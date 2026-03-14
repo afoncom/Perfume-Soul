@@ -9,6 +9,5 @@ import Foundation
 import Combine
 
 final class MainViewModel: ObservableObject {
-    @Published var viewState: MainScreen.ViewState = .loading
     
 }

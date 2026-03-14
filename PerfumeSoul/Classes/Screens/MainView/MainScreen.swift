@@ -20,29 +20,27 @@ struct MainScreen: View {
     }
     
     var body: some View {
-        VStack {
-            switch viewModel.viewState {
-            case .loading:
-                ProgressView()
-            case .loaded:
-                Text(verbatim: "loaded")
-            case .error:
-                Text(verbatim: "Error")
-            }
+        TabView {
+            
+            Text("BirthdayScreen")
+                .tabItem {
+                    Label("Birthday", systemImage: "birthday.cake.fill")
+                }
+            
+            Text("DescriptionPersonScreen")
+                .tabItem {
+                    Label("Description", systemImage: "person")
+                }
+            
+            Text("PerfumePerson")
+                .tabItem {
+                    Label("Perfume", systemImage: "vial.viewfinder")
+                }
         }
-
-        
+        .tabViewStyle(.automatic)
     }
 }
 
 extension MainScreen {
     
-}
-
-extension MainScreen {
-    enum ViewState {
-        case loading
-        case loaded
-        case error
-    }
 }
