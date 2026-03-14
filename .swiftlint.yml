@@ -1,0 +1,188 @@
+# ✅ Основной список активных правил SwiftLint
+only_rules:
+  - accessibility_trait_for_button         # Проверяет, чтобы у кнопок был корректный accessibility trait
+  - array_init                             # Предпочтение литералов массивов вместо Array()
+  - blanket_disable_command                # Не допускает отключения всех правил сразу
+  - block_based_kvo                        # Рекомендует использовать block-based KVO вместо старого API
+  - class_delegate_protocol                # Проверяет, что протоколы делегатов помечены как class-only
+  - closing_brace                          # Корректное расположение закрывающей фигурной скобки
+  - closure_end_indentation                # Выравнивание конца замыкания
+  - collection_alignment                   # Выравнивание элементов коллекций
+  - colon                                  # Пробелы перед/после двоеточия (например, типы и словари)
+  - comma                                  # Пробел после запятой, без пробела до
+  - comma_inheritance                      # Корректное форматирование при наследовании классов/протоколов
+  - compiler_protocol_init                 # Предупреждает использование init из протоколов компилятора
+  - computed_accessors_order               # getter должен идти перед setter
+  - conditional_returns_on_newline          # Каждый return должен быть на новой строке после условия
+  - contains_over_filter_count             # Предпочитает contains() вместо filter().count > 0
+  - contains_over_filter_is_empty          # Предпочитает contains() вместо filter().isEmpty
+  - contains_over_first_not_nil            # Предпочитает contains() вместо first(where:) != nil
+  - contains_over_range_nil_comparison     # Предпочитает contains() вместо range != nil
+  - control_statement                      # Требует фигурные скобки для if/else/while и т.д.
+  - custom_rules                           # Включает пользовательские правила (см. ниже)
+  - deployment_target                      # Проверяет соответствие min deployment target для платформ
+  - discarded_notification_center_observer # Проверяет, что observer NotificationCenter не игнорируется
+  - discouraged_assert                     # Предпочтение XCTAssert вместо assert() в тестах
+  - discouraged_direct_init                # Запрещает прямой вызов некоторых инициализаторов (например, URLSession())
+  - discouraged_none_name                  # Не допускает enum case с названием `.none`
+  - discouraged_object_literal             # Рекомендует использовать UIImage(named:) вместо #imageLiteral()
+  - discouraged_optional_boolean           # Предупреждает использование Bool? где не нужно
+  - duplicate_conditions                   # Проверяет повторяющиеся условия в if / guard
+  - duplicate_enum_cases                   # Проверяет дублирующиеся кейсы enum
+  - duplicate_imports                      # Не допускает повторного импорта модулей
+  - duplicated_key_in_dictionary_literal   # Не допускает повторяющихся ключей в словаре
+  - dynamic_inline                         # Проверяет сочетание dynamic и inline (не рекомендуется)
+  - empty_collection_literal               # Предпочитает [] вместо Array()
+  - empty_count                            # Использует isEmpty вместо count == 0
+  - empty_enum_arguments                   # Не допускает пустых скобок в enum кейсах
+  - empty_parameters                       # Не допускает пустых параметров без необходимости
+  - empty_parentheses_with_trailing_closure # Убирает ненужные скобки при передаче замыкания
+  - empty_string                           # Использует .isEmpty вместо == ""
+  - enum_case_associated_values_count      # Контролирует количество ассоциированных значений в enum
+  - explicit_init                          # Требует явного вызова init(), если используется
+  - fallthrough                            # Предупреждает использование fallthrough в switch
+  - fatal_error_message                    # Требует поясняющего сообщения в fatalError()
+  - final_test_case                        # Тестовые классы должны быть final
+  - first_where                            # Предпочитает first(where:) вместо filter.first
+  - flatmap_over_map_reduce                # Предпочитает flatMap вместо map + reduce
+  - generic_type_name                      # Контролирует длину имени generic-типа (например, <T>)
+  - ibinspectable_in_extension             # Не допускает @IBInspectable в extension
+  - identical_operands                     # Проверяет сравнение переменной самой с собой
+  - identifier_name                        # Контролирует длину имён переменных
+  - implicit_getter                        # Требует явного getter для computed property
+  - implicit_return                        # Разрешает не писать return в однострочных выражениях
+  - inclusive_language                     # Предупреждает потенциально некорректные термины (например, blacklist)
+  - indentation_width                      # Проверяет правильность табуляции (отступы)
+  - invalid_swiftlint_command              # Предупреждает неверное использование комментариев swiftlint:disable
+  - is_disjoint                            # Предпочитает isDisjoint(with:) вместо intersection.isEmpty
+  - joined_default_parameter               # Не допускает ненужного использования separator: ""
+  - last_where                             # Предпочитает last(where:) вместо reversed().first(where:)
+  - legacy_cggeometry_functions
+  - legacy_constant
+  - number_separator                       # Проверяет разделители в больших числах
+  - legacy_constructor
+  - legacy_hashing
+  - legacy_multiple
+  - legacy_nsgeometry_functions
+  - legacy_random
+  - literal_expression_end_indentation     # Проверяет выравнивание литералов
+  - lower_acl_than_parent                  # Access control не должен быть слабее, чем у родителя
+  - mark                                  # Требует формат комментариев // MARK:
+  - modifier_order                         # Контролирует порядок модификаторов (private static и т.п.)
+  - multiline_arguments
+  - multiline_function_chains
+  - multiline_literal_brackets
+  - multiline_parameters
+  - multiline_parameters_brackets
+  - nimble_operator                        # Требует использование ==, !== вместо операторов Nimble
+  - no_extension_access_modifier            # Не разрешает указывать модификатор доступа у extension без необходимости
+  - private_action                         # @IBAction должен быть private
+  - private_outlet                         # @IBOutlet должен быть private
+  - private_unit_test                      # Тестовые классы и методы должны быть private
+  - redundant_discardable_let
+  - redundant_nil_coalescing
+  - redundant_objc_attribute
+  - implicit_optional_initialization
+  - redundant_set_access_control
+  - redundant_string_enum_value
+  - redundant_void_return
+  - self_binding                           # Не допускает избыточного self
+  - shorthand_operator                     # Использует сокращённые операторы (+=, -=)
+  - switch_case_alignment                  # Выравнивание кейсов в switch
+  - trailing_closure
+  - trailing_comma
+  - trailing_newline
+  - trailing_semicolon
+  - unused_control_flow_label
+  - unused_enumerated
+  - unused_optional_binding
+  - unused_setter_value
+  - vertical_parameter_alignment
+  - vertical_parameter_alignment_on_call
+  - void_return                            # Проверяет использование Void в функциях
+  - yoda_condition                         # Не допускает "if 5 == value" — правильнее "if value == 5"
+
+# ✅ Анализатор SwiftLint (глубокие проверки, похожие на компилятор)
+analyzer_rules:
+  - capture_variable                      # Проверяет безопасный захват переменных в замыканиях
+  - typesafe_array_init                   # Проверяет корректность типов при инициализации массива
+  - unneeded_synthesized_initializer      # Убирает ненужные auto-generated init
+  - unused_declaration                    # Предупреждает неиспользуемые функции / переменные
+  - unused_import                         # Удаляет неиспользуемые импорты
+
+# ⚙️ Дополнительные настройки конкретных правил
+redundant_discardable_let:
+  ignore_swiftui_view_bodies: true        # Игнорировать предупреждения о discardable let внутри SwiftUI View
+
+number_separator:
+  minimum_length: 5                       # Требует разделитель только у чисел с длиной ≥5 цифр
+
+indentation_width:
+  indentation_width: 4                    # Отступ с 4 пробелами (не табы)
+
+identifier_name:
+  max_length:
+    warning: 100
+    error: 100
+  min_length:
+    warning: 2
+    error: 2
+  allowed_symbols:
+    - '_'                                 # Разрешает подчёркивание
+  excluded:                               # Исключения — короткие имена, допустимые в математике
+    - 'x'
+    - 'y'
+    - 'z'
+    - 'a'
+    - 'b'
+    - 'x1'
+    - 'x2'
+    - 'y1'
+    - 'y2'
+    - 'z2'
+
+deployment_target:
+  macOS_deployment_target: '14'
+  iOS_deployment_target: '18'
+  tvOS_deployment_target: '17'
+  watchOS_deployment_target: '10'         # Минимальные версии платформ для правил SwiftLint
+
+# 🧩 Кастомные правила (твои собственные проверки)
+custom_rules:
+  no_nsrect:
+    regex: '\bNSRect\b'
+    match_kinds: typeidentifier
+    message: 'Use CGRect instead of NSRect'
+  no_nssize:
+    regex: '\bNSSize\b'
+    match_kinds: typeidentifier
+    message: 'Use CGSize instead of NSSize'
+  no_nspoint:
+    regex: '\bNSPoint\b'
+    match_kinds: typeidentifier
+    message: 'Use CGPoint instead of NSPoint'
+  no_cgfloat:
+    regex: '\bCGFloat\b'
+    match_kinds: typeidentifier
+    message: 'Use Double instead of CGFloat'
+  no_cgfloat2:
+    regex: '\bCGFloat\('
+    message: 'Use Double instead of CGFloat'
+  swiftui_state_private:
+    regex: '@(ObservedObject|EnvironmentObject)\s+var'
+    message: 'SwiftUI @ObservedObject and @EnvironmentObject properties should be private'
+  swiftui_environment_private:
+    regex: '@Environment\(\\\.\w+\)\s+var'
+    message: 'SwiftUI @Environment properties should be private'
+  swiftui_scaledtofit:
+    regex: 'aspectRatio\(contentMode: \.fit\)'
+    message: 'Prefer `scaledToFit()`'
+  swiftui_scaledtofill:
+      regex: 'aspectRatio\(contentMode: \.fill\)'
+      message: 'Prefer `scaledToFill()`'
+  final_class:
+    regex: '^class [a-zA-Z\d]+[^{]+\{'
+    message: 'Classes should be marked as final whenever possible.'
+  no_alignment_center:
+    regex: '\b\(alignment: .center\b'
+    message: 'This alignment is the default.'
