@@ -20,29 +20,10 @@ struct MainScreen: View {
     }
     
     var body: some View {
-        VStack {
-            switch viewModel.viewState {
-            case .loading:
-                ProgressView()
-            case .loaded:
-                Text(verbatim: "loaded")
-            case .error:
-                Text(verbatim: "Error")
-            }
-        }
-
-        
+        Text("MainScreen")
     }
 }
 
 extension MainScreen {
     
-}
-
-extension MainScreen {
-    enum ViewState {
-        case loading
-        case loaded
-        case error
-    }
 }

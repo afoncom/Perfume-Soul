@@ -3,24 +3,25 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1DB16EF47343F7D1BAA7F7C1 /* MainModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3127DEF350CC7CBD89D3A562 /* MainModule.swift */; };
-		23BB392E4785A813D9169213 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD7742B0EDAB804609EF8B3 /* AppDelegate.swift */; };
+		000C4CB0BC30C80C69A9D10A /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F2D40CBB3A156105F6209C /* MainRouter.swift */; };
+		0843BAE52F66BF0D004A8671 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843BAE42F66BEFF004A8671 /* MainTabViewController.swift */; };
+		0843BAE92F66C39D004A8671 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843BAE82F66C39A004A8671 /* SettingsScreen.swift */; };
+		0843BAEB2F66C3B3004A8671 /* SettingsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843BAEA2F66C3AE004A8671 /* SettingsModule.swift */; };
+		0843BAEF2F66C761004A8671 /* ProfileModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843BAEE2F66C75A004A8671 /* ProfileModule.swift */; };
+		0843BAF12F66C76C004A8671 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843BAF02F66C766004A8671 /* ProfileScreen.swift */; };
+		1C828E8F7726D0378967E731 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D710D7E38F1B947F329D7D48 /* MainScreen.swift */; };
 		33C1A0B777B08E65D780C5D1 /* PerfumeSoulUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E5E02AAFCE9A050707C2F5 /* PerfumeSoulUITests.swift */; };
-		3765E2091CB6812E879DBB04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A84EAB9CBCE34327C1DE609 /* LaunchScreen.storyboard */; };
 		58F62A3849780958241F4D6D /* PerfumeSoulTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8871CAD4D456222B11FD455 /* PerfumeSoulTests.swift */; };
-		5B7CA2EF8AE5F514D0720636 /* TuistAssets+PerfumeSoul.swift in Sources */ = {isa = PBXBuildFile; fileRef = F941B0FB2B26ADA8E1C50E66 /* TuistAssets+PerfumeSoul.swift */; };
-		5F75079A520EEDF3D37B3698 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE76317A3F058C0704872F3 /* SceneDelegate.swift */; };
-		68006E092BC40D9252CF7784 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7BB6553554757D26E63291 /* MainPresenter.swift */; };
-		6B47900AFBC6934812A3EFD2 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311581AA02BFDAA56AF46E7B /* MainRouter.swift */; };
-		89A20ED221E943C22A18E3EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7339E2131C0C33A10E19627 /* Assets.xcassets */; };
-		91462616EF91265C88C09EBE /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71077DC50CF4A0D30BC6CECD /* MainViewModel.swift */; };
-		A27171E089B2BBA14D58B78A /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573A0C768C559CDED5B4D9 /* MainScreen.swift */; };
+		892F941F3B12B88034D70B5F /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5CF51887D5A67A364555B3 /* MainViewModel.swift */; };
+		94895565C2C530C0F848F3FA /* MainModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1152C1BAA500AC7F07DABE3 /* MainModule.swift */; };
+		B3E720CE4E8B533FCEC29607 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B6A38FD292756A192CE44 /* MainPresenter.swift */; };
 		B8828D487E2D0BCF023A1973 /* PerfumeSoulUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DD5D72E32FB61119A8D84C /* PerfumeSoulUITestsLaunchTests.swift */; };
-		CB4FB92C169EB1944212BB06 /* TuistBundle+PerfumeSoul.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322643BBCCED1EEF4706C8C /* TuistBundle+PerfumeSoul.swift */; };
+		D5E459BD7412BFE60FD59DD5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7674B5CA14531E69FD28F9 /* SceneDelegate.swift */; };
+		DC56EE54391296D533A3F089 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E0CA4E8EC628F1C0E3149 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,25 +76,26 @@
 
 /* Begin PBXFileReference section */
 		00DD5D72E32FB61119A8D84C /* PerfumeSoulUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfumeSoulUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		2AD7742B0EDAB804609EF8B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		311581AA02BFDAA56AF46E7B /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
-		3127DEF350CC7CBD89D3A562 /* MainModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModule.swift; sourceTree = "<group>"; };
-		5EE76317A3F058C0704872F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		71077DC50CF4A0D30BC6CECD /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		80653715AC4577F7C8F3135B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0843BAE42F66BEFF004A8671 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
+		0843BAE82F66C39A004A8671 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		0843BAEA2F66C3AE004A8671 /* SettingsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModule.swift; sourceTree = "<group>"; };
+		0843BAEE2F66C75A004A8671 /* ProfileModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModule.swift; sourceTree = "<group>"; };
+		0843BAF02F66C766004A8671 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		7A6E0CA4E8EC628F1C0E3149 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A807E4F42E2ED444DC2B1AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		91293F8361A5AB795A5213AD /* PerfumeSoul.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerfumeSoul.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E5E02AAFCE9A050707C2F5 /* PerfumeSoulUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfumeSoulUITests.swift; sourceTree = "<group>"; };
 		A8533A67175A2787179404FA /* PerfumeSoulTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "PerfumeSoulTests-Info.plist"; sourceTree = "<group>"; };
 		ABDCB5B3A808799B3D5C86AF /* PerfumeSoulUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "PerfumeSoulUITests-Info.plist"; sourceTree = "<group>"; };
 		AC3311154E96272EA396DED5 /* PerfumeSoulUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PerfumeSoulUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B322643BBCCED1EEF4706C8C /* TuistBundle+PerfumeSoul.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+PerfumeSoul.swift"; sourceTree = "<group>"; };
+		AD7674B5CA14531E69FD28F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		AE5CF51887D5A67A364555B3 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		B1152C1BAA500AC7F07DABE3 /* MainModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModule.swift; sourceTree = "<group>"; };
 		B8871CAD4D456222B11FD455 /* PerfumeSoulTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfumeSoulTests.swift; sourceTree = "<group>"; };
-		BF573A0C768C559CDED5B4D9 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
-		C7339E2131C0C33A10E19627 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CB7BB6553554757D26E63291 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		B9F2D40CBB3A156105F6209C /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
+		C83B6A38FD292756A192CE44 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		D710D7E38F1B947F329D7D48 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		D74F6265FE89F692D97B32C2 /* PerfumeSoulTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PerfumeSoulTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F941B0FB2B26ADA8E1C50E66 /* TuistAssets+PerfumeSoul.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+PerfumeSoul.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,16 +123,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		07569CDB6C90D27B06091408 /* MainView */ = {
+		0843BAE32F66BEEC004A8671 /* MainTabViewController */ = {
 			isa = PBXGroup;
 			children = (
-				3127DEF350CC7CBD89D3A562 /* MainModule.swift */,
-				CB7BB6553554757D26E63291 /* MainPresenter.swift */,
-				311581AA02BFDAA56AF46E7B /* MainRouter.swift */,
-				BF573A0C768C559CDED5B4D9 /* MainScreen.swift */,
-				71077DC50CF4A0D30BC6CECD /* MainViewModel.swift */,
+				0843BAE42F66BEFF004A8671 /* MainTabViewController.swift */,
 			);
-			path = MainView;
+			path = MainTabViewController;
+			sourceTree = "<group>";
+		};
+		0843BAE72F66C393004A8671 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0843BAEA2F66C3AE004A8671 /* SettingsModule.swift */,
+				0843BAE82F66C39A004A8671 /* SettingsScreen.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		0843BAED2F66C74F004A8671 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0843BAF02F66C766004A8671 /* ProfileScreen.swift */,
+				0843BAEE2F66C75A004A8671 /* ProfileModule.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		0B57E7AD9CFF6A01F3BC91A1 /* Products */ = {
@@ -154,6 +170,26 @@
 			name = Project;
 			sourceTree = "<group>";
 		};
+		2D8DC5FF1D5BE47AC32FB483 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CE70062DD85843C730039C0A /* Application */,
+				5B3C08D4F8E2A22BF528C216 /* Screens */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		5B3C08D4F8E2A22BF528C216 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				0843BAED2F66C74F004A8671 /* Profile */,
+				0843BAE72F66C393004A8671 /* Settings */,
+				0843BAE32F66BEEC004A8671 /* MainTabViewController */,
+				913BC4412E360226999CF621 /* MainView */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
 		70D6E3F621CE74F9F6C577F5 /* PerfumeSoulUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,13 +199,16 @@
 			path = PerfumeSoulUITests;
 			sourceTree = "<group>";
 		};
-		8B72D2C4E5A2AE2E8FFE55C1 /* Sources */ = {
+		913BC4412E360226999CF621 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
-				F941B0FB2B26ADA8E1C50E66 /* TuistAssets+PerfumeSoul.swift */,
-				B322643BBCCED1EEF4706C8C /* TuistBundle+PerfumeSoul.swift */,
+				B1152C1BAA500AC7F07DABE3 /* MainModule.swift */,
+				C83B6A38FD292756A192CE44 /* MainPresenter.swift */,
+				B9F2D40CBB3A156105F6209C /* MainRouter.swift */,
+				D710D7E38F1B947F329D7D48 /* MainScreen.swift */,
+				AE5CF51887D5A67A364555B3 /* MainViewModel.swift */,
 			);
-			path = Sources;
+			path = MainView;
 			sourceTree = "<group>";
 		};
 		96F7F306DDA8B27DA7392D47 = {
@@ -180,15 +219,20 @@
 			);
 			sourceTree = "<group>";
 		};
+		CE70062DD85843C730039C0A /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				7A6E0CA4E8EC628F1C0E3149 /* AppDelegate.swift */,
+				AD7674B5CA14531E69FD28F9 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		D55F5847E047693AB504B279 /* PerfumeSoul */ = {
 			isa = PBXGroup;
 			children = (
-				5A84EAB9CBCE34327C1DE609 /* LaunchScreen.storyboard */,
-				07569CDB6C90D27B06091408 /* MainView */,
-				2AD7742B0EDAB804609EF8B3 /* AppDelegate.swift */,
-				C7339E2131C0C33A10E19627 /* Assets.xcassets */,
+				2D8DC5FF1D5BE47AC32FB483 /* Classes */,
 				8A807E4F42E2ED444DC2B1AF /* Info.plist */,
-				5EE76317A3F058C0704872F3 /* SceneDelegate.swift */,
 			);
 			path = PerfumeSoul;
 			sourceTree = "<group>";
@@ -214,7 +258,6 @@
 			isa = PBXGroup;
 			children = (
 				E2677B3022677936A54698A3 /* InfoPlists */,
-				8B72D2C4E5A2AE2E8FFE55C1 /* Sources */,
 			);
 			path = Derived;
 			sourceTree = "<group>";
@@ -226,10 +269,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 11566757EBB1868EECB8536F /* Build configuration list for PBXNativeTarget "PerfumeSoul" */;
 			buildPhases = (
-				0A8F4A3E2F9D123400ABCDEF /* SwiftLint */,
-				080D735F2F632A7300E56975 /* Sources */,
-				080D73602F632A7300E56975 /* Frameworks */,
-				080D73612F632A7300E56975 /* Resources */,
+				DB7542E711D3F66C45AEE29C /* Sources */,
+				AAAC23652AEA2AA5C0A3BD43 /* Resources */,
+				476FBB81F57FB34625DA34F1 /* Frameworks */,
+				367EA3FC6E33A4786F10A68B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -309,13 +352,8 @@
 				Base,
 				en,
 			);
-			mainGroup = 080D735A2F632A7300E56975;
-			minimizedProjectReferenceProxies = 1;
-			packageReferences = (
-				0A8F4A3E2F9D123400ABCDE0 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
-			);
-			preferredProjectObjectVersion = 77;
-			productRefGroup = 080D73642F632A7300E56975 /* Products */;
+			mainGroup = 96F7F306DDA8B27DA7392D47;
+			productRefGroup = 0B57E7AD9CFF6A01F3BC91A1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -338,8 +376,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89A20ED221E943C22A18E3EC /* Assets.xcassets in Resources */,
-				3765E2091CB6812E879DBB04 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,28 +387,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0A8F4A3E2F9D123400ABCDEF /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint > /dev/null; then\n  swiftlint lint\nelse\n  echo \"error: SwiftLint not installed\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B406312CA235A38294E56086 /* Sources */ = {
@@ -396,15 +410,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B7CA2EF8AE5F514D0720636 /* TuistAssets+PerfumeSoul.swift in Sources */,
-				CB4FB92C169EB1944212BB06 /* TuistBundle+PerfumeSoul.swift in Sources */,
-				23BB392E4785A813D9169213 /* AppDelegate.swift in Sources */,
-				1DB16EF47343F7D1BAA7F7C1 /* MainModule.swift in Sources */,
-				68006E092BC40D9252CF7784 /* MainPresenter.swift in Sources */,
-				6B47900AFBC6934812A3EFD2 /* MainRouter.swift in Sources */,
-				A27171E089B2BBA14D58B78A /* MainScreen.swift in Sources */,
-				91462616EF91265C88C09EBE /* MainViewModel.swift in Sources */,
-				5F75079A520EEDF3D37B3698 /* SceneDelegate.swift in Sources */,
+				DC56EE54391296D533A3F089 /* AppDelegate.swift in Sources */,
+				0843BAE92F66C39D004A8671 /* SettingsScreen.swift in Sources */,
+				0843BAE52F66BF0D004A8671 /* MainTabViewController.swift in Sources */,
+				D5E459BD7412BFE60FD59DD5 /* SceneDelegate.swift in Sources */,
+				94895565C2C530C0F848F3FA /* MainModule.swift in Sources */,
+				B3E720CE4E8B533FCEC29607 /* MainPresenter.swift in Sources */,
+				000C4CB0BC30C80C69A9D10A /* MainRouter.swift in Sources */,
+				0843BAF12F66C76C004A8671 /* ProfileScreen.swift in Sources */,
+				1C828E8F7726D0378967E731 /* MainScreen.swift in Sources */,
+				0843BAEB2F66C3B3004A8671 /* SettingsModule.swift in Sources */,
+				0843BAEF2F66C761004A8671 /* ProfileModule.swift in Sources */,
+				892F941F3B12B88034D70B5F /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,17 +441,6 @@
 			targetProxy = 0676B49FF84A9C7FA614E291 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		0A8F4A3E2F9D123400ABCDE0 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
-			requirement = {
-				kind = exactVersion;
-				version = 0.62.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCBuildConfiguration section */
 		12D01CB09BDF4169393A0607 /* Release */ = {
@@ -489,10 +495,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -522,10 +525,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -574,10 +574,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -629,8 +626,9 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -731,10 +729,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
