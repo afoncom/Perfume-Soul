@@ -1,5 +1,5 @@
 //
-//  MainScreen.swift
+//  PerfumeScreen.swift
 //  PerfumeSoul
 //
 //  Created by afon.com on 12.03.2026.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct MainScreen: View {
-    @StateObject private var viewModel: MainViewModel
-    private let presenter: MainPresenter
+struct PerfumeScreen: View {
+    @StateObject private var viewModel: PerfumeViewModel
+    private let presenter: PerfumePresenter
     
     init(
-        viewModel: MainViewModel,
-        presenter: MainPresenter
+        viewModel: PerfumeViewModel,
+        presenter: PerfumePresenter
     ) {
         self._viewModel = StateObject(wrappedValue: viewModel)
         self.presenter = presenter
@@ -24,6 +24,6 @@ struct MainScreen: View {
     }
 }
 
-extension MainScreen {
+extension PerfumeScreen {
     
 }
