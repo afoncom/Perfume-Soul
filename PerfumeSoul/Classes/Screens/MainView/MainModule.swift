@@ -8,7 +8,7 @@
 import SwiftUI
 
 final class MainModule {
-    static func build() -> MainScreen {
+    static func build() -> UIViewController {
         let viewModel = MainViewModel()
         let router = MainRouterImpl(navigationController: nil)
         let presenter = MainPresenterImpl(
@@ -17,6 +17,9 @@ final class MainModule {
         )
         
         let view = MainScreen(viewModel: viewModel, presenter: presenter)
-        return view
+        let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
+        hostingController.view.backgroundColor = .systemBackground
+        hostingController.tabBarItem = UITabBarItem.init(title: "Main", image: nil, tag: 0)
+        return hostingController
     }
 }

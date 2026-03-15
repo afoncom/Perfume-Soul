@@ -28,18 +28,22 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func showMainScreen() {
-        let mainView = MainModule.build()
-        setRootView(mainView)
+        let mainScreen = MainModule.build()
+        let settingsScreen = SettingsModule.build()
+        let profileScreen = ProfileModule.build()
+        let tabController = UITabBarController()
+        tabController.viewControllers = [mainScreen, profileScreen, settingsScreen]
+        setRootViewController(tabController)
     }
+    
 
-    private func setRootView<V: View>(_ view: V) {
+    private func setRootViewController(_ viewController: UIViewController) {
         guard let window else {
             return
         }
-
-        let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
-        hostingController.view.backgroundColor = .systemBackground
-        window.rootViewController = hostingController
+        window.rootViewController = viewController
         window.makeKeyAndVisible()
     }
+    
+    
 }
