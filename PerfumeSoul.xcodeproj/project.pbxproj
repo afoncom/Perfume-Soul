@@ -13,6 +13,12 @@
 		0843BAEB2F66C3B3004A8671 /* SettingsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843BAEA2F66C3AE004A8671 /* SettingsModule.swift */; };
 		0843BAEF2F66C761004A8671 /* ProfileModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843BAEE2F66C75A004A8671 /* ProfileModule.swift */; };
 		0843BAF12F66C76C004A8671 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843BAF02F66C766004A8671 /* ProfileScreen.swift */; };
+		0843BAF92F670A03004A8671 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843BAF82F6709F8004A8671 /* SettingsPresenter.swift */; };
+		0843BAFB2F670A13004A8671 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843BAFA2F670A09004A8671 /* SettingsViewModel.swift */; };
+		0843BAFD2F670A23004A8671 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843BAFC2F670A17004A8671 /* SettingsRouter.swift */; };
+		0843BAFF2F670A4F004A8671 /* ProfileViewMoodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843BAFE2F670A41004A8671 /* ProfileViewMoodel.swift */; };
+		0843BB012F670A6C004A8671 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843BB002F670A59004A8671 /* ProfilePresenter.swift */; };
+		0843BB032F670A74004A8671 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843BB022F670A70004A8671 /* ProfileRouter.swift */; };
 		1C828E8F7726D0378967E731 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D710D7E38F1B947F329D7D48 /* MainScreen.swift */; };
 		33C1A0B777B08E65D780C5D1 /* PerfumeSoulUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E5E02AAFCE9A050707C2F5 /* PerfumeSoulUITests.swift */; };
 		58F62A3849780958241F4D6D /* PerfumeSoulTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8871CAD4D456222B11FD455 /* PerfumeSoulTests.swift */; };
@@ -81,6 +87,12 @@
 		0843BAEA2F66C3AE004A8671 /* SettingsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModule.swift; sourceTree = "<group>"; };
 		0843BAEE2F66C75A004A8671 /* ProfileModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModule.swift; sourceTree = "<group>"; };
 		0843BAF02F66C766004A8671 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		0843BAF82F6709F8004A8671 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
+		0843BAFA2F670A09004A8671 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		0843BAFC2F670A17004A8671 /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
+		0843BAFE2F670A41004A8671 /* ProfileViewMoodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewMoodel.swift; sourceTree = "<group>"; };
+		0843BB002F670A59004A8671 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
+		0843BB022F670A70004A8671 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		7A6E0CA4E8EC628F1C0E3149 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A807E4F42E2ED444DC2B1AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		91293F8361A5AB795A5213AD /* PerfumeSoul.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerfumeSoul.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +146,9 @@
 		0843BAE72F66C393004A8671 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				0843BAFC2F670A17004A8671 /* SettingsRouter.swift */,
+				0843BAFA2F670A09004A8671 /* SettingsViewModel.swift */,
+				0843BAF82F6709F8004A8671 /* SettingsPresenter.swift */,
 				0843BAEA2F66C3AE004A8671 /* SettingsModule.swift */,
 				0843BAE82F66C39A004A8671 /* SettingsScreen.swift */,
 			);
@@ -143,7 +158,10 @@
 		0843BAED2F66C74F004A8671 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				0843BB022F670A70004A8671 /* ProfileRouter.swift */,
+				0843BB002F670A59004A8671 /* ProfilePresenter.swift */,
 				0843BAF02F66C766004A8671 /* ProfileScreen.swift */,
+				0843BAFE2F670A41004A8671 /* ProfileViewMoodel.swift */,
 				0843BAEE2F66C75A004A8671 /* ProfileModule.swift */,
 			);
 			path = Profile;
@@ -417,11 +435,17 @@
 				94895565C2C530C0F848F3FA /* MainModule.swift in Sources */,
 				B3E720CE4E8B533FCEC29607 /* MainPresenter.swift in Sources */,
 				000C4CB0BC30C80C69A9D10A /* MainRouter.swift in Sources */,
+				0843BAF92F670A03004A8671 /* SettingsPresenter.swift in Sources */,
 				0843BAF12F66C76C004A8671 /* ProfileScreen.swift in Sources */,
+				0843BAFD2F670A23004A8671 /* SettingsRouter.swift in Sources */,
+				0843BB012F670A6C004A8671 /* ProfilePresenter.swift in Sources */,
 				1C828E8F7726D0378967E731 /* MainScreen.swift in Sources */,
+				0843BB032F670A74004A8671 /* ProfileRouter.swift in Sources */,
 				0843BAEB2F66C3B3004A8671 /* SettingsModule.swift in Sources */,
 				0843BAEF2F66C761004A8671 /* ProfileModule.swift in Sources */,
 				892F941F3B12B88034D70B5F /* MainViewModel.swift in Sources */,
+				0843BAFF2F670A4F004A8671 /* ProfileViewMoodel.swift in Sources */,
+				0843BAFB2F670A13004A8671 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
