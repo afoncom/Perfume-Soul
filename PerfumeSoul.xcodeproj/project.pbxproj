@@ -112,6 +112,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 080D738C2F632A7600E56975 /* Build configuration list for PBXNativeTarget "PerfumeSoul" */;
 			buildPhases = (
+				0A8F4A3E2F9D123400ABCDEF /* SwiftLint */,
 				080D735F2F632A7300E56975 /* Sources */,
 				080D73602F632A7300E56975 /* Frameworks */,
 				080D73612F632A7300E56975 /* Resources */,
@@ -208,6 +209,9 @@
 			);
 			mainGroup = 080D735A2F632A7300E56975;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				0A8F4A3E2F9D123400ABCDE0 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 080D73642F632A7300E56975 /* Products */;
 			projectDirPath = "";
@@ -243,6 +247,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0A8F4A3E2F9D123400ABCDEF /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint > /dev/null; then\n  swiftlint lint\nelse\n  echo \"error: SwiftLint not installed\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		080D735F2F632A7300E56975 /* Sources */ = {
@@ -280,6 +306,17 @@
 			targetProxy = 080D73842F632A7600E56975 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0A8F4A3E2F9D123400ABCDE0 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = exactVersion;
+				version = 0.62.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCBuildConfiguration section */
 		080D738D2F632A7600E56975 /* Debug */ = {
@@ -384,7 +421,7 @@
 				DEVELOPMENT_TEAM = 9282D5CGQH;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -448,7 +485,7 @@
 				DEVELOPMENT_TEAM = 9282D5CGQH;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
