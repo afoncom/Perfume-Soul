@@ -24,6 +24,7 @@ final class TodayModule {
         let navigationController = UINavigationController(rootViewController: hostingController)
         navigationController.tabBarItem = UITabBarItem(title: "Today", image: nil, tag: 0)
         router.navigationController = navigationController
+        
         return navigationController
     }
 }
