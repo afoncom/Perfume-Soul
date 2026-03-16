@@ -81,6 +81,12 @@
 		0843BAEA2F66C3AE004A8671 /* SettingsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModule.swift; sourceTree = "<group>"; };
 		0843BAEE2F66C75A004A8671 /* ProfileModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModule.swift; sourceTree = "<group>"; };
 		0843BAF02F66C766004A8671 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		0843BAF82F6709F8004A8671 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
+		0843BAFA2F670A09004A8671 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		0843BAFC2F670A17004A8671 /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
+		0843BAFE2F670A41004A8671 /* ProfileViewMoodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewMoodel.swift; sourceTree = "<group>"; };
+		0843BB002F670A59004A8671 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
+		0843BB022F670A70004A8671 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		7A6E0CA4E8EC628F1C0E3149 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A807E4F42E2ED444DC2B1AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		91293F8361A5AB795A5213AD /* PerfumeSoul.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerfumeSoul.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +140,9 @@
 		0843BAE72F66C393004A8671 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				0843BAFC2F670A17004A8671 /* SettingsRouter.swift */,
+				0843BAFA2F670A09004A8671 /* SettingsViewModel.swift */,
+				0843BAF82F6709F8004A8671 /* SettingsPresenter.swift */,
 				0843BAEA2F66C3AE004A8671 /* SettingsModule.swift */,
 				0843BAE82F66C39A004A8671 /* SettingsScreen.swift */,
 			);
@@ -143,7 +152,10 @@
 		0843BAED2F66C74F004A8671 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				0843BB022F670A70004A8671 /* ProfileRouter.swift */,
+				0843BB002F670A59004A8671 /* ProfilePresenter.swift */,
 				0843BAF02F66C766004A8671 /* ProfileScreen.swift */,
+				0843BAFE2F670A41004A8671 /* ProfileViewMoodel.swift */,
 				0843BAEE2F66C75A004A8671 /* ProfileModule.swift */,
 			);
 			path = Profile;
