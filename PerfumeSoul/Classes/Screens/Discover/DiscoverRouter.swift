@@ -1,17 +1,18 @@
 //
-//  PerfumeRouter.swift
+//  DiscoverRouter.swift
 //  PerfumeSoul
 //
-//  Created by afon.com on 12.03.2026.
+//  Created by afon.com on 16.03.2026.
+//  Copyright © 2026 afon.com. All rights reserved.
 //
 
 import UIKit
 
-protocol PerfumeRouter {
+protocol DiscoverRouter {
     
 }
 
-final class PerfumeRouterImpl {
+final class DiscoverRouterImpl {
     weak var navigationController: UINavigationController?
     
     init(navigationController: UINavigationController?) {
@@ -20,6 +21,6 @@ final class PerfumeRouterImpl {
     
 }
 
-extension PerfumeRouterImpl: PerfumeRouter {
+extension DiscoverRouterImpl: DiscoverRouter {
     
 }

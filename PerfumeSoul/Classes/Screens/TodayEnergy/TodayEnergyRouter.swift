@@ -1,0 +1,22 @@
+//
+//  TodayEnergyRouter.swift
+//  PerfumeSoul
+//
+//  Created by afon.com on 16.03.2026.
+//  Copyright © 2026 afon.com. All rights reserved.
+//
+
+import UIKit
+
+protocol TodayEnergyRouter {
+    
+}
+
+final class TodayEnergyRouterImpl {
+    weak var navigationController: UINavigationController?
+    
+}
+
+extension TodayEnergyRouterImpl: TodayEnergyRouter {
+    
+}

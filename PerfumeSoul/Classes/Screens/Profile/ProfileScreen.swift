@@ -12,7 +12,7 @@ struct ProfileScreen: View {
     
     
     var body: some View {
-        Text("ProfileScreen")
+        Text("Profile")
     }
 }
 

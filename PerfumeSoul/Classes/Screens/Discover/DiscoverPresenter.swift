@@ -1,16 +1,16 @@
 //
-//  ProfilePresenter.swift
+//  DiscoverPresenter.swift
 //  PerfumeSoul
 //
-//  Created by afon.com on 15.03.2026.
+//  Created by afon.com on 16.03.2026.
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
-protocol ProfilePresenter {
+protocol DiscoverPresenter {
     
 }
 
-final class ProfilePresenterImpl {
+final class DiscoverPresenterImpl {
     private let viewModel: ProfileViewMoodel
     private let router: ProfileRouter
     
@@ -23,6 +23,6 @@ final class ProfilePresenterImpl {
     }
 }
 
-extension ProfilePresenterImpl: ProfilePresenter {
+extension DiscoverPresenterImpl: DiscoverPresenter {
     
 }
