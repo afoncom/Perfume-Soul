@@ -8,7 +8,8 @@
 
 import Foundation
 import Combine
+import Observation
 
-final class SettingsViewModel: ObservableObject {
+@Observable final class SettingsViewModel {
     
 }
