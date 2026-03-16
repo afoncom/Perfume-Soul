@@ -1,0 +1,24 @@
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
+
+stages:
+  - test
+
+variables:
+  LC_ALL: "en_US.UTF-8"
+  LANG: "en_US.UTF-8"
+
+unit_tests:
+  stage: test
+  tags:
+    - macos
+  script:
+    - set -o pipefail
+    - xcodebuild test -project PerfumeSoul.xcodeproj -scheme PerfumeSoul -destination 'platform=iOS Simulator,name=iPhone SE (3rd generation),OS=18.6' -enableCodeCoverage YES | tee xcodebuild.log
+  artifacts:
+    when: always
+    paths:
+      - xcodebuild.log
+    expire_in: 1 week
