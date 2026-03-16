@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import Combine
+import Observation
 
-final class PerfumeViewModel: ObservableObject {
+@Observable final class PerfumeViewModel {
     
 }

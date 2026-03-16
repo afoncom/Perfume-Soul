@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct PerfumeScreen: View {
-    @StateObject private var viewModel: PerfumeViewModel
+    @Bindable private var viewModel: PerfumeViewModel
     private let presenter: PerfumePresenter
     
     init(
         viewModel: PerfumeViewModel,
         presenter: PerfumePresenter
     ) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
+        self.viewModel = viewModel
         self.presenter = presenter
     }
     
