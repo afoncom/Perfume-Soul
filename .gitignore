@@ -8,6 +8,7 @@ xcuserdata/
 ## Project/workspace (generated)
 *.xcodeproj
 *.xcworkspace
+PerfumeSoul.xcodeproj/
 
 ## Obj-C/Swift specific
 *.hmap
