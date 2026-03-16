@@ -1,5 +1,5 @@
 //
-//  MainRouter.swift
+//  PerfumeRouter.swift
 //  PerfumeSoul
 //
 //  Created by afon.com on 12.03.2026.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol MainRouter {
+protocol PerfumeRouter {
     
 }
 
-final class MainRouterImpl {
+final class PerfumeRouterImpl {
     weak var navigationController: UINavigationController?
     
     init(navigationController: UINavigationController?) {
@@ -20,6 +20,6 @@ final class MainRouterImpl {
     
 }
 
-extension MainRouterImpl: MainRouter {
+extension PerfumeRouterImpl: PerfumeRouter {
     
 }

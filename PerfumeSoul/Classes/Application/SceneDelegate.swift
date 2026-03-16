@@ -28,7 +28,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func showMainScreen() {
-        let mainScreen = MainModule.build()
+        let mainScreen = PerfumeModule.build()
         let settingsScreen = SettingsModule.build()
         let profileScreen = ProfileModule.build()
         let tabController = UITabBarController()

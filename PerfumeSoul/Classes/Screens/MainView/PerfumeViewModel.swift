@@ -1,13 +1,13 @@
 //
-//  MainViewModel.swift
+//  PerfumeViewModel.swift
 //  PerfumeSoul
 //
 //  Created by afon.com on 12.03.2026.
 //
 
 import Foundation
-import Combine
+import Observation
 
-final class MainViewModel: ObservableObject {
+@Observable final class PerfumeViewModel {
     
 }
