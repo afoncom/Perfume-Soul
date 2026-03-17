@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct DiscoverScreen: View {
-    
+    @Bindable private var viewModel: TodayViewModel
     
     var body: some View {
         Text("Discover")
