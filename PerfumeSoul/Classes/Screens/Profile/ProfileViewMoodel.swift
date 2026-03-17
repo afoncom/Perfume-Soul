@@ -8,7 +8,8 @@
 
 import Foundation
 import Combine
+import Observation
 
-final class ProfileViewMoodel: ObservableObject {
+@Observable final class ProfileViewMoodel {
     
 }
