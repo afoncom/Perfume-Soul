@@ -28,11 +28,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func showMainScreen() {
-        let mainScreen = PerfumeModule.build()
+        let todayScreen = TodayModule.build()
         let settingsScreen = SettingsModule.build()
+        let discoverScreen = DiscoverModule.build()
         let profileScreen = ProfileModule.build()
         let tabController = UITabBarController()
-        tabController.viewControllers = [mainScreen, profileScreen, settingsScreen]
+        tabController.viewControllers = [todayScreen, discoverScreen, profileScreen, settingsScreen]
         setRootViewController(tabController)
     }
     

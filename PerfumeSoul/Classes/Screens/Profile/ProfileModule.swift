@@ -13,7 +13,8 @@ final class ProfileModule {
         let view = ProfileScreen()
         let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
         hostingController.view.backgroundColor = .systemBackground
-        hostingController.tabBarItem = UITabBarItem.init(title: "Profile", image: nil, tag: 1)
+        hostingController.tabBarItem = UITabBarItem.init(title: "Profile", image: nil, tag: 2)
+        hostingController.title = "Profile"
         return hostingController
     }
 }
