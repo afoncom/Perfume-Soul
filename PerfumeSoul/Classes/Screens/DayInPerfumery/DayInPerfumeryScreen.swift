@@ -10,6 +10,15 @@ import SwiftUI
 
 struct DayInPerfumeryScreen: View {
     @Bindable var viewModel: DayInPerfumeryViewModel
+    private let presenter: DayInPerfumeryPresenter
+    
+    init(
+        viewModel: DayInPerfumeryViewModel,
+        presenter: DayInPerfumeryPresenter
+    ) {
+        self.viewModel = viewModel
+        self.presenter = presenter
+    }
     
     var body: some View {
         Text("DayInPerfumery")

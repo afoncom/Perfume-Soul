@@ -11,7 +11,13 @@ import SwiftUI
 final class DayInPerfumeryModule {
     static func build() -> UIViewController {
         let viewModel = DayInPerfumeryViewModel()
-        let view = DayInPerfumeryScreen(viewModel: viewModel)
+        let router = DayInPerfumeryRouterImpl()
+        let presenter = DayInPerfumeryPresenterImpl(
+            viewModel: viewModel,
+            router: router
+        )
+        
+        let view = DayInPerfumeryScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
         hostingController.title = "DayInPerfumery"
