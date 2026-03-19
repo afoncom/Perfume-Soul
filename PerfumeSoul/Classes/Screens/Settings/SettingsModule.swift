@@ -17,7 +17,7 @@ final class SettingsModule {
             router: router
         )
         
-        let view = SettingsScreen(viewModel: viewModel)
+        let view = SettingsScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
         hostingController.title = "Settings"
