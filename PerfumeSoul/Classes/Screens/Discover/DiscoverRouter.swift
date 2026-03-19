@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DiscoverRouter {
-    
+    func showStartQuizScreen()
 }
 
 final class DiscoverRouterImpl {
@@ -18,5 +18,7 @@ final class DiscoverRouterImpl {
 }
 
 extension DiscoverRouterImpl: DiscoverRouter {
-    
+    func showStartQuizScreen() {
+        self.navigationController?.pushViewController(StartQuizModule.build(), animated: true)
+    }
 }
