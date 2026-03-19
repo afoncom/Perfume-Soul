@@ -10,6 +10,15 @@ import SwiftUI
 
 struct TodayEnergyScreen: View {
     @Bindable var viewModel: TodayEnergyViewModel
+    private let presenter: TodayEnergyPresenter
+    
+    init(
+        viewModel: TodayEnergyViewModel,
+        presenter: TodayEnergyPresenter
+    ) {
+        self.viewModel = viewModel
+        self.presenter = presenter
+    }
     
     var body: some View {
         Text("TodayEnergy")
