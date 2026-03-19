@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct AddedNewProfilesScreen: View {
-    @Bindable var viewModel: AddedNewProfilesViewModel
+    @Bindable private var viewModel: AddedNewProfilesViewModel
     private let presenter: AddedNewProfilesPresenter
     
     init(

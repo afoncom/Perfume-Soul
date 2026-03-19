@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct DayInPerfumeryScreen: View {
-    @Bindable var viewModel: DayInPerfumeryViewModel
+    @Bindable private var viewModel: DayInPerfumeryViewModel
     private let presenter: DayInPerfumeryPresenter
     
     init(

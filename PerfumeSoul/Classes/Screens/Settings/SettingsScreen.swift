@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SettingsScreen: View {
-    @Bindable var viewModel: SettingsViewModel
+    @Bindable private var viewModel: SettingsViewModel
     private let presenter: SettingsPresenter
     
     init(
