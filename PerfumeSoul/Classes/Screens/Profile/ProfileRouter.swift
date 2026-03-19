@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ProfileRouter {
-    
+    func showAddedNewProfiles()
 }
 
 final class ProfileRouterImpl {
@@ -18,5 +18,7 @@ final class ProfileRouterImpl {
 }
 
 extension ProfileRouterImpl: ProfileRouter {
-    
+    func showAddedNewProfiles() {
+        self.navigationController?.pushViewController(AddedNewProfilesModule.build(), animated: true)
+    }
 }
