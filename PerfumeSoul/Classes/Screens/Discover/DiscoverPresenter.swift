@@ -25,9 +25,11 @@ final class DiscoverPresenterImpl {
 }
 
 extension DiscoverPresenterImpl: DiscoverPresenter {
-    func comparePerfumesButtonTab() {
-        router.showComparePerfumesScreen()
     func startQuizButtonTab() {
         router.showStartQuizScreen()
+    }
+    
+    func comparePerfumesButtonTab() {
+        router.showComparePerfumesScreen()
     }
 }
