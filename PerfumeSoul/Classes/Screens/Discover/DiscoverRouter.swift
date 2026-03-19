@@ -10,6 +10,7 @@ import UIKit
 
 protocol DiscoverRouter {
     func showComparePerfumesScreen()
+    func showStartQuizScreen()
 }
 
 final class DiscoverRouterImpl {
@@ -20,5 +21,7 @@ final class DiscoverRouterImpl {
 extension DiscoverRouterImpl: DiscoverRouter {
     func showComparePerfumesScreen() {
         self.navigationController?.pushViewController(ComparePerfumesModule.build(), animated: true)
+    func showStartQuizScreen() {
+        self.navigationController?.pushViewController(StartQuizModule.build(), animated: true)
     }
 }

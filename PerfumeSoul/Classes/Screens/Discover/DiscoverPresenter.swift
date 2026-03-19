@@ -8,6 +8,7 @@
 
 protocol DiscoverPresenter {
     func comparePerfumesButtonTab()
+    func startQuizButtonTab()
 }
 
 final class DiscoverPresenterImpl {
@@ -26,5 +27,7 @@ final class DiscoverPresenterImpl {
 extension DiscoverPresenterImpl: DiscoverPresenter {
     func comparePerfumesButtonTab() {
         router.showComparePerfumesScreen()
+    func startQuizButtonTab() {
+        router.showStartQuizScreen()
     }
 }

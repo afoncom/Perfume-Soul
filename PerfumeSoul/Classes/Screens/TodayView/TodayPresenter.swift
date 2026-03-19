@@ -7,6 +7,7 @@
 
 protocol TodayPresenter {
     func todayEnergyButtonTab()
+    func dayInPerfumeryButtonTab()
 }
 
 final class TodayPresenterImpl {
@@ -25,5 +26,9 @@ final class TodayPresenterImpl {
 extension TodayPresenterImpl: TodayPresenter {
     func todayEnergyButtonTab() {
         router.showTodayEnergyScreen()
+    }
+    
+    func dayInPerfumeryButtonTab() {
+        router.showDayInPerfumeryScreen()
     }
 }

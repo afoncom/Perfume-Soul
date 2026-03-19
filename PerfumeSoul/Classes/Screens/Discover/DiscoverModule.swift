@@ -10,8 +10,14 @@ import SwiftUI
 
 final class DiscoverModule {
     static func build() -> UIViewController {
+        let viewModel = DiscoverViewModel()
         let router = DiscoverRouterImpl()
-        let view = DiscoverScreen()
+        let presenter = DiscoverPresenterImpl(
+            viewModel: viewModel,
+            router: router
+        )
+        
+        let view = DiscoverScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
         hostingController.title = "Discover"
