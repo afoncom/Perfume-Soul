@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ProfileScreen: View {
-    @Bindable private var viewModel: ProfileViewMoodel
+    @Bindable var viewModel: ProfileViewMoodel
     
     var body: some View {
         Text("Profile")
