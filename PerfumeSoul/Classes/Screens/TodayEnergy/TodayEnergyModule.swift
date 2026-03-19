@@ -10,7 +10,8 @@ import SwiftUI
 
 final class TodayEnergyModule {
     static func build() -> UIViewController {
-        let view = TodayEnergyScreen()
+        let viewModel = TodayEnergyViewModel()
+        let view = TodayEnergyScreen(viewModel: viewModel)
         
         let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
         hostingController.title = "TodayEnergy"
