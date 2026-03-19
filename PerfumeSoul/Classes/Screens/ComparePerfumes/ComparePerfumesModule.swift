@@ -11,7 +11,13 @@ import SwiftUI
 final class ComparePerfumesModule {
     static func build() -> UIViewController {
         let viewModel = ComparePerfumesViewModel()
-        let view = ComparePerfumesScreen(viewModel: viewModel)
+        let router = ComparePerfumesRouterImpl()
+        let presenter = ComparePerfumesPresenterImpl(
+            viewModel: viewModel,
+            router: router
+        )
+        
+        let view = ComparePerfumesScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
         hostingController.title = "ComparePerfumes"
