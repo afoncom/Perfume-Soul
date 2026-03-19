@@ -9,7 +9,16 @@
 import SwiftUI
 
 struct SettingsScreen: View {
-    @Bindable private var viewModel: SettingsViewModel
+    @Bindable var viewModel: SettingsViewModel
+    private let presenter: SettingsPresenter
+    
+    init(
+        viewModel: SettingsViewModel,
+        presenter: SettingsPresenter
+    ) {
+        self.viewModel = viewModel
+        self.presenter = presenter
+    }
     
     var body: some View {
         Text("Settings")

@@ -10,8 +10,14 @@ import SwiftUI
 
 final class SettingsModule {
     static func build() -> UIViewController {
+        let viewModel = SettingsViewModel()
         let router = SettingsRouterImpl()
-        let view = SettingsScreen()
+        let presenter = SettingsPresenterImpl(
+            viewModel: viewModel,
+            router: router
+        )
+        
+        let view = SettingsScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
         hostingController.title = "Settings"

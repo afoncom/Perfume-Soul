@@ -11,6 +11,7 @@ import SwiftUI
 struct DiscoverScreen: View {
     @Bindable private var viewModel: DiscoverViewModel
     private let presenter : DiscoverPresenter
+    private let presenter: DiscoverPresenter
     
     init(
         viewModel: DiscoverViewModel,
@@ -25,6 +26,10 @@ struct DiscoverScreen: View {
         
         Button("FindPerfumes") {
             presenter.findPerfumesButtonTab()
+        }
+      
+        Button("StartQuiz") {
+            presenter.startQuizButtonTab()
         }
     }
 }
