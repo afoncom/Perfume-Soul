@@ -11,7 +11,13 @@ import SwiftUI
 final class AddedNewProfilesModule {
     static func build() -> UIViewController {
         let viewModel = AddedNewProfilesViewModel()
-        let view = AddedNewProfilesScreen(viewModel: viewModel)
+        let router = AddedNewProfilesRouterImpl()
+        let presenter = AddedNewProfilesPresenterImpl(
+            viewModel: viewModel,
+            router: router
+        )
+        
+        let view = AddedNewProfilesScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
         hostingController.title = "AddedNewProfiles"
