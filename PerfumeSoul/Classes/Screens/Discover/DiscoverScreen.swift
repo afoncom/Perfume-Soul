@@ -23,6 +23,10 @@ struct DiscoverScreen: View {
     var body: some View {
         Text("Discover")
         
+        Button("ComparePerfumes") {
+            presenter.comparePerfumesButtonTab()
+        }
+        
         Button("StartQuiz") {
             presenter.startQuizButtonTab()
         }
