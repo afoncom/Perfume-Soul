@@ -1,5 +1,5 @@
 //
-//  TodayEnergyModule.swift
+//  ComparePerfumesModule.swift
 //  PerfumeSoul
 //
 //  Created by afon.com on 16.03.2026.
@@ -8,19 +8,19 @@
 
 import SwiftUI
 
-final class TodayEnergyModule {
+final class ComparePerfumesModule {
     static func build() -> UIViewController {
-        let viewModel = TodayEnergyViewModel()
-        let router = TodayEnergyRouterImpl()
-        let presenter = TodayEnergyPresenterImpl(
+        let viewModel = ComparePerfumesViewModel()
+        let router = ComparePerfumesRouterImpl()
+        let presenter = ComparePerfumesPresenterImpl(
             viewModel: viewModel,
             router: router
         )
         
-        let view = TodayEnergyScreen(viewModel: viewModel, presenter: presenter)
+        let view = ComparePerfumesScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
-        hostingController.title = "TodayEnergy"
+        hostingController.title = "ComparePerfumes"
         
         return hostingController
     }

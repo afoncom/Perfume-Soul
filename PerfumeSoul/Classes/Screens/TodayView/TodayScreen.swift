@@ -22,11 +22,12 @@ struct TodayScreen: View {
     var body: some View {
         Text("Today")
         
-        Button(action: {
+        Button("TodayEnergy") {
             presenter.todayEnergyButtonTab()
         }
-        ) {
-            Text("TodayEnergy")
+        
+        Button("DayInPerfumery") {
+            presenter.dayInPerfumeryButtonTab()
         }
     }
 }

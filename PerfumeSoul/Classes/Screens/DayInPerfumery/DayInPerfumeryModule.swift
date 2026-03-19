@@ -8,19 +8,19 @@
 
 import SwiftUI
 
-final class TodayEnergyModule {
+final class DayInPerfumeryModule {
     static func build() -> UIViewController {
-        let viewModel = TodayEnergyViewModel()
-        let router = TodayEnergyRouterImpl()
-        let presenter = TodayEnergyPresenterImpl(
+        let viewModel = DayInPerfumeryViewModel()
+        let router = DayInPerfumeryRouterImpl()
+        let presenter = DayInPerfumeryPresenterImpl(
             viewModel: viewModel,
             router: router
         )
         
-        let view = TodayEnergyScreen(viewModel: viewModel, presenter: presenter)
+        let view = DayInPerfumeryScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
-        hostingController.title = "TodayEnergy"
+        hostingController.title = "DayInPerfumery"
         
         return hostingController
     }

@@ -10,8 +10,8 @@ import SwiftUI
 
 final class ProfileModule {
     static func build() -> UIViewController {
-        let router = ProfileRouterImpl()
         let viewModel = ProfileViewMoodel()
+        let router = ProfileRouterImpl()
         let presenter = ProfilePresenterImpl(
             viewModel: viewModel,
             router: router

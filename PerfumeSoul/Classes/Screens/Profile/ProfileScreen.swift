@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ProfileScreen: View {
-    @Bindable private var viewModel: ProfileViewMoodel
+    @Bindable var viewModel: ProfileViewMoodel
     private let presenter: ProfilePresenter
     
     init(

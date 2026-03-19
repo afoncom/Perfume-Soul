@@ -9,10 +9,27 @@
 import SwiftUI
 
 struct DiscoverScreen: View {
-    @Bindable private var viewModel: TodayViewModel
+    @Bindable private var viewModel: DiscoverViewModel
+    private let presenter: DiscoverPresenter
+    
+    init(
+        viewModel: DiscoverViewModel,
+        presenter: DiscoverPresenter
+    ) {
+        self.viewModel = viewModel
+        self.presenter = presenter
+    }
     
     var body: some View {
         Text("Discover")
+        
+        Button("ComparePerfumes") {
+            presenter.comparePerfumesButtonTab()
+        }
+        
+        Button("StartQuiz") {
+            presenter.startQuizButtonTab()
+        }
     }
 }
 
