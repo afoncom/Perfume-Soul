@@ -12,6 +12,11 @@ final class SettingsModule {
     static func build() -> UIViewController {
         let viewModel = SettingsViewModel()
         let router = SettingsRouterImpl()
+        let presenter = SettingsPresenterImpl(
+            viewModel: viewModel,
+            router: router
+        )
+        
         let view = SettingsScreen(viewModel: viewModel)
         
         let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
