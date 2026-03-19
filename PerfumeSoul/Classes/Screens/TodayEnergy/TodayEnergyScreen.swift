@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct TodayEnergyScreen: View {
-    @Bindable var viewModel: TodayEnergyViewModel
+    @Bindable private var viewModel: TodayEnergyViewModel
     private let presenter: TodayEnergyPresenter
     
     init(

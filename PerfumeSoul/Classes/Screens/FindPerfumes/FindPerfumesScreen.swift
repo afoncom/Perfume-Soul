@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct FindPerfumesScreen: View {
-    @Bindable var viewModel: FindPerfumesViewModel
+    @Bindable private var viewModel: FindPerfumesViewModel
     private let presenter: FindPerfumesPresenter
     
     init(

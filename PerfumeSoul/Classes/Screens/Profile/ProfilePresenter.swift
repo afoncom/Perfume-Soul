@@ -7,7 +7,7 @@
 //
 
 protocol ProfilePresenter {
-    func AddedNewProfilesButtonTab()
+    func addedNewProfilesButtonTab()
 }
 
 final class ProfilePresenterImpl {
@@ -24,7 +24,7 @@ final class ProfilePresenterImpl {
 }
 
 extension ProfilePresenterImpl: ProfilePresenter {
-    func AddedNewProfilesButtonTab() {
+    func addedNewProfilesButtonTab() {
         router.showAddedNewProfiles()
     }
 }

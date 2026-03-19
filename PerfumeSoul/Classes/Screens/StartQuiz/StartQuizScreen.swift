@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct StartQuizScreen: View {
-    @Bindable var viewModel: StartQuizViewModel
+    @Bindable private var viewModel: StartQuizViewModel
     private let presenter: StartQuizPresenter
     
     init(
