@@ -11,7 +11,13 @@ import SwiftUI
 final class ProfileModule {
     static func build() -> UIViewController {
         let router = ProfileRouterImpl()
-        let view = ProfileScreen()
+        let viewModel = ProfileViewMoodel()
+        let presenter = ProfilePresenterImpl(
+            viewModel: viewModel,
+            router: router
+        )
+        
+        let view = ProfileScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
         hostingController.title = "Profile"

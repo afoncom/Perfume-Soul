@@ -10,9 +10,22 @@ import SwiftUI
 
 struct ProfileScreen: View {
     @Bindable private var viewModel: ProfileViewMoodel
+    private let presenter: ProfilePresenter
+    
+    init(
+        viewModel: ProfileViewMoodel,
+        presenter: ProfilePresenter
+    ) {
+        self.viewModel = viewModel
+        self.presenter = presenter
+    }
     
     var body: some View {
         Text("Profile")
+        
+        Button("AddedNewProfiles") {
+            presenter.AddedNewProfilesButtonTab()
+        }
     }
 }
 
