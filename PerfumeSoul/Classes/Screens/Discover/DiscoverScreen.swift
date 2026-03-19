@@ -28,6 +28,10 @@ struct DiscoverScreen: View {
             presenter.findPerfumesButtonTab()
         }
       
+        Button("ComparePerfumes") {
+            presenter.comparePerfumesButtonTab()
+        }
+        
         Button("StartQuiz") {
             presenter.startQuizButtonTab()
         }
