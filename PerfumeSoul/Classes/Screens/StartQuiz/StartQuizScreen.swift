@@ -10,6 +10,15 @@ import SwiftUI
 
 struct StartQuizScreen: View {
     @Bindable var viewModel: StartQuizViewModel
+    private let presenter: StartQuizPresenter
+    
+    init(
+        viewModel: StartQuizViewModel,
+        presenter: StartQuizPresenter
+    ) {
+        self.viewModel = viewModel
+        self.presenter = presenter
+    }
     
     var body: some View {
         Text("StartQuiz")

@@ -11,7 +11,13 @@ import SwiftUI
 final class StartQuizModule {
     static func build() -> UIViewController {
         let viewModel = StartQuizViewModel()
-        let view = StartQuizScreen(viewModel: viewModel)
+        let router = StartQuizRouterImpl()
+        let presenter = StartQuizPresenterImpl(
+            viewModel: viewModel,
+            router: router
+        )
+        
+        let view = StartQuizScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
         hostingController.title = "StartQuiz"
