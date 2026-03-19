@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DiscoverRouter {
-    
+    func showFindPerfumesScreen()
 }
 
 final class DiscoverRouterImpl {
@@ -18,5 +18,7 @@ final class DiscoverRouterImpl {
 }
 
 extension DiscoverRouterImpl: DiscoverRouter {
-    
+    func showFindPerfumesScreen() {
+        self.navigationController?.pushViewController(FindPerfumesModule.build(), animated: true)
+    }
 }

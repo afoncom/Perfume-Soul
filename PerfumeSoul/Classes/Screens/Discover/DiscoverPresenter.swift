@@ -7,16 +7,16 @@
 //
 
 protocol DiscoverPresenter {
-    
+    func findPerfumesButtonTab()
 }
 
 final class DiscoverPresenterImpl {
-    private let viewModel: ProfileViewMoodel
-    private let router: ProfileRouter
+    private let viewModel: DiscoverViewModel
+    private let router: DiscoverRouter
     
     init(
-        viewModel: ProfileViewMoodel,
-        router: ProfileRouter
+        viewModel: DiscoverViewModel,
+        router: DiscoverRouter
     ) {
         self.viewModel = viewModel
         self.router = router
@@ -24,5 +24,7 @@ final class DiscoverPresenterImpl {
 }
 
 extension DiscoverPresenterImpl: DiscoverPresenter {
-    
+    func findPerfumesButtonTab() {
+        router.showFindPerfumesScreen()
+    }
 }
