@@ -23,9 +23,8 @@ jobs:
         fi
 
         echo "PerfumeSoul.xcodeproj is missing. Generating from Project.swift..."
-        curl -Ls https://install.tuist.io | bash
-        echo "$HOME/.tuist/bin" >> "$GITHUB_PATH"
-        export PATH="$HOME/.tuist/bin:$PATH"
+        brew tap tuist/tuist
+        brew install --formula tuist
         tuist version
         tuist generate --no-open
     - name: Resolve simulator destination
