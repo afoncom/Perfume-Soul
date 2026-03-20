@@ -9,10 +9,33 @@ on:
 jobs:
   test:
     runs-on: macos-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
+    - name: Resolve simulator destination
+      id: simulator
+      shell: bash
+      run: |
+        set -eo pipefail
+        DESTINATION_ID="$(xcodebuild -showdestinations -project PerfumeSoul.xcodeproj -scheme PerfumeSoul | awk -F'id:' '/platform:iOS Simulator/ {split($2, a, ","); gsub(/[[:space:]]/, "", a[1]); print a[1]; exit}')"
+        if [[ -z "$DESTINATION_ID" ]]; then
+          echo "Failed to find an iOS Simulator destination for scheme PerfumeSoul."
+          xcodebuild -showdestinations -project PerfumeSoul.xcodeproj -scheme PerfumeSoul
+          exit 1
+        fi
+        echo "destination=id=$DESTINATION_ID" >> "$GITHUB_OUTPUT"
+        echo "Using simulator destination id=$DESTINATION_ID"
     - name: Run tests
-      run: xcodebuild test -project PerfumeSoul.xcodeproj -scheme PerfumeSoul -destination 'platform=iOS Simulator,name=iPhone SE (3rd generation),OS=18.6' -enableCodeCoverage YES | tee xcodebuild.log
+      shell: bash
+      run: |
+        set -eo pipefail
+        xcodebuild test \
+          -project PerfumeSoul.xcodeproj \
+          -scheme PerfumeSoul \
+          -destination "${{ steps.simulator.outputs.destination }}" \
+          -enableCodeCoverage YES \
+          | tee xcodebuild.log
     - name: Upload logs if failed
       if: failure()
       uses: actions/upload-artifact@v4
