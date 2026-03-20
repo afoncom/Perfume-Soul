@@ -9,10 +9,34 @@ on:
 jobs:
   test:
     runs-on: macos-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
+    - name: Generate Xcode project
+      shell: bash
+      run: |
+        set -eo pipefail
+        if [[ -f "PerfumeSoul.xcodeproj/project.pbxproj" ]]; then
+          echo "PerfumeSoul.xcodeproj already exists."
+          exit 0
+        fi
+
+        echo "PerfumeSoul.xcodeproj is missing. Generating from Project.swift..."
+        brew tap tuist/tuist
+        brew install --formula tuist
+        tuist version
+        tuist generate --no-open
     - name: Run tests
-      run: xcodebuild test -project PerfumeSoul.xcodeproj -scheme PerfumeSoul -destination 'platform=iOS Simulator,name=iPhone SE (3rd generation),OS=18.6' -enableCodeCoverage YES | tee xcodebuild.log
+      shell: bash
+      run: |
+        set -eo pipefail
+        xcodebuild test \
+          -project PerfumeSoul.xcodeproj \
+          -scheme PerfumeSoul \
+          -destination 'platform=iOS Simulator,name=iPhone SE (3rd generation),OS=latest' \
+          -enableCodeCoverage YES \
+          | tee xcodebuild.log
     - name: Upload logs if failed
       if: failure()
       uses: actions/upload-artifact@v4
