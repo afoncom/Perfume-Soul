@@ -13,9 +13,11 @@ protocol TodayRouter {
 }
 
 final class TodayRouterImpl {
-    weak var navigationController: UINavigationController? 
-    
-    
+    private weak var navigationController: UINavigationController?
+
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
 }
 
 extension TodayRouterImpl: TodayRouter {
@@ -26,6 +28,4 @@ extension TodayRouterImpl: TodayRouter {
     func showDayInPerfumeryScreen() {
         self.navigationController?.pushViewController(DayInPerfumeryModule.build(), animated: true)
     }
-    
-    
 }

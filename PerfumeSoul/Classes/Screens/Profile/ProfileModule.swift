@@ -11,7 +11,8 @@ import SwiftUI
 final class ProfileModule {
     static func build() -> UIViewController {
         let viewModel = ProfileViewMoodel()
-        let router = ProfileRouterImpl()
+        let navigationController = UINavigationController()
+        let router = ProfileRouterImpl(navigationController: navigationController)
         let presenter = ProfilePresenterImpl(
             viewModel: viewModel,
             router: router
@@ -22,9 +23,8 @@ final class ProfileModule {
         let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
         hostingController.title = "Profile"
         
-        let navigationController = UINavigationController(rootViewController: hostingController)
+        navigationController.viewControllers = [hostingController]
         navigationController.tabBarItem = UITabBarItem(title: "Profile", image: nil, tag: 2)
-        router.navigationController = navigationController
         
         return navigationController
     }

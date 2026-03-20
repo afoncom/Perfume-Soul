@@ -15,8 +15,11 @@ protocol DiscoverRouter {
 }
 
 final class DiscoverRouterImpl {
-    weak var navigationController: UINavigationController?
+    private weak var navigationController: UINavigationController?
 
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
 }
 
 extension DiscoverRouterImpl: DiscoverRouter {
