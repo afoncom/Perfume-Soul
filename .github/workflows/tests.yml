@@ -13,6 +13,21 @@ jobs:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     steps:
     - uses: actions/checkout@v5
+    - name: Generate Xcode project
+      shell: bash
+      run: |
+        set -eo pipefail
+        if [[ -f "PerfumeSoul.xcodeproj/project.pbxproj" ]]; then
+          echo "PerfumeSoul.xcodeproj already exists."
+          exit 0
+        fi
+
+        echo "PerfumeSoul.xcodeproj is missing. Generating from Project.swift..."
+        curl -Ls https://install.tuist.io | bash
+        echo "$HOME/.tuist/bin" >> "$GITHUB_PATH"
+        export PATH="$HOME/.tuist/bin:$PATH"
+        tuist version
+        tuist generate --no-open
     - name: Resolve simulator destination
       id: simulator
       shell: bash
