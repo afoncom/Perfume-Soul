@@ -13,8 +13,11 @@ protocol DayInPerfumeryRouter {
 }
 
 final class DayInPerfumeryRouterImpl {
-    weak var navigationController: UINavigationController?
-    
+    private weak var navigationController: UINavigationController?
+
+    init(navigationController: UINavigationController?) {
+        self.navigationController = navigationController
+    }
 }
 
 extension DayInPerfumeryRouterImpl: DayInPerfumeryRouter {

@@ -9,9 +9,9 @@
 import SwiftUI
 
 final class DayInPerfumeryModule {
-    static func build() -> UIViewController {
+    static func build(navigationController: UINavigationController?) -> UIViewController {
         let viewModel = DayInPerfumeryViewModel()
-        let router = DayInPerfumeryRouterImpl()
+        let router = DayInPerfumeryRouterImpl(navigationController: navigationController)
         let presenter = DayInPerfumeryPresenterImpl(
             viewModel: viewModel,
             router: router

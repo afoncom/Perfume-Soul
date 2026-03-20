@@ -9,9 +9,9 @@
 import SwiftUI
 
 final class StartQuizModule {
-    static func build() -> UIViewController {
+    static func build(navigationController: UINavigationController?) -> UIViewController {
         let viewModel = StartQuizViewModel()
-        let router = StartQuizRouterImpl()
+        let router = StartQuizRouterImpl(navigationController: navigationController)
         let presenter = StartQuizPresenterImpl(
             viewModel: viewModel,
             router: router

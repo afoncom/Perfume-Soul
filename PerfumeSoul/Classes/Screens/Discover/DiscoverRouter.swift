@@ -24,14 +24,26 @@ final class DiscoverRouterImpl {
 
 extension DiscoverRouterImpl: DiscoverRouter {
     func showFindPerfumesScreen() {
-        self.navigationController?.pushViewController(FindPerfumesModule.build(), animated: true) 
+        guard let navigationController = self.navigationController else { return }
+        navigationController.pushViewController(
+            FindPerfumesModule.build(navigationController: navigationController),
+            animated: true
+        )
     }
   
     func showComparePerfumesScreen() {
-        self.navigationController?.pushViewController(ComparePerfumesModule.build(), animated: true)
+        guard let navigationController = self.navigationController else { return }
+        navigationController.pushViewController(
+            ComparePerfumesModule.build(navigationController: navigationController),
+            animated: true
+        )
     }
     
     func showStartQuizScreen() {
-        self.navigationController?.pushViewController(StartQuizModule.build(), animated: true)
+        guard let navigationController = self.navigationController else { return }
+        navigationController.pushViewController(
+            StartQuizModule.build(navigationController: navigationController),
+            animated: true
+        )
     }
 }

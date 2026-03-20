@@ -22,10 +22,18 @@ final class TodayRouterImpl {
 
 extension TodayRouterImpl: TodayRouter {
     func showTodayEnergyScreen() {
-        self.navigationController?.pushViewController(TodayEnergyModule.build(), animated: true)
+        guard let navigationController = self.navigationController else { return }
+        navigationController.pushViewController(
+            TodayEnergyModule.build(navigationController: navigationController),
+            animated: true
+        )
     }
     
     func showDayInPerfumeryScreen() {
-        self.navigationController?.pushViewController(DayInPerfumeryModule.build(), animated: true)
+        guard let navigationController = self.navigationController else { return }
+        navigationController.pushViewController(
+            DayInPerfumeryModule.build(navigationController: navigationController),
+            animated: true
+        )
     }
 }

@@ -22,6 +22,10 @@ final class ProfileRouterImpl {
 
 extension ProfileRouterImpl: ProfileRouter {
     func showAddedNewProfiles() {
-        self.navigationController?.pushViewController(AddedNewProfilesModule.build(), animated: true)
+        guard let navigationController = self.navigationController else { return }
+        navigationController.pushViewController(
+            AddedNewProfilesModule.build(navigationController: navigationController),
+            animated: true
+        )
     }
 }

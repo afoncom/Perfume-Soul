@@ -9,9 +9,9 @@
 import SwiftUI
 
 final class AddedNewProfilesModule {
-    static func build() -> UIViewController {
+    static func build(navigationController: UINavigationController?) -> UIViewController {
         let viewModel = AddedNewProfilesViewModel()
-        let router = AddedNewProfilesRouterImpl()
+        let router = AddedNewProfilesRouterImpl(navigationController: navigationController)
         let presenter = AddedNewProfilesPresenterImpl(
             viewModel: viewModel,
             router: router
