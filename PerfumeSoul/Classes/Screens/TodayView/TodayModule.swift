@@ -19,7 +19,7 @@ final class TodayModule {
         
         let view = TodayScreen(viewModel: viewModel, presenter: presenter)
         
-        let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
+        let hostingController = UIHostingController(rootView: view)
         hostingController.title = "Today"
 
         navigationController.viewControllers = [hostingController]

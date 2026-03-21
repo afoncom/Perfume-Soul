@@ -19,8 +19,8 @@ final class FindPerfumesModule {
         
         let view = FindPerfumesScreen(viewModel: viewModel, presenter: presenter)
         
-        let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
-        hostingController.title = "TodayEnergy"
+        let hostingController = UIHostingController(rootView: view)
+        hostingController.title = "FindPerfumes"
         
         return hostingController
     }

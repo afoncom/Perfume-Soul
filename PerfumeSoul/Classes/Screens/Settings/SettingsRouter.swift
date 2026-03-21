@@ -15,7 +15,7 @@ protocol SettingsRouter {
 final class SettingsRouterImpl {
     private weak var navigationController: UINavigationController?
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
     }
 }

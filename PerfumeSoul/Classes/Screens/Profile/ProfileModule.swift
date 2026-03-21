@@ -20,7 +20,7 @@ final class ProfileModule {
         
         let view = ProfileScreen(viewModel: viewModel, presenter: presenter)
         
-        let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
+        let hostingController = UIHostingController(rootView: view)
         hostingController.title = "Profile"
         
         navigationController.viewControllers = [hostingController]

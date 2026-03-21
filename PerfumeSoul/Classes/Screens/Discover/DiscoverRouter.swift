@@ -16,32 +16,29 @@ protocol DiscoverRouter {
 
 final class DiscoverRouterImpl {
     private weak var navigationController: UINavigationController?
-
-    init(navigationController: UINavigationController) {
+    
+    init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
     }
 }
 
 extension DiscoverRouterImpl: DiscoverRouter {
     func showFindPerfumesScreen() {
-        guard let navigationController = self.navigationController else { return }
-        navigationController.pushViewController(
+        navigationController?.pushViewController(
             FindPerfumesModule.build(navigationController: navigationController),
             animated: true
         )
     }
-  
+    
     func showComparePerfumesScreen() {
-        guard let navigationController = self.navigationController else { return }
-        navigationController.pushViewController(
+        navigationController?.pushViewController(
             ComparePerfumesModule.build(navigationController: navigationController),
             animated: true
         )
     }
     
     func showStartQuizScreen() {
-        guard let navigationController = self.navigationController else { return }
-        navigationController.pushViewController(
+        navigationController?.pushViewController(
             StartQuizModule.build(navigationController: navigationController),
             animated: true
         )

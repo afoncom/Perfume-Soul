@@ -19,7 +19,7 @@ final class ComparePerfumesModule {
         
         let view = ComparePerfumesScreen(viewModel: viewModel, presenter: presenter)
         
-        let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
+        let hostingController = UIHostingController(rootView: view)
         hostingController.title = "ComparePerfumes"
         
         return hostingController

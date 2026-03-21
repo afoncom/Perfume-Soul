@@ -19,7 +19,7 @@ final class TodayEnergyModule {
         
         let view = TodayEnergyScreen(viewModel: viewModel, presenter: presenter)
         
-        let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
+        let hostingController = UIHostingController(rootView: view)
         hostingController.title = "TodayEnergy"
         
         return hostingController
