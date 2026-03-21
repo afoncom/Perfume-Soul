@@ -9,9 +9,9 @@
 import SwiftUI
 
 final class TodayEnergyModule {
-    static func build() -> UIViewController {
+    static func build(navigationController: UINavigationController?) -> UIViewController {
         let viewModel = TodayEnergyViewModel()
-        let router = TodayEnergyRouterImpl()
+        let router = TodayEnergyRouterImpl(navigationController: navigationController)
         let presenter = TodayEnergyPresenterImpl(
             viewModel: viewModel,
             router: router
@@ -19,7 +19,7 @@ final class TodayEnergyModule {
         
         let view = TodayEnergyScreen(viewModel: viewModel, presenter: presenter)
         
-        let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
+        let hostingController = UIHostingController(rootView: view)
         hostingController.title = "TodayEnergy"
         
         return hostingController

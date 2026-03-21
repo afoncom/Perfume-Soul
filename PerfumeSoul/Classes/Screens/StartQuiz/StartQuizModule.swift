@@ -9,9 +9,9 @@
 import SwiftUI
 
 final class StartQuizModule {
-    static func build() -> UIViewController {
+    static func build(navigationController: UINavigationController?) -> UIViewController {
         let viewModel = StartQuizViewModel()
-        let router = StartQuizRouterImpl()
+        let router = StartQuizRouterImpl(navigationController: navigationController)
         let presenter = StartQuizPresenterImpl(
             viewModel: viewModel,
             router: router
@@ -19,7 +19,7 @@ final class StartQuizModule {
         
         let view = StartQuizScreen(viewModel: viewModel, presenter: presenter)
         
-        let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
+        let hostingController = UIHostingController(rootView: view)
         hostingController.title = "StartQuiz"
         
         return hostingController

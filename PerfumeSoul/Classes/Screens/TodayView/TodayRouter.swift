@@ -9,23 +9,29 @@ import UIKit
 
 protocol TodayRouter {
     func showTodayEnergyScreen()
-    func showDayInPerfumeryScreen() 
+    func showDayInPerfumeryScreen()
 }
 
 final class TodayRouterImpl {
-    weak var navigationController: UINavigationController? 
+    private weak var navigationController: UINavigationController?
     
-    
+    init(navigationController: UINavigationController?) {
+        self.navigationController = navigationController
+    }
 }
 
 extension TodayRouterImpl: TodayRouter {
     func showTodayEnergyScreen() {
-        self.navigationController?.pushViewController(TodayEnergyModule.build(), animated: true)
+        navigationController?.pushViewController(
+            TodayEnergyModule.build(navigationController: navigationController),
+            animated: true
+        )
     }
     
     func showDayInPerfumeryScreen() {
-        self.navigationController?.pushViewController(DayInPerfumeryModule.build(), animated: true)
+        navigationController?.pushViewController(
+            DayInPerfumeryModule.build(navigationController: navigationController),
+            animated: true
+        )
     }
-    
-    
 }

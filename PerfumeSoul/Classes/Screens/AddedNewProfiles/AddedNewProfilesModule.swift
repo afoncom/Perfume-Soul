@@ -9,9 +9,9 @@
 import SwiftUI
 
 final class AddedNewProfilesModule {
-    static func build() -> UIViewController {
+    static func build(navigationController: UINavigationController?) -> UIViewController {
         let viewModel = AddedNewProfilesViewModel()
-        let router = AddedNewProfilesRouterImpl()
+        let router = AddedNewProfilesRouterImpl(navigationController: navigationController)
         let presenter = AddedNewProfilesPresenterImpl(
             viewModel: viewModel,
             router: router
@@ -19,7 +19,7 @@ final class AddedNewProfilesModule {
         
         let view = AddedNewProfilesScreen(viewModel: viewModel, presenter: presenter)
         
-        let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
+        let hostingController = UIHostingController(rootView: view)
         hostingController.title = "AddedNewProfiles"
         
         return hostingController

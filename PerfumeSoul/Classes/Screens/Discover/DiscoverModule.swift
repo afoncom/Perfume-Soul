@@ -11,7 +11,8 @@ import SwiftUI
 final class DiscoverModule {
     static func build() -> UIViewController {
         let viewModel = DiscoverViewModel()
-        let router = DiscoverRouterImpl()
+        let navigationController = UINavigationController()
+        let router = DiscoverRouterImpl(navigationController: navigationController)
         let presenter = DiscoverPresenterImpl(
             viewModel: viewModel,
             router: router
@@ -19,12 +20,11 @@ final class DiscoverModule {
         
         let view = DiscoverScreen(viewModel: viewModel, presenter: presenter)
         
-        let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
+        let hostingController = UIHostingController(rootView: view)
         hostingController.title = "Discover"
         
-        let navigationController = UINavigationController(rootViewController: hostingController)
+        navigationController.viewControllers = [hostingController]
         navigationController.tabBarItem = UITabBarItem(title: "Discover", image: nil, tag: 1)
-        router.navigationController = navigationController
 
         return navigationController
     }

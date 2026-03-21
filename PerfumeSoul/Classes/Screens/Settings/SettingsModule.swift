@@ -11,7 +11,8 @@ import SwiftUI
 final class SettingsModule {
     static func build() -> UIViewController {
         let viewModel = SettingsViewModel()
-        let router = SettingsRouterImpl()
+        let navigationController = UINavigationController()
+        let router = SettingsRouterImpl(navigationController: navigationController)
         let presenter = SettingsPresenterImpl(
             viewModel: viewModel,
             router: router
@@ -19,12 +20,11 @@ final class SettingsModule {
         
         let view = SettingsScreen(viewModel: viewModel, presenter: presenter)
         
-        let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
+        let hostingController = UIHostingController(rootView: view)
         hostingController.title = "Settings"
         
-        let navigationController = UINavigationController(rootViewController: hostingController)
+        navigationController.viewControllers = [hostingController]
         navigationController.tabBarItem = UITabBarItem(title: "Settings", image: nil, tag: 3)
-        router.navigationController = navigationController
         
         return navigationController
     }

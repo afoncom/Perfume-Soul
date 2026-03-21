@@ -13,8 +13,11 @@ protocol ComparePerfumesRouter {
 }
 
 final class ComparePerfumesRouterImpl {
-    weak var navigationController: UINavigationController?
-    
+    private weak var navigationController: UINavigationController?
+
+    init(navigationController: UINavigationController?) {
+        self.navigationController = navigationController
+    }
 }
 
 extension ComparePerfumesRouterImpl: ComparePerfumesRouter {

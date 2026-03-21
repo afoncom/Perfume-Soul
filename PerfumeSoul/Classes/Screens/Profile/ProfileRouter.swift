@@ -13,12 +13,18 @@ protocol ProfileRouter {
 }
 
 final class ProfileRouterImpl {
-    weak var navigationController: UINavigationController?
+    private weak var navigationController: UINavigationController?
     
+    init(navigationController: UINavigationController?) {
+        self.navigationController = navigationController
+    }
 }
 
 extension ProfileRouterImpl: ProfileRouter {
     func showAddedNewProfiles() {
-        self.navigationController?.pushViewController(AddedNewProfilesModule.build(), animated: true)
+        navigationController?.pushViewController(
+            AddedNewProfilesModule.build(navigationController: navigationController),
+            animated: true
+        )
     }
 }

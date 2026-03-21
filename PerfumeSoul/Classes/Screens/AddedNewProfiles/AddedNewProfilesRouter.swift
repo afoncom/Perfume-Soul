@@ -13,8 +13,11 @@ protocol AddedNewProfilesRouter {
 }
 
 final class AddedNewProfilesRouterImpl {
-    weak var navigationController: UINavigationController?
-    
+    private weak var navigationController: UINavigationController?
+
+    init(navigationController: UINavigationController?) {
+        self.navigationController = navigationController
+    }
 }
 
 extension AddedNewProfilesRouterImpl: AddedNewProfilesRouter {

@@ -9,9 +9,9 @@
 import SwiftUI
 
 final class ComparePerfumesModule {
-    static func build() -> UIViewController {
+    static func build(navigationController: UINavigationController?) -> UIViewController {
         let viewModel = ComparePerfumesViewModel()
-        let router = ComparePerfumesRouterImpl()
+        let router = ComparePerfumesRouterImpl(navigationController: navigationController)
         let presenter = ComparePerfumesPresenterImpl(
             viewModel: viewModel,
             router: router
@@ -19,7 +19,7 @@ final class ComparePerfumesModule {
         
         let view = ComparePerfumesScreen(viewModel: viewModel, presenter: presenter)
         
-        let hostingController = UIHostingController(rootView: AnyView(view.ignoresSafeArea()))
+        let hostingController = UIHostingController(rootView: view)
         hostingController.title = "ComparePerfumes"
         
         return hostingController

@@ -13,8 +13,11 @@ protocol StartQuizRouter {
 }
 
 final class StartQuizRouterImpl {
-    weak var navigationController: UINavigationController?
-    
+    private weak var navigationController: UINavigationController?
+
+    init(navigationController: UINavigationController?) {
+        self.navigationController = navigationController
+    }
 }
 
 extension StartQuizRouterImpl: StartQuizRouter {
