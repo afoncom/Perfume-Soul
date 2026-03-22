@@ -24,6 +24,7 @@ final class TodayModule {
 
         navigationController.viewControllers = [hostingController]
         navigationController.tabBarItem = UITabBarItem(title: "Today", image: nil, tag: 0)
+        navigationController.navigationBar.prefersLargeTitles = true
         
         return navigationController
     }
