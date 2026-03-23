@@ -21,14 +21,218 @@ struct ProfileScreen: View {
     }
     
     var body: some View {
-        Text("Profile")
-        
-        Button("AddedNewProfiles") {
-            presenter.addedNewProfilesButtonTab()
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack(spacing: 10) {
+                makeProfileScreen()
+                    .padding(.horizontal, 16)
+                
+                makeMyNatalChart()
+                    .padding(.horizontal, 16)
+                
+                makeElementBalance()
+                    .padding(.horizontal, 16)
+                
+                makeAddedNewProfiless()
+                    .padding(.horizontal, 16)
+            }
+            .padding(.vertical, 8)
         }
     }
 }
 
-extension ProfileScreen {
+private extension ProfileScreen {
+    func makeProfileScreen() -> some View {
+        HStack(spacing: 12) {
+            Circle()
+                .fill(Color.gray.opacity(0.16))
+                .frame(width: 62, height: 62)
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Anna Petrova")
+                    .font(.title3)
+                    .fontWeight(.medium)
+                
+                Text("Born May 12, 1993  Paris, France")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
     
+    func makeMyNatalChart() -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("My Natal Chart")
+                .font(.title3)
+                .fontWeight(.medium)
+            
+            VStack(spacing: 8) {
+                makeNatalChartRow(
+                    color: Color.orange.opacity(0.25),
+                    symbol: "sun.max.fill",
+                    symbolColor: .orange,
+                    title: "Sun",
+                    value: "Taurus ♉"
+                )
+                
+                makeNatalChartRow(
+                    color: Color.blue.opacity(0.25),
+                    symbol: "moon.fill",
+                    symbolColor: .blue,
+                    title: "Moon",
+                    value: "Libra ♎"
+                )
+                
+                makeNatalChartRow(
+                    color: Color.pink.opacity(0.25),
+                    symbol: "circle.hexagongrid.fill",
+                    symbolColor: .pink,
+                    title: "Ascendant",
+                    value: "Capricorn ♑"
+                )
+            }
+        }
+        .padding(14)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .shadow(color: .black.opacity(0.04), radius: 7, x: 0, y: 3)
+    }
+    
+    func makeElementBalance() -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Element Balance")
+                .font(.title3)
+                .fontWeight(.medium)
+            
+            ZStack(alignment: .leading) {
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .fill(Color.gray.opacity(0.08))
+                    .frame(height: 34)
+            }
+            
+            HStack {
+                makeElementItem(percent: "15%", title: "Fire")
+                Spacer()
+                makeElementItem(percent: "40%", title: "Earth")
+                Spacer()
+                makeElementItem(percent: "15%", title: "Air")
+                Spacer()
+                makeElementItem(percent: "30%", title: "Water")
+            }
+        }
+        .padding(14)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .shadow(color: .black.opacity(0.04), radius: 7, x: 0, y: 3)
+    }
+    
+    func makeAddedNewProfiless() -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text("Profiles")
+                    .font(.title3)
+                    .fontWeight(.medium)
+                
+                Spacer()
+                
+                Button(action: {
+                    presenter.addedNewProfilesButtonTab()
+                }) {
+                    Image(systemName: "plus")
+                        .font(.headline.weight(.medium))
+                        .foregroundStyle(.secondary)
+                        .frame(width: 28, height: 28)
+                }
+            }
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    makeAddedProfileItem(name: "Laura")
+                    makeAddedProfileItem(name: "Alex")
+                    makeAddedProfileItem(name: "Ada")
+                }
+            }
+        }
+        .padding(14)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .shadow(color: .black.opacity(0.04), radius: 7, x: 0, y: 3)
+    }
+}
+
+//MARK: - Natal Chart Row
+
+private extension ProfileScreen {
+    func makeNatalChartRow(
+        color: Color,
+        symbol: String,
+        symbolColor: Color,
+        title: String,
+        value: String
+    ) -> some View {
+        HStack(spacing: 12) {
+            Circle()
+                .fill(color)
+                .frame(width: 42, height: 42)
+                .overlay(
+                    Image(systemName: symbol)
+                        .font(.headline)
+                        .foregroundColor(symbolColor)
+                )
+            
+            HStack(spacing: 8) {
+                Text(title)
+                    .font(.headline)
+                
+                Text(value)
+                    .font(.headline)
+                    .foregroundStyle(.primary)
+            }
+            
+            Spacer()
+            
+            Image(systemName: "chevron.right")
+                .font(.footnote.weight(.medium))
+                .foregroundStyle(.secondary)
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
+        .background(Color.gray.opacity(0.06))
+        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+    }
+}
+
+//MARK: - Element Item
+
+private extension ProfileScreen {
+    func makeElementItem(percent: String, title: String) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(percent)
+                .font(.headline)
+                .fontWeight(.medium)
+            
+            Text(title)
+                .font(.headline)
+                .foregroundStyle(.secondary)
+        }
+    }
+}
+
+//MARK: - Added Profile Item
+
+private extension ProfileScreen {
+    func makeAddedProfileItem(name: String) -> some View {
+        VStack(spacing: 8) {
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(Color.gray.opacity(0.12))
+                .frame(width: 92, height: 92)
+            
+            Text(name)
+                .font(.headline)
+                .foregroundStyle(.primary)
+        }
+    }
 }
