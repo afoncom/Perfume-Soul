@@ -25,6 +25,7 @@ final class DiscoverModule {
         
         navigationController.viewControllers = [hostingController]
         navigationController.tabBarItem = UITabBarItem(title: "Discover", image: nil, tag: 1)
+        navigationController.navigationBar.prefersLargeTitles = true
 
         return navigationController
     }
