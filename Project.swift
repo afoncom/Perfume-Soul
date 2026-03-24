@@ -13,10 +13,15 @@ let project = Project(
             infoPlist: .file(path: "PerfumeSoul/Info.plist"),
             sources: .sourceFilesList(globs: ["PerfumeSoul/**/*.swift"]),
             resources: [
-                "PerfumeSoul/Assets.xcassets",
-                "PerfumeSoul/Base.lproj/**"
+                "PerfumeSoul/Resources/Assets.xcassets",
+                "PerfumeSoul/Resources/Base.lproj/**"
             ],
-            dependencies: []
+            dependencies: [],
+            settings: .settings(
+                base: [
+                    "ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": "YES"
+                ]
+            )
         ),
         Target.target(
             name: "PerfumeSoulTests",

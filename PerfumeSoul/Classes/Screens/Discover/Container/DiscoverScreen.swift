@@ -11,10 +11,7 @@ import SwiftUI
 struct DiscoverScreen: View {
     @Bindable private var viewModel: DiscoverViewModel
     private let presenter: DiscoverPresenter
-    @State private var perfumeAName = ""
-    @State private var perfumeBName = ""
-    @FocusState private var focusedField: FocusedField?
-    private let primaryButtonColor = Color(red: 0.95, green: 0.74, blue: 0.80)
+    @FocusState private var focusedFieldID: ComparePerfumeInput.ID?
     
     init(
         viewModel: DiscoverViewModel,
@@ -57,7 +54,7 @@ private extension DiscoverScreen {
                 Button("Start quiz") {
                     presenter.startQuizButtonTab()
                 }
-                .primaryCapsuleButton(color: primaryButtonColor)
+                .primaryCapsuleButton(color: .primaryButton)
                 .padding(.horizontal, 28)
             }
             .padding(14)
@@ -74,22 +71,18 @@ private extension DiscoverScreen {
                 .fontWeight(.semibold)
             
             VStack(spacing: 12) {
-                makePerfumeInput(
-                    title: "Perfume A",
-                    text: $perfumeAName,
-                    field: .perfumeA
-                )
-                
-                makePerfumeInput(
-                    title: "Perfume B",
-                    text: $perfumeBName,
-                    field: .perfumeB
-                )
+                ForEach($viewModel.comparePerfumes) { $perfume in
+                    makePerfumeInput(
+                        title: perfume.title,
+                        text: $perfume.name,
+                        fieldID: perfume.id
+                    )
+                }
                 
                 Button("Compare") {
                     presenter.comparePerfumesButtonTab()
                 }
-                .primaryCapsuleButton(color: primaryButtonColor)
+                .primaryCapsuleButton(color: .primaryButton)
             }
             .padding(14)
             .background(Color.white)
@@ -112,7 +105,7 @@ private extension DiscoverScreen {
             Button("Find") {
                 presenter.findPerfumesButtonTab()
             }
-            .primaryCapsuleButton(color: primaryButtonColor)
+            .primaryCapsuleButton(color: .primaryButton)
             .padding(.top, 2)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -124,25 +117,18 @@ private extension DiscoverScreen {
 }
 
 private extension DiscoverScreen {
-    enum FocusedField {
-        case perfumeA
-        case perfumeB
-    }
-}
-
-private extension DiscoverScreen {
     func makePerfumeInput(
         title: String,
         text: Binding<String>,
-        field: FocusedField
+        fieldID: ComparePerfumeInput.ID
     ) -> some View {
         HStack(spacing: 12) {
             TextField(title, text: text)
-                .focused($focusedField, equals: field)
+                .focused($focusedFieldID, equals: fieldID)
                 .submitLabel(.done)
                 .font(.title3)
                 .onSubmit {
-                    focusedField = nil
+                    focusedFieldID = nil
                 }
             
             Image(systemName: "magnifyingglass")

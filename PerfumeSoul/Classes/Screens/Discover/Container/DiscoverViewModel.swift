@@ -11,5 +11,14 @@ import Combine
 import Observation
 
 @Observable final class DiscoverViewModel {
-    
+    var comparePerfumes: [ComparePerfumeInput] = [
+        ComparePerfumeInput(title: "Perfume A"),
+        ComparePerfumeInput(title: "Perfume B")
+    ]
+}
+
+struct ComparePerfumeInput: Identifiable {
+    let id = UUID()
+    let title: String
+    var name: String = ""
 }
