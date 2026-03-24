@@ -25,6 +25,7 @@ final class ProfileModule {
         
         navigationController.viewControllers = [hostingController]
         navigationController.tabBarItem = UITabBarItem(title: "Profile", image: nil, tag: 2)
+        navigationController.navigationBar.prefersLargeTitles = true
         
         return navigationController
     }
