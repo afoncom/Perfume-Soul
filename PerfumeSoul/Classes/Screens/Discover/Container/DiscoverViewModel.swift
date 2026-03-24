@@ -16,9 +16,3 @@ import Observation
         ComparePerfumeInput(title: "Perfume B")
     ]
 }
-
-struct ComparePerfumeInput: Identifiable {
-    let id = UUID()
-    let title: String
-    var name: String = ""
-}
