@@ -11,7 +11,7 @@ import SwiftUI
 struct DiscoverScreen: View {
     @Bindable private var viewModel: DiscoverViewModel
     private let presenter: DiscoverPresenter
-    @FocusState private var focusedFieldID: ComparePerfumeInput.ID?
+    @FocusState private var focusedFieldName: String?
     
     init(
         viewModel: DiscoverViewModel,
@@ -54,7 +54,7 @@ private extension DiscoverScreen {
                 Button("Start quiz") {
                     presenter.startQuizButtonTab()
                 }
-                .primaryCapsuleButton(color: .primaryButton)
+                .primaryCapsuleButton(color: Color("PrimaryButton"))
                 .padding(.horizontal, 28)
             }
             .padding(14)
@@ -71,18 +71,18 @@ private extension DiscoverScreen {
                 .fontWeight(.semibold)
             
             VStack(spacing: 12) {
-                ForEach($viewModel.comparePerfumes) { $perfume in
+                ForEach(Array(viewModel.comparePerfumeTitles.enumerated()), id: \.offset) { index, title in
                     makePerfumeInput(
-                        title: perfume.title,
-                        text: $perfume.name,
-                        fieldID: perfume.id
+                        title: title,
+                        text: $viewModel.comparePerfumeNames[index],
+                        fieldName: title
                     )
                 }
                 
                 Button("Compare") {
                     presenter.comparePerfumesButtonTab()
                 }
-                .primaryCapsuleButton(color: .primaryButton)
+                .primaryCapsuleButton(color: Color("PrimaryButton"))
             }
             .padding(14)
             .background(Color.white)
@@ -105,7 +105,7 @@ private extension DiscoverScreen {
             Button("Find") {
                 presenter.findPerfumesButtonTab()
             }
-            .primaryCapsuleButton(color: .primaryButton)
+            .primaryCapsuleButton(color: Color("PrimaryButton"))
             .padding(.top, 2)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -120,15 +120,15 @@ private extension DiscoverScreen {
     func makePerfumeInput(
         title: String,
         text: Binding<String>,
-        fieldID: ComparePerfumeInput.ID
+        fieldName: String
     ) -> some View {
         HStack(spacing: 12) {
             TextField(title, text: text)
-                .focused($focusedFieldID, equals: fieldID)
+                .focused($focusedFieldName, equals: fieldName)
                 .submitLabel(.done)
                 .font(.title3)
                 .onSubmit {
-                    focusedFieldID = nil
+                    focusedFieldName = nil
                 }
             
             Image(systemName: "magnifyingglass")

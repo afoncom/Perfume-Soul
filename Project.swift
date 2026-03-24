@@ -16,12 +16,7 @@ let project = Project(
                 "PerfumeSoul/Resources/Assets.xcassets",
                 "PerfumeSoul/Resources/Base.lproj/**"
             ],
-            dependencies: [],
-            settings: .settings(
-                base: [
-                    "ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": "YES"
-                ]
-            )
+            dependencies: []
         ),
         Target.target(
             name: "PerfumeSoulTests",
