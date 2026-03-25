@@ -54,7 +54,7 @@ private extension DiscoverScreen {
                 Button("Start quiz") {
                     presenter.startQuizButtonTab()
                 }
-                .primaryCapsuleButton(color: Color("PrimaryButton"))
+                .primaryCapsuleButton(color: .pinkButton)
                 .padding(.horizontal, 28)
             }
             .padding(14)
@@ -82,7 +82,7 @@ private extension DiscoverScreen {
                 Button("Compare") {
                     presenter.comparePerfumesButtonTab()
                 }
-                .primaryCapsuleButton(color: Color("PrimaryButton"))
+                .primaryCapsuleButton(color: .pinkButton)
             }
             .padding(14)
             .background(Color.white)
@@ -105,7 +105,7 @@ private extension DiscoverScreen {
             Button("Find") {
                 presenter.findPerfumesButtonTab()
             }
-            .primaryCapsuleButton(color: Color("PrimaryButton"))
+            .primaryCapsuleButton(color: .pinkButton)
             .padding(.top, 2)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
