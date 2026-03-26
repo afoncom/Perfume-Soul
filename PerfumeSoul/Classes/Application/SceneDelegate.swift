@@ -47,26 +47,18 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabController.viewControllers = [todayScreen, discoverScreen, profileScreen, settingsScreen]
         setRootViewController(tabController)
     }
-    
+
+    private func finishCalculationFlow() {
+        UserDefaults.standard.set(true, forKey: Constants.hasCompletedCalculationKey)
+        showMainScreen()
+    }
 
     private func setRootViewController(_ viewController: UIViewController) {
         guard let window else {
             return
         }
-        let shouldAnimateTransition = window.rootViewController != nil
-        
+
         window.rootViewController = viewController
         window.makeKeyAndVisible()
-        
-        guard shouldAnimateTransition else {
-            return
-        }
-        
-        UIView.transition(
-            with: window,
-            duration: 0.25,
-            options: .transitionCrossDissolve,
-            animations: nil
-        )
     }
 }
