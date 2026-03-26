@@ -10,6 +10,10 @@ import SwiftUI
 import CoreData
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    private enum Constants {
+        static let hasCompletedCalculationKey = "hasCompletedCalculation"
+    }
+    
     var window: UIWindow?
     let coreDataManager: CoreDataManager = CoreDataManagerImpl()
     
@@ -49,9 +53,20 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let window else {
             return
         }
+        let shouldAnimateTransition = window.rootViewController != nil
+        
         window.rootViewController = viewController
         window.makeKeyAndVisible()
+        
+        guard shouldAnimateTransition else {
+            return
+        }
+        
+        UIView.transition(
+            with: window,
+            duration: 0.25,
+            options: .transitionCrossDissolve,
+            animations: nil
+        )
     }
-    
-    
 }
