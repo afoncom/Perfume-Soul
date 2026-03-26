@@ -10,5 +10,8 @@ import Foundation
 import Observation
 
 @Observable final class CalculationViewModel {
-  
+    var firstName = ""
+    var birthDate = ""
+    var birthTime = "12:00"
+    var birthPlace = ""
 }

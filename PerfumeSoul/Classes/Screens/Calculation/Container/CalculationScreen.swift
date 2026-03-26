@@ -21,6 +21,155 @@ struct CalculationScreen: View {
     }
     
     var body: some View {
-        Text("CalculationScreen")
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack(spacing: 28) {
+                makeHeaderView()
+                makeFormCard()
+                makeContinueButton()
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 36)
+            .padding(.bottom, 24)
+        }
+        .background(Color.white)
     }
 }
+
+private extension CalculationScreen {
+    func makeHeaderView() -> some View {
+        VStack(spacing: 12) {
+            Text("Create your profile")
+                .font(.largeTitle)
+                .fontWeight(.semibold)
+                .multilineTextAlignment(.center)
+            
+            Text("Enter your birth details to unlock personalized insights.")
+                .font(.title3)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .lineSpacing(4)
+        }
+        .padding(.horizontal, 12)
+    }
+    
+    func makeFormCard() -> some View {
+        VStack(alignment: .leading, spacing: 20) {
+            makeNameField()
+            makeBirthDateField()
+            makeBirthTimeField()
+            makeBirthPlaceField()
+        }
+        .padding(22)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+        .shadow(color: .black.opacity(0.05), radius: 18, x: 0, y: 8)
+    }
+    
+    func makeNameField() -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Name")
+                .font(.title3)
+                .fontWeight(.medium)
+            
+            HStack(spacing: 12) {
+                Image(systemName: "person")
+                    .font(.headline)
+                    .foregroundStyle(.black)
+                
+                TextField("Your first name", text: $viewModel.firstName)
+                    .font(.title3)
+                    .foregroundStyle(.primary)
+                    .textInputAutocapitalization(.words)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 16)
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+        }
+    }
+    
+    func makeBirthDateField() -> some View {
+        makeStaticField(
+            title: "Birth Date",
+            systemImage: "calendar",
+            value: viewModel.birthDate.isEmpty ? "DD-MM-YYYY" : viewModel.birthDate,
+            iconColor: .black
+        )
+    }
+    
+    func makeBirthTimeField() -> some View {
+        makeStaticField(
+            title: "Birth Time",
+            systemImage: "clock",
+            value: viewModel.birthTime,
+            iconColor: .black
+        )
+    }
+    
+    func makeBirthPlaceField() -> some View {
+        makeStaticField(
+            title: "Birth Place",
+            systemImage: "location",
+            value: viewModel.birthPlace.isEmpty ? "Enter city or town" : viewModel.birthPlace,
+            iconColor: .black
+        )
+    }
+}
+
+//MARK: - Continue Button
+private extension CalculationScreen {
+    func makeContinueButton() -> some View {
+        Button {
+            presenter.continueButtonTapped()
+        } label: {
+            Text("Continue")
+                .font(.title2)
+                .fontWeight(.medium)
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+                .background(.pinkButton)
+                .clipShape(Capsule())
+        }
+        .shadow(color: .black.opacity(0.08), radius: 12, x: 0, y: 6)
+    }
+}
+
+//MARK: - Static Field
+private extension CalculationScreen {
+    func makeStaticField(
+        title: String,
+        systemImage: String,
+        value: String,
+        iconColor: Color,
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text(title)
+                .font(.title3)
+                .fontWeight(.medium)
+            
+            HStack(spacing: 12) {
+                Image(systemName: systemImage)
+                    .font(.headline)
+                    .foregroundStyle(iconColor)
+                
+                Text(value)
+                    .font(.title3)
+                    .foregroundStyle(.secondary)
+                
+                Spacer()
+                
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 16)
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .stroke(Color.black.opacity(0.08), lineWidth: 1)
+            )
+        }
+    }
+}
+
+
