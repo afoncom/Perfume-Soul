@@ -9,6 +9,10 @@ import UIKit
 import SwiftUI
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    private enum Constants {
+        static let hasCompletedCalculationKey = "hasCompletedCalculation"
+    }
+    
     var window: UIWindow?
 
     func scene(
@@ -24,6 +28,26 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.backgroundColor = .systemBackground
         self.window = window
 
+        showInitialScreen()
+    }
+
+    private func showInitialScreen() {
+        if UserDefaults.standard.bool(forKey: Constants.hasCompletedCalculationKey) {
+            showMainScreen()
+        } else {
+            showCalculationScreen()
+        }
+    }
+    
+    private func showCalculationScreen() {
+        let calculationScreen = CalculationModule.build { [weak self] in
+            self?.finishCalculationFlow()
+        }
+        setRootViewController(calculationScreen)
+    }
+    
+    private func finishCalculationFlow() {
+        UserDefaults.standard.set(true, forKey: Constants.hasCompletedCalculationKey)
         showMainScreen()
     }
 
@@ -42,9 +66,20 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let window else {
             return
         }
+        let shouldAnimateTransition = window.rootViewController != nil
+        
         window.rootViewController = viewController
         window.makeKeyAndVisible()
+        
+        guard shouldAnimateTransition else {
+            return
+        }
+        
+        UIView.transition(
+            with: window,
+            duration: 0.25,
+            options: .transitionCrossDissolve,
+            animations: nil
+        )
     }
-    
-    
 }
