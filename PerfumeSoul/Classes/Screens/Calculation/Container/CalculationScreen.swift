@@ -89,7 +89,7 @@ private extension CalculationScreen {
     }
     
     func makeBirthDateField() -> some View {
-        makeStaticField(
+        makeReadOnlyField(
             title: "Birth Date",
             systemImage: "calendar",
             value: viewModel.birthDate.isEmpty ? "DD-MM-YYYY" : viewModel.birthDate,
@@ -98,7 +98,7 @@ private extension CalculationScreen {
     }
     
     func makeBirthTimeField() -> some View {
-        makeStaticField(
+        makeReadOnlyField(
             title: "Birth Time",
             systemImage: "clock",
             value: viewModel.birthTime,
@@ -107,7 +107,7 @@ private extension CalculationScreen {
     }
     
     func makeBirthPlaceField() -> some View {
-        makeStaticField(
+        makeReadOnlyField(
             title: "Birth Place",
             systemImage: "location",
             value: viewModel.birthPlace.isEmpty ? "Enter city or town" : viewModel.birthPlace,
@@ -135,9 +135,9 @@ private extension CalculationScreen {
     }
 }
 
-//MARK: - Static Field
+//MARK: - Read-Only Field
 private extension CalculationScreen {
-    func makeStaticField(
+    func makeReadOnlyField(
         title: String,
         systemImage: String,
         value: String,
@@ -171,5 +171,3 @@ private extension CalculationScreen {
         }
     }
 }
-
-
