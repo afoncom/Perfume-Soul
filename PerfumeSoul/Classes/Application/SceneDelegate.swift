@@ -52,7 +52,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UserDefaults.standard.set(true, forKey: Constants.hasCompletedCalculationKey)
         showMainScreen()
     }
-
+    
     private func setRootViewController(_ viewController: UIViewController) {
         guard let window else {
             return
