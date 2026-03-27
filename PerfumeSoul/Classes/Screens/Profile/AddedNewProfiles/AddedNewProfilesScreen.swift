@@ -21,7 +21,7 @@ struct AddedNewProfilesScreen: View {
     }
     
     var body: some View {
-        Text("AddedNewProfiles")
+        Text(L10n.Screen.addedProfiles)
     }
 }
 

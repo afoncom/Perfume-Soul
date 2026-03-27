@@ -41,7 +41,7 @@ struct DiscoverScreen: View {
 private extension DiscoverScreen {
     func makeFindYourScentArchetype() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Find Your Scent Archetype")
+            Text(L10n.Discover.ScentArchetype.title)
                 .font(.title2)
                 .fontWeight(.semibold)
             
@@ -51,7 +51,7 @@ private extension DiscoverScreen {
                     .frame(maxWidth: .infinity)
                     .frame(height: 170)
                 
-                Button("Start quiz") {
+                Button(L10n.Discover.ScentArchetype.button) {
                     presenter.startQuizButtonTab()
                 }
                 .primaryCapsuleButton(color: .pinkButton)
@@ -66,7 +66,7 @@ private extension DiscoverScreen {
     
     func makeComparePerfumes() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Compare Perfumes")
+            Text(L10n.Discover.Compare.title)
                 .font(.title2)
                 .fontWeight(.semibold)
             
@@ -79,7 +79,7 @@ private extension DiscoverScreen {
                     )
                 }
                 
-                Button("Compare") {
+                Button(L10n.Discover.Compare.button) {
                     presenter.comparePerfumesButtonTab()
                 }
                 .primaryCapsuleButton(color: .pinkButton)
@@ -93,16 +93,16 @@ private extension DiscoverScreen {
     
     func makeFindSimilarPerfumes() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Find Similar Perfumes")
+            Text(L10n.Discover.FindSimilar.title)
                 .font(.title2)
                 .fontWeight(.semibold)
             
-            Text("Enter perfumes you own to find similar scents.")
+            Text(L10n.Discover.FindSimilar.subtitle)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Button("Find") {
+            Button(L10n.Discover.FindSimilar.button) {
                 presenter.findPerfumesButtonTab()
             }
             .primaryCapsuleButton(color: .pinkButton)

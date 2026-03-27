@@ -20,10 +20,10 @@ final class TodayModule {
         let view = TodayScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: view)
-        hostingController.title = "Today"
+        hostingController.title = L10n.Screen.today
 
         navigationController.viewControllers = [hostingController]
-        navigationController.tabBarItem = UITabBarItem(title: "Today", image: nil, tag: 0)
+        navigationController.tabBarItem = UITabBarItem(title: L10n.Screen.today, image: nil, tag: 0)
         navigationController.navigationBar.prefersLargeTitles = true
         
         return navigationController

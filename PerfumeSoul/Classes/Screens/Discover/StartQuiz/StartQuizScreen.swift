@@ -21,7 +21,7 @@ struct StartQuizScreen: View {
     }
     
     var body: some View {
-        Text("StartQuiz")
+        Text(L10n.Screen.startQuiz)
     }
 }
 

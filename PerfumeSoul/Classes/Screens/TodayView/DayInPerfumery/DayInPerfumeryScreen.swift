@@ -21,7 +21,7 @@ struct DayInPerfumeryScreen: View {
     }
     
     var body: some View {
-        Text("DayInPerfumery")
+        Text(L10n.Screen.dayInPerfumery)
     }
 }
 

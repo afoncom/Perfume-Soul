@@ -21,10 +21,10 @@ final class SettingsModule {
         let view = SettingsScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: view)
-        hostingController.title = "Settings"
+        hostingController.title = L10n.Screen.settings
         
         navigationController.viewControllers = [hostingController]
-        navigationController.tabBarItem = UITabBarItem(title: "Settings", image: nil, tag: 3)
+        navigationController.tabBarItem = UITabBarItem(title: L10n.Screen.settings, image: nil, tag: 3)
         
         return navigationController
     }

@@ -3,9 +3,6 @@ import ProjectDescription
 let project = Project(
     name: "PerfumeSoul",
     organizationName: "afon.com",
-    options: .options(
-        disableSynthesizedResourceAccessors: true
-    ),
     targets: [
         Target.target(
             name: "PerfumeSoul",
@@ -17,7 +14,9 @@ let project = Project(
             sources: .sourceFilesList(globs: ["PerfumeSoul/**/*.swift"]),
             resources: [
                 "PerfumeSoul/Resources/Assets.xcassets",
-                "PerfumeSoul/Resources/Base.lproj/**"
+                "PerfumeSoul/Resources/Base.lproj/**",
+                "PerfumeSoul/Resources/en.lproj/**",
+                "PerfumeSoul/Resources/ru.lproj/**"
             ],
             dependencies: [],
             settings: .settings(
