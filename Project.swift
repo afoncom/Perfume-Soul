@@ -4,6 +4,7 @@ let project = Project(
     name: "PerfumeSoul",
     organizationName: "afon.com",
     options: .options(
+        disableBundleAccessors: true,
         disableSynthesizedResourceAccessors: true
     ),
     targets: [
