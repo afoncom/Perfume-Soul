@@ -10,12 +10,14 @@ import SwiftUI
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
-
+    let coreDataManager: CoreDataManager = CoreDataManagerImpl()
+    
     func scene(
         _ scene: UIScene,
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
+        coreDataManager.initContainer()
         guard let windowScene = scene as? UIWindowScene else {
             return
         }
@@ -25,6 +27,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
 
         showMainScreen()
+    }
+    
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        coreDataManager.saveContext()
     }
 
     private func showMainScreen() {
