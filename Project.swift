@@ -3,10 +3,6 @@ import ProjectDescription
 let project = Project(
     name: "PerfumeSoul",
     organizationName: "afon.com",
-    options: .options(
-        disableBundleAccessors: true,
-        disableSynthesizedResourceAccessors: true
-    ),
     targets: [
         Target.target(
             name: "PerfumeSoul",
