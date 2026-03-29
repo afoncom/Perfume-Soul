@@ -18,7 +18,8 @@ let project = Project(
             sources: .sourceFilesList(globs: ["PerfumeSoul/**/*.swift"]),
             resources: [
                 "PerfumeSoul/Resources/Assets.xcassets",
-                "PerfumeSoul/Resources/Base.lproj/**"
+                "PerfumeSoul/Resources/Base.lproj/**",
+                "PerfumeSoul/Classes/Core/CoreData/**/*.xcdatamodeld"
             ],
             dependencies: [],
             settings: .settings(
