@@ -21,7 +21,7 @@ struct ComparePerfumesScreen: View {
     }
     
     var body: some View {
-        Text("ComparePerfumes")
+        Text(L10n.Screen.comparePerfumes)
     }
 }
 

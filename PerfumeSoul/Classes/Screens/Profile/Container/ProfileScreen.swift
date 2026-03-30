@@ -52,7 +52,7 @@ private extension ProfileScreen {
                     .font(.title3)
                     .fontWeight(.medium)
                 
-                Text("Born May 12, 1993  Paris, France")
+                Text(L10n.Profile.birthInfo)
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -65,7 +65,7 @@ private extension ProfileScreen {
     
     func makeMyNatalChart() -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("My Natal Chart")
+            Text(L10n.Profile.NatalChart.title)
                 .font(.title3)
                 .fontWeight(.medium)
             
@@ -74,24 +74,24 @@ private extension ProfileScreen {
                     color: Color.orange.opacity(0.25),
                     symbol: "sun.max.fill",
                     symbolColor: .orange,
-                    title: "Sun",
-                    value: "Taurus ♉"
+                    title: L10n.Profile.NatalChart.sun,
+                    value: L10n.Profile.NatalChart.sunValue
                 )
                 
                 makeNatalChartRow(
                     color: Color.blue.opacity(0.25),
                     symbol: "moon.fill",
                     symbolColor: .blue,
-                    title: "Moon",
-                    value: "Libra ♎"
+                    title: L10n.Profile.NatalChart.moon,
+                    value: L10n.Profile.NatalChart.moonValue
                 )
                 
                 makeNatalChartRow(
                     color: Color.pink.opacity(0.25),
                     symbol: "circle.hexagongrid.fill",
                     symbolColor: .pink,
-                    title: "Ascendant",
-                    value: "Capricorn ♑"
+                    title: L10n.Profile.NatalChart.ascendant,
+                    value: L10n.Profile.NatalChart.ascendantValue
                 )
             }
         }
@@ -103,7 +103,7 @@ private extension ProfileScreen {
     
     func makeElementBalance() -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Element Balance")
+            Text(L10n.Profile.ElementBalance.title)
                 .font(.title3)
                 .fontWeight(.medium)
             
@@ -114,13 +114,13 @@ private extension ProfileScreen {
             }
             
             HStack {
-                makeElementItem(percent: "15%", title: "Fire")
+                makeElementItem(percent: "15%", title: L10n.Profile.Element.fire)
                 Spacer()
-                makeElementItem(percent: "40%", title: "Earth")
+                makeElementItem(percent: "40%", title: L10n.Profile.Element.earth)
                 Spacer()
-                makeElementItem(percent: "15%", title: "Air")
+                makeElementItem(percent: "15%", title: L10n.Profile.Element.air)
                 Spacer()
-                makeElementItem(percent: "30%", title: "Water")
+                makeElementItem(percent: "30%", title: L10n.Profile.Element.water)
             }
         }
         .padding(14)
@@ -132,7 +132,7 @@ private extension ProfileScreen {
     func makeAddedNewProfiless() -> some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("Profiles")
+                Text(L10n.Profile.Profiles.title)
                     .font(.title3)
                     .fontWeight(.medium)
                 

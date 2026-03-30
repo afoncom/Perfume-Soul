@@ -42,7 +42,7 @@ struct TodayScreen: View {
 private extension TodayScreen {
     func makeTodayEnergyScreen() -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Today's Energy")
+            Text(L10n.Today.Energy.title)
                 .font(.title3)
                 .fontWeight(.medium)
             
@@ -56,10 +56,10 @@ private extension TodayScreen {
                     )
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Moon in Scorpio")
+                    Text(L10n.Today.Energy.moonTitle)
                         .font(.headline)
                     
-                    Text("Your emotions are deeper and more intense today.")
+                    Text(L10n.Today.Energy.description)
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
@@ -77,7 +77,7 @@ private extension TodayScreen {
     
     func makeAromaDay() -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Aroma of the Day")
+            Text(L10n.Today.Aroma.title)
                 .font(.title3)
                 .fontWeight(.medium)
             
@@ -88,13 +88,13 @@ private extension TodayScreen {
                         .font(.title3)
                         .fontWeight(.medium)
                     
-                    Text("Warm · Deep · Magnetic")
+                    Text(L10n.Today.Aroma.tags)
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                     
                     HStack(spacing: 6) {
                         Button(action: {}) {
-                            Text("My vibe")
+                            Text(L10n.Today.Aroma.primaryAction)
                                 .font(.caption)
                                 .foregroundColor(.white)
                                 .padding(.horizontal, 12)
@@ -104,7 +104,7 @@ private extension TodayScreen {
                         }
                         
                         Button(action: {}) {
-                            Text("Not today")
+                            Text(L10n.Today.Aroma.secondaryAction)
                                 .font(.caption)
                                 .foregroundColor(.gray)
                                 .padding(.horizontal, 12)
@@ -132,7 +132,7 @@ private extension TodayScreen {
     
     func makeRecommendedForYou() -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Recommended for You")
+            Text(L10n.Today.Recommended.title)
                 .font(.title3)
                 .fontWeight(.medium)
             
@@ -169,7 +169,7 @@ private extension TodayScreen {
     
     func makeThisDayInPerfumery() -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("On This Day in Perfumery")
+            Text(L10n.Today.History.title)
                 .font(.title3)
                 .fontWeight(.medium)
             
@@ -179,12 +179,12 @@ private extension TodayScreen {
                         .font(.title2)
                         .fontWeight(.medium)
                     
-                    Text("Dior released Diorissimo")
+                    Text(L10n.Today.History.eventTitle)
                         .font(.title3)
                         .foregroundStyle(.primary)
                 }
                 
-                Text("One of the most iconic lily-of-the-valley perfumes from Dior.")
+                Text(L10n.Today.History.description)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)

@@ -3,10 +3,6 @@ import ProjectDescription
 let project = Project(
     name: "PerfumeSoul",
     organizationName: "afon.com",
-    options: .options(
-        disableBundleAccessors: true,
-        disableSynthesizedResourceAccessors: true
-    ),
     targets: [
         Target.target(
             name: "PerfumeSoul",
@@ -20,6 +16,8 @@ let project = Project(
                 "PerfumeSoul/Resources/Assets.xcassets",
                 "PerfumeSoul/Resources/Base.lproj/**",
                 "PerfumeSoul/Classes/Core/CoreData/**/*.xcdatamodeld"
+                "PerfumeSoul/Resources/en.lproj/**",
+                "PerfumeSoul/Resources/ru.lproj/**"
             ],
             dependencies: [],
             settings: .settings(

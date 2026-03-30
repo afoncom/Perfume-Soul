@@ -20,7 +20,7 @@ final class StartQuizModule {
         let view = StartQuizScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: view)
-        hostingController.title = "StartQuiz"
+        hostingController.title = L10n.Screen.startQuiz
         
         return hostingController
     }

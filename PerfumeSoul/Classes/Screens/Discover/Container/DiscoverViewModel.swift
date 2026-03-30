@@ -11,10 +11,12 @@ import Combine
 import Observation
 
 @Observable final class DiscoverViewModel {
-    let comparePerfumeTitles = [
-        "Perfume A",
-        "Perfume B"
-    ]
+    var comparePerfumeTitles: [String] {
+        [
+            L10n.Discover.Compare.placeholderA,
+            L10n.Discover.Compare.placeholderB
+        ]
+    }
+
     var comparePerfumeNames = ["", ""]
 }
-

@@ -21,10 +21,10 @@ final class ProfileModule {
         let view = ProfileScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: view)
-        hostingController.title = "Profile"
+        hostingController.title = L10n.Screen.profile
         
         navigationController.viewControllers = [hostingController]
-        navigationController.tabBarItem = UITabBarItem(title: "Profile", image: nil, tag: 2)
+        navigationController.tabBarItem = UITabBarItem(title: L10n.Screen.profile, image: nil, tag: 2)
         navigationController.navigationBar.prefersLargeTitles = true
         
         return navigationController
