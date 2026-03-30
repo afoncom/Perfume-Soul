@@ -20,7 +20,7 @@ final class ComparePerfumesModule {
         let view = ComparePerfumesScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: view)
-        hostingController.title = "ComparePerfumes"
+        hostingController.title = L10n.Screen.comparePerfumes
         
         return hostingController
     }

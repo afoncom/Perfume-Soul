@@ -21,10 +21,10 @@ final class DiscoverModule {
         let view = DiscoverScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: view)
-        hostingController.title = "Discover"
+        hostingController.title = L10n.Screen.discover
         
         navigationController.viewControllers = [hostingController]
-        navigationController.tabBarItem = UITabBarItem(title: "Discover", image: nil, tag: 1)
+        navigationController.tabBarItem = UITabBarItem(title: L10n.Screen.discover, image: nil, tag: 1)
         navigationController.navigationBar.prefersLargeTitles = true
 
         return navigationController

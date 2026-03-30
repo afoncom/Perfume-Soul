@@ -20,7 +20,7 @@ final class TodayEnergyModule {
         let view = TodayEnergyScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: view)
-        hostingController.title = "TodayEnergy"
+        hostingController.title = L10n.Screen.todayEnergy
         
         return hostingController
     }

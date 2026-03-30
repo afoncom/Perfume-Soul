@@ -21,7 +21,7 @@ struct FindPerfumesScreen: View {
     }
     
     var body: some View {
-        Text("FindPerfumes")
+        Text(L10n.Screen.findPerfumes)
     }
 }
 

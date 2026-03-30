@@ -21,7 +21,7 @@ struct TodayEnergyScreen: View {
     }
     
     var body: some View {
-        Text("TodayEnergy")
+        Text(L10n.Screen.todayEnergy)
     }
 }
 

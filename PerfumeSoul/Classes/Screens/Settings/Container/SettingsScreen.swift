@@ -21,7 +21,7 @@ struct SettingsScreen: View {
     }
     
     var body: some View {
-        Text("Settings")
+        Text(L10n.Screen.settings)
     }
 }
 

@@ -20,7 +20,7 @@ final class AddedNewProfilesModule {
         let view = AddedNewProfilesScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: view)
-        hostingController.title = "AddedNewProfiles"
+        hostingController.title = L10n.Screen.addedProfiles
         
         return hostingController
     }
