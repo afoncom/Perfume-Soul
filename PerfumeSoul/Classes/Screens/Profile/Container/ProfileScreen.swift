@@ -11,6 +11,7 @@ import SwiftUI
 struct ProfileScreen: View {
     @Bindable private var viewModel: ProfileViewMoodel
     private let presenter: ProfilePresenter
+
     
     init(
         viewModel: ProfileViewMoodel,
@@ -36,6 +37,9 @@ struct ProfileScreen: View {
                     .padding(.horizontal, 16)
             }
             .padding(.vertical, 8)
+        }
+        .task {
+            await presenter.onAppear()
         }
     }
 }

@@ -11,11 +11,11 @@ import CoreData
 protocol CoreDataManager {
     func initContainer()
     func saveContext()
+    var container: NSPersistentContainer { get }
 }
 
 final class CoreDataManagerImpl {
-    private let container = NSPersistentContainer(name: "PerfumeSoul")
-    
+    let container = NSPersistentContainer(name: "PerfumeSoul")
 }
 
 extension CoreDataManagerImpl: CoreDataManager {

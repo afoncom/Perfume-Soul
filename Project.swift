@@ -15,7 +15,7 @@ let project = Project(
             resources: [
                 "PerfumeSoul/Resources/Assets.xcassets",
                 "PerfumeSoul/Resources/Base.lproj/**",
-                "PerfumeSoul/Classes/Core/CoreData/**/*.xcdatamodeld"
+                "PerfumeSoul/Classes/Core/CoreData/**/*.xcdatamodeld",
                 "PerfumeSoul/Resources/en.lproj/**",
                 "PerfumeSoul/Resources/ru.lproj/**"
             ],
