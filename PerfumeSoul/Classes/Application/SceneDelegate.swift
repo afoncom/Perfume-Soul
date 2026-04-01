@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import CoreData
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
@@ -25,19 +26,19 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         window.backgroundColor = .systemBackground
         self.window = window
-
-        showMainScreen()
+        
+        showMainScreen(container: coreDataManager.container)
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
         coreDataManager.saveContext()
     }
 
-    private func showMainScreen() {
+    private func showMainScreen(container: NSPersistentContainer) {
         let todayScreen = TodayModule.build()
         let settingsScreen = SettingsModule.build()
         let discoverScreen = DiscoverModule.build()
-        let profileScreen = ProfileModule.build()
+        let profileScreen = ProfileModule.build(container: container)
         let tabController = UITabBarController()
         tabController.viewControllers = [todayScreen, discoverScreen, profileScreen, settingsScreen]
         setRootViewController(tabController)

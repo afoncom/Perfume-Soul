@@ -7,15 +7,18 @@
 //
 
 import SwiftUI
+import CoreData
 
 final class ProfileModule {
-    static func build() -> UIViewController {
+    static func build(container: NSPersistentContainer) -> UIViewController {
         let viewModel = ProfileViewMoodel()
         let navigationController = UINavigationController()
+        let profileService = ProfileServiceImpl(container: container)
         let router = ProfileRouterImpl(navigationController: navigationController)
         let presenter = ProfilePresenterImpl(
             viewModel: viewModel,
-            router: router
+            router: router,
+            profileService: profileService
         )
         
         let view = ProfileScreen(viewModel: viewModel, presenter: presenter)
