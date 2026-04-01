@@ -11,7 +11,7 @@ protocol DatabaseStorage {
     associatedtype DatabaseModel: DatabaseStorable
     func saveModel(model:  DatabaseModel)
 //    func delete(model: DatabaseModel)
-    func fechAll() -> [DatabaseModel]
+    func fechAll() async -> [DatabaseModel]
 }
 
 final class DatabaseStorageImpl <DatabaseModel: DatabaseStorable> {
@@ -34,7 +34,7 @@ final class DatabaseStorageImpl <DatabaseModel: DatabaseStorable> {
     }
 }
 
-extension DatabaseStorageImpl {
+extension DatabaseStorageImpl: DatabaseStorage {
     func saveModel(model:  DatabaseModel) {
         let context = container.newBackgroundContext()
         context.perform {
@@ -56,7 +56,7 @@ extension DatabaseStorageImpl {
             do {
                 let storingModel = try context.fetch(fetchRequest)
                 return storingModel.compactMap { DatabaseModel(storableModel: $0) }
-            } catch let error {
+            } catch {
                 return []
             }
         }
