@@ -52,7 +52,7 @@ private extension ProfileScreen {
                 .frame(width: 62, height: 62)
             
             VStack(alignment: .leading, spacing: 4) {
-                Text("Anna Petrova")
+                Text(viewModel.profileName)
                     .font(.title3)
                     .fontWeight(.medium)
                 

@@ -10,5 +10,5 @@ import Foundation
 import Observation
 
 @Observable final class ProfileViewMoodel {
-    
+    var profileName = ""
 }

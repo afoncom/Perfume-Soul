@@ -7,14 +7,20 @@
 //
 
 import SwiftUI
+import CoreData
 
 final class CalculationModule {
-    static func build(onFinish: @escaping () -> Void) -> UIViewController {
+    static func build(
+        container: NSPersistentContainer,
+        onFinish: @escaping () -> Void
+    ) -> UIViewController {
         let viewModel = CalculationViewModel()
         let router = CalculationRouterImpl(onFinish: onFinish)
+        let profileService = ProfileServiceImpl(container: container)
         let presenter = CalculationPresenterImpl(
             viewModel: viewModel,
-            router: router
+            router: router,
+            profileService: profileService
         )
         
         let view = CalculationScreen(viewModel: viewModel, presenter: presenter)

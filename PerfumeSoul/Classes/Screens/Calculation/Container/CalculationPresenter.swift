@@ -13,18 +13,26 @@ protocol CalculationPresenter {
 final class CalculationPresenterImpl {
     private let viewModel: CalculationViewModel
     private let router: CalculationRouter
+    private let profileService: ProfileService
     
     init(
         viewModel: CalculationViewModel,
-        router: CalculationRouter
+        router: CalculationRouter,
+        profileService: ProfileService
     ) {
         self.viewModel = viewModel
         self.router = router
+        self.profileService = profileService
     }
 }
 
 extension CalculationPresenterImpl: CalculationPresenter {
     func continueButtonTapped() {
+        let profile = Profile(
+            surname: "",
+            name: viewModel.firstName
+        )
+        profileService.addProfile(model: profile)
         router.finishCalculation()
     }
 }

@@ -31,11 +31,9 @@ extension ProfilePresenterImpl: ProfilePresenter {
     func addedNewProfilesButtonTab() {
         router.showAddedNewProfiles()
     }
-    
+
     func onAppear() async {
-        let allProfile = await profileService.fechProfile()
-        print(allProfile)
-        let profile = Profile(surname: "Pupkin", name: "Vova")
-        profileService.addProfile(model: profile)
+        let profiles = await profileService.fechProfile()
+        viewModel.profileName = profiles.last?.name ?? ""
     }
 }
