@@ -9,8 +9,8 @@
 import CoreData
 
 protocol ProfileService {
-    func addProfile(model: Profile)
-    func fechProfile() async -> [Profile]
+    func saveProfile(_ profile: Profile)
+    func fetchProfile() async -> Profile?
 }
 
 final class ProfileServiceImpl<ProfileStorage: DatabaseStorage> where ProfileStorage.DatabaseModel == Profile {
@@ -28,11 +28,11 @@ extension ProfileServiceImpl where ProfileStorage == DatabaseStorageImpl<Profile
 }
 
 extension ProfileServiceImpl: ProfileService {
-    func addProfile(model: Profile) {
-        profileStorage.saveModel(model: model)
+    func saveProfile(_ profile: Profile) {
+        profileStorage.saveModel(model: profile)
     }
     
-    func fechProfile() async -> [Profile] {
-        await profileStorage.fechAll()
+    func fetchProfile() async -> Profile? {
+        (await profileStorage.fechAll()).first
     }
 }

@@ -9,12 +9,12 @@
 import SwiftUI
 
 struct ProfileScreen: View {
-    @Bindable private var viewModel: ProfileViewMoodel
+    @Bindable private var viewModel: ProfileViewModel
     private let presenter: ProfilePresenter
 
     
     init(
-        viewModel: ProfileViewMoodel,
+        viewModel: ProfileViewModel,
         presenter: ProfilePresenter
     ) {
         self.viewModel = viewModel
@@ -52,7 +52,7 @@ private extension ProfileScreen {
                 .frame(width: 62, height: 62)
             
             VStack(alignment: .leading, spacing: 4) {
-                Text("Anna Petrova")
+                Text(viewModel.profileName)
                     .font(.title3)
                     .fontWeight(.medium)
                 
