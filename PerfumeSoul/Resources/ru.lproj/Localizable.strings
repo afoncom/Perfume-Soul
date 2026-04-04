@@ -1,6 +1,7 @@
 "discover.compare.button" = "Сравнить";
 "discover.compare.placeholderA" = "Аромат A";
 "discover.compare.placeholderB" = "Аромат B";
+
 "discover.compare.title" = "Сравнение ароматов";
 "discover.findSimilar.button" = "Найти";
 "discover.findSimilar.subtitle" = "Введите ароматы, которые у вас уже есть, чтобы найти похожие.";
@@ -30,6 +31,7 @@
 "screen.settings" = "Настройки";
 "screen.startQuiz" = "Квиз";
 "screen.today" = "Сегодня";
+"screen.calculationCreateProfile" = "Создай свой профиль";
 "screen.todayEnergy" = "Энергия дня";
 "today.aroma.primaryAction" = "Мое настроение";
 "today.aroma.secondaryAction" = "Не сегодня";

@@ -29,10 +29,12 @@ final class CalculationPresenterImpl {
 extension CalculationPresenterImpl: CalculationPresenter {
     func continueButtonTapped() {
         let profile = Profile(
-            surname: "",
-            name: viewModel.firstName
+            name: viewModel.firstName,
+            birthDate: viewModel.birthDate,
+            birthTime: viewModel.birthTime,
+            birthPlace: viewModel.birthPlace
         )
-        profileService.addProfile(model: profile)
+        profileService.saveProfile(profile)
         router.finishCalculation()
     }
 }

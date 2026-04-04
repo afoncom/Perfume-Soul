@@ -1,5 +1,5 @@
 //
-//  ProfileViewMoodel.swift
+//  ProfileViewModel.swift
 //  PerfumeSoul
 //
 //  Created by afon.com on 15.03.2026.
@@ -9,6 +9,6 @@
 import Foundation
 import Observation
 
-@Observable final class ProfileViewMoodel {
+@Observable final class ProfileViewModel {
     var profileName = ""
 }

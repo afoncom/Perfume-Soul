@@ -114,10 +114,8 @@ private extension CalculationScreen {
             iconColor: .black
         )
     }
-}
-
-//MARK: - Continue Button
-private extension CalculationScreen {
+    
+    //MARK: - Continue Button
     func makeContinueButton() -> some View {
         Button {
             presenter.continueButtonTapped()
@@ -133,10 +131,8 @@ private extension CalculationScreen {
         }
         .shadow(color: .black.opacity(0.08), radius: 12, x: 0, y: 6)
     }
-}
-
-//MARK: - Read-Only Field
-private extension CalculationScreen {
+    
+    //MARK: - Display info view
     func makeReadOnlyField(
         title: String,
         systemImage: String,

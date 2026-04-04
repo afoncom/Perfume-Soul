@@ -8,21 +8,27 @@
 
 
 struct Profile: Equatable {
-    let surname: String
     let name: String
+    let birthDate: String
+    let birthTime: String
+    let birthPlace: String
 }
 
 extension Profile: DatabaseStorable {
     init?(storableModel: CDProfile) {
-        self.surname = storableModel.surname ?? ""
         self.name = storableModel.name ?? ""
+        self.birthDate = storableModel.birthDate ?? ""
+        self.birthTime = storableModel.birthTime ?? ""
+        self.birthPlace = storableModel.birthPlace ?? ""
     }
 }
 
 extension CDProfile: CDModel {
     func update(by model: Profile) {
-        self.surname = model.surname
         self.name = model.name
+        self.birthDate = model.birthDate
+        self.birthTime = model.birthTime
+        self.birthPlace = model.birthPlace
     }
 }
 

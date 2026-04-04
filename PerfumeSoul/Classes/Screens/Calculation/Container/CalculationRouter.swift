@@ -6,7 +6,6 @@
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
-import UIKit
 
 protocol CalculationRouter {
     func finishCalculation()

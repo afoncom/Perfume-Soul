@@ -9,12 +9,12 @@
 import SwiftUI
 
 struct ProfileScreen: View {
-    @Bindable private var viewModel: ProfileViewMoodel
+    @Bindable private var viewModel: ProfileViewModel
     private let presenter: ProfilePresenter
 
     
     init(
-        viewModel: ProfileViewMoodel,
+        viewModel: ProfileViewModel,
         presenter: ProfilePresenter
     ) {
         self.viewModel = viewModel

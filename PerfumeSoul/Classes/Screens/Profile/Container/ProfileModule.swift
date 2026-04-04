@@ -11,7 +11,7 @@ import CoreData
 
 final class ProfileModule {
     static func build(container: NSPersistentContainer) -> UIViewController {
-        let viewModel = ProfileViewMoodel()
+        let viewModel = ProfileViewModel()
         let navigationController = UINavigationController()
         let profileService = ProfileServiceImpl(container: container)
         let router = ProfileRouterImpl(navigationController: navigationController)

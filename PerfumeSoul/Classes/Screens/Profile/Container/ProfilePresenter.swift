@@ -12,12 +12,12 @@ protocol ProfilePresenter {
 }
 
 final class ProfilePresenterImpl {
-    private let viewModel: ProfileViewMoodel
+    private let viewModel: ProfileViewModel
     private let router: ProfileRouter
     private let profileService: ProfileService
     
     init(
-        viewModel: ProfileViewMoodel,
+        viewModel: ProfileViewModel,
         router: ProfileRouter,
         profileService: ProfileService
     ) {
@@ -33,7 +33,7 @@ extension ProfilePresenterImpl: ProfilePresenter {
     }
 
     func onAppear() async {
-        let profiles = await profileService.fechProfile()
-        viewModel.profileName = profiles.last?.name ?? ""
+        let profile = await profileService.fetchProfile()
+        viewModel.profileName = profile?.name ?? "Dima"
     }
 }
