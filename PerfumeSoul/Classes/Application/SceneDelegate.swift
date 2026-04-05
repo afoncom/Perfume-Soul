@@ -10,10 +10,6 @@ import SwiftUI
 import CoreData
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    private enum Constants {
-        static let hasCompletedCalculationKey = "hasCompletedCalculation"
-    }
-    
     var window: UIWindow?
     let coreDataManager: CoreDataManager = CoreDataManagerImpl()
     
@@ -30,16 +26,25 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         window.backgroundColor = .systemBackground
         self.window = window
-        
-        if UserDefaults.standard.bool(forKey: Constants.hasCompletedCalculationKey) {
-            showMainScreen(container: coreDataManager.container)
-        } else {
-            showCalculationScreen(container: coreDataManager.container)
-        }
+
+        showWelcomeLoadingScreen(container: coreDataManager.container)
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
         coreDataManager.saveContext()
+    }
+
+    private func showWelcomeLoadingScreen(container: NSPersistentContainer) {
+        let welcomeLoadingScreen = WelcomeLoadingModule.build(
+            container: container,
+            onProfileExists: { [weak self] in
+                self?.showMainScreen(container: container)
+            },
+            onProfileMissing: { [weak self] in
+                self?.showCalculationScreen(container: container)
+            }
+        )
+        setRootViewController(welcomeLoadingScreen)
     }
 
     private func showMainScreen(container: NSPersistentContainer) {
@@ -63,7 +68,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func finishCalculationFlow() {
-        UserDefaults.standard.set(true, forKey: Constants.hasCompletedCalculationKey)
         showMainScreen(container: coreDataManager.container)
     }
     
