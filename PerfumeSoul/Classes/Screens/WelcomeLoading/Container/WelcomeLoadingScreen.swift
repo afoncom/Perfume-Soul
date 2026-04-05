@@ -40,11 +40,7 @@ struct WelcomeLoadingScreen: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.white)
         .task {
-            await presenter.onTask()
+            await presenter.onAppear()
         }
     }
-}
-
-private extension WelcomeLoadingScreen {
-    
 }

@@ -8,7 +8,7 @@
 
 protocol WelcomeLoadingPresenter {
     @MainActor
-    func onTask() async
+    func onAppear() async
 }
 
 final class WelcomeLoadingPresenterImpl {
@@ -29,7 +29,7 @@ final class WelcomeLoadingPresenterImpl {
 
 extension WelcomeLoadingPresenterImpl: WelcomeLoadingPresenter {
     @MainActor
-    func onTask() async {
+    func onAppear() async {
         guard !viewModel.hasStartedLoading else {
             return
         }

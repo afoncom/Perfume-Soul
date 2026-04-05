@@ -6,7 +6,6 @@
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
-import Foundation
 import Observation
 
 @Observable final class WelcomeLoadingViewModel {
