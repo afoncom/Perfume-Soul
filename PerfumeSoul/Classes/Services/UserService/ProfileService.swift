@@ -12,6 +12,7 @@ protocol ProfileService {
     func saveProfile(_ profile: Profile)
     func fetchProfile() async -> Profile?
     func deleteProfile(_ profile: Profile) async
+    func deleteAllProfiles() async
 }
 
 final class ProfileServiceImpl<ProfileStorage: DatabaseStorage> where ProfileStorage.DatabaseModel == Profile {
@@ -39,5 +40,9 @@ extension ProfileServiceImpl: ProfileService {
     
     func deleteProfile(_ profile: Profile) async {
         await profileStorage.delete(model: profile)
+    }
+
+    func deleteAllProfiles() async {
+        await profileStorage.deleteAll()
     }
 }
