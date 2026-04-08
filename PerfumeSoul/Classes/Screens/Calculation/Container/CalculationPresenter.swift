@@ -30,8 +30,8 @@ extension CalculationPresenterImpl: CalculationPresenter {
     func continueButtonTapped() {
         let profile = Profile(
             name: viewModel.firstName,
-            birthDate: viewModel.birthDate,
-            birthTime: viewModel.birthTime,
+            birthDate: viewModel.formattedBirthDate,
+            birthTime: viewModel.formattedBirthTime,
             birthPlace: viewModel.birthPlace
         )
         profileService.saveProfile(profile)
