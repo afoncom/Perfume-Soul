@@ -10,5 +10,5 @@ import Foundation
 import Observation
 
 @Observable final class ProfileViewModel {
-    var profileName = ""
+    var profile: Profile?
 }

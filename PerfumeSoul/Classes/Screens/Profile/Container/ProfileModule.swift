@@ -10,11 +10,17 @@ import SwiftUI
 import CoreData
 
 final class ProfileModule {
-    static func build(container: NSPersistentContainer) -> UIViewController {
+    static func build(
+        container: NSPersistentContainer,
+        onProfileDeleted: @escaping () -> Void
+    ) -> UIViewController {
         let viewModel = ProfileViewModel()
         let navigationController = UINavigationController()
         let profileService = ProfileServiceImpl(container: container)
-        let router = ProfileRouterImpl(navigationController: navigationController)
+        let router = ProfileRouterImpl(
+            navigationController: navigationController,
+            onProfileDeleted: onProfileDeleted
+        )
         let presenter = ProfilePresenterImpl(
             viewModel: viewModel,
             router: router,

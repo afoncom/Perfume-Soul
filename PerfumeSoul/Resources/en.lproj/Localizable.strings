@@ -8,6 +8,11 @@
 "discover.scentArchetype.button" = "Start quiz";
 "discover.scentArchetype.title" = "Find Your Scent Archetype";
 "profile.birthInfo" = "Born May 12, 1993  Paris, France";
+"profile.actions.cancelButton" = "Cancel";
+"profile.actions.deleteAlertMessage" = "This action can't be undone.";
+"profile.actions.deleteAlertTitle" = "Delete profile?";
+"profile.actions.deleteButton" = "Delete profile";
+"profile.actions.deleteTitle" = "Delete profile";
 "profile.element.air" = "Air";
 "profile.element.earth" = "Earth";
 "profile.element.fire" = "Fire";

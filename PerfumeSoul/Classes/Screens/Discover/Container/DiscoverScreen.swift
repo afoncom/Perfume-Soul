@@ -54,7 +54,7 @@ private extension DiscoverScreen {
                 Button(L10n.Discover.ScentArchetype.button) {
                     presenter.startQuizButtonTab()
                 }
-                .primaryCapsuleButton(color: .pinkButton)
+                .primaryCapsuleButton(color: .pink)
                 .padding(.horizontal, 28)
             }
             .padding(14)
@@ -82,7 +82,7 @@ private extension DiscoverScreen {
                 Button(L10n.Discover.Compare.button) {
                     presenter.comparePerfumesButtonTab()
                 }
-                .primaryCapsuleButton(color: .pinkButton)
+                .primaryCapsuleButton(color: .pink)
             }
             .padding(14)
             .background(Color.white)
@@ -105,7 +105,7 @@ private extension DiscoverScreen {
             Button(L10n.Discover.FindSimilar.button) {
                 presenter.findPerfumesButtonTab()
             }
-            .primaryCapsuleButton(color: .pinkButton)
+            .primaryCapsuleButton(color: .pink)
             .padding(.top, 2)
         }
         .frame(maxWidth: .infinity, alignment: .leading)

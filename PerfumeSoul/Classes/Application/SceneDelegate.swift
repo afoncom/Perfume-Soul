@@ -51,7 +51,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let todayScreen = TodayModule.build()
         let settingsScreen = SettingsModule.build()
         let discoverScreen = DiscoverModule.build()
-        let profileScreen = ProfileModule.build(container: container)
+        let profileScreen = ProfileModule.build(
+            container: container,
+            onProfileDeleted: { [weak self] in
+                self?.showCalculationScreen(container: container)
+            }
+        )
         let tabController = UITabBarController()
         tabController.viewControllers = [todayScreen, discoverScreen, profileScreen, settingsScreen]
         setRootViewController(tabController)

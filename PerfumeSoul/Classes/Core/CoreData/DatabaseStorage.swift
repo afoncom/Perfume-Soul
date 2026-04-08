@@ -10,7 +10,7 @@ import CoreData
 protocol DatabaseStorage {
     associatedtype DatabaseModel: DatabaseStorable
     func saveModel(model:  DatabaseModel)
-//    func delete(model: DatabaseModel)
+    func delete(model: DatabaseModel) async
     func fechAll() async -> [DatabaseModel]
 }
 
@@ -44,9 +44,19 @@ extension DatabaseStorageImpl: DatabaseStorage {
         }
     }
     
-//    func delete(model: DatabaseModel) {
-//        
-//    }
+    func delete(model: DatabaseModel) async {
+        let context = container.newBackgroundContext()
+        return await context.perform {
+            let fetchRequest = StoringModel.fetchRequest() as? NSFetchRequest<StoringModel>
+            guard let fetchRequest, let storingModels = try? context.fetch(fetchRequest) else { return }
+            for storingModel in storingModels {
+                if DatabaseModel(storableModel: storingModel) == model {
+                    context.delete(storingModel)
+                }
+            }
+            self.savedContext(context: context)
+        }
+    }
     
     func fechAll() async -> [DatabaseModel] {
         let context = container.newBackgroundContext()

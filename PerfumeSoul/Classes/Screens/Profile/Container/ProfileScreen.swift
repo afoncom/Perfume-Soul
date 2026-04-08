@@ -11,6 +11,7 @@ import SwiftUI
 struct ProfileScreen: View {
     @Bindable private var viewModel: ProfileViewModel
     private let presenter: ProfilePresenter
+    @State private var isShowingDeleteProfileAlert = false
 
     
     init(
@@ -35,8 +36,24 @@ struct ProfileScreen: View {
                 
                 makeAddedNewProfiless()
                     .padding(.horizontal, 16)
+                
+                makeDeleteProfileAction()
+                    .padding(.horizontal, 16)
             }
             .padding(.vertical, 8)
+        }
+        .alert(
+            L10n.Profile.Actions.deleteAlertTitle,
+            isPresented: $isShowingDeleteProfileAlert
+        ) {
+            Button(L10n.Profile.Actions.cancelButton, role: .cancel) { }
+            Button(L10n.Profile.Actions.deleteButton, role: .destructive) {
+                Task {
+                    await presenter.deleteProfile()
+                }
+            }
+        } message: {
+            Text(L10n.Profile.Actions.deleteAlertMessage)
         }
         .task {
             await presenter.onAppear()
@@ -52,14 +69,16 @@ private extension ProfileScreen {
                 .frame(width: 62, height: 62)
             
             VStack(alignment: .leading, spacing: 4) {
-                Text(viewModel.profileName)
+                Text(viewModel.profile?.name ?? "")
                     .font(.title3)
                     .fontWeight(.medium)
                 
-                Text(L10n.Profile.birthInfo)
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
+                if !profileBirthInfo.isEmpty {
+                    Text(profileBirthInfo)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
             
             Spacer()
@@ -164,6 +183,28 @@ private extension ProfileScreen {
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
         .shadow(color: .black.opacity(0.04), radius: 7, x: 0, y: 3)
+    }
+    
+    func makeDeleteProfileAction() -> some View {
+        Button {
+            isShowingDeleteProfileAlert = true
+        } label: {
+            Text(L10n.Profile.Actions.deleteButton)
+                .font(.headline)
+                .foregroundStyle(.red)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+                .background(Color.red.opacity(0.06))
+                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+        }
+        .buttonStyle(.plain)
+    }
+    
+    var profileBirthInfo: String {
+        guard let profile = viewModel.profile else { return "" }
+        return [profile.birthDate, profile.birthTime, profile.birthPlace]
+            .filter { !$0.isEmpty }
+            .joined(separator: " · ")
     }
 }
 
