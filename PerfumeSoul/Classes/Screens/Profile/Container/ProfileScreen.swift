@@ -23,24 +23,30 @@ struct ProfileScreen: View {
     }
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(spacing: 10) {
-                makeProfileScreen()
-                    .padding(.horizontal, 16)
-                
-                makeMyNatalChart()
-                    .padding(.horizontal, 16)
-                
-                makeElementBalance()
-                    .padding(.horizontal, 16)
-                
-                makeAddedNewProfiless()
-                    .padding(.horizontal, 16)
-                
-                makeDeleteProfileAction()
-                    .padding(.horizontal, 16)
+        ZStack {
+            if let profile = viewModel.profile {
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 10) {
+                        makeProfileScreen(profile: profile)
+                            .padding(.horizontal, 16)
+                        
+                        makeMyNatalChart()
+                            .padding(.horizontal, 16)
+                        
+                        makeElementBalance()
+                            .padding(.horizontal, 16)
+                        
+                        makeAddedNewProfiless()
+                            .padding(.horizontal, 16)
+                        
+                        makeDeleteProfileAction()
+                            .padding(.horizontal, 16)
+                    }
+                }
+            } else {
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .padding(.vertical, 8)
         }
         .alert(
             L10n.Profile.Actions.deleteAlertTitle,
@@ -62,23 +68,21 @@ struct ProfileScreen: View {
 }
 
 private extension ProfileScreen {
-    func makeProfileScreen() -> some View {
+    func makeProfileScreen(profile: Profile) -> some View {
         HStack(spacing: 12) {
             Circle()
                 .fill(Color.gray.opacity(0.16))
                 .frame(width: 62, height: 62)
             
             VStack(alignment: .leading, spacing: 4) {
-                Text(viewModel.profile?.name ?? "")
+                Text(profile.name)
                     .font(.title3)
                     .fontWeight(.medium)
                 
-                if !profileBirthInfo.isEmpty {
-                    Text(profileBirthInfo)
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
+                Text(makeProfileBirthInfo(profile: profile))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             
             Spacer()
@@ -200,8 +204,7 @@ private extension ProfileScreen {
         .buttonStyle(.plain)
     }
     
-    var profileBirthInfo: String {
-        guard let profile = viewModel.profile else { return "" }
+    func makeProfileBirthInfo(profile: Profile) -> String {
         return [profile.birthDate, profile.birthTime, profile.birthPlace]
             .filter { !$0.isEmpty }
             .joined(separator: " · ")
