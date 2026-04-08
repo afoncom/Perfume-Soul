@@ -52,7 +52,7 @@ private extension TodayScreen {
                     .frame(width: 36, height: 36)
                     .overlay(
                         Circle()
-                            .stroke(Color.pink, lineWidth: 1)
+                            .stroke(.pinkButton, lineWidth: 1)
                     )
                 
                 VStack(alignment: .leading, spacing: 4) {
@@ -99,7 +99,7 @@ private extension TodayScreen {
                                 .foregroundColor(.white)
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 7)
-                                .background(Color.pink)
+                                .background(.pinkButton)
                                 .clipShape(Capsule())
                         }
                         

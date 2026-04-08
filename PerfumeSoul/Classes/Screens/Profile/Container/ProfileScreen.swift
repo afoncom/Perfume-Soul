@@ -114,9 +114,9 @@ private extension ProfileScreen {
                 )
                 
                 makeNatalChartRow(
-                    color: Color.pink.opacity(0.25),
+                    color: Color.pinkButton.opacity(0.25),
                     symbol: "circle.hexagongrid.fill",
-                    symbolColor: .pink,
+                    symbolColor: .pinkButton,
                     title: L10n.Profile.NatalChart.ascendant,
                     value: L10n.Profile.NatalChart.ascendantValue
                 )

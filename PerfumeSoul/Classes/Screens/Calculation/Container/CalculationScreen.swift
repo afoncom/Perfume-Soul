@@ -126,7 +126,7 @@ private extension CalculationScreen {
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 14)
-                .background(Color.pink)
+                .background(.pinkButton)
                 .clipShape(Capsule())
         }
         .shadow(color: .black.opacity(0.08), radius: 12, x: 0, y: 6)
