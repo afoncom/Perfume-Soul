@@ -1,7 +1,6 @@
 "discover.compare.button" = "Сравнить";
 "discover.compare.placeholderA" = "Аромат A";
 "discover.compare.placeholderB" = "Аромат B";
-
 "discover.compare.title" = "Сравнение ароматов";
 "discover.findSimilar.button" = "Найти";
 "discover.findSimilar.subtitle" = "Введите ароматы, которые у вас уже есть, чтобы найти похожие.";
@@ -9,6 +8,11 @@
 "discover.scentArchetype.button" = "Начать квиз";
 "discover.scentArchetype.title" = "Найди свой ароматический архетип";
 "profile.birthInfo" = "Родилась 12 мая 1993  Париж, Франция";
+"profile.actions.cancelButton" = "Отмена";
+"profile.actions.deleteAlertMessage" = "Это действие нельзя отменить.";
+"profile.actions.deleteAlertTitle" = "Удалить профиль?";
+"profile.actions.deleteButton" = "Удалить профиль";
+"profile.actions.deleteTitle" = "Удалить профиль";
 "profile.element.air" = "Воздух";
 "profile.element.earth" = "Земля";
 "profile.element.fire" = "Огонь";

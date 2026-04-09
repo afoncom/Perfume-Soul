@@ -9,6 +9,7 @@
 protocol ProfilePresenter {
     func addedNewProfilesButtonTab()
     func onAppear() async
+    func deleteProfile() async
 }
 
 final class ProfilePresenterImpl {
@@ -34,6 +35,22 @@ extension ProfilePresenterImpl: ProfilePresenter {
 
     func onAppear() async {
         let profile = await profileService.fetchProfile()
-        viewModel.profileName = profile?.name ?? "Dima"
+        await MainActor.run {
+            viewModel.profile = profile
+        }
+    }
+    
+    func deleteProfile() async {
+        let profile = await MainActor.run {
+            viewModel.profile
+        }
+        guard let profile else { return }
+        
+        await profileService.deleteProfile(profile)
+        
+        await MainActor.run {
+            viewModel.profile = nil
+            router.showCalculationScreen()
+        }
     }
 }

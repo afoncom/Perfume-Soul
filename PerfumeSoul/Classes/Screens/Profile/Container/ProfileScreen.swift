@@ -11,7 +11,6 @@ import SwiftUI
 struct ProfileScreen: View {
     @Bindable private var viewModel: ProfileViewModel
     private let presenter: ProfilePresenter
-
     
     init(
         viewModel: ProfileViewModel,
@@ -22,21 +21,43 @@ struct ProfileScreen: View {
     }
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(spacing: 10) {
-                makeProfileScreen()
-                    .padding(.horizontal, 16)
-                
-                makeMyNatalChart()
-                    .padding(.horizontal, 16)
-                
-                makeElementBalance()
-                    .padding(.horizontal, 16)
-                
-                makeAddedNewProfiless()
-                    .padding(.horizontal, 16)
+        ZStack {
+            if let profile = viewModel.profile {
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 10) {
+                        makeProfileScreen(profile: profile)
+                            .padding(.horizontal, 16)
+                        
+                        makeMyNatalChart()
+                            .padding(.horizontal, 16)
+                        
+                        makeElementBalance()
+                            .padding(.horizontal, 16)
+                        
+                        makeAddedNewProfiless()
+                            .padding(.horizontal, 16)
+                        
+                        makeDeleteProfileAction()
+                            .padding(.horizontal, 16)
+                    }
+                }
+            } else {
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .padding(.vertical, 8)
+        }
+        .alert(
+            L10n.Profile.Actions.deleteAlertTitle,
+            isPresented: $viewModel.isShowingDeleteProfileAlert
+        ) {
+            Button(L10n.Profile.Actions.cancelButton, role: .cancel) { }
+            Button(L10n.Profile.Actions.deleteButton, role: .destructive) {
+                Task {
+                    await presenter.deleteProfile()
+                }
+            }
+        } message: {
+            Text(L10n.Profile.Actions.deleteAlertMessage)
         }
         .task {
             await presenter.onAppear()
@@ -45,18 +66,18 @@ struct ProfileScreen: View {
 }
 
 private extension ProfileScreen {
-    func makeProfileScreen() -> some View {
+    func makeProfileScreen(profile: Profile) -> some View {
         HStack(spacing: 12) {
             Circle()
                 .fill(Color.gray.opacity(0.16))
                 .frame(width: 62, height: 62)
             
             VStack(alignment: .leading, spacing: 4) {
-                Text(viewModel.profileName)
+                Text(profile.name)
                     .font(.title3)
                     .fontWeight(.medium)
                 
-                Text(L10n.Profile.birthInfo)
+                Text(makeProfileBirthInfo(profile: profile))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -91,9 +112,9 @@ private extension ProfileScreen {
                 )
                 
                 makeNatalChartRow(
-                    color: Color.pink.opacity(0.25),
+                    color: Color.pinkButton.opacity(0.25),
                     symbol: "circle.hexagongrid.fill",
-                    symbolColor: .pink,
+                    symbolColor: .pinkButton,
                     title: L10n.Profile.NatalChart.ascendant,
                     value: L10n.Profile.NatalChart.ascendantValue
                 )
@@ -164,6 +185,27 @@ private extension ProfileScreen {
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
         .shadow(color: .black.opacity(0.04), radius: 7, x: 0, y: 3)
+    }
+    
+    func makeDeleteProfileAction() -> some View {
+        Button {
+            viewModel.isShowingDeleteProfileAlert = true
+        } label: {
+            Text(L10n.Profile.Actions.deleteButton)
+                .font(.headline)
+                .foregroundStyle(.red)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+                .background(Color.red.opacity(0.06))
+                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+        }
+        .buttonStyle(.plain)
+    }
+    
+    func makeProfileBirthInfo(profile: Profile) -> String {
+        return [profile.birthDate, profile.birthTime, profile.birthPlace]
+            .filter { !$0.isEmpty }
+            .joined(separator: " · ")
     }
 }
 
