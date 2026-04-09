@@ -11,8 +11,6 @@ import SwiftUI
 struct ProfileScreen: View {
     @Bindable private var viewModel: ProfileViewModel
     private let presenter: ProfilePresenter
-    @State private var isShowingDeleteProfileAlert = false
-
     
     init(
         viewModel: ProfileViewModel,
@@ -50,7 +48,7 @@ struct ProfileScreen: View {
         }
         .alert(
             L10n.Profile.Actions.deleteAlertTitle,
-            isPresented: $isShowingDeleteProfileAlert
+            isPresented: $viewModel.isShowingDeleteProfileAlert
         ) {
             Button(L10n.Profile.Actions.cancelButton, role: .cancel) { }
             Button(L10n.Profile.Actions.deleteButton, role: .destructive) {
@@ -191,7 +189,7 @@ private extension ProfileScreen {
     
     func makeDeleteProfileAction() -> some View {
         Button {
-            isShowingDeleteProfileAlert = true
+            viewModel.isShowingDeleteProfileAlert = true
         } label: {
             Text(L10n.Profile.Actions.deleteButton)
                 .font(.headline)
