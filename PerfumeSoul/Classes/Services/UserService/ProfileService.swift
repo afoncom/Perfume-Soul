@@ -16,7 +16,7 @@ protocol ProfileService {
 
 final class ProfileServiceImpl<ProfileStorage: DatabaseStorage> where ProfileStorage.DatabaseModel == Profile {
     private let profileStorage: ProfileStorage
-
+    
     init(profileStorage: ProfileStorage) {
         self.profileStorage = profileStorage
     }

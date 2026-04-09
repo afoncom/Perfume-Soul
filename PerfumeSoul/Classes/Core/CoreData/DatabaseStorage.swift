@@ -11,6 +11,7 @@ protocol DatabaseStorage {
     associatedtype DatabaseModel: DatabaseStorable
     func saveModel(model:  DatabaseModel)
     func delete(model: DatabaseModel) async
+    func deleteAll() async
     func fechAll() async -> [DatabaseModel]
 }
 
@@ -54,6 +55,16 @@ extension DatabaseStorageImpl: DatabaseStorage {
                     context.delete(storingModel)
                 }
             }
+            self.savedContext(context: context)
+        }
+    }
+
+    func deleteAll() async {
+        let context = container.newBackgroundContext()
+        return await context.perform {
+            let fetchRequest = StoringModel.fetchRequest() as? NSFetchRequest<StoringModel>
+            guard let fetchRequest, let storingModels = try? context.fetch(fetchRequest) else { return }
+            storingModels.forEach(context.delete)
             self.savedContext(context: context)
         }
     }
