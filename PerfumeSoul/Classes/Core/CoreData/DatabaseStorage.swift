@@ -58,13 +58,15 @@ extension DatabaseStorageImpl: DatabaseStorage {
             self.savedContext(context: context)
         }
     }
-
+    
     func deleteAll() async {
         let context = container.newBackgroundContext()
         return await context.perform {
             let fetchRequest = StoringModel.fetchRequest() as? NSFetchRequest<StoringModel>
             guard let fetchRequest, let storingModels = try? context.fetch(fetchRequest) else { return }
-            storingModels.forEach(context.delete)
+            for model in storingModels {
+                context.delete(model)
+            }
             self.savedContext(context: context)
         }
     }
