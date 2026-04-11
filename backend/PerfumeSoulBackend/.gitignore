@@ -1,0 +1,12 @@
+.DS_Store
+/.build
+/Packages
+xcuserdata/
+DerivedData/
+.swiftpm
+.env
+.env.*
+!.env.example
+db.sqlite
+default.profraw
+.netrc

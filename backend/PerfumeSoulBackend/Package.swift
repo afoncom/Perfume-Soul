@@ -1,0 +1,38 @@
+// swift-tools-version: 6.0
+
+import PackageDescription
+
+let package = Package(
+    name: "PerfumeSoulBackend",
+    platforms: [
+        .macOS(.v13)
+    ],
+    dependencies: [
+        .package(url: "https://github.com/vapor/vapor.git", from: "4.115.0"),
+        .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
+    ],
+    targets: [
+        .executableTarget(
+            name: "PerfumeSoulBackend",
+            dependencies: [
+                .product(name: "Vapor", package: "vapor"),
+                .product(name: "NIOCore", package: "swift-nio"),
+                .product(name: "NIOPosix", package: "swift-nio"),
+            ],
+            swiftSettings: swiftSettings
+        ),
+        .testTarget(
+            name: "PerfumeSoulBackendTests",
+            dependencies: [
+                .target(name: "PerfumeSoulBackend"),
+                .product(name: "VaporTesting", package: "vapor"),
+            ],
+            swiftSettings: swiftSettings
+        ),
+    ],
+    swiftLanguageModes: [.v6]
+)
+
+var swiftSettings: [SwiftSetting] { [
+    .enableUpcomingFeature("ExistentialAny"),
+] }
