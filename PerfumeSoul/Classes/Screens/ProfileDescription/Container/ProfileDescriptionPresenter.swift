@@ -7,7 +7,7 @@
 //
 
 protocol ProfileDescriptionPresenter {
-    
+    func continueButtonTapped()
 }
 
 final class ProfileDescriptionPresenterImpl {
@@ -27,5 +27,7 @@ final class ProfileDescriptionPresenterImpl {
 }
 
 extension ProfileDescriptionPresenterImpl: ProfileDescriptionPresenter {
-    
+    func continueButtonTapped() {
+        router.showPersonalPerfume()
+    }
 }

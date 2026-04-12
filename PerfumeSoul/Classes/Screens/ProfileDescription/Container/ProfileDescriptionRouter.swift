@@ -6,14 +6,35 @@
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
+import UIKit
+import CoreData
 
 protocol ProfileDescriptionRouter {
-    
+    func showPersonalPerfume()
 }
 
 final class ProfileDescriptionRouterImpl {
+    private weak var navigationController: UINavigationController?
+    private let container: NSPersistentContainer
+    private let onFinish: () -> Void
+
+    init(
+        navigationController: UINavigationController?,
+        container: NSPersistentContainer,
+        onFinish: @escaping () -> Void
+    ) {
+        self.navigationController = navigationController
+        self.container = container
+        self.onFinish = onFinish
+    }
 }
 
 extension ProfileDescriptionRouterImpl: ProfileDescriptionRouter {
-    
+    func showPersonalPerfume() {
+        let screen = PersonalPerfumeModule.build(
+            container: container,
+            onFinish: onFinish
+        )
+        navigationController?.pushViewController(screen, animated: true)
+    }
 }
