@@ -6,21 +6,29 @@
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
+import UIKit
+import CoreData
 
 protocol CalculationRouter {
-    func finishCalculation()
+    func showProfileDescription()
 }
 
 final class CalculationRouterImpl {
-    private let onFinish: () -> Void
-    
-    init(onFinish: @escaping () -> Void) {
-        self.onFinish = onFinish
+    private weak var navigationController: UINavigationController?
+    private let container: NSPersistentContainer
+
+    init(
+        navigationController: UINavigationController?,
+        container: NSPersistentContainer
+    ) {
+        self.navigationController = navigationController
+        self.container = container
     }
 }
 
 extension CalculationRouterImpl: CalculationRouter {
-    func finishCalculation() {
-        onFinish()
+    func showProfileDescription() {
+        let screen = ProfileDescriptionModule.build(container: container)
+        navigationController?.pushViewController(screen, animated: true)
     }
 }
