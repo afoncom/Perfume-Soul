@@ -23,19 +23,19 @@ import Observation
         Self.birthTimeFormatter.string(from: birthTime)
     }
     
-    static let birthDateFormatter: DateFormatter = {
+    private static let birthDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
         return formatter
     }()
     
-    static let birthTimeFormatter: DateFormatter = {
+    private static let birthTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         return formatter
     }()
     
-    static let defaultBirthTime: Date = {
+    private static let defaultBirthTime: Date = {
         let calendar = Calendar.current
         let date = Date()
         return calendar.date(
