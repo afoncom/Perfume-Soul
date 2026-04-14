@@ -19,8 +19,7 @@ final class PersonalPerfumeModule {
         let profileService = ProfileServiceImpl(container: container)
         let presenter = PersonalPerfumePresenterImpl(
             viewModel: viewModel,
-            router: router,
-            profileService: profileService
+            router: router
         )
         
         let view = PersonalPerfumeScreen(viewModel: viewModel, presenter: presenter)

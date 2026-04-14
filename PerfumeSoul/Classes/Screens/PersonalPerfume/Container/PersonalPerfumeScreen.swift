@@ -9,13 +9,14 @@
 import SwiftUI
 
 struct PersonalPerfumeScreen: View {
+    @Bindable private var viewModel: PersonalPerfumeViewModel
     private let presenter: PersonalPerfumePresenter
 
     init(
         viewModel: PersonalPerfumeViewModel,
         presenter: PersonalPerfumePresenter
     ) {
-        _ = viewModel
+        self.viewModel = viewModel
         self.presenter = presenter
     }
 
@@ -32,8 +33,7 @@ struct PersonalPerfumeScreen: View {
         .background(
             LinearGradient(
                 colors: [
-                    Color.white,
-                    Color(red: 0.98, green: 0.96, blue: 0.99)
+                    Color.white
                 ],
                 startPoint: .top,
                 endPoint: .bottom
@@ -124,7 +124,7 @@ private extension PersonalPerfumeScreen {
                     .fixedSize(horizontal: false, vertical: true)
             }
             .padding(14)
-            .background(Color(red: 0.97, green: 0.95, blue: 0.99))
+            .background(Color.purpleTable)
             .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 22, style: .continuous)

@@ -13,16 +13,13 @@ protocol PersonalPerfumePresenter {
 final class PersonalPerfumePresenterImpl {
     private let viewModel: PersonalPerfumeViewModel
     private let router: PersonalPerfumeRouter
-    private let profileService: ProfileService
     
     init(
         viewModel: PersonalPerfumeViewModel,
-        router: PersonalPerfumeRouter,
-        profileService: ProfileService
+        router: PersonalPerfumeRouter
     ) {
         self.viewModel = viewModel
         self.router = router
-        self.profileService = profileService
     }
 }
 
