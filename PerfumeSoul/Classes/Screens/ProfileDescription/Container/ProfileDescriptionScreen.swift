@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ProfileDescriptionScreen: View {
-    private let viewModel: ProfileDescriptionViewModel
+    @Bindable private var viewModel: ProfileDescriptionViewModel
     private let presenter: ProfileDescriptionPresenter
     
     init(
@@ -68,14 +68,14 @@ private extension ProfileDescriptionScreen {
         VStack(spacing: 14) {
             makeInsightCard(
                 symbol: "drop.fill",
-                iconTint: Color(red: 0.78, green: 0.75, blue: 0.88),
+                iconTint: Color.purpleIcon,
                 title: "Water dominant",
                 description: "You are deeply intuitive and empathetic."
             )
-
+            
             makeInsightCard(
                 symbol: "heart.fill",
-                iconTint: Color(red: 0.94, green: 0.76, blue: 0.84),
+                iconTint: Color.pinkIcon,
                 title: "Strong emotional perception",
                 description: "You can easily sense the moods and feelings of others."
             )
