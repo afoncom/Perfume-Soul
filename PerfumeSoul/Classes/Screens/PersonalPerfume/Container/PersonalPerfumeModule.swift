@@ -11,7 +11,6 @@ import CoreData
 
 final class PersonalPerfumeModule {
     static func build(
-        container: NSPersistentContainer,
         onFinish: @escaping () -> Void
     ) -> UIViewController {
         let viewModel = PersonalPerfumeViewModel()

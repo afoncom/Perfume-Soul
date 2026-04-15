@@ -30,6 +30,8 @@ final class ProfileDescriptionPresenterImpl {
 extension ProfileDescriptionPresenterImpl: ProfileDescriptionPresenter {
     func continueButtonTapped() {
         router.showPersonalPerfume()
+    }
+    
     func onAppear() async {
         let profile = await profileService.fetchProfile()
         await MainActor.run {

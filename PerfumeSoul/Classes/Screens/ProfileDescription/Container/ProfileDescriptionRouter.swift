@@ -32,7 +32,6 @@ final class ProfileDescriptionRouterImpl {
 extension ProfileDescriptionRouterImpl: ProfileDescriptionRouter {
     func showPersonalPerfume() {
         let screen = PersonalPerfumeModule.build(
-            container: container,
             onFinish: onFinish
         )
         navigationController?.pushViewController(screen, animated: true)
