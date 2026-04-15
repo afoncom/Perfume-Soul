@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 protocol ProfileDescriptionRouter {
     func showPersonalPerfume()
