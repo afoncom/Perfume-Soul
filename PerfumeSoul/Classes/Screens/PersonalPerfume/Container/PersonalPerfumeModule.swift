@@ -16,7 +16,6 @@ final class PersonalPerfumeModule {
     ) -> UIViewController {
         let viewModel = PersonalPerfumeViewModel()
         let router = PersonalPerfumeRouterImpl(onFinish: onFinish)
-        let profileService = ProfileServiceImpl(container: container)
         let presenter = PersonalPerfumePresenterImpl(
             viewModel: viewModel,
             router: router

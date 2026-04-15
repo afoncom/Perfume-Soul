@@ -52,35 +52,9 @@ struct PersonalPerfumeScreen: View {
 private extension PersonalPerfumeScreen {
     func makeSectionsView() -> some View {
         VStack(alignment: .leading, spacing: 18) {
-            makePerfumeSection(
-                title: "Luxury Picks",
-                perfumes: [
-                    ("Initio", "Oud for Greatness"),
-                    ("Kilian", "Angels' Share"),
-                    ("Tom Ford", "Soleil Blanc")
-                ],
-                description: "Oud, saffron, and patchouli create a deep, mysterious aura."
-            )
-
-            makePerfumeSection(
-                title: "Daily Picks",
-                perfumes: [
-                    ("Chanel", "Coco Mademoiselle"),
-                    ("Dior", "Sauvage"),
-                    ("Byredo", "Mojave Ghost")
-                ],
-                description: "Fresh spices and amberwood suit your bold, confident vibe."
-            )
-
-            makePerfumeSection(
-                title: "Affordable Picks",
-                perfumes: [
-                    ("Montblanc", "Explorer"),
-                    ("Zara", "Vibrant Leather"),
-                    ("Lattafa", "Khamrah")
-                ],
-                description: "Bergamot and warm woods give a refined effect with an easy mood."
-            )
+            ForEach(Array(viewModel.sections.enumerated()), id: \.offset) { _, section in
+                makePerfumeSection(section: section)
+            }
         }
     }
 
@@ -101,24 +75,20 @@ private extension PersonalPerfumeScreen {
         .padding(.bottom, 8)
     }
 
-    func makePerfumeSection(
-        title: String,
-        perfumes: [(name: String, subtitle: String)],
-        description: String
-    ) -> some View {
+    func makePerfumeSection(section: PersonalPerfumeViewModel.PerfumeSection) -> some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text(title)
+            Text(section.title)
                 .font(.system(size: 22, weight: .medium, design: .rounded))
                 .foregroundStyle(Color.black.opacity(0.82))
 
             VStack(alignment: .leading, spacing: 16) {
                 HStack(alignment: .top, spacing: 12) {
-                    ForEach(Array(perfumes.enumerated()), id: \.offset) { _, perfume in
+                    ForEach(Array(section.perfumes.enumerated()), id: \.offset) { _, perfume in
                         makePerfumeItem(name: perfume.name, subtitle: perfume.subtitle)
                     }
                 }
 
-                Text(description)
+                Text(section.description)
                     .font(.system(size: 16, weight: .regular, design: .rounded))
                     .foregroundStyle(Color.black.opacity(0.5))
                     .fixedSize(horizontal: false, vertical: true)
