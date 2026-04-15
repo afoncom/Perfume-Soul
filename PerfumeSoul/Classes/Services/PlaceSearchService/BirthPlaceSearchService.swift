@@ -8,6 +8,7 @@
 
 import MapKit
 
+@MainActor
 final class BirthPlaceSearchService: NSObject {
     private let completer = MKLocalSearchCompleter()
     private var searchContinuation: CheckedContinuation<[MKLocalSearchCompletion], Never>?
@@ -15,7 +16,7 @@ final class BirthPlaceSearchService: NSObject {
     override init() {
         super.init()
         completer.delegate = self
-        completer.resultTypes = .address
+        completer.resultTypes = [.address, .query]
     }
     
     func search(_ query: String) async -> [MKLocalSearchCompletion] {

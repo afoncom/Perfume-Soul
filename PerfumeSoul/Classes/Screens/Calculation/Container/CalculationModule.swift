@@ -10,7 +10,7 @@ import SwiftUI
 import CoreData
 
 final class CalculationModule {
-    static func build(
+    @MainActor static func build(
         container: NSPersistentContainer,
         onFinish: @escaping () -> Void
     ) -> UIViewController {
