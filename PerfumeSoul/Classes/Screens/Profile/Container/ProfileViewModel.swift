@@ -12,5 +12,4 @@ import Observation
 @Observable final class ProfileViewModel {
     var profile: Profile?
     var isShowingDeleteProfileAlert = false
-    let personalPerfumeSections = PersonalPerfumeContent.sections
 }

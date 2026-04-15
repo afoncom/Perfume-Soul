@@ -23,6 +23,9 @@ final class PersonalPerfumeModule {
         
         let view = PersonalPerfumeScreen(viewModel: viewModel, presenter: presenter)
         let hostingController = UIHostingController(rootView: view)
+        hostingController.title = "Personal Perfumes"
+        hostingController.navigationItem.largeTitleDisplayMode = .never
+        hostingController.hidesBottomBarWhenPushed = true
 
         return hostingController
     }

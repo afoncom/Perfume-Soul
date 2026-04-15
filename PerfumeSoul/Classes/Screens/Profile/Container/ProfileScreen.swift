@@ -34,7 +34,7 @@ struct ProfileScreen: View {
                         makeElementBalance()
                             .padding(.horizontal, 16)
 
-                        makePersonalPerfumeSelection()
+                        makePersonalPerfumesRow()
                             .padding(.horizontal, 16)
                         
                         makeAddedNewProfiless()
@@ -157,41 +157,49 @@ private extension ProfileScreen {
         .shadow(color: .black.opacity(0.04), radius: 7, x: 0, y: 3)
     }
 
-    func makePersonalPerfumeSelection() -> some View {
-        VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Personal Perfume Wardrobe")
-                    .font(.title3)
-                    .fontWeight(.medium)
+    func makePersonalPerfumesRow() -> some View {
+        Button {
+            presenter.personalPerfumesButtonTapped()
+        } label: {
+            HStack(spacing: 14) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .fill(Color.purpleTable.opacity(0.18))
+                        .frame(width: 46, height: 46)
+                    
+                    Image(systemName: "sparkles")
+                        .font(.headline)
+                        .foregroundStyle(.purpleIcon)
+                }
                 
-                Text("A quick view of the scents selected for your vibe.")
-                    .font(.footnote)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Personal Perfumes")
+                        .font(.title3)
+                        .fontWeight(.medium)
+                        .foregroundStyle(.primary)
+                    
+                    Text("Open your curated fragrance selection.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .font(.footnote.weight(.semibold))
                     .foregroundStyle(.secondary)
             }
-            
-            VStack(spacing: 14) {
-                ForEach(Array(viewModel.personalPerfumeSections.enumerated()), id: \.offset) { _, section in
-                    makePersonalPerfumeSection(section: section)
-                }
-            }
-        }
-        .padding(14)
-        .background(
-            LinearGradient(
-                colors: [
-                    Color.purpleTable.opacity(0.72),
-                    Color.white
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 22, style: .continuous)
+                    .stroke(Color.black.opacity(0.06), lineWidth: 1)
             )
-        )
-        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .stroke(Color.white.opacity(0.9), lineWidth: 1)
-        )
-        .shadow(color: Color.purpleIcon.opacity(0.08), radius: 12, x: 0, y: 6)
+            .shadow(color: .black.opacity(0.04), radius: 7, x: 0, y: 3)
+        }
+        .buttonStyle(.plain)
     }
     
     func makeAddedNewProfiless() -> some View {
@@ -246,76 +254,6 @@ private extension ProfileScreen {
         return [profile.birthDate, profile.birthTime, profile.birthPlace]
             .filter { !$0.isEmpty }
             .joined(separator: " · ")
-    }
-
-    func makePersonalPerfumeSection(section: PersonalPerfumeSection) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                Text(section.title)
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(Color.black.opacity(0.8))
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 6)
-                    .background(Color.white.opacity(0.88))
-                    .clipShape(Capsule())
-                
-                Spacer()
-            }
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 10) {
-                    ForEach(Array(section.perfumes.enumerated()), id: \.offset) { _, perfume in
-                        makePersonalPerfumeItem(perfume)
-                    }
-                }
-            }
-            
-            Text(section.description)
-                .font(.footnote)
-                .foregroundStyle(Color.black.opacity(0.56))
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .padding(12)
-        .background(Color.white.opacity(0.78))
-        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-    }
-
-    func makePersonalPerfumeItem(_ perfume: PersonalPerfumeItem) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .fill(
-                    LinearGradient(
-                        colors: [
-                            Color.white,
-                            Color.purpleTable.opacity(0.78)
-                        ],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-                .frame(width: 86, height: 94)
-                .overlay(
-                    Image(systemName: "sparkles")
-                        .font(.title3.weight(.medium))
-                        .foregroundStyle(Color.purpleIcon.opacity(0.78))
-                )
-            
-            VStack(alignment: .leading, spacing: 3) {
-                Text(perfume.name)
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(Color.black.opacity(0.82))
-                    .lineLimit(1)
-                
-                Text(perfume.subtitle)
-                    .font(.caption)
-                    .foregroundStyle(Color.black.opacity(0.5))
-                    .lineLimit(2)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-        .frame(width: 86, alignment: .topLeading)
     }
 }
 
