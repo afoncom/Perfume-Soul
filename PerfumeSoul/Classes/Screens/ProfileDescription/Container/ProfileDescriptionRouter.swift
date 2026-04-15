@@ -15,16 +15,13 @@ protocol ProfileDescriptionRouter {
 
 final class ProfileDescriptionRouterImpl {
     private weak var navigationController: UINavigationController?
-    private let container: NSPersistentContainer
     private let onFinish: () -> Void
 
     init(
         navigationController: UINavigationController?,
-        container: NSPersistentContainer,
         onFinish: @escaping () -> Void
     ) {
         self.navigationController = navigationController
-        self.container = container
         self.onFinish = onFinish
     }
 }
