@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ProfileDescriptionScreen: View {
-    private let viewModel: ProfileDescriptionViewModel
+    @Bindable private var viewModel: ProfileDescriptionViewModel
     private let presenter: ProfileDescriptionPresenter
     
     init(
@@ -21,15 +21,22 @@ struct ProfileDescriptionScreen: View {
     }
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(spacing: 26) {
-                makeHeaderView()
-                makeEmptyHeroSection()
-                makeInsightCards()
+        ZStack {
+            if let profile = viewModel.profile {
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 26) {
+                        makeHeaderView(profile: profile)
+                        makeEmptyHeroSection()
+                        makeInsightCards()
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 28)
+                    .padding(.bottom, 140)
+                }
+            } else {
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .padding(.horizontal, 20)
-            .padding(.top, 28)
-            .padding(.bottom, 140)
         }
         .background(Color.white.ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
@@ -38,13 +45,16 @@ struct ProfileDescriptionScreen: View {
                 .padding(.top, 12)
                 .padding(.bottom, 8)
         }
+        .task {
+            await presenter.onAppear()
+        }
     }
 }
 
 private extension ProfileDescriptionScreen {
-    func makeHeaderView() -> some View {
+    func makeHeaderView(profile: Profile) -> some View {
         VStack(spacing: 10) {
-            Text("Anna, you are")
+            Text("\(profile.name), you are")
                 .font(.system(size: 26, weight: .medium, design: .rounded))
                 .foregroundStyle(Color.black.opacity(0.82))
                 .multilineTextAlignment(.center)
@@ -68,14 +78,14 @@ private extension ProfileDescriptionScreen {
         VStack(spacing: 14) {
             makeInsightCard(
                 symbol: "drop.fill",
-                iconTint: Color(red: 0.78, green: 0.75, blue: 0.88),
+                iconTint: Color.purpleIcon,
                 title: "Water dominant",
                 description: "You are deeply intuitive and empathetic."
             )
-
+            
             makeInsightCard(
                 symbol: "heart.fill",
-                iconTint: Color(red: 0.94, green: 0.76, blue: 0.84),
+                iconTint: Color.pinkIcon,
                 title: "Strong emotional perception",
                 description: "You can easily sense the moods and feelings of others."
             )
