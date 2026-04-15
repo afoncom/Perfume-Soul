@@ -17,10 +17,12 @@ final class CalculationModule {
         let viewModel = CalculationViewModel()
         let router = CalculationRouterImpl(onFinish: onFinish)
         let profileService = ProfileServiceImpl(container: container)
+        let birthPlaceSearch = BirthPlaceSearchService()
         let presenter = CalculationPresenterImpl(
             viewModel: viewModel,
             router: router,
-            profileService: profileService
+            profileService: profileService,
+            birthPlaceSearch: birthPlaceSearch
         )
         
         let view = CalculationScreen(viewModel: viewModel, presenter: presenter)

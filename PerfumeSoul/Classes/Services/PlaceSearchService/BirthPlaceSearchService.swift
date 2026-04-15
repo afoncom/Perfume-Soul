@@ -6,13 +6,11 @@
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
-import Combine
 import MapKit
 
-final class BirthPlaceSearchService: NSObject, ObservableObject {
-    @Published private(set) var completions: [MKLocalSearchCompletion] = []
-    
+final class BirthPlaceSearchService: NSObject {
     private let completer = MKLocalSearchCompleter()
+    private var searchContinuation: CheckedContinuation<[MKLocalSearchCompletion], Never>?
     
     override init() {
         super.init()
@@ -20,33 +18,36 @@ final class BirthPlaceSearchService: NSObject, ObservableObject {
         completer.resultTypes = .address
     }
     
-    func updateQuery(_ query: String) {
+    func search(_ query: String) async -> [MKLocalSearchCompletion] {
         let trimmedQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
         
         guard trimmedQuery.count >= 2 else {
             clear()
-            return
+            return []
         }
         
-        completer.queryFragment = trimmedQuery
+        return await withCheckedContinuation { continuation in
+            searchContinuation?.resume(returning: [])
+            searchContinuation = continuation
+            completer.queryFragment = trimmedQuery
+        }
     }
     
     func clear() {
-        completions = []
-    }
-    
-    func formattedTitle(for completion: MKLocalSearchCompletion) -> String {
-        guard !completion.subtitle.isEmpty else { return completion.title }
-        return "\(completion.title), \(completion.subtitle)"
+        completer.queryFragment = ""
+        searchContinuation?.resume(returning: [])
+        searchContinuation = nil
     }
 }
 
 extension BirthPlaceSearchService: MKLocalSearchCompleterDelegate {
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        completions = completer.results
+        searchContinuation?.resume(returning: completer.results)
+        searchContinuation = nil
     }
     
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: any Error) {
-        completions = []
+        searchContinuation?.resume(returning: [])
+        searchContinuation = nil
     }
 }

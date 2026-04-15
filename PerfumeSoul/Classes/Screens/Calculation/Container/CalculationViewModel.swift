@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 import Observation
 
 @Observable final class CalculationViewModel {
@@ -14,6 +15,7 @@ import Observation
     var birthDate = Date()
     var birthTime = CalculationViewModel.defaultBirthTime
     var birthPlace = ""
+    var birthPlaceCompletions: [MKLocalSearchCompletion] = []
 
     var formattedBirthDate: String {
         Self.birthDateFormatter.string(from: birthDate)

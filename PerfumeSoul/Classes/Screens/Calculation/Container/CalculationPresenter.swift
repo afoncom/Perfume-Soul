@@ -8,21 +8,27 @@
 
 protocol CalculationPresenter {
     func continueButtonTapped()
+    func birthPlaceDidChange(_ query: String)
+    func clearBirthPlaceSearch()
 }
 
 final class CalculationPresenterImpl {
     private let viewModel: CalculationViewModel
     private let router: CalculationRouter
     private let profileService: ProfileService
+    private let birthPlaceSearch: BirthPlaceSearchService
+    private var birthPlaceSearchTask: Task<Void, Never>?
     
     init(
         viewModel: CalculationViewModel,
         router: CalculationRouter,
-        profileService: ProfileService
+        profileService: ProfileService,
+        birthPlaceSearch: BirthPlaceSearchService
     ) {
         self.viewModel = viewModel
         self.router = router
         self.profileService = profileService
+        self.birthPlaceSearch = birthPlaceSearch
     }
 }
 
@@ -36,5 +42,24 @@ extension CalculationPresenterImpl: CalculationPresenter {
         )
         profileService.saveProfile(profile)
         router.finishCalculation()
+    }
+    
+    func birthPlaceDidChange(_ query: String) {
+        birthPlaceSearchTask?.cancel()
+        birthPlaceSearchTask = Task { @MainActor [weak self] in
+            guard let self else { return }
+            let completions = await birthPlaceSearch.search(query)
+            
+            guard !Task.isCancelled else { return }
+            
+            viewModel.birthPlaceCompletions = completions
+        }
+    }
+    
+    func clearBirthPlaceSearch() {
+        birthPlaceSearchTask?.cancel()
+        birthPlaceSearchTask = nil
+        viewModel.birthPlaceCompletions = []
+        birthPlaceSearch.clear()
     }
 }

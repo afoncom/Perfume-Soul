@@ -12,7 +12,6 @@ struct CalculationScreen: View {
     @Bindable private var viewModel: CalculationViewModel
     private let presenter: CalculationPresenter
     @FocusState private var focusedField: Field?
-    @StateObject private var birthPlaceSearch = BirthPlaceSearchService()
     
     init(
         viewModel: CalculationViewModel,
@@ -155,7 +154,8 @@ private extension CalculationScreen {
                     .textContentType(.addressCity)
                     .autocorrectionDisabled()
                     .onChange(of: viewModel.birthPlace) { _, newValue in
-                        birthPlaceSearch.updateQuery(newValue)
+                        guard focusedField == .birthPlace else { return }
+                        presenter.birthPlaceDidChange(newValue)
                     }
             }
             .padding(.horizontal, 16)
@@ -167,13 +167,16 @@ private extension CalculationScreen {
                     .stroke(Color.black.opacity(0.08), lineWidth: 1)
             )
             
-            if focusedField == .birthPlace, !birthPlaceSearch.completions.isEmpty {
+            if focusedField == .birthPlace, !viewModel.birthPlaceCompletions.isEmpty {
                 VStack(spacing: 0) {
-                    ForEach(Array(birthPlaceSearch.completions.prefix(5).enumerated()), id: \.offset) { index, completion in
+                    ForEach(Array(viewModel.birthPlaceCompletions.prefix(5).enumerated()), id: \.offset) { index, completion in
                         Button {
-                            viewModel.birthPlace = birthPlaceSearch.formattedTitle(for: completion)
-                            birthPlaceSearch.clear()
                             focusedField = nil
+                            viewModel.birthPlace = completion.subtitle.isEmpty
+                                ? completion.title
+                                : "\(completion.title), \(completion.subtitle)"
+                            viewModel.birthPlaceCompletions = []
+                            presenter.clearBirthPlaceSearch()
                         } label: {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(completion.title)
@@ -193,7 +196,7 @@ private extension CalculationScreen {
                         }
                         .buttonStyle(.plain)
                         
-                        if index < min(birthPlaceSearch.completions.count, 5) - 1 {
+                        if index < min(viewModel.birthPlaceCompletions.count, 5) - 1 {
                             Divider()
                                 .padding(.leading, 16)
                         }
