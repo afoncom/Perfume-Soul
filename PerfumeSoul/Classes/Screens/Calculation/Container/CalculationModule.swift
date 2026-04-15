@@ -15,7 +15,12 @@ final class CalculationModule {
         onFinish: @escaping () -> Void
     ) -> UIViewController {
         let viewModel = CalculationViewModel()
-        let router = CalculationRouterImpl(onFinish: onFinish)
+        let navigationController = UINavigationController()
+        let router = CalculationRouterImpl(
+            navigationController: navigationController,
+            container: container,
+            onFinish: onFinish
+        )
         let profileService = ProfileServiceImpl(container: container)
         let birthPlaceSearch = BirthPlaceSearchService()
         let presenter = CalculationPresenterImpl(
@@ -28,6 +33,9 @@ final class CalculationModule {
         let view = CalculationScreen(viewModel: viewModel, presenter: presenter)
         let hostingController = UIHostingController(rootView: view)
 
-        return hostingController
+        navigationController.viewControllers = [hostingController]
+        navigationController.setNavigationBarHidden(true, animated: false)
+
+        return navigationController
     }
 }

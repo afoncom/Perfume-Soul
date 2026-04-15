@@ -41,7 +41,7 @@ extension CalculationPresenterImpl: CalculationPresenter {
             birthPlace: viewModel.birthPlace
         )
         profileService.saveProfile(profile)
-        router.finishCalculation()
+        router.showProfileDescription()
     }
     
     func birthPlaceDidChange(_ query: String) async {
