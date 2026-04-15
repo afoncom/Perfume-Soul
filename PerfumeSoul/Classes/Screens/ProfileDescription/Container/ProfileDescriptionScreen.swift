@@ -21,15 +21,22 @@ struct ProfileDescriptionScreen: View {
     }
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(spacing: 26) {
-                makeHeaderView()
-                makeEmptyHeroSection()
-                makeInsightCards()
+        ZStack {
+            if let profile = viewModel.profile {
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 26) {
+                        makeHeaderView(profile: profile)
+                        makeEmptyHeroSection()
+                        makeInsightCards()
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 28)
+                    .padding(.bottom, 140)
+                }
+            } else {
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .padding(.horizontal, 20)
-            .padding(.top, 28)
-            .padding(.bottom, 140)
         }
         .background(Color.white.ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
@@ -38,13 +45,16 @@ struct ProfileDescriptionScreen: View {
                 .padding(.top, 12)
                 .padding(.bottom, 8)
         }
+        .task {
+            await presenter.onAppear()
+        }
     }
 }
 
 private extension ProfileDescriptionScreen {
-    func makeHeaderView() -> some View {
+    func makeHeaderView(profile: Profile) -> some View {
         VStack(spacing: 10) {
-            Text("Anna, you are")
+            Text("\(profile.name), you are")
                 .font(.system(size: 26, weight: .medium, design: .rounded))
                 .foregroundStyle(Color.black.opacity(0.82))
                 .multilineTextAlignment(.center)

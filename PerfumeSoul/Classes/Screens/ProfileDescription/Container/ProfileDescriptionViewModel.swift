@@ -9,5 +9,5 @@
 import Observation
 
 @Observable final class ProfileDescriptionViewModel {
-    
+    var profile: Profile?
 }

@@ -7,7 +7,7 @@
 //
 
 protocol ProfileDescriptionPresenter {
-    
+    func onAppear() async 
 }
 
 final class ProfileDescriptionPresenterImpl {
@@ -27,5 +27,10 @@ final class ProfileDescriptionPresenterImpl {
 }
 
 extension ProfileDescriptionPresenterImpl: ProfileDescriptionPresenter {
-    
+    func onAppear() async {
+        let profile = await profileService.fetchProfile()
+        await MainActor.run {
+            viewModel.profile = profile
+        }
+    }
 }
