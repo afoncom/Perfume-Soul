@@ -18,7 +18,8 @@ final class CalculationModule {
         let navigationController = UINavigationController()
         let router = CalculationRouterImpl(
             navigationController: navigationController,
-            container: container
+            container: container,
+            onFinish: onFinish
         )
         let profileService = ProfileServiceImpl(container: container)
         let presenter = CalculationPresenterImpl(

@@ -8,11 +8,19 @@
 
 import SwiftUI
 import CoreData
+import UIKit
 
 final class ProfileDescriptionModule {
-    static func build(container: NSPersistentContainer) -> UIViewController {
+    static func build(
+        container: NSPersistentContainer,
+        navigationController: UINavigationController?,
+        onFinish: @escaping () -> Void
+    ) -> UIViewController {
         let viewModel = ProfileDescriptionViewModel()
-        let router = ProfileDescriptionRouterImpl()
+        let router = ProfileDescriptionRouterImpl(
+            navigationController: navigationController,
+            onFinish: onFinish
+        )
         let profileService = ProfileServiceImpl(container: container)
         let presenter = ProfileDescriptionPresenterImpl(
             viewModel: viewModel,

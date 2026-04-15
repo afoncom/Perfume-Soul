@@ -137,7 +137,9 @@ private extension ProfileDescriptionScreen {
     }
     
     func makeContinueButton() -> some View {
-        Button(action: { }) {
+        Button {
+            presenter.continueButtonTapped()
+        } label: {
             Text("Continue")
                 .font(.system(size: 24, weight: .medium, design: .rounded))
                 .foregroundStyle(.white)
