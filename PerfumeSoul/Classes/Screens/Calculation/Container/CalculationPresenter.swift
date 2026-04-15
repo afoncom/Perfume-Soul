@@ -8,7 +8,7 @@
 
 protocol CalculationPresenter {
     func continueButtonTapped()
-    func birthPlaceDidChange(_ query: String)
+    func birthPlaceDidChange(_ query: String) async
     func clearBirthPlaceSearch()
 }
 
@@ -44,14 +44,9 @@ extension CalculationPresenterImpl: CalculationPresenter {
         router.finishCalculation()
     }
     
-    func birthPlaceDidChange(_ query: String) {
-        birthPlaceSearchTask?.cancel()
-        birthPlaceSearchTask = Task { @MainActor [weak self] in
-            guard let self else { return }
-            let completions = await birthPlaceSearch.search(query)
-            
-            guard !Task.isCancelled else { return }
-            
+    func birthPlaceDidChange(_ query: String) async {
+        let completions = await birthPlaceSearch.search(query)
+        await MainActor.run {
             viewModel.birthPlaceCompletions = completions
         }
     }

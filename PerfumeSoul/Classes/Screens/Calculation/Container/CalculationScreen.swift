@@ -153,9 +153,10 @@ private extension CalculationScreen {
                     .textInputAutocapitalization(.words)
                     .textContentType(.addressCity)
                     .autocorrectionDisabled()
-                    .onChange(of: viewModel.birthPlace) { _, newValue in
-                        guard focusedField == .birthPlace else { return }
-                        presenter.birthPlaceDidChange(newValue)
+                    .task(id: viewModel.birthPlace) {
+                        try? await Task.sleep(for: .seconds(0.5))
+                        guard focusedField == .birthPlace && !Task.isCancelled else { return }
+                        await presenter.birthPlaceDidChange(viewModel.birthPlace)
                     }
             }
             .padding(.horizontal, 16)
@@ -173,8 +174,8 @@ private extension CalculationScreen {
                         Button {
                             focusedField = nil
                             viewModel.birthPlace = completion.subtitle.isEmpty
-                                ? completion.title
-                                : "\(completion.title), \(completion.subtitle)"
+                            ? completion.title
+                            : "\(completion.title), \(completion.subtitle)"
                             viewModel.birthPlaceCompletions = []
                             presenter.clearBirthPlaceSearch()
                         } label: {
