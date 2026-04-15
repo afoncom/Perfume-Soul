@@ -8,45 +8,49 @@
 
 import Observation
 
-@Observable final class PersonalPerfumeViewModel {
-    struct PerfumeItem {
-        let name: String
-        let subtitle: String
-    }
-    
-    struct PerfumeSection {
-        let title: String
-        let perfumes: [PerfumeItem]
-        let description: String
-    }
-    
-    let sections: [PerfumeSection] = [
-        PerfumeSection(
+struct PersonalPerfumeItem {
+    let name: String
+    let subtitle: String
+}
+
+struct PersonalPerfumeSection {
+    let title: String
+    let perfumes: [PersonalPerfumeItem]
+    let description: String
+}
+
+enum PersonalPerfumeContent {
+    static let sections: [PersonalPerfumeSection] = [
+        PersonalPerfumeSection(
             title: "Luxury Picks",
             perfumes: [
-                PerfumeItem(name: "Initio", subtitle: "Oud for Greatness"),
-                PerfumeItem(name: "Kilian", subtitle: "Angels' Share"),
-                PerfumeItem(name: "Tom Ford", subtitle: "Soleil Blanc")
+                PersonalPerfumeItem(name: "Initio", subtitle: "Oud for Greatness"),
+                PersonalPerfumeItem(name: "Kilian", subtitle: "Angels' Share"),
+                PersonalPerfumeItem(name: "Tom Ford", subtitle: "Soleil Blanc")
             ],
             description: "Oud, saffron, and patchouli create a deep, mysterious aura."
         ),
-        PerfumeSection(
+        PersonalPerfumeSection(
             title: "Daily Picks",
             perfumes: [
-                PerfumeItem(name: "Chanel", subtitle: "Coco Mademoiselle"),
-                PerfumeItem(name: "Dior", subtitle: "Sauvage"),
-                PerfumeItem(name: "Byredo", subtitle: "Mojave Ghost")
+                PersonalPerfumeItem(name: "Chanel", subtitle: "Coco Mademoiselle"),
+                PersonalPerfumeItem(name: "Dior", subtitle: "Sauvage"),
+                PersonalPerfumeItem(name: "Byredo", subtitle: "Mojave Ghost")
             ],
             description: "Fresh spices and amberwood suit your bold, confident vibe."
         ),
-        PerfumeSection(
+        PersonalPerfumeSection(
             title: "Affordable Picks",
             perfumes: [
-                PerfumeItem(name: "Montblanc", subtitle: "Explorer"),
-                PerfumeItem(name: "Zara", subtitle: "Vibrant Leather"),
-                PerfumeItem(name: "Lattafa", subtitle: "Khamrah")
+                PersonalPerfumeItem(name: "Montblanc", subtitle: "Explorer"),
+                PersonalPerfumeItem(name: "Zara", subtitle: "Vibrant Leather"),
+                PersonalPerfumeItem(name: "Lattafa", subtitle: "Khamrah")
             ],
             description: "Bergamot and warm woods give a refined effect with an easy mood."
         )
     ]
+}
+
+@Observable final class PersonalPerfumeViewModel {
+    let sections = PersonalPerfumeContent.sections
 }
