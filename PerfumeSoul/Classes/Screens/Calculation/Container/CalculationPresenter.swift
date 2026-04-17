@@ -9,6 +9,7 @@
 protocol CalculationPresenter {
     func continueButtonTapped()
     func birthPlaceDidChange(_ query: String) async
+    @MainActor
     func clearBirthPlaceSearch()
 }
 
@@ -17,7 +18,6 @@ final class CalculationPresenterImpl {
     private let router: CalculationRouter
     private let profileService: ProfileService
     private let birthPlaceSearch: BirthPlaceSearchService
-    private var birthPlaceSearchTask: Task<Void, Never>?
     
     init(
         viewModel: CalculationViewModel,
@@ -51,9 +51,8 @@ extension CalculationPresenterImpl: CalculationPresenter {
         }
     }
     
+    @MainActor
     func clearBirthPlaceSearch() {
-        birthPlaceSearchTask?.cancel()
-        birthPlaceSearchTask = nil
         viewModel.birthPlaceCompletions = []
         birthPlaceSearch.clear()
     }
