@@ -38,7 +38,7 @@ struct ProfileDescriptionScreen: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        .background(Color.white.ignoresSafeArea())
+        .background(Color.backgroundPrimary.ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
             makeContinueButton()
                 .padding(.horizontal, 24)
@@ -56,12 +56,12 @@ private extension ProfileDescriptionScreen {
         VStack(spacing: 10) {
             Text("\(profile.name), you are")
                 .font(.system(size: 26, weight: .medium, design: .rounded))
-                .foregroundStyle(Color.black.opacity(0.82))
+                .foregroundStyle(.titleText)
                 .multilineTextAlignment(.center)
             
             Text("Deep, Intuitive, Magnetic\nPersonality")
                 .font(.system(size: 20, weight: .regular, design: .rounded))
-                .foregroundStyle(Color.black.opacity(0.62))
+                .foregroundStyle(.bodyText)
                 .multilineTextAlignment(.center)
                 .lineSpacing(4)
         }
@@ -78,6 +78,7 @@ private extension ProfileDescriptionScreen {
         VStack(spacing: 14) {
             makeInsightCard(
                 symbol: "drop.fill",
+                iconBackground: .purpleIconSurface,
                 iconTint: Color.purpleIcon,
                 title: "Water dominant",
                 description: "You are deeply intuitive and empathetic."
@@ -85,6 +86,7 @@ private extension ProfileDescriptionScreen {
             
             makeInsightCard(
                 symbol: "heart.fill",
+                iconBackground: .pinkIconSurface,
                 iconTint: Color.pinkIcon,
                 title: "Strong emotional perception",
                 description: "You can easily sense the moods and feelings of others."
@@ -95,6 +97,7 @@ private extension ProfileDescriptionScreen {
     
     func makeInsightCard(
         symbol: String,
+        iconBackground: Color,
         iconTint: Color,
         title: String,
         description: String
@@ -102,7 +105,7 @@ private extension ProfileDescriptionScreen {
         HStack(spacing: 14) {
             ZStack {
                 Circle()
-                    .fill(iconTint.opacity(0.22))
+                    .fill(iconBackground)
                     .frame(width: 42, height: 42)
                 
                 Image(systemName: symbol)
@@ -114,11 +117,11 @@ private extension ProfileDescriptionScreen {
             VStack(alignment: .leading, spacing: 6) {
                 Text(title)
                     .font(.system(size: 17, weight: .semibold, design: .rounded))
-                    .foregroundStyle(Color.black.opacity(0.8))
+                    .foregroundStyle(.titleText)
                 
                 Text(description)
                     .font(.system(size: 16, weight: .regular, design: .rounded))
-                    .foregroundStyle(Color.black.opacity(0.48))
+                    .foregroundStyle(.descriptionText)
                     .fixedSize(horizontal: false, vertical: true)
             }
             
@@ -127,13 +130,13 @@ private extension ProfileDescriptionScreen {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 18)
-        .background(Color.white.opacity(0.78))
+        .background(.surfaceOverlay)
         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .stroke(Color.white.opacity(0.55), lineWidth: 1)
+                .stroke(.glassBorder, lineWidth: 1)
         )
-        .shadow(color: Color(red: 0.74, green: 0.63, blue: 0.84).opacity(0.12), radius: 18, x: 0, y: 10)
+        .shadow(color: .insightCardShadow, radius: 18, x: 0, y: 10)
     }
     
     func makeContinueButton() -> some View {
@@ -142,14 +145,14 @@ private extension ProfileDescriptionScreen {
         } label: {
             Text("Continue")
                 .font(.system(size: 24, weight: .medium, design: .rounded))
-                .foregroundStyle(.white)
+                .foregroundStyle(.textOnAccent)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 17)
                 .background(
                     LinearGradient(
                         colors: [
-                            Color.white.opacity(0.18),
-                            .pinkButton.opacity(0.82)
+                            .buttonShine,
+                            .pinkButton
                         ],
                         startPoint: .leading,
                         endPoint: .trailing
@@ -157,6 +160,6 @@ private extension ProfileDescriptionScreen {
                 )
                 .clipShape(Capsule())
         }
-        .background(Color.white.opacity(0.08))
+        .background(.surfaceHighlight)
     }
 }

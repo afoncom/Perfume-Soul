@@ -47,7 +47,7 @@ private extension DiscoverScreen {
             
             VStack(spacing: 14) {
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .fill(Color.gray.opacity(0.12))
+                    .fill(.placeholderMedium)
                     .frame(maxWidth: .infinity)
                     .frame(height: 170)
                 
@@ -58,9 +58,9 @@ private extension DiscoverScreen {
                 .padding(.horizontal, 28)
             }
             .padding(14)
-            .background(Color.white)
+            .background(.surfacePrimary)
             .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-            .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
+            .shadow(color: .cardShadowSoft, radius: 8, x: 0, y: 4)
         }
     }
     
@@ -85,9 +85,9 @@ private extension DiscoverScreen {
                 .primaryCapsuleButton(color: .pinkButton)
             }
             .padding(14)
-            .background(Color.white)
+            .background(.surfacePrimary)
             .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-            .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
+            .shadow(color: .cardShadowSoft, radius: 8, x: 0, y: 4)
         }
     }
     
@@ -99,7 +99,7 @@ private extension DiscoverScreen {
             
             Text(L10n.Discover.FindSimilar.subtitle)
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
             
             Button(L10n.Discover.FindSimilar.button) {
@@ -110,9 +110,9 @@ private extension DiscoverScreen {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(14)
-        .background(Color.white)
+        .background(.surfacePrimary)
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
+        .shadow(color: .cardShadowSoft, radius: 8, x: 0, y: 4)
     }
 }
 
@@ -132,11 +132,11 @@ private extension DiscoverScreen {
                 }
             
             Image(systemName: "magnifyingglass")
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.textSecondary)
         }
         .padding(.horizontal, 18)
         .padding(.vertical, 14)
-        .background(Color.gray.opacity(0.08))
+        .background(.placeholderSoft)
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 }
@@ -146,7 +146,7 @@ private extension View {
         self
             .font(.title3)
             .fontWeight(.semibold)
-            .foregroundColor(.white)
+            .foregroundStyle(.textOnAccent)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 12)
             .background(color)
