@@ -8,17 +8,6 @@
 
 import Observation
 
-struct PersonalPerfumeItem {
-    let name: String
-    let subtitle: String
-}
-
-struct PersonalPerfumeSection {
-    let title: String
-    let perfumes: [PersonalPerfumeItem]
-    let description: String
-}
-
 enum PersonalPerfumeContent {
     static let sections: [PersonalPerfumeSection] = [
         PersonalPerfumeSection(
