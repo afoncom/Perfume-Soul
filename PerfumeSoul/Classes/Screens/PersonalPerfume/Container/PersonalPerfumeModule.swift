@@ -15,10 +15,12 @@ final class PersonalPerfumeModule {
         onFinish: @escaping () -> Void
     ) -> UIViewController {
         let viewModel = PersonalPerfumeViewModel()
+        let service = PersonalPerfumeServiceImpl()
         let router = PersonalPerfumeRouterImpl(onFinish: onFinish)
         let presenter = PersonalPerfumePresenterImpl(
             viewModel: viewModel,
-            router: router
+            router: router,
+            service: service
         )
         
         let view = PersonalPerfumeScreen(viewModel: viewModel, presenter: presenter)
