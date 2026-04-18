@@ -32,29 +32,17 @@ swift test
 
 After `swift run`, open:
 
-- http://127.0.0.1:8080
-- http://127.0.0.1:8080/hello
 - http://127.0.0.1:8080/perfumery-history/04-11
-
-Expected response on `/hello`:
-
-```text
-Hello, world!
-```
 
 Expected response on `/perfumery-history/04-11`:
 
 ```json
-{
-  "dateKey": "04-11",
-  "title": "Этот день в парфюмерии",
-  "items": [
-    {
-      "year": 1921,
-      "text": "В начале 1920-х Chanel No. 5 начал формировать новую эпоху в истории парфюмерии и быстро стал одним из самых узнаваемых ароматов мира."
-    }
-  ]
-}
+[
+  {
+    "year": 1921,
+    "text": "В начале 1920-х Chanel No. 5 начал формировать новую эпоху в истории парфюмерии и быстро стал одним из самых узнаваемых ароматов мира."
+  }
+]
 ```
 
 ## Notes for me

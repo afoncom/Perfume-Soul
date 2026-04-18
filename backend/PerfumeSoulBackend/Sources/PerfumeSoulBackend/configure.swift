@@ -1,5 +1,6 @@
-import Vapor
+ import Vapor
 
+@available(iOS 13.0.0, *)
 public func configure(_ app: Application) async throws {
     // Uncomment this if you want to serve files from /Public.
     // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
