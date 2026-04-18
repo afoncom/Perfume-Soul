@@ -26,7 +26,6 @@ struct ProfileDescriptionScreen: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 26) {
                         makeHeaderView(profile: profile)
-                        makeEmptyHeroSection()
                         makeInsightCards()
                     }
                     .padding(.horizontal, 20)
@@ -66,12 +65,6 @@ private extension ProfileDescriptionScreen {
                 .lineSpacing(4)
         }
         .padding(.top, 8)
-    }
-    
-    func makeEmptyHeroSection() -> some View {
-        Color.clear
-            .frame(maxWidth: .infinity)
-            .frame(height: 220)
     }
     
     func makeInsightCards() -> some View {

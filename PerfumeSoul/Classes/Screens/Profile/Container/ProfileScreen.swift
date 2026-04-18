@@ -176,28 +176,28 @@ private extension ProfileScreen {
                     Text("Personal Perfumes")
                         .font(.title3)
                         .fontWeight(.medium)
-                        .foregroundStyle(.primary)
+                        .foregroundStyle(.textPrimary)
                     
                     Text("Open your curated fragrance selection.")
                         .font(.footnote)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.textSecondary)
                 }
                 
                 Spacer()
                 
                 Image(systemName: "chevron.right")
                     .font(.footnote.weight(.semibold))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.textSecondary)
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 14)
-            .background(Color.white)
+            .background(.surfacePrimary)
             .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 22, style: .continuous)
-                    .stroke(Color.black.opacity(0.06), lineWidth: 1)
+                    .stroke(.cardBorder, lineWidth: 1)
             )
-            .shadow(color: .black.opacity(0.04), radius: 7, x: 0, y: 3)
+            .shadow(color: .cardShadowSubtle, radius: 7, x: 0, y: 3)
         }
         .buttonStyle(.plain)
     }
