@@ -33,6 +33,9 @@ struct ProfileScreen: View {
                         
                         makeElementBalance()
                             .padding(.horizontal, 16)
+
+                        makePersonalPerfumesRow()
+                            .padding(.horizontal, 16)
                         
                         makeAddedNewProfiless()
                             .padding(.horizontal, 16)
@@ -152,6 +155,51 @@ private extension ProfileScreen {
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
         .shadow(color: .black.opacity(0.04), radius: 7, x: 0, y: 3)
+    }
+
+    func makePersonalPerfumesRow() -> some View {
+        Button {
+            presenter.personalPerfumesButtonTapped()
+        } label: {
+            HStack(spacing: 14) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .fill(Color.purpleTable.opacity(0.18))
+                        .frame(width: 46, height: 46)
+                    
+                    Image(systemName: "sparkles")
+                        .font(.headline)
+                        .foregroundStyle(.purpleIcon)
+                }
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Personal Perfumes")
+                        .font(.title3)
+                        .fontWeight(.medium)
+                        .foregroundStyle(.primary)
+                    
+                    Text("Open your curated fragrance selection.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 22, style: .continuous)
+                    .stroke(Color.black.opacity(0.06), lineWidth: 1)
+            )
+            .shadow(color: .black.opacity(0.04), radius: 7, x: 0, y: 3)
+        }
+        .buttonStyle(.plain)
     }
     
     func makeAddedNewProfiless() -> some View {

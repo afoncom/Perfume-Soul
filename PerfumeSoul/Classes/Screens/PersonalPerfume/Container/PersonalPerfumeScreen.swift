@@ -46,6 +46,9 @@ struct PersonalPerfumeScreen: View {
                 .padding(.top, 12)
                 .padding(.bottom, 8)
         }
+        .task {
+            presenter.onAppear()
+        }
     }
 }
 
@@ -75,7 +78,7 @@ private extension PersonalPerfumeScreen {
         .padding(.bottom, 8)
     }
 
-    func makePerfumeSection(section: PersonalPerfumeViewModel.PerfumeSection) -> some View {
+    func makePerfumeSection(section: PersonalPerfumeSection) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             Text(section.title)
                 .font(.system(size: 22, weight: .medium, design: .rounded))
