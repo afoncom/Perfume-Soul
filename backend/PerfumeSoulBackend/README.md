@@ -34,7 +34,7 @@ After `swift run`, open:
 
 - http://127.0.0.1:8080
 - http://127.0.0.1:8080/hello
-- http://127.0.0.1:8080/horoscope/daily/aries/2026-04-11
+- http://127.0.0.1:8080/horoscope/daily/2026-04-18
 
 Expected response on `/hello`:
 
@@ -42,16 +42,21 @@ Expected response on `/hello`:
 Hello, world!
 ```
 
-Expected response on `/horoscope/daily/aries/2026-04-11`:
+Expected response on `/horoscope/daily/2026-04-18`:
 
 ```json
-{
-  "sign": "aries",
-  "date": "2026-04-11",
-  "energyOfDay": {
-    "text": "Сегодня хороший день для инициативы и быстрых решений."
+[
+  {
+    "sign": "aries",
+    "date": "2026-04-18",
+    "energyOfDay": "Сегодня хороший день для инициативы и быстрых решений."
+  },
+  {
+    "sign": "taurus",
+    "date": "2026-04-18",
+    "energyOfDay": "День подойдет для спокойной концентрации, практичных покупок и наведения порядка в делах."
   }
-}
+]
 ```
 
 ## Notes for me

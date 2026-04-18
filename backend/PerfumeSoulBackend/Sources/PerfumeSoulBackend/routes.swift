@@ -1,3 +1,4 @@
+import Foundation
 import Vapor
 
 func routes(_ app: Application) throws {
@@ -9,20 +10,26 @@ func routes(_ app: Application) throws {
         "Hello, world!"
     }
 
-    app.get("horoscope", "daily", ":sign", ":date") { req async throws -> DailyHoroscope in
-        guard
-            let sign = req.parameters.get("sign"),
-            let date = req.parameters.get("date")
-        else {
+    app.get("horoscope", "daily", ":date") { req async throws -> Response in
+        guard let date = req.parameters.get("date") else {
             throw Abort(.badRequest)
         }
 
-        let horoscope = try DailyHoroscopeLoader.load()
-
-        guard horoscope.sign == sign, horoscope.date == date else {
+        do {
+            return try jsonResponse(DailyHoroscopeLoader.load(date: date))
+        } catch let error as CocoaError where error.code == .fileNoSuchFile {
             throw Abort(.notFound)
+        } catch {
+            throw error
         }
-
-        return horoscope
     }
+}
+
+private func jsonResponse<T: Encodable>(_ value: T) throws -> Response {
+    let data = try JSONEncoder().encode(value)
+
+    var headers = HTTPHeaders()
+    headers.contentType = .json
+
+    return Response(status: .ok, headers: headers, body: .init(data: data))
 }
