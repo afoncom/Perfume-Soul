@@ -46,8 +46,8 @@ struct PersonalPerfumeScreen: View {
                 .padding(.top, 12)
                 .padding(.bottom, 8)
         }
-        .onAppear {
-            presenter.viewDidLoad()
+        .task {
+            presenter.onAppear()
         }
     }
 }

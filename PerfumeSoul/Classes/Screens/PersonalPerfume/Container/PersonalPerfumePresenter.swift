@@ -7,7 +7,8 @@
 //
 
 protocol PersonalPerfumePresenter {
-    func viewDidLoad()
+    @MainActor
+    func onAppear()
     func continueButtonTapped()
 }
 
@@ -28,7 +29,8 @@ final class PersonalPerfumePresenterImpl {
 }
 
 extension PersonalPerfumePresenterImpl: PersonalPerfumePresenter {
-    func viewDidLoad() {
+    @MainActor
+    func onAppear() {
         viewModel.sections = service.fetchSections()
     }
 
