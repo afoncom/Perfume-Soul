@@ -41,7 +41,6 @@ extension ProfileRouterImpl: ProfileRouter {
     
     func showPersonalPerfumes() {
         let screen = PersonalPerfumeModule.build(
-            container: container,
             onFinish: { [weak navigationController] in
                 navigationController?.popViewController(animated: true)
             }
