@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-PerfumeSoul is a Tuist-managed iOS app with a small Swift backend. `Project.swift` defines the app, unit test, and UI test targets. App code lives in `PerfumeSoul/Classes`: `Application` for lifecycle, `Core/CoreData` for persistence, `Services` for app services, and `Screens` for feature modules. Screen modules generally follow `Module`, `Presenter`, `Router`, `ViewModel`, and `Screen` files. Assets, storyboards, and localized strings are in `PerfumeSoul/Resources`. iOS tests are in `PerfumeSoulTests` and `PerfumeSoulUITests`; the Vapor backend is in `backend/PerfumeSoulBackend`.
+PerfumeSoul is a Tuist-managed iOS app with a Swift backend. `Project.swift` defines the app and test targets. App code lives in `PerfumeSoul/Classes`: `Application` for lifecycle, `Core/CoreData` for persistence, `Services` for app services, and `Screens` for feature modules. Screen modules generally follow `Module`, `Presenter`, `Router`, `ViewModel`, and `Screen` files. Assets, storyboards, and localized strings are in `PerfumeSoul/Resources`. iOS tests are in `PerfumeSoulTests` and `PerfumeSoulUITests`; the Vapor backend is in `backend/PerfumeSoulBackend`.
 
 ## Build, Test, and Development Commands
 
@@ -16,9 +16,9 @@ PerfumeSoul is a Tuist-managed iOS app with a small Swift backend. `Project.swif
 
 ## Coding Style & Naming Conventions
 
-Use Swift with 4-space indentation. Follow SwiftLint: prefer `isEmpty`, `contains`, `first(where:)`, explicit control braces, no trailing semicolons, and `final` classes where possible. Keep SwiftUI observable properties private when lint requires it. Name feature files by feature and role, for example `TodayPresenter.swift` or `FindPerfumesViewModel.swift`. Keep generated resources and Core Data models under existing Tuist resource paths.
+Use Swift with 4-space indentation. Follow SwiftLint: prefer `isEmpty`, `contains`, `first(where:)`, explicit control braces, no trailing semicolons, and `final` classes where possible. Keep SwiftUI observable properties private when required. Name files by feature and role, for example `TodayPresenter.swift` or `FindPerfumesViewModel.swift`. Keep generated resources and Core Data models under existing Tuist resource paths.
 
-Use only colors from `PerfumeSoul/Resources/Assets.xcassets` through generated asset symbols. In SwiftUI, write `Color(.textPrimary)` or `Color(.backgroundPrimary)`; do not use shorthand `.textPrimary`, `Color.textPrimary`, or `Color("textPrimary")`. In UIKit, use `UIColor(resource: .backgroundPrimary)`. Never use system colors such as `Color.blue`, `UIColor.systemPink`, or `.secondarySystemBackground`. If a color is missing, add a colorset and use its generated symbol.
+Use only colors from `PerfumeSoul/Resources/Assets.xcassets` through Xcode-generated symbols in `GeneratedAssetsSymbols.swift`. In SwiftUI, pass the generated `ColorResource`: `Color(.textPrimary)`, `Color(.backgroundPrimary)`, `LinearGradient(colors: [Color(.buttonShine), Color(.pinkButton)], ...)`. Do not use shorthand `.textPrimary`, `Color.textPrimary`, `Color("textPrimary")`, or system colors such as `Color.blue`, `UIColor.systemPink`, and `.secondarySystemBackground`. In UIKit, use generated APIs such as `UIColor(resource: .backgroundPrimary)`. If a color is missing, add a colorset and use its generated symbol.
 
 ## Testing Guidelines
 
@@ -26,7 +26,7 @@ iOS tests use XCTest; backend tests use Swift Testing plus `VaporTesting`. Add t
 
 ## Commit & Pull Request Guidelines
 
-Recent commits use short imperative summaries, often title case, such as `Remove duplicate daily horoscope model`. Keep commits scoped to one behavior. Pull requests should include a summary, test commands, linked issue when applicable, and screenshots or recordings for UI changes.
+Recent commits use short imperative summaries, often title case, such as `Remove duplicate daily horoscope model`. Keep commits scoped to one behavior. Pull requests should include a summary, test commands, linked issue when applicable, and screenshots for UI changes.
 
 ## Agent-Specific Instructions
 
