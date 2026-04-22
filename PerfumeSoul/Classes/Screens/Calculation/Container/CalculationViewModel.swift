@@ -7,11 +7,44 @@
 //
 
 import Foundation
+import MapKit
 import Observation
 
 @Observable final class CalculationViewModel {
     var firstName = ""
-    var birthDate = ""
-    var birthTime = "12:00"
+    var birthDate = Date()
+    var birthTime = CalculationViewModel.defaultBirthTime
     var birthPlace = ""
+    var birthPlaceCompletions: [MKLocalSearchCompletion] = []
+
+    var formattedBirthDate: String {
+        Self.birthDateFormatter.string(from: birthDate)
+    }
+    
+    var formattedBirthTime: String {
+        Self.birthTimeFormatter.string(from: birthTime)
+    }
+    
+    private static let birthDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        return formatter
+    }()
+    
+    private static let birthTimeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
+    
+    private static let defaultBirthTime: Date = {
+        let calendar = Calendar.current
+        let date = Date()
+        return calendar.date(
+            bySettingHour: 12,
+            minute: 0,
+            second: 0,
+            of: date
+        ) ?? date
+    }()
 }

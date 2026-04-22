@@ -11,6 +11,7 @@ import SwiftUI
 struct CalculationScreen: View {
     @Bindable private var viewModel: CalculationViewModel
     private let presenter: CalculationPresenter
+    @FocusState private var focusedField: Field?
     
     init(
         viewModel: CalculationViewModel,
@@ -31,7 +32,15 @@ struct CalculationScreen: View {
             .padding(.top, 36)
             .padding(.bottom, 24)
         }
-        .background(Color.white)
+        .background(.backgroundPrimary)
+        .scrollDismissesKeyboard(.interactively)
+    }
+}
+
+private extension CalculationScreen {
+    enum Field {
+        case name
+        case birthPlace
     }
 }
 
@@ -45,7 +54,7 @@ private extension CalculationScreen {
             
             Text("Enter your birth details to unlock personalized insights.")
                 .font(.title3)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.textSecondary)
                 .multilineTextAlignment(.center)
                 .lineSpacing(4)
         }
@@ -60,9 +69,9 @@ private extension CalculationScreen {
             makeBirthPlaceField()
         }
         .padding(22)
-        .background(Color.white)
+        .background(.surfacePrimary)
         .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-        .shadow(color: .black.opacity(0.05), radius: 18, x: 0, y: 8)
+        .shadow(color: .cardShadowSoft, radius: 18, x: 0, y: 8)
     }
     
     func makeNameField() -> some View {
@@ -74,45 +83,134 @@ private extension CalculationScreen {
             HStack(spacing: 12) {
                 Image(systemName: "person")
                     .font(.headline)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.textPrimary)
                 
                 TextField("Your first name", text: $viewModel.firstName)
+                    .focused($focusedField, equals: .name)
+                    .submitLabel(.next)
                     .font(.title3)
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(.textPrimary)
                     .textInputAutocapitalization(.words)
+                    .onSubmit {
+                        focusedField = .birthPlace
+                    }
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 16)
-            .background(Color.white)
+            .background(.surfacePrimary)
             .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
         }
     }
     
     func makeBirthDateField() -> some View {
-        makeReadOnlyField(
+        makePickerField(
             title: "Birth Date",
             systemImage: "calendar",
-            value: viewModel.birthDate.isEmpty ? "DD-MM-YYYY" : viewModel.birthDate,
-            iconColor: .black
-        )
+            iconColor: .textPrimary
+        ) {
+            DatePicker(
+                "",
+                selection: $viewModel.birthDate,
+                displayedComponents: .date
+            )
+            .labelsHidden()
+            .datePickerStyle(.compact)
+        }
     }
     
     func makeBirthTimeField() -> some View {
-        makeReadOnlyField(
+        makePickerField(
             title: "Birth Time",
             systemImage: "clock",
-            value: viewModel.birthTime,
-            iconColor: .black
-        )
+            iconColor: .textPrimary
+        ) {
+            DatePicker(
+                "",
+                selection: $viewModel.birthTime,
+                displayedComponents: .hourAndMinute
+            )
+            .labelsHidden()
+            .datePickerStyle(.compact)
+        }
     }
     
     func makeBirthPlaceField() -> some View {
-        makeReadOnlyField(
-            title: "Birth Place",
-            systemImage: "location",
-            value: viewModel.birthPlace.isEmpty ? "Enter city or town" : viewModel.birthPlace,
-            iconColor: .black
-        )
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Birth Place")
+                .font(.title3)
+                .fontWeight(.medium)
+            
+            HStack(spacing: 12) {
+                Image(systemName: "location")
+                    .font(.headline)
+                    .foregroundStyle(.textPrimary)
+                
+                TextField("Enter city or town", text: $viewModel.birthPlace)
+                    .focused($focusedField, equals: .birthPlace)
+                    .submitLabel(.done)
+                    .font(.title3)
+                    .foregroundStyle(.textPrimary)
+                    .textInputAutocapitalization(.words)
+                    .textContentType(.addressCity)
+                    .autocorrectionDisabled()
+                    .task(id: viewModel.birthPlace) {
+                        try? await Task.sleep(for: .seconds(0.5))
+                        guard focusedField == .birthPlace && !Task.isCancelled else { return }
+                        await presenter.birthPlaceDidChange(viewModel.birthPlace)
+                    }
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 16)
+            .background(.surfacePrimary)
+            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .stroke(.inputBorder, lineWidth: 1)
+            )
+            
+            if focusedField == .birthPlace, !viewModel.birthPlaceCompletions.isEmpty {
+                VStack(spacing: 0) {
+                    ForEach(Array(viewModel.birthPlaceCompletions.prefix(5).enumerated()), id: \.offset) { index, completion in
+                        Button {
+                            focusedField = nil
+                            viewModel.birthPlace = completion.subtitle.isEmpty
+                            ? completion.title
+                            : "\(completion.title), \(completion.subtitle)"
+                            viewModel.birthPlaceCompletions = []
+                            presenter.clearBirthPlaceSearch()
+                        } label: {
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(completion.title)
+                                    .font(.headline)
+                                    .foregroundStyle(.textPrimary)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                                if !completion.subtitle.isEmpty {
+                                    Text(completion.subtitle)
+                                        .font(.footnote)
+                                        .foregroundStyle(.textSecondary)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                }
+                            }
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 12)
+                        }
+                        .buttonStyle(.plain)
+                        
+                        if index < min(viewModel.birthPlaceCompletions.count, 5) - 1 {
+                            Divider()
+                                .padding(.leading, 16)
+                        }
+                    }
+                }
+                .background(.surfacePrimary)
+                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 18, style: .continuous)
+                        .stroke(.inputBorder, lineWidth: 1)
+                )
+            }
+        }
     }
     
     //MARK: - Continue Button
@@ -123,21 +221,21 @@ private extension CalculationScreen {
             Text("Continue")
                 .font(.title2)
                 .fontWeight(.medium)
-                .foregroundStyle(.white)
+                .foregroundStyle(.textOnAccent)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 14)
                 .background(.pinkButton)
                 .clipShape(Capsule())
         }
-        .shadow(color: .black.opacity(0.08), radius: 12, x: 0, y: 6)
+        .shadow(color: .buttonShadow, radius: 12, x: 0, y: 6)
     }
     
     //MARK: - Display info view
-    func makeReadOnlyField(
+    func makePickerField<Content: View>(
         title: String,
         systemImage: String,
-        value: String,
         iconColor: Color,
+        @ViewBuilder content: () -> Content
     ) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(title)
@@ -149,20 +247,19 @@ private extension CalculationScreen {
                     .font(.headline)
                     .foregroundStyle(iconColor)
                 
-                Text(value)
+                content()
                     .font(.title3)
-                    .foregroundStyle(.secondary)
+                    .tint(.textPrimary)
                 
                 Spacer()
-                
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 16)
-            .background(Color.white)
+            .background(.surfacePrimary)
             .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .stroke(Color.black.opacity(0.08), lineWidth: 1)
+                    .stroke(.inputBorder, lineWidth: 1)
             )
         }
     }

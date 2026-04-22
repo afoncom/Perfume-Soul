@@ -33,6 +33,9 @@ swift test
 After `swift run`, open:
 
 - http://127.0.0.1:8080/perfumery-history/2026-04-18
+- http://127.0.0.1:8080
+- http://127.0.0.1:8080/hello
+- http://127.0.0.1:8080/horoscope/daily/2026-04-18
 
 Expected response on `/perfumery-history/2026-04-18`:
 
@@ -41,6 +44,21 @@ Expected response on `/perfumery-history/2026-04-18`:
   {
     "year": 1921,
     "text": "В начале 1920-х Chanel No. 5 начал формировать новую эпоху в истории парфюмерии и быстро стал одним из самых узнаваемых ароматов мира."
+  }
+]
+```
+
+Expected response on `/horoscope/daily/2026-04-18`:
+
+```json
+[
+  {
+    "sign": "aries",
+    "energyOfDay": "Сегодня хороший день для инициативы и быстрых решений."
+  },
+  {
+    "sign": "taurus",
+    "energyOfDay": "День подойдет для спокойной концентрации, практичных покупок и наведения порядка в делах."
   }
 ]
 ```

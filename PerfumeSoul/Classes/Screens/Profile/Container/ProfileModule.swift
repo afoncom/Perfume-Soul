@@ -19,6 +19,7 @@ final class ProfileModule {
         let profileService = ProfileServiceImpl(container: container)
         let router = ProfileRouterImpl(
             navigationController: navigationController,
+            container: container,
             onProfileDeleted: onProfileDeleted
         )
         let presenter = ProfilePresenterImpl(

@@ -10,22 +10,32 @@ import SwiftUI
 import CoreData
 
 final class CalculationModule {
-    static func build(
+    @MainActor static func build(
         container: NSPersistentContainer,
         onFinish: @escaping () -> Void
     ) -> UIViewController {
         let viewModel = CalculationViewModel()
-        let router = CalculationRouterImpl(onFinish: onFinish)
+        let navigationController = UINavigationController()
+        let router = CalculationRouterImpl(
+            navigationController: navigationController,
+            container: container,
+            onFinish: onFinish
+        )
         let profileService = ProfileServiceImpl(container: container)
+        let birthPlaceSearch = BirthPlaceSearchService()
         let presenter = CalculationPresenterImpl(
             viewModel: viewModel,
             router: router,
-            profileService: profileService
+            profileService: profileService,
+            birthPlaceSearch: birthPlaceSearch
         )
         
         let view = CalculationScreen(viewModel: viewModel, presenter: presenter)
         let hostingController = UIHostingController(rootView: view)
 
-        return hostingController
+        navigationController.viewControllers = [hostingController]
+        navigationController.setNavigationBarHidden(true, animated: false)
+
+        return navigationController
     }
 }

@@ -7,21 +7,26 @@
 //
 
 import UIKit
+import CoreData
 
 protocol ProfileRouter {
     func showAddedNewProfiles()
+    func showPersonalPerfumes()
     func showCalculationScreen()
 }
 
 final class ProfileRouterImpl {
     private weak var navigationController: UINavigationController?
+    private let container: NSPersistentContainer
     private let onProfileDeleted: () -> Void
     
     init(
         navigationController: UINavigationController?,
+        container: NSPersistentContainer,
         onProfileDeleted: @escaping () -> Void
     ) {
         self.navigationController = navigationController
+        self.container = container
         self.onProfileDeleted = onProfileDeleted
     }
 }
@@ -32,6 +37,15 @@ extension ProfileRouterImpl: ProfileRouter {
             AddedNewProfilesModule.build(navigationController: navigationController),
             animated: true
         )
+    }
+    
+    func showPersonalPerfumes() {
+        let screen = PersonalPerfumeModule.build(
+            onFinish: { [weak navigationController] in
+                navigationController?.popViewController(animated: true)
+            }
+        )
+        navigationController?.pushViewController(screen, animated: true)
     }
     
     func showCalculationScreen() {

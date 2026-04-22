@@ -33,6 +33,9 @@ struct ProfileScreen: View {
                         
                         makeElementBalance()
                             .padding(.horizontal, 16)
+
+                        makePersonalPerfumesRow()
+                            .padding(.horizontal, 16)
                         
                         makeAddedNewProfiless()
                             .padding(.horizontal, 16)
@@ -69,7 +72,7 @@ private extension ProfileScreen {
     func makeProfileScreen(profile: Profile) -> some View {
         HStack(spacing: 12) {
             Circle()
-                .fill(Color.gray.opacity(0.16))
+                .fill(.placeholderStrong)
                 .frame(width: 62, height: 62)
             
             VStack(alignment: .leading, spacing: 4) {
@@ -79,7 +82,7 @@ private extension ProfileScreen {
                 
                 Text(makeProfileBirthInfo(profile: profile))
                     .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
             
@@ -96,23 +99,23 @@ private extension ProfileScreen {
             
             VStack(spacing: 8) {
                 makeNatalChartRow(
-                    color: Color.orange.opacity(0.25),
+                    color: .natalSunSurface,
                     symbol: "sun.max.fill",
-                    symbolColor: .orange,
+                    symbolColor: .natalSunAccent,
                     title: L10n.Profile.NatalChart.sun,
                     value: L10n.Profile.NatalChart.sunValue
                 )
                 
                 makeNatalChartRow(
-                    color: Color.blue.opacity(0.25),
+                    color: .natalMoonSurface,
                     symbol: "moon.fill",
-                    symbolColor: .blue,
+                    symbolColor: .natalMoonAccent,
                     title: L10n.Profile.NatalChart.moon,
                     value: L10n.Profile.NatalChart.moonValue
                 )
                 
                 makeNatalChartRow(
-                    color: Color.pinkButton.opacity(0.25),
+                    color: .natalAscendantSurface,
                     symbol: "circle.hexagongrid.fill",
                     symbolColor: .pinkButton,
                     title: L10n.Profile.NatalChart.ascendant,
@@ -121,9 +124,9 @@ private extension ProfileScreen {
             }
         }
         .padding(14)
-        .background(Color.white)
+        .background(.surfacePrimary)
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: .black.opacity(0.04), radius: 7, x: 0, y: 3)
+        .shadow(color: .cardShadowSubtle, radius: 7, x: 0, y: 3)
     }
     
     func makeElementBalance() -> some View {
@@ -134,7 +137,7 @@ private extension ProfileScreen {
             
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .fill(Color.gray.opacity(0.08))
+                    .fill(.placeholderSoft)
                     .frame(height: 34)
             }
             
@@ -149,9 +152,54 @@ private extension ProfileScreen {
             }
         }
         .padding(14)
-        .background(Color.white)
+        .background(.surfacePrimary)
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: .black.opacity(0.04), radius: 7, x: 0, y: 3)
+        .shadow(color: .cardShadowSubtle, radius: 7, x: 0, y: 3)
+    }
+
+    func makePersonalPerfumesRow() -> some View {
+        Button {
+            presenter.personalPerfumesButtonTapped()
+        } label: {
+            HStack(spacing: 14) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .fill(Color.purpleTable.opacity(0.18))
+                        .frame(width: 46, height: 46)
+                    
+                    Image(systemName: "sparkles")
+                        .font(.headline)
+                        .foregroundStyle(.purpleIcon)
+                }
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Personal Perfumes")
+                        .font(.title3)
+                        .fontWeight(.medium)
+                        .foregroundStyle(.textPrimary)
+                    
+                    Text("Open your curated fragrance selection.")
+                        .font(.footnote)
+                        .foregroundStyle(.textSecondary)
+                }
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(.textSecondary)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .background(.surfacePrimary)
+            .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 22, style: .continuous)
+                    .stroke(.cardBorder, lineWidth: 1)
+            )
+            .shadow(color: .cardShadowSubtle, radius: 7, x: 0, y: 3)
+        }
+        .buttonStyle(.plain)
     }
     
     func makeAddedNewProfiless() -> some View {
@@ -168,7 +216,7 @@ private extension ProfileScreen {
                 }) {
                     Image(systemName: "plus")
                         .font(.headline.weight(.medium))
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.textSecondary)
                         .frame(width: 28, height: 28)
                 }
             }
@@ -182,9 +230,9 @@ private extension ProfileScreen {
             }
         }
         .padding(14)
-        .background(Color.white)
+        .background(.surfacePrimary)
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: .black.opacity(0.04), radius: 7, x: 0, y: 3)
+        .shadow(color: .cardShadowSubtle, radius: 7, x: 0, y: 3)
     }
     
     func makeDeleteProfileAction() -> some View {
@@ -193,10 +241,10 @@ private extension ProfileScreen {
         } label: {
             Text(L10n.Profile.Actions.deleteButton)
                 .font(.headline)
-                .foregroundStyle(.red)
+                .foregroundStyle(.destructiveAccent)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 14)
-                .background(Color.red.opacity(0.06))
+                .background(.destructiveSurface)
                 .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
         }
         .buttonStyle(.plain)
@@ -235,18 +283,18 @@ private extension ProfileScreen {
                 
                 Text(value)
                     .font(.headline)
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(.textPrimary)
             }
             
             Spacer()
             
             Image(systemName: "chevron.right")
                 .font(.footnote.weight(.medium))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.textSecondary)
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
-        .background(Color.gray.opacity(0.06))
+        .background(.rowBackground)
         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 }
@@ -262,7 +310,7 @@ private extension ProfileScreen {
             
             Text(title)
                 .font(.headline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.textSecondary)
         }
     }
 }
@@ -273,12 +321,12 @@ private extension ProfileScreen {
     func makeAddedProfileItem(name: String) -> some View {
         VStack(spacing: 8) {
             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(Color.gray.opacity(0.12))
+                .fill(.placeholderMedium)
                 .frame(width: 92, height: 92)
             
             Text(name)
                 .font(.headline)
-                .foregroundStyle(.primary)
+                .foregroundStyle(.textPrimary)
         }
     }
 }
