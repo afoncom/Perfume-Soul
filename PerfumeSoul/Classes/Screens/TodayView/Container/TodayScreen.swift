@@ -48,7 +48,7 @@ private extension TodayScreen {
             
             HStack(spacing: 12) {
                 Circle()
-                    .fill(Color.white)
+                    .fill(.surfacePrimary)
                     .frame(width: 36, height: 36)
                     .overlay(
                         Circle()
@@ -61,15 +61,15 @@ private extension TodayScreen {
                     
                     Text(L10n.Today.Energy.description)
                         .font(.footnote)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.textSecondary)
                 }
                 Spacer()
             }
         }
         .padding(14)
-        .background(Color.white)
+        .background(.surfacePrimary)
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: .black.opacity(0.06), radius: 10, x: 0, y: 4)
+        .shadow(color: .cardShadow, radius: 10, x: 0, y: 4)
         .onTapGesture {
             presenter.todayEnergyButtonTab()
         }
@@ -90,13 +90,13 @@ private extension TodayScreen {
                     
                     Text(L10n.Today.Aroma.tags)
                         .font(.footnote)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.textSecondary)
                     
                     HStack(spacing: 6) {
                         Button(action: {}) {
                             Text(L10n.Today.Aroma.primaryAction)
                                 .font(.caption)
-                                .foregroundColor(.white)
+                                .foregroundStyle(.textOnAccent)
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 7)
                                 .background(.pinkButton)
@@ -106,13 +106,13 @@ private extension TodayScreen {
                         Button(action: {}) {
                             Text(L10n.Today.Aroma.secondaryAction)
                                 .font(.caption)
-                                .foregroundColor(.gray)
+                                .foregroundStyle(.textSecondary)
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 7)
-                                .background(Color.white.opacity(0.7))
+                                .background(.secondaryButtonBackground)
                                 .overlay(
                                     Capsule()
-                                        .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                                        .stroke(.secondaryButtonBorder, lineWidth: 1)
                                 )
                         }
                     }
@@ -120,14 +120,14 @@ private extension TodayScreen {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .fill(Color.gray.opacity(0.12))
+                    .fill(.placeholderMedium)
                     .frame(width: 82, height: 112)
             }
         }
         .padding(16)
-        .background(Color.white)
+        .background(.surfacePrimary)
         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-        .shadow(color: .black.opacity(0.06), radius: 10, x: 0, y: 4)
+        .shadow(color: .cardShadow, radius: 10, x: 0, y: 4)
     }
     
     func makeRecommendedForYou() -> some View {
@@ -141,24 +141,24 @@ private extension TodayScreen {
                     ForEach(0..<8, id: \.self) { _ in
                         VStack(alignment: .leading, spacing: 6) {
                             RoundedRectangle(cornerRadius: 16, style: .continuous)
-                                .fill(Color.gray.opacity(0.12))
+                                .fill(.placeholderMedium)
                                 .frame(width: 84, height: 96)
                             
                             Text("Byredo")
                                 .font(.subheadline)
-                                .foregroundColor(.black)
+                                .foregroundStyle(.textPrimary)
                                 .lineLimit(1)
                             
                             Text("Gypsy Water")
                                 .font(.caption)
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(.textSecondary)
                                 .lineLimit(1)
                         }
                         .padding(10)
                         .frame(width: 104, alignment: .leading)
-                        .background(Color.white)
+                        .background(.surfacePrimary)
                         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-                        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 3)
+                        .shadow(color: .cardShadowSoft, radius: 8, x: 0, y: 3)
                     }
                     
                 }
@@ -181,19 +181,19 @@ private extension TodayScreen {
                     
                     Text(L10n.Today.History.eventTitle)
                         .font(.title3)
-                        .foregroundStyle(.primary)
+                        .foregroundStyle(.textPrimary)
                 }
                 
                 Text(L10n.Today.History.description)
                     .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(16)
-            .background(Color.white)
+            .background(.surfacePrimary)
             .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-            .shadow(color: .black.opacity(0.06), radius: 10, x: 0, y: 4)
+            .shadow(color: .cardShadow, radius: 10, x: 0, y: 4)
         }
         .onTapGesture {
             presenter.dayInPerfumeryButtonTab()
