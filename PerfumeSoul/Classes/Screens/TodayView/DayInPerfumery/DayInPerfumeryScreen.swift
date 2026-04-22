@@ -32,7 +32,7 @@ struct DayInPerfumeryScreen: View {
             .padding(.top, 20)
             .padding(.bottom, 28)
         }
-        .background(Color.backgroundPrimary.ignoresSafeArea())
+        .background(Color(.backgroundPrimary).ignoresSafeArea())
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -43,12 +43,12 @@ private extension DayInPerfumeryScreen {
             Text("Dior Diorissimo")
                 .font(.title2)
                 .fontWeight(.semibold)
-                .foregroundStyle(.textPrimary)
+                .foregroundStyle(Color(.textPrimary))
                 .multilineTextAlignment(.center)
             
             Text("Один из самых культовых ароматов Dior с нотой ландыша.")
                 .font(.subheadline)
-                .foregroundStyle(.textSecondary)
+                .foregroundStyle(Color(.textSecondary))
                 .multilineTextAlignment(.center)
                 .lineSpacing(3)
         }
@@ -57,18 +57,18 @@ private extension DayInPerfumeryScreen {
     
     func makeImagePlaceholder() -> some View {
         RoundedRectangle(cornerRadius: 24, style: .continuous)
-            .fill(.placeholderMedium)
+            .fill(Color(.placeholderMedium))
             .frame(height: 220)
             .overlay {
                 VStack(spacing: 10) {
                     Image(systemName: "sparkles")
                         .font(.title)
-                        .foregroundStyle(.pinkButton)
+                        .foregroundStyle(Color(.pinkButton))
                     
                     Text("Diorissimo")
                         .font(.title3)
                         .fontWeight(.medium)
-                        .foregroundStyle(.textPrimary)
+                        .foregroundStyle(Color(.textPrimary))
                 }
             }
     }
@@ -82,7 +82,7 @@ private extension DayInPerfumeryScreen {
             Text("Этот аромат и сегодня остаётся одним из самых узнаваемых творений модного дома Dior.")
         }
         .font(.body)
-        .foregroundStyle(.textPrimary)
+        .foregroundStyle(Color(.textPrimary))
         .lineSpacing(4)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -109,13 +109,13 @@ private extension DayInPerfumeryScreen {
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.surfacePrimary)
+        .background(Color(.surfacePrimary))
         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .stroke(.cardBorder, lineWidth: 1)
+                .stroke(Color(.cardBorder), lineWidth: 1)
         )
-        .shadow(color: .cardShadowSubtle, radius: 7, x: 0, y: 3)
+        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
     
     func makeDetailRow(
@@ -126,18 +126,18 @@ private extension DayInPerfumeryScreen {
         HStack(spacing: 12) {
             Image(systemName: symbol)
                 .font(.headline)
-                .foregroundStyle(.pinkButton)
+                .foregroundStyle(Color(.pinkButton))
                 .frame(width: 28)
             
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.subheadline)
                     .fontWeight(.semibold)
-                    .foregroundStyle(.textPrimary)
+                    .foregroundStyle(Color(.textPrimary))
                 
                 Text(subtitle)
                     .font(.footnote)
-                    .foregroundStyle(.textSecondary)
+                    .foregroundStyle(Color(.textSecondary))
             }
             Spacer()
         }

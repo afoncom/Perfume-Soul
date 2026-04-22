@@ -48,11 +48,11 @@ private extension TodayScreen {
             
             HStack(spacing: 12) {
                 Circle()
-                    .fill(.surfacePrimary)
+                    .fill(Color(.surfacePrimary))
                     .frame(width: 36, height: 36)
                     .overlay(
                         Circle()
-                            .stroke(.pinkButton, lineWidth: 1)
+                            .stroke(Color(.pinkButton), lineWidth: 1)
                     )
                 
                 VStack(alignment: .leading, spacing: 4) {
@@ -61,15 +61,15 @@ private extension TodayScreen {
                     
                     Text(L10n.Today.Energy.description)
                         .font(.footnote)
-                        .foregroundStyle(.textSecondary)
+                        .foregroundStyle(Color(.textSecondary))
                 }
                 Spacer()
             }
         }
         .padding(14)
-        .background(.surfacePrimary)
+        .background(Color(.surfacePrimary))
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: .cardShadow, radius: 10, x: 0, y: 4)
+        .shadow(color: Color(.cardShadow), radius: 10, x: 0, y: 4)
         .onTapGesture {
             presenter.todayEnergyButtonTab()
         }
@@ -90,29 +90,29 @@ private extension TodayScreen {
                     
                     Text(L10n.Today.Aroma.tags)
                         .font(.footnote)
-                        .foregroundStyle(.textSecondary)
+                        .foregroundStyle(Color(.textSecondary))
                     
                     HStack(spacing: 6) {
                         Button(action: {}) {
                             Text(L10n.Today.Aroma.primaryAction)
                                 .font(.caption)
-                                .foregroundStyle(.textOnAccent)
+                                .foregroundStyle(Color(.textOnAccent))
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 7)
-                                .background(.pinkButton)
+                                .background(Color(.pinkButton))
                                 .clipShape(Capsule())
                         }
                         
                         Button(action: {}) {
                             Text(L10n.Today.Aroma.secondaryAction)
                                 .font(.caption)
-                                .foregroundStyle(.textSecondary)
+                                .foregroundStyle(Color(.textSecondary))
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 7)
-                                .background(.secondaryButtonBackground)
+                                .background(Color(.secondaryButtonBackground))
                                 .overlay(
                                     Capsule()
-                                        .stroke(.secondaryButtonBorder, lineWidth: 1)
+                                        .stroke(Color(.secondaryButtonBorder), lineWidth: 1)
                                 )
                         }
                     }
@@ -120,14 +120,14 @@ private extension TodayScreen {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .fill(.placeholderMedium)
+                    .fill(Color(.placeholderMedium))
                     .frame(width: 82, height: 112)
             }
         }
         .padding(16)
-        .background(.surfacePrimary)
+        .background(Color(.surfacePrimary))
         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-        .shadow(color: .cardShadow, radius: 10, x: 0, y: 4)
+        .shadow(color: Color(.cardShadow), radius: 10, x: 0, y: 4)
     }
     
     func makeRecommendedForYou() -> some View {
@@ -141,24 +141,24 @@ private extension TodayScreen {
                     ForEach(0..<8, id: \.self) { _ in
                         VStack(alignment: .leading, spacing: 6) {
                             RoundedRectangle(cornerRadius: 16, style: .continuous)
-                                .fill(.placeholderMedium)
+                                .fill(Color(.placeholderMedium))
                                 .frame(width: 84, height: 96)
                             
                             Text("Byredo")
                                 .font(.subheadline)
-                                .foregroundStyle(.textPrimary)
+                                .foregroundStyle(Color(.textPrimary))
                                 .lineLimit(1)
                             
                             Text("Gypsy Water")
                                 .font(.caption)
-                                .foregroundStyle(.textSecondary)
+                                .foregroundStyle(Color(.textSecondary))
                                 .lineLimit(1)
                         }
                         .padding(10)
                         .frame(width: 104, alignment: .leading)
-                        .background(.surfacePrimary)
+                        .background(Color(.surfacePrimary))
                         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-                        .shadow(color: .cardShadowSoft, radius: 8, x: 0, y: 3)
+                        .shadow(color: Color(.cardShadowSoft), radius: 8, x: 0, y: 3)
                     }
                     
                 }
@@ -181,19 +181,19 @@ private extension TodayScreen {
                     
                     Text(L10n.Today.History.eventTitle)
                         .font(.title3)
-                        .foregroundStyle(.textPrimary)
+                        .foregroundStyle(Color(.textPrimary))
                 }
                 
                 Text(L10n.Today.History.description)
                     .font(.subheadline)
-                    .foregroundStyle(.textSecondary)
+                    .foregroundStyle(Color(.textSecondary))
                     .fixedSize(horizontal: false, vertical: true)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(16)
-            .background(.surfacePrimary)
+            .background(Color(.surfacePrimary))
             .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-            .shadow(color: .cardShadow, radius: 10, x: 0, y: 4)
+            .shadow(color: Color(.cardShadow), radius: 10, x: 0, y: 4)
         }
         .onTapGesture {
             presenter.dayInPerfumeryButtonTab()

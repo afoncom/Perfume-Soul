@@ -32,13 +32,13 @@ struct WelcomeLoadingScreen: View {
 
                 Text("Checking saved profile to choose the start screen.")
                     .font(.body)
-                    .foregroundStyle(.textSecondary)
+                    .foregroundStyle(Color(.textSecondary))
                     .multilineTextAlignment(.center)
             }
             .padding(.horizontal, 20)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.backgroundPrimary)
+        .background(Color(.backgroundPrimary))
         .task {
             await presenter.onAppear()
         }

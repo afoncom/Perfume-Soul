@@ -32,7 +32,7 @@ struct CalculationScreen: View {
             .padding(.top, 36)
             .padding(.bottom, 24)
         }
-        .background(.backgroundPrimary)
+        .background(Color(.backgroundPrimary))
         .scrollDismissesKeyboard(.interactively)
     }
 }
@@ -54,7 +54,7 @@ private extension CalculationScreen {
             
             Text("Enter your birth details to unlock personalized insights.")
                 .font(.title3)
-                .foregroundStyle(.textSecondary)
+                .foregroundStyle(Color(.textSecondary))
                 .multilineTextAlignment(.center)
                 .lineSpacing(4)
         }
@@ -69,9 +69,9 @@ private extension CalculationScreen {
             makeBirthPlaceField()
         }
         .padding(22)
-        .background(.surfacePrimary)
+        .background(Color(.surfacePrimary))
         .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-        .shadow(color: .cardShadowSoft, radius: 18, x: 0, y: 8)
+        .shadow(color: Color(.cardShadowSoft), radius: 18, x: 0, y: 8)
     }
     
     func makeNameField() -> some View {
@@ -83,13 +83,13 @@ private extension CalculationScreen {
             HStack(spacing: 12) {
                 Image(systemName: "person")
                     .font(.headline)
-                    .foregroundStyle(.textPrimary)
+                    .foregroundStyle(Color(.textPrimary))
                 
                 TextField("Your first name", text: $viewModel.firstName)
                     .focused($focusedField, equals: .name)
                     .submitLabel(.next)
                     .font(.title3)
-                    .foregroundStyle(.textPrimary)
+                    .foregroundStyle(Color(.textPrimary))
                     .textInputAutocapitalization(.words)
                     .onSubmit {
                         focusedField = .birthPlace
@@ -97,7 +97,7 @@ private extension CalculationScreen {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 16)
-            .background(.surfacePrimary)
+            .background(Color(.surfacePrimary))
             .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
         }
     }
@@ -106,7 +106,7 @@ private extension CalculationScreen {
         makePickerField(
             title: "Birth Date",
             systemImage: "calendar",
-            iconColor: .textPrimary
+            iconColor: Color(.textPrimary)
         ) {
             DatePicker(
                 "",
@@ -122,7 +122,7 @@ private extension CalculationScreen {
         makePickerField(
             title: "Birth Time",
             systemImage: "clock",
-            iconColor: .textPrimary
+            iconColor: Color(.textPrimary)
         ) {
             DatePicker(
                 "",
@@ -143,13 +143,13 @@ private extension CalculationScreen {
             HStack(spacing: 12) {
                 Image(systemName: "location")
                     .font(.headline)
-                    .foregroundStyle(.textPrimary)
+                    .foregroundStyle(Color(.textPrimary))
                 
                 TextField("Enter city or town", text: $viewModel.birthPlace)
                     .focused($focusedField, equals: .birthPlace)
                     .submitLabel(.done)
                     .font(.title3)
-                    .foregroundStyle(.textPrimary)
+                    .foregroundStyle(Color(.textPrimary))
                     .textInputAutocapitalization(.words)
                     .textContentType(.addressCity)
                     .autocorrectionDisabled()
@@ -161,11 +161,11 @@ private extension CalculationScreen {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 16)
-            .background(.surfacePrimary)
+            .background(Color(.surfacePrimary))
             .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .stroke(.inputBorder, lineWidth: 1)
+                    .stroke(Color(.inputBorder), lineWidth: 1)
             )
             
             if focusedField == .birthPlace, !viewModel.birthPlaceCompletions.isEmpty {
@@ -182,13 +182,13 @@ private extension CalculationScreen {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(completion.title)
                                     .font(.headline)
-                                    .foregroundStyle(.textPrimary)
+                                    .foregroundStyle(Color(.textPrimary))
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 
                                 if !completion.subtitle.isEmpty {
                                     Text(completion.subtitle)
                                         .font(.footnote)
-                                        .foregroundStyle(.textSecondary)
+                                        .foregroundStyle(Color(.textSecondary))
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                 }
                             }
@@ -203,11 +203,11 @@ private extension CalculationScreen {
                         }
                     }
                 }
-                .background(.surfacePrimary)
+                .background(Color(.surfacePrimary))
                 .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
                 .overlay(
                     RoundedRectangle(cornerRadius: 18, style: .continuous)
-                        .stroke(.inputBorder, lineWidth: 1)
+                        .stroke(Color(.inputBorder), lineWidth: 1)
                 )
             }
         }
@@ -221,13 +221,13 @@ private extension CalculationScreen {
             Text("Continue")
                 .font(.title2)
                 .fontWeight(.medium)
-                .foregroundStyle(.textOnAccent)
+                .foregroundStyle(Color(.textOnAccent))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 14)
-                .background(.pinkButton)
+                .background(Color(.pinkButton))
                 .clipShape(Capsule())
         }
-        .shadow(color: .buttonShadow, radius: 12, x: 0, y: 6)
+        .shadow(color: Color(.buttonShadow), radius: 12, x: 0, y: 6)
     }
     
     //MARK: - Display info view
@@ -249,17 +249,17 @@ private extension CalculationScreen {
                 
                 content()
                     .font(.title3)
-                    .tint(.textPrimary)
+                    .tint(Color(.textPrimary))
                 
                 Spacer()
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 16)
-            .background(.surfacePrimary)
+            .background(Color(.surfacePrimary))
             .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .stroke(.inputBorder, lineWidth: 1)
+                    .stroke(Color(.inputBorder), lineWidth: 1)
             )
         }
     }
