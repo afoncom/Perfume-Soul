@@ -2,7 +2,6 @@ import Foundation
 
 struct DailyHoroscope: Codable, Equatable {
     let sign: String
-    let date: String
     let energyOfDay: String
 }
 
@@ -10,15 +9,7 @@ enum DailyHoroscopeLoader {
     static func load(date: String) throws -> [DailyHoroscope] {
         let url = try resourceURL(for: date)
         let data = try Data(contentsOf: url)
-        let entries = try JSONDecoder().decode([StoredDailyHoroscope].self, from: data)
-
-        return entries.map {
-            DailyHoroscope(
-                sign: $0.sign,
-                date: date,
-                energyOfDay: $0.energyOfDay
-            )
-        }
+        return try JSONDecoder().decode([DailyHoroscope].self, from: data)
     }
 
     private static func resourceURL(for date: String) throws -> URL {
@@ -32,9 +23,4 @@ enum DailyHoroscopeLoader {
 
         throw CocoaError(.fileNoSuchFile)
     }
-}
-
-private struct StoredDailyHoroscope: Decodable {
-    let sign: String
-    let energyOfDay: String
 }
