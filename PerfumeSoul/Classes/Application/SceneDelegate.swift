@@ -24,7 +24,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
 
         let window = UIWindow(windowScene: windowScene)
-        window.backgroundColor = .systemBackground
+        window.backgroundColor = UIColor(resource: .backgroundPrimary)
         self.window = window
 
         showWelcomeLoadingScreen(container: coreDataManager.container)

@@ -29,7 +29,7 @@ struct TodayEnergyScreen: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
         }
-        .background(.backgroundPrimary)
+        .background(Color(.backgroundPrimary))
         .navigationTitle("Энергия дня")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -44,15 +44,15 @@ private extension TodayEnergyScreen {
             
             makeInfoCard(
                 icon: "♏",
-                iconColor: .pinkButton,
+                iconColor: Color(.pinkButton),
                 title: "Скорпион",
                 subtitle: "Сегодня твои эмоции глубже и интенсивнее."
             )
         }
         .padding(14)
-        .background(.surfacePrimary)
+        .background(Color(.surfacePrimary))
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: .cardShadowSubtle, radius: 7, x: 0, y: 3)
+        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
     
     func makeHoroscopeSection() -> some View {
@@ -64,86 +64,86 @@ private extension TodayEnergyScreen {
             VStack(spacing: 10) {
                 makeInfoCard(
                     icon: "♈",
-                    iconColor: .pinkButton,
+                    iconColor: Color(.pinkButton),
                     title: "Овен",
                     subtitle: "День активных действий и решительных шагов"
                 )
                 
                 makeInfoCard(
                     icon: "♉",
-                    iconColor: .mint,
+                    iconColor: Color(.zodiacMint),
                     title: "Телец",
                     subtitle: "Стабильная и заботливая энергия"
                 )
                 
                 makeInfoCard(
                     icon: "♊",
-                    iconColor: .orange,
+                    iconColor: Color(.zodiacOrange),
                     title: "Близнецы",
                     subtitle: "Сегодня любопытные и общительные вибрации"
                 )
                 
                 makeInfoCard(
                     icon: "♋",
-                    iconColor: .blue.opacity(0.7),
+                    iconColor: Color(.zodiacBlue).opacity(0.7),
                     title: "Рак",
                     subtitle: "Сентиментальное и уютное настроение"
                 )
                 
                 makeInfoCard(
                     icon: "♌",
-                    iconColor: .orange.opacity(0.85),
+                    iconColor: Color(.zodiacOrange).opacity(0.85),
                     title: "Лев",
                     subtitle: "Яркое и уверенное проявление себя"
                 )
                 
                 makeInfoCard(
                     icon: "♍",
-                    iconColor: .brown.opacity(0.7),
+                    iconColor: Color(.zodiacBrown).opacity(0.7),
                     title: "Дева",
                     subtitle: "Собранное и практичное состояние"
                 )
                 
                 makeInfoCard(
                     icon: "♎",
-                    iconColor: .pink.opacity(0.75),
+                    iconColor: Color(.zodiacPink).opacity(0.75),
                     title: "Весы",
                     subtitle: "Естественное стремление к гармонии"
                 )
                 
                 makeInfoCard(
                     icon: "♐",
-                    iconColor: .purple.opacity(0.75),
+                    iconColor: Color(.zodiacPurple).opacity(0.75),
                     title: "Стрелец",
                     subtitle: "Свобода, движение и желание пробовать новое"
                 )
                 
                 makeInfoCard(
                     icon: "♑",
-                    iconColor: .gray.opacity(0.85),
+                    iconColor: Color(.zodiacGray).opacity(0.85),
                     title: "Козерог",
                     subtitle: "Собранность, дисциплина и внимание к целям"
                 )
                 
                 makeInfoCard(
                     icon: "♒",
-                    iconColor: .cyan.opacity(0.8),
+                    iconColor: Color(.zodiacCyan).opacity(0.8),
                     title: "Водолей",
                     subtitle: "Свежие идеи, независимость и нестандартный взгляд"
                 )
                 
                 makeInfoCard(
                     icon: "♓",
-                    iconColor: .blue.opacity(0.55),
+                    iconColor: Color(.zodiacBlue).opacity(0.55),
                     title: "Рыбы",
                     subtitle: "Интуитивное состояние, мягкость и чувствительность"
                 )
             }
         }
         .padding(14)
-        .background(.surfacePrimary)
+        .background(Color(.surfacePrimary))
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: .cardShadowSubtle, radius: 7, x: 0, y: 3)
+        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
     
     func makeInfoCard(
@@ -166,11 +166,11 @@ private extension TodayEnergyScreen {
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .font(.headline)
-                    .foregroundStyle(.textPrimary)
+                    .foregroundStyle(Color(.textPrimary))
                 
                 Text(subtitle)
                     .font(.footnote)
-                    .foregroundStyle(.textSecondary)
+                    .foregroundStyle(Color(.textSecondary))
                     .fixedSize(horizontal: false, vertical: true)
             }
             
@@ -178,11 +178,11 @@ private extension TodayEnergyScreen {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 12)
-        .background(.rowBackground)
+        .background(Color(.rowBackground))
         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .stroke(.cardBorder, lineWidth: 1)
+                .stroke(Color(.cardBorder), lineWidth: 1)
         )
     }
 }

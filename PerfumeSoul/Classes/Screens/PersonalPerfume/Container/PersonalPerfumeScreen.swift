@@ -33,7 +33,7 @@ struct PersonalPerfumeScreen: View {
         .background(
             LinearGradient(
                 colors: [
-                    .backgroundPrimary
+                    Color(.backgroundPrimary)
                 ],
                 startPoint: .top,
                 endPoint: .bottom
@@ -65,12 +65,12 @@ private extension PersonalPerfumeScreen {
         VStack(spacing: 8) {
             Text("Your Personal Scents")
                 .font(.system(size: 28, weight: .medium, design: .rounded))
-                .foregroundStyle(.titleText)
+                .foregroundStyle(Color(.titleText))
                 .multilineTextAlignment(.center)
 
             Text("Discover your curated fragrance selection.")
                 .font(.system(size: 18, weight: .regular, design: .rounded))
-                .foregroundStyle(.descriptionText)
+                .foregroundStyle(Color(.descriptionText))
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity)
@@ -82,7 +82,7 @@ private extension PersonalPerfumeScreen {
         VStack(alignment: .leading, spacing: 14) {
             Text(section.title)
                 .font(.system(size: 22, weight: .medium, design: .rounded))
-                .foregroundStyle(.titleText)
+                .foregroundStyle(Color(.titleText))
 
             VStack(alignment: .leading, spacing: 16) {
                 HStack(alignment: .top, spacing: 12) {
@@ -93,15 +93,15 @@ private extension PersonalPerfumeScreen {
 
                 Text(section.description)
                     .font(.system(size: 16, weight: .regular, design: .rounded))
-                    .foregroundStyle(.descriptionText)
+                    .foregroundStyle(Color(.descriptionText))
                     .fixedSize(horizontal: false, vertical: true)
             }
             .padding(14)
-            .background(Color.purpleTable)
+            .background(Color(.purpleTable))
             .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 22, style: .continuous)
-                    .stroke(.tableBorder, lineWidth: 1)
+                    .stroke(Color(.tableBorder), lineWidth: 1)
             )
         }
     }
@@ -109,22 +109,22 @@ private extension PersonalPerfumeScreen {
     func makePerfumeItem(name: String, subtitle: String) -> some View {
         VStack(spacing: 10) {
             RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .fill(.surfacePrimary)
+                .fill(Color(.surfacePrimary))
                 .frame(height: 108)
                 .overlay(
                     RoundedRectangle(cornerRadius: 16, style: .continuous)
-                        .stroke(.cardBorder, lineWidth: 1)
+                        .stroke(Color(.cardBorder), lineWidth: 1)
                 )
 
             VStack(spacing: 4) {
                 Text(name)
                     .font(.system(size: 15, weight: .medium, design: .rounded))
-                    .foregroundStyle(.titleText)
+                    .foregroundStyle(Color(.titleText))
                     .multilineTextAlignment(.center)
 
                 Text(subtitle)
                     .font(.system(size: 14, weight: .regular, design: .rounded))
-                    .foregroundStyle(.descriptionText)
+                    .foregroundStyle(Color(.descriptionText))
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -138,14 +138,14 @@ private extension PersonalPerfumeScreen {
         } label: {
             Text("Continue")
                 .font(.system(size: 24, weight: .medium, design: .rounded))
-                .foregroundStyle(.textOnAccent)
+                .foregroundStyle(Color(.textOnAccent))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 17)
                 .background(
                     LinearGradient(
                         colors: [
-                            .buttonShine,
-                            .pinkButton
+                            Color(.buttonShine),
+                            Color(.pinkButton)
                         ],
                         startPoint: .leading,
                         endPoint: .trailing
@@ -153,6 +153,6 @@ private extension PersonalPerfumeScreen {
                 )
                 .clipShape(Capsule())
         }
-        .background(.surfaceHighlight)
+        .background(Color(.surfaceHighlight))
     }
 }

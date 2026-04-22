@@ -47,20 +47,20 @@ private extension DiscoverScreen {
             
             VStack(spacing: 14) {
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .fill(.placeholderMedium)
+                    .fill(Color(.placeholderMedium))
                     .frame(maxWidth: .infinity)
                     .frame(height: 170)
                 
                 Button(L10n.Discover.ScentArchetype.button) {
                     presenter.startQuizButtonTab()
                 }
-                .primaryCapsuleButton(color: .pinkButton)
+                .primaryCapsuleButton(color: Color(.pinkButton))
                 .padding(.horizontal, 28)
             }
             .padding(14)
-            .background(.surfacePrimary)
+            .background(Color(.surfacePrimary))
             .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-            .shadow(color: .cardShadowSoft, radius: 8, x: 0, y: 4)
+            .shadow(color: Color(.cardShadowSoft), radius: 8, x: 0, y: 4)
         }
     }
     
@@ -82,12 +82,12 @@ private extension DiscoverScreen {
                 Button(L10n.Discover.Compare.button) {
                     presenter.comparePerfumesButtonTab()
                 }
-                .primaryCapsuleButton(color: .pinkButton)
+                .primaryCapsuleButton(color: Color(.pinkButton))
             }
             .padding(14)
-            .background(.surfacePrimary)
+            .background(Color(.surfacePrimary))
             .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-            .shadow(color: .cardShadowSoft, radius: 8, x: 0, y: 4)
+            .shadow(color: Color(.cardShadowSoft), radius: 8, x: 0, y: 4)
         }
     }
     
@@ -99,20 +99,20 @@ private extension DiscoverScreen {
             
             Text(L10n.Discover.FindSimilar.subtitle)
                 .font(.subheadline)
-                .foregroundStyle(.textSecondary)
+                .foregroundStyle(Color(.textSecondary))
                 .fixedSize(horizontal: false, vertical: true)
             
             Button(L10n.Discover.FindSimilar.button) {
                 presenter.findPerfumesButtonTab()
             }
-            .primaryCapsuleButton(color: .pinkButton)
+            .primaryCapsuleButton(color: Color(.pinkButton))
             .padding(.top, 2)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(14)
-        .background(.surfacePrimary)
+        .background(Color(.surfacePrimary))
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: .cardShadowSoft, radius: 8, x: 0, y: 4)
+        .shadow(color: Color(.cardShadowSoft), radius: 8, x: 0, y: 4)
     }
 }
 
@@ -132,11 +132,11 @@ private extension DiscoverScreen {
                 }
             
             Image(systemName: "magnifyingglass")
-                .foregroundStyle(.textSecondary)
+                .foregroundStyle(Color(.textSecondary))
         }
         .padding(.horizontal, 18)
         .padding(.vertical, 14)
-        .background(.placeholderSoft)
+        .background(Color(.placeholderSoft))
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 }
@@ -146,7 +146,7 @@ private extension View {
         self
             .font(.title3)
             .fontWeight(.semibold)
-            .foregroundStyle(.textOnAccent)
+            .foregroundStyle(Color(.textOnAccent))
             .frame(maxWidth: .infinity)
             .padding(.vertical, 12)
             .background(color)
