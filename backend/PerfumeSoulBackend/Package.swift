@@ -5,7 +5,8 @@ import PackageDescription
 let package = Package(
     name: "PerfumeSoulBackend",
     platforms: [
-        .macOS(.v13)
+        .macOS(.v13),
+        .iOS(.v18)
     ],
     dependencies: [
         .package(url: "https://github.com/vapor/vapor.git", from: "4.115.0"),
