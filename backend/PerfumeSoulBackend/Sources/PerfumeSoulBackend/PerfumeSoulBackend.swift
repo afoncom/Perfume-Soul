@@ -12,7 +12,7 @@ enum Entrypoint {
         let app = try await Application.make(env)
 
         do {
-            try await configure(app)
+            try configure(app)
             try await app.execute()
         } catch {
             app.logger.report(error: error)

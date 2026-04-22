@@ -1,10 +1,5 @@
 import Foundation
 
-struct PerfumeryHistoryDay: Codable, Equatable {
-    let dateKey: String
-    let items: [PerfumeryHistoryItem]
-}
-
 struct PerfumeryHistoryItem: Codable, Equatable {
     let year: Int
     let text: String
@@ -16,28 +11,29 @@ enum PerfumeryHistoryLoader {
             throw CocoaError(.fileReadCorruptFile)
         }
 
-        let url = try resourceURL()
+        let url = try resourceURL(for: dateKey)
         let data = try Data(contentsOf: url)
-        let storage = try JSONDecoder().decode([PerfumeryHistoryDay].self, from: data)
-
-        guard let items = storage.first(where: { $0.dateKey == dateKey })?.items else {
-            throw CocoaError(.fileNoSuchFile)
-        }
-
-        return items
+        return try JSONDecoder().decode([PerfumeryHistoryItem].self, from: data)
     }
 
     private static func isValidDateKey(_ dateKey: String) -> Bool {
         let components = dateKey.split(separator: "-", omittingEmptySubsequences: false)
-        return components.count == 2 && components[0].count == 2 && components[1].count == 2
+        return components.count == 3
+            && components[0].count == 4
+            && components[1].count == 2
+            && components[2].count == 2
     }
 
-    private static func resourceURL() throws -> URL {
+    private static func resourceURL(for dateKey: String) throws -> URL {
         if let url = Bundle.module.url(
-            forResource: "perfumery-history",
+            forResource: dateKey,
             withExtension: "json",
             subdirectory: "perfumery-history"
         ) {
+            return url
+        }
+
+        if let url = Bundle.module.url(forResource: dateKey, withExtension: "json") {
             return url
         }
 

@@ -32,9 +32,9 @@ swift test
 
 After `swift run`, open:
 
-- http://127.0.0.1:8080/perfumery-history/04-11
+- http://127.0.0.1:8080/perfumery-history/2026-04-18
 
-Expected response on `/perfumery-history/04-11`:
+Expected response on `/perfumery-history/2026-04-18`:
 
 ```json
 [
