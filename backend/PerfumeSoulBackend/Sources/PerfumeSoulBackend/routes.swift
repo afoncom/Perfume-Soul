@@ -43,12 +43,3 @@ private func jsonResponse<T: Encodable>(_ value: T) throws -> Response {
 
     return Response(status: .ok, headers: headers, body: .init(data: data))
 }
-
-private func jsonResponse<T: Encodable>(_ value: T) throws -> Response {
-    let data = try JSONEncoder().encode(value)
-
-    var headers = HTTPHeaders()
-    headers.contentType = .json
-
-    return Response(status: .ok, headers: headers, body: .init(data: data))
-}
