@@ -6,7 +6,10 @@
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
+import Foundation
+
 protocol Request {
     var path: String { get }
     var httpMethod: String { get }
+    var queryItems: [URLQueryItem] { get }
 }
