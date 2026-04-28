@@ -34,6 +34,9 @@ struct DayInPerfumeryScreen: View {
         }
         .background(Color(.backgroundPrimary).ignoresSafeArea())
         .navigationBarTitleDisplayMode(.inline)
+        task {
+            await presenter.onAppear()
+        }
     }
 }
 
