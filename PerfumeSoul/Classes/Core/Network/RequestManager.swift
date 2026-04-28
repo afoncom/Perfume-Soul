@@ -27,8 +27,21 @@ final class RequestManagerImpl {
 
 extension RequestManagerImpl: RequestManager {
     func sendRequest(request: Request) async throws {
-        let url = URL(string: baseURL + request.path)
-        guard let url else { throw URLError(.badURL) }
+//        let url = URL(string: baseURL + request.path)
+//        guard let url else { throw URLError(.badURL) }
+
+        //
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            throw URLError(.badURL)
+        }
+
+        urlComponents.path += request.path
+        if !request.queryItems.isEmpty {
+            urlComponents.queryItems = request.queryItems
+        }
+
+        guard let url = urlComponents.url else { throw URLError(.badURL) }
+        //
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.httpMethod

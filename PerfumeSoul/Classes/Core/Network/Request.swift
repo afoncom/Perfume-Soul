@@ -13,3 +13,7 @@ protocol Request {
     var httpMethod: String { get }
     var queryItems: [URLQueryItem] { get }
 }
+
+extension Request {
+    var queryItems: [URLQueryItem] { [] }
+}
