@@ -131,10 +131,14 @@ private extension ComparePerfumesScreen {
         rightValue: CGFloat
     ) -> some View {
         HStack(spacing: 10) {
-            RoundedRectangle(cornerRadius: 999, style: .continuous)
-                .fill(Color(.pinkButton).opacity(0.55))
-                .frame(width: 72 * leftValue, height: 10)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            HStack {
+                RoundedRectangle(cornerRadius: 999, style: .continuous)
+                    .fill(Color(.pinkButton).opacity(0.55))
+                    .frame(width: 72 * leftValue, height: 10)
+                
+                Spacer(minLength: 0)
+            }
+            .frame(width: 72)
             
             Text(title)
                 .font(.footnote)
@@ -142,10 +146,14 @@ private extension ComparePerfumesScreen {
                 .frame(width: 92)
                 .multilineTextAlignment(.center)
             
-            RoundedRectangle(cornerRadius: 999, style: .continuous)
-                .fill(Color(.zodiacPurple).opacity(0.55))
-                .frame(width: 72 * rightValue, height: 10)
-                .frame(maxWidth: .infinity, alignment: .trailing)
+            HStack {
+                Spacer(minLength: 0)
+                
+                RoundedRectangle(cornerRadius: 999, style: .continuous)
+                    .fill(Color(.zodiacPurple).opacity(0.55))
+                    .frame(width: 72 * rightValue, height: 10)
+            }
+            .frame(width: 72)
         }
     }
     
