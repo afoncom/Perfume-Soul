@@ -8,9 +8,16 @@
 
 import Foundation
 
+enum HTTPMethod: String {
+    case get = "GET"
+    case post = "POST"
+    case put = "PUT"
+    case delete = "DELETE"
+}
+
 protocol Request {
     var path: String { get }
-    var httpMethod: String { get }
+    var httpMethod: HTTPMethod { get }
     var queryItems: [URLQueryItem] { get }
 }
 

@@ -7,6 +7,6 @@
 //
 
 struct PerfumeHistoryRequest: Request {
-    let path: String = "/perfumery-history/2026-04-18"
-    let httpMethod: String = "GET"
+    let path: String = "/perfumery-history"
+    let httpMethod: HTTPMethod = .get
 }
