@@ -2,17 +2,13 @@ import Foundation
 import Vapor
 
 func routes(_ app: Application) throws {
-    app.get("perfumery-history", ":dateKey") { req async throws -> Response in
-        guard let dateKey = req.parameters.get("dateKey") else {
-            throw Abort(.badRequest)
-        }
-
+    app.get("perfumery-history") { req async throws -> Response in
         let items: [PerfumeryHistoryItem]
 
         do {
-            items = try PerfumeryHistoryLoader.load(dateKey: dateKey)
+            items = try PerfumeryHistoryLoader.load()
         } catch let error as CocoaError where error.code == .fileNoSuchFile {
-            throw Abort(.notFound)
+            throw Abort(.badRequest)
         } catch let error as CocoaError where error.code == .fileReadCorruptFile {
             throw Abort(.badRequest)
         }
