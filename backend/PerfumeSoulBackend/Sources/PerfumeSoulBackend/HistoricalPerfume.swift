@@ -6,22 +6,10 @@ struct PerfumeryHistoryItem: Codable, Equatable {
 }
 
 enum PerfumeryHistoryLoader {
-    static func load(dateKey: String) throws -> [PerfumeryHistoryItem] {
-        guard isValidDateKey(dateKey) else {
-            throw CocoaError(.fileReadCorruptFile)
-        }
-
-        let url = try resourceURL(for: dateKey)
+    static func load() throws -> [PerfumeryHistoryItem] {
+        let url = try resourceURL(for: "2026-04-18")
         let data = try Data(contentsOf: url)
         return try JSONDecoder().decode([PerfumeryHistoryItem].self, from: data)
-    }
-
-    private static func isValidDateKey(_ dateKey: String) -> Bool {
-        let components = dateKey.split(separator: "-", omittingEmptySubsequences: false)
-        return components.count == 3
-            && components[0].count == 4
-            && components[1].count == 2
-            && components[2].count == 2
     }
 
     private static func resourceURL(for dateKey: String) throws -> URL {
