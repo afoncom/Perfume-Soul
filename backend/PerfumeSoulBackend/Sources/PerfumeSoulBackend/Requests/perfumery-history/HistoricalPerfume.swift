@@ -13,14 +13,6 @@ enum PerfumeryHistoryLoader {
     }
 
     private static func resourceURL(for dateKey: String) throws -> URL {
-        if let url = Bundle.module.url(
-            forResource: dateKey,
-            withExtension: "json",
-            subdirectory: "perfumery-history/Resources"
-        ) {
-            return url
-        }
-
         if let url = Bundle.module.url(forResource: dateKey, withExtension: "json") {
             return url
         }

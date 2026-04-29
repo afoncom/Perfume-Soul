@@ -13,11 +13,7 @@ enum DailyHoroscopeLoader {
     }
 
     private static func resourceURL(for dateKey: String) throws -> URL {
-        if let url = Bundle.module.url(
-            forResource: dateKey,
-            withExtension: "json",
-            subdirectory: "horoscope-daily/Resources"
-        ) {
+        if let url = Bundle.module.url(forResource: dateKey, withExtension: "json") {
             return url
         }
 

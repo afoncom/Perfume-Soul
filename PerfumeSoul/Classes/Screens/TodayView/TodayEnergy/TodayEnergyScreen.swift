@@ -32,6 +32,9 @@ struct TodayEnergyScreen: View {
         .background(Color(.backgroundPrimary))
         .navigationTitle("Энергия дня")
         .navigationBarTitleDisplayMode(.inline)
+        .task {
+            await presenter.onAppear()
+        }
     }
 }
 

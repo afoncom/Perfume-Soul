@@ -34,6 +34,5 @@ extension DayInPerfumeryPresenterImpl: DayInPerfumeryPresenter {
         } catch let error {
             print(error)
         }
-        print("Work")
     }
 }
