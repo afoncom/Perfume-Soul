@@ -34,7 +34,7 @@ struct DayInPerfumeryScreen: View {
         }
         .background(Color(.backgroundPrimary).ignoresSafeArea())
         .navigationBarTitleDisplayMode(.inline)
-        task {
+        .task {
             await presenter.onAppear()
         }
     }
