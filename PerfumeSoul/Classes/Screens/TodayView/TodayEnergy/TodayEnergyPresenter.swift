@@ -30,7 +30,8 @@ extension TodayEnergyPresenterImpl: TodayEnergyPresenter {
     @MainActor
     func onAppear() async {
         do {
-            try await dailyHoroscopeService.requestDailyHoroscope()
+            let result = try await dailyHoroscopeService.requestDailyHoroscope()
+            print(result)
         } catch let error {
             print(error)
         }

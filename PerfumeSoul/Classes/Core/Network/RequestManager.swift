@@ -9,7 +9,7 @@ import Foundation
 
 
 protocol RequestManager {
-    func sendRequest(request: Request) async throws
+    func sendRequest<Response: Decodable>(request: Request) async throws -> Response
 }
 
 final class RequestManagerImpl {
@@ -26,13 +26,13 @@ final class RequestManagerImpl {
 }
 
 extension RequestManagerImpl: RequestManager {
-    func sendRequest(request: Request) async throws {
+    func sendRequest<Response: Decodable>(request: Request) async throws -> Response {
         let urlString = baseURL + request.path
         
         guard var urlComponents = URLComponents(string: urlString) else {
             throw URLError(.badURL)
         }
-
+        
         urlComponents.queryItems = request.queryItems
         
         guard let url = urlComponents.url else { throw URLError(.badURL) }
@@ -41,7 +41,10 @@ extension RequestManagerImpl: RequestManager {
         urlRequest.httpMethod = request.httpMethod.rawValue
         
         let (data, responce) = try await urlSession.data(for: urlRequest)
-        print(data)
+        
         print(responce)
+        
+        let decoder = JSONDecoder()
+        return try decoder.decode(Response.self, from: data)
     }
 }
