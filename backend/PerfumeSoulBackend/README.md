@@ -32,12 +32,10 @@ swift test
 
 After `swift run`, open:
 
-- http://127.0.0.1:8080/perfumery-history/2026-04-18
-- http://127.0.0.1:8080
-- http://127.0.0.1:8080/hello
-- http://127.0.0.1:8080/horoscope/daily/2026-04-18
+- http://127.0.0.1:8080/perfumery-history
+- http://127.0.0.1:8080/horoscope/daily
 
-Expected response on `/perfumery-history/2026-04-18`:
+Expected response on `/perfumery-history`:
 
 ```json
 [
@@ -48,7 +46,7 @@ Expected response on `/perfumery-history/2026-04-18`:
 ]
 ```
 
-Expected response on `/horoscope/daily/2026-04-18`:
+Expected response on `/horoscope/daily`:
 
 ```json
 [
@@ -67,4 +65,5 @@ Expected response on `/horoscope/daily/2026-04-18`:
 
 - Backend is separate from the iOS app and lives in `backend/PerfumeSoulBackend`.
 - First build can take a long time because Swift Package Manager downloads and compiles dependencies.
+- Endpoint resources are stored under `Sources/PerfumeSoulBackend/Requests/<endpoint>/Resources`.
 - If the server is running, stop it with `Control + C`.

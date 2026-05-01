@@ -7,22 +7,32 @@
 //
 
 protocol TodayEnergyPresenter {
-    
+    func onAppear() async
 }
 
 final class TodayEnergyPresenterImpl {
     private let viewModel: TodayEnergyViewModel
     private let router: TodayEnergyRouter
+    private let dailyHoroscopeService: DailyHoroscopeService
     
     init(
         viewModel: TodayEnergyViewModel,
-        router: TodayEnergyRouter
+        router: TodayEnergyRouter,
+        dailyHoroscopeService: DailyHoroscopeService
     ) {
         self.viewModel = viewModel
         self.router = router
+        self.dailyHoroscopeService = dailyHoroscopeService
     }
 }
 
 extension TodayEnergyPresenterImpl: TodayEnergyPresenter {
-    
+    @MainActor
+    func onAppear() async {
+        do {
+            try await dailyHoroscopeService.requestDailyHoroscope()
+        } catch let error {
+            print(error)
+        }
+    }
 }
