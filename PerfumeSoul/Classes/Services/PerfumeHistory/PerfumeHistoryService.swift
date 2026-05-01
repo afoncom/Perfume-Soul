@@ -20,6 +20,6 @@ final class PerfumeHistoryServiceImpl {
 
 extension PerfumeHistoryServiceImpl: PerfumeHistoryService {
     func requestPerfumeHistory() async throws {
-        try await requestManager.sendRequest(request: PerfumeHistoryRequest())
+//        try await requestManager.sendRequest(request: PerfumeHistoryRequest())
     }
 }
