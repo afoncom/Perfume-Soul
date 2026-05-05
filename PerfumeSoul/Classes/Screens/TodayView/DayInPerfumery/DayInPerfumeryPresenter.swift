@@ -30,7 +30,8 @@ extension DayInPerfumeryPresenterImpl: DayInPerfumeryPresenter {
     @MainActor
     func onAppear() async {
         do {
-            try await perfumeHistoryService.requestPerfumeHistory()
+            let result = try await perfumeHistoryService.requestPerfumeHistory()
+            print(result)
         } catch let error {
             print(error)
         }
