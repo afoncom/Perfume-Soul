@@ -2,7 +2,10 @@ import Foundation
 
 struct PerfumeryHistoryItem: Codable, Equatable {
     let year: Int
-    let text: String
+    let namePerfume: String
+    let shortStory: String
+    let fullStory: String
+    let image: String
 }
 
 enum PerfumeryHistoryLoader {

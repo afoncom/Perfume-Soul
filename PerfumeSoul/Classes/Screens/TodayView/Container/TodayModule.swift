@@ -12,9 +12,12 @@ final class TodayModule {
         let viewModel = TodayViewModel()
         let navigationController = UINavigationController()
         let router = TodayRouterImpl(navigationController: navigationController)
+        let requestManager = RequestManagerImpl(urlSession: URLSession.shared, baseURL: "http://127.0.0.1:8080")
+        let perfumeHistoryService = PerfumeHistoryServiceImpl(requestManager: requestManager)
         let presenter = TodayPresenterImpl(
             viewModel: viewModel,
-            router: router
+            router: router,
+            perfumeHistoryService: perfumeHistoryService
         )
         
         let view = TodayScreen(viewModel: viewModel, presenter: presenter)

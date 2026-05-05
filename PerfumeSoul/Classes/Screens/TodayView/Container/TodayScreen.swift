@@ -36,6 +36,9 @@ struct TodayScreen: View {
             }
             .padding(.vertical, 8)
         }
+        .task {
+            await presenter.onAppear()
+        }
     }
 }
 
@@ -175,16 +178,16 @@ private extension TodayScreen {
             
             VStack(alignment: .leading, spacing: 10) {
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Text("1957")
+                    Text(viewModel.historyFacts.first.map { String($0.year) } ?? "")
                         .font(.title2)
                         .fontWeight(.medium)
                     
-                    Text(L10n.Today.History.eventTitle)
+                    Text(viewModel.historyFacts.first?.namePerfume ?? "")
                         .font(.title3)
                         .foregroundStyle(Color(.textPrimary))
                 }
                 
-                Text(L10n.Today.History.description)
+                Text(viewModel.historyFacts.first?.shortStory ?? "")
                     .font(.subheadline)
                     .foregroundStyle(Color(.textSecondary))
                     .fixedSize(horizontal: false, vertical: true)

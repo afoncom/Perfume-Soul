@@ -11,5 +11,5 @@ import Combine
 import Observation
 
 @Observable final class DayInPerfumeryViewModel {
-    
+    var historyFacts: [PerfumeInHistoryResponse] = []
 }
