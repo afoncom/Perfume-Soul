@@ -11,5 +11,5 @@ struct PerfumeInHistoryResponse: Decodable {
     let namePerfume: String
     let shortStory: String
     let fullStory: String
-    let image: String
+    let imageUrl: String
 }

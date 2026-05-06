@@ -9,5 +9,5 @@ import Foundation
 import Observation
 
 @Observable final class TodayViewModel {
-    var historyFacts: [PerfumeInHistoryResponse] = []
+    var historyFact: PerfumeInHistoryResponse?
 }

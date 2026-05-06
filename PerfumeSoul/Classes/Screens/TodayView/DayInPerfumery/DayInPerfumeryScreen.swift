@@ -42,7 +42,7 @@ struct DayInPerfumeryScreen: View {
 private extension DayInPerfumeryScreen {
     func makeHeaderView() -> some View {
         VStack(spacing: 8) {
-            Text(viewModel.historyFacts.first?.namePerfume ?? "")
+            Text(viewModel.historyFact?.namePerfume ?? "")
                 .font(.title2)
                 .fontWeight(.semibold)
                 .foregroundStyle(Color(.textPrimary))
@@ -61,7 +61,7 @@ private extension DayInPerfumeryScreen {
                         .font(.title)
                         .foregroundStyle(Color(.pinkButton))
                     
-                    Text(viewModel.historyFacts.first?.image ?? "")
+                    Text(viewModel.historyFact?.namePerfume ?? "")
                         .font(.title3)
                         .fontWeight(.medium)
                         .foregroundStyle(Color(.textPrimary))
@@ -71,7 +71,7 @@ private extension DayInPerfumeryScreen {
     
     func makeDescriptionView() -> some View {
         VStack(alignment: .leading, spacing: 18) {
-            Text(viewModel.historyFacts.first?.fullStory ?? "")
+            Text(viewModel.historyFact?.fullStory ?? "")
                 .fixedSize(horizontal: false, vertical: true)
         }
         .font(.body)

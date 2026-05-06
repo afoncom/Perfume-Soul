@@ -31,7 +31,7 @@ extension DayInPerfumeryPresenterImpl: DayInPerfumeryPresenter {
     func onAppear() async {
         do {
             let result = try await perfumeHistoryService.requestPerfumeHistory()
-            viewModel.historyFacts = result
+            viewModel.historyFact = result
             print(result)
         } catch let error {
             print(error)

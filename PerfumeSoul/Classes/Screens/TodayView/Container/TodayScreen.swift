@@ -178,16 +178,16 @@ private extension TodayScreen {
             
             VStack(alignment: .leading, spacing: 10) {
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Text(viewModel.historyFacts.first.map { String($0.year) } ?? "")
+                    Text(viewModel.historyFact.map { String($0.year) } ?? "")
                         .font(.title2)
                         .fontWeight(.medium)
                     
-                    Text(viewModel.historyFacts.first?.namePerfume ?? "")
+                    Text(viewModel.historyFact?.namePerfume ?? "")
                         .font(.title3)
                         .foregroundStyle(Color(.textPrimary))
                 }
                 
-                Text(viewModel.historyFacts.first?.shortStory ?? "")
+                Text(viewModel.historyFact?.shortStory ?? "")
                     .font(.subheadline)
                     .foregroundStyle(Color(.textSecondary))
                     .fixedSize(horizontal: false, vertical: true)
