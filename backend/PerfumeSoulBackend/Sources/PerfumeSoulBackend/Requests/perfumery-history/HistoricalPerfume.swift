@@ -2,7 +2,7 @@ import Foundation
 
 struct PerfumeryHistoryItem: Codable, Equatable {
     let year: Int
-    let namePerfume: String
+    let perfumeName: String
     let shortStory: String
     let fullStory: String
     let imageUrl: String

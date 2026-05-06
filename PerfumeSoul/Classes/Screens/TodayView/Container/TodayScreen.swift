@@ -182,7 +182,7 @@ private extension TodayScreen {
                         .font(.title2)
                         .fontWeight(.medium)
                     
-                    Text(viewModel.historyFact?.namePerfume ?? "")
+                    Text(viewModel.historyFact?.perfumeName ?? "")
                         .font(.title3)
                         .foregroundStyle(Color(.textPrimary))
                 }

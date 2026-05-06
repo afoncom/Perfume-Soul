@@ -42,7 +42,7 @@ struct DayInPerfumeryScreen: View {
 private extension DayInPerfumeryScreen {
     func makeHeaderView() -> some View {
         VStack(spacing: 8) {
-            Text(viewModel.historyFact?.namePerfume ?? "")
+            Text(viewModel.historyFact?.perfumeName ?? "")
                 .font(.title2)
                 .fontWeight(.semibold)
                 .foregroundStyle(Color(.textPrimary))
@@ -61,7 +61,7 @@ private extension DayInPerfumeryScreen {
                         .font(.title)
                         .foregroundStyle(Color(.pinkButton))
                     
-                    Text(viewModel.historyFact?.namePerfume ?? "")
+                    Text(viewModel.historyFact?.perfumeName ?? "")
                         .font(.title3)
                         .fontWeight(.medium)
                         .foregroundStyle(Color(.textPrimary))
