@@ -11,5 +11,10 @@ import Combine
 import Observation
 
 @Observable final class TodayEnergyViewModel {
-    
+    var personalDailyHoroscope: DailyHoroscopeResponse?
+    var dailyHoroscopes: [DailyHoroscopeResponse] = []
+
+    var resolvedPersonalDailyHoroscope: DailyHoroscopeResponse? {
+        personalDailyHoroscope ?? dailyHoroscopes.first
+    }
 }

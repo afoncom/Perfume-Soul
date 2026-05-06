@@ -30,27 +30,26 @@ struct TodayEnergyScreen: View {
             .padding(.vertical, 12)
         }
         .background(Color(.backgroundPrimary))
-        .navigationTitle("Энергия дня")
+        .navigationTitle(L10n.Screen.todayEnergy)
         .navigationBarTitleDisplayMode(.inline)
-        .task {
-            await presenter.onAppear()
-        }
     }
 }
 
 private extension TodayEnergyScreen {
     func makePersonalSection() -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Для вас")
+            Text(L10n.Today.Energy.personalTitle)
                 .font(.title3)
                 .fontWeight(.medium)
             
-            makeInfoCard(
-                icon: "♏",
-                iconColor: Color(.pinkButton),
-                title: "Скорпион",
-                subtitle: "Сегодня твои эмоции глубже и интенсивнее."
-            )
+            if let personalDailyHoroscope = viewModel.resolvedPersonalDailyHoroscope {
+                makeInfoCard(
+                    icon: personalDailyHoroscope.symbol,
+                    iconColor: personalDailyHoroscope.iconColor,
+                    title: personalDailyHoroscope.displayName,
+                    subtitle: personalDailyHoroscope.energyOfDay
+                )
+            }
         }
         .padding(14)
         .background(Color(.surfacePrimary))
@@ -60,87 +59,19 @@ private extension TodayEnergyScreen {
     
     func makeHoroscopeSection() -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Гороскопы на сегодня")
+            Text(L10n.Today.Energy.listTitle)
                 .font(.title3)
                 .fontWeight(.medium)
             
             VStack(spacing: 10) {
-                makeInfoCard(
-                    icon: "♈",
-                    iconColor: Color(.pinkButton),
-                    title: "Овен",
-                    subtitle: "День активных действий и решительных шагов"
-                )
-                
-                makeInfoCard(
-                    icon: "♉",
-                    iconColor: Color(.zodiacMint),
-                    title: "Телец",
-                    subtitle: "Стабильная и заботливая энергия"
-                )
-                
-                makeInfoCard(
-                    icon: "♊",
-                    iconColor: Color(.zodiacOrange),
-                    title: "Близнецы",
-                    subtitle: "Сегодня любопытные и общительные вибрации"
-                )
-                
-                makeInfoCard(
-                    icon: "♋",
-                    iconColor: Color(.zodiacBlue).opacity(0.7),
-                    title: "Рак",
-                    subtitle: "Сентиментальное и уютное настроение"
-                )
-                
-                makeInfoCard(
-                    icon: "♌",
-                    iconColor: Color(.zodiacOrange).opacity(0.85),
-                    title: "Лев",
-                    subtitle: "Яркое и уверенное проявление себя"
-                )
-                
-                makeInfoCard(
-                    icon: "♍",
-                    iconColor: Color(.zodiacBrown).opacity(0.7),
-                    title: "Дева",
-                    subtitle: "Собранное и практичное состояние"
-                )
-                
-                makeInfoCard(
-                    icon: "♎",
-                    iconColor: Color(.zodiacPink).opacity(0.75),
-                    title: "Весы",
-                    subtitle: "Естественное стремление к гармонии"
-                )
-                
-                makeInfoCard(
-                    icon: "♐",
-                    iconColor: Color(.zodiacPurple).opacity(0.75),
-                    title: "Стрелец",
-                    subtitle: "Свобода, движение и желание пробовать новое"
-                )
-                
-                makeInfoCard(
-                    icon: "♑",
-                    iconColor: Color(.zodiacGray).opacity(0.85),
-                    title: "Козерог",
-                    subtitle: "Собранность, дисциплина и внимание к целям"
-                )
-                
-                makeInfoCard(
-                    icon: "♒",
-                    iconColor: Color(.zodiacCyan).opacity(0.8),
-                    title: "Водолей",
-                    subtitle: "Свежие идеи, независимость и нестандартный взгляд"
-                )
-                
-                makeInfoCard(
-                    icon: "♓",
-                    iconColor: Color(.zodiacBlue).opacity(0.55),
-                    title: "Рыбы",
-                    subtitle: "Интуитивное состояние, мягкость и чувствительность"
-                )
+                ForEach(viewModel.dailyHoroscopes, id: \.sign) { dailyHoroscope in
+                    makeInfoCard(
+                        icon: dailyHoroscope.symbol,
+                        iconColor: dailyHoroscope.iconColor,
+                        title: dailyHoroscope.displayName,
+                        subtitle: dailyHoroscope.energyOfDay
+                    )
+                }
             }
         }
         .padding(14)

@@ -55,16 +55,22 @@ private extension TodayScreen {
                     .frame(width: 36, height: 36)
                     .overlay(
                         Circle()
-                            .stroke(Color(.pinkButton), lineWidth: 1)
+                            .stroke(viewModel.resolvedPersonalDailyHoroscope?.iconColor ?? Color(.pinkButton), lineWidth: 1)
+                    )
+                    .overlay(
+                        Text(viewModel.resolvedPersonalDailyHoroscope?.symbol ?? "✦")
+                            .font(.headline)
+                            .foregroundStyle(viewModel.resolvedPersonalDailyHoroscope?.iconColor ?? Color(.pinkButton))
                     )
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(L10n.Today.Energy.moonTitle)
+                    Text(viewModel.resolvedPersonalDailyHoroscope?.displayName ?? "")
                         .font(.headline)
                     
-                    Text(L10n.Today.Energy.description)
+                    Text(viewModel.resolvedPersonalDailyHoroscope?.energyOfDay ?? "")
                         .font(.footnote)
                         .foregroundStyle(Color(.textSecondary))
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 Spacer()
             }
