@@ -9,16 +9,14 @@
 import SwiftUI
 
 final class DayInPerfumeryModule {
-    static func build(navigationController: UINavigationController?) -> UIViewController {
+    static func build(
+        navigationController: UINavigationController?,
+        historyFact: PerfumeInHistoryResponse?
+    ) -> UIViewController {
         let viewModel = DayInPerfumeryViewModel()
+        viewModel.historyFact = historyFact
         let router = DayInPerfumeryRouterImpl(navigationController: navigationController)
-        let requestManager = RequestManagerImpl(urlSession: URLSession.shared, baseURL: "http://127.0.0.1:8080")
-        let perfumeHistoryService = PerfumeHistoryServiceImpl(requestManager: requestManager)
-        let presenter = DayInPerfumeryPresenterImpl(
-            viewModel: viewModel,
-            router: router,
-            perfumeHistoryService: perfumeHistoryService
-        )
+        let presenter = DayInPerfumeryPresenterImpl(viewModel: viewModel, router: router)
         
         let view = DayInPerfumeryScreen(viewModel: viewModel, presenter: presenter)
         

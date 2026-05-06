@@ -9,7 +9,7 @@ import UIKit
 
 protocol TodayRouter {
     func showTodayEnergyScreen()
-    func showDayInPerfumeryScreen()
+    func showDayInPerfumeryScreen(historyFact: PerfumeInHistoryResponse?)
 }
 
 final class TodayRouterImpl {
@@ -28,9 +28,12 @@ extension TodayRouterImpl: TodayRouter {
         )
     }
     
-    func showDayInPerfumeryScreen() {
+    func showDayInPerfumeryScreen(historyFact: PerfumeInHistoryResponse?) {
         navigationController?.pushViewController(
-            DayInPerfumeryModule.build(navigationController: navigationController),
+            DayInPerfumeryModule.build(
+                navigationController: navigationController,
+                historyFact: historyFact
+            ),
             animated: true
         )
     }

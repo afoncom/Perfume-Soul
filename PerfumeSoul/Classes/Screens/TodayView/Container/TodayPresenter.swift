@@ -44,6 +44,6 @@ extension TodayPresenterImpl: TodayPresenter {
     }
     
     func dayInPerfumeryButtonTab() {
-        router.showDayInPerfumeryScreen()
+        router.showDayInPerfumeryScreen(historyFact: viewModel.historyFact)
     }
 }
