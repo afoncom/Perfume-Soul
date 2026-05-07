@@ -7,7 +7,7 @@
 //
 
 protocol PerfumeHistoryService {
-    func requestPerfumeHistory() async throws -> [PerfumeInHistoryResponse]
+    func requestPerfumeHistory() async throws -> PerfumeInHistoryResponse
 }
 
 final class PerfumeHistoryServiceImpl {
@@ -19,8 +19,8 @@ final class PerfumeHistoryServiceImpl {
 }
 
 extension PerfumeHistoryServiceImpl: PerfumeHistoryService {
-    func requestPerfumeHistory() async throws -> [PerfumeInHistoryResponse] {
-        let perfumesInHistory: [PerfumeInHistoryResponse] = try await requestManager.sendRequest(request: PerfumeHistoryRequest())
-        return perfumesInHistory
+    func requestPerfumeHistory() async throws -> PerfumeInHistoryResponse {
+        let perfumeInHistory: PerfumeInHistoryResponse = try await requestManager.sendRequest(request: PerfumeHistoryRequest())
+        return perfumeInHistory
     }
 }

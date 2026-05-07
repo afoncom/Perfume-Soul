@@ -3,17 +3,17 @@ import Vapor
 
 func routes(_ app: Application) throws {
     app.get("perfumery-history") { req async throws -> Response in
-        let items: [PerfumeryHistoryItem]
+        let item: PerfumeryHistoryItem
 
         do {
-            items = try PerfumeryHistoryLoader.load()
+            item = try PerfumeryHistoryLoader.load()
         } catch let error as CocoaError where error.code == .fileNoSuchFile {
             throw Abort(.badRequest)
         } catch let error as CocoaError where error.code == .fileReadCorruptFile {
             throw Abort(.badRequest)
         }
 
-        return try jsonResponse(items)
+        return try jsonResponse(item)
     }
 
     app.get("horoscope", "daily") { _ async throws -> Response in

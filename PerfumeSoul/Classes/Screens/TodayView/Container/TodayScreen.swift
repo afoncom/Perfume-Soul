@@ -36,6 +36,9 @@ struct TodayScreen: View {
             }
             .padding(.vertical, 8)
         }
+        .task {
+            await presenter.onAppear()
+        }
     }
 }
 
@@ -173,30 +176,74 @@ private extension TodayScreen {
                 .font(.title3)
                 .fontWeight(.medium)
             
-            VStack(alignment: .leading, spacing: 10) {
-                HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Text("1957")
-                        .font(.title2)
-                        .fontWeight(.medium)
-                    
-                    Text(L10n.Today.History.eventTitle)
-                        .font(.title3)
-                        .foregroundStyle(Color(.textPrimary))
-                }
-                
-                Text(L10n.Today.History.description)
-                    .font(.subheadline)
-                    .foregroundStyle(Color(.textSecondary))
-                    .fixedSize(horizontal: false, vertical: true)
+            switch viewModel.viewState {
+            case .loading:
+                makeHistoryFactLoadingCard()
+            case let .loaded(historyFact):
+                makeHistoryFactCard(historyFact: historyFact)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(16)
-            .background(Color(.surfacePrimary))
-            .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-            .shadow(color: Color(.cardShadow), radius: 10, x: 0, y: 4)
         }
         .onTapGesture {
             presenter.dayInPerfumeryButtonTab()
         }
+    }
+    
+    func makeHistoryFactCard(historyFact: PerfumeInHistoryResponse) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                Text(String(historyFact.year))
+                    .font(.title2)
+                    .fontWeight(.medium)
+                
+                Text(historyFact.perfumeName)
+                    .font(.title3)
+                    .foregroundStyle(Color(.textPrimary))
+            }
+            
+            Text(historyFact.shortStory)
+                .font(.subheadline)
+                .foregroundStyle(Color(.textSecondary))
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(16)
+        .background(Color(.surfacePrimary))
+        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .shadow(color: Color(.cardShadow), radius: 10, x: 0, y: 4)
+    }
+    
+    func makeHistoryFactLoadingCard() -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                RoundedRectangle(cornerRadius: 6, style: .continuous)
+                    .fill(Color(.placeholderMedium))
+                    .frame(width: 52, height: 28)
+                
+                RoundedRectangle(cornerRadius: 6, style: .continuous)
+                    .fill(Color(.placeholderMedium))
+                    .frame(width: 164, height: 24)
+            }
+            
+            RoundedRectangle(cornerRadius: 6, style: .continuous)
+                .fill(Color(.placeholderMedium))
+                .frame(height: 18)
+            
+            RoundedRectangle(cornerRadius: 6, style: .continuous)
+                .fill(Color(.placeholderSoft))
+                .frame(width: 220, height: 18)
+        }
+        .redacted(reason: .placeholder)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(16)
+        .background(Color(.surfacePrimary))
+        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .shadow(color: Color(.cardShadow), radius: 10, x: 0, y: 4)
+    }
+}
+
+extension TodayScreen {
+    enum ViewState {
+        case loading
+        case loaded(historyFact: PerfumeInHistoryResponse)
     }
 }
