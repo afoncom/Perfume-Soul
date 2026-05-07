@@ -9,5 +9,5 @@ import Foundation
 import Observation
 
 @Observable final class TodayViewModel {
-    var historyFact: PerfumeInHistoryResponse?
+    var viewState: TodayScreen.ViewState = .loading
 }

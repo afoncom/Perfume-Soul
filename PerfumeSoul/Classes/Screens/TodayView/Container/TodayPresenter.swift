@@ -30,9 +30,10 @@ final class TodayPresenterImpl {
 extension TodayPresenterImpl: TodayPresenter {
     @MainActor
     func onAppear() async {
+        viewModel.viewState = .loading
         do {
             let result = try await perfumeHistoryService.requestPerfumeHistory()
-            viewModel.historyFact = result
+            viewModel.viewState = .loaded(historyFact: result)
             print(result)
         } catch let error {
             print(error)
@@ -44,6 +45,7 @@ extension TodayPresenterImpl: TodayPresenter {
     }
     
     func dayInPerfumeryButtonTab() {
-        router.showDayInPerfumeryScreen(historyFact: viewModel.historyFact)
+        guard case let .loaded(historyFact) = viewModel.viewState else { return }
+        router.showDayInPerfumeryScreen(historyFact: historyFact)
     }
 }
