@@ -12,7 +12,7 @@ protocol TodayRouter {
         personalDailyHoroscope: DailyHoroscopeResponse?,
         dailyHoroscopes: [DailyHoroscopeResponse]
     )
-    func showDayInPerfumeryScreen(historyFact: PerfumeInHistoryResponse?)
+    func showDayInPerfumeryScreen(historyFact: PerfumeInHistoryResponse)
 }
 
 final class TodayRouterImpl {
