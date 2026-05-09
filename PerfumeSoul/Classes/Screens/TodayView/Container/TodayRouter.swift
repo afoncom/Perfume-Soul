@@ -9,8 +9,8 @@ import UIKit
 
 protocol TodayRouter {
     func showTodayEnergyScreen(
-        personalDailyHoroscope: DailyHoroscopeResponse?,
-        dailyHoroscopes: [DailyHoroscopeResponse]
+        personalDailyHoroscope: DailyHoroscope?,
+        dailyHoroscopes: [DailyHoroscope]
     )
     func showDayInPerfumeryScreen(historyFact: PerfumeInHistoryResponse)
 }
@@ -25,8 +25,8 @@ final class TodayRouterImpl {
 
 extension TodayRouterImpl: TodayRouter {
     func showTodayEnergyScreen(
-        personalDailyHoroscope: DailyHoroscopeResponse?,
-        dailyHoroscopes: [DailyHoroscopeResponse]
+        personalDailyHoroscope: DailyHoroscope?,
+        dailyHoroscopes: [DailyHoroscope]
     ) {
         navigationController?.pushViewController(
             TodayEnergyModule.build(

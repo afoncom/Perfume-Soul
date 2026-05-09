@@ -10,11 +10,7 @@ import Observation
 
 @Observable final class TodayViewModel {
     var historyFact: PerfumeInHistoryResponse?
-    var dailyHoroscopes: [DailyHoroscopeResponse] = []
-    var personalDailyHoroscope: DailyHoroscopeResponse?
-
-    var resolvedPersonalDailyHoroscope: DailyHoroscopeResponse? {
-        personalDailyHoroscope ?? dailyHoroscopes.first
-    }
+    var dailyHoroscopes: [DailyHoroscope] = []
+    var personalHoroscope: DailyHoroscope?
     var viewState: TodayScreen.ViewState = .loading
 }

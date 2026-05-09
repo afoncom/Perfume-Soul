@@ -7,7 +7,7 @@
 //
 
 protocol DailyHoroscopeService {
-    func requestDailyHoroscope() async throws -> [DailyHoroscopeResponse]
+    func requestDailyHoroscope() async throws -> [DailyHoroscope]
 }
 
 final class DailyHoroscopeServiceImpl {
@@ -19,8 +19,8 @@ final class DailyHoroscopeServiceImpl {
 }
 
 extension DailyHoroscopeServiceImpl: DailyHoroscopeService {
-    func requestDailyHoroscope() async throws -> [DailyHoroscopeResponse] {
+    func requestDailyHoroscope() async throws -> [DailyHoroscope] {
         let horoscopes: [DailyHoroscopeResponse] = try await requestManager.sendRequest(request: DailyHoroscopeRequest())
-        return horoscopes
+        return horoscopes.map{ DailyHoroscope(response: $0) }
     }
 }

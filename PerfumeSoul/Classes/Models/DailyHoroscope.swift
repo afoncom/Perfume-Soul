@@ -1,13 +1,25 @@
 //
-//  DailyHoroscopeResponse+Presentation.swift
+//  DailyHoroscope.swift
 //  PerfumeSoul
 //
-//  Created by Codex on 06.05.2026.
+//  Created by afon.com on 09.05.2026.
+//  Copyright © 2026 afon.com. All rights reserved.
 //
-
 import SwiftUI
 
-extension DailyHoroscopeResponse {
+struct DailyHoroscope {
+    let sign: String
+    let energyOfDay: String
+}
+
+extension DailyHoroscope {
+    init(response: DailyHoroscopeResponse) {
+        self.sign = response.sign
+        self.energyOfDay = response.energyOfDay
+    }
+}
+
+extension DailyHoroscope {
     var displayName: String {
         switch sign {
         case "aries":

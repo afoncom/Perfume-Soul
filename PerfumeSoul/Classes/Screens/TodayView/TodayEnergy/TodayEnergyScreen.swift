@@ -42,7 +42,7 @@ private extension TodayEnergyScreen {
                 .font(.title3)
                 .fontWeight(.medium)
             
-            if let personalDailyHoroscope = viewModel.resolvedPersonalDailyHoroscope {
+            if let personalDailyHoroscope = viewModel.personalDailyHoroscope {
                 makeInfoCard(
                     icon: personalDailyHoroscope.symbol,
                     iconColor: personalDailyHoroscope.iconColor,

@@ -55,19 +55,19 @@ private extension TodayScreen {
                     .frame(width: 36, height: 36)
                     .overlay(
                         Circle()
-                            .stroke(viewModel.resolvedPersonalDailyHoroscope?.iconColor ?? Color(.pinkButton), lineWidth: 1)
+                            .stroke(viewModel.personalHoroscope?.iconColor ?? Color(.pinkButton), lineWidth: 1)
                     )
                     .overlay(
-                        Text(viewModel.resolvedPersonalDailyHoroscope?.symbol ?? "✦")
+                        Text(viewModel.personalHoroscope?.symbol ?? "✦")
                             .font(.headline)
-                            .foregroundStyle(viewModel.resolvedPersonalDailyHoroscope?.iconColor ?? Color(.pinkButton))
+                            .foregroundStyle(viewModel.personalHoroscope?.iconColor ?? Color(.pinkButton))
                     )
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(viewModel.resolvedPersonalDailyHoroscope?.displayName ?? "")
+                    Text(viewModel.personalHoroscope?.displayName ?? "")
                         .font(.headline)
                     
-                    Text(viewModel.resolvedPersonalDailyHoroscope?.energyOfDay ?? "")
+                    Text(viewModel.personalHoroscope?.energyOfDay ?? "")
                         .font(.footnote)
                         .foregroundStyle(Color(.textSecondary))
                         .fixedSize(horizontal: false, vertical: true)
