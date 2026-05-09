@@ -14,9 +14,10 @@ final class TodayEnergyModule {
         personalDailyHoroscope: DailyHoroscopeResponse?,
         dailyHoroscopes: [DailyHoroscopeResponse]
     ) -> UIViewController {
-        let viewModel = TodayEnergyViewModel()
-        viewModel.personalDailyHoroscope = personalDailyHoroscope
-        viewModel.dailyHoroscopes = dailyHoroscopes
+        let viewModel = TodayEnergyViewModel(
+            personalDailyHoroscope: personalDailyHoroscope,
+            dailyHoroscopes: dailyHoroscopes
+        )
         let router = TodayEnergyRouterImpl(navigationController: navigationController)
         let presenter = TodayEnergyPresenterImpl(viewModel: viewModel, router: router)
         
