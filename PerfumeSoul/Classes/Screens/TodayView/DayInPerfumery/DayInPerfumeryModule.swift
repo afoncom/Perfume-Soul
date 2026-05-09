@@ -11,10 +11,9 @@ import SwiftUI
 final class DayInPerfumeryModule {
     static func build(
         navigationController: UINavigationController?,
-        historyFact: PerfumeInHistoryResponse?
+        historyFact: PerfumeInHistoryResponse
     ) -> UIViewController {
-        let viewModel = DayInPerfumeryViewModel()
-        viewModel.historyFact = historyFact
+        let viewModel = DayInPerfumeryViewModel(historyFact: historyFact)
         let router = DayInPerfumeryRouterImpl(navigationController: navigationController)
         let presenter = DayInPerfumeryPresenterImpl(viewModel: viewModel, router: router)
         

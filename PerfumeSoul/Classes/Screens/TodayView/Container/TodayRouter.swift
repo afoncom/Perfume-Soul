@@ -38,7 +38,7 @@ extension TodayRouterImpl: TodayRouter {
         )
     }
     
-    func showDayInPerfumeryScreen(historyFact: PerfumeInHistoryResponse?) {
+    func showDayInPerfumeryScreen(historyFact: PerfumeInHistoryResponse) {
         navigationController?.pushViewController(
             DayInPerfumeryModule.build(
                 navigationController: navigationController,

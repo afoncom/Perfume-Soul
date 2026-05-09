@@ -16,4 +16,5 @@ import Observation
     var resolvedPersonalDailyHoroscope: DailyHoroscopeResponse? {
         personalDailyHoroscope ?? dailyHoroscopes.first
     }
+    var viewState: TodayScreen.ViewState = .loading
 }
