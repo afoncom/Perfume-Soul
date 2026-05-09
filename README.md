@@ -1,155 +1,198 @@
 # PerfumeSoul
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Platform-iOS%2018.6%2B-f4b6c2" alt="Platform">
-  <img src="https://img.shields.io/badge/Swift-SwiftUI%20%2B%20UIKit-f7c7d3" alt="SwiftUI + UIKit">
+  <img src="https://img.shields.io/badge/Platform-iOS%2018.0%2B-f4b6c2" alt="Platform">
+  <img src="https://img.shields.io/badge/UI-SwiftUI%20%2B%20UIKit-f7c7d3" alt="SwiftUI + UIKit">
   <img src="https://img.shields.io/badge/Architecture-Module%20%2B%20Presenter%20%2B%20Router-f8d9e2" alt="Architecture">
   <img src="https://img.shields.io/badge/Persistence-Core%20Data-f6c2cf" alt="Core Data">
 </p>
 
-<p align="center">
-  <strong>PerfumeSoul</strong> is an iOS concept app that blends fragrance discovery with mood, astrology and personal scent identity.
-</p>
+PerfumeSoul is a Tuist-managed iOS app that combines perfume discovery, profile-based onboarding, and editorial daily content. The project uses a hybrid UIKit + SwiftUI setup, stores the user profile in Core Data, and includes a small Vapor backend for daily horoscope and perfumery-history content.
 
-<p align="center">
-  The experience is built around three core spaces: <strong>Today</strong>, <strong>Discover</strong> and <strong>Profile</strong>.
-</p>
+## Current App State
 
-## Overview
+The repository currently contains a working application shell with onboarding, a tab bar, persistent profile storage, and several feature modules in different stages of completion.
 
-PerfumeSoul is designed as a soft, editorial-style perfume companion. Instead of showing fragrances as a plain catalog, the app frames scent through daily energy, personal taste and symbolic profile data.
+- `WelcomeLoading` checks whether a profile already exists and routes either to onboarding or the main tab bar.
+- `Calculation` creates a profile with name, birth date, birth time, and birth place.
+- `ProfileDescription` and `PersonalPerfume` continue the onboarding flow with editorial and curated content.
+- `Today` is the most integrated tab right now: it loads `perfumery-history` from the backend and opens a backend-driven `DayInPerfumery` details screen.
+- `Discover` and parts of `Profile` are present as UI flows and navigation scaffolding, but several sections still use static placeholder content.
+- `TodayEnergy` has its own screen and backend service layer, but the screen content is still mostly hardcoded in the current branch.
 
-The current version already includes the main navigation shell, custom SwiftUI screens, reusable module builders, presenter-driven navigation and a Core Data stack prepared for persistence.
-
-## Product Direction
-
-### Today
-- Daily energy card inspired by astrological mood
-- "Aroma of the Day" recommendation block
-- Horizontal personalized perfume suggestions
-- "On This Day in Perfumery" editorial section
-
-### Discover
-- Scent archetype entry point with quiz CTA
-- Perfume comparison inputs for side-by-side exploration
-- Similar scent discovery flow
-
-### Profile
-- Personal identity summary
-- Natal chart-inspired fragrance profile
-- Element balance block
-- Additional profiles section for expanding the concept to multiple people
-
-## Why It Feels Different
-
-- Emotion-first perfume UX instead of a standard ecommerce layout
-- Soft card-based interface with editorial spacing and premium visual rhythm
-- Hybrid app structure: UIKit lifecycle + SwiftUI feature screens
-- Clean feature boundaries through `Module`, `Presenter`, `Router` and `ViewModel`
-- Persistence layer already initialized through Core Data
-
-## Architecture
-
-The project uses a hybrid composition:
-
-- `UIKit` manages app launch, scene lifecycle and tab/navigation containers
-- `SwiftUI` renders the feature interfaces
-- Each feature is assembled through a dedicated module builder
-- Navigation is delegated to routers
-- Presentation actions are coordinated through presenters
-- Screen state is stored in observable view models
-
-### App Flow
+## User Flow
 
 ```text
 SceneDelegate
-   |
-   v
-UITabBarController
-   |
-   +-- Today      -> UINavigationController -> TodayModule
-   +-- Discover   -> UINavigationController -> DiscoverModule
-   +-- Profile    -> UINavigationController -> ProfileModule
-   +-- Settings   -> UINavigationController -> SettingsModule
+  -> WelcomeLoading
+     -> existing profile -> Main tab bar
+     -> no profile      -> Calculation
+                           -> ProfileDescription
+                           -> PersonalPerfume
+                           -> Main tab bar
 ```
 
-## Project Structure
+Main tabs:
+
+- `Today`
+- `Discover`
+- `Profile`
+- `Settings`
+
+## Feature Overview
+
+### Today
+
+- Daily energy entry card
+- Aroma of the Day card
+- Recommended perfumes carousel
+- `This day in perfumery` card with a loading state
+- `DayInPerfumery` details screen populated from the backend
+
+Backend-backed data already used here:
+
+- `GET /perfumery-history` returns a single history item with:
+  - `year`
+  - `perfumeName`
+  - `shortStory`
+  - `fullStory`
+  - `imageUrl`
+
+### Discover
+
+- Start quiz entry point
+- Compare perfumes inputs
+- Find similar perfumes CTA
+
+This part is currently more of a feature scaffold than a completed product flow.
+
+### Profile
+
+- Loads the saved profile from Core Data
+- Shows profile header with birth information
+- Contains natal chart, element balance, personal perfumes, and extra profiles sections
+
+Only the profile entity itself is persisted. Several profile sections still use static display data.
+
+### Today Energy
+
+- Separate screen exists
+- Backend service for daily horoscopes exists
+- `GET /horoscope/daily` returns an array of horoscope items
+
+In the current codebase, the UI for this screen is still mostly static and not fully wired to backend data yet.
+
+## Architecture
+
+The app follows a consistent feature structure:
+
+- `Module` builds dependencies
+- `Presenter` handles user actions and orchestration
+- `Router` performs navigation
+- `ViewModel` stores screen state
+- `Screen` renders SwiftUI views
+
+Technical choices:
+
+- `UIKit` for app lifecycle, navigation controllers, and tab bar setup
+- `SwiftUI` for feature screens
+- `Observation` with `@Observable` / `@Bindable`
+- `Core Data` for local profile persistence
+- `Tuist` for project generation
+- `Vapor` backend for daily content endpoints
+- localization resources in `en.lproj` and `ru.lproj`
+
+## Repository Structure
 
 ```text
 PerfumeSoul/
 ├── Project.swift
+├── README.md
 ├── PerfumeSoul/
 │   ├── Classes/
 │   │   ├── Application/
-│   │   │   ├── AppDelegate.swift
-│   │   │   └── SceneDelegate.swift
 │   │   ├── Core/
-│   │   │   └── CoreData/
-│   │   │      ├── CoreDataManager.swift
-│   │   │      └── PerfumeSoul.xcdatamodeld
-│   │   └── Screens/
-│   │      ├── TodayView/
-│   │      ├── Discover/
-│   │      ├── Profile/
-│   │      ├── Settings/
-│   │      └── MainTabViewController/
-│   ├── Info.plist
+│   │   ├── Screens/
+│   │   └── Services/
 │   └── Resources/
-│      ├── Assets.xcassets
-│      └── Base.lproj/
 ├── PerfumeSoulTests/
-└── PerfumeSoulUITests/
+├── PerfumeSoulUITests/
+└── backend/
+    └── PerfumeSoulBackend/
 ```
 
-## Technical Stack
+Important directories:
 
-- Language: Swift
-- UI: SwiftUI with UIKit integration
-- State management: Observation / `@Observable` / `@Bindable`
-- Navigation: `UINavigationController` + router-based transitions
-- Persistence: Core Data
-- Project configuration: Tuist (`Project.swift`)
-- Testing: unit test and UI test targets included
-- Minimum iOS version: 18.6
+- `PerfumeSoul/Classes/Application` — `AppDelegate`, `SceneDelegate`
+- `PerfumeSoul/Classes/Core` — networking and Core Data
+- `PerfumeSoul/Classes/Services` — API and persistence services
+- `PerfumeSoul/Classes/Screens` — feature modules
+- `backend/PerfumeSoulBackend` — Vapor server and JSON fixtures
 
-## Implementation Notes
+## Local Development
 
-- `SceneDelegate` initializes the Core Data container and assembles the root tab bar
-- Every main tab is created through its own module builder
-- `TodayScreen`, `DiscoverScreen` and `ProfileScreen` already contain custom composed UI
-- Some secondary flows such as quiz/details/settings are currently scaffolded as separate modules and ready for expansion
-
-## Getting Started
-
-### Prerequisites
+### Requirements
 
 - Xcode 16+
-- Tuist installed locally
-- iOS 18.6+ simulator or device
+- Tuist
+- iOS 18.0+ simulator or device
+- Swift 6 toolchain for the backend
 
-### Run Locally
-
-1. Generate the project:
+### Generate and run the app
 
 ```bash
 tuist generate
+tuist build PerfumeSoul
 ```
 
-2. Open the generated project or workspace in Xcode.
+Open `PerfumeSoul.xcodeproj` and run the `PerfumeSoul` scheme.
 
-3. Build and run the `PerfumeSoul` target.
+### Run the backend
 
-## Current Status
+Some screens expect the local backend at `http://127.0.0.1:8080`.
 
-PerfumeSoul already has a strong visual foundation and navigation structure for an editorial perfume app. The home tabs are designed, wired and ready to evolve into richer product flows such as quiz logic, fragrance comparison results, profile persistence and personalized recommendations.
+```bash
+cd backend/PerfumeSoulBackend
+swift run PerfumeSoulBackend
+```
 
-## Preview
+Available routes:
 
-The current UI direction is centered around:
+- `GET /perfumery-history`
+- `GET /horoscope/daily`
 
-- light premium cards
-- soft pink accents
-- airy spacing
-- fragrance discovery through personality and mood
+## Testing and CI
 
-This makes the project a strong base for a distinctive lifestyle app rather than a generic perfume catalog.
+Local commands:
+
+```bash
+tuist test PerfumeSoulTests
+tuist test PerfumeSoulUITests
+cd backend/PerfumeSoulBackend && swift test
+```
+
+GitHub Actions:
+
+- runs on `push` and `pull_request` to `main`
+- generates the Tuist project if needed
+- runs `xcodebuild test` for the `PerfumeSoul` scheme
+- uploads `xcodebuild.log` as an artifact on failure
+
+## Notes on Current Limitations
+
+This README reflects the codebase as it exists now, not the intended future product. A few parts are still in transition:
+
+- `Today` mixes backend-driven content with static cards
+- `TodayEnergy` backend integration is incomplete in the current branch
+- `Discover` actions mostly navigate to scaffolded flows
+- several `Profile` sections are UI-complete but still use placeholder values
+
+## Stack Summary
+
+- Swift
+- SwiftUI
+- UIKit
+- Core Data
+- Tuist
+- Vapor
+- XCTest / XCUITest
