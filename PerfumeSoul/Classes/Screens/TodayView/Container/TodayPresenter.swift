@@ -64,8 +64,10 @@ extension TodayPresenterImpl: TodayPresenter {
     }
 
     func todayEnergyButtonTab() {
+        guard let personalHoroscope = viewModel.personalHoroscope else { return }
+
         router.showTodayEnergyScreen(
-            personalDailyHoroscope: viewModel.personalHoroscope,
+            personalDailyHoroscope: personalHoroscope,
             dailyHoroscopes: viewModel.dailyHoroscopes
         )
     }

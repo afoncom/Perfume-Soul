@@ -42,14 +42,12 @@ private extension TodayEnergyScreen {
                 .font(.title3)
                 .fontWeight(.medium)
             
-            if let personalDailyHoroscope = viewModel.personalDailyHoroscope {
-                makeInfoCard(
-                    icon: personalDailyHoroscope.symbol,
-                    iconColor: personalDailyHoroscope.iconColor,
-                    title: personalDailyHoroscope.displayName,
-                    subtitle: personalDailyHoroscope.energyOfDay
-                )
-            }
+            makeInfoCard(
+                icon: viewModel.personalDailyHoroscope.symbol,
+                iconColor: viewModel.personalDailyHoroscope.iconColor,
+                title: viewModel.personalDailyHoroscope.displayName,
+                subtitle: viewModel.personalDailyHoroscope.energyOfDay
+            )
         }
         .padding(14)
         .background(Color(.surfacePrimary))

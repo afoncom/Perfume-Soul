@@ -11,11 +11,11 @@ import Combine
 import Observation
 
 @Observable final class TodayEnergyViewModel {
-    let personalDailyHoroscope: DailyHoroscope?
+    let personalDailyHoroscope: DailyHoroscope
     let dailyHoroscopes: [DailyHoroscope]
 
     init(
-        personalDailyHoroscope: DailyHoroscope?,
+        personalDailyHoroscope: DailyHoroscope,
         dailyHoroscopes: [DailyHoroscope]
     ) {
         self.personalDailyHoroscope = personalDailyHoroscope

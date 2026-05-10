@@ -11,7 +11,7 @@ import SwiftUI
 final class TodayEnergyModule {
     static func build(
         navigationController: UINavigationController?,
-        personalDailyHoroscope: DailyHoroscope?,
+        personalDailyHoroscope: DailyHoroscope,
         dailyHoroscopes: [DailyHoroscope]
     ) -> UIViewController {
         let viewModel = TodayEnergyViewModel(
