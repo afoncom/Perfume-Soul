@@ -7,7 +7,7 @@
 //
 
 protocol FindPerfumesPresenter {
-    
+    func findSimilarPerfumesButtonTapped()
 }
 
 final class FindPerfumesPresenterImpl {
@@ -24,5 +24,7 @@ final class FindPerfumesPresenterImpl {
 }
 
 extension FindPerfumesPresenterImpl: FindPerfumesPresenter {
-    
+    func findSimilarPerfumesButtonTapped() {
+        router.showSimilarPerfumesScreen()
+    }
 }
