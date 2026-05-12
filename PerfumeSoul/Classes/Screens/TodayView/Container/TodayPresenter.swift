@@ -55,9 +55,9 @@ extension TodayPresenterImpl: TodayPresenter {
                 horoscope.sign == userSign
             })
             
-            let result = try await perfumeHistoryService.requestPerfumeHistory()
-            viewModel.viewState = .loaded(historyFact: result)
-            print(result)
+            
+            viewModel.viewState = .loaded(historyFact: historyFact)
+            print(historyFact)
         } catch let error {
             print(error)
         }

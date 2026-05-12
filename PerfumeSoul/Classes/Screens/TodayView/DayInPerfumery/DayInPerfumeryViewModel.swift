@@ -11,9 +11,9 @@ import Combine
 import Observation
 
 @Observable final class DayInPerfumeryViewModel {
-    let historyFact: PerfumeHistoryResponse
+    let historyFact: PerfumeHistory
     
-    init(historyFact: PerfumeHistoryResponse) {
+    init(historyFact: PerfumeHistory) {
         self.historyFact = historyFact
     }
 }

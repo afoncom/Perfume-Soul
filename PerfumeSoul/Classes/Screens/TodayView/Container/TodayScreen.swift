@@ -194,7 +194,7 @@ private extension TodayScreen {
         }
     }
     
-    func makeHistoryFactCard(historyFact: PerfumeHistoryResponse) -> some View {
+    func makeHistoryFactCard(historyFact: PerfumeHistory) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
                 Text(String(historyFact.year))
@@ -250,6 +250,6 @@ private extension TodayScreen {
 extension TodayScreen {
     enum ViewState {
         case loading
-        case loaded(historyFact: PerfumeHistoryResponse)
+        case loaded(historyFact: PerfumeHistory)
     }
 }
