@@ -12,7 +12,7 @@ protocol TodayRouter {
         personalDailyHoroscope: DailyHoroscope,
         dailyHoroscopes: [DailyHoroscope]
     )
-    func showDayInPerfumeryScreen(historyFact: PerfumeInHistoryResponse)
+    func showDayInPerfumeryScreen(historyFact: PerfumeHistoryResponse)
 }
 
 final class TodayRouterImpl {
@@ -38,7 +38,7 @@ extension TodayRouterImpl: TodayRouter {
         )
     }
     
-    func showDayInPerfumeryScreen(historyFact: PerfumeInHistoryResponse) {
+    func showDayInPerfumeryScreen(historyFact: PerfumeHistoryResponse) {
         navigationController?.pushViewController(
             DayInPerfumeryModule.build(
                 navigationController: navigationController,

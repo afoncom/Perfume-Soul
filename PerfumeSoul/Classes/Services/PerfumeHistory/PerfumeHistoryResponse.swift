@@ -1,12 +1,12 @@
 //
-//  PerfumeInHistoryResponse.swift
+//  PerfumeHistoryResponse.swift
 //  PerfumeSoul
 //
 //  Created by afon.com on 03.05.2026.
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
-struct PerfumeInHistoryResponse: Decodable {
+struct PerfumeHistoryResponse: Decodable {
     let year: Int
     let perfumeName: String
     let shortStory: String
