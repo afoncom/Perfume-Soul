@@ -9,16 +9,17 @@
 import SwiftUI
 
 final class TodayEnergyModule {
-    static func build(navigationController: UINavigationController?) -> UIViewController {
-        let viewModel = TodayEnergyViewModel()
-        let router = TodayEnergyRouterImpl(navigationController: navigationController)
-        let requestManager = RequestManagerImpl(urlSession: URLSession.shared, baseURL: "http://127.0.0.1:8080")
-        let dailyHoroscopeService = DailyHoroscopeServiceImpl(requestManager: requestManager)
-        let presenter = TodayEnergyPresenterImpl(
-            viewModel: viewModel,
-            router: router,
-            dailyHoroscopeService: dailyHoroscopeService
+    static func build(
+        navigationController: UINavigationController?,
+        personalDailyHoroscope: DailyHoroscope,
+        dailyHoroscopes: [DailyHoroscope]
+    ) -> UIViewController {
+        let viewModel = TodayEnergyViewModel(
+            personalDailyHoroscope: personalDailyHoroscope,
+            dailyHoroscopes: dailyHoroscopes
         )
+        let router = TodayEnergyRouterImpl(navigationController: navigationController)
+        let presenter = TodayEnergyPresenterImpl(viewModel: viewModel, router: router)
         
         let view = TodayEnergyScreen(viewModel: viewModel, presenter: presenter)
         

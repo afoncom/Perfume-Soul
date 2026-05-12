@@ -48,7 +48,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func showMainScreen(container: NSPersistentContainer) {
-        let todayScreen = TodayModule.build()
+        let todayScreen = TodayModule.build(container: container)
         let settingsScreen = SettingsModule.build()
         let discoverScreen = DiscoverModule.build()
         let profileScreen = ProfileModule.build(
