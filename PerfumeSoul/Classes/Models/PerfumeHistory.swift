@@ -18,7 +18,7 @@ extension PerfumeHistory {
     init(responce: PerfumeHistoryResponse) {
         self.year = responce.year
         self.perfumeName = responce.perfumeName
-        self.shortStory = responce.fullStory
+        self.shortStory = responce.shortStory
         self.fullStory = responce.fullStory
         self.imageUrl = responce.imageUrl
     }
