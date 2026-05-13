@@ -27,11 +27,12 @@ final class FindPerfumesPresenterImpl {
 }
 
 extension FindPerfumesPresenterImpl: FindPerfumesPresenter {
-    @MainActor
     func findSimilarPerfumesButtonTapped() async {
         do {
             let listPerfumes = try await listPerfumeService.requestListPerfume()
-            router.showSimilarPerfumesScreen(listPerfumes: listPerfumes)
+            await MainActor.run {
+                router.showSimilarPerfumesScreen(listPerfumes: listPerfumes)
+            }
         } catch {
             print(error)
         }
