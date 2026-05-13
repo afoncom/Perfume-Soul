@@ -3,7 +3,14 @@
 "discover.compare.placeholderB" = "Аромат B";
 "discover.compare.title" = "Сравнение ароматов";
 "discover.findSimilar.button" = "Найти";
+"discover.findSimilar.firstPerfumeSubtitle" = "Найдите или выберите аромат";
+"discover.findSimilar.firstPerfumeTitle" = "Аромат 1";
+"discover.findSimilar.headerSubtitle" = "Добавьте ароматы, которые у вас есть, и мы найдем похожие по звучанию.";
+"discover.findSimilar.hint" = "Чем больше ароматов вы добавите, тем точнее будут рекомендации.";
+"discover.findSimilar.optionalSubtitle" = "Необязательно";
+"discover.findSimilar.secondPerfumeTitle" = "Аромат 2";
 "discover.findSimilar.subtitle" = "Введите ароматы, которые у вас уже есть, чтобы найти похожие.";
+"discover.findSimilar.thirdPerfumeTitle" = "Аромат 3";
 "discover.findSimilar.title" = "Найти похожие ароматы";
 "discover.scentArchetype.button" = "Начать квиз";
 "discover.scentArchetype.title" = "Найди свой ароматический архетип";
