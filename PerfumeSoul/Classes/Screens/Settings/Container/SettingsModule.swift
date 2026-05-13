@@ -24,7 +24,11 @@ final class SettingsModule {
         hostingController.title = L10n.Screen.settings
         
         navigationController.viewControllers = [hostingController]
-        navigationController.tabBarItem = UITabBarItem(title: L10n.Screen.settings, image: nil, tag: 3)
+        navigationController.tabBarItem = UITabBarItem(
+            title: L10n.Screen.settings,
+            image: UIImage(systemName: "gearshape"),
+            selectedImage: UIImage(systemName: "gearshape.fill")
+        )
         
         return navigationController
     }

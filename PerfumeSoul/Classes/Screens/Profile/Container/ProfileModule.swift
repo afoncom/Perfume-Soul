@@ -34,7 +34,11 @@ final class ProfileModule {
         hostingController.title = L10n.Screen.profile
         
         navigationController.viewControllers = [hostingController]
-        navigationController.tabBarItem = UITabBarItem(title: L10n.Screen.profile, image: nil, tag: 2)
+        navigationController.tabBarItem = UITabBarItem(
+            title: L10n.Screen.profile,
+            image: UIImage(systemName: "person.crop.circle"),
+            selectedImage: UIImage(systemName: "person.crop.circle.fill")
+        )
         navigationController.navigationBar.prefersLargeTitles = true
         
         return navigationController
