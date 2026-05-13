@@ -52,7 +52,7 @@ private extension FindPerfumesScreen {
                 .foregroundStyle(Color(.titleText))
                 .multilineTextAlignment(.center)
             
-            Text("Добавьте ароматы, которые у вас есть, и мы найдем похожие по звучанию.")
+            Text(L10n.Discover.FindSimilar.headerSubtitle)
                 .font(.system(size: 18, weight: .regular, design: .rounded))
                 .foregroundStyle(Color(.descriptionText))
                 .multilineTextAlignment(.center)
@@ -65,22 +65,22 @@ private extension FindPerfumesScreen {
     func makePerfumeFieldsSection() -> some View {
         VStack(spacing: 14) {
             makePerfumeField(
-                title: "Аромат 1",
-                subtitle: "Найдите или выберите аромат",
+                title: L10n.Discover.FindSimilar.firstPerfumeTitle,
+                subtitle: L10n.Discover.FindSimilar.firstPerfumeSubtitle,
                 iconColor: Color(.pinkButton),
                 trailingSymbol: "magnifyingglass"
             )
             
             makePerfumeField(
-                title: "Аромат 2",
-                subtitle: "Необязательно",
+                title: L10n.Discover.FindSimilar.secondPerfumeTitle,
+                subtitle: L10n.Discover.FindSimilar.optionalSubtitle,
                 iconColor: Color(.textSecondary),
                 trailingSymbol: "plus"
             )
             
             makePerfumeField(
-                title: "Аромат 3",
-                subtitle: "Необязательно",
+                title: L10n.Discover.FindSimilar.thirdPerfumeTitle,
+                subtitle: L10n.Discover.FindSimilar.optionalSubtitle,
                 iconColor: Color(.textSecondary),
                 trailingSymbol: "plus"
             )
@@ -138,7 +138,7 @@ private extension FindPerfumesScreen {
                 .font(.title3)
                 .foregroundStyle(Color(.zodiacPurple))
             
-            Text("Чем больше ароматов вы добавите, тем точнее будут рекомендации.")
+            Text(L10n.Discover.FindSimilar.hint)
                 .font(.subheadline)
                 .foregroundStyle(Color(.descriptionText))
             
