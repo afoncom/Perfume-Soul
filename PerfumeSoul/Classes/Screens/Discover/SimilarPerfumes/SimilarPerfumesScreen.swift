@@ -125,7 +125,7 @@ private extension SimilarPerfumesScreen {
     func makeRecommendationsSection() -> some View {
         VStack(spacing: 12) {
             makeRecommendationCard(
-                title: "Prada Luna Rossa Black",
+                title: "Luna Rossa Black",
                 brand: "Prada",
                 accords: "Теплый · Пряный · Древесный",
                 notes: "Созвучие: амбра, лаванда, древесные ноты",
@@ -133,7 +133,7 @@ private extension SimilarPerfumesScreen {
             )
             
             makeRecommendationCard(
-                title: "Giorgio Armani Acqua di Giò Profondo",
+                title: "Acqua di Giò Profondo",
                 brand: "Giorgio Armani",
                 accords: "Морской · Ароматический · Свежий",
                 notes: "Созвучие: бергамот, лаванда, морские ноты",
@@ -141,7 +141,7 @@ private extension SimilarPerfumesScreen {
             )
             
             makeRecommendationCard(
-                title: "Chanel Allure Homme Sport",
+                title: "Allure Homme Sport",
                 brand: "Chanel",
                 accords: "Цитрусовый · Пряный · Древесный",
                 notes: "Созвучие: цитрусы, мускус, кедр",
@@ -149,7 +149,7 @@ private extension SimilarPerfumesScreen {
             )
             
             makeRecommendationCard(
-                title: "Yves Saint Laurent Y Le Parfum",
+                title: "Y Le Parfum",
                 brand: "YSL",
                 accords: "Древесный · Ароматический · Элегантный",
                 notes: "Созвучие: лаванда, амбра, пачули",
@@ -157,7 +157,7 @@ private extension SimilarPerfumesScreen {
             )
             
             makeRecommendationCard(
-                title: "Dior Homme Intense",
+                title: "Homme Intense",
                 brand: "Dior",
                 accords: "Пудровый · Древесный · Ирисовый",
                 notes: "Созвучие: ирис, амбра, древесные ноты",

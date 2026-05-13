@@ -1,0 +1,47 @@
+[
+  {
+    "id": "7E9F6B5A-8E70-4A0F-9E0D-7B4C2A1D3F11",
+    "perfumeName": "Luna Rossa Black",
+    "brandName": "Prada",
+    "accords": ["Теплый", "Пряный", "Древесный"],
+    "matchingNotes": ["Амбра", "Лаванда", "Древесные ноты"],
+    "matchPercentage": 92,
+    "imageUrl": "https://example.com/images/luna-rossa-black.png"
+  },
+  {
+    "id": "D80F8436-2D1D-4FD0-8F5F-6AE27F4C8F2A",
+    "perfumeName": "Acqua di Giò Profondo",
+    "brandName": "Giorgio Armani",
+    "accords": ["Морской", "Ароматический", "Свежий"],
+    "matchingNotes": ["Бергамот", "Лаванда", "Морские ноты"],
+    "matchPercentage": 89,
+    "imageUrl": "https://example.com/images/acqua-di-gio-profondo.png"
+  },
+  {
+    "id": "1A6B8D28-3E9C-4C7E-90D4-31F5A7D6B220",
+    "perfumeName": "Allure Homme Sport",
+    "brandName": "Chanel",
+    "accords": ["Цитрусовый", "Пряный", "Древесный"],
+    "matchingNotes": ["Цитрусы", "Мускус", "Кедр"],
+    "matchPercentage": 86,
+    "imageUrl": "https://example.com/images/allure-homme-sport.png"
+  },
+  {
+    "id": "B4C5D6E7-F809-41AA-BC0D-1234567890AB",
+    "perfumeName": "Y Le Parfum",
+    "brandName": "YSL",
+    "accords": ["Древесный", "Ароматический", "Элегантный"],
+    "matchingNotes": ["Лаванда", "Амбра", "Пачули"],
+    "matchPercentage": 84,
+    "imageUrl": "https://example.com/images/y-le-parfum.png"
+  },
+  {
+    "id": "F1E2D3C4-B5A6-4789-9012-CDEF34567890",
+    "perfumeName": "Homme Intense",
+    "brandName": "Dior",
+    "accords": ["Пудровый", "Древесный", "Ирисовый"],
+    "matchingNotes": ["Ирис", "Амбра", "Древесные ноты"],
+    "matchPercentage": 82,
+    "imageUrl": "https://example.com/images/homme-intense.png"
+  }
+]
