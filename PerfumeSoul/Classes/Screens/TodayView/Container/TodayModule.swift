@@ -31,7 +31,11 @@ final class TodayModule {
         hostingController.title = L10n.Screen.today
 
         navigationController.viewControllers = [hostingController]
-        navigationController.tabBarItem = UITabBarItem(title: L10n.Screen.today, image: nil, tag: 0)
+        navigationController.tabBarItem = UITabBarItem(
+            title: L10n.Screen.today,
+            image: UIImage(systemName: "house"),
+            selectedImage: UIImage(systemName: "house.fill")
+        )
         navigationController.navigationBar.prefersLargeTitles = true
         
         return navigationController
