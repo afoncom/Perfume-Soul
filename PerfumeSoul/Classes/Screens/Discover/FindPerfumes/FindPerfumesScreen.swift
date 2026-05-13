@@ -156,7 +156,9 @@ private extension FindPerfumesScreen {
     
     func makeFindButton() -> some View {
         Button {
-            presenter.findSimilarPerfumesButtonTapped()
+            Task {
+                await presenter.findSimilarPerfumesButtonTapped()
+            }
         } label: {
             Text(L10n.Discover.FindSimilar.button)
                 .font(.system(size: 24, weight: .medium, design: .rounded))

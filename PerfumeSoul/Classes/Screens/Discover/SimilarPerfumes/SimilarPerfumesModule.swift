@@ -9,8 +9,11 @@
 import SwiftUI
 
 final class SimilarPerfumesModule {
-    static func build(navigationController: UINavigationController?) -> UIViewController {
-        let viewModel = SimilarPerfumesViewModel()
+    static func build(
+        navigationController: UINavigationController?,
+        listPerfumes: [ListPerfume]
+    ) -> UIViewController {
+        let viewModel = SimilarPerfumesViewModel(listPerfumes: listPerfumes)
         let router = SimilarPerfumesRouterImpl(navigationController: navigationController)
         let presenter = SimilarPerfumesPresenterImpl(
             viewModel: viewModel,

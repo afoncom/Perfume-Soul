@@ -7,24 +7,33 @@
 //
 
 protocol FindPerfumesPresenter {
-    func findSimilarPerfumesButtonTapped()
+    func findSimilarPerfumesButtonTapped() async
 }
 
 final class FindPerfumesPresenterImpl {
     private let viewModel: FindPerfumesViewModel
     private let router: FindPerfumesRouter
+    private let listPerfumeService: ListPerfumeService
     
     init(
         viewModel: FindPerfumesViewModel,
-        router: FindPerfumesRouter
+        router: FindPerfumesRouter,
+        listPerfumeService: ListPerfumeService
     ) {
         self.viewModel = viewModel
         self.router = router
+        self.listPerfumeService = listPerfumeService
     }
 }
 
 extension FindPerfumesPresenterImpl: FindPerfumesPresenter {
-    func findSimilarPerfumesButtonTapped() {
-        router.showSimilarPerfumesScreen()
+    @MainActor
+    func findSimilarPerfumesButtonTapped() async {
+        do {
+            let listPerfumes = try await listPerfumeService.requestListPerfume()
+            router.showSimilarPerfumesScreen(listPerfumes: listPerfumes)
+        } catch {
+            print(error)
+        }
     }
 }

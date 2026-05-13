@@ -124,45 +124,15 @@ private extension SimilarPerfumesScreen {
     
     func makeRecommendationsSection() -> some View {
         VStack(spacing: 12) {
-            makeRecommendationCard(
-                title: "Luna Rossa Black",
-                brand: "Prada",
-                accords: "Теплый · Пряный · Древесный",
-                notes: "Созвучие: амбра, лаванда, древесные ноты",
-                score: "92%"
-            )
-            
-            makeRecommendationCard(
-                title: "Acqua di Giò Profondo",
-                brand: "Giorgio Armani",
-                accords: "Морской · Ароматический · Свежий",
-                notes: "Созвучие: бергамот, лаванда, морские ноты",
-                score: "89%"
-            )
-            
-            makeRecommendationCard(
-                title: "Allure Homme Sport",
-                brand: "Chanel",
-                accords: "Цитрусовый · Пряный · Древесный",
-                notes: "Созвучие: цитрусы, мускус, кедр",
-                score: "86%"
-            )
-            
-            makeRecommendationCard(
-                title: "Y Le Parfum",
-                brand: "YSL",
-                accords: "Древесный · Ароматический · Элегантный",
-                notes: "Созвучие: лаванда, амбра, пачули",
-                score: "84%"
-            )
-            
-            makeRecommendationCard(
-                title: "Homme Intense",
-                brand: "Dior",
-                accords: "Пудровый · Древесный · Ирисовый",
-                notes: "Созвучие: ирис, амбра, древесные ноты",
-                score: "82%"
-            )
+            ForEach(viewModel.listPerfumes, id: \.id) { perfume in
+                makeRecommendationCard(
+                    title: perfume.perfumeName,
+                    brand: perfume.brandName,
+                    accords: perfume.accords.joined(separator: " · "),
+                    notes: "Созвучие: " + perfume.matchingNotes.joined(separator: ", "),
+                    score: "\(perfume.matchPercentage)%"
+                )
+            }
         }
     }
     

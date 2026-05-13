@@ -25,6 +25,16 @@ func routes(_ app: Application) throws {
             throw error
         }
     }
+    
+    app.get("list", "perfume") { _ async throws -> Response in
+        do {
+            return try jsonResponse(ListPerfumeLoader.load())
+        } catch let error as CocoaError where error.code == .fileNoSuchFile {
+            throw Abort(.notFound)
+        } catch {
+            throw error
+        }
+    }
 }
 
 private func jsonResponse<T: Encodable>(_ value: T) throws -> Response {

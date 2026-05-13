@@ -12,9 +12,12 @@ final class FindPerfumesModule {
     static func build(navigationController: UINavigationController?) -> UIViewController {
         let viewModel = FindPerfumesViewModel()
         let router = FindPerfumesRouterImpl(navigationController: navigationController)
+        let requestManager = RequestManagerImpl(urlSession: URLSession.shared, baseURL: "http://127.0.0.1:8080")
+        let listPerfumeService = ListPerfumeServiceImpl(requestManager: requestManager)
         let presenter = FindPerfumesPresenterImpl(
             viewModel: viewModel,
-            router: router
+            router: router,
+            listPerfumeService: listPerfumeService
         )
         
         let view = FindPerfumesScreen(viewModel: viewModel, presenter: presenter)
