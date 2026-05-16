@@ -34,6 +34,9 @@ struct FindPerfumesScreen: View {
         .background {
             Color(.backgroundPrimary).ignoresSafeArea()
         }
+        .task {
+            await presenter.onAppear()
+        }
         .safeAreaInset(edge: .bottom) {
             makeFindButton()
                 .padding(.horizontal, 24)
@@ -156,9 +159,7 @@ private extension FindPerfumesScreen {
     
     func makeFindButton() -> some View {
         Button {
-            Task {
-                await presenter.findSimilarPerfumesButtonTapped()
-            }
+            presenter.findSimilarPerfumesButtonTapped()
         } label: {
             Text(L10n.Discover.FindSimilar.button)
                 .font(.system(size: 24, weight: .medium, design: .rounded))
