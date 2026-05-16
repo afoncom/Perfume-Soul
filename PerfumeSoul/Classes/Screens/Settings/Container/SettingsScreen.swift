@@ -157,20 +157,25 @@ private extension SettingsScreen {
             makeSectionTitle(L10n.Settings.aboutTitle)
 
             VStack(spacing: 0) {
+                Button {
+                    presenter.feedbackButtonTapped()
+                } label: {
+                    makeActionRow(
+                        icon: "envelope",
+                        iconColor: Color(.zodiacBlue),
+                        title: L10n.Settings.About.feedbackTitle,
+                        subtitle: L10n.Settings.About.feedbackSubtitle
+                    )
+                }
+                .buttonStyle(.plain)
+
+                makeDivider()
+
                 makeActionRow(
                     icon: "info.circle",
                     iconColor: Color(.zodiacPurple),
                     title: L10n.Settings.About.aboutAppTitle,
                     subtitle: L10n.Settings.About.aboutAppSubtitle
-                )
-
-                makeDivider()
-
-                makeActionRow(
-                    icon: "link",
-                    iconColor: Color(.zodiacBlue),
-                    title: L10n.Settings.About.contactDeveloperTitle,
-                    subtitle: L10n.Settings.About.contactDeveloperSubtitle
                 )
             }
             .padding(.horizontal, 14)
