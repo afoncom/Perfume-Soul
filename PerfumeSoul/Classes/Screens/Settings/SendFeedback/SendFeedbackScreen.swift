@@ -39,6 +39,9 @@ struct SendFeedbackScreen: View {
         .background {
             Color(.backgroundPrimary).ignoresSafeArea()
         }
+        .task {
+            presenter.onAppear()
+        }
         .toolbar(.visible, for: .navigationBar)
         .navigationBarBackButtonHidden()
         .navigationTitle(L10n.Screen.sendFeedback)

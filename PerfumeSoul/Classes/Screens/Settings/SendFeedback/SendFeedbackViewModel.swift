@@ -10,14 +10,6 @@ import Combine
 import Observation
 
 @Observable final class SendFeedbackViewModel {
-    let developerEmail: String
-    let canSendMail: Bool
-
-    init(
-        developerEmail: String,
-        canSendMail: Bool
-    ) {
-        self.developerEmail = developerEmail
-        self.canSendMail = canSendMail
-    }
+    let developerEmail = "afon.com12@gmail.com"
+    var canSendMail = false
 }
