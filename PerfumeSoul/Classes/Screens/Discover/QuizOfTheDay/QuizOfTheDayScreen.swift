@@ -26,8 +26,14 @@ struct QuizOfTheDayScreen: View {
             VStack(spacing: 22) {
                 makeTopBar()
                 makeProgressCard()
-                makeQuestionCard()
-                makeExplanationCard()
+                if let currentQuestion = viewModel.currentQuestion {
+                    makeQuestionCard(question: currentQuestion)
+                    makeExplanationCard(explanation: currentQuestion.explanation)
+                } else {
+                    ProgressView()
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 80)
+                }
                 makeBottomControls()
             }
             .padding(.horizontal, 16)
@@ -36,6 +42,9 @@ struct QuizOfTheDayScreen: View {
         }
         .background {
             Color(.backgroundPrimary).ignoresSafeArea()
+        }
+        .task {
+            await presenter.onAppear()
         }
         .toolbar(.hidden, for: .navigationBar)
     }
@@ -91,6 +100,7 @@ private extension QuizOfTheDayScreen {
                     trailingValue: "/ 15"
                 )
 
+                
                 Spacer(minLength: 8)
 
                 makeStatItem(
@@ -107,13 +117,13 @@ private extension QuizOfTheDayScreen {
 
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
-                    Text("Вопрос 5 из 15")
+                    Text("Вопрос \(viewModel.currentQuestionNumber) из \(viewModel.totalQuestions)")
                         .font(.system(size: 17, weight: .medium, design: .rounded))
                         .foregroundStyle(Color(.textPrimary))
 
                     Spacer()
 
-                    Text("33%")
+                    Text(viewModel.progressPercentText)
                         .font(.system(size: 17, weight: .medium, design: .rounded))
                         .foregroundStyle(Color(.textSecondary))
                 }
@@ -125,7 +135,7 @@ private extension QuizOfTheDayScreen {
 
                     Capsule()
                         .fill(Color(.pinkButton))
-                        .frame(width: 265, height: 10)
+                        .frame(width: viewModel.progressValue * 265, height: 10)
                 }
             }
         }
@@ -173,10 +183,10 @@ private extension QuizOfTheDayScreen {
         }
     }
 
-    func makeQuestionCard() -> some View {
+    func makeQuestionCard(question: QuizOfTheDayQuestion) -> some View {
         VStack(spacing: 20) {
             VStack(spacing: 12) {
-                Text("Какие ноты чаще всего относятся\nк верхним (начальным) нотам аромата?")
+                Text(question.question)
                     .font(.system(size: 23, weight: .semibold, design: .rounded))
                     .foregroundStyle(Color(.titleText))
                     .multilineTextAlignment(.center)
@@ -189,10 +199,13 @@ private extension QuizOfTheDayScreen {
             .padding(.top, 8)
 
             VStack(spacing: 14) {
-                makeAnswerRow(letter: "A", title: "Ваниль, пачули, амбра", isSelected: false)
-                makeAnswerRow(letter: "B", title: "Бергамот, лимон, мята", isSelected: true)
-                makeAnswerRow(letter: "C", title: "Сандал, кедр, мускус", isSelected: false)
-                makeAnswerRow(letter: "D", title: "Ирис, ветивер, кожа", isSelected: false)
+                ForEach(question.answers, id: \.id) { answer in
+                    makeAnswerRow(
+                        letter: answer.id,
+                        title: answer.text,
+                        isSelected: answer.isCorrect
+                    )
+                }
             }
         }
         .padding(18)
@@ -229,7 +242,7 @@ private extension QuizOfTheDayScreen {
         )
     }
 
-    func makeExplanationCard() -> some View {
+    func makeExplanationCard(explanation: String) -> some View {
         HStack(spacing: 18) {
             VStack(alignment: .leading, spacing: 12) {
                 HStack(spacing: 10) {
@@ -247,7 +260,7 @@ private extension QuizOfTheDayScreen {
                         .foregroundStyle(Color(.zodiacMint))
                 }
 
-                Text("Верхние ноты — это то, что вы чувствуете сразу после нанесения аромата. Чаще всего это свежие и лёгкие ноты: цитрусы, зелёные ноты, травы.")
+                Text(explanation)
                     .font(.system(size: 16, weight: .regular, design: .rounded))
                     .foregroundStyle(Color(.descriptionText))
                     .fixedSize(horizontal: false, vertical: true)
