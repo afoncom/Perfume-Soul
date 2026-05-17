@@ -11,9 +11,9 @@ import Combine
 import Observation
 
 @Observable final class SimilarPerfumesViewModel {
-    let listPerfumes: [ListPerfume]
+    let similarPerfumes: [SimilarPerfume]
 
-    init(listPerfumes: [ListPerfume]) {
-        self.listPerfumes = listPerfumes
+    init(similarPerfumes: [SimilarPerfume]) {
+        self.similarPerfumes = similarPerfumes
     }
 }

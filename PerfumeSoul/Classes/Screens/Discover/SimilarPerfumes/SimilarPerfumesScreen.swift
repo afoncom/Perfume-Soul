@@ -124,7 +124,7 @@ private extension SimilarPerfumesScreen {
     
     func makeRecommendationsSection() -> some View {
         VStack(spacing: 12) {
-            ForEach(viewModel.listPerfumes, id: \.id) { perfume in
+            ForEach(viewModel.similarPerfumes, id: \.id) { perfume in
                 makeRecommendationCard(
                     title: perfume.perfumeName,
                     brand: perfume.brandName,

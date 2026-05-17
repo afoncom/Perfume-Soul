@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FindPerfumesRouter {
-    func showSimilarPerfumesScreen(listPerfumes: [ListPerfume])
+    func showSimilarPerfumesScreen(similarPerfumes: [SimilarPerfume])
 }
 
 final class FindPerfumesRouterImpl {
@@ -21,11 +21,11 @@ final class FindPerfumesRouterImpl {
 }
 
 extension FindPerfumesRouterImpl: FindPerfumesRouter {
-    func showSimilarPerfumesScreen(listPerfumes: [ListPerfume]) {
+    func showSimilarPerfumesScreen(similarPerfumes: [SimilarPerfume]) {
         navigationController?.pushViewController(
             SimilarPerfumesModule.build(
                 navigationController: navigationController,
-                listPerfumes: listPerfumes
+                similarPerfumes: similarPerfumes
             ),
             animated: true
         )
