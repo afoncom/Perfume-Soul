@@ -1,5 +1,5 @@
 //
-//  StartQuizRouter.swift
+//  QuizOfTheDayRouter.swift
 //  PerfumeSoul
 //
 //  Created by afon.com on 16.03.2026.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol StartQuizRouter {
-    
+protocol QuizOfTheDayRouter {
+
 }
 
-final class StartQuizRouterImpl {
+final class QuizOfTheDayRouterImpl {
     private weak var navigationController: UINavigationController?
 
     init(navigationController: UINavigationController?) {
@@ -20,6 +20,6 @@ final class StartQuizRouterImpl {
     }
 }
 
-extension StartQuizRouterImpl: StartQuizRouter {
-    
+extension QuizOfTheDayRouterImpl: QuizOfTheDayRouter {
+
 }
