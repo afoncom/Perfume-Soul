@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SendFeedbackScreen: View {
     @Environment(\.dismiss) private var dismiss
-    @Bindable private var viewModel: SendFeedbackViewModel
+    private let viewModel: SendFeedbackViewModel
     private let presenter: SendFeedbackPresenter
 
     init(
@@ -44,7 +44,6 @@ struct SendFeedbackScreen: View {
         }
         .toolbar(.visible, for: .navigationBar)
         .navigationBarBackButtonHidden()
-        .navigationTitle(L10n.Screen.sendFeedback)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {

@@ -30,7 +30,7 @@ extension SendFeedbackRouterImpl: SendFeedbackRouter {
         composer.setMessageBody("", isHTML: false)
         composer.mailComposeDelegate = self
 
-        navigationController?.topViewController?.present(composer, animated: true)
+        navigationController?.present(composer, animated: true)
     }
 }
 
