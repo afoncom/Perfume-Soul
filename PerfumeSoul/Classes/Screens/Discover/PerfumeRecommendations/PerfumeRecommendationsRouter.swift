@@ -1,5 +1,5 @@
 //
-//  SimilarPerfumesRouter.swift
+//  PerfumeRecommendationsRouter.swift
 //  PerfumeSoul
 //
 //  Created by afon.com on 10.05.2026.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol SimilarPerfumesRouter {
+protocol PerfumeRecommendationsRouter {
     
 }
 
-final class SimilarPerfumesRouterImpl {
+final class PerfumeRecommendationsRouterImpl {
     private weak var navigationController: UINavigationController?
 
     init(navigationController: UINavigationController?) {
@@ -20,6 +20,6 @@ final class SimilarPerfumesRouterImpl {
     }
 }
 
-extension SimilarPerfumesRouterImpl: SimilarPerfumesRouter {
+extension PerfumeRecommendationsRouterImpl: PerfumeRecommendationsRouter {
     
 }

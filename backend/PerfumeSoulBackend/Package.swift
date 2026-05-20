@@ -24,7 +24,7 @@ let package = Package(
                 .process("Requests/perfumery-history/Resources"),
                 .process("Requests/horoscope-daily/Resources"),
                 .process("Requests/quiz-of-the-day/Resources"),
-                .process("Requests/list-perfume/Resources")
+                .process("Requests/perfume-recommendations/Resources")
             ],
             swiftSettings: swiftSettings
         ),

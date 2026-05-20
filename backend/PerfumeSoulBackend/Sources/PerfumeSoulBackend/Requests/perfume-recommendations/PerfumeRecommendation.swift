@@ -1,6 +1,6 @@
 import Foundation
 
-struct ListPerfume: Codable, Equatable {
+struct PerfumeRecommendation: Codable, Equatable {
     let id: UUID
     let perfumeName: String
     let brandName: String
@@ -10,15 +10,15 @@ struct ListPerfume: Codable, Equatable {
     let imageUrl: String
 }
 
-enum ListPerfumeLoader {
-    static func load() throws -> [ListPerfume] {
+enum PerfumeRecommendationLoader {
+    static func load() throws -> [PerfumeRecommendation] {
         let url = try resourceURL()
         let data = try Data(contentsOf: url)
-        return try JSONDecoder().decode([ListPerfume].self, from: data)
+        return try JSONDecoder().decode([PerfumeRecommendation].self, from: data)
     }
 
     private static func resourceURL() throws -> URL {
-        if let url = Bundle.module.url(forResource: "list-perfume", withExtension: "json") {
+        if let url = Bundle.module.url(forResource: "perfume-recommendations", withExtension: "json") {
             return url
         }
 

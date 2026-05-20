@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SettingsRouter {
-    
+    func showSendFeedback()
 }
 
 final class SettingsRouterImpl {
@@ -21,5 +21,10 @@ final class SettingsRouterImpl {
 }
 
 extension SettingsRouterImpl: SettingsRouter {
-    
+    func showSendFeedback() {
+        navigationController?.pushViewController(
+            SendFeedbackModule.build(navigationController: navigationController),
+            animated: true
+        )
+    }
 }
