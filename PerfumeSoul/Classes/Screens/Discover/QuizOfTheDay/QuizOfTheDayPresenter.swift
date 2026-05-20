@@ -7,13 +7,13 @@
 //
 
 protocol QuizOfTheDayPresenter {
-
+    
 }
 
 final class QuizOfTheDayPresenterImpl {
     private let viewModel: QuizOfTheDayViewModel
     private let router: QuizOfTheDayRouter
-
+    
     init(
         viewModel: QuizOfTheDayViewModel,
         router: QuizOfTheDayRouter
@@ -24,5 +24,5 @@ final class QuizOfTheDayPresenterImpl {
 }
 
 extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
-
+    
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol QuizOfTheDayRouter {
-
+    
 }
 
 final class QuizOfTheDayRouterImpl {
@@ -21,5 +21,5 @@ final class QuizOfTheDayRouterImpl {
 }
 
 extension QuizOfTheDayRouterImpl: QuizOfTheDayRouter {
-
+    
 }
