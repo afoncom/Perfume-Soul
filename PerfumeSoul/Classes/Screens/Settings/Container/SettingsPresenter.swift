@@ -7,7 +7,7 @@
 //
 
 protocol SettingsPresenter {
-    
+    func feedbackButtonTapped()
 }
 
 final class SettingsPresenterImpl {
@@ -24,6 +24,7 @@ final class SettingsPresenterImpl {
 }
 
 extension SettingsPresenterImpl: SettingsPresenter {
-    
-
+    func feedbackButtonTapped() {
+        router.showSendFeedback()
+    }
 }

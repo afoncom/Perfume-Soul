@@ -42,6 +42,7 @@
 "perfumeRecommendations.empty.title" = "Рекомендации пока недоступны";
 "perfumeRecommendations.empty.subtitle" = "Попробуйте позже";
 "screen.profile" = "Профиль";
+"screen.sendFeedback" = "Обратная связь";
 "screen.settings" = "Настройки";
 "screen.quizOfTheDay" = "Квиз дня";
 "screen.today" = "Сегодня";
@@ -49,8 +50,8 @@
 "screen.todayEnergy" = "Энергия дня";
 "settings.about.aboutAppSubtitle" = "Версия 1.0.0";
 "settings.about.aboutAppTitle" = "О приложении";
-"settings.about.contactDeveloperSubtitle" = "Портфолио, GitHub, Email";
-"settings.about.contactDeveloperTitle" = "Связаться с разработчиком";
+"settings.about.feedbackSubtitle" = "Отзывы, пожелания и идеи по улучшению";
+"settings.about.feedbackTitle" = "Обратная связь";
 "settings.aboutTitle" = "О приложении";
 "settings.notification.aromaOfTheDaySubtitle" = "Уведомлять о новом аромате дня";
 "settings.notification.aromaOfTheDayTitle" = "Аромат дня";
@@ -58,6 +59,12 @@
 "settings.notification.dailyHoroscopeTitle" = "Ежедневный гороскоп";
 "settings.notification.dayInPerfumerySubtitle" = "Исторические события и факты";
 "settings.notification.dayInPerfumeryTitle" = "Этот день в парфюмерии";
+"sendFeedback.button" = "Написать разработчику";
+"sendFeedback.emailSubtitle" = "Если почта не настроена, вы можете написать на этот адрес вручную.";
+"sendFeedback.emailTitle" = "Почта разработчика";
+"sendFeedback.mailUnavailable" = "Apple Mail не настроен на этом устройстве. Используйте адрес выше для ручной отправки письма.";
+"sendFeedback.subtitle" = "Напишите разработчику, если хотите поделиться идеей, отзывом или предложением по улучшению приложения.";
+"sendFeedback.title" = "Отзывы и пожелания";
 "settings.notificationsTitle" = "Уведомления";
 "settings.privacy.clearLocalDataSubtitle" = "Удалить кэш и временные файлы";
 "settings.privacy.clearLocalDataTitle" = "Очистить локальные данные";
