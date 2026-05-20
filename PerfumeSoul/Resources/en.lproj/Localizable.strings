@@ -38,10 +38,12 @@
 "screen.dayInPerfumery" = "Day in Perfumery";
 "screen.discover" = "Discover";
 "screen.findPerfumes" = "Find Perfumes";
-"screen.similarPerfumes" = "Similar Perfumes";
+"screen.perfumeRecommendations" = "Perfume Recommendations";
+"perfumeRecommendations.empty.title" = "Recommendations are currently unavailable";
+"perfumeRecommendations.empty.subtitle" = "Please try again later";
 "screen.profile" = "Profile";
 "screen.settings" = "Settings";
-"screen.startQuiz" = "Start Quiz";
+"screen.quizOfTheDay" = "Quiz of the Day";
 "screen.today" = "Today";
 "screen.todayEnergy" = "Today's Energy";
 "settings.about.aboutAppSubtitle" = "Version 1.0.0";

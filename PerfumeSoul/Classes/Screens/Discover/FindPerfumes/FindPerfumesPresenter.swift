@@ -25,6 +25,6 @@ final class FindPerfumesPresenterImpl {
 
 extension FindPerfumesPresenterImpl: FindPerfumesPresenter {
     func findSimilarPerfumesButtonTapped() {
-        router.showSimilarPerfumesScreen()
+        router.showPerfumeRecommendationsScreen()
     }
 }

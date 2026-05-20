@@ -52,7 +52,7 @@ private extension DiscoverScreen {
                     .frame(height: 170)
                 
                 Button(L10n.Discover.ScentArchetype.button) {
-                    presenter.startQuizButtonTab()
+                    presenter.quizOfTheDayButtonTapped()
                 }
                 .primaryCapsuleButton(color: Color(.pinkButton))
                 .padding(.horizontal, 28)

@@ -9,7 +9,7 @@
 protocol DiscoverPresenter {
     func findPerfumesButtonTab()
     func comparePerfumesButtonTab()
-    func startQuizButtonTab()
+    func quizOfTheDayButtonTapped()
 }
 
 final class DiscoverPresenterImpl {
@@ -30,8 +30,8 @@ extension DiscoverPresenterImpl: DiscoverPresenter {
         router.showFindPerfumesScreen()
     }
 
-    func startQuizButtonTab() {
-        router.showStartQuizScreen()
+    func quizOfTheDayButtonTapped() {
+        router.showQuizOfTheDayScreen()
     }
     
     func comparePerfumesButtonTab() {

@@ -1,5 +1,5 @@
 //
-//  SimilarPerfumesScreen.swift
+//  PerfumeRecommendationsScreen.swift
 //  PerfumeSoul
 //
 //  Created by afon.com on 10.05.2026.
@@ -8,13 +8,13 @@
 
 import SwiftUI
 
-struct SimilarPerfumesScreen: View {
-    @Bindable private var viewModel: SimilarPerfumesViewModel
-    private let presenter: SimilarPerfumesPresenter
+struct PerfumeRecommendationsScreen: View {
+    @Bindable private var viewModel: PerfumeRecommendationsViewModel
+    private let presenter: PerfumeRecommendationsPresenter
     
     init(
-        viewModel: SimilarPerfumesViewModel,
-        presenter: SimilarPerfumesPresenter
+        viewModel: PerfumeRecommendationsViewModel,
+        presenter: PerfumeRecommendationsPresenter
     ) {
         self.viewModel = viewModel
         self.presenter = presenter
@@ -35,13 +35,16 @@ struct SimilarPerfumesScreen: View {
         .background {
             Color(.backgroundPrimary).ignoresSafeArea()
         }
+        .task {
+            await presenter.onAppear()
+        }
         .navigationBarTitleDisplayMode(.inline)
     }
 }
 
-private extension SimilarPerfumesScreen {
+private extension PerfumeRecommendationsScreen {
     func makeHeaderView() -> some View {
-        Text(L10n.Screen.similarPerfumes)
+        Text(L10n.Screen.perfumeRecommendations)
             .font(.system(size: 30, weight: .medium, design: .rounded))
             .foregroundStyle(Color(.titleText))
             .frame(maxWidth: .infinity, alignment: .center)
@@ -124,46 +127,44 @@ private extension SimilarPerfumesScreen {
     
     func makeRecommendationsSection() -> some View {
         VStack(spacing: 12) {
-            makeRecommendationCard(
-                title: "Luna Rossa Black",
-                brand: "Prada",
-                accords: "Теплый · Пряный · Древесный",
-                notes: "Созвучие: амбра, лаванда, древесные ноты",
-                score: "92%"
-            )
-            
-            makeRecommendationCard(
-                title: "Acqua di Giò Profondo",
-                brand: "Giorgio Armani",
-                accords: "Морской · Ароматический · Свежий",
-                notes: "Созвучие: бергамот, лаванда, морские ноты",
-                score: "89%"
-            )
-            
-            makeRecommendationCard(
-                title: "Allure Homme Sport",
-                brand: "Chanel",
-                accords: "Цитрусовый · Пряный · Древесный",
-                notes: "Созвучие: цитрусы, мускус, кедр",
-                score: "86%"
-            )
-            
-            makeRecommendationCard(
-                title: "Y Le Parfum",
-                brand: "YSL",
-                accords: "Древесный · Ароматический · Элегантный",
-                notes: "Созвучие: лаванда, амбра, пачули",
-                score: "84%"
-            )
-            
-            makeRecommendationCard(
-                title: "Homme Intense",
-                brand: "Dior",
-                accords: "Пудровый · Древесный · Ирисовый",
-                notes: "Созвучие: ирис, амбра, древесные ноты",
-                score: "82%"
-            )
+            if viewModel.isLoading {
+                EmptyView()
+            } else if viewModel.perfumeRecommendations.isEmpty {
+                makeEmptyStateView()
+            } else {
+                ForEach(viewModel.perfumeRecommendations, id: \.id) { perfume in
+                    makeRecommendationCard(
+                        title: perfume.perfumeName,
+                        brand: perfume.brandName,
+                        accords: perfume.accords.joined(separator: " · "),
+                        notes: "Созвучие: " + perfume.matchingNotes.joined(separator: ", "),
+                        score: "\(perfume.matchPercentage)%"
+                    )
+                }
+            }
         }
+    }
+
+    func makeEmptyStateView() -> some View {
+        VStack(spacing: 8) {
+            Text(L10n.PerfumeRecommendations.Empty.title)
+                .font(.headline)
+                .foregroundStyle(Color(.textPrimary))
+
+            Text(L10n.PerfumeRecommendations.Empty.subtitle)
+                .font(.subheadline)
+                .foregroundStyle(Color(.textSecondary))
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 32)
+        .padding(.horizontal, 20)
+        .background(Color(.surfacePrimary))
+        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .stroke(Color(.cardBorder), lineWidth: 1)
+        )
+        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
     
     func makeRecommendationCard(
