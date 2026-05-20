@@ -10,5 +10,5 @@ import Foundation
 import Observation
 
 @Observable final class QuizOfTheDayViewModel {
-
+    var progressValue: Double = 0.33
 }
