@@ -57,6 +57,12 @@
 "settings.notification.dailyHoroscopeTitle" = "Ежедневный гороскоп";
 "settings.notification.dayInPerfumerySubtitle" = "Исторические события и факты";
 "settings.notification.dayInPerfumeryTitle" = "Этот день в парфюмерии";
+"sendFeedback.button" = "Написать разработчику";
+"sendFeedback.emailSubtitle" = "Если почта не настроена, вы можете написать на этот адрес вручную.";
+"sendFeedback.emailTitle" = "Почта разработчика";
+"sendFeedback.mailUnavailable" = "Apple Mail не настроен на этом устройстве. Используйте адрес выше для ручной отправки письма.";
+"sendFeedback.subtitle" = "Напишите разработчику, если хотите поделиться идеей, отзывом или предложением по улучшению приложения.";
+"sendFeedback.title" = "Отзывы и пожелания";
 "settings.notificationsTitle" = "Уведомления";
 "settings.privacy.clearLocalDataSubtitle" = "Удалить кэш и временные файлы";
 "settings.privacy.clearLocalDataTitle" = "Очистить локальные данные";
@@ -68,12 +74,6 @@
 "settings.support.supportDeveloperSubtitle" = "Если приложение вам нравится, вы можете поддержать его развитие";
 "settings.support.supportDeveloperTitle" = "Поддержать разработчика";
 "settings.supportTitle" = "Поддержка";
-"sendFeedback.button" = "Написать разработчику";
-"sendFeedback.emailSubtitle" = "Если почта не настроена, вы можете написать на этот адрес вручную.";
-"sendFeedback.emailTitle" = "Почта разработчика";
-"sendFeedback.mailUnavailable" = "Apple Mail не настроен на этом устройстве. Используйте адрес выше для ручной отправки письма.";
-"sendFeedback.subtitle" = "Напишите разработчику, если хотите поделиться идеей, отзывом или предложением по улучшению приложения.";
-"sendFeedback.title" = "Отзывы и пожелания";
 "horoscope.sign.aquarius" = "Водолей";
 "horoscope.sign.aries" = "Овен";
 "horoscope.sign.cancer" = "Рак";

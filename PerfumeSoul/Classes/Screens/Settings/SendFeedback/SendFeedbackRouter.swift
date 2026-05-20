@@ -22,8 +22,6 @@ final class SendFeedbackRouterImpl: NSObject {
 
 extension SendFeedbackRouterImpl: SendFeedbackRouter {
     func presentMailComposer(email: String, subject: String) {
-        guard MFMailComposeViewController.canSendMail() else { return }
-
         let composer = MFMailComposeViewController()
         composer.setToRecipients([email])
         composer.setSubject(subject)
@@ -40,6 +38,23 @@ extension SendFeedbackRouterImpl: MFMailComposeViewControllerDelegate {
         didFinishWith result: MFMailComposeResult,
         error: Error?
     ) {
+        if let error {
+            print("Mail composer error: \(error)")
+        }
+
+        switch result {
+        case .cancelled:
+            print("Mail composer cancelled")
+        case .saved:
+            print("Mail composer draft saved")
+        case .sent:
+            print("Mail composer sent")
+        case .failed:
+            print("Mail composer failed")
+        @unknown default:
+            print("Mail composer finished with unknown result")
+        }
+
         controller.dismiss(animated: true)
     }
 }

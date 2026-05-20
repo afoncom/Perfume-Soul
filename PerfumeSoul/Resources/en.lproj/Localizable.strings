@@ -57,6 +57,12 @@
 "settings.notification.dayInPerfumerySubtitle" = "Historical events and facts";
 "settings.notification.dayInPerfumeryTitle" = "This Day in Perfumery";
 "settings.notificationsTitle" = "Notifications";
+"sendFeedback.button" = "Write to the Developer";
+"sendFeedback.emailSubtitle" = "If mail is not configured, you can write to this address manually.";
+"sendFeedback.emailTitle" = "Developer email";
+"sendFeedback.mailUnavailable" = "Apple Mail is not configured on this device. Use the address above to send your message manually.";
+"sendFeedback.subtitle" = "Write to the developer if you want to share an idea, review, or suggestion for improving the app.";
+"sendFeedback.title" = "Reviews and Suggestions";
 "settings.privacy.clearLocalDataSubtitle" = "Delete cache and temporary files";
 "settings.privacy.clearLocalDataTitle" = "Clear Local Data";
 "settings.privacy.deleteAllProfilesSubtitle" = "Delete all created profiles and app data";
@@ -67,12 +73,6 @@
 "settings.support.supportDeveloperSubtitle" = "If you like the app, you can support its development";
 "settings.support.supportDeveloperTitle" = "Support the Developer";
 "settings.supportTitle" = "Support";
-"sendFeedback.button" = "Write to the Developer";
-"sendFeedback.emailSubtitle" = "If mail is not configured, you can write to this address manually.";
-"sendFeedback.emailTitle" = "Developer email";
-"sendFeedback.mailUnavailable" = "Apple Mail is not configured on this device. Use the address above to send your message manually.";
-"sendFeedback.subtitle" = "Write to the developer if you want to share an idea, review, or suggestion for improving the app.";
-"sendFeedback.title" = "Reviews and Suggestions";
 "horoscope.sign.aquarius" = "Aquarius";
 "horoscope.sign.aries" = "Aries";
 "horoscope.sign.cancer" = "Cancer";

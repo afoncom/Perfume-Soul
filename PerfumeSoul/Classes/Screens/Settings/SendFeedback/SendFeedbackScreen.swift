@@ -142,8 +142,8 @@ private extension SendFeedbackScreen {
                         endPoint: .trailing
                     )
                 )
+                .background(Color(.surfaceHighlight))
                 .clipShape(Capsule())
         }
-        .background(Color(.surfaceHighlight))
     }
 }
