@@ -45,6 +45,8 @@
 "screen.today" = "Today";
 "screen.todayEnergy" = "Today's Energy";
 "quizOfTheDay.nextQuestion" = "Next Question";
+"quizOfTheDay.correctResult" = "Correct!";
+"quizOfTheDay.incorrectResult" = "Incorrect";
 "quizOfTheDay.scoreHint" = "1 correct answer = 1 point";
 "quizOfTheDay.scoreToday" = "Today's Score";
 "quizOfTheDay.selectOneAnswer" = "Choose one correct answer";

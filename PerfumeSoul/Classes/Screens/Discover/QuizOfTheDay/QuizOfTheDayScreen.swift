@@ -28,7 +28,12 @@ struct QuizOfTheDayScreen: View {
                 makeProgressCard()
                 if let currentQuestion = viewModel.currentQuestion {
                     makeQuestionCard(question: currentQuestion)
-                    makeExplanationCard(explanation: currentQuestion.explanation)
+                    if viewModel.hasSelectedAnswer {
+                        makeExplanationCard(
+                            explanation: currentQuestion.explanation,
+                            isCorrect: viewModel.isSelectedAnswerCorrect
+                        )
+                    }
                 } else {
                     ProgressView()
                         .frame(maxWidth: .infinity)
@@ -128,15 +133,17 @@ private extension QuizOfTheDayScreen {
                         .foregroundStyle(Color(.textSecondary))
                 }
 
-                ZStack(alignment: .leading) {
-                    Capsule()
-                        .fill(Color(.placeholderSoft))
-                        .frame(height: 10)
+                GeometryReader { proxy in
+                    ZStack(alignment: .leading) {
+                        Capsule()
+                            .fill(Color(.placeholderSoft))
 
-                    Capsule()
-                        .fill(Color(.pinkButton))
-                        .frame(width: viewModel.progressValue * 265, height: 10)
+                        Capsule()
+                            .fill(Color(.pinkButton))
+                            .frame(width: proxy.size.width * CGFloat(viewModel.progressValue))
+                    }
                 }
+                .frame(height: 10)
             }
         }
         .padding(18)
@@ -203,7 +210,10 @@ private extension QuizOfTheDayScreen {
                     makeAnswerRow(
                         letter: answer.id,
                         title: answer.text,
-                        isSelected: answer.isCorrect
+                        isSelected: viewModel.isAnswerSelected(answer.id),
+                        onTap: {
+                            viewModel.selectAnswer(id: answer.id)
+                        }
                     )
                 }
             }
@@ -214,50 +224,58 @@ private extension QuizOfTheDayScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 10, x: 0, y: 4)
     }
 
-    func makeAnswerRow(letter: String, title: String, isSelected: Bool) -> some View {
-        HStack(spacing: 14) {
-            ZStack {
-                Circle()
-                    .fill(isSelected ? Color(.pinkButton) : Color(.placeholderSoft))
-                    .frame(width: 48, height: 48)
+    func makeAnswerRow(
+        letter: String,
+        title: String,
+        isSelected: Bool,
+        onTap: @escaping () -> Void
+    ) -> some View {
+        Button(action: onTap) {
+            HStack(spacing: 14) {
+                ZStack {
+                    Circle()
+                        .fill(isSelected ? Color(.pinkButton) : Color(.placeholderSoft))
+                        .frame(width: 48, height: 48)
 
-                Text(letter)
-                    .font(.system(size: 17, weight: .medium, design: .rounded))
-                    .foregroundStyle(isSelected ? Color(.textOnAccent) : Color(.textSecondary))
+                    Text(letter)
+                        .font(.system(size: 17, weight: .medium, design: .rounded))
+                        .foregroundStyle(isSelected ? Color(.textOnAccent) : Color(.textSecondary))
+                }
+
+                Text(title)
+                    .font(.system(size: 18, weight: .regular, design: .rounded))
+                    .foregroundStyle(Color(.textPrimary))
+
+                Spacer(minLength: 0)
             }
-
-            Text(title)
-                .font(.system(size: 18, weight: .regular, design: .rounded))
-                .foregroundStyle(Color(.textPrimary))
-
-            Spacer(minLength: 0)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 16)
+            .background(Color(.surfacePrimary))
+            .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 22, style: .continuous)
+                    .stroke(isSelected ? Color(.pinkButton) : Color(.cardBorder), lineWidth: isSelected ? 2 : 1)
+            )
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 16)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .stroke(isSelected ? Color(.pinkButton) : Color(.cardBorder), lineWidth: isSelected ? 2 : 1)
-        )
+        .buttonStyle(.plain)
     }
 
-    func makeExplanationCard(explanation: String) -> some View {
+    func makeExplanationCard(explanation: String, isCorrect: Bool) -> some View {
         HStack(spacing: 18) {
             VStack(alignment: .leading, spacing: 12) {
                 HStack(spacing: 10) {
                     Circle()
-                        .fill(Color(.zodiacMint))
+                        .fill(isCorrect ? Color(.zodiacMint) : Color(.pinkButton))
                         .frame(width: 40, height: 40)
                         .overlay {
-                            Image(systemName: "checkmark")
+                            Image(systemName: isCorrect ? "checkmark" : "xmark")
                                 .font(.headline.weight(.bold))
                                 .foregroundStyle(Color(.surfacePrimary))
                         }
 
-                    Text("Правильно!")
+                    Text(isCorrect ? L10n.QuizOfTheDay.correctResult : L10n.QuizOfTheDay.incorrectResult)
                         .font(.system(size: 20, weight: .semibold, design: .rounded))
-                        .foregroundStyle(Color(.zodiacMint))
+                        .foregroundStyle(isCorrect ? Color(.zodiacMint) : Color(.pinkButton))
                 }
 
                 Text(explanation)

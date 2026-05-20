@@ -32,6 +32,7 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
             let questions = try await service.requestQuizOfTheDayQuestions()
             await MainActor.run {
                 viewModel.questions = questions
+                viewModel.selectedAnswerId = nil
             }
         } catch {
             print(error)

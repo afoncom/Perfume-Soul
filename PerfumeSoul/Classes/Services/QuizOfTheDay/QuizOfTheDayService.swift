@@ -10,7 +10,7 @@ protocol QuizOfTheDayService {
 }
 
 final class QuizOfTheDayServiceImpl {
-    let requestManager: RequestManager
+    private let requestManager: RequestManager
 
     init(requestManager: RequestManager) {
         self.requestManager = requestManager

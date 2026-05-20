@@ -8,15 +8,27 @@
 
 import Foundation
 import Observation
-import CoreGraphics
 
 @Observable final class QuizOfTheDayViewModel {
     var questions: [QuizOfTheDayQuestion] = []
     var currentQuestionIndex = 0
+    var selectedAnswerId: String?
 
     var currentQuestion: QuizOfTheDayQuestion? {
         guard questions.indices.contains(currentQuestionIndex) else { return nil }
         return questions[currentQuestionIndex]
+    }
+
+    var selectedAnswer: QuizOfTheDayAnswer? {
+        currentQuestion?.answers.first(where: { $0.id == selectedAnswerId })
+    }
+
+    var hasSelectedAnswer: Bool {
+        selectedAnswerId != nil
+    }
+
+    var isSelectedAnswerCorrect: Bool {
+        selectedAnswer?.isCorrect == true
     }
 
     var totalQuestions: Int {
@@ -27,11 +39,19 @@ import CoreGraphics
         totalQuestions == 0 ? 0 : currentQuestionIndex + 1
     }
 
-    var progressValue: CGFloat {
-        totalQuestions == 0 ? 0 : CGFloat(currentQuestionNumber) / CGFloat(totalQuestions)
+    var progressValue: Double {
+        totalQuestions == 0 ? 0 : Double(currentQuestionNumber) / Double(totalQuestions)
     }
 
     var progressPercentText: String {
         "\(Int(progressValue * 100))%"
+    }
+
+    func isAnswerSelected(_ id: String) -> Bool {
+        selectedAnswerId == id
+    }
+
+    func selectAnswer(id: String) {
+        selectedAnswerId = id
     }
 }

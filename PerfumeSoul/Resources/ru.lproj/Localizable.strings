@@ -46,6 +46,8 @@
 "screen.calculationCreateProfile" = "Создай свой профиль";
 "screen.todayEnergy" = "Энергия дня";
 "quizOfTheDay.nextQuestion" = "Следующий вопрос";
+"quizOfTheDay.correctResult" = "Правильно!";
+"quizOfTheDay.incorrectResult" = "Неправильно";
 "quizOfTheDay.scoreHint" = "1 правильный ответ = 1 балл";
 "quizOfTheDay.scoreToday" = "Баллы за сегодня";
 "quizOfTheDay.selectOneAnswer" = "Выберите один правильный ответ";
