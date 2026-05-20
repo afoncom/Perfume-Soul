@@ -32,6 +32,8 @@
 "screen.discover" = "Поиск";
 "screen.findPerfumes" = "Поиск ароматов";
 "screen.perfumeRecommendations" = "Рекомендации ароматов";
+"perfumeRecommendations.empty.title" = "Рекомендации пока недоступны";
+"perfumeRecommendations.empty.subtitle" = "Попробуйте позже";
 "screen.profile" = "Профиль";
 "screen.settings" = "Настройки";
 "screen.quizOfTheDay" = "Квиз дня";

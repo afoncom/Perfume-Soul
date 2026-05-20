@@ -9,15 +9,15 @@
 import SwiftUI
 
 final class PerfumeRecommendationsModule {
-    static func build(
-        navigationController: UINavigationController?,
-        perfumeRecommendations: [PerfumeRecommendation]
-    ) -> UIViewController {
-        let viewModel = PerfumeRecommendationsViewModel(perfumeRecommendations: perfumeRecommendations)
+    static func build(navigationController: UINavigationController?) -> UIViewController {
+        let viewModel = PerfumeRecommendationsViewModel()
         let router = PerfumeRecommendationsRouterImpl(navigationController: navigationController)
+        let requestManager = RequestManagerImpl(urlSession: URLSession.shared, baseURL: "http://127.0.0.1:8080")
+        let perfumeRecommendationService = PerfumeRecommendationServiceImpl(requestManager: requestManager)
         let presenter = PerfumeRecommendationsPresenterImpl(
             viewModel: viewModel,
-            router: router
+            router: router,
+            perfumeRecommendationService: perfumeRecommendationService
         )
         
         let view = PerfumeRecommendationsScreen(viewModel: viewModel, presenter: presenter)

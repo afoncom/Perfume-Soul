@@ -35,6 +35,9 @@ struct PerfumeRecommendationsScreen: View {
         .background {
             Color(.backgroundPrimary).ignoresSafeArea()
         }
+        .task {
+            await presenter.onAppear()
+        }
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -124,16 +127,44 @@ private extension PerfumeRecommendationsScreen {
     
     func makeRecommendationsSection() -> some View {
         VStack(spacing: 12) {
-            ForEach(viewModel.perfumeRecommendations, id: \.id) { perfume in
-                makeRecommendationCard(
-                    title: perfume.perfumeName,
-                    brand: perfume.brandName,
-                    accords: perfume.accords.joined(separator: " · "),
-                    notes: "Созвучие: " + perfume.matchingNotes.joined(separator: ", "),
-                    score: "\(perfume.matchPercentage)%"
-                )
+            if viewModel.isLoading {
+                EmptyView()
+            } else if viewModel.perfumeRecommendations.isEmpty {
+                makeEmptyStateView()
+            } else {
+                ForEach(viewModel.perfumeRecommendations, id: \.id) { perfume in
+                    makeRecommendationCard(
+                        title: perfume.perfumeName,
+                        brand: perfume.brandName,
+                        accords: perfume.accords.joined(separator: " · "),
+                        notes: "Созвучие: " + perfume.matchingNotes.joined(separator: ", "),
+                        score: "\(perfume.matchPercentage)%"
+                    )
+                }
             }
         }
+    }
+
+    func makeEmptyStateView() -> some View {
+        VStack(spacing: 8) {
+            Text(L10n.PerfumeRecommendations.Empty.title)
+                .font(.headline)
+                .foregroundStyle(Color(.textPrimary))
+
+            Text(L10n.PerfumeRecommendations.Empty.subtitle)
+                .font(.subheadline)
+                .foregroundStyle(Color(.textSecondary))
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 32)
+        .padding(.horizontal, 20)
+        .background(Color(.surfacePrimary))
+        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .stroke(Color(.cardBorder), lineWidth: 1)
+        )
+        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
     
     func makeRecommendationCard(

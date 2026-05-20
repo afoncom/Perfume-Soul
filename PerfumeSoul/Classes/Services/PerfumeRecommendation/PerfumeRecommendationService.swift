@@ -11,7 +11,7 @@ protocol PerfumeRecommendationService {
 }
 
 final class PerfumeRecommendationServiceImpl {
-    let requestManager: RequestManager
+    private let requestManager: RequestManager
     
     init(requestManager: RequestManager) {
         self.requestManager = requestManager

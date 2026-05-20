@@ -32,6 +32,8 @@
 "screen.discover" = "Discover";
 "screen.findPerfumes" = "Find Perfumes";
 "screen.perfumeRecommendations" = "Perfume Recommendations";
+"perfumeRecommendations.empty.title" = "Recommendations are currently unavailable";
+"perfumeRecommendations.empty.subtitle" = "Please try again later";
 "screen.profile" = "Profile";
 "screen.settings" = "Settings";
 "screen.quizOfTheDay" = "Quiz of the Day";

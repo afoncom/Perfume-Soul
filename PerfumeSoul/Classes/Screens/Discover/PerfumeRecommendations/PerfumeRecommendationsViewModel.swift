@@ -11,9 +11,6 @@ import Combine
 import Observation
 
 @Observable final class PerfumeRecommendationsViewModel {
-    let perfumeRecommendations: [PerfumeRecommendation]
-
-    init(perfumeRecommendations: [PerfumeRecommendation]) {
-        self.perfumeRecommendations = perfumeRecommendations
-    }
+    var perfumeRecommendations: [PerfumeRecommendation] = []
+    var isLoading = false
 }

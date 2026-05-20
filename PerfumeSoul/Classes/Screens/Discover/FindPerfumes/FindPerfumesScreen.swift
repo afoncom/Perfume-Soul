@@ -34,9 +34,6 @@ struct FindPerfumesScreen: View {
         .background {
             Color(.backgroundPrimary).ignoresSafeArea()
         }
-        .task {
-            await presenter.onAppear()
-        }
         .safeAreaInset(edge: .bottom) {
             makeFindButton()
                 .padding(.horizontal, 24)
