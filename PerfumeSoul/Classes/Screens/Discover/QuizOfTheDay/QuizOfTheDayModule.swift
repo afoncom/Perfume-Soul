@@ -16,12 +16,12 @@ final class QuizOfTheDayModule {
             viewModel: viewModel,
             router: router
         )
-        
+
         let view = QuizOfTheDayScreen(viewModel: viewModel, presenter: presenter)
-        
+
         let hostingController = UIHostingController(rootView: view)
         hostingController.title = L10n.Screen.quizOfTheDay
-        
+
         return hostingController
     }
 }
