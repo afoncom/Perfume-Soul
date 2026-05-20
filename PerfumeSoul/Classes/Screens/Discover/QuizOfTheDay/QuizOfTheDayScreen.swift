@@ -68,15 +68,8 @@ private extension QuizOfTheDayScreen {
 
             Spacer()
 
-            Button(action: { }) {
-                ZStack {
-                    Circle()
-                        .fill(Color(.surfacePrimary))
-                        .frame(width: 44, height: 44)
-
-                }
-            }
-            .buttonStyle(.plain)
+            Color.clear
+                .frame(width: 44, height: 44)
         }
     }
 
@@ -118,15 +111,18 @@ private extension QuizOfTheDayScreen {
                         .foregroundStyle(Color(.textSecondary))
                 }
 
-                ZStack(alignment: .leading) {
-                    Capsule()
-                        .fill(Color(.placeholderSoft))
-                        .frame(height: 10)
+                GeometryReader { proxy in
+                    ZStack(alignment: .leading) {
+                        Capsule()
+                            .fill(Color(.placeholderSoft))
+                            .frame(height: 10)
 
-                    Capsule()
-                        .fill(Color(.pinkButton))
-                        .frame(width: 265, height: 10)
+                        Capsule()
+                            .fill(Color(.pinkButton))
+                            .frame(width: proxy.size.width * viewModel.progressValue, height: 10)
+                    }
                 }
+                .frame(height: 10)
             }
         }
         .padding(18)
