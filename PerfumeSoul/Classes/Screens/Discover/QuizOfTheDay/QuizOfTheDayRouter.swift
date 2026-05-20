@@ -1,18 +1,18 @@
 //
-//  SimilarPerfumesRouter.swift
+//  QuizOfTheDayRouter.swift
 //  PerfumeSoul
 //
-//  Created by afon.com on 10.05.2026.
+//  Created by afon.com on 16.03.2026.
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
 import UIKit
 
-protocol SimilarPerfumesRouter {
+protocol QuizOfTheDayRouter {
     
 }
 
-final class SimilarPerfumesRouterImpl {
+final class QuizOfTheDayRouterImpl {
     private weak var navigationController: UINavigationController?
 
     init(navigationController: UINavigationController?) {
@@ -20,6 +20,6 @@ final class SimilarPerfumesRouterImpl {
     }
 }
 
-extension SimilarPerfumesRouterImpl: SimilarPerfumesRouter {
+extension QuizOfTheDayRouterImpl: QuizOfTheDayRouter {
     
 }

@@ -1,5 +1,5 @@
 //
-//  StartQuizViewModel.swift
+//  QuizOfTheDayViewModel.swift
 //  PerfumeSoul
 //
 //  Created by afon.com on 16.03.2026.
@@ -10,6 +10,6 @@ import Foundation
 import Combine
 import Observation
 
-@Observable final class StartQuizViewModel {
+@Observable final class QuizOfTheDayViewModel {
     
 }

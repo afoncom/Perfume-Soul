@@ -1,5 +1,5 @@
 //
-//  SimilarPerfume.swift
+//  PerfumeRecommendation.swift
 //  PerfumeSoul
 //
 //  Created by afon.com on 13.05.2026.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SimilarPerfume {
+struct PerfumeRecommendation {
     let id: UUID
     let perfumeName: String
     let brandName: String
@@ -18,8 +18,8 @@ struct SimilarPerfume {
     let imageUrl: String
 }
 
-extension SimilarPerfume {
-    init(response: SimilarPerfumeResponse) {
+extension PerfumeRecommendation {
+    init(response: PerfumeRecommendationResponse) {
         self.id = response.id
         self.perfumeName = response.perfumeName
         self.brandName = response.brandName

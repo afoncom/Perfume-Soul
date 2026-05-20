@@ -26,9 +26,9 @@ func routes(_ app: Application) throws {
         }
     }
     
-    app.get("similar", "perfume") { _ async throws -> Response in
+    app.get("perfumes", "recommendations") { _ async throws -> Response in
         do {
-            return try jsonResponse(SimilarPerfumeLoader.load())
+            return try jsonResponse(PerfumeRecommendationLoader.load())
         } catch let error as CocoaError where error.code == .fileNoSuchFile {
             throw Abort(.notFound)
         } catch {

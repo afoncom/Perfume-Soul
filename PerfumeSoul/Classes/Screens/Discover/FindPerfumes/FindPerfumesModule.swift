@@ -13,11 +13,11 @@ final class FindPerfumesModule {
         let viewModel = FindPerfumesViewModel()
         let router = FindPerfumesRouterImpl(navigationController: navigationController)
         let requestManager = RequestManagerImpl(urlSession: URLSession.shared, baseURL: "http://127.0.0.1:8080")
-        let similarPerfumeService = SimilarPerfumeServiceImpl(requestManager: requestManager)
+        let perfumeRecommendationService = PerfumeRecommendationServiceImpl(requestManager: requestManager)
         let presenter = FindPerfumesPresenterImpl(
             viewModel: viewModel,
             router: router,
-            similarPerfumeService: similarPerfumeService
+            perfumeRecommendationService: perfumeRecommendationService
         )
         
         let view = FindPerfumesScreen(viewModel: viewModel, presenter: presenter)

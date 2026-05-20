@@ -14,25 +14,25 @@ protocol FindPerfumesPresenter {
 final class FindPerfumesPresenterImpl {
     private let viewModel: FindPerfumesViewModel
     private let router: FindPerfumesRouter
-    private let similarPerfumeService: SimilarPerfumeService
+    private let perfumeRecommendationService: PerfumeRecommendationService
     
     init(
         viewModel: FindPerfumesViewModel,
         router: FindPerfumesRouter,
-        similarPerfumeService: SimilarPerfumeService
+        perfumeRecommendationService: PerfumeRecommendationService
     ) {
         self.viewModel = viewModel
         self.router = router
-        self.similarPerfumeService = similarPerfumeService
+        self.perfumeRecommendationService = perfumeRecommendationService
     }
 }
 
 extension FindPerfumesPresenterImpl: FindPerfumesPresenter {
     func onAppear() async {
         do {
-            let similarPerfumes = try await similarPerfumeService.requestSimilarPerfumes()
+            let perfumeRecommendations = try await perfumeRecommendationService.requestPerfumeRecommendations()
             await MainActor.run {
-                viewModel.similarPerfumes = similarPerfumes
+                viewModel.perfumeRecommendations = perfumeRecommendations
             }
         } catch {
             print(error)
@@ -40,6 +40,6 @@ extension FindPerfumesPresenterImpl: FindPerfumesPresenter {
     }
 
     func findSimilarPerfumesButtonTapped() {
-        router.showSimilarPerfumesScreen(similarPerfumes: viewModel.similarPerfumes)
+        router.showPerfumeRecommendationsScreen(perfumeRecommendations: viewModel.perfumeRecommendations)
     }
 }

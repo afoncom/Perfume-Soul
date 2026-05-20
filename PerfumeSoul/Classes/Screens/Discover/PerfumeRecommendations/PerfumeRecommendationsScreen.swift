@@ -1,5 +1,5 @@
 //
-//  SimilarPerfumesScreen.swift
+//  PerfumeRecommendationsScreen.swift
 //  PerfumeSoul
 //
 //  Created by afon.com on 10.05.2026.
@@ -8,13 +8,13 @@
 
 import SwiftUI
 
-struct SimilarPerfumesScreen: View {
-    @Bindable private var viewModel: SimilarPerfumesViewModel
-    private let presenter: SimilarPerfumesPresenter
+struct PerfumeRecommendationsScreen: View {
+    @Bindable private var viewModel: PerfumeRecommendationsViewModel
+    private let presenter: PerfumeRecommendationsPresenter
     
     init(
-        viewModel: SimilarPerfumesViewModel,
-        presenter: SimilarPerfumesPresenter
+        viewModel: PerfumeRecommendationsViewModel,
+        presenter: PerfumeRecommendationsPresenter
     ) {
         self.viewModel = viewModel
         self.presenter = presenter
@@ -39,9 +39,9 @@ struct SimilarPerfumesScreen: View {
     }
 }
 
-private extension SimilarPerfumesScreen {
+private extension PerfumeRecommendationsScreen {
     func makeHeaderView() -> some View {
-        Text(L10n.Screen.similarPerfumes)
+        Text(L10n.Screen.perfumeRecommendations)
             .font(.system(size: 30, weight: .medium, design: .rounded))
             .foregroundStyle(Color(.titleText))
             .frame(maxWidth: .infinity, alignment: .center)
@@ -124,7 +124,7 @@ private extension SimilarPerfumesScreen {
     
     func makeRecommendationsSection() -> some View {
         VStack(spacing: 12) {
-            ForEach(viewModel.similarPerfumes, id: \.id) { perfume in
+            ForEach(viewModel.perfumeRecommendations, id: \.id) { perfume in
                 makeRecommendationCard(
                     title: perfume.perfumeName,
                     brand: perfume.brandName,

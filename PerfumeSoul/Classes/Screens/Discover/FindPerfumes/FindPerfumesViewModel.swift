@@ -11,5 +11,5 @@ import Combine
 import Observation
 
 @Observable final class FindPerfumesViewModel {
-    var similarPerfumes: [SimilarPerfume] = []
+    var perfumeRecommendations: [PerfumeRecommendation] = []
 }

@@ -1,5 +1,5 @@
 //
-//  SimilarPerfumeResponse.swift
+//  PerfumeRecommendationResponse.swift
 //  PerfumeSoul
 //
 //  Created by afon.com on 13.05.2026.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SimilarPerfumeResponse: Decodable {
+struct PerfumeRecommendationResponse: Decodable {
     let id: UUID
     let perfumeName: String
     let brandName: String
