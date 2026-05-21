@@ -49,6 +49,15 @@
 "screen.perfumeRecommendations" = "Рекомендации ароматов";
 "perfumeRecommendations.empty.title" = "Рекомендации пока недоступны";
 "perfumeRecommendations.empty.subtitle" = "Попробуйте позже";
+"searchPerfume.emptyState" = "Парфюмы не найдены.";
+"searchPerfume.itemsPerPagePlaceholder" = "Введите количество элементов";
+"searchPerfume.itemsPerPageTitle" = "Элементов на странице";
+"searchPerfume.pagePlaceholder" = "Введите страницу";
+"searchPerfume.pageTitle" = "Страница";
+"searchPerfume.resultsTitle" = "Список парфюмов";
+"searchPerfume.searchButton" = "Получить парфюмы";
+"searchPerfume.searchTextPlaceholder" = "Введите текст поиска";
+"searchPerfume.searchTextTitle" = "Текст поиска";
 "screen.profile" = "Профиль";
 "screen.sendFeedback" = "Обратная связь";
 "screen.searchPerfume" = "Поиск";

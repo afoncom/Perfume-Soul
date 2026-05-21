@@ -23,7 +23,8 @@ let package = Package(
             resources: [
                 .process("Requests/perfumery-history/Resources"),
                 .process("Requests/horoscope-daily/Resources"),
-                .process("Requests/perfume-recommendations/Resources")
+                .process("Requests/perfume-recommendations/Resources"),
+                .process("Requests/perfumes/Resources")
             ],
             swiftSettings: swiftSettings
         ),
