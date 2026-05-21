@@ -51,6 +51,7 @@
 "perfumeRecommendations.empty.subtitle" = "Please try again later";
 "screen.profile" = "Profile";
 "screen.sendFeedback" = "Feedback";
+"screen.searchPerfume" = "Search";
 "screen.settings" = "Settings";
 "screen.quizOfTheDay" = "Quiz of the Day";
 "screen.today" = "Today";

@@ -26,8 +26,8 @@ final class DiscoverModule {
         navigationController.viewControllers = [hostingController]
         navigationController.tabBarItem = UITabBarItem(
             title: L10n.Screen.discover,
-            image: UIImage(systemName: "magnifyingglass"),
-            selectedImage: UIImage(systemName: "magnifyingglass")
+            image: UIImage(systemName: "sparkles"),
+            selectedImage: UIImage(systemName: "sparkles")
         )
         navigationController.navigationBar.prefersLargeTitles = true
 
