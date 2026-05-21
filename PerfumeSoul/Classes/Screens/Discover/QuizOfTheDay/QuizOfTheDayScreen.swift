@@ -26,8 +26,19 @@ struct QuizOfTheDayScreen: View {
             VStack(spacing: 22) {
                 makeTopBar()
                 makeProgressCard()
-                makeQuestionCard()
-                makeExplanationCard()
+                if let currentQuestion = viewModel.currentQuestion {
+                    makeQuestionCard(question: currentQuestion)
+                    if viewModel.hasSelectedAnswer {
+                        makeExplanationCard(
+                            explanation: currentQuestion.explanation,
+                            isCorrect: viewModel.isSelectedAnswerCorrect
+                        )
+                    }
+                } else {
+                    ProgressView()
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 80)
+                }
                 makeBottomControls()
             }
             .padding(.horizontal, 16)
@@ -36,6 +47,9 @@ struct QuizOfTheDayScreen: View {
         }
         .background {
             Color(.backgroundPrimary).ignoresSafeArea()
+        }
+        .task {
+            await presenter.onAppear()
         }
         .toolbar(.hidden, for: .navigationBar)
     }
@@ -84,6 +98,7 @@ private extension QuizOfTheDayScreen {
                     trailingValue: "/ 15"
                 )
 
+                
                 Spacer(minLength: 8)
 
                 makeStatItem(
@@ -100,13 +115,13 @@ private extension QuizOfTheDayScreen {
 
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
-                    Text("Вопрос 5 из 15")
+                    Text("Вопрос \(viewModel.currentQuestionNumber) из \(viewModel.totalQuestions)")
                         .font(.system(size: 17, weight: .medium, design: .rounded))
                         .foregroundStyle(Color(.textPrimary))
 
                     Spacer()
 
-                    Text("33%")
+                    Text(viewModel.progressPercentText)
                         .font(.system(size: 17, weight: .medium, design: .rounded))
                         .foregroundStyle(Color(.textSecondary))
                 }
@@ -169,10 +184,10 @@ private extension QuizOfTheDayScreen {
         }
     }
 
-    func makeQuestionCard() -> some View {
+    func makeQuestionCard(question: QuizOfTheDayQuestion) -> some View {
         VStack(spacing: 20) {
             VStack(spacing: 12) {
-                Text("Какие ноты чаще всего относятся\nк верхним (начальным) нотам аромата?")
+                Text(question.question)
                     .font(.system(size: 23, weight: .semibold, design: .rounded))
                     .foregroundStyle(Color(.titleText))
                     .multilineTextAlignment(.center)
@@ -185,10 +200,16 @@ private extension QuizOfTheDayScreen {
             .padding(.top, 8)
 
             VStack(spacing: 14) {
-                makeAnswerRow(letter: "A", title: "Ваниль, пачули, амбра", isSelected: false)
-                makeAnswerRow(letter: "B", title: "Бергамот, лимон, мята", isSelected: true)
-                makeAnswerRow(letter: "C", title: "Сандал, кедр, мускус", isSelected: false)
-                makeAnswerRow(letter: "D", title: "Ирис, ветивер, кожа", isSelected: false)
+                ForEach(question.answers, id: \.id) { answer in
+                    makeAnswerRow(
+                        letter: answer.id,
+                        title: answer.text,
+                        isSelected: viewModel.isAnswerSelected(answer.id),
+                        onTap: {
+                            viewModel.selectAnswer(id: answer.id)
+                        }
+                    )
+                }
             }
         }
         .padding(18)
@@ -197,53 +218,61 @@ private extension QuizOfTheDayScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 10, x: 0, y: 4)
     }
 
-    func makeAnswerRow(letter: String, title: String, isSelected: Bool) -> some View {
-        HStack(spacing: 14) {
-            ZStack {
-                Circle()
-                    .fill(isSelected ? Color(.pinkButton) : Color(.placeholderSoft))
-                    .frame(width: 48, height: 48)
+    func makeAnswerRow(
+        letter: String,
+        title: String,
+        isSelected: Bool,
+        onTap: @escaping () -> Void
+    ) -> some View {
+        Button(action: onTap) {
+            HStack(spacing: 14) {
+                ZStack {
+                    Circle()
+                        .fill(isSelected ? Color(.pinkButton) : Color(.placeholderSoft))
+                        .frame(width: 48, height: 48)
 
-                Text(letter)
-                    .font(.system(size: 17, weight: .medium, design: .rounded))
-                    .foregroundStyle(isSelected ? Color(.textOnAccent) : Color(.textSecondary))
+                    Text(letter)
+                        .font(.system(size: 17, weight: .medium, design: .rounded))
+                        .foregroundStyle(isSelected ? Color(.textOnAccent) : Color(.textSecondary))
+                }
+
+                Text(title)
+                    .font(.system(size: 18, weight: .regular, design: .rounded))
+                    .foregroundStyle(Color(.textPrimary))
+
+                Spacer(minLength: 0)
             }
-
-            Text(title)
-                .font(.system(size: 18, weight: .regular, design: .rounded))
-                .foregroundStyle(Color(.textPrimary))
-
-            Spacer(minLength: 0)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 16)
+            .background(Color(.surfacePrimary))
+            .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 22, style: .continuous)
+                    .stroke(isSelected ? Color(.pinkButton) : Color(.cardBorder), lineWidth: isSelected ? 2 : 1)
+            )
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 16)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .stroke(isSelected ? Color(.pinkButton) : Color(.cardBorder), lineWidth: isSelected ? 2 : 1)
-        )
+        .buttonStyle(.plain)
     }
 
-    func makeExplanationCard() -> some View {
+    func makeExplanationCard(explanation: String, isCorrect: Bool) -> some View {
         HStack(spacing: 18) {
             VStack(alignment: .leading, spacing: 12) {
                 HStack(spacing: 10) {
                     Circle()
-                        .fill(Color(.zodiacMint))
+                        .fill(isCorrect ? Color(.zodiacMint) : Color(.pinkButton))
                         .frame(width: 40, height: 40)
                         .overlay {
-                            Image(systemName: "checkmark")
+                            Image(systemName: isCorrect ? "checkmark" : "xmark")
                                 .font(.headline.weight(.bold))
                                 .foregroundStyle(Color(.surfacePrimary))
                         }
 
-                    Text("Правильно!")
+                    Text(isCorrect ? L10n.QuizOfTheDay.correctResult : L10n.QuizOfTheDay.incorrectResult)
                         .font(.system(size: 20, weight: .semibold, design: .rounded))
-                        .foregroundStyle(Color(.zodiacMint))
+                        .foregroundStyle(isCorrect ? Color(.zodiacMint) : Color(.pinkButton))
                 }
 
-                Text("Верхние ноты — это то, что вы чувствуете сразу после нанесения аромата. Чаще всего это свежие и лёгкие ноты: цитрусы, зелёные ноты, травы.")
+                Text(explanation)
                     .font(.system(size: 16, weight: .regular, design: .rounded))
                     .foregroundStyle(Color(.descriptionText))
                     .fixedSize(horizontal: false, vertical: true)

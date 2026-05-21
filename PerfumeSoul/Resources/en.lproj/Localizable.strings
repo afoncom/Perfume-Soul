@@ -55,6 +55,14 @@
 "screen.quizOfTheDay" = "Quiz of the Day";
 "screen.today" = "Today";
 "screen.todayEnergy" = "Today's Energy";
+"quizOfTheDay.nextQuestion" = "Next Question";
+"quizOfTheDay.correctResult" = "Correct!";
+"quizOfTheDay.incorrectResult" = "Incorrect";
+"quizOfTheDay.scoreHint" = "1 correct answer = 1 point";
+"quizOfTheDay.scoreToday" = "Today's Score";
+"quizOfTheDay.selectOneAnswer" = "Choose one correct answer";
+"quizOfTheDay.streakDays" = "Day Streak";
+"quizOfTheDay.title" = "Perfumery Knowledge Quiz";
 "settings.about.aboutAppSubtitle" = "Version 1.0.0";
 "settings.about.aboutAppTitle" = "About the App";
 "settings.about.feedbackSubtitle" = "Reviews, wishes, and ideas for improvement";

@@ -16,7 +16,7 @@ final class QuizOfTheDayPresenterImpl {
     
     init(
         viewModel: QuizOfTheDayViewModel,
-        router: QuizOfTheDayRouter
+        router: QuizOfTheDayRouter,
     ) {
         self.viewModel = viewModel
         self.router = router
