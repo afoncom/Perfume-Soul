@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import CoreGraphics
 
 struct QuizOfTheDayScreen: View {
     @Environment(\.dismiss) private var dismiss
@@ -26,9 +27,11 @@ struct QuizOfTheDayScreen: View {
             VStack(spacing: 22) {
                 makeTopBar()
                 makeProgressCard()
-                if let currentQuestion = viewModel.currentQuestion {
+                if viewModel.isQuizCompleted {
+                    makeQuizCompletedCard()
+                } else if let currentQuestion = viewModel.currentQuestion {
                     makeQuestionCard(question: currentQuestion)
-                    if viewModel.hasSelectedAnswer {
+                    if viewModel.shouldShowExplanation {
                         makeExplanationCard(
                             explanation: currentQuestion.explanation,
                             isCorrect: viewModel.isSelectedAnswerCorrect
@@ -94,8 +97,8 @@ private extension QuizOfTheDayScreen {
                     icon: "trophy",
                     iconColor: Color(.pinkButton),
                     title: L10n.QuizOfTheDay.scoreToday,
-                    value: "8",
-                    trailingValue: "/ 15"
+                    value: "\(viewModel.scoreToday)",
+                    trailingValue: "/ \(viewModel.totalQuestions)"
                 )
 
                 
@@ -105,8 +108,8 @@ private extension QuizOfTheDayScreen {
                     icon: "flame.fill",
                     iconColor: Color(.pinkButton),
                     title: L10n.QuizOfTheDay.streakDays,
-                    value: "3 дня",
-                    trailingValue: nil
+                    value: "3",
+                    trailingValue: L10n.QuizOfTheDay.daySuffix,
                 )
             }
 
@@ -134,7 +137,7 @@ private extension QuizOfTheDayScreen {
 
                         Capsule()
                             .fill(Color(.pinkButton))
-                            .frame(width: proxy.size.width * viewModel.progressValue, height: 10)
+                            .frame(width: proxy.size.width * CGFloat(viewModel.progressValue), height: 10)
                     }
                 }
                 .frame(height: 10)
@@ -295,32 +298,72 @@ private extension QuizOfTheDayScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 10, x: 0, y: 4)
     }
 
+    func makeQuizCompletedCard() -> some View {
+        VStack(spacing: 18) {
+            ZStack {
+                Circle()
+                    .fill(Color(.surfaceOverlay))
+                    .frame(width: 72, height: 72)
+
+                Image(systemName: "checkmark.seal.fill")
+                    .font(.system(size: 34))
+                    .foregroundStyle(Color(.pinkButton))
+            }
+
+            VStack(spacing: 10) {
+                Text(L10n.QuizOfTheDay.completedTitle)
+                    .font(.system(size: 24, weight: .semibold, design: .rounded))
+                    .foregroundStyle(Color(.titleText))
+                    .multilineTextAlignment(.center)
+
+                Text(L10n.QuizOfTheDay.completedSubtitle)
+                    .font(.system(size: 17, weight: .regular, design: .rounded))
+                    .foregroundStyle(Color(.descriptionText))
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 20)
+        .padding(.vertical, 28)
+        .background(Color(.surfacePrimary))
+        .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+        .shadow(color: Color(.cardShadowSubtle), radius: 10, x: 0, y: 4)
+    }
+
     func makeBottomControls() -> some View {
         VStack(spacing: 16) {
-            HStack(spacing: 18) {
-                makeArrowButton(systemName: "arrow.left")
+            if !viewModel.isQuizCompleted {
+                HStack(spacing: 18) {
+                    makeArrowButton(systemName: "arrow.left", action: { }, isEnabled: false)
 
-                Button(action: { }) {
-                    Text(L10n.QuizOfTheDay.nextQuestion)
-                        .font(.system(size: 21, weight: .medium, design: .rounded))
-                        .foregroundStyle(Color(.textOnAccent))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 18)
-                        .background(
-                            LinearGradient(
-                                colors: [
-                                    Color(.buttonShine),
-                                    Color(.pinkButton)
-                                ],
-                                startPoint: .leading,
-                                endPoint: .trailing
+                    Button(action: handlePrimaryAction) {
+                        Text(primaryButtonTitle)
+                            .font(.system(size: 21, weight: .medium, design: .rounded))
+                            .foregroundStyle(Color(.textOnAccent))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 18)
+                            .background(
+                                LinearGradient(
+                                    colors: [
+                                        Color(.buttonShine),
+                                        Color(.pinkButton)
+                                    ],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
                             )
-                        )
-                        .clipShape(Capsule())
-                }
-                .buttonStyle(.plain)
+                            .clipShape(Capsule())
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(!canPerformPrimaryAction)
+                    .opacity(canPerformPrimaryAction ? 1 : 0.55)
 
-                makeArrowButton(systemName: "arrow.right")
+                    makeArrowButton(
+                        systemName: "arrow.right",
+                        action: handlePrimaryAction,
+                        isEnabled: canPerformPrimaryAction
+                    )
+                }
             }
 
             HStack(spacing: 8) {
@@ -335,8 +378,8 @@ private extension QuizOfTheDayScreen {
         }
     }
 
-    func makeArrowButton(systemName: String) -> some View {
-        Button(action: { }) {
+    func makeArrowButton(systemName: String, action: @escaping () -> Void, isEnabled: Bool) -> some View {
+        Button(action: action) {
             ZStack {
                 Circle()
                     .fill(Color(.surfacePrimary))
@@ -348,5 +391,34 @@ private extension QuizOfTheDayScreen {
             }
         }
         .buttonStyle(.plain)
+        .disabled(!isEnabled)
+        .opacity(isEnabled ? 1 : 0.45)
+    }
+
+    var canPerformPrimaryAction: Bool {
+        if viewModel.isQuizCompleted {
+            return false
+        }
+        if viewModel.canFinishQuiz {
+            return true
+        }
+        return viewModel.isAnswerSubmitted ? viewModel.canGoToNextQuestion : viewModel.canSubmitAnswer
+    }
+
+    var primaryButtonTitle: String {
+        if viewModel.canFinishQuiz {
+            return L10n.QuizOfTheDay.finishQuiz
+        }
+        return viewModel.isAnswerSubmitted ? L10n.QuizOfTheDay.nextQuestion : L10n.QuizOfTheDay.submitAnswer
+    }
+
+    func handlePrimaryAction() {
+        if viewModel.canFinishQuiz {
+            viewModel.finishQuiz()
+        } else if viewModel.isAnswerSubmitted {
+            viewModel.goToNextQuestion()
+        } else {
+            viewModel.submitAnswer()
+        }
     }
 }

@@ -12,7 +12,10 @@ import Observation
 @Observable final class QuizOfTheDayViewModel {
     var questions: [QuizOfTheDayQuestion] = []
     var currentQuestionIndex = 0
+    var scoreToday = 0
     var selectedAnswerId: String?
+    var isAnswerSubmitted = false
+    var isQuizCompleted = false
 
     var currentQuestion: QuizOfTheDayQuestion? {
         guard questions.indices.contains(currentQuestionIndex) else { return nil }
@@ -25,6 +28,26 @@ import Observation
 
     var hasSelectedAnswer: Bool {
         selectedAnswerId != nil
+    }
+
+    var shouldShowExplanation: Bool {
+        isAnswerSubmitted
+    }
+
+    var canSubmitAnswer: Bool {
+        !isAnswerSubmitted && hasSelectedAnswer
+    }
+
+    var canGoToNextQuestion: Bool {
+        isAnswerSubmitted && currentQuestionIndex + 1 < totalQuestions
+    }
+
+    var isOnLastQuestion: Bool {
+        totalQuestions > 0 && currentQuestionIndex == totalQuestions - 1
+    }
+
+    var canFinishQuiz: Bool {
+        isAnswerSubmitted && isOnLastQuestion && !isQuizCompleted
     }
 
     var isSelectedAnswerCorrect: Bool {
@@ -40,7 +63,7 @@ import Observation
     }
 
     var progressValue: Double {
-        totalQuestions == 0 ? 0 : Double(currentQuestionNumber) / Double(totalQuestions)
+        totalQuestions == 0 ? 0 : (isQuizCompleted ? 1 : Double(currentQuestionNumber) / Double(totalQuestions))
     }
 
     var progressPercentText: String {
@@ -52,8 +75,29 @@ import Observation
     }
 
     func selectAnswer(id: String) {
+        guard !isAnswerSubmitted else { return }
         selectedAnswerId = id
     }
 
-    var progressValue: Double = 0.33
+    func submitAnswer() {
+        guard canSubmitAnswer else { return }
+
+        if isSelectedAnswerCorrect {
+            scoreToday += 1
+        }
+        isAnswerSubmitted = true
+    }
+
+    func goToNextQuestion() {
+        guard canGoToNextQuestion else { return }
+
+        currentQuestionIndex += 1
+        selectedAnswerId = nil
+        isAnswerSubmitted = false
+    }
+
+    func finishQuiz() {
+        guard canFinishQuiz else { return }
+        isQuizCompleted = true
+    }
 }
