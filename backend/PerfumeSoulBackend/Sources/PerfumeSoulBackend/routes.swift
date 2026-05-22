@@ -25,6 +25,16 @@ func routes(_ app: Application) throws {
             throw error
         }
     }
+
+    app.get("quiz-of-the-day") { _ async throws -> Response in
+        do {
+            return try jsonResponse(QuizOfTheDayQuestionLoader.load())
+        } catch let error as CocoaError where error.code == .fileNoSuchFile {
+            throw Abort(.notFound)
+        } catch {
+            throw error
+        }
+    }
     
     app.get("perfumes", "recommendations") { _ async throws -> Response in
         do {
