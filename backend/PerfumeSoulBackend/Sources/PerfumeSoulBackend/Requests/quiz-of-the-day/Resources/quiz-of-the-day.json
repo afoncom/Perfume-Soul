@@ -1,0 +1,167 @@
+[
+  {
+    "id": 1,
+    "question": "Какие ноты чаще всего относятся к верхним (начальным) нотам аромата?",
+    "answers": [
+      { "id": "A", "text": "Ваниль, пачули, амбра", "isCorrect": false },
+      { "id": "B", "text": "Бергамот, лимон, мята", "isCorrect": true },
+      { "id": "C", "text": "Сандал, кедр, мускус", "isCorrect": false },
+      { "id": "D", "text": "Ирис, ветивер, кожа", "isCorrect": false }
+    ],
+    "explanation": "Верхние ноты ощущаются сразу после нанесения. Обычно это свежие цитрусовые и зелёные аккорды."
+  },
+  {
+    "id": 2,
+    "question": "Что чаще всего относится к базовым нотам?",
+    "answers": [
+      { "id": "A", "text": "Лимон и бергамот", "isCorrect": false },
+      { "id": "B", "text": "Морские ноты", "isCorrect": false },
+      { "id": "C", "text": "Ваниль, сандал, мускус", "isCorrect": true },
+      { "id": "D", "text": "Лаванда и мята", "isCorrect": false }
+    ],
+    "explanation": "Базовые ноты раскрываются дольше всего и формируют шлейф аромата."
+  },
+  {
+    "id": 3,
+    "question": "Что означает термин “шлейф” в парфюмерии?",
+    "answers": [
+      { "id": "A", "text": "Цвет флакона", "isCorrect": false },
+      { "id": "B", "text": "След аромата, остающийся в воздухе", "isCorrect": true },
+      { "id": "C", "text": "Первые ноты духов", "isCorrect": false },
+      { "id": "D", "text": "Время хранения парфюма", "isCorrect": false }
+    ],
+    "explanation": "Шлейф — это аромат, который ощущают окружающие после вашего прохождения."
+  },
+  {
+    "id": 4,
+    "question": "Что такое “унисекс” аромат?",
+    "answers": [
+      { "id": "A", "text": "Только мужской аромат", "isCorrect": false },
+      { "id": "B", "text": "Только женский аромат", "isCorrect": false },
+      { "id": "C", "text": "Аромат без яркого гендерного акцента", "isCorrect": true },
+      { "id": "D", "text": "Очень сладкий аромат", "isCorrect": false }
+    ],
+    "explanation": "Унисекс-парфюмы подходят любому полу и строятся вокруг универсальных аккордов."
+  },
+  {
+    "id": 5,
+    "question": "Какой ингредиент чаще всего даёт древесное звучание?",
+    "answers": [
+      { "id": "A", "text": "Сандал", "isCorrect": true },
+      { "id": "B", "text": "Лимон", "isCorrect": false },
+      { "id": "C", "text": "Мандарин", "isCorrect": false },
+      { "id": "D", "text": "Лотос", "isCorrect": false }
+    ],
+    "explanation": "Сандал — одна из самых известных древесных нот."
+  },
+  {
+    "id": 6,
+    "question": "Что обычно означает “Eau de Parfum”?",
+    "answers": [
+      { "id": "A", "text": "Самая слабая концентрация", "isCorrect": false },
+      { "id": "B", "text": "Средняя/высокая концентрация парфюма", "isCorrect": true },
+      { "id": "C", "text": "Только натуральные масла", "isCorrect": false },
+      { "id": "D", "text": "Вид мужских духов", "isCorrect": false }
+    ],
+    "explanation": "Eau de Parfum держится дольше Eau de Toilette за счёт большей концентрации масел."
+  },
+  {
+    "id": 7,
+    "question": "Какой аккорд чаще всего считается “свежим”?",
+    "answers": [
+      { "id": "A", "text": "Кожаный", "isCorrect": false },
+      { "id": "B", "text": "Цитрусовый", "isCorrect": true },
+      { "id": "C", "text": "Табачный", "isCorrect": false },
+      { "id": "D", "text": "Восточный", "isCorrect": false }
+    ],
+    "explanation": "Цитрусовые ароматы ассоциируются с чистотой и лёгкостью."
+  },
+  {
+    "id": 8,
+    "question": "Что чаще всего относится к гурманским ароматам?",
+    "answers": [
+      { "id": "A", "text": "Шоколад, карамель, ваниль", "isCorrect": true },
+      { "id": "B", "text": "Морская соль и озон", "isCorrect": false },
+      { "id": "C", "text": "Мята и эвкалипт", "isCorrect": false },
+      { "id": "D", "text": "Листья томата", "isCorrect": false }
+    ],
+    "explanation": "Gourmand — “съедобные” сладкие ароматы."
+  },
+  {
+    "id": 9,
+    "question": "Какая нота чаще всего встречается в фужерных ароматах?",
+    "answers": [
+      { "id": "A", "text": "Лаванда", "isCorrect": true },
+      { "id": "B", "text": "Кокос", "isCorrect": false },
+      { "id": "C", "text": "Арбуз", "isCorrect": false },
+      { "id": "D", "text": "Вишня", "isCorrect": false }
+    ],
+    "explanation": "Лаванда — основа многих классических фужерных композиций."
+  },
+  {
+    "id": 10,
+    "question": "Что такое “аккорд” в парфюмерии?",
+    "answers": [
+      { "id": "A", "text": "Один ингредиент", "isCorrect": false },
+      { "id": "B", "text": "Смесь нескольких нот, создающая единое звучание", "isCorrect": true },
+      { "id": "C", "text": "Название бренда", "isCorrect": false },
+      { "id": "D", "text": "Тип флакона", "isCorrect": false }
+    ],
+    "explanation": "Аккорд — это комбинация нот, воспринимаемая как единый аромат."
+  },
+  {
+    "id": 11,
+    "question": "Какие ароматы чаще ассоциируются с летом?",
+    "answers": [
+      { "id": "A", "text": "Тяжёлые восточные", "isCorrect": false },
+      { "id": "B", "text": "Цитрусовые и водные", "isCorrect": true },
+      { "id": "C", "text": "Табачные", "isCorrect": false },
+      { "id": "D", "text": "Кожаные", "isCorrect": false }
+    ],
+    "explanation": "Летом обычно выбирают более лёгкие и свежие композиции."
+  },
+  {
+    "id": 12,
+    "question": "Что чаще всего означает “нишевый” парфюм?",
+    "answers": [
+      { "id": "A", "text": "Дешёвый аромат", "isCorrect": false },
+      { "id": "B", "text": "Массовый аромат", "isCorrect": false },
+      { "id": "C", "text": "Более редкий и авторский аромат", "isCorrect": true },
+      { "id": "D", "text": "Только винтажный аромат", "isCorrect": false }
+    ],
+    "explanation": "Нишевая парфюмерия делает акцент на необычности и уникальности."
+  },
+  {
+    "id": 13,
+    "question": "Какая нота чаще всего ассоциируется с “дымностью”?",
+    "answers": [
+      { "id": "A", "text": "Ладан", "isCorrect": true },
+      { "id": "B", "text": "Лимон", "isCorrect": false },
+      { "id": "C", "text": "Жасмин", "isCorrect": false },
+      { "id": "D", "text": "Пион", "isCorrect": false }
+    ],
+    "explanation": "Ладан и смолы часто дают дымное, мистическое звучание."
+  },
+  {
+    "id": 14,
+    "question": "Что обычно происходит с ароматом после нанесения?",
+    "answers": [
+      { "id": "A", "text": "Он не меняется", "isCorrect": false },
+      { "id": "B", "text": "Ноты раскрываются постепенно", "isCorrect": true },
+      { "id": "C", "text": "Исчезают только верхние ноты", "isCorrect": false },
+      { "id": "D", "text": "Меняется цвет жидкости", "isCorrect": false }
+    ],
+    "explanation": "Аромат развивается по пирамиде: верхние → сердечные → базовые ноты."
+  },
+  {
+    "id": 15,
+    "question": "Какой ингредиент чаще всего даёт “чистое”, мягкое ощущение?",
+    "answers": [
+      { "id": "A", "text": "Табак", "isCorrect": false },
+      { "id": "B", "text": "Белый мускус", "isCorrect": true },
+      { "id": "C", "text": "Перец", "isCorrect": false },
+      { "id": "D", "text": "Кожа", "isCorrect": false }
+    ],
+    "explanation": "Белый мускус часто ассоциируется с чистотой, тканью и мягкостью."
+  }
+]
