@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import CoreGraphics
 
 struct QuizOfTheDayScreen: View {
     @Environment(\.dismiss) private var dismiss
@@ -33,7 +32,7 @@ struct QuizOfTheDayScreen: View {
                     makeQuizCompletedCard()
                 } else if let currentQuestion = viewModel.currentQuestion {
                     makeQuestionCard(question: currentQuestion)
-                    if viewModel.shouldShowExplanation {
+                    if viewModel.isAnswerSubmitted {
                         makeExplanationCard(
                             explanation: currentQuestion.explanation,
                             isCorrect: viewModel.isSelectedAnswerCorrect
@@ -363,37 +362,27 @@ private extension QuizOfTheDayScreen {
     func makeBottomControls() -> some View {
         VStack(spacing: 16) {
             if !viewModel.isQuizCompleted {
-                HStack(spacing: 18) {
-                    makeArrowButton(systemName: "arrow.left", action: { }, isEnabled: false)
-
-                    Button(action: handlePrimaryAction) {
-                        Text(primaryButtonTitle)
-                            .font(.system(size: 21, weight: .medium, design: .rounded))
-                            .foregroundStyle(Color(.textOnAccent))
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 18)
-                            .background(
-                                LinearGradient(
-                                    colors: [
-                                        Color(.buttonShine),
-                                        Color(.pinkButton)
-                                    ],
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
+                Button(action: handlePrimaryAction) {
+                    Text(primaryButtonTitle)
+                        .font(.system(size: 21, weight: .medium, design: .rounded))
+                        .foregroundStyle(Color(.textOnAccent))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 18)
+                        .background(
+                            LinearGradient(
+                                colors: [
+                                    Color(.buttonShine),
+                                    Color(.pinkButton)
+                                ],
+                                startPoint: .leading,
+                                endPoint: .trailing
                             )
-                            .clipShape(Capsule())
-                    }
-                    .buttonStyle(.plain)
-                    .disabled(!canPerformPrimaryAction)
-                    .opacity(canPerformPrimaryAction ? 1 : 0.55)
-
-                    makeArrowButton(
-                        systemName: "arrow.right",
-                        action: handlePrimaryAction,
-                        isEnabled: canPerformPrimaryAction
-                    )
+                        )
+                        .clipShape(Capsule())
                 }
+                .buttonStyle(.plain)
+                .disabled(!canPerformPrimaryAction)
+                .opacity(canPerformPrimaryAction ? 1 : 0.55)
             }
 
             HStack(spacing: 8) {
@@ -406,23 +395,6 @@ private extension QuizOfTheDayScreen {
                     .foregroundStyle(Color(.textSecondary))
             }
         }
-    }
-
-    func makeArrowButton(systemName: String, action: @escaping () -> Void, isEnabled: Bool) -> some View {
-        Button(action: action) {
-            ZStack {
-                Circle()
-                    .fill(Color(.surfacePrimary))
-                    .frame(width: 58, height: 58)
-
-                Image(systemName: systemName)
-                    .font(.title3)
-                    .foregroundStyle(Color(.pinkButton))
-            }
-        }
-        .buttonStyle(.plain)
-        .disabled(!isEnabled)
-        .opacity(isEnabled ? 1 : 0.45)
     }
 
     var canPerformPrimaryAction: Bool {

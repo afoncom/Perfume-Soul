@@ -52,10 +52,6 @@ import Observation
         selectedAnswerId != nil
     }
 
-    var shouldShowExplanation: Bool {
-        isAnswerSubmitted
-    }
-
     var canSubmitAnswer: Bool {
         !isAnswerSubmitted && hasSelectedAnswer
     }
