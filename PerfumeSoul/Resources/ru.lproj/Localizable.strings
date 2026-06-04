@@ -57,7 +57,7 @@
 "screen.addedProfiles" = "Добавленные профили";
 "screen.comparePerfumes" = "Сравнение ароматов";
 "screen.dayInPerfumery" = "День в парфюмерии";
-"screen.discover" = "Поиск";
+"screen.discover" = "Подбор";
 "screen.findPerfumes" = "Поиск ароматов";
 "screen.quizOfTheDay" = "Квиз дня";
 "screen.similarPerfumes" = "Похожие ароматы";
@@ -66,6 +66,7 @@
 "perfumeRecommendations.empty.subtitle" = "Попробуйте позже";
 "screen.profile" = "Профиль";
 "screen.sendFeedback" = "Обратная связь";
+"screen.searchPerfume" = "Поиск";
 "screen.settings" = "Настройки";
 "screen.quizOfTheDay" = "Квиз дня";
 "screen.today" = "Сегодня";

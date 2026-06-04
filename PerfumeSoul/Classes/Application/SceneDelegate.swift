@@ -58,7 +58,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         )
         let tabController = UITabBarController()
-        tabController.viewControllers = [todayScreen, discoverScreen, profileScreen, settingsScreen]
+        tabController.viewControllers = [todayScreen, discoverScreen, profileScreen, settingsScreen, searchPerfumeScreen]
         setRootViewController(tabController)
     }
 
