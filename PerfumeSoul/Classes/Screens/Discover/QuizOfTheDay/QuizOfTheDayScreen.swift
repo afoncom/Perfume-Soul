@@ -138,7 +138,7 @@ private extension QuizOfTheDayScreen {
                     icon: "flame.fill",
                     iconColor: Color(.pinkButton),
                     title: L10n.QuizOfTheDay.streakDays,
-                    value: "3",
+                    value: "\(viewModel.streakDays)",
                     trailingValue: L10n.QuizOfTheDay.daySuffix,
                 )
             }

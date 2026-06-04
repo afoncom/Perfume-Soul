@@ -11,11 +11,13 @@ import Observation
 
 @Observable final class QuizOfTheDayViewModel {
     private let onCorrectAnswer: (() -> Void)?
+    private let onQuizCompletion: (() -> Int)?
     private let onProgressChange: ((QuizOfTheDayProgress) -> Void)?
     var questions: [QuizOfTheDayQuestion] = []
     var errorMessage: String?
     var currentQuestionIndex: Int
     var scoreToday: Int
+    var streakDays: Int
     var selectedAnswerId: String?
     var isAnswerSubmitted: Bool
     var isQuizCompleted: Bool
@@ -23,14 +25,17 @@ import Observation
     init(
         progress: QuizOfTheDayProgress = .initial,
         onCorrectAnswer: (() -> Void)? = nil,
+        onQuizCompletion: (() -> Int)? = nil,
         onProgressChange: ((QuizOfTheDayProgress) -> Void)? = nil
     ) {
         self.currentQuestionIndex = progress.currentQuestionIndex
         self.scoreToday = progress.scoreToday
+        self.streakDays = progress.streakDays
         self.selectedAnswerId = progress.selectedAnswerId
         self.isAnswerSubmitted = progress.isAnswerSubmitted
         self.isQuizCompleted = progress.isQuizCompleted
         self.onCorrectAnswer = onCorrectAnswer
+        self.onQuizCompletion = onQuizCompletion
         self.onProgressChange = onProgressChange
     }
 
@@ -120,6 +125,7 @@ import Observation
     func finishQuiz() {
         guard canFinishQuiz else { return }
         isQuizCompleted = true
+        streakDays = onQuizCompletion?() ?? streakDays
         saveProgress()
     }
 
@@ -128,6 +134,7 @@ import Observation
             QuizOfTheDayProgress(
                 currentQuestionIndex: currentQuestionIndex,
                 scoreToday: scoreToday,
+                streakDays: streakDays,
                 selectedAnswerId: selectedAnswerId,
                 isAnswerSubmitted: isAnswerSubmitted,
                 isQuizCompleted: isQuizCompleted

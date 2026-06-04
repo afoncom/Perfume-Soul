@@ -23,6 +23,9 @@ final class QuizOfTheDayModule {
                     await profileService.incrementTotalCorrectQuizAnswers()
                 }
             },
+            onQuizCompletion: {
+                progressStorage.completeQuiz()
+            },
             onProgressChange: { progress in
                 progressStorage.saveProgress(progress)
             }
