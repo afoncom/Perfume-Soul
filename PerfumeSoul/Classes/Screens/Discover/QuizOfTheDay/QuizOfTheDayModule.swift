@@ -15,11 +15,16 @@ final class QuizOfTheDayModule {
         container: NSPersistentContainer
     ) -> UIViewController {
         let profileService = ProfileServiceImpl(container: container)
+        let progressStorage = QuizOfTheDayProgressStorageImpl(userDefaults: .standard)
         let viewModel = QuizOfTheDayViewModel(
+            progress: progressStorage.loadProgress(),
             onCorrectAnswer: {
                 Task {
                     await profileService.incrementTotalCorrectQuizAnswers()
                 }
+            },
+            onProgressChange: { progress in
+                progressStorage.saveProgress(progress)
             }
         )
         let router = QuizOfTheDayRouterImpl(navigationController: navigationController)

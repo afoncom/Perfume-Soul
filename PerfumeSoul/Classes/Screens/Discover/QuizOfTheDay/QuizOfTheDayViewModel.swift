@@ -11,15 +11,26 @@ import Observation
 
 @Observable final class QuizOfTheDayViewModel {
     private let onCorrectAnswer: (() -> Void)?
+    private let onProgressChange: ((QuizOfTheDayProgress) -> Void)?
     var questions: [QuizOfTheDayQuestion] = []
-    var currentQuestionIndex = 0
-    var scoreToday = 0
+    var currentQuestionIndex: Int
+    var scoreToday: Int
     var selectedAnswerId: String?
-    var isAnswerSubmitted = false
-    var isQuizCompleted = false
+    var isAnswerSubmitted: Bool
+    var isQuizCompleted: Bool
 
-    init(onCorrectAnswer: (() -> Void)? = nil) {
+    init(
+        progress: QuizOfTheDayProgress = .initial,
+        onCorrectAnswer: (() -> Void)? = nil,
+        onProgressChange: ((QuizOfTheDayProgress) -> Void)? = nil
+    ) {
+        self.currentQuestionIndex = progress.currentQuestionIndex
+        self.scoreToday = progress.scoreToday
+        self.selectedAnswerId = progress.selectedAnswerId
+        self.isAnswerSubmitted = progress.isAnswerSubmitted
+        self.isQuizCompleted = progress.isQuizCompleted
         self.onCorrectAnswer = onCorrectAnswer
+        self.onProgressChange = onProgressChange
     }
 
     var currentQuestion: QuizOfTheDayQuestion? {
@@ -82,6 +93,7 @@ import Observation
     func selectAnswer(id: String) {
         guard !isAnswerSubmitted else { return }
         selectedAnswerId = id
+        saveProgress()
     }
 
     func submitAnswer() {
@@ -92,6 +104,7 @@ import Observation
             onCorrectAnswer?()
         }
         isAnswerSubmitted = true
+        saveProgress()
     }
 
     func goToNextQuestion() {
@@ -100,10 +113,24 @@ import Observation
         currentQuestionIndex += 1
         selectedAnswerId = nil
         isAnswerSubmitted = false
+        saveProgress()
     }
 
     func finishQuiz() {
         guard canFinishQuiz else { return }
         isQuizCompleted = true
+        saveProgress()
+    }
+
+    private func saveProgress() {
+        onProgressChange?(
+            QuizOfTheDayProgress(
+                currentQuestionIndex: currentQuestionIndex,
+                scoreToday: scoreToday,
+                selectedAnswerId: selectedAnswerId,
+                isAnswerSubmitted: isAnswerSubmitted,
+                isQuizCompleted: isQuizCompleted
+            )
+        )
     }
 }
