@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PerfumeExpertiseLevel {
+enum PerfumeExpertiseLevel: CaseIterable {
     case novice
     case noteExplorer
     case accordExpert
@@ -30,32 +30,17 @@ enum PerfumeExpertiseLevel {
     }
 
     var nextLevelStart: Int? {
-        switch self {
-        case .novice:
-            return 10
-        case .noteExplorer:
-            return 25
-        case .accordExpert:
-            return 50
-        case .fragranceAnalyst:
-            return 100
-        case .perfumer:
+        guard
+            let currentIndex = Self.allCases.firstIndex(of: self),
+            Self.allCases.indices.contains(currentIndex + 1)
+        else {
             return nil
         }
+
+        return Self.allCases[currentIndex + 1].range.lowerBound
     }
 
     static func level(for correctAnswers: Int) -> PerfumeExpertiseLevel {
-        switch correctAnswers {
-        case ..<10:
-            return .novice
-        case 10..<25:
-            return .noteExplorer
-        case 25..<50:
-            return .accordExpert
-        case 50..<100:
-            return .fragranceAnalyst
-        default:
-            return .perfumer
-        }
+        allCases.first(where: { $0.range.contains(correctAnswers) }) ?? .perfumer
     }
 }
