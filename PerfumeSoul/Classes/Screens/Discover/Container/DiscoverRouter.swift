@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 protocol DiscoverRouter {
     func showFindPerfumesScreen()
@@ -16,9 +17,14 @@ protocol DiscoverRouter {
 
 final class DiscoverRouterImpl {
     private weak var navigationController: UINavigationController?
+    private let container: NSPersistentContainer
     
-    init(navigationController: UINavigationController?) {
+    init(
+        navigationController: UINavigationController?,
+        container: NSPersistentContainer
+    ) {
         self.navigationController = navigationController
+        self.container = container
     }
 }
 
@@ -39,7 +45,10 @@ extension DiscoverRouterImpl: DiscoverRouter {
     
     func showQuizOfTheDayScreen() {
         navigationController?.pushViewController(
-            QuizOfTheDayModule.build(navigationController: navigationController),
+            QuizOfTheDayModule.build(
+                navigationController: navigationController,
+                container: container
+            ),
             animated: true
         )
     }

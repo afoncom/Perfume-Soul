@@ -10,12 +10,17 @@ import Foundation
 import Observation
 
 @Observable final class QuizOfTheDayViewModel {
+    private let onCorrectAnswer: (() -> Void)?
     var questions: [QuizOfTheDayQuestion] = []
     var currentQuestionIndex = 0
     var scoreToday = 0
     var selectedAnswerId: String?
     var isAnswerSubmitted = false
     var isQuizCompleted = false
+
+    init(onCorrectAnswer: (() -> Void)? = nil) {
+        self.onCorrectAnswer = onCorrectAnswer
+    }
 
     var currentQuestion: QuizOfTheDayQuestion? {
         guard questions.indices.contains(currentQuestionIndex) else { return nil }
@@ -84,6 +89,7 @@ import Observation
 
         if isSelectedAnswerCorrect {
             scoreToday += 1
+            onCorrectAnswer?()
         }
         isAnswerSubmitted = true
     }

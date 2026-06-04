@@ -50,7 +50,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func showMainScreen(container: NSPersistentContainer) {
         let todayScreen = TodayModule.build(container: container)
         let settingsScreen = SettingsModule.build()
-        let discoverScreen = DiscoverModule.build()
+        let discoverScreen = DiscoverModule.build(container: container)
         let profileScreen = ProfileModule.build(
             container: container,
             onProfileDeleted: { [weak self] in

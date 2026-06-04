@@ -12,7 +12,10 @@ import Observation
 @Observable final class ProfileViewModel {
     var profile: Profile?
     var isShowingDeleteProfileAlert = false
-    var totalCorrectQuizAnswers = 18
+    
+    var totalCorrectQuizAnswers: Int {
+        profile?.totalCorrectQuizAnswers ?? 0
+    }
 
     var perfumeExpertiseLevel: PerfumeExpertiseLevel {
         PerfumeExpertiseLevel.level(for: totalCorrectQuizAnswers)

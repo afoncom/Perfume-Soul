@@ -7,10 +7,21 @@
 //
 
 import SwiftUI
+import CoreData
 
 final class QuizOfTheDayModule {
-    static func build(navigationController: UINavigationController?) -> UIViewController {
-        let viewModel = QuizOfTheDayViewModel()
+    static func build(
+        navigationController: UINavigationController?,
+        container: NSPersistentContainer
+    ) -> UIViewController {
+        let profileService = ProfileServiceImpl(container: container)
+        let viewModel = QuizOfTheDayViewModel(
+            onCorrectAnswer: {
+                Task {
+                    await profileService.incrementTotalCorrectQuizAnswers()
+                }
+            }
+        )
         let router = QuizOfTheDayRouterImpl(navigationController: navigationController)
         let requestManager = RequestManagerImpl(urlSession: URLSession.shared, baseURL: "http://127.0.0.1:8080")
         let service = QuizOfTheDayServiceImpl(requestManager: requestManager)

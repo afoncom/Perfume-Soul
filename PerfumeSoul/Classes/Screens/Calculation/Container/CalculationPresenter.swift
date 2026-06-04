@@ -38,7 +38,8 @@ extension CalculationPresenterImpl: CalculationPresenter {
             name: viewModel.firstName,
             birthDate: viewModel.formattedBirthDate,
             birthTime: viewModel.formattedBirthTime,
-            birthPlace: viewModel.birthPlace
+            birthPlace: viewModel.birthPlace,
+            totalCorrectQuizAnswers: 0
         )
         profileService.saveProfile(profile)
         router.showProfileDescription()
