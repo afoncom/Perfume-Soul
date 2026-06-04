@@ -31,10 +31,13 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
         do {
             let questions = try await service.requestQuizOfTheDayQuestions()
             await MainActor.run {
+                viewModel.errorMessage = nil
                 viewModel.questions = questions
             }
         } catch {
-            print(error)
+            await MainActor.run {
+                viewModel.errorMessage = L10n.Common.Error.message
+            }
         }
     }
 }

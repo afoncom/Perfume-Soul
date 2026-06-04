@@ -13,6 +13,7 @@ import Observation
     private let onCorrectAnswer: (() -> Void)?
     private let onProgressChange: ((QuizOfTheDayProgress) -> Void)?
     var questions: [QuizOfTheDayQuestion] = []
+    var errorMessage: String?
     var currentQuestionIndex: Int
     var scoreToday: Int
     var selectedAnswerId: String?

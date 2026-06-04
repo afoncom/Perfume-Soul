@@ -27,7 +27,9 @@ struct QuizOfTheDayScreen: View {
             VStack(spacing: 22) {
                 makeTopBar()
                 makeProgressCard()
-                if viewModel.isQuizCompleted {
+                if let errorMessage = viewModel.errorMessage {
+                    makeErrorCard(message: errorMessage)
+                } else if viewModel.isQuizCompleted {
                     makeQuizCompletedCard()
                 } else if let currentQuestion = viewModel.currentQuestion {
                     makeQuestionCard(question: currentQuestion)
@@ -59,6 +61,34 @@ struct QuizOfTheDayScreen: View {
 }
 
 private extension QuizOfTheDayScreen {
+    func makeErrorCard(message: String) -> some View {
+        VStack(spacing: 16) {
+            Text(message)
+                .font(.system(size: 17, weight: .medium, design: .rounded))
+                .foregroundStyle(Color(.textPrimary))
+                .multilineTextAlignment(.center)
+
+            Button {
+                Task {
+                    await presenter.onAppear()
+                }
+            } label: {
+                Text(L10n.QuizOfTheDay.retryButton)
+                    .font(.system(size: 17, weight: .semibold, design: .rounded))
+                    .foregroundStyle(Color(.textOnAccent))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(Color(.pinkButton))
+                    .clipShape(Capsule())
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(18)
+        .background(Color(.surfacePrimary))
+        .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+        .shadow(color: Color(.cardShadowSubtle), radius: 10, x: 0, y: 4)
+    }
+
     func makeTopBar() -> some View {
         HStack(alignment: .center) {
             Button {
