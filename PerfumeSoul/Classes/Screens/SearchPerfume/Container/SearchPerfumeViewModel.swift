@@ -13,6 +13,7 @@ import Observation
     var pageText = "1"
     var itemsPerPageText = "10"
     var perfumes: [SearchPerfumeItem] = []
+    var errorMessage: String?
     var isLoading = false
     var hasSearched = false
 }

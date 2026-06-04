@@ -14,6 +14,7 @@
 "discover.findSimilar.title" = "Найти похожие ароматы";
 "discover.scentArchetype.button" = "Начать квиз";
 "discover.scentArchetype.title" = "Найди свой ароматический архетип";
+"common.error.message" = "Что-то пошло не так. Попробуйте еще раз.";
 "profile.birthInfo" = "Родилась 12 мая 1993  Париж, Франция";
 "profile.actions.cancelButton" = "Отмена";
 "profile.actions.deleteAlertMessage" = "Это действие нельзя отменить.";

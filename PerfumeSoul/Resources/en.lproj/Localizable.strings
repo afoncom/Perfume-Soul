@@ -14,6 +14,7 @@
 "discover.findSimilar.title" = "Find Similar Perfumes";
 "discover.scentArchetype.button" = "Start quiz";
 "discover.scentArchetype.title" = "Find Your Scent Archetype";
+"common.error.message" = "Something went wrong. Please try again.";
 "profile.birthInfo" = "Born May 12, 1993  Paris, France";
 "profile.actions.cancelButton" = "Cancel";
 "profile.actions.deleteAlertMessage" = "This action can't be undone.";

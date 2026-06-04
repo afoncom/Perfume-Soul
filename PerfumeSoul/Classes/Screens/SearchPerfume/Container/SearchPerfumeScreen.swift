@@ -113,6 +113,12 @@ extension SearchPerfumeScreen {
                 ProgressView()
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 24)
+            } else if let errorMessage = viewModel.errorMessage {
+                Text(errorMessage)
+                    .font(.body)
+                    .foregroundStyle(Color(.textSecondary))
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.vertical, 24)
             } else if viewModel.perfumes.isEmpty, viewModel.hasSearched {
                 Text(L10n.SearchPerfume.emptyState)
                     .font(.body)

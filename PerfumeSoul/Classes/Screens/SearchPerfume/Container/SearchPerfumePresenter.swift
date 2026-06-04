@@ -35,6 +35,7 @@ extension SearchPerfumePresenterImpl: SearchPerfumePresenter {
         await MainActor.run {
             viewModel.isLoading = true
             viewModel.hasSearched = true
+            viewModel.errorMessage = nil
         }
 
         do {
@@ -46,12 +47,13 @@ extension SearchPerfumePresenterImpl: SearchPerfumePresenter {
 
             await MainActor.run {
                 viewModel.perfumes = perfumes
+                viewModel.errorMessage = nil
                 viewModel.isLoading = false
             }
         } catch {
-            print(error)
             await MainActor.run {
                 viewModel.perfumes = []
+                viewModel.errorMessage = L10n.Common.Error.message
                 viewModel.isLoading = false
             }
         }
