@@ -28,7 +28,7 @@ struct QuizOfTheDayProgress {
 protocol QuizOfTheDayProgressStorage {
     func loadProgress() -> QuizOfTheDayProgress
     func saveProgress(_ progress: QuizOfTheDayProgress)
-    func completeQuiz() -> Int
+    func completeQuiz()
 }
 
 final class QuizOfTheDayProgressStorageImpl {
@@ -120,7 +120,7 @@ extension QuizOfTheDayProgressStorageImpl: QuizOfTheDayProgressStorage {
         userDefaults.set(progress.isQuizCompleted, forKey: Keys.isQuizCompleted)
     }
 
-    func completeQuiz() -> Int {
+    func completeQuiz() {
         let newStreakDays: Int
         let currentStreakDays = resolvedStreakDays()
         let lastCompletedDate = userDefaults.string(forKey: Keys.lastCompletedDate)
@@ -135,7 +135,5 @@ extension QuizOfTheDayProgressStorageImpl: QuizOfTheDayProgressStorage {
 
         userDefaults.set(newStreakDays, forKey: Keys.streakDays)
         userDefaults.set(todayKey, forKey: Keys.lastCompletedDate)
-
-        return newStreakDays
     }
 }

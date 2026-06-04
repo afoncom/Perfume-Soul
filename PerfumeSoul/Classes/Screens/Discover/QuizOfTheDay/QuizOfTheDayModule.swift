@@ -16,27 +16,16 @@ final class QuizOfTheDayModule {
     ) -> UIViewController {
         let profileService = ProfileServiceImpl(container: container)
         let progressStorage = QuizOfTheDayProgressStorageImpl(userDefaults: .standard)
-        let viewModel = QuizOfTheDayViewModel(
-            progress: progressStorage.loadProgress(),
-            onCorrectAnswer: {
-                Task {
-                    await profileService.incrementTotalCorrectQuizAnswers()
-                }
-            },
-            onQuizCompletion: {
-                progressStorage.completeQuiz()
-            },
-            onProgressChange: { progress in
-                progressStorage.saveProgress(progress)
-            }
-        )
+        let viewModel = QuizOfTheDayViewModel()
         let router = QuizOfTheDayRouterImpl(navigationController: navigationController)
         let requestManager = RequestManagerImpl(urlSession: URLSession.shared, baseURL: "http://127.0.0.1:8080")
         let service = QuizOfTheDayServiceImpl(requestManager: requestManager)
         let presenter = QuizOfTheDayPresenterImpl(
             viewModel: viewModel,
             router: router,
-            service: service
+            service: service,
+            progressStorage: progressStorage,
+            profileService: profileService
         )
 
         let view = QuizOfTheDayScreen(viewModel: viewModel, presenter: presenter)
