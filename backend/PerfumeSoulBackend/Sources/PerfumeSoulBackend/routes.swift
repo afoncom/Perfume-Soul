@@ -36,13 +36,13 @@ func routes(_ app: Application) throws {
         }
     }
 
-    app.get("perfumes", "perfumes") { req async throws -> Response in
+    app.get("perfumes") { req async throws -> Response in
         let searchText = try req.query.get(String.self, at: "searchText")
         let page = try req.query.get(Int.self, at: "page")
         let itemsPerPage = try req.query.get(Int.self, at: "itemsPerPage")
 
         do {
-            return try jsonResponse(PerfumesLoader.load())
+            return try jsonResponse(PerfumeLoader.load())
         } catch let error as CocoaError where error.code == .fileNoSuchFile {
             throw Abort(.notFound)
         } catch {

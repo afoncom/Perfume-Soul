@@ -9,7 +9,7 @@
 import Foundation
 
 struct SearchPerfumeRequest: Request {
-    let path: String = "/perfumes/perfumes"
+    let path: String = "/perfumes"
     let httpMethod: HTTPMethod = .get
 
     let searchText: String
