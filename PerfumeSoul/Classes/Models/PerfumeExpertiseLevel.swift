@@ -41,6 +41,6 @@ enum PerfumeExpertiseLevel: CaseIterable {
     }
 
     static func level(for correctAnswers: Int) -> PerfumeExpertiseLevel {
-        allCases.first(where: { $0.range.contains(correctAnswers) }) ?? .perfumer
+        allCases.first(where: { $0.range.contains(correctAnswers) }) ?? .novice
     }
 }

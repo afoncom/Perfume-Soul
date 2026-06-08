@@ -12,7 +12,6 @@ protocol ProfileService {
     func saveProfile(_ profile: Profile)
     func fetchProfile() async -> Profile?
     func deleteProfile(_ profile: Profile) async
-    func incrementTotalCorrectQuizAnswers() async
 }
 
 final class ProfileServiceImpl<ProfileStorage: DatabaseStorage> where ProfileStorage.DatabaseModel == Profile {
@@ -40,13 +39,5 @@ extension ProfileServiceImpl: ProfileService {
     
     func deleteProfile(_ profile: Profile) async {
         await profileStorage.delete(model: profile)
-    }
-
-    func incrementTotalCorrectQuizAnswers() async {
-        guard var profile = await fetchProfile() else { return }
-
-        profile.totalCorrectQuizAnswers += 1
-        await profileStorage.deleteAll()
-        profileStorage.saveModel(model: profile)
     }
 }

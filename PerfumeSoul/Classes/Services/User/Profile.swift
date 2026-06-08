@@ -12,7 +12,6 @@ struct Profile: Equatable {
     let birthDate: String
     let birthTime: String
     let birthPlace: String
-    var totalCorrectQuizAnswers: Int
 }
 
 extension Profile: DatabaseStorable {
@@ -21,7 +20,6 @@ extension Profile: DatabaseStorable {
         self.birthDate = storableModel.birthDate ?? ""
         self.birthTime = storableModel.birthTime ?? ""
         self.birthPlace = storableModel.birthPlace ?? ""
-        self.totalCorrectQuizAnswers = Int(storableModel.totalCorrectQuizAnswers)
     }
 }
 
@@ -31,7 +29,6 @@ extension CDProfile: CDModel {
         self.birthDate = model.birthDate
         self.birthTime = model.birthTime
         self.birthPlace = model.birthPlace
-        self.totalCorrectQuizAnswers = Int64(model.totalCorrectQuizAnswers)
     }
 }
 
