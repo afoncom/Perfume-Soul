@@ -11,8 +11,7 @@ import Foundation
 protocol SearchPerfumePresenter {
     func onAppear() async
     func searchSubmitted() async
-    func resultsDidScroll()
-    func loadMoreIfNeeded() async
+    func perfumeItemAppeared(at index: Int) async
 }
 
 final class SearchPerfumePresenterImpl {
@@ -33,31 +32,17 @@ final class SearchPerfumePresenterImpl {
 }
 
 extension SearchPerfumePresenterImpl: SearchPerfumePresenter {
-    
-    //- нужен для первой автозагрузки списка, когда экран открылся
-    //- чтобы сразу показать первые 10 ароматов
     func onAppear() async {
         guard !viewModel.hasLoadedOnce else { return }
         await loadPerfumes(resetResults: true)
     }
 
-    //- запускает новый поиск после нажатия search на клавиатуре
-    //- сбрасывает старый список и грузит результаты заново по новому тексту
     func searchSubmitted() async {
         await loadPerfumes(resetResults: true)
     }
 
-    //- помечает, что пользователь реально начал скроллить
-    //- нужен, чтобы не запускать автодогрузку сразу при первом рендере списка
-    func resultsDidScroll() {
-        guard !viewModel.hasStartedScrolling else { return }
-        viewModel.hasStartedScrolling = true
-    }
-    
-    //- проверяет, можно ли грузить следующую пачку
-    //- если да, запускает догрузку ещё 10 ароматов
-    func loadMoreIfNeeded() async {
-        guard viewModel.hasStartedScrolling else { return }
+    func perfumeItemAppeared(at index: Int) async {
+        guard index == viewModel.perfumes.count - 1 else { return }
         guard viewModel.canLoadMore else { return }
         guard viewModel.errorMessage == nil else { return }
         guard !viewModel.isLoading, !viewModel.isLoadingMore else { return }
@@ -67,16 +52,6 @@ extension SearchPerfumePresenterImpl: SearchPerfumePresenter {
 }
 
 private extension SearchPerfumePresenterImpl {
-    
-    //- общая внутренняя функция загрузки
-    //- в одном месте управляет:
-    //    - initial load
-    //    - новый поиск
-    //    - догрузка следующей пачки
-    //    - loading state
-    //    - error state
-    //    - обновление списка
-    
     func loadPerfumes(resetResults: Bool) async {
         let searchText = resetResults
             ? viewModel.searchText.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -89,7 +64,6 @@ private extension SearchPerfumePresenterImpl {
             if resetResults {
                 viewModel.isLoading = true
                 viewModel.canLoadMore = false
-                viewModel.hasStartedScrolling = false
             } else {
                 viewModel.isLoadingMore = true
             }

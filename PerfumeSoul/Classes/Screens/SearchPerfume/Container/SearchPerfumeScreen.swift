@@ -32,12 +32,6 @@ struct SearchPerfumeScreen: View {
         }
         .background(Color(.backgroundPrimary).ignoresSafeArea())
         .scrollDismissesKeyboard(.interactively)
-        .simultaneousGesture(
-            DragGesture(minimumDistance: 1)
-                .onChanged { _ in
-                    presenter.resultsDidScroll()
-                }
-        )
         .task {
             await presenter.onAppear()
             try? await Task.sleep(for: .milliseconds(300))
@@ -109,7 +103,7 @@ extension SearchPerfumeScreen {
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.vertical, 24)
             } else {
-                ForEach(Array(viewModel.perfumes.enumerated()), id: \.offset) { _, perfume in
+                ForEach(Array(viewModel.perfumes.enumerated()), id: \.offset) { index, perfume in
                     Text(perfume.name)
                         .font(.body)
                         .foregroundStyle(Color(.textPrimary))
@@ -122,9 +116,14 @@ extension SearchPerfumeScreen {
                             RoundedRectangle(cornerRadius: 16, style: .continuous)
                                 .stroke(Color(.cardBorder), lineWidth: 1)
                         )
+                        .onAppear {
+                            Task {
+                                await presenter.perfumeItemAppeared(at: index)
+                            }
+                        }
                 }
 
-                makeLoadMoreFooter()
+                makeLoadMoreIndicator()
 
                 if let errorMessage = viewModel.errorMessage {
                     Text(errorMessage)
@@ -138,23 +137,11 @@ extension SearchPerfumeScreen {
     }
 
     @ViewBuilder
-    func makeLoadMoreFooter() -> some View {
-        if viewModel.canLoadMore, viewModel.hasStartedScrolling {
-            Group {
-                if viewModel.isLoadingMore {
-                    ProgressView()
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 12)
-                } else {
-                    Color.clear
-                        .frame(height: 1)
-                        .onAppear {
-                            Task {
-                                await presenter.loadMoreIfNeeded()
-                            }
-                        }
-                }
-            }
+    func makeLoadMoreIndicator() -> some View {
+        if viewModel.isLoadingMore {
+            ProgressView()
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 12)
         }
     }
 }

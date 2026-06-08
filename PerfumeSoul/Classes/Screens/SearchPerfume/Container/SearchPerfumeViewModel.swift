@@ -17,5 +17,4 @@ import Observation
     var isLoadingMore = false
     var hasLoadedOnce = false
     var canLoadMore = false
-    var hasStartedScrolling = false
 }
