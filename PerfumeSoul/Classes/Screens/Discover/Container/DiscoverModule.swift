@@ -7,16 +7,12 @@
 //
 
 import SwiftUI
-import CoreData
 
 final class DiscoverModule {
-    static func build(container: NSPersistentContainer) -> UIViewController {
+    static func build() -> UIViewController {
         let viewModel = DiscoverViewModel()
         let navigationController = UINavigationController()
-        let router = DiscoverRouterImpl(
-            navigationController: navigationController,
-            container: container
-        )
+        let router = DiscoverRouterImpl(navigationController: navigationController)
         let presenter = DiscoverPresenterImpl(
             viewModel: viewModel,
             router: router

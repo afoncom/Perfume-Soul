@@ -10,33 +10,27 @@ import Foundation
 import Observation
 
 @Observable final class QuizOfTheDayViewModel {
-    private let onCorrectAnswer: (() -> Void)?
-    private let onQuizCompletion: (() -> Int)?
-    private let onProgressChange: ((QuizOfTheDayProgress) -> Void)?
+    private var dailyQuizState: DailyQuizState?
+    private var quizProgress: QuizProgress
     var questions: [QuizOfTheDayQuestion] = []
     var errorMessage: String?
-    var currentQuestionIndex: Int
-    var scoreToday: Int
-    var streakDays: Int
-    var selectedAnswerId: String?
-    var isAnswerSubmitted: Bool
-    var isQuizCompleted: Bool
 
-    init(
-        progress: QuizOfTheDayProgress = .initial,
-        onCorrectAnswer: (() -> Void)? = nil,
-        onQuizCompletion: (() -> Int)? = nil,
-        onProgressChange: ((QuizOfTheDayProgress) -> Void)? = nil
+    init(quizProgress: QuizProgress = .initial) {
+        self.quizProgress = quizProgress
+    }
+
+    func applySession(
+        questions: [QuizOfTheDayQuestion],
+        dailyQuizState: DailyQuizState,
+        quizProgress: QuizProgress
     ) {
-        self.currentQuestionIndex = progress.currentQuestionIndex
-        self.scoreToday = progress.scoreToday
-        self.streakDays = progress.streakDays
-        self.selectedAnswerId = progress.selectedAnswerId
-        self.isAnswerSubmitted = progress.isAnswerSubmitted
-        self.isQuizCompleted = progress.isQuizCompleted
-        self.onCorrectAnswer = onCorrectAnswer
-        self.onQuizCompletion = onQuizCompletion
-        self.onProgressChange = onProgressChange
+        self.questions = questions
+        self.dailyQuizState = dailyQuizState
+        self.quizProgress = quizProgress
+    }
+
+    var currentDailyQuizState: DailyQuizState? {
+        dailyQuizState
     }
 
     var currentQuestion: QuizOfTheDayQuestion? {
@@ -44,8 +38,37 @@ import Observation
         return questions[currentQuestionIndex]
     }
 
+    private var currentQuestionState: DailyQuizQuestionState? {
+        guard let questionID = currentQuestion?.id else { return nil }
+        return dailyQuizState?.questionState(for: questionID)
+    }
+
     var selectedAnswer: QuizOfTheDayAnswer? {
         currentQuestion?.answers.first(where: { $0.id == selectedAnswerId })
+    }
+
+    var currentQuestionIndex: Int {
+        dailyQuizState?.currentQuestionIndex ?? 0
+    }
+
+    var scoreToday: Int {
+        dailyQuizState?.questionStates.filter { $0.isSubmitted && $0.wasCorrect }.count ?? 0
+    }
+
+    var streakDays: Int {
+        quizProgress.streakDays
+    }
+
+    var selectedAnswerId: String? {
+        currentQuestionState?.selectedAnswerID
+    }
+
+    var isAnswerSubmitted: Bool {
+        currentQuestionState?.isSubmitted ?? false
+    }
+
+    var isQuizCompleted: Bool {
+        dailyQuizState?.isCompleted ?? false
     }
 
     var hasSelectedAnswer: Bool {
@@ -93,48 +116,64 @@ import Observation
     }
 
     func selectAnswer(id: String) {
-        guard !isAnswerSubmitted else { return }
-        selectedAnswerId = id
-        saveProgress()
+        guard !isAnswerSubmitted, let questionID = currentQuestion?.id else { return }
+        updateDailyQuizState { state in
+            state.updateQuestionState(questionID: questionID) { questionState in
+                questionState.selectedAnswerID = id
+            }
+        }
     }
 
-    func submitAnswer() {
-        guard canSubmitAnswer else { return }
-
-        if isSelectedAnswerCorrect {
-            scoreToday += 1
-            onCorrectAnswer?()
+    func submitAnswer() -> (questionID: Int, wasCorrect: Bool)? {
+        guard
+            canSubmitAnswer,
+            let question = currentQuestion
+        else {
+            return nil
         }
-        isAnswerSubmitted = true
-        saveProgress()
+
+        let wasCorrect = isSelectedAnswerCorrect
+
+        updateDailyQuizState { state in
+            state.updateQuestionState(questionID: question.id) { questionState in
+                questionState.isSubmitted = true
+                questionState.wasCorrect = wasCorrect
+            }
+        }
+
+        return (question.id, wasCorrect)
     }
 
     func goToNextQuestion() {
         guard canGoToNextQuestion else { return }
 
-        currentQuestionIndex += 1
-        selectedAnswerId = nil
-        isAnswerSubmitted = false
-        saveProgress()
+        updateDailyQuizState { state in
+            state.currentQuestionIndex += 1
+        }
     }
 
-    func finishQuiz() {
-        guard canFinishQuiz else { return }
-        isQuizCompleted = true
-        streakDays = onQuizCompletion?() ?? streakDays
-        saveProgress()
+    func finishQuiz() -> String? {
+        guard
+            canFinishQuiz,
+            let quizDayKey = dailyQuizState?.quizDayKey
+        else {
+            return nil
+        }
+
+        updateDailyQuizState { state in
+            state.isCompleted = true
+        }
+
+        return quizDayKey
     }
 
-    private func saveProgress() {
-        onProgressChange?(
-            QuizOfTheDayProgress(
-                currentQuestionIndex: currentQuestionIndex,
-                scoreToday: scoreToday,
-                streakDays: streakDays,
-                selectedAnswerId: selectedAnswerId,
-                isAnswerSubmitted: isAnswerSubmitted,
-                isQuizCompleted: isQuizCompleted
-            )
-        )
+    func updateQuizProgress(_ quizProgress: QuizProgress) {
+        self.quizProgress = quizProgress
+    }
+
+    private func updateDailyQuizState(_ update: (inout DailyQuizState) -> Void) {
+        guard var dailyQuizState else { return }
+        update(&dailyQuizState)
+        self.dailyQuizState = dailyQuizState
     }
 }

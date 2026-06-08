@@ -238,7 +238,7 @@ private extension QuizOfTheDayScreen {
                         title: answer.text,
                         isSelected: viewModel.isAnswerSelected(answer.id),
                         onTap: {
-                            viewModel.selectAnswer(id: answer.id)
+                            presenter.selectAnswer(id: answer.id)
                         }
                     )
                 }
@@ -416,11 +416,11 @@ private extension QuizOfTheDayScreen {
 
     func handlePrimaryAction() {
         if viewModel.canFinishQuiz {
-            viewModel.finishQuiz()
+            presenter.finishQuiz()
         } else if viewModel.isAnswerSubmitted {
-            viewModel.goToNextQuestion()
+            presenter.goToNextQuestion()
         } else {
-            viewModel.submitAnswer()
+            presenter.submitAnswer()
         }
     }
 }
