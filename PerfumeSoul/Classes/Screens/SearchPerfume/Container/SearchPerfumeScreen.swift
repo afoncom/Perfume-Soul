@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SearchPerfumeScreen: View {
     @Bindable private var viewModel: SearchPerfumeViewModel
+    @FocusState private var isSearchFieldFocused: Bool
     private let presenter: SearchPerfumePresenter
     
     init(
@@ -22,104 +23,86 @@ struct SearchPerfumeScreen: View {
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 20) {
-                makeSearchFields()
-                makeSearchButton()
+            LazyVStack(alignment: .leading, spacing: 20) {
+                makeSearchBar()
                 makeResultsSection()
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 20)
         }
         .background(Color(.backgroundPrimary).ignoresSafeArea())
+        .scrollDismissesKeyboard(.interactively)
+        .simultaneousGesture(
+            DragGesture(minimumDistance: 1)
+                .onChanged { _ in
+                    presenter.resultsDidScroll()
+                }
+        )
+        .task {
+            await presenter.onAppear()
+            try? await Task.sleep(for: .milliseconds(300))
+            isSearchFieldFocused = true
+        }
     }
 }
 
 extension SearchPerfumeScreen {
-    func makeSearchFields() -> some View {
-        VStack(spacing: 14) {
-            makeTextField(
-                title: L10n.SearchPerfume.searchTextTitle,
-                placeholder: L10n.SearchPerfume.searchTextPlaceholder,
-                text: $viewModel.searchText
-            )
+    func makeSearchBar() -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: "magnifyingglass")
+                .font(.title2)
+                .foregroundStyle(Color(.textSecondary))
 
-            makeTextField(
-                title: L10n.SearchPerfume.pageTitle,
-                placeholder: L10n.SearchPerfume.pagePlaceholder,
-                text: $viewModel.pageText,
-                keyboardType: .numberPad
-            )
-
-            makeTextField(
-                title: L10n.SearchPerfume.itemsPerPageTitle,
-                placeholder: L10n.SearchPerfume.itemsPerPagePlaceholder,
-                text: $viewModel.itemsPerPageText,
-                keyboardType: .numberPad
-            )
-        }
-    }
-
-    func makeTextField(
-        title: String,
-        placeholder: String,
-        text: Binding<String>,
-        keyboardType: UIKeyboardType = .default
-    ) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(title)
-                .font(.headline)
+            TextField(L10n.SearchPerfume.searchTextPlaceholder, text: $viewModel.searchText)
+                .focused($isSearchFieldFocused)
+                .submitLabel(.search)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
                 .foregroundStyle(Color(.textPrimary))
+                .onSubmit {
+                    Task {
+                        await presenter.searchSubmitted()
+                    }
+                }
 
-            TextField(placeholder, text: text)
-                .keyboardType(keyboardType)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 14)
-                .background(Color(.surfacePrimary))
-                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 16, style: .continuous)
-                        .stroke(Color(.cardBorder), lineWidth: 1)
-                )
-        }
-    }
+            if !viewModel.searchText.isEmpty {
+                Button {
+                    viewModel.searchText = ""
 
-    func makeSearchButton() -> some View {
-        Button {
-            Task {
-                await presenter.searchButtonTapped()
+                    Task {
+                        await presenter.searchSubmitted()
+                    }
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title3)
+                        .foregroundStyle(Color(.textSecondary))
+                }
             }
-        } label: {
-            Text(L10n.SearchPerfume.searchButton)
-                .font(.title3)
-                .fontWeight(.semibold)
-                .foregroundStyle(Color(.textOnAccent))
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 14)
-                .background(Color(.pinkButton))
-                .clipShape(Capsule())
         }
-        .disabled(viewModel.isLoading)
+        .padding(.horizontal, 18)
+        .padding(.vertical, 16)
+        .background(Color(.surfacePrimary))
+        .clipShape(Capsule())
+        .overlay(
+            Capsule()
+                .stroke(Color(.cardBorder), lineWidth: 1)
+        )
     }
 
     @ViewBuilder
     func makeResultsSection() -> some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text(L10n.SearchPerfume.resultsTitle)
-                .font(.title3)
-                .fontWeight(.semibold)
-                .foregroundStyle(Color(.textPrimary))
-
-            if viewModel.isLoading {
+            if viewModel.isLoading, viewModel.perfumes.isEmpty {
                 ProgressView()
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 24)
-            } else if let errorMessage = viewModel.errorMessage {
+            } else if let errorMessage = viewModel.errorMessage, viewModel.perfumes.isEmpty {
                 Text(errorMessage)
                     .font(.body)
                     .foregroundStyle(Color(.textSecondary))
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.vertical, 24)
-            } else if viewModel.perfumes.isEmpty, viewModel.hasSearched {
+            } else if viewModel.perfumes.isEmpty, viewModel.hasLoadedOnce {
                 Text(L10n.SearchPerfume.emptyState)
                     .font(.body)
                     .foregroundStyle(Color(.textSecondary))
@@ -139,6 +122,37 @@ extension SearchPerfumeScreen {
                             RoundedRectangle(cornerRadius: 16, style: .continuous)
                                 .stroke(Color(.cardBorder), lineWidth: 1)
                         )
+                }
+
+                makeLoadMoreFooter()
+
+                if let errorMessage = viewModel.errorMessage {
+                    Text(errorMessage)
+                        .font(.footnote)
+                        .foregroundStyle(Color(.textSecondary))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.vertical, 12)
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    func makeLoadMoreFooter() -> some View {
+        if viewModel.canLoadMore, viewModel.hasStartedScrolling {
+            Group {
+                if viewModel.isLoadingMore {
+                    ProgressView()
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                } else {
+                    Color.clear
+                        .frame(height: 1)
+                        .onAppear {
+                            Task {
+                                await presenter.loadMoreIfNeeded()
+                            }
+                        }
                 }
             }
         }

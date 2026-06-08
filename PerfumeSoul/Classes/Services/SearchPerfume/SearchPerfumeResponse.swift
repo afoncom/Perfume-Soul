@@ -8,6 +8,11 @@
 
 import Foundation
 
+struct SearchPerfumePageResponse: Decodable {
+    let items: [SearchPerfumeResponse]
+    let hasMore: Bool
+}
+
 struct SearchPerfumeResponse: Decodable {
     let name: String
 }

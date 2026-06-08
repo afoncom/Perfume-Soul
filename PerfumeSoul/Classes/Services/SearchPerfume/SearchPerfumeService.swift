@@ -9,9 +9,9 @@
 protocol SearchPerfumeService {
     func requestPerfumes(
         searchText: String,
-        page: Int,
-        itemsPerPage: Int
-    ) async throws -> [SearchPerfumeItem]
+        offset: Int,
+        limit: Int
+    ) async throws -> SearchPerfumePage
 }
 
 final class SearchPerfumeServiceImpl {
@@ -25,16 +25,20 @@ final class SearchPerfumeServiceImpl {
 extension SearchPerfumeServiceImpl: SearchPerfumeService {
     func requestPerfumes(
         searchText: String,
-        page: Int,
-        itemsPerPage: Int
-    ) async throws -> [SearchPerfumeItem] {
-        let perfumes: [SearchPerfumeResponse] = try await requestManager.sendRequest(
+        offset: Int,
+        limit: Int
+    ) async throws -> SearchPerfumePage {
+        let response: SearchPerfumePageResponse = try await requestManager.sendRequest(
             request: SearchPerfumeRequest(
                 searchText: searchText,
-                page: page,
-                itemsPerPage: itemsPerPage
+                offset: offset,
+                limit: limit
             )
         )
-        return perfumes.map { SearchPerfumeItem(response: $0) }
+
+        return SearchPerfumePage(
+            items: response.items.map { SearchPerfumeItem(response: $0) },
+            hasMore: response.hasMore
+        )
     }
 }

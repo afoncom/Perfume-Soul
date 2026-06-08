@@ -13,14 +13,14 @@ struct SearchPerfumeRequest: Request {
     let httpMethod: HTTPMethod = .get
 
     let searchText: String
-    let page: Int
-    let itemsPerPage: Int
+    let offset: Int
+    let limit: Int
 
     var queryItems: [URLQueryItem] {
         [
             URLQueryItem(name: "searchText", value: searchText),
-            URLQueryItem(name: "page", value: String(page)),
-            URLQueryItem(name: "itemsPerPage", value: String(itemsPerPage))
+            URLQueryItem(name: "offset", value: String(offset)),
+            URLQueryItem(name: "limit", value: String(limit))
         ]
     }
 }

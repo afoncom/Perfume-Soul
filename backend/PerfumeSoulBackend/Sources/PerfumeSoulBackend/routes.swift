@@ -37,12 +37,16 @@ func routes(_ app: Application) throws {
     }
 
     app.get("perfumes") { req async throws -> Response in
-        let searchText = try req.query.get(String.self, at: "searchText")
-        let page = try req.query.get(Int.self, at: "page")
-        let itemsPerPage = try req.query.get(Int.self, at: "itemsPerPage")
+        let query = try req.query.decode(PerfumeSearchQuery.self)
 
         do {
-            return try jsonResponse(PerfumeLoader.load())
+            return try jsonResponse(
+                PerfumeLoader.load(
+                    searchText: query.searchText ?? "",
+                    offset: max(query.offset ?? 0, 0),
+                    limit: max(query.limit ?? 10, 1)
+                )
+            )
         } catch let error as CocoaError where error.code == .fileNoSuchFile {
             throw Abort(.notFound)
         } catch {
@@ -58,4 +62,10 @@ private func jsonResponse<T: Encodable>(_ value: T) throws -> Response {
     headers.contentType = .json
 
     return Response(status: .ok, headers: headers, body: .init(data: data))
+}
+
+private struct PerfumeSearchQuery: Content {
+    let searchText: String?
+    let offset: Int?
+    let limit: Int?
 }

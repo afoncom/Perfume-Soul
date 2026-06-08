@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SearchPerfumeItem {
+struct SearchPerfumeItem: Equatable {
     let name: String
 }
 

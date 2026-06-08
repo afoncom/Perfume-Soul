@@ -10,10 +10,12 @@ import Observation
 
 @Observable final class SearchPerfumeViewModel {
     var searchText = ""
-    var pageText = "1"
-    var itemsPerPageText = "10"
+    var activeSearchText = ""
     var perfumes: [SearchPerfumeItem] = []
     var errorMessage: String?
     var isLoading = false
-    var hasSearched = false
+    var isLoadingMore = false
+    var hasLoadedOnce = false
+    var canLoadMore = false
+    var hasStartedScrolling = false
 }
