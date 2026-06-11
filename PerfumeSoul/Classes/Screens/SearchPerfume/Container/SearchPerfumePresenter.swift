@@ -19,6 +19,7 @@ final class SearchPerfumePresenterImpl {
     private let router: SearchPerfumeRouter
     private let searchPerfumeService: SearchPerfumeService
     private let pageSize = 10
+    @MainActor private var activeRequestID = UUID()
     
     init(
         viewModel: SearchPerfumeViewModel,
@@ -57,15 +58,18 @@ private extension SearchPerfumePresenterImpl {
             ? viewModel.searchText.trimmingCharacters(in: .whitespacesAndNewlines)
             : viewModel.activeSearchText
         let offset = resetResults ? 0 : viewModel.perfumes.count
-
-        await MainActor.run {
+        let requestID = await MainActor.run { () -> UUID in
             viewModel.errorMessage = nil
 
             if resetResults {
+                let newRequestID = UUID()
+                activeRequestID = newRequestID
                 viewModel.isLoading = true
                 viewModel.canLoadMore = false
+                return newRequestID
             } else {
                 viewModel.isLoadingMore = true
+                return activeRequestID
             }
         }
 
@@ -81,6 +85,8 @@ private extension SearchPerfumePresenterImpl {
             )
 
             await MainActor.run {
+                guard requestID == activeRequestID else { return }
+
                 if resetResults {
                     viewModel.perfumes = result.items
                     viewModel.activeSearchText = searchText
@@ -96,6 +102,8 @@ private extension SearchPerfumePresenterImpl {
             }
         } catch {
             await MainActor.run {
+                guard requestID == activeRequestID else { return }
+
                 if resetResults {
                     viewModel.perfumes = []
                     viewModel.canLoadMore = false
