@@ -73,10 +73,6 @@ private extension SearchPerfumePresenterImpl {
             }
         }
 
-        if !resetResults {
-            try? await Task.sleep(for: .seconds(2))
-        }
-
         do {
             let result = try await searchPerfumeService.requestPerfumes(
                 searchText: searchText,
