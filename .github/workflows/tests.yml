@@ -8,15 +8,11 @@ on:
 
 jobs:
   test:
-    runs-on: macos-15
+    runs-on: macos-latest
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     steps:
     - uses: actions/checkout@v5
-    - name: Select Xcode
-      uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: "16.4"
     - name: Generate Xcode project
       shell: bash
       run: |
