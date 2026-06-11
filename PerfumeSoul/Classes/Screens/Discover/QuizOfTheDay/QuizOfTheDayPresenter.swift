@@ -67,7 +67,10 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
         guard let result = viewModel.submitAnswer() else { return }
 
         if result.wasCorrect {
-            let updatedQuizProgress = quizProgressService.recordCorrectAnswer(questionID: result.questionID)
+            let updatedQuizProgress = quizProgressService.recordCorrectAnswer(
+                questionID: result.questionID,
+                quizDayKey: result.quizDayKey
+            )
             viewModel.updateQuizProgress(updatedQuizProgress)
         }
 

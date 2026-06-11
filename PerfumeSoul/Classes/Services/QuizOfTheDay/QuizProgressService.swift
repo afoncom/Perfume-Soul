@@ -9,7 +9,7 @@ import Foundation
 
 protocol QuizProgressService {
     func loadProgress() -> QuizProgress
-    func recordCorrectAnswer(questionID: Int) -> QuizProgress
+    func recordCorrectAnswer(questionID: Int, quizDayKey: String) -> QuizProgress
     func completeQuiz(for quizDayKey: String) -> QuizProgress
     func resetProgress()
 }
@@ -51,12 +51,19 @@ final class QuizProgressServiceImpl {
         userDefaults.set(data, forKey: Keys.progress)
     }
 
+    private func correctAnswerKey(
+        questionID: Int,
+        quizDayKey: String
+    ) -> String {
+        "\(quizDayKey)_\(questionID)"
+    }
+
     private func resolvedProgress(from progress: QuizProgress) -> QuizProgress {
         guard let lastCompletedQuizDayKey = progress.lastCompletedQuizDayKey else {
             return QuizProgress(
                 streakDays: 0,
                 lastCompletedQuizDayKey: nil,
-                correctQuestionIDs: progress.correctQuestionIDs
+                correctAnswerKeys: progress.correctAnswerKeys
             )
         }
 
@@ -64,7 +71,7 @@ final class QuizProgressServiceImpl {
             return QuizProgress(
                 streakDays: 0,
                 lastCompletedQuizDayKey: lastCompletedQuizDayKey,
-                correctQuestionIDs: progress.correctQuestionIDs
+                correctAnswerKeys: progress.correctAnswerKeys
             )
         }
 
@@ -77,9 +84,14 @@ extension QuizProgressServiceImpl: QuizProgressService {
         resolvedProgress(from: storedProgress())
     }
 
-    func recordCorrectAnswer(questionID: Int) -> QuizProgress {
+    func recordCorrectAnswer(questionID: Int, quizDayKey: String) -> QuizProgress {
         var progress = storedProgress()
-        progress.correctQuestionIDs.insert(questionID)
+        progress.correctAnswerKeys.insert(
+            correctAnswerKey(
+                questionID: questionID,
+                quizDayKey: quizDayKey
+            )
+        )
         saveProgress(progress)
         return resolvedProgress(from: progress)
     }

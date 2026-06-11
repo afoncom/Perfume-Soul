@@ -124,10 +124,11 @@ import Observation
         }
     }
 
-    func submitAnswer() -> (questionID: Int, wasCorrect: Bool)? {
+    func submitAnswer() -> (questionID: Int, quizDayKey: String, wasCorrect: Bool)? {
         guard
             canSubmitAnswer,
-            let question = currentQuestion
+            let question = currentQuestion,
+            let quizDayKey = dailyQuizState?.quizDayKey
         else {
             return nil
         }
@@ -141,7 +142,7 @@ import Observation
             }
         }
 
-        return (question.id, wasCorrect)
+        return (question.id, quizDayKey, wasCorrect)
     }
 
     func goToNextQuestion() {
