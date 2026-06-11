@@ -38,13 +38,14 @@ func routes(_ app: Application) throws {
 
     app.get("perfumes") { req async throws -> Response in
         let query = try req.query.decode(PerfumeSearchQuery.self)
+        let limit = min(max(query.limit ?? 10, 1), 50)
 
         do {
             return try jsonResponse(
                 PerfumeLoader.load(
                     searchText: query.searchText ?? "",
                     offset: max(query.offset ?? 0, 0),
-                    limit: max(query.limit ?? 10, 1)
+                    limit: limit
                 )
             )
         } catch let error as CocoaError where error.code == .fileNoSuchFile {

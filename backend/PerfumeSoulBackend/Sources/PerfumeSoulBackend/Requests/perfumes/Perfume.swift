@@ -30,7 +30,8 @@ enum PerfumeLoader {
             }
 
         let startIndex = min(offset, filteredPerfumes.count)
-        let endIndex = min(startIndex + limit, filteredPerfumes.count)
+        let pageSize = min(limit, filteredPerfumes.count - startIndex)
+        let endIndex = startIndex + pageSize
         let items = Array(filteredPerfumes[startIndex..<endIndex])
 
         return PerfumeSearchPage(
