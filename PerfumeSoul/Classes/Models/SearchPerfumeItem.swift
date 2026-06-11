@@ -8,8 +8,12 @@
 
 import Foundation
 
-struct SearchPerfumeItem: Equatable {
+struct SearchPerfumeItem: Equatable, Identifiable {
     let name: String
+
+    var id: String {
+        name
+    }
 }
 
 extension SearchPerfumeItem {

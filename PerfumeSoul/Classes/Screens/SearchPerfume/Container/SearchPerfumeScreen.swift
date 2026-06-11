@@ -103,7 +103,7 @@ extension SearchPerfumeScreen {
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.vertical, 24)
             } else {
-                ForEach(Array(viewModel.perfumes.enumerated()), id: \.offset) { index, perfume in
+                ForEach(viewModel.perfumes) { perfume in
                     Text(perfume.name)
                         .font(.body)
                         .foregroundStyle(Color(.textPrimary))
@@ -117,6 +117,10 @@ extension SearchPerfumeScreen {
                                 .stroke(Color(.cardBorder), lineWidth: 1)
                         )
                         .onAppear {
+                            guard let index = viewModel.perfumes.firstIndex(where: { $0.id == perfume.id }) else {
+                                return
+                            }
+
                             Task {
                                 await presenter.perfumeItemAppeared(at: index)
                             }
