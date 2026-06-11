@@ -115,14 +115,8 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
         questions: [QuizOfTheDayQuestion],
         todayKey: String
     ) -> (questions: [QuizOfTheDayQuestion], state: DailyQuizState)? {
-        if state.isCompleted {
-            guard state.quizDayKey == todayKey else {
-                return nil
-            }
-        } else {
-            guard dayKeyProvider.isCurrentOrPreviousDay(state.quizDayKey) else {
-                return nil
-            }
+        guard state.quizDayKey == todayKey else {
+            return nil
         }
 
         guard !questions.isEmpty else {
