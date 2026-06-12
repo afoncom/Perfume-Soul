@@ -64,6 +64,15 @@
 "screen.perfumeRecommendations" = "Perfume Recommendations";
 "perfumeRecommendations.empty.title" = "Recommendations are currently unavailable";
 "perfumeRecommendations.empty.subtitle" = "Please try again later";
+"searchPerfume.emptyState" = "No perfumes found.";
+"searchPerfume.itemsPerPagePlaceholder" = "Enter items per page";
+"searchPerfume.itemsPerPageTitle" = "Items per page";
+"searchPerfume.pagePlaceholder" = "Enter page";
+"searchPerfume.pageTitle" = "Page";
+"searchPerfume.resultsTitle" = "Perfume list";
+"searchPerfume.searchButton" = "Get perfumes";
+"searchPerfume.searchTextPlaceholder" = "Enter search text";
+"searchPerfume.searchTextTitle" = "Search text";
 "screen.profile" = "Profile";
 "screen.sendFeedback" = "Feedback";
 "screen.searchPerfume" = "Search";
