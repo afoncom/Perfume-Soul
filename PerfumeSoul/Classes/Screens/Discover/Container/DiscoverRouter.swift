@@ -39,7 +39,7 @@ extension DiscoverRouterImpl: DiscoverRouter {
     
     func showQuizOfTheDayScreen() {
         navigationController?.pushViewController(
-            QuizOfTheDayModule.build(),
+            QuizOfTheDayModule.build(navigationController: navigationController),
             animated: true
         )
     }
