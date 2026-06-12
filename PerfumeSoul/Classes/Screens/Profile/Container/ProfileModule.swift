@@ -17,6 +17,12 @@ final class ProfileModule {
         let viewModel = ProfileViewModel()
         let navigationController = UINavigationController()
         let profileService = ProfileServiceImpl(container: container)
+        let dayKeyProvider = QuizDayKeyProviderImpl()
+        let quizProgressService = QuizProgressServiceImpl(
+            userDefaults: .standard,
+            dayKeyProvider: dayKeyProvider
+        )
+        let dailyQuizStateStorage = DailyQuizStateStorageImpl(userDefaults: .standard)
         let router = ProfileRouterImpl(
             navigationController: navigationController,
             container: container,
@@ -25,7 +31,9 @@ final class ProfileModule {
         let presenter = ProfilePresenterImpl(
             viewModel: viewModel,
             router: router,
-            profileService: profileService
+            profileService: profileService,
+            quizProgressService: quizProgressService,
+            dailyQuizStateStorage: dailyQuizStateStorage
         )
         
         let view = ProfileScreen(viewModel: viewModel, presenter: presenter)
