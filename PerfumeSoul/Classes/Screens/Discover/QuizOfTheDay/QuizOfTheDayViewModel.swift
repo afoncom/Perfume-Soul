@@ -54,4 +54,6 @@ import Observation
     func selectAnswer(id: String) {
         selectedAnswerId = id
     }
+
+    var progressValue: Double = 0.33
 }

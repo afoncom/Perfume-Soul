@@ -23,7 +23,6 @@ let package = Package(
             resources: [
                 .process("Requests/perfumery-history/Resources"),
                 .process("Requests/horoscope-daily/Resources"),
-                .process("Requests/perfumes/Resources"),
                 .process("Requests/quiz-of-the-day/Resources"),
                 .process("Requests/perfume-recommendations/Resources")
             ],
