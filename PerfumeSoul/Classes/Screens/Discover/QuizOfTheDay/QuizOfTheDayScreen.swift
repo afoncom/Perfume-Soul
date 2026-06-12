@@ -26,9 +26,13 @@ struct QuizOfTheDayScreen: View {
             VStack(spacing: 22) {
                 makeTopBar()
                 makeProgressCard()
-                if let currentQuestion = viewModel.currentQuestion {
+                if let errorMessage = viewModel.errorMessage {
+                    makeErrorCard(message: errorMessage)
+                } else if viewModel.isQuizCompleted {
+                    makeQuizCompletedCard()
+                } else if let currentQuestion = viewModel.currentQuestion {
                     makeQuestionCard(question: currentQuestion)
-                    if viewModel.hasSelectedAnswer {
+                    if viewModel.isAnswerSubmitted {
                         makeExplanationCard(
                             explanation: currentQuestion.explanation,
                             isCorrect: viewModel.isSelectedAnswerCorrect
@@ -56,6 +60,34 @@ struct QuizOfTheDayScreen: View {
 }
 
 private extension QuizOfTheDayScreen {
+    func makeErrorCard(message: String) -> some View {
+        VStack(spacing: 16) {
+            Text(message)
+                .font(.system(size: 17, weight: .medium, design: .rounded))
+                .foregroundStyle(Color(.textPrimary))
+                .multilineTextAlignment(.center)
+
+            Button {
+                Task {
+                    await presenter.onAppear()
+                }
+            } label: {
+                Text(L10n.QuizOfTheDay.retryButton)
+                    .font(.system(size: 17, weight: .semibold, design: .rounded))
+                    .foregroundStyle(Color(.textOnAccent))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(Color(.pinkButton))
+                    .clipShape(Capsule())
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(18)
+        .background(Color(.surfacePrimary))
+        .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+        .shadow(color: Color(.cardShadowSubtle), radius: 10, x: 0, y: 4)
+    }
+
     func makeTopBar() -> some View {
         HStack(alignment: .center) {
             Button {
@@ -94,8 +126,8 @@ private extension QuizOfTheDayScreen {
                     icon: "trophy",
                     iconColor: Color(.pinkButton),
                     title: L10n.QuizOfTheDay.scoreToday,
-                    value: "8",
-                    trailingValue: "/ 15"
+                    value: "\(viewModel.scoreToday)",
+                    trailingValue: "/ \(viewModel.totalQuestions)"
                 )
 
                 
@@ -105,8 +137,8 @@ private extension QuizOfTheDayScreen {
                     icon: "flame.fill",
                     iconColor: Color(.pinkButton),
                     title: L10n.QuizOfTheDay.streakDays,
-                    value: "3 дня",
-                    trailingValue: nil
+                    value: "\(viewModel.streakDays)",
+                    trailingValue: L10n.QuizOfTheDay.daySuffix,
                 )
             }
 
@@ -134,7 +166,7 @@ private extension QuizOfTheDayScreen {
 
                         Capsule()
                             .fill(Color(.pinkButton))
-                            .frame(width: proxy.size.width * viewModel.progressValue, height: 10)
+                            .frame(width: proxy.size.width * CGFloat(viewModel.progressValue), height: 10)
                     }
                 }
                 .frame(height: 10)
@@ -206,7 +238,7 @@ private extension QuizOfTheDayScreen {
                         title: answer.text,
                         isSelected: viewModel.isAnswerSelected(answer.id),
                         onTap: {
-                            viewModel.selectAnswer(id: answer.id)
+                            presenter.selectAnswer(id: answer.id)
                         }
                     )
                 }
@@ -295,13 +327,43 @@ private extension QuizOfTheDayScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 10, x: 0, y: 4)
     }
 
+    func makeQuizCompletedCard() -> some View {
+        VStack(spacing: 18) {
+            ZStack {
+                Circle()
+                    .fill(Color(.surfaceOverlay))
+                    .frame(width: 72, height: 72)
+
+                Image(systemName: "checkmark.seal.fill")
+                    .font(.system(size: 34))
+                    .foregroundStyle(Color(.pinkButton))
+            }
+
+            VStack(spacing: 10) {
+                Text(L10n.QuizOfTheDay.completedTitle)
+                    .font(.system(size: 24, weight: .semibold, design: .rounded))
+                    .foregroundStyle(Color(.titleText))
+                    .multilineTextAlignment(.center)
+
+                Text(L10n.QuizOfTheDay.completedSubtitle)
+                    .font(.system(size: 17, weight: .regular, design: .rounded))
+                    .foregroundStyle(Color(.descriptionText))
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 20)
+        .padding(.vertical, 28)
+        .background(Color(.surfacePrimary))
+        .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+        .shadow(color: Color(.cardShadowSubtle), radius: 10, x: 0, y: 4)
+    }
+
     func makeBottomControls() -> some View {
         VStack(spacing: 16) {
-            HStack(spacing: 18) {
-                makeArrowButton(systemName: "arrow.left")
-
-                Button(action: { }) {
-                    Text(L10n.QuizOfTheDay.nextQuestion)
+            if !viewModel.isQuizCompleted {
+                Button(action: handlePrimaryAction) {
+                    Text(primaryButtonTitle)
                         .font(.system(size: 21, weight: .medium, design: .rounded))
                         .foregroundStyle(Color(.textOnAccent))
                         .frame(maxWidth: .infinity)
@@ -319,8 +381,8 @@ private extension QuizOfTheDayScreen {
                         .clipShape(Capsule())
                 }
                 .buttonStyle(.plain)
-
-                makeArrowButton(systemName: "arrow.right")
+                .disabled(!canPerformPrimaryAction)
+                .opacity(canPerformPrimaryAction ? 1 : 0.55)
             }
 
             HStack(spacing: 8) {
@@ -335,18 +397,30 @@ private extension QuizOfTheDayScreen {
         }
     }
 
-    func makeArrowButton(systemName: String) -> some View {
-        Button(action: { }) {
-            ZStack {
-                Circle()
-                    .fill(Color(.surfacePrimary))
-                    .frame(width: 58, height: 58)
-
-                Image(systemName: systemName)
-                    .font(.title3)
-                    .foregroundStyle(Color(.pinkButton))
-            }
+    var canPerformPrimaryAction: Bool {
+        if viewModel.isQuizCompleted {
+            return false
         }
-        .buttonStyle(.plain)
+        if viewModel.canFinishQuiz {
+            return true
+        }
+        return viewModel.isAnswerSubmitted ? viewModel.canGoToNextQuestion : viewModel.canSubmitAnswer
+    }
+
+    var primaryButtonTitle: String {
+        if viewModel.canFinishQuiz {
+            return L10n.QuizOfTheDay.finishQuiz
+        }
+        return viewModel.isAnswerSubmitted ? L10n.QuizOfTheDay.nextQuestion : L10n.QuizOfTheDay.submitAnswer
+    }
+
+    func handlePrimaryAction() {
+        if viewModel.canFinishQuiz {
+            presenter.finishQuiz()
+        } else if viewModel.isAnswerSubmitted {
+            presenter.goToNextQuestion()
+        } else {
+            presenter.submitAnswer()
+        }
     }
 }

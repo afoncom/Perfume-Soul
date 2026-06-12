@@ -17,15 +17,21 @@ final class ProfilePresenterImpl {
     private let viewModel: ProfileViewModel
     private let router: ProfileRouter
     private let profileService: ProfileService
+    private let quizProgressService: QuizProgressService
+    private let dailyQuizStateStorage: DailyQuizStateStorage
     
     init(
         viewModel: ProfileViewModel,
         router: ProfileRouter,
-        profileService: ProfileService
+        profileService: ProfileService,
+        quizProgressService: QuizProgressService,
+        dailyQuizStateStorage: DailyQuizStateStorage
     ) {
         self.viewModel = viewModel
         self.router = router
         self.profileService = profileService
+        self.quizProgressService = quizProgressService
+        self.dailyQuizStateStorage = dailyQuizStateStorage
     }
 }
 
@@ -40,8 +46,10 @@ extension ProfilePresenterImpl: ProfilePresenter {
 
     func onAppear() async {
         let profile = await profileService.fetchProfile()
+        let quizProgress = quizProgressService.loadProgress()
         await MainActor.run {
             viewModel.profile = profile
+            viewModel.totalCorrectQuizAnswers = quizProgress.totalCorrectQuizAnswers
         }
     }
     
@@ -52,9 +60,12 @@ extension ProfilePresenterImpl: ProfilePresenter {
         guard let profile else { return }
         
         await profileService.deleteProfile(profile)
+        quizProgressService.resetProgress()
+        dailyQuizStateStorage.clearState()
         
         await MainActor.run {
             viewModel.profile = nil
+            viewModel.totalCorrectQuizAnswers = 0
             router.showCalculationScreen()
         }
     }
