@@ -34,9 +34,6 @@ struct ProfileScreen: View {
                         makeElementBalance()
                             .padding(.horizontal, 16)
 
-                        makePerfumeExpertiseLevel()
-                            .padding(.horizontal, 16)
-
                         makePersonalPerfumesRow()
                             .padding(.horizontal, 16)
                         
@@ -204,93 +201,6 @@ private extension ProfileScreen {
         }
         .buttonStyle(.plain)
     }
-
-    func makePerfumeExpertiseLevel() -> some View {
-        VStack(alignment: .leading, spacing: 14) {
-            HStack(spacing: 12) {
-                Circle()
-                    .fill(Color(.surfaceOverlay))
-                    .frame(width: 48, height: 48)
-                    .overlay(
-                        Image(systemName: "medal.star.fill")
-                            .font(.title3)
-                            .foregroundStyle(Color(.pinkButton))
-                    )
-
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(L10n.Profile.Expertise.title)
-                        .font(.title3)
-                        .fontWeight(.medium)
-                        .foregroundStyle(Color(.textPrimary))
-
-                    Text(expertiseLevelTitle)
-                        .font(.headline)
-                        .foregroundStyle(Color(.pinkButton))
-                }
-
-                Spacer()
-
-                Text("\(viewModel.totalCorrectQuizAnswers)")
-                    .font(.headline)
-                    .foregroundStyle(Color(.textPrimary))
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 8)
-                    .background(Color(.surfaceOverlay))
-                    .clipShape(Capsule())
-            }
-
-            Text(expertiseLevelDescription)
-                .font(.footnote)
-                .foregroundStyle(Color(.textSecondary))
-                .fixedSize(horizontal: false, vertical: true)
-
-            VStack(alignment: .leading, spacing: 8) {
-                GeometryReader { proxy in
-                    ZStack(alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 999, style: .continuous)
-                            .fill(Color(.placeholderSoft))
-                            .frame(height: 10)
-
-                        RoundedRectangle(cornerRadius: 999, style: .continuous)
-                            .fill(
-                                LinearGradient(
-                                    colors: [
-                                        Color(.buttonShine),
-                                        Color(.pinkButton)
-                                    ],
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
-                            )
-                            .frame(width: proxy.size.width * CGFloat(viewModel.perfumeExpertiseProgress), height: 10)
-                    }
-                }
-                .frame(height: 10)
-
-                HStack {
-                    Text(L10n.Profile.Expertise.correctAnswersFormat(viewModel.totalCorrectQuizAnswers))
-                        .font(.footnote)
-                        .foregroundStyle(Color(.textSecondary))
-
-                    Spacer()
-
-                    if let answersToNextLevel = viewModel.answersToNextLevel {
-                        Text(L10n.Profile.Expertise.nextLevelFormat(answersToNextLevel))
-                            .font(.footnote)
-                            .foregroundStyle(Color(.textSecondary))
-                    } else {
-                        Text(L10n.Profile.Expertise.maxLevel)
-                            .font(.footnote)
-                            .foregroundStyle(Color(.pinkButton))
-                    }
-                }
-            }
-        }
-        .padding(14)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
-    }
     
     func makeAddedNewProfiless() -> some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -344,36 +254,6 @@ private extension ProfileScreen {
         return [profile.birthDate, profile.birthTime, profile.birthPlace]
             .filter { !$0.isEmpty }
             .joined(separator: " · ")
-    }
-
-    var expertiseLevelTitle: String {
-        switch viewModel.perfumeExpertiseLevel {
-        case .novice:
-            return L10n.Profile.Expertise.Level.novice
-        case .noteExplorer:
-            return L10n.Profile.Expertise.Level.noteExplorer
-        case .accordExpert:
-            return L10n.Profile.Expertise.Level.accordExpert
-        case .fragranceAnalyst:
-            return L10n.Profile.Expertise.Level.fragranceAnalyst
-        case .perfumer:
-            return L10n.Profile.Expertise.Level.perfumer
-        }
-    }
-
-    var expertiseLevelDescription: String {
-        switch viewModel.perfumeExpertiseLevel {
-        case .novice:
-            return L10n.Profile.Expertise.Description.novice
-        case .noteExplorer:
-            return L10n.Profile.Expertise.Description.noteExplorer
-        case .accordExpert:
-            return L10n.Profile.Expertise.Description.accordExpert
-        case .fragranceAnalyst:
-            return L10n.Profile.Expertise.Description.fragranceAnalyst
-        case .perfumer:
-            return L10n.Profile.Expertise.Description.perfumer
-        }
     }
 }
 

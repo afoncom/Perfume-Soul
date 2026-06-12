@@ -51,6 +51,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let todayScreen = TodayModule.build(container: container)
         let settingsScreen = SettingsModule.build()
         let discoverScreen = DiscoverModule.build()
+        let searchPerfumeScreen = SearchPerfumeModule.build()
         let profileScreen = ProfileModule.build(
             container: container,
             onProfileDeleted: { [weak self] in
@@ -58,7 +59,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         )
         let tabController = UITabBarController()
-        tabController.viewControllers = [todayScreen, discoverScreen, profileScreen, settingsScreen]
+        tabController.viewControllers = [todayScreen, discoverScreen, profileScreen, settingsScreen, searchPerfumeScreen]
         setRootViewController(tabController)
     }
 
