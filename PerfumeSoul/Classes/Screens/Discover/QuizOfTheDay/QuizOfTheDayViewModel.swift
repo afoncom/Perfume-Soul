@@ -177,6 +177,4 @@ import Observation
         update(&dailyQuizState)
         self.dailyQuizState = dailyQuizState
     }
-
-    var progressValue: Double = 0.33
 }

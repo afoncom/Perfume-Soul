@@ -16,6 +16,7 @@ protocol QuizOfTheDayPresenter {
 
 final class QuizOfTheDayPresenterImpl {
     private let viewModel: QuizOfTheDayViewModel
+    private let router: QuizOfTheDayRouter
     private let service: QuizOfTheDayService
     private let dailyQuizStateStorage: DailyQuizStateStorage
     private let quizProgressService: QuizProgressService
@@ -23,12 +24,14 @@ final class QuizOfTheDayPresenterImpl {
     
     init(
         viewModel: QuizOfTheDayViewModel,
+        router: QuizOfTheDayRouter,
         service: QuizOfTheDayService,
         dailyQuizStateStorage: DailyQuizStateStorage,
         quizProgressService: QuizProgressService,
         dayKeyProvider: QuizDayKeyProvider
     ) {
         self.viewModel = viewModel
+        self.router = router
         self.service = service
         self.dailyQuizStateStorage = dailyQuizStateStorage
         self.quizProgressService = quizProgressService

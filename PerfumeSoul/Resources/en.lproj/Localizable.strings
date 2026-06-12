@@ -14,6 +14,7 @@
 "discover.findSimilar.title" = "Find Similar Perfumes";
 "discover.scentArchetype.button" = "Start quiz";
 "discover.scentArchetype.title" = "Find Your Scent Archetype";
+"common.error.message" = "Something went wrong. Please try again.";
 "profile.birthInfo" = "Born May 12, 1993  Paris, France";
 "profile.actions.cancelButton" = "Cancel";
 "profile.actions.deleteAlertMessage" = "This action can't be undone.";
@@ -63,6 +64,15 @@
 "screen.perfumeRecommendations" = "Perfume Recommendations";
 "perfumeRecommendations.empty.title" = "Recommendations are currently unavailable";
 "perfumeRecommendations.empty.subtitle" = "Please try again later";
+"searchPerfume.emptyState" = "No perfumes found.";
+"searchPerfume.itemsPerPagePlaceholder" = "Enter items per page";
+"searchPerfume.itemsPerPageTitle" = "Items per page";
+"searchPerfume.pagePlaceholder" = "Enter page";
+"searchPerfume.pageTitle" = "Page";
+"searchPerfume.resultsTitle" = "Perfume list";
+"searchPerfume.searchButton" = "Get perfumes";
+"searchPerfume.searchTextPlaceholder" = "Enter search text";
+"searchPerfume.searchTextTitle" = "Search text";
 "screen.profile" = "Profile";
 "screen.sendFeedback" = "Feedback";
 "screen.searchPerfume" = "Search";
