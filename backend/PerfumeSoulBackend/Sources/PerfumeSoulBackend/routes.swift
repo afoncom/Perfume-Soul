@@ -1,4 +1,4 @@
-import Foundation
+import Fluent
 import Vapor
 
 func routes(_ app: Application) throws {
@@ -50,19 +50,14 @@ func routes(_ app: Application) throws {
         let query = try req.query.decode(PerfumeSearchQuery.self)
         let limit = min(max(query.limit ?? 10, 1), 50)
 
-        do {
-            return try jsonResponse(
-                PerfumeLoader.load(
-                    searchText: query.searchText ?? "",
-                    offset: max(query.offset ?? 0, 0),
-                    limit: limit
-                )
-            )
-        } catch let error as CocoaError where error.code == .fileNoSuchFile {
-            throw Abort(.notFound)
-        } catch {
-            throw error
-        }
+        let page = try await PerfumeLoader.load(
+            on: req.db,
+            searchText: query.searchText ?? "",
+            offset: max(query.offset ?? 0, 0),
+            limit: limit
+        )
+
+        return try jsonResponse(page)
     }
 }
 

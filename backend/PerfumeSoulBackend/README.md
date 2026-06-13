@@ -16,6 +16,18 @@ Build the project:
 swift build
 ```
 
+Configure the database connection in `.env`:
+
+```bash
+cp .env.example .env
+```
+
+Then set `DATABASE_URL`, for example:
+
+```bash
+DATABASE_URL=postgresql://postgres:your-password@localhost:5432/postgres
+```
+
 Run the server:
 
 ```bash
@@ -65,5 +77,6 @@ Expected response on `/horoscope/daily`:
 
 - Backend is separate from the iOS app and lives in `backend/PerfumeSoulBackend`.
 - First build can take a long time because Swift Package Manager downloads and compiles dependencies.
+- `GET /perfumes` now reads from PostgreSQL, so the local database must be running and contain `brands` and `perfumes`.
 - Endpoint resources are stored under `Sources/PerfumeSoulBackend/Requests/<endpoint>/Resources`.
 - If the server is running, stop it with `Control + C`.

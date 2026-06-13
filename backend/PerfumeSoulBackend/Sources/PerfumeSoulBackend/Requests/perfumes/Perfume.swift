@@ -1,4 +1,4 @@
-import Foundation
+import Fluent
 
 struct Perfume: Codable, Equatable {
     let name: String
@@ -11,16 +11,18 @@ struct PerfumeSearchPage: Codable, Equatable {
 
 enum PerfumeLoader {
     static func load(
+        on database: any Database,
         searchText: String,
         offset: Int,
         limit: Int
-    ) throws -> PerfumeSearchPage {
-        let url = try resourceURL(for: "perfumesList")
-        let data = try Data(contentsOf: url)
-        let perfumes = try JSONDecoder().decode([Perfume].self, from: data)
+    ) async throws -> PerfumeSearchPage {
+        let perfumes = try await PerfumeModel.query(on: database)
+            .with(\.$brand)
+            .all()
 
         let normalizedSearchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         let filteredPerfumes = perfumes
+            .map(Perfume.init(model:))
             .filter { perfume in
                 normalizedSearchText.isEmpty
                     || perfume.name.localizedCaseInsensitiveContains(normalizedSearchText)
@@ -39,12 +41,21 @@ enum PerfumeLoader {
             hasMore: endIndex < filteredPerfumes.count
         )
     }
+}
 
-    private static func resourceURL(for resourceName: String) throws -> URL {
-        if let url = Bundle.module.url(forResource: resourceName, withExtension: "json") {
-            return url
+private extension Perfume {
+    init(model: PerfumeModel) {
+        let brandName = model.brand.name.trimmingCharacters(in: .whitespacesAndNewlines)
+        let perfumeName = model.perfumeName.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if perfumeName.localizedCaseInsensitiveContains(brandName), !brandName.isEmpty {
+            self.name = perfumeName
+        } else if brandName.isEmpty {
+            self.name = perfumeName
+        } else if perfumeName.isEmpty {
+            self.name = brandName
+        } else {
+            self.name = "\(brandName) \(perfumeName)"
         }
-
-        throw CocoaError(.fileNoSuchFile)
     }
 }
