@@ -12,6 +12,9 @@ final class PerfumeModel: Model, @unchecked Sendable {
     @Parent(key: "brand_id")
     var brand: BrandModel
 
+    @Children(for: \.$perfume)
+    var notes: [PerfumeNoteModel]
+
     init() { }
 
     init(id: Int? = nil, perfumeName: String, brandID: Int) {

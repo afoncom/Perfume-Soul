@@ -1,4 +1,5 @@
 import Fluent
+import Foundation
 
 struct Perfume: Codable, Equatable {
     let name: String
@@ -9,6 +10,15 @@ struct PerfumeSearchPage: Codable, Equatable {
     let hasMore: Bool
 }
 
+struct PerfumeNotesResponse: Codable, Equatable {
+    let id: Int
+    let brand: String
+    let perfumeName: String
+    let topNotes: [String]
+    let middleNotes: [String]
+    let baseNotes: [String]
+}
+
 enum PerfumeLoader {
     static func load(
         on database: any Database,
@@ -16,29 +26,77 @@ enum PerfumeLoader {
         offset: Int,
         limit: Int
     ) async throws -> PerfumeSearchPage {
-        let perfumes = try await PerfumeModel.query(on: database)
-            .with(\.$brand)
-            .all()
-
         let normalizedSearchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        let filteredPerfumes = perfumes
+        let upperBound = offset + limit + 1
+
+        let query = PerfumeModel.query(on: database)
+            .with(\.$brand)
+            .join(parent: \.$brand)
+            .sort(BrandModel.self, \.$name)
+            .sort(\.$perfumeName)
+            .range(offset..<upperBound)
+
+        if !normalizedSearchText.isEmpty {
+            query.filter(\.$perfumeName, .custom("ilike"), "%\(normalizedSearchText)%")
+        }
+
+        let perfumes = try await query.all()
+        let hasMore = perfumes.count > limit
+        let items = perfumes
+            .prefix(limit)
             .map(Perfume.init(model:))
-            .filter { perfume in
-                normalizedSearchText.isEmpty
-                    || perfume.name.localizedCaseInsensitiveContains(normalizedSearchText)
-            }
-            .sorted { leftPerfume, rightPerfume in
-                leftPerfume.name.localizedCaseInsensitiveCompare(rightPerfume.name) == .orderedAscending
-            }
 
-        let startIndex = min(offset, filteredPerfumes.count)
-        let pageSize = min(limit, filteredPerfumes.count - startIndex)
-        let endIndex = startIndex + pageSize
-        let items = Array(filteredPerfumes[startIndex..<endIndex])
-
+        print(items)
         return PerfumeSearchPage(
-            items: items,
-            hasMore: endIndex < filteredPerfumes.count
+            items: Array(items),
+            hasMore: hasMore
+        )
+    }
+}
+
+enum PerfumeNotesLoader {
+    static func load(
+        perfumeID: Int,
+        on database: any Database
+    ) async throws -> PerfumeNotesResponse? {
+        guard let perfume = try await PerfumeModel.query(on: database)
+            .with(\.$brand)
+            .with(\.$notes) { query in
+                query.with(\.$note)
+                    .sort(\.$sortOrder)
+            }
+            .filter(\.$id == perfumeID)
+            .first()
+        else {
+            return nil
+        }
+
+        var topNotes: [String] = []
+        var middleNotes: [String] = []
+        var baseNotes: [String] = []
+
+        for perfumeNote in perfume.notes {
+            switch perfumeNote.noteType {
+            case .top:
+                topNotes.append(perfumeNote.note.name)
+            case .middle:
+                middleNotes.append(perfumeNote.note.name)
+            case .base:
+                baseNotes.append(perfumeNote.note.name)
+            }
+        }
+
+        guard let id = perfume.id else {
+            return nil
+        }
+
+        return PerfumeNotesResponse(
+            id: id,
+            brand: perfume.brand.name,
+            perfumeName: perfume.perfumeName,
+            topNotes: topNotes,
+            middleNotes: middleNotes,
+            baseNotes: baseNotes
         )
     }
 }

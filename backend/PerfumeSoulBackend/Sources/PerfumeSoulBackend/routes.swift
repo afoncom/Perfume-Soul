@@ -59,6 +59,19 @@ func routes(_ app: Application) throws {
 
         return try jsonResponse(page)
     }
+
+    app.get("perfumes", ":perfumeID", "notes") { req async throws -> Response in
+        let perfumeID = try req.parameters.require("perfumeID", as: Int.self)
+
+        guard let perfumeNotes = try await PerfumeNotesLoader.load(
+            perfumeID: perfumeID,
+            on: req.db
+        ) else {
+            throw Abort(.notFound)
+        }
+
+        return try jsonResponse(perfumeNotes)
+    }
 }
 
 private func jsonResponse<T: Encodable>(_ value: T) throws -> Response {
