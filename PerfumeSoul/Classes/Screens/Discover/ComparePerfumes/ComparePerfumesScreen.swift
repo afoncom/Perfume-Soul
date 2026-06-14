@@ -22,36 +22,94 @@ struct ComparePerfumesScreen: View {
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            VStack(spacing: 18) {
-                makePerfumesHeader()
-                makeNotesSection()
-                makeWearSection()
-            }
-            .padding(.horizontal, 16)
-            .padding(.top, 16)
-            .padding(.bottom, 28)
+            content
         }
         .background {
             Color(.backgroundPrimary).ignoresSafeArea()
         }
         .navigationTitle("Сравнение ароматов")
         .navigationBarTitleDisplayMode(.inline)
+        .task {
+            await presenter.onAppear()
+        }
     }
 }
 
 private extension ComparePerfumesScreen {
-    func makePerfumesHeader() -> some View {
+    var leftPerfume: ComparePerfume? {
+        viewModel.leftPerfume
+    }
+
+    var rightPerfume: ComparePerfume? {
+        viewModel.rightPerfume
+    }
+
+    @ViewBuilder
+    var content: some View {
+        if viewModel.isLoading && !viewModel.hasLoadedOnce {
+            makeLoadingState()
+        } else if let errorMessage = viewModel.errorMessage {
+            makeErrorState(message: errorMessage)
+        } else if let leftPerfume, let rightPerfume {
+            VStack(spacing: 18) {
+                makePerfumesHeader(
+                    leftPerfume: leftPerfume,
+                    rightPerfume: rightPerfume
+                )
+                makeNotesSection(
+                    leftPerfume: leftPerfume,
+                    rightPerfume: rightPerfume
+                )
+                makeWearSection(
+                    leftPerfume: leftPerfume,
+                    rightPerfume: rightPerfume
+                )
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 16)
+            .padding(.bottom, 28)
+        } else {
+            makeErrorState(message: "Не удалось загрузить данные для сравнения.")
+        }
+    }
+
+    func makeLoadingState() -> some View {
+        VStack(spacing: 14) {
+            ProgressView()
+            Text("Загружаем сравнение ароматов...")
+                .font(.footnote)
+                .foregroundStyle(Color(.textSecondary))
+        }
+        .frame(maxWidth: .infinity, minHeight: 360)
+        .padding(.horizontal, 16)
+        .padding(.top, 16)
+    }
+
+    func makeErrorState(message: String) -> some View {
+        Text(message)
+            .font(.footnote)
+            .foregroundStyle(Color(.textSecondary))
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: .infinity, minHeight: 360)
+            .padding(.horizontal, 24)
+            .padding(.top, 16)
+    }
+
+    func makePerfumesHeader(
+        leftPerfume: ComparePerfume,
+        rightPerfume: ComparePerfume
+    ) -> some View {
         ZStack {
             HStack(alignment: .top, spacing: 12) {
                 makePerfumeCard(
-                    brand: "Tom Ford",
-                    name: "Oud Wood",
+                    brand: leftPerfume.brand,
+                    name: leftPerfume.name,
                     type: "Парфюмерная вода"
                 )
                 
                 makePerfumeCard(
-                    brand: "Dior",
-                    name: "Sauvage",
+                    brand: rightPerfume.brand,
+                    name: rightPerfume.name,
                     type: "Парфюмерная вода"
                 )
             }
@@ -101,25 +159,28 @@ private extension ComparePerfumesScreen {
         .frame(maxWidth: .infinity)
     }
     
-    func makeNotesSection() -> some View {
+    func makeNotesSection(
+        leftPerfume: ComparePerfume,
+        rightPerfume: ComparePerfume
+    ) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             makeSectionTitle("Пирамида нот")
-            
+
             HStack(alignment: .top, spacing: 12) {
                 makePerfumeNotesCard(
-                    name: "Oud Wood",
+                    name: leftPerfume.name,
                     accentColor: Color(.pinkButton),
-                    topNotes: ["Кардамон", "Перец", "Палисандр", "Бергамот", "Лаванда"],
-                    middleNotes: ["Уд", "Сандал", "Ветивер", "Сычуанский перец", "Пачули"],
-                    baseNotes: ["Амбра", "Бобы тонка", "Ваниль", "Амброксан", "Кедр", "Лабданум"]
+                    topNotes: leftPerfume.topNotes,
+                    middleNotes: leftPerfume.middleNotes,
+                    baseNotes: leftPerfume.baseNotes
                 )
                 
                 makePerfumeNotesCard(
-                    name: "Sauvage",
+                    name: rightPerfume.name,
                     accentColor: Color(.zodiacPurple),
-                    topNotes: ["Бергамот", "Перец"],
-                    middleNotes: ["Лаванда", "Герань", "Ветивер", "Пачули"],
-                    baseNotes: ["Амброксан", "Кедр", "Лабданум"]
+                    topNotes: rightPerfume.topNotes,
+                    middleNotes: rightPerfume.middleNotes,
+                    baseNotes: rightPerfume.baseNotes
                 )
             }
         }
@@ -214,14 +275,17 @@ private extension ComparePerfumesScreen {
         }
     }
     
-    func makeWearSection() -> some View {
+    func makeWearSection(
+        leftPerfume: ComparePerfume,
+        rightPerfume: ComparePerfume
+    ) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             makeSectionTitle("На коже")
             
             HStack(alignment: .top, spacing: 12) {
                 makeWearCard(
-                    brand: "Tom Ford",
-                    name: "Oud Wood",
+                    brand: leftPerfume.brand,
+                    name: leftPerfume.name,
                     accentColor: Color(.pinkButton),
                     metrics: [
                         ("Стойкость", "8/10"),
@@ -230,8 +294,8 @@ private extension ComparePerfumesScreen {
                 )
                 
                 makeWearCard(
-                    brand: "Dior",
-                    name: "Sauvage",
+                    brand: rightPerfume.brand,
+                    name: rightPerfume.name,
                     accentColor: Color(.zodiacPurple),
                     metrics: [
                         ("Стойкость", "7/10"),

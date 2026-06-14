@@ -12,9 +12,12 @@ final class ComparePerfumesModule {
     static func build(navigationController: UINavigationController?) -> UIViewController {
         let viewModel = ComparePerfumesViewModel()
         let router = ComparePerfumesRouterImpl(navigationController: navigationController)
+        let requestManager = RequestManagerImpl(urlSession: URLSession.shared, baseURL: "http://127.0.0.1:8080")
+        let comparePerfumeService = ComparePerfumeServiceImpl(requestManager: requestManager)
         let presenter = ComparePerfumesPresenterImpl(
             viewModel: viewModel,
-            router: router
+            router: router,
+            comparePerfumeService: comparePerfumeService
         )
         
         let view = ComparePerfumesScreen(viewModel: viewModel, presenter: presenter)
