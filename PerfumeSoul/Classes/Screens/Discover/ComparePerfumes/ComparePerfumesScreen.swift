@@ -24,10 +24,8 @@ struct ComparePerfumesScreen: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 18) {
                 makePerfumesHeader()
-                makeAccordsSection()
                 makeNotesSection()
-                makeImpressionSection()
-                makePerformanceSection()
+                makeWearSection()
             }
             .padding(.horizontal, 16)
             .padding(.top, 16)
@@ -103,196 +101,25 @@ private extension ComparePerfumesScreen {
         .frame(maxWidth: .infinity)
     }
     
-    func makeAccordsSection() -> some View {
-        VStack(alignment: .leading, spacing: 14) {
-            makeSectionTitle("Основные аккорды")
-            
-            VStack(spacing: 14) {
-                makeAccordRow(title: "Древесный", leftValue: 0.86, rightValue: 0.92)
-                makeAccordRow(title: "Удовый", leftValue: 0.72, rightValue: 0.34)
-                makeAccordRow(title: "Теплый пряный", leftValue: 0.76, rightValue: 0.52)
-                makeAccordRow(title: "Свежий пряный", leftValue: 0.46, rightValue: 0.78)
-                makeAccordRow(title: "Дымный", leftValue: 0.38, rightValue: 0.56)
-            }
-        }
-        .padding(16)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .stroke(Color(.cardBorder), lineWidth: 1)
-        )
-        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
-    }
-    
-    func makeAccordRow(
-        title: String,
-        leftValue: CGFloat,
-        rightValue: CGFloat
-    ) -> some View {
-        HStack(spacing: 10) {
-            HStack {
-                RoundedRectangle(cornerRadius: 999, style: .continuous)
-                    .fill(Color(.pinkButton).opacity(0.55))
-                    .frame(width: 72 * leftValue, height: 10)
-                
-                Spacer(minLength: 0)
-            }
-            .frame(width: 72)
-            
-            Text(title)
-                .font(.footnote)
-                .foregroundStyle(Color(.textPrimary))
-                .frame(width: 92)
-                .multilineTextAlignment(.center)
-            
-            HStack {
-                Spacer(minLength: 0)
-                
-                RoundedRectangle(cornerRadius: 999, style: .continuous)
-                    .fill(Color(.zodiacPurple).opacity(0.55))
-                    .frame(width: 72 * rightValue, height: 10)
-            }
-            .frame(width: 72)
-        }
-    }
-    
     func makeNotesSection() -> some View {
         VStack(alignment: .leading, spacing: 14) {
-            makeSectionTitle("Ноты")
-            
-            VStack(spacing: 18) {
-                makeNotesRow(
-                    title: "Верхние ноты",
-                    leftNotes: ["Кардамон", "Перец", "Палисандр"],
-                    rightNotes: ["Бергамот", "Перец", "Лаванда"]
-                )
-                
-                makeNotesRow(
-                    title: "Средние ноты",
-                    leftNotes: ["Уд", "Сандал", "Ветивер"],
-                    rightNotes: ["Лаванда", "Сычуанский перец", "Пачули"]
-                )
-                
-                makeNotesRow(
-                    title: "Базовые ноты",
-                    leftNotes: ["Амбра", "Бобы тонка", "Ваниль"],
-                    rightNotes: ["Амброксан", "Кедр", "Лабданум"]
-                )
-            }
-        }
-        .padding(16)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .stroke(Color(.cardBorder), lineWidth: 1)
-        )
-        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
-    }
-    
-    func makeNotesRow(
-        title: String,
-        leftNotes: [String],
-        rightNotes: [String]
-    ) -> some View {
-        VStack(spacing: 14) {
-            Text(title)
-                .font(.headline)
-                .foregroundStyle(Color(.textPrimary))
-                .frame(maxWidth: .infinity)
+            makeSectionTitle("Пирамида нот")
             
             HStack(alignment: .top, spacing: 12) {
-                makeNotesColumn(leftNotes)
-                makeNotesColumn(rightNotes)
-            }
-        }
-    }
-    
-    func makeNotesColumn(_ notes: [String]) -> some View {
-        HStack(spacing: 10) {
-            ForEach(notes, id: \.self) { note in
-                VStack(spacing: 8) {
-                    RoundedRectangle(cornerRadius: 12, style: .continuous)
-                        .fill(Color(.placeholderMedium))
-                        .frame(width: 38, height: 38)
-                    
-                    Text(note)
-                        .font(.caption)
-                        .foregroundStyle(Color(.textSecondary))
-                        .multilineTextAlignment(.center)
-                        .frame(width: 48)
-                }
-            }
-        }
-        .frame(maxWidth: .infinity)
-    }
-    
-    func makeImpressionSection() -> some View {
-        VStack(alignment: .leading, spacing: 14) {
-            makeSectionTitle("Общее впечатление")
-            
-            HStack(spacing: 14) {
-                makeImpressionCard("Глубокий, древесный, элегантный.")
-                makeImpressionCard("Свежий, пряный, мужественный.")
-            }
-        }
-        .padding(16)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .stroke(Color(.cardBorder), lineWidth: 1)
-        )
-        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
-    }
-    
-    func makeImpressionCard(_ text: String) -> some View {
-        Text(text)
-            .font(.body)
-            .foregroundStyle(Color(.textPrimary))
-            .multilineTextAlignment(.center)
-            .frame(maxWidth: .infinity, minHeight: 72)
-            .padding(.horizontal, 10)
-            .background(Color(.rowBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-    }
-    
-    func makePerformanceSection() -> some View {
-        VStack(spacing: 16) {
-            HStack(alignment: .top, spacing: 12) {
-                makeScoreColumn(
-                    topTitle: "Стойкость",
-                    topScore: "8/10",
-                    topValue: 0.78,
-                    bottomTitle: "Шлейф",
-                    bottomScore: "9/10",
-                    bottomValue: 0.88,
-                    accentColor: Color(.pinkButton)
+                makePerfumeNotesCard(
+                    name: "Oud Wood",
+                    accentColor: Color(.pinkButton),
+                    topNotes: ["Кардамон", "Перец", "Палисандр", "Бергамот", "Лаванда"],
+                    middleNotes: ["Уд", "Сандал", "Ветивер", "Сычуанский перец", "Пачули"],
+                    baseNotes: ["Амбра", "Бобы тонка", "Ваниль", "Амброксан", "Кедр", "Лабданум"]
                 )
                 
-                VStack {
-                    Image(systemName: "hand.thumbsup")
-                        .font(.headline)
-                        .foregroundStyle(Color(.pinkButton))
-                        .frame(width: 42, height: 42)
-                        .background(Color(.surfacePrimary))
-                        .clipShape(Circle())
-                        .overlay(
-                            Circle()
-                                .stroke(Color(.cardBorder), lineWidth: 1)
-                        )
-                    Spacer()
-                }
-                
-                makeScoreColumn(
-                    topTitle: "Стойкость",
-                    topScore: "7/10",
-                    topValue: 0.68,
-                    bottomTitle: "Шлейф",
-                    bottomScore: "8/10",
-                    bottomValue: 0.76,
-                    accentColor: Color(.zodiacPurple)
+                makePerfumeNotesCard(
+                    name: "Sauvage",
+                    accentColor: Color(.zodiacPurple),
+                    topNotes: ["Бергамот", "Перец"],
+                    middleNotes: ["Лаванда", "Герань", "Ветивер", "Пачули"],
+                    baseNotes: ["Амброксан", "Кедр", "Лабданум"]
                 )
             }
         }
@@ -306,44 +133,178 @@ private extension ComparePerfumesScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
     
-    func makeScoreColumn(
-        topTitle: String,
-        topScore: String,
-        topValue: CGFloat,
-        bottomTitle: String,
-        bottomScore: String,
-        bottomValue: CGFloat,
-        accentColor: Color
+    func makePerfumeNotesCard(
+        name: String,
+        accentColor: Color,
+        topNotes: [String],
+        middleNotes: [String],
+        baseNotes: [String]
     ) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            makeScoreRow(title: topTitle, score: topScore, value: topValue, color: accentColor)
-            makeScoreRow(title: bottomTitle, score: bottomScore, value: bottomValue, color: accentColor)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-    
-    func makeScoreRow(
-        title: String,
-        score: String,
-        value: CGFloat,
-        color: Color
-    ) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Text(title)
+            VStack(alignment: .leading, spacing: 6) {
+                Capsule()
+                    .fill(accentColor.opacity(0.22))
+                    .frame(width: 48, height: 6)
+                
+                Text(name)
                     .font(.headline)
                     .foregroundStyle(Color(.textPrimary))
-                
-                Spacer()
-                
-                Text(score)
-                    .font(.headline)
-                    .foregroundStyle(color)
+                    .lineLimit(2)
             }
             
-            RoundedRectangle(cornerRadius: 999, style: .continuous)
-                .fill(color.opacity(0.45))
-                .frame(width: 82 * value, height: 10)
+            makeNotesGroup(
+                title: "Верхние",
+                notes: topNotes,
+                accentColor: accentColor
+            )
+            
+            makeNotesGroup(
+                title: "Средние",
+                notes: middleNotes,
+                accentColor: accentColor
+            )
+            
+            makeNotesGroup(
+                title: "Базовые",
+                notes: baseNotes,
+                accentColor: accentColor
+            )
+        }
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .padding(14)
+        .background(Color(.rowBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+    }
+    
+    func makeNotesGroup(
+        title: String,
+        notes: [String],
+        accentColor: Color
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text(title)
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(Color(.textPrimary))
+            
+            VStack(alignment: .leading, spacing: 8) {
+                ForEach(notes, id: \.self) { note in
+                    makeNoteRow(
+                        note: note,
+                        accentColor: accentColor
+                    )
+                }
+            }
+        }
+    }
+    
+    func makeNoteRow(
+        note: String,
+        accentColor: Color
+    ) -> some View {
+        HStack(alignment: .top, spacing: 8) {
+            Circle()
+                .fill(accentColor.opacity(0.75))
+                .frame(width: 8, height: 8)
+                .padding(.top, 4)
+            
+            Text(note)
+                .font(.footnote)
+                .foregroundStyle(Color(.textPrimary))
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+    
+    func makeWearSection() -> some View {
+        VStack(alignment: .leading, spacing: 14) {
+            makeSectionTitle("На коже")
+            
+            HStack(alignment: .top, spacing: 12) {
+                makeWearCard(
+                    brand: "Tom Ford",
+                    name: "Oud Wood",
+                    accentColor: Color(.pinkButton),
+                    metrics: [
+                        ("Стойкость", "8/10"),
+                        ("Шлейф", "9/10")
+                    ]
+                )
+                
+                makeWearCard(
+                    brand: "Dior",
+                    name: "Sauvage",
+                    accentColor: Color(.zodiacPurple),
+                    metrics: [
+                        ("Стойкость", "7/10"),
+                        ("Шлейф", "8/10")
+                    ]
+                )
+            }
+        }
+        .padding(16)
+        .background(Color(.surfacePrimary))
+        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .stroke(Color(.cardBorder), lineWidth: 1)
+        )
+        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
+    }
+    
+    func makeWearCard(
+        brand: String,
+        name: String,
+        accentColor: Color,
+        metrics: [(String, String)]
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 14) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(brand)
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(Color(.textSecondary))
+                
+                Text(name)
+                    .font(.headline)
+                    .foregroundStyle(Color(.textPrimary))
+                    .lineLimit(2)
+            }
+            
+            VStack(spacing: 10) {
+                ForEach(metrics, id: \.0) { metric in
+                    makeWearRow(
+                        title: metric.0,
+                        score: metric.1,
+                        accentColor: accentColor
+                    )
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .padding(14)
+        .background(Color(.rowBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+    }
+    
+    func makeWearRow(
+        title: String,
+        score: String,
+        accentColor: Color
+    ) -> some View {
+        HStack(alignment: .center, spacing: 10) {
+            Text(title)
+                .font(.caption.weight(.medium))
+                .foregroundStyle(Color(.textPrimary))
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+            
+            Spacer(minLength: 8)
+            
+            Text(score)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(accentColor)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 5)
+                .background(accentColor.opacity(0.14))
+                .clipShape(Capsule())
         }
     }
     

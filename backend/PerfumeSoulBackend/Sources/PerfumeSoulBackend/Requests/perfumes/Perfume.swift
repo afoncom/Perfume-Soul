@@ -37,7 +37,11 @@ enum PerfumeLoader {
             .range(offset..<upperBound)
 
         if !normalizedSearchText.isEmpty {
-            query.filter(\.$perfumeName, .custom("ilike"), "%\(normalizedSearchText)%")
+            let pattern = "%\(normalizedSearchText)%"
+            query.group(.or) { group in
+                group.filter(\.$perfumeName, .custom("ilike"), pattern)
+                    .filter(BrandModel.self, \.$name, .custom("ilike"), pattern)
+            }
         }
 
         let perfumes = try await query.all()
@@ -46,7 +50,6 @@ enum PerfumeLoader {
             .prefix(limit)
             .map(Perfume.init(model:))
 
-        print(items)
         return PerfumeSearchPage(
             items: Array(items),
             hasMore: hasMore
@@ -61,21 +64,23 @@ enum PerfumeNotesLoader {
     ) async throws -> PerfumeNotesResponse? {
         guard let perfume = try await PerfumeModel.query(on: database)
             .with(\.$brand)
-            .with(\.$notes) { query in
-                query.with(\.$note)
-                    .sort(\.$sortOrder)
-            }
             .filter(\.$id == perfumeID)
             .first()
         else {
             return nil
         }
 
+        let perfumeNotes = try await PerfumeNoteModel.query(on: database)
+            .with(\.$note)
+            .filter(\.$perfume.$id == perfumeID)
+            .sort(\.$sortOrder)
+            .all()
+
         var topNotes: [String] = []
         var middleNotes: [String] = []
         var baseNotes: [String] = []
 
-        for perfumeNote in perfume.notes {
+        for perfumeNote in perfumeNotes {
             switch perfumeNote.noteType {
             case .top:
                 topNotes.append(perfumeNote.note.name)
