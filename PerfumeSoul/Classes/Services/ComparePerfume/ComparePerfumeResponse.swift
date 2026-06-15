@@ -12,6 +12,8 @@ struct ComparePerfumeResponse: Decodable {
     let id: Int
     let brand: String
     let perfumeName: String
+    let longevityScore: Int?
+    let sillageScore: Int?
     let topNotes: [String]
     let middleNotes: [String]
     let baseNotes: [String]

@@ -288,8 +288,8 @@ private extension ComparePerfumesScreen {
                     name: leftPerfume.name,
                     accentColor: Color(.pinkButton),
                     metrics: [
-                        ("Стойкость", "8/10"),
-                        ("Шлейф", "9/10")
+                        ("Стойкость", scoreText(leftPerfume.longevityScore)),
+                        ("Шлейф", scoreText(leftPerfume.sillageScore))
                     ]
                 )
                 
@@ -298,8 +298,8 @@ private extension ComparePerfumesScreen {
                     name: rightPerfume.name,
                     accentColor: Color(.zodiacPurple),
                     metrics: [
-                        ("Стойкость", "7/10"),
-                        ("Шлейф", "8/10")
+                        ("Стойкость", scoreText(rightPerfume.longevityScore)),
+                        ("Шлейф", scoreText(rightPerfume.sillageScore))
                     ]
                 )
             }
@@ -370,6 +370,11 @@ private extension ComparePerfumesScreen {
                 .background(accentColor.opacity(0.14))
                 .clipShape(Capsule())
         }
+    }
+
+    func scoreText(_ score: Int?) -> String {
+        guard let score else { return "--" }
+        return "\(score)/10"
     }
     
     func makeSectionTitle(_ title: String) -> some View {

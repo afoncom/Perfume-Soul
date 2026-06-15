@@ -14,6 +14,8 @@ struct PerfumeNotesResponse: Codable, Equatable {
     let id: Int
     let brand: String
     let perfumeName: String
+    let longevityScore: Int?
+    let sillageScore: Int?
     let topNotes: [String]
     let middleNotes: [String]
     let baseNotes: [String]
@@ -99,6 +101,8 @@ enum PerfumeNotesLoader {
             id: id,
             brand: perfume.brand.name,
             perfumeName: perfume.perfumeName,
+            longevityScore: perfume.longevityScore,
+            sillageScore: perfume.sillageScore,
             topNotes: topNotes,
             middleNotes: middleNotes,
             baseNotes: baseNotes
