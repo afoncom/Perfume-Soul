@@ -39,7 +39,7 @@ enum PerfumeLoader {
             .range(offset..<upperBound)
 
         if !normalizedSearchText.isEmpty {
-            let pattern = "%\(normalizedSearchText)%"
+            let pattern = "%\(normalizedSearchText.escapedForLikePattern)%"
             query.group(.or) { group in
                 group.filter(\.$perfumeName, .custom("ilike"), pattern)
                     .filter(BrandModel.self, \.$name, .custom("ilike"), pattern)
@@ -124,5 +124,13 @@ private extension Perfume {
         } else {
             self.name = "\(brandName) \(perfumeName)"
         }
+    }
+}
+
+private extension String {
+    var escapedForLikePattern: String {
+        replacingOccurrences(of: "\\", with: "\\\\")
+            .replacingOccurrences(of: "%", with: "\\%")
+            .replacingOccurrences(of: "_", with: "\\_")
     }
 }
