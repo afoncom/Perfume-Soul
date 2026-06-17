@@ -11,6 +11,7 @@ protocol ComparePerfumesPresenter {
     func retryTapped() async
 }
 
+@MainActor
 final class ComparePerfumesPresenterImpl {
     private let viewModel: ComparePerfumesViewModel
     private let router: ComparePerfumesRouter
@@ -46,20 +47,16 @@ private extension ComparePerfumesPresenterImpl {
         guard !viewModel.isLoading else { return }
 
         guard let selection = comparePerfumeSelectionService.fetchSelection() else {
-            await MainActor.run {
-                viewModel.leftPerfume = nil
-                viewModel.rightPerfume = nil
-                viewModel.isLoading = false
-                viewModel.hasLoadedOnce = false
-                viewModel.errorMessage = "Не выбрана пара ароматов для сравнения."
-            }
+            viewModel.leftPerfume = nil
+            viewModel.rightPerfume = nil
+            viewModel.isLoading = false
+            viewModel.hasLoadedOnce = false
+            viewModel.errorMessage = "Не выбрана пара ароматов для сравнения."
             return
         }
 
-        await MainActor.run {
-            viewModel.isLoading = true
-            viewModel.errorMessage = nil
-        }
+        viewModel.isLoading = true
+        viewModel.errorMessage = nil
 
         do {
             async let leftPerfume = comparePerfumeService.requestPerfume(perfumeID: selection.leftPerfumeID)
@@ -67,21 +64,17 @@ private extension ComparePerfumesPresenterImpl {
 
             let result = try await (leftPerfume, rightPerfume)
 
-            await MainActor.run {
-                viewModel.leftPerfume = result.0
-                viewModel.rightPerfume = result.1
-                viewModel.isLoading = false
-                viewModel.hasLoadedOnce = true
-                viewModel.errorMessage = nil
-            }
+            viewModel.leftPerfume = result.0
+            viewModel.rightPerfume = result.1
+            viewModel.isLoading = false
+            viewModel.hasLoadedOnce = true
+            viewModel.errorMessage = nil
         } catch {
-            await MainActor.run {
-                viewModel.leftPerfume = nil
-                viewModel.rightPerfume = nil
-                viewModel.isLoading = false
-                viewModel.hasLoadedOnce = false
-                viewModel.errorMessage = "Не удалось загрузить данные для сравнения."
-            }
+            viewModel.leftPerfume = nil
+            viewModel.rightPerfume = nil
+            viewModel.isLoading = false
+            viewModel.hasLoadedOnce = false
+            viewModel.errorMessage = "Не удалось загрузить данные для сравнения."
         }
     }
 }
