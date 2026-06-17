@@ -12,7 +12,11 @@ final class DiscoverModule {
     static func build() -> UIViewController {
         let viewModel = DiscoverViewModel()
         let navigationController = UINavigationController()
-        let router = DiscoverRouterImpl(navigationController: navigationController)
+        let comparePerfumeSelectionService = ComparePerfumeSelectionServiceImpl()
+        let router = DiscoverRouterImpl(
+            navigationController: navigationController,
+            comparePerfumeSelectionService: comparePerfumeSelectionService
+        )
         let presenter = DiscoverPresenterImpl(
             viewModel: viewModel,
             router: router

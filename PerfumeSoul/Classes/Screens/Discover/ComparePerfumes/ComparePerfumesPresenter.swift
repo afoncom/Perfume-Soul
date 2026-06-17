@@ -15,15 +15,18 @@ final class ComparePerfumesPresenterImpl {
     private let viewModel: ComparePerfumesViewModel
     private let router: ComparePerfumesRouter
     private let comparePerfumeService: ComparePerfumeService
+    private let comparePerfumeSelectionService: ComparePerfumeSelectionService
     
     init(
         viewModel: ComparePerfumesViewModel,
         router: ComparePerfumesRouter,
-        comparePerfumeService: ComparePerfumeService
+        comparePerfumeService: ComparePerfumeService,
+        comparePerfumeSelectionService: ComparePerfumeSelectionService
     ) {
         self.viewModel = viewModel
         self.router = router
         self.comparePerfumeService = comparePerfumeService
+        self.comparePerfumeSelectionService = comparePerfumeSelectionService
     }
 }
 
@@ -42,14 +45,25 @@ private extension ComparePerfumesPresenterImpl {
         guard force || !viewModel.hasLoadedOnce else { return }
         guard !viewModel.isLoading else { return }
 
+        guard let selection = comparePerfumeSelectionService.fetchSelection() else {
+            await MainActor.run {
+                viewModel.leftPerfume = nil
+                viewModel.rightPerfume = nil
+                viewModel.isLoading = false
+                viewModel.hasLoadedOnce = false
+                viewModel.errorMessage = "Не выбрана пара ароматов для сравнения."
+            }
+            return
+        }
+
         await MainActor.run {
             viewModel.isLoading = true
             viewModel.errorMessage = nil
         }
 
         do {
-            async let leftPerfume = comparePerfumeService.requestPerfume(perfumeID: 3)
-            async let rightPerfume = comparePerfumeService.requestPerfume(perfumeID: 1)
+            async let leftPerfume = comparePerfumeService.requestPerfume(perfumeID: selection.leftPerfumeID)
+            async let rightPerfume = comparePerfumeService.requestPerfume(perfumeID: selection.rightPerfumeID)
 
             let result = try await (leftPerfume, rightPerfume)
 
