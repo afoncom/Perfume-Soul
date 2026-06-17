@@ -86,13 +86,33 @@ private extension ComparePerfumesScreen {
     }
 
     func makeErrorState(message: String) -> some View {
-        Text(message)
-            .font(.footnote)
-            .foregroundStyle(Color(.textSecondary))
-            .multilineTextAlignment(.center)
-            .frame(maxWidth: .infinity, minHeight: 360)
-            .padding(.horizontal, 24)
-            .padding(.top, 16)
+        VStack(spacing: 14) {
+            Text(message)
+                .font(.footnote)
+                .foregroundStyle(Color(.textSecondary))
+                .multilineTextAlignment(.center)
+
+            Button {
+                Task {
+                    await presenter.retryTapped()
+                }
+            } label: {
+                Text("Повторить")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(Color(.textPrimary))
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 10)
+                    .background(Color(.surfacePrimary))
+                    .clipShape(Capsule())
+                    .overlay(
+                        Capsule()
+                            .stroke(Color(.cardBorder), lineWidth: 1)
+                    )
+            }
+        }
+        .frame(maxWidth: .infinity, minHeight: 360)
+        .padding(.horizontal, 24)
+        .padding(.top, 16)
     }
 
     func makePerfumesHeader(

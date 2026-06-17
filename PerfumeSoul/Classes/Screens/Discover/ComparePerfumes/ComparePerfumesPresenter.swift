@@ -8,6 +8,7 @@
 
 protocol ComparePerfumesPresenter {
     func onAppear() async
+    func retryTapped() async
 }
 
 final class ComparePerfumesPresenterImpl {
@@ -28,7 +29,18 @@ final class ComparePerfumesPresenterImpl {
 
 extension ComparePerfumesPresenterImpl: ComparePerfumesPresenter {
     func onAppear() async {
-        guard !viewModel.hasLoadedOnce else { return }
+        await loadComparison(force: false)
+    }
+
+    func retryTapped() async {
+        await loadComparison(force: true)
+    }
+}
+
+private extension ComparePerfumesPresenterImpl {
+    func loadComparison(force: Bool) async {
+        guard force || !viewModel.hasLoadedOnce else { return }
+        guard !viewModel.isLoading else { return }
 
         await MainActor.run {
             viewModel.isLoading = true
@@ -53,7 +65,7 @@ extension ComparePerfumesPresenterImpl: ComparePerfumesPresenter {
                 viewModel.leftPerfume = nil
                 viewModel.rightPerfume = nil
                 viewModel.isLoading = false
-                viewModel.hasLoadedOnce = true
+                viewModel.hasLoadedOnce = false
                 viewModel.errorMessage = "Не удалось загрузить данные для сравнения."
             }
         }
