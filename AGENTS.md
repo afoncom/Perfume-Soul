@@ -2,32 +2,31 @@
 
 ## Project Structure & Module Organization
 
-PerfumeSoul is a Tuist-managed iOS app with a Swift backend. `Project.swift` defines the app and test targets. App code lives in `PerfumeSoul/Classes`: `Application` for lifecycle, `Core/CoreData` for persistence, `Services` for app services, and `Screens` for feature modules. Screen modules generally follow `Module`, `Presenter`, `Router`, `ViewModel`, and `Screen` files. Assets, storyboards, and localized strings are in `PerfumeSoul/Resources`. iOS tests are in `PerfumeSoulTests` and `PerfumeSoulUITests`; the Vapor backend is in `backend/PerfumeSoulBackend`.
+PerfumeSoul is a Tuist-managed iOS app with a Vapor backend. `Project.swift` defines the app plus `PerfumeSoulTests` and `PerfumeSoulUITests`. App code is under `PerfumeSoul/Classes`: `Application` for lifecycle, `Core/CoreData` for persistence, `Services` for network and domain logic, and `Screens` for feature UI. Screen folders usually contain `Module`, `Presenter`, `Router`, `ViewModel`, and `Screen` files. Assets, storyboards, and localizations live in `PerfumeSoul/Resources`. Backend code lives in `backend/PerfumeSoulBackend`.
 
 ## Build, Test, and Development Commands
 
-- `tuist generate`: generate the Xcode project.
-- `tuist build PerfumeSoul`: build the iOS app.
-- `tuist test PerfumeSoulTests`: run unit tests.
-- `tuist test PerfumeSoulUITests`: run UI tests.
-- `swiftlint`: run `.swiftlint.yml` rules.
-- `cd backend/PerfumeSoulBackend && swift test`: run backend tests.
-- `cd backend/PerfumeSoulBackend && swift run PerfumeSoulBackend`: start Vapor locally.
+- `tuist generate` builds the Xcode project from `Project.swift`.
+- `tuist build PerfumeSoul` compiles the iOS app.
+- `tuist test PerfumeSoulTests` runs unit tests; `tuist test PerfumeSoulUITests` runs UI tests.
+- `swiftlint` checks repository Swift style rules from `.swiftlint.yml`.
+- `cd backend/PerfumeSoulBackend && swift test` runs backend tests.
+- `cd backend/PerfumeSoulBackend && swift run PerfumeSoulBackend` starts the local Vapor server.
 
 ## Coding Style & Naming Conventions
 
-Use Swift with 4-space indentation. Follow SwiftLint: prefer `isEmpty`, `contains`, `first(where:)`, explicit control braces, no trailing semicolons, and `final` classes where possible. Keep SwiftUI observable properties private when required. Name files by feature and role, for example `TodayPresenter.swift` or `FindPerfumesViewModel.swift`. Keep generated resources and Core Data models under existing Tuist resource paths.
+Use Swift with 4-space indentation and keep SwiftLint clean. Prefer `isEmpty`, `contains`, `first(where:)`, explicit braces, and `final` classes when practical. Name files by feature and role, for example `TodayPresenter.swift` or `SearchPerfumeViewModel.swift`. Preserve the existing screen module structure instead of mixing patterns.
 
-Use only colors from `PerfumeSoul/Resources/Assets.xcassets` through Xcode-generated symbols in `GeneratedAssetsSymbols.swift`. In SwiftUI, pass the generated `ColorResource`: `Color(.textPrimary)`, `Color(.backgroundPrimary)`, `LinearGradient(colors: [Color(.buttonShine), Color(.pinkButton)], ...)`. Do not use shorthand `.textPrimary`, `Color.textPrimary`, `Color("textPrimary")`, or system colors such as `Color.blue`, `UIColor.systemPink`, and `.secondarySystemBackground`. In UIKit, use generated APIs such as `UIColor(resource: .backgroundPrimary)`. If a color is missing, add a colorset and use its generated symbol.
+Use only generated asset symbols from `PerfumeSoul/Resources/Assets.xcassets`. In SwiftUI, use `Color(.textPrimary)` or `LinearGradient(colors: [Color(.buttonShine), Color(.pinkButton)], ...)`. In UIKit, use `UIColor(resource: .backgroundPrimary)`. Do not hardcode system or string-based colors.
 
 ## Testing Guidelines
 
-iOS tests use XCTest; backend tests use Swift Testing plus `VaporTesting`. Add tests near the target they cover and name methods with `test...` or descriptive backend `@Test` names. Prefer focused tests for presenters, services, loaders, and routes. Run the relevant Tuist test target for app changes and `swift test` for backend changes.
+iOS tests use XCTest; backend tests use Swift Testing with `VaporTesting`. Add focused tests near the target they cover and name them with `test...` or descriptive backend `@Test` cases. Run the relevant Tuist test target for app changes and `swift test` for backend work.
 
 ## Commit & Pull Request Guidelines
 
-Recent commits use short imperative summaries, often title case, such as `Remove duplicate daily horoscope model`. Keep commits scoped to one behavior. Pull requests should include a summary, test commands, linked issue when applicable, and screenshots for UI changes.
+Recent commits use short imperative subjects, often title case, for example `Escape LIKE wildcards in perfume search`. Keep commits scoped to a single behavior. Pull requests should include a summary, the commands used for verification, linked issues when relevant, and screenshots for UI changes.
 
-## Agent-Specific Instructions
+## Configuration & Contributor Notes
 
-Do not revert unrelated local changes. Preserve the module/presenter/router structure when adding screens, use only generated asset color symbols in UI code, update localized strings in both `en.lproj` and `ru.lproj` when user-facing text changes, and keep backend fixture JSON under `Sources/PerfumeSoulBackend/Resources`.
+Do not revert unrelated local changes. When user-facing text changes, update both `PerfumeSoul/Resources/en.lproj` and `PerfumeSoul/Resources/ru.lproj`. Keep backend fixture JSON under `backend/PerfumeSoulBackend/Sources/PerfumeSoulBackend/Resources` and retain existing Tuist resource paths for Core Data models and app assets.
