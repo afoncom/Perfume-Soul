@@ -11,5 +11,9 @@ import Combine
 import Observation
 
 @Observable final class ComparePerfumesViewModel {
-    
+    var leftPerfume: ComparePerfume?
+    var rightPerfume: ComparePerfume?
+    var isLoading = false
+    var hasLoadedOnce = false
+    var errorMessage: String?
 }

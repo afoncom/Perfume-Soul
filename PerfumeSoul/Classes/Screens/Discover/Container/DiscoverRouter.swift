@@ -16,9 +16,14 @@ protocol DiscoverRouter {
 
 final class DiscoverRouterImpl {
     private weak var navigationController: UINavigationController?
+    private let comparePerfumeSelectionService: ComparePerfumeSelectionService
     
-    init(navigationController: UINavigationController?) {
+    init(
+        navigationController: UINavigationController?,
+        comparePerfumeSelectionService: ComparePerfumeSelectionService
+    ) {
         self.navigationController = navigationController
+        self.comparePerfumeSelectionService = comparePerfumeSelectionService
     }
 }
 
@@ -31,8 +36,15 @@ extension DiscoverRouterImpl: DiscoverRouter {
     }
     
     func showComparePerfumesScreen() {
+        comparePerfumeSelectionService.saveSelection(
+            ComparePerfumeSelection(leftPerfumeID: 3, rightPerfumeID: 1)
+        )
+
         navigationController?.pushViewController(
-            ComparePerfumesModule.build(navigationController: navigationController),
+            ComparePerfumesModule.build(
+                navigationController: navigationController,
+                comparePerfumeSelectionService: comparePerfumeSelectionService
+            ),
             animated: true
         )
     }
