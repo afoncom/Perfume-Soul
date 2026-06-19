@@ -1,4 +1,6 @@
 "discover.compare.button" = "Compare";
+"discover.compare.description" = "Choose two perfumes and compare their brand, notes, longevity, and sillage.";
+"discover.compare.openButton" = "Open comparison";
 "discover.compare.placeholderA" = "Perfume A";
 "discover.compare.placeholderB" = "Perfume B";
 "discover.compare.title" = "Compare Perfumes";
@@ -15,6 +17,16 @@
 "discover.scentArchetype.button" = "Start quiz";
 "discover.scentArchetype.title" = "Find Your Scent Archetype";
 "common.error.message" = "Something went wrong. Please try again.";
+"comparePerfumes.compareButton" = "Compare";
+"comparePerfumes.leftPlaceholder" = "Perfume A";
+"comparePerfumes.loadingMessage" = "Loading comparison data...";
+"comparePerfumes.loadErrorMessage" = "Failed to load comparison data.";
+"comparePerfumes.retryButton" = "Retry";
+"comparePerfumes.rightPlaceholder" = "Perfume B";
+"comparePerfumes.samePerfumesValidationMessage" = "Choose two different perfumes to compare.";
+"comparePerfumes.selectionDescription" = "Find and select two perfumes from the database to view their comparison.";
+"comparePerfumes.selectionTitle" = "Select perfumes";
+"comparePerfumes.selectionValidationMessage" = "You need to select two perfumes from the list to compare them.";
 "profile.birthInfo" = "Born May 12, 1993  Paris, France";
 "profile.actions.cancelButton" = "Cancel";
 "profile.actions.deleteAlertMessage" = "This action can't be undone.";

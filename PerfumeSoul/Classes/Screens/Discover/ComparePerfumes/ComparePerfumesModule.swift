@@ -9,7 +9,7 @@
 import SwiftUI
 
 final class ComparePerfumesModule {
-    static func build(
+    @MainActor static func build(
         navigationController: UINavigationController?,
         comparePerfumeSelectionService: ComparePerfumeSelectionService
     ) -> UIViewController {
@@ -17,10 +17,12 @@ final class ComparePerfumesModule {
         let router = ComparePerfumesRouterImpl(navigationController: navigationController)
         let requestManager = RequestManagerImpl(urlSession: URLSession.shared, baseURL: "http://127.0.0.1:8080")
         let comparePerfumeService = ComparePerfumeServiceImpl(requestManager: requestManager)
+        let searchPerfumeService = SearchPerfumeServiceImpl(requestManager: requestManager)
         let presenter = ComparePerfumesPresenterImpl(
             viewModel: viewModel,
             router: router,
             comparePerfumeService: comparePerfumeService,
+            searchPerfumeService: searchPerfumeService,
             comparePerfumeSelectionService: comparePerfumeSelectionService
         )
         

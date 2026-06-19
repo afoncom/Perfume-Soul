@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ComparePerfumesScreen: View {
     @Bindable private var viewModel: ComparePerfumesViewModel
+    @FocusState private var focusedField: ComparePerfumeField?
     private let presenter: ComparePerfumesPresenter
     
     init(
@@ -22,16 +23,37 @@ struct ComparePerfumesScreen: View {
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            content
+            VStack(spacing: 18) {
+                makeSelectionSection()
+                makeSearchResultsSection()
+                makeComparisonContent()
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 16)
+            .padding(.bottom, 28)
         }
         .background {
             Color(.backgroundPrimary).ignoresSafeArea()
         }
-        .navigationTitle("Сравнение ароматов")
+        .navigationTitle(L10n.Screen.comparePerfumes)
         .navigationBarTitleDisplayMode(.inline)
-        .task {
-            await presenter.onAppear()
+        .onChange(of: focusedField) { _, newValue in
+            guard let newValue else { return }
+
+            Task {
+                await presenter.searchFieldFocused(newValue)
+            }
         }
+        .alert(
+            L10n.Common.Error.message,
+            isPresented: $viewModel.isShowingValidationAlert,
+            actions: {
+                Button("OK", role: .cancel) {}
+            },
+            message: {
+                Text(viewModel.validationMessage ?? "")
+            }
+        )
     }
 }
 
@@ -44,9 +66,159 @@ private extension ComparePerfumesScreen {
         viewModel.rightPerfume
     }
 
+    func makeSelectionSection() -> some View {
+        VStack(alignment: .leading, spacing: 14) {
+            Text(L10n.ComparePerfumes.selectionTitle)
+                .font(.title3)
+                .fontWeight(.semibold)
+
+            Text(L10n.ComparePerfumes.selectionDescription)
+                .font(.subheadline)
+                .foregroundStyle(Color(.textSecondary))
+                .fixedSize(horizontal: false, vertical: true)
+
+            makeSearchField(
+                title: L10n.ComparePerfumes.leftPlaceholder,
+                text: Binding(
+                    get: { viewModel.leftSearchText },
+                    set: { newValue in
+                        viewModel.leftSearchText = newValue
+
+                        Task {
+                            await presenter.searchTextChanged(newValue, for: .left)
+                        }
+                    }
+                ),
+                field: .left
+            )
+
+            makeSearchField(
+                title: L10n.ComparePerfumes.rightPlaceholder,
+                text: Binding(
+                    get: { viewModel.rightSearchText },
+                    set: { newValue in
+                        viewModel.rightSearchText = newValue
+
+                        Task {
+                            await presenter.searchTextChanged(newValue, for: .right)
+                        }
+                    }
+                ),
+                field: .right
+            )
+
+            Button(L10n.ComparePerfumes.compareButton) {
+                focusedField = nil
+
+                Task {
+                    await presenter.compareTapped()
+                }
+            }
+            .font(.title3)
+            .fontWeight(.semibold)
+            .foregroundStyle(Color(.textOnAccent))
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 12)
+            .background(Color(.pinkButton))
+            .clipShape(Capsule())
+        }
+        .padding(14)
+        .background(Color(.surfacePrimary))
+        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .shadow(color: Color(.cardShadowSoft), radius: 8, x: 0, y: 4)
+    }
+
+    func makeSearchField(
+        title: String,
+        text: Binding<String>,
+        field: ComparePerfumeField
+    ) -> some View {
+        HStack(spacing: 12) {
+            TextField(title, text: text)
+                .focused($focusedField, equals: field)
+                .submitLabel(.done)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .font(.title3)
+
+            Image(systemName: "magnifyingglass")
+                .foregroundStyle(Color(.textSecondary))
+        }
+        .padding(.horizontal, 18)
+        .padding(.vertical, 14)
+        .background(Color(.placeholderSoft))
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .onTapGesture {
+            focusedField = field
+        }
+    }
+
     @ViewBuilder
-    var content: some View {
-        if viewModel.isLoading && !viewModel.hasLoadedOnce {
+    func makeSearchResultsSection() -> some View {
+        let activeSearchText = currentSearchText
+        let shouldShowSection = (
+            focusedField != nil
+            && !activeSearchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        )
+            || viewModel.isSearching
+            || !viewModel.searchResults.isEmpty
+            || viewModel.searchErrorMessage != nil
+
+        if shouldShowSection {
+            VStack(alignment: .leading, spacing: 12) {
+                if viewModel.isSearching {
+                    ProgressView()
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 20)
+                } else if let searchErrorMessage = viewModel.searchErrorMessage {
+                    Text(searchErrorMessage)
+                        .font(.body)
+                        .foregroundStyle(Color(.textSecondary))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.vertical, 20)
+                } else if viewModel.searchResults.isEmpty {
+                    Text(L10n.SearchPerfume.emptyState)
+                        .font(.body)
+                        .foregroundStyle(Color(.textSecondary))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.vertical, 20)
+                } else {
+                    ForEach(viewModel.searchResults) { perfume in
+                        Button {
+                            presenter.searchResultTapped(perfume)
+                            focusedField = nil
+                        } label: {
+                            Text(perfume.name)
+                                .font(.body)
+                                .foregroundStyle(Color(.textPrimary))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 14)
+                                .background(Color(.surfacePrimary))
+                                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                        .stroke(Color(.cardBorder), lineWidth: 1)
+                                )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    var currentSearchText: String {
+        switch viewModel.activeField {
+        case .left:
+            viewModel.leftSearchText
+        case .right:
+            viewModel.rightSearchText
+        }
+    }
+
+    @ViewBuilder
+    func makeComparisonContent() -> some View {
+        if viewModel.isLoading {
             makeLoadingState()
         } else if let errorMessage = viewModel.errorMessage {
             makeErrorState(message: errorMessage)
@@ -65,24 +237,17 @@ private extension ComparePerfumesScreen {
                     rightPerfume: rightPerfume
                 )
             }
-            .padding(.horizontal, 16)
-            .padding(.top, 16)
-            .padding(.bottom, 28)
-        } else {
-            makeErrorState(message: "Не удалось загрузить данные для сравнения.")
         }
     }
 
     func makeLoadingState() -> some View {
         VStack(spacing: 14) {
             ProgressView()
-            Text("Загружаем сравнение ароматов...")
+            Text(L10n.ComparePerfumes.loadingMessage)
                 .font(.footnote)
                 .foregroundStyle(Color(.textSecondary))
         }
-        .frame(maxWidth: .infinity, minHeight: 360)
-        .padding(.horizontal, 16)
-        .padding(.top, 16)
+        .frame(maxWidth: .infinity, minHeight: 180)
     }
 
     func makeErrorState(message: String) -> some View {
@@ -97,7 +262,7 @@ private extension ComparePerfumesScreen {
                     await presenter.retryTapped()
                 }
             } label: {
-                Text("Повторить")
+                Text(L10n.ComparePerfumes.retryButton)
                     .font(.footnote.weight(.semibold))
                     .foregroundStyle(Color(.textPrimary))
                     .padding(.horizontal, 16)
@@ -110,9 +275,8 @@ private extension ComparePerfumesScreen {
                     )
             }
         }
-        .frame(maxWidth: .infinity, minHeight: 360)
+        .frame(maxWidth: .infinity, minHeight: 180)
         .padding(.horizontal, 24)
-        .padding(.top, 16)
     }
 
     func makePerfumesHeader(
@@ -407,10 +571,6 @@ private extension ComparePerfumesScreen {
                 .foregroundStyle(Color(.textPrimary))
             
             Spacer()
-            
-            Image(systemName: "info.circle")
-                .font(.headline)
-                .foregroundStyle(Color(.textSecondary))
         }
     }
 }

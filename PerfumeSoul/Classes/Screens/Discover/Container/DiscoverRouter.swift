@@ -35,11 +35,7 @@ extension DiscoverRouterImpl: DiscoverRouter {
         )
     }
     
-    func showComparePerfumesScreen() {
-        comparePerfumeSelectionService.saveSelection(
-            ComparePerfumeSelection(leftPerfumeID: 3, rightPerfumeID: 1)
-        )
-
+    @MainActor func showComparePerfumesScreen() {
         navigationController?.pushViewController(
             ComparePerfumesModule.build(
                 navigationController: navigationController,

@@ -11,7 +11,6 @@ import SwiftUI
 struct DiscoverScreen: View {
     @Bindable private var viewModel: DiscoverViewModel
     private let presenter: DiscoverPresenter
-    @FocusState private var focusedFieldName: String?
     
     init(
         viewModel: DiscoverViewModel,
@@ -70,16 +69,13 @@ private extension DiscoverScreen {
                 .font(.title2)
                 .fontWeight(.semibold)
             
+            Text(L10n.Discover.Compare.description)
+                .font(.subheadline)
+                .foregroundStyle(Color(.textSecondary))
+                .fixedSize(horizontal: false, vertical: true)
+
             VStack(spacing: 12) {
-                ForEach(Array(viewModel.comparePerfumeTitles.enumerated()), id: \.offset) { index, title in
-                    makePerfumeInput(
-                        title: title,
-                        text: $viewModel.comparePerfumeNames[index],
-                        fieldName: title
-                    )
-                }
-                
-                Button(L10n.Discover.Compare.button) {
+                Button(L10n.Discover.Compare.openButton) {
                     presenter.comparePerfumesButtonTab()
                 }
                 .primaryCapsuleButton(color: Color(.pinkButton))
@@ -113,31 +109,6 @@ private extension DiscoverScreen {
         .background(Color(.surfacePrimary))
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
         .shadow(color: Color(.cardShadowSoft), radius: 8, x: 0, y: 4)
-    }
-}
-
-private extension DiscoverScreen {
-    func makePerfumeInput(
-        title: String,
-        text: Binding<String>,
-        fieldName: String
-    ) -> some View {
-        HStack(spacing: 12) {
-            TextField(title, text: text)
-                .focused($focusedFieldName, equals: fieldName)
-                .submitLabel(.done)
-                .font(.title3)
-                .onSubmit {
-                    focusedFieldName = nil
-                }
-            
-            Image(systemName: "magnifyingglass")
-                .foregroundStyle(Color(.textSecondary))
-        }
-        .padding(.horizontal, 18)
-        .padding(.vertical, 14)
-        .background(Color(.placeholderSoft))
-        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 }
 

@@ -9,15 +9,13 @@
 import Foundation
 
 struct SearchPerfumeItem: Equatable, Identifiable {
+    let id: Int
     let name: String
-
-    var id: String {
-        name
-    }
 }
 
 extension SearchPerfumeItem {
     init(response: SearchPerfumeResponse) {
+        self.id = response.id
         self.name = response.name
     }
 }
