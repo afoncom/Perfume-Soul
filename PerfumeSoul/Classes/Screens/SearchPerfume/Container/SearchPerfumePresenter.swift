@@ -12,6 +12,8 @@ protocol SearchPerfumePresenter {
     func onAppear() async
     func searchSubmitted() async
     func perfumeItemAppeared(at index: Int) async
+    @MainActor
+    func perfumeTapped(_ perfume: SearchPerfumeItem)
 }
 
 final class SearchPerfumePresenterImpl {
@@ -49,6 +51,10 @@ extension SearchPerfumePresenterImpl: SearchPerfumePresenter {
         guard !viewModel.isLoading, !viewModel.isLoadingMore else { return }
 
         await loadPerfumes(resetResults: false)
+    }
+
+    @MainActor func perfumeTapped(_ perfume: SearchPerfumeItem) {
+        router.showPerfumeDetailsScreen(perfume: perfume)
     }
 }
 
