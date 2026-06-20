@@ -18,7 +18,6 @@ enum ComparePerfumeField: Hashable {
     var rightSearchText = ""
     var leftSelectedPerfume: SearchPerfumeItem?
     var rightSelectedPerfume: SearchPerfumeItem?
-    var activeField: ComparePerfumeField = .left
     var searchResults: [SearchPerfumeItem] = []
     var isSearching = false
     var searchErrorMessage: String?

@@ -37,13 +37,6 @@ struct ComparePerfumesScreen: View {
         }
         .navigationTitle(L10n.Screen.comparePerfumes)
         .navigationBarTitleDisplayMode(.inline)
-        .onChange(of: focusedField) { _, newValue in
-            guard let newValue else { return }
-
-            Task {
-                await presenter.searchFieldFocused(newValue)
-            }
-        }
         .alert(
             L10n.Common.Error.message,
             isPresented: $viewModel.isShowingValidationAlert,
@@ -185,7 +178,9 @@ private extension ComparePerfumesScreen {
                 } else {
                     ForEach(viewModel.searchResults) { perfume in
                         Button {
-                            presenter.searchResultTapped(perfume)
+                            guard let currentField = focusedField else { return }
+
+                            presenter.searchResultTapped(perfume, for: currentField)
                             focusedField = nil
                         } label: {
                             Text(perfume.name)
@@ -208,11 +203,13 @@ private extension ComparePerfumesScreen {
     }
 
     var currentSearchText: String {
-        switch viewModel.activeField {
+        switch focusedField {
         case .left:
             viewModel.leftSearchText
         case .right:
             viewModel.rightSearchText
+        case nil:
+            ""
         }
     }
 

@@ -9,9 +9,8 @@
 import Foundation
 
 protocol ComparePerfumesPresenter {
-    func searchFieldFocused(_ field: ComparePerfumeField) async
     func searchTextChanged(_ searchText: String, for field: ComparePerfumeField) async
-    func searchResultTapped(_ perfume: SearchPerfumeItem)
+    func searchResultTapped(_ perfume: SearchPerfumeItem, for field: ComparePerfumeField)
     func compareTapped() async
     func retryTapped() async
 }
@@ -42,22 +41,7 @@ final class ComparePerfumesPresenterImpl {
 }
 
 extension ComparePerfumesPresenterImpl: ComparePerfumesPresenter {
-    func searchFieldFocused(_ field: ComparePerfumeField) async {
-        viewModel.activeField = field
-        let searchText = currentSearchText(for: field)
-
-        guard !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            viewModel.searchResults = []
-            viewModel.isSearching = false
-            viewModel.searchErrorMessage = nil
-            return
-        }
-
-        await loadSearchResults(searchText: searchText)
-    }
-
     func searchTextChanged(_ searchText: String, for field: ComparePerfumeField) async {
-        viewModel.activeField = field
         updateSelectedPerfumeIfNeeded(for: field, searchText: searchText)
         clearComparisonState()
 
@@ -71,8 +55,11 @@ extension ComparePerfumesPresenterImpl: ComparePerfumesPresenter {
         await loadSearchResults(searchText: searchText)
     }
 
-    func searchResultTapped(_ perfume: SearchPerfumeItem) {
-        switch viewModel.activeField {
+    func searchResultTapped(
+        _ perfume: SearchPerfumeItem,
+        for field: ComparePerfumeField
+    ) {
+        switch field {
         case .left:
             viewModel.leftSearchText = perfume.name
             viewModel.leftSelectedPerfume = perfume
@@ -183,15 +170,6 @@ private extension ComparePerfumesPresenterImpl {
             viewModel.isLoading = false
             viewModel.hasLoadedOnce = false
             viewModel.errorMessage = L10n.ComparePerfumes.loadErrorMessage
-        }
-    }
-
-    func currentSearchText(for field: ComparePerfumeField) -> String {
-        switch field {
-        case .left:
-            viewModel.leftSearchText
-        case .right:
-            viewModel.rightSearchText
         }
     }
 
