@@ -107,10 +107,6 @@ private extension PerfumeDetailsScreen {
                     .fontWeight(.semibold)
                     .foregroundStyle(Color(.textPrimary))
                     .multilineTextAlignment(.center)
-
-                Text(L10n.PerfumeDetails.perfumeType)
-                    .font(.footnote)
-                    .foregroundStyle(Color(.textSecondary))
             }
             .multilineTextAlignment(.center)
         }
