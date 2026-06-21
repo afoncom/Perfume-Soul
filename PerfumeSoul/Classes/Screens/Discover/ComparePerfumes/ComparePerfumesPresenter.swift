@@ -24,6 +24,7 @@ final class ComparePerfumesPresenterImpl {
     private let comparePerfumeSelectionService: ComparePerfumeSelectionService
     private let pageSize = 10
     private var activeSearchRequestID = UUID()
+    private var activeComparisonRequestID = UUID()
     
     init(
         viewModel: ComparePerfumesViewModel,
@@ -46,6 +47,7 @@ extension ComparePerfumesPresenterImpl: ComparePerfumesPresenter {
         clearComparisonState()
 
         guard !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            activeSearchRequestID = UUID()
             viewModel.searchResults = []
             viewModel.isSearching = false
             viewModel.searchErrorMessage = nil
@@ -148,7 +150,8 @@ private extension ComparePerfumesPresenterImpl {
     }
 
     func loadComparison(selection: ComparePerfumeSelection) async {
-        guard !viewModel.isLoading else { return }
+        let requestID = UUID()
+        activeComparisonRequestID = requestID
 
         viewModel.isLoading = true
         viewModel.errorMessage = nil
@@ -159,12 +162,20 @@ private extension ComparePerfumesPresenterImpl {
 
             let result = try await (leftPerfume, rightPerfume)
 
+            guard requestID == activeComparisonRequestID else {
+                return
+            }
+
             viewModel.leftPerfume = result.0
             viewModel.rightPerfume = result.1
             viewModel.isLoading = false
             viewModel.hasLoadedOnce = true
             viewModel.errorMessage = nil
         } catch {
+            guard requestID == activeComparisonRequestID else {
+                return
+            }
+
             viewModel.leftPerfume = nil
             viewModel.rightPerfume = nil
             viewModel.isLoading = false
@@ -190,8 +201,10 @@ private extension ComparePerfumesPresenterImpl {
     }
 
     func clearComparisonState() {
+        activeComparisonRequestID = UUID()
         viewModel.leftPerfume = nil
         viewModel.rightPerfume = nil
+        viewModel.isLoading = false
         viewModel.hasLoadedOnce = false
         viewModel.errorMessage = nil
     }
