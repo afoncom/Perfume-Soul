@@ -6,17 +6,8 @@
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
-import Foundation
-import Combine
 import Observation
 
 @Observable final class DiscoverViewModel {
-    var comparePerfumeTitles: [String] {
-        [
-            L10n.Discover.Compare.placeholderA,
-            L10n.Discover.Compare.placeholderB
-        ]
-    }
-
-    var comparePerfumeNames = ["", ""]
+    
 }

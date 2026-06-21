@@ -14,5 +14,6 @@ struct SearchPerfumePageResponse: Decodable {
 }
 
 struct SearchPerfumeResponse: Decodable {
+    let id: Int
     let name: String
 }

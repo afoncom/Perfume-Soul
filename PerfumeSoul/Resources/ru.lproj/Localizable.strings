@@ -1,4 +1,6 @@
 "discover.compare.button" = "Сравнить";
+"discover.compare.description" = "Выберите два аромата и получите сравнение по бренду, нотам, стойкости и шлейфу.";
+"discover.compare.openButton" = "Перейти к сравнению";
 "discover.compare.placeholderA" = "Аромат A";
 "discover.compare.placeholderB" = "Аромат B";
 "discover.compare.title" = "Сравнение ароматов";
@@ -15,6 +17,16 @@
 "discover.scentArchetype.button" = "Начать квиз";
 "discover.scentArchetype.title" = "Найди свой ароматический архетип";
 "common.error.message" = "Что-то пошло не так. Попробуйте еще раз.";
+"comparePerfumes.compareButton" = "Сравнить";
+"comparePerfumes.leftPlaceholder" = "Аромат A";
+"comparePerfumes.loadingMessage" = "Загружаем данные для сравнения...";
+"comparePerfumes.loadErrorMessage" = "Не удалось загрузить данные для сравнения.";
+"comparePerfumes.retryButton" = "Повторить";
+"comparePerfumes.rightPlaceholder" = "Аромат B";
+"comparePerfumes.samePerfumesValidationMessage" = "Выберите два разных аромата для сравнения.";
+"comparePerfumes.selectionDescription" = "Найдите и выберите два аромата из базы, после этого можно будет посмотреть их сравнение.";
+"comparePerfumes.selectionTitle" = "Выбор ароматов";
+"comparePerfumes.selectionValidationMessage" = "Для сравнения нужно выбрать два аромата из списка.";
 "profile.birthInfo" = "Родилась 12 мая 1993  Париж, Франция";
 "profile.actions.cancelButton" = "Отмена";
 "profile.actions.deleteAlertMessage" = "Это действие нельзя отменить.";

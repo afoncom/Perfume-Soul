@@ -29,7 +29,6 @@ final class PersonalPerfumePresenterImpl {
 }
 
 extension PersonalPerfumePresenterImpl: PersonalPerfumePresenter {
-    @MainActor
     func onAppear() {
         viewModel.sections = service.fetchSections()
     }

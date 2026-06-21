@@ -2,6 +2,7 @@ import Fluent
 import Foundation
 
 struct Perfume: Codable, Equatable {
+    let id: Int
     let name: String
 }
 
@@ -50,7 +51,7 @@ enum PerfumeLoader {
         let hasMore = perfumes.count > limit
         let items = perfumes
             .prefix(limit)
-            .map(Perfume.init(model:))
+            .compactMap(Perfume.init(model:))
 
         return PerfumeSearchPage(
             items: Array(items),
@@ -111,7 +112,13 @@ enum PerfumeNotesLoader {
 }
 
 private extension Perfume {
-    init(model: PerfumeModel) {
+    init?(model: PerfumeModel) {
+        guard let id = model.id else {
+            return nil
+        }
+
+        self.id = id
+
         let brandName = model.brand.name.trimmingCharacters(in: .whitespacesAndNewlines)
         let perfumeName = model.perfumeName.trimmingCharacters(in: .whitespacesAndNewlines)
 
