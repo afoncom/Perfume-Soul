@@ -51,16 +51,26 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let todayScreen = TodayModule.build(container: container)
         let settingsScreen = SettingsModule.build()
         let discoverScreen = DiscoverModule.build()
-        let searchPerfumeScreen = SearchPerfumeModule.build()
+//        let searchPerfumeScreen = SearchPerfumeModule.build()
         let profileScreen = ProfileModule.build(
             container: container,
             onProfileDeleted: { [weak self] in
                 self?.showCalculationScreen(container: container)
             }
         )
-        let tabController = UITabBarController()
-        tabController.viewControllers = [todayScreen, discoverScreen, profileScreen, settingsScreen, searchPerfumeScreen]
-        setRootViewController(tabController)
+        let searchPerfumeScreen = NavigationControllerWrapper(
+            viewController: SearchPerfumeModule.build()
+        )
+        
+        let mainTabView = MainTabView(
+            todayScreen: todayScreen,
+            discoverScreen: discoverScreen,
+            profileScreen: profileScreen,
+            settingsScreen: settingsScreen,
+            searchPerfumeScreen: searchPerfumeScreen
+        )
+        let viewController = UIHostingController(rootView: mainTabView)
+        setRootViewController(viewController)
     }
 
     private func showCalculationScreen(container: NSPersistentContainer) {

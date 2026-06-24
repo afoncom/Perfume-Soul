@@ -13,7 +13,7 @@ final class ProfileModule {
     static func build(
         container: NSPersistentContainer,
         onProfileDeleted: @escaping () -> Void
-    ) -> UIViewController {
+    ) -> NavigationControllerWrapper {
         let viewModel = ProfileViewModel()
         let navigationController = UINavigationController()
         let profileService = ProfileServiceImpl(container: container)
@@ -42,13 +42,8 @@ final class ProfileModule {
         hostingController.title = L10n.Screen.profile
         
         navigationController.viewControllers = [hostingController]
-        navigationController.tabBarItem = UITabBarItem(
-            title: L10n.Screen.profile,
-            image: UIImage(systemName: "person.crop.circle"),
-            selectedImage: UIImage(systemName: "person.crop.circle.fill")
-        )
         navigationController.navigationBar.prefersLargeTitles = true
         
-        return navigationController
+        return NavigationControllerWrapper(navigationController: navigationController)
     }
 }

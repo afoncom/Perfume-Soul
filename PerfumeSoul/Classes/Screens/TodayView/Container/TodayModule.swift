@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 final class TodayModule {
-    static func build(container: NSPersistentContainer) -> UIViewController {
+    static func build(container: NSPersistentContainer) -> NavigationControllerWrapper {
         let viewModel = TodayViewModel()
         let navigationController = UINavigationController()
         let router = TodayRouterImpl(navigationController: navigationController)
@@ -31,13 +31,8 @@ final class TodayModule {
         hostingController.title = L10n.Screen.today
 
         navigationController.viewControllers = [hostingController]
-        navigationController.tabBarItem = UITabBarItem(
-            title: L10n.Screen.today,
-            image: UIImage(systemName: "house"),
-            selectedImage: UIImage(systemName: "house.fill")
-        )
         navigationController.navigationBar.prefersLargeTitles = true
         
-        return navigationController
+        return NavigationControllerWrapper(navigationController: navigationController)
     }
 }

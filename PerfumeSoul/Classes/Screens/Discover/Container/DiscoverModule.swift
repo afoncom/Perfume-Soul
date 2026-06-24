@@ -9,7 +9,7 @@
 import SwiftUI
 
 final class DiscoverModule {
-    static func build() -> UIViewController {
+    static func build() -> NavigationControllerWrapper {
         let viewModel = DiscoverViewModel()
         let navigationController = UINavigationController()
         let comparePerfumeSelectionService = ComparePerfumeSelectionServiceImpl()
@@ -28,13 +28,8 @@ final class DiscoverModule {
         hostingController.title = L10n.Screen.discover
         
         navigationController.viewControllers = [hostingController]
-        navigationController.tabBarItem = UITabBarItem(
-            title: L10n.Screen.discover,
-            image: UIImage(systemName: "sparkles"),
-            selectedImage: UIImage(systemName: "sparkles")
-        )
         navigationController.navigationBar.prefersLargeTitles = true
 
-        return navigationController
+        return NavigationControllerWrapper(navigationController: navigationController)
     }
 }
