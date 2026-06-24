@@ -9,10 +9,9 @@
 import SwiftUI
 
 final class SearchPerfumeModule {
-    static func build() -> UIViewController {
+    static func build(requestManager: RequestManager) -> UIViewController {
         let viewModel = SearchPerfumeViewModel()
         let navigationController = UINavigationController()
-        let requestManager = RequestManagerImpl(urlSession: URLSession.shared, baseURL: "http://127.0.0.1:8080")
         let searchPerfumeService = SearchPerfumeServiceImpl(requestManager: requestManager)
         let router = SearchPerfumeRouterImpl()
         let presenter = SearchPerfumePresenterImpl(

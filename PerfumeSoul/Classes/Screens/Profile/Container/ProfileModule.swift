@@ -13,7 +13,7 @@ final class ProfileModule {
     static func build(
         container: NSPersistentContainer,
         onProfileDeleted: @escaping () -> Void
-    ) -> NavigationControllerWrapper {
+    ) -> NavigationControllerContainer {
         let viewModel = ProfileViewModel()
         let navigationController = UINavigationController()
         let profileService = ProfileServiceImpl(container: container)
@@ -44,6 +44,6 @@ final class ProfileModule {
         navigationController.viewControllers = [hostingController]
         navigationController.navigationBar.prefersLargeTitles = true
         
-        return NavigationControllerWrapper(navigationController: navigationController)
+        return NavigationControllerContainer(navigationController: navigationController)
     }
 }

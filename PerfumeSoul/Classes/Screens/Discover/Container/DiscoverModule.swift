@@ -9,13 +9,14 @@
 import SwiftUI
 
 final class DiscoverModule {
-    static func build() -> NavigationControllerWrapper {
+    static func build(requestManager: RequestManager) -> NavigationControllerContainer {
         let viewModel = DiscoverViewModel()
         let navigationController = UINavigationController()
         let comparePerfumeSelectionService = ComparePerfumeSelectionServiceImpl()
         let router = DiscoverRouterImpl(
             navigationController: navigationController,
-            comparePerfumeSelectionService: comparePerfumeSelectionService
+            comparePerfumeSelectionService: comparePerfumeSelectionService,
+            requestManager: requestManager
         )
         let presenter = DiscoverPresenterImpl(
             viewModel: viewModel,
@@ -30,6 +31,6 @@ final class DiscoverModule {
         navigationController.viewControllers = [hostingController]
         navigationController.navigationBar.prefersLargeTitles = true
 
-        return NavigationControllerWrapper(navigationController: navigationController)
+        return NavigationControllerContainer(navigationController: navigationController)
     }
 }

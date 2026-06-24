@@ -9,9 +9,15 @@
 import SwiftUI
 
 final class FindPerfumesModule {
-    static func build(navigationController: UINavigationController?) -> UIViewController {
+    static func build(
+        navigationController: UINavigationController?,
+        requestManager: RequestManager
+    ) -> UIViewController {
         let viewModel = FindPerfumesViewModel()
-        let router = FindPerfumesRouterImpl(navigationController: navigationController)
+        let router = FindPerfumesRouterImpl(
+            navigationController: navigationController,
+            requestManager: requestManager
+        )
         let presenter = FindPerfumesPresenterImpl(
             viewModel: viewModel,
             router: router

@@ -12,6 +12,10 @@ import CoreData
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     let coreDataManager: CoreDataManager = CoreDataManagerImpl()
+    private let requestManager: RequestManager = RequestManagerImpl(
+        urlSession: URLSession.shared,
+        baseURL: "http://127.0.0.1:8080"
+    )
     
     func scene(
         _ scene: UIScene,
@@ -48,9 +52,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func showMainScreen(container: NSPersistentContainer) {
-        let todayScreen = TodayModule.build(container: container)
+        let todayScreen = TodayModule.build(
+            container: container,
+            requestManager: requestManager
+        )
         let settingsScreen = SettingsModule.build()
-        let discoverScreen = DiscoverModule.build()
+        let discoverScreen = DiscoverModule.build(requestManager: requestManager)
 //        let searchPerfumeScreen = SearchPerfumeModule.build()
         let profileScreen = ProfileModule.build(
             container: container,
@@ -58,8 +65,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 self?.showCalculationScreen(container: container)
             }
         )
-        let searchPerfumeScreen = NavigationControllerWrapper(
-            viewController: SearchPerfumeModule.build()
+        let searchPerfumeScreen = NavigationControllerContainer(
+            viewController: SearchPerfumeModule.build(requestManager: requestManager)
         )
         
         let mainTabView = MainTabView(

@@ -9,18 +9,18 @@
 import SwiftUI
 
 struct MainTabView: View {
-    let todayScreen: NavigationControllerWrapper
-    let discoverScreen: NavigationControllerWrapper
-    let profileScreen: NavigationControllerWrapper
-    let settingsScreen: NavigationControllerWrapper
-    let searchPerfumeScreen: NavigationControllerWrapper
+    let todayScreen: NavigationControllerContainer
+    let discoverScreen: NavigationControllerContainer
+    let profileScreen: NavigationControllerContainer
+    let settingsScreen: NavigationControllerContainer
+    let searchPerfumeScreen: NavigationControllerContainer
     
     init(
-        todayScreen: NavigationControllerWrapper,
-        discoverScreen: NavigationControllerWrapper,
-        profileScreen: NavigationControllerWrapper,
-        settingsScreen: NavigationControllerWrapper,
-        searchPerfumeScreen: NavigationControllerWrapper
+        todayScreen: NavigationControllerContainer,
+        discoverScreen: NavigationControllerContainer,
+        profileScreen: NavigationControllerContainer,
+        settingsScreen: NavigationControllerContainer,
+        searchPerfumeScreen: NavigationControllerContainer
     ) {
         self.todayScreen = todayScreen
         self.discoverScreen = discoverScreen
@@ -51,37 +51,5 @@ struct MainTabView: View {
                 searchPerfumeScreen
             }
         }
-    }
-}
-
-struct NavigationControllerWrapper: UIViewControllerRepresentable {
-    let navigationController: UINavigationController
-    
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
-
-    init(viewController: UIViewController) {
-        if let navigationController = viewController as? UINavigationController {
-            self.navigationController = navigationController
-        } else {
-            self.navigationController = UINavigationController(rootViewController: viewController)
-        }
-    }
-    
-    func makeUIViewController(context: Context) -> UINavigationController {
-        navigationController
-    }
-    
-    func updateUIViewController(_ navigationConroller: UINavigationController, context: Context) {
-        
-    }
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator()
-    }
-    
-    final class Coordinator: NSObject, UITextViewDelegate {
-        
     }
 }

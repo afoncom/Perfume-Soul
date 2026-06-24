@@ -9,7 +9,7 @@
 import SwiftUI
 
 final class SettingsModule {
-    static func build() -> NavigationControllerWrapper {
+    static func build() -> NavigationControllerContainer {
         let viewModel = SettingsViewModel()
         let navigationController = UINavigationController()
         let router = SettingsRouterImpl(navigationController: navigationController)
@@ -26,6 +26,6 @@ final class SettingsModule {
         navigationController.viewControllers = [hostingController]
         navigationController.navigationBar.prefersLargeTitles = true
         
-        return NavigationControllerWrapper(navigationController: navigationController)
+        return NavigationControllerContainer(navigationController: navigationController)
     }
 }

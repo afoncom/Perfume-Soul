@@ -14,9 +14,14 @@ protocol FindPerfumesRouter {
 
 final class FindPerfumesRouterImpl {
     private weak var navigationController: UINavigationController?
+    private let requestManager: RequestManager
 
-    init(navigationController: UINavigationController?) {
+    init(
+        navigationController: UINavigationController?,
+        requestManager: RequestManager
+    ) {
         self.navigationController = navigationController
+        self.requestManager = requestManager
     }
 }
 
@@ -24,7 +29,8 @@ extension FindPerfumesRouterImpl: FindPerfumesRouter {
     func showPerfumeRecommendationsScreen() {
         navigationController?.pushViewController(
             PerfumeRecommendationsModule.build(
-                navigationController: navigationController
+                navigationController: navigationController,
+                requestManager: requestManager
             ),
             animated: true
         )
