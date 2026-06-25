@@ -58,16 +58,13 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         )
         let settingsScreen = SettingsModule.build()
         let discoverScreen = DiscoverModule.build(requestManager: requestManager)
-//        let searchPerfumeScreen = SearchPerfumeModule.build()
         let profileScreen = ProfileModule.build(
             container: container,
             onProfileDeleted: { [weak self] in
                 self?.showCalculationScreen(container: container)
             }
         )
-        let searchPerfumeScreen = NavigationControllerContainer(
-            viewController: SearchPerfumeModule.build(requestManager: requestManager)
-        )
+        let searchPerfumeScreen = SearchPerfumeModule.build(requestManager: requestManager)
         
         let mainTabView = MainTabView(
             todayScreen: todayScreen,

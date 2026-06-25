@@ -21,18 +21,16 @@ struct MainTabView: View {
     let discoverScreen: NavigationControllerContainer
     let profileScreen: NavigationControllerContainer
     let settingsScreen: NavigationControllerContainer
-    let searchPerfumeScreen: NavigationControllerContainer
+    let searchPerfumeScreen: SearchPerfumeScreen
     
     @State private var selectedTab: MainTab = .today
-    @State private var previousTab: MainTab = .today
-    @State private var isShowingSearchScreen = false
     
     init(
         todayScreen: NavigationControllerContainer,
         discoverScreen: NavigationControllerContainer,
         profileScreen: NavigationControllerContainer,
         settingsScreen: NavigationControllerContainer,
-        searchPerfumeScreen: NavigationControllerContainer
+        searchPerfumeScreen: SearchPerfumeScreen
     ) {
         self.todayScreen = todayScreen
         self.discoverScreen = discoverScreen
@@ -60,20 +58,12 @@ struct MainTabView: View {
             }
             
             Tab(value: .search, role: .search) {
-                Color.clear
+                NavigationView {
+                    searchPerfumeScreen
+                }
+                .navigationViewStyle(.stack)
             }
         }
-        .onChange(of: selectedTab) { _, newValue in
-            guard newValue == .search else {
-                previousTab = newValue
-                return
-            }
-
-            selectedTab = previousTab
-            isShowingSearchScreen = true
-        }
-        .sheet(isPresented: $isShowingSearchScreen) {
-            searchPerfumeScreen
-        }
+        .tabBarMinimizeBehavior(.onScrollDown)
     }
 }

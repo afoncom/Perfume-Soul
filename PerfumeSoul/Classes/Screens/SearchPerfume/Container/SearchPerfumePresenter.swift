@@ -10,6 +10,7 @@ import Foundation
 
 protocol SearchPerfumePresenter {
     func onAppear() async
+    func searchTextChanged(_ searchText: String) async
     func searchSubmitted() async
     func perfumeItemAppeared(at index: Int) async
 }
@@ -35,6 +36,16 @@ final class SearchPerfumePresenterImpl {
 extension SearchPerfumePresenterImpl: SearchPerfumePresenter {
     func onAppear() async {
         guard !viewModel.hasLoadedOnce else { return }
+        await loadPerfumes(resetResults: true)
+    }
+
+    func searchTextChanged(_ searchText: String) async {
+        let trimmedSearchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        guard trimmedSearchText != viewModel.activeSearchText || !viewModel.hasLoadedOnce else {
+            return
+        }
+
         await loadPerfumes(resetResults: true)
     }
 

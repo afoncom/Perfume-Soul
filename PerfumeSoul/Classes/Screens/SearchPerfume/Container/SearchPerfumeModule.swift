@@ -9,9 +9,8 @@
 import SwiftUI
 
 final class SearchPerfumeModule {
-    static func build(requestManager: RequestManager) -> UIViewController {
+    static func build(requestManager: RequestManager) -> SearchPerfumeScreen {
         let viewModel = SearchPerfumeViewModel()
-        let navigationController = UINavigationController()
         let searchPerfumeService = SearchPerfumeServiceImpl(requestManager: requestManager)
         let router = SearchPerfumeRouterImpl()
         let presenter = SearchPerfumePresenterImpl(
@@ -19,19 +18,7 @@ final class SearchPerfumeModule {
             router: router,
             searchPerfumeService: searchPerfumeService
         )
-        
-        let view = SearchPerfumeScreen(viewModel: viewModel, presenter: presenter)
-        let hostingController = UIHostingController(rootView: view)
-        hostingController.title = L10n.Screen.searchPerfume
 
-        navigationController.viewControllers = [hostingController]
-        navigationController.tabBarItem = UITabBarItem(
-            title: L10n.Screen.searchPerfume,
-            image: UIImage(systemName: "magnifyingglass"),
-            selectedImage: UIImage(systemName: "magnifyingglass")
-        )
-        navigationController.navigationBar.prefersLargeTitles = true
-
-        return navigationController
+        return SearchPerfumeScreen(viewModel: viewModel, presenter: presenter)
     }
 }
