@@ -20,6 +20,7 @@ final class SearchPerfumePresenterImpl {
     private let router: SearchPerfumeRouter
     private let searchPerfumeService: SearchPerfumeService
     private let pageSize = 10
+    private var searchTask: Task<Void, Never>?
     @MainActor private var activeRequestID = UUID()
     
     init(
@@ -46,10 +47,21 @@ extension SearchPerfumePresenterImpl: SearchPerfumePresenter {
             return
         }
 
-        await loadPerfumes(resetResults: true)
+        searchTask?.cancel()
+        searchTask = Task { [weak self] in
+            do {
+                try await Task.sleep(for: .milliseconds(350))
+            } catch {
+                return
+            }
+
+            guard !Task.isCancelled else { return }
+            await self?.loadPerfumes(resetResults: true)
+        }
     }
 
     func searchSubmitted() async {
+        searchTask?.cancel()
         await loadPerfumes(resetResults: true)
     }
 
