@@ -25,20 +25,6 @@ struct MainTabView: View {
     
     @State private var selectedTab: MainTab = .today
     
-    init(
-        todayScreen: NavigationControllerContainer,
-        discoverScreen: NavigationControllerContainer,
-        profileScreen: NavigationControllerContainer,
-        settingsScreen: NavigationControllerContainer,
-        searchPerfumeScreen: SearchPerfumeScreen
-    ) {
-        self.todayScreen = todayScreen
-        self.discoverScreen = discoverScreen
-        self.profileScreen = profileScreen
-        self.settingsScreen = settingsScreen
-        self.searchPerfumeScreen = searchPerfumeScreen
-    }
-    
     var body: some View {
         if #available(iOS 26.0, *) {
             makeTabView()
@@ -69,10 +55,9 @@ private extension MainTabView {
             }
             
             Tab(value: .search, role: .search) {
-                NavigationView {
+                NavigationStack {
                     searchPerfumeScreen
                 }
-                .navigationViewStyle(.stack)
             }
         }
     }

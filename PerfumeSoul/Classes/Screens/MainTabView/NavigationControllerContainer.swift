@@ -13,14 +13,6 @@ struct NavigationControllerContainer: UIViewControllerRepresentable {
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
-
-    init(viewController: UIViewController) {
-        if let navigationController = viewController as? UINavigationController {
-            self.navigationController = navigationController
-        } else {
-            self.navigationController = UINavigationController(rootViewController: viewController)
-        }
-    }
     
     func makeUIViewController(context: Context) -> UINavigationController {
         navigationController
