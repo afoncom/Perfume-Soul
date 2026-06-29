@@ -40,6 +40,17 @@ struct MainTabView: View {
     }
     
     var body: some View {
+        if #available(iOS 26.0, *) {
+            makeTabView()
+                .tabBarMinimizeBehavior(.onScrollDown)
+        } else {
+            makeTabView()
+        }
+    }
+}
+
+private extension MainTabView {
+    func makeTabView() -> some View {
         TabView(selection: $selectedTab) {
             Tab(L10n.Screen.today, systemImage: "house.fill", value: .today) {
                 todayScreen
@@ -64,6 +75,5 @@ struct MainTabView: View {
                 .navigationViewStyle(.stack)
             }
         }
-        .tabBarMinimizeBehavior(.onScrollDown)
     }
 }
