@@ -12,6 +12,10 @@ import CoreData
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     let coreDataManager: CoreDataManager = CoreDataManagerImpl()
+    private let requestManager: RequestManager = RequestManagerImpl(
+        urlSession: URLSession.shared,
+        baseURL: "http://127.0.0.1:8080"
+    )
     
     func scene(
         _ scene: UIScene,
@@ -48,19 +52,29 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func showMainScreen(container: NSPersistentContainer) {
-        let todayScreen = TodayModule.build(container: container)
+        let todayScreen = TodayModule.build(
+            container: container,
+            requestManager: requestManager
+        )
         let settingsScreen = SettingsModule.build()
-        let discoverScreen = DiscoverModule.build()
-        let searchPerfumeScreen = SearchPerfumeModule.build()
+        let discoverScreen = DiscoverModule.build(requestManager: requestManager)
         let profileScreen = ProfileModule.build(
             container: container,
             onProfileDeleted: { [weak self] in
                 self?.showCalculationScreen(container: container)
             }
         )
-        let tabController = UITabBarController()
-        tabController.viewControllers = [todayScreen, discoverScreen, profileScreen, settingsScreen, searchPerfumeScreen]
-        setRootViewController(tabController)
+        let searchPerfumeScreen = SearchPerfumeModule.build(requestManager: requestManager)
+        
+        let mainTabView = MainTabView(
+            todayScreen: todayScreen,
+            discoverScreen: discoverScreen,
+            profileScreen: profileScreen,
+            settingsScreen: settingsScreen,
+            searchPerfumeScreen: searchPerfumeScreen
+        )
+        let viewController = UIHostingController(rootView: mainTabView)
+        setRootViewController(viewController)
     }
 
     private func showCalculationScreen(container: NSPersistentContainer) {

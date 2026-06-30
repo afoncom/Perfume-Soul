@@ -9,11 +9,13 @@ import SwiftUI
 import CoreData
 
 final class TodayModule {
-    static func build(container: NSPersistentContainer) -> UIViewController {
+    static func build(
+        container: NSPersistentContainer,
+        requestManager: RequestManager
+    ) -> NavigationControllerContainer {
         let viewModel = TodayViewModel()
         let navigationController = UINavigationController()
         let router = TodayRouterImpl(navigationController: navigationController)
-        let requestManager = RequestManagerImpl(urlSession: URLSession.shared, baseURL: "http://127.0.0.1:8080")
         let perfumeHistoryService = PerfumeHistoryServiceImpl(requestManager: requestManager)
         let dailyHoroscopeService = DailyHoroscopeServiceImpl(requestManager: requestManager)
         let profileService = ProfileServiceImpl(container: container)
@@ -31,13 +33,8 @@ final class TodayModule {
         hostingController.title = L10n.Screen.today
 
         navigationController.viewControllers = [hostingController]
-        navigationController.tabBarItem = UITabBarItem(
-            title: L10n.Screen.today,
-            image: UIImage(systemName: "house"),
-            selectedImage: UIImage(systemName: "house.fill")
-        )
         navigationController.navigationBar.prefersLargeTitles = true
         
-        return navigationController
+        return NavigationControllerContainer(navigationController: navigationController)
     }
 }

@@ -92,7 +92,7 @@
 "screen.quizOfTheDay" = "Квиз дня";
 "screen.today" = "Сегодня";
 "screen.calculationCreateProfile" = "Создай свой профиль";
-"screen.todayEnergy" = "Энергия дня";
+"screen.todayEnergy" = "Гороскоп дня";
 "quizOfTheDay.nextQuestion" = "Следующий вопрос";
 "quizOfTheDay.correctResult" = "Правильно!";
 "quizOfTheDay.completedSubtitle" = "На сегодня вопросы закончились. Возвращайтесь завтра за новым квизом и продолжайте набирать баллы.";
@@ -155,7 +155,7 @@
 "today.energy.listTitle" = "Гороскопы на сегодня";
 "today.energy.moonTitle" = "Луна в Скорпионе";
 "today.energy.personalTitle" = "Для вас";
-"today.energy.title" = "Энергия дня";
+"today.energy.title" = "Гороскоп дня";
 "today.history.description" = "Один из самых культовых ароматов Dior с нотой ландыша.";
 "today.history.eventTitle" = "Dior выпустил Diorissimo";
 "today.history.title" = "Этот день в парфюмерии";

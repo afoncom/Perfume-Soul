@@ -9,7 +9,7 @@
 import SwiftUI
 
 final class SettingsModule {
-    static func build() -> UIViewController {
+    static func build() -> NavigationControllerContainer {
         let viewModel = SettingsViewModel()
         let navigationController = UINavigationController()
         let router = SettingsRouterImpl(navigationController: navigationController)
@@ -24,12 +24,8 @@ final class SettingsModule {
         hostingController.title = L10n.Screen.settings
         
         navigationController.viewControllers = [hostingController]
-        navigationController.tabBarItem = UITabBarItem(
-            title: L10n.Screen.settings,
-            image: UIImage(systemName: "gearshape"),
-            selectedImage: UIImage(systemName: "gearshape.fill")
-        )
+        navigationController.navigationBar.prefersLargeTitles = true
         
-        return navigationController
+        return NavigationControllerContainer(navigationController: navigationController)
     }
 }

@@ -91,7 +91,7 @@
 "screen.settings" = "Settings";
 "screen.quizOfTheDay" = "Quiz of the Day";
 "screen.today" = "Today";
-"screen.todayEnergy" = "Today's Energy";
+"screen.todayEnergy" = "Today's Horoscope";
 "quizOfTheDay.nextQuestion" = "Next Question";
 "quizOfTheDay.correctResult" = "Correct!";
 "quizOfTheDay.completedSubtitle" = "There are no more questions for today. Come back tomorrow for a new quiz and keep earning points.";
@@ -155,7 +155,7 @@
 "today.energy.listTitle" = "Today's Horoscopes";
 "today.energy.moonTitle" = "Moon in Scorpio";
 "today.energy.personalTitle" = "For You";
-"today.energy.title" = "Today's Energy";
+"today.energy.title" = "Today's Horoscope";
 "today.history.description" = "One of the most iconic lily-of-the-valley perfumes from Dior.";
 "today.history.eventTitle" = "Dior released Diorissimo";
 "today.history.title" = "On This Day in Perfumery";

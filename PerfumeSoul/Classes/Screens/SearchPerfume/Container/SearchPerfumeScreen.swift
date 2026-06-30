@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SearchPerfumeScreen: View {
     @Bindable private var viewModel: SearchPerfumeViewModel
-    @FocusState private var isSearchFieldFocused: Bool
+    @State private var isSearchPresented = true
     private let presenter: SearchPerfumePresenter
     
     init(
@@ -24,7 +24,6 @@ struct SearchPerfumeScreen: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 20) {
-                makeSearchBar()
                 makeResultsSection()
             }
             .padding(.horizontal, 16)
@@ -32,57 +31,31 @@ struct SearchPerfumeScreen: View {
         }
         .background(Color(.backgroundPrimary).ignoresSafeArea())
         .scrollDismissesKeyboard(.interactively)
+        .navigationTitle(L10n.Screen.searchPerfume)
+        .navigationBarTitleDisplayMode(.large)
+        .searchable(
+            text: $viewModel.searchText,
+            isPresented: $isSearchPresented,
+            prompt: L10n.SearchPerfume.searchTextPlaceholder
+        )
+        .onChange(of: viewModel.searchText) { _, newValue in
+            Task {
+                await presenter.searchTextChanged(newValue)
+            }
+        }
+        .onSubmit(of: .search) {
+            Task {
+                await presenter.searchSubmitted()
+            }
+        }
         .task {
             await presenter.onAppear()
-            try? await Task.sleep(for: .milliseconds(300))
-            isSearchFieldFocused = true
+            isSearchPresented = true
         }
     }
 }
 
 extension SearchPerfumeScreen {
-    func makeSearchBar() -> some View {
-        HStack(spacing: 12) {
-            Image(systemName: "magnifyingglass")
-                .font(.title2)
-                .foregroundStyle(Color(.textSecondary))
-
-            TextField(L10n.SearchPerfume.searchTextPlaceholder, text: $viewModel.searchText)
-                .focused($isSearchFieldFocused)
-                .submitLabel(.search)
-                .textInputAutocapitalization(.never)
-                .autocorrectionDisabled()
-                .foregroundStyle(Color(.textPrimary))
-                .onSubmit {
-                    Task {
-                        await presenter.searchSubmitted()
-                    }
-                }
-
-            if !viewModel.searchText.isEmpty {
-                Button {
-                    viewModel.searchText = ""
-
-                    Task {
-                        await presenter.searchSubmitted()
-                    }
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.title3)
-                        .foregroundStyle(Color(.textSecondary))
-                }
-            }
-        }
-        .padding(.horizontal, 18)
-        .padding(.vertical, 16)
-        .background(Color(.surfacePrimary))
-        .clipShape(Capsule())
-        .overlay(
-            Capsule()
-                .stroke(Color(.cardBorder), lineWidth: 1)
-        )
-    }
-
     @ViewBuilder
     func makeResultsSection() -> some View {
         VStack(alignment: .leading, spacing: 14) {
