@@ -77,18 +77,22 @@ extension SearchPerfumeScreen {
                     .padding(.vertical, 24)
             } else {
                 ForEach(viewModel.perfumes) { perfume in
-                    Text(perfume.name)
-                        .font(.body)
-                        .foregroundStyle(Color(.textPrimary))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 14)
-                        .background(Color(.surfacePrimary))
-                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                                .stroke(Color(.cardBorder), lineWidth: 1)
-                        )
+                    Button {
+                        presenter.perfumeTapped(perfume)
+                    } label: {
+                        Text(perfume.name)
+                            .font(.body)
+                            .foregroundStyle(Color(.textPrimary))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 14)
+                            .background(Color(.surfacePrimary))
+                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                    .stroke(Color(.cardBorder), lineWidth: 1)
+                            )
+                    }
                         .onAppear {
                             guard let index = viewModel.perfumes.firstIndex(where: { $0.id == perfume.id }) else {
                                 return
