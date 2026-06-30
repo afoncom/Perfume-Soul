@@ -25,7 +25,6 @@ extension SearchPerfumeRouterImpl: SearchPerfumeRouter {
     @MainActor func showPerfumeDetailsScreen(perfume: SearchPerfumeItem) {
         navigationController?.pushViewController(
             PerfumeDetailsModule.build(
-                navigationController: navigationController,
                 perfume: perfume
             ),
             animated: true

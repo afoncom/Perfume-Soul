@@ -117,7 +117,6 @@ private extension PerfumeDetailsScreen {
             makeSectionTitle(L10n.PerfumeDetails.notesSectionTitle)
 
             makeNotesCard(
-                name: perfumeDetails.name,
                 accentColor: Color(.pinkButton),
                 topNotes: perfumeDetails.topNotes,
                 middleNotes: perfumeDetails.middleNotes,
@@ -135,23 +134,15 @@ private extension PerfumeDetailsScreen {
     }
 
     func makeNotesCard(
-        name: String,
         accentColor: Color,
         topNotes: [String],
         middleNotes: [String],
         baseNotes: [String]
     ) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 6) {
-                Capsule()
-                    .fill(accentColor.opacity(0.22))
-                    .frame(width: 48, height: 6)
-
-                Text(name)
-                    .font(.headline)
-                    .foregroundStyle(Color(.textPrimary))
-                    .lineLimit(2)
-            }
+            Capsule()
+                .fill(accentColor.opacity(0.22))
+                .frame(width: 48, height: 6)
 
             makeNotesGroup(
                 title: L10n.PerfumeDetails.topNotesTitle,
@@ -226,8 +217,6 @@ private extension PerfumeDetailsScreen {
             makeSectionTitle(L10n.PerfumeDetails.onSkinSectionTitle)
 
             makeWearCard(
-                brand: perfumeDetails.brand,
-                name: perfumeDetails.name,
                 accentColor: Color(.pinkButton),
                 metrics: [
                     (L10n.PerfumeDetails.longevityTitle, scoreText(perfumeDetails.longevityScore)),
@@ -246,23 +235,10 @@ private extension PerfumeDetailsScreen {
     }
 
     func makeWearCard(
-        brand: String,
-        name: String,
         accentColor: Color,
         metrics: [(String, String)]
     ) -> some View {
         VStack(alignment: .leading, spacing: 14) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(brand)
-                    .font(.footnote.weight(.semibold))
-                    .foregroundStyle(Color(.textSecondary))
-
-                Text(name)
-                    .font(.headline)
-                    .foregroundStyle(Color(.textPrimary))
-                    .lineLimit(2)
-            }
-
             VStack(spacing: 10) {
                 ForEach(metrics, id: \.0) { metric in
                     makeWearRow(

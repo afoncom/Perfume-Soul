@@ -12,11 +12,6 @@ protocol PerfumeDetailsRouter {
 }
 
 final class PerfumeDetailsRouterImpl {
-    private weak var navigationController: UINavigationController?
-
-    init(navigationController: UINavigationController?) {
-        self.navigationController = navigationController
-    }
 }
 
 extension PerfumeDetailsRouterImpl: PerfumeDetailsRouter {
