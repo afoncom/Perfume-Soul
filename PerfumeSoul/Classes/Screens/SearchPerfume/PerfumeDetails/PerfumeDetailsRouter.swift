@@ -8,12 +8,10 @@
 import UIKit
 
 protocol PerfumeDetailsRouter {
-    
 }
 
 final class PerfumeDetailsRouterImpl {
 }
 
 extension PerfumeDetailsRouterImpl: PerfumeDetailsRouter {
-    
 }

@@ -36,9 +36,9 @@ struct PerfumeDetailsScreen: View {
     }
 }
 
-private extension PerfumeDetailsScreen {
+extension PerfumeDetailsScreen {
     @ViewBuilder
-    var content: some View {
+    private var content: some View {
         if viewModel.isLoading {
             makeLoadingState()
         } else if let errorMessage = viewModel.errorMessage {
@@ -52,7 +52,7 @@ private extension PerfumeDetailsScreen {
         }
     }
 
-    func makeLoadingState() -> some View {
+    private func makeLoadingState() -> some View {
         VStack(spacing: 14) {
             ProgressView()
             Text(L10n.PerfumeDetails.loadingMessage)
@@ -62,7 +62,7 @@ private extension PerfumeDetailsScreen {
         .frame(maxWidth: .infinity, minHeight: 360)
     }
 
-    func makeErrorState(message: String) -> some View {
+    private func makeErrorState(message: String) -> some View {
         VStack(spacing: 14) {
             Text(message)
                 .font(.footnote)
@@ -91,7 +91,7 @@ private extension PerfumeDetailsScreen {
         .padding(.horizontal, 24)
     }
 
-    func makePerfumeHeader(perfumeDetails: PerfumeDetails) -> some View {
+    private func makePerfumeHeader(perfumeDetails: PerfumeDetails) -> some View {
         VStack(spacing: 12) {
             RoundedRectangle(cornerRadius: 24, style: .continuous)
                 .fill(Color(.placeholderMedium))
@@ -112,7 +112,7 @@ private extension PerfumeDetailsScreen {
         }
     }
 
-    func makeNotesSection(perfumeDetails: PerfumeDetails) -> some View {
+    private func makeNotesSection(perfumeDetails: PerfumeDetails) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             makeSectionTitle(L10n.PerfumeDetails.notesSectionTitle)
 
@@ -133,7 +133,7 @@ private extension PerfumeDetailsScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
 
-    func makeNotesCard(
+    private func makeNotesCard(
         accentColor: Color,
         topNotes: [String],
         middleNotes: [String],
@@ -168,7 +168,7 @@ private extension PerfumeDetailsScreen {
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
 
-    func makeNotesGroup(
+    private func makeNotesGroup(
         title: String,
         notes: [String],
         accentColor: Color
@@ -195,7 +195,7 @@ private extension PerfumeDetailsScreen {
         }
     }
 
-    func makeNoteRow(
+    private func makeNoteRow(
         note: String,
         accentColor: Color
     ) -> some View {
@@ -212,7 +212,7 @@ private extension PerfumeDetailsScreen {
         }
     }
 
-    func makeWearSection(perfumeDetails: PerfumeDetails) -> some View {
+    private func makeWearSection(perfumeDetails: PerfumeDetails) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             makeSectionTitle(L10n.PerfumeDetails.onSkinSectionTitle)
 
@@ -234,7 +234,7 @@ private extension PerfumeDetailsScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
 
-    func makeWearCard(
+    private func makeWearCard(
         accentColor: Color,
         metrics: [(String, String)]
     ) -> some View {
@@ -255,7 +255,7 @@ private extension PerfumeDetailsScreen {
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
 
-    func makeWearRow(
+    private func makeWearRow(
         title: String,
         score: String,
         accentColor: Color
@@ -277,12 +277,12 @@ private extension PerfumeDetailsScreen {
         }
     }
 
-    func scoreText(_ score: Int?) -> String {
+    private func scoreText(_ score: Int?) -> String {
         guard let score else { return "--" }
         return "\(score)/10"
     }
 
-    func makeSectionTitle(_ title: String) -> some View {
+    private func makeSectionTitle(_ title: String) -> some View {
         HStack {
             Spacer()
 

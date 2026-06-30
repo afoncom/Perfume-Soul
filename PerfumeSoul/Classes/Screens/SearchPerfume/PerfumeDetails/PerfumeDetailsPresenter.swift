@@ -40,8 +40,8 @@ extension PerfumeDetailsPresenterImpl: PerfumeDetailsPresenter {
     }
 }
 
-private extension PerfumeDetailsPresenterImpl {
-    func loadPerfumeDetails() async {
+extension PerfumeDetailsPresenterImpl {
+    private func loadPerfumeDetails() async {
         guard !viewModel.isLoading else { return }
 
         viewModel.isLoading = true
