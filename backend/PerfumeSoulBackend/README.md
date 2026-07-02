@@ -28,6 +28,12 @@ Then set `DATABASE_URL`, for example:
 DATABASE_URL=postgresql://postgres:your-password@localhost:5432/postgres
 ```
 
+Seed daily horoscopes into PostgreSQL:
+
+```bash
+psql "$DATABASE_URL" -f scripts/seed_daily_horoscopes.sql
+```
+
 Run the server:
 
 ```bash
@@ -78,5 +84,6 @@ Expected response on `/horoscope/daily`:
 - Backend is separate from the iOS app and lives in `backend/PerfumeSoulBackend`.
 - First build can take a long time because Swift Package Manager downloads and compiles dependencies.
 - `GET /perfumes` now reads from PostgreSQL, so the local database must be running and contain `brands` and `perfumes`.
+- `GET /horoscope/daily` now reads from PostgreSQL, so `daily_horoscopes` must be seeded before local run.
 - Endpoint resources are stored under `Sources/PerfumeSoulBackend/Requests/<endpoint>/Resources`.
 - If the server is running, stop it with `Control + C`.
