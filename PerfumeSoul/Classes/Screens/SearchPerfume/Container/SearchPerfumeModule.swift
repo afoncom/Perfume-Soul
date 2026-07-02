@@ -12,6 +12,7 @@ final class SearchPerfumeModule {
     static func build(requestManager: RequestManager) -> SearchPerfumeScreen {
         let viewModel = SearchPerfumeViewModel()
         let searchPerfumeService = SearchPerfumeServiceImpl(requestManager: requestManager)
+        let navigationController = UINavigationController()
         let router = SearchPerfumeRouterImpl(navigationController: navigationController)
         let presenter = SearchPerfumePresenterImpl(
             viewModel: viewModel,
