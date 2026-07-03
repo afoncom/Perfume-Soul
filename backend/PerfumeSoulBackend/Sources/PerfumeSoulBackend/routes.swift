@@ -36,14 +36,20 @@ func routes(_ app: Application) throws {
         }
     }
     
-    app.get("perfumes", "recommendations") { _ async throws -> Response in
-        do {
-            return try jsonResponse(PerfumeRecommendationLoader.load())
-        } catch let error as CocoaError where error.code == .fileNoSuchFile {
-            throw Abort(.notFound)
-        } catch {
-            throw error
+    app.get("perfumes", "recommendations") { req async throws -> Response in
+        let query = try req.query.decode(PerfumeRecommendationsQuery.self)
+        let perfumeIDs = query.parsedPerfumeIDs
+
+        guard !perfumeIDs.isEmpty else {
+            throw Abort(.badRequest)
         }
+
+        return try jsonResponse(
+            try await PerfumeRecommendationLoader.load(
+                perfumeIDs: perfumeIDs,
+                on: req.db
+            )
+        )
     }
 
     app.get("perfumes") { req async throws -> Response in
@@ -87,4 +93,14 @@ private struct PerfumeSearchQuery: Content {
     let searchText: String?
     let offset: Int?
     let limit: Int?
+}
+
+private struct PerfumeRecommendationsQuery: Content {
+    let perfumeIDs: String
+
+    var parsedPerfumeIDs: [Int] {
+        perfumeIDs
+            .split(separator: ",")
+            .compactMap { Int($0.trimmingCharacters(in: .whitespacesAndNewlines)) }
+    }
 }

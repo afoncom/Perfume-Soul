@@ -17,7 +17,7 @@ The repository currently contains a working application shell with onboarding, a
 - `Calculation` creates a profile with name, birth date, birth time, and birth place.
 - `ProfileDescription` and `PersonalPerfume` continue the onboarding flow with editorial and curated content.
 - `Today` is the most integrated tab right now: it loads `perfumery-history` from the backend and opens a backend-driven `DayInPerfumery` details screen.
-- `Discover` and parts of `Profile` are present as UI flows and navigation scaffolding, but several sections still use static placeholder content.
+- `Discover` now includes a working `Find Similar Perfumes` flow with database-backed perfume search, backend-driven recommendations, and navigation to the shared perfume details card.
 - `TodayEnergy` has its own screen and backend service layer, but the screen content is still mostly hardcoded in the current branch.
 
 ## User Flow
@@ -57,14 +57,43 @@ Backend-backed data already used here:
   - `shortStory`
   - `fullStory`
   - `imageUrl`
+- `GET /perfumes/recommendations?perfumeIDs=1,2,3` returns up to 5 similar perfumes with:
+  - `id`
+  - `perfumeName`
+  - `brandName`
+  - `matchingNotes`
+  - `matchPercentage`
+  - `longevityScore`
+  - `sillageScore`
 
 ### Discover
 
 - Start quiz entry point
 - Compare perfumes inputs
-- Find similar perfumes CTA
+- Find similar perfumes flow with shared perfume database search
+- Recommendations screen with top 5 matches and shared perfume details navigation
 
-This part is currently more of a feature scaffold than a completed product flow.
+`Find Similar Perfumes` current flow:
+
+1. The user selects 1 required perfume and may add up to 2 optional perfumes.
+2. Each perfume is chosen from the shared backend-driven perfume search list.
+3. The selected perfume ids are passed to `GET /perfumes/recommendations`.
+4. The backend returns up to 5 similar perfumes from the database.
+5. Tapping any recommendation opens the same `PerfumeDetails` screen used in the Search flow.
+
+Current recommendation scoring:
+
+- `70%` weighted note overlap
+- `15%` longevity similarity
+- `15%` sillage similarity
+
+Weighted note overlap uses:
+
+- `top` notes = weight `3`
+- `middle` notes = weight `2`
+- `base` notes = weight `1`
+
+This keeps the first version simple, explainable, and fully based on data already stored in the database.
 
 ### Profile
 
@@ -127,7 +156,7 @@ Important directories:
 - `PerfumeSoul/Classes/Core` — networking and Core Data
 - `PerfumeSoul/Classes/Services` — API and persistence services
 - `PerfumeSoul/Classes/Screens` — feature modules
-- `backend/PerfumeSoulBackend` — Vapor server and JSON fixtures
+- `backend/PerfumeSoulBackend` — Vapor server, PostgreSQL-backed loaders, and recommendation logic
 
 ## Local Development
 
@@ -160,6 +189,9 @@ Available routes:
 
 - `GET /perfumery-history`
 - `GET /horoscope/daily`
+- `GET /perfumes`
+- `GET /perfumes/:perfumeID/notes`
+- `GET /perfumes/recommendations?perfumeIDs=1,2,3`
 
 ## Testing and CI
 
@@ -184,7 +216,6 @@ This README reflects the codebase as it exists now, not the intended future prod
 
 - `Today` mixes backend-driven content with static cards
 - `TodayEnergy` backend integration is incomplete in the current branch
-- `Discover` actions mostly navigate to scaffolded flows
 - several `Profile` sections are UI-complete but still use placeholder values
 
 ## Stack Summary

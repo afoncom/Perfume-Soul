@@ -6,6 +6,9 @@
 "discover.compare.title" = "Сравнение ароматов";
 "discover.findSimilar.button" = "Найти";
 "discover.findSimilar.firstPerfumeSubtitle" = "Найдите или выберите аромат";
+"discover.findSimilar.firstPerfumeValidationMessage" = "Выберите хотя бы один аромат из списка.";
+"discover.findSimilar.selectionValidationMessage" = "Если вы ввели дополнительный аромат, выберите его из списка.";
+"discover.findSimilar.samePerfumesValidationMessage" = "Для рекомендаций выберите разные ароматы.";
 "discover.findSimilar.firstPerfumeTitle" = "Аромат 1";
 "discover.findSimilar.headerSubtitle" = "Добавьте ароматы, которые у вас есть, и мы найдем похожие по звучанию.";
 "discover.findSimilar.hint" = "Чем больше ароматов вы добавите, тем точнее будут рекомендации.";
@@ -77,6 +80,11 @@
 "screen.perfumeDetails" = "Карточка аромата";
 "perfumeRecommendations.empty.title" = "Рекомендации пока недоступны";
 "perfumeRecommendations.empty.subtitle" = "Попробуйте позже";
+"perfumeRecommendations.hint" = "Мы сопоставили ноты, стойкость и шлейф и подобрали самые близкие ароматы из базы.";
+"perfumeRecommendations.matchLabel" = "совпадение";
+"perfumeRecommendations.matchingNotesFormat" = "Совпадающие ноты: %@";
+"perfumeRecommendations.selectedPerfumesTitle" = "На основе ваших ароматов";
+"perfumeRecommendations.wearFormat" = "Стойкость: %@ · Шлейф: %@";
 "perfumeDetails.baseNotesTitle" = "Базовые";
 "perfumeDetails.emptyNotesPlaceholder" = "Нет данных";
 "perfumeDetails.loadingMessage" = "Загружаем данные об аромате...";

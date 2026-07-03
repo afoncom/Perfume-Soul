@@ -9,11 +9,11 @@
 import Foundation
 
 struct PerfumeRecommendationResponse: Decodable {
-    let id: UUID
+    let id: Int
     let perfumeName: String
     let brandName: String
-    let accords: [String]
     let matchingNotes: [String]
     let matchPercentage: Int
-    let imageUrl: String
+    let longevityScore: Int?
+    let sillageScore: Int?
 }
