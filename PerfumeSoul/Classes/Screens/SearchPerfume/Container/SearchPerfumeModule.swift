@@ -9,7 +9,7 @@
 import SwiftUI
 
 final class SearchPerfumeModule {
-    static func build(requestManager: RequestManager) -> SearchPerfumeScreen {
+    static func build(requestManager: RequestManager) -> NavigationControllerContainer {
         let viewModel = SearchPerfumeViewModel()
         let searchPerfumeService = SearchPerfumeServiceImpl(requestManager: requestManager)
         let navigationController = UINavigationController()
@@ -20,6 +20,10 @@ final class SearchPerfumeModule {
             searchPerfumeService: searchPerfumeService
         )
 
-        return SearchPerfumeScreen(viewModel: viewModel, presenter: presenter)
+        let view = SearchPerfumeScreen(viewModel: viewModel, presenter: presenter)
+        let hostingController = UIHostingController(rootView: view)
+        navigationController.setViewControllers([hostingController], animated: false)
+
+        return NavigationControllerContainer(navigationController: navigationController)
     }
 }
