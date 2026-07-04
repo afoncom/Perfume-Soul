@@ -7,7 +7,6 @@ struct PerfumeRecommendation: Codable, Equatable {
     let perfumeName: String
     let brandName: String
     let matchingNotes: [String]
-    let matchPercentage: Int
     let longevityScore: Int?
     let sillageScore: Int?
 }
@@ -44,26 +43,31 @@ enum PerfumeRecommendationLoader {
         return perfumeProfiles
             .filter { !selectedPerfumeIDs.contains($0.id) }
             .compactMap { perfumeProfile in
-                makeRecommendation(
+                makeScoredRecommendation(
                     perfumeProfile: perfumeProfile,
                     targetProfile: targetProfile,
                     scoreRanges: scoreRanges
                 )
             }
             .sorted { lhs, rhs in
-                if lhs.matchPercentage == rhs.matchPercentage {
-                    if lhs.brandName == rhs.brandName {
-                        return lhs.perfumeName < rhs.perfumeName
+                if lhs.rawScore == rhs.rawScore {
+                    if lhs.recommendation.brandName == rhs.recommendation.brandName {
+                        return lhs.recommendation.perfumeName < rhs.recommendation.perfumeName
                     }
 
-                    return lhs.brandName < rhs.brandName
+                    return lhs.recommendation.brandName < rhs.recommendation.brandName
                 }
 
-                return lhs.matchPercentage > rhs.matchPercentage
+                return lhs.rawScore > rhs.rawScore
             }
             .prefix(5)
-            .map { $0 }
+            .map(\.recommendation)
     }
+}
+
+private struct ScoredPerfumeRecommendation {
+    let recommendation: PerfumeRecommendation
+    let rawScore: Double
 }
 
 private extension PerfumeRecommendationLoader {
@@ -78,12 +82,16 @@ private extension PerfumeRecommendationLoader {
         return Array(uniquePerfumeIDs.prefix(3))
     }
 
-    static func makeRecommendation(
+    static func makeScoredRecommendation(
         perfumeProfile: PerfumeProfile,
         targetProfile: RecommendationTargetProfile,
         scoreRanges: ScoreRanges
-    ) -> PerfumeRecommendation? {
+    ) -> ScoredPerfumeRecommendation? {
         let candidateNoteWeights = noteWeights(for: perfumeProfile)
+        let overlapWeight = weightedOverlap(
+            lhs: targetProfile.noteWeights,
+            rhs: candidateNoteWeights
+        )
         let matchingNotes = makeMatchingNotes(
             targetProfile: targetProfile,
             candidateNoteWeights: candidateNoteWeights
@@ -93,9 +101,21 @@ private extension PerfumeRecommendationLoader {
             return nil
         }
 
-        let noteSimilarity = weightedJaccardSimilarity(
-            lhs: targetProfile.noteWeights,
-            rhs: candidateNoteWeights
+        let noteCoverage = weightedCoverage(
+            overlapWeight: overlapWeight,
+            totalWeight: targetProfile.totalNoteWeight
+        )
+        let notePrecision = weightedCoverage(
+            overlapWeight: overlapWeight,
+            totalWeight: totalWeight(of: candidateNoteWeights)
+        )
+        let distinctCoverage = distinctCoverage(
+            matchedCount: matchingNotes.count,
+            totalCount: targetProfile.distinctNoteCount
+        )
+        let noteCountCloseness = countCloseness(
+            lhs: candidateNoteWeights.count,
+            rhs: targetProfile.distinctNoteCount
         )
         let longevitySimilarity = scoreSimilarity(
             value: perfumeProfile.longevityScore,
@@ -109,19 +129,23 @@ private extension PerfumeRecommendationLoader {
         )
 
         let rawScore =
-            noteSimilarity * 0.7
-            + longevitySimilarity * 0.15
-            + sillageSimilarity * 0.15
-        let matchPercentage = Int((rawScore * 100).rounded(.toNearestOrAwayFromZero))
+            noteCoverage * 0.45
+            + notePrecision * 0.2
+            + distinctCoverage * 0.1
+            + noteCountCloseness * 0.1
+            + longevitySimilarity * 0.075
+            + sillageSimilarity * 0.075
 
-        return PerfumeRecommendation(
-            id: perfumeProfile.id,
-            perfumeName: perfumeProfile.perfumeName,
-            brandName: perfumeProfile.brandName,
-            matchingNotes: matchingNotes,
-            matchPercentage: matchPercentage,
-            longevityScore: perfumeProfile.longevityScore,
-            sillageScore: perfumeProfile.sillageScore
+        return ScoredPerfumeRecommendation(
+            recommendation: PerfumeRecommendation(
+                id: perfumeProfile.id,
+                perfumeName: perfumeProfile.perfumeName,
+                brandName: perfumeProfile.brandName,
+                matchingNotes: matchingNotes,
+                longevityScore: perfumeProfile.longevityScore,
+                sillageScore: perfumeProfile.sillageScore
+            ),
+            rawScore: rawScore
         )
     }
 
@@ -190,27 +214,57 @@ private extension PerfumeRecommendationLoader {
             .map { $0.0 }
     }
 
-    static func weightedJaccardSimilarity(
+    static func weightedOverlap(
         lhs: [String: Int],
         rhs: [String: Int]
-    ) -> Double {
+    ) -> Int {
         let allKeys = Set(lhs.keys).union(rhs.keys)
         guard !allKeys.isEmpty else {
             return 0
         }
 
-        let overlapWeight = allKeys.reduce(0) { partialResult, key in
+        return allKeys.reduce(0) { partialResult, key in
             partialResult + min(lhs[key] ?? 0, rhs[key] ?? 0)
         }
-        let unionWeight = allKeys.reduce(0) { partialResult, key in
-            partialResult + max(lhs[key] ?? 0, rhs[key] ?? 0)
-        }
+    }
 
-        guard unionWeight > 0 else {
+    static func weightedCoverage(
+        overlapWeight: Int,
+        totalWeight: Int
+    ) -> Double {
+        guard totalWeight > 0 else {
             return 0
         }
 
-        return Double(overlapWeight) / Double(unionWeight)
+        return Double(overlapWeight) / Double(totalWeight)
+    }
+
+    static func distinctCoverage(
+        matchedCount: Int,
+        totalCount: Int
+    ) -> Double {
+        guard totalCount > 0 else {
+            return 0
+        }
+
+        return Double(matchedCount) / Double(totalCount)
+    }
+
+    static func countCloseness(
+        lhs: Int,
+        rhs: Int
+    ) -> Double {
+        let maxCount = max(lhs, rhs)
+        guard maxCount > 0 else {
+            return 0
+        }
+
+        let distance = abs(lhs - rhs)
+        return max(0, 1 - (Double(distance) / Double(maxCount)))
+    }
+
+    static func totalWeight(of noteWeights: [String: Int]) -> Int {
+        noteWeights.values.reduce(0, +)
     }
 
     static func scoreSimilarity(
@@ -245,6 +299,8 @@ private extension PerfumeRecommendationLoader {
 private struct RecommendationTargetProfile {
     let noteWeights: [String: Int]
     let noteDisplayNames: [String: String]
+    let totalNoteWeight: Int
+    let distinctNoteCount: Int
     let averageLongevityScore: Double?
     let averageSillageScore: Double?
 
@@ -275,6 +331,8 @@ private struct RecommendationTargetProfile {
 
         self.noteWeights = noteWeights
         self.noteDisplayNames = noteDisplayNames
+        self.totalNoteWeight = noteWeights.values.reduce(0, +)
+        self.distinctNoteCount = noteWeights.count
         self.averageLongevityScore = Self.average(
             values: perfumeProfiles.compactMap(\.longevityScore)
         )

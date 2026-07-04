@@ -85,7 +85,6 @@ Expected response on `/perfumes/recommendations?perfumeIDs=1,2,3`:
     "perfumeName": "Eros",
     "brandName": "Versace",
     "matchingNotes": ["Бергамот", "Ветивер", "Кедр"],
-    "matchPercentage": 82,
     "longevityScore": 8,
     "sillageScore": 7
   }
@@ -102,17 +101,14 @@ The endpoint now builds recommendations from PostgreSQL perfume data:
 - source data: brand, perfume name, top/middle/base notes, longevity score, sillage score
 - output: up to `5` similar perfumes excluding the selected ones
 
-Current scoring:
+Current backend responsibility:
 
-- `70%` weighted note overlap
-- `15%` longevity similarity
-- `15%` sillage similarity
+- load perfume data from PostgreSQL
+- build the recommendation candidate list
+- exclude the selected perfumes themselves
+- return matching notes and wear data for the client
 
-Note weights:
-
-- `top` = `3`
-- `middle` = `2`
-- `base` = `1`
+The final displayed match percentage is now calculated on the iOS client.
 
 ## Notes for me
 

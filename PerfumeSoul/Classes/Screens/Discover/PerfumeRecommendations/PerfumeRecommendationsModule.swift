@@ -18,10 +18,12 @@ final class PerfumeRecommendationsModule {
         let viewModel = PerfumeRecommendationsViewModel(selectedPerfumes: selectedPerfumes)
         let router = PerfumeRecommendationsRouterImpl(navigationController: navigationController)
         let perfumeRecommendationService = PerfumeRecommendationServiceImpl(requestManager: requestManager)
+        let perfumeDetailsService = PerfumeDetailsServiceImpl(requestManager: requestManager)
         let presenter = PerfumeRecommendationsPresenterImpl(
             viewModel: viewModel,
             router: router,
-            perfumeRecommendationService: perfumeRecommendationService
+            perfumeRecommendationService: perfumeRecommendationService,
+            perfumeDetailsService: perfumeDetailsService
         )
         
         let view = PerfumeRecommendationsScreen(viewModel: viewModel, presenter: presenter)

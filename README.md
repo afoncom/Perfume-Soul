@@ -62,7 +62,6 @@ Backend-backed data already used here:
   - `perfumeName`
   - `brandName`
   - `matchingNotes`
-  - `matchPercentage`
   - `longevityScore`
   - `sillageScore`
 
@@ -79,21 +78,25 @@ Backend-backed data already used here:
 2. Each perfume is chosen from the shared backend-driven perfume search list.
 3. The selected perfume ids are passed to `GET /perfumes/recommendations`.
 4. The backend returns up to 5 similar perfumes from the database.
-5. Tapping any recommendation opens the same `PerfumeDetails` screen used in the Search flow.
+5. The iOS client loads perfume details for the selected perfumes and returned recommendations.
+6. The displayed match percentage is calculated on the client from note overlap and wear similarity.
+7. Tapping any recommendation opens the same `PerfumeDetails` screen used in the Search flow.
 
 Current recommendation scoring:
 
-- `70%` weighted note overlap
-- `15%` longevity similarity
-- `15%` sillage similarity
+- `SearchPerfume` and `Find Similar Perfumes` search for real database items.
+- The backend returns the candidate recommendation list and matching notes.
+- The iOS client calculates the final displayed match percentage.
+- The main comparison signal is note overlap.
+- Longevity and sillage are used as a small refinement when both perfumes have these values.
 
-Weighted note overlap uses:
+Client-side note comparison uses:
 
-- `top` notes = weight `3`
-- `middle` notes = weight `2`
-- `base` notes = weight `1`
+- `top` notes weight `0.45`
+- `middle` notes weight `0.35`
+- `base` notes weight `0.20`
 
-This keeps the first version simple, explainable, and fully based on data already stored in the database.
+This keeps the percentage dynamic and based on real perfume data instead of storing precomputed values.
 
 ### Profile
 
