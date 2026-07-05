@@ -21,7 +21,7 @@ struct MainTabView: View {
     let discoverScreen: NavigationControllerContainer
     let profileScreen: NavigationControllerContainer
     let settingsScreen: NavigationControllerContainer
-    let searchPerfumeScreen: SearchPerfumeScreen
+    let searchPerfumeScreen: NavigationControllerContainer
     
     @State private var selectedTab: MainTab = .today
     
@@ -55,9 +55,7 @@ private extension MainTabView {
             }
             
             Tab(value: .search, role: .search) {
-                NavigationStack {
-                    searchPerfumeScreen
-                }
+                searchPerfumeScreen
             }
         }
     }
