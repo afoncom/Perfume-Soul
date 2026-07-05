@@ -9,7 +9,8 @@
 import UIKit
 
 protocol PerfumeRecommendationsRouter {
-    
+    @MainActor
+    func showPerfumeDetailsScreen(perfume: SearchPerfumeItem)
 }
 
 final class PerfumeRecommendationsRouterImpl {
@@ -21,5 +22,10 @@ final class PerfumeRecommendationsRouterImpl {
 }
 
 extension PerfumeRecommendationsRouterImpl: PerfumeRecommendationsRouter {
-    
+    @MainActor func showPerfumeDetailsScreen(perfume: SearchPerfumeItem) {
+        navigationController?.pushViewController(
+            PerfumeDetailsModule.build(perfume: perfume),
+            animated: true
+        )
+    }
 }

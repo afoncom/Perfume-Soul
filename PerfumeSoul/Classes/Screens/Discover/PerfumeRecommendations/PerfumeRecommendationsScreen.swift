@@ -11,7 +11,7 @@ import SwiftUI
 struct PerfumeRecommendationsScreen: View {
     @Bindable private var viewModel: PerfumeRecommendationsViewModel
     private let presenter: PerfumeRecommendationsPresenter
-    
+
     init(
         viewModel: PerfumeRecommendationsViewModel,
         presenter: PerfumeRecommendationsPresenter
@@ -19,7 +19,7 @@ struct PerfumeRecommendationsScreen: View {
         self.viewModel = viewModel
         self.presenter = presenter
     }
-    
+
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 18) {
@@ -42,77 +42,54 @@ struct PerfumeRecommendationsScreen: View {
     }
 }
 
-private extension PerfumeRecommendationsScreen {
-    func makeHeaderView() -> some View {
+extension PerfumeRecommendationsScreen {
+    private func makeHeaderView() -> some View {
         Text(L10n.Screen.perfumeRecommendations)
             .font(.system(size: 30, weight: .medium, design: .rounded))
             .foregroundStyle(Color(.titleText))
             .frame(maxWidth: .infinity, alignment: .center)
             .padding(.bottom, 4)
     }
-    
-    func makeBasedOnSection() -> some View {
+
+    private func makeBasedOnSection() -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("На основе ваших ароматов")
+            Text(L10n.PerfumeRecommendations.selectedPerfumesTitle)
                 .font(.headline)
                 .foregroundStyle(Color(.textPrimary))
-            
+
             HStack(spacing: 12) {
-                makeBasePerfumeItem(title: "Bleu de\nChanel")
-                makeBasePerfumeItem(title: "Dior\nSauvage")
-                makeBasePerfumeItem(title: "YSL\nY Eau de Parfum")
-                makeAddMoreItem()
+                ForEach(viewModel.selectedPerfumes) { perfume in
+                    makeBasePerfumeItem(title: perfume.name)
+                }
             }
         }
     }
-    
-    func makeBasePerfumeItem(title: String) -> some View {
+
+    private func makeBasePerfumeItem(title: String) -> some View {
         VStack(spacing: 8) {
             RoundedRectangle(cornerRadius: 18, style: .continuous)
                 .fill(Color(.placeholderMedium))
                 .frame(height: 78)
-            
+
             Text(title)
                 .font(.caption)
                 .foregroundStyle(Color(.textPrimary))
                 .multilineTextAlignment(.center)
+                .lineLimit(3)
         }
         .frame(maxWidth: .infinity)
     }
-    
-    func makeAddMoreItem() -> some View {
-        VStack(spacing: 8) {
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .fill(Color(.surfacePrimary))
-                .frame(height: 78)
-                .overlay {
-                    Image(systemName: "plus")
-                        .font(.title2)
-                        .foregroundStyle(Color(.textPrimary))
-                }
-                .overlay(
-                    RoundedRectangle(cornerRadius: 18, style: .continuous)
-                        .stroke(Color(.cardBorder), lineWidth: 1)
-                )
-            
-            Text("Добавить\nеще")
-                .font(.caption)
-                .foregroundStyle(Color(.textPrimary))
-                .multilineTextAlignment(.center)
-        }
-        .frame(maxWidth: .infinity)
-    }
-    
-    func makeHintCard() -> some View {
+
+    private func makeHintCard() -> some View {
         HStack(spacing: 12) {
             Image(systemName: "sparkles")
                 .font(.title3)
                 .foregroundStyle(Color(.zodiacPurple))
-            
-            Text("Мы проанализировали звучание и подобрали 5 ароматов, которые могут вам понравиться.")
+
+            Text(L10n.PerfumeRecommendations.hint)
                 .font(.subheadline)
                 .foregroundStyle(Color(.descriptionText))
-            
+
             Spacer()
         }
         .padding(.horizontal, 16)
@@ -124,28 +101,60 @@ private extension PerfumeRecommendationsScreen {
                 .stroke(Color(.tableBorder), lineWidth: 1)
         )
     }
-    
-    func makeRecommendationsSection() -> some View {
+
+    @ViewBuilder
+    private func makeRecommendationsSection() -> some View {
         VStack(spacing: 12) {
             if viewModel.isLoading {
-                EmptyView()
+                makeLoadingState()
+            } else if let errorMessage = viewModel.errorMessage {
+                makeErrorState(message: errorMessage)
             } else if viewModel.perfumeRecommendations.isEmpty {
                 makeEmptyStateView()
             } else {
                 ForEach(viewModel.perfumeRecommendations, id: \.id) { perfume in
-                    makeRecommendationCard(
-                        title: perfume.perfumeName,
-                        brand: perfume.brandName,
-                        accords: perfume.accords.joined(separator: " · "),
-                        notes: "Созвучие: " + perfume.matchingNotes.joined(separator: ", "),
-                        score: "\(perfume.matchPercentage)%"
-                    )
+                    Button {
+                        presenter.recommendationTapped(perfume)
+                    } label: {
+                        makeRecommendationCard(perfume: perfume)
+                    }
+                    .buttonStyle(.plain)
                 }
             }
         }
     }
 
-    func makeEmptyStateView() -> some View {
+    private func makeLoadingState() -> some View {
+        ProgressView()
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 32)
+    }
+
+    private func makeErrorState(message: String) -> some View {
+        VStack(spacing: 8) {
+            Text(message)
+                .font(.headline)
+                .foregroundStyle(Color(.textPrimary))
+                .multilineTextAlignment(.center)
+
+            Text(L10n.PerfumeRecommendations.Empty.subtitle)
+                .font(.subheadline)
+                .foregroundStyle(Color(.textSecondary))
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 32)
+        .padding(.horizontal, 20)
+        .background(Color(.surfacePrimary))
+        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .stroke(Color(.cardBorder), lineWidth: 1)
+        )
+        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
+    }
+
+    private func makeEmptyStateView() -> some View {
         VStack(spacing: 8) {
             Text(L10n.PerfumeRecommendations.Empty.title)
                 .font(.headline)
@@ -166,61 +175,57 @@ private extension PerfumeRecommendationsScreen {
         )
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
-    
-    func makeRecommendationCard(
-        title: String,
-        brand: String,
-        accords: String,
-        notes: String,
-        score: String
-    ) -> some View {
+
+    private func makeRecommendationCard(perfume: PerfumeRecommendation) -> some View {
         HStack(alignment: .top, spacing: 12) {
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .fill(Color(.placeholderMedium))
                 .frame(width: 72, height: 96)
-            
+
             VStack(alignment: .leading, spacing: 6) {
-                Text(title)
+                Text(perfume.perfumeName)
                     .font(.headline)
                     .foregroundStyle(Color(.textPrimary))
                     .fixedSize(horizontal: false, vertical: true)
-                
-                Text(brand)
+
+                Text(perfume.brandName)
                     .font(.subheadline)
                     .foregroundStyle(Color(.textSecondary))
-                
-                Text(accords)
-                    .font(.footnote)
-                    .foregroundStyle(Color(.textSecondary))
-                    .fixedSize(horizontal: false, vertical: true)
-                
-                HStack(alignment: .top, spacing: 6) {
-                    Image(systemName: "checkmark.circle.fill")
-                        .font(.footnote)
-                        .foregroundStyle(Color(.pinkButton))
-                        .padding(.top, 2)
-                    
-                    Text(notes)
-                        .font(.footnote)
-                        .foregroundStyle(Color(.textSecondary))
-                        .fixedSize(horizontal: false, vertical: true)
-                }
+
+                Text(
+                    L10n.PerfumeRecommendations.matchingNotesFormat(
+                        perfume.matchingNotes.joined(separator: ", ")
+                    )
+                )
+                .font(.footnote)
+                .foregroundStyle(Color(.textSecondary))
+                .fixedSize(horizontal: false, vertical: true)
+
+                Text(
+                    L10n.PerfumeRecommendations.wearFormat(
+                        scoreText(perfume.longevityScore),
+                        scoreText(perfume.sillageScore)
+                    )
+                )
+                .font(.footnote)
+                .foregroundStyle(Color(.textSecondary))
+                .fixedSize(horizontal: false, vertical: true)
             }
-            
+
             Spacer(minLength: 8)
-            
+
             VStack(alignment: .trailing, spacing: 12) {
-                Text(score)
+                Text("\(perfume.matchPercentage)%")
                     .font(.title3)
                     .fontWeight(.semibold)
                     .foregroundStyle(Color(.textPrimary))
-                
-                Text("совпадение")
+
+                Text(L10n.PerfumeRecommendations.matchLabel)
                     .font(.caption)
                     .foregroundStyle(Color(.textSecondary))
-                
+
                 Spacer()
-                
+
                 Image(systemName: "chevron.right")
                     .font(.footnote.weight(.semibold))
                     .foregroundStyle(Color(.textSecondary))
@@ -235,5 +240,9 @@ private extension PerfumeRecommendationsScreen {
                 .stroke(Color(.cardBorder), lineWidth: 1)
         )
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
+    }
+
+    private func scoreText(_ score: Int?) -> String {
+        score.map(String.init) ?? L10n.PerfumeDetails.emptyNotesPlaceholder
     }
 }

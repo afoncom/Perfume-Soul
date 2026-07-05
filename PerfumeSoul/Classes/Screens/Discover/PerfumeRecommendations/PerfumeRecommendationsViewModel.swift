@@ -11,6 +11,12 @@ import Combine
 import Observation
 
 @Observable final class PerfumeRecommendationsViewModel {
+    let selectedPerfumes: [SearchPerfumeItem]
     var perfumeRecommendations: [PerfumeRecommendation] = []
     var isLoading = false
+    var errorMessage: String?
+
+    init(selectedPerfumes: [SearchPerfumeItem]) {
+        self.selectedPerfumes = selectedPerfumes
+    }
 }

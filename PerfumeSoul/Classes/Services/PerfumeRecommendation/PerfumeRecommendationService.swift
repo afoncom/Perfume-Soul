@@ -7,7 +7,7 @@
 //
 
 protocol PerfumeRecommendationService {
-    func requestPerfumeRecommendations() async throws -> [PerfumeRecommendation]
+    func requestPerfumeRecommendations(perfumeIDs: [Int]) async throws -> [PerfumeRecommendation]
 }
 
 final class PerfumeRecommendationServiceImpl {
@@ -19,9 +19,9 @@ final class PerfumeRecommendationServiceImpl {
 }
 
 extension PerfumeRecommendationServiceImpl: PerfumeRecommendationService {
-    func requestPerfumeRecommendations() async throws -> [PerfumeRecommendation] {
+    func requestPerfumeRecommendations(perfumeIDs: [Int]) async throws -> [PerfumeRecommendation] {
         let perfumeRecommendations: [PerfumeRecommendationResponse] = try await requestManager.sendRequest(
-            request: PerfumeRecommendationRequest()
+            request: PerfumeRecommendationRequest(perfumeIDs: perfumeIDs)
         )
         return perfumeRecommendations.map { PerfumeRecommendation(response: $0) }
     }

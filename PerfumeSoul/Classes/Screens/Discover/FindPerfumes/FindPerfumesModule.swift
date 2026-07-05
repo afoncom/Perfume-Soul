@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 final class FindPerfumesModule {
     static func build(
@@ -18,9 +19,11 @@ final class FindPerfumesModule {
             navigationController: navigationController,
             requestManager: requestManager
         )
+        let searchPerfumeService = SearchPerfumeServiceImpl(requestManager: requestManager)
         let presenter = FindPerfumesPresenterImpl(
             viewModel: viewModel,
-            router: router
+            router: router,
+            searchPerfumeService: searchPerfumeService
         )
         
         let view = FindPerfumesScreen(viewModel: viewModel, presenter: presenter)

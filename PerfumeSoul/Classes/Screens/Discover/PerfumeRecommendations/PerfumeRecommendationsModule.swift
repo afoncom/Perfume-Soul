@@ -7,19 +7,23 @@
 //
 
 import SwiftUI
+import UIKit
 
 final class PerfumeRecommendationsModule {
     static func build(
         navigationController: UINavigationController?,
+        selectedPerfumes: [SearchPerfumeItem],
         requestManager: RequestManager
     ) -> UIViewController {
-        let viewModel = PerfumeRecommendationsViewModel()
+        let viewModel = PerfumeRecommendationsViewModel(selectedPerfumes: selectedPerfumes)
         let router = PerfumeRecommendationsRouterImpl(navigationController: navigationController)
         let perfumeRecommendationService = PerfumeRecommendationServiceImpl(requestManager: requestManager)
+        let perfumeDetailsService = PerfumeDetailsServiceImpl(requestManager: requestManager)
         let presenter = PerfumeRecommendationsPresenterImpl(
             viewModel: viewModel,
             router: router,
-            perfumeRecommendationService: perfumeRecommendationService
+            perfumeRecommendationService: perfumeRecommendationService,
+            perfumeDetailsService: perfumeDetailsService
         )
         
         let view = PerfumeRecommendationsScreen(viewModel: viewModel, presenter: presenter)

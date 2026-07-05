@@ -6,6 +6,9 @@
 "discover.compare.title" = "Compare Perfumes";
 "discover.findSimilar.button" = "Find";
 "discover.findSimilar.firstPerfumeSubtitle" = "Find or select a perfume";
+"discover.findSimilar.firstPerfumeValidationMessage" = "Select at least one perfume from the list.";
+"discover.findSimilar.selectionValidationMessage" = "If you entered an optional perfume, select it from the list.";
+"discover.findSimilar.samePerfumesValidationMessage" = "Choose different perfumes for recommendations.";
 "discover.findSimilar.firstPerfumeTitle" = "Perfume 1";
 "discover.findSimilar.headerSubtitle" = "Add the perfumes you have, and we will find similar scents.";
 "discover.findSimilar.hint" = "The more perfumes you add, the more accurate the recommendations will be.";
@@ -77,6 +80,11 @@
 "screen.perfumeDetails" = "Perfume Details";
 "perfumeRecommendations.empty.title" = "Recommendations are currently unavailable";
 "perfumeRecommendations.empty.subtitle" = "Please try again later";
+"perfumeRecommendations.hint" = "We matched notes, longevity, and sillage to find the closest perfumes from the database.";
+"perfumeRecommendations.matchLabel" = "match";
+"perfumeRecommendations.matchingNotesFormat" = "Matching notes: %@";
+"perfumeRecommendations.selectedPerfumesTitle" = "Based on your perfumes";
+"perfumeRecommendations.wearFormat" = "Longevity: %@ · Sillage: %@";
 "perfumeDetails.baseNotesTitle" = "Base Notes";
 "perfumeDetails.emptyNotesPlaceholder" = "No data";
 "perfumeDetails.loadingMessage" = "Loading perfume details...";

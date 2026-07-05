@@ -56,6 +56,8 @@ After `swift run`, open:
 
 - http://127.0.0.1:8080/perfumery-history
 - http://127.0.0.1:8080/horoscope/daily
+- http://127.0.0.1:8080/perfumes?searchText=dior&offset=0&limit=10
+- http://127.0.0.1:8080/perfumes/recommendations?perfumeIDs=1,2,3
 
 Expected response on `/perfumery-history`:
 
@@ -64,6 +66,7 @@ Expected response on `/perfumery-history`:
   "year": 1957,
   "perfumeName": "Dior Diorissimo",
   "shortStory": "Один из самых культовых ароматов Dior с нотой ландыша.",
+  "fullStory": "12 мая 1957 года Дом Dior представил миру аромат Diorissimo...",
   "fullStory": "12 мая 1957 года Дом Dior представил миру аромат Diorissimo — утончённый цветочный букет, вдохновлённый ландышем, любимым цветком Кристиана Диора.",
   "imageUrl": ""
 }
@@ -84,12 +87,47 @@ Expected response on `/horoscope/daily`:
 ]
 ```
 
+Expected response on `/perfumes/recommendations?perfumeIDs=1,2,3`:
+
+```json
+[
+  {
+    "id": 12,
+    "perfumeName": "Eros",
+    "brandName": "Versace",
+    "matchingNotes": ["Бергамот", "Ветивер", "Кедр"],
+    "longevityScore": 8,
+    "sillageScore": 7
+  }
+]
+```
+
+## Recommendation logic
+
+`GET /perfumes/recommendations` is no longer loaded from a JSON fixture.
+
+The endpoint now builds recommendations from PostgreSQL perfume data:
+
+- input: `1` to `3` selected perfume ids
+- source data: brand, perfume name, top/middle/base notes, longevity score, sillage score
+- output: up to `5` similar perfumes excluding the selected ones
+
+Current backend responsibility:
+
+- load perfume data from PostgreSQL
+- build the recommendation candidate list
+- exclude the selected perfumes themselves
+- return matching notes and wear data for the client
+
+The final displayed match percentage is now calculated on the iOS client.
+
 ## Notes for me
 
 - Backend is separate from the iOS app and lives in `backend/PerfumeSoulBackend`.
 - First build can take a long time because Swift Package Manager downloads and compiles dependencies.
 - `GET /perfumery-history` now reads from PostgreSQL, so `perfumery_history` must be seeded before local run.
 - `GET /perfumes` now reads from PostgreSQL, so the local database must be running and contain `brands` and `perfumes`.
+- `GET /perfumes/recommendations` also reads from PostgreSQL and depends on populated `perfumes`, `brands`, `notes`, and `perfume_notes`.
 - `GET /horoscope/daily` now reads from PostgreSQL, so `daily_horoscopes` must be seeded before local run.
 - Endpoint resources are stored under `Sources/PerfumeSoulBackend/Requests/<endpoint>/Resources`.
 - If the server is running, stop it with `Control + C`.
