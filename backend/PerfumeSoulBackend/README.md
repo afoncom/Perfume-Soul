@@ -32,6 +32,10 @@ Seed perfumery history into PostgreSQL:
 
 ```bash
 psql "$DATABASE_URL" -f scripts/seed_perfumery_history.sql
+Seed daily horoscopes into PostgreSQL:
+
+```bash
+psql "$DATABASE_URL" -f scripts/seed_daily_horoscopes.sql
 ```
 
 Run the server:
@@ -86,5 +90,6 @@ Expected response on `/horoscope/daily`:
 - First build can take a long time because Swift Package Manager downloads and compiles dependencies.
 - `GET /perfumery-history` now reads from PostgreSQL, so `perfumery_history` must be seeded before local run.
 - `GET /perfumes` now reads from PostgreSQL, so the local database must be running and contain `brands` and `perfumes`.
+- `GET /horoscope/daily` now reads from PostgreSQL, so `daily_horoscopes` must be seeded before local run.
 - Endpoint resources are stored under `Sources/PerfumeSoulBackend/Requests/<endpoint>/Resources`.
 - If the server is running, stop it with `Control + C`.

@@ -13,14 +13,9 @@ func routes(_ app: Application) throws {
         return try jsonResponse(item)
     }
 
-    app.get("horoscope", "daily") { _ async throws -> Response in
-        do {
-            return try jsonResponse(DailyHoroscopeLoader.load())
-        } catch let error as CocoaError where error.code == .fileNoSuchFile {
-            throw Abort(.notFound)
-        } catch {
-            throw error
-        }
+    app.get("horoscope", "daily") { req async throws -> Response in
+        let horoscopes = try await DailyHoroscopeLoader.load(on: req.db)
+        return try jsonResponse(horoscopes)
     }
 
     app.get("quiz-of-the-day") { _ async throws -> Response in
