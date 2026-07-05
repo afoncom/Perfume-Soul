@@ -28,6 +28,16 @@ Then set `DATABASE_URL`, for example:
 DATABASE_URL=postgresql://postgres:your-password@localhost:5432/postgres
 ```
 
+Seed perfumery history into PostgreSQL:
+
+```bash
+psql "$DATABASE_URL" -f scripts/seed_perfumery_history.sql
+Seed daily horoscopes into PostgreSQL:
+
+```bash
+psql "$DATABASE_URL" -f scripts/seed_daily_horoscopes.sql
+```
+
 Run the server:
 
 ```bash
@@ -57,6 +67,7 @@ Expected response on `/perfumery-history`:
   "perfumeName": "Dior Diorissimo",
   "shortStory": "Один из самых культовых ароматов Dior с нотой ландыша.",
   "fullStory": "12 мая 1957 года Дом Dior представил миру аромат Diorissimo...",
+  "fullStory": "12 мая 1957 года Дом Dior представил миру аромат Diorissimo — утончённый цветочный букет, вдохновлённый ландышем, любимым цветком Кристиана Диора.",
   "imageUrl": ""
 }
 ```
@@ -114,7 +125,9 @@ The final displayed match percentage is now calculated on the iOS client.
 
 - Backend is separate from the iOS app and lives in `backend/PerfumeSoulBackend`.
 - First build can take a long time because Swift Package Manager downloads and compiles dependencies.
+- `GET /perfumery-history` now reads from PostgreSQL, so `perfumery_history` must be seeded before local run.
 - `GET /perfumes` now reads from PostgreSQL, so the local database must be running and contain `brands` and `perfumes`.
 - `GET /perfumes/recommendations` also reads from PostgreSQL and depends on populated `perfumes`, `brands`, `notes`, and `perfume_notes`.
+- `GET /horoscope/daily` now reads from PostgreSQL, so `daily_horoscopes` must be seeded before local run.
 - Endpoint resources are stored under `Sources/PerfumeSoulBackend/Requests/<endpoint>/Resources`.
 - If the server is running, stop it with `Control + C`.

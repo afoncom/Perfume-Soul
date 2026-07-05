@@ -25,9 +25,8 @@ let package = Package(
                 .product(name: "NIOPosix", package: "swift-nio"),
             ],
             resources: [
-                .process("Requests/perfumery-history/Resources"),
-                .process("Requests/horoscope-daily/Resources"),
-                .process("Requests/quiz-of-the-day/Resources")
+                .process("Requests/quiz-of-the-day/Resources"),
+                .process("Requests/perfume-recommendations/Resources")
             ],
             swiftSettings: swiftSettings
         ),
