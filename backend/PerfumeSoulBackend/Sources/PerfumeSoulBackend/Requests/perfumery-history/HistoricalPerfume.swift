@@ -1,4 +1,4 @@
-import Foundation
+import Fluent
 
 struct PerfumeryHistoryItem: Codable, Equatable {
     let year: Int
@@ -9,17 +9,27 @@ struct PerfumeryHistoryItem: Codable, Equatable {
 }
 
 enum PerfumeryHistoryLoader {
-    static func load() throws -> PerfumeryHistoryItem {
-        let url = try resourceURL(for: "2026-04-18")
-        let data = try Data(contentsOf: url)
-        return try JSONDecoder().decode(PerfumeryHistoryItem.self, from: data)
-    }
-
-    private static func resourceURL(for dateKey: String) throws -> URL {
-        if let url = Bundle.module.url(forResource: dateKey, withExtension: "json") {
-            return url
+    static func load(
+        dateKey: String,
+        on database: any Database
+    ) async throws -> PerfumeryHistoryItem? {
+        guard let item = try await PerfumeryHistoryModel.query(on: database)
+            .filter(\.$dateKey == dateKey)
+            .first()
+        else {
+            return nil
         }
 
-        throw CocoaError(.fileNoSuchFile)
+        return PerfumeryHistoryItem(model: item)
+    }
+}
+
+private extension PerfumeryHistoryItem {
+    init(model: PerfumeryHistoryModel) {
+        self.year = model.year
+        self.perfumeName = model.perfumeName
+        self.shortStory = model.shortStory
+        self.fullStory = model.fullStory
+        self.imageUrl = model.imageUrl
     }
 }

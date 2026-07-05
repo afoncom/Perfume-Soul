@@ -3,14 +3,11 @@ import Vapor
 
 func routes(_ app: Application) throws {
     app.get("perfumery-history") { req async throws -> Response in
-        let item: PerfumeryHistoryItem
-
-        do {
-            item = try PerfumeryHistoryLoader.load()
-        } catch let error as CocoaError where error.code == .fileNoSuchFile {
-            throw Abort(.badRequest)
-        } catch let error as CocoaError where error.code == .fileReadCorruptFile {
-            throw Abort(.badRequest)
+        guard let item = try await PerfumeryHistoryLoader.load(
+            dateKey: "2026-04-18",
+            on: req.db
+        ) else {
+            throw Abort(.notFound)
         }
 
         return try jsonResponse(item)
