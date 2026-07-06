@@ -156,16 +156,93 @@ private extension PerfumeRecommendationsPresenterImpl {
             selectedPerfumeDetails: selectedPerfumeDetails,
             candidatePerfumeDetails: candidatePerfumeDetails
         )
+        let accordScore = calculateWeightedAccordScore(
+            selectedAccords: selectedPerfumeDetails.accords,
+            candidateAccords: candidatePerfumeDetails.accords
+        )
+        let familyScore = calculateDescriptorSimilarity(
+            selectedValue: selectedPerfumeDetails.fragranceFamily,
+            candidateValue: candidatePerfumeDetails.fragranceFamily
+        )
+        let concentrationScore = calculateDescriptorSimilarity(
+            selectedValue: selectedPerfumeDetails.concentration,
+            candidateValue: candidatePerfumeDetails.concentration
+        )
+        let seasonScore = calculateDescriptorSimilarity(
+            selectedValue: selectedPerfumeDetails.seasonProfile,
+            candidateValue: candidatePerfumeDetails.seasonProfile
+        )
+        let occasionScore = calculateDescriptorSimilarity(
+            selectedValue: selectedPerfumeDetails.occasionProfile,
+            candidateValue: candidatePerfumeDetails.occasionProfile
+        )
+        let styleScore = calculateDescriptorSimilarity(
+            selectedValue: selectedPerfumeDetails.styleProfile,
+            candidateValue: candidatePerfumeDetails.styleProfile
+        )
+        let genderScore = calculateDescriptorSimilarity(
+            selectedValue: selectedPerfumeDetails.genderProfile,
+            candidateValue: candidatePerfumeDetails.genderProfile
+        )
+        let moodScore = calculateDescriptorSimilarity(
+            selectedValue: selectedPerfumeDetails.moodProfile,
+            candidateValue: candidatePerfumeDetails.moodProfile
+        )
         let wearScore = calculateWearScore(
             selectedPerfumeDetails: selectedPerfumeDetails,
             candidatePerfumeDetails: candidatePerfumeDetails
         )
 
-        if let wearScore {
-            return noteScore * 0.85 + wearScore * 0.15
+        var weightedComponents: [(Double, Double)] = [
+            (noteScore, 0.27)
+        ]
+
+        if let accordScore {
+            weightedComponents.append((accordScore, 0.17))
         }
 
-        return noteScore
+        if let familyScore {
+            weightedComponents.append((familyScore, 0.07))
+        }
+
+        if let wearScore {
+            weightedComponents.append((wearScore, 0.08))
+        }
+
+        if let concentrationScore {
+            weightedComponents.append((concentrationScore, 0.04))
+        }
+
+        if let seasonScore {
+            weightedComponents.append((seasonScore, 0.08))
+        }
+
+        if let occasionScore {
+            weightedComponents.append((occasionScore, 0.08))
+        }
+
+        if let styleScore {
+            weightedComponents.append((styleScore, 0.08))
+        }
+
+        if let genderScore {
+            weightedComponents.append((genderScore, 0.07))
+        }
+
+        if let moodScore {
+            weightedComponents.append((moodScore, 0.06))
+        }
+
+        let totalWeight = weightedComponents.reduce(0.0) { $0 + $1.1 }
+        guard totalWeight > 0 else {
+            return 0
+        }
+
+        let weightedScore = weightedComponents.reduce(0.0) { partialResult, component in
+            partialResult + component.0 * component.1
+        }
+
+        return weightedScore / totalWeight
     }
 
     func calculateWeightedNoteScore(
@@ -174,21 +251,21 @@ private extension PerfumeRecommendationsPresenterImpl {
     ) -> Double {
         let layerScores: [(Double, Double)] = [
             (
-                calculateLayerOverlap(
+                calculateLayerSimilarity(
                     selectedNotes: selectedPerfumeDetails.topNotes,
                     candidateNotes: candidatePerfumeDetails.topNotes
                 ),
                 0.45
             ),
             (
-                calculateLayerOverlap(
+                calculateLayerSimilarity(
                     selectedNotes: selectedPerfumeDetails.middleNotes,
                     candidateNotes: candidatePerfumeDetails.middleNotes
                 ),
                 0.35
             ),
             (
-                calculateLayerOverlap(
+                calculateLayerSimilarity(
                     selectedNotes: selectedPerfumeDetails.baseNotes,
                     candidateNotes: candidatePerfumeDetails.baseNotes
                 ),
@@ -205,11 +282,15 @@ private extension PerfumeRecommendationsPresenterImpl {
         let weightedScore = availableLayerScores.reduce(0.0) { partialResult, layer in
             partialResult + layer.0 * layer.1
         }
+        let noteCountScore = calculateNoteCountScore(
+            selectedPerfumeDetails: selectedPerfumeDetails,
+            candidatePerfumeDetails: candidatePerfumeDetails
+        )
 
-        return weightedScore / totalWeight
+        return (weightedScore / totalWeight) * 0.85 + noteCountScore * 0.15
     }
 
-    func calculateLayerOverlap(
+    func calculateLayerSimilarity(
         selectedNotes: [String],
         candidateNotes: [String]
     ) -> Double {
@@ -220,8 +301,34 @@ private extension PerfumeRecommendationsPresenterImpl {
 
         let normalizedCandidateNotes = Set(candidateNotes.map(normalize))
         let matchingNotesCount = normalizedSelectedNotes.intersection(normalizedCandidateNotes).count
+        let coverage = Double(matchingNotesCount) / Double(normalizedSelectedNotes.count)
+        guard !normalizedCandidateNotes.isEmpty else {
+            return coverage * 0.7
+        }
 
-        return Double(matchingNotesCount) / Double(normalizedSelectedNotes.count)
+        let precision = Double(matchingNotesCount) / Double(normalizedCandidateNotes.count)
+        return coverage * 0.7 + precision * 0.3
+    }
+
+    func calculateNoteCountScore(
+        selectedPerfumeDetails: PerfumeDetails,
+        candidatePerfumeDetails: PerfumeDetails
+    ) -> Double {
+        let selectedCount =
+            selectedPerfumeDetails.topNotes.count
+            + selectedPerfumeDetails.middleNotes.count
+            + selectedPerfumeDetails.baseNotes.count
+        let candidateCount =
+            candidatePerfumeDetails.topNotes.count
+            + candidatePerfumeDetails.middleNotes.count
+            + candidatePerfumeDetails.baseNotes.count
+        let maxCount = max(selectedCount, candidateCount)
+
+        guard maxCount > 0 else {
+            return 0
+        }
+
+        return max(0, 1 - (Double(abs(selectedCount - candidateCount)) / Double(maxCount)))
     }
 
     func calculateWearScore(
@@ -251,6 +358,69 @@ private extension PerfumeRecommendationsPresenterImpl {
         return scores.reduce(0, +) / Double(scores.count)
     }
 
+    func calculateWeightedAccordScore(
+        selectedAccords: [PerfumeAccord],
+        candidateAccords: [PerfumeAccord]
+    ) -> Double? {
+        let normalizedSelectedAccords = Dictionary(
+            uniqueKeysWithValues: selectedAccords.map {
+                (normalize($0.name), $0.weight)
+            }
+        )
+        guard !normalizedSelectedAccords.isEmpty else {
+            return nil
+        }
+
+        let normalizedCandidateAccords = Dictionary(
+            uniqueKeysWithValues: candidateAccords.map {
+                (normalize($0.name), $0.weight)
+            }
+        )
+        let allAccordNames = Set(normalizedSelectedAccords.keys).union(normalizedCandidateAccords.keys)
+        let overlapWeight = allAccordNames.reduce(0.0) { partialResult, accordName in
+            partialResult + min(
+                normalizedSelectedAccords[accordName] ?? 0,
+                normalizedCandidateAccords[accordName] ?? 0
+            )
+        }
+
+        let selectedTotalWeight = normalizedSelectedAccords.values.reduce(0, +)
+        guard selectedTotalWeight > 0 else {
+            return nil
+        }
+
+        let candidateTotalWeight = normalizedCandidateAccords.values.reduce(0, +)
+        let coverage = overlapWeight / selectedTotalWeight
+        let precision = candidateTotalWeight > 0 ? overlapWeight / candidateTotalWeight : 0
+
+        return coverage * 0.70 + precision * 0.30
+    }
+
+    func calculateDescriptorSimilarity(
+        selectedValue: String?,
+        candidateValue: String?
+    ) -> Double? {
+        guard
+            let selectedTokens = normalizedTokens(from: selectedValue),
+            let candidateTokens = normalizedTokens(from: candidateValue)
+        else {
+            return nil
+        }
+
+        if selectedTokens == candidateTokens {
+            return 1
+        }
+
+        let overlapCount = selectedTokens.intersection(candidateTokens).count
+        guard overlapCount > 0 else {
+            return 0
+        }
+
+        let coverage = Double(overlapCount) / Double(selectedTokens.count)
+        let precision = Double(overlapCount) / Double(candidateTokens.count)
+        return coverage * 0.7 + precision * 0.3
+    }
+
     func calculateScoreSimilarity(
         selectedScore: Int?,
         candidateScore: Int?
@@ -271,5 +441,23 @@ private extension PerfumeRecommendationsPresenterImpl {
         value
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .lowercased()
+    }
+
+    func normalizedTokens(from value: String?) -> Set<String>? {
+        guard let value else {
+            return nil
+        }
+
+        let tokens = value
+            .split(separator: " ")
+            .map(String.init)
+            .map(normalize)
+            .filter { !$0.isEmpty }
+
+        guard !tokens.isEmpty else {
+            return nil
+        }
+
+        return Set(tokens)
     }
 }
