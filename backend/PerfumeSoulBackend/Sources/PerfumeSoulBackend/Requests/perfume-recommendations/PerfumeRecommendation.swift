@@ -7,6 +7,7 @@ struct PerfumeRecommendation: Codable, Equatable {
     let perfumeName: String
     let brandName: String
     let matchingNotes: [String]
+    let matchPercentage: Int
     let longevityScore: Int?
     let sillageScore: Int?
 }
@@ -26,14 +27,28 @@ enum PerfumeRecommendationLoader {
             .with(\.$notes) { query in
                 query.with(\.$note)
             }
+            .with(\.$accords) { query in
+                query.with(\.$accord)
+            }
             .all()
 
         let perfumeProfiles = perfumeModels.compactMap(PerfumeProfile.init(model:))
-        let selectedPerfumeProfiles = selectedPerfumeIDs.compactMap { perfumeID in
+        return try load(
+            perfumeProfiles: perfumeProfiles,
+            selectedPerfumeIDs: selectedPerfumeIDs
+        )
+    }
+
+    static func load(
+        perfumeProfiles: [PerfumeProfile],
+        selectedPerfumeIDs: [Int]
+    ) throws -> [PerfumeRecommendation] {
+        let uniqueSelectedPerfumeIDs = uniquePerfumeIDs(from: selectedPerfumeIDs)
+        let selectedPerfumeProfiles = uniqueSelectedPerfumeIDs.compactMap { perfumeID in
             perfumeProfiles.first(where: { $0.id == perfumeID })
         }
 
-        guard selectedPerfumeProfiles.count == selectedPerfumeIDs.count else {
+        guard selectedPerfumeProfiles.count == uniqueSelectedPerfumeIDs.count else {
             throw Abort(.notFound)
         }
 
@@ -41,7 +56,7 @@ enum PerfumeRecommendationLoader {
         let scoreRanges = ScoreRanges(perfumeProfiles: perfumeProfiles)
 
         return perfumeProfiles
-            .filter { !selectedPerfumeIDs.contains($0.id) }
+            .filter { !uniqueSelectedPerfumeIDs.contains($0.id) }
             .compactMap { perfumeProfile in
                 makeScoredRecommendation(
                     perfumeProfile: perfumeProfile,
@@ -49,17 +64,8 @@ enum PerfumeRecommendationLoader {
                     scoreRanges: scoreRanges
                 )
             }
-            .sorted { lhs, rhs in
-                if lhs.rawScore == rhs.rawScore {
-                    if lhs.recommendation.brandName == rhs.recommendation.brandName {
-                        return lhs.recommendation.perfumeName < rhs.recommendation.perfumeName
-                    }
-
-                    return lhs.recommendation.brandName < rhs.recommendation.brandName
-                }
-
-                return lhs.rawScore > rhs.rawScore
-            }
+            .sorted(by: areSortedForRecommendationRanking)
+            .uniqueBySignature()
             .prefix(5)
             .map(\.recommendation)
     }
@@ -68,9 +74,29 @@ enum PerfumeRecommendationLoader {
 private struct ScoredPerfumeRecommendation {
     let recommendation: PerfumeRecommendation
     let rawScore: Double
+    let signature: String
 }
 
 private extension PerfumeRecommendationLoader {
+    static func areSortedForRecommendationRanking(
+        lhs: ScoredPerfumeRecommendation,
+        rhs: ScoredPerfumeRecommendation
+    ) -> Bool {
+        if lhs.rawScore == rhs.rawScore {
+            if lhs.recommendation.brandName == rhs.recommendation.brandName {
+                if lhs.recommendation.perfumeName == rhs.recommendation.perfumeName {
+                    return lhs.recommendation.id < rhs.recommendation.id
+                }
+
+                return lhs.recommendation.perfumeName < rhs.recommendation.perfumeName
+            }
+
+            return lhs.recommendation.brandName < rhs.recommendation.brandName
+        }
+
+        return lhs.rawScore > rhs.rawScore
+    }
+
     static func uniquePerfumeIDs(from perfumeIDs: [Int]) -> [Int] {
         var seenPerfumeIDs = Set<Int>()
         var uniquePerfumeIDs: [Int] = []
@@ -92,12 +118,16 @@ private extension PerfumeRecommendationLoader {
             lhs: targetProfile.noteWeights,
             rhs: candidateNoteWeights
         )
+        let matchedDistinctNotesCount = matchedDistinctNotesCount(
+            targetProfile: targetProfile,
+            candidateNoteWeights: candidateNoteWeights
+        )
         let matchingNotes = makeMatchingNotes(
             targetProfile: targetProfile,
             candidateNoteWeights: candidateNoteWeights
         )
 
-        guard !matchingNotes.isEmpty else {
+        guard matchedDistinctNotesCount > 0 else {
             return nil
         }
 
@@ -110,12 +140,57 @@ private extension PerfumeRecommendationLoader {
             totalWeight: totalWeight(of: candidateNoteWeights)
         )
         let distinctCoverage = distinctCoverage(
-            matchedCount: matchingNotes.count,
+            matchedCount: matchedDistinctNotesCount,
             totalCount: targetProfile.distinctNoteCount
         )
         let noteCountCloseness = countCloseness(
             lhs: candidateNoteWeights.count,
             rhs: targetProfile.distinctNoteCount
+        )
+        let candidateAccordWeights = perfumeProfile.accordWeights
+        let accordOverlapWeight = weightedOverlap(
+            lhs: targetProfile.accordWeights,
+            rhs: candidateAccordWeights
+        )
+        let accordCoverage = weightedCoverage(
+            overlapWeight: accordOverlapWeight,
+            totalWeight: targetProfile.totalAccordWeight
+        )
+        let accordPrecision = weightedCoverage(
+            overlapWeight: accordOverlapWeight,
+            totalWeight: totalWeight(of: candidateAccordWeights)
+        )
+        let accordCountCloseness = countCloseness(
+            lhs: candidateAccordWeights.count,
+            rhs: targetProfile.distinctAccordCount
+        )
+        let familyComponent = stringSimilarityComponent(
+            value: perfumeProfile.fragranceFamily,
+            targetValue: targetProfile.fragranceFamily
+        )
+        let concentrationComponent = stringSimilarityComponent(
+            value: perfumeProfile.concentration,
+            targetValue: targetProfile.concentration
+        )
+        let seasonComponent = stringSimilarityComponent(
+            value: perfumeProfile.seasonProfile,
+            targetValue: targetProfile.seasonProfile
+        )
+        let occasionComponent = stringSimilarityComponent(
+            value: perfumeProfile.occasionProfile,
+            targetValue: targetProfile.occasionProfile
+        )
+        let styleComponent = stringSimilarityComponent(
+            value: perfumeProfile.styleProfile,
+            targetValue: targetProfile.styleProfile
+        )
+        let genderComponent = stringSimilarityComponent(
+            value: perfumeProfile.genderProfile,
+            targetValue: targetProfile.genderProfile
+        )
+        let moodComponent = stringSimilarityComponent(
+            value: perfumeProfile.moodProfile,
+            targetValue: targetProfile.moodProfile
         )
         let longevitySimilarity = scoreSimilarity(
             value: perfumeProfile.longevityScore,
@@ -128,13 +203,40 @@ private extension PerfumeRecommendationLoader {
             scoreRange: scoreRanges.sillage
         )
 
-        let rawScore =
-            noteCoverage * 0.45
-            + notePrecision * 0.2
-            + distinctCoverage * 0.1
-            + noteCountCloseness * 0.1
-            + longevitySimilarity * 0.075
-            + sillageSimilarity * 0.075
+        let noteScore =
+            noteCoverage * 0.7
+            + notePrecision * 0.3
+        let accordScore =
+            accordCoverage * 0.7
+            + accordPrecision * 0.3
+        let wearScore =
+            longevitySimilarity * 0.5
+            + sillageSimilarity * 0.5
+        var weightedComponents: [(Double, Double)] = [
+            (noteScore, 0.27),
+            (distinctCoverage, 0.07),
+            (noteCountCloseness, 0.03),
+            (accordScore, 0.17),
+            (accordCountCloseness, 0.03),
+            (wearScore, 0.05)
+        ]
+        appendIfNeeded(familyComponent, weight: 0.07, to: &weightedComponents)
+        appendIfNeeded(concentrationComponent, weight: 0.04, to: &weightedComponents)
+        appendIfNeeded(seasonComponent, weight: 0.08, to: &weightedComponents)
+        appendIfNeeded(occasionComponent, weight: 0.08, to: &weightedComponents)
+        appendIfNeeded(styleComponent, weight: 0.08, to: &weightedComponents)
+        appendIfNeeded(genderComponent, weight: 0.07, to: &weightedComponents)
+        appendIfNeeded(moodComponent, weight: 0.06, to: &weightedComponents)
+        let totalWeight = weightedComponents.reduce(0.0) { partialResult, component in
+            partialResult + component.1
+        }
+        let rawScore = weightedComponents.reduce(0.0) { partialResult, component in
+            partialResult + component.0 * component.1
+        } / totalWeight
+        let matchPercentage = min(
+            100,
+            max(0, Int((rawScore * 100).rounded(.toNearestOrAwayFromZero)))
+        )
 
         return ScoredPerfumeRecommendation(
             recommendation: PerfumeRecommendation(
@@ -142,10 +244,12 @@ private extension PerfumeRecommendationLoader {
                 perfumeName: perfumeProfile.perfumeName,
                 brandName: perfumeProfile.brandName,
                 matchingNotes: matchingNotes,
+                matchPercentage: matchPercentage,
                 longevityScore: perfumeProfile.longevityScore,
                 sillageScore: perfumeProfile.sillageScore
             ),
-            rawScore: rawScore
+            rawScore: rawScore,
+            signature: perfumeProfile.signature
         )
     }
 
@@ -214,10 +318,33 @@ private extension PerfumeRecommendationLoader {
             .map { $0.0 }
     }
 
+    static func matchedDistinctNotesCount(
+        targetProfile: RecommendationTargetProfile,
+        candidateNoteWeights: [String: Int]
+    ) -> Int {
+        targetProfile.noteWeights.keys.reduce(0) { partialResult, normalizedNote in
+            partialResult + (candidateNoteWeights[normalizedNote] == nil ? 0 : 1)
+        }
+    }
+
     static func weightedOverlap(
         lhs: [String: Int],
         rhs: [String: Int]
     ) -> Int {
+        let allKeys = Set(lhs.keys).union(rhs.keys)
+        guard !allKeys.isEmpty else {
+            return 0
+        }
+
+        return allKeys.reduce(0) { partialResult, key in
+            partialResult + min(lhs[key] ?? 0, rhs[key] ?? 0)
+        }
+    }
+
+    static func weightedOverlap(
+        lhs: [String: Double],
+        rhs: [String: Double]
+    ) -> Double {
         let allKeys = Set(lhs.keys).union(rhs.keys)
         guard !allKeys.isEmpty else {
             return 0
@@ -237,6 +364,17 @@ private extension PerfumeRecommendationLoader {
         }
 
         return Double(overlapWeight) / Double(totalWeight)
+    }
+
+    static func weightedCoverage(
+        overlapWeight: Double,
+        totalWeight: Double
+    ) -> Double {
+        guard totalWeight > 0 else {
+            return 0
+        }
+
+        return overlapWeight / totalWeight
     }
 
     static func distinctCoverage(
@@ -267,6 +405,10 @@ private extension PerfumeRecommendationLoader {
         noteWeights.values.reduce(0, +)
     }
 
+    static func totalWeight(of accordWeights: [String: Double]) -> Double {
+        accordWeights.values.reduce(0, +)
+    }
+
     static func scoreSimilarity(
         value: Int?,
         targetValue: Double?,
@@ -289,10 +431,89 @@ private extension PerfumeRecommendationLoader {
         return max(0, 1 - (distance / rangeSpan))
     }
 
+    static func stringSimilarity(
+        value: String?,
+        targetValue: String?
+    ) -> Double {
+        guard
+            let value = normalizedTokens(from: value),
+            let targetValue = normalizedTokens(from: targetValue)
+        else {
+            return 0
+        }
+
+        if value == targetValue {
+            return 1
+        }
+
+        let overlapCount = value.intersection(targetValue).count
+        guard overlapCount > 0 else {
+            return 0
+        }
+
+        let coverage = Double(overlapCount) / Double(targetValue.count)
+        let precision = Double(overlapCount) / Double(value.count)
+        return coverage * 0.7 + precision * 0.3
+    }
+
+    static func stringSimilarityComponent(
+        value: String?,
+        targetValue: String?
+    ) -> Double? {
+        if value == nil, targetValue == nil {
+            return nil
+        }
+
+        return stringSimilarity(value: value, targetValue: targetValue)
+    }
+
+    static func appendIfNeeded(
+        _ score: Double?,
+        weight: Double,
+        to components: inout [(Double, Double)]
+    ) {
+        guard let score else {
+            return
+        }
+
+        components.append((score, weight))
+    }
+
     static func normalize(_ value: String) -> String {
         value
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .lowercased()
+    }
+
+    static func normalizedTokens(from value: String?) -> Set<String>? {
+        guard let value else {
+            return nil
+        }
+
+        let tokens = value
+            .split(separator: " ")
+            .map(String.init)
+            .map(normalize)
+            .filter { !$0.isEmpty }
+
+        guard !tokens.isEmpty else {
+            return nil
+        }
+
+        return Set(tokens)
+    }
+}
+
+private extension Array where Element == ScoredPerfumeRecommendation {
+    func uniqueBySignature() -> [ScoredPerfumeRecommendation] {
+        var seenSignatures = Set<String>()
+        var uniqueRecommendations: [ScoredPerfumeRecommendation] = []
+
+        for recommendation in self where seenSignatures.insert(recommendation.signature).inserted {
+            uniqueRecommendations.append(recommendation)
+        }
+
+        return uniqueRecommendations
     }
 }
 
@@ -301,12 +522,23 @@ private struct RecommendationTargetProfile {
     let noteDisplayNames: [String: String]
     let totalNoteWeight: Int
     let distinctNoteCount: Int
+    let accordWeights: [String: Double]
+    let totalAccordWeight: Double
+    let distinctAccordCount: Int
+    let fragranceFamily: String?
+    let concentration: String?
+    let seasonProfile: String?
+    let occasionProfile: String?
+    let styleProfile: String?
+    let genderProfile: String?
+    let moodProfile: String?
     let averageLongevityScore: Double?
     let averageSillageScore: Double?
 
     init(perfumeProfiles: [PerfumeProfile]) {
         var noteWeights: [String: Int] = [:]
         var noteDisplayNames: [String: String] = [:]
+        var accordWeights: [String: Double] = [:]
 
         for perfumeProfile in perfumeProfiles {
             Self.addNotes(
@@ -327,12 +559,40 @@ private struct RecommendationTargetProfile {
                 noteWeights: &noteWeights,
                 noteDisplayNames: &noteDisplayNames
             )
+            Self.addAccords(
+                perfumeProfile.accordWeights,
+                accordWeights: &accordWeights
+            )
         }
 
         self.noteWeights = noteWeights
         self.noteDisplayNames = noteDisplayNames
         self.totalNoteWeight = noteWeights.values.reduce(0, +)
         self.distinctNoteCount = noteWeights.count
+        self.accordWeights = accordWeights
+        self.totalAccordWeight = accordWeights.values.reduce(0, +)
+        self.distinctAccordCount = accordWeights.count
+        self.fragranceFamily = Self.makeSharedDescriptor(
+            values: perfumeProfiles.compactMap(\.fragranceFamily)
+        )
+        self.concentration = Self.makeSharedDescriptor(
+            values: perfumeProfiles.compactMap(\.concentration)
+        )
+        self.seasonProfile = Self.makeSharedDescriptor(
+            values: perfumeProfiles.compactMap(\.seasonProfile)
+        )
+        self.occasionProfile = Self.makeSharedDescriptor(
+            values: perfumeProfiles.compactMap(\.occasionProfile)
+        )
+        self.styleProfile = Self.makeSharedDescriptor(
+            values: perfumeProfiles.compactMap(\.styleProfile)
+        )
+        self.genderProfile = Self.makeSharedDescriptor(
+            values: perfumeProfiles.compactMap(\.genderProfile)
+        )
+        self.moodProfile = Self.makeSharedDescriptor(
+            values: perfumeProfiles.compactMap(\.moodProfile)
+        )
         self.averageLongevityScore = Self.average(
             values: perfumeProfiles.compactMap(\.longevityScore)
         )
@@ -354,6 +614,15 @@ private struct RecommendationTargetProfile {
         }
     }
 
+    private static func addAccords(
+        _ accords: [String: Double],
+        accordWeights: inout [String: Double]
+    ) {
+        for (accord, weight) in accords {
+            accordWeights[accord, default: 0] += weight
+        }
+    }
+
     private static func average(values: [Int]) -> Double? {
         guard !values.isEmpty else {
             return nil
@@ -361,6 +630,14 @@ private struct RecommendationTargetProfile {
 
         let total = values.reduce(0, +)
         return Double(total) / Double(values.count)
+    }
+
+    private static func makeSharedDescriptor(values: [String]) -> String? {
+        guard !values.isEmpty else {
+            return nil
+        }
+
+        return values.joined(separator: " ")
     }
 }
 
@@ -389,7 +666,7 @@ private struct ScoreRanges {
     }
 }
 
-private struct PerfumeProfile {
+struct PerfumeProfile {
     let id: Int
     let perfumeName: String
     let brandName: String
@@ -398,6 +675,66 @@ private struct PerfumeProfile {
     let topNotes: [String]
     let middleNotes: [String]
     let baseNotes: [String]
+    let accordWeights: [String: Double]
+    let concentration: String?
+    let fragranceFamily: String?
+    let seasonProfile: String?
+    let occasionProfile: String?
+    let styleProfile: String?
+    let genderProfile: String?
+    let moodProfile: String?
+    let signature: String
+
+    init(
+        id: Int,
+        perfumeName: String,
+        brandName: String,
+        longevityScore: Int? = nil,
+        sillageScore: Int? = nil,
+        topNotes: [String] = [],
+        middleNotes: [String] = [],
+        baseNotes: [String] = [],
+        accordWeights: [String: Double] = [:],
+        concentration: String? = nil,
+        fragranceFamily: String? = nil,
+        seasonProfile: String? = nil,
+        occasionProfile: String? = nil,
+        styleProfile: String? = nil,
+        genderProfile: String? = nil,
+        moodProfile: String? = nil
+    ) {
+        self.id = id
+        self.perfumeName = perfumeName
+        self.brandName = brandName
+        self.longevityScore = longevityScore
+        self.sillageScore = sillageScore
+        self.topNotes = topNotes
+        self.middleNotes = middleNotes
+        self.baseNotes = baseNotes
+        self.accordWeights = accordWeights
+        self.concentration = concentration
+        self.fragranceFamily = fragranceFamily
+        self.seasonProfile = seasonProfile
+        self.occasionProfile = occasionProfile
+        self.styleProfile = styleProfile
+        self.genderProfile = genderProfile
+        self.moodProfile = moodProfile
+        self.signature = Self.makeSignature(
+            topNotes: topNotes,
+            middleNotes: middleNotes,
+            baseNotes: baseNotes,
+            accordWeights: accordWeights,
+            concentration: concentration,
+            fragranceFamily: fragranceFamily,
+            seasonProfile: seasonProfile,
+            occasionProfile: occasionProfile,
+            styleProfile: styleProfile,
+            genderProfile: genderProfile,
+            moodProfile: moodProfile,
+            longevityScore: longevityScore,
+            sillageScore: sillageScore
+        )
+    }
 
     init?(model: PerfumeModel) {
         guard let id = model.id else {
@@ -407,6 +744,13 @@ private struct PerfumeProfile {
         self.id = id
         self.perfumeName = model.perfumeName
         self.brandName = model.brand.name
+        self.concentration = model.concentration
+        self.fragranceFamily = model.fragranceFamily
+        self.seasonProfile = model.seasonProfile
+        self.occasionProfile = model.occasionProfile
+        self.styleProfile = model.styleProfile
+        self.genderProfile = model.genderProfile
+        self.moodProfile = model.moodProfile
         self.longevityScore = model.longevityScore
         self.sillageScore = model.sillageScore
 
@@ -423,5 +767,76 @@ private struct PerfumeProfile {
         self.baseNotes = sortedNotes
             .filter { $0.noteType == .base }
             .map { $0.note.name }
+        self.accordWeights = Dictionary(
+            uniqueKeysWithValues: model.accords.map {
+                (PerfumeRecommendationLoader.normalize($0.accord.name), $0.weight)
+            }
+        )
+        self.signature = Self.makeSignature(
+            topNotes: self.topNotes,
+            middleNotes: self.middleNotes,
+            baseNotes: self.baseNotes,
+            accordWeights: self.accordWeights,
+            concentration: self.concentration,
+            fragranceFamily: self.fragranceFamily,
+            seasonProfile: self.seasonProfile,
+            occasionProfile: self.occasionProfile,
+            styleProfile: self.styleProfile,
+            genderProfile: self.genderProfile,
+            moodProfile: self.moodProfile,
+            longevityScore: self.longevityScore,
+            sillageScore: self.sillageScore
+        )
+    }
+
+    private static func makeSignature(
+        topNotes: [String],
+        middleNotes: [String],
+        baseNotes: [String],
+        accordWeights: [String: Double],
+        concentration: String?,
+        fragranceFamily: String?,
+        seasonProfile: String?,
+        occasionProfile: String?,
+        styleProfile: String?,
+        genderProfile: String?,
+        moodProfile: String?,
+        longevityScore: Int?,
+        sillageScore: Int?
+    ) -> String {
+        let noteParts = [
+            "top:" + topNotes.map(PerfumeRecommendationLoader.normalize).sorted().joined(separator: ","),
+            "middle:" + middleNotes.map(PerfumeRecommendationLoader.normalize).sorted().joined(separator: ","),
+            "base:" + baseNotes.map(PerfumeRecommendationLoader.normalize).sorted().joined(separator: ",")
+        ]
+        let accordParts = accordWeights
+            .map { key, value in
+                "\(key)=\(String(format: "%.3f", value))"
+            }
+            .sorted()
+            .joined(separator: ",")
+        let concentrationPart = PerfumeRecommendationLoader.normalize(concentration ?? "")
+        let familyPart = PerfumeRecommendationLoader.normalize(fragranceFamily ?? "")
+        let seasonPart = PerfumeRecommendationLoader.normalize(seasonProfile ?? "")
+        let occasionPart = PerfumeRecommendationLoader.normalize(occasionProfile ?? "")
+        let stylePart = PerfumeRecommendationLoader.normalize(styleProfile ?? "")
+        let genderPart = PerfumeRecommendationLoader.normalize(genderProfile ?? "")
+        let moodPart = PerfumeRecommendationLoader.normalize(moodProfile ?? "")
+        let longevityPart = longevityScore.map(String.init) ?? ""
+        let sillagePart = sillageScore.map(String.init) ?? ""
+
+        return [
+            noteParts.joined(separator: "|"),
+            "accords:\(accordParts)",
+            "concentration:\(concentrationPart)",
+            "family:\(familyPart)",
+            "season:\(seasonPart)",
+            "occasion:\(occasionPart)",
+            "style:\(stylePart)",
+            "gender:\(genderPart)",
+            "mood:\(moodPart)",
+            "longevity:\(longevityPart)",
+            "sillage:\(sillagePart)"
+        ].joined(separator: "||")
     }
 }

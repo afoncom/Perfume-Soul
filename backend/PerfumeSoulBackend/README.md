@@ -28,20 +28,38 @@ Then set `DATABASE_URL`, for example:
 DATABASE_URL=postgresql://postgres:your-password@localhost:5432/postgres
 ```
 
+Schema changes for perfume profile metadata and accords are now applied by Fluent migrations during app startup.
+
+Seed/backfill steps remain separate and should be run manually for local data population.
+
 Seed perfumery history into PostgreSQL:
 
 ```bash
 psql "$DATABASE_URL" -f scripts/seed_perfumery_history.sql
+```
+
 Seed daily horoscopes into PostgreSQL:
 
 ```bash
 psql "$DATABASE_URL" -f scripts/seed_daily_horoscopes.sql
 ```
 
+Backfill perfume profile metadata:
+
+```bash
+psql "$DATABASE_URL" -f scripts/fill_perfume_profile_metadata.sql
+```
+
+Backfill perfume accords:
+
+```bash
+psql "$DATABASE_URL" -f scripts/fill_perfume_accords.sql
+```
+
 Run the server:
 
 ```bash
-swift run
+swift run PerfumeSoulBackend
 ```
 
 Run tests:
@@ -57,6 +75,7 @@ After `swift run`, open:
 - http://127.0.0.1:8080/perfumery-history
 - http://127.0.0.1:8080/horoscope/daily
 - http://127.0.0.1:8080/perfumes?searchText=dior&offset=0&limit=10
+- http://127.0.0.1:8080/perfumes/1/notes
 - http://127.0.0.1:8080/perfumes/recommendations?perfumeIDs=1,2,3
 
 Expected response on `/perfumery-history`:
@@ -66,7 +85,6 @@ Expected response on `/perfumery-history`:
   "year": 1957,
   "perfumeName": "Dior Diorissimo",
   "shortStory": "Один из самых культовых ароматов Dior с нотой ландыша.",
-  "fullStory": "12 мая 1957 года Дом Dior представил миру аромат Diorissimo...",
   "fullStory": "12 мая 1957 года Дом Dior представил миру аромат Diorissimo — утончённый цветочный букет, вдохновлённый ландышем, любимым цветком Кристиана Диора.",
   "imageUrl": ""
 }
@@ -96,6 +114,7 @@ Expected response on `/perfumes/recommendations?perfumeIDs=1,2,3`:
     "perfumeName": "Eros",
     "brandName": "Versace",
     "matchingNotes": ["Бергамот", "Ветивер", "Кедр"],
+    "matchPercentage": 78,
     "longevityScore": 8,
     "sillageScore": 7
   }
@@ -109,7 +128,7 @@ Expected response on `/perfumes/recommendations?perfumeIDs=1,2,3`:
 The endpoint now builds recommendations from PostgreSQL perfume data:
 
 - input: `1` to `3` selected perfume ids
-- source data: brand, perfume name, top/middle/base notes, longevity score, sillage score
+- source data: brand, perfume name, top/middle/base notes, accords, profile metadata, longevity score, sillage score
 - output: up to `5` similar perfumes excluding the selected ones
 
 Current backend responsibility:
@@ -117,9 +136,20 @@ Current backend responsibility:
 - load perfume data from PostgreSQL
 - build the recommendation candidate list
 - exclude the selected perfumes themselves
+- calculate the final `matchPercentage`
+- deduplicate close perfume clones by signature
+- apply deterministic tie-breakers for equal scores
 - return matching notes and wear data for the client
 
-The final displayed match percentage is now calculated on the iOS client.
+The backend is now the single source of truth for recommendation scoring.
+
+## Tests
+
+Backend recommendation logic has focused tests for:
+
+- duplicate signature deduplication
+- empty accords / optional metadata scoring
+- deterministic tie-breakers for equal scores
 
 ## Notes for me
 
@@ -127,7 +157,7 @@ The final displayed match percentage is now calculated on the iOS client.
 - First build can take a long time because Swift Package Manager downloads and compiles dependencies.
 - `GET /perfumery-history` now reads from PostgreSQL, so `perfumery_history` must be seeded before local run.
 - `GET /perfumes` now reads from PostgreSQL, so the local database must be running and contain `brands` and `perfumes`.
-- `GET /perfumes/recommendations` also reads from PostgreSQL and depends on populated `perfumes`, `brands`, `notes`, and `perfume_notes`.
+- `GET /perfumes/recommendations` also reads from PostgreSQL and depends on populated `perfumes`, `brands`, `notes`, `perfume_notes`, `accords`, and `perfume_accords`.
 - `GET /horoscope/daily` now reads from PostgreSQL, so `daily_horoscopes` must be seeded before local run.
-- Endpoint resources are stored under `Sources/PerfumeSoulBackend/Requests/<endpoint>/Resources`.
+- quiz data still uses packaged backend resources under `Sources/PerfumeSoulBackend/Requests/quiz-of-the-day/Resources`.
 - If the server is running, stop it with `Control + C`.

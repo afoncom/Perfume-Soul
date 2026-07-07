@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/badge/Persistence-Core%20Data-f6c2cf" alt="Core Data">
 </p>
 
-PerfumeSoul is a Tuist-managed iOS app that combines perfume discovery, profile-based onboarding, and editorial daily content. The project uses a hybrid UIKit + SwiftUI setup, stores the user profile in Core Data, and includes a small Vapor backend for daily horoscope and perfumery-history content.
+PerfumeSoul is a Tuist-managed iOS app that combines perfume discovery, profile-based onboarding, and editorial daily content. The project uses a hybrid UIKit + SwiftUI setup, stores the user profile in Core Data, and includes a Vapor backend backed by PostgreSQL for daily content, perfume search, perfume details, and perfume recommendations.
 
 ## Current App State
 
@@ -16,9 +16,9 @@ The repository currently contains a working application shell with onboarding, a
 - `WelcomeLoading` checks whether a profile already exists and routes either to onboarding or the main tab bar.
 - `Calculation` creates a profile with name, birth date, birth time, and birth place.
 - `ProfileDescription` and `PersonalPerfume` continue the onboarding flow with editorial and curated content.
-- `Today` is the most integrated tab right now: it loads `perfumery-history` from the backend and opens a backend-driven `DayInPerfumery` details screen.
+- `Today` is one of the most integrated tabs right now: it loads `perfumery-history` and daily horoscopes from the backend and opens backend-driven details screens.
 - `Discover` now includes a working `Find Similar Perfumes` flow with database-backed perfume search, backend-driven recommendations, and navigation to the shared perfume details card.
-- `TodayEnergy` has its own screen and backend service layer, but the screen content is still mostly hardcoded in the current branch.
+- `TodayEnergy` is wired to backend data and receives both the personal horoscope and the full horoscope list from the `Today` flow.
 
 ## User Flow
 
@@ -62,6 +62,7 @@ Backend-backed data already used here:
   - `perfumeName`
   - `brandName`
   - `matchingNotes`
+  - `matchPercentage`
   - `longevityScore`
   - `sillageScore`
 
@@ -78,25 +79,17 @@ Backend-backed data already used here:
 2. Each perfume is chosen from the shared backend-driven perfume search list.
 3. The selected perfume ids are passed to `GET /perfumes/recommendations`.
 4. The backend returns up to 5 similar perfumes from the database.
-5. The iOS client loads perfume details for the selected perfumes and returned recommendations.
-6. The displayed match percentage is calculated on the client from note overlap and wear similarity.
-7. Tapping any recommendation opens the same `PerfumeDetails` screen used in the Search flow.
+5. The backend calculates the ranking and the displayed `matchPercentage`.
+6. Tapping any recommendation opens the same `PerfumeDetails` screen used in the Search flow.
 
 Current recommendation scoring:
 
 - `SearchPerfume` and `Find Similar Perfumes` search for real database items.
-- The backend returns the candidate recommendation list and matching notes.
-- The iOS client calculates the final displayed match percentage.
-- The main comparison signal is note overlap.
-- Longevity and sillage are used as a small refinement when both perfumes have these values.
-
-Client-side note comparison uses:
-
-- `top` notes weight `0.45`
-- `middle` notes weight `0.35`
-- `base` notes weight `0.20`
-
-This keeps the percentage dynamic and based on real perfume data instead of storing precomputed values.
+- The backend returns the final recommendation list, matching notes, and `matchPercentage`.
+- The backend is the single source of truth for recommendation scoring.
+- The current formula uses note overlap, distinct note coverage, accord overlap, family/concentration/profile similarity, and longevity/sillage similarity.
+- Deduplication is applied on backend signatures before the final top 5 is returned.
+- Deterministic tie-breakers are applied by `brandName`, `perfumeName`, and `id`.
 
 ### Profile
 
@@ -110,9 +103,8 @@ Only the profile entity itself is persisted. Several profile sections still use 
 
 - Separate screen exists
 - Backend service for daily horoscopes exists
-- `GET /horoscope/daily` returns an array of horoscope items
-
-In the current codebase, the UI for this screen is still mostly static and not fully wired to backend data yet.
+- `GET /horoscope/daily` returns an array of horoscope items from PostgreSQL
+- The screen receives backend-driven data through the `Today` module and displays the personal horoscope plus the general list
 
 ## Architecture
 
@@ -131,7 +123,7 @@ Technical choices:
 - `Observation` with `@Observable` / `@Bindable`
 - `Core Data` for local profile persistence
 - `Tuist` for project generation
-- `Vapor` backend for daily content endpoints
+- `Vapor` backend for PostgreSQL-backed content and perfume endpoints
 - localization resources in `en.lproj` and `ru.lproj`
 
 ## Repository Structure
@@ -177,7 +169,7 @@ tuist generate
 tuist build PerfumeSoul
 ```
 
-Open `PerfumeSoul.xcodeproj` and run the `PerfumeSoul` scheme.
+Open `PerfumeSoul.xcworkspace` (or `PerfumeSoul.xcodeproj`) and run the `PerfumeSoul` scheme.
 
 ### Run the backend
 
@@ -218,8 +210,8 @@ GitHub Actions:
 This README reflects the codebase as it exists now, not the intended future product. A few parts are still in transition:
 
 - `Today` mixes backend-driven content with static cards
-- `TodayEnergy` backend integration is incomplete in the current branch
 - several `Profile` sections are UI-complete but still use placeholder values
+- recommendation quality now comes from one backend scoring source, but the perfume metadata dataset is still evolving
 
 ## Stack Summary
 

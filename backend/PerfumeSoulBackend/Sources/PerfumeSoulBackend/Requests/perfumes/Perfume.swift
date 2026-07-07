@@ -15,11 +15,24 @@ struct PerfumeNotesResponse: Codable, Equatable {
     let id: Int
     let brand: String
     let perfumeName: String
+    let concentration: String?
+    let fragranceFamily: String?
+    let seasonProfile: String?
+    let occasionProfile: String?
+    let styleProfile: String?
+    let genderProfile: String?
+    let moodProfile: String?
     let longevityScore: Int?
     let sillageScore: Int?
+    let accords: [PerfumeAccordResponse]
     let topNotes: [String]
     let middleNotes: [String]
     let baseNotes: [String]
+}
+
+struct PerfumeAccordResponse: Codable, Equatable {
+    let name: String
+    let weight: Double
 }
 
 enum PerfumeLoader {
@@ -78,10 +91,28 @@ enum PerfumeNotesLoader {
             .filter(\.$perfume.$id == perfumeID)
             .sort(\.$sortOrder)
             .all()
+        let perfumeAccords = try await PerfumeAccordModel.query(on: database)
+            .with(\.$accord)
+            .filter(\.$perfume.$id == perfumeID)
+            .all()
 
         var topNotes: [String] = []
         var middleNotes: [String] = []
         var baseNotes: [String] = []
+        let accords = perfumeAccords
+            .sorted { lhs, rhs in
+                if lhs.weight == rhs.weight {
+                    return lhs.accord.name < rhs.accord.name
+                }
+
+                return lhs.weight > rhs.weight
+            }
+            .map {
+                PerfumeAccordResponse(
+                    name: $0.accord.name,
+                    weight: $0.weight
+                )
+            }
 
         for perfumeNote in perfumeNotes {
             switch perfumeNote.noteType {
@@ -102,8 +133,16 @@ enum PerfumeNotesLoader {
             id: id,
             brand: perfume.brand.name,
             perfumeName: perfume.perfumeName,
+            concentration: perfume.concentration,
+            fragranceFamily: perfume.fragranceFamily,
+            seasonProfile: perfume.seasonProfile,
+            occasionProfile: perfume.occasionProfile,
+            styleProfile: perfume.styleProfile,
+            genderProfile: perfume.genderProfile,
+            moodProfile: perfume.moodProfile,
             longevityScore: perfume.longevityScore,
             sillageScore: perfume.sillageScore,
+            accords: accords,
             topNotes: topNotes,
             middleNotes: middleNotes,
             baseNotes: baseNotes
