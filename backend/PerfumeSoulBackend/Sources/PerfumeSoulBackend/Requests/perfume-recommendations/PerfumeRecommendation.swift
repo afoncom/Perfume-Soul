@@ -164,31 +164,31 @@ private extension PerfumeRecommendationLoader {
             lhs: candidateAccordWeights.count,
             rhs: targetProfile.distinctAccordCount
         )
-        let familySimilarity = stringSimilarity(
+        let familyComponent = stringSimilarityComponent(
             value: perfumeProfile.fragranceFamily,
             targetValue: targetProfile.fragranceFamily
         )
-        let concentrationSimilarity = stringSimilarity(
+        let concentrationComponent = stringSimilarityComponent(
             value: perfumeProfile.concentration,
             targetValue: targetProfile.concentration
         )
-        let seasonSimilarity = stringSimilarity(
+        let seasonComponent = stringSimilarityComponent(
             value: perfumeProfile.seasonProfile,
             targetValue: targetProfile.seasonProfile
         )
-        let occasionSimilarity = stringSimilarity(
+        let occasionComponent = stringSimilarityComponent(
             value: perfumeProfile.occasionProfile,
             targetValue: targetProfile.occasionProfile
         )
-        let styleSimilarity = stringSimilarity(
+        let styleComponent = stringSimilarityComponent(
             value: perfumeProfile.styleProfile,
             targetValue: targetProfile.styleProfile
         )
-        let genderSimilarity = stringSimilarity(
+        let genderComponent = stringSimilarityComponent(
             value: perfumeProfile.genderProfile,
             targetValue: targetProfile.genderProfile
         )
-        let moodSimilarity = stringSimilarity(
+        let moodComponent = stringSimilarityComponent(
             value: perfumeProfile.moodProfile,
             targetValue: targetProfile.moodProfile
         )
@@ -212,21 +212,21 @@ private extension PerfumeRecommendationLoader {
         let wearScore =
             longevitySimilarity * 0.5
             + sillageSimilarity * 0.5
-        let weightedComponents: [(Double, Double)] = [
+        var weightedComponents: [(Double, Double)] = [
             (noteScore, 0.27),
             (distinctCoverage, 0.07),
             (noteCountCloseness, 0.03),
             (accordScore, 0.17),
             (accordCountCloseness, 0.03),
-            (familySimilarity, 0.07),
-            (concentrationSimilarity, 0.04),
-            (seasonSimilarity, 0.08),
-            (occasionSimilarity, 0.08),
-            (styleSimilarity, 0.08),
-            (genderSimilarity, 0.07),
-            (moodSimilarity, 0.06),
             (wearScore, 0.05)
         ]
+        appendIfNeeded(familyComponent, weight: 0.07, to: &weightedComponents)
+        appendIfNeeded(concentrationComponent, weight: 0.04, to: &weightedComponents)
+        appendIfNeeded(seasonComponent, weight: 0.08, to: &weightedComponents)
+        appendIfNeeded(occasionComponent, weight: 0.08, to: &weightedComponents)
+        appendIfNeeded(styleComponent, weight: 0.08, to: &weightedComponents)
+        appendIfNeeded(genderComponent, weight: 0.07, to: &weightedComponents)
+        appendIfNeeded(moodComponent, weight: 0.06, to: &weightedComponents)
         let totalWeight = weightedComponents.reduce(0.0) { partialResult, component in
             partialResult + component.1
         }
@@ -454,6 +454,29 @@ private extension PerfumeRecommendationLoader {
         let coverage = Double(overlapCount) / Double(targetValue.count)
         let precision = Double(overlapCount) / Double(value.count)
         return coverage * 0.7 + precision * 0.3
+    }
+
+    static func stringSimilarityComponent(
+        value: String?,
+        targetValue: String?
+    ) -> Double? {
+        if value == nil, targetValue == nil {
+            return nil
+        }
+
+        return stringSimilarity(value: value, targetValue: targetValue)
+    }
+
+    static func appendIfNeeded(
+        _ score: Double?,
+        weight: Double,
+        to components: inout [(Double, Double)]
+    ) {
+        guard let score else {
+            return
+        }
+
+        components.append((score, weight))
     }
 
     static func normalize(_ value: String) -> String {

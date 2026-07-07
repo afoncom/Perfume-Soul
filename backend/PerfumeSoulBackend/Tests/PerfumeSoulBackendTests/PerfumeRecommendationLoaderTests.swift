@@ -111,6 +111,50 @@ struct PerfumeRecommendationLoaderTests {
 
         #expect(recommendations.map(\.id) == [2, 3, 4])
     }
+
+    @Test("Both nil metadata is excluded from weighted string components")
+    func bothNilMetadataDoesNotActAsMismatch() throws {
+        let selectedPerfume = PerfumeProfile(
+            id: 1,
+            perfumeName: "Selected",
+            brandName: "Brand",
+            longevityScore: 7,
+            sillageScore: 7,
+            topNotes: ["Бергамот"],
+            middleNotes: ["Жасмин"],
+            baseNotes: ["Кедр"]
+        )
+        let candidateWithoutMetadata = PerfumeProfile(
+            id: 2,
+            perfumeName: "No Metadata",
+            brandName: "Brand",
+            longevityScore: 7,
+            sillageScore: 7,
+            topNotes: ["Бергамот"],
+            middleNotes: ["Жасмин"],
+            baseNotes: ["Кедр"]
+        )
+        let candidateWithMismatchMetadata = PerfumeProfile(
+            id: 3,
+            perfumeName: "With Mismatch",
+            brandName: "Brand",
+            longevityScore: 7,
+            sillageScore: 7,
+            topNotes: ["Бергамот"],
+            middleNotes: ["Жасмин"],
+            baseNotes: ["Кедр"],
+            fragranceFamily: "woody"
+        )
+
+        let recommendations = try PerfumeRecommendationLoader.load(
+            perfumeProfiles: [selectedPerfume, candidateWithoutMetadata, candidateWithMismatchMetadata],
+            selectedPerfumeIDs: [selectedPerfume.id]
+        )
+
+        #expect(recommendations.count == 2)
+        #expect(recommendations[0].id == 2)
+        #expect(recommendations[0].matchPercentage > recommendations[1].matchPercentage)
+    }
 }
 
 private extension PerfumeRecommendationLoaderTests {
