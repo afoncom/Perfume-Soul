@@ -33,11 +33,22 @@ enum PerfumeRecommendationLoader {
             .all()
 
         let perfumeProfiles = perfumeModels.compactMap(PerfumeProfile.init(model:))
-        let selectedPerfumeProfiles = selectedPerfumeIDs.compactMap { perfumeID in
+        return try load(
+            perfumeProfiles: perfumeProfiles,
+            selectedPerfumeIDs: selectedPerfumeIDs
+        )
+    }
+
+    static func load(
+        perfumeProfiles: [PerfumeProfile],
+        selectedPerfumeIDs: [Int]
+    ) throws -> [PerfumeRecommendation] {
+        let uniqueSelectedPerfumeIDs = uniquePerfumeIDs(from: selectedPerfumeIDs)
+        let selectedPerfumeProfiles = uniqueSelectedPerfumeIDs.compactMap { perfumeID in
             perfumeProfiles.first(where: { $0.id == perfumeID })
         }
 
-        guard selectedPerfumeProfiles.count == selectedPerfumeIDs.count else {
+        guard selectedPerfumeProfiles.count == uniqueSelectedPerfumeIDs.count else {
             throw Abort(.notFound)
         }
 
@@ -45,7 +56,7 @@ enum PerfumeRecommendationLoader {
         let scoreRanges = ScoreRanges(perfumeProfiles: perfumeProfiles)
 
         return perfumeProfiles
-            .filter { !selectedPerfumeIDs.contains($0.id) }
+            .filter { !uniqueSelectedPerfumeIDs.contains($0.id) }
             .compactMap { perfumeProfile in
                 makeScoredRecommendation(
                     perfumeProfile: perfumeProfile,
@@ -53,21 +64,7 @@ enum PerfumeRecommendationLoader {
                     scoreRanges: scoreRanges
                 )
             }
-            .sorted { lhs, rhs in
-                if lhs.rawScore == rhs.rawScore {
-                    if lhs.recommendation.brandName == rhs.recommendation.brandName {
-                        if lhs.recommendation.perfumeName == rhs.recommendation.perfumeName {
-                            return lhs.recommendation.id < rhs.recommendation.id
-                        }
-
-                        return lhs.recommendation.perfumeName < rhs.recommendation.perfumeName
-                    }
-
-                    return lhs.recommendation.brandName < rhs.recommendation.brandName
-                }
-
-                return lhs.rawScore > rhs.rawScore
-            }
+            .sorted(by: areSortedForRecommendationRanking)
             .uniqueBySignature()
             .prefix(5)
             .map(\.recommendation)
@@ -81,6 +78,25 @@ private struct ScoredPerfumeRecommendation {
 }
 
 private extension PerfumeRecommendationLoader {
+    static func areSortedForRecommendationRanking(
+        lhs: ScoredPerfumeRecommendation,
+        rhs: ScoredPerfumeRecommendation
+    ) -> Bool {
+        if lhs.rawScore == rhs.rawScore {
+            if lhs.recommendation.brandName == rhs.recommendation.brandName {
+                if lhs.recommendation.perfumeName == rhs.recommendation.perfumeName {
+                    return lhs.recommendation.id < rhs.recommendation.id
+                }
+
+                return lhs.recommendation.perfumeName < rhs.recommendation.perfumeName
+            }
+
+            return lhs.recommendation.brandName < rhs.recommendation.brandName
+        }
+
+        return lhs.rawScore > rhs.rawScore
+    }
+
     static func uniquePerfumeIDs(from perfumeIDs: [Int]) -> [Int] {
         var seenPerfumeIDs = Set<Int>()
         var uniquePerfumeIDs: [Int] = []
@@ -627,7 +643,7 @@ private struct ScoreRanges {
     }
 }
 
-private struct PerfumeProfile {
+struct PerfumeProfile {
     let id: Int
     let perfumeName: String
     let brandName: String
@@ -645,6 +661,57 @@ private struct PerfumeProfile {
     let genderProfile: String?
     let moodProfile: String?
     let signature: String
+
+    init(
+        id: Int,
+        perfumeName: String,
+        brandName: String,
+        longevityScore: Int? = nil,
+        sillageScore: Int? = nil,
+        topNotes: [String] = [],
+        middleNotes: [String] = [],
+        baseNotes: [String] = [],
+        accordWeights: [String: Double] = [:],
+        concentration: String? = nil,
+        fragranceFamily: String? = nil,
+        seasonProfile: String? = nil,
+        occasionProfile: String? = nil,
+        styleProfile: String? = nil,
+        genderProfile: String? = nil,
+        moodProfile: String? = nil
+    ) {
+        self.id = id
+        self.perfumeName = perfumeName
+        self.brandName = brandName
+        self.longevityScore = longevityScore
+        self.sillageScore = sillageScore
+        self.topNotes = topNotes
+        self.middleNotes = middleNotes
+        self.baseNotes = baseNotes
+        self.accordWeights = accordWeights
+        self.concentration = concentration
+        self.fragranceFamily = fragranceFamily
+        self.seasonProfile = seasonProfile
+        self.occasionProfile = occasionProfile
+        self.styleProfile = styleProfile
+        self.genderProfile = genderProfile
+        self.moodProfile = moodProfile
+        self.signature = Self.makeSignature(
+            topNotes: topNotes,
+            middleNotes: middleNotes,
+            baseNotes: baseNotes,
+            accordWeights: accordWeights,
+            concentration: concentration,
+            fragranceFamily: fragranceFamily,
+            seasonProfile: seasonProfile,
+            occasionProfile: occasionProfile,
+            styleProfile: styleProfile,
+            genderProfile: genderProfile,
+            moodProfile: moodProfile,
+            longevityScore: longevityScore,
+            sillageScore: sillageScore
+        )
+    }
 
     init?(model: PerfumeModel) {
         guard let id = model.id else {
