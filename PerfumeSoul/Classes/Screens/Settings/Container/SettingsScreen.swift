@@ -12,7 +12,6 @@ struct SettingsScreen: View {
     @Bindable private var viewModel: SettingsViewModel
     private let presenter: SettingsPresenter
 
-    @State private var dailyHoroscopeEnabled = true
     @State private var aromaOfTheDayEnabled = true
     @State private var dayInPerfumeryEnabled = false
 
@@ -41,6 +40,26 @@ struct SettingsScreen: View {
             Color(.backgroundPrimary).ignoresSafeArea()
         }
         .toolbar(.hidden, for: .navigationBar)
+        .task {
+            await presenter.onAppear()
+        }
+        .alert(
+            viewModel.notificationAlertTitle ?? "",
+            isPresented: $viewModel.isShowingNotificationAlert
+        ) {
+            if viewModel.showsNotificationSettingsAction {
+                Button(L10n.Settings.Notification.openSettingsButton) {
+                    presenter.openSystemSettingsTapped()
+                    presenter.notificationAlertDismissed()
+                }
+            }
+
+            Button(L10n.Settings.Notification.dismissButton, role: .cancel) {
+                presenter.notificationAlertDismissed()
+            }
+        } message: {
+            Text(viewModel.notificationAlertMessage ?? "")
+        }
     }
 }
 
@@ -63,7 +82,14 @@ private extension SettingsScreen {
                     iconColor: Color(.pinkButton),
                     title: L10n.Settings.Notification.dailyHoroscopeTitle,
                     subtitle: L10n.Settings.Notification.dailyHoroscopeSubtitle,
-                    isOn: $dailyHoroscopeEnabled
+                    isOn: Binding(
+                        get: { viewModel.isDailyHoroscopeNotificationEnabled },
+                        set: { isEnabled in
+                            Task {
+                                await presenter.dailyHoroscopeNotificationToggled(isEnabled: isEnabled)
+                            }
+                        }
+                    )
                 )
 
                 makeDivider()

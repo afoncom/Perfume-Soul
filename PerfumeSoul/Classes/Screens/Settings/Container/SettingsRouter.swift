@@ -10,6 +10,7 @@ import UIKit
 
 protocol SettingsRouter {
     func showSendFeedback()
+    func openSystemSettings()
 }
 
 final class SettingsRouterImpl {
@@ -26,5 +27,13 @@ extension SettingsRouterImpl: SettingsRouter {
             SendFeedbackModule.build(navigationController: navigationController),
             animated: true
         )
+    }
+
+    func openSystemSettings() {
+        guard let url = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+
+        UIApplication.shared.open(url)
     }
 }

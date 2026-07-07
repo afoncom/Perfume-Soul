@@ -7,15 +7,28 @@
 //
 
 import SwiftUI
+import CoreData
 
 final class SettingsModule {
-    static func build() -> NavigationControllerContainer {
-        let viewModel = SettingsViewModel()
+    static func build(
+        container: NSPersistentContainer,
+        requestManager: RequestManager
+    ) -> NavigationControllerContainer {
+        let profileService = ProfileServiceImpl(container: container)
+        let dailyHoroscopeService = DailyHoroscopeServiceImpl(requestManager: requestManager)
+        let dailyHoroscopeNotificationService = DailyHoroscopeNotificationServiceImpl(
+            dailyHoroscopeService: dailyHoroscopeService,
+            profileService: profileService
+        )
+        let viewModel = SettingsViewModel(
+            isDailyHoroscopeNotificationEnabled: dailyHoroscopeNotificationService.isDailyHoroscopeNotificationEnabled()
+        )
         let navigationController = UINavigationController()
         let router = SettingsRouterImpl(navigationController: navigationController)
         let presenter = SettingsPresenterImpl(
             viewModel: viewModel,
-            router: router
+            router: router,
+            dailyHoroscopeNotificationService: dailyHoroscopeNotificationService
         )
         
         let view = SettingsScreen(viewModel: viewModel, presenter: presenter)

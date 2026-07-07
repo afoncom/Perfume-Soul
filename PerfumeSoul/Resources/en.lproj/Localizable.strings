@@ -135,6 +135,14 @@
 "settings.notification.aromaOfTheDayTitle" = "Aroma of the Day";
 "settings.notification.dailyHoroscopeSubtitle" = "Receive a forecast every day";
 "settings.notification.dailyHoroscopeTitle" = "Daily Horoscope";
+"settings.notification.dismissButton" = "OK";
+"settings.notification.openSettingsButton" = "Open Settings";
+"settings.notification.permissionDeniedMessage" = "To receive your daily horoscope at 9:00 AM, allow notifications for the app in system settings.";
+"settings.notification.permissionDeniedTitle" = "Notifications Disabled";
+"settings.notification.profileRequiredMessage" = "We could not determine your zodiac sign. Please check your birth date in the profile.";
+"settings.notification.profileRequiredTitle" = "Profile Data Required";
+"settings.notification.unavailableMessage" = "The daily horoscope is currently unavailable. Please try again later.";
+"settings.notification.unavailableTitle" = "Horoscope Unavailable";
 "settings.notification.dayInPerfumerySubtitle" = "Historical events and facts";
 "settings.notification.dayInPerfumeryTitle" = "This Day in Perfumery";
 "settings.notificationsTitle" = "Notifications";
