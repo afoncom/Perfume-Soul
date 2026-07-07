@@ -13,7 +13,7 @@ struct PerfumeRecommendation {
     let perfumeName: String
     let brandName: String
     let matchingNotes: [String]
-    var matchPercentage: Int
+    let matchPercentage: Int
     let longevityScore: Int?
     let sillageScore: Int?
 }
@@ -24,7 +24,7 @@ extension PerfumeRecommendation {
         self.perfumeName = response.perfumeName
         self.brandName = response.brandName
         self.matchingNotes = response.matchingNotes
-        self.matchPercentage = 0
+        self.matchPercentage = response.matchPercentage
         self.longevityScore = response.longevityScore
         self.sillageScore = response.sillageScore
     }

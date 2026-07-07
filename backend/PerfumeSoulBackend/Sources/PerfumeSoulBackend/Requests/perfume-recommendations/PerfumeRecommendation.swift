@@ -7,6 +7,7 @@ struct PerfumeRecommendation: Codable, Equatable {
     let perfumeName: String
     let brandName: String
     let matchingNotes: [String]
+    let matchPercentage: Int
     let longevityScore: Int?
     let sillageScore: Int?
 }
@@ -55,6 +56,10 @@ enum PerfumeRecommendationLoader {
             .sorted { lhs, rhs in
                 if lhs.rawScore == rhs.rawScore {
                     if lhs.recommendation.brandName == rhs.recommendation.brandName {
+                        if lhs.recommendation.perfumeName == rhs.recommendation.perfumeName {
+                            return lhs.recommendation.id < rhs.recommendation.id
+                        }
+
                         return lhs.recommendation.perfumeName < rhs.recommendation.perfumeName
                     }
 
@@ -97,12 +102,16 @@ private extension PerfumeRecommendationLoader {
             lhs: targetProfile.noteWeights,
             rhs: candidateNoteWeights
         )
+        let matchedDistinctNotesCount = matchedDistinctNotesCount(
+            targetProfile: targetProfile,
+            candidateNoteWeights: candidateNoteWeights
+        )
         let matchingNotes = makeMatchingNotes(
             targetProfile: targetProfile,
             candidateNoteWeights: candidateNoteWeights
         )
 
-        guard !matchingNotes.isEmpty else {
+        guard matchedDistinctNotesCount > 0 else {
             return nil
         }
 
@@ -115,7 +124,7 @@ private extension PerfumeRecommendationLoader {
             totalWeight: totalWeight(of: candidateNoteWeights)
         )
         let distinctCoverage = distinctCoverage(
-            matchedCount: matchingNotes.count,
+            matchedCount: matchedDistinctNotesCount,
             totalCount: targetProfile.distinctNoteCount
         )
         let noteCountCloseness = countCloseness(
@@ -187,20 +196,31 @@ private extension PerfumeRecommendationLoader {
         let wearScore =
             longevitySimilarity * 0.5
             + sillageSimilarity * 0.5
-        let rawScore =
-            noteScore * 0.27
-            + distinctCoverage * 0.07
-            + noteCountCloseness * 0.03
-            + accordScore * 0.17
-            + accordCountCloseness * 0.03
-            + familySimilarity * 0.07
-            + concentrationSimilarity * 0.04
-            + seasonSimilarity * 0.08
-            + occasionSimilarity * 0.08
-            + styleSimilarity * 0.08
-            + genderSimilarity * 0.07
-            + moodSimilarity * 0.06
-            + wearScore * 0.05
+        let weightedComponents: [(Double, Double)] = [
+            (noteScore, 0.27),
+            (distinctCoverage, 0.07),
+            (noteCountCloseness, 0.03),
+            (accordScore, 0.17),
+            (accordCountCloseness, 0.03),
+            (familySimilarity, 0.07),
+            (concentrationSimilarity, 0.04),
+            (seasonSimilarity, 0.08),
+            (occasionSimilarity, 0.08),
+            (styleSimilarity, 0.08),
+            (genderSimilarity, 0.07),
+            (moodSimilarity, 0.06),
+            (wearScore, 0.05)
+        ]
+        let totalWeight = weightedComponents.reduce(0.0) { partialResult, component in
+            partialResult + component.1
+        }
+        let rawScore = weightedComponents.reduce(0.0) { partialResult, component in
+            partialResult + component.0 * component.1
+        } / totalWeight
+        let matchPercentage = min(
+            100,
+            max(0, Int((rawScore * 100).rounded(.toNearestOrAwayFromZero)))
+        )
 
         return ScoredPerfumeRecommendation(
             recommendation: PerfumeRecommendation(
@@ -208,6 +228,7 @@ private extension PerfumeRecommendationLoader {
                 perfumeName: perfumeProfile.perfumeName,
                 brandName: perfumeProfile.brandName,
                 matchingNotes: matchingNotes,
+                matchPercentage: matchPercentage,
                 longevityScore: perfumeProfile.longevityScore,
                 sillageScore: perfumeProfile.sillageScore
             ),
@@ -279,6 +300,15 @@ private extension PerfumeRecommendationLoader {
             }
             .prefix(5)
             .map { $0.0 }
+    }
+
+    static func matchedDistinctNotesCount(
+        targetProfile: RecommendationTargetProfile,
+        candidateNoteWeights: [String: Int]
+    ) -> Int {
+        targetProfile.noteWeights.keys.reduce(0) { partialResult, normalizedNote in
+            partialResult + (candidateNoteWeights[normalizedNote] == nil ? 0 : 1)
+        }
     }
 
     static func weightedOverlap(

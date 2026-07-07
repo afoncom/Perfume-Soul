@@ -13,6 +13,7 @@ struct PerfumeRecommendationResponse: Decodable {
     let perfumeName: String
     let brandName: String
     let matchingNotes: [String]
+    let matchPercentage: Int
     let longevityScore: Int?
     let sillageScore: Int?
 }
