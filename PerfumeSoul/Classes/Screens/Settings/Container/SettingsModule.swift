@@ -20,9 +20,7 @@ final class SettingsModule {
             dailyHoroscopeService: dailyHoroscopeService,
             profileService: profileService
         )
-        let viewModel = SettingsViewModel(
-            isDailyHoroscopeNotificationEnabled: dailyHoroscopeNotificationService.isDailyHoroscopeNotificationEnabled()
-        )
+        let viewModel = SettingsViewModel()
         let navigationController = UINavigationController()
         let router = SettingsRouterImpl(navigationController: navigationController)
         let presenter = SettingsPresenterImpl(

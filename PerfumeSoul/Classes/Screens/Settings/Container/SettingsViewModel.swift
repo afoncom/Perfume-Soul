@@ -9,13 +9,9 @@
 import Observation
 
 @Observable final class SettingsViewModel {
-    var isDailyHoroscopeNotificationEnabled: Bool
+    var isDailyHoroscopeNotificationEnabled = false
     var notificationAlertTitle: String?
     var notificationAlertMessage: String?
     var isShowingNotificationAlert = false
     var showsNotificationSettingsAction = false
-
-    init(isDailyHoroscopeNotificationEnabled: Bool) {
-        self.isDailyHoroscopeNotificationEnabled = isDailyHoroscopeNotificationEnabled
-    }
 }
