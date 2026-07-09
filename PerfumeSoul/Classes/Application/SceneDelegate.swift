@@ -38,6 +38,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         coreDataManager.saveContext()
     }
 
+    func sceneWillEnterForeground(_ scene: UIScene) {
+        refreshDailyHoroscopeNotificationIfNeeded(container: coreDataManager.container)
+    }
+
     private func showWelcomeLoadingScreen(container: NSPersistentContainer) {
         let welcomeLoadingScreen = WelcomeLoadingModule.build(
             container: container,
@@ -57,8 +61,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             requestManager: requestManager
         )
         let settingsScreen = SettingsModule.build(
-            container: container,
-            requestManager: requestManager
+            container: container
         )
         let discoverScreen = DiscoverModule.build(requestManager: requestManager)
         let profileScreen = ProfileModule.build(
@@ -78,7 +81,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         )
         let viewController = UIHostingController(rootView: mainTabView)
         setRootViewController(viewController)
-        syncDailyHoroscopeNotifications(container: container)
     }
 
     private func showCalculationScreen(container: NSPersistentContainer) {
@@ -95,10 +97,17 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         showMainScreen(container: coreDataManager.container)
     }
 
-    func sceneWillEnterForeground(_ scene: UIScene) {
-        syncDailyHoroscopeNotifications(container: coreDataManager.container)
+    private func refreshDailyHoroscopeNotificationIfNeeded(container: NSPersistentContainer) {
+        let profileService = ProfileServiceImpl(container: container)
+        let dailyHoroscopeNotificationService = DailyHoroscopeNotificationServiceImpl(
+            profileService: profileService
+        )
+
+        Task {
+            await dailyHoroscopeNotificationService.refreshDailyHoroscopeNotificationIfNeeded()
+        }
     }
-    
+
     private func setRootViewController(_ viewController: UIViewController) {
         guard let window else {
             return
@@ -106,18 +115,5 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window.rootViewController = viewController
         window.makeKeyAndVisible()
-    }
-
-    private func syncDailyHoroscopeNotifications(container: NSPersistentContainer) {
-        let dailyHoroscopeService = DailyHoroscopeServiceImpl(requestManager: requestManager)
-        let profileService = ProfileServiceImpl(container: container)
-        let dailyHoroscopeNotificationService = DailyHoroscopeNotificationServiceImpl(
-            dailyHoroscopeService: dailyHoroscopeService,
-            profileService: profileService
-        )
-
-        Task {
-            await dailyHoroscopeNotificationService.refreshDailyHoroscopeNotificationIfNeeded()
-        }
     }
 }

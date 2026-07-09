@@ -76,22 +76,28 @@ private extension ProfileScreen {
         HStack(spacing: 12) {
             Circle()
                 .fill(Color(.placeholderStrong))
-                .frame(width: 62, height: 62)
+                .frame(width: 74, height: 74)
             
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text(profile.name)
-                    .font(.title3)
+                    .font(.title2)
                     .fontWeight(.medium)
+                    .foregroundStyle(Color(.textPrimary))
                 
                 Text(makeProfileBirthInfo(profile: profile))
                     .font(.footnote)
                     .foregroundStyle(Color(.textSecondary))
                     .fixedSize(horizontal: false, vertical: true)
+
+                if let zodiacInfo = makeZodiacInfo(profile: profile) {
+                    makeZodiacBadge(zodiacInfo: zodiacInfo)
+                }
             }
             
             Spacer()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.top, 4)
     }
     
     func makeMyNatalChart() -> some View {
@@ -344,6 +350,32 @@ private extension ProfileScreen {
         return [profile.birthDate, profile.birthTime, profile.birthPlace]
             .filter { !$0.isEmpty }
             .joined(separator: " · ")
+    }
+
+    func makeZodiacInfo(profile: Profile) -> DailyHoroscope? {
+        guard let sign = profile.zodiacSign() else {
+            return nil
+        }
+
+        return DailyHoroscope(sign: sign, energyOfDay: "")
+    }
+
+    func makeZodiacBadge(zodiacInfo: DailyHoroscope) -> some View {
+        HStack(spacing: 8) {
+            Text(zodiacInfo.symbol)
+                .font(.subheadline)
+
+            Text(zodiacInfo.displayName)
+                .font(.subheadline)
+                .fontWeight(.medium)
+        }
+        .foregroundStyle(zodiacInfo.iconColor)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 7)
+        .background(
+            Capsule(style: .continuous)
+                .fill(zodiacInfo.iconColor.opacity(0.14))
+        )
     }
 
     var expertiseLevelTitle: String {

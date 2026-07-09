@@ -9,7 +9,7 @@
 @MainActor
 protocol SettingsPresenter {
     func onAppear() async
-    func dailyHoroscopeNotificationToggled(isEnabled: Bool) async
+    func dailyHoroscopeNotificationToggled(isEnabled: Bool)
     func feedbackButtonTapped()
     func openSystemSettingsTapped()
     func notificationAlertDismissed()
@@ -19,6 +19,7 @@ final class SettingsPresenterImpl {
     private let viewModel: SettingsViewModel
     private let router: SettingsRouter
     private let dailyHoroscopeNotificationService: DailyHoroscopeNotificationService
+    private var notificationToggleTask: Task<Void, Never>?
     
     init(
         viewModel: SettingsViewModel,
@@ -37,22 +38,46 @@ extension SettingsPresenterImpl: SettingsPresenter {
         viewModel.isDailyHoroscopeNotificationEnabled = dailyHoroscopeNotificationService.isDailyHoroscopeNotificationEnabled()
     }
 
-    @MainActor
-    func dailyHoroscopeNotificationToggled(isEnabled: Bool) async {
-        if isEnabled {
-            do {
-                try await dailyHoroscopeNotificationService.enableDailyHoroscopeNotification()
-                viewModel.isDailyHoroscopeNotificationEnabled = true
-            } catch let error as DailyHoroscopeNotificationServiceError {
-                viewModel.isDailyHoroscopeNotificationEnabled = false
-                presentNotificationError(error)
-            } catch {
-                viewModel.isDailyHoroscopeNotificationEnabled = false
-                presentUnknownNotificationError()
+    func dailyHoroscopeNotificationToggled(isEnabled: Bool) {
+        viewModel.isDailyHoroscopeNotificationEnabled = isEnabled
+        notificationToggleTask?.cancel()
+
+        notificationToggleTask = Task { @MainActor [weak self] in
+            guard let self else {
+                return
             }
-        } else {
-            await dailyHoroscopeNotificationService.disableDailyHoroscopeNotification()
-            viewModel.isDailyHoroscopeNotificationEnabled = false
+
+            if isEnabled {
+                do {
+                    try await dailyHoroscopeNotificationService.enableDailyHoroscopeNotification()
+                    guard !Task.isCancelled else {
+                        return
+                    }
+
+                    viewModel.isDailyHoroscopeNotificationEnabled = true
+                } catch let error as DailyHoroscopeNotificationServiceError {
+                    guard !Task.isCancelled else {
+                        return
+                    }
+
+                    viewModel.isDailyHoroscopeNotificationEnabled = false
+                    presentNotificationError(error)
+                } catch {
+                    guard !Task.isCancelled else {
+                        return
+                    }
+
+                    viewModel.isDailyHoroscopeNotificationEnabled = false
+                    presentUnknownNotificationError()
+                }
+            } else {
+                await dailyHoroscopeNotificationService.disableDailyHoroscopeNotification()
+                guard !Task.isCancelled else {
+                    return
+                }
+
+                viewModel.isDailyHoroscopeNotificationEnabled = false
+            }
         }
     }
 
@@ -83,10 +108,6 @@ private extension SettingsPresenterImpl {
         case .profileUnavailable:
             viewModel.notificationAlertTitle = L10n.Settings.Notification.profileRequiredTitle
             viewModel.notificationAlertMessage = L10n.Settings.Notification.profileRequiredMessage
-            viewModel.showsNotificationSettingsAction = false
-        case .horoscopeUnavailable:
-            viewModel.notificationAlertTitle = L10n.Settings.Notification.unavailableTitle
-            viewModel.notificationAlertMessage = L10n.Settings.Notification.unavailableMessage
             viewModel.showsNotificationSettingsAction = false
         }
 

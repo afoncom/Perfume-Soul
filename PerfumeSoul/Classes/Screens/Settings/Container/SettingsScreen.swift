@@ -85,9 +85,7 @@ private extension SettingsScreen {
                     isOn: Binding(
                         get: { viewModel.isDailyHoroscopeNotificationEnabled },
                         set: { isEnabled in
-                            Task {
-                                await presenter.dailyHoroscopeNotificationToggled(isEnabled: isEnabled)
-                            }
+                            presenter.dailyHoroscopeNotificationToggled(isEnabled: isEnabled)
                         }
                     )
                 )

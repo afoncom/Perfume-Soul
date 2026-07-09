@@ -11,13 +11,10 @@ import CoreData
 
 final class SettingsModule {
     static func build(
-        container: NSPersistentContainer,
-        requestManager: RequestManager
+        container: NSPersistentContainer
     ) -> NavigationControllerContainer {
         let profileService = ProfileServiceImpl(container: container)
-        let dailyHoroscopeService = DailyHoroscopeServiceImpl(requestManager: requestManager)
         let dailyHoroscopeNotificationService = DailyHoroscopeNotificationServiceImpl(
-            dailyHoroscopeService: dailyHoroscopeService,
             profileService: profileService
         )
         let viewModel = SettingsViewModel()

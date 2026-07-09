@@ -136,6 +136,7 @@
 "settings.notification.aromaOfTheDayTitle" = "Аромат дня";
 "settings.notification.dailyHoroscopeSubtitle" = "Получайте прогноз каждый день";
 "settings.notification.dailyHoroscopeTitle" = "Ежедневный гороскоп";
+"settings.notification.dailyHoroscopeReminderBody" = "Откройте PerfumeSoul, чтобы прочитать сегодняшний гороскоп.";
 "settings.notification.dismissButton" = "ОК";
 "settings.notification.openSettingsButton" = "Открыть настройки";
 "settings.notification.permissionDeniedMessage" = "Чтобы получать ежедневный гороскоп в 09:00, разрешите уведомления для приложения в системных настройках.";
