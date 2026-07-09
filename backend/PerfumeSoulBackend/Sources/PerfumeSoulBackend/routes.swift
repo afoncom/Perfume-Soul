@@ -2,6 +2,11 @@ import Fluent
 import Vapor
 
 func routes(_ app: Application) throws {
+    app.post("profile", "calculate") { req async throws -> Response in
+        let request = try req.content.decode(ProfileCalculationRequest.self)
+        return try jsonResponse(try ProfileCalculationLoader.load(request: request))
+    }
+
     app.get("perfumery-history") { req async throws -> Response in
         guard let item = try await PerfumeryHistoryLoader.load(
             dateKey: "2026-04-18",
