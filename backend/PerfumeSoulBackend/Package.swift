@@ -16,9 +16,15 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
     ],
     targets: [
+        .target(
+            name: "CAstronomy",
+            path: "Sources/CAstronomy",
+            publicHeadersPath: "include"
+        ),
         .executableTarget(
             name: "PerfumeSoulBackend",
             dependencies: [
+                .target(name: "CAstronomy"),
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentSQL", package: "fluent-kit"),
                 .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
