@@ -78,7 +78,7 @@ extension CalculationPresenterImpl: CalculationPresenter {
             viewModel.birthPlaceCompletions = []
         }
 
-        birthPlaceSearch.clear()
+        await birthPlaceSearch.clear()
     }
     
     @MainActor

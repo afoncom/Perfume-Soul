@@ -35,8 +35,8 @@ extension CDProfile: CDModel {
         self.birthDate = model.birthDate
         self.birthTime = model.birthTime
         self.birthPlace = model.birthPlace
-        self.birthLatitude = model.birthLatitude.map(String.init)
-        self.birthLongitude = model.birthLongitude.map(String.init)
+        self.birthLatitude = model.birthLatitude.map { String($0) }
+        self.birthLongitude = model.birthLongitude.map { String($0) }
         self.birthTimeZoneIdentifier = model.birthTimeZoneIdentifier
     }
 }
