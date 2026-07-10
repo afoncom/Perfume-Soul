@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import OSLog
 import UserNotifications
 
 enum DailyHoroscopeNotificationServiceError: Error {
@@ -18,7 +17,6 @@ protocol DailyHoroscopeNotificationService {
     func isDailyHoroscopeNotificationEnabled() -> Bool
     func enableDailyHoroscopeNotification() async throws
     func disableDailyHoroscopeNotification() async
-    func refreshDailyHoroscopeNotificationIfNeeded() async
 }
 
 final class DailyHoroscopeNotificationServiceImpl {
@@ -42,10 +40,6 @@ final class DailyHoroscopeNotificationServiceImpl {
         }
     }
 
-    private let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier ?? "PerfumeSoul",
-        category: "DailyHoroscopeNotificationService"
-    )
     private let userNotificationCenter: UNUserNotificationCenter
     private let profileService: ProfileService
     private let userDefaults: UserDefaults
@@ -85,7 +79,7 @@ extension DailyHoroscopeNotificationServiceImpl: DailyHoroscopeNotificationServi
             return
         }
 
-        try await scheduleNotification(content: content, for: nextNotificationDate())
+        try await scheduleNotification(content: content)
 
         guard await operationCoordinator.isCurrent(operationID) else {
             userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [Constants.notificationIdentifier])
@@ -99,26 +93,6 @@ extension DailyHoroscopeNotificationServiceImpl: DailyHoroscopeNotificationServi
         _ = await operationCoordinator.beginOperation()
         userDefaults.set(false, forKey: Constants.isEnabledKey)
         userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [Constants.notificationIdentifier])
-    }
-
-    func refreshDailyHoroscopeNotificationIfNeeded() async {
-        guard isDailyHoroscopeNotificationEnabled() else {
-            return
-        }
-
-        let operationID = await operationCoordinator.beginOperation()
-
-        do {
-            let content = try await makeNotificationContent()
-
-            guard await operationCoordinator.isCurrent(operationID) else {
-                return
-            }
-
-            try await scheduleNotification(content: content, for: nextNotificationDate())
-        } catch {
-            logger.error("Failed to refresh daily horoscope notification: \(error.localizedDescription)")
-        }
     }
 }
 
@@ -139,27 +113,25 @@ private extension DailyHoroscopeNotificationServiceImpl {
     }
 
     func makeNotificationContent() async throws -> UNMutableNotificationContent {
-        guard let profile = await profileService.fetchProfile(),
-              let sign = profile.zodiacSign() else {
+        guard await profileService.fetchProfile() != nil else {
             throw DailyHoroscopeNotificationServiceError.profileUnavailable
         }
 
-        let horoscope = DailyHoroscope(sign: sign, energyOfDay: "")
-
         let content = UNMutableNotificationContent()
         content.title = L10n.Settings.Notification.dailyHoroscopeTitle
-        content.subtitle = horoscope.displayName
         content.body = L10n.Settings.Notification.dailyHoroscopeReminderBody
         content.sound = .default
         content.threadIdentifier = Constants.notificationIdentifier
         return content
     }
 
-    func scheduleNotification(content: UNMutableNotificationContent, for date: Date) async throws {
-        let calendar = Calendar.current
+    func scheduleNotification(content: UNMutableNotificationContent) async throws {
         let trigger = UNCalendarNotificationTrigger(
-            dateMatching: calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date),
-            repeats: false
+            dateMatching: DateComponents(
+                hour: Constants.notificationHour,
+                minute: Constants.notificationMinute
+            ),
+            repeats: true
         )
         let request = UNNotificationRequest(
             identifier: Constants.notificationIdentifier,
@@ -178,21 +150,5 @@ private extension DailyHoroscopeNotificationServiceImpl {
                 }
             }
         }
-    }
-
-    func nextNotificationDate(from now: Date = Date()) -> Date {
-        let calendar = Calendar.current
-        let todayNotificationDate = calendar.date(
-            bySettingHour: Constants.notificationHour,
-            minute: Constants.notificationMinute,
-            second: 0,
-            of: now
-        ) ?? now
-
-        if now < todayNotificationDate {
-            return todayNotificationDate
-        }
-
-        return calendar.date(byAdding: .day, value: 1, to: todayNotificationDate) ?? todayNotificationDate
     }
 }

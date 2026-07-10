@@ -38,10 +38,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         coreDataManager.saveContext()
     }
 
-    func sceneWillEnterForeground(_ scene: UIScene) {
-        refreshDailyHoroscopeNotificationIfNeeded(container: coreDataManager.container)
-    }
-
     private func showWelcomeLoadingScreen(container: NSPersistentContainer) {
         let welcomeLoadingScreen = WelcomeLoadingModule.build(
             container: container,
@@ -95,17 +91,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private func finishCalculationFlow() {
         showMainScreen(container: coreDataManager.container)
-    }
-
-    private func refreshDailyHoroscopeNotificationIfNeeded(container: NSPersistentContainer) {
-        let profileService = ProfileServiceImpl(container: container)
-        let dailyHoroscopeNotificationService = DailyHoroscopeNotificationServiceImpl(
-            profileService: profileService
-        )
-
-        Task {
-            await dailyHoroscopeNotificationService.refreshDailyHoroscopeNotificationIfNeeded()
-        }
     }
 
     private func setRootViewController(_ viewController: UIViewController) {
