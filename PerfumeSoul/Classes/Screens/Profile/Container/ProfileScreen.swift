@@ -359,8 +359,7 @@ private extension ProfileScreen {
     }
 
     func makeZodiacInfo(profile: Profile) -> DailyHoroscope? {
-        let sign = viewModel.profileCalculation?.natalChart.sun.sign ?? profile.zodiacSign()
-        guard let sign else {
+        guard let sign = viewModel.profileCalculation?.natalChart.sun.sign.rawValue ?? profile.zodiacSign() else {
             return nil
         }
 
@@ -416,7 +415,7 @@ private extension ProfileScreen {
     }
 
     func makePlacementTitle(for placement: ZodiacPlacement) -> String {
-        let horoscope = DailyHoroscope(sign: placement.sign, energyOfDay: "")
+        let horoscope = DailyHoroscope(sign: placement.sign.rawValue, energyOfDay: "")
         return "\(horoscope.displayName) \(horoscope.symbol)"
     }
 }

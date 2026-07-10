@@ -66,7 +66,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let discoverScreen = DiscoverModule.build(requestManager: requestManager)
         let profileScreen = ProfileModule.build(
             container: container,
-            requestManager: requestManager,
             onProfileDeleted: { [weak self] in
                 self?.showCalculationScreen(container: container)
             }
