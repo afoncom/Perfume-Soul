@@ -153,6 +153,11 @@ private extension CalculationScreen {
                     .textInputAutocapitalization(.words)
                     .textContentType(.addressCity)
                     .autocorrectionDisabled()
+                    .onChange(of: viewModel.birthPlace) { _, newValue in
+                        if viewModel.selectedBirthPlace?.displayName != newValue {
+                            viewModel.selectedBirthPlace = nil
+                        }
+                    }
                     .task(id: viewModel.birthPlace) {
                         try? await Task.sleep(for: .seconds(0.5))
                         guard focusedField == .birthPlace && !Task.isCancelled else { return }
@@ -173,11 +178,9 @@ private extension CalculationScreen {
                     ForEach(Array(viewModel.birthPlaceCompletions.prefix(5).enumerated()), id: \.offset) { index, completion in
                         Button {
                             focusedField = nil
-                            viewModel.birthPlace = completion.subtitle.isEmpty
-                            ? completion.title
-                            : "\(completion.title), \(completion.subtitle)"
-                            viewModel.birthPlaceCompletions = []
-                            presenter.clearBirthPlaceSearch()
+                            Task {
+                                await presenter.birthPlaceCompletionTapped(completion)
+                            }
                         } label: {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(completion.title)
@@ -227,6 +230,8 @@ private extension CalculationScreen {
                 .background(Color(.pinkButton))
                 .clipShape(Capsule())
         }
+        .disabled(!viewModel.isContinueEnabled)
+        .opacity(viewModel.isContinueEnabled ? 1 : 0.6)
         .shadow(color: Color(.buttonShadow), radius: 12, x: 0, y: 6)
     }
     

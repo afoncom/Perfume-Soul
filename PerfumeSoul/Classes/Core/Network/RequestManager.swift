@@ -39,6 +39,15 @@ extension RequestManagerImpl: RequestManager {
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.httpMethod.rawValue
+        urlRequest.httpBody = request.httpBody
+
+        request.headers.forEach { key, value in
+            urlRequest.setValue(value, forHTTPHeaderField: key)
+        }
+
+        if request.httpBody != nil, request.headers["Content-Type"] == nil {
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
         
         let (data, responce) = try await urlSession.data(for: urlRequest)
         

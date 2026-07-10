@@ -19,8 +19,12 @@ protocol Request {
     var path: String { get }
     var httpMethod: HTTPMethod { get }
     var queryItems: [URLQueryItem] { get }
+    var headers: [String: String] { get }
+    var httpBody: Data? { get }
 }
 
 extension Request {
     var queryItems: [URLQueryItem] { [] }
+    var headers: [String: String] { [:] }
+    var httpBody: Data? { nil }
 }

@@ -2,8 +2,11 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24901" systemVersion="25F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="CDProfile" representedClassName="CDProfile" syncable="YES" codeGenerationType="class">
         <attribute name="birthDate" optional="YES" attributeType="String"/>
+        <attribute name="birthLatitude" optional="YES" attributeType="String"/>
+        <attribute name="birthLongitude" optional="YES" attributeType="String"/>
         <attribute name="birthPlace" optional="YES" attributeType="String"/>
         <attribute name="birthTime" optional="YES" attributeType="String"/>
+        <attribute name="birthTimeZoneIdentifier" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
 </model>

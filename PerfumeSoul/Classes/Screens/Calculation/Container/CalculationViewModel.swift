@@ -15,7 +15,13 @@ import Observation
     var birthDate = Date()
     var birthTime = CalculationViewModel.defaultBirthTime
     var birthPlace = ""
+    var selectedBirthPlace: BirthPlaceSelection?
     var birthPlaceCompletions: [MKLocalSearchCompletion] = []
+
+    var isContinueEnabled: Bool {
+        !firstName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+        selectedBirthPlace != nil
+    }
 
     var formattedBirthDate: String {
         Self.birthDateFormatter.string(from: birthDate)

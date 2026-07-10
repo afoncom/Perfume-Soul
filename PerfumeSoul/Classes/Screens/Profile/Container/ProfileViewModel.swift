@@ -11,6 +11,7 @@ import Observation
 
 @Observable final class ProfileViewModel {
     var profile: Profile?
+    var profileCalculation: ProfileCalculation?
     var isShowingDeleteProfileAlert = false
     var totalCorrectQuizAnswers = 0
 

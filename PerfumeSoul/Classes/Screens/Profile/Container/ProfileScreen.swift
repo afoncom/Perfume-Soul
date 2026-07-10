@@ -105,31 +105,36 @@ private extension ProfileScreen {
             Text(L10n.Profile.NatalChart.title)
                 .font(.title3)
                 .fontWeight(.medium)
-            
-            VStack(spacing: 8) {
-                makeNatalChartRow(
-                    color: Color(.natalSunSurface),
-                    symbol: "sun.max.fill",
-                    symbolColor: Color(.natalSunAccent),
-                    title: L10n.Profile.NatalChart.sun,
-                    value: L10n.Profile.NatalChart.sunValue
-                )
-                
-                makeNatalChartRow(
-                    color: Color(.natalMoonSurface),
-                    symbol: "moon.fill",
-                    symbolColor: Color(.natalMoonAccent),
-                    title: L10n.Profile.NatalChart.moon,
-                    value: L10n.Profile.NatalChart.moonValue
-                )
-                
-                makeNatalChartRow(
-                    color: Color(.natalAscendantSurface),
-                    symbol: "circle.hexagongrid.fill",
-                    symbolColor: Color(.pinkButton),
-                    title: L10n.Profile.NatalChart.ascendant,
-                    value: L10n.Profile.NatalChart.ascendantValue
-                )
+            if let natalChart = viewModel.profileCalculation?.natalChart {
+                VStack(spacing: 8) {
+                    makeNatalChartRow(
+                        color: Color(.natalSunSurface),
+                        symbol: "sun.max.fill",
+                        symbolColor: Color(.natalSunAccent),
+                        title: L10n.Profile.NatalChart.sun,
+                        value: makePlacementTitle(for: natalChart.sun)
+                    )
+
+                    makeNatalChartRow(
+                        color: Color(.natalMoonSurface),
+                        symbol: "moon.fill",
+                        symbolColor: Color(.natalMoonAccent),
+                        title: L10n.Profile.NatalChart.moon,
+                        value: makePlacementTitle(for: natalChart.moon)
+                    )
+
+                    makeNatalChartRow(
+                        color: Color(.natalAscendantSurface),
+                        symbol: "circle.hexagongrid.fill",
+                        symbolColor: Color(.pinkButton),
+                        title: L10n.Profile.NatalChart.ascendant,
+                        value: makePlacementTitle(for: natalChart.ascendant)
+                    )
+                }
+            } else {
+                ProgressView()
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.vertical, 20)
             }
         }
         .padding(14)
@@ -143,21 +148,22 @@ private extension ProfileScreen {
             Text(L10n.Profile.ElementBalance.title)
                 .font(.title3)
                 .fontWeight(.medium)
-            
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .fill(Color(.placeholderSoft))
-                    .frame(height: 34)
-            }
-            
-            HStack {
-                makeElementItem(percent: "15%", title: L10n.Profile.Element.fire)
-                Spacer()
-                makeElementItem(percent: "40%", title: L10n.Profile.Element.earth)
-                Spacer()
-                makeElementItem(percent: "15%", title: L10n.Profile.Element.air)
-                Spacer()
-                makeElementItem(percent: "30%", title: L10n.Profile.Element.water)
+            if let elementBalance = viewModel.profileCalculation?.elementBalance {
+                makeElementBalanceBar(elementBalance: elementBalance)
+
+                HStack {
+                    makeElementItem(percent: "\(elementBalance.fire)%", title: L10n.Profile.Element.fire)
+                    Spacer()
+                    makeElementItem(percent: "\(elementBalance.earth)%", title: L10n.Profile.Element.earth)
+                    Spacer()
+                    makeElementItem(percent: "\(elementBalance.air)%", title: L10n.Profile.Element.air)
+                    Spacer()
+                    makeElementItem(percent: "\(elementBalance.water)%", title: L10n.Profile.Element.water)
+                }
+            } else {
+                ProgressView()
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.vertical, 20)
             }
         }
         .padding(14)
@@ -353,7 +359,8 @@ private extension ProfileScreen {
     }
 
     func makeZodiacInfo(profile: Profile) -> DailyHoroscope? {
-        guard let sign = profile.zodiacSign() else {
+        let sign = viewModel.profileCalculation?.natalChart.sun.sign ?? profile.zodiacSign()
+        guard let sign else {
             return nil
         }
 
@@ -407,6 +414,11 @@ private extension ProfileScreen {
             return L10n.Profile.Expertise.Description.perfumer
         }
     }
+
+    func makePlacementTitle(for placement: ZodiacPlacement) -> String {
+        let horoscope = DailyHoroscope(sign: placement.sign, energyOfDay: "")
+        return "\(horoscope.displayName) \(horoscope.symbol)"
+    }
 }
 
 //MARK: - Natal Chart Row
@@ -454,6 +466,39 @@ private extension ProfileScreen {
 //MARK: - Element Item
 
 private extension ProfileScreen {
+    func makeElementBalanceBar(elementBalance: ElementBalance) -> some View {
+        GeometryReader { proxy in
+            let width = proxy.size.width
+
+            HStack(spacing: 0) {
+                makeElementBalanceSegment(
+                    color: Color(.pinkButton),
+                    width: width * CGFloat(elementBalance.fire) / 100
+                )
+                makeElementBalanceSegment(
+                    color: Color(.zodiacMint),
+                    width: width * CGFloat(elementBalance.earth) / 100
+                )
+                makeElementBalanceSegment(
+                    color: Color(.zodiacCyan),
+                    width: width * CGFloat(elementBalance.air) / 100
+                )
+                makeElementBalanceSegment(
+                    color: Color(.zodiacBlue),
+                    width: width * CGFloat(elementBalance.water) / 100
+                )
+            }
+            .background(Color(.placeholderSoft))
+            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        }
+        .frame(height: 34)
+    }
+
+    func makeElementBalanceSegment(color: Color, width: CGFloat) -> some View {
+        color
+            .frame(width: width)
+    }
+
     func makeElementItem(percent: String, title: String) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(percent)

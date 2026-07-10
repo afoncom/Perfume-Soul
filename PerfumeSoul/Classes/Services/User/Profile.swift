@@ -12,6 +12,9 @@ struct Profile: Equatable {
     let birthDate: String
     let birthTime: String
     let birthPlace: String
+    let birthLatitude: Double?
+    let birthLongitude: Double?
+    let birthTimeZoneIdentifier: String?
 }
 
 extension Profile: DatabaseStorable {
@@ -20,6 +23,9 @@ extension Profile: DatabaseStorable {
         self.birthDate = storableModel.birthDate ?? ""
         self.birthTime = storableModel.birthTime ?? ""
         self.birthPlace = storableModel.birthPlace ?? ""
+        self.birthLatitude = Double(storableModel.birthLatitude ?? "")
+        self.birthLongitude = Double(storableModel.birthLongitude ?? "")
+        self.birthTimeZoneIdentifier = storableModel.birthTimeZoneIdentifier
     }
 }
 
@@ -29,10 +35,33 @@ extension CDProfile: CDModel {
         self.birthDate = model.birthDate
         self.birthTime = model.birthTime
         self.birthPlace = model.birthPlace
+        self.birthLatitude = model.birthLatitude.map(String.init)
+        self.birthLongitude = model.birthLongitude.map(String.init)
+        self.birthTimeZoneIdentifier = model.birthTimeZoneIdentifier
     }
 }
 
 extension Profile {
+    var hasCompleteBirthPlaceData: Bool {
+        birthLatitude != nil &&
+        birthLongitude != nil &&
+        birthTimeZoneIdentifier?.isEmpty == false
+    }
+
+    var normalizedBirthDate: String? {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "dd.MM.yyyy"
+
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "yyyy-MM-dd"
+
+        guard let date = inputFormatter.date(from: birthDate) else {
+            return nil
+        }
+
+        return outputFormatter.string(from: date)
+    }
+
     func zodiacSign() -> String? {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
