@@ -97,9 +97,9 @@ extension SettingsPresenterImpl: SettingsPresenter {
     }
 }
 
-private extension SettingsPresenterImpl {
+extension SettingsPresenterImpl {
     @MainActor
-    func presentNotificationError(_ error: DailyHoroscopeNotificationServiceError) {
+    private func presentNotificationError(_ error: DailyHoroscopeNotificationServiceError) {
         switch error {
         case .permissionDenied:
             viewModel.notificationAlertTitle = L10n.Settings.Notification.permissionDeniedTitle
@@ -115,7 +115,7 @@ private extension SettingsPresenterImpl {
     }
 
     @MainActor
-    func presentUnknownNotificationError() {
+    private func presentUnknownNotificationError() {
         viewModel.notificationAlertTitle = L10n.Settings.Notification.unavailableTitle
         viewModel.notificationAlertMessage = L10n.Common.Error.message
         viewModel.showsNotificationSettingsAction = false

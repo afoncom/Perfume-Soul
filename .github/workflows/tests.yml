@@ -23,8 +23,8 @@ jobs:
         fi
 
         echo "PerfumeSoul.xcodeproj is missing. Generating from Project.swift..."
-        brew tap tuist/tuist
-        brew install --formula tuist
+        curl -Ls https://install.tuist.io | bash
+        export PATH="$HOME/.local/bin:$PATH"
         tuist version
         tuist generate --no-open
     - name: Run tests

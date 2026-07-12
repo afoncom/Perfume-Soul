@@ -96,8 +96,8 @@ extension DailyHoroscopeNotificationServiceImpl: DailyHoroscopeNotificationServi
     }
 }
 
-private extension DailyHoroscopeNotificationServiceImpl {
-    func requestNotificationAuthorizationIfNeeded() async throws -> Bool {
+extension DailyHoroscopeNotificationServiceImpl {
+    private func requestNotificationAuthorizationIfNeeded() async throws -> Bool {
         let settings = await userNotificationCenter.notificationSettings()
 
         switch settings.authorizationStatus {
@@ -112,7 +112,7 @@ private extension DailyHoroscopeNotificationServiceImpl {
         }
     }
 
-    func makeNotificationContent() async throws -> UNMutableNotificationContent {
+    private func makeNotificationContent() async throws -> UNMutableNotificationContent {
         guard await profileService.fetchProfile() != nil else {
             throw DailyHoroscopeNotificationServiceError.profileUnavailable
         }
@@ -125,7 +125,7 @@ private extension DailyHoroscopeNotificationServiceImpl {
         return content
     }
 
-    func scheduleNotification(content: UNMutableNotificationContent) async throws {
+    private func scheduleNotification(content: UNMutableNotificationContent) async throws {
         let trigger = UNCalendarNotificationTrigger(
             dateMatching: DateComponents(
                 hour: Constants.notificationHour,

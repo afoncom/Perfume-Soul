@@ -63,8 +63,8 @@ struct SettingsScreen: View {
     }
 }
 
-private extension SettingsScreen {
-    func makeHeaderView() -> some View {
+extension SettingsScreen {
+    private func makeHeaderView() -> some View {
         Text(L10n.Screen.settings)
             .font(.system(size: 28, weight: .medium, design: .rounded))
             .foregroundStyle(Color(.titleText))
@@ -72,7 +72,7 @@ private extension SettingsScreen {
             .padding(.bottom, 2)
     }
 
-    func makeNotificationsSection() -> some View {
+    private func makeNotificationsSection() -> some View {
         VStack(alignment: .leading, spacing: 14) {
             makeSectionTitle(L10n.Settings.notificationsTitle)
 
@@ -118,7 +118,7 @@ private extension SettingsScreen {
         }
     }
 
-    func makePrivacySection() -> some View {
+    private func makePrivacySection() -> some View {
         VStack(alignment: .leading, spacing: 14) {
             makeSectionTitle(L10n.Settings.privacyTitle)
 
@@ -156,7 +156,7 @@ private extension SettingsScreen {
         }
     }
 
-    func makeSupportSection() -> some View {
+    private func makeSupportSection() -> some View {
         VStack(alignment: .leading, spacing: 14) {
             makeSectionTitle(L10n.Settings.supportTitle)
 
@@ -176,7 +176,7 @@ private extension SettingsScreen {
         }
     }
 
-    func makeAboutSection() -> some View {
+    private func makeAboutSection() -> some View {
         VStack(alignment: .leading, spacing: 14) {
             makeSectionTitle(L10n.Settings.aboutTitle)
 
@@ -210,14 +210,14 @@ private extension SettingsScreen {
         }
     }
 
-    func makeSectionTitle(_ title: String) -> some View {
+    private func makeSectionTitle(_ title: String) -> some View {
         Text(title)
             .font(.system(size: 20, weight: .semibold, design: .rounded))
             .foregroundStyle(Color(.textPrimary))
             .padding(.horizontal, 4)
     }
 
-    func makeToggleRow(
+    private func makeToggleRow(
         icon: String,
         iconColor: Color,
         title: String,
@@ -247,7 +247,7 @@ private extension SettingsScreen {
         .padding(.vertical, 14)
     }
 
-    func makeActionRow(
+    private func makeActionRow(
         icon: String,
         iconColor: Color,
         title: String,
@@ -276,7 +276,7 @@ private extension SettingsScreen {
         .padding(.vertical, 14)
     }
 
-    func makeIconCircle(icon: String, iconColor: Color) -> some View {
+    private func makeIconCircle(icon: String, iconColor: Color) -> some View {
         ZStack {
             Circle()
                 .fill(Color(.surfaceOverlay))
@@ -288,7 +288,7 @@ private extension SettingsScreen {
         }
     }
 
-    func makeDivider() -> some View {
+    private func makeDivider() -> some View {
         Divider()
             .overlay(Color(.cardBorder))
             .padding(.leading, 64)
