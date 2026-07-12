@@ -136,6 +136,15 @@
 "settings.notification.aromaOfTheDayTitle" = "Аромат дня";
 "settings.notification.dailyHoroscopeSubtitle" = "Получайте прогноз каждый день";
 "settings.notification.dailyHoroscopeTitle" = "Ежедневный гороскоп";
+"settings.notification.dailyHoroscopeReminderBody" = "Откройте PerfumeSoul, чтобы прочитать сегодняшний гороскоп.";
+"settings.notification.dismissButton" = "ОК";
+"settings.notification.openSettingsButton" = "Открыть настройки";
+"settings.notification.permissionDeniedMessage" = "Чтобы получать ежедневный гороскоп в 09:00, разрешите уведомления для приложения в системных настройках.";
+"settings.notification.permissionDeniedTitle" = "Уведомления отключены";
+"settings.notification.profileRequiredMessage" = "Не удалось определить ваш знак зодиака. Проверьте дату рождения в профиле.";
+"settings.notification.profileRequiredTitle" = "Нужны данные профиля";
+"settings.notification.unavailableMessage" = "Сейчас не удалось получить гороскоп дня. Попробуйте позже.";
+"settings.notification.unavailableTitle" = "Гороскоп недоступен";
 "settings.notification.dayInPerfumerySubtitle" = "Исторические события и факты";
 "settings.notification.dayInPerfumeryTitle" = "Этот день в парфюмерии";
 "sendFeedback.button" = "Написать разработчику";

@@ -56,7 +56,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             container: container,
             requestManager: requestManager
         )
-        let settingsScreen = SettingsModule.build()
+        let settingsScreen = SettingsModule.build(
+            container: container
+        )
         let discoverScreen = DiscoverModule.build(requestManager: requestManager)
         let profileScreen = ProfileModule.build(
             container: container,
@@ -90,7 +92,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func finishCalculationFlow() {
         showMainScreen(container: coreDataManager.container)
     }
-    
+
     private func setRootViewController(_ viewController: UIViewController) {
         guard let window else {
             return

@@ -6,10 +6,12 @@
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
-import Foundation
-import Combine
 import Observation
 
 @Observable final class SettingsViewModel {
-    
+    var isDailyHoroscopeNotificationEnabled = false
+    var notificationAlertTitle: String?
+    var notificationAlertMessage: String?
+    var isShowingNotificationAlert = false
+    var showsNotificationSettingsAction = false
 }
