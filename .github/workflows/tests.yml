@@ -36,7 +36,7 @@ jobs:
         xcodebuild test \
           -project PerfumeSoul.xcodeproj \
           -scheme PerfumeSoul \
-          -destination 'platform=iOS Simulator,name=iPhone SE (3rd generation),OS=latest' \
+          -destination 'platform=iOS Simulator,name=iPhone 17,OS=latest' \
           -enableCodeCoverage YES \
           | tee xcodebuild.log
     - name: Upload logs if failed
