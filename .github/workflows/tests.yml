@@ -13,6 +13,10 @@ jobs:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     steps:
     - uses: actions/checkout@v5
+    - uses: jdx/mise-action@v4
+      with:
+        tool_versions: |
+          tuist latest
     - name: Generate Xcode project
       shell: bash
       run: |
@@ -23,8 +27,6 @@ jobs:
         fi
 
         echo "PerfumeSoul.xcodeproj is missing. Generating from Project.swift..."
-        curl -Ls https://install.tuist.io | bash
-        export PATH="$HOME/.local/bin:$PATH"
         tuist version
         tuist generate --no-open
     - name: Run tests
