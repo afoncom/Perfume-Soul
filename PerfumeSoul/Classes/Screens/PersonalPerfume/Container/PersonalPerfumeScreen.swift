@@ -21,6 +21,8 @@ struct PersonalPerfumeScreen: View {
     }
 
     var body: some View {
+        let bottomPadding: CGFloat = presenter.shouldShowContinueButton ? 120 : 32
+
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 18) {
                 makeHeaderView()
@@ -28,7 +30,7 @@ struct PersonalPerfumeScreen: View {
             }
             .padding(.horizontal, 16)
             .padding(.top, 24)
-            .padding(.bottom, 120)
+            .padding(.bottom, bottomPadding)
         }
         .background(
             LinearGradient(
@@ -40,20 +42,22 @@ struct PersonalPerfumeScreen: View {
             )
             .ignoresSafeArea()
         )
-        .safeAreaInset(edge: .bottom) {
-            makeContinueButton()
-                .padding(.horizontal, 24)
-                .padding(.top, 12)
-                .padding(.bottom, 8)
-        }
         .task {
             presenter.onAppear()
+        }
+        .safeAreaInset(edge: .bottom) {
+            if presenter.shouldShowContinueButton {
+                makeContinueButton()
+                    .padding(.horizontal, 24)
+                    .padding(.top, 12)
+                    .padding(.bottom, 8)
+            }
         }
     }
 }
 
-private extension PersonalPerfumeScreen {
-    func makeSectionsView() -> some View {
+extension PersonalPerfumeScreen {
+    private func makeSectionsView() -> some View {
         VStack(alignment: .leading, spacing: 18) {
             ForEach(Array(viewModel.sections.enumerated()), id: \.offset) { _, section in
                 makePerfumeSection(section: section)
@@ -61,14 +65,14 @@ private extension PersonalPerfumeScreen {
         }
     }
 
-    func makeHeaderView() -> some View {
+    private func makeHeaderView() -> some View {
         VStack(spacing: 8) {
-            Text("Your Personal Scents")
+            Text(L10n.PersonalPerfume.title)
                 .font(.system(size: 28, weight: .medium, design: .rounded))
                 .foregroundStyle(Color(.titleText))
                 .multilineTextAlignment(.center)
 
-            Text("Discover your curated fragrance selection.")
+            Text(L10n.PersonalPerfume.subtitle)
                 .font(.system(size: 18, weight: .regular, design: .rounded))
                 .foregroundStyle(Color(.descriptionText))
                 .multilineTextAlignment(.center)
@@ -78,7 +82,7 @@ private extension PersonalPerfumeScreen {
         .padding(.bottom, 8)
     }
 
-    func makePerfumeSection(section: PersonalPerfumeSection) -> some View {
+    private func makePerfumeSection(section: PersonalPerfumeSection) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             Text(section.title)
                 .font(.system(size: 22, weight: .medium, design: .rounded))
@@ -106,7 +110,7 @@ private extension PersonalPerfumeScreen {
         }
     }
 
-    func makePerfumeItem(name: String, subtitle: String) -> some View {
+    private func makePerfumeItem(name: String, subtitle: String) -> some View {
         VStack(spacing: 10) {
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .fill(Color(.surfacePrimary))
@@ -132,11 +136,11 @@ private extension PersonalPerfumeScreen {
         .frame(maxWidth: .infinity, alignment: .top)
     }
 
-    func makeContinueButton() -> some View {
+    private func makeContinueButton() -> some View {
         Button {
             presenter.continueButtonTapped()
         } label: {
-            Text("Continue")
+            Text(L10n.Common.continueButton)
                 .font(.system(size: 24, weight: .medium, design: .rounded))
                 .foregroundStyle(Color(.textOnAccent))
                 .frame(maxWidth: .infinity)

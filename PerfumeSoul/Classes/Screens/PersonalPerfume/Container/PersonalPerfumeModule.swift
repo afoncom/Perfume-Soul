@@ -7,24 +7,22 @@
 //
 
 import SwiftUI
-import CoreData
 
 final class PersonalPerfumeModule {
-    static func build(
-        onFinish: @escaping () -> Void
-    ) -> UIViewController {
+    static func build(onFinish: (() -> Void)? = nil) -> UIViewController {
         let viewModel = PersonalPerfumeViewModel()
-        let service = PersonalPerfumeServiceImpl()
         let router = PersonalPerfumeRouterImpl(onFinish: onFinish)
+        let service = PersonalPerfumeServiceImpl()
         let presenter = PersonalPerfumePresenterImpl(
             viewModel: viewModel,
             router: router,
-            service: service
+            service: service,
+            shouldShowContinueButton: onFinish != nil
         )
         
         let view = PersonalPerfumeScreen(viewModel: viewModel, presenter: presenter)
         let hostingController = UIHostingController(rootView: view)
-        hostingController.title = "Personal Perfumes"
+        hostingController.title = L10n.PersonalPerfume.navigationTitle
         hostingController.navigationItem.largeTitleDisplayMode = .never
         hostingController.hidesBottomBarWhenPushed = true
 

@@ -9,6 +9,7 @@
 protocol ProfilePresenter {
     func addedNewProfilesButtonTab()
     func personalPerfumesButtonTapped()
+    func profileDescriptionButtonTapped()
     func onAppear() async
     func deleteProfile() async
 }
@@ -45,6 +46,10 @@ extension ProfilePresenterImpl: ProfilePresenter {
     
     func personalPerfumesButtonTapped() {
         router.showPersonalPerfumes()
+    }
+
+    func profileDescriptionButtonTapped() {
+        router.showProfileDescription()
     }
 
     func onAppear() async {

@@ -95,9 +95,54 @@ Current recommendation scoring:
 
 - Loads the saved profile from Core Data
 - Shows profile header with birth information
-- Contains natal chart, element balance, personal perfumes, and extra profiles sections
+- Contains natal chart, element balance, dynamic profile description, personal perfumes, and extra profiles sections
 
 Only the profile entity itself is persisted. Several profile sections still use static display data.
+
+### Dynamic Profile Description
+
+`ProfileDescription` is now generated on the iOS side from the same birth data that powers the natal chart:
+
+```text
+Profile from Core Data
+  -> ProfileCalculationService
+     -> AstronomyEngine
+        -> Sun / Moon / Ascendant / element balance
+  -> ProfileDescriptionBuilder
+     -> title, subtitle, summary, insight cards
+  -> ProfileDescriptionScreen
+```
+
+The builder is deterministic and does not call paid AI services or third-party text APIs. This keeps secrets out of the mobile app, avoids subscription limits, and makes the MVP behavior predictable.
+
+Current template system:
+
+- 12 Sun templates describe the user's core identity.
+- 12 Moon templates describe emotional rhythm and inner needs.
+- 12 Ascendant templates describe first impression and outer style.
+- 4 dominant element templates describe the strongest temperament.
+- 4 weak element templates describe the element that needs more conscious support.
+- Synthesis rules combine Sun, Moon, Ascendant, and element balance into one summary.
+
+Current synthesis rules cover:
+
+- all three placements in one sign
+- Sun and Moon in one sign
+- all placements in one element
+- Sun/Moon same element
+- Sun/Ascendant same element
+- Moon/Ascendant same element
+- opposite Sun/Moon elements
+- balanced element profile
+- default layered profile
+
+This is intentionally an MVP system. It gives a real dynamic profile without requiring thousands of text combinations. Future growth points:
+
+- move templates into localization resources
+- add richer Russian and English copy variants
+- add aspects, houses, and more precise birth-place handling
+- reuse the same profile result for `PersonalPerfume`
+- move profile-description generation to the backend only if the product later needs server-side consistency across platforms
 
 ### Today Energy
 

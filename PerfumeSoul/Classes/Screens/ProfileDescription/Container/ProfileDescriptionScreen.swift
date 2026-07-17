@@ -21,17 +21,22 @@ struct ProfileDescriptionScreen: View {
     }
     
     var body: some View {
+        let bottomPadding: CGFloat = presenter.shouldShowContinueButton ? 140 : 32
+
         ZStack {
-            if let profile = viewModel.profile {
+            if let profileDescription = viewModel.profileDescription {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 26) {
-                        makeHeaderView(profile: profile)
-                        makeInsightCards()
+                        makeHeaderView(profileDescription: profileDescription)
+                        makeInsightCards(profileDescription: profileDescription)
                     }
                     .padding(.horizontal, 20)
                     .padding(.top, 28)
-                    .padding(.bottom, 140)
+                    .padding(.bottom, bottomPadding)
                 }
+            } else if viewModel.profile != nil {
+                makeUnavailableState()
+                    .padding(.horizontal, 24)
             } else {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -39,10 +44,12 @@ struct ProfileDescriptionScreen: View {
         }
         .background(Color(.backgroundPrimary).ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
-            makeContinueButton()
-                .padding(.horizontal, 24)
-                .padding(.top, 12)
-                .padding(.bottom, 8)
+            if presenter.shouldShowContinueButton {
+                makeContinueButton()
+                    .padding(.horizontal, 24)
+                    .padding(.top, 12)
+                    .padding(.bottom, 8)
+            }
         }
         .task {
             await presenter.onAppear()
@@ -50,45 +57,48 @@ struct ProfileDescriptionScreen: View {
     }
 }
 
-private extension ProfileDescriptionScreen {
-    func makeHeaderView(profile: Profile) -> some View {
+extension ProfileDescriptionScreen {
+    private func makeHeaderView(profileDescription: ProfileDescription) -> some View {
         VStack(spacing: 10) {
-            Text("\(profile.name), you are")
+            Text(profileDescription.title)
                 .font(.system(size: 26, weight: .medium, design: .rounded))
                 .foregroundStyle(Color(.titleText))
                 .multilineTextAlignment(.center)
             
-            Text("Deep, Intuitive, Magnetic\nPersonality")
+            Text(profileDescription.subtitle)
                 .font(.system(size: 20, weight: .regular, design: .rounded))
                 .foregroundStyle(Color(.bodyText))
                 .multilineTextAlignment(.center)
                 .lineSpacing(4)
+
+            Text(profileDescription.summary)
+                .font(.system(size: 17, weight: .regular, design: .rounded))
+                .foregroundStyle(Color(.descriptionText))
+                .multilineTextAlignment(.center)
+                .lineSpacing(4)
+                .padding(.top, 6)
         }
         .padding(.top, 8)
     }
     
-    func makeInsightCards() -> some View {
+    private func makeInsightCards(profileDescription: ProfileDescription) -> some View {
         VStack(spacing: 14) {
-            makeInsightCard(
-                symbol: "drop.fill",
-                iconBackground: Color(.purpleIconSurface),
-                iconTint: Color(.purpleIcon),
-                title: "Water dominant",
-                description: "You are deeply intuitive and empathetic."
-            )
-            
-            makeInsightCard(
-                symbol: "heart.fill",
-                iconBackground: Color(.pinkIconSurface),
-                iconTint: Color(.pinkIcon),
-                title: "Strong emotional perception",
-                description: "You can easily sense the moods and feelings of others."
-            )
+            ForEach(Array(profileDescription.insights.enumerated()), id: \.offset) { _, insight in
+                let colors = colors(for: insight.style)
+
+                makeInsightCard(
+                    symbol: insight.iconSystemName,
+                    iconBackground: colors.background,
+                    iconTint: colors.tint,
+                    title: insight.title,
+                    description: insight.description
+                )
+            }
         }
         .frame(maxWidth: .infinity)
     }
     
-    func makeInsightCard(
+    private func makeInsightCard(
         symbol: String,
         iconBackground: Color,
         iconTint: Color,
@@ -132,11 +142,47 @@ private extension ProfileDescriptionScreen {
         .shadow(color: Color(.insightCardShadow), radius: 18, x: 0, y: 10)
     }
     
-    func makeContinueButton() -> some View {
+    private func makeUnavailableState() -> some View {
+        VStack(spacing: 14) {
+            Image(systemName: "sparkles")
+                .font(.system(size: 28, weight: .semibold))
+                .foregroundStyle(Color(.pinkIcon))
+
+            Text(L10n.ProfileDescription.unavailableTitle)
+                .font(.system(size: 22, weight: .semibold, design: .rounded))
+                .foregroundStyle(Color(.titleText))
+
+            Text(L10n.ProfileDescription.unavailableMessage)
+                .font(.system(size: 16, weight: .regular, design: .rounded))
+                .foregroundStyle(Color(.descriptionText))
+                .multilineTextAlignment(.center)
+                .lineSpacing(4)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private func colors(for style: ProfileDescriptionInsightStyle) -> (background: Color, tint: Color) {
+        switch style {
+        case .sun:
+            (Color(.natalSunSurface), Color(.natalSunAccent))
+        case .moon:
+            (Color(.natalMoonSurface), Color(.natalMoonAccent))
+        case .ascendant:
+            (Color(.natalAscendantSurface), Color(.zodiacPurple))
+        case .dominantElement:
+            (Color(.pinkIconSurface), Color(.pinkIcon))
+        case .weakElement:
+            (Color(.purpleIconSurface), Color(.purpleIcon))
+        case .synthesis:
+            (Color(.surfaceOverlay), Color(.pinkButton))
+        }
+    }
+
+    private func makeContinueButton() -> some View {
         Button {
             presenter.continueButtonTapped()
         } label: {
-            Text("Continue")
+            Text(L10n.Common.continueButton)
                 .font(.system(size: 24, weight: .medium, design: .rounded))
                 .foregroundStyle(Color(.textOnAccent))
                 .frame(maxWidth: .infinity)

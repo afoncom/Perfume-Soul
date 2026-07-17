@@ -39,6 +39,9 @@ struct ProfileScreen: View {
 
                         makePersonalPerfumesRow()
                             .padding(.horizontal, 16)
+
+                        makeProfileDescriptionRow()
+                            .padding(.horizontal, 16)
                         
                         makeAddedNewProfiless()
                             .padding(.horizontal, 16)
@@ -188,18 +191,63 @@ private extension ProfileScreen {
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Personal Perfumes")
+                    Text(L10n.Profile.PersonalPerfumes.title)
                         .font(.title3)
                         .fontWeight(.medium)
                         .foregroundStyle(Color(.textPrimary))
                     
-                    Text("Open your curated fragrance selection.")
+                    Text(L10n.Profile.PersonalPerfumes.subtitle)
                         .font(.footnote)
                         .foregroundStyle(Color(.textSecondary))
                 }
                 
                 Spacer()
                 
+                Image(systemName: "chevron.right")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(Color(.textSecondary))
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .background(Color(.surfacePrimary))
+            .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 22, style: .continuous)
+                    .stroke(Color(.cardBorder), lineWidth: 1)
+            )
+            .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
+        }
+        .buttonStyle(.plain)
+    }
+
+    func makeProfileDescriptionRow() -> some View {
+        Button {
+            presenter.profileDescriptionButtonTapped()
+        } label: {
+            HStack(spacing: 14) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .fill(Color(.pinkIconSurface))
+                        .frame(width: 46, height: 46)
+
+                    Image(systemName: "person.text.rectangle")
+                        .font(.headline)
+                        .foregroundStyle(Color(.pinkIcon))
+                }
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(L10n.Profile.PersonalityDescription.title)
+                        .font(.title3)
+                        .fontWeight(.medium)
+                        .foregroundStyle(Color(.textPrimary))
+
+                    Text(L10n.Profile.PersonalityDescription.subtitle)
+                        .font(.footnote)
+                        .foregroundStyle(Color(.textSecondary))
+                }
+
+                Spacer()
+
                 Image(systemName: "chevron.right")
                     .font(.footnote.weight(.semibold))
                     .foregroundStyle(Color(.textSecondary))

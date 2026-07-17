@@ -14,11 +14,11 @@ protocol ProfileDescriptionRouter {
 
 final class ProfileDescriptionRouterImpl {
     private weak var navigationController: UINavigationController?
-    private let onFinish: () -> Void
+    private let onFinish: (() -> Void)?
 
     init(
         navigationController: UINavigationController?,
-        onFinish: @escaping () -> Void
+        onFinish: (() -> Void)? = nil
     ) {
         self.navigationController = navigationController
         self.onFinish = onFinish
@@ -27,9 +27,7 @@ final class ProfileDescriptionRouterImpl {
 
 extension ProfileDescriptionRouterImpl: ProfileDescriptionRouter {
     func showPersonalPerfume() {
-        let screen = PersonalPerfumeModule.build(
-            onFinish: onFinish
-        )
+        let screen = PersonalPerfumeModule.build(onFinish: onFinish)
         navigationController?.pushViewController(screen, animated: true)
     }
 }

@@ -47,12 +47,12 @@ private extension CalculationScreen {
 private extension CalculationScreen {
     func makeHeaderView() -> some View {
         VStack(spacing: 12) {
-            Text("Create your profile")
+            Text(L10n.Screen.calculationCreateProfile)
                 .font(.largeTitle)
                 .fontWeight(.semibold)
                 .multilineTextAlignment(.center)
             
-            Text("Enter your birth details to unlock personalized insights.")
+            Text(L10n.Calculation.subtitle)
                 .font(.title3)
                 .foregroundStyle(Color(.textSecondary))
                 .multilineTextAlignment(.center)
@@ -76,7 +76,7 @@ private extension CalculationScreen {
     
     func makeNameField() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Name")
+            Text(L10n.Calculation.nameTitle)
                 .font(.title3)
                 .fontWeight(.medium)
             
@@ -85,7 +85,7 @@ private extension CalculationScreen {
                     .font(.headline)
                     .foregroundStyle(Color(.textPrimary))
                 
-                TextField("Your first name", text: $viewModel.firstName)
+                TextField(L10n.Calculation.namePlaceholder, text: $viewModel.firstName)
                     .focused($focusedField, equals: .name)
                     .submitLabel(.next)
                     .font(.title3)
@@ -104,7 +104,7 @@ private extension CalculationScreen {
     
     func makeBirthDateField() -> some View {
         makePickerField(
-            title: "Birth Date",
+            title: L10n.Calculation.birthDateTitle,
             systemImage: "calendar",
             iconColor: Color(.textPrimary)
         ) {
@@ -120,7 +120,7 @@ private extension CalculationScreen {
     
     func makeBirthTimeField() -> some View {
         makePickerField(
-            title: "Birth Time",
+            title: L10n.Calculation.birthTimeTitle,
             systemImage: "clock",
             iconColor: Color(.textPrimary)
         ) {
@@ -136,7 +136,7 @@ private extension CalculationScreen {
     
     func makeBirthPlaceField() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Birth Place")
+            Text(L10n.Calculation.birthPlaceTitle)
                 .font(.title3)
                 .fontWeight(.medium)
             
@@ -145,7 +145,7 @@ private extension CalculationScreen {
                     .font(.headline)
                     .foregroundStyle(Color(.textPrimary))
                 
-                TextField("Enter city or town", text: $viewModel.birthPlace)
+                TextField(L10n.Calculation.birthPlacePlaceholder, text: $viewModel.birthPlace)
                     .focused($focusedField, equals: .birthPlace)
                     .submitLabel(.done)
                     .font(.title3)
@@ -221,7 +221,7 @@ private extension CalculationScreen {
         Button {
             presenter.continueButtonTapped()
         } label: {
-            Text("Continue")
+            Text(L10n.Common.continueButton)
                 .font(.title2)
                 .fontWeight(.medium)
                 .foregroundStyle(Color(.textOnAccent))
