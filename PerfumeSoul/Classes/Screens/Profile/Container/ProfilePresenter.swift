@@ -45,7 +45,7 @@ extension ProfilePresenterImpl: ProfilePresenter {
     }
     
     func personalPerfumesButtonTapped() {
-        router.showPersonalPerfumes()
+        router.showPersonalPerfumes(profileCalculation: viewModel.profileCalculation)
     }
 
     func profileDescriptionButtonTapped() {
@@ -74,7 +74,9 @@ extension ProfilePresenterImpl: ProfilePresenter {
         let profile = await MainActor.run {
             viewModel.profile
         }
-        guard let profile else { return }
+        guard let profile else {
+            return
+        }
         
         await profileService.deleteProfile(profile)
         quizProgressService.resetProgress()

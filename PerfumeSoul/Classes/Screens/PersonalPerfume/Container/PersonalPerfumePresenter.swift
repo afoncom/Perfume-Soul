@@ -9,8 +9,7 @@
 protocol PersonalPerfumePresenter {
     var shouldShowContinueButton: Bool { get }
 
-    @MainActor
-    func onAppear()
+    func onAppear() async
     func continueButtonTapped()
 }
 
@@ -18,27 +17,119 @@ final class PersonalPerfumePresenterImpl {
     private let viewModel: PersonalPerfumeViewModel
     private let router: PersonalPerfumeRouter
     private let service: PersonalPerfumeService
+    private let profileCalculation: ProfileCalculation?
     let shouldShowContinueButton: Bool
     
     init(
         viewModel: PersonalPerfumeViewModel,
         router: PersonalPerfumeRouter,
         service: PersonalPerfumeService,
+        profileCalculation: ProfileCalculation?,
         shouldShowContinueButton: Bool
     ) {
         self.viewModel = viewModel
         self.router = router
         self.service = service
+        self.profileCalculation = profileCalculation
         self.shouldShowContinueButton = shouldShowContinueButton
     }
 }
 
 extension PersonalPerfumePresenterImpl: PersonalPerfumePresenter {
-    func onAppear() {
-        viewModel.sections = service.fetchSections()
+    func onAppear() async {
+        guard let profileCalculation else {
+            await MainActor.run {
+                viewModel.sections = []
+                viewModel.isLoading = false
+                viewModel.errorMessage = L10n.Common.Error.message
+            }
+            return
+        }
+
+        await MainActor.run {
+            viewModel.isLoading = true
+            viewModel.errorMessage = nil
+        }
+
+        do {
+            let perfumes = try await service.requestPersonalPerfumes(
+                profile: makeProfileRequest(profileCalculation: profileCalculation)
+            )
+
+            await MainActor.run {
+                viewModel.sections = makeSections(perfumes: perfumes)
+                viewModel.isLoading = false
+                viewModel.errorMessage = nil
+            }
+        } catch {
+            await MainActor.run {
+                viewModel.sections = []
+                viewModel.isLoading = false
+                viewModel.errorMessage = L10n.Common.Error.message
+            }
+        }
     }
 
     func continueButtonTapped() {
         router.finishOnboarding()
+    }
+}
+
+extension PersonalPerfumePresenterImpl {
+    private func makeProfileRequest(profileCalculation: ProfileCalculation) -> PersonalPerfumeProfileRequest {
+        PersonalPerfumeProfileRequest(
+            sun: profileCalculation.natalChart.sun.sign.rawValue,
+            moon: profileCalculation.natalChart.moon.sign.rawValue,
+            ascendant: profileCalculation.natalChart.ascendant.sign.rawValue,
+            elementBalance: PersonalPerfumeElementBalanceRequest(
+                fire: profileCalculation.elementBalance.fire,
+                earth: profileCalculation.elementBalance.earth,
+                air: profileCalculation.elementBalance.air,
+                water: profileCalculation.elementBalance.water
+            )
+        )
+    }
+
+    private func makeSections(perfumes: [PersonalPerfumeResponse]) -> [PersonalPerfumeSection] {
+        PersonalPerfumeMarketSegment.allCases.compactMap { segment in
+            let segmentPerfumes = perfumes.filter { $0.marketSegment == segment }
+            guard !segmentPerfumes.isEmpty else {
+                return nil
+            }
+
+            return PersonalPerfumeSection(
+                title: title(for: segment),
+                perfumes: segmentPerfumes.map { perfume in
+                    PersonalPerfumeItem(
+                        name: perfume.brandName,
+                        subtitle: perfume.perfumeName,
+                        matchPercentage: perfume.matchPercentage
+                    )
+                },
+                description: description(for: segment)
+            )
+        }
+    }
+
+    private func title(for segment: PersonalPerfumeMarketSegment) -> String {
+        switch segment {
+        case .luxury:
+            L10n.PersonalPerfume.Section.Luxury.title
+        case .daily:
+            L10n.PersonalPerfume.Section.Daily.title
+        case .niche:
+            L10n.PersonalPerfume.Section.Niche.title
+        }
+    }
+
+    private func description(for segment: PersonalPerfumeMarketSegment) -> String {
+        switch segment {
+        case .luxury:
+            L10n.PersonalPerfume.Section.Luxury.description
+        case .daily:
+            L10n.PersonalPerfume.Section.Daily.description
+        case .niche:
+            L10n.PersonalPerfume.Section.Niche.description
+        }
     }
 }

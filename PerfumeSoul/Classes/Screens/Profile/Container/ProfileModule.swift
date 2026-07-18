@@ -12,6 +12,7 @@ import CoreData
 final class ProfileModule {
     static func build(
         container: NSPersistentContainer,
+        requestManager: RequestManager,
         onProfileDeleted: @escaping () -> Void
     ) -> NavigationControllerContainer {
         let viewModel = ProfileViewModel()
@@ -27,6 +28,7 @@ final class ProfileModule {
         let router = ProfileRouterImpl(
             navigationController: navigationController,
             container: container,
+            requestManager: requestManager,
             onProfileDeleted: onProfileDeleted
         )
         let presenter = ProfilePresenterImpl(

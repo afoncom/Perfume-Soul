@@ -200,6 +200,15 @@
 "personalPerfume.navigationTitle" = "Personal Perfumes";
 "personalPerfume.subtitle" = "Discover your curated fragrance selection.";
 "personalPerfume.title" = "Your Personal Scents";
+"personalPerfume.empty.title" = "Personal perfumes are currently unavailable";
+"personalPerfume.empty.subtitle" = "Please try again later";
+"personalPerfume.matchFormat" = "%d%% match";
+"personalPerfume.section.luxury.title" = "Luxury Picks";
+"personalPerfume.section.luxury.description" = "Premium fragrances with the strongest match for your natal scent profile.";
+"personalPerfume.section.daily.title" = "Daily Picks";
+"personalPerfume.section.daily.description" = "Designer and everyday fragrances selected for regular wear.";
+"personalPerfume.section.niche.title" = "Niche Picks";
+"personalPerfume.section.niche.description" = "Distinctive niche fragrances that fit your personal aromatic vector.";
 "profile.personalPerfumes.subtitle" = "Open your curated fragrance selection.";
 "profile.personalPerfumes.title" = "Personal Perfumes";
 "profile.personalityDescription.subtitle" = "Reopen your natal scent profile.";

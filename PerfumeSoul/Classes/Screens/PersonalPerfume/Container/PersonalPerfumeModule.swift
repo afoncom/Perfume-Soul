@@ -9,14 +9,19 @@
 import SwiftUI
 
 final class PersonalPerfumeModule {
-    static func build(onFinish: (() -> Void)? = nil) -> UIViewController {
+    static func build(
+        profileCalculation: ProfileCalculation?,
+        requestManager: RequestManager,
+        onFinish: (() -> Void)? = nil
+    ) -> UIViewController {
         let viewModel = PersonalPerfumeViewModel()
         let router = PersonalPerfumeRouterImpl(onFinish: onFinish)
-        let service = PersonalPerfumeServiceImpl()
+        let service = PersonalPerfumeServiceImpl(requestManager: requestManager)
         let presenter = PersonalPerfumePresenterImpl(
             viewModel: viewModel,
             router: router,
             service: service,
+            profileCalculation: profileCalculation,
             shouldShowContinueButton: onFinish != nil
         )
         

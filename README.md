@@ -15,7 +15,7 @@ The repository currently contains a working application shell with onboarding, a
 
 - `WelcomeLoading` checks whether a profile already exists and routes either to onboarding or the main tab bar.
 - `Calculation` creates a profile with name, birth date, birth time, and birth place.
-- `ProfileDescription` and `PersonalPerfume` continue the onboarding flow with editorial and curated content.
+- `ProfileDescription` and `PersonalPerfume` continue the onboarding flow with dynamic profile-based content.
 - `Today` is one of the most integrated tabs right now: it loads `perfumery-history` and daily horoscopes from the backend and opens backend-driven details screens.
 - `Discover` now includes a working `Find Similar Perfumes` flow with database-backed perfume search, backend-driven recommendations, and navigation to the shared perfume details card.
 - `TodayEnergy` is wired to backend data and receives both the personal horoscope and the full horoscope list from the `Today` flow.
@@ -65,6 +65,16 @@ Backend-backed data already used here:
   - `matchPercentage`
   - `longevityScore`
   - `sillageScore`
+- `POST /personal-perfumes` returns 9 profile-based perfumes grouped by market segment with:
+  - `id`
+  - `perfumeName`
+  - `brandName`
+  - `marketSegment`
+  - `matchingNotes`
+  - `matchingAccords`
+  - `matchPercentage`
+  - `longevityScore`
+  - `sillageScore`
 
 ### Discover
 
@@ -97,7 +107,7 @@ Current recommendation scoring:
 - Shows profile header with birth information
 - Contains natal chart, element balance, dynamic profile description, personal perfumes, and extra profiles sections
 
-Only the profile entity itself is persisted. Several profile sections still use static display data.
+Only the profile entity itself is persisted. Dynamic profile sections derive their data from the saved profile and backend perfume metadata.
 
 ### Dynamic Profile Description
 
@@ -141,8 +151,60 @@ This is intentionally an MVP system. It gives a real dynamic profile without req
 - move templates into localization resources
 - add richer Russian and English copy variants
 - add aspects, houses, and more precise birth-place handling
-- reuse the same profile result for `PersonalPerfume`
 - move profile-description generation to the backend only if the product later needs server-side consistency across platforms
+
+### Personal Perfumes
+
+`PersonalPerfume` is a backend-driven recommendation flow. The iOS app does not score perfumes locally and does not calculate `matchPercentage`.
+
+Current data flow:
+
+```text
+ProfileCalculation
+  -> PersonalPerfumePresenter
+     -> PersonalPerfumeService
+        -> RequestManager
+           -> POST /personal-perfumes
+              -> PersonalPerfumeLoader
+                 -> PostgreSQL perfume data
+                 -> deterministic scoring
+              -> response with 9 perfumes
+     -> PersonalPerfumeViewModel
+  -> PersonalPerfumeScreen
+```
+
+The request sends only the already calculated natal profile data needed for matching:
+
+- Sun sign
+- Moon sign
+- Ascendant sign
+- element balance
+
+The backend maps the profile into aromatic preferences:
+
+- Sun defines the core fragrance direction: families, accords, and base taste vector.
+- Moon defines emotional comfort: softness, freshness, sweetness, wateriness, calmness, and cozy notes.
+- Ascendant defines outer impression: style, brightness, intensity, sillage, and perceived presence.
+- Element balance strengthens the overall vector:
+  - Fire: spicy, amber, leather, smoky, citrus, stronger sillage
+  - Earth: woody, green, earthy, vetiver, patchouli, iris, longer wear
+  - Air: fresh, citrus, aromatic, musky, clean, light
+  - Water: marine, floral, soft musk, vanilla, incense, powdery, soft
+
+Current MVP scoring is deterministic and uses:
+
+- accord match, weighted at `0.35`
+- note match, weighted at `0.30`
+- fragrance family, mood, and style match, weighted at `0.25`
+- longevity and sillage match, weighted at `0.10`
+
+The backend normalizes the final score into `matchPercentage`. Perfumes are split by `marketSegment` stored on the perfume row:
+
+- `luxury`
+- `daily`
+- `niche`
+
+The endpoint returns top 3 perfumes per segment, for 9 perfumes total. If a segment has fewer than 3 valid perfumes, the MVP returns the available perfumes from that segment and does not borrow from another segment.
 
 ### Today Energy
 
@@ -232,6 +294,7 @@ Available routes:
 - `GET /perfumes`
 - `GET /perfumes/:perfumeID/notes`
 - `GET /perfumes/recommendations?perfumeIDs=1,2,3`
+- `POST /personal-perfumes`
 
 ## Testing and CI
 
@@ -256,7 +319,7 @@ This README reflects the codebase as it exists now, not the intended future prod
 
 - `Today` mixes backend-driven content with static cards
 - several `Profile` sections are UI-complete but still use placeholder values
-- recommendation quality now comes from one backend scoring source, but the perfume metadata dataset is still evolving
+- recommendation quality now comes from backend scoring sources, but the perfume metadata dataset is still evolving
 
 ## Stack Summary
 

@@ -9,6 +9,7 @@
 struct PersonalPerfumeItem {
     let name: String
     let subtitle: String
+    let matchPercentage: Int
 }
 
 struct PersonalPerfumeSection {

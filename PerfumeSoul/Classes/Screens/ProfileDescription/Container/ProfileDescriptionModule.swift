@@ -13,12 +13,14 @@ import UIKit
 final class ProfileDescriptionModule {
     static func build(
         container: NSPersistentContainer,
+        requestManager: RequestManager,
         navigationController: UINavigationController? = nil,
         onFinish: (() -> Void)? = nil
     ) -> UIViewController {
         let viewModel = ProfileDescriptionViewModel()
         let router = ProfileDescriptionRouterImpl(
             navigationController: navigationController,
+            requestManager: requestManager,
             onFinish: onFinish
         )
         let profileService = ProfileServiceImpl(container: container)

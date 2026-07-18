@@ -11,7 +11,7 @@ import CoreData
 
 protocol ProfileRouter {
     func showAddedNewProfiles()
-    func showPersonalPerfumes()
+    func showPersonalPerfumes(profileCalculation: ProfileCalculation?)
     func showProfileDescription()
     func showCalculationScreen()
 }
@@ -19,15 +19,18 @@ protocol ProfileRouter {
 final class ProfileRouterImpl {
     private weak var navigationController: UINavigationController?
     private let container: NSPersistentContainer
+    private let requestManager: RequestManager
     private let onProfileDeleted: () -> Void
     
     init(
         navigationController: UINavigationController?,
         container: NSPersistentContainer,
+        requestManager: RequestManager,
         onProfileDeleted: @escaping () -> Void
     ) {
         self.navigationController = navigationController
         self.container = container
+        self.requestManager = requestManager
         self.onProfileDeleted = onProfileDeleted
     }
 }
@@ -40,14 +43,18 @@ extension ProfileRouterImpl: ProfileRouter {
         )
     }
     
-    func showPersonalPerfumes() {
-        let screen = PersonalPerfumeModule.build()
+    func showPersonalPerfumes(profileCalculation: ProfileCalculation?) {
+        let screen = PersonalPerfumeModule.build(
+            profileCalculation: profileCalculation,
+            requestManager: requestManager
+        )
         navigationController?.pushViewController(screen, animated: true)
     }
 
     func showProfileDescription() {
         let screen = ProfileDescriptionModule.build(
-            container: container
+            container: container,
+            requestManager: requestManager
         )
         navigationController?.pushViewController(screen, animated: true)
     }

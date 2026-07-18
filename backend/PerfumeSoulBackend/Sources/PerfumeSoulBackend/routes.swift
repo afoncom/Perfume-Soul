@@ -7,6 +7,16 @@ func routes(_ app: Application) throws {
         return try jsonResponse(try ProfileCalculationLoader.load(request: request))
     }
 
+    app.post("personal-perfumes") { req async throws -> Response in
+        let request = try req.content.decode(PersonalPerfumesRequest.self)
+        return try jsonResponse(
+            try await PersonalPerfumeLoader.load(
+                request: request,
+                on: req.db
+            )
+        )
+    }
+
     app.get("perfumery-history") { req async throws -> Response in
         guard let item = try await PerfumeryHistoryLoader.load(
             dateKey: "2026-04-18",

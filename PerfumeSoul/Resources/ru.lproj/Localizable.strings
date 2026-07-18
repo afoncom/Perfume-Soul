@@ -200,6 +200,15 @@
 "personalPerfume.navigationTitle" = "Персональные ароматы";
 "personalPerfume.subtitle" = "Откройте персональную подборку ароматов.";
 "personalPerfume.title" = "Ваши персональные ароматы";
+"personalPerfume.empty.title" = "Персональные ароматы сейчас недоступны";
+"personalPerfume.empty.subtitle" = "Попробуйте позже";
+"personalPerfume.matchFormat" = "%d%% совпадение";
+"personalPerfume.section.luxury.title" = "Luxury подборка";
+"personalPerfume.section.luxury.description" = "Премиальные ароматы с самым сильным совпадением с вашим натальным профилем.";
+"personalPerfume.section.daily.title" = "Daily подборка";
+"personalPerfume.section.daily.description" = "Дизайнерские и повседневные ароматы для регулярного ношения.";
+"personalPerfume.section.niche.title" = "Niche подборка";
+"personalPerfume.section.niche.description" = "Самобытные нишевые ароматы, которые подходят вашему ароматическому вектору.";
 "profile.personalPerfumes.subtitle" = "Откройте свою персональную подборку ароматов.";
 "profile.personalPerfumes.title" = "Персональные ароматы";
 "profile.personalityDescription.subtitle" = "Перечитайте свой профиль по натальной карте.";

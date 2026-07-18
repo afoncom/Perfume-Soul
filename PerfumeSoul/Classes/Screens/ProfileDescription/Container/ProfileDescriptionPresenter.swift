@@ -40,28 +40,32 @@ final class ProfileDescriptionPresenterImpl {
 
 extension ProfileDescriptionPresenterImpl: ProfileDescriptionPresenter {
     func continueButtonTapped() {
-        router.showPersonalPerfume()
+        router.showPersonalPerfume(profileCalculation: viewModel.profileCalculation)
     }
     
     func onAppear() async {
         let profile = await profileService.fetchProfile()
         let profileDescription: ProfileDescription?
+        let profileCalculation: ProfileCalculation?
 
         if
             let profile,
             profile.hasCompleteBirthPlaceData,
             let calculation = try? await profileCalculationService.calculate(profile: profile)
         {
+            profileCalculation = calculation
             profileDescription = profileDescriptionBuilder.build(
                 profile: profile,
                 calculation: calculation
             )
         } else {
+            profileCalculation = nil
             profileDescription = nil
         }
 
         await MainActor.run {
             viewModel.profile = profile
+            viewModel.profileCalculation = profileCalculation
             viewModel.profileDescription = profileDescription
         }
     }

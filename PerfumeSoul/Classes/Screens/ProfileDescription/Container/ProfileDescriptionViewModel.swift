@@ -10,5 +10,6 @@ import Observation
 
 @Observable final class ProfileDescriptionViewModel {
     var profile: Profile?
+    var profileCalculation: ProfileCalculation?
     var profileDescription: ProfileDescription?
 }

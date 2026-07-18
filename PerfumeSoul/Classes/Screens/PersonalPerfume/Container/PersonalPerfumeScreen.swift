@@ -21,7 +21,7 @@ struct PersonalPerfumeScreen: View {
     }
 
     var body: some View {
-        let bottomPadding: CGFloat = presenter.shouldShowContinueButton ? 120 : 32
+        let bottomPadding = presenter.shouldShowContinueButton ? 120.0 : 32.0
 
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 18) {
@@ -43,7 +43,7 @@ struct PersonalPerfumeScreen: View {
             .ignoresSafeArea()
         )
         .task {
-            presenter.onAppear()
+            await presenter.onAppear()
         }
         .safeAreaInset(edge: .bottom) {
             if presenter.shouldShowContinueButton {
@@ -57,10 +57,19 @@ struct PersonalPerfumeScreen: View {
 }
 
 extension PersonalPerfumeScreen {
+    @ViewBuilder
     private func makeSectionsView() -> some View {
-        VStack(alignment: .leading, spacing: 18) {
-            ForEach(Array(viewModel.sections.enumerated()), id: \.offset) { _, section in
-                makePerfumeSection(section: section)
+        if viewModel.isLoading {
+            makeLoadingState()
+        } else if let errorMessage = viewModel.errorMessage {
+            makeErrorState(message: errorMessage)
+        } else if viewModel.sections.isEmpty {
+            makeEmptyState()
+        } else {
+            VStack(alignment: .leading, spacing: 18) {
+                ForEach(Array(viewModel.sections.enumerated()), id: \.offset) { _, section in
+                    makePerfumeSection(section: section)
+                }
             }
         }
     }
@@ -91,7 +100,7 @@ extension PersonalPerfumeScreen {
             VStack(alignment: .leading, spacing: 16) {
                 HStack(alignment: .top, spacing: 12) {
                     ForEach(Array(section.perfumes.enumerated()), id: \.offset) { _, perfume in
-                        makePerfumeItem(name: perfume.name, subtitle: perfume.subtitle)
+                        makePerfumeItem(perfume: perfume)
                     }
                 }
 
@@ -110,7 +119,7 @@ extension PersonalPerfumeScreen {
         }
     }
 
-    private func makePerfumeItem(name: String, subtitle: String) -> some View {
+    private func makePerfumeItem(perfume: PersonalPerfumeItem) -> some View {
         VStack(spacing: 10) {
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .fill(Color(.surfacePrimary))
@@ -121,19 +130,68 @@ extension PersonalPerfumeScreen {
                 )
 
             VStack(spacing: 4) {
-                Text(name)
+                Text(perfume.name)
                     .font(.system(size: 15, weight: .medium, design: .rounded))
                     .foregroundStyle(Color(.titleText))
                     .multilineTextAlignment(.center)
 
-                Text(subtitle)
+                Text(perfume.subtitle)
                     .font(.system(size: 14, weight: .regular, design: .rounded))
                     .foregroundStyle(Color(.descriptionText))
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
+
+                Text(L10n.PersonalPerfume.matchFormat(perfume.matchPercentage))
+                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .foregroundStyle(Color(.pinkButton))
+                    .multilineTextAlignment(.center)
             }
         }
         .frame(maxWidth: .infinity, alignment: .top)
+    }
+
+    private func makeLoadingState() -> some View {
+        ProgressView()
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 32)
+    }
+
+    private func makeErrorState(message: String) -> some View {
+        makeMessageState(
+            title: message,
+            subtitle: L10n.PersonalPerfume.Empty.subtitle
+        )
+    }
+
+    private func makeEmptyState() -> some View {
+        makeMessageState(
+            title: L10n.PersonalPerfume.Empty.title,
+            subtitle: L10n.PersonalPerfume.Empty.subtitle
+        )
+    }
+
+    private func makeMessageState(title: String, subtitle: String) -> some View {
+        VStack(spacing: 8) {
+            Text(title)
+                .font(.headline)
+                .foregroundStyle(Color(.textPrimary))
+                .multilineTextAlignment(.center)
+
+            Text(subtitle)
+                .font(.subheadline)
+                .foregroundStyle(Color(.textSecondary))
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 32)
+        .padding(.horizontal, 20)
+        .background(Color(.surfacePrimary))
+        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .stroke(Color(.cardBorder), lineWidth: 1)
+        )
+        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
 
     private func makeContinueButton() -> some View {

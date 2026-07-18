@@ -10,4 +10,6 @@ import Observation
 
 @Observable final class PersonalPerfumeViewModel {
     var sections: [PersonalPerfumeSection] = []
+    var isLoading = false
+    var errorMessage: String?
 }
