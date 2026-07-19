@@ -77,25 +77,30 @@ private struct ScoredPersonalPerfume {
     let signature: String
 }
 
+private struct WeightedScore {
+    let value: Double
+    let weight: Double
+}
+
 private struct PersonalPerfumePreference {
     let accordWeights: [String: Double]
-    let noteWeights: [String: Int]
+    let noteWeights: [String: Double]
     let noteDisplayNames: [String: String]
-    let fragranceProfile: String
-    let moodProfile: String
-    let styleProfile: String
+    let fragranceTokenWeights: [String: Double]
+    let moodTokenWeights: [String: Double]
+    let styleTokenWeights: [String: Double]
     let targetLongevityScore: Double
     let targetSillageScore: Double
 
     init(request: PersonalPerfumesRequest) {
         var accordWeights: [String: Double] = [:]
-        var noteWeights: [String: Int] = [:]
+        var noteWeights: [String: Double] = [:]
         var noteDisplayNames: [String: String] = [:]
-        var fragranceTokens: [String] = []
-        var moodTokens: [String] = []
-        var styleTokens: [String] = []
-        var longevityValues: [Double] = []
-        var sillageValues: [Double] = []
+        var fragranceTokenWeights: [String: Double] = [:]
+        var moodTokenWeights: [String: Double] = [:]
+        var styleTokenWeights: [String: Double] = [:]
+        var longevityValues: [WeightedScore] = []
+        var sillageValues: [WeightedScore] = []
 
         let sunPreference = SignPerfumePreference.preference(for: request.sun)
         Self.add(
@@ -106,8 +111,8 @@ private struct PersonalPerfumePreference {
             noteWeights: &noteWeights,
             noteDisplayNames: &noteDisplayNames
         )
-        fragranceTokens.append(contentsOf: sunPreference.fragranceTokens)
-        longevityValues.append(sunPreference.longevityScore)
+        Self.addTokens(sunPreference.fragranceTokens, weight: 1, to: &fragranceTokenWeights)
+        longevityValues.append(WeightedScore(value: sunPreference.longevityScore, weight: 1))
 
         let moonPreference = SignPerfumePreference.preference(for: request.moon)
         Self.add(
@@ -118,8 +123,8 @@ private struct PersonalPerfumePreference {
             noteWeights: &noteWeights,
             noteDisplayNames: &noteDisplayNames
         )
-        moodTokens.append(contentsOf: moonPreference.moodTokens)
-        longevityValues.append(moonPreference.longevityScore)
+        Self.addTokens(moonPreference.moodTokens, weight: 1, to: &moodTokenWeights)
+        longevityValues.append(WeightedScore(value: moonPreference.longevityScore, weight: 0.8))
 
         let ascendantPreference = SignPerfumePreference.preference(for: request.ascendant)
         Self.add(
@@ -130,8 +135,8 @@ private struct PersonalPerfumePreference {
             noteWeights: &noteWeights,
             noteDisplayNames: &noteDisplayNames
         )
-        styleTokens.append(contentsOf: ascendantPreference.styleTokens)
-        sillageValues.append(ascendantPreference.sillageScore)
+        Self.addTokens(ascendantPreference.styleTokens, weight: 1, to: &styleTokenWeights)
+        sillageValues.append(WeightedScore(value: ascendantPreference.sillageScore, weight: 1))
 
         Self.add(
             elementPreference: .fire,
@@ -139,9 +144,9 @@ private struct PersonalPerfumePreference {
             accordWeights: &accordWeights,
             noteWeights: &noteWeights,
             noteDisplayNames: &noteDisplayNames,
-            fragranceTokens: &fragranceTokens,
-            moodTokens: &moodTokens,
-            styleTokens: &styleTokens,
+            fragranceTokenWeights: &fragranceTokenWeights,
+            moodTokenWeights: &moodTokenWeights,
+            styleTokenWeights: &styleTokenWeights,
             longevityValues: &longevityValues,
             sillageValues: &sillageValues
         )
@@ -151,9 +156,9 @@ private struct PersonalPerfumePreference {
             accordWeights: &accordWeights,
             noteWeights: &noteWeights,
             noteDisplayNames: &noteDisplayNames,
-            fragranceTokens: &fragranceTokens,
-            moodTokens: &moodTokens,
-            styleTokens: &styleTokens,
+            fragranceTokenWeights: &fragranceTokenWeights,
+            moodTokenWeights: &moodTokenWeights,
+            styleTokenWeights: &styleTokenWeights,
             longevityValues: &longevityValues,
             sillageValues: &sillageValues
         )
@@ -163,9 +168,9 @@ private struct PersonalPerfumePreference {
             accordWeights: &accordWeights,
             noteWeights: &noteWeights,
             noteDisplayNames: &noteDisplayNames,
-            fragranceTokens: &fragranceTokens,
-            moodTokens: &moodTokens,
-            styleTokens: &styleTokens,
+            fragranceTokenWeights: &fragranceTokenWeights,
+            moodTokenWeights: &moodTokenWeights,
+            styleTokenWeights: &styleTokenWeights,
             longevityValues: &longevityValues,
             sillageValues: &sillageValues
         )
@@ -175,9 +180,9 @@ private struct PersonalPerfumePreference {
             accordWeights: &accordWeights,
             noteWeights: &noteWeights,
             noteDisplayNames: &noteDisplayNames,
-            fragranceTokens: &fragranceTokens,
-            moodTokens: &moodTokens,
-            styleTokens: &styleTokens,
+            fragranceTokenWeights: &fragranceTokenWeights,
+            moodTokenWeights: &moodTokenWeights,
+            styleTokenWeights: &styleTokenWeights,
             longevityValues: &longevityValues,
             sillageValues: &sillageValues
         )
@@ -185,11 +190,11 @@ private struct PersonalPerfumePreference {
         self.accordWeights = accordWeights
         self.noteWeights = noteWeights
         self.noteDisplayNames = noteDisplayNames
-        self.fragranceProfile = fragranceTokens.joined(separator: " ")
-        self.moodProfile = moodTokens.joined(separator: " ")
-        self.styleProfile = styleTokens.joined(separator: " ")
-        self.targetLongevityScore = Self.average(values: longevityValues) ?? 6
-        self.targetSillageScore = Self.average(values: sillageValues) ?? 6
+        self.fragranceTokenWeights = fragranceTokenWeights
+        self.moodTokenWeights = moodTokenWeights
+        self.styleTokenWeights = styleTokenWeights
+        self.targetLongevityScore = Self.weightedAverage(values: longevityValues) ?? 6
+        self.targetSillageScore = Self.weightedAverage(values: sillageValues) ?? 6
     }
 }
 
@@ -273,8 +278,8 @@ private extension PersonalPerfumeLoader {
         return lhs.rawScore > rhs.rawScore
     }
 
-    static func noteWeights(for perfumeProfile: PerfumeProfile) -> [String: Int] {
-        var noteWeights: [String: Int] = [:]
+    static func noteWeights(for perfumeProfile: PerfumeProfile) -> [String: Double] {
+        var noteWeights: [String: Double] = [:]
         addNotes(perfumeProfile.topNotes, weight: 3, to: &noteWeights)
         addNotes(perfumeProfile.middleNotes, weight: 2, to: &noteWeights)
         addNotes(perfumeProfile.baseNotes, weight: 1, to: &noteWeights)
@@ -283,8 +288,8 @@ private extension PersonalPerfumeLoader {
 
     static func addNotes(
         _ notes: [String],
-        weight: Int,
-        to noteWeights: inout [String: Int]
+        weight: Double,
+        to noteWeights: inout [String: Double]
     ) {
         for note in notes {
             noteWeights[normalize(note), default: 0] += weight
@@ -327,17 +332,17 @@ private extension PersonalPerfumeLoader {
         perfumeProfile: PerfumeProfile,
         preference: PersonalPerfumePreference
     ) -> Double {
-        let familyScore = stringSimilarity(
+        let familyScore = weightedTokenSimilarity(
             value: perfumeProfile.fragranceFamily,
-            targetValue: preference.fragranceProfile
+            targetWeights: preference.fragranceTokenWeights
         )
-        let moodScore = stringSimilarity(
+        let moodScore = weightedTokenSimilarity(
             value: perfumeProfile.moodProfile,
-            targetValue: preference.moodProfile
+            targetWeights: preference.moodTokenWeights
         )
-        let styleScore = stringSimilarity(
+        let styleScore = weightedTokenSimilarity(
             value: perfumeProfile.styleProfile,
-            targetValue: preference.styleProfile
+            targetWeights: preference.styleTokenWeights
         )
         return familyScore * 0.4 + moodScore * 0.35 + styleScore * 0.25
     }
@@ -369,33 +374,26 @@ private extension PersonalPerfumeLoader {
         return max(0, 1 - (distance / 9))
     }
 
-    static func stringSimilarity(
+    static func weightedTokenSimilarity(
         value: String?,
-        targetValue: String
+        targetWeights: [String: Double]
     ) -> Double {
-        guard
-            let valueTokens = normalizedTokens(from: value),
-            let targetTokens = normalizedTokens(from: targetValue)
-        else {
+        guard let candidateWeights = tokenWeights(from: value) else {
             return 0
         }
 
-        let overlapCount = valueTokens.intersection(targetTokens).count
-        guard overlapCount > 0 else {
-            return 0
-        }
-
-        let coverage = Double(overlapCount) / Double(targetTokens.count)
-        let precision = Double(overlapCount) / Double(valueTokens.count)
-        return coverage * 0.7 + precision * 0.3
+        return weightedSimilarity(
+            targetWeights: targetWeights,
+            candidateWeights: candidateWeights
+        )
     }
 
     static func matchingNotes(
         preference: PersonalPerfumePreference,
-        candidateNoteWeights: [String: Int]
+        candidateNoteWeights: [String: Double]
     ) -> [String] {
         preference.noteWeights.keys
-            .compactMap { normalizedNote -> (String, Int)? in
+            .compactMap { normalizedNote -> (String, Double)? in
                 guard let candidateWeight = candidateNoteWeights[normalizedNote] else {
                     return nil
                 }
@@ -447,7 +445,7 @@ private extension PersonalPerfumeLoader {
             .lowercased()
     }
 
-    static func normalizedTokens(from value: String?) -> Set<String>? {
+    static func tokenWeights(from value: String?) -> [String: Double]? {
         guard let value else {
             return nil
         }
@@ -462,25 +460,33 @@ private extension PersonalPerfumeLoader {
             return nil
         }
 
-        return Set(tokens)
+        return tokens.reduce(into: [:]) { weights, token in
+            weights[token, default: 0] += 1
+        }
     }
 }
 
 private extension PersonalPerfumePreference {
-    static func average(values: [Double]) -> Double? {
-        guard !values.isEmpty else {
+    static func weightedAverage(values: [WeightedScore]) -> Double? {
+        let totalWeight = values.reduce(0) { partialResult, score in
+            partialResult + score.weight
+        }
+        guard totalWeight > 0 else {
             return nil
         }
 
-        return values.reduce(0, +) / Double(values.count)
+        let weightedTotal = values.reduce(0) { partialResult, score in
+            partialResult + score.value * score.weight
+        }
+        return weightedTotal / totalWeight
     }
 
     static func add(
         signPreference: SignPerfumePreference,
         accordMultiplier: Double,
-        noteWeight: Int,
+        noteWeight: Double,
         accordWeights: inout [String: Double],
-        noteWeights: inout [String: Int],
+        noteWeights: inout [String: Double],
         noteDisplayNames: inout [String: String]
     ) {
         for accord in signPreference.accords {
@@ -494,17 +500,27 @@ private extension PersonalPerfumePreference {
         }
     }
 
+    static func addTokens(
+        _ tokens: [String],
+        weight: Double,
+        to tokenWeights: inout [String: Double]
+    ) {
+        for token in tokens {
+            tokenWeights[PersonalPerfumeLoader.normalize(token), default: 0] += weight
+        }
+    }
+
     static func add(
         elementPreference: ElementPerfumePreference,
         balance: Int,
         accordWeights: inout [String: Double],
-        noteWeights: inout [String: Int],
+        noteWeights: inout [String: Double],
         noteDisplayNames: inout [String: String],
-        fragranceTokens: inout [String],
-        moodTokens: inout [String],
-        styleTokens: inout [String],
-        longevityValues: inout [Double],
-        sillageValues: inout [Double]
+        fragranceTokenWeights: inout [String: Double],
+        moodTokenWeights: inout [String: Double],
+        styleTokenWeights: inout [String: Double],
+        longevityValues: inout [WeightedScore],
+        sillageValues: inout [WeightedScore]
     ) {
         guard balance > 0 else {
             return
@@ -515,18 +531,18 @@ private extension PersonalPerfumePreference {
             accordWeights[accord, default: 0] += multiplier
         }
 
-        let noteWeight = max(1, Int((multiplier * 3).rounded(.toNearestOrAwayFromZero)))
+        let noteWeight = multiplier * 3
         for note in elementPreference.notes {
             let normalizedNote = PersonalPerfumeLoader.normalize(note)
             noteWeights[normalizedNote, default: 0] += noteWeight
             noteDisplayNames[normalizedNote] = note
         }
 
-        fragranceTokens.append(contentsOf: elementPreference.fragranceTokens)
-        moodTokens.append(contentsOf: elementPreference.moodTokens)
-        styleTokens.append(contentsOf: elementPreference.styleTokens)
-        longevityValues.append(elementPreference.longevityScore)
-        sillageValues.append(elementPreference.sillageScore)
+        addTokens(elementPreference.fragranceTokens, weight: multiplier, to: &fragranceTokenWeights)
+        addTokens(elementPreference.moodTokens, weight: multiplier, to: &moodTokenWeights)
+        addTokens(elementPreference.styleTokens, weight: multiplier, to: &styleTokenWeights)
+        longevityValues.append(WeightedScore(value: elementPreference.longevityScore, weight: multiplier))
+        sillageValues.append(WeightedScore(value: elementPreference.sillageScore, weight: multiplier))
     }
 }
 

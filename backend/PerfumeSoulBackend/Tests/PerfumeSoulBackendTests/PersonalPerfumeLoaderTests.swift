@@ -51,9 +51,66 @@ struct PersonalPerfumeLoaderTests {
         #expect(recommendations.dropFirst(3).prefix(3).map(\.marketSegment) == [.daily, .daily, .daily])
         #expect(recommendations.suffix(3).map(\.marketSegment) == [.niche, .niche, .niche])
     }
+
+    @Test("Dominant element profile scores matching descriptors and wear higher than balanced profile")
+    func dominantElementWeightsDescriptorsAndWearProportionally() {
+        let firePerfume = PerfumeProfile(
+            id: 1,
+            perfumeName: "Fire Descriptor",
+            brandName: "Brand",
+            longevityScore: 7,
+            sillageScore: 9,
+            fragranceFamily: "spicy amber leather citrus",
+            styleProfile: "bold glamorous strong",
+            moodProfile: "warm energetic bold",
+            marketSegment: "daily"
+        )
+        let fireDominantRequest = makeRequest(
+            fire: 97,
+            earth: 1,
+            air: 1,
+            water: 1
+        )
+        let balancedRequest = makeRequest(
+            fire: 25,
+            earth: 25,
+            air: 25,
+            water: 25
+        )
+
+        let fireDominantMatch = PersonalPerfumeLoader.load(
+            request: fireDominantRequest,
+            perfumeProfiles: [firePerfume]
+        )[0].matchPercentage
+        let balancedMatch = PersonalPerfumeLoader.load(
+            request: balancedRequest,
+            perfumeProfiles: [firePerfume]
+        )[0].matchPercentage
+
+        #expect(fireDominantMatch > balancedMatch)
+    }
 }
 
 private extension PersonalPerfumeLoaderTests {
+    func makeRequest(
+        fire: Int,
+        earth: Int,
+        air: Int,
+        water: Int
+    ) -> PersonalPerfumesRequest {
+        PersonalPerfumesRequest(
+            sun: .aquarius,
+            moon: .aquarius,
+            ascendant: .aquarius,
+            elementBalance: ElementBalance(
+                fire: fire,
+                earth: earth,
+                air: air,
+                water: water
+            )
+        )
+    }
+
     func makePerfumes() -> [PerfumeProfile] {
         [
             makePerfume(id: 1, name: "Luxury Fire", brand: "Tom Ford", segment: "luxury", accords: ["amber": 1, "spicy": 0.9]),
