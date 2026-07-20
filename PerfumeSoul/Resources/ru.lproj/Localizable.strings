@@ -202,7 +202,13 @@
 "personalPerfume.title" = "Ваши персональные ароматы";
 "personalPerfume.empty.title" = "Персональные ароматы сейчас недоступны";
 "personalPerfume.empty.subtitle" = "Попробуйте позже";
+"personalPerfume.error.missingProfile.title" = "Натальный профиль недоступен";
+"personalPerfume.error.missingProfile.subtitle" = "Завершите или повторите расчет профиля перед открытием персональных ароматов.";
+"personalPerfume.error.requestFailed.title" = "Не удалось загрузить персональные ароматы";
+"personalPerfume.error.requestFailed.subtitle" = "Проверьте соединение и попробуйте еще раз.";
 "personalPerfume.matchFormat" = "%d%% совпадение";
+"personalPerfume.matchExplanationFormat" = "Совпало: %@";
+"personalPerfume.retryButton" = "Повторить";
 "personalPerfume.section.luxury.title" = "Luxury подборка";
 "personalPerfume.section.luxury.description" = "Премиальные ароматы с самым сильным совпадением с вашим натальным профилем.";
 "personalPerfume.section.daily.title" = "Daily подборка";

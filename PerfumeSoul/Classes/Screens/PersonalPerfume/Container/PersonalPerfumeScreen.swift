@@ -59,18 +59,25 @@ struct PersonalPerfumeScreen: View {
 extension PersonalPerfumeScreen {
     @ViewBuilder
     private func makeSectionsView() -> some View {
-        if viewModel.isLoading {
+        switch viewModel.state {
+        case .loading:
             makeLoadingState()
-        } else if let errorMessage = viewModel.errorMessage {
-            makeErrorState(message: errorMessage)
-        } else if viewModel.sections.isEmpty {
+        case let .content(sections):
+            makeContentState(sections: sections)
+        case .empty:
             makeEmptyState()
-        } else {
-            VStack(alignment: .leading, spacing: 18) {
-                ForEach(Array(viewModel.sections.enumerated()), id: \.offset) { _, section in
-                    makePerfumeSection(section: section)
-                }
-            }
+        case .missingProfileCalculation:
+            makeErrorState(
+                title: L10n.PersonalPerfume.Error.MissingProfile.title,
+                subtitle: L10n.PersonalPerfume.Error.MissingProfile.subtitle,
+                canRetry: false
+            )
+        case .requestFailed:
+            makeErrorState(
+                title: L10n.PersonalPerfume.Error.RequestFailed.title,
+                subtitle: L10n.PersonalPerfume.Error.RequestFailed.subtitle,
+                canRetry: true
+            )
         }
     }
 
@@ -145,9 +152,26 @@ extension PersonalPerfumeScreen {
                     .font(.system(size: 13, weight: .semibold, design: .rounded))
                     .foregroundStyle(Color(.pinkButton))
                     .multilineTextAlignment(.center)
+
+                if let matchExplanation = perfume.matchExplanation {
+                    Text(matchExplanation)
+                        .font(.system(size: 11, weight: .regular, design: .rounded))
+                        .foregroundStyle(Color(.descriptionText))
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.85)
+                }
             }
         }
         .frame(maxWidth: .infinity, alignment: .top)
+    }
+
+    private func makeContentState(sections: [PersonalPerfumeSection]) -> some View {
+        VStack(alignment: .leading, spacing: 18) {
+            ForEach(Array(sections.enumerated()), id: \.offset) { _, section in
+                makePerfumeSection(section: section)
+            }
+        }
     }
 
     private func makeLoadingState() -> some View {
@@ -156,22 +180,32 @@ extension PersonalPerfumeScreen {
             .padding(.vertical, 32)
     }
 
-    private func makeErrorState(message: String) -> some View {
+    private func makeErrorState(
+        title: String,
+        subtitle: String,
+        canRetry: Bool
+    ) -> some View {
         makeMessageState(
-            title: message,
-            subtitle: L10n.PersonalPerfume.Empty.subtitle
+            title: title,
+            subtitle: subtitle,
+            canRetry: canRetry
         )
     }
 
     private func makeEmptyState() -> some View {
         makeMessageState(
             title: L10n.PersonalPerfume.Empty.title,
-            subtitle: L10n.PersonalPerfume.Empty.subtitle
+            subtitle: L10n.PersonalPerfume.Empty.subtitle,
+            canRetry: false
         )
     }
 
-    private func makeMessageState(title: String, subtitle: String) -> some View {
-        VStack(spacing: 8) {
+    private func makeMessageState(
+        title: String,
+        subtitle: String,
+        canRetry: Bool
+    ) -> some View {
+        VStack(spacing: 12) {
             Text(title)
                 .font(.headline)
                 .foregroundStyle(Color(.textPrimary))
@@ -181,6 +215,27 @@ extension PersonalPerfumeScreen {
                 .font(.subheadline)
                 .foregroundStyle(Color(.textSecondary))
                 .multilineTextAlignment(.center)
+
+            if canRetry {
+                Button {
+                    Task {
+                        await presenter.retryButtonTapped()
+                    }
+                } label: {
+                    Text(L10n.PersonalPerfume.retryButton)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Color(.textPrimary))
+                        .padding(.horizontal, 18)
+                        .padding(.vertical, 10)
+                        .background(Color(.surfacePrimary))
+                        .clipShape(Capsule())
+                        .overlay(
+                            Capsule()
+                                .stroke(Color(.cardBorder), lineWidth: 1)
+                        )
+                }
+                .buttonStyle(.plain)
+            }
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 32)
@@ -215,6 +270,8 @@ extension PersonalPerfumeScreen {
                 )
                 .clipShape(Capsule())
         }
+        .disabled(!viewModel.canContinue)
+        .opacity(viewModel.canContinue ? 1 : 0.55)
         .background(Color(.surfaceHighlight))
     }
 }

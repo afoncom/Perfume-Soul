@@ -19,7 +19,7 @@ final class CalculationModule {
         let viewModel = CalculationViewModel()
         let navigationController = UINavigationController()
         let router = CalculationRouterImpl(
-            navigationController: navigationController,
+            navigationController: navigationController, 
             container: container,
             requestManager: requestManager,
             onFinish: onFinish

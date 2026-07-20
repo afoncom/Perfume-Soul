@@ -10,6 +10,7 @@ protocol PersonalPerfumePresenter {
     var shouldShowContinueButton: Bool { get }
 
     func onAppear() async
+    func retryButtonTapped() async
     func continueButtonTapped()
 }
 
@@ -37,45 +38,51 @@ final class PersonalPerfumePresenterImpl {
 
 extension PersonalPerfumePresenterImpl: PersonalPerfumePresenter {
     func onAppear() async {
+        await loadPersonalPerfumes()
+    }
+
+    func retryButtonTapped() async {
+        await loadPersonalPerfumes()
+    }
+
+    func continueButtonTapped() {
+        guard viewModel.canContinue else {
+            return
+        }
+
+        router.finishOnboarding()
+    }
+}
+
+extension PersonalPerfumePresenterImpl {
+    private func loadPersonalPerfumes() async {
         guard let profileCalculation else {
             await MainActor.run {
-                viewModel.sections = []
-                viewModel.isLoading = false
-                viewModel.errorMessage = L10n.Common.Error.message
+                viewModel.state = .missingProfileCalculation
             }
             return
         }
 
         await MainActor.run {
-            viewModel.isLoading = true
-            viewModel.errorMessage = nil
+            viewModel.state = .loading
         }
 
         do {
             let perfumes = try await service.requestPersonalPerfumes(
                 profile: makeProfileRequest(profileCalculation: profileCalculation)
             )
+            let sections = makeSections(perfumes: perfumes)
 
             await MainActor.run {
-                viewModel.sections = makeSections(perfumes: perfumes)
-                viewModel.isLoading = false
-                viewModel.errorMessage = nil
+                viewModel.state = sections.isEmpty ? .empty : .content(sections)
             }
         } catch {
             await MainActor.run {
-                viewModel.sections = []
-                viewModel.isLoading = false
-                viewModel.errorMessage = L10n.Common.Error.message
+                viewModel.state = .requestFailed
             }
         }
     }
 
-    func continueButtonTapped() {
-        router.finishOnboarding()
-    }
-}
-
-extension PersonalPerfumePresenterImpl {
     private func makeProfileRequest(profileCalculation: ProfileCalculation) -> PersonalPerfumeProfileRequest {
         PersonalPerfumeProfileRequest(
             sun: profileCalculation.natalChart.sun.sign.rawValue,
@@ -103,6 +110,7 @@ extension PersonalPerfumePresenterImpl {
                     PersonalPerfumeItem(
                         name: perfume.brandName,
                         subtitle: perfume.perfumeName,
+                        matchExplanation: makeMatchExplanation(perfume: perfume),
                         matchPercentage: perfume.matchPercentage
                     )
                 },
@@ -131,5 +139,17 @@ extension PersonalPerfumePresenterImpl {
         case .niche:
             L10n.PersonalPerfume.Section.Niche.description
         }
+    }
+
+    private func makeMatchExplanation(perfume: PersonalPerfumeResponse) -> String? {
+        let matchedValues = (perfume.matchingNotes + perfume.matchingAccords)
+            .filter { !$0.isEmpty }
+            .prefix(4)
+
+        guard !matchedValues.isEmpty else {
+            return nil
+        }
+
+        return L10n.PersonalPerfume.matchExplanationFormat(matchedValues.joined(separator: ", "))
     }
 }

@@ -202,7 +202,13 @@
 "personalPerfume.title" = "Your Personal Scents";
 "personalPerfume.empty.title" = "Personal perfumes are currently unavailable";
 "personalPerfume.empty.subtitle" = "Please try again later";
+"personalPerfume.error.missingProfile.title" = "Natal profile is unavailable";
+"personalPerfume.error.missingProfile.subtitle" = "Complete or retry the profile calculation before opening personal perfumes.";
+"personalPerfume.error.requestFailed.title" = "Failed to load personal perfumes";
+"personalPerfume.error.requestFailed.subtitle" = "Check the connection and try again.";
 "personalPerfume.matchFormat" = "%d%% match";
+"personalPerfume.matchExplanationFormat" = "Matches: %@";
+"personalPerfume.retryButton" = "Retry";
 "personalPerfume.section.luxury.title" = "Luxury Picks";
 "personalPerfume.section.luxury.description" = "Premium fragrances with the strongest match for your natal scent profile.";
 "personalPerfume.section.daily.title" = "Daily Picks";
