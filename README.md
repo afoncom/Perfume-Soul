@@ -191,14 +191,16 @@ The backend maps the profile into aromatic preferences:
   - Air: fresh, citrus, aromatic, musky, clean, light
   - Water: marine, floral, soft musk, vanilla, incense, powdery, soft
 
-Current MVP scoring is deterministic and uses:
+Current MVP scoring is deterministic and produces a display compatibility score. `matchPercentage` is not a statistical probability; it is a normalized compatibility value for ranking and UI display. The backend uses:
 
 - accord match, weighted at `0.35`
 - note match, weighted at `0.30`
 - fragrance family, mood, and style match, weighted at `0.25`
 - longevity and sillage match, weighted at `0.10`
 
-The backend normalizes the final score into `matchPercentage`. Perfumes are split by `marketSegment` stored on the perfume row:
+For each candidate perfume, unavailable metadata components are excluded and the available component weights are renormalized. This prevents missing optional metadata, such as longevity or mood descriptors, from being scored as a negative match. Candidates without enough scoring metadata are excluded from personal recommendations.
+
+The backend returns the final display score as `matchPercentage`. Perfumes are split by `marketSegment` stored on the perfume row:
 
 - `luxury`
 - `daily`

@@ -105,6 +105,14 @@ private struct WeightedScore {
     let weight: Double
 }
 
+private enum PersonalPerfumeScoreWeight {
+    static let accords = 0.35
+    static let notes = 0.30
+    static let descriptors = 0.25
+    static let wear = 0.10
+    static let minimumAvailableMetadata = 0.35
+}
+
 private struct PersonalPerfumePreference {
     let accordWeights: [String: Double]
     let noteWeights: [String: Double]
@@ -221,8 +229,8 @@ private struct PersonalPerfumePreference {
     }
 }
 
-private extension PersonalPerfumeLoader {
-    static func makeScoredPerfume(
+extension PersonalPerfumeLoader {
+    fileprivate static func makeScoredPerfume(
         perfumeProfile: PerfumeProfile,
         preference: PersonalPerfumePreference
     ) -> ScoredPersonalPerfume? {
@@ -233,27 +241,16 @@ private extension PersonalPerfumeLoader {
         }
 
         let candidateNoteWeights = noteWeights(for: perfumeProfile)
-        let notesMatch = weightedSimilarity(
-            targetWeights: preference.noteWeights,
-            candidateWeights: candidateNoteWeights
-        )
-        let accordsMatch = weightedSimilarity(
-            targetWeights: preference.accordWeights,
-            candidateWeights: perfumeProfile.accordWeights
-        )
-        let familyMoodStyleMatch = descriptorMatch(
-            perfumeProfile: perfumeProfile,
-            preference: preference
-        )
-        let longevitySillageMatch = wearMatch(
-            perfumeProfile: perfumeProfile,
-            preference: preference
-        )
-        let rawScore =
-            accordsMatch * 0.35
-            + notesMatch * 0.30
-            + familyMoodStyleMatch * 0.25
-            + longevitySillageMatch * 0.10
+        guard
+            let rawScore = compatibilityScore(
+                perfumeProfile: perfumeProfile,
+                candidateNoteWeights: candidateNoteWeights,
+                preference: preference
+            )
+        else {
+            return nil
+        }
+
         let matchPercentage = min(
             100,
             max(0, Int((rawScore * 100).rounded(.toNearestOrAwayFromZero)))
@@ -282,110 +279,163 @@ private extension PersonalPerfumeLoader {
         )
     }
 
-    static func areSortedForRecommendationRanking(
-        lhs: ScoredPersonalPerfume,
-        rhs: ScoredPersonalPerfume
-    ) -> Bool {
-        if lhs.rawScore == rhs.rawScore {
-            if lhs.response.brandName == rhs.response.brandName {
-                if lhs.response.perfumeName == rhs.response.perfumeName {
-                    return lhs.response.id < rhs.response.id
-                }
+    fileprivate static func compatibilityScore(
+        perfumeProfile: PerfumeProfile,
+        candidateNoteWeights: [String: Double],
+        preference: PersonalPerfumePreference
+    ) -> Double? {
+        let scoreComponents: [WeightedScore?] = [
+            scoreComponent(
+                value: weightedSimilarity(
+                    targetWeights: preference.accordWeights,
+                    candidateWeights: perfumeProfile.accordWeights
+                ),
+                weight: PersonalPerfumeScoreWeight.accords,
+                isAvailable: !perfumeProfile.accordWeights.isEmpty
+            ),
+            scoreComponent(
+                value: weightedSimilarity(
+                    targetWeights: preference.noteWeights,
+                    candidateWeights: candidateNoteWeights
+                ),
+                weight: PersonalPerfumeScoreWeight.notes,
+                isAvailable: !candidateNoteWeights.isEmpty
+            ),
+            descriptorScoreComponent(
+                perfumeProfile: perfumeProfile,
+                preference: preference
+            ),
+            wearScoreComponent(
+                perfumeProfile: perfumeProfile,
+                preference: preference
+            )
+        ]
 
-                return lhs.response.perfumeName < rhs.response.perfumeName
-            }
-
-            return lhs.response.brandName < rhs.response.brandName
-        }
-
-        return lhs.rawScore > rhs.rawScore
+        return normalizedScore(
+            components: scoreComponents.compactMap { $0 },
+            minimumAvailableWeight: PersonalPerfumeScoreWeight.minimumAvailableMetadata
+        )
     }
 
-    static func noteWeights(for perfumeProfile: PerfumeProfile) -> [String: Double] {
-        var noteWeights: [String: Double] = [:]
-        addNotes(perfumeProfile.topNotes, weight: 3, to: &noteWeights)
-        addNotes(perfumeProfile.middleNotes, weight: 2, to: &noteWeights)
-        addNotes(perfumeProfile.baseNotes, weight: 1, to: &noteWeights)
-        return noteWeights
-    }
-
-    static func addNotes(
-        _ notes: [String],
+    fileprivate static func scoreComponent(
+        value: Double,
         weight: Double,
-        to noteWeights: inout [String: Double]
-    ) {
-        for note in notes {
-            noteWeights[normalize(note), default: 0] += weight
+        isAvailable: Bool
+    ) -> WeightedScore? {
+        guard isAvailable else {
+            return nil
         }
+
+        return WeightedScore(value: value, weight: weight)
     }
 
-    static func weightedSimilarity(
-        targetWeights: [String: Int],
-        candidateWeights: [String: Int]
-    ) -> Double {
-        guard !targetWeights.isEmpty, !candidateWeights.isEmpty else {
-            return 0
+    fileprivate static func descriptorScoreComponent(
+        perfumeProfile: PerfumeProfile,
+        preference: PersonalPerfumePreference
+    ) -> WeightedScore? {
+        let descriptorComponents: [WeightedScore?] = [
+            weightedTokenScore(
+                value: perfumeProfile.fragranceFamily,
+                targetWeights: preference.fragranceTokenWeights,
+                weight: 0.4
+            ),
+            weightedTokenScore(
+                value: perfumeProfile.moodProfile,
+                targetWeights: preference.moodTokenWeights,
+                weight: 0.35
+            ),
+            weightedTokenScore(
+                value: perfumeProfile.styleProfile,
+                targetWeights: preference.styleTokenWeights,
+                weight: 0.25
+            )
+        ]
+
+        guard let descriptorScore = normalizedScore(
+            components: descriptorComponents.compactMap { $0 }
+        ) else {
+            return nil
         }
 
-        let overlapWeight = Set(targetWeights.keys).intersection(candidateWeights.keys).reduce(0) { partialResult, key in
-            partialResult + min(targetWeights[key] ?? 0, candidateWeights[key] ?? 0)
-        }
-        let coverage = Double(overlapWeight) / Double(targetWeights.values.reduce(0, +))
-        let precision = Double(overlapWeight) / Double(candidateWeights.values.reduce(0, +))
-        return coverage * 0.7 + precision * 0.3
+        return WeightedScore(
+            value: descriptorScore,
+            weight: PersonalPerfumeScoreWeight.descriptors
+        )
     }
 
-    static func weightedSimilarity(
+    fileprivate static func wearScoreComponent(
+        perfumeProfile: PerfumeProfile,
+        preference: PersonalPerfumePreference
+    ) -> WeightedScore? {
+        let wearComponents: [WeightedScore?] = [
+            scoreComponent(
+                value: scoreSimilarity(
+                    value: perfumeProfile.longevityScore,
+                    targetValue: preference.targetLongevityScore
+                ),
+                weight: 0.5,
+                isAvailable: perfumeProfile.longevityScore != nil
+            ),
+            scoreComponent(
+                value: scoreSimilarity(
+                    value: perfumeProfile.sillageScore,
+                    targetValue: preference.targetSillageScore
+                ),
+                weight: 0.5,
+                isAvailable: perfumeProfile.sillageScore != nil
+            )
+        ]
+
+        guard let wearScore = normalizedScore(
+            components: wearComponents.compactMap { $0 }
+        ) else {
+            return nil
+        }
+
+        return WeightedScore(
+            value: wearScore,
+            weight: PersonalPerfumeScoreWeight.wear
+        )
+    }
+
+    fileprivate static func weightedTokenScore(
+        value: String?,
         targetWeights: [String: Double],
-        candidateWeights: [String: Double]
-    ) -> Double {
-        guard !targetWeights.isEmpty, !candidateWeights.isEmpty else {
-            return 0
+        weight: Double
+    ) -> WeightedScore? {
+        guard let candidateWeights = tokenWeights(from: value) else {
+            return nil
         }
 
-        let overlapWeight = Set(targetWeights.keys).intersection(candidateWeights.keys).reduce(0.0) { partialResult, key in
-            partialResult + min(targetWeights[key] ?? 0, candidateWeights[key] ?? 0)
+        return WeightedScore(
+            value: weightedSimilarity(
+                targetWeights: targetWeights,
+                candidateWeights: candidateWeights
+            ),
+            weight: weight
+        )
+    }
+
+    fileprivate static func normalizedScore(
+        components: [WeightedScore],
+        minimumAvailableWeight: Double = 0
+    ) -> Double? {
+        let availableWeight = components.reduce(0) { partialResult, component in
+            partialResult + component.weight
         }
-        let coverage = overlapWeight / targetWeights.values.reduce(0, +)
-        let precision = overlapWeight / candidateWeights.values.reduce(0, +)
-        return coverage * 0.7 + precision * 0.3
+
+        guard availableWeight >= minimumAvailableWeight, availableWeight > 0 else {
+            return nil
+        }
+
+        let weightedScore = components.reduce(0) { partialResult, component in
+            partialResult + component.value * component.weight
+        }
+
+        return weightedScore / availableWeight
     }
 
-    static func descriptorMatch(
-        perfumeProfile: PerfumeProfile,
-        preference: PersonalPerfumePreference
-    ) -> Double {
-        let familyScore = weightedTokenSimilarity(
-            value: perfumeProfile.fragranceFamily,
-            targetWeights: preference.fragranceTokenWeights
-        )
-        let moodScore = weightedTokenSimilarity(
-            value: perfumeProfile.moodProfile,
-            targetWeights: preference.moodTokenWeights
-        )
-        let styleScore = weightedTokenSimilarity(
-            value: perfumeProfile.styleProfile,
-            targetWeights: preference.styleTokenWeights
-        )
-        return familyScore * 0.4 + moodScore * 0.35 + styleScore * 0.25
-    }
-
-    static func wearMatch(
-        perfumeProfile: PerfumeProfile,
-        preference: PersonalPerfumePreference
-    ) -> Double {
-        let longevitySimilarity = scoreSimilarity(
-            value: perfumeProfile.longevityScore,
-            targetValue: preference.targetLongevityScore
-        )
-        let sillageSimilarity = scoreSimilarity(
-            value: perfumeProfile.sillageScore,
-            targetValue: preference.targetSillageScore
-        )
-        return longevitySimilarity * 0.5 + sillageSimilarity * 0.5
-    }
-
-    static func scoreSimilarity(
+    fileprivate static func scoreSimilarity(
         value: Int?,
         targetValue: Double
     ) -> Double {
@@ -397,21 +447,7 @@ private extension PersonalPerfumeLoader {
         return max(0, 1 - (distance / 9))
     }
 
-    static func weightedTokenSimilarity(
-        value: String?,
-        targetWeights: [String: Double]
-    ) -> Double {
-        guard let candidateWeights = tokenWeights(from: value) else {
-            return 0
-        }
-
-        return weightedSimilarity(
-            targetWeights: targetWeights,
-            candidateWeights: candidateWeights
-        )
-    }
-
-    static func matchingNotes(
+    fileprivate static func matchingNotes(
         preference: PersonalPerfumePreference,
         candidateNoteWeights: [String: Double]
     ) -> [String] {
@@ -439,7 +475,7 @@ private extension PersonalPerfumeLoader {
             .map(\.0)
     }
 
-    static func matchingAccords(
+    fileprivate static func matchingAccords(
         preference: PersonalPerfumePreference,
         candidateAccordWeights: [String: Double]
     ) -> [String] {
@@ -462,13 +498,13 @@ private extension PersonalPerfumeLoader {
             .map(\.0)
     }
 
-    static func normalize(_ value: String) -> String {
+    fileprivate static func normalize(_ value: String) -> String {
         value
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .lowercased()
     }
 
-    static func tokenWeights(from value: String?) -> [String: Double]? {
+    fileprivate static func tokenWeights(from value: String?) -> [String: Double]? {
         guard let value else {
             return nil
         }
@@ -487,10 +523,64 @@ private extension PersonalPerfumeLoader {
             weights[token, default: 0] += 1
         }
     }
+
+    fileprivate static func areSortedForRecommendationRanking(
+        lhs: ScoredPersonalPerfume,
+        rhs: ScoredPersonalPerfume
+    ) -> Bool {
+        if lhs.rawScore == rhs.rawScore {
+            if lhs.response.brandName == rhs.response.brandName {
+                if lhs.response.perfumeName == rhs.response.perfumeName {
+                    return lhs.response.id < rhs.response.id
+                }
+
+                return lhs.response.perfumeName < rhs.response.perfumeName
+            }
+
+            return lhs.response.brandName < rhs.response.brandName
+        }
+
+        return lhs.rawScore > rhs.rawScore
+    }
+
+    fileprivate static func noteWeights(for perfumeProfile: PerfumeProfile) -> [String: Double] {
+        var noteWeights: [String: Double] = [:]
+        addNotes(perfumeProfile.topNotes, weight: 3, to: &noteWeights)
+        addNotes(perfumeProfile.middleNotes, weight: 2, to: &noteWeights)
+        addNotes(perfumeProfile.baseNotes, weight: 1, to: &noteWeights)
+        return noteWeights
+    }
+
+    fileprivate static func addNotes(
+        _ notes: [String],
+        weight: Double,
+        to noteWeights: inout [String: Double]
+    ) {
+        for note in notes {
+            noteWeights[normalize(note), default: 0] += weight
+        }
+    }
+
+    fileprivate static func weightedSimilarity(
+        targetWeights: [String: Double],
+        candidateWeights: [String: Double]
+    ) -> Double {
+        guard !targetWeights.isEmpty, !candidateWeights.isEmpty else {
+            return 0
+        }
+
+        let overlapWeight = Set(targetWeights.keys).intersection(candidateWeights.keys).reduce(0.0) { partialResult, key in
+            partialResult + min(targetWeights[key] ?? 0, candidateWeights[key] ?? 0)
+        }
+        let coverage = overlapWeight / targetWeights.values.reduce(0, +)
+        let precision = overlapWeight / candidateWeights.values.reduce(0, +)
+        return coverage * 0.7 + precision * 0.3
+    }
+
 }
 
-private extension PersonalPerfumePreference {
-    static func weightedAverage(values: [WeightedScore]) -> Double? {
+extension PersonalPerfumePreference {
+    fileprivate static func weightedAverage(values: [WeightedScore]) -> Double? {
         let totalWeight = values.reduce(0) { partialResult, score in
             partialResult + score.weight
         }
@@ -504,7 +594,7 @@ private extension PersonalPerfumePreference {
         return weightedTotal / totalWeight
     }
 
-    static func add(
+    fileprivate static func add(
         signPreference: SignPerfumePreference,
         accordMultiplier: Double,
         noteWeight: Double,
@@ -523,7 +613,7 @@ private extension PersonalPerfumePreference {
         }
     }
 
-    static func addTokens(
+    fileprivate static func addTokens(
         _ tokens: [String],
         weight: Double,
         to tokenWeights: inout [String: Double]
@@ -533,7 +623,7 @@ private extension PersonalPerfumePreference {
         }
     }
 
-    static func add(
+    fileprivate static func add(
         elementPreference: ElementPerfumePreference,
         balance: Int,
         accordWeights: inout [String: Double],
@@ -569,8 +659,8 @@ private extension PersonalPerfumePreference {
     }
 }
 
-private extension Array where Element == ScoredPersonalPerfume {
-    func uniqueBySignature() -> [ScoredPersonalPerfume] {
+extension Array where Element == ScoredPersonalPerfume {
+    fileprivate func uniqueBySignature() -> [ScoredPersonalPerfume] {
         var seenSignatures = Set<String>()
         var uniquePerfumes: [ScoredPersonalPerfume] = []
 

@@ -170,8 +170,8 @@ struct PersonalPerfumeLoaderTests {
         #expect(recommendations.map(\.marketSegment) == [.daily])
     }
 
-    @Test("Missing optional metadata still returns a bounded recommendation")
-    func missingOptionalMetadataStillReturnsBoundedRecommendation() {
+    @Test("Insufficient metadata is excluded from recommendations")
+    func insufficientMetadataIsExcludedFromRecommendations() {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
         let recommendations = PersonalPerfumeLoader.load(
             request: request,
@@ -185,9 +185,33 @@ struct PersonalPerfumeLoaderTests {
             ]
         )
 
-        #expect(recommendations.count == 1)
-        #expect(recommendations[0].matchPercentage >= 0)
-        #expect(recommendations[0].matchPercentage <= 100)
+        #expect(recommendations.isEmpty)
+    }
+
+    @Test("Partially missing metadata is renormalized instead of scored as zero")
+    func partiallyMissingMetadataIsRenormalized() {
+        let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
+        let recommendations = PersonalPerfumeLoader.load(
+            request: request,
+            perfumeProfiles: [
+                makeAirAccordOnlyPerfume(id: 1, name: "Air Accord Only"),
+                makeAirAccordOnlyPerfume(
+                    id: 2,
+                    name: "Air Accord With Mismatching Metadata",
+                    longevityScore: 9,
+                    sillageScore: 9,
+                    topNotes: ["Табак"],
+                    middleNotes: ["Кожа"],
+                    baseNotes: ["Уд"],
+                    fragranceFamily: "smoky leather",
+                    styleProfile: "dark formal",
+                    moodProfile: "dark sensual"
+                )
+            ]
+        )
+
+        #expect(recommendations.map(\.id) == [1, 2])
+        #expect(recommendations[0].matchPercentage > recommendations[1].matchPercentage)
     }
 
     @Test("Dominant element profile scores matching descriptors and wear higher than balanced profile")
@@ -358,6 +382,41 @@ extension PersonalPerfumeLoaderTests {
             fragranceFamily: "smoky",
             styleProfile: "dark",
             moodProfile: "dark",
+            marketSegment: "daily"
+        )
+    }
+
+    private func makeAirAccordOnlyPerfume(
+        id: Int,
+        name: String,
+        longevityScore: Int? = nil,
+        sillageScore: Int? = nil,
+        topNotes: [String] = [],
+        middleNotes: [String] = [],
+        baseNotes: [String] = [],
+        fragranceFamily: String? = nil,
+        styleProfile: String? = nil,
+        moodProfile: String? = nil
+    ) -> PerfumeProfile {
+        PerfumeProfile(
+            id: id,
+            perfumeName: name,
+            brandName: "Brand",
+            longevityScore: longevityScore,
+            sillageScore: sillageScore,
+            topNotes: topNotes,
+            middleNotes: middleNotes,
+            baseNotes: baseNotes,
+            accordWeights: [
+                "fresh": 1,
+                "aromatic": 1,
+                "musky": 1,
+                "marine": 0.8,
+                "citrus": 0.8
+            ],
+            fragranceFamily: fragranceFamily,
+            styleProfile: styleProfile,
+            moodProfile: moodProfile,
             marketSegment: "daily"
         )
     }
