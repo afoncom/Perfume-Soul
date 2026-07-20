@@ -79,28 +79,100 @@ struct PersonalPerfumeLoaderTests {
         #expect(recommendations.allSatisfy { $0.matchPercentage >= 0 && $0.matchPercentage <= 100 })
     }
 
-    @Test("Market segment ranking is deterministic")
-    func deterministicSegmentRanking() {
-        let request = PersonalPerfumesRequest(
-            sun: .virgo,
-            moon: .taurus,
-            ascendant: .capricorn,
-            elementBalance: ElementBalance(
-                fire: 0,
-                earth: 80,
-                air: 10,
-                water: 10
-            )
-        )
-
+    @Test("Known profile returns exact ranked perfume ids")
+    func knownProfileReturnsExactRankedPerfumeIDs() {
+        let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
         let recommendations = PersonalPerfumeLoader.load(
             request: request,
-            perfumeProfiles: makePerfumes()
+            perfumeProfiles: makeAirRankingPerfumes()
         )
 
-        #expect(recommendations.prefix(3).map(\.marketSegment) == [.luxury, .luxury, .luxury])
-        #expect(recommendations.dropFirst(3).prefix(3).map(\.marketSegment) == [.daily, .daily, .daily])
-        #expect(recommendations.suffix(3).map(\.marketSegment) == [.niche, .niche, .niche])
+        #expect(recommendations.map(\.id) == [101, 102, 103])
+        #expect(recommendations[0].matchPercentage > recommendations[1].matchPercentage)
+        #expect(recommendations[1].matchPercentage > recommendations[2].matchPercentage)
+    }
+
+    @Test("Known profile ranking is independent from input order")
+    func knownProfileRankingIsIndependentFromInputOrder() {
+        let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
+        let recommendations = PersonalPerfumeLoader.load(
+            request: request,
+            perfumeProfiles: makeAirRankingPerfumes()
+        )
+        let reversedRecommendations = PersonalPerfumeLoader.load(
+            request: request,
+            perfumeProfiles: makeAirRankingPerfumes().reversed()
+        )
+
+        #expect(recommendations.map(\.id) == reversedRecommendations.map(\.id))
+        #expect(recommendations.map(\.matchPercentage) == reversedRecommendations.map(\.matchPercentage))
+    }
+
+    @Test("Equal scores use deterministic brand, perfume, and id tie-breakers")
+    func equalScoresUseDeterministicTieBreakers() {
+        let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
+        let recommendations = PersonalPerfumeLoader.load(
+            request: request,
+            perfumeProfiles: [
+                makeTieBreakerPerfume(id: 4, brand: "Beta", name: "Another", note: "Дым"),
+                makeTieBreakerPerfume(id: 3, brand: "Alpha", name: "Shared", note: "Табак"),
+                makeTieBreakerPerfume(id: 2, brand: "Alpha", name: "Shared", note: "Уд")
+            ]
+        )
+
+        #expect(recommendations.map(\.id) == [2, 3, 4])
+    }
+
+    @Test("Duplicate signatures are removed after ranking")
+    func duplicateSignaturesAreRemovedAfterRanking() {
+        let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
+        let recommendations = PersonalPerfumeLoader.load(
+            request: request,
+            perfumeProfiles: [
+                makeAirRankingPerfume(id: 102, name: "Air Secondary", accordScale: 0.5),
+                makeAirRankingPerfume(id: 101, name: "Air Primary", accordScale: 1),
+                makeAirRankingPerfume(id: 201, name: "Air Primary Clone", accordScale: 1)
+            ]
+        )
+
+        #expect(recommendations.map(\.id) == [101, 102])
+    }
+
+    @Test("Segment returns fewer than three perfumes without borrowing from another segment")
+    func shortSegmentDoesNotBorrowFromAnotherSegment() {
+        let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
+        let recommendations = PersonalPerfumeLoader.load(
+            request: request,
+            perfumeProfiles: [
+                makeAirRankingPerfume(id: 101, name: "Daily Air", accordScale: 1),
+                makeAirRankingPerfume(id: 301, name: "Luxury Air", segment: "luxury", accordScale: 1),
+                makeAirRankingPerfume(id: 302, name: "Luxury Clean", segment: "luxury", accordScale: 0.7)
+            ]
+        )
+
+        #expect(recommendations.map(\.marketSegment) == [.luxury, .luxury, .daily])
+        #expect(recommendations.filter { $0.marketSegment == .luxury }.count == 2)
+        #expect(recommendations.filter { $0.marketSegment == .daily }.count == 1)
+    }
+
+    @Test("Missing optional metadata still returns a bounded recommendation")
+    func missingOptionalMetadataStillReturnsBoundedRecommendation() {
+        let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
+        let recommendations = PersonalPerfumeLoader.load(
+            request: request,
+            perfumeProfiles: [
+                PerfumeProfile(
+                    id: 1,
+                    perfumeName: "Minimal",
+                    brandName: "Brand",
+                    marketSegment: "daily"
+                )
+            ]
+        )
+
+        #expect(recommendations.count == 1)
+        #expect(recommendations[0].matchPercentage >= 0)
+        #expect(recommendations[0].matchPercentage <= 100)
     }
 
     @Test("Dominant element profile scores matching descriptors and wear higher than balanced profile")
@@ -142,8 +214,8 @@ struct PersonalPerfumeLoaderTests {
     }
 }
 
-private extension PersonalPerfumeLoaderTests {
-    func expectBadRequest(
+extension PersonalPerfumeLoaderTests {
+    private func expectBadRequest(
         fire: Int,
         earth: Int,
         air: Int,
@@ -164,7 +236,7 @@ private extension PersonalPerfumeLoaderTests {
         }
     }
 
-    func makeRequest(
+    private func makeRequest(
         fire: Int,
         earth: Int,
         air: Int,
@@ -183,7 +255,7 @@ private extension PersonalPerfumeLoaderTests {
         )
     }
 
-    func makePerfumes() -> [PerfumeProfile] {
+    private func makePerfumes() -> [PerfumeProfile] {
         [
             makePerfume(id: 1, name: "Luxury Fire", brand: "Tom Ford", segment: "luxury", accords: ["amber": 1, "spicy": 0.9]),
             makePerfume(id: 2, name: "Luxury Water", brand: "Creed", segment: "luxury", accords: ["marine": 1, "floral": 0.8]),
@@ -200,7 +272,82 @@ private extension PersonalPerfumeLoaderTests {
         ]
     }
 
-    func makePerfume(
+    private func makeAirRankingPerfumes() -> [PerfumeProfile] {
+        [
+            makeAirRankingPerfume(id: 104, name: "No Match", accordScale: 0),
+            makeAirRankingPerfume(id: 102, name: "Partial Air", accordScale: 0.5),
+            makeAirRankingPerfume(id: 103, name: "Descriptor Air", accordScale: 0.2),
+            makeAirRankingPerfume(id: 101, name: "Perfect Air", accordScale: 1)
+        ]
+    }
+
+    private func makeAirRankingPerfume(
+        id: Int,
+        name: String,
+        segment: String = "daily",
+        accordScale: Double
+    ) -> PerfumeProfile {
+        if accordScale == 0 {
+            return PerfumeProfile(
+                id: id,
+                perfumeName: name,
+                brandName: "Brand",
+                longevityScore: 9,
+                sillageScore: 9,
+                topNotes: ["Табак"],
+                middleNotes: ["Кожа"],
+                baseNotes: ["Уд"],
+                accordWeights: ["smoky": 1, "leather": 1],
+                fragranceFamily: "smoky leather",
+                styleProfile: "dark formal",
+                moodProfile: "dark sensual",
+                marketSegment: segment
+            )
+        }
+
+        return PerfumeProfile(
+            id: id,
+            perfumeName: name,
+            brandName: "Brand",
+            longevityScore: 5,
+            sillageScore: 5,
+            topNotes: ["Мята", "Лаванда", "Мускус", "Бергамот"],
+            middleNotes: ["Лимон"],
+            baseNotes: ["Мускус"],
+            accordWeights: [
+                "fresh": 1 * accordScale,
+                "aromatic": 1 * accordScale,
+                "musky": 1 * accordScale,
+                "marine": 0.8 * accordScale,
+                "citrus": 0.8 * accordScale
+            ],
+            fragranceFamily: accordScale >= 0.5 ? "fresh marine aromatic citrus" : "fresh",
+            styleProfile: accordScale >= 0.5 ? "clean modern light" : "modern",
+            moodProfile: accordScale >= 0.5 ? "airy clean bright" : "clean",
+            marketSegment: segment
+        )
+    }
+
+    private func makeTieBreakerPerfume(
+        id: Int,
+        brand: String,
+        name: String,
+        note: String
+    ) -> PerfumeProfile {
+        PerfumeProfile(
+            id: id,
+            perfumeName: name,
+            brandName: brand,
+            topNotes: [note],
+            accordWeights: ["smoky": 1],
+            fragranceFamily: "smoky",
+            styleProfile: "dark",
+            moodProfile: "dark",
+            marketSegment: "daily"
+        )
+    }
+
+    private func makePerfume(
         id: Int,
         name: String,
         brand: String,
