@@ -155,6 +155,21 @@ struct PersonalPerfumeLoaderTests {
         #expect(recommendations.filter { $0.marketSegment == .daily }.count == 1)
     }
 
+    @Test("Unclassified perfumes are excluded from recommendations")
+    func unclassifiedPerfumesAreExcludedFromRecommendations() {
+        let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
+        let recommendations = PersonalPerfumeLoader.load(
+            request: request,
+            perfumeProfiles: [
+                makeAirRankingPerfume(id: 101, name: "Unclassified Air", segment: "unclassified", accordScale: 1),
+                makeAirRankingPerfume(id: 102, name: "Daily Air", segment: "daily", accordScale: 0.5)
+            ]
+        )
+
+        #expect(recommendations.map(\.id) == [102])
+        #expect(recommendations.map(\.marketSegment) == [.daily])
+    }
+
     @Test("Missing optional metadata still returns a bounded recommendation")
     func missingOptionalMetadataStillReturnsBoundedRecommendation() {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)

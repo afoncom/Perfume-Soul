@@ -203,8 +203,11 @@ The backend normalizes the final score into `matchPercentage`. Perfumes are spli
 - `luxury`
 - `daily`
 - `niche`
+- `unclassified`
 
-The endpoint returns top 3 perfumes per segment, for 9 perfumes total. If a segment has fewer than 3 valid perfumes, the MVP returns the available perfumes from that segment and does not borrow from another segment.
+`luxury` is used for premium or high-price-positioned perfumes, `daily` for curated designer or everyday-wear perfumes, and `niche` for niche house or niche-line perfumes. `unclassified` means the perfume has not been deliberately classified yet. It is stored in the database so newly added or unlisted brands can be audited instead of silently becoming daily recommendations.
+
+The endpoint returns top 3 perfumes for `luxury`, `daily`, and `niche`, for 9 perfumes total. `unclassified` perfumes are not eligible for personal recommendations. If a segment has fewer than 3 valid perfumes, the MVP returns the available perfumes from that segment and does not borrow from another segment.
 
 ### Today Energy
 

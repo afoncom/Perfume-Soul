@@ -464,7 +464,14 @@ SET market_segment = CASE
         'Parfums de Marly',
         'Tom Ford'
     ) THEN 'luxury'
-    ELSE 'daily'
+    WHEN brands.brand IN (
+        'Burberry',
+        'Chanel',
+        'Dior',
+        'Giorgio Armani',
+        'Narciso Rodriguez'
+    ) THEN 'daily'
+    ELSE 'unclassified'
 END
 FROM brands
 WHERE perfumes.brand_id = brands.id;
