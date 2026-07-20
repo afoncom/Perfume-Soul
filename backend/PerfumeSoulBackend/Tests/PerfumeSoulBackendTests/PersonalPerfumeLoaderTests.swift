@@ -1,7 +1,58 @@
 import Testing
+import Vapor
 @testable import PerfumeSoulBackend
 
 struct PersonalPerfumeLoaderTests {
+    @Test("Element balance validation accepts a valid 100 percent total")
+    func validElementBalancePassesValidation() throws {
+        try makeRequest(
+            fire: 25,
+            earth: 25,
+            air: 25,
+            water: 25
+        ).validateElementBalance()
+    }
+
+    @Test("Element balance validation rejects negative values with bad request")
+    func negativeElementBalanceFailsValidation() {
+        expectBadRequest(
+            fire: -1,
+            earth: 34,
+            air: 33,
+            water: 34
+        )
+    }
+
+    @Test("Element balance validation rejects values above 100 with bad request")
+    func oversizedElementBalanceFailsValidation() {
+        expectBadRequest(
+            fire: 101,
+            earth: 0,
+            air: 0,
+            water: -1
+        )
+    }
+
+    @Test("Element balance validation rejects totals below 100 with bad request")
+    func lowElementBalanceTotalFailsValidation() {
+        expectBadRequest(
+            fire: 25,
+            earth: 25,
+            air: 25,
+            water: 24
+        )
+    }
+
+    @Test("Element balance validation rejects totals above 100 with bad request")
+    func highElementBalanceTotalFailsValidation() {
+        expectBadRequest(
+            fire: 25,
+            earth: 25,
+            air: 25,
+            water: 26
+        )
+    }
+
     @Test("Personal perfume loader returns three perfumes per market segment")
     func returnsThreePerfumesPerMarketSegment() {
         let request = PersonalPerfumesRequest(
@@ -92,6 +143,27 @@ struct PersonalPerfumeLoaderTests {
 }
 
 private extension PersonalPerfumeLoaderTests {
+    func expectBadRequest(
+        fire: Int,
+        earth: Int,
+        air: Int,
+        water: Int
+    ) {
+        do {
+            try makeRequest(
+                fire: fire,
+                earth: earth,
+                air: air,
+                water: water
+            ).validateElementBalance()
+            Issue.record("Expected elementBalance validation to fail")
+        } catch let abort as Abort {
+            #expect(abort.status == .badRequest)
+        } catch {
+            Issue.record("Expected Abort(.badRequest), got \(error)")
+        }
+    }
+
     func makeRequest(
         fire: Int,
         earth: Int,

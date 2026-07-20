@@ -9,6 +9,7 @@ func routes(_ app: Application) throws {
 
     app.post("personal-perfumes") { req async throws -> Response in
         let request = try req.content.decode(PersonalPerfumesRequest.self)
+        try request.validateElementBalance()
         return try jsonResponse(
             try await PersonalPerfumeLoader.load(
                 request: request,

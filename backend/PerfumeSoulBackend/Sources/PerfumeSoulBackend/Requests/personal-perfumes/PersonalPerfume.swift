@@ -7,6 +7,29 @@ struct PersonalPerfumesRequest: Content {
     let moon: ZodiacSign
     let ascendant: ZodiacSign
     let elementBalance: ElementBalance
+
+    func validateElementBalance() throws {
+        let values = [
+            elementBalance.fire,
+            elementBalance.earth,
+            elementBalance.air,
+            elementBalance.water
+        ]
+
+        guard values.allSatisfy({ (0...100).contains($0) }) else {
+            throw Abort(
+                .badRequest,
+                reason: "elementBalance values must be in 0...100"
+            )
+        }
+
+        guard values.reduce(0, +) == 100 else {
+            throw Abort(
+                .badRequest,
+                reason: "elementBalance total must equal 100"
+            )
+        }
+    }
 }
 
 struct PersonalPerfumeResponse: Codable, Equatable {
