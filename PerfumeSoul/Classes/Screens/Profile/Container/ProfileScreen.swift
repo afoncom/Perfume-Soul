@@ -134,6 +134,8 @@ private extension ProfileScreen {
                         value: makePlacementTitle(for: natalChart.ascendant)
                     )
                 }
+            } else if viewModel.didFailProfileCalculation {
+                makeProfileCalculationUnavailableState()
             } else {
                 ProgressView()
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -163,6 +165,8 @@ private extension ProfileScreen {
                     Spacer()
                     makeElementItem(percent: "\(elementBalance.water)%", title: L10n.Profile.Element.water)
                 }
+            } else if viewModel.didFailProfileCalculation {
+                makeProfileCalculationUnavailableState()
             } else {
                 ProgressView()
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -177,7 +181,9 @@ private extension ProfileScreen {
 
     func makePersonalPerfumesRow() -> some View {
         Button {
-            presenter.personalPerfumesButtonTapped()
+            Task {
+                await presenter.personalPerfumesButtonTapped()
+            }
         } label: {
             HStack(spacing: 14) {
                 ZStack {
@@ -196,16 +202,14 @@ private extension ProfileScreen {
                         .fontWeight(.medium)
                         .foregroundStyle(Color(.textPrimary))
                     
-                    Text(L10n.Profile.PersonalPerfumes.subtitle)
+                    Text(personalPerfumesSubtitle)
                         .font(.footnote)
                         .foregroundStyle(Color(.textSecondary))
                 }
                 
                 Spacer()
-                
-                Image(systemName: "chevron.right")
-                    .font(.footnote.weight(.semibold))
-                    .foregroundStyle(Color(.textSecondary))
+
+                makePersonalPerfumesAccessory()
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 14)
@@ -218,6 +222,34 @@ private extension ProfileScreen {
             .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
         }
         .buttonStyle(.plain)
+        .disabled(viewModel.isProfileCalculationLoading)
+        .opacity(viewModel.isProfileCalculationLoading ? 0.65 : 1)
+    }
+
+    func makePersonalPerfumesAccessory() -> some View {
+        Group {
+            if viewModel.isProfileCalculationLoading {
+                ProgressView()
+                    .frame(width: 18, height: 18)
+            } else if viewModel.didFailProfileCalculation {
+                Image(systemName: "arrow.clockwise")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(Color(.textSecondary))
+            } else {
+                Image(systemName: "chevron.right")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(Color(.textSecondary))
+            }
+        }
+    }
+
+    func makeProfileCalculationUnavailableState() -> some View {
+        Text(L10n.Profile.Calculation.unavailableMessage)
+            .font(.footnote)
+            .foregroundStyle(Color(.textSecondary))
+            .frame(maxWidth: .infinity, alignment: .center)
+            .multilineTextAlignment(.center)
+            .padding(.vertical, 20)
     }
 
     func makeProfileDescriptionRow() -> some View {
@@ -460,6 +492,18 @@ private extension ProfileScreen {
         case .perfumer:
             return L10n.Profile.Expertise.Description.perfumer
         }
+    }
+
+    var personalPerfumesSubtitle: String {
+        if viewModel.isProfileCalculationLoading {
+            return L10n.Profile.PersonalPerfumes.loadingSubtitle
+        }
+
+        if viewModel.didFailProfileCalculation {
+            return L10n.Profile.PersonalPerfumes.retrySubtitle
+        }
+
+        return L10n.Profile.PersonalPerfumes.subtitle
     }
 
     func makePlacementTitle(for placement: ZodiacPlacement) -> String {

@@ -209,6 +209,9 @@
 "personalPerfume.section.daily.description" = "Designer and everyday fragrances selected for regular wear.";
 "personalPerfume.section.niche.title" = "Niche Picks";
 "personalPerfume.section.niche.description" = "Distinctive niche fragrances that fit your personal aromatic vector.";
+"profile.calculation.unavailableMessage" = "Natal profile calculation is unavailable. Retry from Personal Perfumes.";
+"profile.personalPerfumes.loadingSubtitle" = "Calculating your natal scent profile...";
+"profile.personalPerfumes.retrySubtitle" = "Natal profile calculation failed. Tap to retry.";
 "profile.personalPerfumes.subtitle" = "Open your curated fragrance selection.";
 "profile.personalPerfumes.title" = "Personal Perfumes";
 "profile.personalityDescription.subtitle" = "Reopen your natal scent profile.";

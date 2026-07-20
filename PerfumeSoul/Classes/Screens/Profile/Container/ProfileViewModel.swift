@@ -9,11 +9,34 @@
 import Foundation
 import Observation
 
+enum ProfileCalculationState: Equatable {
+    case idle
+    case loading
+    case loaded(ProfileCalculation)
+    case failed
+}
+
 @Observable final class ProfileViewModel {
     var profile: Profile?
-    var profileCalculation: ProfileCalculation?
+    var profileCalculationState: ProfileCalculationState = .idle
     var isShowingDeleteProfileAlert = false
     var totalCorrectQuizAnswers = 0
+
+    var profileCalculation: ProfileCalculation? {
+        guard case let .loaded(profileCalculation) = profileCalculationState else {
+            return nil
+        }
+
+        return profileCalculation
+    }
+
+    var isProfileCalculationLoading: Bool {
+        profileCalculationState == .loading
+    }
+
+    var didFailProfileCalculation: Bool {
+        profileCalculationState == .failed
+    }
 
     var perfumeExpertiseLevel: PerfumeExpertiseLevel {
         PerfumeExpertiseLevel.level(for: totalCorrectQuizAnswers)
@@ -27,7 +50,10 @@ import Observation
         let lowerBound = perfumeExpertiseLevel.range.lowerBound
         let upperBound = perfumeExpertiseLevel.nextLevelStart ?? perfumeExpertiseLevel.range.upperBound
 
-        guard upperBound > lowerBound else { return 1 }
+        guard upperBound > lowerBound else {
+            return 1
+        }
+
         let progress = Double(totalCorrectQuizAnswers - lowerBound) / Double(upperBound - lowerBound)
         return min(max(progress, 0), 1)
     }
