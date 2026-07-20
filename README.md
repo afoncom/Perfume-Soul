@@ -211,6 +211,10 @@ The backend returns the final display score as `matchPercentage`. Perfumes are s
 
 The endpoint returns top 3 perfumes for `luxury`, `daily`, and `niche`, for 9 perfumes total. `unclassified` perfumes are not eligible for personal recommendations. If a segment has fewer than 3 valid perfumes, the MVP returns the available perfumes from that segment and does not borrow from another segment.
 
+The current persistence strategy is intended for a curated MVP catalogue in the low hundreds of perfumes. `PersonalPerfumeLoader` narrows the PostgreSQL query to eligible `luxury`, `daily`, and `niche` rows, eagerly loads notes and accords for those rows, and then passes normalized `PerfumeProfile` values to `PersonalPerfumeScorer`. The scorer is independent from Fluent so the recommendation model can be tested without a database and the loading strategy can change later.
+
+Follow-up for a larger catalogue: cache or precompute `PerfumeProfile` scoring metadata per perfume, then invalidate that cache when perfume notes, accords, descriptor profiles, or market segment values change. If the catalogue grows beyond the curated MVP size, the endpoint should read from that cache or a materialized profile table instead of rebuilding all related notes and accords on every request.
+
 ### Today Energy
 
 - Separate screen exists

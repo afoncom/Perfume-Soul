@@ -56,6 +56,11 @@ enum PersonalPerfumeLoader {
         on database: any Database
     ) async throws -> [PersonalPerfumeResponse] {
         let perfumeModels = try await PerfumeModel.query(on: database)
+            .group(.or) { group in
+                for segment in PersonalPerfumeMarketSegment.allCases {
+                    group.filter(\.$marketSegment == segment.rawValue)
+                }
+            }
             .with(\.$brand)
             .with(\.$notes) { query in
                 query.with(\.$note)
@@ -65,13 +70,15 @@ enum PersonalPerfumeLoader {
             }
             .all()
 
-        return load(
+        return PersonalPerfumeScorer.score(
             request: request,
             perfumeProfiles: perfumeModels.compactMap(PerfumeProfile.init(model:))
         )
     }
+}
 
-    static func load(
+enum PersonalPerfumeScorer {
+    static func score(
         request: PersonalPerfumesRequest,
         perfumeProfiles: [PerfumeProfile]
     ) -> [PersonalPerfumeResponse] {
@@ -229,7 +236,7 @@ private struct PersonalPerfumePreference {
     }
 }
 
-extension PersonalPerfumeLoader {
+extension PersonalPerfumeScorer {
     fileprivate static func makeScoredPerfume(
         perfumeProfile: PerfumeProfile,
         preference: PersonalPerfumePreference
@@ -607,7 +614,7 @@ extension PersonalPerfumePreference {
         }
 
         for note in signPreference.notes {
-            let normalizedNote = PersonalPerfumeLoader.normalize(note)
+            let normalizedNote = PersonalPerfumeScorer.normalize(note)
             noteWeights[normalizedNote, default: 0] += noteWeight
             noteDisplayNames[normalizedNote] = note
         }
@@ -619,7 +626,7 @@ extension PersonalPerfumePreference {
         to tokenWeights: inout [String: Double]
     ) {
         for token in tokens {
-            tokenWeights[PersonalPerfumeLoader.normalize(token), default: 0] += weight
+            tokenWeights[PersonalPerfumeScorer.normalize(token), default: 0] += weight
         }
     }
 
@@ -646,7 +653,7 @@ extension PersonalPerfumePreference {
 
         let noteWeight = multiplier * 3
         for note in elementPreference.notes {
-            let normalizedNote = PersonalPerfumeLoader.normalize(note)
+            let normalizedNote = PersonalPerfumeScorer.normalize(note)
             noteWeights[normalizedNote, default: 0] += noteWeight
             noteDisplayNames[normalizedNote] = note
         }

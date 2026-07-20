@@ -67,7 +67,7 @@ struct PersonalPerfumeLoaderTests {
             )
         )
 
-        let recommendations = PersonalPerfumeLoader.load(
+        let recommendations = PersonalPerfumeScorer.score(
             request: request,
             perfumeProfiles: makePerfumes()
         )
@@ -82,7 +82,7 @@ struct PersonalPerfumeLoaderTests {
     @Test("Known profile returns exact ranked perfume ids")
     func knownProfileReturnsExactRankedPerfumeIDs() {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
-        let recommendations = PersonalPerfumeLoader.load(
+        let recommendations = PersonalPerfumeScorer.score(
             request: request,
             perfumeProfiles: makeAirRankingPerfumes()
         )
@@ -95,11 +95,11 @@ struct PersonalPerfumeLoaderTests {
     @Test("Known profile ranking is independent from input order")
     func knownProfileRankingIsIndependentFromInputOrder() {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
-        let recommendations = PersonalPerfumeLoader.load(
+        let recommendations = PersonalPerfumeScorer.score(
             request: request,
             perfumeProfiles: makeAirRankingPerfumes()
         )
-        let reversedRecommendations = PersonalPerfumeLoader.load(
+        let reversedRecommendations = PersonalPerfumeScorer.score(
             request: request,
             perfumeProfiles: makeAirRankingPerfumes().reversed()
         )
@@ -111,7 +111,7 @@ struct PersonalPerfumeLoaderTests {
     @Test("Equal scores use deterministic brand, perfume, and id tie-breakers")
     func equalScoresUseDeterministicTieBreakers() {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
-        let recommendations = PersonalPerfumeLoader.load(
+        let recommendations = PersonalPerfumeScorer.score(
             request: request,
             perfumeProfiles: [
                 makeTieBreakerPerfume(id: 4, brand: "Beta", name: "Another", note: "Дым"),
@@ -126,7 +126,7 @@ struct PersonalPerfumeLoaderTests {
     @Test("Duplicate signatures are removed after ranking")
     func duplicateSignaturesAreRemovedAfterRanking() {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
-        let recommendations = PersonalPerfumeLoader.load(
+        let recommendations = PersonalPerfumeScorer.score(
             request: request,
             perfumeProfiles: [
                 makeAirRankingPerfume(id: 102, name: "Air Secondary", accordScale: 0.5),
@@ -141,7 +141,7 @@ struct PersonalPerfumeLoaderTests {
     @Test("Segment returns fewer than three perfumes without borrowing from another segment")
     func shortSegmentDoesNotBorrowFromAnotherSegment() {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
-        let recommendations = PersonalPerfumeLoader.load(
+        let recommendations = PersonalPerfumeScorer.score(
             request: request,
             perfumeProfiles: [
                 makeAirRankingPerfume(id: 101, name: "Daily Air", accordScale: 1),
@@ -158,7 +158,7 @@ struct PersonalPerfumeLoaderTests {
     @Test("Unclassified perfumes are excluded from recommendations")
     func unclassifiedPerfumesAreExcludedFromRecommendations() {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
-        let recommendations = PersonalPerfumeLoader.load(
+        let recommendations = PersonalPerfumeScorer.score(
             request: request,
             perfumeProfiles: [
                 makeAirRankingPerfume(id: 101, name: "Unclassified Air", segment: "unclassified", accordScale: 1),
@@ -173,7 +173,7 @@ struct PersonalPerfumeLoaderTests {
     @Test("Insufficient metadata is excluded from recommendations")
     func insufficientMetadataIsExcludedFromRecommendations() {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
-        let recommendations = PersonalPerfumeLoader.load(
+        let recommendations = PersonalPerfumeScorer.score(
             request: request,
             perfumeProfiles: [
                 PerfumeProfile(
@@ -191,7 +191,7 @@ struct PersonalPerfumeLoaderTests {
     @Test("Partially missing metadata is renormalized instead of scored as zero")
     func partiallyMissingMetadataIsRenormalized() {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
-        let recommendations = PersonalPerfumeLoader.load(
+        let recommendations = PersonalPerfumeScorer.score(
             request: request,
             perfumeProfiles: [
                 makeAirAccordOnlyPerfume(id: 1, name: "Air Accord Only"),
@@ -240,11 +240,11 @@ struct PersonalPerfumeLoaderTests {
             water: 25
         )
 
-        let fireDominantMatch = PersonalPerfumeLoader.load(
+        let fireDominantMatch = PersonalPerfumeScorer.score(
             request: fireDominantRequest,
             perfumeProfiles: [firePerfume]
         )[0].matchPercentage
-        let balancedMatch = PersonalPerfumeLoader.load(
+        let balancedMatch = PersonalPerfumeScorer.score(
             request: balancedRequest,
             perfumeProfiles: [firePerfume]
         )[0].matchPercentage
