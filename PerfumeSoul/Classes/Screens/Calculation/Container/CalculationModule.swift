@@ -12,6 +12,7 @@ import CoreData
 final class CalculationModule {
     @MainActor static func build(
         container: NSPersistentContainer,
+        requestManager: RequestManager,
         onFinish: @escaping () -> Void
     ) -> UIViewController {
         let viewModel = CalculationViewModel()
@@ -19,6 +20,7 @@ final class CalculationModule {
         let router = CalculationRouterImpl(
             navigationController: navigationController,
             container: container,
+            requestManager: requestManager,
             onFinish: onFinish
         )
         let profileService = ProfileServiceImpl(container: container)

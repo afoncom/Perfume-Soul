@@ -13,6 +13,7 @@ import UIKit
 final class ProfileDescriptionModule {
     static func build(
         container: NSPersistentContainer,
+        requestManager: RequestManager,
         navigationController: UINavigationController? = nil,
         onFinish: (() -> Void)? = nil
     ) -> UIViewController {
@@ -22,7 +23,7 @@ final class ProfileDescriptionModule {
             onFinish: onFinish
         )
         let profileService = ProfileServiceImpl(container: container)
-        let profileCalculationService = ProfileCalculationServiceImpl()
+        let profileCalculationService = ProfileCalculationServiceImpl(requestManager: requestManager)
         let profileDescriptionBuilder = ProfileDescriptionBuilderImpl()
         let presenter = ProfileDescriptionPresenterImpl(
             viewModel: viewModel,

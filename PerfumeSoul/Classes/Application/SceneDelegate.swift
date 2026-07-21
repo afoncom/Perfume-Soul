@@ -66,10 +66,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let discoverScreen = DiscoverModule.build(requestManager: requestManager)
         let profileScreen = ProfileModule.build(
             container: container,
-            onProfileDeleted: { [weak self] in
-                self?.showCalculationScreen(container: container)
-            }
-        )
+            requestManager: requestManager
+        ) { [weak self] in
+            self?.showCalculationScreen(container: container)
+        }
         let searchPerfumeScreen = SearchPerfumeModule.build(requestManager: requestManager)
         
         let mainTabView = MainTabView(
@@ -86,10 +86,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func showCalculationScreen(container: NSPersistentContainer) {
         let calculationScreen = CalculationModule.build(
             container: container,
-            onFinish: { [weak self] in
-                self?.finishCalculationFlow()
-            }
-        )
+            requestManager: requestManager
+        ) { [weak self] in
+            self?.finishCalculationFlow()
+        }
         setRootViewController(calculationScreen)
     }
 

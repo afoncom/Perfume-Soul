@@ -12,12 +12,13 @@ import CoreData
 final class ProfileModule {
     static func build(
         container: NSPersistentContainer,
+        requestManager: RequestManager,
         onProfileDeleted: @escaping () -> Void
     ) -> NavigationControllerContainer {
         let viewModel = ProfileViewModel()
         let navigationController = UINavigationController()
         let profileService = ProfileServiceImpl(container: container)
-        let profileCalculationService = ProfileCalculationServiceImpl()
+        let profileCalculationService = ProfileCalculationServiceImpl(requestManager: requestManager)
         let dayKeyProvider = QuizDayKeyProviderImpl()
         let quizProgressService = QuizProgressServiceImpl(
             userDefaults: .standard,
@@ -27,6 +28,7 @@ final class ProfileModule {
         let router = ProfileRouterImpl(
             navigationController: navigationController,
             container: container,
+            requestManager: requestManager,
             onProfileDeleted: onProfileDeleted
         )
         let presenter = ProfilePresenterImpl(
