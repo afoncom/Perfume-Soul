@@ -200,6 +200,12 @@
 "personalPerfume.navigationTitle" = "Personal Perfumes";
 "personalPerfume.subtitle" = "Discover your curated fragrance selection.";
 "personalPerfume.title" = "Your Personal Scents";
+"profile.calculation.failed.button" = "Retry";
+"profile.calculation.failed.subtitle" = "Please try the natal profile calculation again.";
+"profile.calculation.failed.title" = "Calculation failed";
+"profile.calculation.missingBirthData.button" = "Complete birth data";
+"profile.calculation.missingBirthData.subtitle" = "Add birth-place coordinates and timezone to calculate your natal profile.";
+"profile.calculation.missingBirthData.title" = "Complete birth data";
 "profile.personalPerfumes.subtitle" = "Open your curated fragrance selection.";
 "profile.personalPerfumes.title" = "Personal Perfumes";
 "profile.personalityDescription.subtitle" = "Reopen your natal scent profile.";

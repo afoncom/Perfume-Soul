@@ -135,9 +135,7 @@ private extension ProfileScreen {
                     )
                 }
             } else {
-                ProgressView()
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(.vertical, 20)
+                makeProfileCalculationStateView()
             }
         }
         .padding(14)
@@ -164,9 +162,7 @@ private extension ProfileScreen {
                     makeElementItem(percent: "\(elementBalance.water)%", title: L10n.Profile.Element.water)
                 }
             } else {
-                ProgressView()
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(.vertical, 20)
+                makeProfileCalculationStateView()
             }
         }
         .padding(14)
@@ -218,6 +214,72 @@ private extension ProfileScreen {
             .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
         }
         .buttonStyle(.plain)
+    }
+
+    @ViewBuilder
+    func makeProfileCalculationStateView() -> some View {
+        switch viewModel.profileCalculationState {
+        case .idle, .loading:
+            ProgressView()
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.vertical, 20)
+        case .loaded:
+            EmptyView()
+        case .missingBirthPlaceData:
+            makeProfileCalculationActionState(
+                title: L10n.Profile.Calculation.MissingBirthData.title,
+                subtitle: L10n.Profile.Calculation.MissingBirthData.subtitle,
+                buttonTitle: L10n.Profile.Calculation.MissingBirthData.button
+            ) {
+                Task {
+                    await presenter.completeBirthDataButtonTapped()
+                }
+            }
+        case .failed:
+            makeProfileCalculationActionState(
+                title: L10n.Profile.Calculation.Failed.title,
+                subtitle: L10n.Profile.Calculation.Failed.subtitle,
+                buttonTitle: L10n.Profile.Calculation.Failed.button
+            ) {
+                Task {
+                    await presenter.retryProfileCalculationButtonTapped()
+                }
+            }
+        }
+    }
+
+    func makeProfileCalculationActionState(
+        title: String,
+        subtitle: String,
+        buttonTitle: String,
+        action: @escaping () -> Void
+    ) -> some View {
+        VStack(spacing: 10) {
+            Text(title)
+                .font(.headline)
+                .foregroundStyle(Color(.textPrimary))
+                .multilineTextAlignment(.center)
+
+            Text(subtitle)
+                .font(.footnote)
+                .foregroundStyle(Color(.textSecondary))
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Button(action: action) {
+                Text(buttonTitle)
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(Color(.textOnAccent))
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 10)
+                    .background(Color(.pinkButton))
+                    .clipShape(Capsule())
+            }
+            .buttonStyle(.plain)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 14)
+        .padding(.horizontal, 12)
     }
 
     func makeProfileDescriptionRow() -> some View {

@@ -10,6 +10,8 @@ protocol ProfilePresenter {
     func addedNewProfilesButtonTab()
     func personalPerfumesButtonTapped()
     func profileDescriptionButtonTapped()
+    func retryProfileCalculationButtonTapped() async
+    func completeBirthDataButtonTapped() async
     func onAppear() async
     func deleteProfile() async
 }
@@ -52,22 +54,40 @@ extension ProfilePresenterImpl: ProfilePresenter {
         router.showProfileDescription()
     }
 
-    func onAppear() async {
-        let profile = await profileService.fetchProfile()
-        let quizProgress = quizProgressService.loadProgress()
-        let profileCalculation: ProfileCalculation?
+    func retryProfileCalculationButtonTapped() async {
+        let profile = await MainActor.run {
+            viewModel.profile
+        }
 
-        if let profile, profile.hasCompleteBirthPlaceData {
-            profileCalculation = try? await profileCalculationService.calculate(profile: profile)
-        } else {
-            profileCalculation = nil
+        await loadProfileCalculation(profile: profile)
+    }
+
+    func completeBirthDataButtonTapped() async {
+        let profile = await MainActor.run {
+            viewModel.profile
+        }
+
+        if let profile {
+            await profileService.deleteProfile(profile)
         }
 
         await MainActor.run {
+            viewModel.profile = nil
+            viewModel.profileCalculationState = .idle
+            router.showProfileSetupScreen()
+        }
+    }
+
+    func onAppear() async {
+        let profile = await profileService.fetchProfile()
+        let quizProgress = quizProgressService.loadProgress()
+
+        await MainActor.run {
             viewModel.profile = profile
-            viewModel.profileCalculation = profileCalculation
             viewModel.totalCorrectQuizAnswers = quizProgress.totalCorrectQuizAnswers
         }
+
+        await loadProfileCalculation(profile: profile)
     }
     
     func deleteProfile() async {
@@ -82,9 +102,42 @@ extension ProfilePresenterImpl: ProfilePresenter {
         
         await MainActor.run {
             viewModel.profile = nil
-            viewModel.profileCalculation = nil
+            viewModel.profileCalculationState = .idle
             viewModel.totalCorrectQuizAnswers = 0
             router.showCalculationScreen()
+        }
+    }
+}
+
+extension ProfilePresenterImpl {
+    private func loadProfileCalculation(profile: Profile?) async {
+        guard let profile else {
+            await MainActor.run {
+                viewModel.profileCalculationState = .idle
+            }
+            return
+        }
+
+        guard profile.hasCompleteBirthPlaceData else {
+            await MainActor.run {
+                viewModel.profileCalculationState = .missingBirthPlaceData
+            }
+            return
+        }
+
+        await MainActor.run {
+            viewModel.profileCalculationState = .loading
+        }
+
+        do {
+            let profileCalculation = try await profileCalculationService.calculate(profile: profile)
+            await MainActor.run {
+                viewModel.profileCalculationState = .loaded(profileCalculation)
+            }
+        } catch {
+            await MainActor.run {
+                viewModel.profileCalculationState = .failed
+            }
         }
     }
 }

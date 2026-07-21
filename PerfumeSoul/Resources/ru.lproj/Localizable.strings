@@ -200,6 +200,12 @@
 "personalPerfume.navigationTitle" = "Персональные ароматы";
 "personalPerfume.subtitle" = "Откройте персональную подборку ароматов.";
 "personalPerfume.title" = "Ваши персональные ароматы";
+"profile.calculation.failed.button" = "Повторить";
+"profile.calculation.failed.subtitle" = "Попробуйте повторить расчет натального профиля.";
+"profile.calculation.failed.title" = "Не удалось рассчитать профиль";
+"profile.calculation.missingBirthData.button" = "Заполнить данные";
+"profile.calculation.missingBirthData.subtitle" = "Добавьте координаты места рождения и часовой пояс, чтобы рассчитать натальный профиль.";
+"profile.calculation.missingBirthData.title" = "Заполните данные рождения";
 "profile.personalPerfumes.subtitle" = "Откройте свою персональную подборку ароматов.";
 "profile.personalPerfumes.title" = "Персональные ароматы";
 "profile.personalityDescription.subtitle" = "Перечитайте свой профиль по натальной карте.";

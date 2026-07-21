@@ -13,6 +13,7 @@ protocol ProfileRouter {
     func showAddedNewProfiles()
     func showPersonalPerfumes()
     func showProfileDescription()
+    func showProfileSetupScreen()
     func showCalculationScreen()
 }
 
@@ -50,6 +51,10 @@ extension ProfileRouterImpl: ProfileRouter {
             container: container
         )
         navigationController?.pushViewController(screen, animated: true)
+    }
+
+    func showProfileSetupScreen() {
+        onProfileDeleted()
     }
     
     func showCalculationScreen() {
