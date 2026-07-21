@@ -1,3 +1,4 @@
+import Foundation
 import Testing
 import Vapor
 @testable import PerfumeSoulBackend
@@ -90,6 +91,28 @@ struct PersonalPerfumeLoaderTests {
         #expect(recommendations.map(\.id) == [101, 102, 103])
         #expect(recommendations[0].matchPercentage > recommendations[1].matchPercentage)
         #expect(recommendations[1].matchPercentage > recommendations[2].matchPercentage)
+    }
+
+    @Test("Recommendation exposes stable match keys instead of display strings")
+    func recommendationExposesStableMatchKeys() throws {
+        let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
+        let recommendations = PersonalPerfumeScorer.score(
+            request: request,
+            perfumeProfiles: [makeAirRankingPerfume(id: 101, name: "Perfect Air", accordScale: 1)]
+        )
+        let recommendation = try #require(recommendations.first)
+        let json = try JSONEncoder().encode(recommendation)
+        let jsonObject = try #require(
+            try JSONSerialization.jsonObject(with: json) as? [String: Any]
+        )
+
+        #expect(recommendation.matchingNoteKeys.contains("musk"))
+        #expect(recommendation.matchingAccordKeys.contains("fresh"))
+        #expect(recommendation.matchingNoteKeys.allSatisfy { $0.range(of: "\\p{Cyrillic}", options: .regularExpression) == nil })
+        #expect(jsonObject["matchingNoteKeys"] != nil)
+        #expect(jsonObject["matchingAccordKeys"] != nil)
+        #expect(jsonObject["matchingNotes"] == nil)
+        #expect(jsonObject["matchingAccords"] == nil)
     }
 
     @Test("Known profile ranking is independent from input order")

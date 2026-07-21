@@ -142,10 +142,6 @@ extension ProfilePresenterImpl {
     }
 
     private func loadProfileCalculation(profile: Profile?) async {
-        guard let profile, profile.hasCompleteBirthPlaceData else {
-            await MainActor.run {
-                viewModel.profileCalculationState = .failed
-    private func loadProfileCalculation(profile: Profile?) async {
         guard let profile else {
             await MainActor.run {
                 viewModel.profileCalculationState = .idle
