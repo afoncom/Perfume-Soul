@@ -10,6 +10,8 @@ protocol ProfilePresenter {
     func addedNewProfilesButtonTab()
     func personalPerfumesButtonTapped() async
     func profileDescriptionButtonTapped()
+    func retryProfileCalculationButtonTapped() async
+    func completeBirthDataButtonTapped() async
     func onAppear() async
     func deleteProfile() async
 }
@@ -67,17 +69,36 @@ extension ProfilePresenterImpl: ProfilePresenter {
         router.showProfileDescription()
     }
 
+    func retryProfileCalculationButtonTapped() async {
+        let profile = await MainActor.run {
+            viewModel.profile
+        }
+
+        await loadProfileCalculation(profile: profile)
+    }
+
+    func completeBirthDataButtonTapped() async {
+        let profile = await MainActor.run {
+            viewModel.profile
+        }
+
+        if let profile {
+            await profileService.deleteProfile(profile)
+        }
+
+        await MainActor.run {
+            viewModel.profile = nil
+            viewModel.profileCalculationState = .idle
+            router.showProfileSetupScreen()
+        }
+    }
+
     func onAppear() async {
         let profile = await profileService.fetchProfile()
         let quizProgress = quizProgressService.loadProgress()
 
         await MainActor.run {
             viewModel.profile = profile
-            if let profile {
-                viewModel.profileCalculationState = profile.hasCompleteBirthPlaceData ? .loading : .failed
-            } else {
-                viewModel.profileCalculationState = .idle
-            }
             viewModel.totalCorrectQuizAnswers = quizProgress.totalCorrectQuizAnswers
         }
 
@@ -124,6 +145,17 @@ extension ProfilePresenterImpl {
         guard let profile, profile.hasCompleteBirthPlaceData else {
             await MainActor.run {
                 viewModel.profileCalculationState = .failed
+    private func loadProfileCalculation(profile: Profile?) async {
+        guard let profile else {
+            await MainActor.run {
+                viewModel.profileCalculationState = .idle
+            }
+            return
+        }
+
+        guard profile.hasCompleteBirthPlaceData else {
+            await MainActor.run {
+                viewModel.profileCalculationState = .missingBirthPlaceData
             }
             return
         }

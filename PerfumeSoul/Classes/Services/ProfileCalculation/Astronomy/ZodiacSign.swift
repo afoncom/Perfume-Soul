@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ZodiacSign: String, CaseIterable, Equatable, Codable, Hashable {
+enum ZodiacSign: String, CaseIterable, Codable, Equatable, Hashable {
     case aries
     case taurus
     case gemini

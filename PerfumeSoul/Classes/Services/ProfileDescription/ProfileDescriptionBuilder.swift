@@ -14,17 +14,24 @@ protocol ProfileDescriptionBuilder {
 final class ProfileDescriptionBuilderImpl {
 }
 
+struct ElementBalanceProfile: Equatable {
+    let dominantElement: ZodiacElement
+    let weakElement: ZodiacElement
+    let spread: Int
+    let isBalanced: Bool
+}
+
 extension ProfileDescriptionBuilderImpl: ProfileDescriptionBuilder {
     func build(profile: Profile, calculation: ProfileCalculation) -> ProfileDescription {
         let natalChart = calculation.natalChart
-        let dominantElement = makeDominantElement(from: calculation.elementBalance)
-        let weakElement = makeWeakElement(from: calculation.elementBalance)
+        let elementProfile = makeElementBalanceProfile(from: calculation.elementBalance)
         let synthesis = makeSynthesis(
             sun: natalChart.sun.sign,
             moon: natalChart.moon.sign,
             ascendant: natalChart.ascendant.sign,
-            dominantElement: dominantElement,
-            weakElement: weakElement
+            dominantElement: elementProfile.dominantElement,
+            weakElement: elementProfile.weakElement,
+            hasBalancedElementSpread: elementProfile.isBalanced
         )
 
         return ProfileDescription(
@@ -49,11 +56,11 @@ extension ProfileDescriptionBuilderImpl: ProfileDescriptionBuilder {
                     sign: natalChart.ascendant.sign
                 ),
                 elementInsight(
-                    element: dominantElement,
+                    element: elementProfile.dominantElement,
                     isDominant: true
                 ),
                 elementInsight(
-                    element: weakElement,
+                    element: elementProfile.weakElement,
                     isDominant: false
                 ),
                 ProfileDescriptionInsight(
@@ -68,6 +75,8 @@ extension ProfileDescriptionBuilderImpl: ProfileDescriptionBuilder {
 }
 
 extension ProfileDescriptionBuilderImpl {
+    private static let balancedElementSpreadThreshold = 10
+
     private enum Placement {
         case sun
         case moon
@@ -135,12 +144,20 @@ extension ProfileDescriptionBuilderImpl {
         )
     }
 
-    private func makeDominantElement(from balance: ElementBalance) -> ZodiacElement {
-        elementValues(from: balance).max { $0.value < $1.value }?.element ?? .fire
-    }
+    func makeElementBalanceProfile(from balance: ElementBalance) -> ElementBalanceProfile {
+        let values = elementValues(from: balance)
+        let dominantElement = values.max(by: compareElementValues)?.element ?? .fire
+        let weakElement = values.min(by: compareElementValues)?.element ?? .earth
+        let maxValue = values.map(\.value).max() ?? 0
+        let minValue = values.map(\.value).min() ?? 0
+        let spread = maxValue - minValue
 
-    private func makeWeakElement(from balance: ElementBalance) -> ZodiacElement {
-        elementValues(from: balance).min { $0.value < $1.value }?.element ?? .earth
+        return ElementBalanceProfile(
+            dominantElement: dominantElement,
+            weakElement: weakElement,
+            spread: spread,
+            isBalanced: spread <= Self.balancedElementSpreadThreshold
+        )
     }
 
     private func elementValues(from balance: ElementBalance) -> [(element: ZodiacElement, value: Int)] {
@@ -152,12 +169,24 @@ extension ProfileDescriptionBuilderImpl {
         ]
     }
 
+    private func compareElementValues(
+        lhs: (element: ZodiacElement, value: Int),
+        rhs: (element: ZodiacElement, value: Int)
+    ) -> Bool {
+        if lhs.value == rhs.value {
+            return lhs.element.priority > rhs.element.priority
+        }
+
+        return lhs.value < rhs.value
+    }
+
     private func makeSynthesis(
         sun: ZodiacSign,
         moon: ZodiacSign,
         ascendant: ZodiacSign,
         dominantElement: ZodiacElement,
-        weakElement: ZodiacElement
+        weakElement: ZodiacElement,
+        hasBalancedElementSpread: Bool
     ) -> Synthesis {
         if sun == moon && moon == ascendant {
             return Synthesis(
@@ -215,7 +244,7 @@ extension ProfileDescriptionBuilderImpl {
             )
         }
 
-        if dominantElement == weakElement {
+        if hasBalancedElementSpread {
             return Synthesis(
                 title: localized("profileDescription.synthesis.balanced.title"),
                 description: localized("profileDescription.synthesis.balanced.description"),
@@ -270,6 +299,15 @@ extension ZodiacElement {
         case .earth: "earth"
         case .air: "air"
         case .water: "water"
+        }
+    }
+
+    fileprivate var priority: Int {
+        switch self {
+        case .fire: 0
+        case .earth: 1
+        case .air: 2
+        case .water: 3
         }
     }
 }

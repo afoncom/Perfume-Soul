@@ -24,7 +24,7 @@ final class ProfileDescriptionModule {
             onFinish: onFinish
         )
         let profileService = ProfileServiceImpl(container: container)
-        let profileCalculationService = ProfileCalculationServiceImpl()
+        let profileCalculationService = ProfileCalculationServiceImpl(requestManager: requestManager)
         let profileDescriptionBuilder = ProfileDescriptionBuilderImpl()
         let presenter = ProfileDescriptionPresenterImpl(
             viewModel: viewModel,

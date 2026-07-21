@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct ProfileCalculation: Equatable {
+struct ProfileCalculation: Decodable, Equatable {
     let natalChart: NatalChart
     let elementBalance: ElementBalance
 }
 
-struct NatalChart: Equatable {
+struct NatalChart: Decodable, Equatable {
     let sun: ZodiacPlacement
     let moon: ZodiacPlacement
     let ascendant: ZodiacPlacement
 }
 
-struct ZodiacPlacement: Equatable {
+struct ZodiacPlacement: Decodable, Equatable {
     let sign: ZodiacSign
     let longitude: Double
 
@@ -28,7 +28,7 @@ struct ZodiacPlacement: Equatable {
     }
 }
 
-struct ElementBalance: Equatable {
+struct ElementBalance: Decodable, Equatable {
     let fire: Int
     let earth: Int
     let air: Int
@@ -63,8 +63,8 @@ struct ElementBalance: Equatable {
     }
 }
 
-private extension ZodiacPlacement {
-    static func normalize(_ longitude: Double) -> Double {
+extension ZodiacPlacement {
+    fileprivate static func normalize(_ longitude: Double) -> Double {
         let remainder = longitude.truncatingRemainder(dividingBy: 360)
         return remainder >= 0 ? remainder : remainder + 360
     }

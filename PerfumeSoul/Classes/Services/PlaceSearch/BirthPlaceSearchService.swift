@@ -96,16 +96,28 @@ final class BirthPlaceSearchService: NSObject {
 
         return "\(completion.title), \(completion.subtitle)"
     }
+
+    private func finishSearch(with results: [MKLocalSearchCompletion]) {
+        searchContinuation?.resume(returning: results)
+        searchContinuation = nil
+    }
+
+    private func failSearch() {
+        searchContinuation?.resume(returning: [])
+        searchContinuation = nil
+    }
 }
 
 extension BirthPlaceSearchService: MKLocalSearchCompleterDelegate {
-    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        searchContinuation?.resume(returning: completer.results)
-        searchContinuation = nil
+    nonisolated func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        Task { @MainActor [weak self] in
+            self?.finishSearch(with: completer.results)
+        }
     }
     
-    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: any Error) {
-        searchContinuation?.resume(returning: [])
-        searchContinuation = nil
+    nonisolated func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: any Error) {
+        Task { @MainActor [weak self] in
+            self?.failSearch()
+        }
     }
 }

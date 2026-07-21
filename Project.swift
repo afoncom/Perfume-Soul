@@ -11,7 +11,7 @@ let project = Project(
             bundleId: "afon-com.PerfumeSoul",
             deploymentTargets: .iOS("18.0"),
             infoPlist: .file(path: "PerfumeSoul/Info.plist"),
-            sources: .sourceFilesList(globs: ["PerfumeSoul/**/*.swift", "PerfumeSoul/**/*.c"]),
+            sources: .sourceFilesList(globs: ["PerfumeSoul/**/*.swift"]),
             resources: [
                 "PerfumeSoul/Resources/Assets.xcassets",
                 "PerfumeSoul/Resources/Base.lproj/**",
@@ -23,9 +23,7 @@ let project = Project(
             settings: .settings(
                 base: [
                     "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS": "YES",
-                    "ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": "YES",
-                    "SWIFT_OBJC_BRIDGING_HEADER": "PerfumeSoul/Classes/Services/ProfileCalculation/Astronomy/PerfumeSoul-Bridging-Header.h",
-                    "HEADER_SEARCH_PATHS": "$(inherited) $(SRCROOT)/PerfumeSoul/Classes/Services/ProfileCalculation/Astronomy/CAstronomy/include"
+                    "ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": "YES"
                 ]
             )
         ),
