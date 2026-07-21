@@ -244,6 +244,9 @@
 "profileDescription.element.weak.fire" = "Мягкий огонь означает, что смелое действие требует осознанной поддержки. Тепло и решительность растут через практику.";
 "profileDescription.element.weak.water" = "Мягкая вода означает, что эмоциями проще управлять через структуру, чем через полное погружение.";
 "profileDescription.element.weakTitle" = "%@ требует поддержки";
+"profileDescription.failedMessage" = "Попробуйте повторить расчет натального профиля.";
+"profileDescription.failedTitle" = "Не удалось рассчитать профиль";
+"profileDescription.retryButton" = "Повторить";
 "profileDescription.moon.aquarius" = "Вам нужны эмоциональное пространство и интеллектуальная честность. Давление может заставлять отстраняться.";
 "profileDescription.moon.aries" = "Эмоционально вам нужны прямота и быстрый выход энергии. Долгое ожидание может утомлять сильнее действия.";
 "profileDescription.moon.cancer" = "Вам нужны нежность, приватность и доверительное эмоциональное пространство.";

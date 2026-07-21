@@ -244,6 +244,9 @@
 "profileDescription.element.weak.fire" = "A softer fire element means bold action may need conscious support. Warmth and courage grow through practice.";
 "profileDescription.element.weak.water" = "A softer water element means emotions may be easier to manage through structure than through immersion.";
 "profileDescription.element.weakTitle" = "%@ needs support";
+"profileDescription.failedMessage" = "Please try the natal profile calculation again.";
+"profileDescription.failedTitle" = "Calculation failed";
+"profileDescription.retryButton" = "Retry";
 "profileDescription.moon.aquarius" = "You need emotional space and intellectual honesty. Too much pressure can make you detach.";
 "profileDescription.moon.aries" = "Emotionally, you need directness and quick release. Waiting too long can feel heavier than acting.";
 "profileDescription.moon.cancer" = "You need tenderness, privacy, and a trusted emotional home before you fully open up.";

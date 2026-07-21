@@ -21,26 +21,10 @@ struct ProfileDescriptionScreen: View {
     }
     
     var body: some View {
-        let bottomPadding: CGFloat = presenter.shouldShowContinueButton ? 140 : 32
+        let bottomPadding = presenter.shouldShowContinueButton ? 140.0 : 32.0
 
         ZStack {
-            if let profileDescription = viewModel.profileDescription {
-                ScrollView(.vertical, showsIndicators: false) {
-                    VStack(spacing: 26) {
-                        makeHeaderView(profileDescription: profileDescription)
-                        makeInsightCards(profileDescription: profileDescription)
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 28)
-                    .padding(.bottom, bottomPadding)
-                }
-            } else if viewModel.profile != nil {
-                makeUnavailableState()
-                    .padding(.horizontal, 24)
-            } else {
-                ProgressView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
+            makeContentView(bottomPadding: bottomPadding)
         }
         .background(Color(.backgroundPrimary).ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
@@ -58,6 +42,38 @@ struct ProfileDescriptionScreen: View {
 }
 
 extension ProfileDescriptionScreen {
+    @ViewBuilder
+    private func makeContentView(bottomPadding: Double) -> some View {
+        switch viewModel.state {
+        case .idle, .loading:
+            makeLoadingState()
+        case let .content(_, profileDescription):
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 26) {
+                    makeHeaderView(profileDescription: profileDescription)
+                    makeInsightCards(profileDescription: profileDescription)
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 28)
+                .padding(.bottom, bottomPadding)
+            }
+        case .missingBirthPlaceData:
+            makeUnavailableState(
+                title: L10n.ProfileDescription.unavailableTitle,
+                message: L10n.ProfileDescription.unavailableMessage,
+                canRetry: false
+            )
+            .padding(.horizontal, 24)
+        case .failed:
+            makeUnavailableState(
+                title: L10n.ProfileDescription.failedTitle,
+                message: L10n.ProfileDescription.failedMessage,
+                canRetry: true
+            )
+            .padding(.horizontal, 24)
+        }
+    }
+
     private func makeHeaderView(profileDescription: ProfileDescription) -> some View {
         VStack(spacing: 10) {
             Text(profileDescription.title)
@@ -141,22 +157,52 @@ extension ProfileDescriptionScreen {
         )
         .shadow(color: Color(.insightCardShadow), radius: 18, x: 0, y: 10)
     }
-    
-    private func makeUnavailableState() -> some View {
+
+    private func makeLoadingState() -> some View {
+        ProgressView()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private func makeUnavailableState(
+        title: String,
+        message: String,
+        canRetry: Bool
+    ) -> some View {
         VStack(spacing: 14) {
             Image(systemName: "sparkles")
                 .font(.system(size: 28, weight: .semibold))
                 .foregroundStyle(Color(.pinkIcon))
 
-            Text(L10n.ProfileDescription.unavailableTitle)
+            Text(title)
                 .font(.system(size: 22, weight: .semibold, design: .rounded))
                 .foregroundStyle(Color(.titleText))
 
-            Text(L10n.ProfileDescription.unavailableMessage)
+            Text(message)
                 .font(.system(size: 16, weight: .regular, design: .rounded))
                 .foregroundStyle(Color(.descriptionText))
                 .multilineTextAlignment(.center)
                 .lineSpacing(4)
+
+            if canRetry {
+                Button {
+                    Task {
+                        await presenter.retryButtonTapped()
+                    }
+                } label: {
+                    Text(L10n.ProfileDescription.retryButton)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Color(.textPrimary))
+                        .padding(.horizontal, 18)
+                        .padding(.vertical, 10)
+                        .background(Color(.surfacePrimary))
+                        .clipShape(Capsule())
+                        .overlay(
+                            Capsule()
+                                .stroke(Color(.cardBorder), lineWidth: 1)
+                        )
+                }
+                .buttonStyle(.plain)
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -199,6 +245,8 @@ extension ProfileDescriptionScreen {
                 )
                 .clipShape(Capsule())
         }
+        .disabled(!viewModel.canContinue)
+        .opacity(viewModel.canContinue ? 1 : 0.55)
         .background(Color(.surfaceHighlight))
     }
 }
