@@ -106,6 +106,7 @@ private extension ProfileCalculationRequest {
     func makeNatalChartInput() throws -> NatalChartInput {
         let dateComponents = try parseBirthDate()
         let timeComponents = try parseBirthTime()
+        try validateCoordinates()
 
         return NatalChartInput(
             year: dateComponents.year,
@@ -121,30 +122,76 @@ private extension ProfileCalculationRequest {
     }
 
     func parseBirthDate() throws -> (year: Int, month: Int, day: Int) {
-        let components = birthDate.split(separator: "-")
+        let components = birthDate.split(separator: "-", omittingEmptySubsequences: false)
         guard
+            birthDate.count == 10,
             components.count == 3,
+            components[0].count == 4,
+            components[1].count == 2,
+            components[2].count == 2,
             let year = Int(components[0]),
             let month = Int(components[1]),
             let day = Int(components[2])
         else {
-            throw ProfileCalculationLoaderError.invalidBirthDateFormat
+            throw Abort(.badRequest, reason: "birthDate must use yyyy-MM-dd format.")
+        }
+
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0) ?? .gmt
+
+        let dateComponents = DateComponents(
+            calendar: calendar,
+            timeZone: calendar.timeZone,
+            year: year,
+            month: month,
+            day: day
+        )
+
+        guard let date = calendar.date(from: dateComponents) else {
+            throw Abort(.badRequest, reason: "birthDate must be a valid calendar date.")
+        }
+
+        let resolvedComponents = calendar.dateComponents([.year, .month, .day], from: date)
+        guard
+            (1...9999).contains(year),
+            resolvedComponents.year == year,
+            resolvedComponents.month == month,
+            resolvedComponents.day == day
+        else {
+            throw Abort(.badRequest, reason: "birthDate must be a valid calendar date.")
         }
 
         return (year, month, day)
     }
 
     func parseBirthTime() throws -> (hour: Int, minute: Int) {
-        let components = birthTime.split(separator: ":")
+        let components = birthTime.split(separator: ":", omittingEmptySubsequences: false)
         guard
+            birthTime.count == 5,
             components.count == 2,
+            components[0].count == 2,
+            components[1].count == 2,
             let hour = Int(components[0]),
             let minute = Int(components[1])
         else {
-            throw ProfileCalculationLoaderError.invalidBirthTimeFormat
+            throw Abort(.badRequest, reason: "birthTime must use HH:mm format.")
+        }
+
+        guard (0...23).contains(hour), (0...59).contains(minute) else {
+            throw Abort(.badRequest, reason: "birthTime must be a valid 24-hour time.")
         }
 
         return (hour, minute)
+    }
+
+    func validateCoordinates() throws {
+        guard (-90...90).contains(latitude) else {
+            throw Abort(.badRequest, reason: "latitude must be between -90 and 90.")
+        }
+
+        guard (-180...180).contains(longitude) else {
+            throw Abort(.badRequest, reason: "longitude must be between -180 and 180.")
+        }
     }
 }
 
@@ -175,20 +222,6 @@ private enum ZodiacElement: CaseIterable {
         case .earth: 1
         case .air: 2
         case .water: 3
-        }
-    }
-}
-
-private enum ProfileCalculationLoaderError: LocalizedError {
-    case invalidBirthDateFormat
-    case invalidBirthTimeFormat
-
-    var errorDescription: String? {
-        switch self {
-        case .invalidBirthDateFormat:
-            "birthDate must use yyyy-MM-dd format."
-        case .invalidBirthTimeFormat:
-            "birthTime must use HH:mm format."
         }
     }
 }
