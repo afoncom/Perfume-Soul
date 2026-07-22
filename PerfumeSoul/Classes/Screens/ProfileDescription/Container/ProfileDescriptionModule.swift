@@ -20,6 +20,7 @@ final class ProfileDescriptionModule {
         let viewModel = ProfileDescriptionViewModel()
         let router = ProfileDescriptionRouterImpl(
             navigationController: navigationController,
+            requestManager: requestManager,
             onFinish: onFinish
         )
         let profileService = ProfileServiceImpl(container: container)

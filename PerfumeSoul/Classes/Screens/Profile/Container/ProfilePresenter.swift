@@ -8,7 +8,7 @@
 
 protocol ProfilePresenter {
     func addedNewProfilesButtonTab()
-    func personalPerfumesButtonTapped()
+    func personalPerfumesButtonTapped() async
     func profileDescriptionButtonTapped()
     func retryProfileCalculationButtonTapped() async
     func completeBirthDataButtonTapped() async
@@ -46,8 +46,23 @@ extension ProfilePresenterImpl: ProfilePresenter {
         router.showAddedNewProfiles()
     }
     
-    func personalPerfumesButtonTapped() {
-        router.showPersonalPerfumes()
+    func personalPerfumesButtonTapped() async {
+        if let profileCalculation = await MainActor.run(body: { viewModel.profileCalculation }) {
+            await MainActor.run {
+                router.showPersonalPerfumes(profileCalculation: profileCalculation)
+            }
+            return
+        }
+
+        let isProfileCalculationLoading = await MainActor.run {
+            viewModel.isProfileCalculationLoading
+        }
+
+        guard !isProfileCalculationLoading else {
+            return
+        }
+
+        await loadProfileCalculationAndOpenPersonalPerfumes()
     }
 
     func profileDescriptionButtonTapped() {
@@ -94,7 +109,9 @@ extension ProfilePresenterImpl: ProfilePresenter {
         let profile = await MainActor.run {
             viewModel.profile
         }
-        guard let profile else { return }
+        guard let profile else {
+            return
+        }
         
         await profileService.deleteProfile(profile)
         quizProgressService.resetProgress()
@@ -110,6 +127,20 @@ extension ProfilePresenterImpl: ProfilePresenter {
 }
 
 extension ProfilePresenterImpl {
+    private func loadProfileCalculationAndOpenPersonalPerfumes() async {
+        let profile = await MainActor.run {
+            viewModel.profile
+        }
+
+        await loadProfileCalculation(profile: profile)
+
+        if let profileCalculation = await MainActor.run(body: { viewModel.profileCalculation }) {
+            await MainActor.run {
+                router.showPersonalPerfumes(profileCalculation: profileCalculation)
+            }
+        }
+    }
+
     private func loadProfileCalculation(profile: Profile?) async {
         guard let profile else {
             await MainActor.run {

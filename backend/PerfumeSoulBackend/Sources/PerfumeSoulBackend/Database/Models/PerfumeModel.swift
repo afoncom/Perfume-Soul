@@ -36,6 +36,9 @@ final class PerfumeModel: Model, @unchecked Sendable {
     @OptionalField(key: "mood_profile")
     var moodProfile: String?
 
+    @OptionalField(key: "market_segment")
+    var marketSegment: String?
+
     @Parent(key: "brand_id")
     var brand: BrandModel
 
@@ -59,6 +62,7 @@ final class PerfumeModel: Model, @unchecked Sendable {
         styleProfile: String? = nil,
         genderProfile: String? = nil,
         moodProfile: String? = nil,
+        marketSegment: String? = nil,
         brandID: Int
     ) {
         self.id = id
@@ -72,6 +76,7 @@ final class PerfumeModel: Model, @unchecked Sendable {
         self.styleProfile = styleProfile
         self.genderProfile = genderProfile
         self.moodProfile = moodProfile
+        self.marketSegment = marketSegment
         self.$brand.id = brandID
     }
 }

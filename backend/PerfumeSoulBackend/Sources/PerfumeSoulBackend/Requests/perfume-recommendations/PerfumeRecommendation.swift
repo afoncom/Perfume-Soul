@@ -660,6 +660,7 @@ struct PerfumeProfile {
     let styleProfile: String?
     let genderProfile: String?
     let moodProfile: String?
+    let marketSegment: String?
     let signature: String
 
     init(
@@ -678,7 +679,8 @@ struct PerfumeProfile {
         occasionProfile: String? = nil,
         styleProfile: String? = nil,
         genderProfile: String? = nil,
-        moodProfile: String? = nil
+        moodProfile: String? = nil,
+        marketSegment: String? = nil
     ) {
         self.id = id
         self.perfumeName = perfumeName
@@ -696,6 +698,7 @@ struct PerfumeProfile {
         self.styleProfile = styleProfile
         self.genderProfile = genderProfile
         self.moodProfile = moodProfile
+        self.marketSegment = marketSegment
         self.signature = Self.makeSignature(
             topNotes: topNotes,
             middleNotes: middleNotes,
@@ -728,6 +731,7 @@ struct PerfumeProfile {
         self.styleProfile = model.styleProfile
         self.genderProfile = model.genderProfile
         self.moodProfile = model.moodProfile
+        self.marketSegment = model.marketSegment
         self.longevityScore = model.longevityScore
         self.sillageScore = model.sillageScore
 

@@ -31,6 +31,14 @@ enum ProfileCalculationState: Equatable {
         return profileCalculation
     }
 
+    var isProfileCalculationLoading: Bool {
+        profileCalculationState == .loading
+    }
+
+    var didFailProfileCalculation: Bool {
+        profileCalculationState == .failed
+    }
+
     var perfumeExpertiseLevel: PerfumeExpertiseLevel {
         PerfumeExpertiseLevel.level(for: totalCorrectQuizAnswers)
     }
