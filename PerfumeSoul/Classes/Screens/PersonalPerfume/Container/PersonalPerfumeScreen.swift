@@ -21,6 +21,8 @@ struct PersonalPerfumeScreen: View {
     }
 
     var body: some View {
+        let bottomPadding = presenter.shouldShowContinueButton ? 120.0 : 32.0
+
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 18) {
                 makeHeaderView()
@@ -28,7 +30,7 @@ struct PersonalPerfumeScreen: View {
             }
             .padding(.horizontal, 16)
             .padding(.top, 24)
-            .padding(.bottom, 120)
+            .padding(.bottom, bottomPadding)
         }
         .background(
             LinearGradient(
@@ -40,35 +42,53 @@ struct PersonalPerfumeScreen: View {
             )
             .ignoresSafeArea()
         )
-        .safeAreaInset(edge: .bottom) {
-            makeContinueButton()
-                .padding(.horizontal, 24)
-                .padding(.top, 12)
-                .padding(.bottom, 8)
-        }
         .task {
-            presenter.onAppear()
+            await presenter.onAppear()
+        }
+        .safeAreaInset(edge: .bottom) {
+            if presenter.shouldShowContinueButton {
+                makeContinueButton()
+                    .padding(.horizontal, 24)
+                    .padding(.top, 12)
+                    .padding(.bottom, 8)
+            }
         }
     }
 }
 
-private extension PersonalPerfumeScreen {
-    func makeSectionsView() -> some View {
-        VStack(alignment: .leading, spacing: 18) {
-            ForEach(Array(viewModel.sections.enumerated()), id: \.offset) { _, section in
-                makePerfumeSection(section: section)
-            }
+extension PersonalPerfumeScreen {
+    @ViewBuilder
+    private func makeSectionsView() -> some View {
+        switch viewModel.state {
+        case .loading:
+            makeLoadingState()
+        case let .content(sections):
+            makeContentState(sections: sections)
+        case .empty:
+            makeEmptyState()
+        case .missingProfileCalculation:
+            makeErrorState(
+                title: L10n.PersonalPerfume.Error.MissingProfile.title,
+                subtitle: L10n.PersonalPerfume.Error.MissingProfile.subtitle,
+                canRetry: false
+            )
+        case .requestFailed:
+            makeErrorState(
+                title: L10n.PersonalPerfume.Error.RequestFailed.title,
+                subtitle: L10n.PersonalPerfume.Error.RequestFailed.subtitle,
+                canRetry: true
+            )
         }
     }
 
-    func makeHeaderView() -> some View {
+    private func makeHeaderView() -> some View {
         VStack(spacing: 8) {
-            Text("Your Personal Scents")
+            Text(L10n.PersonalPerfume.title)
                 .font(.system(size: 28, weight: .medium, design: .rounded))
                 .foregroundStyle(Color(.titleText))
                 .multilineTextAlignment(.center)
 
-            Text("Discover your curated fragrance selection.")
+            Text(L10n.PersonalPerfume.subtitle)
                 .font(.system(size: 18, weight: .regular, design: .rounded))
                 .foregroundStyle(Color(.descriptionText))
                 .multilineTextAlignment(.center)
@@ -78,7 +98,7 @@ private extension PersonalPerfumeScreen {
         .padding(.bottom, 8)
     }
 
-    func makePerfumeSection(section: PersonalPerfumeSection) -> some View {
+    private func makePerfumeSection(section: PersonalPerfumeSection) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             Text(section.title)
                 .font(.system(size: 22, weight: .medium, design: .rounded))
@@ -87,7 +107,7 @@ private extension PersonalPerfumeScreen {
             VStack(alignment: .leading, spacing: 16) {
                 HStack(alignment: .top, spacing: 12) {
                     ForEach(Array(section.perfumes.enumerated()), id: \.offset) { _, perfume in
-                        makePerfumeItem(name: perfume.name, subtitle: perfume.subtitle)
+                        makePerfumeItem(perfume: perfume)
                     }
                 }
 
@@ -106,7 +126,7 @@ private extension PersonalPerfumeScreen {
         }
     }
 
-    func makePerfumeItem(name: String, subtitle: String) -> some View {
+    private func makePerfumeItem(perfume: PersonalPerfumeItem) -> some View {
         VStack(spacing: 10) {
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .fill(Color(.surfacePrimary))
@@ -117,26 +137,123 @@ private extension PersonalPerfumeScreen {
                 )
 
             VStack(spacing: 4) {
-                Text(name)
+                Text(perfume.name)
                     .font(.system(size: 15, weight: .medium, design: .rounded))
                     .foregroundStyle(Color(.titleText))
                     .multilineTextAlignment(.center)
 
-                Text(subtitle)
+                Text(perfume.subtitle)
                     .font(.system(size: 14, weight: .regular, design: .rounded))
                     .foregroundStyle(Color(.descriptionText))
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
+
+                Text(L10n.PersonalPerfume.matchFormat(perfume.matchPercentage))
+                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .foregroundStyle(Color(.pinkButton))
+                    .multilineTextAlignment(.center)
+
+                if let matchExplanation = perfume.matchExplanation {
+                    Text(matchExplanation)
+                        .font(.system(size: 11, weight: .regular, design: .rounded))
+                        .foregroundStyle(Color(.descriptionText))
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.85)
+                }
             }
         }
         .frame(maxWidth: .infinity, alignment: .top)
     }
 
-    func makeContinueButton() -> some View {
+    private func makeContentState(sections: [PersonalPerfumeSection]) -> some View {
+        VStack(alignment: .leading, spacing: 18) {
+            ForEach(Array(sections.enumerated()), id: \.offset) { _, section in
+                makePerfumeSection(section: section)
+            }
+        }
+    }
+
+    private func makeLoadingState() -> some View {
+        ProgressView()
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 32)
+    }
+
+    private func makeErrorState(
+        title: String,
+        subtitle: String,
+        canRetry: Bool
+    ) -> some View {
+        makeMessageState(
+            title: title,
+            subtitle: subtitle,
+            canRetry: canRetry
+        )
+    }
+
+    private func makeEmptyState() -> some View {
+        makeMessageState(
+            title: L10n.PersonalPerfume.Empty.title,
+            subtitle: L10n.PersonalPerfume.Empty.subtitle,
+            canRetry: false
+        )
+    }
+
+    private func makeMessageState(
+        title: String,
+        subtitle: String,
+        canRetry: Bool
+    ) -> some View {
+        VStack(spacing: 12) {
+            Text(title)
+                .font(.headline)
+                .foregroundStyle(Color(.textPrimary))
+                .multilineTextAlignment(.center)
+
+            Text(subtitle)
+                .font(.subheadline)
+                .foregroundStyle(Color(.textSecondary))
+                .multilineTextAlignment(.center)
+
+            if canRetry {
+                Button {
+                    Task {
+                        await presenter.retryButtonTapped()
+                    }
+                } label: {
+                    Text(L10n.PersonalPerfume.retryButton)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Color(.textPrimary))
+                        .padding(.horizontal, 18)
+                        .padding(.vertical, 10)
+                        .background(Color(.surfacePrimary))
+                        .clipShape(Capsule())
+                        .overlay(
+                            Capsule()
+                                .stroke(Color(.cardBorder), lineWidth: 1)
+                        )
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 32)
+        .padding(.horizontal, 20)
+        .background(Color(.surfacePrimary))
+        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .stroke(Color(.cardBorder), lineWidth: 1)
+        )
+        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
+    }
+
+    private func makeContinueButton() -> some View {
         Button {
             presenter.continueButtonTapped()
         } label: {
-            Text("Continue")
+            Text(L10n.Common.continueButton)
                 .font(.system(size: 24, weight: .medium, design: .rounded))
                 .foregroundStyle(Color(.textOnAccent))
                 .frame(maxWidth: .infinity)
@@ -153,6 +270,8 @@ private extension PersonalPerfumeScreen {
                 )
                 .clipShape(Capsule())
         }
+        .disabled(!viewModel.canContinue)
+        .opacity(viewModel.canContinue ? 1 : 0.55)
         .background(Color(.surfaceHighlight))
     }
 }

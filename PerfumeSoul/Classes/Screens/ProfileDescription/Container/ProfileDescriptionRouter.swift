@@ -9,25 +9,30 @@
 import UIKit
 
 protocol ProfileDescriptionRouter {
-    func showPersonalPerfume()
+    func showPersonalPerfume(profileCalculation: ProfileCalculation?)
 }
 
 final class ProfileDescriptionRouterImpl {
     private weak var navigationController: UINavigationController?
-    private let onFinish: () -> Void
+    private let requestManager: RequestManager
+    private let onFinish: (() -> Void)?
 
     init(
         navigationController: UINavigationController?,
-        onFinish: @escaping () -> Void
+        requestManager: RequestManager,
+        onFinish: (() -> Void)? = nil
     ) {
         self.navigationController = navigationController
+        self.requestManager = requestManager
         self.onFinish = onFinish
     }
 }
 
 extension ProfileDescriptionRouterImpl: ProfileDescriptionRouter {
-    func showPersonalPerfume() {
+    func showPersonalPerfume(profileCalculation: ProfileCalculation?) {
         let screen = PersonalPerfumeModule.build(
+            profileCalculation: profileCalculation,
+            requestManager: requestManager,
             onFinish: onFinish
         )
         navigationController?.pushViewController(screen, animated: true)

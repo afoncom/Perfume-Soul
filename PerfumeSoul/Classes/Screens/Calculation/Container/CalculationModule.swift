@@ -10,15 +10,18 @@ import SwiftUI
 import CoreData
 
 final class CalculationModule {
-    @MainActor static func build(
+    @MainActor
+    static func build(
         container: NSPersistentContainer,
+        requestManager: RequestManager,
         onFinish: @escaping () -> Void
     ) -> UIViewController {
         let viewModel = CalculationViewModel()
         let navigationController = UINavigationController()
         let router = CalculationRouterImpl(
-            navigationController: navigationController,
+            navigationController: navigationController, 
             container: container,
+            requestManager: requestManager,
             onFinish: onFinish
         )
         let profileService = ProfileServiceImpl(container: container)
@@ -32,7 +35,7 @@ final class CalculationModule {
         
         let view = CalculationScreen(viewModel: viewModel, presenter: presenter)
         let hostingController = UIHostingController(rootView: view)
-
+ 
         navigationController.viewControllers = [hostingController]
         navigationController.setNavigationBarHidden(true, animated: false)
 

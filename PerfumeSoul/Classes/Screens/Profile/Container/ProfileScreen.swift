@@ -39,6 +39,9 @@ struct ProfileScreen: View {
 
                         makePersonalPerfumesRow()
                             .padding(.horizontal, 16)
+
+                        makeProfileDescriptionRow()
+                            .padding(.horizontal, 16)
                         
                         makeAddedNewProfiless()
                             .padding(.horizontal, 16)
@@ -105,31 +108,36 @@ private extension ProfileScreen {
             Text(L10n.Profile.NatalChart.title)
                 .font(.title3)
                 .fontWeight(.medium)
-            
-            VStack(spacing: 8) {
-                makeNatalChartRow(
-                    color: Color(.natalSunSurface),
-                    symbol: "sun.max.fill",
-                    symbolColor: Color(.natalSunAccent),
-                    title: L10n.Profile.NatalChart.sun,
-                    value: L10n.Profile.NatalChart.sunValue
-                )
-                
-                makeNatalChartRow(
-                    color: Color(.natalMoonSurface),
-                    symbol: "moon.fill",
-                    symbolColor: Color(.natalMoonAccent),
-                    title: L10n.Profile.NatalChart.moon,
-                    value: L10n.Profile.NatalChart.moonValue
-                )
-                
-                makeNatalChartRow(
-                    color: Color(.natalAscendantSurface),
-                    symbol: "circle.hexagongrid.fill",
-                    symbolColor: Color(.pinkButton),
-                    title: L10n.Profile.NatalChart.ascendant,
-                    value: L10n.Profile.NatalChart.ascendantValue
-                )
+            if let natalChart = viewModel.profileCalculation?.natalChart {
+                VStack(spacing: 8) {
+                    makeNatalChartRow(
+                        color: Color(.natalSunSurface),
+                        symbol: "sun.max.fill",
+                        symbolColor: Color(.natalSunAccent),
+                        title: L10n.Profile.NatalChart.sun,
+                        value: makePlacementTitle(for: natalChart.sun)
+                    )
+
+                    makeNatalChartRow(
+                        color: Color(.natalMoonSurface),
+                        symbol: "moon.fill",
+                        symbolColor: Color(.natalMoonAccent),
+                        title: L10n.Profile.NatalChart.moon,
+                        value: makePlacementTitle(for: natalChart.moon)
+                    )
+
+                    makeNatalChartRow(
+                        color: Color(.natalAscendantSurface),
+                        symbol: "circle.hexagongrid.fill",
+                        symbolColor: Color(.pinkButton),
+                        title: L10n.Profile.NatalChart.ascendant,
+                        value: makePlacementTitle(for: natalChart.ascendant)
+                    )
+                }
+            } else if viewModel.didFailProfileCalculation {
+                makeProfileCalculationUnavailableState()
+            } else {
+                makeProfileCalculationStateView()
             }
         }
         .padding(14)
@@ -143,21 +151,22 @@ private extension ProfileScreen {
             Text(L10n.Profile.ElementBalance.title)
                 .font(.title3)
                 .fontWeight(.medium)
-            
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .fill(Color(.placeholderSoft))
-                    .frame(height: 34)
-            }
-            
-            HStack {
-                makeElementItem(percent: "15%", title: L10n.Profile.Element.fire)
-                Spacer()
-                makeElementItem(percent: "40%", title: L10n.Profile.Element.earth)
-                Spacer()
-                makeElementItem(percent: "15%", title: L10n.Profile.Element.air)
-                Spacer()
-                makeElementItem(percent: "30%", title: L10n.Profile.Element.water)
+            if let elementBalance = viewModel.profileCalculation?.elementBalance {
+                makeElementBalanceBar(elementBalance: elementBalance)
+
+                HStack {
+                    makeElementItem(percent: "\(elementBalance.fire)%", title: L10n.Profile.Element.fire)
+                    Spacer()
+                    makeElementItem(percent: "\(elementBalance.earth)%", title: L10n.Profile.Element.earth)
+                    Spacer()
+                    makeElementItem(percent: "\(elementBalance.air)%", title: L10n.Profile.Element.air)
+                    Spacer()
+                    makeElementItem(percent: "\(elementBalance.water)%", title: L10n.Profile.Element.water)
+                }
+            } else if viewModel.didFailProfileCalculation {
+                makeProfileCalculationUnavailableState()
+            } else {
+                makeProfileCalculationStateView()
             }
         }
         .padding(14)
@@ -168,7 +177,9 @@ private extension ProfileScreen {
 
     func makePersonalPerfumesRow() -> some View {
         Button {
-            presenter.personalPerfumesButtonTapped()
+            Task {
+                await presenter.personalPerfumesButtonTapped()
+            }
         } label: {
             HStack(spacing: 14) {
                 ZStack {
@@ -182,18 +193,155 @@ private extension ProfileScreen {
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Personal Perfumes")
+                    Text(L10n.Profile.PersonalPerfumes.title)
                         .font(.title3)
                         .fontWeight(.medium)
                         .foregroundStyle(Color(.textPrimary))
                     
-                    Text("Open your curated fragrance selection.")
+                    Text(personalPerfumesSubtitle)
                         .font(.footnote)
                         .foregroundStyle(Color(.textSecondary))
                 }
                 
                 Spacer()
-                
+
+                makePersonalPerfumesAccessory()
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .background(Color(.surfacePrimary))
+            .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 22, style: .continuous)
+                    .stroke(Color(.cardBorder), lineWidth: 1)
+            )
+            .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
+        }
+        .buttonStyle(.plain)
+        .disabled(viewModel.isProfileCalculationLoading)
+        .opacity(viewModel.isProfileCalculationLoading ? 0.65 : 1)
+    }
+
+    func makePersonalPerfumesAccessory() -> some View {
+        Group {
+            if viewModel.isProfileCalculationLoading {
+                ProgressView()
+                    .frame(width: 18, height: 18)
+            } else if viewModel.didFailProfileCalculation {
+                Image(systemName: "arrow.clockwise")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(Color(.textSecondary))
+            } else {
+                Image(systemName: "chevron.right")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(Color(.textSecondary))
+            }
+        }
+    }
+
+    func makeProfileCalculationUnavailableState() -> some View {
+        Text(L10n.Profile.Calculation.unavailableMessage)
+            .font(.footnote)
+            .foregroundStyle(Color(.textSecondary))
+            .frame(maxWidth: .infinity, alignment: .center)
+            .multilineTextAlignment(.center)
+            .padding(.vertical, 20)
+    }
+
+    @ViewBuilder
+    func makeProfileCalculationStateView() -> some View {
+        switch viewModel.profileCalculationState {
+        case .idle, .loading:
+            ProgressView()
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.vertical, 20)
+        case .loaded:
+            EmptyView()
+        case .missingBirthPlaceData:
+            makeProfileCalculationActionState(
+                title: L10n.Profile.Calculation.MissingBirthData.title,
+                subtitle: L10n.Profile.Calculation.MissingBirthData.subtitle,
+                buttonTitle: L10n.Profile.Calculation.MissingBirthData.button
+            ) {
+                Task {
+                    await presenter.completeBirthDataButtonTapped()
+                }
+            }
+        case .failed:
+            makeProfileCalculationActionState(
+                title: L10n.Profile.Calculation.Failed.title,
+                subtitle: L10n.Profile.Calculation.Failed.subtitle,
+                buttonTitle: L10n.Profile.Calculation.Failed.button
+            ) {
+                Task {
+                    await presenter.retryProfileCalculationButtonTapped()
+                }
+            }
+        }
+    }
+
+    func makeProfileCalculationActionState(
+        title: String,
+        subtitle: String,
+        buttonTitle: String,
+        action: @escaping () -> Void
+    ) -> some View {
+        VStack(spacing: 10) {
+            Text(title)
+                .font(.headline)
+                .foregroundStyle(Color(.textPrimary))
+                .multilineTextAlignment(.center)
+
+            Text(subtitle)
+                .font(.footnote)
+                .foregroundStyle(Color(.textSecondary))
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Button(action: action) {
+                Text(buttonTitle)
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(Color(.textOnAccent))
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 10)
+                    .background(Color(.pinkButton))
+                    .clipShape(Capsule())
+            }
+            .buttonStyle(.plain)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 14)
+        .padding(.horizontal, 12)
+    }
+
+    func makeProfileDescriptionRow() -> some View {
+        Button {
+            presenter.profileDescriptionButtonTapped()
+        } label: {
+            HStack(spacing: 14) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .fill(Color(.pinkIconSurface))
+                        .frame(width: 46, height: 46)
+
+                    Image(systemName: "person.text.rectangle")
+                        .font(.headline)
+                        .foregroundStyle(Color(.pinkIcon))
+                }
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(L10n.Profile.PersonalityDescription.title)
+                        .font(.title3)
+                        .fontWeight(.medium)
+                        .foregroundStyle(Color(.textPrimary))
+
+                    Text(L10n.Profile.PersonalityDescription.subtitle)
+                        .font(.footnote)
+                        .foregroundStyle(Color(.textSecondary))
+                }
+
+                Spacer()
+
                 Image(systemName: "chevron.right")
                     .font(.footnote.weight(.semibold))
                     .foregroundStyle(Color(.textSecondary))
@@ -353,7 +501,7 @@ private extension ProfileScreen {
     }
 
     func makeZodiacInfo(profile: Profile) -> DailyHoroscope? {
-        guard let sign = profile.zodiacSign() else {
+        guard let sign = viewModel.profileCalculation?.natalChart.sun.sign.rawValue ?? profile.zodiacSign() else {
             return nil
         }
 
@@ -407,6 +555,23 @@ private extension ProfileScreen {
             return L10n.Profile.Expertise.Description.perfumer
         }
     }
+
+    var personalPerfumesSubtitle: String {
+        if viewModel.isProfileCalculationLoading {
+            return L10n.Profile.PersonalPerfumes.loadingSubtitle
+        }
+
+        if viewModel.didFailProfileCalculation {
+            return L10n.Profile.PersonalPerfumes.retrySubtitle
+        }
+
+        return L10n.Profile.PersonalPerfumes.subtitle
+    }
+
+    func makePlacementTitle(for placement: ZodiacPlacement) -> String {
+        let horoscope = DailyHoroscope(sign: placement.sign.rawValue, energyOfDay: "")
+        return "\(horoscope.displayName) \(horoscope.symbol)"
+    }
 }
 
 //MARK: - Natal Chart Row
@@ -454,6 +619,39 @@ private extension ProfileScreen {
 //MARK: - Element Item
 
 private extension ProfileScreen {
+    func makeElementBalanceBar(elementBalance: ElementBalance) -> some View {
+        GeometryReader { proxy in
+            let width = proxy.size.width
+
+            HStack(spacing: 0) {
+                makeElementBalanceSegment(
+                    color: Color(.pinkButton),
+                    width: width * CGFloat(elementBalance.fire) / 100
+                )
+                makeElementBalanceSegment(
+                    color: Color(.zodiacMint),
+                    width: width * CGFloat(elementBalance.earth) / 100
+                )
+                makeElementBalanceSegment(
+                    color: Color(.zodiacCyan),
+                    width: width * CGFloat(elementBalance.air) / 100
+                )
+                makeElementBalanceSegment(
+                    color: Color(.zodiacBlue),
+                    width: width * CGFloat(elementBalance.water) / 100
+                )
+            }
+            .background(Color(.placeholderSoft))
+            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        }
+        .frame(height: 34)
+    }
+
+    func makeElementBalanceSegment(color: Color, width: CGFloat) -> some View {
+        color
+            .frame(width: width)
+    }
+
     func makeElementItem(percent: String, title: String) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(percent)

@@ -7,7 +7,8 @@ SET concentration = NULL,
     occasion_profile = NULL,
     style_profile = NULL,
     gender_profile = NULL,
-    mood_profile = NULL;
+    mood_profile = NULL,
+    market_segment = NULL;
 
 UPDATE perfumes
 SET concentration = CASE
@@ -446,5 +447,33 @@ JOIN brands
     ON brands.brand = override_values.brand_name
 WHERE perfumes.brand_id = brands.id
   AND perfumes.perfume_name = override_values.perfume_name;
+
+UPDATE perfumes
+SET market_segment = CASE
+    WHEN brands.brand IN (
+        'Byredo',
+        'Diptyque',
+        'Kilian Paris',
+        'Le Labo',
+        'Maison Margiela',
+        'Initio'
+    ) THEN 'niche'
+    WHEN brands.brand IN (
+        'Creed',
+        'Maison Francis Kurkdjian',
+        'Parfums de Marly',
+        'Tom Ford'
+    ) THEN 'luxury'
+    WHEN brands.brand IN (
+        'Burberry',
+        'Chanel',
+        'Dior',
+        'Giorgio Armani',
+        'Narciso Rodriguez'
+    ) THEN 'daily'
+    ELSE 'unclassified'
+END
+FROM brands
+WHERE perfumes.brand_id = brands.id;
 
 COMMIT;

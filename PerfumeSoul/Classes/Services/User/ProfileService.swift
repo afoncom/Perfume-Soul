@@ -10,6 +10,7 @@ import CoreData
 
 protocol ProfileService {
     func saveProfile(_ profile: Profile)
+    func replaceProfile(_ profile: Profile) async
     func fetchProfile() async -> Profile?
     func deleteProfile(_ profile: Profile) async
 }
@@ -31,6 +32,10 @@ extension ProfileServiceImpl where ProfileStorage == DatabaseStorageImpl<Profile
 extension ProfileServiceImpl: ProfileService {
     func saveProfile(_ profile: Profile) {
         profileStorage.saveModel(model: profile)
+    }
+
+    func replaceProfile(_ profile: Profile) async {
+        await profileStorage.replaceAll(with: profile)
     }
     
     func fetchProfile() async -> Profile? {
