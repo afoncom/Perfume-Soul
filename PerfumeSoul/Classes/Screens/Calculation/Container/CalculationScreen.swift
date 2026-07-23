@@ -219,7 +219,9 @@ private extension CalculationScreen {
     //MARK: - Continue Button
     func makeContinueButton() -> some View {
         Button {
-            presenter.continueButtonTapped()
+            Task {
+                await presenter.continueButtonTapped()
+            }
         } label: {
             Text(L10n.Common.continueButton)
                 .font(.title2)

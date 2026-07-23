@@ -78,17 +78,7 @@ extension ProfilePresenterImpl: ProfilePresenter {
     }
 
     func completeBirthDataButtonTapped() async {
-        let profile = await MainActor.run {
-            viewModel.profile
-        }
-
-        if let profile {
-            await profileService.deleteProfile(profile)
-        }
-
         await MainActor.run {
-            viewModel.profile = nil
-            viewModel.profileCalculationState = .idle
             router.showProfileSetupScreen()
         }
     }

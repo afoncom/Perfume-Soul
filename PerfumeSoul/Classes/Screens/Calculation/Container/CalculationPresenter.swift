@@ -9,7 +9,7 @@
 import MapKit
 
 protocol CalculationPresenter {
-    func continueButtonTapped()
+    func continueButtonTapped() async
     func birthPlaceDidChange(_ query: String) async
     func birthPlaceCompletionTapped(_ completion: MKLocalSearchCompletion) async
     @MainActor
@@ -36,7 +36,7 @@ final class CalculationPresenterImpl {
 }
 
 extension CalculationPresenterImpl: CalculationPresenter {
-    func continueButtonTapped() {
+    func continueButtonTapped() async {
         guard let selectedBirthPlace = viewModel.selectedBirthPlace else {
             return
         }
@@ -50,8 +50,11 @@ extension CalculationPresenterImpl: CalculationPresenter {
             birthLongitude: selectedBirthPlace.longitude,
             birthTimeZoneIdentifier: selectedBirthPlace.timeZoneIdentifier
         )
-        profileService.saveProfile(profile)
-        router.showProfileDescription()
+
+        await profileService.replaceProfile(profile)
+        await MainActor.run {
+            router.showProfileDescription()
+        }
     }
     
     func birthPlaceDidChange(_ query: String) async {
