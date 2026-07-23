@@ -107,6 +107,7 @@ private extension ProfileCalculationRequest {
         let dateComponents = try parseBirthDate()
         let timeComponents = try parseBirthTime()
         try validateCoordinates()
+        try validateTimeZoneIdentifier()
 
         return NatalChartInput(
             year: dateComponents.year,
@@ -191,6 +192,12 @@ private extension ProfileCalculationRequest {
 
         guard (-180...180).contains(longitude) else {
             throw Abort(.badRequest, reason: "longitude must be between -180 and 180.")
+        }
+    }
+
+    func validateTimeZoneIdentifier() throws {
+        guard TimeZone(identifier: timeZoneIdentifier) != nil else {
+            throw Abort(.badRequest, reason: "timeZoneIdentifier must be a valid IANA time zone identifier.")
         }
     }
 }

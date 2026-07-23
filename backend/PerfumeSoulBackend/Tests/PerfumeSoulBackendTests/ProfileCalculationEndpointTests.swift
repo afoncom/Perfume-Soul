@@ -70,7 +70,8 @@ struct ProfileCalculationEndpointTests {
             ("latitude below range", makeRequest(latitude: -90.1)),
             ("latitude above range", makeRequest(latitude: 90.1)),
             ("longitude below range", makeRequest(longitude: -180.1)),
-            ("longitude above range", makeRequest(longitude: 180.1))
+            ("longitude above range", makeRequest(longitude: 180.1)),
+            ("invalid time zone", makeRequest(timeZoneIdentifier: "Mars/Olympus"))
         ]
 
         for (name, request) in invalidCases {
