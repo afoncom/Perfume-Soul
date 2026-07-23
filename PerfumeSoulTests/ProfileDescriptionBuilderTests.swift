@@ -11,18 +11,7 @@ import XCTest
 final class ProfileDescriptionBuilderTests: XCTestCase {
     private let builder = ProfileDescriptionBuilderImpl()
 
-    func testElementBalanceProfileTreatsSmallSpreadAsBalanced() {
-        let profile = builder.makeElementBalanceProfile(
-            from: ElementBalance(fire: 28, earth: 24, air: 25, water: 23)
-        )
-
-        XCTAssertEqual(profile.dominantElement, .fire)
-        XCTAssertEqual(profile.weakElement, .water)
-        XCTAssertEqual(profile.spread, 5)
-        XCTAssertTrue(profile.isBalanced)
-    }
-
-    func testElementBalanceProfileDoesNotTreatThreePlacementDistributionAsBalanced() {
+    func testElementBalanceProfileKeepsFullSpreadForThreePlacementDistribution() {
         let profile = builder.makeElementBalanceProfile(
             from: ElementBalance(fire: 34, earth: 33, air: 33, water: 0)
         )
@@ -30,7 +19,6 @@ final class ProfileDescriptionBuilderTests: XCTestCase {
         XCTAssertEqual(profile.dominantElement, .fire)
         XCTAssertEqual(profile.weakElement, .water)
         XCTAssertEqual(profile.spread, 34)
-        XCTAssertFalse(profile.isBalanced)
     }
 
     func testElementBalanceProfileSelectsDominantAndWeakByScore() {
@@ -41,7 +29,6 @@ final class ProfileDescriptionBuilderTests: XCTestCase {
         XCTAssertEqual(profile.dominantElement, .earth)
         XCTAssertEqual(profile.weakElement, .water)
         XCTAssertEqual(profile.spread, 45)
-        XCTAssertFalse(profile.isBalanced)
     }
 
     func testElementBalanceProfileUsesStableTieBreakers() {
@@ -52,23 +39,43 @@ final class ProfileDescriptionBuilderTests: XCTestCase {
         XCTAssertEqual(profile.dominantElement, .earth)
         XCTAssertEqual(profile.weakElement, .water)
         XCTAssertEqual(profile.spread, 50)
-        XCTAssertFalse(profile.isBalanced)
     }
 
-    func testBuildUsesSpreadBasedBalancedSynthesis() {
+    func testBuildUsesBalancedSynthesisForRealizableThreeElementDistribution() {
         let description = builder.build(
             profile: makeProfile(),
             calculation: ProfileCalculation(
                 natalChart: NatalChart(
                     sun: ZodiacPlacement(longitude: 0),
                     moon: ZodiacPlacement(longitude: 30),
-                    ascendant: ZodiacPlacement(longitude: 90)
+                    ascendant: ZodiacPlacement(longitude: 60)
                 ),
-                elementBalance: ElementBalance(fire: 28, earth: 24, air: 25, water: 23)
+                elementBalance: ElementBalance(fire: 40, earth: 28, air: 32, water: 0)
             )
         )
         let expectedSummary = Bundle.main.localizedString(
             forKey: "profileDescription.synthesis.balanced.summary",
+            value: nil,
+            table: nil
+        )
+
+        XCTAssertEqual(description.summary, expectedSummary)
+    }
+
+    func testBuildDoesNotUseBalancedSynthesisForRepeatedElementDistribution() {
+        let description = builder.build(
+            profile: makeProfile(),
+            calculation: ProfileCalculation(
+                natalChart: NatalChart(
+                    sun: ZodiacPlacement(longitude: 0),
+                    moon: ZodiacPlacement(longitude: 30),
+                    ascendant: ZodiacPlacement(longitude: 150)
+                ),
+                elementBalance: ElementBalance(fire: 40, earth: 60, air: 0, water: 0)
+            )
+        )
+        let expectedSummary = Bundle.main.localizedString(
+            forKey: "profileDescription.synthesis.visibleEmotional.summary",
             value: nil,
             table: nil
         )

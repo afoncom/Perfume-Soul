@@ -18,7 +18,6 @@ struct ElementBalanceProfile: Equatable {
     let dominantElement: ZodiacElement
     let weakElement: ZodiacElement
     let spread: Int
-    let isBalanced: Bool
 }
 
 extension ProfileDescriptionBuilderImpl: ProfileDescriptionBuilder {
@@ -29,9 +28,7 @@ extension ProfileDescriptionBuilderImpl: ProfileDescriptionBuilder {
             sun: natalChart.sun.sign,
             moon: natalChart.moon.sign,
             ascendant: natalChart.ascendant.sign,
-            dominantElement: elementProfile.dominantElement,
-            weakElement: elementProfile.weakElement,
-            hasBalancedElementSpread: elementProfile.isBalanced
+            dominantElement: elementProfile.dominantElement
         )
 
         return ProfileDescription(
@@ -75,8 +72,6 @@ extension ProfileDescriptionBuilderImpl: ProfileDescriptionBuilder {
 }
 
 extension ProfileDescriptionBuilderImpl {
-    private static let balancedElementSpreadThreshold = 10
-
     private enum Placement {
         case sun
         case moon
@@ -155,8 +150,7 @@ extension ProfileDescriptionBuilderImpl {
         return ElementBalanceProfile(
             dominantElement: dominantElement,
             weakElement: weakElement,
-            spread: spread,
-            isBalanced: spread <= Self.balancedElementSpreadThreshold
+            spread: spread
         )
     }
 
@@ -184,9 +178,7 @@ extension ProfileDescriptionBuilderImpl {
         sun: ZodiacSign,
         moon: ZodiacSign,
         ascendant: ZodiacSign,
-        dominantElement: ZodiacElement,
-        weakElement: ZodiacElement,
-        hasBalancedElementSpread: Bool
+        dominantElement: ZodiacElement
     ) -> Synthesis {
         if sun == moon && moon == ascendant {
             return Synthesis(
@@ -244,7 +236,11 @@ extension ProfileDescriptionBuilderImpl {
             )
         }
 
-        if hasBalancedElementSpread {
+        if hasDistributedElementPlacements(
+            sun: sun,
+            moon: moon,
+            ascendant: ascendant
+        ) {
             return Synthesis(
                 title: localized("profileDescription.synthesis.balanced.title"),
                 description: localized("profileDescription.synthesis.balanced.description"),
@@ -279,6 +275,14 @@ extension ProfileDescriptionBuilderImpl {
         default:
             false
         }
+    }
+
+    private func hasDistributedElementPlacements(
+        sun: ZodiacSign,
+        moon: ZodiacSign,
+        ascendant: ZodiacSign
+    ) -> Bool {
+        Set([sun.element, moon.element, ascendant.element]).count == 3
     }
 }
 
