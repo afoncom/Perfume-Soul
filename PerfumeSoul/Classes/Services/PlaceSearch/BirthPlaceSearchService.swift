@@ -21,13 +21,13 @@ final class BirthPlaceSearchService: NSObject {
     private let completer = MKLocalSearchCompleter()
     private let geocoder = CLGeocoder()
     private var searchContinuation: CheckedContinuation<[MKLocalSearchCompletion], Never>?
-    
+
     override init() {
         super.init()
         completer.delegate = self
         completer.resultTypes = [.address, .query]
     }
-    
+
     func search(_ query: String) async -> [MKLocalSearchCompletion] {
         let trimmedQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
         
@@ -114,7 +114,7 @@ extension BirthPlaceSearchService: MKLocalSearchCompleterDelegate {
             self?.finishSearch(with: completer.results)
         }
     }
-    
+
     nonisolated func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: any Error) {
         Task { @MainActor [weak self] in
             self?.failSearch()

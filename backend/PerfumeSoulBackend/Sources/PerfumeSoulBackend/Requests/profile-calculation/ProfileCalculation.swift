@@ -35,14 +35,14 @@ enum ProfileCalculationLoader {
     }
 }
 
-private extension ProfileCalculationLoader {
-    static let placementWeights: [(KeyPath<NatalChart, ZodiacPlacement>, Double)] = [
+extension ProfileCalculationLoader {
+    fileprivate static let placementWeights: [(KeyPath<NatalChart, ZodiacPlacement>, Double)] = [
         (\.sun, 1.0),
         (\.moon, 0.7),
         (\.ascendant, 0.8)
     ]
 
-    static func makeElementBalance(for natalChart: NatalChart) -> ElementBalance {
+    fileprivate static func makeElementBalance(for natalChart: NatalChart) -> ElementBalance {
         var weightsByElement: [ZodiacElement: Double] = [:]
 
         for (keyPath, weight) in placementWeights {
@@ -60,7 +60,7 @@ private extension ProfileCalculationLoader {
         )
     }
 
-    static func normalizedPercentages(
+    fileprivate static func normalizedPercentages(
         from weightsByElement: [ZodiacElement: Double]
     ) -> [ZodiacElement: Int] {
         let totalWeight = weightsByElement.values.reduce(0, +)
@@ -102,12 +102,17 @@ private extension ProfileCalculationLoader {
     }
 }
 
-private extension ProfileCalculationRequest {
-    func makeNatalChartInput() throws -> NatalChartInput {
+extension ProfileCalculationRequest {
+    fileprivate func makeNatalChartInput() throws -> NatalChartInput {
         let dateComponents = try parseBirthDate()
         let timeComponents = try parseBirthTime()
         try validateCoordinates()
-        try validateTimeZoneIdentifier()
+        let timeZone = try validateTimeZoneIdentifier()
+        try validateLocalWallTime(
+            dateComponents: dateComponents,
+            timeComponents: timeComponents,
+            timeZone: timeZone
+        )
 
         return NatalChartInput(
             year: dateComponents.year,
@@ -195,15 +200,40 @@ private extension ProfileCalculationRequest {
         }
     }
 
-    func validateTimeZoneIdentifier() throws {
-        guard TimeZone(identifier: timeZoneIdentifier) != nil else {
+    func validateTimeZoneIdentifier() throws -> TimeZone {
+        guard let timeZone = TimeZone(identifier: timeZoneIdentifier) else {
             throw Abort(.badRequest, reason: "timeZoneIdentifier must be a valid IANA time zone identifier.")
+        }
+
+        return timeZone
+    }
+
+    func validateLocalWallTime(
+        dateComponents: (year: Int, month: Int, day: Int),
+        timeComponents: (hour: Int, minute: Int),
+        timeZone: TimeZone
+    ) throws {
+        guard
+            LocalWallTimeResolver.date(
+                year: dateComponents.year,
+                month: dateComponents.month,
+                day: dateComponents.day,
+                hour: timeComponents.hour,
+                minute: timeComponents.minute,
+                second: 0,
+                timeZone: timeZone
+            ) != nil
+        else {
+            throw Abort(
+                .badRequest,
+                reason: "birthDate, birthTime, and timeZoneIdentifier must represent an existing local time."
+            )
         }
     }
 }
 
-private extension ZodiacSign {
-    var element: ZodiacElement {
+extension ZodiacSign {
+    fileprivate var element: ZodiacElement {
         switch self {
         case .aries, .leo, .sagittarius:
             .fire

@@ -122,7 +122,7 @@ extension DailyHoroscopeNotificationServiceImpl: DailyHoroscopeNotificationServi
     }
 }
 
-private extension DailyHoroscopeNotificationServiceImpl {
+extension DailyHoroscopeNotificationServiceImpl {
     func requestNotificationAuthorizationIfNeeded() async throws -> Bool {
         let settings = await userNotificationCenter.notificationSettings()
 
@@ -139,8 +139,10 @@ private extension DailyHoroscopeNotificationServiceImpl {
     }
 
     func makeNotificationContent() async throws -> UNMutableNotificationContent {
-        guard let profile = await profileService.fetchProfile(),
-              let sign = profile.zodiacSign() else {
+        guard
+            let profile = await profileService.fetchProfile(),
+            let sign = profile.zodiacSign()
+        else {
             throw DailyHoroscopeNotificationServiceError.profileUnavailable
         }
 

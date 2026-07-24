@@ -63,7 +63,7 @@ struct SettingsScreen: View {
     }
 }
 
-private extension SettingsScreen {
+extension SettingsScreen {
     func makeHeaderView() -> some View {
         Text(L10n.Screen.settings)
             .font(.system(size: 28, weight: .medium, design: .rounded))

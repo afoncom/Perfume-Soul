@@ -71,7 +71,15 @@ struct ProfileCalculationEndpointTests {
             ("latitude above range", makeRequest(latitude: 90.1)),
             ("longitude below range", makeRequest(longitude: -180.1)),
             ("longitude above range", makeRequest(longitude: 180.1)),
-            ("invalid time zone", makeRequest(timeZoneIdentifier: "Mars/Olympus"))
+            ("invalid time zone", makeRequest(timeZoneIdentifier: "Mars/Olympus")),
+            (
+                "nonexistent local time",
+                makeRequest(
+                    birthDate: "2024-03-31",
+                    birthTime: "02:30",
+                    timeZoneIdentifier: "Europe/Belgrade"
+                )
+            )
         ]
 
         for (name, request) in invalidCases {
@@ -83,6 +91,25 @@ struct ProfileCalculationEndpointTests {
                 } afterResponse: { res in
                     #expect(res.status == .badRequest, "\(name) should be rejected")
                 }
+            }
+        }
+    }
+
+    @Test("POST /profile/calculate accepts ambiguous fall-back local time")
+    func profileCalculateEndpointAcceptsAmbiguousFallBackLocalTime() async throws {
+        try await withApp { app in
+            try routes(app)
+
+            try await app.testing().test(.POST, "/profile/calculate") { req in
+                try req.content.encode(
+                    makeRequest(
+                        birthDate: "2024-10-27",
+                        birthTime: "02:30",
+                        timeZoneIdentifier: "Europe/Belgrade"
+                    )
+                )
+            } afterResponse: { res in
+                #expect(res.status == .ok)
             }
         }
     }

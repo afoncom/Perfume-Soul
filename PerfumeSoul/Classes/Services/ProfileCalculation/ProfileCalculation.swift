@@ -33,7 +33,7 @@ struct ElementBalance: Decodable, Equatable {
     let earth: Int
     let air: Int
     let water: Int
-    
+
     init(fire: Double, earth: Double, air: Double, water: Double) {
         let total = fire + earth + air + water
 

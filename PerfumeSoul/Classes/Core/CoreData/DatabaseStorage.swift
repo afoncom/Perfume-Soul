@@ -9,7 +9,7 @@ import CoreData
 
 protocol DatabaseStorage {
     associatedtype DatabaseModel: DatabaseStorable
-    func saveModel(model:  DatabaseModel)
+    func saveModel(model: DatabaseModel)
     func replaceAll(with model: DatabaseModel) async
     func delete(model: DatabaseModel) async
     func deleteAll() async
@@ -37,7 +37,7 @@ final class DatabaseStorageImpl <DatabaseModel: DatabaseStorable> {
 }
 
 extension DatabaseStorageImpl: DatabaseStorage {
-    func saveModel(model:  DatabaseModel) {
+    func saveModel(model: DatabaseModel) {
         let context = container.newBackgroundContext()
         context.perform {
             let storingModel = StoringModel(context: context)
@@ -66,7 +66,9 @@ extension DatabaseStorageImpl: DatabaseStorage {
         let context = container.newBackgroundContext()
         return await context.perform {
             let fetchRequest = StoringModel.fetchRequest() as? NSFetchRequest<StoringModel>
-            guard let fetchRequest, let storingModels = try? context.fetch(fetchRequest) else { return }
+            guard let fetchRequest, let storingModels = try? context.fetch(fetchRequest) else {
+                return
+            }
             for storingModel in storingModels {
                 if DatabaseModel(storableModel: storingModel) == model {
                     context.delete(storingModel)
@@ -80,7 +82,9 @@ extension DatabaseStorageImpl: DatabaseStorage {
         let context = container.newBackgroundContext()
         return await context.perform {
             let fetchRequest = StoringModel.fetchRequest() as? NSFetchRequest<StoringModel>
-            guard let fetchRequest, let storingModels = try? context.fetch(fetchRequest) else { return }
+            guard let fetchRequest, let storingModels = try? context.fetch(fetchRequest) else {
+                return
+            }
             for model in storingModels {
                 context.delete(model)
             }
@@ -92,7 +96,9 @@ extension DatabaseStorageImpl: DatabaseStorage {
         let context = container.newBackgroundContext()
         return await context.perform {
             let fetchRequest = StoringModel.fetchRequest() as? NSFetchRequest<StoringModel>
-            guard let fetchRequest else { return [] }
+            guard let fetchRequest else {
+                return []
+            }
             do {
                 let storingModel = try context.fetch(fetchRequest)
                 return storingModel.compactMap { DatabaseModel(storableModel: $0) }

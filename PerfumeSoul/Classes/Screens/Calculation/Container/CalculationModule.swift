@@ -19,7 +19,7 @@ final class CalculationModule {
         let viewModel = CalculationViewModel()
         let navigationController = UINavigationController()
         let router = CalculationRouterImpl(
-            navigationController: navigationController, 
+            navigationController: navigationController,
             container: container,
             requestManager: requestManager,
             onFinish: onFinish
@@ -32,10 +32,10 @@ final class CalculationModule {
             profileService: profileService,
             birthPlaceSearch: birthPlaceSearch
         )
-        
+
         let view = CalculationScreen(viewModel: viewModel, presenter: presenter)
         let hostingController = UIHostingController(rootView: view)
- 
+
         navigationController.viewControllers = [hostingController]
         navigationController.setNavigationBarHidden(true, animated: false)
 

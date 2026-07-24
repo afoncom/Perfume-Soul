@@ -97,7 +97,7 @@ extension SettingsPresenterImpl: SettingsPresenter {
     }
 }
 
-private extension SettingsPresenterImpl {
+extension SettingsPresenterImpl {
     @MainActor
     func presentNotificationError(_ error: DailyHoroscopeNotificationServiceError) {
         switch error {

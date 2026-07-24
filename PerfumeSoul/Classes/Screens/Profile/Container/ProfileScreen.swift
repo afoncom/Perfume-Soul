@@ -74,7 +74,7 @@ struct ProfileScreen: View {
     }
 }
 
-private extension ProfileScreen {
+extension ProfileScreen {
     func makeProfileScreen(profile: Profile) -> some View {
         HStack(spacing: 12) {
             Circle()
@@ -416,7 +416,7 @@ private extension ProfileScreen {
                                     endPoint: .trailing
                                 )
                             )
-                            .frame(width: proxy.size.width * CGFloat(viewModel.perfumeExpertiseProgress), height: 10)
+                            .frame(width: proxy.size.width * .init(viewModel.perfumeExpertiseProgress), height: 10)
                     }
                 }
                 .frame(height: 10)
@@ -493,9 +493,9 @@ private extension ProfileScreen {
         }
         .buttonStyle(.plain)
     }
-    
+
     func makeProfileBirthInfo(profile: Profile) -> String {
-        return [profile.birthDate, profile.birthTime, profile.birthPlace]
+        [profile.birthDate, profile.birthTime, profile.birthPlace]
             .filter { !$0.isEmpty }
             .joined(separator: " · ")
     }
@@ -574,9 +574,9 @@ private extension ProfileScreen {
     }
 }
 
-//MARK: - Natal Chart Row
+// MARK: - Natal Chart Row
 
-private extension ProfileScreen {
+extension ProfileScreen {
     func makeNatalChartRow(
         color: Color,
         symbol: String,
@@ -616,29 +616,29 @@ private extension ProfileScreen {
     }
 }
 
-//MARK: - Element Item
+// MARK: - Element Item
 
-private extension ProfileScreen {
+extension ProfileScreen {
     func makeElementBalanceBar(elementBalance: ElementBalance) -> some View {
         GeometryReader { proxy in
-            let width = proxy.size.width
+            let width = Double(proxy.size.width)
 
             HStack(spacing: 0) {
                 makeElementBalanceSegment(
                     color: Color(.pinkButton),
-                    width: width * CGFloat(elementBalance.fire) / 100
+                    width: width * .init(elementBalance.fire) / 100
                 )
                 makeElementBalanceSegment(
                     color: Color(.zodiacMint),
-                    width: width * CGFloat(elementBalance.earth) / 100
+                    width: width * .init(elementBalance.earth) / 100
                 )
                 makeElementBalanceSegment(
                     color: Color(.zodiacCyan),
-                    width: width * CGFloat(elementBalance.air) / 100
+                    width: width * .init(elementBalance.air) / 100
                 )
                 makeElementBalanceSegment(
                     color: Color(.zodiacBlue),
-                    width: width * CGFloat(elementBalance.water) / 100
+                    width: width * .init(elementBalance.water) / 100
                 )
             }
             .background(Color(.placeholderSoft))
@@ -647,9 +647,9 @@ private extension ProfileScreen {
         .frame(height: 34)
     }
 
-    func makeElementBalanceSegment(color: Color, width: CGFloat) -> some View {
+    func makeElementBalanceSegment(color: Color, width: Double) -> some View {
         color
-            .frame(width: width)
+            .frame(width: .init(width))
     }
 
     func makeElementItem(percent: String, title: String) -> some View {
@@ -665,9 +665,9 @@ private extension ProfileScreen {
     }
 }
 
-//MARK: - Added Profile Item
+// MARK: - Added Profile Item
 
-private extension ProfileScreen {
+extension ProfileScreen {
     func makeAddedProfileItem(name: String) -> some View {
         VStack(spacing: 8) {
             RoundedRectangle(cornerRadius: 20, style: .continuous)

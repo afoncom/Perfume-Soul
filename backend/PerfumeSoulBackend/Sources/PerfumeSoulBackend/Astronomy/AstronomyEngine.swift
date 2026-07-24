@@ -1,6 +1,80 @@
 import CAstronomy
 import Foundation
 
+enum LocalWallTimeResolver {
+    static func date(
+        year: Int,
+        month: Int,
+        day: Int,
+        hour: Int,
+        minute: Int,
+        second: Int,
+        timeZone: TimeZone
+    ) -> Date? {
+        var localCalendar = Calendar(identifier: .gregorian)
+        localCalendar.timeZone = timeZone
+
+        var utcCalendar = Calendar(identifier: .gregorian)
+        utcCalendar.timeZone = TimeZone(secondsFromGMT: 0) ?? .gmt
+
+        let searchStartComponents = DateComponents(
+            calendar: utcCalendar,
+            timeZone: utcCalendar.timeZone,
+            year: year,
+            month: month,
+            day: day,
+            hour: 0,
+            minute: 0,
+            second: 0
+        )
+
+        guard let searchStart = utcCalendar.date(from: searchStartComponents)?.addingTimeInterval(-86_400) else {
+            return nil
+        }
+
+        let matchingComponents = DateComponents(
+            calendar: localCalendar,
+            timeZone: timeZone,
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second
+        )
+
+        guard
+            let localDate = localCalendar.nextDate(
+                after: searchStart,
+                matching: matchingComponents,
+                matchingPolicy: .strict,
+                repeatedTimePolicy: .first,
+                direction: .forward
+            )
+        else {
+            return nil
+        }
+
+        let resolvedComponents = localCalendar.dateComponents(
+            [.year, .month, .day, .hour, .minute, .second],
+            from: localDate
+        )
+
+        guard
+            resolvedComponents.year == year,
+            resolvedComponents.month == month,
+            resolvedComponents.day == day,
+            resolvedComponents.hour == hour,
+            resolvedComponents.minute == minute,
+            resolvedComponents.second == second
+        else {
+            return nil
+        }
+
+        return localDate
+    }
+}
+
 enum AstronomyEngine {
     static func calculateNatalChart(for input: NatalChartInput) throws -> NatalChart {
         let moment = try utcMoment(from: input)
@@ -40,7 +114,7 @@ enum AstronomyEngine {
     }
 }
 
-private extension AstronomyEngine {
+extension AstronomyEngine {
     static func utcMoment(from input: NatalChartInput) throws -> DateComponents {
         guard let timeZone = TimeZone(identifier: input.timeZoneIdentifier) else {
             throw AstronomyEngineError.invalidTimeZone(input.timeZoneIdentifier)
@@ -49,18 +123,17 @@ private extension AstronomyEngine {
         var localCalendar = Calendar(identifier: .gregorian)
         localCalendar.timeZone = timeZone
 
-        let localComponents = DateComponents(
-            calendar: localCalendar,
-            timeZone: timeZone,
-            year: input.year,
-            month: input.month,
-            day: input.day,
-            hour: input.hour,
-            minute: input.minute,
-            second: 0
-        )
-
-        guard let localDate = localCalendar.date(from: localComponents) else {
+        guard
+            let localDate = LocalWallTimeResolver.date(
+                year: input.year,
+                month: input.month,
+                day: input.day,
+                hour: input.hour,
+                minute: input.minute,
+                second: 0,
+                timeZone: timeZone
+            )
+        else {
             throw AstronomyEngineError.invalidLocalDate
         }
 

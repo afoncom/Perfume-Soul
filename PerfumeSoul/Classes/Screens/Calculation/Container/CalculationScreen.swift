@@ -37,14 +37,14 @@ struct CalculationScreen: View {
     }
 }
 
-private extension CalculationScreen {
+extension CalculationScreen {
     enum Field {
         case name
         case birthPlace
     }
 }
 
-private extension CalculationScreen {
+extension CalculationScreen {
     func makeHeaderView() -> some View {
         VStack(spacing: 12) {
             Text(L10n.Screen.calculationCreateProfile)
@@ -160,7 +160,9 @@ private extension CalculationScreen {
                     }
                     .task(id: viewModel.birthPlace) {
                         try? await Task.sleep(for: .seconds(0.5))
-                        guard focusedField == .birthPlace && !Task.isCancelled else { return }
+                        guard focusedField == .birthPlace && !Task.isCancelled else {
+                            return
+                        }
                         await presenter.birthPlaceDidChange(viewModel.birthPlace)
                     }
             }
@@ -216,7 +218,7 @@ private extension CalculationScreen {
         }
     }
     
-    //MARK: - Continue Button
+    // MARK: - Continue Button
     func makeContinueButton() -> some View {
         Button {
             Task {
@@ -237,7 +239,7 @@ private extension CalculationScreen {
         .shadow(color: Color(.buttonShadow), radius: 12, x: 0, y: 6)
     }
     
-    //MARK: - Display info view
+    // MARK: - Display info view
     func makePickerField<Content: View>(
         title: String,
         systemImage: String,
