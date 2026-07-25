@@ -250,6 +250,7 @@
 "personalPerfume.note.vanilla" = "ваниль";
 "personalPerfume.note.vetiver" = "ветивер";
 "personalPerfume.retryButton" = "Повторить";
+"personalPerfume.skipButton" = "Пропустить сейчас";
 "personalPerfume.section.luxury.title" = "Luxury подборка";
 "personalPerfume.section.luxury.description" = "Премиальные ароматы с самым сильным совпадением с вашим натальным профилем.";
 "personalPerfume.section.daily.title" = "Daily подборка";
@@ -299,6 +300,7 @@
 "profileDescription.invalidBirthDataMessage" = "Некоторые данные рождения не описывают существующее локальное время. Обновите данные в профиле перед повторным открытием описания.";
 "profileDescription.invalidBirthDataTitle" = "Обновите данные рождения";
 "profileDescription.retryButton" = "Повторить";
+"profileDescription.skipButton" = "Пропустить сейчас";
 "profileDescription.moon.aquarius" = "Вам нужны эмоциональное пространство и интеллектуальная честность. Давление может заставлять отстраняться.";
 "profileDescription.moon.aries" = "Эмоционально вам нужны прямота и быстрый выход энергии. Долгое ожидание может утомлять сильнее действия.";
 "profileDescription.moon.cancer" = "Вам нужны нежность, приватность и доверительное эмоциональное пространство.";

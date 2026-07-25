@@ -11,6 +11,7 @@ protocol ProfileDescriptionPresenter {
 
     func continueButtonTapped()
     func retryButtonTapped() async
+    func skipButtonTapped()
     func onAppear() async
 }
 
@@ -54,6 +55,10 @@ extension ProfileDescriptionPresenterImpl: ProfileDescriptionPresenter {
         }
 
         await loadProfileDescription(profile: profile)
+    }
+
+    func skipButtonTapped() {
+        router.finishOnboarding()
     }
     
     func onAppear() async {

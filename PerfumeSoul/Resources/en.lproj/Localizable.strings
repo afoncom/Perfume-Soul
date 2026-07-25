@@ -250,6 +250,7 @@
 "personalPerfume.note.vanilla" = "vanilla";
 "personalPerfume.note.vetiver" = "vetiver";
 "personalPerfume.retryButton" = "Retry";
+"personalPerfume.skipButton" = "Skip for now";
 "personalPerfume.section.luxury.title" = "Luxury Picks";
 "personalPerfume.section.luxury.description" = "Premium fragrances with the strongest match for your natal scent profile.";
 "personalPerfume.section.daily.title" = "Daily Picks";
@@ -299,6 +300,7 @@
 "profileDescription.invalidBirthDataMessage" = "Some birth details do not describe a valid local time. Update your birth data from Profile before opening the description again.";
 "profileDescription.invalidBirthDataTitle" = "Update birth data";
 "profileDescription.retryButton" = "Retry";
+"profileDescription.skipButton" = "Skip for now";
 "profileDescription.moon.aquarius" = "You need emotional space and intellectual honesty. Too much pressure can make you detach.";
 "profileDescription.moon.aries" = "Emotionally, you need directness and quick release. Waiting too long can feel heavier than acting.";
 "profileDescription.moon.cancer" = "You need tenderness, privacy, and a trusted emotional home before you fully open up.";

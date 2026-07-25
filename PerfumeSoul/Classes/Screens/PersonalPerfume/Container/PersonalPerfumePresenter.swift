@@ -13,6 +13,7 @@ protocol PersonalPerfumePresenter {
 
     func onAppear() async
     func retryButtonTapped() async
+    func skipButtonTapped()
     func continueButtonTapped()
 }
 
@@ -45,6 +46,10 @@ extension PersonalPerfumePresenterImpl: PersonalPerfumePresenter {
 
     func retryButtonTapped() async {
         await loadPersonalPerfumes()
+    }
+
+    func skipButtonTapped() {
+        router.finishOnboarding()
     }
 
     func continueButtonTapped() {

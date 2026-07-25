@@ -70,13 +70,15 @@ extension PersonalPerfumeScreen {
             makeErrorState(
                 title: L10n.PersonalPerfume.Error.MissingProfile.title,
                 subtitle: L10n.PersonalPerfume.Error.MissingProfile.subtitle,
-                canRetry: false
+                canRetry: false,
+                canSkip: presenter.shouldShowContinueButton
             )
         case .requestFailed:
             makeErrorState(
                 title: L10n.PersonalPerfume.Error.RequestFailed.title,
                 subtitle: L10n.PersonalPerfume.Error.RequestFailed.subtitle,
-                canRetry: true
+                canRetry: true,
+                canSkip: presenter.shouldShowContinueButton
             )
         }
     }
@@ -183,12 +185,14 @@ extension PersonalPerfumeScreen {
     private func makeErrorState(
         title: String,
         subtitle: String,
-        canRetry: Bool
+        canRetry: Bool,
+        canSkip: Bool
     ) -> some View {
         makeMessageState(
             title: title,
             subtitle: subtitle,
-            canRetry: canRetry
+            canRetry: canRetry,
+            canSkip: canSkip
         )
     }
 
@@ -196,14 +200,16 @@ extension PersonalPerfumeScreen {
         makeMessageState(
             title: L10n.PersonalPerfume.Empty.title,
             subtitle: L10n.PersonalPerfume.Empty.subtitle,
-            canRetry: false
+            canRetry: false,
+            canSkip: false
         )
     }
 
     private func makeMessageState(
         title: String,
         subtitle: String,
-        canRetry: Bool
+        canRetry: Bool,
+        canSkip: Bool
     ) -> some View {
         VStack(spacing: 12) {
             Text(title)
@@ -233,6 +239,21 @@ extension PersonalPerfumeScreen {
                             Capsule()
                                 .stroke(Color(.cardBorder), lineWidth: 1)
                         )
+                }
+                .buttonStyle(.plain)
+            }
+
+            if canSkip {
+                Button {
+                    presenter.skipButtonTapped()
+                } label: {
+                    Text(L10n.PersonalPerfume.skipButton)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Color(.textOnAccent))
+                        .padding(.horizontal, 18)
+                        .padding(.vertical, 10)
+                        .background(Color(.pinkButton))
+                        .clipShape(Capsule())
                 }
                 .buttonStyle(.plain)
             }

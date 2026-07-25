@@ -61,21 +61,24 @@ extension ProfileDescriptionScreen {
             makeUnavailableState(
                 title: L10n.ProfileDescription.unavailableTitle,
                 message: L10n.ProfileDescription.unavailableMessage,
-                canRetry: false
+                canRetry: false,
+                canSkip: presenter.shouldShowContinueButton
             )
             .padding(.horizontal, 24)
         case .invalidBirthData:
             makeUnavailableState(
                 title: L10n.ProfileDescription.invalidBirthDataTitle,
                 message: L10n.ProfileDescription.invalidBirthDataMessage,
-                canRetry: false
+                canRetry: false,
+                canSkip: presenter.shouldShowContinueButton
             )
             .padding(.horizontal, 24)
         case .failed:
             makeUnavailableState(
                 title: L10n.ProfileDescription.failedTitle,
                 message: L10n.ProfileDescription.failedMessage,
-                canRetry: true
+                canRetry: true,
+                canSkip: presenter.shouldShowContinueButton
             )
             .padding(.horizontal, 24)
         }
@@ -173,7 +176,8 @@ extension ProfileDescriptionScreen {
     private func makeUnavailableState(
         title: String,
         message: String,
-        canRetry: Bool
+        canRetry: Bool,
+        canSkip: Bool
     ) -> some View {
         VStack(spacing: 14) {
             Image(systemName: "sparkles")
@@ -207,6 +211,21 @@ extension ProfileDescriptionScreen {
                             Capsule()
                                 .stroke(Color(.cardBorder), lineWidth: 1)
                         )
+                }
+                .buttonStyle(.plain)
+            }
+
+            if canSkip {
+                Button {
+                    presenter.skipButtonTapped()
+                } label: {
+                    Text(L10n.ProfileDescription.skipButton)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Color(.textOnAccent))
+                        .padding(.horizontal, 18)
+                        .padding(.vertical, 10)
+                        .background(Color(.pinkButton))
+                        .clipShape(Capsule())
                 }
                 .buttonStyle(.plain)
             }

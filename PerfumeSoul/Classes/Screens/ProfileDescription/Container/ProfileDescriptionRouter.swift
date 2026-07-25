@@ -10,6 +10,7 @@ import UIKit
 
 protocol ProfileDescriptionRouter {
     func showPersonalPerfume(profileCalculation: ProfileCalculation?)
+    func finishOnboarding()
 }
 
 final class ProfileDescriptionRouterImpl {
@@ -36,5 +37,9 @@ extension ProfileDescriptionRouterImpl: ProfileDescriptionRouter {
             onFinish: onFinish
         )
         navigationController?.pushViewController(screen, animated: true)
+    }
+
+    func finishOnboarding() {
+        onFinish?()
     }
 }
