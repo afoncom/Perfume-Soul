@@ -4,6 +4,11 @@ import Vapor
 @testable import PerfumeSoulBackend
 
 struct PersonalPerfumeLoaderTests {
+    @Test("Personal perfume loader limits SQL candidates per market segment")
+    func loaderLimitsCandidatesPerMarketSegment() {
+        #expect(PersonalPerfumeLoader.candidateLimitPerSegment == 100)
+    }
+
     @Test("Element balance validation accepts a valid 100 percent total")
     func validElementBalancePassesValidation() throws {
         try makeRequest(

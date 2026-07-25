@@ -51,16 +51,38 @@ enum PersonalPerfumeMarketSegment: String, Codable, CaseIterable {
 }
 
 enum PersonalPerfumeLoader {
+    static let candidateLimitPerSegment = 100
+
     static func load(
         request: PersonalPerfumesRequest,
         on database: any Database
     ) async throws -> [PersonalPerfumeResponse] {
-        let perfumeModels = try await PerfumeModel.query(on: database)
-            .group(.or) { group in
-                for segment in PersonalPerfumeMarketSegment.allCases {
-                    group.filter(\.$marketSegment == segment.rawValue)
-                }
-            }
+        var perfumeModels: [PerfumeModel] = []
+
+        for segment in PersonalPerfumeMarketSegment.allCases {
+            let segmentModels = try await loadCandidates(
+                marketSegment: segment,
+                limit: candidateLimitPerSegment,
+                on: database
+            )
+            perfumeModels += segmentModels
+        }
+
+        return PersonalPerfumeScorer.score(
+            request: request,
+            perfumeProfiles: perfumeModels.compactMap(PerfumeProfile.init(model:))
+        )
+    }
+
+    private static func loadCandidates(
+        marketSegment: PersonalPerfumeMarketSegment,
+        limit: Int,
+        on database: any Database
+    ) async throws -> [PerfumeModel] {
+        try await PerfumeModel.query(on: database)
+            .filter(\.$marketSegment == marketSegment.rawValue)
+            .sort(\.$id)
+            .limit(limit)
             .with(\.$brand)
             .with(\.$notes) { query in
                 query.with(\.$note)
@@ -69,11 +91,6 @@ enum PersonalPerfumeLoader {
                 query.with(\.$accord)
             }
             .all()
-
-        return PersonalPerfumeScorer.score(
-            request: request,
-            perfumeProfiles: perfumeModels.compactMap(PerfumeProfile.init(model:))
-        )
     }
 }
 
