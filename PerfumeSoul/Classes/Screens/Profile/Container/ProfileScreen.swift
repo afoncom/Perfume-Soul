@@ -134,8 +134,6 @@ extension ProfileScreen {
                         value: makePlacementTitle(for: natalChart.ascendant)
                     )
                 }
-            } else if viewModel.didFailProfileCalculation {
-                makeProfileCalculationUnavailableState()
             } else {
                 makeProfileCalculationStateView()
             }
@@ -163,8 +161,6 @@ extension ProfileScreen {
                     Spacer()
                     makeElementItem(percent: "\(elementBalance.water)%", title: L10n.Profile.Element.water)
                 }
-            } else if viewModel.didFailProfileCalculation {
-                makeProfileCalculationUnavailableState()
             } else {
                 makeProfileCalculationStateView()
             }
@@ -237,15 +233,6 @@ extension ProfileScreen {
                     .foregroundStyle(Color(.textSecondary))
             }
         }
-    }
-
-    func makeProfileCalculationUnavailableState() -> some View {
-        Text(L10n.Profile.Calculation.unavailableMessage)
-            .font(.footnote)
-            .foregroundStyle(Color(.textSecondary))
-            .frame(maxWidth: .infinity, alignment: .center)
-            .multilineTextAlignment(.center)
-            .padding(.vertical, 20)
     }
 
     @ViewBuilder
