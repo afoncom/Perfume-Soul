@@ -14,9 +14,14 @@ final class CalculationModule {
     static func build(
         container: NSPersistentContainer,
         requestManager: RequestManager,
+        initialProfile: Profile? = nil,
         onFinish: @escaping () -> Void
     ) -> UIViewController {
-        let viewModel = CalculationViewModel()
+        let viewModel = if let initialProfile {
+            CalculationViewModel(initialProfile: initialProfile)
+        } else {
+            CalculationViewModel()
+        }
         let navigationController = UINavigationController()
         let router = CalculationRouterImpl(
             navigationController: navigationController,

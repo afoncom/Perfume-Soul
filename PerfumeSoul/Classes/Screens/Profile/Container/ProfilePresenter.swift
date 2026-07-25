@@ -78,8 +78,16 @@ extension ProfilePresenterImpl: ProfilePresenter {
     }
 
     func completeBirthDataButtonTapped() async {
+        let profile = await MainActor.run {
+            viewModel.profile
+        }
+
+        guard let profile else {
+            return
+        }
+
         await MainActor.run {
-            router.showProfileSetupScreen()
+            router.showProfileSetupScreen(profile: profile)
         }
     }
 

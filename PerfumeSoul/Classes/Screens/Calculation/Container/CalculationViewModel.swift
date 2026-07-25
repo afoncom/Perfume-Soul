@@ -30,6 +30,36 @@ import Observation
     var formattedBirthTime: String {
         Self.birthTimeFormatter.string(from: birthTime)
     }
+
+    init() {
+    }
+
+    init(initialProfile: Profile) {
+        firstName = initialProfile.name
+        birthPlace = initialProfile.birthPlace
+
+        if let birthDate = Self.birthDateFormatter.date(from: initialProfile.birthDate) {
+            self.birthDate = birthDate
+        }
+
+        if let birthTime = Self.birthTimeFormatter.date(from: initialProfile.birthTime) {
+            self.birthTime = birthTime
+        }
+
+        if
+            let latitude = initialProfile.birthLatitude,
+            let longitude = initialProfile.birthLongitude,
+            let timeZoneIdentifier = initialProfile.birthTimeZoneIdentifier,
+            !timeZoneIdentifier.isEmpty
+        {
+            selectedBirthPlace = BirthPlaceSelection(
+                displayName: initialProfile.birthPlace,
+                latitude: latitude,
+                longitude: longitude,
+                timeZoneIdentifier: timeZoneIdentifier
+            )
+        }
+    }
     
     private static let birthDateFormatter: DateFormatter = {
         FixedFormatDateFormatter.make(dateFormat: "dd.MM.yyyy")

@@ -13,7 +13,7 @@ final class ProfileModule {
     static func build(
         container: NSPersistentContainer,
         requestManager: RequestManager,
-        onProfileDeleted: @escaping () -> Void
+        onProfileSetupRequested: @escaping (Profile?) -> Void
     ) -> NavigationControllerContainer {
         let viewModel = ProfileViewModel()
         let navigationController = UINavigationController()
@@ -29,7 +29,7 @@ final class ProfileModule {
             navigationController: navigationController,
             container: container,
             requestManager: requestManager,
-            onProfileDeleted: onProfileDeleted
+            onProfileSetupRequested: onProfileSetupRequested
         )
         let presenter = ProfilePresenterImpl(
             viewModel: viewModel,

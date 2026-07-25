@@ -48,6 +48,41 @@ final class FixedFormatDateFormatterTests: XCTestCase {
         XCTAssertEqual(viewModel.formattedBirthTime, "16:37")
     }
 
+    func testCalculationViewModelPrefillsCompleteProfile() {
+        let viewModel = CalculationViewModel(initialProfile: makeProfile())
+
+        XCTAssertEqual(viewModel.firstName, "Test")
+        XCTAssertEqual(viewModel.formattedBirthDate, "07.07.1996")
+        XCTAssertEqual(viewModel.formattedBirthTime, "16:37")
+        XCTAssertEqual(viewModel.birthPlace, "Belgrade")
+        XCTAssertEqual(viewModel.selectedBirthPlace?.displayName, "Belgrade")
+        XCTAssertEqual(viewModel.selectedBirthPlace?.latitude, 44.7866)
+        XCTAssertEqual(viewModel.selectedBirthPlace?.longitude, 20.4489)
+        XCTAssertEqual(viewModel.selectedBirthPlace?.timeZoneIdentifier, "Europe/Belgrade")
+        XCTAssertTrue(viewModel.isContinueEnabled)
+    }
+
+    func testCalculationViewModelPrefillsProfileWithoutResolvedBirthPlace() {
+        let viewModel = CalculationViewModel(
+            initialProfile: Profile(
+                name: "Test",
+                birthDate: "07.07.1996",
+                birthTime: "16:37",
+                birthPlace: "Belgrade",
+                birthLatitude: nil,
+                birthLongitude: nil,
+                birthTimeZoneIdentifier: nil
+            )
+        )
+
+        XCTAssertEqual(viewModel.firstName, "Test")
+        XCTAssertEqual(viewModel.formattedBirthDate, "07.07.1996")
+        XCTAssertEqual(viewModel.formattedBirthTime, "16:37")
+        XCTAssertEqual(viewModel.birthPlace, "Belgrade")
+        XCTAssertNil(viewModel.selectedBirthPlace)
+        XCTAssertFalse(viewModel.isContinueEnabled)
+    }
+
     private func makeGregorianDate(
         year: Int,
         month: Int,
@@ -68,6 +103,18 @@ final class FixedFormatDateFormatterTests: XCTestCase {
                     minute: minute
                 )
             )
+        )
+    }
+
+    private func makeProfile() -> Profile {
+        Profile(
+            name: "Test",
+            birthDate: "07.07.1996",
+            birthTime: "16:37",
+            birthPlace: "Belgrade",
+            birthLatitude: 44.7866,
+            birthLongitude: 20.4489,
+            birthTimeZoneIdentifier: "Europe/Belgrade"
         )
     }
 }

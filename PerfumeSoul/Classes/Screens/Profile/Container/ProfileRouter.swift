@@ -13,7 +13,7 @@ protocol ProfileRouter {
     func showAddedNewProfiles()
     func showPersonalPerfumes(profileCalculation: ProfileCalculation?)
     func showProfileDescription()
-    func showProfileSetupScreen()
+    func showProfileSetupScreen(profile: Profile)
     func showCalculationScreen()
 }
 
@@ -21,18 +21,18 @@ final class ProfileRouterImpl {
     private weak var navigationController: UINavigationController?
     private let container: NSPersistentContainer
     private let requestManager: RequestManager
-    private let onProfileDeleted: () -> Void
+    private let onProfileSetupRequested: (Profile?) -> Void
     
     init(
         navigationController: UINavigationController?,
         container: NSPersistentContainer,
         requestManager: RequestManager,
-        onProfileDeleted: @escaping () -> Void
+        onProfileSetupRequested: @escaping (Profile?) -> Void
     ) {
         self.navigationController = navigationController
         self.container = container
         self.requestManager = requestManager
-        self.onProfileDeleted = onProfileDeleted
+        self.onProfileSetupRequested = onProfileSetupRequested
     }
 }
 
@@ -60,11 +60,11 @@ extension ProfileRouterImpl: ProfileRouter {
         navigationController?.pushViewController(screen, animated: true)
     }
 
-    func showProfileSetupScreen() {
-        onProfileDeleted()
+    func showProfileSetupScreen(profile: Profile) {
+        onProfileSetupRequested(profile)
     }
     
     func showCalculationScreen() {
-        onProfileDeleted()
+        onProfileSetupRequested(nil)
     }
 }
