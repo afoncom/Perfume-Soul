@@ -14,6 +14,7 @@ enum ProfileCalculationState: Equatable {
     case loading
     case loaded(ProfileCalculation)
     case missingBirthPlaceData
+    case invalidBirthData
     case failed
 }
 

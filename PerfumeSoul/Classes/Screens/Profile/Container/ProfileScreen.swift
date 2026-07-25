@@ -267,6 +267,16 @@ extension ProfileScreen {
                     await presenter.completeBirthDataButtonTapped()
                 }
             }
+        case .invalidBirthData:
+            makeProfileCalculationActionState(
+                title: L10n.Profile.Calculation.InvalidBirthData.title,
+                subtitle: L10n.Profile.Calculation.InvalidBirthData.subtitle,
+                buttonTitle: L10n.Profile.Calculation.InvalidBirthData.button
+            ) {
+                Task {
+                    await presenter.completeBirthDataButtonTapped()
+                }
+            }
         case .failed:
             makeProfileCalculationActionState(
                 title: L10n.Profile.Calculation.Failed.title,

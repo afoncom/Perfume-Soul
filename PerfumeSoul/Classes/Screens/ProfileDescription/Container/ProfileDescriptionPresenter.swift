@@ -97,6 +97,10 @@ extension ProfileDescriptionPresenterImpl {
             await MainActor.run {
                 viewModel.state = .content(calculation, profileDescription)
             }
+        } catch is ProfileCalculationError {
+            await MainActor.run {
+                viewModel.state = .invalidBirthData
+            }
         } catch {
             await MainActor.run {
                 viewModel.state = .failed

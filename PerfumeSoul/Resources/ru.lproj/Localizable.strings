@@ -262,6 +262,9 @@
 "profile.calculation.failed.button" = "Повторить";
 "profile.calculation.failed.subtitle" = "Попробуйте повторить расчет натального профиля.";
 "profile.calculation.failed.title" = "Не удалось рассчитать профиль";
+"profile.calculation.invalidBirthData.button" = "Обновить данные";
+"profile.calculation.invalidBirthData.subtitle" = "Некоторые данные рождения не описывают существующее локальное время. Обновите данные, чтобы рассчитать натальный профиль.";
+"profile.calculation.invalidBirthData.title" = "Обновите данные рождения";
 "profile.calculation.missingBirthData.button" = "Заполнить данные";
 "profile.calculation.missingBirthData.subtitle" = "Добавьте координаты места рождения и часовой пояс, чтобы рассчитать натальный профиль.";
 "profile.calculation.missingBirthData.title" = "Заполните данные рождения";
@@ -293,6 +296,8 @@
 "profileDescription.element.weakTitle" = "%@ требует поддержки";
 "profileDescription.failedMessage" = "Попробуйте повторить расчет натального профиля.";
 "profileDescription.failedTitle" = "Не удалось рассчитать профиль";
+"profileDescription.invalidBirthDataMessage" = "Некоторые данные рождения не описывают существующее локальное время. Обновите данные в профиле перед повторным открытием описания.";
+"profileDescription.invalidBirthDataTitle" = "Обновите данные рождения";
 "profileDescription.retryButton" = "Повторить";
 "profileDescription.moon.aquarius" = "Вам нужны эмоциональное пространство и интеллектуальная честность. Давление может заставлять отстраняться.";
 "profileDescription.moon.aries" = "Эмоционально вам нужны прямота и быстрый выход энергии. Долгое ожидание может утомлять сильнее действия.";

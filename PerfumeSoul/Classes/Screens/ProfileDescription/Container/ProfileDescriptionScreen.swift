@@ -64,6 +64,13 @@ extension ProfileDescriptionScreen {
                 canRetry: false
             )
             .padding(.horizontal, 24)
+        case .invalidBirthData:
+            makeUnavailableState(
+                title: L10n.ProfileDescription.invalidBirthDataTitle,
+                message: L10n.ProfileDescription.invalidBirthDataMessage,
+                canRetry: false
+            )
+            .padding(.horizontal, 24)
         case .failed:
             makeUnavailableState(
                 title: L10n.ProfileDescription.failedTitle,

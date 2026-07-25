@@ -262,6 +262,9 @@
 "profile.calculation.failed.button" = "Retry";
 "profile.calculation.failed.subtitle" = "Please try the natal profile calculation again.";
 "profile.calculation.failed.title" = "Calculation failed";
+"profile.calculation.invalidBirthData.button" = "Update birth data";
+"profile.calculation.invalidBirthData.subtitle" = "Some birth details do not describe a valid local time. Update your birth data to calculate the natal profile.";
+"profile.calculation.invalidBirthData.title" = "Update birth data";
 "profile.calculation.missingBirthData.button" = "Complete birth data";
 "profile.calculation.missingBirthData.subtitle" = "Add birth-place coordinates and timezone to calculate your natal profile.";
 "profile.calculation.missingBirthData.title" = "Complete birth data";
@@ -293,6 +296,8 @@
 "profileDescription.element.weakTitle" = "%@ needs support";
 "profileDescription.failedMessage" = "Please try the natal profile calculation again.";
 "profileDescription.failedTitle" = "Calculation failed";
+"profileDescription.invalidBirthDataMessage" = "Some birth details do not describe a valid local time. Update your birth data from Profile before opening the description again.";
+"profileDescription.invalidBirthDataTitle" = "Update birth data";
 "profileDescription.retryButton" = "Retry";
 "profileDescription.moon.aquarius" = "You need emotional space and intellectual honesty. Too much pressure can make you detach.";
 "profileDescription.moon.aries" = "Emotionally, you need directness and quick release. Waiting too long can feel heavier than acting.";

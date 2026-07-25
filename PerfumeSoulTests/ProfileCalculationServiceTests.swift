@@ -58,6 +58,23 @@ final class ProfileCalculationServiceTests: XCTestCase {
         }
     }
 
+    func testCalculateMapsBackendClientErrorToRejectedProfileData() async throws {
+        let requestManager = CapturingRequestManager(
+            error: RequestManagerError.clientError(
+                statusCode: 400,
+                reason: "birthDate, birthTime, and timeZoneIdentifier must represent an existing local time."
+            )
+        )
+        let service = ProfileCalculationServiceImpl(requestManager: requestManager)
+
+        do {
+            _ = try await service.calculate(profile: makeProfile())
+            XCTFail("Expected rejected profile data error")
+        } catch ProfileCalculationError.rejectedProfileData(let reason) {
+            XCTAssertEqual(reason, "birthDate, birthTime, and timeZoneIdentifier must represent an existing local time.")
+        }
+    }
+
     private func makeProfile() -> Profile {
         Profile(
             name: "Test",
@@ -73,14 +90,20 @@ final class ProfileCalculationServiceTests: XCTestCase {
 
 private final class CapturingRequestManager: RequestManager {
     private let responseData: Data
+    private let error: (any Error)?
     private(set) var capturedRequest: Request?
 
-    init(responseJSON: String) {
+    init(responseJSON: String = "{}", error: (any Error)? = nil) {
         self.responseData = Data(responseJSON.utf8)
+        self.error = error
     }
 
     func sendRequest<Response: Decodable>(request: Request) async throws -> Response {
         capturedRequest = request
+        if let error {
+            throw error
+        }
+
         return try JSONDecoder().decode(Response.self, from: responseData)
     }
 }

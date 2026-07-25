@@ -13,6 +13,7 @@ enum ProfileDescriptionScreenState: Equatable {
     case loading
     case content(ProfileCalculation, ProfileDescription)
     case missingBirthPlaceData
+    case invalidBirthData
     case failed
 }
 

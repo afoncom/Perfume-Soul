@@ -21,7 +21,15 @@ final class ProfileCalculationServiceImpl {
 
 extension ProfileCalculationServiceImpl: ProfileCalculationService {
     func calculate(profile: Profile) async throws -> ProfileCalculation {
-        try await requestManager.sendRequest(request: ProfileCalculationRequest(profile: profile))
+        do {
+            return try await requestManager.sendRequest(request: ProfileCalculationRequest(profile: profile))
+        } catch let error as RequestManagerError {
+            if case let .clientError(_, reason) = error {
+                throw ProfileCalculationError.rejectedProfileData(reason: reason)
+            }
+
+            throw error
+        }
     }
 }
 
@@ -62,4 +70,5 @@ private struct ProfileCalculationRequestBody: Encodable {
 
 enum ProfileCalculationError: Error {
     case invalidProfileData
+    case rejectedProfileData(reason: String?)
 }
