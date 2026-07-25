@@ -11,14 +11,13 @@ import XCTest
 final class ProfileDescriptionBuilderTests: XCTestCase {
     private let builder = ProfileDescriptionBuilderImpl()
 
-    func testElementBalanceProfileKeepsFullSpreadForThreePlacementDistribution() {
+    func testElementBalanceProfileSelectsDominantAndWeakForThreePlacementDistribution() {
         let profile = builder.makeElementBalanceProfile(
             from: ElementBalance(fire: 34, earth: 33, air: 33, water: 0)
         )
 
         XCTAssertEqual(profile.dominantElement, .fire)
         XCTAssertEqual(profile.weakElement, .water)
-        XCTAssertEqual(profile.spread, 34)
     }
 
     func testElementBalanceProfileSelectsDominantAndWeakByScore() {
@@ -28,7 +27,6 @@ final class ProfileDescriptionBuilderTests: XCTestCase {
 
         XCTAssertEqual(profile.dominantElement, .earth)
         XCTAssertEqual(profile.weakElement, .water)
-        XCTAssertEqual(profile.spread, 45)
     }
 
     func testElementBalanceProfileUsesStableTieBreakers() {
@@ -38,7 +36,6 @@ final class ProfileDescriptionBuilderTests: XCTestCase {
 
         XCTAssertEqual(profile.dominantElement, .earth)
         XCTAssertEqual(profile.weakElement, .water)
-        XCTAssertEqual(profile.spread, 50)
     }
 
     func testBuildUsesBalancedSynthesisForRealizableThreeElementDistribution() {

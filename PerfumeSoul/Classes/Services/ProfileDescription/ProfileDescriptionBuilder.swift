@@ -17,7 +17,6 @@ final class ProfileDescriptionBuilderImpl {
 struct ElementBalanceProfile: Equatable {
     let dominantElement: ZodiacElement
     let weakElement: ZodiacElement
-    let spread: Int
 }
 
 extension ProfileDescriptionBuilderImpl: ProfileDescriptionBuilder {
@@ -143,14 +142,10 @@ extension ProfileDescriptionBuilderImpl {
         let values = elementValues(from: balance)
         let dominantElement = values.max(by: compareElementValues)?.element ?? .fire
         let weakElement = values.min(by: compareElementValues)?.element ?? .earth
-        let maxValue = values.map(\.value).max() ?? 0
-        let minValue = values.map(\.value).min() ?? 0
-        let spread = maxValue - minValue
 
         return ElementBalanceProfile(
             dominantElement: dominantElement,
-            weakElement: weakElement,
-            spread: spread
+            weakElement: weakElement
         )
     }
 
