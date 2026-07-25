@@ -32,15 +32,11 @@ import Observation
     }
     
     private static let birthDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        return formatter
+        FixedFormatDateFormatter.make(dateFormat: "dd.MM.yyyy")
     }()
     
     private static let birthTimeFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return formatter
+        FixedFormatDateFormatter.make(dateFormat: "HH:mm")
     }()
     
     private static let defaultBirthTime: Date = {

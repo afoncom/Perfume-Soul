@@ -49,28 +49,19 @@ extension Profile {
     }
 
     var normalizedBirthDate: String? {
-        let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "dd.MM.yyyy"
-
-        let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "yyyy-MM-dd"
-
-        guard let date = inputFormatter.date(from: birthDate) else {
+        guard let date = Self.birthDateFormatter.date(from: birthDate) else {
             return nil
         }
 
-        return outputFormatter.string(from: date)
+        return Self.normalizedBirthDateFormatter.string(from: date)
     }
 
     func zodiacSign() -> String? {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        
-        guard let date = formatter.date(from: birthDate) else {
+        guard let date = Self.birthDateFormatter.date(from: birthDate) else {
             return nil
         }
-        
-        let calendar = Calendar.current
+
+        let calendar = Calendar(identifier: .gregorian)
         let month = calendar.component(.month, from: date)
         let day = calendar.component(.day, from: date)
         
@@ -90,4 +81,7 @@ extension Profile {
         default: return nil
         }
     }
+
+    private static let birthDateFormatter = FixedFormatDateFormatter.make(dateFormat: "dd.MM.yyyy")
+    private static let normalizedBirthDateFormatter = FixedFormatDateFormatter.make(dateFormat: "yyyy-MM-dd")
 }
