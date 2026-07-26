@@ -223,7 +223,7 @@ extension ProfileScreen {
             if viewModel.isProfileCalculationLoading {
                 ProgressView()
                     .frame(width: 18, height: 18)
-            } else if viewModel.didFailProfileCalculation {
+            } else if viewModel.needsProfileCalculationAction {
                 Image(systemName: "arrow.clockwise")
                     .font(.footnote.weight(.semibold))
                     .foregroundStyle(Color(.textSecondary))
@@ -498,7 +498,7 @@ extension ProfileScreen {
     }
 
     func makeZodiacInfo(profile: Profile) -> DailyHoroscope? {
-        guard let sign = viewModel.profileCalculation?.natalChart.sun.sign.rawValue ?? profile.zodiacSign() else {
+        guard let sign = viewModel.profileCalculation?.natalChart.sun.sign.rawValue ?? profile.preferredZodiacSign else {
             return nil
         }
 
@@ -560,6 +560,17 @@ extension ProfileScreen {
 
         if viewModel.didFailProfileCalculation {
             return L10n.Profile.PersonalPerfumes.retrySubtitle
+        }
+
+        if viewModel.needsBirthDataForProfileCalculation {
+            switch viewModel.profileCalculationState {
+            case .missingBirthPlaceData:
+                return L10n.Profile.Calculation.MissingBirthData.subtitle
+            case .invalidBirthData:
+                return L10n.Profile.Calculation.InvalidBirthData.subtitle
+            case .idle, .loading, .loaded, .failed:
+                break
+            }
         }
 
         return L10n.Profile.PersonalPerfumes.subtitle

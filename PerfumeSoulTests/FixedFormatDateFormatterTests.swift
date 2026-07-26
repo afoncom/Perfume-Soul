@@ -39,6 +39,22 @@ final class FixedFormatDateFormatterTests: XCTestCase {
         XCTAssertEqual(profile.zodiacSign(), "cancer")
     }
 
+    func testProfilePreferredZodiacSignUsesCalculatedSunSignBeforeDateFallback() {
+        let profile = Profile(
+            name: "Test",
+            birthDate: "21.06.1996",
+            birthTime: "00:30",
+            birthPlace: "Belgrade",
+            birthLatitude: 44.7866,
+            birthLongitude: 20.4489,
+            birthTimeZoneIdentifier: "Europe/Belgrade",
+            calculatedSunSign: "gemini"
+        )
+
+        XCTAssertEqual(profile.zodiacSign(), "cancer")
+        XCTAssertEqual(profile.preferredZodiacSign, "gemini")
+    }
+
     func testCalculationViewModelFormatsBirthDateWithGregorianCalendar() throws {
         let viewModel = CalculationViewModel()
         viewModel.birthDate = try makeGregorianDate(year: 1996, month: 7, day: 7)

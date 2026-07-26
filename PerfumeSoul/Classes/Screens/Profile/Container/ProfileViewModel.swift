@@ -40,6 +40,24 @@ enum ProfileCalculationState: Equatable {
         profileCalculationState == .failed
     }
 
+    var needsBirthDataForProfileCalculation: Bool {
+        switch profileCalculationState {
+        case .missingBirthPlaceData, .invalidBirthData:
+            return true
+        case .idle, .loading, .loaded, .failed:
+            return false
+        }
+    }
+
+    var needsProfileCalculationAction: Bool {
+        switch profileCalculationState {
+        case .missingBirthPlaceData, .invalidBirthData, .failed:
+            return true
+        case .idle, .loading, .loaded:
+            return false
+        }
+    }
+
     var perfumeExpertiseLevel: PerfumeExpertiseLevel {
         PerfumeExpertiseLevel.level(for: totalCorrectQuizAnswers)
     }

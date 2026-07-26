@@ -115,7 +115,7 @@ extension DailyHoroscopeNotificationServiceImpl {
     func makeNotificationContent() async throws -> UNMutableNotificationContent {
         guard
             let profile = await profileService.fetchProfile(),
-            let sign = profile.zodiacSign()
+            profile.preferredZodiacSign != nil
         else {
             throw DailyHoroscopeNotificationServiceError.profileUnavailable
         }

@@ -94,12 +94,15 @@ extension ProfileDescriptionPresenterImpl {
 
         do {
             let calculation = try await profileCalculationService.calculate(profile: profile)
+            let updatedProfile = profile.withCalculatedSunSign(calculation.natalChart.sun.sign)
             let profileDescription = profileDescriptionBuilder.build(
-                profile: profile,
+                profile: updatedProfile,
                 calculation: calculation
             )
+            await profileService.replaceProfile(updatedProfile)
 
             await MainActor.run {
+                viewModel.profile = updatedProfile
                 viewModel.state = .content(calculation, profileDescription)
             }
         } catch is ProfileCalculationError {

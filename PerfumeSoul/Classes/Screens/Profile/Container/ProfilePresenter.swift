@@ -47,22 +47,22 @@ extension ProfilePresenterImpl: ProfilePresenter {
     }
     
     func personalPerfumesButtonTapped() async {
-        if let profileCalculation = await MainActor.run(body: { viewModel.profileCalculation }) {
+        let profileCalculationState = await MainActor.run {
+            viewModel.profileCalculationState
+        }
+
+        switch profileCalculationState {
+        case .loaded(let profileCalculation):
             await MainActor.run {
                 router.showPersonalPerfumes(profileCalculation: profileCalculation)
             }
+        case .loading:
             return
+        case .missingBirthPlaceData, .invalidBirthData:
+            await completeBirthDataButtonTapped()
+        case .idle, .failed:
+            await loadProfileCalculationAndOpenPersonalPerfumes()
         }
-
-        let isProfileCalculationLoading = await MainActor.run {
-            viewModel.isProfileCalculationLoading
-        }
-
-        guard !isProfileCalculationLoading else {
-            return
-        }
-
-        await loadProfileCalculationAndOpenPersonalPerfumes()
     }
 
     func profileDescriptionButtonTapped() {
@@ -160,7 +160,11 @@ extension ProfilePresenterImpl {
 
         do {
             let profileCalculation = try await profileCalculationService.calculate(profile: profile)
+            let updatedProfile = profile.withCalculatedSunSign(profileCalculation.natalChart.sun.sign)
+            await profileService.replaceProfile(updatedProfile)
+
             await MainActor.run {
+                viewModel.profile = updatedProfile
                 viewModel.profileCalculationState = .loaded(profileCalculation)
             }
         } catch is ProfileCalculationError {

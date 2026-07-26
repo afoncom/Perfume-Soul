@@ -15,6 +15,27 @@ struct Profile: Equatable {
     let birthLatitude: Double?
     let birthLongitude: Double?
     let birthTimeZoneIdentifier: String?
+    let calculatedSunSign: String?
+
+    init(
+        name: String,
+        birthDate: String,
+        birthTime: String,
+        birthPlace: String,
+        birthLatitude: Double?,
+        birthLongitude: Double?,
+        birthTimeZoneIdentifier: String?,
+        calculatedSunSign: String? = nil
+    ) {
+        self.name = name
+        self.birthDate = birthDate
+        self.birthTime = birthTime
+        self.birthPlace = birthPlace
+        self.birthLatitude = birthLatitude
+        self.birthLongitude = birthLongitude
+        self.birthTimeZoneIdentifier = birthTimeZoneIdentifier
+        self.calculatedSunSign = calculatedSunSign
+    }
 }
 
 extension Profile: DatabaseStorable {
@@ -26,6 +47,7 @@ extension Profile: DatabaseStorable {
         self.birthLatitude = Double(storableModel.birthLatitude ?? "")
         self.birthLongitude = Double(storableModel.birthLongitude ?? "")
         self.birthTimeZoneIdentifier = storableModel.birthTimeZoneIdentifier
+        self.calculatedSunSign = storableModel.calculatedSunSign
     }
 }
 
@@ -38,6 +60,7 @@ extension CDProfile: CDModel {
         self.birthLatitude = model.birthLatitude.map { String($0) }
         self.birthLongitude = model.birthLongitude.map { String($0) }
         self.birthTimeZoneIdentifier = model.birthTimeZoneIdentifier
+        self.calculatedSunSign = model.calculatedSunSign
     }
 }
 
@@ -54,6 +77,10 @@ extension Profile {
         }
 
         return Self.normalizedBirthDateFormatter.string(from: date)
+    }
+
+    var preferredZodiacSign: String? {
+        calculatedSunSign ?? zodiacSign()
     }
 
     func zodiacSign() -> String? {
@@ -80,6 +107,19 @@ extension Profile {
         case (2, 19...29), (3, 1...20): return "pisces"
         default: return nil
         }
+    }
+
+    func withCalculatedSunSign(_ sign: ZodiacSign) -> Profile {
+        Profile(
+            name: name,
+            birthDate: birthDate,
+            birthTime: birthTime,
+            birthPlace: birthPlace,
+            birthLatitude: birthLatitude,
+            birthLongitude: birthLongitude,
+            birthTimeZoneIdentifier: birthTimeZoneIdentifier,
+            calculatedSunSign: sign.rawValue
+        )
     }
 
     private static let birthDateFormatter = FixedFormatDateFormatter.make(dateFormat: "dd.MM.yyyy")
