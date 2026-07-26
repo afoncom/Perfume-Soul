@@ -4,9 +4,36 @@ import Vapor
 @testable import PerfumeSoulBackend
 
 struct PersonalPerfumeLoaderTests {
-    @Test("Personal perfume loader limits SQL candidates per market segment")
-    func loaderLimitsCandidatesPerMarketSegment() {
-        #expect(PersonalPerfumeLoader.candidateLimitPerSegment == 100)
+    @Test("Personal perfume loader pages SQL candidates per market segment")
+    func loaderPagesCandidatesPerMarketSegment() {
+        #expect(PersonalPerfumeLoader.candidatePageSize == 100)
+    }
+
+    @Test("Paged ranking can recommend a matching perfume beyond the first page")
+    func pagedRankingCanRecommendMatchingPerfumeBeyondFirstPage() {
+        let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
+        let firstPage = (1...PersonalPerfumeLoader.candidatePageSize).map {
+            makeAirRankingPerfume(
+                id: $0,
+                name: "Weak Air \($0)",
+                accordScale: 0
+            )
+        }
+        let secondPage = [
+            makeAirRankingPerfume(
+                id: PersonalPerfumeLoader.candidatePageSize + 1,
+                name: "Perfect Air Beyond First Page",
+                accordScale: 1
+            )
+        ]
+
+        let recommendations = PersonalPerfumeScorer.scoreSegmentPages(
+            request: request,
+            marketSegment: .daily,
+            perfumeProfilePages: [firstPage, secondPage]
+        )
+
+        #expect(recommendations.first?.id == PersonalPerfumeLoader.candidatePageSize + 1)
     }
 
     @Test("Element balance validation accepts a valid 100 percent total")

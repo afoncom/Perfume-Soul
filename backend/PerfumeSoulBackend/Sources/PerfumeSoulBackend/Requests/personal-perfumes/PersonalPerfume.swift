@@ -51,38 +51,72 @@ enum PersonalPerfumeMarketSegment: String, Codable, CaseIterable {
 }
 
 enum PersonalPerfumeLoader {
-    static let candidateLimitPerSegment = 100
+    static let candidatePageSize = 100
 
     static func load(
         request: PersonalPerfumesRequest,
         on database: any Database
     ) async throws -> [PersonalPerfumeResponse] {
-        var perfumeModels: [PerfumeModel] = []
+        let preference = PersonalPerfumePreference(request: request)
+        var recommendations: [PersonalPerfumeResponse] = []
 
         for segment in PersonalPerfumeMarketSegment.allCases {
-            let segmentModels = try await loadCandidates(
+            let scoredPerfumes = try await loadScoredRecommendations(
                 marketSegment: segment,
-                limit: candidateLimitPerSegment,
+                pageSize: candidatePageSize,
+                preference: preference,
                 on: database
             )
-            perfumeModels += segmentModels
+            recommendations += scoredPerfumes.map(\.response)
         }
 
-        return PersonalPerfumeScorer.score(
-            request: request,
-            perfumeProfiles: perfumeModels.compactMap(PerfumeProfile.init(model:))
-        )
+        return recommendations
+    }
+
+    private static func loadScoredRecommendations(
+        marketSegment: PersonalPerfumeMarketSegment,
+        pageSize: Int,
+        preference: PersonalPerfumePreference,
+        on database: any Database
+    ) async throws -> [ScoredPersonalPerfume] {
+        var offset = 0
+        var topScoredPerfumes: [ScoredPersonalPerfume] = []
+
+        while true {
+            let perfumeModels = try await loadCandidates(
+                marketSegment: marketSegment,
+                offset: offset,
+                limit: pageSize,
+                on: database
+            )
+            let perfumeProfiles = perfumeModels.compactMap(PerfumeProfile.init(model:))
+            let scoredPage = PersonalPerfumeScorer.scoreCandidates(
+                perfumeProfiles: perfumeProfiles,
+                preference: preference
+            )
+            topScoredPerfumes = PersonalPerfumeScorer.topScoredPerfumes(
+                scoredPerfumes: topScoredPerfumes + scoredPage,
+                marketSegment: marketSegment
+            )
+
+            guard perfumeModels.count == pageSize else {
+                return topScoredPerfumes
+            }
+
+            offset += pageSize
+        }
     }
 
     private static func loadCandidates(
         marketSegment: PersonalPerfumeMarketSegment,
+        offset: Int,
         limit: Int,
         on database: any Database
     ) async throws -> [PerfumeModel] {
         try await PerfumeModel.query(on: database)
             .filter(\.$marketSegment == marketSegment.rawValue)
             .sort(\.$id)
-            .limit(limit)
+            .range(offset..<(offset + limit))
             .with(\.$brand)
             .with(\.$notes) { query in
                 query.with(\.$note)
@@ -100,21 +134,40 @@ enum PersonalPerfumeScorer {
         perfumeProfiles: [PerfumeProfile]
     ) -> [PersonalPerfumeResponse] {
         let preference = PersonalPerfumePreference(request: request)
-        let scoredPerfumes = perfumeProfiles.compactMap { perfumeProfile in
-            makeScoredPerfume(
-                perfumeProfile: perfumeProfile,
+        let scoredPerfumes = scoreCandidates(
+            perfumeProfiles: perfumeProfiles,
+            preference: preference
+        )
+
+        return PersonalPerfumeMarketSegment.allCases.flatMap { segment in
+            topScoredPerfumes(
+                scoredPerfumes: scoredPerfumes,
+                marketSegment: segment
+            )
+                .map(\.response)
+        }
+    }
+
+    static func scoreSegmentPages(
+        request: PersonalPerfumesRequest,
+        marketSegment: PersonalPerfumeMarketSegment,
+        perfumeProfilePages: [[PerfumeProfile]]
+    ) -> [PersonalPerfumeResponse] {
+        let preference = PersonalPerfumePreference(request: request)
+        var topScoredPerfumes: [ScoredPersonalPerfume] = []
+
+        for perfumeProfiles in perfumeProfilePages {
+            let scoredPage = scoreCandidates(
+                perfumeProfiles: perfumeProfiles,
                 preference: preference
+            )
+            topScoredPerfumes = self.topScoredPerfumes(
+                scoredPerfumes: topScoredPerfumes + scoredPage,
+                marketSegment: marketSegment
             )
         }
 
-        return PersonalPerfumeMarketSegment.allCases.flatMap { segment in
-            scoredPerfumes
-                .filter { $0.response.marketSegment == segment }
-                .sorted(by: areSortedForRecommendationRanking)
-                .uniqueBySignature()
-                .prefix(3)
-                .map(\.response)
-        }
+        return topScoredPerfumes.map(\.response)
     }
 }
 
@@ -254,6 +307,30 @@ private struct PersonalPerfumePreference {
 }
 
 extension PersonalPerfumeScorer {
+    fileprivate static func scoreCandidates(
+        perfumeProfiles: [PerfumeProfile],
+        preference: PersonalPerfumePreference
+    ) -> [ScoredPersonalPerfume] {
+        perfumeProfiles.compactMap { perfumeProfile in
+            makeScoredPerfume(
+                perfumeProfile: perfumeProfile,
+                preference: preference
+            )
+        }
+    }
+
+    fileprivate static func topScoredPerfumes(
+        scoredPerfumes: [ScoredPersonalPerfume],
+        marketSegment: PersonalPerfumeMarketSegment
+    ) -> [ScoredPersonalPerfume] {
+        scoredPerfumes
+            .filter { $0.response.marketSegment == marketSegment }
+            .sorted(by: areSortedForRecommendationRanking)
+            .uniqueBySignature()
+            .prefix(3)
+            .map { $0 }
+    }
+
     fileprivate static func makeScoredPerfume(
         perfumeProfile: PerfumeProfile,
         preference: PersonalPerfumePreference
