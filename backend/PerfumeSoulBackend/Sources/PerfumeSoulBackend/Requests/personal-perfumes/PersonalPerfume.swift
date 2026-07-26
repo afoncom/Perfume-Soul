@@ -73,23 +73,56 @@ enum PersonalPerfumeLoader {
         return recommendations
     }
 
+    static func loadRecommendations(
+        request: PersonalPerfumesRequest,
+        marketSegment: PersonalPerfumeMarketSegment,
+        pageSize: Int,
+        pageProvider: (_ offset: Int, _ limit: Int) async throws -> [PerfumeProfile]
+    ) async throws -> [PersonalPerfumeResponse] {
+        let preference = PersonalPerfumePreference(request: request)
+        let scoredPerfumes = try await loadScoredRecommendations(
+            marketSegment: marketSegment,
+            pageSize: pageSize,
+            preference: preference,
+            pageProvider: pageProvider
+        )
+
+        return scoredPerfumes.map(\.response)
+    }
+
     private static func loadScoredRecommendations(
         marketSegment: PersonalPerfumeMarketSegment,
         pageSize: Int,
         preference: PersonalPerfumePreference,
         on database: any Database
     ) async throws -> [ScoredPersonalPerfume] {
+        try await loadScoredRecommendations(
+            marketSegment: marketSegment,
+            pageSize: pageSize,
+            preference: preference
+        ) { offset, limit in
+            let perfumeModels = try await loadCandidates(
+                marketSegment: marketSegment,
+                offset: offset,
+                limit: limit,
+                on: database
+            )
+
+            return perfumeModels.compactMap(PerfumeProfile.init(model:))
+        }
+    }
+
+    private static func loadScoredRecommendations(
+        marketSegment: PersonalPerfumeMarketSegment,
+        pageSize: Int,
+        preference: PersonalPerfumePreference,
+        pageProvider: (_ offset: Int, _ limit: Int) async throws -> [PerfumeProfile]
+    ) async throws -> [ScoredPersonalPerfume] {
         var offset = 0
         var topScoredPerfumes: [ScoredPersonalPerfume] = []
 
         while true {
-            let perfumeModels = try await loadCandidates(
-                marketSegment: marketSegment,
-                offset: offset,
-                limit: pageSize,
-                on: database
-            )
-            let perfumeProfiles = perfumeModels.compactMap(PerfumeProfile.init(model:))
+            let perfumeProfiles = try await pageProvider(offset, pageSize)
             let scoredPage = PersonalPerfumeScorer.scoreCandidates(
                 perfumeProfiles: perfumeProfiles,
                 preference: preference
@@ -99,7 +132,7 @@ enum PersonalPerfumeLoader {
                 marketSegment: marketSegment
             )
 
-            guard perfumeModels.count == pageSize else {
+            guard perfumeProfiles.count == pageSize else {
                 return topScoredPerfumes
             }
 
@@ -146,28 +179,6 @@ enum PersonalPerfumeScorer {
             )
                 .map(\.response)
         }
-    }
-
-    static func scoreSegmentPages(
-        request: PersonalPerfumesRequest,
-        marketSegment: PersonalPerfumeMarketSegment,
-        perfumeProfilePages: [[PerfumeProfile]]
-    ) -> [PersonalPerfumeResponse] {
-        let preference = PersonalPerfumePreference(request: request)
-        var topScoredPerfumes: [ScoredPersonalPerfume] = []
-
-        for perfumeProfiles in perfumeProfilePages {
-            let scoredPage = scoreCandidates(
-                perfumeProfiles: perfumeProfiles,
-                preference: preference
-            )
-            topScoredPerfumes = self.topScoredPerfumes(
-                scoredPerfumes: topScoredPerfumes + scoredPage,
-                marketSegment: marketSegment
-            )
-        }
-
-        return topScoredPerfumes.map(\.response)
     }
 }
 

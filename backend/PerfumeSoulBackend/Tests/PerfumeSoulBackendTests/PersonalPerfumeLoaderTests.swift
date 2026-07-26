@@ -10,7 +10,7 @@ struct PersonalPerfumeLoaderTests {
     }
 
     @Test("Paged ranking can recommend a matching perfume beyond the first page")
-    func pagedRankingCanRecommendMatchingPerfumeBeyondFirstPage() {
+    func pagedRankingCanRecommendMatchingPerfumeBeyondFirstPage() async throws {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
         let firstPage = (1...PersonalPerfumeLoader.candidatePageSize).map {
             makeAirRankingPerfume(
@@ -27,11 +27,20 @@ struct PersonalPerfumeLoaderTests {
             )
         ]
 
-        let recommendations = PersonalPerfumeScorer.scoreSegmentPages(
+        let recommendations = try await PersonalPerfumeLoader.loadRecommendations(
             request: request,
             marketSegment: .daily,
-            perfumeProfilePages: [firstPage, secondPage]
-        )
+            pageSize: PersonalPerfumeLoader.candidatePageSize
+        ) { offset, _ in
+            switch offset {
+            case 0:
+                return firstPage
+            case PersonalPerfumeLoader.candidatePageSize:
+                return secondPage
+            default:
+                return []
+            }
+        }
 
         #expect(recommendations.first?.id == PersonalPerfumeLoader.candidatePageSize + 1)
     }
