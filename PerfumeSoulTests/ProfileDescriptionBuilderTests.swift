@@ -11,43 +11,44 @@ import XCTest
 final class ProfileDescriptionBuilderTests: XCTestCase {
     private let builder = ProfileDescriptionBuilderImpl()
 
-    func testElementBalanceProfileSelectsDominantAndWeakForThreePlacementDistribution() {
+    func testElementBalanceProfileSelectsDominantAndWeakForThreePlacementDistribution() throws {
         let profile = builder.makeElementBalanceProfile(
-            from: ElementBalance(fire: 34, earth: 33, air: 33, water: 0)
+            from: try makeCalculation(fire: 34, earth: 33, air: 33, water: 0).elementBalance
         )
 
         XCTAssertEqual(profile.dominantElement, .fire)
         XCTAssertEqual(profile.weakElement, .water)
     }
 
-    func testElementBalanceProfileSelectsDominantAndWeakByScore() {
+    func testElementBalanceProfileSelectsDominantAndWeakByScore() throws {
         let profile = builder.makeElementBalanceProfile(
-            from: ElementBalance(fire: 10, earth: 55, air: 25, water: 10)
+            from: try makeCalculation(fire: 10, earth: 55, air: 25, water: 10).elementBalance
         )
 
         XCTAssertEqual(profile.dominantElement, .earth)
         XCTAssertEqual(profile.weakElement, .water)
     }
 
-    func testElementBalanceProfileUsesStableTieBreakers() {
+    func testElementBalanceProfileUsesStableTieBreakers() throws {
         let profile = builder.makeElementBalanceProfile(
-            from: ElementBalance(fire: 0, earth: 50, air: 50, water: 0)
+            from: try makeCalculation(fire: 0, earth: 50, air: 50, water: 0).elementBalance
         )
 
         XCTAssertEqual(profile.dominantElement, .earth)
         XCTAssertEqual(profile.weakElement, .water)
     }
 
-    func testBuildUsesBalancedSynthesisForRealizableThreeElementDistribution() {
+    func testBuildUsesBalancedSynthesisForRealizableThreeElementDistribution() throws {
         let description = builder.build(
             profile: makeProfile(),
-            calculation: ProfileCalculation(
-                natalChart: NatalChart(
-                    sun: ZodiacPlacement(longitude: 0),
-                    moon: ZodiacPlacement(longitude: 30),
-                    ascendant: ZodiacPlacement(longitude: 60)
-                ),
-                elementBalance: ElementBalance(fire: 40, earth: 28, air: 32, water: 0)
+            calculation: try makeCalculation(
+                sun: .aries,
+                moon: .taurus,
+                ascendant: .gemini,
+                fire: 40,
+                earth: 28,
+                air: 32,
+                water: 0
             )
         )
         let expectedSummary = Bundle.main.localizedString(
@@ -59,16 +60,17 @@ final class ProfileDescriptionBuilderTests: XCTestCase {
         XCTAssertEqual(description.summary, expectedSummary)
     }
 
-    func testBuildDoesNotUseBalancedSynthesisForRepeatedElementDistribution() {
+    func testBuildDoesNotUseBalancedSynthesisForRepeatedElementDistribution() throws {
         let description = builder.build(
             profile: makeProfile(),
-            calculation: ProfileCalculation(
-                natalChart: NatalChart(
-                    sun: ZodiacPlacement(longitude: 0),
-                    moon: ZodiacPlacement(longitude: 30),
-                    ascendant: ZodiacPlacement(longitude: 150)
-                ),
-                elementBalance: ElementBalance(fire: 40, earth: 60, air: 0, water: 0)
+            calculation: try makeCalculation(
+                sun: .aries,
+                moon: .taurus,
+                ascendant: .virgo,
+                fire: 40,
+                earth: 60,
+                air: 0,
+                water: 0
             )
         )
         let expectedSummary = Bundle.main.localizedString(
@@ -78,6 +80,34 @@ final class ProfileDescriptionBuilderTests: XCTestCase {
         )
 
         XCTAssertEqual(description.summary, expectedSummary)
+    }
+
+    private func makeCalculation(
+        sun: ZodiacSign = .aries,
+        moon: ZodiacSign = .taurus,
+        ascendant: ZodiacSign = .gemini,
+        fire: Int,
+        earth: Int,
+        air: Int,
+        water: Int
+    ) throws -> ProfileCalculation {
+        let json = """
+        {
+            "natalChart": {
+                "sun": { "sign": "\(sun.rawValue)", "longitude": 0 },
+                "moon": { "sign": "\(moon.rawValue)", "longitude": 30 },
+                "ascendant": { "sign": "\(ascendant.rawValue)", "longitude": 60 }
+            },
+            "elementBalance": {
+                "fire": \(fire),
+                "earth": \(earth),
+                "air": \(air),
+                "water": \(water)
+            }
+        }
+        """
+
+        return try JSONDecoder().decode(ProfileCalculation.self, from: Data(json.utf8))
     }
 
     private func makeProfile() -> Profile {

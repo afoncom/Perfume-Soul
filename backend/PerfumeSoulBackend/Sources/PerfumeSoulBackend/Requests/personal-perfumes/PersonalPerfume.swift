@@ -323,12 +323,11 @@ extension PersonalPerfumeScorer {
         scoredPerfumes: [ScoredPersonalPerfume],
         marketSegment: PersonalPerfumeMarketSegment
     ) -> [ScoredPersonalPerfume] {
-        scoredPerfumes
+        Array(scoredPerfumes
             .filter { $0.response.marketSegment == marketSegment }
             .sorted(by: areSortedForRecommendationRanking)
             .uniqueBySignature()
-            .prefix(3)
-            .map { $0 }
+            .prefix(3))
     }
 
     fileprivate static func makeScoredPerfume(
