@@ -75,6 +75,26 @@ final class ProfileCalculationServiceTests: XCTestCase {
         }
     }
 
+    func testCalculateDoesNotMapNonBadRequestClientErrorToRejectedProfileData() async throws {
+        let requestManager = CapturingRequestManager(
+            error: RequestManagerError.clientError(
+                statusCode: 404,
+                reason: "Not Found"
+            )
+        )
+        let service = ProfileCalculationServiceImpl(requestManager: requestManager)
+
+        do {
+            _ = try await service.calculate(profile: makeProfile())
+            XCTFail("Expected client error")
+        } catch RequestManagerError.clientError(let statusCode, let reason) {
+            XCTAssertEqual(statusCode, 404)
+            XCTAssertEqual(reason, "Not Found")
+        } catch ProfileCalculationError.rejectedProfileData {
+            XCTFail("Only HTTP 400 should map to rejected profile data")
+        }
+    }
+
     private func makeProfile() -> Profile {
         Profile(
             name: "Test",

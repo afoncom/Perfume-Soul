@@ -24,7 +24,7 @@ extension ProfileCalculationServiceImpl: ProfileCalculationService {
         do {
             return try await requestManager.sendRequest(request: ProfileCalculationRequest(profile: profile))
         } catch let error as RequestManagerError {
-            if case let .clientError(_, reason) = error {
+            if case let .clientError(statusCode, reason) = error, statusCode == 400 {
                 throw ProfileCalculationError.rejectedProfileData(reason: reason)
             }
 
