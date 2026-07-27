@@ -25,9 +25,7 @@ extension CoreDataManagerImpl: CoreDataManager {
         storeDescription?.shouldInferMappingModelAutomatically = true
 
         container.loadPersistentStores { _, error in
-            guard let error else {
-                return
-            }
+            guard let error else { return }
 
             fatalError("Failed to load persistent store: \(error.localizedDescription)")
         }

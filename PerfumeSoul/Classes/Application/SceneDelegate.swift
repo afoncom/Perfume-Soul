@@ -98,9 +98,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func setRootViewController(_ viewController: UIViewController) {
-        guard let window else {
-            return
-        }
+        guard let window else { return }
 
         window.rootViewController = viewController
         window.makeKeyAndVisible()

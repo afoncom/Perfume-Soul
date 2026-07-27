@@ -11,31 +11,48 @@ import XCTest
 final class ProfileDescriptionBuilderTests: XCTestCase {
     private let builder = ProfileDescriptionBuilderImpl()
 
-    func testElementBalanceProfileSelectsDominantAndWeakForThreePlacementDistribution() throws {
+    func testElementBalanceProfileOmitsWeakElementWhenMinimumIsTied() throws {
         let profile = builder.makeElementBalanceProfile(
-            from: try makeCalculation(fire: 34, earth: 33, air: 33, water: 0).elementBalance
+            from: try makeCalculation(fire: 100, earth: 0, air: 0, water: 0).elementBalance
         )
 
         XCTAssertEqual(profile.dominantElement, .fire)
-        XCTAssertEqual(profile.weakElement, .water)
+        XCTAssertNil(profile.weakElement)
     }
 
-    func testElementBalanceProfileSelectsDominantAndWeakByScore() throws {
+    func testElementBalanceProfileSelectsUniqueWeakElementByScore() throws {
         let profile = builder.makeElementBalanceProfile(
-            from: try makeCalculation(fire: 10, earth: 55, air: 25, water: 10).elementBalance
+            from: try makeCalculation(fire: 12, earth: 55, air: 25, water: 8).elementBalance
         )
 
         XCTAssertEqual(profile.dominantElement, .earth)
         XCTAssertEqual(profile.weakElement, .water)
     }
 
-    func testElementBalanceProfileUsesStableTieBreakers() throws {
+    func testElementBalanceProfileOmitsWeakElementForTiedZeroMinimum() throws {
         let profile = builder.makeElementBalanceProfile(
             from: try makeCalculation(fire: 0, earth: 50, air: 50, water: 0).elementBalance
         )
 
         XCTAssertEqual(profile.dominantElement, .earth)
-        XCTAssertEqual(profile.weakElement, .water)
+        XCTAssertNil(profile.weakElement)
+    }
+
+    func testBuildOmitsWeakElementInsightWhenMinimumIsTied() throws {
+        let description = builder.build(
+            profile: makeProfile(),
+            calculation: try makeCalculation(
+                sun: .aries,
+                moon: .leo,
+                ascendant: .sagittarius,
+                fire: 100,
+                earth: 0,
+                air: 0,
+                water: 0
+            )
+        )
+
+        XCTAssertFalse(description.insights.contains { $0.style == .weakElement })
     }
 
     func testBuildUsesBalancedSynthesisForRealizableThreeElementDistribution() throws {

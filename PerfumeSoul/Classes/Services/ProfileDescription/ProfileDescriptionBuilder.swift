@@ -16,7 +16,7 @@ final class ProfileDescriptionBuilderImpl {
 
 struct ElementBalanceProfile: Equatable {
     let dominantElement: ZodiacElement
-    let weakElement: ZodiacElement
+    let weakElement: ZodiacElement?
 }
 
 extension ProfileDescriptionBuilderImpl: ProfileDescriptionBuilder {
@@ -30,6 +30,43 @@ extension ProfileDescriptionBuilderImpl: ProfileDescriptionBuilder {
             dominantElement: elementProfile.dominantElement
         )
 
+        var insights = [
+            insight(
+                placement: .sun,
+                sign: natalChart.sun.sign
+            ),
+            insight(
+                placement: .moon,
+                sign: natalChart.moon.sign
+            ),
+            insight(
+                placement: .ascendant,
+                sign: natalChart.ascendant.sign
+            ),
+            elementInsight(
+                element: elementProfile.dominantElement,
+                isDominant: true
+            )
+        ]
+
+        if let weakElement = elementProfile.weakElement {
+            insights.append(
+                elementInsight(
+                    element: weakElement,
+                    isDominant: false
+                )
+            )
+        }
+
+        insights.append(
+            ProfileDescriptionInsight(
+                iconSystemName: "sparkles",
+                style: .synthesis,
+                title: synthesis.title,
+                description: synthesis.description
+            )
+        )
+
         return ProfileDescription(
             title: localized("profileDescription.title", profile.name),
             subtitle: subtitle(
@@ -38,34 +75,7 @@ extension ProfileDescriptionBuilderImpl: ProfileDescriptionBuilder {
                 ascendant: natalChart.ascendant.sign
             ),
             summary: synthesis.summary,
-            insights: [
-                insight(
-                    placement: .sun,
-                    sign: natalChart.sun.sign
-                ),
-                insight(
-                    placement: .moon,
-                    sign: natalChart.moon.sign
-                ),
-                insight(
-                    placement: .ascendant,
-                    sign: natalChart.ascendant.sign
-                ),
-                elementInsight(
-                    element: elementProfile.dominantElement,
-                    isDominant: true
-                ),
-                elementInsight(
-                    element: elementProfile.weakElement,
-                    isDominant: false
-                ),
-                ProfileDescriptionInsight(
-                    iconSystemName: "sparkles",
-                    style: .synthesis,
-                    title: synthesis.title,
-                    description: synthesis.description
-                )
-            ]
+            insights: insights
         )
     }
 }
@@ -141,7 +151,7 @@ extension ProfileDescriptionBuilderImpl {
     func makeElementBalanceProfile(from balance: ElementBalance) -> ElementBalanceProfile {
         let values = elementValues(from: balance)
         let dominantElement = values.max(by: compareElementValues)?.element ?? .fire
-        let weakElement = values.min(by: compareElementValues)?.element ?? .earth
+        let weakElement = uniqueWeakElement(from: values)
 
         return ElementBalanceProfile(
             dominantElement: dominantElement,
@@ -156,6 +166,22 @@ extension ProfileDescriptionBuilderImpl {
             (.air, balance.air),
             (.water, balance.water)
         ]
+    }
+
+    private func uniqueWeakElement(
+        from values: [(element: ZodiacElement, value: Int)]
+    ) -> ZodiacElement? {
+        guard let minimumValue = values.map(\.value).min() else {
+            return nil
+        }
+
+        let weakestValues = values.filter { $0.value == minimumValue }
+
+        guard weakestValues.count == 1 else {
+            return nil
+        }
+
+        return weakestValues.first?.element
     }
 
     private func compareElementValues(
