@@ -7,23 +7,23 @@
 
 import Foundation
 
-struct ProfileCalculation: Decodable, Equatable {
+struct ProfileCalculation: Codable, Equatable {
     let natalChart: NatalChart
     let elementBalance: ElementBalance
 }
 
-struct NatalChart: Decodable, Equatable {
+struct NatalChart: Codable, Equatable {
     let sun: ZodiacPlacement
     let moon: ZodiacPlacement
     let ascendant: ZodiacPlacement
 }
 
-struct ZodiacPlacement: Decodable, Equatable {
+struct ZodiacPlacement: Codable, Equatable {
     let sign: ZodiacSign
     let longitude: Double
 }
 
-struct ElementBalance: Decodable, Equatable {
+struct ElementBalance: Codable, Equatable {
     let fire: Int
     let earth: Int
     let air: Int

@@ -88,13 +88,25 @@ extension ProfileDescriptionPresenterImpl {
             return
         }
 
+        if let cachedCalculation = profile.cachedProfileCalculation {
+            let profileDescription = profileDescriptionBuilder.build(
+                profile: profile,
+                calculation: cachedCalculation
+            )
+
+            await MainActor.run {
+                viewModel.state = .content(cachedCalculation, profileDescription)
+            }
+            return
+        }
+
         await MainActor.run {
             viewModel.state = .loading
         }
 
         do {
             let calculation = try await profileCalculationService.calculate(profile: profile)
-            let updatedProfile = profile.withCalculatedSunSign(calculation.natalChart.sun.sign)
+            let updatedProfile = profile.withProfileCalculation(calculation)
             let profileDescription = profileDescriptionBuilder.build(
                 profile: updatedProfile,
                 calculation: calculation

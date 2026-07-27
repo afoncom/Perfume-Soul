@@ -154,13 +154,20 @@ extension ProfilePresenterImpl {
             return
         }
 
+        if let cachedProfileCalculation = profile.cachedProfileCalculation {
+            await MainActor.run {
+                viewModel.profileCalculationState = .loaded(cachedProfileCalculation)
+            }
+            return
+        }
+
         await MainActor.run {
             viewModel.profileCalculationState = .loading
         }
 
         do {
             let profileCalculation = try await profileCalculationService.calculate(profile: profile)
-            let updatedProfile = profile.withCalculatedSunSign(profileCalculation.natalChart.sun.sign)
+            let updatedProfile = profile.withProfileCalculation(profileCalculation)
             await profileService.replaceProfile(updatedProfile)
 
             await MainActor.run {

@@ -55,6 +55,32 @@ final class FixedFormatDateFormatterTests: XCTestCase {
         XCTAssertEqual(profile.preferredZodiacSign, "gemini")
     }
 
+    func testProfileUsesCachedCalculationWhenBirthInputsMatch() throws {
+        let profile = makeProfile().withProfileCalculation(makeProfileCalculation())
+        let cachedProfileCalculation = try XCTUnwrap(profile.cachedProfileCalculation)
+
+        XCTAssertEqual(cachedProfileCalculation.natalChart.sun.sign, .cancer)
+        XCTAssertEqual(profile.preferredZodiacSign, "cancer")
+    }
+
+    func testProfileInvalidatesCachedCalculationWhenBirthInputsChange() {
+        let profile = makeProfile().withProfileCalculation(makeProfileCalculation())
+        let changedProfile = Profile(
+            name: profile.name,
+            birthDate: profile.birthDate,
+            birthTime: "18:00",
+            birthPlace: profile.birthPlace,
+            birthLatitude: profile.birthLatitude,
+            birthLongitude: profile.birthLongitude,
+            birthTimeZoneIdentifier: profile.birthTimeZoneIdentifier,
+            calculatedSunSign: profile.calculatedSunSign,
+            profileCalculationCacheKey: profile.profileCalculationCacheKey,
+            profileCalculationJSON: profile.profileCalculationJSON
+        )
+
+        XCTAssertNil(changedProfile.cachedProfileCalculation)
+    }
+
     func testCalculationViewModelFormatsBirthDateWithGregorianCalendar() throws {
         let viewModel = CalculationViewModel()
         viewModel.birthDate = try makeGregorianDate(year: 1996, month: 7, day: 7)
@@ -131,6 +157,22 @@ final class FixedFormatDateFormatterTests: XCTestCase {
             birthLatitude: 44.7866,
             birthLongitude: 20.4489,
             birthTimeZoneIdentifier: "Europe/Belgrade"
+        )
+    }
+
+    private func makeProfileCalculation() -> ProfileCalculation {
+        ProfileCalculation(
+            natalChart: NatalChart(
+                sun: ZodiacPlacement(sign: .cancer, longitude: 105.4),
+                moon: ZodiacPlacement(sign: .aquarius, longitude: 318.2),
+                ascendant: ZodiacPlacement(sign: .libra, longitude: 190.1)
+            ),
+            elementBalance: ElementBalance(
+                fire: 0,
+                earth: 0,
+                air: 60,
+                water: 40
+            )
         )
     }
 }

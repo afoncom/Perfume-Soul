@@ -16,6 +16,8 @@ struct Profile: Equatable {
     let birthLongitude: Double?
     let birthTimeZoneIdentifier: String?
     let calculatedSunSign: String?
+    let profileCalculationCacheKey: String?
+    let profileCalculationJSON: String?
 
     init(
         name: String,
@@ -25,7 +27,9 @@ struct Profile: Equatable {
         birthLatitude: Double?,
         birthLongitude: Double?,
         birthTimeZoneIdentifier: String?,
-        calculatedSunSign: String? = nil
+        calculatedSunSign: String? = nil,
+        profileCalculationCacheKey: String? = nil,
+        profileCalculationJSON: String? = nil
     ) {
         self.name = name
         self.birthDate = birthDate
@@ -35,6 +39,8 @@ struct Profile: Equatable {
         self.birthLongitude = birthLongitude
         self.birthTimeZoneIdentifier = birthTimeZoneIdentifier
         self.calculatedSunSign = calculatedSunSign
+        self.profileCalculationCacheKey = profileCalculationCacheKey
+        self.profileCalculationJSON = profileCalculationJSON
     }
 }
 
@@ -48,6 +54,8 @@ extension Profile: DatabaseStorable {
         self.birthLongitude = Double(storableModel.birthLongitude ?? "")
         self.birthTimeZoneIdentifier = storableModel.birthTimeZoneIdentifier
         self.calculatedSunSign = storableModel.calculatedSunSign
+        self.profileCalculationCacheKey = storableModel.profileCalculationCacheKey
+        self.profileCalculationJSON = storableModel.profileCalculationJSON
     }
 }
 
@@ -61,6 +69,8 @@ extension CDProfile: CDModel {
         self.birthLongitude = model.birthLongitude.map { String($0) }
         self.birthTimeZoneIdentifier = model.birthTimeZoneIdentifier
         self.calculatedSunSign = model.calculatedSunSign
+        self.profileCalculationCacheKey = model.profileCalculationCacheKey
+        self.profileCalculationJSON = model.profileCalculationJSON
     }
 }
 
@@ -81,6 +91,18 @@ extension Profile {
 
     var preferredZodiacSign: String? {
         calculatedSunSign ?? zodiacSign()
+    }
+
+    var cachedProfileCalculation: ProfileCalculation? {
+        guard
+            profileCalculationCacheKey == currentProfileCalculationCacheKey,
+            let profileCalculationJSON,
+            let data = profileCalculationJSON.data(using: .utf8)
+        else {
+            return nil
+        }
+
+        return try? JSONDecoder().decode(ProfileCalculation.self, from: data)
     }
 
     func zodiacSign() -> String? {
@@ -109,8 +131,11 @@ extension Profile {
         }
     }
 
-    func withCalculatedSunSign(_ sign: ZodiacSign) -> Profile {
-        Profile(
+    func withProfileCalculation(_ calculation: ProfileCalculation) -> Profile {
+        let data = try? JSONEncoder().encode(calculation)
+        let profileCalculationJSON = data.flatMap { String(data: $0, encoding: .utf8) }
+
+        return Profile(
             name: name,
             birthDate: birthDate,
             birthTime: birthTime,
@@ -118,8 +143,29 @@ extension Profile {
             birthLatitude: birthLatitude,
             birthLongitude: birthLongitude,
             birthTimeZoneIdentifier: birthTimeZoneIdentifier,
-            calculatedSunSign: sign.rawValue
+            calculatedSunSign: calculation.natalChart.sun.sign.rawValue,
+            profileCalculationCacheKey: currentProfileCalculationCacheKey,
+            profileCalculationJSON: profileCalculationJSON
         )
+    }
+
+    private var currentProfileCalculationCacheKey: String? {
+        guard
+            let normalizedBirthDate,
+            let birthLatitude,
+            let birthLongitude,
+            let birthTimeZoneIdentifier
+        else {
+            return nil
+        }
+
+        return [
+            normalizedBirthDate,
+            birthTime,
+            String(birthLatitude),
+            String(birthLongitude),
+            birthTimeZoneIdentifier
+        ].joined(separator: "|")
     }
 
     private static let birthDateFormatter = FixedFormatDateFormatter.make(dateFormat: "dd.MM.yyyy")
