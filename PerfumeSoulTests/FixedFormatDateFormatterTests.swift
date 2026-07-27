@@ -81,6 +81,27 @@ final class FixedFormatDateFormatterTests: XCTestCase {
         XCTAssertNil(changedProfile.cachedProfileCalculation)
     }
 
+    func testProfileInvalidatesCachedCalculationWhenCacheVersionChanges() {
+        let profile = makeProfile().withProfileCalculation(makeProfileCalculation())
+        let profileWithOldCacheVersion = Profile(
+            name: profile.name,
+            birthDate: profile.birthDate,
+            birthTime: profile.birthTime,
+            birthPlace: profile.birthPlace,
+            birthLatitude: profile.birthLatitude,
+            birthLongitude: profile.birthLongitude,
+            birthTimeZoneIdentifier: profile.birthTimeZoneIdentifier,
+            calculatedSunSign: profile.calculatedSunSign,
+            profileCalculationCacheKey: profile.profileCalculationCacheKey?.replacingOccurrences(
+                of: "profileCalculation:v1",
+                with: "profileCalculation:v0"
+            ),
+            profileCalculationJSON: profile.profileCalculationJSON
+        )
+
+        XCTAssertNil(profileWithOldCacheVersion.cachedProfileCalculation)
+    }
+
     func testCalculationViewModelFormatsBirthDateWithGregorianCalendar() throws {
         let viewModel = CalculationViewModel()
         viewModel.birthDate = try makeGregorianDate(year: 1996, month: 7, day: 7)

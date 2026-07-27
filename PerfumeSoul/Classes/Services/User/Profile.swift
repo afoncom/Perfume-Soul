@@ -95,6 +95,7 @@ extension Profile {
 
     var cachedProfileCalculation: ProfileCalculation? {
         guard
+            let currentProfileCalculationCacheKey,
             profileCalculationCacheKey == currentProfileCalculationCacheKey,
             let profileCalculationJSON,
             let data = profileCalculationJSON.data(using: .utf8)
@@ -160,6 +161,7 @@ extension Profile {
         }
 
         return [
+            Self.profileCalculationCacheVersion,
             normalizedBirthDate,
             birthTime,
             String(birthLatitude),
@@ -168,6 +170,7 @@ extension Profile {
         ].joined(separator: "|")
     }
 
+    private static let profileCalculationCacheVersion = "profileCalculation:v1"
     private static let birthDateFormatter = FixedFormatDateFormatter.make(dateFormat: "dd.MM.yyyy")
     private static let normalizedBirthDateFormatter = FixedFormatDateFormatter.make(dateFormat: "yyyy-MM-dd")
 }
