@@ -20,9 +20,16 @@ final class CoreDataManagerImpl {
 
 extension CoreDataManagerImpl: CoreDataManager {
     func initContainer() {
+        let storeDescription = container.persistentStoreDescriptions.first
+        storeDescription?.shouldMigrateStoreAutomatically = true
+        storeDescription?.shouldInferMappingModelAutomatically = true
+
         container.loadPersistentStores { _, error in
-            guard let error else { return }
-            print(error.localizedDescription)
+            guard let error else {
+                return
+            }
+
+            fatalError("Failed to load persistent store: \(error.localizedDescription)")
         }
     }
     
