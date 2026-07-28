@@ -315,11 +315,23 @@ private struct BirthDatePickerSheet: View {
             }
 
             HStack(spacing: 0) {
-                makeWheelPicker(selection: $day, values: 1...daysInSelectedMonth)
-                makeWheelPicker(selection: $month, values: 1...12) { value in
+                makeWheelPicker(
+                    selection: $day,
+                    values: 1...daysInSelectedMonth,
+                    accessibilityLabel: localized("calculation.picker.day")
+                )
+                makeWheelPicker(
+                    selection: $month,
+                    values: 1...12,
+                    accessibilityLabel: localized("calculation.picker.month")
+                ) { value in
                     Self.monthFormatter.monthSymbols[value - 1]
                 }
-                makeWheelPicker(selection: $year, values: years)
+                makeWheelPicker(
+                    selection: $year,
+                    values: years,
+                    accessibilityLabel: localized("calculation.picker.year")
+                )
             }
             .frame(height: 190)
             .onChange(of: month) { _, _ in
@@ -392,11 +404,23 @@ private struct BirthTimePickerSheet: View {
 
             HStack(spacing: 0) {
                 if Self.usesTwelveHourClock {
-                    makeWheelPicker(selection: $hour, values: 1...12)
+                    makeWheelPicker(
+                        selection: $hour,
+                        values: 1...12,
+                        accessibilityLabel: localized("calculation.picker.hour")
+                    )
                 } else {
-                    makeWheelPicker(selection: $hour, values: 0...23)
+                    makeWheelPicker(
+                        selection: $hour,
+                        values: 0...23,
+                        accessibilityLabel: localized("calculation.picker.hour")
+                    )
                 }
-                makeWheelPicker(selection: $minute, values: 0...59)
+                makeWheelPicker(
+                    selection: $minute,
+                    values: 0...59,
+                    accessibilityLabel: localized("calculation.picker.minute")
+                )
                 if Self.usesTwelveHourClock {
                     makePeriodPicker()
                 }
@@ -441,6 +465,7 @@ private struct BirthTimePickerSheet: View {
         }
         .pickerStyle(.wheel)
         .labelsHidden()
+        .accessibilityLabel(localized("calculation.picker.period"))
         .frame(maxWidth: .infinity)
         .clipped()
     }
@@ -484,6 +509,7 @@ private func makeSheetHeader(
 private func makeWheelPicker<Values: RandomAccessCollection>(
     selection: Binding<Int>,
     values: Values,
+    accessibilityLabel: String,
     title: ((Int) -> String)? = nil
 ) -> some View where Values.Element == Int {
     Picker("", selection: selection) {
@@ -495,6 +521,7 @@ private func makeWheelPicker<Values: RandomAccessCollection>(
     }
     .pickerStyle(.wheel)
     .labelsHidden()
+    .accessibilityLabel(accessibilityLabel)
     .frame(maxWidth: .infinity)
     .clipped()
 }

@@ -194,6 +194,12 @@
 "calculation.birthPlaceTitle" = "Birth Place";
 "calculation.birthTimeTitle" = "Birth Time";
 "calculation.picker.doneButton" = "Done";
+"calculation.picker.day" = "Day";
+"calculation.picker.hour" = "Hour";
+"calculation.picker.minute" = "Minute";
+"calculation.picker.month" = "Month";
+"calculation.picker.period" = "AM or PM";
+"calculation.picker.year" = "Year";
 "calculation.namePlaceholder" = "Your first name";
 "calculation.nameTitle" = "Name";
 "calculation.subtitle" = "Enter your birth details to unlock personalized insights.";
