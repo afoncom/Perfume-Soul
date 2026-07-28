@@ -45,6 +45,9 @@ struct PersonalPerfumeScreen: View {
         .task {
             await presenter.onAppear()
         }
+        .safeAreaInset(edge: .top, spacing: 0) {
+            makeTopSafeAreaMask()
+        }
         .safeAreaInset(edge: .bottom) {
             if presenter.shouldShowContinueButton {
                 makeContinueButton()
@@ -57,6 +60,12 @@ struct PersonalPerfumeScreen: View {
 }
 
 extension PersonalPerfumeScreen {
+    private func makeTopSafeAreaMask() -> some View {
+        Color(.backgroundPrimary)
+            .frame(height: 92)
+            .ignoresSafeArea(edges: .top)
+    }
+
     @ViewBuilder
     private func makeSectionsView() -> some View {
         switch viewModel.state {
@@ -279,16 +288,7 @@ extension PersonalPerfumeScreen {
                 .foregroundStyle(Color(.textOnAccent))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 17)
-                .background(
-                    LinearGradient(
-                        colors: [
-                            Color(.buttonShine),
-                            Color(.pinkButton)
-                        ],
-                        startPoint: .leading,
-                        endPoint: .trailing
-                    )
-                )
+                .background(Color(.pinkButton))
                 .clipShape(Capsule())
         }
         .disabled(!viewModel.canContinue)

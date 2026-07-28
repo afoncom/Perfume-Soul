@@ -59,7 +59,7 @@ struct QuizOfTheDayScreen: View {
     }
 }
 
-private extension QuizOfTheDayScreen {
+extension QuizOfTheDayScreen {
     func makeErrorCard(message: String) -> some View {
         VStack(spacing: 16) {
             Text(message)
@@ -89,7 +89,7 @@ private extension QuizOfTheDayScreen {
     }
 
     func makeTopBar() -> some View {
-        HStack(alignment: .center) {
+        HStack {
             Button {
                 dismiss()
             } label: {
@@ -166,7 +166,7 @@ private extension QuizOfTheDayScreen {
 
                         Capsule()
                             .fill(Color(.pinkButton))
-                            .frame(width: proxy.size.width * CGFloat(viewModel.progressValue), height: 10)
+                            .frame(width: proxy.size.width * .init(viewModel.progressValue), height: 10)
                     }
                 }
                 .frame(height: 10)
@@ -236,11 +236,10 @@ private extension QuizOfTheDayScreen {
                     makeAnswerRow(
                         letter: answer.id,
                         title: answer.text,
-                        isSelected: viewModel.isAnswerSelected(answer.id),
-                        onTap: {
-                            presenter.selectAnswer(id: answer.id)
-                        }
-                    )
+                        isSelected: viewModel.isAnswerSelected(answer.id)
+                    ) {
+                        presenter.selectAnswer(id: answer.id)
+                    }
                 }
             }
         }
@@ -368,16 +367,7 @@ private extension QuizOfTheDayScreen {
                         .foregroundStyle(Color(.textOnAccent))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 18)
-                        .background(
-                            LinearGradient(
-                                colors: [
-                                    Color(.buttonShine),
-                                    Color(.pinkButton)
-                                ],
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                        )
+                        .background(Color(.pinkButton))
                         .clipShape(Capsule())
                 }
                 .buttonStyle(.plain)

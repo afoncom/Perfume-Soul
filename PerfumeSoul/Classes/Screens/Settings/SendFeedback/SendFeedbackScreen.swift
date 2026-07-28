@@ -59,7 +59,7 @@ struct SendFeedbackScreen: View {
     }
 }
 
-private extension SendFeedbackScreen {
+extension SendFeedbackScreen {
     func makeHeaderView() -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(L10n.SendFeedback.title)
@@ -132,16 +132,7 @@ private extension SendFeedbackScreen {
                 .foregroundStyle(Color(.textOnAccent))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
-                .background(
-                    LinearGradient(
-                        colors: [
-                            Color(.buttonShine),
-                            Color(.pinkButton)
-                        ],
-                        startPoint: .leading,
-                        endPoint: .trailing
-                    )
-                )
+                .background(Color(.pinkButton))
                 .background(Color(.surfaceHighlight))
                 .clipShape(Capsule())
         }
