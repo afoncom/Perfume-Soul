@@ -59,6 +59,10 @@ extension CoreDataManagerImpl {
     private func recreatePersistentStore(after loadError: any Error) {
         print("Failed to load persistent store: \(String(describing: loadError))")
 
+        guard canRecreatePersistentStore(after: loadError) else {
+            fatalError("Failed to load persistent store: \(String(describing: loadError))")
+        }
+
         guard
             let storeDescription = container.persistentStoreDescriptions.first,
             let storeURL = storeDescription.url
@@ -67,6 +71,7 @@ extension CoreDataManagerImpl {
         }
 
         do {
+            try quarantinePersistentStore(at: storeURL)
             try container.persistentStoreCoordinator.destroyPersistentStore(
                 at: storeURL,
                 ofType: storeDescription.type,
@@ -81,5 +86,42 @@ extension CoreDataManagerImpl {
         }
 
         loadPersistentStores(allowingStoreRecreation: false)
+    }
+
+    private func canRecreatePersistentStore(after error: any Error) -> Bool {
+        let nsError = error as NSError
+        if
+            nsError.domain == NSCocoaErrorDomain,
+            [
+                NSPersistentStoreIncompatibleVersionHashError,
+                NSMigrationError,
+                NSFileReadCorruptFileError
+            ].contains(nsError.code)
+        {
+            return true
+        }
+
+        if nsError.domain == NSSQLiteErrorDomain, [11, 26].contains(nsError.code) {
+            return true
+        }
+
+        if let underlyingError = nsError.userInfo[NSUnderlyingErrorKey] as? any Error {
+            return canRecreatePersistentStore(after: underlyingError)
+        }
+
+        return false
+    }
+
+    private func quarantinePersistentStore(at storeURL: URL) throws {
+        let fileManager = FileManager.default
+        let quarantineURL = storeURL.appendingPathExtension("quarantine")
+
+        if fileManager.fileExists(atPath: quarantineURL.path) {
+            try fileManager.removeItem(at: quarantineURL)
+        }
+
+        if fileManager.fileExists(atPath: storeURL.path) {
+            try fileManager.copyItem(at: storeURL, to: quarantineURL)
+        }
     }
 }
