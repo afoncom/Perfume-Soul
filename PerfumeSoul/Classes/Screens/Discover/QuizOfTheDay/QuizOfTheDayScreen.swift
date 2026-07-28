@@ -341,16 +341,6 @@ extension QuizOfTheDayScreen {
                 .disabled(!canPerformPrimaryAction)
                 .opacity(canPerformPrimaryAction ? 1 : 0.55)
             }
-
-            HStack(spacing: 8) {
-                Image(systemName: "lightbulb")
-                    .font(.subheadline)
-                    .foregroundStyle(Color(.textSecondary))
-
-                Text(L10n.QuizOfTheDay.scoreHint)
-                    .font(.system(size: 15, weight: .regular, design: .rounded))
-                    .foregroundStyle(Color(.textSecondary))
-            }
         }
     }
 
