@@ -193,6 +193,7 @@
 "calculation.birthPlacePlaceholder" = "Enter city or town";
 "calculation.birthPlaceTitle" = "Birth Place";
 "calculation.birthTimeTitle" = "Birth Time";
+"calculation.picker.doneButton" = "Done";
 "calculation.namePlaceholder" = "Your first name";
 "calculation.nameTitle" = "Name";
 "calculation.subtitle" = "Enter your birth details to unlock personalized insights.";

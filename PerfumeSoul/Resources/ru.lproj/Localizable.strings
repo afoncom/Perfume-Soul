@@ -193,6 +193,7 @@
 "calculation.birthPlacePlaceholder" = "Введите город или населенный пункт";
 "calculation.birthPlaceTitle" = "Место рождения";
 "calculation.birthTimeTitle" = "Время рождения";
+"calculation.picker.doneButton" = "Готово";
 "calculation.namePlaceholder" = "Ваше имя";
 "calculation.nameTitle" = "Имя";
 "calculation.subtitle" = "Введите данные рождения, чтобы открыть персональные рекомендации.";
