@@ -88,13 +88,17 @@ extension CoreDataManagerImpl {
         loadPersistentStores(allowingStoreRecreation: false)
     }
 
-    private func canRecreatePersistentStore(after error: any Error) -> Bool {
+    func canRecreatePersistentStore(after error: any Error) -> Bool {
         let nsError = error as NSError
+
+        if let underlyingError = nsError.userInfo[NSUnderlyingErrorKey] as? any Error {
+            return canRecreatePersistentStore(after: underlyingError)
+        }
+
         if
             nsError.domain == NSCocoaErrorDomain,
             [
                 NSPersistentStoreIncompatibleVersionHashError,
-                NSMigrationError,
                 NSFileReadCorruptFileError
             ].contains(nsError.code)
         {
@@ -103,10 +107,6 @@ extension CoreDataManagerImpl {
 
         if nsError.domain == NSSQLiteErrorDomain, [11, 26].contains(nsError.code) {
             return true
-        }
-
-        if let underlyingError = nsError.userInfo[NSUnderlyingErrorKey] as? any Error {
-            return canRecreatePersistentStore(after: underlyingError)
         }
 
         return false

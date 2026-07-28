@@ -6,10 +6,25 @@
 //
 
 import Foundation
+import CoreData
 import XCTest
 @testable import PerfumeSoul
 
 final class CoreDataManagerTests: XCTestCase {
+    func testGenericMigrationErrorWithNonCorruptionUnderlyingCannotRecreateStore() {
+        let underlyingError = NSError(
+            domain: NSCocoaErrorDomain,
+            code: NSFileWriteOutOfSpaceError
+        )
+        let migrationError = NSError(
+            domain: NSCocoaErrorDomain,
+            code: NSMigrationError,
+            userInfo: [NSUnderlyingErrorKey: underlyingError]
+        )
+
+        XCTAssertFalse(CoreDataManagerImpl().canRecreatePersistentStore(after: migrationError))
+    }
+
     func testQuarantinePersistentStoreCopiesSQLiteSidecars() throws {
         let fileManager = FileManager.default
         let directoryURL = fileManager.temporaryDirectory
