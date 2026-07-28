@@ -112,16 +112,27 @@ extension CoreDataManagerImpl {
         return false
     }
 
-    private func quarantinePersistentStore(at storeURL: URL) throws {
+    func quarantinePersistentStore(at storeURL: URL) throws {
         let fileManager = FileManager.default
-        let quarantineURL = storeURL.appendingPathExtension("quarantine")
 
-        if fileManager.fileExists(atPath: quarantineURL.path) {
-            try fileManager.removeItem(at: quarantineURL)
-        }
+        try persistentStoreFileURLs(for: storeURL).forEach { fileURL in
+            let quarantineURL = fileURL.appendingPathExtension("quarantine")
 
-        if fileManager.fileExists(atPath: storeURL.path) {
-            try fileManager.copyItem(at: storeURL, to: quarantineURL)
+            if fileManager.fileExists(atPath: quarantineURL.path) {
+                try fileManager.removeItem(at: quarantineURL)
+            }
+
+            if fileManager.fileExists(atPath: fileURL.path) {
+                try fileManager.copyItem(at: fileURL, to: quarantineURL)
+            }
         }
+    }
+
+    func persistentStoreFileURLs(for storeURL: URL) -> [URL] {
+        [
+            storeURL,
+            URL(fileURLWithPath: storeURL.path + "-wal"),
+            URL(fileURLWithPath: storeURL.path + "-shm")
+        ]
     }
 }
