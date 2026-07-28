@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct QuizOfTheDayScreen: View {
-    @Environment(\.dismiss) private var dismiss
     private let viewModel: QuizOfTheDayViewModel
     private let presenter: QuizOfTheDayPresenter
 
@@ -24,7 +23,6 @@ struct QuizOfTheDayScreen: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 22) {
-                makeTopBar()
                 makeProgressCard()
                 if let errorMessage = viewModel.errorMessage {
                     makeErrorCard(message: errorMessage)
@@ -55,7 +53,7 @@ struct QuizOfTheDayScreen: View {
         .task {
             await presenter.onAppear()
         }
-        .toolbar(.hidden, for: .navigationBar)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -86,37 +84,6 @@ extension QuizOfTheDayScreen {
         .background(Color(.surfacePrimary))
         .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
         .shadow(color: Color(.cardShadowSubtle), radius: 10, x: 0, y: 4)
-    }
-
-    func makeTopBar() -> some View {
-        HStack {
-            Button {
-                dismiss()
-            } label: {
-                ZStack {
-                    Circle()
-                        .fill(Color(.surfacePrimary))
-                        .frame(width: 44, height: 44)
-
-                    Image(systemName: "chevron.left")
-                        .font(.headline)
-                        .foregroundStyle(Color(.textPrimary))
-                }
-            }
-            .buttonStyle(.plain)
-
-            Spacer()
-
-            Text(L10n.QuizOfTheDay.title)
-                .font(.system(size: 19, weight: .semibold, design: .rounded))
-                .foregroundStyle(Color(.titleText))
-                .multilineTextAlignment(.center)
-
-            Spacer()
-
-            Color.clear
-                .frame(width: 44, height: 44)
-        }
     }
 
     func makeProgressCard() -> some View {

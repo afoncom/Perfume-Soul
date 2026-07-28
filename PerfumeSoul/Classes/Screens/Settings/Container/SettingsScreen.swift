@@ -26,20 +26,18 @@ struct SettingsScreen: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 28) {
-                makeHeaderView()
                 makeNotificationsSection()
                 makePrivacySection()
                 makeSupportSection()
                 makeAboutSection()
             }
             .padding(.horizontal, 16)
-            .padding(.top, 28)
+            .padding(.top, 12)
             .padding(.bottom, 28)
         }
         .background {
             Color(.backgroundPrimary).ignoresSafeArea()
         }
-        .toolbar(.hidden, for: .navigationBar)
         .task {
             await presenter.onAppear()
         }
@@ -64,14 +62,6 @@ struct SettingsScreen: View {
 }
 
 extension SettingsScreen {
-    private func makeHeaderView() -> some View {
-        Text(L10n.Screen.settings)
-            .font(.system(size: 28, weight: .medium, design: .rounded))
-            .foregroundStyle(Color(.titleText))
-            .frame(maxWidth: .infinity, alignment: .center)
-            .padding(.bottom, 2)
-    }
-
     private func makeNotificationsSection() -> some View {
         VStack(alignment: .leading, spacing: 14) {
             makeSectionTitle(L10n.Settings.notificationsTitle)
