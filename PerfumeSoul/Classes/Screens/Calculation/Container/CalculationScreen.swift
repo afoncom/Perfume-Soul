@@ -372,13 +372,16 @@ private struct BirthTimePickerSheet: View {
     @Environment(\.dismiss) private var dismiss
     @State private var hour: Int
     @State private var minute: Int
+    @State private var period: Int
 
     init(time: Binding<Date>) {
         _time = time
 
         let components = Self.calendar.dateComponents([.hour, .minute], from: time.wrappedValue)
-        _hour = State(initialValue: components.hour ?? 12)
+        let hour = components.hour ?? 12
+        _hour = State(initialValue: Self.usesTwelveHourClock ? Self.twelveHourValue(from: hour) : hour)
         _minute = State(initialValue: components.minute ?? 0)
+        _period = State(initialValue: hour >= 12 ? 1 : 0)
     }
 
     var body: some View {
@@ -388,8 +391,15 @@ private struct BirthTimePickerSheet: View {
             }
 
             HStack(spacing: 0) {
-                makeWheelPicker(selection: $hour, values: 0...23)
+                if Self.usesTwelveHourClock {
+                    makeWheelPicker(selection: $hour, values: 1...12)
+                } else {
+                    makeWheelPicker(selection: $hour, values: 0...23)
+                }
                 makeWheelPicker(selection: $minute, values: 0...59)
+                if Self.usesTwelveHourClock {
+                    makePeriodPicker()
+                }
             }
             .frame(height: 170)
         }
@@ -400,7 +410,7 @@ private struct BirthTimePickerSheet: View {
 
     private func applySelection() {
         let selectedTime = Self.calendar.date(
-            bySettingHour: hour,
+            bySettingHour: Self.usesTwelveHourClock ? twentyFourHourValue : hour,
             minute: minute,
             second: 0,
             of: time
@@ -413,7 +423,44 @@ private struct BirthTimePickerSheet: View {
         dismiss()
     }
 
+    private var twentyFourHourValue: Int {
+        if period == 0 {
+            return hour == 12 ? 0 : hour
+        }
+
+        return hour == 12 ? 12 : hour + 12
+    }
+
+    private func makePeriodPicker() -> some View {
+        Picker("", selection: $period) {
+            ForEach(0...1, id: \.self) { value in
+                Text(value == 0 ? Self.periodFormatter.amSymbol : Self.periodFormatter.pmSymbol)
+                    .font(.title2)
+                    .tag(value)
+            }
+        }
+        .pickerStyle(.wheel)
+        .labelsHidden()
+        .frame(maxWidth: .infinity)
+        .clipped()
+    }
+
+    private static func twelveHourValue(from hour: Int) -> Int {
+        let value = hour % 12
+        return value == 0 ? 12 : value
+    }
+
+    private static let usesTwelveHourClock: Bool = {
+        let format = DateFormatter.dateFormat(fromTemplate: "j", options: 0, locale: .current) ?? ""
+        return format.contains("a")
+    }()
+
     private static let calendar = Calendar(identifier: .gregorian)
+    private static let periodFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = .current
+        return formatter
+    }()
 }
 
 private func makeSheetHeader(
