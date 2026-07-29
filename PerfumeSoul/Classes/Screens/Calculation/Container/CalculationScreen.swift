@@ -34,7 +34,7 @@ struct CalculationScreen: View {
             .padding(.bottom, 24)
         }
         .background(Color(.backgroundPrimary))
-        .safeAreaInset(edge: .top, spacing: 0) {
+        .overlay(alignment: .top) {
             makeTopSafeAreaMask()
         }
         .scrollDismissesKeyboard(.interactively)

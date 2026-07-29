@@ -27,7 +27,7 @@ struct ProfileDescriptionScreen: View {
             makeContentView(bottomPadding: bottomPadding)
         }
         .background(Color(.backgroundPrimary).ignoresSafeArea())
-        .safeAreaInset(edge: .top, spacing: 0) {
+        .overlay(alignment: .top) {
             makeTopSafeAreaMask()
         }
         .safeAreaInset(edge: .bottom) {

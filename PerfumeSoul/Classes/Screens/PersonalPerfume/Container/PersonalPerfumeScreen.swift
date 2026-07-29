@@ -45,7 +45,7 @@ struct PersonalPerfumeScreen: View {
         .task {
             await presenter.onAppear()
         }
-        .safeAreaInset(edge: .top, spacing: 0) {
+        .overlay(alignment: .top) {
             makeTopSafeAreaMask()
         }
         .safeAreaInset(edge: .bottom) {
