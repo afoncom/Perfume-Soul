@@ -12,6 +12,7 @@ struct CalculationScreen: View {
     @Bindable private var viewModel: CalculationViewModel
     private let presenter: CalculationPresenter
     @FocusState private var focusedField: Field?
+    @State private var activePicker: PickerSheet?
     
     init(
         viewModel: CalculationViewModel,
@@ -34,6 +35,18 @@ struct CalculationScreen: View {
         }
         .background(Color(.backgroundPrimary))
         .scrollDismissesKeyboard(.interactively)
+        .sheet(item: $activePicker) { picker in
+            switch picker {
+            case .birthDate:
+                BirthDatePickerSheet(date: $viewModel.birthDate)
+                    .presentationDetents([.height(360)])
+                    .presentationDragIndicator(.visible)
+            case .birthTime:
+                BirthTimePickerSheet(time: $viewModel.birthTime)
+                    .presentationDetents([.height(320)])
+                    .presentationDragIndicator(.visible)
+            }
+        }
     }
 }
 
@@ -41,6 +54,15 @@ extension CalculationScreen {
     enum Field {
         case name
         case birthPlace
+    }
+
+    enum PickerSheet: Identifiable {
+        case birthDate
+        case birthTime
+
+        var id: Self {
+            self
+        }
     }
 }
 
@@ -103,34 +125,24 @@ extension CalculationScreen {
     }
     
     func makeBirthDateField() -> some View {
-        makePickerField(
+        makePickerButton(
             title: L10n.Calculation.birthDateTitle,
             systemImage: "calendar",
-            iconColor: Color(.textPrimary)
+            value: viewModel.birthDate.formatted(.dateTime.day().month(.wide).year())
         ) {
-            DatePicker(
-                "",
-                selection: $viewModel.birthDate,
-                displayedComponents: .date
-            )
-            .labelsHidden()
-            .datePickerStyle(.compact)
+            focusedField = nil
+            activePicker = .birthDate
         }
     }
     
     func makeBirthTimeField() -> some View {
-        makePickerField(
+        makePickerButton(
             title: L10n.Calculation.birthTimeTitle,
             systemImage: "clock",
-            iconColor: Color(.textPrimary)
+            value: viewModel.birthTime.formatted(.dateTime.hour().minute())
         ) {
-            DatePicker(
-                "",
-                selection: $viewModel.birthTime,
-                displayedComponents: .hourAndMinute
-            )
-            .labelsHidden()
-            .datePickerStyle(.compact)
+            focusedField = nil
+            activePicker = .birthTime
         }
     }
     
@@ -240,36 +252,309 @@ extension CalculationScreen {
     }
     
     // MARK: - Display info view
-    func makePickerField<Content: View>(
+    func makePickerButton(
         title: String,
         systemImage: String,
-        iconColor: Color,
-        @ViewBuilder content: () -> Content
+        value: String,
+        action: @escaping () -> Void
     ) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(title)
                 .font(.title3)
                 .fontWeight(.medium)
-            
-            HStack(spacing: 12) {
-                Image(systemName: systemImage)
-                    .font(.headline)
-                    .foregroundStyle(iconColor)
-                
-                content()
-                    .font(.title3)
-                    .tint(Color(.textPrimary))
-                
-                Spacer()
+
+            Button(action: action) {
+                HStack(spacing: 12) {
+                    Image(systemName: systemImage)
+                        .font(.headline)
+                        .foregroundStyle(Color(.textPrimary))
+
+                    Text(value)
+                        .font(.title3)
+                        .foregroundStyle(Color(.textPrimary))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    Image(systemName: "chevron.down")
+                        .font(.subheadline)
+                        .foregroundStyle(Color(.textSecondary))
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 16)
+                .background(Color(.surfacePrimary))
+                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 18, style: .continuous)
+                        .stroke(Color(.inputBorder), lineWidth: 1)
+                )
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 16)
-            .background(Color(.surfacePrimary))
-            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .stroke(Color(.inputBorder), lineWidth: 1)
+            .buttonStyle(.plain)
+        }
+    }
+}
+
+private struct BirthDatePickerSheet: View {
+    @Binding private var date: Date
+    @Environment(\.dismiss) private var dismiss
+    @State private var day: Int
+    @State private var month: Int
+    @State private var year: Int
+
+    init(date: Binding<Date>) {
+        _date = date
+
+        let components = Self.calendar.dateComponents([.day, .month, .year], from: date.wrappedValue)
+        _day = State(initialValue: components.day ?? 1)
+        _month = State(initialValue: components.month ?? 1)
+        _year = State(initialValue: components.year ?? Self.currentYear)
+    }
+
+    var body: some View {
+        VStack(spacing: 18) {
+            makeSheetHeader(title: L10n.Calculation.birthDateTitle) {
+                applySelection()
+            }
+
+            HStack(spacing: 0) {
+                ForEach(Self.dateComponentOrder, id: \.self) { component in
+                    makeDateComponentPicker(component)
+                }
+            }
+            .frame(height: 190)
+            .onChange(of: month) { _, _ in
+                clampDay()
+            }
+            .onChange(of: year) { _, _ in
+                clampDay()
+            }
+        }
+        .padding(.horizontal, 20)
+        .padding(.top, 18)
+        .padding(.bottom, 8)
+    }
+
+    private var daysInSelectedMonth: Int {
+        let components = DateComponents(year: year, month: month)
+        let date = Self.calendar.date(from: components) ?? Date()
+        return Self.calendar.range(of: .day, in: .month, for: date)?.count ?? 31
+    }
+
+    private var years: [Int] {
+        Array((1900...Self.currentYear).reversed())
+    }
+
+    private func clampDay() {
+        day = min(day, daysInSelectedMonth)
+    }
+
+    private func applySelection() {
+        let components = DateComponents(year: year, month: month, day: day)
+        if let selectedDate = Self.calendar.date(from: components) {
+            date = selectedDate
+        }
+
+        dismiss()
+    }
+
+    @ViewBuilder
+    private func makeDateComponentPicker(_ component: DateComponent) -> some View {
+        switch component {
+        case .day:
+            makeWheelPicker(
+                selection: $day,
+                values: 1...daysInSelectedMonth,
+                accessibilityLabel: localized("calculation.picker.day")
+            )
+        case .month:
+            makeWheelPicker(
+                selection: $month,
+                values: 1...12,
+                accessibilityLabel: localized("calculation.picker.month")
+            ) { value in
+                Self.monthFormatter.standaloneMonthSymbols[value - 1]
+            }
+        case .year:
+            makeWheelPicker(
+                selection: $year,
+                values: years,
+                accessibilityLabel: localized("calculation.picker.year")
             )
         }
     }
+
+    private enum DateComponent: Character {
+        case day = "d"
+        case month = "M"
+        case year = "y"
+    }
+
+    private static let dateComponentOrder: [DateComponent] = {
+        let format = DateFormatter.dateFormat(fromTemplate: "yMMMd", options: 0, locale: .current) ?? "dMy"
+        let order = format.compactMap { DateComponent(rawValue: $0) }.reduce(into: [DateComponent]()) { result, component in
+            if !result.contains(component) {
+                result.append(component)
+            }
+        }
+
+        return order.isEmpty ? [.day, .month, .year] : order
+    }()
+
+    private static let calendar = Calendar(identifier: .gregorian)
+    private static let currentYear = calendar.component(.year, from: Date())
+    private static let monthFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.locale = .current
+        return formatter
+    }()
+}
+
+private struct BirthTimePickerSheet: View {
+    @Binding private var time: Date
+    @Environment(\.dismiss) private var dismiss
+    @State private var hour: Int
+    @State private var minute: Int
+    @State private var period: Int
+
+    init(time: Binding<Date>) {
+        _time = time
+
+        let components = Self.calendar.dateComponents([.hour, .minute], from: time.wrappedValue)
+        let hour = components.hour ?? 12
+        _hour = State(initialValue: Self.usesTwelveHourClock ? Self.twelveHourValue(from: hour) : hour)
+        _minute = State(initialValue: components.minute ?? 0)
+        _period = State(initialValue: hour >= 12 ? 1 : 0)
+    }
+
+    var body: some View {
+        VStack(spacing: 18) {
+            makeSheetHeader(title: L10n.Calculation.birthTimeTitle) {
+                applySelection()
+            }
+
+            HStack(spacing: 0) {
+                if Self.usesTwelveHourClock {
+                    makeWheelPicker(
+                        selection: $hour,
+                        values: 1...12,
+                        accessibilityLabel: localized("calculation.picker.hour")
+                    )
+                } else {
+                    makeWheelPicker(
+                        selection: $hour,
+                        values: 0...23,
+                        accessibilityLabel: localized("calculation.picker.hour")
+                    )
+                }
+                makeWheelPicker(
+                    selection: $minute,
+                    values: 0...59,
+                    accessibilityLabel: localized("calculation.picker.minute")
+                )
+                if Self.usesTwelveHourClock {
+                    makePeriodPicker()
+                }
+            }
+            .frame(height: 170)
+        }
+        .padding(.horizontal, 20)
+        .padding(.top, 18)
+        .padding(.bottom, 8)
+    }
+
+    private func applySelection() {
+        let selectedTime = Self.calendar.date(
+            bySettingHour: Self.usesTwelveHourClock ? twentyFourHourValue : hour,
+            minute: minute,
+            second: 0,
+            of: time
+        )
+
+        if let selectedTime {
+            time = selectedTime
+        }
+
+        dismiss()
+    }
+
+    private var twentyFourHourValue: Int {
+        if period == 0 {
+            return hour == 12 ? 0 : hour
+        }
+
+        return hour == 12 ? 12 : hour + 12
+    }
+
+    private func makePeriodPicker() -> some View {
+        Picker("", selection: $period) {
+            ForEach(0...1, id: \.self) { value in
+                Text(value == 0 ? Self.periodFormatter.amSymbol : Self.periodFormatter.pmSymbol)
+                    .font(.title2)
+                    .tag(value)
+            }
+        }
+        .pickerStyle(.wheel)
+        .labelsHidden()
+        .accessibilityLabel(localized("calculation.picker.period"))
+        .frame(maxWidth: .infinity)
+        .clipped()
+    }
+
+    private static func twelveHourValue(from hour: Int) -> Int {
+        let value = hour % 12
+        return value == 0 ? 12 : value
+    }
+
+    private static let usesTwelveHourClock: Bool = {
+        let format = DateFormatter.dateFormat(fromTemplate: "j", options: 0, locale: .current) ?? ""
+        return format.contains("a")
+    }()
+
+    private static let calendar = Calendar(identifier: .gregorian)
+    private static let periodFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = .current
+        return formatter
+    }()
+}
+
+private func makeSheetHeader(
+    title: String,
+    onDone: @escaping () -> Void
+) -> some View {
+    HStack {
+        Text(title)
+            .font(.title3)
+            .fontWeight(.semibold)
+            .foregroundStyle(Color(.textPrimary))
+
+        Spacer()
+
+        Button(localized("calculation.picker.doneButton"), action: onDone)
+            .font(.headline)
+            .foregroundStyle(Color(.pinkButton))
+    }
+}
+
+private func makeWheelPicker<Values: RandomAccessCollection>(
+    selection: Binding<Int>,
+    values: Values,
+    accessibilityLabel: String,
+    title: ((Int) -> String)? = nil
+) -> some View where Values.Element == Int {
+    Picker("", selection: selection) {
+        ForEach(values, id: \.self) { value in
+            Text(title?(value) ?? String(format: "%02d", value))
+                .font(.title2)
+                .tag(value)
+        }
+    }
+    .pickerStyle(.wheel)
+    .labelsHidden()
+    .accessibilityLabel(accessibilityLabel)
+    .frame(maxWidth: .infinity)
+    .clipped()
+}
+
+private func localized(_ key: String) -> String {
+    String(localized: String.LocalizationValue(key))
 }

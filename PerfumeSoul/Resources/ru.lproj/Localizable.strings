@@ -193,6 +193,13 @@
 "calculation.birthPlacePlaceholder" = "Введите город или населенный пункт";
 "calculation.birthPlaceTitle" = "Место рождения";
 "calculation.birthTimeTitle" = "Время рождения";
+"calculation.picker.doneButton" = "Готово";
+"calculation.picker.day" = "День";
+"calculation.picker.hour" = "Час";
+"calculation.picker.minute" = "Минута";
+"calculation.picker.month" = "Месяц";
+"calculation.picker.period" = "До или после полудня";
+"calculation.picker.year" = "Год";
 "calculation.namePlaceholder" = "Ваше имя";
 "calculation.nameTitle" = "Имя";
 "calculation.subtitle" = "Введите данные рождения, чтобы открыть персональные рекомендации.";
