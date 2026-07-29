@@ -315,23 +315,9 @@ private struct BirthDatePickerSheet: View {
             }
 
             HStack(spacing: 0) {
-                makeWheelPicker(
-                    selection: $day,
-                    values: 1...daysInSelectedMonth,
-                    accessibilityLabel: localized("calculation.picker.day")
-                )
-                makeWheelPicker(
-                    selection: $month,
-                    values: 1...12,
-                    accessibilityLabel: localized("calculation.picker.month")
-                ) { value in
-                    Self.monthFormatter.monthSymbols[value - 1]
+                ForEach(Self.dateComponentOrder, id: \.self) { component in
+                    makeDateComponentPicker(component)
                 }
-                makeWheelPicker(
-                    selection: $year,
-                    values: years,
-                    accessibilityLabel: localized("calculation.picker.year")
-                )
             }
             .frame(height: 190)
             .onChange(of: month) { _, _ in
@@ -368,6 +354,49 @@ private struct BirthDatePickerSheet: View {
 
         dismiss()
     }
+
+    @ViewBuilder
+    private func makeDateComponentPicker(_ component: DateComponent) -> some View {
+        switch component {
+        case .day:
+            makeWheelPicker(
+                selection: $day,
+                values: 1...daysInSelectedMonth,
+                accessibilityLabel: localized("calculation.picker.day")
+            )
+        case .month:
+            makeWheelPicker(
+                selection: $month,
+                values: 1...12,
+                accessibilityLabel: localized("calculation.picker.month")
+            ) { value in
+                Self.monthFormatter.standaloneMonthSymbols[value - 1]
+            }
+        case .year:
+            makeWheelPicker(
+                selection: $year,
+                values: years,
+                accessibilityLabel: localized("calculation.picker.year")
+            )
+        }
+    }
+
+    private enum DateComponent: Character {
+        case day = "d"
+        case month = "M"
+        case year = "y"
+    }
+
+    private static let dateComponentOrder: [DateComponent] = {
+        let format = DateFormatter.dateFormat(fromTemplate: "yMMMd", options: 0, locale: .current) ?? "dMy"
+        let order = format.compactMap { DateComponent(rawValue: $0) }.reduce(into: [DateComponent]()) { result, component in
+            if !result.contains(component) {
+                result.append(component)
+            }
+        }
+
+        return order.isEmpty ? [.day, .month, .year] : order
+    }()
 
     private static let calendar = Calendar(identifier: .gregorian)
     private static let currentYear = calendar.component(.year, from: Date())
