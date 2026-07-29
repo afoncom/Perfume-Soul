@@ -709,11 +709,11 @@ extension ProfileScreen {
                 Text(percent)
                     .font(.headline)
                     .fontWeight(.medium)
-                    .foregroundStyle(color)
+                    .foregroundStyle(Color(.textPrimary))
 
                 Text(title)
                     .font(.headline)
-                    .foregroundStyle(color)
+                    .foregroundStyle(Color(.textSecondary))
             }
             .padding(.horizontal, 8)
             .padding(.vertical, 6)
