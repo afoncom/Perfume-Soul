@@ -153,28 +153,31 @@ extension ProfileScreen {
             if let elementBalance = viewModel.profileCalculation?.elementBalance {
                 makeElementBalanceBar(elementBalance: elementBalance)
 
-                HStack {
+                LazyVGrid(
+                    columns: Array(
+                        repeating: GridItem(.flexible(), spacing: 4, alignment: .leading),
+                        count: 4
+                    ),
+                    spacing: 8
+                ) {
                     makeElementItem(
                         element: .fire,
                         percent: "\(elementBalance.fire)%",
                         title: L10n.Profile.Element.fire,
                         color: Color(.pinkButton)
                     )
-                    Spacer()
                     makeElementItem(
                         element: .earth,
                         percent: "\(elementBalance.earth)%",
                         title: L10n.Profile.Element.earth,
                         color: Color(.zodiacMint)
                     )
-                    Spacer()
                     makeElementItem(
                         element: .air,
                         percent: "\(elementBalance.air)%",
                         title: L10n.Profile.Element.air,
                         color: Color(.zodiacCyan)
                     )
-                    Spacer()
                     makeElementItem(
                         element: .water,
                         percent: "\(elementBalance.water)%",
@@ -715,7 +718,7 @@ extension ProfileScreen {
                     .font(.headline)
                     .foregroundStyle(Color(.textSecondary))
             }
-            .padding(.horizontal, 8)
+            .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical, 6)
             .background(isSelected ? color.opacity(0.12) : Color.clear)
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
