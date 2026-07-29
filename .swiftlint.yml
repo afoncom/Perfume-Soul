@@ -1,3 +1,6 @@
+excluded:
+  - backend/PerfumeSoulBackend/.build
+
 # ✅ Основной список активных правил SwiftLint
 only_rules:
   - accessibility_trait_for_button         # Проверяет, чтобы у кнопок был корректный accessibility trait

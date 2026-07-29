@@ -10,15 +10,23 @@ import SwiftUI
 import CoreData
 
 final class CalculationModule {
-    @MainActor static func build(
+    @MainActor
+    static func build(
         container: NSPersistentContainer,
+        requestManager: RequestManager,
+        initialProfile: Profile? = nil,
         onFinish: @escaping () -> Void
     ) -> UIViewController {
-        let viewModel = CalculationViewModel()
+        let viewModel = if let initialProfile {
+            CalculationViewModel(initialProfile: initialProfile)
+        } else {
+            CalculationViewModel()
+        }
         let navigationController = UINavigationController()
         let router = CalculationRouterImpl(
             navigationController: navigationController,
             container: container,
+            requestManager: requestManager,
             onFinish: onFinish
         )
         let profileService = ProfileServiceImpl(container: container)
@@ -29,7 +37,7 @@ final class CalculationModule {
             profileService: profileService,
             birthPlaceSearch: birthPlaceSearch
         )
-        
+
         let view = CalculationScreen(viewModel: viewModel, presenter: presenter)
         let hostingController = UIHostingController(rootView: view)
 

@@ -6,9 +6,12 @@
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
+import MapKit
+
 protocol CalculationPresenter {
-    func continueButtonTapped()
+    func continueButtonTapped() async
     func birthPlaceDidChange(_ query: String) async
+    func birthPlaceCompletionTapped(_ completion: MKLocalSearchCompletion) async
     @MainActor
     func clearBirthPlaceSearch()
 }
@@ -33,22 +36,52 @@ final class CalculationPresenterImpl {
 }
 
 extension CalculationPresenterImpl: CalculationPresenter {
-    func continueButtonTapped() {
+    func continueButtonTapped() async {
+        guard let selectedBirthPlace = viewModel.selectedBirthPlace else {
+            return
+        }
+
         let profile = Profile(
             name: viewModel.firstName,
             birthDate: viewModel.formattedBirthDate,
             birthTime: viewModel.formattedBirthTime,
-            birthPlace: viewModel.birthPlace
+            birthPlace: selectedBirthPlace.displayName,
+            birthLatitude: selectedBirthPlace.latitude,
+            birthLongitude: selectedBirthPlace.longitude,
+            birthTimeZoneIdentifier: selectedBirthPlace.timeZoneIdentifier
         )
-        profileService.saveProfile(profile)
-        router.showProfileDescription()
+
+        await profileService.replaceProfile(profile)
+        await MainActor.run {
+            router.showProfileDescription()
+        }
     }
     
     func birthPlaceDidChange(_ query: String) async {
+        await MainActor.run {
+            if viewModel.selectedBirthPlace?.displayName != query {
+                viewModel.selectedBirthPlace = nil
+            }
+        }
+
         let completions = await birthPlaceSearch.search(query)
         await MainActor.run {
             viewModel.birthPlaceCompletions = completions
         }
+    }
+
+    func birthPlaceCompletionTapped(_ completion: MKLocalSearchCompletion) async {
+        guard let selection = await birthPlaceSearch.resolve(completion) else {
+            return
+        }
+
+        await MainActor.run {
+            viewModel.birthPlace = selection.displayName
+            viewModel.selectedBirthPlace = selection
+            viewModel.birthPlaceCompletions = []
+        }
+
+        await birthPlaceSearch.clear()
     }
     
     @MainActor

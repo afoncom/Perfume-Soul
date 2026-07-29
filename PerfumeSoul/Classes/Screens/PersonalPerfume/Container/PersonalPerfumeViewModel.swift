@@ -8,6 +8,23 @@
 
 import Observation
 
+enum PersonalPerfumeScreenState {
+    case loading
+    case content([PersonalPerfumeSection])
+    case empty
+    case missingProfileCalculation
+    case requestFailed
+}
+
 @Observable final class PersonalPerfumeViewModel {
-    var sections: [PersonalPerfumeSection] = []
+    var state: PersonalPerfumeScreenState = .loading
+
+    var canContinue: Bool {
+        switch state {
+        case .content, .empty:
+            return true
+        case .loading, .missingProfileCalculation, .requestFailed:
+            return false
+        }
+    }
 }

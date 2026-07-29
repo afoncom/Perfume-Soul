@@ -157,7 +157,7 @@ struct PerfumeRecommendationLoaderTests {
     }
 }
 
-private extension PerfumeRecommendationLoaderTests {
+extension PerfumeRecommendationLoaderTests {
     func makeSelectedPerfume(id: Int) -> PerfumeProfile {
         PerfumeProfile(
             id: id,

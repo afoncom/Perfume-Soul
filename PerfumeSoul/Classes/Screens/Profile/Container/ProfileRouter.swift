@@ -11,23 +11,28 @@ import CoreData
 
 protocol ProfileRouter {
     func showAddedNewProfiles()
-    func showPersonalPerfumes()
+    func showPersonalPerfumes(profileCalculation: ProfileCalculation?)
+    func showProfileDescription()
+    func showProfileSetupScreen(profile: Profile)
     func showCalculationScreen()
 }
 
 final class ProfileRouterImpl {
     private weak var navigationController: UINavigationController?
     private let container: NSPersistentContainer
-    private let onProfileDeleted: () -> Void
+    private let requestManager: RequestManager
+    private let onProfileSetupRequested: (Profile?) -> Void
     
     init(
         navigationController: UINavigationController?,
         container: NSPersistentContainer,
-        onProfileDeleted: @escaping () -> Void
+        requestManager: RequestManager,
+        onProfileSetupRequested: @escaping (Profile?) -> Void
     ) {
         self.navigationController = navigationController
         self.container = container
-        self.onProfileDeleted = onProfileDeleted
+        self.requestManager = requestManager
+        self.onProfileSetupRequested = onProfileSetupRequested
     }
 }
 
@@ -39,16 +44,27 @@ extension ProfileRouterImpl: ProfileRouter {
         )
     }
     
-    func showPersonalPerfumes() {
+    func showPersonalPerfumes(profileCalculation: ProfileCalculation?) {
         let screen = PersonalPerfumeModule.build(
-            onFinish: { [weak navigationController] in
-                navigationController?.popViewController(animated: true)
-            }
+            profileCalculation: profileCalculation,
+            requestManager: requestManager
         )
         navigationController?.pushViewController(screen, animated: true)
     }
+
+    func showProfileDescription() {
+        let screen = ProfileDescriptionModule.build(
+            container: container,
+            requestManager: requestManager
+        )
+        navigationController?.pushViewController(screen, animated: true)
+    }
+
+    func showProfileSetupScreen(profile: Profile) {
+        onProfileSetupRequested(profile)
+    }
     
     func showCalculationScreen() {
-        onProfileDeleted()
+        onProfileSetupRequested(nil)
     }
 }

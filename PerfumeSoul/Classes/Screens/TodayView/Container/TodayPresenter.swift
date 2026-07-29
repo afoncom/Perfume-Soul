@@ -47,14 +47,13 @@ extension TodayPresenterImpl: TodayPresenter {
             let historyFact = try await historyFactTask
             let dailyHoroscopes = try await dailyHoroscopesTask
             let profile = await profileTask
-            let userSign = profile?.zodiacSign()
+            let userSign = profile?.preferredZodiacSign
             
             viewModel.historyFact = historyFact
             viewModel.dailyHoroscopes = dailyHoroscopes
-            viewModel.personalHoroscope = dailyHoroscopes.first(where: { horoscope in
+            viewModel.personalHoroscope = dailyHoroscopes.first { horoscope in
                 horoscope.sign == userSign
-            })
-            
+            }
             
             viewModel.viewState = .loaded(historyFact: historyFact)
             print(historyFact)
@@ -64,7 +63,9 @@ extension TodayPresenterImpl: TodayPresenter {
     }
 
     func todayEnergyButtonTab() {
-        guard let personalHoroscope = viewModel.personalHoroscope else { return }
+        guard let personalHoroscope = viewModel.personalHoroscope else {
+            return
+        }
 
         router.showTodayEnergyScreen(
             personalDailyHoroscope: personalHoroscope,
@@ -73,7 +74,10 @@ extension TodayPresenterImpl: TodayPresenter {
     }
     
     func dayInPerfumeryButtonTab() {
-        guard case let .loaded(historyFact) = viewModel.viewState else { return }
+        guard case let .loaded(historyFact) = viewModel.viewState else {
+            return
+        }
+
         router.showDayInPerfumeryScreen(historyFact: historyFact)
     }
 }

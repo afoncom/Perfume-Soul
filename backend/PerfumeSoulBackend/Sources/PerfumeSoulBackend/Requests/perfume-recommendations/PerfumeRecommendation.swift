@@ -45,7 +45,7 @@ enum PerfumeRecommendationLoader {
     ) throws -> [PerfumeRecommendation] {
         let uniqueSelectedPerfumeIDs = uniquePerfumeIDs(from: selectedPerfumeIDs)
         let selectedPerfumeProfiles = uniqueSelectedPerfumeIDs.compactMap { perfumeID in
-            perfumeProfiles.first(where: { $0.id == perfumeID })
+            perfumeProfiles.first { $0.id == perfumeID }
         }
 
         guard selectedPerfumeProfiles.count == uniqueSelectedPerfumeIDs.count else {
@@ -77,8 +77,8 @@ private struct ScoredPerfumeRecommendation {
     let signature: String
 }
 
-private extension PerfumeRecommendationLoader {
-    static func areSortedForRecommendationRanking(
+extension PerfumeRecommendationLoader {
+    fileprivate static func areSortedForRecommendationRanking(
         lhs: ScoredPerfumeRecommendation,
         rhs: ScoredPerfumeRecommendation
     ) -> Bool {
@@ -108,7 +108,7 @@ private extension PerfumeRecommendationLoader {
         return Array(uniquePerfumeIDs.prefix(3))
     }
 
-    static func makeScoredRecommendation(
+    fileprivate static func makeScoredRecommendation(
         perfumeProfile: PerfumeProfile,
         targetProfile: RecommendationTargetProfile,
         scoreRanges: ScoreRanges
@@ -286,7 +286,7 @@ private extension PerfumeRecommendationLoader {
         }
     }
 
-    static func makeMatchingNotes(
+    fileprivate static func makeMatchingNotes(
         targetProfile: RecommendationTargetProfile,
         candidateNoteWeights: [String: Int]
     ) -> [String] {
@@ -318,7 +318,7 @@ private extension PerfumeRecommendationLoader {
             .map { $0.0 }
     }
 
-    static func matchedDistinctNotesCount(
+    fileprivate static func matchedDistinctNotesCount(
         targetProfile: RecommendationTargetProfile,
         candidateNoteWeights: [String: Int]
     ) -> Int {
@@ -504,8 +504,8 @@ private extension PerfumeRecommendationLoader {
     }
 }
 
-private extension Array where Element == ScoredPerfumeRecommendation {
-    func uniqueBySignature() -> [ScoredPerfumeRecommendation] {
+extension Array where Element == ScoredPerfumeRecommendation {
+    fileprivate func uniqueBySignature() -> [ScoredPerfumeRecommendation] {
         var seenSignatures = Set<String>()
         var uniqueRecommendations: [ScoredPerfumeRecommendation] = []
 
@@ -683,6 +683,7 @@ struct PerfumeProfile {
     let styleProfile: String?
     let genderProfile: String?
     let moodProfile: String?
+    let marketSegment: String?
     let signature: String
 
     init(
@@ -701,7 +702,8 @@ struct PerfumeProfile {
         occasionProfile: String? = nil,
         styleProfile: String? = nil,
         genderProfile: String? = nil,
-        moodProfile: String? = nil
+        moodProfile: String? = nil,
+        marketSegment: String? = nil
     ) {
         self.id = id
         self.perfumeName = perfumeName
@@ -719,6 +721,7 @@ struct PerfumeProfile {
         self.styleProfile = styleProfile
         self.genderProfile = genderProfile
         self.moodProfile = moodProfile
+        self.marketSegment = marketSegment
         self.signature = Self.makeSignature(
             topNotes: topNotes,
             middleNotes: middleNotes,
@@ -751,6 +754,7 @@ struct PerfumeProfile {
         self.styleProfile = model.styleProfile
         self.genderProfile = model.genderProfile
         self.moodProfile = model.moodProfile
+        self.marketSegment = model.marketSegment
         self.longevityScore = model.longevityScore
         self.sillageScore = model.sillageScore
 

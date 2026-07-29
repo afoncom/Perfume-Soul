@@ -12,6 +12,7 @@ public func configure(_ app: Application) throws {
 
     app.databases.use(try .postgres(url: databaseURL), as: .psql)
     app.migrations.add(AddPerfumeProfileMetadataMigration())
+    app.migrations.add(AddPerfumeMarketSegmentMigration())
     app.migrations.add(CreatePerfumeAccordsMigration())
 
     try app.autoMigrate().wait()

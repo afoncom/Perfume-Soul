@@ -13,19 +13,26 @@ import UIKit
 final class ProfileDescriptionModule {
     static func build(
         container: NSPersistentContainer,
-        navigationController: UINavigationController?,
-        onFinish: @escaping () -> Void
+        requestManager: RequestManager,
+        navigationController: UINavigationController? = nil,
+        onFinish: (() -> Void)? = nil
     ) -> UIViewController {
         let viewModel = ProfileDescriptionViewModel()
         let router = ProfileDescriptionRouterImpl(
             navigationController: navigationController,
+            requestManager: requestManager,
             onFinish: onFinish
         )
         let profileService = ProfileServiceImpl(container: container)
+        let profileCalculationService = ProfileCalculationServiceImpl(requestManager: requestManager)
+        let profileDescriptionBuilder = ProfileDescriptionBuilderImpl()
         let presenter = ProfileDescriptionPresenterImpl(
             viewModel: viewModel,
             router: router,
-            profileService: profileService
+            profileService: profileService,
+            profileCalculationService: profileCalculationService,
+            profileDescriptionBuilder: profileDescriptionBuilder,
+            shouldShowContinueButton: onFinish != nil
         )
         
         let view = ProfileDescriptionScreen(viewModel: viewModel, presenter: presenter)

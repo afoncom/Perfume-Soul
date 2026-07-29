@@ -15,7 +15,13 @@ import Observation
     var birthDate = Date()
     var birthTime = CalculationViewModel.defaultBirthTime
     var birthPlace = ""
+    var selectedBirthPlace: BirthPlaceSelection?
     var birthPlaceCompletions: [MKLocalSearchCompletion] = []
+
+    var isContinueEnabled: Bool {
+        !firstName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+        selectedBirthPlace != nil
+    }
 
     var formattedBirthDate: String {
         Self.birthDateFormatter.string(from: birthDate)
@@ -24,17 +30,43 @@ import Observation
     var formattedBirthTime: String {
         Self.birthTimeFormatter.string(from: birthTime)
     }
+
+    init() {
+    }
+
+    init(initialProfile: Profile) {
+        firstName = initialProfile.name
+        birthPlace = initialProfile.birthPlace
+
+        if let birthDate = Self.birthDateFormatter.date(from: initialProfile.birthDate) {
+            self.birthDate = birthDate
+        }
+
+        if let birthTime = Self.birthTimeFormatter.date(from: initialProfile.birthTime) {
+            self.birthTime = birthTime
+        }
+
+        if
+            let latitude = initialProfile.birthLatitude,
+            let longitude = initialProfile.birthLongitude,
+            let timeZoneIdentifier = initialProfile.birthTimeZoneIdentifier,
+            !timeZoneIdentifier.isEmpty
+        {
+            selectedBirthPlace = BirthPlaceSelection(
+                displayName: initialProfile.birthPlace,
+                latitude: latitude,
+                longitude: longitude,
+                timeZoneIdentifier: timeZoneIdentifier
+            )
+        }
+    }
     
     private static let birthDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        return formatter
+        FixedFormatDateFormatter.make(dateFormat: "dd.MM.yyyy")
     }()
     
     private static let birthTimeFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return formatter
+        FixedFormatDateFormatter.make(dateFormat: "HH:mm")
     }()
     
     private static let defaultBirthTime: Date = {
