@@ -23,6 +23,11 @@ struct QuizOfTheDayScreen: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 22) {
+                Text(L10n.QuizOfTheDay.title)
+                    .font(.system(size: 34, weight: .bold, design: .rounded))
+                    .foregroundStyle(Color(.titleText))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
                 makeProgressCard()
                 if let errorMessage = viewModel.errorMessage {
                     makeErrorCard(message: errorMessage)
