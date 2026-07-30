@@ -50,7 +50,7 @@ struct ComparePerfumesScreen: View {
     }
 }
 
-private extension ComparePerfumesScreen {
+extension ComparePerfumesScreen {
     var leftPerfume: ComparePerfume? {
         viewModel.leftPerfume
     }
@@ -178,7 +178,9 @@ private extension ComparePerfumesScreen {
                 } else {
                     ForEach(viewModel.searchResults) { perfume in
                         Button {
-                            guard let currentField = focusedField else { return }
+                            guard let currentField = focusedField else {
+                                return
+                            }
 
                             presenter.searchResultTapped(perfume, for: currentField)
                             focusedField = nil
@@ -347,21 +349,28 @@ private extension ComparePerfumesScreen {
         VStack(alignment: .leading, spacing: 14) {
             makeSectionTitle("Пирамида нот")
 
-            HStack(alignment: .top, spacing: 12) {
-                makePerfumeNotesCard(
-                    name: leftPerfume.name,
-                    accentColor: Color(.pinkButton),
-                    topNotes: leftPerfume.topNotes,
-                    middleNotes: leftPerfume.middleNotes,
-                    baseNotes: leftPerfume.baseNotes
+            VStack(spacing: 12) {
+                makeNotesPerfumeHeader(
+                    leftName: leftPerfume.name,
+                    rightName: rightPerfume.name
                 )
-                
-                makePerfumeNotesCard(
-                    name: rightPerfume.name,
-                    accentColor: Color(.zodiacPurple),
-                    topNotes: rightPerfume.topNotes,
-                    middleNotes: rightPerfume.middleNotes,
-                    baseNotes: rightPerfume.baseNotes
+
+                makeNotesComparisonRow(
+                    title: "Верхние",
+                    leftNotes: leftPerfume.topNotes,
+                    rightNotes: rightPerfume.topNotes
+                )
+
+                makeNotesComparisonRow(
+                    title: "Средние",
+                    leftNotes: leftPerfume.middleNotes,
+                    rightNotes: rightPerfume.middleNotes
+                )
+
+                makeNotesComparisonRow(
+                    title: "Базовые",
+                    leftNotes: leftPerfume.baseNotes,
+                    rightNotes: rightPerfume.baseNotes
                 )
             }
         }
@@ -375,60 +384,79 @@ private extension ComparePerfumesScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
     
-    func makePerfumeNotesCard(
-        name: String,
-        accentColor: Color,
-        topNotes: [String],
-        middleNotes: [String],
-        baseNotes: [String]
+    func makeNotesPerfumeHeader(
+        leftName: String,
+        rightName: String
     ) -> some View {
-        VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 6) {
-                Capsule()
-                    .fill(accentColor.opacity(0.22))
-                    .frame(width: 48, height: 6)
-                
-                Text(name)
-                    .font(.headline)
-                    .foregroundStyle(Color(.textPrimary))
-                    .lineLimit(2)
-            }
-            
-            makeNotesGroup(
-                title: "Верхние",
-                notes: topNotes,
-                accentColor: accentColor
+        HStack(alignment: .top, spacing: 12) {
+            makeNotesPerfumeTitle(
+                name: leftName,
+                accentColor: Color(.pinkButton)
             )
-            
-            makeNotesGroup(
-                title: "Средние",
-                notes: middleNotes,
-                accentColor: accentColor
-            )
-            
-            makeNotesGroup(
-                title: "Базовые",
-                notes: baseNotes,
-                accentColor: accentColor
+
+            makeNotesPerfumeTitle(
+                name: rightName,
+                accentColor: Color(.zodiacPurple)
             )
         }
-        .frame(maxWidth: .infinity, alignment: .topLeading)
-        .padding(14)
-        .background(Color(.rowBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
-    
-    func makeNotesGroup(
-        title: String,
-        notes: [String],
+
+    func makeNotesPerfumeTitle(
+        name: String,
         accentColor: Color
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Capsule()
+                .fill(accentColor.opacity(0.22))
+                .frame(width: 48, height: 6)
+
+            Text(name)
+                .font(.headline)
+                .foregroundStyle(Color(.textPrimary))
+                .lineLimit(2)
+        }
+        .frame(maxWidth: .infinity, minHeight: 58, alignment: .topLeading)
+        .padding(.horizontal, 12)
+    }
+
+    func makeNotesComparisonRow(
+        title: String,
+        leftNotes: [String],
+        rightNotes: [String]
     ) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(title)
-                .font(.footnote.weight(.semibold))
+                .font(.subheadline.weight(.semibold))
                 .foregroundStyle(Color(.textPrimary))
-            
-            VStack(alignment: .leading, spacing: 8) {
+
+            HStack(alignment: .top, spacing: 12) {
+                makeNotesColumn(
+                    notes: leftNotes,
+                    accentColor: Color(.pinkButton)
+                )
+
+                makeNotesColumn(
+                    notes: rightNotes,
+                    accentColor: Color(.zodiacPurple)
+                )
+            }
+        }
+        .padding(12)
+        .background(Color(.rowBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+    }
+
+    @ViewBuilder
+    func makeNotesColumn(
+        notes: [String],
+        accentColor: Color
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if notes.isEmpty {
+                Text(L10n.PerfumeDetails.emptyNotesPlaceholder)
+                    .font(.footnote)
+                    .foregroundStyle(Color(.textSecondary))
+            } else {
                 ForEach(notes, id: \.self) { note in
                     makeNoteRow(
                         note: note,
@@ -437,6 +465,7 @@ private extension ComparePerfumesScreen {
                 }
             }
         }
+        .frame(maxWidth: .infinity, alignment: .topLeading)
     }
     
     func makeNoteRow(
@@ -534,7 +563,7 @@ private extension ComparePerfumesScreen {
         score: String,
         accentColor: Color
     ) -> some View {
-        HStack(alignment: .center, spacing: 10) {
+        HStack(spacing: 10) {
             Text(title)
                 .font(.caption.weight(.medium))
                 .foregroundStyle(Color(.textPrimary))
@@ -554,7 +583,9 @@ private extension ComparePerfumesScreen {
     }
 
     func scoreText(_ score: Int?) -> String {
-        guard let score else { return "--" }
+        guard let score else {
+            return "--"
+        }
         return "\(score)/10"
     }
     
