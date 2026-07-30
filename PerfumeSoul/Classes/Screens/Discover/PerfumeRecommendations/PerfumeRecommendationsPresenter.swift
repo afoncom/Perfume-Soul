@@ -30,6 +30,13 @@ final class PerfumeRecommendationsPresenterImpl {
 
 extension PerfumeRecommendationsPresenterImpl: PerfumeRecommendationsPresenter {
     func onAppear() async {
+        let shouldLoad = await MainActor.run {
+            !viewModel.hasLoadedRecommendations
+        }
+        guard shouldLoad else {
+            return
+        }
+
         await MainActor.run {
             viewModel.isLoading = true
             viewModel.errorMessage = nil
@@ -42,6 +49,7 @@ extension PerfumeRecommendationsPresenterImpl: PerfumeRecommendationsPresenter {
 
             await MainActor.run {
                 viewModel.perfumeRecommendations = perfumeRecommendations
+                viewModel.hasLoadedRecommendations = true
                 viewModel.isLoading = false
                 viewModel.errorMessage = nil
             }
