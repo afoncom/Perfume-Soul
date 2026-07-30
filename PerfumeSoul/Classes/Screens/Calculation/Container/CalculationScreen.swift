@@ -71,9 +71,12 @@ extension CalculationScreen {
 
 extension CalculationScreen {
     func makeTopSafeAreaMask() -> some View {
-        Color(.backgroundPrimary)
-            .frame(height: 92)
-            .ignoresSafeArea(edges: .top)
+        GeometryReader { proxy in
+            Color(.backgroundPrimary)
+                .frame(height: proxy.safeAreaInsets.top)
+                .ignoresSafeArea(edges: .top)
+        }
+        .allowsHitTesting(false)
     }
 
     func makeHeaderView() -> some View {
