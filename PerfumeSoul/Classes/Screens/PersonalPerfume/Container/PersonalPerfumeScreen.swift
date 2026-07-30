@@ -152,29 +152,34 @@ extension PersonalPerfumeScreen {
                     .font(.system(size: 15, weight: .medium, design: .rounded))
                     .foregroundStyle(Color(.titleText))
                     .multilineTextAlignment(.center)
+                    .lineLimit(2)
+                    .frame(height: 38, alignment: .top)
 
                 Text(perfume.subtitle)
                     .font(.system(size: 14, weight: .regular, design: .rounded))
                     .foregroundStyle(Color(.descriptionText))
                     .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .frame(height: 18, alignment: .top)
 
-                Text(L10n.PersonalPerfume.matchFormat(perfume.matchPercentage))
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
-                    .foregroundStyle(Color(.pinkButton))
-                    .multilineTextAlignment(.center)
-
-                if let matchExplanation = perfume.matchExplanation {
-                    Text(matchExplanation)
-                        .font(.system(size: 11, weight: .regular, design: .rounded))
-                        .foregroundStyle(Color(.descriptionText))
-                        .multilineTextAlignment(.center)
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.85)
-                }
+                makeMatchBadge(matchPercentage: perfume.matchPercentage)
             }
         }
         .frame(maxWidth: .infinity, alignment: .top)
+    }
+
+    private func makeMatchBadge(matchPercentage: Int) -> some View {
+        Text(L10n.PersonalPerfume.matchFormat(matchPercentage))
+            .font(.system(size: 11, weight: .bold, design: .rounded))
+            .lineLimit(1)
+            .minimumScaleFactor(0.75)
+            .frame(maxWidth: .infinity)
+            .padding(.horizontal, 6)
+            .padding(.vertical, 5)
+            .foregroundStyle(Color(.pinkButton))
+            .background(Color(.pinkButton).opacity(0.12))
+            .clipShape(Capsule())
     }
 
     private func makeContentState(sections: [PersonalPerfumeSection]) -> some View {
