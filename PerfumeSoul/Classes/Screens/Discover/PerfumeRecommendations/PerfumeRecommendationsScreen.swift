@@ -24,7 +24,9 @@ struct PerfumeRecommendationsScreen: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 18) {
                 makeBasedOnSection()
-                makeHintCard()
+                if shouldShowHintCard {
+                    makeHintCard()
+                }
                 makeRecommendationsSection()
             }
             .padding(.horizontal, 16)
@@ -42,6 +44,12 @@ struct PerfumeRecommendationsScreen: View {
 }
 
 extension PerfumeRecommendationsScreen {
+    private var shouldShowHintCard: Bool {
+        !viewModel.isLoading &&
+        viewModel.errorMessage == nil &&
+        !viewModel.perfumeRecommendations.isEmpty
+    }
+
     private func makeBasedOnSection() -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(L10n.PerfumeRecommendations.selectedPerfumesTitle)
