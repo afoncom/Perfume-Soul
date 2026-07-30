@@ -83,6 +83,7 @@
 "perfumeRecommendations.hint" = "We matched notes, longevity, and sillage to find the closest perfumes from the database.";
 "perfumeRecommendations.matchLabel" = "match";
 "perfumeRecommendations.matchingNotesFormat" = "Matching notes: %@";
+"perfumeRecommendations.matchingNotesTitle" = "Matching notes";
 "perfumeRecommendations.selectedPerfumesTitle" = "Based on your perfumes";
 "perfumeRecommendations.wearFormat" = "Longevity: %@ · Sillage: %@";
 "perfumeDetails.baseNotesTitle" = "Base Notes";

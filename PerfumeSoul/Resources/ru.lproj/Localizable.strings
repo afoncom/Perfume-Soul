@@ -83,6 +83,7 @@
 "perfumeRecommendations.hint" = "Мы сопоставили ноты, стойкость и шлейф и подобрали самые близкие ароматы из базы.";
 "perfumeRecommendations.matchLabel" = "совпадение";
 "perfumeRecommendations.matchingNotesFormat" = "Совпадающие ноты: %@";
+"perfumeRecommendations.matchingNotesTitle" = "Совпадающие ноты";
 "perfumeRecommendations.selectedPerfumesTitle" = "На основе ваших ароматов";
 "perfumeRecommendations.wearFormat" = "Стойкость: %@ · Шлейф: %@";
 "perfumeDetails.baseNotesTitle" = "Базовые";
