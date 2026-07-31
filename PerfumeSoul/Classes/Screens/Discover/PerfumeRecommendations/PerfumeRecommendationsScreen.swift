@@ -23,7 +23,6 @@ struct PerfumeRecommendationsScreen: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 18) {
-                makeHeaderView()
                 makeBasedOnSection()
                 makeHintCard()
                 makeRecommendationsSection()
@@ -43,14 +42,6 @@ struct PerfumeRecommendationsScreen: View {
 }
 
 extension PerfumeRecommendationsScreen {
-    private func makeHeaderView() -> some View {
-        Text(L10n.Screen.perfumeRecommendations)
-            .font(.system(size: 30, weight: .medium, design: .rounded))
-            .foregroundStyle(Color(.titleText))
-            .frame(maxWidth: .infinity, alignment: .center)
-            .padding(.bottom, 4)
-    }
-
     private func makeBasedOnSection() -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(L10n.PerfumeRecommendations.selectedPerfumesTitle)

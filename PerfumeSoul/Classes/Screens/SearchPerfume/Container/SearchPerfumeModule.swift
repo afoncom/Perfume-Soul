@@ -22,7 +22,9 @@ final class SearchPerfumeModule {
 
         let view = SearchPerfumeScreen(viewModel: viewModel, presenter: presenter)
         let hostingController = UIHostingController(rootView: view)
+        hostingController.title = L10n.Screen.searchPerfume
         navigationController.setViewControllers([hostingController], animated: false)
+        navigationController.navigationBar.prefersLargeTitles = true
 
         return NavigationControllerContainer(navigationController: navigationController)
     }

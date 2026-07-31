@@ -68,7 +68,7 @@
 "quizOfTheDay.scoreToday" = "Баллы за сегодня";
 "quizOfTheDay.selectOneAnswer" = "Выберите один правильный ответ";
 "quizOfTheDay.streakDays" = "Серия дней";
-"quizOfTheDay.title" = "Квиз на знание парфюмерии";
+"quizOfTheDay.title" = "Квиз";
 "screen.addedProfiles" = "Добавленные профили";
 "screen.comparePerfumes" = "Сравнение ароматов";
 "screen.dayInPerfumery" = "День в парфюмерии";
@@ -107,7 +107,7 @@
 "searchPerfume.searchTextTitle" = "Текст поиска";
 "screen.profile" = "Профиль";
 "screen.sendFeedback" = "Обратная связь";
-"screen.searchPerfume" = "Поиск";
+"screen.searchPerfume" = "Библиотека ароматов";
 "screen.settings" = "Настройки";
 "screen.quizOfTheDay" = "Квиз дня";
 "screen.today" = "Сегодня";
@@ -126,7 +126,7 @@
 "quizOfTheDay.selectOneAnswer" = "Выберите один правильный ответ";
 "quizOfTheDay.streakDays" = "Серия дней";
 "quizOfTheDay.submitAnswer" = "Проверить ответ";
-"quizOfTheDay.title" = "Квиз на знание парфюмерии";
+"quizOfTheDay.title" = "Квиз";
 "settings.about.aboutAppSubtitle" = "Версия 1.0.0";
 "settings.about.aboutAppTitle" = "О приложении";
 "settings.about.feedbackSubtitle" = "Отзывы, пожелания и идеи по улучшению";

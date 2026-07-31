@@ -222,7 +222,9 @@ extension FindPerfumesScreen {
                 } else {
                     ForEach(viewModel.searchResults) { perfume in
                         Button {
-                            guard let currentField = focusedField else { return }
+                            guard let currentField = focusedField else {
+                                return
+                            }
 
                             presenter.searchResultTapped(perfume, for: currentField)
                             focusedField = nil
@@ -278,16 +280,7 @@ extension FindPerfumesScreen {
                 .foregroundStyle(Color(.textOnAccent))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 17)
-                .background(
-                    LinearGradient(
-                        colors: [
-                            Color(.buttonShine),
-                            Color(.pinkButton)
-                        ],
-                        startPoint: .leading,
-                        endPoint: .trailing
-                    )
-                )
+                .background(Color(.pinkButton))
                 .clipShape(Capsule())
         }
         .background(Color(.surfaceHighlight))

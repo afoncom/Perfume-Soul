@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct QuizOfTheDayScreen: View {
-    @Environment(\.dismiss) private var dismiss
     private let viewModel: QuizOfTheDayViewModel
     private let presenter: QuizOfTheDayPresenter
 
@@ -24,7 +23,11 @@ struct QuizOfTheDayScreen: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 22) {
-                makeTopBar()
+                Text(L10n.QuizOfTheDay.title)
+                    .font(.system(size: 34, weight: .bold, design: .rounded))
+                    .foregroundStyle(Color(.titleText))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
                 makeProgressCard()
                 if let errorMessage = viewModel.errorMessage {
                     makeErrorCard(message: errorMessage)
@@ -55,11 +58,11 @@ struct QuizOfTheDayScreen: View {
         .task {
             await presenter.onAppear()
         }
-        .toolbar(.hidden, for: .navigationBar)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
-private extension QuizOfTheDayScreen {
+extension QuizOfTheDayScreen {
     func makeErrorCard(message: String) -> some View {
         VStack(spacing: 16) {
             Text(message)
@@ -86,37 +89,6 @@ private extension QuizOfTheDayScreen {
         .background(Color(.surfacePrimary))
         .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
         .shadow(color: Color(.cardShadowSubtle), radius: 10, x: 0, y: 4)
-    }
-
-    func makeTopBar() -> some View {
-        HStack(alignment: .center) {
-            Button {
-                dismiss()
-            } label: {
-                ZStack {
-                    Circle()
-                        .fill(Color(.surfacePrimary))
-                        .frame(width: 44, height: 44)
-
-                    Image(systemName: "chevron.left")
-                        .font(.headline)
-                        .foregroundStyle(Color(.textPrimary))
-                }
-            }
-            .buttonStyle(.plain)
-
-            Spacer()
-
-            Text(L10n.QuizOfTheDay.title)
-                .font(.system(size: 19, weight: .semibold, design: .rounded))
-                .foregroundStyle(Color(.titleText))
-                .multilineTextAlignment(.center)
-
-            Spacer()
-
-            Color.clear
-                .frame(width: 44, height: 44)
-        }
     }
 
     func makeProgressCard() -> some View {
@@ -166,7 +138,7 @@ private extension QuizOfTheDayScreen {
 
                         Capsule()
                             .fill(Color(.pinkButton))
-                            .frame(width: proxy.size.width * CGFloat(viewModel.progressValue), height: 10)
+                            .frame(width: proxy.size.width * .init(viewModel.progressValue), height: 10)
                     }
                 }
                 .frame(height: 10)
@@ -236,11 +208,10 @@ private extension QuizOfTheDayScreen {
                     makeAnswerRow(
                         letter: answer.id,
                         title: answer.text,
-                        isSelected: viewModel.isAnswerSelected(answer.id),
-                        onTap: {
-                            presenter.selectAnswer(id: answer.id)
-                        }
-                    )
+                        isSelected: viewModel.isAnswerSelected(answer.id)
+                    ) {
+                        presenter.selectAnswer(id: answer.id)
+                    }
                 }
             }
         }
@@ -287,43 +258,44 @@ private extension QuizOfTheDayScreen {
     }
 
     func makeExplanationCard(explanation: String, isCorrect: Bool) -> some View {
-        HStack(spacing: 18) {
-            VStack(alignment: .leading, spacing: 12) {
-                HStack(spacing: 10) {
-                    Circle()
-                        .fill(isCorrect ? Color(.zodiacMint) : Color(.pinkButton))
-                        .frame(width: 40, height: 40)
-                        .overlay {
-                            Image(systemName: isCorrect ? "checkmark" : "xmark")
-                                .font(.headline.weight(.bold))
-                                .foregroundStyle(Color(.surfacePrimary))
-                        }
+        let accentColor = isCorrect ? Color(.zodiacMint) : Color(.pinkButton)
 
-                    Text(isCorrect ? L10n.QuizOfTheDay.correctResult : L10n.QuizOfTheDay.incorrectResult)
-                        .font(.system(size: 20, weight: .semibold, design: .rounded))
-                        .foregroundStyle(isCorrect ? Color(.zodiacMint) : Color(.pinkButton))
+        return VStack(alignment: .leading, spacing: 14) {
+            HStack(spacing: 12) {
+                ZStack {
+                    Circle()
+                        .fill(accentColor)
+                        .frame(width: 46, height: 46)
+
+                    Image(systemName: isCorrect ? "checkmark" : "xmark")
+                        .font(.title3.weight(.bold))
+                        .foregroundStyle(Color(.surfacePrimary))
                 }
 
-                Text(explanation)
-                    .font(.system(size: 16, weight: .regular, design: .rounded))
-                    .foregroundStyle(Color(.descriptionText))
-                    .fixedSize(horizontal: false, vertical: true)
+                Text(isCorrect ? L10n.QuizOfTheDay.correctResult : L10n.QuizOfTheDay.incorrectResult)
+                    .font(.system(size: 24, weight: .semibold, design: .rounded))
+                    .foregroundStyle(accentColor)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+
+                Spacer(minLength: 0)
             }
 
-            Spacer(minLength: 0)
-
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(Color(.placeholderSoft))
-                .frame(width: 120, height: 120)
-                .overlay {
-                    Image(systemName: "leaf.fill")
-                        .font(.system(size: 34))
-                        .foregroundStyle(Color(.zodiacMint))
-                }
+            Text(explanation)
+                .font(.system(size: 17, weight: .regular, design: .rounded))
+                .foregroundStyle(Color(.descriptionText))
+                .lineSpacing(3)
+                .fixedSize(horizontal: false, vertical: true)
         }
-        .padding(18)
-        .background(Color(.surfacePrimary))
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 18)
+        .padding(.vertical, 20)
+        .background(accentColor.opacity(0.08))
         .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 28, style: .continuous)
+                .stroke(accentColor.opacity(0.16), lineWidth: 1)
+        )
         .shadow(color: Color(.cardShadowSubtle), radius: 10, x: 0, y: 4)
     }
 
@@ -368,31 +340,12 @@ private extension QuizOfTheDayScreen {
                         .foregroundStyle(Color(.textOnAccent))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 18)
-                        .background(
-                            LinearGradient(
-                                colors: [
-                                    Color(.buttonShine),
-                                    Color(.pinkButton)
-                                ],
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                        )
+                        .background(Color(.pinkButton))
                         .clipShape(Capsule())
                 }
                 .buttonStyle(.plain)
                 .disabled(!canPerformPrimaryAction)
                 .opacity(canPerformPrimaryAction ? 1 : 0.55)
-            }
-
-            HStack(spacing: 8) {
-                Image(systemName: "lightbulb")
-                    .font(.subheadline)
-                    .foregroundStyle(Color(.textSecondary))
-
-                Text(L10n.QuizOfTheDay.scoreHint)
-                    .font(.system(size: 15, weight: .regular, design: .rounded))
-                    .foregroundStyle(Color(.textSecondary))
             }
         }
     }

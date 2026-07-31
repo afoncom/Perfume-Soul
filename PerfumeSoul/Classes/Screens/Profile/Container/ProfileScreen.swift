@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ProfileScreen: View {
     @Bindable private var viewModel: ProfileViewModel
+    @State private var selectedElement: ProfileElement?
     private let presenter: ProfilePresenter
     
     init(
@@ -152,14 +153,37 @@ extension ProfileScreen {
             if let elementBalance = viewModel.profileCalculation?.elementBalance {
                 makeElementBalanceBar(elementBalance: elementBalance)
 
-                HStack {
-                    makeElementItem(percent: "\(elementBalance.fire)%", title: L10n.Profile.Element.fire)
-                    Spacer()
-                    makeElementItem(percent: "\(elementBalance.earth)%", title: L10n.Profile.Element.earth)
-                    Spacer()
-                    makeElementItem(percent: "\(elementBalance.air)%", title: L10n.Profile.Element.air)
-                    Spacer()
-                    makeElementItem(percent: "\(elementBalance.water)%", title: L10n.Profile.Element.water)
+                LazyVGrid(
+                    columns: Array(
+                        repeating: GridItem(.flexible(), spacing: 4, alignment: .leading),
+                        count: 4
+                    ),
+                    spacing: 8
+                ) {
+                    makeElementItem(
+                        element: .fire,
+                        percent: "\(elementBalance.fire)%",
+                        title: L10n.Profile.Element.fire,
+                        color: Color(.pinkButton)
+                    )
+                    makeElementItem(
+                        element: .earth,
+                        percent: "\(elementBalance.earth)%",
+                        title: L10n.Profile.Element.earth,
+                        color: Color(.zodiacMint)
+                    )
+                    makeElementItem(
+                        element: .air,
+                        percent: "\(elementBalance.air)%",
+                        title: L10n.Profile.Element.air,
+                        color: Color(.zodiacCyan)
+                    )
+                    makeElementItem(
+                        element: .water,
+                        percent: "\(elementBalance.water)%",
+                        title: L10n.Profile.Element.water,
+                        color: Color(.zodiacBlue)
+                    )
                 }
             } else {
                 makeProfileCalculationStateView()
@@ -626,6 +650,13 @@ extension ProfileScreen {
 
 // MARK: - Element Item
 
+private enum ProfileElement: Equatable {
+    case fire
+    case earth
+    case air
+    case water
+}
+
 extension ProfileScreen {
     func makeElementBalanceBar(elementBalance: ElementBalance) -> some View {
         GeometryReader { proxy in
@@ -660,16 +691,39 @@ extension ProfileScreen {
             .frame(width: .init(width))
     }
 
-    func makeElementItem(percent: String, title: String) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(percent)
-                .font(.headline)
-                .fontWeight(.medium)
-            
-            Text(title)
-                .font(.headline)
-                .foregroundStyle(Color(.textSecondary))
+    private func makeElementItem(
+        element: ProfileElement,
+        percent: String,
+        title: String,
+        color: Color
+    ) -> some View {
+        let isSelected = selectedElement == element
+
+        return Button {
+            withAnimation(.easeInOut(duration: 0.18)) {
+                selectedElement = isSelected ? nil : element
+            }
+        } label: {
+            VStack(alignment: .leading, spacing: 4) {
+                Circle()
+                    .fill(color)
+                    .frame(width: 7, height: 7)
+
+                Text(percent)
+                    .font(.headline)
+                    .fontWeight(.medium)
+                    .foregroundStyle(Color(.textPrimary))
+
+                Text(title)
+                    .font(.headline)
+                    .foregroundStyle(Color(.textSecondary))
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.vertical, 6)
+            .background(isSelected ? color.opacity(0.12) : Color.clear)
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
+        .buttonStyle(.plain)
     }
 }
 

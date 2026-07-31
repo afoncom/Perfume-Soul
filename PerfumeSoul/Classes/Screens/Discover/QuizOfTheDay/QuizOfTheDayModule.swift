@@ -34,7 +34,7 @@ final class QuizOfTheDayModule {
         let view = QuizOfTheDayScreen(viewModel: viewModel, presenter: presenter)
 
         let hostingController = UIHostingController(rootView: view)
-        hostingController.title = L10n.Screen.quizOfTheDay
+        hostingController.navigationItem.largeTitleDisplayMode = .never
 
         return hostingController
     }
