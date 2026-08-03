@@ -76,7 +76,7 @@
 "screen.findPerfumes" = "Find Perfumes";
 "screen.quizOfTheDay" = "Quiz of the Day";
 "screen.similarPerfumes" = "Similar Perfumes";
-"screen.perfumeRecommendations" = "Perfume Recommendations";
+"screen.perfumeRecommendations" = "Recommendations";
 "screen.perfumeDetails" = "Perfume Details";
 "perfumeRecommendations.empty.title" = "Recommendations are currently unavailable";
 "perfumeRecommendations.empty.subtitle" = "Please try again later";

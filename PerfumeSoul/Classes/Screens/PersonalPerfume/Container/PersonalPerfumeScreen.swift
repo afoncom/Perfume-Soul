@@ -153,7 +153,6 @@ extension PersonalPerfumeScreen {
                     .foregroundStyle(Color(.titleText))
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
-                    .frame(minHeight: 38, alignment: .top)
 
                 Text(perfume.subtitle)
                     .font(.system(size: 14, weight: .regular, design: .rounded))
@@ -163,8 +162,11 @@ extension PersonalPerfumeScreen {
                     .truncationMode(.tail)
                     .frame(minHeight: 18, alignment: .top)
 
+                Spacer(minLength: 0)
+
                 makeMatchBadge(matchPercentage: perfume.matchPercentage)
             }
+            .frame(minHeight: 80, alignment: .top)
         }
         .frame(maxWidth: .infinity, alignment: .top)
     }

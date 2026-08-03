@@ -100,20 +100,23 @@ extension ComparePerfumesScreen {
                 field: .right
             )
 
-            Button(L10n.ComparePerfumes.compareButton) {
+            Button {
                 focusedField = nil
 
                 Task {
                     await presenter.compareTapped()
                 }
+            } label: {
+                Text(L10n.ComparePerfumes.compareButton)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Color(.textOnAccent))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
             }
-            .font(.title3)
-            .fontWeight(.semibold)
-            .foregroundStyle(Color(.textOnAccent))
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 12)
             .background(Color(.pinkButton))
             .clipShape(Capsule())
+            .contentShape(Capsule())
         }
         .padding(14)
         .background(Color(.surfacePrimary))

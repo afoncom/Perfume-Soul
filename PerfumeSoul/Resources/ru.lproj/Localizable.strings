@@ -76,7 +76,7 @@
 "screen.findPerfumes" = "Поиск ароматов";
 "screen.quizOfTheDay" = "Квиз дня";
 "screen.similarPerfumes" = "Похожие ароматы";
-"screen.perfumeRecommendations" = "Рекомендации ароматов";
+"screen.perfumeRecommendations" = "Рекомендации";
 "screen.perfumeDetails" = "Карточка аромата";
 "perfumeRecommendations.empty.title" = "Рекомендации пока недоступны";
 "perfumeRecommendations.empty.subtitle" = "Попробуйте позже";
@@ -252,11 +252,11 @@
 "personalPerfume.note.vetiver" = "ветивер";
 "personalPerfume.retryButton" = "Повторить";
 "personalPerfume.skipButton" = "Пропустить сейчас";
-"personalPerfume.section.luxury.title" = "Luxury подборка";
+"personalPerfume.section.luxury.title" = "Премиальная подборка";
 "personalPerfume.section.luxury.description" = "Премиальные ароматы с самым сильным совпадением с вашим натальным профилем.";
-"personalPerfume.section.daily.title" = "Daily подборка";
+"personalPerfume.section.daily.title" = "На каждый день";
 "personalPerfume.section.daily.description" = "Дизайнерские и повседневные ароматы для регулярного ношения.";
-"personalPerfume.section.niche.title" = "Niche подборка";
+"personalPerfume.section.niche.title" = "Нишевая подборка";
 "personalPerfume.section.niche.description" = "Самобытные нишевые ароматы, которые подходят вашему ароматическому вектору.";
 "profile.calculation.unavailableMessage" = "Расчет натального профиля недоступен. Повторите через Персональные ароматы.";
 "profile.personalPerfumes.loadingSubtitle" = "Рассчитываем ваш натальный ароматический профиль...";
