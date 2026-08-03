@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import StoreKit
 
 protocol SettingsRouter {
     func showSendFeedback()
     func openSystemSettings()
+    func requestAppReview()
 }
 
 final class SettingsRouterImpl {
@@ -35,5 +37,13 @@ extension SettingsRouterImpl: SettingsRouter {
         }
 
         UIApplication.shared.open(url)
+    }
+
+    func requestAppReview() {
+        guard let windowScene = navigationController?.view.window?.windowScene else {
+            return
+        }
+
+        SKStoreReviewController.requestReview(in: windowScene)
     }
 }

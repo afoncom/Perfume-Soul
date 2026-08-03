@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import StoreKit
 
 protocol QuizOfTheDayRouter {
-    
+    func requestAppReview()
 }
 
 final class QuizOfTheDayRouterImpl {
@@ -21,5 +22,11 @@ final class QuizOfTheDayRouterImpl {
 }
 
 extension QuizOfTheDayRouterImpl: QuizOfTheDayRouter {
-    
+    func requestAppReview() {
+        guard let windowScene = navigationController?.view.window?.windowScene else {
+            return
+        }
+
+        SKStoreReviewController.requestReview(in: windowScene)
+    }
 }

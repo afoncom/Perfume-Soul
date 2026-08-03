@@ -157,6 +157,20 @@ extension SettingsScreen {
                     title: L10n.Settings.Support.supportDeveloperTitle,
                     subtitle: L10n.Settings.Support.supportDeveloperSubtitle
                 )
+
+                makeDivider()
+
+                Button {
+                    presenter.rateAppButtonTapped()
+                } label: {
+                    makeActionRow(
+                        icon: "star",
+                        iconColor: Color(.zodiacOrange),
+                        title: L10n.Settings.Support.rateAppTitle,
+                        subtitle: L10n.Settings.Support.rateAppSubtitle
+                    )
+                }
+                .buttonStyle(.plain)
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
