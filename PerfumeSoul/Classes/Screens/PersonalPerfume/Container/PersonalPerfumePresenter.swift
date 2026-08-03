@@ -117,7 +117,6 @@ extension PersonalPerfumePresenterImpl {
                     PersonalPerfumeItem(
                         name: perfume.brandName,
                         subtitle: perfume.perfumeName,
-                        matchExplanation: makeMatchExplanation(perfume: perfume),
                         matchPercentage: perfume.matchPercentage
                     )
                 },
@@ -145,38 +144,6 @@ extension PersonalPerfumePresenterImpl {
             L10n.PersonalPerfume.Section.Daily.description
         case .niche:
             L10n.PersonalPerfume.Section.Niche.description
-        }
-    }
-
-    private func makeMatchExplanation(perfume: PersonalPerfumeResponse) -> String? {
-        let matchedValues = (
-            localizedValues(keys: perfume.matchingNoteKeys, prefix: "personalPerfume.note")
-            + localizedValues(keys: perfume.matchingAccordKeys, prefix: "personalPerfume.accord")
-        )
-            .filter { !$0.isEmpty }
-            .prefix(4)
-
-        guard !matchedValues.isEmpty else {
-            return nil
-        }
-
-        return L10n.PersonalPerfume.matchExplanationFormat(matchedValues.joined(separator: ", "))
-    }
-
-    private func localizedValues(keys: [String], prefix: String) -> [String] {
-        keys.compactMap { key in
-            let localizationKey = "\(prefix).\(key)"
-            let localizedValue = Bundle.main.localizedString(
-                forKey: localizationKey,
-                value: nil,
-                table: nil
-            )
-
-            guard localizedValue != localizationKey else {
-                return nil
-            }
-
-            return localizedValue
         }
     }
 }

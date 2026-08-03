@@ -209,7 +209,6 @@
 "personalPerfume.error.requestFailed.title" = "Failed to load personal perfumes";
 "personalPerfume.error.requestFailed.subtitle" = "Check the connection and try again.";
 "personalPerfume.matchFormat" = "%d%% match";
-"personalPerfume.matchExplanationFormat" = "Matches: %@";
 "personalPerfume.accord.amber" = "amber";
 "personalPerfume.accord.aromatic" = "aromatic";
 "personalPerfume.accord.citrus" = "citrus";

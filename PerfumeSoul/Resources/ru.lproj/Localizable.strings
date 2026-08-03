@@ -209,7 +209,6 @@
 "personalPerfume.error.requestFailed.title" = "Не удалось загрузить персональные ароматы";
 "personalPerfume.error.requestFailed.subtitle" = "Проверьте соединение и попробуйте еще раз.";
 "personalPerfume.matchFormat" = "%d%% совпадение";
-"personalPerfume.matchExplanationFormat" = "Совпало: %@";
 "personalPerfume.accord.amber" = "амбровый";
 "personalPerfume.accord.aromatic" = "ароматический";
 "personalPerfume.accord.citrus" = "цитрусовый";
