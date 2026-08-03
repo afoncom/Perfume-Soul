@@ -51,15 +51,15 @@ struct ComparePerfumesScreen: View {
 }
 
 extension ComparePerfumesScreen {
-    var leftPerfume: ComparePerfume? {
+    private var leftPerfume: ComparePerfume? {
         viewModel.leftPerfume
     }
 
-    var rightPerfume: ComparePerfume? {
+    private var rightPerfume: ComparePerfume? {
         viewModel.rightPerfume
     }
 
-    func makeSelectionSection() -> some View {
+    private func makeSelectionSection() -> some View {
         VStack(alignment: .leading, spacing: 14) {
             Text(L10n.ComparePerfumes.selectionTitle)
                 .font(.title3)
@@ -124,7 +124,7 @@ extension ComparePerfumesScreen {
         .shadow(color: Color(.cardShadowSoft), radius: 8, x: 0, y: 4)
     }
 
-    func makeSearchField(
+    private func makeSearchField(
         title: String,
         text: Binding<String>,
         field: ComparePerfumeField
@@ -150,7 +150,7 @@ extension ComparePerfumesScreen {
     }
 
     @ViewBuilder
-    func makeSearchResultsSection() -> some View {
+    private func makeSearchResultsSection() -> some View {
         let activeSearchText = currentSearchText
         let shouldShowSection = (
             focusedField != nil
@@ -207,7 +207,7 @@ extension ComparePerfumesScreen {
         }
     }
 
-    var currentSearchText: String {
+    private var currentSearchText: String {
         switch focusedField {
         case .left:
             viewModel.leftSearchText
@@ -219,7 +219,7 @@ extension ComparePerfumesScreen {
     }
 
     @ViewBuilder
-    func makeComparisonContent() -> some View {
+    private func makeComparisonContent() -> some View {
         if viewModel.isLoading {
             makeLoadingState()
         } else if let errorMessage = viewModel.errorMessage {
@@ -242,7 +242,7 @@ extension ComparePerfumesScreen {
         }
     }
 
-    func makeLoadingState() -> some View {
+    private func makeLoadingState() -> some View {
         VStack(spacing: 14) {
             ProgressView()
             Text(L10n.ComparePerfumes.loadingMessage)
@@ -252,7 +252,7 @@ extension ComparePerfumesScreen {
         .frame(maxWidth: .infinity, minHeight: 180)
     }
 
-    func makeErrorState(message: String) -> some View {
+    private func makeErrorState(message: String) -> some View {
         VStack(spacing: 14) {
             Text(message)
                 .font(.footnote)
@@ -281,7 +281,7 @@ extension ComparePerfumesScreen {
         .padding(.horizontal, 24)
     }
 
-    func makePerfumesHeader(
+    private func makePerfumesHeader(
         leftPerfume: ComparePerfume,
         rightPerfume: ComparePerfume
     ) -> some View {
@@ -314,7 +314,7 @@ extension ComparePerfumesScreen {
         }
     }
     
-    func makePerfumeCard(
+    private func makePerfumeCard(
         brand: String,
         name: String,
         type: String
@@ -345,7 +345,7 @@ extension ComparePerfumesScreen {
         .frame(maxWidth: .infinity)
     }
     
-    func makeNotesSection(
+    private func makeNotesSection(
         leftPerfume: ComparePerfume,
         rightPerfume: ComparePerfume
     ) -> some View {
@@ -387,7 +387,7 @@ extension ComparePerfumesScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
     
-    func makeNotesPerfumeHeader(
+    private func makeNotesPerfumeHeader(
         leftName: String,
         rightName: String
     ) -> some View {
@@ -404,7 +404,7 @@ extension ComparePerfumesScreen {
         }
     }
 
-    func makeNotesPerfumeTitle(
+    private func makeNotesPerfumeTitle(
         name: String,
         accentColor: Color
     ) -> some View {
@@ -422,7 +422,7 @@ extension ComparePerfumesScreen {
         .padding(.horizontal, 12)
     }
 
-    func makeNotesComparisonRow(
+    private func makeNotesComparisonRow(
         title: String,
         leftNotes: [String],
         rightNotes: [String]
@@ -450,7 +450,7 @@ extension ComparePerfumesScreen {
     }
 
     @ViewBuilder
-    func makeNotesColumn(
+    private func makeNotesColumn(
         notes: [String],
         accentColor: Color
     ) -> some View {
@@ -471,7 +471,7 @@ extension ComparePerfumesScreen {
         .frame(maxWidth: .infinity, alignment: .topLeading)
     }
     
-    func makeNoteRow(
+    private func makeNoteRow(
         note: String,
         accentColor: Color
     ) -> some View {
@@ -488,7 +488,7 @@ extension ComparePerfumesScreen {
         }
     }
     
-    func makeWearSection(
+    private func makeWearSection(
         leftPerfume: ComparePerfume,
         rightPerfume: ComparePerfume
     ) -> some View {
@@ -527,7 +527,7 @@ extension ComparePerfumesScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
     
-    func makeWearCard(
+    private func makeWearCard(
         brand: String,
         name: String,
         accentColor: Color,
@@ -561,7 +561,7 @@ extension ComparePerfumesScreen {
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
     
-    func makeWearRow(
+    private func makeWearRow(
         title: String,
         score: String,
         accentColor: Color
@@ -585,14 +585,14 @@ extension ComparePerfumesScreen {
         }
     }
 
-    func scoreText(_ score: Int?) -> String {
+    private func scoreText(_ score: Int?) -> String {
         guard let score else {
             return "--"
         }
         return "\(score)/10"
     }
     
-    func makeSectionTitle(_ title: String) -> some View {
+    private func makeSectionTitle(_ title: String) -> some View {
         HStack {
             Spacer()
             
