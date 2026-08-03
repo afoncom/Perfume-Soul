@@ -67,7 +67,9 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
     }
 
     func submitAnswer() {
-        guard let result = viewModel.submitAnswer() else { return }
+        guard let result = viewModel.submitAnswer() else {
+            return
+        }
 
         if result.wasCorrect {
             let updatedQuizProgress = quizProgressService.recordCorrectAnswer(
@@ -86,7 +88,9 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
     }
 
     func finishQuiz() {
-        guard let quizDayKey = viewModel.finishQuiz() else { return }
+        guard let quizDayKey = viewModel.finishQuiz() else {
+            return
+        }
 
         let updatedQuizProgress = quizProgressService.completeQuiz(for: quizDayKey)
         viewModel.updateQuizProgress(updatedQuizProgress)
@@ -144,8 +148,10 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
     }
 
     private func saveCurrentState() {
-        guard let currentDailyQuizState = viewModel.currentDailyQuizState else { return }
-        
+        guard let currentDailyQuizState = viewModel.currentDailyQuizState else {
+            return
+        }
+
         dailyQuizStateStorage.saveState(currentDailyQuizState)
     }
 }

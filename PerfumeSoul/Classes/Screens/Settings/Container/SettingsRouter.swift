@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import StoreKit
 
 protocol SettingsRouter {
     func showSendFeedback()
@@ -17,9 +16,14 @@ protocol SettingsRouter {
 
 final class SettingsRouterImpl {
     private weak var navigationController: UINavigationController?
+    private let appReviewRequester: AppReviewRequester
 
-    init(navigationController: UINavigationController?) {
+    init(
+        navigationController: UINavigationController?,
+        appReviewRequester: AppReviewRequester = AppReviewRequester()
+    ) {
         self.navigationController = navigationController
+        self.appReviewRequester = appReviewRequester
     }
 }
 
@@ -44,6 +48,6 @@ extension SettingsRouterImpl: SettingsRouter {
             return
         }
 
-        SKStoreReviewController.requestReview(in: windowScene)
+        appReviewRequester.requestReview(in: windowScene)
     }
 }

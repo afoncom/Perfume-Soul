@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import StoreKit
 
 protocol QuizOfTheDayRouter {
     func requestAppReview()
@@ -15,9 +14,14 @@ protocol QuizOfTheDayRouter {
 
 final class QuizOfTheDayRouterImpl {
     private weak var navigationController: UINavigationController?
+    private let appReviewRequester: AppReviewRequester
 
-    init(navigationController: UINavigationController?) {
+    init(
+        navigationController: UINavigationController?,
+        appReviewRequester: AppReviewRequester = AppReviewRequester()
+    ) {
         self.navigationController = navigationController
+        self.appReviewRequester = appReviewRequester
     }
 }
 
@@ -27,6 +31,6 @@ extension QuizOfTheDayRouterImpl: QuizOfTheDayRouter {
             return
         }
 
-        SKStoreReviewController.requestReview(in: windowScene)
+        appReviewRequester.requestReviewAfterQuizCompletion(in: windowScene)
     }
 }
