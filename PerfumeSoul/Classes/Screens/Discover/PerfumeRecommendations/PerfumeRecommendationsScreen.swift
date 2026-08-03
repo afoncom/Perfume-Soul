@@ -254,6 +254,10 @@ extension PerfumeRecommendationsScreen {
                     ForEach(Array(notes.prefix(3)), id: \.self) { note in
                         makeMatchingNoteChip(note: note)
                     }
+
+                    if notes.count > 3 {
+                        makeMatchingNoteChip(note: "+\(notes.count - 3)")
+                    }
                 }
             }
         }
