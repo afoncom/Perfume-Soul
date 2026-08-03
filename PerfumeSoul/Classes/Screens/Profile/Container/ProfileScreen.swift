@@ -77,10 +77,18 @@ struct ProfileScreen: View {
 
 extension ProfileScreen {
     func makeProfileScreen(profile: Profile) -> some View {
-        HStack(spacing: 12) {
+        let initials = makeProfileInitials(name: profile.name)
+
+        return HStack(spacing: 12) {
             Circle()
-                .fill(Color(.placeholderStrong))
+                .fill(makeProfileAvatarGradient(initials: initials))
                 .frame(width: 74, height: 74)
+                .overlay(
+                    Text(initials)
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(Color(.textOnAccent))
+                )
             
             VStack(alignment: .leading, spacing: 8) {
                 Text(profile.name)
@@ -527,6 +535,38 @@ extension ProfileScreen {
         }
 
         return DailyHoroscope(sign: sign, energyOfDay: "")
+    }
+
+    func makeProfileInitials(name: String) -> String {
+        let initials = name
+            .split(whereSeparator: \.isWhitespace)
+            .prefix(2)
+            .compactMap(\.first)
+
+        return String(initials).uppercased()
+    }
+
+    func makeProfileAvatarGradient(initials: String) -> LinearGradient {
+        let colors: [Color] = [
+            Color(.zodiacBlue),
+            Color(.zodiacMint),
+            Color(.pinkButton),
+            Color(.zodiacPurple),
+            Color(.zodiacOrange),
+            Color(.zodiacCyan)
+        ]
+        let hash = initials.uppercased().unicodeScalars.reduce(UInt32(5381)) { result, scalar in
+            result &* 33 &+ UInt32(scalar.value)
+        }
+        let baseIndex = Int(hash % UInt32(colors.count))
+        let accentOffset = Int((hash / UInt32(colors.count)) % UInt32(colors.count - 1)) + 1
+        let accentIndex = (baseIndex + accentOffset) % colors.count
+
+        return LinearGradient(
+            colors: [colors[baseIndex], colors[accentIndex]],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
     }
 
     func makeZodiacBadge(zodiacInfo: DailyHoroscope) -> some View {
