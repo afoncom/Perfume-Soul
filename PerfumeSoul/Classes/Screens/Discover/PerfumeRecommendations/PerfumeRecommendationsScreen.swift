@@ -76,7 +76,7 @@ extension PerfumeRecommendationsScreen {
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
                 .truncationMode(.tail)
-                .frame(height: 34, alignment: .top)
+                .frame(minHeight: 34, alignment: .top)
         }
         .frame(maxWidth: .infinity)
     }
