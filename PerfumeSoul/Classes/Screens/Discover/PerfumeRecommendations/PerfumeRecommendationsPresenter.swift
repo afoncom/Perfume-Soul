@@ -31,15 +31,16 @@ final class PerfumeRecommendationsPresenterImpl {
 extension PerfumeRecommendationsPresenterImpl: PerfumeRecommendationsPresenter {
     func onAppear() async {
         let shouldLoad = await MainActor.run {
-            !viewModel.hasLoadedRecommendations
+            guard !viewModel.hasLoadedRecommendations, !viewModel.isLoading else {
+                return false
+            }
+
+            viewModel.isLoading = true
+            viewModel.errorMessage = nil
+            return true
         }
         guard shouldLoad else {
             return
-        }
-
-        await MainActor.run {
-            viewModel.isLoading = true
-            viewModel.errorMessage = nil
         }
 
         do {
