@@ -20,12 +20,6 @@ final class AppReviewRequester {
         self.userDefaults = userDefaults
     }
 
-    func requestReview(in windowScene: UIWindowScene) {
-        Task { @MainActor in
-            AppStore.requestReview(in: windowScene)
-        }
-    }
-
     func requestReviewAfterQuizCompletion(in windowScene: UIWindowScene) {
         guard userDefaults.bool(forKey: Keys.didRequestReviewAfterQuizCompletion) == false else {
             return
@@ -33,5 +27,11 @@ final class AppReviewRequester {
 
         userDefaults.set(true, forKey: Keys.didRequestReviewAfterQuizCompletion)
         requestReview(in: windowScene)
+    }
+
+    private func requestReview(in windowScene: UIWindowScene) {
+        Task { @MainActor in
+            AppStore.requestReview(in: windowScene)
+        }
     }
 }

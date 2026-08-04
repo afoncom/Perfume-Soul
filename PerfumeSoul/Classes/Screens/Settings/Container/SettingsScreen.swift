@@ -157,20 +157,7 @@ extension SettingsScreen {
                     title: L10n.Settings.Support.supportDeveloperTitle,
                     subtitle: L10n.Settings.Support.supportDeveloperSubtitle
                 )
-
-                makeDivider()
-
-                Button {
-                    presenter.rateAppButtonTapped()
-                } label: {
-                    makeActionRow(
-                        icon: "star",
-                        iconColor: Color(.zodiacOrange),
-                        title: L10n.Settings.Support.rateAppTitle,
-                        subtitle: L10n.Settings.Support.rateAppSubtitle
-                    )
-                }
-                .buttonStyle(.plain)
+                // TODO: Restore Rate App when App Store ID is available and open the write-review URL.
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)

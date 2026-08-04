@@ -11,19 +11,13 @@ import UIKit
 protocol SettingsRouter {
     func showSendFeedback()
     func openSystemSettings()
-    func requestAppReview()
 }
 
 final class SettingsRouterImpl {
     private weak var navigationController: UINavigationController?
-    private let appReviewRequester: AppReviewRequester
 
-    init(
-        navigationController: UINavigationController?,
-        appReviewRequester: AppReviewRequester = AppReviewRequester()
-    ) {
+    init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
-        self.appReviewRequester = appReviewRequester
     }
 }
 
@@ -41,13 +35,5 @@ extension SettingsRouterImpl: SettingsRouter {
         }
 
         UIApplication.shared.open(url)
-    }
-
-    func requestAppReview() {
-        guard let windowScene = navigationController?.view.window?.windowScene else {
-            return
-        }
-
-        appReviewRequester.requestReview(in: windowScene)
     }
 }

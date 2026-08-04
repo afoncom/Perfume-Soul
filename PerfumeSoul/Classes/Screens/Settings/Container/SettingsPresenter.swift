@@ -10,7 +10,6 @@
 protocol SettingsPresenter {
     func onAppear() async
     func dailyHoroscopeNotificationToggled(isEnabled: Bool)
-    func rateAppButtonTapped()
     func feedbackButtonTapped()
     func openSystemSettingsTapped()
     func notificationAlertDismissed()
@@ -84,10 +83,6 @@ extension SettingsPresenterImpl: SettingsPresenter {
 
     func feedbackButtonTapped() {
         router.showSendFeedback()
-    }
-
-    func rateAppButtonTapped() {
-        router.requestAppReview()
     }
 
     func openSystemSettingsTapped() {
