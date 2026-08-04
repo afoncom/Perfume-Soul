@@ -549,11 +549,8 @@ extension ProfileScreen {
     func makeProfileAvatarGradient(initials: String) -> LinearGradient {
         let colors: [Color] = [
             Color(.zodiacBlue),
-            Color(.zodiacMint),
             Color(.pinkButton),
-            Color(.zodiacPurple),
-            Color(.zodiacOrange),
-            Color(.zodiacCyan)
+            Color(.zodiacPurple)
         ]
         let hash = initials.uppercased().unicodeScalars.reduce(UInt32(5381)) { result, scalar in
             result &* 33 &+ UInt32(scalar.value)
