@@ -11,6 +11,7 @@ protocol QuizOfTheDayPresenter {
     func selectAnswer(id: String)
     func submitAnswer()
     func goToNextQuestion()
+    @MainActor
     func finishQuiz()
 }
 
@@ -87,7 +88,7 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
         saveCurrentState()
     }
 
-    func finishQuiz() {
+    @MainActor func finishQuiz() {
         guard let quizDayKey = viewModel.finishQuiz() else {
             return
         }

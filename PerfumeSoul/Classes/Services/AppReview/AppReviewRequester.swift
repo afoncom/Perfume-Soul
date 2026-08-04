@@ -11,27 +11,47 @@ import UIKit
 
 final class AppReviewRequester {
     private enum Keys {
-        static let didRequestReviewAfterQuizCompletion = "appReview.didRequestReviewAfterQuizCompletion"
+        static let completedQuizCount = "appReview.completedQuizCount"
+        static let lastRequestedVersion = "appReview.lastRequestedVersion"
     }
 
+    private let minimumCompletedQuizCount = 3
     private let userDefaults: UserDefaults
 
     init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults
     }
 
+    @MainActor
     func requestReviewAfterQuizCompletion(in windowScene: UIWindowScene) {
-        guard userDefaults.bool(forKey: Keys.didRequestReviewAfterQuizCompletion) == false else {
+        let completedQuizCount = userDefaults.integer(forKey: Keys.completedQuizCount) + 1
+        userDefaults.set(completedQuizCount, forKey: Keys.completedQuizCount)
+
+        guard completedQuizCount >= minimumCompletedQuizCount else {
             return
         }
 
-        userDefaults.set(true, forKey: Keys.didRequestReviewAfterQuizCompletion)
+        let appVersion = currentAppVersion
+        guard userDefaults.string(forKey: Keys.lastRequestedVersion) != appVersion else {
+            return
+        }
+
+        userDefaults.set(appVersion, forKey: Keys.lastRequestedVersion)
         requestReview(in: windowScene)
     }
 
+    @MainActor
     private func requestReview(in windowScene: UIWindowScene) {
-        Task { @MainActor in
-            AppStore.requestReview(in: windowScene)
-        }
+        AppStore.requestReview(in: windowScene)
+    }
+
+    private var currentAppVersion: String {
+        let infoDictionary = Bundle.main.infoDictionary
+        let shortVersion = infoDictionary?["CFBundleShortVersionString"] as? String
+        let buildVersion = infoDictionary?["CFBundleVersion"] as? String
+
+        return [shortVersion, buildVersion]
+            .compactMap { $0 }
+            .joined(separator: "-")
     }
 }
