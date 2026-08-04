@@ -13,6 +13,7 @@ import Observation
 @Observable final class PerfumeRecommendationsViewModel {
     let selectedPerfumes: [SearchPerfumeItem]
     var perfumeRecommendations: [PerfumeRecommendation] = []
+    var hasLoadedRecommendations = false
     var isLoading = false
     var errorMessage: String?
 

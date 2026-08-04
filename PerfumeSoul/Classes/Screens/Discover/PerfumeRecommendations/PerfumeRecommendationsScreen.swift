@@ -24,7 +24,9 @@ struct PerfumeRecommendationsScreen: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 18) {
                 makeBasedOnSection()
-                makeHintCard()
+                if shouldShowHintCard {
+                    makeHintCard()
+                }
                 makeRecommendationsSection()
             }
             .padding(.horizontal, 16)
@@ -42,6 +44,12 @@ struct PerfumeRecommendationsScreen: View {
 }
 
 extension PerfumeRecommendationsScreen {
+    private var shouldShowHintCard: Bool {
+        !viewModel.isLoading &&
+        viewModel.errorMessage == nil &&
+        !viewModel.perfumeRecommendations.isEmpty
+    }
+
     private func makeBasedOnSection() -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(L10n.PerfumeRecommendations.selectedPerfumesTitle)
@@ -66,7 +74,9 @@ extension PerfumeRecommendationsScreen {
                 .font(.caption)
                 .foregroundStyle(Color(.textPrimary))
                 .multilineTextAlignment(.center)
-                .lineLimit(3)
+                .lineLimit(2)
+                .truncationMode(.tail)
+                .frame(minHeight: 34, alignment: .top)
         }
         .frame(maxWidth: .infinity)
     }
@@ -183,14 +193,7 @@ extension PerfumeRecommendationsScreen {
                     .font(.subheadline)
                     .foregroundStyle(Color(.textSecondary))
 
-                Text(
-                    L10n.PerfumeRecommendations.matchingNotesFormat(
-                        perfume.matchingNotes.joined(separator: ", ")
-                    )
-                )
-                .font(.footnote)
-                .foregroundStyle(Color(.textSecondary))
-                .fixedSize(horizontal: false, vertical: true)
+                makeMatchingNotesSection(notes: perfume.matchingNotes)
 
                 Text(
                     L10n.PerfumeRecommendations.wearFormat(
@@ -212,8 +215,10 @@ extension PerfumeRecommendationsScreen {
                     .foregroundStyle(Color(.textPrimary))
 
                 Text(L10n.PerfumeRecommendations.matchLabel)
-                    .font(.caption)
+                    .font(.caption2.weight(.medium))
                     .foregroundStyle(Color(.textSecondary))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
 
                 Spacer()
 
@@ -231,6 +236,44 @@ extension PerfumeRecommendationsScreen {
                 .stroke(Color(.cardBorder), lineWidth: 1)
         )
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
+    }
+
+    @ViewBuilder
+    private func makeMatchingNotesSection(notes: [String]) -> some View {
+        if !notes.isEmpty {
+            VStack(alignment: .leading, spacing: 6) {
+                Text(L10n.PerfumeRecommendations.matchingNotesTitle)
+                    .font(.caption)
+                    .foregroundStyle(Color(.textSecondary))
+
+                LazyVGrid(
+                    columns: [GridItem(.adaptive(minimum: 72), spacing: 6)],
+                    alignment: .leading,
+                    spacing: 6
+                ) {
+                    ForEach(Array(notes.prefix(3)), id: \.self) { note in
+                        makeMatchingNoteChip(note: note)
+                    }
+
+                    if notes.count > 3 {
+                        makeMatchingNoteChip(note: "+\(notes.count - 3)")
+                    }
+                }
+            }
+        }
+    }
+
+    private func makeMatchingNoteChip(note: String) -> some View {
+        Text(note)
+            .font(.caption2.weight(.medium))
+            .foregroundStyle(Color(.zodiacPurple))
+            .lineLimit(1)
+            .minimumScaleFactor(0.8)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 5)
+            .frame(maxWidth: .infinity)
+            .background(Color(.zodiacPurple).opacity(0.1))
+            .clipShape(Capsule())
     }
 
     private func scoreText(_ score: Int?) -> String {

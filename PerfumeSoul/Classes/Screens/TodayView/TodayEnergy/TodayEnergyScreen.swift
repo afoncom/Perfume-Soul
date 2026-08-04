@@ -35,8 +35,8 @@ struct TodayEnergyScreen: View {
     }
 }
 
-private extension TodayEnergyScreen {
-    func makePersonalSection() -> some View {
+extension TodayEnergyScreen {
+    private func makePersonalSection() -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(L10n.Today.Energy.personalTitle)
                 .font(.title3)
@@ -55,7 +55,7 @@ private extension TodayEnergyScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
     
-    func makeHoroscopeSection() -> some View {
+    private func makeHoroscopeSection() -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(L10n.Today.Energy.listTitle)
                 .font(.title3)
@@ -78,13 +78,13 @@ private extension TodayEnergyScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
     
-    func makeInfoCard(
+    private func makeInfoCard(
         icon: String,
         iconColor: Color,
         title: String,
         subtitle: String
     ) -> some View {
-        HStack(spacing: 12) {
+        HStack(alignment: .top, spacing: 12) {
             ZStack {
                 Circle()
                     .fill(iconColor.opacity(0.12))

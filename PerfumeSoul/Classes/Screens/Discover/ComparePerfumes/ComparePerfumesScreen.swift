@@ -50,16 +50,16 @@ struct ComparePerfumesScreen: View {
     }
 }
 
-private extension ComparePerfumesScreen {
-    var leftPerfume: ComparePerfume? {
+extension ComparePerfumesScreen {
+    private var leftPerfume: ComparePerfume? {
         viewModel.leftPerfume
     }
 
-    var rightPerfume: ComparePerfume? {
+    private var rightPerfume: ComparePerfume? {
         viewModel.rightPerfume
     }
 
-    func makeSelectionSection() -> some View {
+    private func makeSelectionSection() -> some View {
         VStack(alignment: .leading, spacing: 14) {
             Text(L10n.ComparePerfumes.selectionTitle)
                 .font(.title3)
@@ -100,20 +100,23 @@ private extension ComparePerfumesScreen {
                 field: .right
             )
 
-            Button(L10n.ComparePerfumes.compareButton) {
+            Button {
                 focusedField = nil
 
                 Task {
                     await presenter.compareTapped()
                 }
+            } label: {
+                Text(L10n.ComparePerfumes.compareButton)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Color(.textOnAccent))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
             }
-            .font(.title3)
-            .fontWeight(.semibold)
-            .foregroundStyle(Color(.textOnAccent))
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 12)
             .background(Color(.pinkButton))
             .clipShape(Capsule())
+            .contentShape(Capsule())
         }
         .padding(14)
         .background(Color(.surfacePrimary))
@@ -121,7 +124,7 @@ private extension ComparePerfumesScreen {
         .shadow(color: Color(.cardShadowSoft), radius: 8, x: 0, y: 4)
     }
 
-    func makeSearchField(
+    private func makeSearchField(
         title: String,
         text: Binding<String>,
         field: ComparePerfumeField
@@ -147,7 +150,7 @@ private extension ComparePerfumesScreen {
     }
 
     @ViewBuilder
-    func makeSearchResultsSection() -> some View {
+    private func makeSearchResultsSection() -> some View {
         let activeSearchText = currentSearchText
         let shouldShowSection = (
             focusedField != nil
@@ -178,7 +181,9 @@ private extension ComparePerfumesScreen {
                 } else {
                     ForEach(viewModel.searchResults) { perfume in
                         Button {
-                            guard let currentField = focusedField else { return }
+                            guard let currentField = focusedField else {
+                                return
+                            }
 
                             presenter.searchResultTapped(perfume, for: currentField)
                             focusedField = nil
@@ -202,7 +207,7 @@ private extension ComparePerfumesScreen {
         }
     }
 
-    var currentSearchText: String {
+    private var currentSearchText: String {
         switch focusedField {
         case .left:
             viewModel.leftSearchText
@@ -214,7 +219,7 @@ private extension ComparePerfumesScreen {
     }
 
     @ViewBuilder
-    func makeComparisonContent() -> some View {
+    private func makeComparisonContent() -> some View {
         if viewModel.isLoading {
             makeLoadingState()
         } else if let errorMessage = viewModel.errorMessage {
@@ -237,7 +242,7 @@ private extension ComparePerfumesScreen {
         }
     }
 
-    func makeLoadingState() -> some View {
+    private func makeLoadingState() -> some View {
         VStack(spacing: 14) {
             ProgressView()
             Text(L10n.ComparePerfumes.loadingMessage)
@@ -247,7 +252,7 @@ private extension ComparePerfumesScreen {
         .frame(maxWidth: .infinity, minHeight: 180)
     }
 
-    func makeErrorState(message: String) -> some View {
+    private func makeErrorState(message: String) -> some View {
         VStack(spacing: 14) {
             Text(message)
                 .font(.footnote)
@@ -276,7 +281,7 @@ private extension ComparePerfumesScreen {
         .padding(.horizontal, 24)
     }
 
-    func makePerfumesHeader(
+    private func makePerfumesHeader(
         leftPerfume: ComparePerfume,
         rightPerfume: ComparePerfume
     ) -> some View {
@@ -309,7 +314,7 @@ private extension ComparePerfumesScreen {
         }
     }
     
-    func makePerfumeCard(
+    private func makePerfumeCard(
         brand: String,
         name: String,
         type: String
@@ -340,28 +345,35 @@ private extension ComparePerfumesScreen {
         .frame(maxWidth: .infinity)
     }
     
-    func makeNotesSection(
+    private func makeNotesSection(
         leftPerfume: ComparePerfume,
         rightPerfume: ComparePerfume
     ) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             makeSectionTitle("Пирамида нот")
 
-            HStack(alignment: .top, spacing: 12) {
-                makePerfumeNotesCard(
-                    name: leftPerfume.name,
-                    accentColor: Color(.pinkButton),
-                    topNotes: leftPerfume.topNotes,
-                    middleNotes: leftPerfume.middleNotes,
-                    baseNotes: leftPerfume.baseNotes
+            VStack(spacing: 12) {
+                makeNotesPerfumeHeader(
+                    leftName: leftPerfume.name,
+                    rightName: rightPerfume.name
                 )
-                
-                makePerfumeNotesCard(
-                    name: rightPerfume.name,
-                    accentColor: Color(.zodiacPurple),
-                    topNotes: rightPerfume.topNotes,
-                    middleNotes: rightPerfume.middleNotes,
-                    baseNotes: rightPerfume.baseNotes
+
+                makeNotesComparisonRow(
+                    title: "Верхние",
+                    leftNotes: leftPerfume.topNotes,
+                    rightNotes: rightPerfume.topNotes
+                )
+
+                makeNotesComparisonRow(
+                    title: "Средние",
+                    leftNotes: leftPerfume.middleNotes,
+                    rightNotes: rightPerfume.middleNotes
+                )
+
+                makeNotesComparisonRow(
+                    title: "Базовые",
+                    leftNotes: leftPerfume.baseNotes,
+                    rightNotes: rightPerfume.baseNotes
                 )
             }
         }
@@ -375,60 +387,79 @@ private extension ComparePerfumesScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
     
-    func makePerfumeNotesCard(
-        name: String,
-        accentColor: Color,
-        topNotes: [String],
-        middleNotes: [String],
-        baseNotes: [String]
+    private func makeNotesPerfumeHeader(
+        leftName: String,
+        rightName: String
     ) -> some View {
-        VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 6) {
-                Capsule()
-                    .fill(accentColor.opacity(0.22))
-                    .frame(width: 48, height: 6)
-                
-                Text(name)
-                    .font(.headline)
-                    .foregroundStyle(Color(.textPrimary))
-                    .lineLimit(2)
-            }
-            
-            makeNotesGroup(
-                title: "Верхние",
-                notes: topNotes,
-                accentColor: accentColor
+        HStack(alignment: .top, spacing: 12) {
+            makeNotesPerfumeTitle(
+                name: leftName,
+                accentColor: Color(.pinkButton)
             )
-            
-            makeNotesGroup(
-                title: "Средние",
-                notes: middleNotes,
-                accentColor: accentColor
-            )
-            
-            makeNotesGroup(
-                title: "Базовые",
-                notes: baseNotes,
-                accentColor: accentColor
+
+            makeNotesPerfumeTitle(
+                name: rightName,
+                accentColor: Color(.zodiacPurple)
             )
         }
-        .frame(maxWidth: .infinity, alignment: .topLeading)
-        .padding(14)
-        .background(Color(.rowBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
-    
-    func makeNotesGroup(
-        title: String,
-        notes: [String],
+
+    private func makeNotesPerfumeTitle(
+        name: String,
         accentColor: Color
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Capsule()
+                .fill(accentColor.opacity(0.22))
+                .frame(width: 48, height: 6)
+
+            Text(name)
+                .font(.headline)
+                .foregroundStyle(Color(.textPrimary))
+                .lineLimit(2)
+        }
+        .frame(maxWidth: .infinity, minHeight: 58, alignment: .topLeading)
+        .padding(.horizontal, 12)
+    }
+
+    private func makeNotesComparisonRow(
+        title: String,
+        leftNotes: [String],
+        rightNotes: [String]
     ) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(title)
-                .font(.footnote.weight(.semibold))
+                .font(.subheadline.weight(.semibold))
                 .foregroundStyle(Color(.textPrimary))
-            
-            VStack(alignment: .leading, spacing: 8) {
+
+            HStack(alignment: .top, spacing: 12) {
+                makeNotesColumn(
+                    notes: leftNotes,
+                    accentColor: Color(.pinkButton)
+                )
+
+                makeNotesColumn(
+                    notes: rightNotes,
+                    accentColor: Color(.zodiacPurple)
+                )
+            }
+        }
+        .padding(12)
+        .background(Color(.rowBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+    }
+
+    @ViewBuilder
+    private func makeNotesColumn(
+        notes: [String],
+        accentColor: Color
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if notes.isEmpty {
+                Text(L10n.PerfumeDetails.emptyNotesPlaceholder)
+                    .font(.footnote)
+                    .foregroundStyle(Color(.textSecondary))
+            } else {
                 ForEach(notes, id: \.self) { note in
                     makeNoteRow(
                         note: note,
@@ -437,9 +468,10 @@ private extension ComparePerfumesScreen {
                 }
             }
         }
+        .frame(maxWidth: .infinity, alignment: .topLeading)
     }
     
-    func makeNoteRow(
+    private func makeNoteRow(
         note: String,
         accentColor: Color
     ) -> some View {
@@ -456,7 +488,7 @@ private extension ComparePerfumesScreen {
         }
     }
     
-    func makeWearSection(
+    private func makeWearSection(
         leftPerfume: ComparePerfume,
         rightPerfume: ComparePerfume
     ) -> some View {
@@ -495,7 +527,7 @@ private extension ComparePerfumesScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
     
-    func makeWearCard(
+    private func makeWearCard(
         brand: String,
         name: String,
         accentColor: Color,
@@ -529,12 +561,12 @@ private extension ComparePerfumesScreen {
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
     
-    func makeWearRow(
+    private func makeWearRow(
         title: String,
         score: String,
         accentColor: Color
     ) -> some View {
-        HStack(alignment: .center, spacing: 10) {
+        HStack(spacing: 10) {
             Text(title)
                 .font(.caption.weight(.medium))
                 .foregroundStyle(Color(.textPrimary))
@@ -553,12 +585,14 @@ private extension ComparePerfumesScreen {
         }
     }
 
-    func scoreText(_ score: Int?) -> String {
-        guard let score else { return "--" }
+    private func scoreText(_ score: Int?) -> String {
+        guard let score else {
+            return "--"
+        }
         return "\(score)/10"
     }
     
-    func makeSectionTitle(_ title: String) -> some View {
+    private func makeSectionTitle(_ title: String) -> some View {
         HStack {
             Spacer()
             

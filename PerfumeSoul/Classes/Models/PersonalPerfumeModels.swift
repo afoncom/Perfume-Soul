@@ -9,7 +9,6 @@
 struct PersonalPerfumeItem {
     let name: String
     let subtitle: String
-    let matchExplanation: String?
     let matchPercentage: Int
 }
 

@@ -42,14 +42,14 @@ struct TodayScreen: View {
     }
 }
 
-private extension TodayScreen {
-    func makeTodayEnergyScreen() -> some View {
+extension TodayScreen {
+    private func makeTodayEnergyScreen() -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(L10n.Today.Energy.title)
                 .font(.title3)
                 .fontWeight(.medium)
             
-            HStack(spacing: 12) {
+            HStack(alignment: .top, spacing: 12) {
                 Circle()
                     .fill(Color(.surfacePrimary))
                     .frame(width: 36, height: 36)
@@ -84,7 +84,7 @@ private extension TodayScreen {
         }
     }
     
-    func makeAromaDay() -> some View {
+    private func makeAromaDay() -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(L10n.Today.Aroma.title)
                 .font(.title3)
@@ -139,7 +139,7 @@ private extension TodayScreen {
         .shadow(color: Color(.cardShadow), radius: 10, x: 0, y: 4)
     }
     
-    func makeRecommendedForYou() -> some View {
+    private func makeRecommendedForYou() -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(L10n.Today.Recommended.title)
                 .font(.title3)
@@ -176,7 +176,7 @@ private extension TodayScreen {
         }
     }
     
-    func makeThisDayInPerfumery() -> some View {
+    private func makeThisDayInPerfumery() -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(L10n.Today.History.title)
                 .font(.title3)
@@ -194,7 +194,7 @@ private extension TodayScreen {
         }
     }
     
-    func makeHistoryFactCard(historyFact: PerfumeHistory) -> some View {
+    private func makeHistoryFactCard(historyFact: PerfumeHistory) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
                 Text(String(historyFact.year))
@@ -218,7 +218,7 @@ private extension TodayScreen {
         .shadow(color: Color(.cardShadow), radius: 10, x: 0, y: 4)
     }
     
-    func makeHistoryFactLoadingCard() -> some View {
+    private func makeHistoryFactLoadingCard() -> some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
                 RoundedRectangle(cornerRadius: 6, style: .continuous)
