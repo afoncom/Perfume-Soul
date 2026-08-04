@@ -9,7 +9,12 @@
 import StoreKit
 import UIKit
 
-final class AppReviewRequester {
+protocol AppReviewRequesting {
+    @MainActor
+    func requestReviewAfterQuizCompletion(in windowScene: UIWindowScene)
+}
+
+final class AppReviewRequesterImpl {
     private enum Keys {
         static let completedQuizCount = "appReview.completedQuizCount"
         static let lastRequestedVersion = "appReview.lastRequestedVersion"
@@ -55,3 +60,5 @@ final class AppReviewRequester {
             .joined(separator: "-")
     }
 }
+
+extension AppReviewRequesterImpl: AppReviewRequesting {}

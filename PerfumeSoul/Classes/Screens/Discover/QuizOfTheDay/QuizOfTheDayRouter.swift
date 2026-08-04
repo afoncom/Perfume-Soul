@@ -15,11 +15,11 @@ protocol QuizOfTheDayRouter {
 
 final class QuizOfTheDayRouterImpl {
     private weak var navigationController: UINavigationController?
-    private let appReviewRequester: AppReviewRequester
+    private let appReviewRequester: AppReviewRequesting
 
     init(
         navigationController: UINavigationController?,
-        appReviewRequester: AppReviewRequester = AppReviewRequester()
+        appReviewRequester: AppReviewRequesting
     ) {
         self.navigationController = navigationController
         self.appReviewRequester = appReviewRequester

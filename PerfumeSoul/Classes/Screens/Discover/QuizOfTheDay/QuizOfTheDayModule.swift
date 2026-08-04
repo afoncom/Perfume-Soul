@@ -20,7 +20,11 @@ final class QuizOfTheDayModule {
         )
         let dailyQuizStateStorage = DailyQuizStateStorageImpl(userDefaults: .standard)
         let viewModel = QuizOfTheDayViewModel()
-        let router = QuizOfTheDayRouterImpl(navigationController: navigationController)
+        let appReviewRequester = AppReviewRequesterImpl()
+        let router = QuizOfTheDayRouterImpl(
+            navigationController: navigationController,
+            appReviewRequester: appReviewRequester
+        )
         let service = QuizOfTheDayServiceImpl(requestManager: requestManager)
         let presenter = QuizOfTheDayPresenterImpl(
             viewModel: viewModel,
