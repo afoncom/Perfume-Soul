@@ -12,14 +12,16 @@ struct ProfileScreen: View {
     @Bindable private var viewModel: ProfileViewModel
     @State private var selectedElement: ProfileElement?
     private let presenter: ProfilePresenter
-    private let profileAvatarBuilder: ProfileAvatarBuilder = ProfileAvatarBuilderImpl()
+    private let profileAvatarBuilder: ProfileAvatarBuilder
     
     init(
         viewModel: ProfileViewModel,
-        presenter: ProfilePresenter
+        presenter: ProfilePresenter,
+        profileAvatarBuilder: ProfileAvatarBuilder
     ) {
         self.viewModel = viewModel
         self.presenter = presenter
+        self.profileAvatarBuilder = profileAvatarBuilder
     }
     
     var body: some View {
@@ -551,8 +553,6 @@ extension ProfileScreen {
         switch color {
         case .zodiacBlue:
             return Color(.zodiacBlue)
-        case .pinkButton:
-            return Color(.pinkButton)
         case .zodiacPurple:
             return Color(.zodiacPurple)
         }

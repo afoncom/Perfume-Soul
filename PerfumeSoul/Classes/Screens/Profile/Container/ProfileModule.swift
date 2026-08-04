@@ -25,6 +25,7 @@ final class ProfileModule {
             dayKeyProvider: dayKeyProvider
         )
         let dailyQuizStateStorage = DailyQuizStateStorageImpl(userDefaults: .standard)
+        let profileAvatarBuilder = ProfileAvatarBuilderImpl()
         let router = ProfileRouterImpl(
             navigationController: navigationController,
             container: container,
@@ -40,7 +41,11 @@ final class ProfileModule {
             dailyQuizStateStorage: dailyQuizStateStorage
         )
         
-        let view = ProfileScreen(viewModel: viewModel, presenter: presenter)
+        let view = ProfileScreen(
+            viewModel: viewModel,
+            presenter: presenter,
+            profileAvatarBuilder: profileAvatarBuilder
+        )
         
         let hostingController = UIHostingController(rootView: view)
         hostingController.title = L10n.Screen.profile
