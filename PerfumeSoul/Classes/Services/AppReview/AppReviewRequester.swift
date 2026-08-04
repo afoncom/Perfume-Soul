@@ -17,6 +17,7 @@ protocol AppReviewRequesting {
 final class AppReviewRequesterImpl {
     private enum Keys {
         static let completedQuizCount = "appReview.completedQuizCount"
+        static let completedQuizCountVersion = "appReview.completedQuizCountVersion"
         static let lastRequestedVersion = "appReview.lastRequestedVersion"
     }
 
@@ -29,6 +30,9 @@ final class AppReviewRequesterImpl {
 
     @MainActor
     func requestReviewAfterQuizCompletion(in windowScene: UIWindowScene) {
+        let appVersion = currentAppVersion
+        resetCompletedQuizCountIfNeeded(for: appVersion)
+
         let completedQuizCount = userDefaults.integer(forKey: Keys.completedQuizCount) + 1
         userDefaults.set(completedQuizCount, forKey: Keys.completedQuizCount)
 
@@ -36,7 +40,6 @@ final class AppReviewRequesterImpl {
             return
         }
 
-        let appVersion = currentAppVersion
         guard userDefaults.string(forKey: Keys.lastRequestedVersion) != appVersion else {
             return
         }
@@ -48,6 +51,15 @@ final class AppReviewRequesterImpl {
     @MainActor
     private func requestReview(in windowScene: UIWindowScene) {
         AppStore.requestReview(in: windowScene)
+    }
+
+    private func resetCompletedQuizCountIfNeeded(for appVersion: String) {
+        guard userDefaults.string(forKey: Keys.completedQuizCountVersion) != appVersion else {
+            return
+        }
+
+        userDefaults.set(0, forKey: Keys.completedQuizCount)
+        userDefaults.set(appVersion, forKey: Keys.completedQuizCountVersion)
     }
 
     private var currentAppVersion: String {
