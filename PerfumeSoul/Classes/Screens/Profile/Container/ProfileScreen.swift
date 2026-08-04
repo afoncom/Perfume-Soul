@@ -12,6 +12,7 @@ struct ProfileScreen: View {
     @Bindable private var viewModel: ProfileViewModel
     @State private var selectedElement: ProfileElement?
     private let presenter: ProfilePresenter
+    private let profileAvatarBuilder: ProfileAvatarBuilder = ProfileAvatarBuilderImpl()
     
     init(
         viewModel: ProfileViewModel,
@@ -77,18 +78,19 @@ struct ProfileScreen: View {
 
 extension ProfileScreen {
     func makeProfileScreen(profile: Profile) -> some View {
-        let initials = makeProfileInitials(name: profile.name)
+        let avatar = profileAvatarBuilder.makeAvatar(name: profile.name)
 
         return HStack(spacing: 12) {
             Circle()
-                .fill(makeProfileAvatarGradient(initials: initials))
+                .fill(makeProfileAvatarGradient(colors: avatar.gradientColors))
                 .frame(width: 74, height: 74)
                 .overlay(
-                    Text(initials)
+                    Text(avatar.initials)
                         .font(.title3)
                         .fontWeight(.semibold)
                         .foregroundStyle(Color(.textOnAccent))
                 )
+                .accessibilityHidden(true)
             
             VStack(alignment: .leading, spacing: 8) {
                 Text(profile.name)
@@ -537,33 +539,23 @@ extension ProfileScreen {
         return DailyHoroscope(sign: sign, energyOfDay: "")
     }
 
-    func makeProfileInitials(name: String) -> String {
-        let initials = name
-            .split(whereSeparator: \.isWhitespace)
-            .prefix(2)
-            .compactMap(\.first)
-
-        return String(initials).uppercased()
-    }
-
-    func makeProfileAvatarGradient(initials: String) -> LinearGradient {
-        let colors: [Color] = [
-            Color(.zodiacBlue),
-            Color(.pinkButton),
-            Color(.zodiacPurple)
-        ]
-        let hash = initials.uppercased().unicodeScalars.reduce(UInt32(5381)) { result, scalar in
-            result &* 33 &+ UInt32(scalar.value)
-        }
-        let baseIndex = Int(hash % UInt32(colors.count))
-        let accentOffset = Int((hash / UInt32(colors.count)) % UInt32(colors.count - 1)) + 1
-        let accentIndex = (baseIndex + accentOffset) % colors.count
-
-        return LinearGradient(
-            colors: [colors[baseIndex], colors[accentIndex]],
+    func makeProfileAvatarGradient(colors: [ProfileAvatarColor]) -> LinearGradient {
+        LinearGradient(
+            colors: colors.map(makeProfileAvatarColor),
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
+    }
+
+    func makeProfileAvatarColor(_ color: ProfileAvatarColor) -> Color {
+        switch color {
+        case .zodiacBlue:
+            return Color(.zodiacBlue)
+        case .pinkButton:
+            return Color(.pinkButton)
+        case .zodiacPurple:
+            return Color(.zodiacPurple)
+        }
     }
 
     func makeZodiacBadge(zodiacInfo: DailyHoroscope) -> some View {

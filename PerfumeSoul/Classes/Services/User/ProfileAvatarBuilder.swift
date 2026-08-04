@@ -1,0 +1,60 @@
+//
+//  ProfileAvatarBuilder.swift
+//  PerfumeSoul
+//
+//  Created by Codex on 04.08.2026.
+//
+
+import Foundation
+
+protocol ProfileAvatarBuilder {
+    func makeAvatar(name: String) -> ProfileAvatar
+}
+
+struct ProfileAvatar: Equatable {
+    let initials: String
+    let gradientColors: [ProfileAvatarColor]
+}
+
+enum ProfileAvatarColor: CaseIterable, Equatable {
+    case zodiacBlue
+    case pinkButton
+    case zodiacPurple
+}
+
+final class ProfileAvatarBuilderImpl {}
+
+extension ProfileAvatarBuilderImpl: ProfileAvatarBuilder {
+    func makeAvatar(name: String) -> ProfileAvatar {
+        let initials = makeInitials(name: name)
+
+        return ProfileAvatar(
+            initials: initials,
+            gradientColors: makeGradientColors(initials: initials)
+        )
+    }
+}
+
+extension ProfileAvatarBuilderImpl {
+    private func makeInitials(name: String) -> String {
+        let initials = name
+            .split(whereSeparator: \.isWhitespace)
+            .prefix(2)
+            .compactMap(\.first)
+        let result = String(initials).uppercased()
+
+        return result.isEmpty ? "?" : result
+    }
+
+    private func makeGradientColors(initials: String) -> [ProfileAvatarColor] {
+        let colors = ProfileAvatarColor.allCases
+        let hash = initials.uppercased().unicodeScalars.reduce(UInt32(5381)) { result, scalar in
+            result &* 33 &+ UInt32(scalar.value)
+        }
+        let baseIndex = Int(hash % UInt32(colors.count))
+        let accentOffset = Int((hash / UInt32(colors.count)) % UInt32(colors.count - 1)) + 1
+        let accentIndex = (baseIndex + accentOffset) % colors.count
+
+        return [colors[baseIndex], colors[accentIndex]]
+    }
+}
