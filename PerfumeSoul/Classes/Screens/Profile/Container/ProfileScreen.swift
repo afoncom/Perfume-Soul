@@ -128,7 +128,7 @@ extension ProfileScreen {
                         symbol: "sun.max.fill",
                         symbolColor: Color(.natalSunAccent),
                         title: L10n.Profile.NatalChart.sun,
-                        value: makePlacementTitle(for: natalChart.sun)
+                        placement: natalChart.sun
                     )
 
                     makeNatalChartRow(
@@ -136,7 +136,7 @@ extension ProfileScreen {
                         symbol: "moon.fill",
                         symbolColor: Color(.natalMoonAccent),
                         title: L10n.Profile.NatalChart.moon,
-                        value: makePlacementTitle(for: natalChart.moon)
+                        placement: natalChart.moon
                     )
 
                     makeNatalChartRow(
@@ -144,7 +144,7 @@ extension ProfileScreen {
                         symbol: "circle.hexagongrid.fill",
                         symbolColor: Color(.pinkButton),
                         title: L10n.Profile.NatalChart.ascendant,
-                        value: makePlacementTitle(for: natalChart.ascendant)
+                        placement: natalChart.ascendant
                     )
                 }
             } else {
@@ -615,10 +615,6 @@ extension ProfileScreen {
         return L10n.Profile.PersonalPerfumes.subtitle
     }
 
-    func makePlacementTitle(for placement: ZodiacPlacement) -> String {
-        let horoscope = DailyHoroscope(sign: placement.sign.rawValue, energyOfDay: "")
-        return "\(horoscope.displayName) \(horoscope.symbol)"
-    }
 }
 
 // MARK: - Natal Chart Row
@@ -629,9 +625,11 @@ extension ProfileScreen {
         symbol: String,
         symbolColor: Color,
         title: String,
-        value: String
+        placement: ZodiacPlacement
     ) -> some View {
-        HStack(spacing: 12) {
+        let horoscope = DailyHoroscope(sign: placement.sign.rawValue, energyOfDay: "")
+
+        return HStack(spacing: 12) {
             Circle()
                 .fill(color)
                 .frame(width: 42, height: 42)
@@ -641,24 +639,44 @@ extension ProfileScreen {
                         .foregroundColor(symbolColor)
                 )
             
-            HStack(spacing: 8) {
+            VStack(alignment: .leading, spacing: 3) {
                 Text(title)
-                    .font(.headline)
+                    .font(.caption)
+                    .fontWeight(.medium)
+                    .foregroundStyle(Color(.textSecondary))
                 
-                Text(value)
+                Text(horoscope.displayName)
                     .font(.headline)
+                    .lineLimit(1)
                     .foregroundStyle(Color(.textPrimary))
             }
             
             Spacer()
             
-            Image(systemName: "chevron.right")
-                .font(.footnote.weight(.medium))
-                .foregroundStyle(Color(.textSecondary))
+            Text(horoscope.symbol)
+                .font(.title3)
+                .fontWeight(.semibold)
+                .foregroundStyle(symbolColor)
+                .frame(width: 40, height: 40)
+                .background(color)
+                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
-        .background(Color(.rowBackground))
+        .background(
+            LinearGradient(
+                colors: [
+                    color.opacity(0.55),
+                    Color(.rowBackground)
+                ],
+                startPoint: .leading,
+                endPoint: .trailing
+            )
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .stroke(symbolColor.opacity(0.12), lineWidth: 1)
+        )
         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 }
