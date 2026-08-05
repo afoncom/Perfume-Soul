@@ -47,6 +47,10 @@ extension ProfileAvatarBuilderImpl {
 
     private func makeGradientColors(initials: String) -> [ProfileAvatarColor] {
         let colors = ProfileAvatarColor.allCases
+        guard colors.count > 1 else {
+            return colors
+        }
+
         let hash = initials.uppercased().unicodeScalars.reduce(UInt32(5381)) { result, scalar in
             result &* 33 &+ UInt32(scalar.value)
         }
