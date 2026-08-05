@@ -21,7 +21,7 @@ struct PersonalPerfumeScreen: View {
     }
 
     var body: some View {
-        let bottomPadding = presenter.shouldShowContinueButton ? 120.0 : 32.0
+        let bottomPadding = presenter.shouldShowContinueButton ? 96.0 : 32.0
 
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 18) {

@@ -21,7 +21,7 @@ struct ProfileDescriptionScreen: View {
     }
     
     var body: some View {
-        let bottomPadding = presenter.shouldShowContinueButton ? 140.0 : 32.0
+        let bottomPadding = presenter.shouldShowContinueButton ? 96.0 : 32.0
 
         ZStack {
             makeContentView(bottomPadding: bottomPadding)
