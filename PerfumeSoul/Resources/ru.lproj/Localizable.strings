@@ -119,6 +119,9 @@
 "quizOfTheDay.completedSubtitle" = "На сегодня вопросы закончились. Возвращайтесь завтра за новым квизом и продолжайте набирать баллы.";
 "quizOfTheDay.completedTitle" = "Квиз на сегодня завершен";
 "quizOfTheDay.daySuffix" = "дня";
+"quizOfTheDay.closeExplanationButton" = "Понятно";
+"quizOfTheDay.explanationButton" = "Почему?";
+"quizOfTheDay.explanationTitle" = "Пояснение";
 "quizOfTheDay.finishQuiz" = "Завершить квиз";
 "quizOfTheDay.incorrectResult" = "Неправильно";
 "quizOfTheDay.retryButton" = "Повторить";

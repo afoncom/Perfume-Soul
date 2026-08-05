@@ -11,6 +11,7 @@ import SwiftUI
 struct QuizOfTheDayScreen: View {
     private let viewModel: QuizOfTheDayViewModel
     private let presenter: QuizOfTheDayPresenter
+    @State private var isShowingExplanation = false
 
     init(
         viewModel: QuizOfTheDayViewModel,
@@ -31,10 +32,7 @@ struct QuizOfTheDayScreen: View {
                 } else if let currentQuestion = viewModel.currentQuestion {
                     makeQuestionCard(question: currentQuestion)
                     if viewModel.isAnswerSubmitted {
-                        makeExplanationCard(
-                            explanation: currentQuestion.explanation,
-                            isCorrect: viewModel.isSelectedAnswerCorrect
-                        )
+                        makeAnswerResultPill(isCorrect: viewModel.isSelectedAnswerCorrect)
                     }
                 } else {
                     ProgressView()
@@ -52,6 +50,11 @@ struct QuizOfTheDayScreen: View {
         }
         .task {
             await presenter.onAppear()
+        }
+        .sheet(isPresented: $isShowingExplanation) {
+            makeExplanationSheet()
+                .presentationDetents([.height(280), .medium])
+                .presentationDragIndicator(.visible)
         }
     }
 }
@@ -96,7 +99,6 @@ extension QuizOfTheDayScreen {
                     trailingValue: "/ \(viewModel.totalQuestions)"
                 )
 
-                
                 Spacer(minLength: 8)
 
                 makeStatItem(
@@ -251,46 +253,111 @@ extension QuizOfTheDayScreen {
         .buttonStyle(.plain)
     }
 
-    func makeExplanationCard(explanation: String, isCorrect: Bool) -> some View {
+    func makeAnswerResultPill(isCorrect: Bool) -> some View {
         let accentColor = isCorrect ? Color(.zodiacMint) : Color(.pinkButton)
 
-        return VStack(alignment: .leading, spacing: 14) {
-            HStack(spacing: 12) {
-                ZStack {
-                    Circle()
-                        .fill(accentColor)
-                        .frame(width: 46, height: 46)
+        return HStack(spacing: 12) {
+            ZStack {
+                Circle()
+                    .fill(accentColor)
+                    .frame(width: 38, height: 38)
 
-                    Image(systemName: isCorrect ? "checkmark" : "xmark")
-                        .font(.title3.weight(.bold))
-                        .foregroundStyle(Color(.surfacePrimary))
-                }
-
-                Text(isCorrect ? L10n.QuizOfTheDay.correctResult : L10n.QuizOfTheDay.incorrectResult)
-                    .font(.system(size: 24, weight: .semibold, design: .rounded))
-                    .foregroundStyle(accentColor)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
-
-                Spacer(minLength: 0)
+                Image(systemName: isCorrect ? "checkmark" : "xmark")
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundStyle(Color(.textPrimary))
             }
 
-            Text(explanation)
-                .font(.system(size: 17, weight: .regular, design: .rounded))
-                .foregroundStyle(Color(.descriptionText))
-                .lineSpacing(3)
-                .fixedSize(horizontal: false, vertical: true)
+            Text(isCorrect ? L10n.QuizOfTheDay.correctResult : L10n.QuizOfTheDay.incorrectResult)
+                .font(.system(size: 17, weight: .semibold, design: .rounded))
+                .foregroundStyle(Color(.textPrimary))
+                .lineLimit(1)
+
+            Spacer(minLength: 0)
+
+            Button {
+                isShowingExplanation = true
+            } label: {
+                HStack(spacing: 6) {
+                    Text(L10n.QuizOfTheDay.explanationButton)
+                        .font(.system(size: 15, weight: .semibold, design: .rounded))
+
+                    Image(systemName: "questionmark.circle.fill")
+                        .font(.system(size: 16, weight: .semibold))
+                }
+                .foregroundStyle(accentColor)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(accentColor.opacity(0.12))
+                .clipShape(Capsule())
+            }
+            .buttonStyle(.plain)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 18)
-        .padding(.vertical, 20)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
         .background(accentColor.opacity(0.08))
-        .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
         .overlay(
-            RoundedRectangle(cornerRadius: 28, style: .continuous)
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
                 .stroke(accentColor.opacity(0.16), lineWidth: 1)
         )
-        .shadow(color: Color(.cardShadowSubtle), radius: 10, x: 0, y: 4)
+        .transition(.scale(scale: 0.96).combined(with: .opacity))
+    }
+
+    @ViewBuilder
+    func makeExplanationSheet() -> some View {
+        if let currentQuestion = viewModel.currentQuestion {
+            let isCorrect = viewModel.isSelectedAnswerCorrect
+            let accentColor = isCorrect ? Color(.zodiacMint) : Color(.pinkButton)
+
+            VStack(alignment: .leading, spacing: 18) {
+                HStack(spacing: 12) {
+                    ZStack {
+                        Circle()
+                            .fill(accentColor)
+                            .frame(width: 46, height: 46)
+
+                        Image(systemName: isCorrect ? "checkmark" : "xmark")
+                            .font(.title3.weight(.bold))
+                            .foregroundStyle(Color(.textPrimary))
+                    }
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(L10n.QuizOfTheDay.explanationTitle)
+                            .font(.system(size: 14, weight: .medium, design: .rounded))
+                            .foregroundStyle(Color(.textSecondary))
+
+                        Text(isCorrect ? L10n.QuizOfTheDay.correctResult : L10n.QuizOfTheDay.incorrectResult)
+                            .font(.system(size: 24, weight: .semibold, design: .rounded))
+                            .foregroundStyle(Color(.textPrimary))
+                    }
+                }
+
+                Text(currentQuestion.explanation)
+                    .font(.system(size: 17, weight: .regular, design: .rounded))
+                    .foregroundStyle(Color(.descriptionText))
+                    .lineSpacing(3)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Spacer(minLength: 0)
+
+                Button {
+                    isShowingExplanation = false
+                } label: {
+                    Text(L10n.QuizOfTheDay.closeExplanationButton)
+                        .font(.system(size: 18, weight: .semibold, design: .rounded))
+                        .foregroundStyle(Color(.textOnAccent))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 15)
+                        .background(Color(.pinkButton))
+                        .clipShape(Capsule())
+                }
+                .buttonStyle(.plain)
+            }
+            .padding(.horizontal, 24)
+            .padding(.top, 28)
+            .padding(.bottom, 18)
+            .background(Color(.backgroundPrimary))
+        }
     }
 
     func makeQuizCompletedCard() -> some View {

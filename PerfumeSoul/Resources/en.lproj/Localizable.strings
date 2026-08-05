@@ -118,6 +118,9 @@
 "quizOfTheDay.completedSubtitle" = "There are no more questions for today. Come back tomorrow for a new quiz and keep earning points.";
 "quizOfTheDay.completedTitle" = "Today's quiz is complete";
 "quizOfTheDay.daySuffix" = "days";
+"quizOfTheDay.closeExplanationButton" = "Got it";
+"quizOfTheDay.explanationButton" = "Why?";
+"quizOfTheDay.explanationTitle" = "Explanation";
 "quizOfTheDay.finishQuiz" = "Finish Quiz";
 "quizOfTheDay.incorrectResult" = "Incorrect";
 "quizOfTheDay.retryButton" = "Retry";
