@@ -25,7 +25,9 @@ struct PersonalPerfumeScreen: View {
 
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 18) {
-                makeHeaderView()
+                if presenter.shouldShowContinueButton {
+                    makeHeaderView()
+                }
                 makeSectionsView()
             }
             .padding(.horizontal, 16)
@@ -46,7 +48,9 @@ struct PersonalPerfumeScreen: View {
             await presenter.onAppear()
         }
         .overlay(alignment: .top) {
-            makeTopSafeAreaMask()
+            if presenter.shouldShowContinueButton {
+                makeTopSafeAreaBackground()
+            }
         }
         .safeAreaInset(edge: .bottom) {
             if presenter.shouldShowContinueButton {
@@ -60,10 +64,14 @@ struct PersonalPerfumeScreen: View {
 }
 
 extension PersonalPerfumeScreen {
-    private func makeTopSafeAreaMask() -> some View {
-        Color(.backgroundPrimary)
-            .frame(height: 92)
-            .ignoresSafeArea(edges: .top)
+    private func makeTopSafeAreaBackground() -> some View {
+        GeometryReader { proxy in
+            Color(.backgroundPrimary)
+                .frame(height: proxy.safeAreaInsets.top)
+                .frame(maxHeight: .infinity, alignment: .top)
+                .ignoresSafeArea(edges: .top)
+        }
+        .allowsHitTesting(false)
     }
 
     @ViewBuilder

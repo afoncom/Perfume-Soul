@@ -34,9 +34,6 @@ struct CalculationScreen: View {
             .padding(.bottom, 24)
         }
         .background(Color(.backgroundPrimary))
-        .overlay(alignment: .top) {
-            makeTopSafeAreaMask()
-        }
         .scrollDismissesKeyboard(.interactively)
         .sheet(item: $activePicker) { picker in
             switch picker {
@@ -70,12 +67,6 @@ extension CalculationScreen {
 }
 
 extension CalculationScreen {
-    func makeTopSafeAreaMask() -> some View {
-        Color(.backgroundPrimary)
-            .frame(height: 92)
-            .ignoresSafeArea(edges: .top)
-    }
-
     func makeHeaderView() -> some View {
         VStack(spacing: 12) {
             Text(L10n.Screen.calculationCreateProfile)

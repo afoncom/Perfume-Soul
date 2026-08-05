@@ -27,9 +27,6 @@ struct ProfileDescriptionScreen: View {
             makeContentView(bottomPadding: bottomPadding)
         }
         .background(Color(.backgroundPrimary).ignoresSafeArea())
-        .overlay(alignment: .top) {
-            makeTopSafeAreaMask()
-        }
         .safeAreaInset(edge: .bottom) {
             if presenter.shouldShowContinueButton {
                 makeContinueButton()
@@ -41,14 +38,23 @@ struct ProfileDescriptionScreen: View {
         .task {
             await presenter.onAppear()
         }
+        .overlay(alignment: .top) {
+            if presenter.shouldShowContinueButton {
+                makeTopSafeAreaBackground()
+            }
+        }
     }
 }
 
 extension ProfileDescriptionScreen {
-    private func makeTopSafeAreaMask() -> some View {
-        Color(.backgroundPrimary)
-            .frame(height: 92)
-            .ignoresSafeArea(edges: .top)
+    private func makeTopSafeAreaBackground() -> some View {
+        GeometryReader { proxy in
+            Color(.backgroundPrimary)
+                .frame(height: proxy.safeAreaInsets.top)
+                .frame(maxHeight: .infinity, alignment: .top)
+                .ignoresSafeArea(edges: .top)
+        }
+        .allowsHitTesting(false)
     }
 
     @ViewBuilder

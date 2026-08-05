@@ -199,7 +199,7 @@
 "calculation.nameTitle" = "Имя";
 "calculation.subtitle" = "Введите данные рождения, чтобы открыть персональные рекомендации.";
 "common.continueButton" = "Продолжить";
-"personalPerfume.navigationTitle" = "Персональные ароматы";
+"personalPerfume.navigationTitle" = "Мои ароматы";
 "personalPerfume.subtitle" = "Откройте персональную подборку ароматов.";
 "personalPerfume.title" = "Ваши персональные ароматы";
 "personalPerfume.empty.title" = "Персональные ароматы сейчас недоступны";
