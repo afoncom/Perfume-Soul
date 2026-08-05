@@ -163,39 +163,25 @@ extension ProfileScreen {
                 .font(.title3)
                 .fontWeight(.medium)
             if let elementBalance = viewModel.profileCalculation?.elementBalance {
+                let elementItems = makeElementBalanceItems(elementBalance: elementBalance)
+
                 makeElementBalanceBar(elementBalance: elementBalance)
 
                 LazyVGrid(
                     columns: Array(
                         repeating: GridItem(.flexible(), spacing: 4, alignment: .leading),
-                        count: 4
+                        count: max(1, min(elementItems.count, 4))
                     ),
                     spacing: 8
                 ) {
-                    makeElementItem(
-                        element: .fire,
-                        percent: "\(elementBalance.fire)%",
-                        title: L10n.Profile.Element.fire,
-                        color: Color(.pinkButton)
-                    )
-                    makeElementItem(
-                        element: .earth,
-                        percent: "\(elementBalance.earth)%",
-                        title: L10n.Profile.Element.earth,
-                        color: Color(.zodiacMint)
-                    )
-                    makeElementItem(
-                        element: .air,
-                        percent: "\(elementBalance.air)%",
-                        title: L10n.Profile.Element.air,
-                        color: Color(.zodiacCyan)
-                    )
-                    makeElementItem(
-                        element: .water,
-                        percent: "\(elementBalance.water)%",
-                        title: L10n.Profile.Element.water,
-                        color: Color(.zodiacBlue)
-                    )
+                    ForEach(elementItems, id: \.element) { item in
+                        makeElementItem(
+                            element: item.element,
+                            percent: "\(item.value)%",
+                            title: item.title,
+                            color: item.color
+                        )
+                    }
                 }
             } else {
                 makeProfileCalculationStateView()
@@ -679,7 +665,7 @@ extension ProfileScreen {
 
 // MARK: - Element Item
 
-private enum ProfileElement: Equatable {
+private enum ProfileElement: Hashable {
     case fire
     case earth
     case air
@@ -690,24 +676,15 @@ extension ProfileScreen {
     func makeElementBalanceBar(elementBalance: ElementBalance) -> some View {
         GeometryReader { proxy in
             let width = Double(proxy.size.width)
+            let elementItems = makeElementBalanceItems(elementBalance: elementBalance)
 
             HStack(spacing: 0) {
-                makeElementBalanceSegment(
-                    color: Color(.pinkButton),
-                    width: width * .init(elementBalance.fire) / 100
-                )
-                makeElementBalanceSegment(
-                    color: Color(.zodiacMint),
-                    width: width * .init(elementBalance.earth) / 100
-                )
-                makeElementBalanceSegment(
-                    color: Color(.zodiacCyan),
-                    width: width * .init(elementBalance.air) / 100
-                )
-                makeElementBalanceSegment(
-                    color: Color(.zodiacBlue),
-                    width: width * .init(elementBalance.water) / 100
-                )
+                ForEach(elementItems, id: \.element) { item in
+                    makeElementBalanceSegment(
+                        color: item.color,
+                        width: width * .init(item.value) / 100
+                    )
+                }
             }
             .background(Color(.placeholderSoft))
             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
@@ -718,6 +695,18 @@ extension ProfileScreen {
     func makeElementBalanceSegment(color: Color, width: Double) -> some View {
         color
             .frame(width: .init(width))
+    }
+
+    private func makeElementBalanceItems(elementBalance: ElementBalance) -> [
+        (element: ProfileElement, value: Int, title: String, color: Color)
+    ] {
+        [
+            (.fire, elementBalance.fire, L10n.Profile.Element.fire, Color(.pinkButton)),
+            (.earth, elementBalance.earth, L10n.Profile.Element.earth, Color(.zodiacMint)),
+            (.air, elementBalance.air, L10n.Profile.Element.air, Color(.zodiacCyan)),
+            (.water, elementBalance.water, L10n.Profile.Element.water, Color(.zodiacBlue))
+        ]
+        .filter { $0.value > 0 }
     }
 
     private func makeElementItem(
