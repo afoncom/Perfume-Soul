@@ -9,13 +9,13 @@
 "discover.findSimilar.firstPerfumeValidationMessage" = "Select at least one perfume from the list.";
 "discover.findSimilar.selectionValidationMessage" = "If you entered an optional perfume, select it from the list.";
 "discover.findSimilar.samePerfumesValidationMessage" = "Choose different perfumes for recommendations.";
-"discover.findSimilar.firstPerfumeTitle" = "Perfume 1";
+"discover.findSimilar.firstPerfumeTitle" = "Main perfume";
 "discover.findSimilar.headerSubtitle" = "Add the perfumes you have, and we will find similar scents.";
 "discover.findSimilar.hint" = "The more perfumes you add, the more accurate the recommendations will be.";
 "discover.findSimilar.optionalSubtitle" = "Optional";
-"discover.findSimilar.secondPerfumeTitle" = "Perfume 2";
+"discover.findSimilar.secondPerfumeTitle" = "Additional perfume";
 "discover.findSimilar.subtitle" = "Enter perfumes you own to find similar scents.";
-"discover.findSimilar.thirdPerfumeTitle" = "Perfume 3";
+"discover.findSimilar.thirdPerfumeTitle" = "Additional perfume";
 "discover.findSimilar.title" = "Find Similar Perfumes";
 "discover.scentArchetype.button" = "Start quiz";
 "discover.scentArchetype.title" = "Find Your Scent Archetype";

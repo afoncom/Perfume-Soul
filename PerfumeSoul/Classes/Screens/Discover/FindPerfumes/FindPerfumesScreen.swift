@@ -145,30 +145,38 @@ extension FindPerfumesScreen {
         text: Binding<String>,
         field: FindPerfumeField
     ) -> some View {
-        HStack(spacing: 14) {
-            ZStack {
-                Circle()
-                    .fill(Color(.surfaceOverlay))
-                    .frame(width: 46, height: 46)
-
-                Image(systemName: "bag")
-                    .font(.headline)
-                    .foregroundStyle(field == .first ? Color(.pinkButton) : Color(.textSecondary))
-            }
-
+        HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 6) {
-                Text(title)
-                    .font(.headline)
-                    .fontWeight(.medium)
-                    .foregroundStyle(Color(.textPrimary))
+                HStack(spacing: 8) {
+                    Text(fieldNumber(field))
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(Color(.pinkButton))
+                        .frame(width: 24, height: 24)
+                        .background(Color(.purpleTable))
+                        .clipShape(Circle())
 
-                TextField(placeholder, text: text)
-                    .focused($focusedField, equals: field)
-                    .submitLabel(.done)
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
-                    .font(.subheadline)
-                    .foregroundStyle(Color(.textSecondary))
+                    Text(title)
+                        .font(.headline)
+                        .fontWeight(.medium)
+                        .foregroundStyle(Color(.textPrimary))
+                }
+
+                ZStack(alignment: .leading) {
+                    if text.wrappedValue.isEmpty {
+                        Text(placeholder)
+                            .font(.subheadline)
+                            .foregroundStyle(Color(.descriptionText))
+                            .lineLimit(1)
+                    }
+
+                    TextField("", text: text)
+                        .focused($focusedField, equals: field)
+                        .submitLabel(.done)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                        .font(.subheadline)
+                        .foregroundStyle(Color(.textPrimary))
+                }
             }
 
             Spacer()
@@ -183,11 +191,26 @@ extension FindPerfumesScreen {
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .stroke(Color(.cardBorder), lineWidth: 1)
+                .stroke(
+                    focusedField == field ? Color(.pinkButton) : Color(.cardBorder),
+                    lineWidth: focusedField == field ? 1.5 : 1
+                )
         )
+        .contentShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
         .onTapGesture {
             focusedField = field
+        }
+    }
+
+    private func fieldNumber(_ field: FindPerfumeField) -> String {
+        switch field {
+        case .first:
+            return "1"
+        case .second:
+            return "2"
+        case .third:
+            return "3"
         }
     }
 
