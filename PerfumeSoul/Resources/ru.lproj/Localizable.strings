@@ -163,7 +163,7 @@
 "settings.privacy.deleteAllProfilesSubtitle" = "Удалить все созданные профили и данные приложения";
 "settings.privacy.deleteAllProfilesTitle" = "Удалить все профили";
 "settings.privacy.howDataIsUsedSubtitle" = "Узнайте, как мы защищаем вашу информацию";
-"settings.privacy.howDataIsUsedTitle" = "Как используются мои данные";
+"settings.privacy.howDataIsUsedTitle" = "Политика конфиденциальности";
 "settings.privacyTitle" = "Конфиденциальность";
 "settings.support.supportDeveloperSubtitle" = "Если приложение вам нравится, вы можете поддержать его развитие";
 "settings.support.supportDeveloperTitle" = "Поддержать разработчика";
