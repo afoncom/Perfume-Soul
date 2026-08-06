@@ -24,6 +24,11 @@ struct PerfumeNotesResponse: Codable, Equatable {
     let moodProfile: String?
     let longevityScore: Int?
     let sillageScore: Int?
+    let releaseYear: Int?
+    let perfumer: String?
+    let shortDescription: String?
+    let recommendationReason: String?
+    let fullStory: String?
     let accords: [PerfumeAccordResponse]
     let topNotes: [String]
     let middleNotes: [String]
@@ -142,6 +147,11 @@ enum PerfumeNotesLoader {
             moodProfile: perfume.moodProfile,
             longevityScore: perfume.longevityScore,
             sillageScore: perfume.sillageScore,
+            releaseYear: perfume.releaseYear,
+            perfumer: perfume.perfumer,
+            shortDescription: perfume.shortDescription,
+            recommendationReason: perfume.recommendationReason,
+            fullStory: perfume.fullStory,
             accords: accords,
             topNotes: topNotes,
             middleNotes: middleNotes,
@@ -150,8 +160,8 @@ enum PerfumeNotesLoader {
     }
 }
 
-private extension Perfume {
-    init?(model: PerfumeModel) {
+extension Perfume {
+    fileprivate init?(model: PerfumeModel) {
         guard let id = model.id else {
             return nil
         }
@@ -173,8 +183,8 @@ private extension Perfume {
     }
 }
 
-private extension String {
-    var escapedForLikePattern: String {
+extension String {
+    fileprivate var escapedForLikePattern: String {
         replacingOccurrences(of: "\\", with: "\\\\")
             .replacingOccurrences(of: "%", with: "\\%")
             .replacingOccurrences(of: "_", with: "\\_")

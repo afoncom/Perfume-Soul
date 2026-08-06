@@ -39,6 +39,21 @@ final class PerfumeModel: Model, @unchecked Sendable {
     @OptionalField(key: "market_segment")
     var marketSegment: String?
 
+    @OptionalField(key: "release_year")
+    var releaseYear: Int?
+
+    @OptionalField(key: "perfumer")
+    var perfumer: String?
+
+    @OptionalField(key: "short_description")
+    var shortDescription: String?
+
+    @OptionalField(key: "recommendation_reason")
+    var recommendationReason: String?
+
+    @OptionalField(key: "full_story")
+    var fullStory: String?
+
     @Parent(key: "brand_id")
     var brand: BrandModel
 
@@ -63,6 +78,11 @@ final class PerfumeModel: Model, @unchecked Sendable {
         genderProfile: String? = nil,
         moodProfile: String? = nil,
         marketSegment: String? = nil,
+        releaseYear: Int? = nil,
+        perfumer: String? = nil,
+        shortDescription: String? = nil,
+        recommendationReason: String? = nil,
+        fullStory: String? = nil,
         brandID: Int
     ) {
         self.id = id
@@ -77,6 +97,11 @@ final class PerfumeModel: Model, @unchecked Sendable {
         self.genderProfile = genderProfile
         self.moodProfile = moodProfile
         self.marketSegment = marketSegment
+        self.releaseYear = releaseYear
+        self.perfumer = perfumer
+        self.shortDescription = shortDescription
+        self.recommendationReason = recommendationReason
+        self.fullStory = fullStory
         self.$brand.id = brandID
     }
 }

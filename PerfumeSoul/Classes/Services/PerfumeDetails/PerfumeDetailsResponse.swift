@@ -20,6 +20,11 @@ struct PerfumeDetailsResponse: Decodable {
     let moodProfile: String?
     let longevityScore: Int?
     let sillageScore: Int?
+    let releaseYear: Int?
+    let perfumer: String?
+    let shortDescription: String?
+    let recommendationReason: String?
+    let fullStory: String?
     let accords: [PerfumeAccordResponse]
     let topNotes: [String]
     let middleNotes: [String]
@@ -38,6 +43,11 @@ struct PerfumeDetailsResponse: Decodable {
         case moodProfile
         case longevityScore
         case sillageScore
+        case releaseYear
+        case perfumer
+        case shortDescription
+        case recommendationReason
+        case fullStory
         case accords
         case topNotes
         case middleNotes
@@ -59,6 +69,11 @@ struct PerfumeDetailsResponse: Decodable {
         self.moodProfile = try container.decodeIfPresent(String.self, forKey: .moodProfile)
         self.longevityScore = try container.decodeIfPresent(Int.self, forKey: .longevityScore)
         self.sillageScore = try container.decodeIfPresent(Int.self, forKey: .sillageScore)
+        self.releaseYear = try container.decodeIfPresent(Int.self, forKey: .releaseYear)
+        self.perfumer = try container.decodeIfPresent(String.self, forKey: .perfumer)
+        self.shortDescription = try container.decodeIfPresent(String.self, forKey: .shortDescription)
+        self.recommendationReason = try container.decodeIfPresent(String.self, forKey: .recommendationReason)
+        self.fullStory = try container.decodeIfPresent(String.self, forKey: .fullStory)
         self.accords = try container.decodeIfPresent([PerfumeAccordResponse].self, forKey: .accords) ?? []
         self.topNotes = try container.decode([String].self, forKey: .topNotes)
         self.middleNotes = try container.decode([String].self, forKey: .middleNotes)
