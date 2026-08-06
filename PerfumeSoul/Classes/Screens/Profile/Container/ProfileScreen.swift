@@ -47,8 +47,9 @@ struct ProfileScreen: View {
                         makeProfileDescriptionRow()
                             .padding(.horizontal, 16)
                         
-                        makeAddedNewProfiless()
-                            .padding(.horizontal, 16)
+                        // TODO: Re-enable multi-profile switcher after the V1 profile flow supports it.
+                        // makeAddedNewProfiless()
+                        //     .padding(.horizontal, 16)
                         
                         makeDeleteProfileAction()
                             .padding(.horizontal, 16)
