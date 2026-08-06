@@ -190,6 +190,8 @@ extension CalculationScreen {
             if focusedField == .birthPlace, !viewModel.birthPlaceCompletions.isEmpty {
                 VStack(spacing: 0) {
                     ForEach(Array(viewModel.birthPlaceCompletions.prefix(5).enumerated()), id: \.offset) { index, completion in
+                        let subtitle = makeBirthPlaceCompletionSubtitle(completion.subtitle)
+
                         Button {
                             focusedField = nil
                             Task {
@@ -202,8 +204,8 @@ extension CalculationScreen {
                                     .foregroundStyle(Color(.textPrimary))
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 
-                                if !completion.subtitle.isEmpty {
-                                    Text(completion.subtitle)
+                                if let subtitle {
+                                    Text(subtitle)
                                         .font(.footnote)
                                         .foregroundStyle(Color(.textSecondary))
                                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -228,6 +230,19 @@ extension CalculationScreen {
                 )
             }
         }
+    }
+
+    func makeBirthPlaceCompletionSubtitle(_ subtitle: String) -> String? {
+        let components = subtitle
+            .split(separator: ",")
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+
+        guard components.count > 1 else {
+            return nil
+        }
+
+        return components.dropLast().joined(separator: ", ")
     }
     
     // MARK: - Continue Button

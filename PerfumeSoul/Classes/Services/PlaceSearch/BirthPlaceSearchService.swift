@@ -68,7 +68,7 @@ final class BirthPlaceSearchService: NSObject {
         }
 
         return BirthPlaceSelection(
-            displayName: makeDisplayName(from: completion),
+            displayName: makeDisplayName(from: mapItem.placemark, fallback: completion),
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
             timeZoneIdentifier: timeZoneIdentifier
@@ -89,12 +89,33 @@ final class BirthPlaceSearchService: NSObject {
         return placemarks?.first?.timeZone?.identifier
     }
 
-    private func makeDisplayName(from completion: MKLocalSearchCompletion) -> String {
-        guard !completion.subtitle.isEmpty else {
-            return completion.title
+    private func makeDisplayName(
+        from placemark: MKPlacemark,
+        fallback completion: MKLocalSearchCompletion
+    ) -> String {
+        let title = trimmed(completion.title) ?? trimmed(placemark.name) ?? ""
+        guard let administrativeArea = trimmed(placemark.administrativeArea) else {
+            return title
         }
 
-        return "\(completion.title), \(completion.subtitle)"
+        guard !isSamePlaceComponent(title, administrativeArea) else {
+            return title
+        }
+
+        return "\(title), \(administrativeArea)"
+    }
+
+    private func trimmed(_ value: String?) -> String? {
+        let trimmedValue = value?.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmedValue?.isEmpty == false ? trimmedValue : nil
+    }
+
+    private func isSamePlaceComponent(_ lhs: String, _ rhs: String) -> Bool {
+        lhs.compare(
+            rhs,
+            options: [.caseInsensitive, .diacriticInsensitive],
+            locale: .current
+        ) == .orderedSame
     }
 
     private func finishSearch(with results: [MKLocalSearchCompletion]) {
