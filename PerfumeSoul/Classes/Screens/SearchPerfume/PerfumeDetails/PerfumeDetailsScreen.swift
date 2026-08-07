@@ -356,7 +356,7 @@ extension PerfumeDetailsScreen {
             .fixedSize(horizontal: false, vertical: true)
             .padding(.horizontal, 8)
             .padding(.vertical, 5)
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(accentColor.opacity(0.12))
             .clipShape(Capsule())
     }

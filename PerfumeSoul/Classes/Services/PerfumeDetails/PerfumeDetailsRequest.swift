@@ -14,5 +14,4 @@ struct PerfumeDetailsRequest: Request {
     var path: String {
         "/perfumes/\(perfumeID)/notes"
     }
-
 }
