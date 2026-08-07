@@ -153,13 +153,13 @@ enum PerfumeNotesLoader {
             releaseYear: perfume.releaseYear,
             perfumer: perfume.perfumer,
             shortDescription: isEnglish
-                ? perfume.shortDescriptionEnglish ?? perfume.shortDescription
+                ? perfume.shortDescriptionEnglish
                 : perfume.shortDescription,
             recommendationReason: isEnglish
-                ? perfume.recommendationReasonEnglish ?? perfume.recommendationReason
+                ? perfume.recommendationReasonEnglish
                 : perfume.recommendationReason,
             fullStory: isEnglish
-                ? perfume.fullStoryEnglish ?? perfume.fullStory
+                ? perfume.fullStoryEnglish
                 : perfume.fullStory,
             accords: accords,
             topNotes: topNotes,

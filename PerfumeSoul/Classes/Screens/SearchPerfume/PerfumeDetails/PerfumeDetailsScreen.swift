@@ -115,7 +115,6 @@ extension PerfumeDetailsScreen {
                         .font(.footnote)
                         .foregroundStyle(Color(.descriptionText))
                         .fixedSize(horizontal: false, vertical: true)
-                        .lineLimit(4)
                 }
             }
 
@@ -287,16 +286,13 @@ extension PerfumeDetailsScreen {
             .accessibilityAddTraits(isStoryExpanded ? .isSelected : [])
 
             if isStoryExpanded {
-                VStack(alignment: .leading, spacing: 12) {
-                    if let fullStory = perfumeDetails.fullStory,
-                        !fullStory.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                        Text(fullStory)
-                            .font(.footnote)
-                            .foregroundStyle(Color(.descriptionText))
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
+                if let fullStory = perfumeDetails.fullStory {
+                    Text(fullStory)
+                        .font(.footnote)
+                        .foregroundStyle(Color(.descriptionText))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .transition(.opacity.combined(with: .move(edge: .top)))
                 }
-                .transition(.opacity.combined(with: .move(edge: .top)))
             }
         }
         .padding(16)
@@ -438,13 +434,12 @@ extension PerfumeDetailsScreen {
                     spacing: 8
                 ) {
                     ForEach(notes, id: \.self) { note in
-                    makeCompactChip(text: note, accentColor: accentColor)
+                        makeCompactChip(text: note, accentColor: accentColor)
                     }
                 }
             }
         }
     }
-
 
     private func makeWearSection(perfumeDetails: PerfumeDetails) -> some View {
         VStack(alignment: .leading, spacing: 14) {
