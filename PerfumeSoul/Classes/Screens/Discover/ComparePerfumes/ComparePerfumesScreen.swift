@@ -545,7 +545,7 @@ extension ComparePerfumesScreen {
                     .foregroundStyle(Color(.textPrimary))
                     .lineLimit(2)
             }
-            .frame(height: 78, alignment: .topLeading)
+            .frame(minHeight: 78, alignment: .topLeading)
             
             VStack(spacing: 10) {
                 ForEach(metrics, id: \.0) { metric in

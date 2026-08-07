@@ -157,10 +157,6 @@
 "sendFeedback.mailUnavailable" = "Apple Mail is not configured on this device. Use the address above to send your message manually.";
 "sendFeedback.subtitle" = "Write to the developer if you want to share an idea, review, or suggestion for improving the app.";
 "sendFeedback.title" = "Reviews and Suggestions";
-"settings.privacy.clearLocalDataSubtitle" = "Delete cache and temporary files";
-"settings.privacy.clearLocalDataTitle" = "Clear Local Data";
-"settings.privacy.deleteAllProfilesSubtitle" = "Delete all created profiles and app data";
-"settings.privacy.deleteAllProfilesTitle" = "Delete All Profiles";
 "settings.privacy.howDataIsUsedSubtitle" = "Learn how we protect your information";
 "settings.privacy.howDataIsUsedTitle" = "Privacy Policy";
 "settings.privacyTitle" = "Privacy";

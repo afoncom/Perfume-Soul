@@ -149,7 +149,7 @@ extension CalculationScreen {
     func makeBirthPlaceField() -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(L10n.Calculation.birthPlaceTitle)
-                .font (.title3)
+                .font(.title3)
                 .fontWeight(.medium)
             
             HStack(spacing: 12) {
@@ -190,8 +190,6 @@ extension CalculationScreen {
             if focusedField == .birthPlace, !viewModel.birthPlaceCompletions.isEmpty {
                 VStack(spacing: 0) {
                     ForEach(Array(viewModel.birthPlaceCompletions.prefix(5).enumerated()), id: \.offset) { index, completion in
-                        let subtitle = makeBirthPlaceCompletionSubtitle(completion.subtitle)
-
                         Button {
                             focusedField = nil
                             Task {
@@ -199,17 +197,14 @@ extension CalculationScreen {
                             }
                         } label: {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text(completion.title)
+                                Text(BirthPlaceNameFormatter.format(
+                                    title: completion.title,
+                                    subtitle: completion.subtitle
+                                ))
                                     .font(.headline)
                                     .foregroundStyle(Color(.textPrimary))
+                                    .lineLimit(2)
                                     .frame(maxWidth: .infinity, alignment: .leading)
-                                
-                                if let subtitle {
-                                    Text(subtitle)
-                                        .font(.footnote)
-                                        .foregroundStyle(Color(.textSecondary))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                }
                             }
                             .padding(.horizontal, 16)
                             .padding(.vertical, 12)
@@ -232,19 +227,6 @@ extension CalculationScreen {
         }
     }
 
-    func makeBirthPlaceCompletionSubtitle(_ subtitle: String) -> String? {
-        let components = subtitle
-            .split(separator: ",")
-            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-            .filter { !$0.isEmpty }
-
-        guard components.count > 1 else {
-            return nil
-        }
-
-        return components.dropLast().joined(separator: ", ")
-    }
-    
     // MARK: - Continue Button
     func makeContinueButton() -> some View {
         Button {

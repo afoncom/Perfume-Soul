@@ -48,9 +48,6 @@ struct ProfileScreen: View {
                             .padding(.horizontal, 16)
                         
                         // TODO: Re-enable multi-profile switcher after the V1 profile flow supports it.
-                        // makeAddedNewProfiless()
-                        //     .padding(.horizontal, 16)
-                        
                         makeDeleteProfileAction()
                             .padding(.horizontal, 16)
                     }
@@ -466,39 +463,6 @@ extension ProfileScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
     
-    func makeAddedNewProfiless() -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text(L10n.Profile.Profiles.title)
-                    .font(.title3)
-                    .fontWeight(.medium)
-                
-                Spacer()
-                
-                Button(action: {
-                    presenter.addedNewProfilesButtonTab()
-                }) {
-                    Image(systemName: "plus")
-                        .font(.headline.weight(.medium))
-                        .foregroundStyle(Color(.textSecondary))
-                        .frame(width: 28, height: 28)
-                }
-            }
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
-                    makeAddedProfileItem(name: "Laura")
-                    makeAddedProfileItem(name: "Alex")
-                    makeAddedProfileItem(name: "Ada")
-                }
-            }
-        }
-        .padding(14)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
-    }
-    
     func makeDeleteProfileAction() -> some View {
         Button {
             viewModel.isShowingDeleteProfileAlert = true
@@ -674,11 +638,11 @@ extension ProfileScreen {
                 endPoint: .trailing
             )
         )
+        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: 18, style: .continuous)
                 .stroke(symbolColor.opacity(0.12), lineWidth: 1)
         )
-        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 }
 
@@ -761,21 +725,5 @@ extension ProfileScreen {
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
         .buttonStyle(.plain)
-    }
-}
-
-// MARK: - Added Profile Item
-
-extension ProfileScreen {
-    func makeAddedProfileItem(name: String) -> some View {
-        VStack(spacing: 8) {
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(Color(.placeholderMedium))
-                .frame(width: 92, height: 92)
-            
-            Text(name)
-                .font(.headline)
-                .foregroundStyle(Color(.textPrimary))
-        }
     }
 }

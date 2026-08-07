@@ -44,6 +44,7 @@ struct QuizOfTheDayScreen: View {
             .padding(.horizontal, 16)
             .padding(.top, 12)
             .padding(.bottom, 28)
+            .animation(.snappy, value: viewModel.isAnswerSubmitted)
         }
         .background {
             Color(.backgroundPrimary).ignoresSafeArea()

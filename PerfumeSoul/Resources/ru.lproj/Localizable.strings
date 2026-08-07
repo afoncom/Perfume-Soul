@@ -158,10 +158,6 @@
 "sendFeedback.subtitle" = "Напишите разработчику, если хотите поделиться идеей, отзывом или предложением по улучшению приложения.";
 "sendFeedback.title" = "Отзывы и пожелания";
 "settings.notificationsTitle" = "Уведомления";
-"settings.privacy.clearLocalDataSubtitle" = "Удалить кэш и временные файлы";
-"settings.privacy.clearLocalDataTitle" = "Очистить локальные данные";
-"settings.privacy.deleteAllProfilesSubtitle" = "Удалить все созданные профили и данные приложения";
-"settings.privacy.deleteAllProfilesTitle" = "Удалить все профили";
 "settings.privacy.howDataIsUsedSubtitle" = "Узнайте, как мы защищаем вашу информацию";
 "settings.privacy.howDataIsUsedTitle" = "Политика конфиденциальности";
 "settings.privacyTitle" = "Конфиденциальность";
