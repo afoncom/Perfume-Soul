@@ -91,6 +91,9 @@ extension ProfileScreen {
                         .font(.title3)
                         .fontWeight(.semibold)
                         .foregroundStyle(Color(.textOnAccent))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.6)
+                        .frame(width: 56)
                 )
                 .accessibilityHidden(true)
             
@@ -555,6 +558,12 @@ extension ProfileScreen {
             return Color(.zodiacBlue)
         case .zodiacPurple:
             return Color(.zodiacPurple)
+        case .zodiacBrown:
+            return Color(.zodiacBrown)
+        case .zodiacPink:
+            return Color(.zodiacPink)
+        case .zodiacGray:
+            return Color(.zodiacGray)
         }
     }
 

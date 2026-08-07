@@ -35,14 +35,14 @@ final class AppReviewRequesterImpl {
 
     @MainActor
     func requestReviewAfterQuizCompletion(in windowScene: UIWindowScene) {
-        guard shouldRequestReviewAfterQuizCompletion() else {
+        guard recordQuizCompletionAndCheckReviewRequest() else {
             return
         }
 
         requestReview(in: windowScene)
     }
 
-    func shouldRequestReviewAfterQuizCompletion() -> Bool {
+    func recordQuizCompletionAndCheckReviewRequest() -> Bool {
         let appVersion = appVersionProvider.currentAppVersion()
         resetCompletedQuizCountIfNeeded(for: appVersion)
 

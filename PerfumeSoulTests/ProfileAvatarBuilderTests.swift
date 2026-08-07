@@ -30,4 +30,11 @@ final class ProfileAvatarBuilderTests: XCTestCase {
         XCTAssertEqual(firstAvatar.gradientColors, secondAvatar.gradientColors)
         XCTAssertEqual(firstAvatar.gradientColors.count, 2)
     }
+
+    func testMakeAvatarCanUseDifferentGradientColorsForDifferentNames() {
+        let firstAvatar = builder.makeAvatar(name: "Maria Elena")
+        let secondAvatar = builder.makeAvatar(name: "Dmitry Ivanov")
+
+        XCTAssertNotEqual(firstAvatar.gradientColors, secondAvatar.gradientColors)
+    }
 }
