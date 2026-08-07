@@ -150,9 +150,9 @@ extension FindPerfumesScreen {
                 HStack(spacing: 8) {
                     Text(fieldNumber(field))
                         .font(.footnote.weight(.semibold))
-                        .foregroundStyle(Color(.pinkButton))
+                        .foregroundStyle(Color(.textOnAccent))
                         .frame(width: 24, height: 24)
-                        .background(Color(.purpleTable))
+                        .background(Color(.pinkButton))
                         .clipShape(Circle())
 
                     Text(title)
