@@ -628,7 +628,7 @@ extension ProfileScreen {
             Text(horoscope.symbol)
                 .font(.title3)
                 .fontWeight(.semibold)
-                .foregroundStyle(symbolColor)
+                .foregroundStyle(Color(.textPrimary))
                 .frame(width: 40, height: 40)
                 .background(color)
                 .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
