@@ -40,4 +40,14 @@ final class BirthPlaceNameFormatterTests: XCTestCase {
             "Springfield, Illinois"
         )
     }
+
+    func testFormatReturnsSubtitleWhenPrimaryIsEmpty() {
+        XCTAssertEqual(
+            BirthPlaceNameFormatter.format(
+                title: nil,
+                subtitle: "Illinois, United States"
+            ),
+            "Illinois, United States"
+        )
+    }
 }
