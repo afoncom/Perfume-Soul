@@ -167,9 +167,11 @@ extension FindPerfumesScreen {
                             .font(.subheadline)
                             .foregroundStyle(Color(.descriptionText))
                             .lineLimit(1)
+                            .accessibilityHidden(true)
                     }
 
                     TextField("", text: text)
+                        .accessibilityLabel("\(fieldNumber(field)). \(title)")
                         .focused($focusedField, equals: field)
                         .submitLabel(.done)
                         .textInputAutocapitalization(.never)

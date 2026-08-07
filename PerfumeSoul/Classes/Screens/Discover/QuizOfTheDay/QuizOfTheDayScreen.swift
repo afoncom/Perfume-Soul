@@ -53,7 +53,7 @@ struct QuizOfTheDayScreen: View {
         }
         .sheet(isPresented: $isShowingExplanation) {
             makeExplanationSheet()
-                .presentationDetents([.height(280), .medium])
+                .presentationDetents([.height(280), .medium, .large])
                 .presentationDragIndicator(.visible)
         }
     }
@@ -284,7 +284,7 @@ extension QuizOfTheDayScreen {
                     Image(systemName: "questionmark.circle.fill")
                         .font(.system(size: 16, weight: .semibold))
                 }
-                .foregroundStyle(accentColor)
+                .foregroundStyle(Color(.textPrimary))
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)
                 .background(accentColor.opacity(0.12))
@@ -332,11 +332,13 @@ extension QuizOfTheDayScreen {
                     }
                 }
 
-                Text(currentQuestion.explanation)
-                    .font(.system(size: 17, weight: .regular, design: .rounded))
-                    .foregroundStyle(Color(.descriptionText))
-                    .lineSpacing(3)
-                    .fixedSize(horizontal: false, vertical: true)
+                ScrollView(.vertical, showsIndicators: false) {
+                    Text(currentQuestion.explanation)
+                        .font(.system(size: 17, weight: .regular, design: .rounded))
+                        .foregroundStyle(Color(.descriptionText))
+                        .lineSpacing(3)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
 
                 Spacer(minLength: 0)
 
