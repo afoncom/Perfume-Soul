@@ -281,6 +281,10 @@ extension PerfumeDetailsScreen {
                 }
             }
             .buttonStyle(.plain)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(L10n.PerfumeDetails.historyTitle)
+            .accessibilityValue(storyButtonTitle)
+            .accessibilityAddTraits(isStoryExpanded ? .isSelected : [])
 
             if isStoryExpanded {
                 VStack(alignment: .leading, spacing: 12) {
@@ -369,7 +373,7 @@ extension PerfumeDetailsScreen {
             makeSectionTitle(L10n.PerfumeDetails.notesSectionTitle)
 
             makeNotesCard(
-                accentColor: Color(.pinkButton),
+                topAccentColor: Color(.pinkButton),
                 topNotes: perfumeDetails.topNotes,
                 middleNotes: perfumeDetails.middleNotes,
                 baseNotes: perfumeDetails.baseNotes
@@ -386,7 +390,7 @@ extension PerfumeDetailsScreen {
     }
 
     private func makeNotesCard(
-        accentColor: Color,
+        topAccentColor: Color,
         topNotes: [String],
         middleNotes: [String],
         baseNotes: [String]
@@ -395,7 +399,7 @@ extension PerfumeDetailsScreen {
             makeNotesGroup(
                 title: L10n.PerfumeDetails.topNotesTitle,
                 notes: topNotes,
-                accentColor: accentColor
+                accentColor: topAccentColor
             )
 
             makeNotesGroup(
