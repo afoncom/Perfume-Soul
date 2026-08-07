@@ -45,7 +45,7 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
     }
 
-    func testVersionBumpResetsQuizCountBeforeReviewRequest() {
+    func testVersionBumpKeepsQuizCountForAnotherReviewRequest() {
         let requester = makeRequester()
 
         XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
@@ -54,8 +54,6 @@ final class AppReviewRequesterTests: XCTestCase {
 
         appVersionProvider.appVersion = "1.1-2"
 
-        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
-        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
         XCTAssertTrue(requester.registerQuizCompletionAndCheckReviewEligibility())
     }
 

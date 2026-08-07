@@ -768,10 +768,21 @@ extension ProfileScreen {
 
 extension ProfileScreen {
     func makeAddedProfileItem(name: String) -> some View {
-        VStack(spacing: 8) {
+        let avatar = profileAvatarBuilder.makeAvatar(name: name)
+
+        return VStack(spacing: 8) {
             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(Color(.placeholderMedium))
+                .fill(makeProfileAvatarGradient(colors: avatar.gradientColors))
                 .frame(width: 92, height: 92)
+                .overlay {
+                    Text(avatar.initials)
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(Color(.textOnAccent))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                        .accessibilityHidden(true)
+                }
             
             Text(name)
                 .font(.headline)
