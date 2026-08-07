@@ -86,15 +86,14 @@ extension ProfileScreen {
             Circle()
                 .fill(makeProfileAvatarGradient(colors: avatar.gradientColors))
                 .frame(width: 74, height: 74)
-                .overlay(
+                .overlay {
                     Text(avatar.initials)
                         .font(.title3)
                         .fontWeight(.semibold)
                         .foregroundStyle(Color(.textOnAccent))
                         .lineLimit(1)
-                        .minimumScaleFactor(0.6)
-                        .frame(width: 56)
-                )
+                        .minimumScaleFactor(0.8)
+                }
                 .accessibilityHidden(true)
             
             VStack(alignment: .leading, spacing: 8) {

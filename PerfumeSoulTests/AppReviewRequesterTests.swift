@@ -31,32 +31,32 @@ final class AppReviewRequesterTests: XCTestCase {
     func testFreshInstallDoesNotRequestReviewUntilThirdQuizCompletion() {
         let requester = makeRequester()
 
-        XCTAssertFalse(requester.recordQuizCompletionAndCheckReviewRequest())
-        XCTAssertFalse(requester.recordQuizCompletionAndCheckReviewRequest())
-        XCTAssertTrue(requester.recordQuizCompletionAndCheckReviewRequest())
+        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
+        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
+        XCTAssertTrue(requester.registerQuizCompletionAndCheckReviewEligibility())
     }
 
     func testSameVersionDoesNotRepeatReviewRequest() {
         let requester = makeRequester()
 
-        XCTAssertFalse(requester.recordQuizCompletionAndCheckReviewRequest())
-        XCTAssertFalse(requester.recordQuizCompletionAndCheckReviewRequest())
-        XCTAssertTrue(requester.recordQuizCompletionAndCheckReviewRequest())
-        XCTAssertFalse(requester.recordQuizCompletionAndCheckReviewRequest())
+        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
+        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
+        XCTAssertTrue(requester.registerQuizCompletionAndCheckReviewEligibility())
+        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
     }
 
     func testVersionBumpResetsQuizCountBeforeReviewRequest() {
         let requester = makeRequester()
 
-        XCTAssertFalse(requester.recordQuizCompletionAndCheckReviewRequest())
-        XCTAssertFalse(requester.recordQuizCompletionAndCheckReviewRequest())
-        XCTAssertTrue(requester.recordQuizCompletionAndCheckReviewRequest())
+        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
+        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
+        XCTAssertTrue(requester.registerQuizCompletionAndCheckReviewEligibility())
 
         appVersionProvider.appVersion = "1.1-2"
 
-        XCTAssertFalse(requester.recordQuizCompletionAndCheckReviewRequest())
-        XCTAssertFalse(requester.recordQuizCompletionAndCheckReviewRequest())
-        XCTAssertTrue(requester.recordQuizCompletionAndCheckReviewRequest())
+        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
+        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
+        XCTAssertTrue(requester.registerQuizCompletionAndCheckReviewEligibility())
     }
 
     private func makeRequester() -> AppReviewRequesterImpl {
