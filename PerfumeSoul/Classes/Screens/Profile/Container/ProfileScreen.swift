@@ -615,7 +615,7 @@ extension ProfileScreen {
                 Text(title)
                     .font(.caption)
                     .fontWeight(.medium)
-                    .foregroundStyle(Color(.textSecondary))
+                    .foregroundStyle(Color(.textPrimary))
                 
                 Text(horoscope.displayName)
                     .font(.headline)
