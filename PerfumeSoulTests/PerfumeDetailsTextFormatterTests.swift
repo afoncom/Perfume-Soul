@@ -9,7 +9,7 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
             "fresh floral", "fresh woody", "marine fresh", "woody amber",
             "woody aromatic", "woody citrus", "woody floral", "woody leather",
             "woody spicy", "amber gourmand", "amber spicy", "amber woody",
-            "fresh aromatic", "airy energetic", "romantic soft", "dark sensual",
+            "fresh aromatic", "airy energetic", "balanced modern", "romantic soft", "dark sensual",
             "cozy indulgent", "refined grounded", "bright energetic",
             "warm indulgent", "rich sensual", "bright romantic"
         ]

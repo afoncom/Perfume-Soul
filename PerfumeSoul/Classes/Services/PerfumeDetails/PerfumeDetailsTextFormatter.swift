@@ -150,6 +150,7 @@ enum PerfumeDetailsTextFormatter {
         case "woody floral": return L10n.PerfumeDetails.ProfilePhrase.woodyFloral
         case "fresh aromatic": return L10n.PerfumeDetails.ProfilePhrase.freshAromatic
         case "airy energetic": return L10n.PerfumeDetails.ProfilePhrase.airyEnergetic
+        case "balanced modern": return L10n.PerfumeDetails.ProfilePhrase.balancedModern
         case "romantic soft": return L10n.PerfumeDetails.ProfilePhrase.romanticSoft
         case "dark sensual": return L10n.PerfumeDetails.ProfilePhrase.darkSensual
         case "cozy indulgent": return L10n.PerfumeDetails.ProfilePhrase.cozyIndulgent
