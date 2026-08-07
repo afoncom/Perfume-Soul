@@ -33,10 +33,17 @@ jobs:
       shell: bash
       run: |
         set -eo pipefail
+        SIMULATOR_ID=$(xcrun simctl list devices available | awk -F '[()]' '/iPhone/ { print $2; exit }')
+        if [[ -z "$SIMULATOR_ID" ]]; then
+          echo "No available iPhone simulator found."
+          xcrun simctl list devices available
+          exit 1
+        fi
+
         xcodebuild test \
           -project PerfumeSoul.xcodeproj \
           -scheme PerfumeSoul \
-          -destination 'platform=iOS Simulator,OS=latest' \
+          -destination "platform=iOS Simulator,id=$SIMULATOR_ID" \
           -enableCodeCoverage YES \
           | tee xcodebuild.log
     - name: Upload logs if failed
