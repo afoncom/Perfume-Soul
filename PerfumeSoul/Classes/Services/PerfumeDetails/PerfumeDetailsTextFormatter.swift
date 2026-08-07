@@ -126,7 +126,7 @@ enum PerfumeDetailsTextFormatter {
         }
     }
 
-    private static func localizedProfilePhraseKey(_ phrase: String) -> String? {
+    static func localizedProfilePhraseKey(_ phrase: String) -> String? {
         switch phrase {
         case "all season": return L10n.PerfumeDetails.ProfilePhrase.allSeason
         case "autumn winter": return L10n.PerfumeDetails.ProfilePhrase.autumnWinter

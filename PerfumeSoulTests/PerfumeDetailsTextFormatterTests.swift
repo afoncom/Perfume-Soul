@@ -16,8 +16,13 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
 
         for phrase in backendPhrases {
             XCTAssertNotNil(
-                PerfumeDetailsTextFormatter.localizedProfilePhrase(phrase),
+                PerfumeDetailsTextFormatter.localizedProfilePhraseKey(phrase),
                 "Missing localization for \(phrase)"
+            )
+            XCTAssertNotEqual(
+                PerfumeDetailsTextFormatter.localizedProfilePhrase(phrase),
+                phrase,
+                "Unlocalized backend phrase: \(phrase)"
             )
         }
     }
