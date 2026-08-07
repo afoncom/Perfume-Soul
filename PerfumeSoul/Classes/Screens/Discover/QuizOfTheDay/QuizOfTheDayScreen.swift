@@ -341,8 +341,6 @@ extension QuizOfTheDayScreen {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
-                Spacer(minLength: 0)
-
                 Button {
                     isShowingExplanation = false
                 } label: {

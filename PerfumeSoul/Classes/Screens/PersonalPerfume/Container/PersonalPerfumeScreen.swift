@@ -21,11 +21,11 @@ struct PersonalPerfumeScreen: View {
     }
 
     var body: some View {
-        let bottomPadding = presenter.shouldShowContinueButton ? 96.0 : 32.0
+        let bottomPadding = presenter.isPresentedInOnboarding ? 96.0 : 32.0
 
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 18) {
-                if presenter.shouldShowContinueButton {
+                if presenter.isPresentedInOnboarding {
                     makeHeaderView()
                 }
                 makeSectionsView()
@@ -48,12 +48,12 @@ struct PersonalPerfumeScreen: View {
             await presenter.onAppear()
         }
         .overlay(alignment: .top) {
-            if presenter.shouldShowContinueButton {
+            if presenter.isPresentedInOnboarding {
                 makeTopSafeAreaBackground()
             }
         }
         .safeAreaInset(edge: .bottom) {
-            if presenter.shouldShowContinueButton {
+            if presenter.isPresentedInOnboarding {
                 makeContinueButton()
                     .padding(.horizontal, 24)
                     .padding(.top, 12)
@@ -88,14 +88,14 @@ extension PersonalPerfumeScreen {
                 title: L10n.PersonalPerfume.Error.MissingProfile.title,
                 subtitle: L10n.PersonalPerfume.Error.MissingProfile.subtitle,
                 canRetry: false,
-                canSkip: presenter.shouldShowContinueButton
+                canSkip: presenter.isPresentedInOnboarding
             )
         case .requestFailed:
             makeErrorState(
                 title: L10n.PersonalPerfume.Error.RequestFailed.title,
                 subtitle: L10n.PersonalPerfume.Error.RequestFailed.subtitle,
                 canRetry: true,
-                canSkip: presenter.shouldShowContinueButton
+                canSkip: presenter.isPresentedInOnboarding
             )
         }
     }

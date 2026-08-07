@@ -21,14 +21,14 @@ struct ProfileDescriptionScreen: View {
     }
     
     var body: some View {
-        let bottomPadding = presenter.shouldShowContinueButton ? 96.0 : 32.0
+        let bottomPadding = presenter.isPresentedInOnboarding ? 96.0 : 32.0
 
         ZStack {
             makeContentView(bottomPadding: bottomPadding)
         }
         .background(Color(.backgroundPrimary).ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
-            if presenter.shouldShowContinueButton {
+            if presenter.isPresentedInOnboarding {
                 makeContinueButton()
                     .padding(.horizontal, 24)
                     .padding(.top, 12)
@@ -39,7 +39,7 @@ struct ProfileDescriptionScreen: View {
             await presenter.onAppear()
         }
         .overlay(alignment: .top) {
-            if presenter.shouldShowContinueButton {
+            if presenter.isPresentedInOnboarding {
                 makeTopSafeAreaBackground()
             }
         }
@@ -77,7 +77,7 @@ extension ProfileDescriptionScreen {
                 title: L10n.ProfileDescription.unavailableTitle,
                 message: L10n.ProfileDescription.unavailableMessage,
                 canRetry: false,
-                canSkip: presenter.shouldShowContinueButton
+                canSkip: presenter.isPresentedInOnboarding
             )
             .padding(.horizontal, 24)
         case .invalidBirthData:
@@ -85,7 +85,7 @@ extension ProfileDescriptionScreen {
                 title: L10n.ProfileDescription.invalidBirthDataTitle,
                 message: L10n.ProfileDescription.invalidBirthDataMessage,
                 canRetry: false,
-                canSkip: presenter.shouldShowContinueButton
+                canSkip: presenter.isPresentedInOnboarding
             )
             .padding(.horizontal, 24)
         case .failed:
@@ -93,7 +93,7 @@ extension ProfileDescriptionScreen {
                 title: L10n.ProfileDescription.failedTitle,
                 message: L10n.ProfileDescription.failedMessage,
                 canRetry: true,
-                canSkip: presenter.shouldShowContinueButton
+                canSkip: presenter.isPresentedInOnboarding
             )
             .padding(.horizontal, 24)
         }

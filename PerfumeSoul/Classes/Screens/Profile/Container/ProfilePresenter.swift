@@ -7,7 +7,6 @@
 //
 
 protocol ProfilePresenter {
-    func addedNewProfilesButtonTab()
     func personalPerfumesButtonTapped() async
     func profileDescriptionButtonTapped()
     func retryProfileCalculationButtonTapped() async
@@ -42,10 +41,6 @@ final class ProfilePresenterImpl {
 }
 
 extension ProfilePresenterImpl: ProfilePresenter {
-    func addedNewProfilesButtonTab() {
-        router.showAddedNewProfiles()
-    }
-    
     func personalPerfumesButtonTapped() async {
         let profileCalculationState = await MainActor.run {
             viewModel.profileCalculationState

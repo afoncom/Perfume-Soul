@@ -120,7 +120,6 @@ extension SettingsScreen {
                     subtitle: L10n.Settings.Privacy.howDataIsUsedSubtitle
                 )
 
-                // TODO: Re-enable local data/profile management after the V1 settings flow supports it.
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)

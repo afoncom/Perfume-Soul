@@ -62,14 +62,12 @@
 "profile.natalChart.sun" = "Солнце";
 "profile.natalChart.sunValue" = "Телец ♉";
 "profile.natalChart.title" = "Моя натальная карта";
-"profile.profiles.title" = "Профили";
 "quizOfTheDay.nextQuestion" = "Следующий вопрос";
 "quizOfTheDay.scoreHint" = "1 правильный ответ = 1 балл";
 "quizOfTheDay.scoreToday" = "Баллы за сегодня";
 "quizOfTheDay.selectOneAnswer" = "Выберите один правильный ответ";
 "quizOfTheDay.streakDays" = "Серия дней";
 "quizOfTheDay.title" = "Квиз";
-"screen.addedProfiles" = "Добавленные профили";
 "screen.comparePerfumes" = "Сравнение ароматов";
 "screen.dayInPerfumery" = "День в парфюмерии";
 "screen.discover" = "Подбор";

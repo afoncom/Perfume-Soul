@@ -47,7 +47,6 @@ struct ProfileScreen: View {
                         makeProfileDescriptionRow()
                             .padding(.horizontal, 16)
                         
-                        // TODO: Re-enable multi-profile switcher after the V1 profile flow supports it.
                         makeDeleteProfileAction()
                             .padding(.horizontal, 16)
                     }

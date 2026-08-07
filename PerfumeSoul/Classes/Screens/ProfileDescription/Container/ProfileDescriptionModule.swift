@@ -32,7 +32,7 @@ final class ProfileDescriptionModule {
             profileService: profileService,
             profileCalculationService: profileCalculationService,
             profileDescriptionBuilder: profileDescriptionBuilder,
-            shouldShowContinueButton: onFinish != nil
+            isPresentedInOnboarding: onFinish != nil
         )
         
         let view = ProfileDescriptionScreen(viewModel: viewModel, presenter: presenter)

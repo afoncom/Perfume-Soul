@@ -30,4 +30,14 @@ final class BirthPlaceNameFormatterTests: XCTestCase {
             "Madrid"
         )
     }
+
+    func testFormatDropsLeadingTitleBeforeRegion() {
+        XCTAssertEqual(
+            BirthPlaceNameFormatter.format(
+                title: "Springfield",
+                subtitle: "Springfield, Illinois, United States"
+            ),
+            "Springfield, Illinois"
+        )
+    }
 }

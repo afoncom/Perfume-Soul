@@ -22,7 +22,7 @@ final class PersonalPerfumeModule {
             router: router,
             service: service,
             profileCalculation: profileCalculation,
-            shouldShowContinueButton: onFinish != nil
+            isPresentedInOnboarding: onFinish != nil
         )
         
         let view = PersonalPerfumeScreen(viewModel: viewModel, presenter: presenter)
