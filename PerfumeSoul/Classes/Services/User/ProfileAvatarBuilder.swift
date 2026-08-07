@@ -19,6 +19,9 @@ struct ProfileAvatar: Equatable {
 enum ProfileAvatarColor: CaseIterable, Equatable {
     case zodiacBlue
     case zodiacPurple
+    case zodiacBrown
+    case zodiacPink
+    case zodiacGray
 }
 
 final class ProfileAvatarBuilderImpl {}
