@@ -15,7 +15,4 @@ struct PerfumeDetailsRequest: Request {
         "/perfumes/\(perfumeID)/notes"
     }
 
-    var headers: [String: String] {
-        ["Accept-Language": Locale.preferredLanguages.first ?? Locale.current.identifier]
-    }
 }

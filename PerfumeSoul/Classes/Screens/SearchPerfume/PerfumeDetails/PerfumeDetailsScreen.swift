@@ -309,10 +309,8 @@ extension PerfumeDetailsScreen {
     }
 
     private func perfumeInitials(_ perfumeDetails: PerfumeDetails) -> String {
-        let words = (perfumeDetails.brand + " " + perfumeDetails.name)
-            .split(separator: " ")
-            .prefix(2)
-            .compactMap(\.first)
+        let words = [perfumeDetails.brand, perfumeDetails.name]
+            .compactMap { $0.split(separator: " ").first?.first }
 
         return words.map(String.init).joined().uppercased()
     }
@@ -359,8 +357,7 @@ extension PerfumeDetailsScreen {
         Text(text)
             .font(.caption2.weight(.medium))
             .foregroundStyle(accentColor)
-            .lineLimit(1)
-            .minimumScaleFactor(0.75)
+            .fixedSize(horizontal: false, vertical: true)
             .padding(.horizontal, 8)
             .padding(.vertical, 5)
             .frame(maxWidth: .infinity)
@@ -436,7 +433,7 @@ extension PerfumeDetailsScreen {
                     .foregroundStyle(Color(.textSecondary))
             } else {
                 LazyVGrid(
-                    columns: [GridItem(.adaptive(minimum: 82), spacing: 8)],
+                    columns: [GridItem(.adaptive(minimum: 110), spacing: 8)],
                     alignment: .leading,
                     spacing: 8
                 ) {

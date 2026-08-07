@@ -23,6 +23,10 @@ enum PerfumeDetailsTextFormatter {
             return recommendationReason
         }
 
+        guard isRussianLocale else {
+            return L10n.PerfumeDetails.defaultRecommendation
+        }
+
         let notes = (perfumeDetails.topNotes + perfumeDetails.middleNotes + perfumeDetails.baseNotes)
             .compactMap(nonBlank)
             .prefix(3)
@@ -59,13 +63,16 @@ enum PerfumeDetailsTextFormatter {
             return nil
         }
 
-        let tokens = value
-            .split { $0.isWhitespace }
-            .map(String.init)
-            .map(localizedProfileToken)
-            .map { $0.localizedCapitalized }
+        let normalizedValue = normalized(value)
+        if let localizedPhrase = localizedProfilePhraseKey(normalizedValue) {
+            return localizedPhrase
+        }
 
-        return tokens.isEmpty ? nil : tokens.joined(separator: " / ")
+        guard !normalizedValue.contains(" ") else {
+            return value
+        }
+
+        return localizedProfileToken(value).localizedCapitalized
     }
 
     static func localizedAccord(_ value: String) -> String {
@@ -95,21 +102,68 @@ enum PerfumeDetailsTextFormatter {
     private static func localizedProfileToken(_ token: String) -> String {
         switch normalized(token) {
         case "all": return L10n.PerfumeDetails.ProfileToken.all
+        case "airy": return L10n.PerfumeDetails.ProfileToken.airy
         case "autumn": return L10n.PerfumeDetails.ProfileToken.autumn
+        case "balanced": return L10n.PerfumeDetails.ProfileToken.balanced
         case "bright": return L10n.PerfumeDetails.ProfileToken.bright
+        case "cozy": return L10n.PerfumeDetails.ProfileToken.cozy
         case "dark": return L10n.PerfumeDetails.ProfileToken.dark
         case "energetic": return L10n.PerfumeDetails.ProfileToken.energetic
         case "grounded": return L10n.PerfumeDetails.ProfileToken.grounded
+        case "indulgent": return L10n.PerfumeDetails.ProfileToken.indulgent
+        case "modern": return L10n.PerfumeDetails.ProfileToken.modern
         case "refined": return L10n.PerfumeDetails.ProfileToken.refined
         case "romantic": return L10n.PerfumeDetails.ProfileToken.romantic
+        case "rich": return L10n.PerfumeDetails.ProfileToken.rich
         case "season": return L10n.PerfumeDetails.ProfileToken.season
         case "sensual": return L10n.PerfumeDetails.ProfileToken.sensual
         case "soft": return L10n.PerfumeDetails.ProfileToken.soft
         case "spring": return L10n.PerfumeDetails.ProfileToken.spring
         case "summer": return L10n.PerfumeDetails.ProfileToken.summer
+        case "warm": return L10n.PerfumeDetails.ProfileToken.warm
         case "winter": return L10n.PerfumeDetails.ProfileToken.winter
         default: return localizedAccord(token)
         }
+    }
+
+    private static func localizedProfilePhraseKey(_ phrase: String) -> String? {
+        switch phrase {
+        case "all season": return L10n.PerfumeDetails.ProfilePhrase.allSeason
+        case "autumn winter": return L10n.PerfumeDetails.ProfilePhrase.autumnWinter
+        case "spring autumn": return L10n.PerfumeDetails.ProfilePhrase.springAutumn
+        case "spring summer": return L10n.PerfumeDetails.ProfilePhrase.springSummer
+        case "fresh citrus": return L10n.PerfumeDetails.ProfilePhrase.freshCitrus
+        case "floral citrus": return L10n.PerfumeDetails.ProfilePhrase.floralCitrus
+        case "floral woody": return L10n.PerfumeDetails.ProfilePhrase.floralWoody
+        case "marine fresh": return L10n.PerfumeDetails.ProfilePhrase.marineFresh
+        case "woody amber": return L10n.PerfumeDetails.ProfilePhrase.woodyAmber
+        case "woody spicy": return L10n.PerfumeDetails.ProfilePhrase.woodySpicy
+        case "fresh woody": return L10n.PerfumeDetails.ProfilePhrase.freshWoody
+        case "amber woody": return L10n.PerfumeDetails.ProfilePhrase.amberWoody
+        case "amber spicy": return L10n.PerfumeDetails.ProfilePhrase.amberSpicy
+        case "floral fruity": return L10n.PerfumeDetails.ProfilePhrase.floralFruity
+        case "fresh floral": return L10n.PerfumeDetails.ProfilePhrase.freshFloral
+        case "amber gourmand": return L10n.PerfumeDetails.ProfilePhrase.amberGourmand
+        case "woody leather": return L10n.PerfumeDetails.ProfilePhrase.woodyLeather
+        case "woody aromatic": return L10n.PerfumeDetails.ProfilePhrase.woodyAromatic
+        case "woody citrus": return L10n.PerfumeDetails.ProfilePhrase.woodyCitrus
+        case "woody floral": return L10n.PerfumeDetails.ProfilePhrase.woodyFloral
+        case "fresh aromatic": return L10n.PerfumeDetails.ProfilePhrase.freshAromatic
+        case "airy energetic": return L10n.PerfumeDetails.ProfilePhrase.airyEnergetic
+        case "romantic soft": return L10n.PerfumeDetails.ProfilePhrase.romanticSoft
+        case "dark sensual": return L10n.PerfumeDetails.ProfilePhrase.darkSensual
+        case "cozy indulgent": return L10n.PerfumeDetails.ProfilePhrase.cozyIndulgent
+        case "refined grounded": return L10n.PerfumeDetails.ProfilePhrase.refinedGrounded
+        case "bright energetic": return L10n.PerfumeDetails.ProfilePhrase.brightEnergetic
+        case "warm indulgent": return L10n.PerfumeDetails.ProfilePhrase.warmIndulgent
+        case "rich sensual": return L10n.PerfumeDetails.ProfilePhrase.richSensual
+        case "bright romantic": return L10n.PerfumeDetails.ProfilePhrase.brightRomantic
+        default: return nil
+        }
+    }
+
+    private static var isRussianLocale: Bool {
+        Bundle.main.preferredLocalizations.first?.hasPrefix("ru") == true
     }
 
     private static func normalized(_ value: String) -> String {
