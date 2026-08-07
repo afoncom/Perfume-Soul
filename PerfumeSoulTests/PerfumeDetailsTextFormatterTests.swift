@@ -25,7 +25,7 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
     func testLocalizedProfilePhraseKeepsUnknownPhraseTogether() {
         XCTAssertEqual(
             PerfumeDetailsTextFormatter.localizedProfilePhrase("rare modern profile"),
-            "rare modern profile"
+            "Rare Modern Profile"
         )
     }
 }

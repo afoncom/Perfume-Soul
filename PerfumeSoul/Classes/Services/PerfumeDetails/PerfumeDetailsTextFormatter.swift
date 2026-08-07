@@ -68,11 +68,11 @@ enum PerfumeDetailsTextFormatter {
             return localizedPhrase
         }
 
-        guard !normalizedValue.contains(" ") else {
-            return value
-        }
+        let tokens = normalizedValue
+            .split(separator: " ")
+            .map { localizedProfileToken(String($0)).localizedCapitalized }
 
-        return localizedProfileToken(value).localizedCapitalized
+        return tokens.joined(separator: " ")
     }
 
     static func localizedAccord(_ value: String) -> String {
