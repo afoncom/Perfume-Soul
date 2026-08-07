@@ -15,6 +15,7 @@ public func configure(_ app: Application) throws {
     app.migrations.add(AddPerfumeMarketSegmentMigration())
     app.migrations.add(CreatePerfumeAccordsMigration())
     app.migrations.add(AddPerfumeStoryMetadataMigration())
+    app.migrations.add(AddPerfumeStoryEnglishMetadataMigration())
 
     try app.autoMigrate().wait()
 

@@ -68,6 +68,7 @@ struct AddPerfumeStoryMetadataMigration: AsyncMigration {
                 ON brands.brand = story.brand_name
             WHERE perfumes.brand_id = brands.id
                 AND perfumes.perfume_name = story.perfume_name
+                AND perfumes.full_story IS NULL
             """)
             .run()
     }

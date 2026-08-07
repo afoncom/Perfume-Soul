@@ -54,6 +54,15 @@ final class PerfumeModel: Model, @unchecked Sendable {
     @OptionalField(key: "full_story")
     var fullStory: String?
 
+    @OptionalField(key: "short_description_en")
+    var shortDescriptionEnglish: String?
+
+    @OptionalField(key: "recommendation_reason_en")
+    var recommendationReasonEnglish: String?
+
+    @OptionalField(key: "full_story_en")
+    var fullStoryEnglish: String?
+
     @Parent(key: "brand_id")
     var brand: BrandModel
 
@@ -83,6 +92,9 @@ final class PerfumeModel: Model, @unchecked Sendable {
         shortDescription: String? = nil,
         recommendationReason: String? = nil,
         fullStory: String? = nil,
+        shortDescriptionEnglish: String? = nil,
+        recommendationReasonEnglish: String? = nil,
+        fullStoryEnglish: String? = nil,
         brandID: Int
     ) {
         self.id = id
@@ -102,6 +114,9 @@ final class PerfumeModel: Model, @unchecked Sendable {
         self.shortDescription = shortDescription
         self.recommendationReason = recommendationReason
         self.fullStory = fullStory
+        self.shortDescriptionEnglish = shortDescriptionEnglish
+        self.recommendationReasonEnglish = recommendationReasonEnglish
+        self.fullStoryEnglish = fullStoryEnglish
         self.$brand.id = brandID
     }
 }

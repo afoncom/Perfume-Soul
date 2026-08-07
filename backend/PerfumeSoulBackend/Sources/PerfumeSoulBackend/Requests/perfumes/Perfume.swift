@@ -81,7 +81,8 @@ enum PerfumeLoader {
 enum PerfumeNotesLoader {
     static func load(
         perfumeID: Int,
-        on database: any Database
+        on database: any Database,
+        language: String? = nil
     ) async throws -> PerfumeNotesResponse? {
         guard let perfume = try await PerfumeModel.query(on: database)
             .with(\.$brand)
@@ -134,6 +135,8 @@ enum PerfumeNotesLoader {
             return nil
         }
 
+        let isEnglish = language?.lowercased().split(separator: ",").first?.hasPrefix("en") == true
+
         return PerfumeNotesResponse(
             id: id,
             brand: perfume.brand.name,
@@ -149,9 +152,15 @@ enum PerfumeNotesLoader {
             sillageScore: perfume.sillageScore,
             releaseYear: perfume.releaseYear,
             perfumer: perfume.perfumer,
-            shortDescription: perfume.shortDescription,
-            recommendationReason: perfume.recommendationReason,
-            fullStory: perfume.fullStory,
+            shortDescription: isEnglish
+                ? perfume.shortDescriptionEnglish ?? perfume.shortDescription
+                : perfume.shortDescription,
+            recommendationReason: isEnglish
+                ? perfume.recommendationReasonEnglish ?? perfume.recommendationReason
+                : perfume.recommendationReason,
+            fullStory: isEnglish
+                ? perfume.fullStoryEnglish ?? perfume.fullStory
+                : perfume.fullStory,
             accords: accords,
             topNotes: topNotes,
             middleNotes: middleNotes,
