@@ -84,12 +84,14 @@ extension ProfileScreen {
             Circle()
                 .fill(makeProfileAvatarGradient(colors: avatar.gradientColors))
                 .frame(width: 74, height: 74)
-                .overlay(
+                .overlay {
                     Text(avatar.initials)
                         .font(.title3)
                         .fontWeight(.semibold)
                         .foregroundStyle(Color(.textOnAccent))
-                )
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                }
                 .accessibilityHidden(true)
             
             VStack(alignment: .leading, spacing: 8) {
@@ -506,6 +508,12 @@ extension ProfileScreen {
             return Color(.zodiacBlue)
         case .zodiacPurple:
             return Color(.zodiacPurple)
+        case .zodiacBrown:
+            return Color(.zodiacBrown)
+        case .zodiacPink:
+            return Color(.zodiacPink)
+        case .zodiacGray:
+            return Color(.zodiacGray)
         }
     }
 
@@ -725,5 +733,32 @@ extension ProfileScreen {
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
         .buttonStyle(.plain)
+    }
+}
+
+// MARK: - Added Profile Item
+
+extension ProfileScreen {
+    func makeAddedProfileItem(name: String) -> some View {
+        let avatar = profileAvatarBuilder.makeAvatar(name: name)
+
+        return VStack(spacing: 8) {
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(makeProfileAvatarGradient(colors: avatar.gradientColors))
+                .frame(width: 92, height: 92)
+                .overlay {
+                    Text(avatar.initials)
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(Color(.textOnAccent))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                        .accessibilityHidden(true)
+                }
+            
+            Text(name)
+                .font(.headline)
+                .foregroundStyle(Color(.textPrimary))
+        }
     }
 }
