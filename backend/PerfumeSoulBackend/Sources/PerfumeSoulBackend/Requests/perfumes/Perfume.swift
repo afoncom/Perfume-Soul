@@ -106,6 +106,9 @@ enum PerfumeNotesLoader {
         var middleNotes: [String] = []
         var baseNotes: [String] = []
         let isEnglish = language?.lowercased().split(separator: ",").first?.hasPrefix("en") == true
+        let useEnglishNotes = isEnglish && perfumeNotes.allSatisfy {
+            $0.note.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+        }
         let accords = perfumeAccords
             .sorted { lhs, rhs in
                 if lhs.weight == rhs.weight {
@@ -119,12 +122,15 @@ enum PerfumeNotesLoader {
                     name: $0.accord.name,
                     weight: $0.weight
                 )
-            }
+        }
 
         for perfumeNote in perfumeNotes {
-            let noteName = isEnglish
-                ? (perfumeNote.note.nameEnglish ?? perfumeNote.note.name)
-                : perfumeNote.note.name
+            let noteName: String
+            if useEnglishNotes, let englishName = perfumeNote.note.nameEnglish {
+                noteName = englishName
+            } else {
+                noteName = perfumeNote.note.name
+            }
 
             switch perfumeNote.noteType {
             case .top:
