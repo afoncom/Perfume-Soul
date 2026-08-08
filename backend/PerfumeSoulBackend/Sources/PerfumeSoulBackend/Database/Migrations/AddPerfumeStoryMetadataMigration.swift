@@ -1,0 +1,92 @@
+import Fluent
+import FluentSQL
+
+struct AddPerfumeStoryMetadataMigration: AsyncMigration {
+    func prepare(on database: any Database) async throws {
+        guard let sqlDatabase = database as? any SQLDatabase else {
+            throw DatabaseMigrationError.sqlDatabaseIsRequired
+        }
+
+        try await sqlDatabase
+            .raw("""
+            ALTER TABLE perfumes
+                ADD COLUMN IF NOT EXISTS release_year INTEGER,
+                ADD COLUMN IF NOT EXISTS perfumer TEXT,
+                ADD COLUMN IF NOT EXISTS short_description TEXT,
+                ADD COLUMN IF NOT EXISTS recommendation_reason TEXT,
+                ADD COLUMN IF NOT EXISTS full_story TEXT
+            """)
+            .run()
+
+        try await sqlDatabase
+            .raw("""
+            UPDATE perfumes
+            SET release_year = story.release_year,
+                perfumer = story.perfumer,
+                short_description = story.short_description,
+                recommendation_reason = story.recommendation_reason,
+                full_story = story.full_story
+            FROM (
+                VALUES
+                    (
+                        'Maison Francis Kurkdjian',
+                        'Baccarat Rouge 540',
+                        2015,
+                        'Francis Kurkdjian',
+                        'Прозрачный амброво-древесный аромат с шафраном, воздушным жасмином, Ambroxan и сухим кедровым шлейфом.',
+                        'Подходит профилю, которому нужна заметная, но не тяжёлая аура: шафран даёт искру, жасмин добавляет воздух, а амброво-древесная база держит чистый сияющий след.',
+                        'Baccarat Rouge 540 появился как совместный проект Maison Francis Kurkdjian и Baccarat к юбилею хрустального дома. Название отсылает к температуре 540°C: при таком нагреве хрусталь с золотой пудрой получает фирменный красный оттенок Baccarat. В аромате эта идея переведена на язык света и плотности: шафран создаёт тёплый металлический импульс, жасмин и hedione дают прозрачный воздух, Ambroxan собирает минеральную амбру, а кедр делает шлейф сухим и графичным.'
+                    ),
+                    (
+                        'Creed',
+                        'Aventus',
+                        2010,
+                        'Olivier Creed, Erwin Creed',
+                        'Фруктово-древесная композиция с ананасом, бергамотом, яблоком, чёрной смородиной, берёзой, жасмином, дубовым мхом и амброй.',
+                        'Подходит профилю, которому нужны энергия, статус и чистый древесный контур: сочные фрукты быстро раскрывают аромат, а берёза, мох, мускус и амбра делают его собранным и уверенным.',
+                        'Aventus был представлен Creed в 2010 году к 250-летию дома. История аромата строится вокруг образа движения, силы и личной победы, но сама композиция звучит очень практично: яркий фруктовый старт из ананаса, яблока, чёрной смородины и бергамота переходит в более сухое сердце с берёзой, жасмином и древесными оттенками. База с дубовым мхом, мускусом, ванилью и амброй даёт узнаваемый современный шлейф, из-за которого Aventus стал одним из самых цитируемых мужских ароматов последних лет.'
+                    ),
+                    (
+                        'Tom Ford',
+                        'Oud Wood',
+                        2007,
+                        'Richard Herpin',
+                        'Гладкий древесно-пряный аромат из Private Blend: уд, палисандр, кардамон, сандал, ветивер, тонка, ваниль и амбра.',
+                        'Подходит профилю, которому нужна спокойная нишевая глубина без тяжёлой дымности: специи открывают композицию, уд и сандал дают плотность, а ваниль с тонка смягчают базу.',
+                        'Oud Wood вышел в 2007 году в линии Tom Ford Private Blend и стал одним из ароматов, которые сделали уд более понятным для западной люксовой парфюмерии. Здесь уд не звучит грубо или слишком животно: его сглаживают палисандр, кардамон, сандал и ветивер. В базе тонка, ваниль и амбра добавляют мягкое тепло, поэтому аромат воспринимается не как тяжёлая восточная композиция, а как сухой, дорогой и очень носибельный древесный профиль.'
+                    )
+            ) AS story(
+                brand_name,
+                perfume_name,
+                release_year,
+                perfumer,
+                short_description,
+                recommendation_reason,
+                full_story
+            )
+            JOIN brands
+                ON brands.brand = story.brand_name
+            WHERE perfumes.brand_id = brands.id
+                AND perfumes.perfume_name = story.perfume_name
+                AND perfumes.full_story IS NULL
+            """)
+            .run()
+    }
+
+    func revert(on database: any Database) async throws {
+        guard let sqlDatabase = database as? any SQLDatabase else {
+            throw DatabaseMigrationError.sqlDatabaseIsRequired
+        }
+
+        try await sqlDatabase
+            .raw("""
+            ALTER TABLE perfumes
+                DROP COLUMN IF EXISTS release_year,
+                DROP COLUMN IF EXISTS perfumer,
+                DROP COLUMN IF EXISTS short_description,
+                DROP COLUMN IF EXISTS recommendation_reason,
+                DROP COLUMN IF EXISTS full_story
+            """)
+            .run()
+    }
+}

@@ -25,6 +25,11 @@ struct PerfumeDetails {
     let moodProfile: String?
     let longevityScore: Int?
     let sillageScore: Int?
+    let releaseYear: Int?
+    let perfumer: String?
+    let shortDescription: String?
+    let recommendationReason: String?
+    let fullStory: String?
     let accords: [PerfumeAccord]
     let topNotes: [String]
     let middleNotes: [String]
@@ -45,6 +50,11 @@ extension PerfumeDetails {
         self.moodProfile = response.moodProfile
         self.longevityScore = response.longevityScore
         self.sillageScore = response.sillageScore
+        self.releaseYear = response.releaseYear
+        self.perfumer = response.perfumer
+        self.shortDescription = response.shortDescription
+        self.recommendationReason = response.recommendationReason
+        self.fullStory = response.fullStory
         self.accords = response.accords.map {
             PerfumeAccord(
                 name: $0.name,

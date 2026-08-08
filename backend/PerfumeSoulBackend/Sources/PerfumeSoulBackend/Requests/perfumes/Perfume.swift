@@ -24,6 +24,11 @@ struct PerfumeNotesResponse: Codable, Equatable {
     let moodProfile: String?
     let longevityScore: Int?
     let sillageScore: Int?
+    let releaseYear: Int?
+    let perfumer: String?
+    let shortDescription: String?
+    let recommendationReason: String?
+    let fullStory: String?
     let accords: [PerfumeAccordResponse]
     let topNotes: [String]
     let middleNotes: [String]
@@ -76,7 +81,8 @@ enum PerfumeLoader {
 enum PerfumeNotesLoader {
     static func load(
         perfumeID: Int,
-        on database: any Database
+        on database: any Database,
+        language: String? = nil
     ) async throws -> PerfumeNotesResponse? {
         guard let perfume = try await PerfumeModel.query(on: database)
             .with(\.$brand)
@@ -99,6 +105,10 @@ enum PerfumeNotesLoader {
         var topNotes: [String] = []
         var middleNotes: [String] = []
         var baseNotes: [String] = []
+        let isEnglish = language?.lowercased().split(separator: ",").first?.hasPrefix("en") == true
+        let useEnglishNotes = isEnglish && perfumeNotes.allSatisfy {
+            $0.note.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+        }
         let accords = perfumeAccords
             .sorted { lhs, rhs in
                 if lhs.weight == rhs.weight {
@@ -112,16 +122,23 @@ enum PerfumeNotesLoader {
                     name: $0.accord.name,
                     weight: $0.weight
                 )
-            }
+        }
 
         for perfumeNote in perfumeNotes {
+            let noteName: String
+            if useEnglishNotes, let englishName = perfumeNote.note.nameEnglish {
+                noteName = englishName
+            } else {
+                noteName = perfumeNote.note.name
+            }
+
             switch perfumeNote.noteType {
             case .top:
-                topNotes.append(perfumeNote.note.name)
+                topNotes.append(noteName)
             case .middle:
-                middleNotes.append(perfumeNote.note.name)
+                middleNotes.append(noteName)
             case .base:
-                baseNotes.append(perfumeNote.note.name)
+                baseNotes.append(noteName)
             }
         }
 
@@ -142,6 +159,17 @@ enum PerfumeNotesLoader {
             moodProfile: perfume.moodProfile,
             longevityScore: perfume.longevityScore,
             sillageScore: perfume.sillageScore,
+            releaseYear: perfume.releaseYear,
+            perfumer: perfume.perfumer,
+            shortDescription: isEnglish
+                ? perfume.shortDescriptionEnglish
+                : perfume.shortDescription,
+            recommendationReason: isEnglish
+                ? perfume.recommendationReasonEnglish
+                : perfume.recommendationReason,
+            fullStory: isEnglish
+                ? perfume.fullStoryEnglish
+                : perfume.fullStory,
             accords: accords,
             topNotes: topNotes,
             middleNotes: middleNotes,
@@ -150,8 +178,8 @@ enum PerfumeNotesLoader {
     }
 }
 
-private extension Perfume {
-    init?(model: PerfumeModel) {
+extension Perfume {
+    fileprivate init?(model: PerfumeModel) {
         guard let id = model.id else {
             return nil
         }
@@ -173,8 +201,8 @@ private extension Perfume {
     }
 }
 
-private extension String {
-    var escapedForLikePattern: String {
+extension String {
+    fileprivate var escapedForLikePattern: String {
         replacingOccurrences(of: "\\", with: "\\\\")
             .replacingOccurrences(of: "%", with: "\\%")
             .replacingOccurrences(of: "_", with: "\\_")

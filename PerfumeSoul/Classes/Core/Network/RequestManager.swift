@@ -48,9 +48,15 @@ extension RequestManagerImpl: RequestManager {
         urlRequest.httpMethod = request.httpMethod.rawValue
         urlRequest.httpBody = request.httpBody
 
-        request.headers.forEach { key, value in
-            urlRequest.setValue(value, forHTTPHeaderField: key)
-        }
+        let defaultHeaders = [
+            "Accept-Language": Bundle.main.preferredLocalizations.first ?? "en"
+        ]
+
+        defaultHeaders
+            .merging(request.headers) { _, custom in custom }
+            .forEach { key, value in
+                urlRequest.setValue(value, forHTTPHeaderField: key)
+            }
 
         if request.httpBody != nil, request.headers["Content-Type"] == nil {
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")

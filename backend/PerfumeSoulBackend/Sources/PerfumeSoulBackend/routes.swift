@@ -79,7 +79,8 @@ func routes(_ app: Application) throws {
 
         guard let perfumeNotes = try await PerfumeNotesLoader.load(
             perfumeID: perfumeID,
-            on: req.db
+            on: req.db,
+            language: req.headers.first(name: "Accept-Language")
         ) else {
             throw Abort(.notFound)
         }
@@ -93,6 +94,7 @@ private func jsonResponse<T: Encodable>(_ value: T) throws -> Response {
 
     var headers = HTTPHeaders()
     headers.contentType = .json
+    headers.add(name: "Vary", value: "Accept-Language")
 
     return Response(status: .ok, headers: headers, body: .init(data: data))
 }
