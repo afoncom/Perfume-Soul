@@ -23,10 +23,6 @@ enum PerfumeDetailsTextFormatter {
             return recommendationReason
         }
 
-        guard isRussianLocale else {
-            return L10n.PerfumeDetails.defaultRecommendation
-        }
-
         let notes = (perfumeDetails.topNotes + perfumeDetails.middleNotes + perfumeDetails.baseNotes)
             .compactMap(nonBlank)
             .prefix(3)
@@ -161,10 +157,6 @@ enum PerfumeDetailsTextFormatter {
         case "bright romantic": return L10n.PerfumeDetails.ProfilePhrase.brightRomantic
         default: return nil
         }
-    }
-
-    private static var isRussianLocale: Bool {
-        Bundle.main.preferredLocalizations.first?.hasPrefix("ru") == true
     }
 
     private static func normalized(_ value: String) -> String {

@@ -55,8 +55,8 @@ extension RequestManagerImpl: RequestManager {
         defaultHeaders
             .merging(request.headers) { _, custom in custom }
             .forEach { key, value in
-            urlRequest.setValue(value, forHTTPHeaderField: key)
-        }
+                urlRequest.setValue(value, forHTTPHeaderField: key)
+            }
 
         if request.httpBody != nil, request.headers["Content-Type"] == nil {
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")

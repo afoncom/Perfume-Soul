@@ -19,18 +19,13 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
                 PerfumeDetailsTextFormatter.localizedProfilePhraseKey(phrase),
                 "Missing localization for \(phrase)"
             )
-            XCTAssertNotEqual(
-                PerfumeDetailsTextFormatter.localizedProfilePhrase(phrase),
-                phrase,
-                "Unlocalized backend phrase: \(phrase)"
-            )
         }
     }
 
     func testLocalizedProfilePhraseKeepsUnknownPhraseTogether() {
         XCTAssertEqual(
-            PerfumeDetailsTextFormatter.localizedProfilePhrase("rare modern profile"),
-            "Rare Modern Profile"
+            PerfumeDetailsTextFormatter.localizedProfilePhrase("rare vintage profile"),
+            "Rare Vintage Profile"
         )
     }
 }

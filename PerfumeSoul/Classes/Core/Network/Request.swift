@@ -25,8 +25,6 @@ protocol Request {
 
 extension Request {
     var queryItems: [URLQueryItem] { [] }
-    var headers: [String: String] {
-        ["Accept-Language": Bundle.main.preferredLocalizations.first ?? "en"]
-    }
+    var headers: [String: String] { [:] }
     var httpBody: Data? { nil }
 }
