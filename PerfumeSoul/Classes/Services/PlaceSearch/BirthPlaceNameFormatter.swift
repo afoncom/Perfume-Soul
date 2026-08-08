@@ -8,7 +8,7 @@ import Foundation
 enum BirthPlaceNameFormatter {
     static func format(title: String?, subtitle: String?, fallback: String? = nil) -> String {
         let primary = trimmed(title) ?? trimmed(fallback) ?? ""
-        let components = subtitle?
+        var components = subtitle?
             .split(separator: ",")
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { !$0.isEmpty } ?? []
@@ -16,8 +16,6 @@ enum BirthPlaceNameFormatter {
         guard !primary.isEmpty else {
             return components.joined(separator: ", ")
         }
-
-        var components = components
 
         if components.count > 1 {
             components.removeLast()
