@@ -43,7 +43,7 @@ extension ProfileAvatarBuilderImpl {
             .split(whereSeparator: \.isWhitespace)
             .prefix(2)
             .compactMap(\.first)
-        let result = String(initials).uppercased()
+        let result = String(String(initials).uppercased().prefix(2))
 
         return result.isEmpty ? "?" : result
     }
