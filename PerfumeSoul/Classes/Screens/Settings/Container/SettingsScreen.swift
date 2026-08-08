@@ -120,23 +120,6 @@ extension SettingsScreen {
                     subtitle: L10n.Settings.Privacy.howDataIsUsedSubtitle
                 )
 
-                makeDivider()
-
-                makeActionRow(
-                    icon: "trash",
-                    iconColor: Color(.pinkButton),
-                    title: L10n.Settings.Privacy.clearLocalDataTitle,
-                    subtitle: L10n.Settings.Privacy.clearLocalDataSubtitle
-                )
-
-                makeDivider()
-
-                makeActionRow(
-                    icon: "person",
-                    iconColor: Color(.zodiacOrange),
-                    title: L10n.Settings.Privacy.deleteAllProfilesTitle,
-                    subtitle: L10n.Settings.Privacy.deleteAllProfilesSubtitle
-                )
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)

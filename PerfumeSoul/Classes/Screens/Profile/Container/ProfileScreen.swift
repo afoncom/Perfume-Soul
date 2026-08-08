@@ -47,9 +47,6 @@ struct ProfileScreen: View {
                         makeProfileDescriptionRow()
                             .padding(.horizontal, 16)
                         
-                        makeAddedNewProfiless()
-                            .padding(.horizontal, 16)
-                        
                         makeDeleteProfileAction()
                             .padding(.horizontal, 16)
                     }
@@ -125,7 +122,7 @@ extension ProfileScreen {
                         symbol: "sun.max.fill",
                         symbolColor: Color(.natalSunAccent),
                         title: L10n.Profile.NatalChart.sun,
-                        value: makePlacementTitle(for: natalChart.sun)
+                        placement: natalChart.sun
                     )
 
                     makeNatalChartRow(
@@ -133,7 +130,7 @@ extension ProfileScreen {
                         symbol: "moon.fill",
                         symbolColor: Color(.natalMoonAccent),
                         title: L10n.Profile.NatalChart.moon,
-                        value: makePlacementTitle(for: natalChart.moon)
+                        placement: natalChart.moon
                     )
 
                     makeNatalChartRow(
@@ -141,7 +138,7 @@ extension ProfileScreen {
                         symbol: "circle.hexagongrid.fill",
                         symbolColor: Color(.pinkButton),
                         title: L10n.Profile.NatalChart.ascendant,
-                        value: makePlacementTitle(for: natalChart.ascendant)
+                        placement: natalChart.ascendant
                     )
                 }
             } else {
@@ -160,39 +157,25 @@ extension ProfileScreen {
                 .font(.title3)
                 .fontWeight(.medium)
             if let elementBalance = viewModel.profileCalculation?.elementBalance {
+                let elementItems = makeElementBalanceItems(elementBalance: elementBalance)
+
                 makeElementBalanceBar(elementBalance: elementBalance)
 
                 LazyVGrid(
                     columns: Array(
                         repeating: GridItem(.flexible(), spacing: 4, alignment: .leading),
-                        count: 4
+                        count: max(1, min(elementItems.count, 4))
                     ),
                     spacing: 8
                 ) {
-                    makeElementItem(
-                        element: .fire,
-                        percent: "\(elementBalance.fire)%",
-                        title: L10n.Profile.Element.fire,
-                        color: Color(.pinkButton)
-                    )
-                    makeElementItem(
-                        element: .earth,
-                        percent: "\(elementBalance.earth)%",
-                        title: L10n.Profile.Element.earth,
-                        color: Color(.zodiacMint)
-                    )
-                    makeElementItem(
-                        element: .air,
-                        percent: "\(elementBalance.air)%",
-                        title: L10n.Profile.Element.air,
-                        color: Color(.zodiacCyan)
-                    )
-                    makeElementItem(
-                        element: .water,
-                        percent: "\(elementBalance.water)%",
-                        title: L10n.Profile.Element.water,
-                        color: Color(.zodiacBlue)
-                    )
+                    ForEach(elementItems, id: \.element) { item in
+                        makeElementItem(
+                            element: item.element,
+                            percent: "\(item.value)%",
+                            title: item.title,
+                            color: item.color
+                        )
+                    }
                 }
             } else {
                 makeProfileCalculationStateView()
@@ -476,39 +459,6 @@ extension ProfileScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
     
-    func makeAddedNewProfiless() -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text(L10n.Profile.Profiles.title)
-                    .font(.title3)
-                    .fontWeight(.medium)
-                
-                Spacer()
-                
-                Button(action: {
-                    presenter.addedNewProfilesButtonTab()
-                }) {
-                    Image(systemName: "plus")
-                        .font(.headline.weight(.medium))
-                        .foregroundStyle(Color(.textSecondary))
-                        .frame(width: 28, height: 28)
-                }
-            }
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
-                    makeAddedProfileItem(name: "Laura")
-                    makeAddedProfileItem(name: "Alex")
-                    makeAddedProfileItem(name: "Ada")
-                }
-            }
-        }
-        .padding(14)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
-    }
-    
     func makeDeleteProfileAction() -> some View {
         Button {
             viewModel.isShowingDeleteProfileAlert = true
@@ -647,10 +597,6 @@ extension ProfileScreen {
         return L10n.Profile.PersonalPerfumes.subtitle
     }
 
-    func makePlacementTitle(for placement: ZodiacPlacement) -> String {
-        let horoscope = DailyHoroscope(sign: placement.sign.rawValue, energyOfDay: "")
-        return "\(horoscope.displayName) \(horoscope.symbol)"
-    }
 }
 
 // MARK: - Natal Chart Row
@@ -661,9 +607,11 @@ extension ProfileScreen {
         symbol: String,
         symbolColor: Color,
         title: String,
-        value: String
+        placement: ZodiacPlacement
     ) -> some View {
-        HStack(spacing: 12) {
+        let horoscope = DailyHoroscope(sign: placement.sign.rawValue, energyOfDay: "")
+
+        return HStack(spacing: 12) {
             Circle()
                 .fill(color)
                 .frame(width: 42, height: 42)
@@ -673,31 +621,51 @@ extension ProfileScreen {
                         .foregroundColor(symbolColor)
                 )
             
-            HStack(spacing: 8) {
+            VStack(alignment: .leading, spacing: 3) {
                 Text(title)
-                    .font(.headline)
+                    .font(.caption)
+                    .fontWeight(.medium)
+                    .foregroundStyle(Color(.textPrimary))
                 
-                Text(value)
+                Text(horoscope.displayName)
                     .font(.headline)
+                    .lineLimit(1)
                     .foregroundStyle(Color(.textPrimary))
             }
             
             Spacer()
             
-            Image(systemName: "chevron.right")
-                .font(.footnote.weight(.medium))
-                .foregroundStyle(Color(.textSecondary))
+            Text(horoscope.symbol)
+                .font(.title3)
+                .fontWeight(.semibold)
+                .foregroundStyle(Color(.textPrimary))
+                .frame(width: 40, height: 40)
+                .background(color)
+                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
-        .background(Color(.rowBackground))
+        .background(
+            LinearGradient(
+                colors: [
+                    color.opacity(0.55),
+                    Color(.rowBackground)
+                ],
+                startPoint: .leading,
+                endPoint: .trailing
+            )
+        )
         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .stroke(symbolColor.opacity(0.12), lineWidth: 1)
+        )
     }
 }
 
 // MARK: - Element Item
 
-private enum ProfileElement: Equatable {
+private enum ProfileElement: Hashable {
     case fire
     case earth
     case air
@@ -708,24 +676,15 @@ extension ProfileScreen {
     func makeElementBalanceBar(elementBalance: ElementBalance) -> some View {
         GeometryReader { proxy in
             let width = Double(proxy.size.width)
+            let elementItems = makeElementBalanceItems(elementBalance: elementBalance)
 
             HStack(spacing: 0) {
-                makeElementBalanceSegment(
-                    color: Color(.pinkButton),
-                    width: width * .init(elementBalance.fire) / 100
-                )
-                makeElementBalanceSegment(
-                    color: Color(.zodiacMint),
-                    width: width * .init(elementBalance.earth) / 100
-                )
-                makeElementBalanceSegment(
-                    color: Color(.zodiacCyan),
-                    width: width * .init(elementBalance.air) / 100
-                )
-                makeElementBalanceSegment(
-                    color: Color(.zodiacBlue),
-                    width: width * .init(elementBalance.water) / 100
-                )
+                ForEach(elementItems, id: \.element) { item in
+                    makeElementBalanceSegment(
+                        color: item.color,
+                        width: width * .init(item.value) / 100
+                    )
+                }
             }
             .background(Color(.placeholderSoft))
             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
@@ -736,6 +695,18 @@ extension ProfileScreen {
     func makeElementBalanceSegment(color: Color, width: Double) -> some View {
         color
             .frame(width: .init(width))
+    }
+
+    private func makeElementBalanceItems(elementBalance: ElementBalance) -> [
+        (element: ProfileElement, value: Int, title: String, color: Color)
+    ] {
+        [
+            (.fire, elementBalance.fire, L10n.Profile.Element.fire, Color(.pinkButton)),
+            (.earth, elementBalance.earth, L10n.Profile.Element.earth, Color(.zodiacMint)),
+            (.air, elementBalance.air, L10n.Profile.Element.air, Color(.zodiacCyan)),
+            (.water, elementBalance.water, L10n.Profile.Element.water, Color(.zodiacBlue))
+        ]
+        .filter { $0.value > 0 }
     }
 
     private func makeElementItem(

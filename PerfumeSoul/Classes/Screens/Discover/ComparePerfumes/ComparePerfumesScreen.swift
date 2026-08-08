@@ -538,12 +538,14 @@ extension ComparePerfumesScreen {
                 Text(brand)
                     .font(.footnote.weight(.semibold))
                     .foregroundStyle(Color(.textSecondary))
+                    .lineLimit(1)
                 
                 Text(name)
                     .font(.headline)
                     .foregroundStyle(Color(.textPrimary))
                     .lineLimit(2)
             }
+            .frame(minHeight: 78, alignment: .topLeading)
             
             VStack(spacing: 10) {
                 ForEach(metrics, id: \.0) { metric in

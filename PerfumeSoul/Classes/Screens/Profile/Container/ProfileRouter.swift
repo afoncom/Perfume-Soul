@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 
 protocol ProfileRouter {
-    func showAddedNewProfiles()
     func showPersonalPerfumes(profileCalculation: ProfileCalculation?)
     func showProfileDescription()
     func showProfileSetupScreen(profile: Profile)
@@ -37,13 +36,6 @@ final class ProfileRouterImpl {
 }
 
 extension ProfileRouterImpl: ProfileRouter {
-    func showAddedNewProfiles() {
-        navigationController?.pushViewController(
-            AddedNewProfilesModule.build(navigationController: navigationController),
-            animated: true
-        )
-    }
-    
     func showPersonalPerfumes(profileCalculation: ProfileCalculation?) {
         let screen = PersonalPerfumeModule.build(
             profileCalculation: profileCalculation,

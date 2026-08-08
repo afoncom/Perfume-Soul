@@ -68,7 +68,11 @@ final class BirthPlaceSearchService: NSObject {
         }
 
         return BirthPlaceSelection(
-            displayName: makeDisplayName(from: completion),
+            displayName: BirthPlaceNameFormatter.format(
+                title: completion.title,
+                subtitle: completion.subtitle,
+                fallback: mapItem.placemark.name
+            ),
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
             timeZoneIdentifier: timeZoneIdentifier
@@ -87,14 +91,6 @@ final class BirthPlaceSearchService: NSObject {
 
         let placemarks = try? await geocoder.reverseGeocodeLocation(location)
         return placemarks?.first?.timeZone?.identifier
-    }
-
-    private func makeDisplayName(from completion: MKLocalSearchCompletion) -> String {
-        guard !completion.subtitle.isEmpty else {
-            return completion.title
-        }
-
-        return "\(completion.title), \(completion.subtitle)"
     }
 
     private func finishSearch(with results: [MKLocalSearchCompletion]) {

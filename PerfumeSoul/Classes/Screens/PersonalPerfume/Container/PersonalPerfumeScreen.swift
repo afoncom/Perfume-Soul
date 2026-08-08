@@ -21,11 +21,13 @@ struct PersonalPerfumeScreen: View {
     }
 
     var body: some View {
-        let bottomPadding = presenter.shouldShowContinueButton ? 120.0 : 32.0
+        let bottomPadding = presenter.isPresentedInOnboarding ? 96.0 : 32.0
 
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 18) {
-                makeHeaderView()
+                if presenter.isPresentedInOnboarding {
+                    makeHeaderView()
+                }
                 makeSectionsView()
             }
             .padding(.horizontal, 16)
@@ -46,10 +48,12 @@ struct PersonalPerfumeScreen: View {
             await presenter.onAppear()
         }
         .overlay(alignment: .top) {
-            makeTopSafeAreaMask()
+            if presenter.isPresentedInOnboarding {
+                makeTopSafeAreaBackground()
+            }
         }
         .safeAreaInset(edge: .bottom) {
-            if presenter.shouldShowContinueButton {
+            if presenter.isPresentedInOnboarding {
                 makeContinueButton()
                     .padding(.horizontal, 24)
                     .padding(.top, 12)
@@ -60,10 +64,14 @@ struct PersonalPerfumeScreen: View {
 }
 
 extension PersonalPerfumeScreen {
-    private func makeTopSafeAreaMask() -> some View {
-        Color(.backgroundPrimary)
-            .frame(height: 92)
-            .ignoresSafeArea(edges: .top)
+    private func makeTopSafeAreaBackground() -> some View {
+        GeometryReader { proxy in
+            Color(.backgroundPrimary)
+                .frame(height: proxy.safeAreaInsets.top)
+                .frame(maxHeight: .infinity, alignment: .top)
+                .ignoresSafeArea(edges: .top)
+        }
+        .allowsHitTesting(false)
     }
 
     @ViewBuilder
@@ -80,14 +88,14 @@ extension PersonalPerfumeScreen {
                 title: L10n.PersonalPerfume.Error.MissingProfile.title,
                 subtitle: L10n.PersonalPerfume.Error.MissingProfile.subtitle,
                 canRetry: false,
-                canSkip: presenter.shouldShowContinueButton
+                canSkip: presenter.isPresentedInOnboarding
             )
         case .requestFailed:
             makeErrorState(
                 title: L10n.PersonalPerfume.Error.RequestFailed.title,
                 subtitle: L10n.PersonalPerfume.Error.RequestFailed.subtitle,
                 canRetry: true,
-                canSkip: presenter.shouldShowContinueButton
+                canSkip: presenter.isPresentedInOnboarding
             )
         }
     }
