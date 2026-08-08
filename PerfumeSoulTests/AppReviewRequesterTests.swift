@@ -57,6 +57,20 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertTrue(requester.registerQuizCompletionAndCheckReviewEligibility())
     }
 
+    func testResetCompletedQuizCountAllowsNewProfileToReachThreshold() {
+        let requester = makeRequester()
+
+        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
+        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
+        XCTAssertTrue(requester.registerQuizCompletionAndCheckReviewEligibility())
+
+        requester.resetCompletedQuizCount()
+
+        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
+        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
+        XCTAssertTrue(requester.registerQuizCompletionAndCheckReviewEligibility())
+    }
+
     func testMissingVersionDoesNotRecordQuizCompletion() {
         let requester = makeRequester()
         appVersionProvider.appVersion = nil

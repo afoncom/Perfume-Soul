@@ -12,6 +12,7 @@ import UIKit
 protocol AppReviewRequesting {
     @MainActor
     func requestReviewAfterQuizCompletion(in windowScene: UIWindowScene)
+    func resetCompletedQuizCount()
 }
 
 final class AppReviewRequesterImpl {
@@ -59,6 +60,10 @@ final class AppReviewRequesterImpl {
 
         userDefaults.set(appVersion, forKey: Keys.lastRequestedVersion)
         return true
+    }
+
+    func resetCompletedQuizCount() {
+        userDefaults.removeObject(forKey: Keys.completedQuizCount)
     }
 
     @MainActor
