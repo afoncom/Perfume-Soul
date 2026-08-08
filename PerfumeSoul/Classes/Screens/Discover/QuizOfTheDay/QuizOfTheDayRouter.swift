@@ -9,17 +9,32 @@
 import UIKit
 
 protocol QuizOfTheDayRouter {
-    
+    @MainActor
+    func requestAppReview()
 }
 
 final class QuizOfTheDayRouterImpl {
     private weak var navigationController: UINavigationController?
+    private let appReviewRequester: AppReviewRequesting
 
-    init(navigationController: UINavigationController?) {
+    init(
+        navigationController: UINavigationController?,
+        appReviewRequester: AppReviewRequesting
+    ) {
         self.navigationController = navigationController
+        self.appReviewRequester = appReviewRequester
     }
 }
 
 extension QuizOfTheDayRouterImpl: QuizOfTheDayRouter {
-    
+    @MainActor
+    func requestAppReview() {
+        appReviewRequester.registerQuizCompletion()
+
+        guard let windowScene = navigationController?.view.window?.windowScene else {
+            return
+        }
+
+        appReviewRequester.requestReviewIfEligible(in: windowScene)
+    }
 }

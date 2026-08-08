@@ -157,6 +157,7 @@ extension SettingsScreen {
                     title: L10n.Settings.Support.supportDeveloperTitle,
                     subtitle: L10n.Settings.Support.supportDeveloperSubtitle
                 )
+                // TODO: Restore Rate App when App Store ID is available and open the write-review URL.
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
