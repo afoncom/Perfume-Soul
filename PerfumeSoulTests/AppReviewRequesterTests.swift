@@ -17,7 +17,7 @@ final class AppReviewRequesterTests: XCTestCase {
         super.setUp()
         suiteName = "AppReviewRequesterTests-\(UUID().uuidString)"
         userDefaults = UserDefaults(suiteName: suiteName)
-        appVersionProvider = AppVersionProviderMock(appVersion: "1.0-1")
+        appVersionProvider = AppVersionProviderMock(appVersion: "1.0")
     }
 
     override func tearDown() {
@@ -52,8 +52,21 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
         XCTAssertTrue(requester.registerQuizCompletionAndCheckReviewEligibility())
 
-        appVersionProvider.appVersion = "1.1-2"
+        appVersionProvider.appVersion = "1.1"
 
+        XCTAssertTrue(requester.registerQuizCompletionAndCheckReviewEligibility())
+    }
+
+    func testMissingVersionDoesNotRecordQuizCompletion() {
+        let requester = makeRequester()
+        appVersionProvider.appVersion = nil
+
+        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
+
+        appVersionProvider.appVersion = "1.0"
+
+        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
+        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
         XCTAssertTrue(requester.registerQuizCompletionAndCheckReviewEligibility())
     }
 
@@ -66,15 +79,15 @@ final class AppReviewRequesterTests: XCTestCase {
 }
 
 private final class AppVersionProviderMock {
-    var appVersion: String
+    var appVersion: String?
 
-    init(appVersion: String) {
+    init(appVersion: String?) {
         self.appVersion = appVersion
     }
 }
 
 extension AppVersionProviderMock: AppVersionProvider {
-    func currentAppVersion() -> String {
+    func currentAppVersion() -> String? {
         appVersion
     }
 }

@@ -42,7 +42,10 @@ final class AppReviewRequesterImpl {
     }
 
     func registerQuizCompletionAndCheckReviewEligibility() -> Bool {
-        let appVersion = appVersionProvider.currentAppVersion()
+        guard let appVersion = appVersionProvider.currentAppVersion() else {
+            return false
+        }
+
         let completedQuizCount = userDefaults.integer(forKey: Keys.completedQuizCount) + 1
         userDefaults.set(completedQuizCount, forKey: Keys.completedQuizCount)
 
