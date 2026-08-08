@@ -87,12 +87,7 @@ extension ProfileScreen {
                 .fill(makeProfileAvatarGradient(colors: avatar.gradientColors))
                 .frame(width: 74, height: 74)
                 .overlay {
-                    Text(avatar.initials)
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(Color(.textOnAccent))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
+                    makeProfileAvatarInitials(avatar.initials, font: .title3)
                 }
                 .accessibilityHidden(true)
             
@@ -563,7 +558,22 @@ extension ProfileScreen {
             return Color(.zodiacPink)
         case .zodiacGray:
             return Color(.zodiacGray)
+        case .zodiacCyanDark:
+            return Color(.zodiacCyanDark)
+        case .zodiacMintDark:
+            return Color(.zodiacMintDark)
+        case .zodiacOrangeDark:
+            return Color(.zodiacOrangeDark)
         }
+    }
+
+    private func makeProfileAvatarInitials(_ initials: String, font: Font) -> some View {
+        Text(initials)
+            .font(font)
+            .fontWeight(.semibold)
+            .foregroundStyle(Color(.textOnAccent))
+            .lineLimit(1)
+            .minimumScaleFactor(0.8)
     }
 
     func makeZodiacBadge(zodiacInfo: DailyHoroscope) -> some View {
@@ -775,14 +785,9 @@ extension ProfileScreen {
                 .fill(makeProfileAvatarGradient(colors: avatar.gradientColors))
                 .frame(width: 92, height: 92)
                 .overlay {
-                    Text(avatar.initials)
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(Color(.textOnAccent))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
-                        .accessibilityHidden(true)
+                    makeProfileAvatarInitials(avatar.initials, font: .title2)
                 }
+                .accessibilityHidden(true)
             
             Text(name)
                 .font(.headline)

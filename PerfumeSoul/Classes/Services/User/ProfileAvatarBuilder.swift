@@ -22,6 +22,9 @@ enum ProfileAvatarColor: CaseIterable, Equatable {
     case zodiacBrown
     case zodiacPink
     case zodiacGray
+    case zodiacCyanDark
+    case zodiacMintDark
+    case zodiacOrangeDark
 }
 
 final class ProfileAvatarBuilderImpl {}
