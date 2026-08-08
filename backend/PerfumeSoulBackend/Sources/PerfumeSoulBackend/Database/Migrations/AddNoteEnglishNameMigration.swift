@@ -57,11 +57,19 @@ struct AddNoteEnglishNameMigration: AsyncMigration {
                 WHEN 'Чай' THEN 'tea'
                 WHEN 'Шафран' THEN 'saffron'
                 WHEN 'Яблоко' THEN 'apple'
-                ELSE name_en
             END
             WHERE name_en IS NULL
             """)
             .run()
+
+        let missingNames = try await sqlDatabase
+            .raw("SELECT name FROM notes WHERE name_en IS NULL ORDER BY name")
+            .all()
+            .map { try $0.decode(column: "name", as: String.self) }
+
+        guard missingNames.isEmpty else {
+            throw DatabaseMigrationError.missingEnglishNoteNames(missingNames)
+        }
     }
 
     func revert(on database: any Database) async throws {

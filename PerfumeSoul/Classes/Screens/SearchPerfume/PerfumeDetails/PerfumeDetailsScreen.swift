@@ -434,7 +434,7 @@ extension PerfumeDetailsScreen {
                     spacing: 8
                 ) {
                     ForEach(notes, id: \.self) { note in
-                        makeCompactChip(text: note, accentColor: accentColor)
+                        makeCompactChip(text: note.localizedCapitalized, accentColor: accentColor)
                     }
                 }
             }
