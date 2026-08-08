@@ -29,10 +29,12 @@ final class QuizOfTheDayRouterImpl {
 extension QuizOfTheDayRouterImpl: QuizOfTheDayRouter {
     @MainActor
     func requestAppReview() {
+        appReviewRequester.registerQuizCompletion()
+
         guard let windowScene = navigationController?.view.window?.windowScene else {
             return
         }
 
-        appReviewRequester.requestReviewAfterQuizCompletion(in: windowScene)
+        appReviewRequester.requestReviewIfEligible(in: windowScene)
     }
 }

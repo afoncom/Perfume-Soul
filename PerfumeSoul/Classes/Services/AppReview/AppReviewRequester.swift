@@ -10,8 +10,9 @@ import StoreKit
 import UIKit
 
 protocol AppReviewRequesting {
+    func registerQuizCompletion()
     @MainActor
-    func requestReviewAfterQuizCompletion(in windowScene: UIWindowScene)
+    func requestReviewIfEligible(in windowScene: UIWindowScene)
     func resetCompletedQuizCount()
 }
 
@@ -33,33 +34,28 @@ final class AppReviewRequesterImpl {
         self.appVersionProvider = appVersionProvider
     }
 
+    func registerQuizCompletion() {
+        let completedQuizCount = userDefaults.integer(forKey: Keys.completedQuizCount) + 1
+        userDefaults.set(completedQuizCount, forKey: Keys.completedQuizCount)
+    }
+
     @MainActor
-    func requestReviewAfterQuizCompletion(in windowScene: UIWindowScene) {
-        guard registerQuizCompletionAndCheckReviewEligibility() else {
+    func requestReviewIfEligible(in windowScene: UIWindowScene) {
+        guard let appVersion = appVersionProvider.currentAppVersion() else {
             return
         }
 
-        requestReview(in: windowScene)
-    }
-
-    func registerQuizCompletionAndCheckReviewEligibility() -> Bool {
-        guard let appVersion = appVersionProvider.currentAppVersion() else {
-            return false
-        }
-
-        let completedQuizCount = userDefaults.integer(forKey: Keys.completedQuizCount) + 1
-        userDefaults.set(completedQuizCount, forKey: Keys.completedQuizCount)
-
+        let completedQuizCount = userDefaults.integer(forKey: Keys.completedQuizCount)
         guard completedQuizCount >= minimumCompletedQuizCount else {
-            return false
+            return
         }
 
         guard userDefaults.string(forKey: Keys.lastRequestedVersion) != appVersion else {
-            return false
+            return
         }
 
         userDefaults.set(appVersion, forKey: Keys.lastRequestedVersion)
-        return true
+        requestReview(in: windowScene)
     }
 
     func resetCompletedQuizCount() {
