@@ -11,6 +11,7 @@ import UIKit
 
 protocol AppReviewRequesting {
     func registerQuizCompletion()
+    func consumeReviewRequestSlot() -> Bool
     @MainActor
     func requestReviewIfEligible(in windowScene: UIWindowScene)
     func resetCompletedQuizCount()
@@ -39,22 +40,30 @@ final class AppReviewRequesterImpl {
         userDefaults.set(completedQuizCount, forKey: Keys.completedQuizCount)
     }
 
-    @MainActor
-    func requestReviewIfEligible(in windowScene: UIWindowScene) {
+    func consumeReviewRequestSlot() -> Bool {
         guard let appVersion = appVersionProvider.currentAppVersion() else {
-            return
+            return false
         }
 
         let completedQuizCount = userDefaults.integer(forKey: Keys.completedQuizCount)
         guard completedQuizCount >= minimumCompletedQuizCount else {
-            return
+            return false
         }
 
         guard userDefaults.string(forKey: Keys.lastRequestedVersion) != appVersion else {
-            return
+            return false
         }
 
         userDefaults.set(appVersion, forKey: Keys.lastRequestedVersion)
+        return true
+    }
+
+    @MainActor
+    func requestReviewIfEligible(in windowScene: UIWindowScene) {
+        guard consumeReviewRequestSlot() else {
+            return
+        }
+
         requestReview(in: windowScene)
     }
 

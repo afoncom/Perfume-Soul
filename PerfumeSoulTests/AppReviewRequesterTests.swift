@@ -28,26 +28,32 @@ final class AppReviewRequesterTests: XCTestCase {
         super.tearDown()
     }
 
-    func testFreshInstallDoesNotRequestReviewUntilThirdQuizCompletion() {
+    func testReviewSlotOpensOnThirdQuizCompletion() {
         let requester = makeRequester()
 
         requester.registerQuizCompletion()
         requester.registerQuizCompletion()
+
+        XCTAssertFalse(requester.consumeReviewRequestSlot())
+
         requester.registerQuizCompletion()
 
-        XCTAssertEqual(userDefaults.integer(forKey: "appReview.completedQuizCount"), 3)
+        XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
-    func testQuizCompletionCountContinuesAcrossVersions() {
+    func testReviewSlotIsConsumedOnlyOncePerVersion() {
         let requester = makeRequester()
 
         requester.registerQuizCompletion()
         requester.registerQuizCompletion()
-
-        appVersionProvider.appVersion = "1.1"
         requester.registerQuizCompletion()
 
-        XCTAssertEqual(userDefaults.integer(forKey: "appReview.completedQuizCount"), 3)
+        XCTAssertTrue(requester.consumeReviewRequestSlot())
+        XCTAssertFalse(requester.consumeReviewRequestSlot())
+
+        appVersionProvider.appVersion = "1.1"
+
+        XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
     func testResetCompletedQuizCountAllowsNewProfileToReachThreshold() {
@@ -62,18 +68,17 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertEqual(userDefaults.integer(forKey: "appReview.completedQuizCount"), 0)
     }
 
-    func testMissingVersionDoesNotRecordQuizCompletion() {
+    func testMissingVersionDoesNotConsumeReviewSlot() {
         let requester = makeRequester()
+
+        requester.registerQuizCompletion()
+        requester.registerQuizCompletion()
+        requester.registerQuizCompletion()
+
         appVersionProvider.appVersion = nil
 
-        requester.registerQuizCompletion()
-
-        appVersionProvider.appVersion = "1.0"
-
-        requester.registerQuizCompletion()
-        requester.registerQuizCompletion()
-
-        XCTAssertEqual(userDefaults.integer(forKey: "appReview.completedQuizCount"), 3)
+        XCTAssertFalse(requester.consumeReviewRequestSlot())
+        XCTAssertNil(userDefaults.string(forKey: "appReview.lastRequestedVersion"))
     }
 
     private func makeRequester() -> AppReviewRequesterImpl {

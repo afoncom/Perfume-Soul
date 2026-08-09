@@ -26,6 +26,10 @@ private final class AppReviewRequesterMock: AppReviewRequesting {
         registeredCompletions += 1
     }
 
+    func consumeReviewRequestSlot() -> Bool {
+        false
+    }
+
     @MainActor
     func requestReviewIfEligible(in windowScene: UIWindowScene) {
         didRequestReview = true
