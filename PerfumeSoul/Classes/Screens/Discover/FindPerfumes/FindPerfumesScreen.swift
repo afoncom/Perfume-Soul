@@ -154,11 +154,13 @@ extension FindPerfumesScreen {
                         .frame(width: 24, height: 24)
                         .background(Color(.pinkButton))
                         .clipShape(Circle())
+                        .accessibilityHidden(true)
 
                     Text(title)
                         .font(.headline)
                         .fontWeight(.medium)
                         .foregroundStyle(Color(.textPrimary))
+                        .accessibilityHidden(true)
                 }
 
                 ZStack(alignment: .leading) {
