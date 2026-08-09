@@ -22,6 +22,9 @@ enum ProfileAvatarColor: CaseIterable, Equatable {
     case zodiacBrown
     case zodiacPink
     case zodiacGray
+    case avatarOcean
+    case avatarTeal
+    case avatarAmber
 }
 
 final class ProfileAvatarBuilderImpl {}
@@ -32,7 +35,7 @@ extension ProfileAvatarBuilderImpl: ProfileAvatarBuilder {
 
         return ProfileAvatar(
             initials: initials,
-            gradientColors: makeGradientColors(initials: initials)
+            gradientColors: makeGradientColors(key: normalizedName(name))
         )
     }
 }
@@ -43,18 +46,25 @@ extension ProfileAvatarBuilderImpl {
             .split(whereSeparator: \.isWhitespace)
             .prefix(2)
             .compactMap(\.first)
-        let result = String(initials).uppercased()
+        let result = String(String(initials).uppercased().prefix(2))
 
         return result.isEmpty ? "?" : result
     }
 
-    private func makeGradientColors(initials: String) -> [ProfileAvatarColor] {
+    private func normalizedName(_ name: String) -> String {
+        name
+            .split(whereSeparator: \.isWhitespace)
+            .joined(separator: " ")
+            .lowercased()
+    }
+
+    private func makeGradientColors(key: String) -> [ProfileAvatarColor] {
         let colors = ProfileAvatarColor.allCases
         guard colors.count > 1 else {
             return colors
         }
 
-        let hash = initials.uppercased().unicodeScalars.reduce(UInt32(5381)) { result, scalar in
+        let hash = key.unicodeScalars.reduce(UInt32(5381)) { result, scalar in
             result &* 33 &+ UInt32(scalar.value)
         }
         let baseIndex = Int(hash % UInt32(colors.count))

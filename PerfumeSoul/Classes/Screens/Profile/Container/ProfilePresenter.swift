@@ -22,6 +22,7 @@ final class ProfilePresenterImpl {
     private let profileCalculationService: ProfileCalculationService
     private let quizProgressService: QuizProgressService
     private let dailyQuizStateStorage: DailyQuizStateStorage
+    private let appReviewRequester: AppReviewRequesting
     
     init(
         viewModel: ProfileViewModel,
@@ -29,7 +30,8 @@ final class ProfilePresenterImpl {
         profileService: ProfileService,
         profileCalculationService: ProfileCalculationService,
         quizProgressService: QuizProgressService,
-        dailyQuizStateStorage: DailyQuizStateStorage
+        dailyQuizStateStorage: DailyQuizStateStorage,
+        appReviewRequester: AppReviewRequesting
     ) {
         self.viewModel = viewModel
         self.router = router
@@ -37,6 +39,7 @@ final class ProfilePresenterImpl {
         self.profileCalculationService = profileCalculationService
         self.quizProgressService = quizProgressService
         self.dailyQuizStateStorage = dailyQuizStateStorage
+        self.appReviewRequester = appReviewRequester
     }
 }
 
@@ -109,6 +112,7 @@ extension ProfilePresenterImpl: ProfilePresenter {
         await profileService.deleteProfile(profile)
         quizProgressService.resetProgress()
         dailyQuizStateStorage.clearState()
+        appReviewRequester.resetCompletedQuizCount()
         
         await MainActor.run {
             viewModel.profile = nil

@@ -17,7 +17,7 @@ final class AppReviewRequesterTests: XCTestCase {
         super.setUp()
         suiteName = "AppReviewRequesterTests-\(UUID().uuidString)"
         userDefaults = UserDefaults(suiteName: suiteName)
-        appVersionProvider = AppVersionProviderMock(appVersion: "1.0-1")
+        appVersionProvider = AppVersionProviderMock(appVersion: "1.0")
     }
 
     override func tearDown() {
@@ -28,33 +28,57 @@ final class AppReviewRequesterTests: XCTestCase {
         super.tearDown()
     }
 
-    func testFreshInstallDoesNotRequestReviewUntilThirdQuizCompletion() {
+    func testReviewSlotOpensOnThirdQuizCompletion() {
         let requester = makeRequester()
 
-        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
-        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
-        XCTAssertTrue(requester.registerQuizCompletionAndCheckReviewEligibility())
+        requester.registerQuizCompletion()
+        requester.registerQuizCompletion()
+
+        XCTAssertFalse(requester.consumeReviewRequestSlot())
+
+        requester.registerQuizCompletion()
+
+        XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
-    func testSameVersionDoesNotRepeatReviewRequest() {
+    func testReviewSlotIsConsumedOnlyOncePerVersion() {
         let requester = makeRequester()
 
-        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
-        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
-        XCTAssertTrue(requester.registerQuizCompletionAndCheckReviewEligibility())
-        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
+        requester.registerQuizCompletion()
+        requester.registerQuizCompletion()
+        requester.registerQuizCompletion()
+
+        XCTAssertTrue(requester.consumeReviewRequestSlot())
+        XCTAssertFalse(requester.consumeReviewRequestSlot())
+
+        appVersionProvider.appVersion = "1.1"
+
+        XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
-    func testVersionBumpKeepsQuizCountForAnotherReviewRequest() {
+    func testResetCompletedQuizCountAllowsNewProfileToReachThreshold() {
         let requester = makeRequester()
 
-        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
-        XCTAssertFalse(requester.registerQuizCompletionAndCheckReviewEligibility())
-        XCTAssertTrue(requester.registerQuizCompletionAndCheckReviewEligibility())
+        requester.registerQuizCompletion()
+        requester.registerQuizCompletion()
+        requester.registerQuizCompletion()
 
-        appVersionProvider.appVersion = "1.1-2"
+        requester.resetCompletedQuizCount()
 
-        XCTAssertTrue(requester.registerQuizCompletionAndCheckReviewEligibility())
+        XCTAssertEqual(userDefaults.integer(forKey: "appReview.completedQuizCount"), 0)
+    }
+
+    func testMissingVersionDoesNotConsumeReviewSlot() {
+        let requester = makeRequester()
+
+        requester.registerQuizCompletion()
+        requester.registerQuizCompletion()
+        requester.registerQuizCompletion()
+
+        appVersionProvider.appVersion = nil
+
+        XCTAssertFalse(requester.consumeReviewRequestSlot())
+        XCTAssertNil(userDefaults.string(forKey: "appReview.lastRequestedVersion"))
     }
 
     private func makeRequester() -> AppReviewRequesterImpl {
@@ -66,15 +90,15 @@ final class AppReviewRequesterTests: XCTestCase {
 }
 
 private final class AppVersionProviderMock {
-    var appVersion: String
+    var appVersion: String?
 
-    init(appVersion: String) {
+    init(appVersion: String?) {
         self.appVersion = appVersion
     }
 }
 
 extension AppVersionProviderMock: AppVersionProvider {
-    func currentAppVersion() -> String {
+    func currentAppVersion() -> String? {
         appVersion
     }
 }

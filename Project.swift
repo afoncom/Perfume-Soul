@@ -23,7 +23,9 @@ let project = Project(
             settings: .settings(
                 base: [
                     "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS": "YES",
-                    "ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": "YES"
+                    "ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": "YES",
+                    "MARKETING_VERSION": "1.0",
+                    "CURRENT_PROJECT_VERSION": "1"
                 ]
             )
         ),

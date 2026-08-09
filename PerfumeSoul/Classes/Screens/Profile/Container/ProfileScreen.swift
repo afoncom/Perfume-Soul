@@ -84,12 +84,7 @@ extension ProfileScreen {
                 .fill(makeProfileAvatarGradient(colors: avatar.gradientColors))
                 .frame(width: 74, height: 74)
                 .overlay {
-                    Text(avatar.initials)
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(Color(.textOnAccent))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
+                    makeProfileAvatarInitials(avatar.initials, font: .title3)
                 }
                 .accessibilityHidden(true)
             
@@ -513,7 +508,22 @@ extension ProfileScreen {
             return Color(.zodiacPink)
         case .zodiacGray:
             return Color(.zodiacGray)
+        case .avatarOcean:
+            return Color(.avatarOcean)
+        case .avatarTeal:
+            return Color(.avatarTeal)
+        case .avatarAmber:
+            return Color(.avatarAmber)
         }
+    }
+
+    private func makeProfileAvatarInitials(_ initials: String, font: Font) -> some View {
+        Text(initials)
+            .font(font)
+            .fontWeight(.semibold)
+            .foregroundStyle(Color(.textOnAccent))
+            .lineLimit(1)
+            .minimumScaleFactor(0.8)
     }
 
     func makeZodiacBadge(zodiacInfo: DailyHoroscope) -> some View {

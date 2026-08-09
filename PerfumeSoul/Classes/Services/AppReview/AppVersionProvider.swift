@@ -8,19 +8,18 @@
 import Foundation
 
 protocol AppVersionProvider {
-    func currentAppVersion() -> String
+    func currentAppVersion() -> String?
 }
 
 final class AppVersionProviderImpl {}
 
 extension AppVersionProviderImpl: AppVersionProvider {
-    func currentAppVersion() -> String {
-        let infoDictionary = Bundle.main.infoDictionary
-        let shortVersion = infoDictionary?["CFBundleShortVersionString"] as? String
-        let buildVersion = infoDictionary?["CFBundleVersion"] as? String
+    func currentAppVersion() -> String? {
+        guard let shortVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+            return nil
+        }
 
-        return [shortVersion, buildVersion]
-            .compactMap { $0 }
-            .joined(separator: "-")
+        let trimmedVersion = shortVersion.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmedVersion.isEmpty ? nil : trimmedVersion
     }
 }
