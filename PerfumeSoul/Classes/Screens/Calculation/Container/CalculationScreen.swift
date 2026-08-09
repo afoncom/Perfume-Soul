@@ -34,6 +34,7 @@ struct CalculationScreen: View {
             .padding(.bottom, 24)
         }
         .background(Color(.backgroundPrimary))
+        .modifier(TopSafeAreaBackground(isEnabled: true))
         .scrollDismissesKeyboard(.interactively)
         .sheet(item: $activePicker) { picker in
             switch picker {

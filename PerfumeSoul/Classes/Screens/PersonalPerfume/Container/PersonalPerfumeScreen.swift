@@ -44,13 +44,9 @@ struct PersonalPerfumeScreen: View {
             )
             .ignoresSafeArea()
         )
+        .modifier(TopSafeAreaBackground(isEnabled: presenter.isPresentedInOnboarding))
         .task {
             await presenter.onAppear()
-        }
-        .overlay(alignment: .top) {
-            if presenter.isPresentedInOnboarding {
-                makeTopSafeAreaBackground()
-            }
         }
         .safeAreaInset(edge: .bottom) {
             if presenter.isPresentedInOnboarding {
@@ -64,16 +60,6 @@ struct PersonalPerfumeScreen: View {
 }
 
 extension PersonalPerfumeScreen {
-    private func makeTopSafeAreaBackground() -> some View {
-        GeometryReader { proxy in
-            Color(.backgroundPrimary)
-                .frame(height: proxy.safeAreaInsets.top)
-                .frame(maxHeight: .infinity, alignment: .top)
-                .ignoresSafeArea(edges: .top)
-        }
-        .allowsHitTesting(false)
-    }
-
     @ViewBuilder
     private func makeSectionsView() -> some View {
         switch viewModel.state {
