@@ -23,6 +23,10 @@ enum PerfumeDetailsTextFormatter {
             return recommendationReason
         }
 
+        guard notesMatchCurrentLanguage(perfumeDetails.notesLanguage) else {
+            return L10n.PerfumeDetails.defaultRecommendation
+        }
+
         let notes = (perfumeDetails.topNotes + perfumeDetails.middleNotes + perfumeDetails.baseNotes)
             .compactMap(nonBlank)
             .prefix(3)
@@ -170,5 +174,14 @@ enum PerfumeDetailsTextFormatter {
 
         let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmed.isEmpty ? nil : trimmed
+    }
+
+    private static func notesMatchCurrentLanguage(_ notesLanguage: String?) -> Bool {
+        guard let notesLanguage = nonBlank(notesLanguage) else {
+            return false
+        }
+
+        let appLanguage = Bundle.main.preferredLocalizations.first ?? "en"
+        return normalized(notesLanguage) == normalized(appLanguage)
     }
 }

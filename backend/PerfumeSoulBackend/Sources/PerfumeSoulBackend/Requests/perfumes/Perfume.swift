@@ -30,6 +30,7 @@ struct PerfumeNotesResponse: Codable, Equatable {
     let recommendationReason: String?
     let fullStory: String?
     let accords: [PerfumeAccordResponse]
+    let notesLanguage: String
     let topNotes: [String]
     let middleNotes: [String]
     let baseNotes: [String]
@@ -122,7 +123,7 @@ enum PerfumeNotesLoader {
                     name: $0.accord.name,
                     weight: $0.weight
                 )
-        }
+            }
 
         for perfumeNote in perfumeNotes {
             let noteName: String
@@ -171,6 +172,7 @@ enum PerfumeNotesLoader {
                 ? perfume.fullStoryEnglish
                 : perfume.fullStory,
             accords: accords,
+            notesLanguage: useEnglishNotes ? "en" : "ru",
             topNotes: topNotes,
             middleNotes: middleNotes,
             baseNotes: baseNotes

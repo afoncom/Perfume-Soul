@@ -31,6 +31,7 @@ struct PerfumeDetails {
     let recommendationReason: String?
     let fullStory: String?
     let accords: [PerfumeAccord]
+    let notesLanguage: String?
     let topNotes: [String]
     let middleNotes: [String]
     let baseNotes: [String]
@@ -61,6 +62,7 @@ extension PerfumeDetails {
                 weight: $0.weight
             )
         }
+        self.notesLanguage = response.notesLanguage
         self.topNotes = response.topNotes
         self.middleNotes = response.middleNotes
         self.baseNotes = response.baseNotes

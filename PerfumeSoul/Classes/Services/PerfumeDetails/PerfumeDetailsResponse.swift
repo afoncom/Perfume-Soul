@@ -26,6 +26,7 @@ struct PerfumeDetailsResponse: Decodable {
     let recommendationReason: String?
     let fullStory: String?
     let accords: [PerfumeAccordResponse]
+    let notesLanguage: String?
     let topNotes: [String]
     let middleNotes: [String]
     let baseNotes: [String]
@@ -49,6 +50,7 @@ struct PerfumeDetailsResponse: Decodable {
         case recommendationReason
         case fullStory
         case accords
+        case notesLanguage
         case topNotes
         case middleNotes
         case baseNotes
@@ -75,6 +77,7 @@ struct PerfumeDetailsResponse: Decodable {
         self.recommendationReason = try container.decodeIfPresent(String.self, forKey: .recommendationReason)
         self.fullStory = try container.decodeIfPresent(String.self, forKey: .fullStory)
         self.accords = try container.decodeIfPresent([PerfumeAccordResponse].self, forKey: .accords) ?? []
+        self.notesLanguage = try container.decodeIfPresent(String.self, forKey: .notesLanguage)
         self.topNotes = try container.decode([String].self, forKey: .topNotes)
         self.middleNotes = try container.decode([String].self, forKey: .middleNotes)
         self.baseNotes = try container.decode([String].self, forKey: .baseNotes)
