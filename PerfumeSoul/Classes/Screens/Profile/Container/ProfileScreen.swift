@@ -558,12 +558,12 @@ extension ProfileScreen {
             return Color(.zodiacPink)
         case .zodiacGray:
             return Color(.zodiacGray)
-        case .zodiacCyanDark:
-            return Color(.zodiacCyanDark)
-        case .zodiacMintDark:
-            return Color(.zodiacMintDark)
-        case .zodiacOrangeDark:
-            return Color(.zodiacOrangeDark)
+        case .avatarOcean:
+            return Color(.avatarOcean)
+        case .avatarTeal:
+            return Color(.avatarTeal)
+        case .avatarAmber:
+            return Color(.avatarAmber)
         }
     }
 
