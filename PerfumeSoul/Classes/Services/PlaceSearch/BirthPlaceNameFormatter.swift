@@ -17,12 +17,12 @@ enum BirthPlaceNameFormatter {
             return components.joined(separator: ", ")
         }
 
-        if components.count > 1 {
-            components.removeLast()
-        }
-
         if let first = components.first, isSamePlaceComponent(primary, first) {
             components.removeFirst()
+        }
+
+        if components.count > 1 {
+            components.removeLast()
         }
 
         guard !components.isEmpty else {

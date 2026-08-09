@@ -41,6 +41,16 @@ final class BirthPlaceNameFormatterTests: XCTestCase {
         )
     }
 
+    func testFormatKeepsCountryAfterDroppingLeadingTitle() {
+        XCTAssertEqual(
+            BirthPlaceNameFormatter.format(
+                title: "Paris",
+                subtitle: "Paris, France"
+            ),
+            "Paris, France"
+        )
+    }
+
     func testFormatReturnsSubtitleWhenPrimaryIsEmpty() {
         XCTAssertEqual(
             BirthPlaceNameFormatter.format(
