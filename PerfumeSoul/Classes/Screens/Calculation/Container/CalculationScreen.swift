@@ -197,16 +197,14 @@ extension CalculationScreen {
                                 await presenter.birthPlaceCompletionTapped(completion)
                             }
                         } label: {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(BirthPlaceNameFormatter.format(
-                                    title: completion.title,
-                                    subtitle: completion.subtitle
-                                ))
-                                    .font(.headline)
-                                    .foregroundStyle(Color(.textPrimary))
-                                    .lineLimit(2)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            }
+                            Text(BirthPlaceNameFormatter.format(
+                                title: completion.title,
+                                subtitle: completion.subtitle
+                            ))
+                            .font(.headline)
+                            .foregroundStyle(Color(.textPrimary))
+                            .lineLimit(2)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 16)
                             .padding(.vertical, 12)
                         }
