@@ -164,7 +164,7 @@ extension ProfileScreen {
                 LazyVGrid(
                     columns: Array(
                         repeating: GridItem(.flexible(), spacing: 4, alignment: .leading),
-                        count: max(1, min(elementItems.count, 4))
+                        count: 4
                     ),
                     spacing: 8
                 ) {
@@ -458,40 +458,7 @@ extension ProfileScreen {
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
-    
-    func makeAddedNewProfiless() -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text(L10n.Profile.Profiles.title)
-                    .font(.title3)
-                    .fontWeight(.medium)
-                
-                Spacer()
-                
-                Button(action: {
-                    presenter.addedNewProfilesButtonTab()
-                }) {
-                    Image(systemName: "plus")
-                        .font(.headline.weight(.medium))
-                        .foregroundStyle(Color(.textSecondary))
-                        .frame(width: 28, height: 28)
-                }
-            }
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
-                    makeAddedProfileItem(name: "Laura")
-                    makeAddedProfileItem(name: "Alex")
-                    makeAddedProfileItem(name: "Emma")
-                }
-            }
-        }
-        .padding(14)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
-    }
-    
+
     func makeDeleteProfileAction() -> some View {
         Button {
             viewModel.isShowingDeleteProfileAlert = true
