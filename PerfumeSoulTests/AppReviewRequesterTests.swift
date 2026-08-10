@@ -63,9 +63,19 @@ final class AppReviewRequesterTests: XCTestCase {
         requester.registerQuizCompletion()
         requester.registerQuizCompletion()
 
+        XCTAssertTrue(requester.consumeReviewRequestSlot())
+
         requester.resetCompletedQuizCount()
 
-        XCTAssertEqual(userDefaults.integer(forKey: "appReview.completedQuizCount"), 0)
+        XCTAssertFalse(requester.consumeReviewRequestSlot())
+
+        appVersionProvider.appVersion = "1.1"
+
+        requester.registerQuizCompletion()
+        requester.registerQuizCompletion()
+        requester.registerQuizCompletion()
+
+        XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
     func testMissingVersionDoesNotConsumeReviewSlot() {

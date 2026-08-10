@@ -67,8 +67,9 @@ extension ProfileAvatarBuilderImpl {
         let hash = key.unicodeScalars.reduce(UInt32(5381)) { result, scalar in
             result &* 33 &+ UInt32(scalar.value)
         }
-        let baseIndex = Int(hash % UInt32(colors.count))
-        let accentOffset = Int((hash / UInt32(colors.count)) % UInt32(colors.count - 1)) + 1
+        let mixed = hash ^ (hash >> 15)
+        let baseIndex = Int(mixed % UInt32(colors.count))
+        let accentOffset = Int((mixed / UInt32(colors.count)) % UInt32(colors.count - 1)) + 1
         let accentIndex = (baseIndex + accentOffset) % colors.count
 
         return [colors[baseIndex], colors[accentIndex]]
