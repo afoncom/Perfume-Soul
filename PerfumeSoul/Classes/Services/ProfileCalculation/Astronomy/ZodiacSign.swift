@@ -2,7 +2,7 @@
 //  ZodiacSign.swift
 //  PerfumeSoul
 //
-//  Created by Codex on 10.07.2026.
+//  Created by afon.com on 10.07.2026.
 //
 
 import Foundation

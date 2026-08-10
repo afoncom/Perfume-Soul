@@ -2,7 +2,7 @@
 //  ProfileDescription.swift
 //  PerfumeSoul
 //
-//  Created by Codex on 17.07.2026.
+//  Created by afon.com on 17.07.2026.
 //
 
 import Foundation
