@@ -13,16 +13,16 @@ enum BirthPlaceNameFormatter {
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { !$0.isEmpty } ?? []
 
-        guard !primary.isEmpty else {
-            return components.joined(separator: ", ")
-        }
-
         if let first = components.first, isSamePlaceComponent(primary, first) {
             components.removeFirst()
         }
 
         if components.count > 1 {
             components.removeLast()
+        }
+
+        guard !primary.isEmpty else {
+            return components.joined(separator: ", ")
         }
 
         guard !components.isEmpty else {

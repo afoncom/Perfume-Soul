@@ -57,7 +57,7 @@ final class BirthPlaceNameFormatterTests: XCTestCase {
                 title: nil,
                 subtitle: "Illinois, United States"
             ),
-            "Illinois, United States"
+            "Illinois"
         )
     }
 }
