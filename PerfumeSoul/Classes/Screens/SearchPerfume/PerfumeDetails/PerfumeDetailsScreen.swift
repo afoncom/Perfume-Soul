@@ -322,14 +322,14 @@ extension PerfumeDetailsScreen {
         ]
 
         return facts
-        .compactMap { fact in
-            guard let value = fact.1,
-                !value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-                return nil
-            }
+            .compactMap { fact in
+                guard let value = fact.1,
+                    !value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+                    return nil
+                }
 
-            return (fact.0, value)
-        }
+                return (fact.0, value)
+            }
     }
 
     private func hasStoryContent(_ perfumeDetails: PerfumeDetails) -> Bool {

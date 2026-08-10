@@ -68,11 +68,13 @@ enum PerfumeDetailsTextFormatter {
             return localizedPhrase
         }
 
-        let tokens = normalizedValue
+        let phrase = normalizedValue
             .split(separator: " ")
-            .map { localizedProfileToken(String($0)).localizedCapitalized }
+            .map { localizedProfileToken(String($0)) }
+            .joined(separator: " ")
+            .lowercased()
 
-        return tokens.joined(separator: " ")
+        return uppercasedFirstCharacter(phrase)
     }
 
     static func localizedAccord(_ value: String) -> String {
@@ -174,6 +176,14 @@ enum PerfumeDetailsTextFormatter {
 
         let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmed.isEmpty ? nil : trimmed
+    }
+
+    private static func uppercasedFirstCharacter(_ value: String) -> String {
+        guard let first = value.first else {
+            return value
+        }
+
+        return first.uppercased() + value.dropFirst()
     }
 
     private static func notesMatchCurrentLanguage(_ notesLanguage: String?) -> Bool {
