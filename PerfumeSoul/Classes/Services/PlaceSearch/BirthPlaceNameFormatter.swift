@@ -17,10 +17,6 @@ enum BirthPlaceNameFormatter {
             components.removeFirst()
         }
 
-        if components.count > 1 {
-            components.removeLast()
-        }
-
         guard !primary.isEmpty else {
             return components.joined(separator: ", ")
         }

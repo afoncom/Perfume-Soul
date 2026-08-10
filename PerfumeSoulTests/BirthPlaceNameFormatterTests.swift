@@ -7,13 +7,13 @@ import XCTest
 @testable import PerfumeSoul
 
 final class BirthPlaceNameFormatterTests: XCTestCase {
-    func testFormatKeepsRegionAndDropsCountrySuffix() {
+    func testFormatKeepsRegionAndCountrySuffix() {
         XCTAssertEqual(
             BirthPlaceNameFormatter.format(
                 title: "Springfield",
                 subtitle: "Illinois, United States"
             ),
-            "Springfield, Illinois"
+            "Springfield, Illinois, United States"
         )
     }
 
@@ -37,7 +37,7 @@ final class BirthPlaceNameFormatterTests: XCTestCase {
                 title: "Springfield",
                 subtitle: "Springfield, Illinois, United States"
             ),
-            "Springfield, Illinois"
+            "Springfield, Illinois, United States"
         )
     }
 
@@ -57,7 +57,7 @@ final class BirthPlaceNameFormatterTests: XCTestCase {
                 title: nil,
                 subtitle: "Illinois, United States"
             ),
-            "Illinois"
+            "Illinois, United States"
         )
     }
 }
