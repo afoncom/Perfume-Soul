@@ -155,9 +155,6 @@
 "sendFeedback.mailUnavailable" = "Apple Mail is not configured on this device. Use the address above to send your message manually.";
 "sendFeedback.subtitle" = "Write to the developer if you want to share an idea, review, or suggestion for improving the app.";
 "sendFeedback.title" = "Reviews and Suggestions";
-"settings.privacy.howDataIsUsedSubtitle" = "Learn how we protect your information";
-"settings.privacy.howDataIsUsedTitle" = "Privacy Policy";
-"settings.privacyTitle" = "Privacy";
 "settings.support.supportDeveloperSubtitle" = "If you like the app, you can support its development";
 "settings.support.supportDeveloperTitle" = "Support the Developer";
 "settings.supportTitle" = "Support";
