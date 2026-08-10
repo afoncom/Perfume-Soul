@@ -111,7 +111,7 @@ enum PerfumeNotesLoader {
             $0.note.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
         }
         if isEnglish, !useEnglishNotes {
-            database.logger.warning("[perfumes] serving Russian notes for English request")
+            database.logger.notice("[perfumes] serving Russian notes for English request perfumeID=\(perfumeID)")
         }
         let accords = perfumeAccords
             .sorted { lhs, rhs in
