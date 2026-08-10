@@ -11,7 +11,6 @@ import UIKit
 
 protocol AppReviewRequesting {
     func registerQuizCompletion()
-    func consumeReviewRequestSlot() -> Bool
     @MainActor
     func requestReviewIfEligible(in windowScene: UIWindowScene)
     func resetCompletedQuizCount()
@@ -64,18 +63,12 @@ final class AppReviewRequesterImpl {
             return
         }
 
-        requestReview(in: windowScene)
+        AppStore.requestReview(in: windowScene)
     }
 
     func resetCompletedQuizCount() {
         userDefaults.removeObject(forKey: Keys.completedQuizCount)
     }
-
-    @MainActor
-    private func requestReview(in windowScene: UIWindowScene) {
-        AppStore.requestReview(in: windowScene)
-    }
-
 }
 
 extension AppReviewRequesterImpl: AppReviewRequesting {}

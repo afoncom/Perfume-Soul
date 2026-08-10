@@ -2,7 +2,7 @@
 //  ProfileCalculationServiceTests.swift
 //  PerfumeSoulTests
 //
-//  Created by Codex on 21.07.2026.
+//  Created by afon.com on 21.07.2026.
 //
 
 import Foundation

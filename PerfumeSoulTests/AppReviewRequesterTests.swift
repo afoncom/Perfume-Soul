@@ -2,7 +2,7 @@
 //  AppReviewRequesterTests.swift
 //  PerfumeSoulTests
 //
-//  Created by Codex on 05.08.2026.
+//  Created by afon.com on 05.08.2026.
 //
 
 import XCTest
@@ -65,7 +65,13 @@ final class AppReviewRequesterTests: XCTestCase {
 
         requester.resetCompletedQuizCount()
 
-        XCTAssertEqual(userDefaults.integer(forKey: "appReview.completedQuizCount"), 0)
+        XCTAssertFalse(requester.consumeReviewRequestSlot())
+
+        requester.registerQuizCompletion()
+        requester.registerQuizCompletion()
+        requester.registerQuizCompletion()
+
+        XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
     func testMissingVersionDoesNotConsumeReviewSlot() {

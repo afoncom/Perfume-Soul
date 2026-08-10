@@ -1,3 +1,10 @@
+//
+//  QuizOfTheDayRouterTests.swift
+//  PerfumeSoulTests
+//
+//  Created by afon.com on 09.08.2026.
+//
+
 import XCTest
 import UIKit
 @testable import PerfumeSoul
@@ -24,10 +31,6 @@ private final class AppReviewRequesterMock: AppReviewRequesting {
 
     func registerQuizCompletion() {
         registeredCompletions += 1
-    }
-
-    func consumeReviewRequestSlot() -> Bool {
-        false
     }
 
     @MainActor
