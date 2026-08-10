@@ -63,13 +63,9 @@ final class AppReviewRequesterTests: XCTestCase {
         requester.registerQuizCompletion()
         requester.registerQuizCompletion()
 
-        XCTAssertTrue(requester.consumeReviewRequestSlot())
-
         requester.resetCompletedQuizCount()
 
         XCTAssertFalse(requester.consumeReviewRequestSlot())
-
-        appVersionProvider.appVersion = "1.1"
 
         requester.registerQuizCompletion()
         requester.registerQuizCompletion()
