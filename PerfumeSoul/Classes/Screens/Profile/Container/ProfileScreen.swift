@@ -499,7 +499,7 @@ extension ProfileScreen {
                 HStack(spacing: 12) {
                     makeAddedProfileItem(name: "Laura")
                     makeAddedProfileItem(name: "Alex")
-                    makeAddedProfileItem(name: "Ada")
+                    makeAddedProfileItem(name: "Emma")
                 }
             }
         }
