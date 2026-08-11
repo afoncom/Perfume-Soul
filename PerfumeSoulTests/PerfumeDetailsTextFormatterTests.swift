@@ -42,7 +42,7 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
     func testHasRecommendationContentAllowsMatchingLanguageNotes() {
         let perfumeDetails = makePerfumeDetails(
             recommendationReason: nil,
-            notesLanguage: Bundle.main.preferredLocalizations.first ?? "en",
+            notesLanguage: SupportedAppLanguage.currentCode,
             topNotes: ["bergamot"]
         )
 
@@ -52,7 +52,7 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
     func testHasRecommendationContentRejectsFallbackOnlyReason() {
         let perfumeDetails = makePerfumeDetails(
             recommendationReason: " ",
-            notesLanguage: Bundle.main.preferredLocalizations.first ?? "en",
+            notesLanguage: SupportedAppLanguage.currentCode,
             topNotes: []
         )
 

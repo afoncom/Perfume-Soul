@@ -205,7 +205,6 @@ enum PerfumeDetailsTextFormatter {
             return false
         }
 
-        let appLanguage = Bundle.main.preferredLocalizations.first ?? "en"
-        return normalized(notesLanguage) == normalized(appLanguage)
+        return normalized(notesLanguage) == SupportedAppLanguage.currentCode
     }
 }

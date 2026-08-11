@@ -45,6 +45,11 @@ final class RequestManagerTests: XCTestCase {
 
     func testSendRequestDecodesSuccessfulResponse() async throws {
         MockURLProtocol.requestHandler = { request in
+            XCTAssertEqual(
+                request.value(forHTTPHeaderField: "Accept-Language"),
+                SupportedAppLanguage.currentCode
+            )
+
             let response = try XCTUnwrap(
                 HTTPURLResponse(
                     url: try XCTUnwrap(request.url),

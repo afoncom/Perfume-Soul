@@ -49,7 +49,7 @@ extension RequestManagerImpl: RequestManager {
         urlRequest.httpBody = request.httpBody
 
         let defaultHeaders = [
-            "Accept-Language": Bundle.main.preferredLocalizations.first ?? "en"
+            "Accept-Language": SupportedAppLanguage.currentCode
         ]
 
         defaultHeaders
