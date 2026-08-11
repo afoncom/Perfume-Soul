@@ -106,7 +106,7 @@ enum PerfumeNotesLoader {
         var topNotes: [String] = []
         var middleNotes: [String] = []
         var baseNotes: [String] = []
-        let isEnglish = language?.lowercased().split(separator: ",").first?.hasPrefix("en") == true
+        let isEnglish = Self.prefersEnglish(acceptLanguage: language)
         let useEnglishNotes = isEnglish && !perfumeNotes.isEmpty && perfumeNotes.allSatisfy {
             $0.note.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
         }
@@ -180,6 +180,15 @@ enum PerfumeNotesLoader {
             middleNotes: middleNotes,
             baseNotes: baseNotes
         )
+    }
+
+    static func prefersEnglish(acceptLanguage: String?) -> Bool {
+        acceptLanguage?
+            .lowercased()
+            .split(separator: ",")
+            .first?
+            .trimmingCharacters(in: .whitespaces)
+            .hasPrefix("en") == true
     }
 }
 
