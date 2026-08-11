@@ -163,25 +163,15 @@ extension FindPerfumesScreen {
                         .accessibilityHidden(true)
                 }
 
-                ZStack(alignment: .leading) {
-                    if text.wrappedValue.isEmpty {
-                        Text(placeholder)
-                            .font(.subheadline)
-                            .foregroundStyle(Color(.descriptionText))
-                            .lineLimit(1)
-                            .accessibilityHidden(true)
-                    }
-
-                    TextField("", text: text)
-                        .accessibilityLabel("\(fieldNumber(field)). \(title)")
-                        .accessibilityHint(Text(placeholder))
-                        .focused($focusedField, equals: field)
-                        .submitLabel(.done)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                        .font(.subheadline)
-                        .foregroundStyle(Color(.textPrimary))
-                }
+                TextField("", text: text, prompt: Text(placeholder))
+                    .accessibilityLabel("\(fieldNumber(field)). \(title)")
+                    .accessibilityHint(Text(placeholder))
+                    .focused($focusedField, equals: field)
+                    .submitLabel(.done)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .font(.subheadline)
+                    .foregroundStyle(Color(.textPrimary))
             }
 
             Spacer()
