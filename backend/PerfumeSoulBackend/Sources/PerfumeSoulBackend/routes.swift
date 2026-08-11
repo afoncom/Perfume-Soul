@@ -85,16 +85,21 @@ func routes(_ app: Application) throws {
             throw Abort(.notFound)
         }
 
-        return try jsonResponse(perfumeNotes)
+        return try jsonResponse(perfumeNotes, varyByLanguage: true)
     }
 }
 
-private func jsonResponse<T: Encodable>(_ value: T) throws -> Response {
+private func jsonResponse<T: Encodable>(
+    _ value: T,
+    varyByLanguage: Bool = false
+) throws -> Response {
     let data = try JSONEncoder().encode(value)
 
     var headers = HTTPHeaders()
     headers.contentType = .json
-    headers.add(name: "Vary", value: "Accept-Language")
+    if varyByLanguage {
+        headers.add(name: "Vary", value: "Accept-Language")
+    }
 
     return Response(status: .ok, headers: headers, body: .init(data: data))
 }
