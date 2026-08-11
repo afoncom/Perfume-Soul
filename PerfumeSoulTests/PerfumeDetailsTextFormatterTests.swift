@@ -2,18 +2,18 @@ import XCTest
 @testable import PerfumeSoul
 
 final class PerfumeDetailsTextFormatterTests: XCTestCase {
-    func testLocalizedProfilePhraseCoversBackendVocabulary() {
-        let backendPhrases = [
-            "all season", "autumn winter", "spring autumn", "spring summer",
-            "fresh citrus", "floral citrus", "floral fruity", "floral woody",
-            "fresh floral", "fresh woody", "marine fresh", "woody amber",
-            "woody aromatic", "woody citrus", "woody floral", "woody leather",
-            "woody spicy", "amber gourmand", "amber spicy", "amber woody",
-            "fresh aromatic", "airy energetic", "balanced modern", "romantic soft", "dark sensual",
-            "cozy indulgent", "refined grounded", "bright energetic",
-            "warm indulgent", "rich sensual", "bright romantic"
-        ]
+    private let backendPhrases = [
+        "all season", "autumn winter", "spring autumn", "spring summer",
+        "fresh citrus", "floral citrus", "floral fruity", "floral woody",
+        "fresh floral", "fresh woody", "marine fresh", "woody amber",
+        "woody aromatic", "woody citrus", "woody floral", "woody leather",
+        "woody spicy", "amber gourmand", "amber spicy", "amber woody",
+        "fresh aromatic", "airy energetic", "balanced modern", "romantic soft", "dark sensual",
+        "cozy indulgent", "refined grounded", "bright energetic",
+        "warm indulgent", "rich sensual", "bright romantic"
+    ]
 
+    func testLocalizedProfilePhraseCoversBackendVocabulary() {
         for phrase in backendPhrases {
             XCTAssertNotNil(
                 PerfumeDetailsTextFormatter.localizedProfilePhraseKey(phrase),
@@ -27,6 +27,16 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
             PerfumeDetailsTextFormatter.localizedProfilePhrase("rare vintage profile"),
             "Rare vintage profile"
         )
+    }
+
+    func testMappedProfilePhrasesUseSameCasingAsFallback() throws {
+        for phrase in backendPhrases {
+            let mapped = PerfumeDetailsTextFormatter.localizedProfilePhrase(phrase)
+            let unwrapped = try XCTUnwrap(mapped)
+            let sentenceCased = unwrapped.prefix(1).uppercased() + unwrapped.dropFirst()
+
+            XCTAssertEqual(unwrapped, sentenceCased, "\(phrase) has unexpected casing")
+        }
     }
 
     func testHasRecommendationContentAllowsExplicitReason() {
