@@ -28,4 +28,65 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
             "Rare vintage profile"
         )
     }
+
+    func testHasRecommendationContentAllowsExplicitReason() {
+        let perfumeDetails = makePerfumeDetails(
+            recommendationReason: "Best for warm evenings.",
+            notesLanguage: nil,
+            topNotes: []
+        )
+
+        XCTAssertTrue(PerfumeDetailsTextFormatter.hasRecommendationContent(for: perfumeDetails))
+    }
+
+    func testHasRecommendationContentAllowsMatchingLanguageNotes() {
+        let perfumeDetails = makePerfumeDetails(
+            recommendationReason: nil,
+            notesLanguage: Bundle.main.preferredLocalizations.first ?? "en",
+            topNotes: ["bergamot"]
+        )
+
+        XCTAssertTrue(PerfumeDetailsTextFormatter.hasRecommendationContent(for: perfumeDetails))
+    }
+
+    func testHasRecommendationContentRejectsFallbackOnlyReason() {
+        let perfumeDetails = makePerfumeDetails(
+            recommendationReason: " ",
+            notesLanguage: Bundle.main.preferredLocalizations.first ?? "en",
+            topNotes: []
+        )
+
+        XCTAssertFalse(PerfumeDetailsTextFormatter.hasRecommendationContent(for: perfumeDetails))
+    }
+
+    private func makePerfumeDetails(
+        recommendationReason: String?,
+        notesLanguage: String?,
+        topNotes: [String]
+    ) -> PerfumeDetails {
+        PerfumeDetails(
+            id: 1,
+            brand: "Brand",
+            name: "Perfume",
+            concentration: nil,
+            fragranceFamily: nil,
+            seasonProfile: nil,
+            occasionProfile: nil,
+            styleProfile: nil,
+            genderProfile: nil,
+            moodProfile: nil,
+            longevityScore: nil,
+            sillageScore: nil,
+            releaseYear: nil,
+            perfumer: nil,
+            shortDescription: nil,
+            recommendationReason: recommendationReason,
+            fullStory: nil,
+            accords: [],
+            notesLanguage: notesLanguage,
+            topNotes: topNotes,
+            middleNotes: [],
+            baseNotes: []
+        )
+    }
 }

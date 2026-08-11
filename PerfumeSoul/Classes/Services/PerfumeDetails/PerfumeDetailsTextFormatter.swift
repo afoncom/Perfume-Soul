@@ -39,6 +39,20 @@ enum PerfumeDetailsTextFormatter {
         return L10n.PerfumeDetails.defaultRecommendationFormat(notes)
     }
 
+    static func hasRecommendationContent(for perfumeDetails: PerfumeDetails) -> Bool {
+        if nonBlank(perfumeDetails.recommendationReason) != nil {
+            return true
+        }
+
+        guard notesMatchCurrentLanguage(perfumeDetails.notesLanguage) else {
+            return false
+        }
+
+        return !(perfumeDetails.topNotes + perfumeDetails.middleNotes + perfumeDetails.baseNotes)
+            .compactMap(nonBlank)
+            .isEmpty
+    }
+
     static func localizedConcentration(_ value: String?) -> String? {
         guard let value = nonBlank(value) else {
             return nil

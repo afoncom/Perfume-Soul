@@ -47,7 +47,9 @@ extension PerfumeDetailsScreen {
         } else if let perfumeDetails = viewModel.perfumeDetails {
             VStack(spacing: 18) {
                 makePerfumeHeader(perfumeDetails: perfumeDetails)
-                makeRecommendationSection(perfumeDetails: perfumeDetails)
+                if PerfumeDetailsTextFormatter.hasRecommendationContent(for: perfumeDetails) {
+                    makeRecommendationSection(perfumeDetails: perfumeDetails)
+                }
                 if hasStoryContent(perfumeDetails) {
                     makeStorySection(perfumeDetails: perfumeDetails)
                 }
