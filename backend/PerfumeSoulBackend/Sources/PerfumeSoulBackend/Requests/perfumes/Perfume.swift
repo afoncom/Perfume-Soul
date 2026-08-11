@@ -107,7 +107,7 @@ enum PerfumeNotesLoader {
         var middleNotes: [String] = []
         var baseNotes: [String] = []
         let isEnglish = language?.lowercased().split(separator: ",").first?.hasPrefix("en") == true
-        let useEnglishNotes = isEnglish && perfumeNotes.allSatisfy {
+        let useEnglishNotes = isEnglish && !perfumeNotes.isEmpty && perfumeNotes.allSatisfy {
             $0.note.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
         }
         if isEnglish, !useEnglishNotes {
