@@ -56,6 +56,7 @@ extension ProfileAvatarBuilderImpl {
             .split(whereSeparator: \.isWhitespace)
             .joined(separator: " ")
             .lowercased()
+            .precomposedStringWithCanonicalMapping
     }
 
     private func makeGradientColors(key: String) -> [ProfileAvatarColor] {

@@ -59,7 +59,10 @@ final class ProfileAvatarBuilderTests: XCTestCase {
     func testMakeAvatarNormalizesNameBeforeHashing() {
         let firstAvatar = builder.makeAvatar(name: "Maria Elena")
         let secondAvatar = builder.makeAvatar(name: "  maria   elena ")
+        let precomposedAvatar = builder.makeAvatar(name: "José Álvarez")
+        let decomposedAvatar = builder.makeAvatar(name: "Jose\u{301} A\u{301}lvarez")
 
         XCTAssertEqual(firstAvatar.gradientColors, secondAvatar.gradientColors)
+        XCTAssertEqual(precomposedAvatar.gradientColors, decomposedAvatar.gradientColors)
     }
 }
