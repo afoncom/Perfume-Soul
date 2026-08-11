@@ -37,14 +37,18 @@ final class ProfileAvatarBuilderTests: XCTestCase {
         XCTAssertEqual(firstAvatar.gradientColors.count, 2)
     }
 
-    func testMakeAvatarCanUseDifferentGradientColorsForDifferentNames() {
-        let firstAvatar = builder.makeAvatar(name: "Maria Elena")
-        let secondAvatar = builder.makeAvatar(name: "Dmitry Ivanov")
+    func testMakeAvatarUsesDistinctGradientsForPlaceholderProfiles() {
+        // Mirrors the hardcoded names in ProfileScreen.makeAddedNewProfiless(), which render side by side.
+        let laura = builder.makeAvatar(name: "Laura").gradientColors
+        let alex = builder.makeAvatar(name: "Alex").gradientColors
+        let emma = builder.makeAvatar(name: "Emma").gradientColors
 
-        XCTAssertNotEqual(firstAvatar.gradientColors, secondAvatar.gradientColors)
+        XCTAssertNotEqual(laura, alex)
+        XCTAssertNotEqual(alex, emma)
+        XCTAssertNotEqual(laura, emma)
     }
 
-    func testMakeAvatarCanUseDifferentGradientColorsForSameInitials() {
+    func testMakeAvatarKeysGradientByFullNameInsteadOfInitials() {
         let firstAvatar = builder.makeAvatar(name: "Alex")
         let secondAvatar = builder.makeAvatar(name: "Ada")
 
