@@ -197,6 +197,7 @@ extension PerfumeDetailsScreen {
                 .lineLimit(2)
                 .fixedSize(horizontal: false, vertical: true)
         }
+        .accessibilityElement(children: .combine)
         .frame(maxWidth: .infinity, minHeight: 48, alignment: .topLeading)
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
@@ -506,6 +507,7 @@ extension PerfumeDetailsScreen {
                 .background(accentColor.opacity(0.14))
                 .clipShape(Capsule())
         }
+        .accessibilityElement(children: .combine)
     }
 
     private func scoreText(_ score: Int?) -> String {
