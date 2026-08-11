@@ -25,7 +25,7 @@ final class QuizOfTheDayRouterTests: XCTestCase {
     }
 }
 
-private final class AppReviewRequesterMock: AppReviewRequesting {
+private final class AppReviewRequesterMock: AppReviewRequester {
     var registeredCompletions = 0
     var didRequestReview = false
 

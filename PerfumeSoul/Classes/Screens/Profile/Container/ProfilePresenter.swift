@@ -23,7 +23,7 @@ final class ProfilePresenterImpl {
     private let profileCalculationService: ProfileCalculationService
     private let quizProgressService: QuizProgressService
     private let dailyQuizStateStorage: DailyQuizStateStorage
-    private let appReviewRequester: AppReviewRequesting
+    private let appReviewRequester: AppReviewRequester
     
     init(
         viewModel: ProfileViewModel,
@@ -32,7 +32,7 @@ final class ProfilePresenterImpl {
         profileCalculationService: ProfileCalculationService,
         quizProgressService: QuizProgressService,
         dailyQuizStateStorage: DailyQuizStateStorage,
-        appReviewRequester: AppReviewRequesting
+        appReviewRequester: AppReviewRequester
     ) {
         self.viewModel = viewModel
         self.router = router
