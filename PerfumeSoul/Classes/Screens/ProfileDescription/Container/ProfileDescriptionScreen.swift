@@ -49,7 +49,9 @@ extension ProfileDescriptionScreen {
         case let .content(_, profileDescription):
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 26) {
-                    makeHeaderView(profileDescription: profileDescription)
+                    if presenter.isPresentedInOnboarding {
+                        makeHeaderView(profileDescription: profileDescription)
+                    }
                     makeInsightCards(profileDescription: profileDescription)
                 }
                 .padding(.horizontal, 20)
