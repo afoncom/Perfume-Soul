@@ -206,7 +206,7 @@ extension ProfileScreen {
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(L10n.Profile.PersonalPerfumes.title)
+                    Text(L10n.PersonalPerfume.navigationTitle)
                         .font(.title3)
                         .fontWeight(.medium)
                         .foregroundStyle(Color(.textPrimary))
