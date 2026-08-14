@@ -516,6 +516,7 @@ extension ComparePerfumesScreen {
                     ]
                 )
             }
+            .fixedSize(horizontal: false, vertical: true)
         }
         .padding(16)
         .background(Color(.surfacePrimary))
@@ -538,14 +539,13 @@ extension ComparePerfumesScreen {
                 Text(brand)
                     .font(.footnote.weight(.semibold))
                     .foregroundStyle(Color(.textSecondary))
-                    .lineLimit(1)
+                    .lineLimit(2)
                 
                 Text(name)
                     .font(.headline)
                     .foregroundStyle(Color(.textPrimary))
                     .lineLimit(2)
             }
-            .frame(minHeight: 78, alignment: .topLeading)
             
             VStack(spacing: 10) {
                 ForEach(metrics, id: \.0) { metric in
