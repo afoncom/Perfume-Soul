@@ -11,6 +11,7 @@ import SwiftUI
 struct FindPerfumesScreen: View {
     @Bindable private var viewModel: FindPerfumesViewModel
     @FocusState private var focusedField: FindPerfumeField?
+    @ScaledMetric(relativeTo: .footnote) private var badgeSize: CGFloat = 24
     private let presenter: FindPerfumesPresenter
 
     init(
@@ -151,7 +152,8 @@ extension FindPerfumesScreen {
                     Text(fieldNumber(field))
                         .font(.footnote.weight(.semibold))
                         .foregroundStyle(Color(.textOnAccent))
-                        .frame(width: 24, height: 24)
+                        .minimumScaleFactor(0.8)
+                        .frame(width: badgeSize, height: badgeSize)
                         .background(Color(.pinkButton))
                         .clipShape(Circle())
                         .accessibilityHidden(true)
