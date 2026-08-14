@@ -95,7 +95,6 @@
 "perfumeDetails.concentration.extrait" = "Extrait";
 "perfumeDetails.concentration.parfum" = "Parfum";
 "perfumeDetails.concentrationTitle" = "Format";
-"perfumeDetails.defaultRecommendation" = "Recommended for its balance of notes, accords, longevity, and sillage.";
 "perfumeDetails.defaultRecommendationFormat" = "The recommendation leans on the most expressive notes in this profile: %@.";
 "perfumeDetails.defaultSummary" = "A balanced composition shaped by its notes and wearing character.";
 "perfumeDetails.defaultSummaryFormat" = "A composition built around %@ accents.";

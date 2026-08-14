@@ -39,34 +39,50 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
         }
     }
 
-    func testHasRecommendationContentAllowsExplicitReason() {
+    func testRecommendationReasonReturnsExplicitReason() {
         let perfumeDetails = makePerfumeDetails(
             recommendationReason: "Best for warm evenings.",
             notesLanguage: nil,
             topNotes: []
         )
 
-        XCTAssertTrue(PerfumeDetailsTextFormatter.hasRecommendationContent(for: perfumeDetails))
+        XCTAssertEqual(
+            PerfumeDetailsTextFormatter.recommendationReason(for: perfumeDetails),
+            "Best for warm evenings."
+        )
     }
 
-    func testHasRecommendationContentAllowsMatchingLanguageNotes() {
+    func testRecommendationReasonUsesMatchingLanguageNotes() {
         let perfumeDetails = makePerfumeDetails(
             recommendationReason: nil,
             notesLanguage: SupportedAppLanguage.currentCode,
             topNotes: ["bergamot"]
         )
 
-        XCTAssertTrue(PerfumeDetailsTextFormatter.hasRecommendationContent(for: perfumeDetails))
+        XCTAssertEqual(
+            PerfumeDetailsTextFormatter.recommendationReason(for: perfumeDetails),
+            L10n.PerfumeDetails.defaultRecommendationFormat("bergamot")
+        )
     }
 
-    func testHasRecommendationContentRejectsFallbackOnlyReason() {
+    func testRecommendationReasonRejectsFallbackOnlyReason() {
         let perfumeDetails = makePerfumeDetails(
             recommendationReason: " ",
             notesLanguage: SupportedAppLanguage.currentCode,
             topNotes: []
         )
 
-        XCTAssertFalse(PerfumeDetailsTextFormatter.hasRecommendationContent(for: perfumeDetails))
+        XCTAssertNil(PerfumeDetailsTextFormatter.recommendationReason(for: perfumeDetails))
+    }
+
+    func testRecommendationReasonRejectsMismatchedLanguageNotes() {
+        let perfumeDetails = makePerfumeDetails(
+            recommendationReason: nil,
+            notesLanguage: "zz",
+            topNotes: ["bergamot"]
+        )
+
+        XCTAssertNil(PerfumeDetailsTextFormatter.recommendationReason(for: perfumeDetails))
     }
 
     private func makePerfumeDetails(

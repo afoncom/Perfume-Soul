@@ -47,8 +47,8 @@ extension PerfumeDetailsScreen {
         } else if let perfumeDetails = viewModel.perfumeDetails {
             VStack(spacing: 18) {
                 makePerfumeHeader(perfumeDetails: perfumeDetails)
-                if PerfumeDetailsTextFormatter.hasRecommendationContent(for: perfumeDetails) {
-                    makeRecommendationSection(perfumeDetails: perfumeDetails)
+                if let recommendationReason = PerfumeDetailsTextFormatter.recommendationReason(for: perfumeDetails) {
+                    makeRecommendationSection(recommendationReason: recommendationReason)
                 }
                 if hasStoryContent(perfumeDetails) {
                     makeStorySection(perfumeDetails: perfumeDetails)
@@ -226,7 +226,7 @@ extension PerfumeDetailsScreen {
         }
     }
 
-    private func makeRecommendationSection(perfumeDetails: PerfumeDetails) -> some View {
+    private func makeRecommendationSection(recommendationReason: String) -> some View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: "wand.and.stars")
                 .font(.title3)
@@ -239,7 +239,7 @@ extension PerfumeDetailsScreen {
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(Color(.textPrimary))
 
-                Text(PerfumeDetailsTextFormatter.recommendationReason(for: perfumeDetails))
+                Text(recommendationReason)
                     .font(.footnote)
                     .foregroundStyle(Color(.descriptionText))
                     .fixedSize(horizontal: false, vertical: true)

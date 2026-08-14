@@ -95,7 +95,6 @@
 "perfumeDetails.concentration.extrait" = "Экстракт";
 "perfumeDetails.concentration.parfum" = "Духи";
 "perfumeDetails.concentrationTitle" = "Формат";
-"perfumeDetails.defaultRecommendation" = "Рекомендуется за сочетание нот, аккордов, стойкости и шлейфа.";
 "perfumeDetails.defaultRecommendationFormat" = "Рекомендация опирается на самые заметные ноты этого профиля: %@.";
 "perfumeDetails.defaultSummary" = "Сбалансированная композиция, раскрывающаяся через ноты и характер звучания.";
 "perfumeDetails.defaultSummaryFormat" = "Композиция собрана вокруг акцентов: %@.";
