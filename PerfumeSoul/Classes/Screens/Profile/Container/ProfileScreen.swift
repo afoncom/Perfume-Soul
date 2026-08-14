@@ -621,6 +621,7 @@ extension ProfileScreen {
                         .font(.headline)
                         .foregroundColor(symbolColor)
                 )
+                .accessibilityHidden(true)
             
             VStack(alignment: .leading, spacing: 3) {
                 Text(title)
@@ -644,7 +645,9 @@ extension ProfileScreen {
                 .frame(width: 40, height: 40)
                 .background(color)
                 .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                .accessibilityHidden(true)
         }
+        .accessibilityElement(children: .combine)
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
         .background(
