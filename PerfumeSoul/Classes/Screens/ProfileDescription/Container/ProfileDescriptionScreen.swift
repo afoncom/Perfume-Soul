@@ -21,10 +21,8 @@ struct ProfileDescriptionScreen: View {
     }
     
     var body: some View {
-        let bottomPadding = presenter.isPresentedInOnboarding ? 96.0 : 32.0
-
         ZStack {
-            makeContentView(bottomPadding: bottomPadding)
+            makeContentView()
         }
         .background(Color(.backgroundPrimary).ignoresSafeArea())
         .modifier(TopSafeAreaBackground(isEnabled: presenter.isPresentedInOnboarding))
@@ -44,7 +42,7 @@ struct ProfileDescriptionScreen: View {
 
 extension ProfileDescriptionScreen {
     @ViewBuilder
-    private func makeContentView(bottomPadding: Double) -> some View {
+    private func makeContentView() -> some View {
         switch viewModel.state {
         case .idle, .loading:
             makeLoadingState()
@@ -56,7 +54,7 @@ extension ProfileDescriptionScreen {
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 28)
-                .padding(.bottom, bottomPadding)
+                .padding(.bottom, 32)
             }
         case .missingBirthPlaceData:
             makeUnavailableState(

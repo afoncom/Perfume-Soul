@@ -21,8 +21,6 @@ struct PersonalPerfumeScreen: View {
     }
 
     var body: some View {
-        let bottomPadding = presenter.isPresentedInOnboarding ? 96.0 : 32.0
-
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 18) {
                 if presenter.isPresentedInOnboarding {
@@ -32,7 +30,7 @@ struct PersonalPerfumeScreen: View {
             }
             .padding(.horizontal, 16)
             .padding(.top, 24)
-            .padding(.bottom, bottomPadding)
+            .padding(.bottom, 32)
         }
         .background(
             LinearGradient(
