@@ -198,7 +198,7 @@ extension PerfumeDetailsScreen {
                 .fixedSize(horizontal: false, vertical: true)
         }
         .accessibilityElement(children: .combine)
-        .frame(maxWidth: .infinity, minHeight: 48, alignment: .topLeading)
+        .frame(maxWidth: .infinity, minHeight: 48, maxHeight: .infinity, alignment: .topLeading)
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
         .background(Color(.rowBackground))
