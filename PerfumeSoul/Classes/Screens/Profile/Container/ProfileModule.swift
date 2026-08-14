@@ -44,13 +44,13 @@ final class ProfileModule {
             profileCalculationService: profileCalculationService,
             quizProgressService: quizProgressService,
             dailyQuizStateStorage: dailyQuizStateStorage,
-            appReviewRequester: appReviewRequester
+            appReviewRequester: appReviewRequester,
+            profileAvatarBuilder: profileAvatarBuilder
         )
         
         let view = ProfileScreen(
             viewModel: viewModel,
-            presenter: presenter,
-            profileAvatarBuilder: profileAvatarBuilder
+            presenter: presenter
         )
         
         let hostingController = UIHostingController(rootView: view)

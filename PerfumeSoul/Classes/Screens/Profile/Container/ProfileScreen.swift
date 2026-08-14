@@ -12,24 +12,21 @@ struct ProfileScreen: View {
     @Bindable private var viewModel: ProfileViewModel
     @State private var selectedElement: ProfileElement?
     private let presenter: ProfilePresenter
-    private let profileAvatarBuilder: ProfileAvatarBuilder
     
     init(
         viewModel: ProfileViewModel,
-        presenter: ProfilePresenter,
-        profileAvatarBuilder: ProfileAvatarBuilder
+        presenter: ProfilePresenter
     ) {
         self.viewModel = viewModel
         self.presenter = presenter
-        self.profileAvatarBuilder = profileAvatarBuilder
     }
     
     var body: some View {
         ZStack {
-            if let profile = viewModel.profile {
+            if let profile = viewModel.profile, let avatar = viewModel.avatar {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 10) {
-                        makeProfileScreen(profile: profile)
+                        makeProfileScreen(profile: profile, avatar: avatar)
                             .padding(.horizontal, 16)
                         
                         makeMyNatalChart()
@@ -79,10 +76,8 @@ struct ProfileScreen: View {
 }
 
 extension ProfileScreen {
-    func makeProfileScreen(profile: Profile) -> some View {
-        let avatar = profileAvatarBuilder.makeAvatar(name: profile.name)
-
-        return HStack(spacing: 12) {
+    func makeProfileScreen(profile: Profile, avatar: ProfileAvatar) -> some View {
+        HStack(spacing: 12) {
             Circle()
                 .fill(makeProfileAvatarGradient(colors: avatar.gradientColors))
                 .frame(width: 74, height: 74)
@@ -497,9 +492,9 @@ extension ProfileScreen {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
-                    makeAddedProfileItem(name: "Laura")
-                    makeAddedProfileItem(name: "Alex")
-                    makeAddedProfileItem(name: "Emma")
+                    ForEach(viewModel.addedProfileItems, id: \.name) { item in
+                        makeAddedProfileItem(item: item)
+                    }
                 }
             }
         }
@@ -777,19 +772,17 @@ extension ProfileScreen {
 // MARK: - Added Profile Item
 
 extension ProfileScreen {
-    func makeAddedProfileItem(name: String) -> some View {
-        let avatar = profileAvatarBuilder.makeAvatar(name: name)
-
-        return VStack(spacing: 8) {
+    func makeAddedProfileItem(item: AddedProfileItem) -> some View {
+        VStack(spacing: 8) {
             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(makeProfileAvatarGradient(colors: avatar.gradientColors))
+                .fill(makeProfileAvatarGradient(colors: item.avatar.gradientColors))
                 .frame(width: 92, height: 92)
                 .overlay {
-                    makeProfileAvatarInitials(avatar.initials, font: .title2)
+                    makeProfileAvatarInitials(item.avatar.initials, font: .title2)
                 }
                 .accessibilityHidden(true)
             
-            Text(name)
+            Text(item.name)
                 .font(.headline)
                 .foregroundStyle(Color(.textPrimary))
         }
