@@ -25,7 +25,7 @@ final class BirthPlaceSearchService: NSObject {
     override init() {
         super.init()
         completer.delegate = self
-        completer.resultTypes = [.address, .query]
+        completer.resultTypes = [.address]
     }
 
     func search(_ query: String) async -> [MKLocalSearchCompletion] {
