@@ -163,8 +163,9 @@ extension ProfileScreen {
 
                 LazyVGrid(
                     columns: Array(
+                        // Element balance is weighted from sun, moon, and ascendant only.
                         repeating: GridItem(.flexible(), spacing: 4, alignment: .leading),
-                        count: 4
+                        count: 3
                     ),
                     spacing: 8
                 ) {
