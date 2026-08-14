@@ -11,6 +11,7 @@ protocol QuizOfTheDayPresenter {
     func selectAnswer(id: String)
     func submitAnswer()
     func goToNextQuestion()
+    // StoreKit review requests must run on the main actor.
     @MainActor
     func finishQuiz()
 }
@@ -88,7 +89,8 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
         saveCurrentState()
     }
 
-    @MainActor func finishQuiz() {
+    @MainActor
+    func finishQuiz() {
         guard let quizDayKey = viewModel.finishQuiz() else {
             return
         }
