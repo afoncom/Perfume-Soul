@@ -31,6 +31,13 @@ final class BirthPlaceNameFormatterTests: XCTestCase {
         )
     }
 
+    func testFormatTreatsDiacriticAndCaseVariantsAsTheSameComponent() {
+        XCTAssertEqual(
+            BirthPlaceNameFormatter.format(title: "Zürich", subtitle: "zurich, Switzerland"),
+            "Zürich, Switzerland"
+        )
+    }
+
     func testFormatDropsLeadingTitleBeforeRegion() {
         XCTAssertEqual(
             BirthPlaceNameFormatter.format(
@@ -58,6 +65,17 @@ final class BirthPlaceNameFormatterTests: XCTestCase {
                 subtitle: "Illinois, United States"
             ),
             "Illinois, United States"
+        )
+    }
+
+    func testFormatUsesFallbackWhenTitleIsBlank() {
+        XCTAssertEqual(
+            BirthPlaceNameFormatter.format(
+                title: "   ",
+                subtitle: "Illinois",
+                fallback: "Springfield"
+            ),
+            "Springfield, Illinois"
         )
     }
 }
