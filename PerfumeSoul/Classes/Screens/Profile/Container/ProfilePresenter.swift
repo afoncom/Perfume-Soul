@@ -22,7 +22,8 @@ final class ProfilePresenterImpl {
     private let profileCalculationService: ProfileCalculationService
     private let quizProgressService: QuizProgressService
     private let dailyQuizStateStorage: DailyQuizStateStorage
-    private let appReviewRequester: AppReviewRequesting
+    private let appReviewRequester: AppReviewRequester
+    private let profileAvatarBuilder: ProfileAvatarBuilder
     
     init(
         viewModel: ProfileViewModel,
@@ -31,7 +32,8 @@ final class ProfilePresenterImpl {
         profileCalculationService: ProfileCalculationService,
         quizProgressService: QuizProgressService,
         dailyQuizStateStorage: DailyQuizStateStorage,
-        appReviewRequester: AppReviewRequesting
+        appReviewRequester: AppReviewRequester,
+        profileAvatarBuilder: ProfileAvatarBuilder
     ) {
         self.viewModel = viewModel
         self.router = router
@@ -40,6 +42,7 @@ final class ProfilePresenterImpl {
         self.quizProgressService = quizProgressService
         self.dailyQuizStateStorage = dailyQuizStateStorage
         self.appReviewRequester = appReviewRequester
+        self.profileAvatarBuilder = profileAvatarBuilder
     }
 }
 
@@ -92,9 +95,13 @@ extension ProfilePresenterImpl: ProfilePresenter {
     func onAppear() async {
         let profile = await profileService.fetchProfile()
         let quizProgress = quizProgressService.loadProgress()
+        let avatar = profile.map { profileAvatarBuilder.makeAvatar(name: $0.name) }
+        let addedProfileItems = makeAddedProfileItems()
 
         await MainActor.run {
             viewModel.profile = profile
+            viewModel.avatar = avatar
+            viewModel.addedProfileItems = addedProfileItems
             viewModel.totalCorrectQuizAnswers = quizProgress.totalCorrectQuizAnswers
         }
 
@@ -116,6 +123,8 @@ extension ProfilePresenterImpl: ProfilePresenter {
         
         await MainActor.run {
             viewModel.profile = nil
+            viewModel.avatar = nil
+            viewModel.addedProfileItems = []
             viewModel.profileCalculationState = .idle
             viewModel.totalCorrectQuizAnswers = 0
             router.showCalculationScreen()
@@ -135,6 +144,15 @@ extension ProfilePresenterImpl {
             await MainActor.run {
                 router.showPersonalPerfumes(profileCalculation: profileCalculation)
             }
+        }
+    }
+
+    private func makeAddedProfileItems() -> [AddedProfileItem] {
+        ["Laura", "Alex", "Emma"].map { name in
+            AddedProfileItem(
+                name: name,
+                avatar: profileAvatarBuilder.makeAvatar(name: name)
+            )
         }
     }
 

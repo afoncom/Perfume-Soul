@@ -9,7 +9,7 @@
 import StoreKit
 import UIKit
 
-protocol AppReviewRequesting {
+protocol AppReviewRequester {
     func registerQuizCompletion()
     @MainActor
     func requestReviewIfEligible(in windowScene: UIWindowScene)
@@ -34,11 +34,6 @@ final class AppReviewRequesterImpl {
         self.appVersionProvider = appVersionProvider
     }
 
-    func registerQuizCompletion() {
-        let completedQuizCount = userDefaults.integer(forKey: Keys.completedQuizCount) + 1
-        userDefaults.set(completedQuizCount, forKey: Keys.completedQuizCount)
-    }
-
     func consumeReviewRequestSlot() -> Bool {
         guard let appVersion = appVersionProvider.currentAppVersion() else {
             return false
@@ -56,6 +51,13 @@ final class AppReviewRequesterImpl {
         userDefaults.set(appVersion, forKey: Keys.lastRequestedVersion)
         return true
     }
+}
+
+extension AppReviewRequesterImpl: AppReviewRequester {
+    func registerQuizCompletion() {
+        let completedQuizCount = userDefaults.integer(forKey: Keys.completedQuizCount) + 1
+        userDefaults.set(completedQuizCount, forKey: Keys.completedQuizCount)
+    }
 
     @MainActor
     func requestReviewIfEligible(in windowScene: UIWindowScene) {
@@ -70,5 +72,3 @@ final class AppReviewRequesterImpl {
         userDefaults.removeObject(forKey: Keys.completedQuizCount)
     }
 }
-
-extension AppReviewRequesterImpl: AppReviewRequesting {}

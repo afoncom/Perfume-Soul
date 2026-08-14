@@ -16,6 +16,12 @@ struct ProfileAvatar: Equatable {
     let gradientColors: [ProfileAvatarColor]
 }
 
+// The case list and its order are part of the generated avatar output.
+// makeGradientColors derives stable name -> color-pair mappings from allCases.count
+// and each case index, so adding, removing, or reordering cases reshuffles existing
+// users' avatars. Treat palette edits as a visible product change and update the
+// golden avatar tests deliberately when that reshuffle is intended.
+// The zodiac* cases share assets with the horoscope feature; re-check initials contrast when those asset values change.
 enum ProfileAvatarColor: CaseIterable, Equatable {
     case zodiacBlue
     case zodiacPurple
@@ -56,6 +62,7 @@ extension ProfileAvatarBuilderImpl {
             .split(whereSeparator: \.isWhitespace)
             .joined(separator: " ")
             .lowercased()
+            .precomposedStringWithCanonicalMapping
     }
 
     private func makeGradientColors(key: String) -> [ProfileAvatarColor] {

@@ -12,24 +12,21 @@ struct ProfileScreen: View {
     @Bindable private var viewModel: ProfileViewModel
     @State private var selectedElement: ProfileElement?
     private let presenter: ProfilePresenter
-    private let profileAvatarBuilder: ProfileAvatarBuilder
     
     init(
         viewModel: ProfileViewModel,
-        presenter: ProfilePresenter,
-        profileAvatarBuilder: ProfileAvatarBuilder
+        presenter: ProfilePresenter
     ) {
         self.viewModel = viewModel
         self.presenter = presenter
-        self.profileAvatarBuilder = profileAvatarBuilder
     }
     
     var body: some View {
         ZStack {
-            if let profile = viewModel.profile {
+            if let profile = viewModel.profile, let avatar = viewModel.avatar {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 10) {
-                        makeProfileScreen(profile: profile)
+                        makeProfileScreen(profile: profile, avatar: avatar)
                             .padding(.horizontal, 16)
                         
                         makeMyNatalChart()
@@ -76,10 +73,8 @@ struct ProfileScreen: View {
 }
 
 extension ProfileScreen {
-    func makeProfileScreen(profile: Profile) -> some View {
-        let avatar = profileAvatarBuilder.makeAvatar(name: profile.name)
-
-        return HStack(spacing: 12) {
+    func makeProfileScreen(profile: Profile, avatar: ProfileAvatar) -> some View {
+        HStack(spacing: 12) {
             Circle()
                 .fill(makeProfileAvatarGradient(colors: avatar.gradientColors))
                 .frame(width: 74, height: 74)
@@ -459,7 +454,40 @@ extension ProfileScreen {
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
-
+    
+    func makeAddedNewProfiless() -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text(L10n.Profile.Profiles.title)
+                    .font(.title3)
+                    .fontWeight(.medium)
+                
+                Spacer()
+                
+                Button(action: {
+                    presenter.addedNewProfilesButtonTab()
+                }) {
+                    Image(systemName: "plus")
+                        .font(.headline.weight(.medium))
+                        .foregroundStyle(Color(.textSecondary))
+                        .frame(width: 28, height: 28)
+                }
+            }
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    ForEach(viewModel.addedProfileItems, id: \.name) { item in
+                        makeAddedProfileItem(item: item)
+                    }
+                }
+            }
+        }
+        .padding(14)
+        .background(Color(.surfacePrimary))
+        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
+    }
+    
     func makeDeleteProfileAction() -> some View {
         Button {
             viewModel.isShowingDeleteProfileAlert = true
@@ -748,5 +776,25 @@ extension ProfileScreen {
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
         .buttonStyle(.plain)
+    }
+}
+
+// MARK: - Added Profile Item
+
+extension ProfileScreen {
+    func makeAddedProfileItem(item: AddedProfileItem) -> some View {
+        VStack(spacing: 8) {
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(makeProfileAvatarGradient(colors: item.avatar.gradientColors))
+                .frame(width: 92, height: 92)
+                .overlay {
+                    makeProfileAvatarInitials(item.avatar.initials, font: .title2)
+                }
+                .accessibilityHidden(true)
+            
+            Text(item.name)
+                .font(.headline)
+                .foregroundStyle(Color(.textPrimary))
+        }
     }
 }

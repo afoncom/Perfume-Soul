@@ -37,14 +37,14 @@ final class ProfileAvatarBuilderTests: XCTestCase {
         XCTAssertEqual(firstAvatar.gradientColors.count, 2)
     }
 
-    func testMakeAvatarCanUseDifferentGradientColorsForDifferentNames() {
-        let firstAvatar = builder.makeAvatar(name: "Maria Elena")
-        let secondAvatar = builder.makeAvatar(name: "Dmitry Ivanov")
-
-        XCTAssertNotEqual(firstAvatar.gradientColors, secondAvatar.gradientColors)
+    func testMakeAvatarKeepsStableGradientColorsForPlaceholderProfiles() {
+        // Mirrors the hardcoded names in ProfileScreen.makeAddedNewProfiless(), which render side by side.
+        XCTAssertEqual(builder.makeAvatar(name: "Laura").gradientColors, [.zodiacPink, .avatarOcean])
+        XCTAssertEqual(builder.makeAvatar(name: "Alex").gradientColors, [.avatarAmber, .zodiacBlue])
+        XCTAssertEqual(builder.makeAvatar(name: "Emma").gradientColors, [.zodiacPurple, .zodiacPink])
     }
 
-    func testMakeAvatarCanUseDifferentGradientColorsForSameInitials() {
+    func testMakeAvatarKeysGradientByFullNameInsteadOfInitials() {
         let firstAvatar = builder.makeAvatar(name: "Alex")
         let secondAvatar = builder.makeAvatar(name: "Ada")
 
@@ -55,7 +55,10 @@ final class ProfileAvatarBuilderTests: XCTestCase {
     func testMakeAvatarNormalizesNameBeforeHashing() {
         let firstAvatar = builder.makeAvatar(name: "Maria Elena")
         let secondAvatar = builder.makeAvatar(name: "  maria   elena ")
+        let precomposedAvatar = builder.makeAvatar(name: "José Álvarez")
+        let decomposedAvatar = builder.makeAvatar(name: "Jose\u{301} A\u{301}lvarez")
 
         XCTAssertEqual(firstAvatar.gradientColors, secondAvatar.gradientColors)
+        XCTAssertEqual(precomposedAvatar.gradientColors, decomposedAvatar.gradientColors)
     }
 }
