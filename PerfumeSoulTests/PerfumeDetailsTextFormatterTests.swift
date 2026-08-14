@@ -85,6 +85,16 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
         XCTAssertNil(PerfumeDetailsTextFormatter.recommendationReason(for: perfumeDetails))
     }
 
+    func testRecommendationReasonRejectsNotesWithoutLanguage() {
+        let perfumeDetails = makePerfumeDetails(
+            recommendationReason: nil,
+            notesLanguage: nil,
+            topNotes: ["bergamot"]
+        )
+
+        XCTAssertNil(PerfumeDetailsTextFormatter.recommendationReason(for: perfumeDetails))
+    }
+
     private func makePerfumeDetails(
         recommendationReason: String?,
         notesLanguage: String?,
