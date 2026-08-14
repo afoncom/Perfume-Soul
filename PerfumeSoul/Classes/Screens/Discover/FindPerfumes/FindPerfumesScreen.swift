@@ -166,7 +166,7 @@ extension FindPerfumesScreen {
                 }
 
                 TextField("", text: text, prompt: Text(placeholder))
-                    .accessibilityLabel("\(fieldNumber(field)). \(title)")
+                    .accessibilityLabel(accessibilityLabel(title: title, field: field))
                     .accessibilityHint(Text(placeholder))
                     .focused($focusedField, equals: field)
                     .submitLabel(.done)
@@ -181,6 +181,7 @@ extension FindPerfumesScreen {
             Image(systemName: "magnifyingglass")
                 .font(.title3)
                 .foregroundStyle(Color(.textSecondary))
+                .accessibilityHidden(true)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 18)
@@ -209,6 +210,14 @@ extension FindPerfumesScreen {
         case .third:
             return "3"
         }
+    }
+
+    private func accessibilityLabel(title: String, field: FindPerfumeField) -> String {
+        guard field != .first else {
+            return "\(fieldNumber(field)). \(title)"
+        }
+
+        return "\(fieldNumber(field)). \(title), \(L10n.Discover.FindSimilar.optionalSubtitle)"
     }
 
     @ViewBuilder
