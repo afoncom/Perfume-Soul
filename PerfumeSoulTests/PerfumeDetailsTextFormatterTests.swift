@@ -33,7 +33,7 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
         for phrase in backendPhrases {
             let mapped = PerfumeDetailsTextFormatter.localizedProfilePhrase(phrase)
             let unwrapped = try XCTUnwrap(mapped)
-            let sentenceCased = unwrapped.prefix(1).uppercased() + unwrapped.dropFirst()
+            let sentenceCased = unwrapped.prefix(1).uppercased() + unwrapped.dropFirst().lowercased()
 
             XCTAssertEqual(unwrapped, sentenceCased, "\(phrase) has unexpected casing")
         }
