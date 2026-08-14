@@ -6,6 +6,6 @@ enum SupportedAppLanguage {
     }
 
     static func code(for preferredLocalization: String?) -> String {
-        preferredLocalization == "ru" ? "ru" : "en"
+        preferredLocalization?.hasPrefix("ru") == true ? "ru" : "en"
     }
 }

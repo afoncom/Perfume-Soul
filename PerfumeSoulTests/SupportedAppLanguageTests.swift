@@ -6,6 +6,10 @@ final class SupportedAppLanguageTests: XCTestCase {
         XCTAssertEqual(SupportedAppLanguage.code(for: "ru"), "ru")
     }
 
+    func testCodeKeepsRegionQualifiedRussianLocalization() {
+        XCTAssertEqual(SupportedAppLanguage.code(for: "ru-RU"), "ru")
+    }
+
     func testCodeFallsBackToEnglishForUnsupportedLocalization() {
         XCTAssertEqual(SupportedAppLanguage.code(for: "pt"), "en")
         XCTAssertEqual(SupportedAppLanguage.code(for: nil), "en")
