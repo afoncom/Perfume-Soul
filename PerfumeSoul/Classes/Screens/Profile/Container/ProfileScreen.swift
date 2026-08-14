@@ -159,7 +159,7 @@ extension ProfileScreen {
             if let elementBalance = viewModel.profileCalculation?.elementBalance {
                 let elementItems = makeElementBalanceItems(elementBalance: elementBalance)
 
-                makeElementBalanceBar(elementBalance: elementBalance)
+                makeElementBalanceBar(elementItems: elementItems)
 
                 LazyVGrid(
                     columns: Array(
@@ -678,10 +678,11 @@ private enum ProfileElement: Hashable {
 }
 
 extension ProfileScreen {
-    func makeElementBalanceBar(elementBalance: ElementBalance) -> some View {
+    func makeElementBalanceBar(
+        elementItems: [(element: ProfileElement, value: Int, title: String, color: Color)]
+    ) -> some View {
         GeometryReader { proxy in
             let width = Double(proxy.size.width)
-            let elementItems = makeElementBalanceItems(elementBalance: elementBalance)
 
             HStack(spacing: 0) {
                 ForEach(elementItems, id: \.element) { item in
