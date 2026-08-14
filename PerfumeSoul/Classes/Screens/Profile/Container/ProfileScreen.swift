@@ -631,6 +631,7 @@ extension ProfileScreen {
                 Text(horoscope.displayName)
                     .font(.headline)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
                     .foregroundStyle(Color(.textPrimary))
             }
             
