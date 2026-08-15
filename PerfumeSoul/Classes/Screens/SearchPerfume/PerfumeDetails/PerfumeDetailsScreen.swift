@@ -50,8 +50,8 @@ extension PerfumeDetailsScreen {
                 if let recommendationReason = PerfumeDetailsTextFormatter.recommendationReason(for: perfumeDetails) {
                     makeRecommendationSection(recommendationReason: recommendationReason)
                 }
-                if hasStoryContent(perfumeDetails) {
-                    makeStorySection(perfumeDetails: perfumeDetails)
+                if let fullStory = PerfumeDetailsTextFormatter.fullStory(for: perfumeDetails) {
+                    makeStorySection(fullStory: fullStory)
                 }
                 makeNotesSection(perfumeDetails: perfumeDetails)
                 makeWearSection(perfumeDetails: perfumeDetails)
@@ -256,7 +256,7 @@ extension PerfumeDetailsScreen {
         )
     }
 
-    private func makeStorySection(perfumeDetails: PerfumeDetails) -> some View {
+    private func makeStorySection(fullStory: String) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Button {
                 withAnimation(.easeInOut(duration: 0.22)) {
@@ -289,13 +289,11 @@ extension PerfumeDetailsScreen {
             .accessibilityAddTraits(isStoryExpanded ? .isSelected : [])
 
             if isStoryExpanded {
-                if let fullStory = perfumeDetails.fullStory {
-                    Text(fullStory)
-                        .font(.footnote)
-                        .foregroundStyle(Color(.descriptionText))
-                        .fixedSize(horizontal: false, vertical: true)
-                        .transition(.opacity.combined(with: .move(edge: .top)))
-                }
+                Text(fullStory)
+                    .font(.footnote)
+                    .foregroundStyle(Color(.descriptionText))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .transition(.opacity.combined(with: .move(edge: .top)))
             }
         }
         .padding(16)
@@ -333,14 +331,6 @@ extension PerfumeDetailsScreen {
 
                 return (fact.0, value)
             }
-    }
-
-    private func hasStoryContent(_ perfumeDetails: PerfumeDetails) -> Bool {
-        guard let fullStory = perfumeDetails.fullStory else {
-            return false
-        }
-
-        return !fullStory.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 
     private var storyButtonTitle: String {

@@ -133,10 +133,10 @@
 "perfumeDetails.profileToken.summer" = "Summer";
 "perfumeDetails.profileToken.warm" = "Warm";
 "perfumeDetails.profileToken.winter" = "Winter";
-"perfumeDetails.profilePhrase.allSeason" = "All season";
-"perfumeDetails.profilePhrase.autumnWinter" = "Autumn winter";
-"perfumeDetails.profilePhrase.springAutumn" = "Spring autumn";
-"perfumeDetails.profilePhrase.springSummer" = "Spring summer";
+"perfumeDetails.profilePhrase.allSeason" = "All seasons";
+"perfumeDetails.profilePhrase.autumnWinter" = "Autumn–winter";
+"perfumeDetails.profilePhrase.springAutumn" = "Spring–autumn";
+"perfumeDetails.profilePhrase.springSummer" = "Spring–summer";
 "perfumeDetails.profilePhrase.freshCitrus" = "Fresh citrus";
 "perfumeDetails.profilePhrase.floralCitrus" = "Floral citrus";
 "perfumeDetails.profilePhrase.floralWoody" = "Floral woody";

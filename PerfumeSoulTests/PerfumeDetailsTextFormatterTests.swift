@@ -95,8 +95,34 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
         XCTAssertNil(PerfumeDetailsTextFormatter.recommendationReason(for: perfumeDetails))
     }
 
+    func testFullStoryReturnsTrimmedStory() {
+        let perfumeDetails = makePerfumeDetails(
+            recommendationReason: nil,
+            fullStory: "\n A story shaped by incense. ",
+            notesLanguage: nil,
+            topNotes: []
+        )
+
+        XCTAssertEqual(
+            PerfumeDetailsTextFormatter.fullStory(for: perfumeDetails),
+            "A story shaped by incense."
+        )
+    }
+
+    func testFullStoryRejectsBlankStory() {
+        let perfumeDetails = makePerfumeDetails(
+            recommendationReason: nil,
+            fullStory: "\n  ",
+            notesLanguage: nil,
+            topNotes: []
+        )
+
+        XCTAssertNil(PerfumeDetailsTextFormatter.fullStory(for: perfumeDetails))
+    }
+
     private func makePerfumeDetails(
         recommendationReason: String?,
+        fullStory: String? = nil,
         notesLanguage: String?,
         topNotes: [String]
     ) -> PerfumeDetails {
@@ -117,7 +143,7 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
             perfumer: nil,
             shortDescription: nil,
             recommendationReason: recommendationReason,
-            fullStory: nil,
+            fullStory: fullStory,
             accords: [],
             notesLanguage: notesLanguage,
             topNotes: topNotes,
