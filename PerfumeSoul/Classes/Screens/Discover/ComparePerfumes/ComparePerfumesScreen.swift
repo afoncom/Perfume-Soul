@@ -557,7 +557,7 @@ extension ComparePerfumesScreen {
                 }
             }
         }
-        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .padding(14)
         .background(Color(.rowBackground))
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
