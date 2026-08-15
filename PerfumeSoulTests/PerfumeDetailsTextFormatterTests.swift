@@ -2,6 +2,11 @@ import XCTest
 @testable import PerfumeSoul
 
 final class PerfumeDetailsTextFormatterTests: XCTestCase {
+    private let backendAccords = [
+        "amber", "aromatic", "boozy", "citrus", "earthy", "floral",
+        "fresh", "fruity", "gourmand", "green", "leather", "marine",
+        "musky", "powdery", "resinous", "smoky", "spicy", "woody"
+    ]
     private let backendPhrases = [
         "all season", "autumn winter", "spring autumn", "spring summer",
         "fresh citrus", "floral citrus", "floral fruity", "floral woody",
@@ -12,6 +17,15 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
         "cozy indulgent", "refined grounded", "bright energetic",
         "warm indulgent", "rich sensual", "bright romantic"
     ]
+
+    func testLocalizedAccordCoversBackendVocabulary() {
+        for accord in backendAccords {
+            XCTAssertNotNil(
+                PerfumeDetailsTextFormatter.localizedAccordKey(accord),
+                "Missing localization for \(accord)"
+            )
+        }
+    }
 
     func testLocalizedProfilePhraseCoversBackendVocabulary() {
         for phrase in backendPhrases {

@@ -82,7 +82,11 @@ enum PerfumeDetailsTextFormatter {
     }
 
     static func localizedAccord(_ value: String) -> String {
-        switch normalized(value) {
+        localizedAccordKey(normalized(value)) ?? value
+    }
+
+    static func localizedAccordKey(_ accord: String) -> String? {
+        switch accord {
         case "amber": return L10n.PersonalPerfume.Accord.amber
         case "aromatic": return L10n.PersonalPerfume.Accord.aromatic
         case "boozy": return L10n.PerfumeDetails.Accord.boozy
@@ -101,7 +105,7 @@ enum PerfumeDetailsTextFormatter {
         case "smoky": return L10n.PersonalPerfume.Accord.smoky
         case "spicy": return L10n.PersonalPerfume.Accord.spicy
         case "woody": return L10n.PersonalPerfume.Accord.woody
-        default: return value
+        default: return nil
         }
     }
 
