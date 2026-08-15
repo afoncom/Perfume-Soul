@@ -44,9 +44,7 @@ final class ProfileAvatarBuilderTests: XCTestCase {
         XCTAssertEqual(gradients[0], [.zodiacPink, .avatarOcean])
         XCTAssertEqual(gradients[1], [.avatarAmber, .zodiacBlue])
         XCTAssertEqual(gradients[2], [.zodiacPurple, .zodiacPink])
-        XCTAssertNotEqual(gradients[0], gradients[1], "Placeholder profile gradients should be distinct")
-        XCTAssertNotEqual(gradients[0], gradients[2], "Placeholder profile gradients should be distinct")
-        XCTAssertNotEqual(gradients[1], gradients[2], "Placeholder profile gradients should be distinct")
+        XCTAssertEqual(Set(gradients).count, gradients.count, "Placeholder profile gradients should be distinct")
     }
 
     func testMakeAvatarKeysGradientByFullNameInsteadOfInitials() {
