@@ -455,39 +455,6 @@ extension ProfileScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
     
-    func makeAddedNewProfiless() -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text(L10n.Profile.Profiles.title)
-                    .font(.title3)
-                    .fontWeight(.medium)
-                
-                Spacer()
-                
-                Button(action: {
-                    presenter.addedNewProfilesButtonTab()
-                }) {
-                    Image(systemName: "plus")
-                        .font(.headline.weight(.medium))
-                        .foregroundStyle(Color(.textSecondary))
-                        .frame(width: 28, height: 28)
-                }
-            }
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
-                    ForEach(viewModel.addedProfileItems, id: \.name) { item in
-                        makeAddedProfileItem(item: item)
-                    }
-                }
-            }
-        }
-        .padding(14)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
-    }
-    
     func makeDeleteProfileAction() -> some View {
         Button {
             viewModel.isShowingDeleteProfileAlert = true
@@ -706,7 +673,7 @@ private enum ProfileElement: Hashable {
 }
 
 extension ProfileScreen {
-    func makeElementBalanceBar(
+    private func makeElementBalanceBar(
         elementItems: [(element: ProfileElement, value: Int, title: String, color: Color)]
     ) -> some View {
         GeometryReader { proxy in
@@ -776,25 +743,5 @@ extension ProfileScreen {
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
         .buttonStyle(.plain)
-    }
-}
-
-// MARK: - Added Profile Item
-
-extension ProfileScreen {
-    func makeAddedProfileItem(item: AddedProfileItem) -> some View {
-        VStack(spacing: 8) {
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(makeProfileAvatarGradient(colors: item.avatar.gradientColors))
-                .frame(width: 92, height: 92)
-                .overlay {
-                    makeProfileAvatarInitials(item.avatar.initials, font: .title2)
-                }
-                .accessibilityHidden(true)
-            
-            Text(item.name)
-                .font(.headline)
-                .foregroundStyle(Color(.textPrimary))
-        }
     }
 }
