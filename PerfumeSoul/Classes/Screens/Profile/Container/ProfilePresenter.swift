@@ -102,12 +102,10 @@ extension ProfilePresenterImpl: ProfilePresenter {
     func onAppear() async {
         let profile = await profileService.fetchProfile()
         let quizProgress = quizProgressService.loadProgress()
-        let avatar = profile.map { profileAvatarBuilder.makeAvatar(name: $0.name) }
         let addedProfileItems = makeAddedProfileItems()
 
         await MainActor.run {
-            viewModel.profile = profile
-            viewModel.avatar = avatar
+            setProfile(profile)
             viewModel.addedProfileItems = addedProfileItems
             viewModel.totalCorrectQuizAnswers = quizProgress.totalCorrectQuizAnswers
         }
@@ -129,8 +127,7 @@ extension ProfilePresenterImpl: ProfilePresenter {
         appReviewRequester.resetCompletedQuizCount()
         
         await MainActor.run {
-            viewModel.profile = nil
-            viewModel.avatar = nil
+            setProfile(nil)
             viewModel.profileCalculationState = .idle
             viewModel.totalCorrectQuizAnswers = 0
             router.showCalculationScreen()
@@ -194,7 +191,7 @@ extension ProfilePresenterImpl {
             await profileService.replaceProfile(updatedProfile)
 
             await MainActor.run {
-                viewModel.profile = updatedProfile
+                setProfile(updatedProfile)
                 viewModel.profileCalculationState = .loaded(profileCalculation)
             }
         } catch is ProfileCalculationError {
@@ -206,5 +203,10 @@ extension ProfilePresenterImpl {
                 viewModel.profileCalculationState = .failed
             }
         }
+    }
+
+    private func setProfile(_ profile: Profile?) {
+        viewModel.profile = profile
+        viewModel.avatar = profile.map { profileAvatarBuilder.makeAvatar(name: $0.name) }
     }
 }
