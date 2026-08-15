@@ -17,6 +17,8 @@ protocol ProfilePresenter {
 }
 
 final class ProfilePresenterImpl {
+    private static let placeholderProfileNames = ["Laura", "Alex", "Emma"]
+
     private let viewModel: ProfileViewModel
     private let router: ProfileRouter
     private let profileService: ProfileService
@@ -129,7 +131,6 @@ extension ProfilePresenterImpl: ProfilePresenter {
         await MainActor.run {
             viewModel.profile = nil
             viewModel.avatar = nil
-            viewModel.addedProfileItems = []
             viewModel.profileCalculationState = .idle
             viewModel.totalCorrectQuizAnswers = 0
             router.showCalculationScreen()
@@ -153,7 +154,7 @@ extension ProfilePresenterImpl {
     }
 
     private func makeAddedProfileItems() -> [AddedProfileItem] {
-        ["Laura", "Alex", "Emma"].map { name in
+        Self.placeholderProfileNames.map { name in
             AddedProfileItem(
                 name: name,
                 avatar: profileAvatarBuilder.makeAvatar(name: name)
