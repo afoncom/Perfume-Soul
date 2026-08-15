@@ -11,7 +11,7 @@ import SwiftUI
 struct FindPerfumesScreen: View {
     @Bindable private var viewModel: FindPerfumesViewModel
     @FocusState private var focusedField: FindPerfumeField?
-    @ScaledMetric(relativeTo: .footnote) private var badgeSize: CGFloat = 24
+    @ScaledMetric(relativeTo: .footnote) private var badgeSize = 24.0
     private let presenter: FindPerfumesPresenter
 
     init(
