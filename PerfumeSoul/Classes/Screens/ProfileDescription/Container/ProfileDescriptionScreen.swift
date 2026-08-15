@@ -49,9 +49,7 @@ extension ProfileDescriptionScreen {
         case let .content(_, profileDescription):
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 26) {
-                    if presenter.isPresentedInOnboarding {
-                        makeHeaderView(profileDescription: profileDescription)
-                    }
+                    makeHeaderView(profileDescription: profileDescription)
                     makeInsightCards(profileDescription: profileDescription)
                 }
                 .padding(.horizontal, 20)
@@ -87,10 +85,12 @@ extension ProfileDescriptionScreen {
 
     private func makeHeaderView(profileDescription: ProfileDescription) -> some View {
         VStack(spacing: 10) {
-            Text(profileDescription.title)
-                .font(.system(size: 26, weight: .medium, design: .rounded))
-                .foregroundStyle(Color(.titleText))
-                .multilineTextAlignment(.center)
+            if presenter.isPresentedInOnboarding {
+                Text(profileDescription.title)
+                    .font(.system(size: 26, weight: .medium, design: .rounded))
+                    .foregroundStyle(Color(.titleText))
+                    .multilineTextAlignment(.center)
+            }
 
             Text(profileDescription.subtitle)
                 .font(.system(size: 20, weight: .regular, design: .rounded))
