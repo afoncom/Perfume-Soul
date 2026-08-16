@@ -18,19 +18,19 @@ final class QuizOfTheDayRouterTests: XCTestCase {
             appReviewRequester: requester
         )
 
-        router.requestAppReview()
+        router.requestAppReview(for: "2026-08-16")
 
-        XCTAssertEqual(requester.registeredCompletions, 1)
+        XCTAssertEqual(requester.registeredQuizDayKeys, ["2026-08-16"])
         XCTAssertFalse(requester.didRequestReview)
     }
 }
 
 private final class AppReviewRequesterMock: AppReviewRequester {
-    var registeredCompletions = 0
+    var registeredQuizDayKeys: [String] = []
     var didRequestReview = false
 
-    func registerQuizCompletion() {
-        registeredCompletions += 1
+    func registerQuizCompletion(for quizDayKey: String) {
+        registeredQuizDayKeys.append(quizDayKey)
     }
 
     @MainActor

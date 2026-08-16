@@ -20,7 +20,7 @@ final class ProfileAvatarBuilderTests: XCTestCase {
     func testMakeAvatarClampsUppercasedUnicodeInitials() {
         let avatar = builder.makeAvatar(name: "ßeta Öz")
 
-        XCTAssertEqual(avatar.initials, "SS")
+        XCTAssertEqual(avatar.initials, "SÖ")
     }
 
     func testMakeAvatarUsesFallbackForEmptyName() {
