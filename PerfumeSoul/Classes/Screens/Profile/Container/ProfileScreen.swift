@@ -11,6 +11,7 @@ import SwiftUI
 struct ProfileScreen: View {
     @Bindable private var viewModel: ProfileViewModel
     @State private var selectedElement: ProfileElement?
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @ScaledMetric(relativeTo: .title3) private var signBadgeSize = 40.0
     private let presenter: ProfilePresenter
     
@@ -633,16 +634,18 @@ extension ProfileScreen {
             }
             
             Spacer()
-            
-            Text(horoscope.symbol)
-                .font(.title3)
-                .fontWeight(.semibold)
-                .minimumScaleFactor(0.8)
-                .foregroundStyle(Color(.textPrimary))
-                .frame(width: signBadgeSize, height: signBadgeSize)
-                .background(color)
-                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-                .accessibilityHidden(true)
+
+            if !dynamicTypeSize.isAccessibilitySize {
+                Text(horoscope.symbol)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .minimumScaleFactor(0.8)
+                    .foregroundStyle(Color(.textPrimary))
+                    .frame(width: signBadgeSize, height: signBadgeSize)
+                    .background(color)
+                    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    .accessibilityHidden(true)
+            }
         }
         .accessibilityElement(children: .combine)
         .padding(.horizontal, 10)
