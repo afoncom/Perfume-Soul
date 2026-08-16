@@ -272,7 +272,7 @@ extension PerfumeDetailsScreen {
 
                     Text(storyButtonTitle)
                         .font(.caption.weight(.semibold))
-                        .foregroundStyle(Color(.pinkButton))
+                        .foregroundStyle(Color(.textPrimary))
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
 
@@ -345,7 +345,7 @@ extension PerfumeDetailsScreen {
     ) -> some View {
         Text(text)
             .font(.caption2.weight(.medium))
-            .foregroundStyle(accentColor)
+            .foregroundStyle(Color(.textPrimary))
             .fixedSize(horizontal: false, vertical: true)
             .padding(.horizontal, 8)
             .padding(.vertical, 5)
@@ -491,7 +491,7 @@ extension PerfumeDetailsScreen {
 
             Text(score)
                 .font(.caption.weight(.semibold))
-                .foregroundStyle(accentColor)
+                .foregroundStyle(Color(.textPrimary))
                 .padding(.horizontal, 8)
                 .padding(.vertical, 5)
                 .background(accentColor.opacity(0.14))
