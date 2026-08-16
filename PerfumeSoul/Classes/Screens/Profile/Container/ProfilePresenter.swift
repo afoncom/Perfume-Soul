@@ -16,8 +16,6 @@ protocol ProfilePresenter {
 }
 
 final class ProfilePresenterImpl {
-    private static let placeholderProfileNames = ["Laura", "Alex", "Emma"]
-
     private let viewModel: ProfileViewModel
     private let router: ProfileRouter
     private let profileService: ProfileService
