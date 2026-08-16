@@ -23,9 +23,7 @@ struct PersonalPerfumeScreen: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 18) {
-                if presenter.isPresentedInOnboarding {
-                    makeHeaderView()
-                }
+                makeHeaderView()
                 makeSectionsView()
             }
             .padding(.horizontal, 16)
@@ -86,10 +84,12 @@ extension PersonalPerfumeScreen {
 
     private func makeHeaderView() -> some View {
         VStack(spacing: 8) {
-            Text(L10n.PersonalPerfume.title)
-                .font(.system(size: 28, weight: .medium, design: .rounded))
-                .foregroundStyle(Color(.titleText))
-                .multilineTextAlignment(.center)
+            if presenter.isPresentedInOnboarding {
+                Text(L10n.PersonalPerfume.title)
+                    .font(.system(size: 28, weight: .medium, design: .rounded))
+                    .foregroundStyle(Color(.titleText))
+                    .multilineTextAlignment(.center)
+            }
 
             Text(L10n.PersonalPerfume.subtitle)
                 .font(.system(size: 18, weight: .regular, design: .rounded))

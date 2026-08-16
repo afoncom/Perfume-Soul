@@ -12,6 +12,7 @@ struct QuizOfTheDayScreen: View {
     private let viewModel: QuizOfTheDayViewModel
     private let presenter: QuizOfTheDayPresenter
     @State private var isShowingExplanation = false
+    @ScaledMetric(relativeTo: .body) private var explanationDetentHeight = 280.0
 
     init(
         viewModel: QuizOfTheDayViewModel,
@@ -54,7 +55,7 @@ struct QuizOfTheDayScreen: View {
         }
         .sheet(isPresented: $isShowingExplanation) {
             makeExplanationSheet()
-                .presentationDetents([.height(280), .medium, .large])
+                .presentationDetents([.height(explanationDetentHeight), .medium, .large])
                 .presentationDragIndicator(.visible)
         }
     }
