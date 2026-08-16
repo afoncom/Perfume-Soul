@@ -288,6 +288,7 @@ extension QuizOfTheDayScreen {
                 .foregroundStyle(Color(.textPrimary))
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)
+                .frame(minHeight: 44)
                 .background(accentColor.opacity(0.12))
                 .clipShape(Capsule())
             }

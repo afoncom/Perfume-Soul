@@ -11,6 +11,7 @@ import SwiftUI
 struct ProfileScreen: View {
     @Bindable private var viewModel: ProfileViewModel
     @State private var selectedElement: ProfileElement?
+    @ScaledMetric(relativeTo: .title3) private var signBadgeSize = 40.0
     private let presenter: ProfilePresenter
     
     init(
@@ -636,8 +637,9 @@ extension ProfileScreen {
             Text(horoscope.symbol)
                 .font(.title3)
                 .fontWeight(.semibold)
+                .minimumScaleFactor(0.8)
                 .foregroundStyle(Color(.textPrimary))
-                .frame(width: 40, height: 40)
+                .frame(width: signBadgeSize, height: signBadgeSize)
                 .background(color)
                 .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                 .accessibilityHidden(true)
