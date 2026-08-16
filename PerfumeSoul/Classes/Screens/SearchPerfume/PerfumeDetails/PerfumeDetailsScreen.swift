@@ -194,7 +194,6 @@ extension PerfumeDetailsScreen {
             Text(value)
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(Color(.textPrimary))
-                .lineLimit(2)
                 .fixedSize(horizontal: false, vertical: true)
         }
         .accessibilityElement(children: .combine)
