@@ -48,11 +48,12 @@ extension ProfileAvatarBuilderImpl: ProfileAvatarBuilder {
 
 extension ProfileAvatarBuilderImpl {
     private func makeInitials(name: String) -> String {
-        let initials = name
+        let result = name
             .split(whereSeparator: \.isWhitespace)
             .prefix(2)
             .compactMap(\.first)
-        let result = String(String(initials).uppercased().prefix(2))
+            .map { String($0).uppercased().prefix(1) }
+            .joined()
 
         return result.isEmpty ? "?" : result
     }
