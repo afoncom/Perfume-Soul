@@ -56,7 +56,10 @@ final class AppReviewRequesterImpl {
 
 extension AppReviewRequesterImpl: AppReviewRequester {
     func registerQuizCompletion(for quizDayKey: String) {
-        guard userDefaults.string(forKey: Keys.lastCountedQuizDayKey) != quizDayKey else {
+        if
+            let lastCountedQuizDayKey = userDefaults.string(forKey: Keys.lastCountedQuizDayKey),
+            quizDayKey <= lastCountedQuizDayKey
+        {
             return
         }
 

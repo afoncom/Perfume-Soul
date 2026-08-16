@@ -55,6 +55,20 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
+    func testEarlierQuizDayIsNotCountedAfterNewerQuizDay() {
+        let requester = makeRequester()
+
+        requester.registerQuizCompletion(for: "2026-08-16")
+        requester.registerQuizCompletion(for: "2026-08-17")
+        requester.registerQuizCompletion(for: "2026-08-16")
+
+        XCTAssertFalse(requester.consumeReviewRequestSlot())
+
+        requester.registerQuizCompletion(for: "2026-08-18")
+
+        XCTAssertTrue(requester.consumeReviewRequestSlot())
+    }
+
     func testReviewSlotIsConsumedOnlyOncePerVersion() {
         let requester = makeRequester()
 
