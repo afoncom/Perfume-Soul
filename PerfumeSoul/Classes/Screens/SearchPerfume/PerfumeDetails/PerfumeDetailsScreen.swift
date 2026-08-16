@@ -189,7 +189,6 @@ extension PerfumeDetailsScreen {
             Text(title)
                 .font(.caption2.weight(.medium))
                 .foregroundStyle(Color(.textSecondary))
-                .lineLimit(1)
 
             Text(value)
                 .font(.caption.weight(.semibold))

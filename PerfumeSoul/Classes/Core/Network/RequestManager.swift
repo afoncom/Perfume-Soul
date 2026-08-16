@@ -48,17 +48,18 @@ extension RequestManagerImpl: RequestManager {
         urlRequest.httpMethod = request.httpMethod.rawValue
         urlRequest.httpBody = request.httpBody
 
-        let defaultHeaders = [
-            "Accept-Language": SupportedAppLanguage.currentCode
-        ]
+        let headers = mergedHeaders(
+            defaultHeaders: [
+                "Accept-Language": SupportedAppLanguage.currentCode
+            ],
+            customHeaders: request.headers
+        )
 
-        defaultHeaders
-            .merging(request.headers) { _, custom in custom }
-            .forEach { key, value in
-                urlRequest.setValue(value, forHTTPHeaderField: key)
-            }
+        headers.forEach { key, value in
+            urlRequest.setValue(value, forHTTPHeaderField: key)
+        }
 
-        if request.httpBody != nil, request.headers["Content-Type"] == nil {
+        if request.httpBody != nil, !headers.containsHeader("Content-Type") {
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
 
@@ -87,6 +88,31 @@ extension RequestManagerImpl: RequestManager {
         }
 
         return try decoder.decode(Response.self, from: data)
+    }
+}
+
+extension RequestManagerImpl {
+    private func mergedHeaders(
+        defaultHeaders: [String: String],
+        customHeaders: [String: String]
+    ) -> [String: String] {
+        var headers = defaultHeaders
+
+        customHeaders.forEach { customKey, customValue in
+            if let existingKey = headers.keys.first(where: { $0.caseInsensitiveCompare(customKey) == .orderedSame }) {
+                headers.removeValue(forKey: existingKey)
+            }
+
+            headers[customKey] = customValue
+        }
+
+        return headers
+    }
+}
+
+extension Dictionary where Key == String, Value == String {
+    fileprivate func containsHeader(_ header: String) -> Bool {
+        keys.contains { $0.caseInsensitiveCompare(header) == .orderedSame }
     }
 }
 
