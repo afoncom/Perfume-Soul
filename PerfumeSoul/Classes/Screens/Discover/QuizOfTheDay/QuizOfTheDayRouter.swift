@@ -10,7 +10,7 @@ import UIKit
 
 protocol QuizOfTheDayRouter {
     @MainActor
-    func requestAppReview()
+    func requestAppReview(for quizDayKey: String)
 }
 
 final class QuizOfTheDayRouterImpl {
@@ -28,8 +28,8 @@ final class QuizOfTheDayRouterImpl {
 
 extension QuizOfTheDayRouterImpl: QuizOfTheDayRouter {
     @MainActor
-    func requestAppReview() {
-        appReviewRequester.registerQuizCompletion()
+    func requestAppReview(for quizDayKey: String) {
+        appReviewRequester.registerQuizCompletion(for: quizDayKey)
 
         guard let windowScene = navigationController?.view.window?.windowScene else {
             return

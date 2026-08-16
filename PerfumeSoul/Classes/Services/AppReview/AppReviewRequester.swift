@@ -10,7 +10,7 @@ import StoreKit
 import UIKit
 
 protocol AppReviewRequester {
-    func registerQuizCompletion()
+    func registerQuizCompletion(for quizDayKey: String)
     @MainActor
     func requestReviewIfEligible(in windowScene: UIWindowScene)
     func resetCompletedQuizCount()
@@ -19,6 +19,7 @@ protocol AppReviewRequester {
 final class AppReviewRequesterImpl {
     private enum Keys {
         static let completedQuizCount = "appReview.completedQuizCount"
+        static let lastCountedQuizDayKey = "appReview.lastCountedQuizDayKey"
         static let lastRequestedVersion = "appReview.lastRequestedVersion"
     }
 
@@ -54,7 +55,12 @@ final class AppReviewRequesterImpl {
 }
 
 extension AppReviewRequesterImpl: AppReviewRequester {
-    func registerQuizCompletion() {
+    func registerQuizCompletion(for quizDayKey: String) {
+        guard userDefaults.string(forKey: Keys.lastCountedQuizDayKey) != quizDayKey else {
+            return
+        }
+
+        userDefaults.set(quizDayKey, forKey: Keys.lastCountedQuizDayKey)
         let completedQuizCount = userDefaults.integer(forKey: Keys.completedQuizCount) + 1
         userDefaults.set(completedQuizCount, forKey: Keys.completedQuizCount)
     }
@@ -70,5 +76,6 @@ extension AppReviewRequesterImpl: AppReviewRequester {
 
     func resetCompletedQuizCount() {
         userDefaults.removeObject(forKey: Keys.completedQuizCount)
+        userDefaults.removeObject(forKey: Keys.lastCountedQuizDayKey)
     }
 }

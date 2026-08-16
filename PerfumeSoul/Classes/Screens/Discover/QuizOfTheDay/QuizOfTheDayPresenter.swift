@@ -98,7 +98,7 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
         let updatedQuizProgress = quizProgressService.completeQuiz(for: quizDayKey)
         viewModel.updateQuizProgress(updatedQuizProgress)
         saveCurrentState()
-        router.requestAppReview()
+        router.requestAppReview(for: quizDayKey)
     }
 
     private func resolveSession(from questions: [QuizOfTheDayQuestion]) -> (questions: [QuizOfTheDayQuestion], state: DailyQuizState) {
