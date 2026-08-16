@@ -349,7 +349,7 @@ extension PerfumeDetailsScreen {
             .padding(.vertical, 5)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(accentColor.opacity(0.12))
-            .clipShape(Capsule())
+            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 
     private func makeNotesSection(perfumeDetails: PerfumeDetails) -> some View {
