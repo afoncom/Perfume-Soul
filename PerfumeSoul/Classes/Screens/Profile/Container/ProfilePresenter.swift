@@ -189,6 +189,6 @@ extension ProfilePresenterImpl {
 
     private func setProfile(_ profile: Profile?) {
         viewModel.profile = profile
-        viewModel.avatar = profile.map { profileAvatarBuilder.makeAvatar(name: $0.name) }
+        viewModel.avatar = profile.map { profileAvatarBuilder.makeAvatar(name: $0.name) } ?? .placeholder
     }
 }

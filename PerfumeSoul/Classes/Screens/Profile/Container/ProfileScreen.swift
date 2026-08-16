@@ -25,10 +25,10 @@ struct ProfileScreen: View {
     
     var body: some View {
         ZStack {
-            if let profile = viewModel.profile, let avatar = viewModel.avatar {
+            if let profile = viewModel.profile {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 10) {
-                        makeProfileScreen(profile: profile, avatar: avatar)
+                        makeProfileScreen(profile: profile, avatar: viewModel.avatar)
                             .padding(.horizontal, 16)
                         
                         makeMyNatalChart()

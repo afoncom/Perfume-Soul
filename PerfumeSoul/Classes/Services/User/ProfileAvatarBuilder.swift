@@ -14,6 +14,8 @@ protocol ProfileAvatarBuilder {
 struct ProfileAvatar: Equatable {
     let initials: String
     let gradientColors: [ProfileAvatarColor]
+
+    static let placeholder = ProfileAvatar(initials: "?", gradientColors: [.zodiacGray, .zodiacBlue])
 }
 
 // The case list and its order are part of the generated avatar output.

@@ -70,7 +70,7 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
-    func testResetCompletedQuizCountAllowsNewProfileToReachThreshold() {
+    func testResetCompletedQuizCountRestartsQuizCounting() {
         let requester = makeRequester()
 
         requester.registerQuizCompletion(for: "2026-08-14")
@@ -84,6 +84,28 @@ final class AppReviewRequesterTests: XCTestCase {
         requester.registerQuizCompletion(for: "2026-08-16")
         requester.registerQuizCompletion(for: "2026-08-17")
         requester.registerQuizCompletion(for: "2026-08-18")
+
+        XCTAssertTrue(requester.consumeReviewRequestSlot())
+    }
+
+    func testResetCompletedQuizCountKeepsReviewSlotConsumedUntilVersionChanges() {
+        let requester = makeRequester()
+
+        requester.registerQuizCompletion(for: "2026-08-14")
+        requester.registerQuizCompletion(for: "2026-08-15")
+        requester.registerQuizCompletion(for: "2026-08-16")
+
+        XCTAssertTrue(requester.consumeReviewRequestSlot())
+
+        requester.resetCompletedQuizCount()
+
+        requester.registerQuizCompletion(for: "2026-08-16")
+        requester.registerQuizCompletion(for: "2026-08-17")
+        requester.registerQuizCompletion(for: "2026-08-18")
+
+        XCTAssertFalse(requester.consumeReviewRequestSlot())
+
+        appVersionProvider.appVersion = "1.1"
 
         XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
