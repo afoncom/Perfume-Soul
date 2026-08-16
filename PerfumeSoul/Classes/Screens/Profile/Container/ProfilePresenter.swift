@@ -17,7 +17,7 @@ protocol ProfilePresenter {
 }
 
 final class ProfilePresenterImpl {
-    private static let placeholderProfileNames = ["Laura", "Alex", "Emma"]
+    static let placeholderProfileNames = ["Laura", "Alex", "Emma"]
 
     private let viewModel: ProfileViewModel
     private let router: ProfileRouter
@@ -153,6 +153,7 @@ extension ProfilePresenterImpl {
     private func makeAddedProfileItems() -> [AddedProfileItem] {
         Self.placeholderProfileNames.map { name in
             AddedProfileItem(
+                id: name,
                 name: name,
                 avatar: profileAvatarBuilder.makeAvatar(name: name)
             )

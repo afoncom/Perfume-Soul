@@ -38,8 +38,9 @@ final class ProfileAvatarBuilderTests: XCTestCase {
     }
 
     func testMakeAvatarKeepsStableGradientColorsForPlaceholderProfiles() {
-        // Mirrors ProfilePresenterImpl.placeholderProfileNames, which render side by side.
-        let gradients = ["Laura", "Alex", "Emma"].map { builder.makeAvatar(name: $0).gradientColors }
+        let gradients = ProfilePresenterImpl.placeholderProfileNames.map {
+            builder.makeAvatar(name: $0).gradientColors
+        }
 
         XCTAssertEqual(gradients[0], [.zodiacPink, .avatarOcean])
         XCTAssertEqual(gradients[1], [.avatarAmber, .zodiacBlue])

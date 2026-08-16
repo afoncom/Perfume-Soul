@@ -492,7 +492,7 @@ extension ProfileScreen {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
-                    ForEach(viewModel.addedProfileItems, id: \.name) { item in
+                    ForEach(viewModel.addedProfileItems) { item in
                         makeAddedProfileItem(item: item)
                     }
                 }

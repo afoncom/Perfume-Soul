@@ -81,7 +81,8 @@ enum ProfileCalculationState: Equatable {
     }
 }
 
-struct AddedProfileItem: Equatable {
+struct AddedProfileItem: Identifiable, Equatable {
+    let id: String
     let name: String
     let avatar: ProfileAvatar
 }
