@@ -67,15 +67,4 @@ final class BirthPlaceNameFormatterTests: XCTestCase {
             "Illinois, United States"
         )
     }
-
-    func testFormatUsesFallbackWhenTitleIsBlank() {
-        XCTAssertEqual(
-            BirthPlaceNameFormatter.format(
-                title: "   ",
-                subtitle: "Illinois",
-                fallback: "Springfield"
-            ),
-            "Springfield, Illinois"
-        )
-    }
 }

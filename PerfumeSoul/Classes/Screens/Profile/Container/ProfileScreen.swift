@@ -167,7 +167,7 @@ extension ProfileScreen {
                     LazyVGrid(
                         columns: Array(
                             repeating: GridItem(.flexible(), spacing: 4, alignment: .leading),
-                            count: min(elementItems.count, 4)
+                            count: 3
                         ),
                         spacing: 8
                     ) {

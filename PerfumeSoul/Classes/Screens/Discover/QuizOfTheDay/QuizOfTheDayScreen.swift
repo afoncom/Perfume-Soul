@@ -307,7 +307,6 @@ extension QuizOfTheDayScreen {
         .transition(.scale(scale: 0.96).combined(with: .opacity))
     }
 
-    @ViewBuilder
     func makeExplanationSheet() -> some View {
         VStack(alignment: .leading, spacing: 18) {
             if let currentQuestion = viewModel.currentQuestion {

@@ -67,11 +67,17 @@ final class BirthPlaceSearchService: NSObject {
             return nil
         }
 
+        let displayName = BirthPlaceNameFormatter.format(
+            title: completion.title,
+            subtitle: completion.subtitle
+        )
+
+        guard !displayName.isEmpty else {
+            return nil
+        }
+
         return BirthPlaceSelection(
-            displayName: BirthPlaceNameFormatter.format(
-                title: completion.title,
-                subtitle: completion.subtitle
-            ),
+            displayName: displayName,
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
             timeZoneIdentifier: timeZoneIdentifier
