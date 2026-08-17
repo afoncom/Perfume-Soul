@@ -154,7 +154,6 @@ extension PerfumeDetailsScreen {
                     Image(systemName: "sparkles")
                         .font(.title2)
                         .foregroundStyle(Color(.pinkButton))
-                        .accessibilityHidden(true)
 
                     Text(perfumeInitials(perfumeDetails))
                         .font(.title3.weight(.semibold))
@@ -163,6 +162,7 @@ extension PerfumeDetailsScreen {
                         .minimumScaleFactor(0.7)
                 }
                 .padding(.horizontal, 10)
+                .accessibilityHidden(true)
             }
             .overlay(
                 RoundedRectangle(cornerRadius: 22, style: .continuous)
@@ -357,7 +357,6 @@ extension PerfumeDetailsScreen {
             makeSectionTitle(L10n.PerfumeDetails.notesSectionTitle)
 
             makeNotesCard(
-                topAccentColor: Color(.pinkButton),
                 topNotes: perfumeDetails.topNotes,
                 middleNotes: perfumeDetails.middleNotes,
                 baseNotes: perfumeDetails.baseNotes
@@ -374,7 +373,6 @@ extension PerfumeDetailsScreen {
     }
 
     private func makeNotesCard(
-        topAccentColor: Color,
         topNotes: [String],
         middleNotes: [String],
         baseNotes: [String]
@@ -383,7 +381,7 @@ extension PerfumeDetailsScreen {
             makeNotesGroup(
                 title: L10n.PerfumeDetails.topNotesTitle,
                 notes: topNotes,
-                accentColor: topAccentColor
+                accentColor: Color(.pinkButton)
             )
 
             makeNotesGroup(
@@ -437,7 +435,6 @@ extension PerfumeDetailsScreen {
             makeSectionTitle(L10n.PerfumeDetails.onSkinSectionTitle)
 
             makeWearCard(
-                accentColor: Color(.pinkButton),
                 metrics: [
                     (L10n.PerfumeDetails.longevityTitle, scoreText(perfumeDetails.longevityScore)),
                     (L10n.PerfumeDetails.sillageTitle, scoreText(perfumeDetails.sillageScore))
@@ -455,7 +452,6 @@ extension PerfumeDetailsScreen {
     }
 
     private func makeWearCard(
-        accentColor: Color,
         metrics: [(String, String)]
     ) -> some View {
         VStack(alignment: .leading, spacing: 14) {
@@ -464,7 +460,7 @@ extension PerfumeDetailsScreen {
                     makeWearRow(
                         title: metric.0,
                         score: metric.1,
-                        accentColor: accentColor
+                        accentColor: Color(.pinkButton)
                     )
                 }
             }
