@@ -57,6 +57,14 @@ Backfill perfume accords:
 psql "$DATABASE_URL" -f scripts/fill_perfume_accords.sql
 ```
 
+Backfill perfume stories and English note names:
+
+```bash
+psql "$DATABASE_URL" -f scripts/fill_perfume_story_metadata.sql
+psql "$DATABASE_URL" -f scripts/fill_perfume_story_english_metadata.sql
+psql "$DATABASE_URL" -f scripts/fill_note_english_names.sql
+```
+
 Run the server:
 
 ```bash

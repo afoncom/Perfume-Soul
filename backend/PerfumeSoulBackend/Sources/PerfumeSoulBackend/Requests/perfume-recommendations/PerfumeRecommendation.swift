@@ -23,6 +23,19 @@ enum PerfumeRecommendationLoader {
         }
 
         let perfumeModels = try await PerfumeModel.query(on: database)
+            .field(\.$id)
+            .field(\.$perfumeName)
+            .field(\.$longevityScore)
+            .field(\.$sillageScore)
+            .field(\.$concentration)
+            .field(\.$fragranceFamily)
+            .field(\.$seasonProfile)
+            .field(\.$occasionProfile)
+            .field(\.$styleProfile)
+            .field(\.$genderProfile)
+            .field(\.$moodProfile)
+            .field(\.$marketSegment)
+            .field(\.$brand.$id)
             .with(\.$brand)
             .with(\.$notes) { query in
                 query.with(\.$note)

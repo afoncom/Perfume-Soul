@@ -72,13 +72,7 @@ enum PerfumeDetailsTextFormatter {
             return localizedPhrase
         }
 
-        let phrase = normalizedValue
-            .split(separator: " ")
-            .map { localizedProfileToken(String($0)) }
-            .joined(separator: " ")
-            .lowercased()
-
-        return uppercasedFirstCharacter(phrase)
+        return localizedAccord(value)
     }
 
     static func localizedAccord(_ value: String) -> String {
@@ -106,33 +100,6 @@ enum PerfumeDetailsTextFormatter {
         case "spicy": return L10n.PersonalPerfume.Accord.spicy
         case "woody": return L10n.PersonalPerfume.Accord.woody
         default: return nil
-        }
-    }
-
-    private static func localizedProfileToken(_ token: String) -> String {
-        switch normalized(token) {
-        case "all": return L10n.PerfumeDetails.ProfileToken.all
-        case "airy": return L10n.PerfumeDetails.ProfileToken.airy
-        case "autumn": return L10n.PerfumeDetails.ProfileToken.autumn
-        case "balanced": return L10n.PerfumeDetails.ProfileToken.balanced
-        case "bright": return L10n.PerfumeDetails.ProfileToken.bright
-        case "cozy": return L10n.PerfumeDetails.ProfileToken.cozy
-        case "dark": return L10n.PerfumeDetails.ProfileToken.dark
-        case "energetic": return L10n.PerfumeDetails.ProfileToken.energetic
-        case "grounded": return L10n.PerfumeDetails.ProfileToken.grounded
-        case "indulgent": return L10n.PerfumeDetails.ProfileToken.indulgent
-        case "modern": return L10n.PerfumeDetails.ProfileToken.modern
-        case "refined": return L10n.PerfumeDetails.ProfileToken.refined
-        case "romantic": return L10n.PerfumeDetails.ProfileToken.romantic
-        case "rich": return L10n.PerfumeDetails.ProfileToken.rich
-        case "season": return L10n.PerfumeDetails.ProfileToken.season
-        case "sensual": return L10n.PerfumeDetails.ProfileToken.sensual
-        case "soft": return L10n.PerfumeDetails.ProfileToken.soft
-        case "spring": return L10n.PerfumeDetails.ProfileToken.spring
-        case "summer": return L10n.PerfumeDetails.ProfileToken.summer
-        case "warm": return L10n.PerfumeDetails.ProfileToken.warm
-        case "winter": return L10n.PerfumeDetails.ProfileToken.winter
-        default: return localizedAccord(token)
         }
     }
 
@@ -184,14 +151,6 @@ enum PerfumeDetailsTextFormatter {
 
         let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmed.isEmpty ? nil : trimmed
-    }
-
-    private static func uppercasedFirstCharacter(_ value: String) -> String {
-        guard let first = value.first else {
-            return value
-        }
-
-        return first.uppercased() + value.dropFirst()
     }
 
     private static func notesMatchCurrentLanguage(_ notesLanguage: String?) -> Bool {
