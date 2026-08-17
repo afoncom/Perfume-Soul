@@ -17,7 +17,7 @@ final class QuizDayKeyProviderImpl {
     private let calendar: Calendar
     private let formatter: DateFormatter
 
-    init(calendar: Calendar = .current) {
+    init(calendar: Calendar = Calendar(identifier: .gregorian)) {
         self.calendar = calendar
 
         let formatter = DateFormatter()

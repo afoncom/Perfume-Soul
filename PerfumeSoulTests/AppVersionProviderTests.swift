@@ -9,7 +9,9 @@ import XCTest
 @testable import PerfumeSoul
 
 final class AppVersionProviderTests: XCTestCase {
-    func testCurrentAppVersionResolvesFromAppBundle() {
-        XCTAssertNotNil(AppVersionProviderImpl().currentAppVersion())
+    func testCurrentAppVersionResolvesFromAppBundle() throws {
+        let version = try XCTUnwrap(AppVersionProviderImpl().currentAppVersion())
+
+        XCTAssertFalse(version.contains("$("), "CFBundleShortVersionString was not substituted: \(version)")
     }
 }
