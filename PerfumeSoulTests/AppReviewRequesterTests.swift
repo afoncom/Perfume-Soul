@@ -69,7 +69,7 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
-    func testReviewSlotIsConsumedOnlyOncePerVersion() {
+    func testReviewSlotRequiresFreshQuizCompletionsAfterVersionChanges() {
         let requester = makeRequester()
 
         requester.registerQuizCompletion(for: "2026-08-14")
@@ -80,6 +80,12 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertFalse(requester.consumeReviewRequestSlot())
 
         appVersionProvider.appVersion = "1.1"
+
+        XCTAssertFalse(requester.consumeReviewRequestSlot())
+
+        requester.registerQuizCompletion(for: "2026-08-17")
+        requester.registerQuizCompletion(for: "2026-08-18")
+        requester.registerQuizCompletion(for: "2026-08-19")
 
         XCTAssertTrue(requester.consumeReviewRequestSlot())
     }

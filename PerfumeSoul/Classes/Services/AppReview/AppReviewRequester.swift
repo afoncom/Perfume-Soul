@@ -50,6 +50,7 @@ final class AppReviewRequesterImpl {
         }
 
         userDefaults.set(appVersion, forKey: Keys.lastRequestedVersion)
+        resetCompletedQuizCount()
         return true
     }
 }
