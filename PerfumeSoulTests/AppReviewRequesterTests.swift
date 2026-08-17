@@ -28,6 +28,7 @@ final class AppReviewRequesterTests: XCTestCase {
         super.tearDown()
     }
 
+    @MainActor
     func testReviewSlotOpensOnThirdQuizCompletion() {
         let requester = makeRequester()
 
@@ -41,6 +42,7 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
+    @MainActor
     func testSameQuizDayIsCountedOnlyOnce() {
         let requester = makeRequester()
 
@@ -55,6 +57,7 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
+    @MainActor
     func testEarlierQuizDayIsNotCountedAfterNewerQuizDay() {
         let requester = makeRequester()
 
@@ -69,6 +72,7 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
+    @MainActor
     func testReviewSlotRequiresFreshQuizCompletionsAfterVersionChanges() {
         let requester = makeRequester()
 
@@ -90,6 +94,7 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
+    @MainActor
     func testResetCompletedQuizCountRestartsQuizCounting() {
         let requester = makeRequester()
 
@@ -108,6 +113,7 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
+    @MainActor
     func testResetCompletedQuizCountKeepsReviewSlotConsumedUntilVersionChanges() {
         let requester = makeRequester()
 
@@ -130,6 +136,7 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
+    @MainActor
     func testMissingVersionDoesNotConsumeReviewSlot() {
         let requester = makeRequester()
 
