@@ -45,6 +45,7 @@
 "profile.element.fire" = "Огонь";
 "profile.element.water" = "Вода";
 "profile.elementBalance.title" = "Баланс стихий";
+"profile.elementBalance.unavailable" = "Баланс стихий недоступен для этого профиля.";
 "profile.expertise.level.novice" = "Новичок";
 "profile.expertise.level.noteExplorer" = "Исследователь нот";
 "profile.expertise.level.accordExpert" = "Знаток аккордов";

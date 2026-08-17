@@ -45,6 +45,7 @@
 "profile.element.fire" = "Fire";
 "profile.element.water" = "Water";
 "profile.elementBalance.title" = "Element Balance";
+"profile.elementBalance.unavailable" = "Element balance is unavailable for this profile.";
 "profile.expertise.level.novice" = "Newcomer";
 "profile.expertise.level.noteExplorer" = "Note Explorer";
 "profile.expertise.level.accordExpert" = "Accord Expert";

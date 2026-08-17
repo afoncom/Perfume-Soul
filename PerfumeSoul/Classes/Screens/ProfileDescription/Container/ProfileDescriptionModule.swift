@@ -37,8 +37,6 @@ final class ProfileDescriptionModule {
         
         let view = ProfileDescriptionScreen(viewModel: viewModel, presenter: presenter)
         let hostingController = UIHostingController(rootView: view)
-        hostingController.title = L10n.Profile.PersonalityDescription.title
-        hostingController.navigationItem.largeTitleDisplayMode = .always
         hostingController.hidesBottomBarWhenPushed = true
 
         return hostingController

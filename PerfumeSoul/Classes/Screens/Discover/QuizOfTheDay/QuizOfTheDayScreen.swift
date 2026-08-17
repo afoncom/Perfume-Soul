@@ -309,11 +309,11 @@ extension QuizOfTheDayScreen {
 
     @ViewBuilder
     func makeExplanationSheet() -> some View {
-        if let currentQuestion = viewModel.currentQuestion {
-            let isCorrect = viewModel.isSelectedAnswerCorrect
-            let accentColor = isCorrect ? Color(.zodiacMint) : Color(.pinkButton)
+        VStack(alignment: .leading, spacing: 18) {
+            if let currentQuestion = viewModel.currentQuestion {
+                let isCorrect = viewModel.isSelectedAnswerCorrect
+                let accentColor = isCorrect ? Color(.zodiacMint) : Color(.pinkButton)
 
-            VStack(alignment: .leading, spacing: 18) {
                 HStack(spacing: 12) {
                     ZStack {
                         Circle()
@@ -343,44 +343,29 @@ extension QuizOfTheDayScreen {
                         .lineSpacing(3)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
+            }
 
-                Button {
-                    isShowingExplanation = false
-                } label: {
-                    Text(L10n.QuizOfTheDay.closeExplanationButton)
-                        .font(.system(size: 18, weight: .semibold, design: .rounded))
-                        .foregroundStyle(Color(.textOnAccent))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 15)
-                        .background(Color(.pinkButton))
-                        .clipShape(Capsule())
-                }
-                .buttonStyle(.plain)
-            }
-            .padding(.horizontal, 24)
-            .padding(.top, 28)
-            .padding(.bottom, 18)
-            .background(Color(.backgroundPrimary))
-        } else {
-            VStack {
-                Button {
-                    isShowingExplanation = false
-                } label: {
-                    Text(L10n.QuizOfTheDay.closeExplanationButton)
-                        .font(.system(size: 18, weight: .semibold, design: .rounded))
-                        .foregroundStyle(Color(.textOnAccent))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 15)
-                        .background(Color(.pinkButton))
-                        .clipShape(Capsule())
-                }
-                .buttonStyle(.plain)
-            }
-            .padding(.horizontal, 24)
-            .padding(.top, 28)
-            .padding(.bottom, 18)
-            .background(Color(.backgroundPrimary))
+            makeCloseExplanationButton()
         }
+        .padding(.horizontal, 24)
+        .padding(.top, 28)
+        .padding(.bottom, 18)
+        .background(Color(.backgroundPrimary))
+    }
+
+    private func makeCloseExplanationButton() -> some View {
+        Button {
+            isShowingExplanation = false
+        } label: {
+            Text(L10n.QuizOfTheDay.closeExplanationButton)
+                .font(.system(size: 18, weight: .semibold, design: .rounded))
+                .foregroundStyle(Color(.textOnAccent))
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 15)
+                .background(Color(.pinkButton))
+                .clipShape(Capsule())
+        }
+        .buttonStyle(.plain)
     }
 
     func makeQuizCompletedCard() -> some View {

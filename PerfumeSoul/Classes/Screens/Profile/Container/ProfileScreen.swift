@@ -157,7 +157,10 @@ extension ProfileScreen {
                 let elementItems = makeElementBalanceItems(elementBalance: elementBalance)
 
                 if elementItems.isEmpty {
-                    makeProfileCalculationStateView()
+                    Text(L10n.Profile.ElementBalance.unavailable)
+                        .font(.footnote)
+                        .foregroundStyle(Color(.textSecondary))
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 } else {
                     makeElementBalanceBar(elementItems: elementItems)
 

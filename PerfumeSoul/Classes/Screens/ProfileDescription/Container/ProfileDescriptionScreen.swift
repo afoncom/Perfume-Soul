@@ -85,12 +85,10 @@ extension ProfileDescriptionScreen {
 
     private func makeHeaderView(profileDescription: ProfileDescription) -> some View {
         VStack(spacing: 10) {
-            if presenter.isPresentedInOnboarding {
-                Text(profileDescription.title)
-                    .font(.system(size: 26, weight: .medium, design: .rounded))
-                    .foregroundStyle(Color(.titleText))
-                    .multilineTextAlignment(.center)
-            }
+            Text(profileDescription.title)
+                .font(.system(size: 26, weight: .medium, design: .rounded))
+                .foregroundStyle(Color(.titleText))
+                .multilineTextAlignment(.center)
 
             Text(profileDescription.subtitle)
                 .font(.system(size: 20, weight: .regular, design: .rounded))

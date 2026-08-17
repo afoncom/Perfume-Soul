@@ -70,8 +70,7 @@ final class BirthPlaceSearchService: NSObject {
         return BirthPlaceSelection(
             displayName: BirthPlaceNameFormatter.format(
                 title: completion.title,
-                subtitle: completion.subtitle,
-                fallback: mapItem.placemark.name
+                subtitle: completion.subtitle
             ),
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
