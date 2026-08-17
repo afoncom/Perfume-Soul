@@ -454,15 +454,13 @@ extension PerfumeDetailsScreen {
     private func makeWearCard(
         metrics: [(String, String)]
     ) -> some View {
-        VStack(alignment: .leading, spacing: 14) {
-            VStack(spacing: 10) {
-                ForEach(metrics, id: \.0) { metric in
-                    makeWearRow(
-                        title: metric.0,
-                        score: metric.1,
-                        accentColor: Color(.pinkButton)
-                    )
-                }
+        VStack(spacing: 10) {
+            ForEach(metrics, id: \.0) { metric in
+                makeWearRow(
+                    title: metric.0,
+                    score: metric.1,
+                    accentColor: Color(.pinkButton)
+                )
             }
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)

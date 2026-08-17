@@ -23,6 +23,7 @@ enum PerfumeRecommendationLoader {
         }
 
         let perfumeModels = try await PerfumeModel.query(on: database)
+            // Keep projected fields in sync with PerfumeProfile.init(model:).
             .field(\.$id)
             .field(\.$perfumeName)
             .field(\.$longevityScore)

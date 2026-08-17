@@ -72,7 +72,16 @@ enum PerfumeDetailsTextFormatter {
             return localizedPhrase
         }
 
-        return localizedAccord(value)
+        let phrase = normalizedValue
+            .split(separator: " ")
+            .map { localizedAccordKey(String($0))?.lowercased() ?? String($0) }
+            .joined(separator: " ")
+
+        guard let first = phrase.first else {
+            return phrase
+        }
+
+        return first.uppercased() + phrase.dropFirst()
     }
 
     static func localizedAccord(_ value: String) -> String {

@@ -39,7 +39,16 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
     func testLocalizedProfilePhraseKeepsUnknownPhraseTogether() {
         XCTAssertEqual(
             PerfumeDetailsTextFormatter.localizedProfilePhrase("rare vintage profile"),
-            "rare vintage profile"
+            "Rare vintage profile"
+        )
+    }
+
+    func testLocalizedProfilePhraseFallsBackToLocalizedAccordTokens() {
+        let phrase = "\(L10n.PersonalPerfume.Accord.smoky) \(L10n.PersonalPerfume.Accord.woody)"
+
+        XCTAssertEqual(
+            PerfumeDetailsTextFormatter.localizedProfilePhrase("smoky woody"),
+            phrase.prefix(1).uppercased() + phrase.dropFirst().lowercased()
         )
     }
 
