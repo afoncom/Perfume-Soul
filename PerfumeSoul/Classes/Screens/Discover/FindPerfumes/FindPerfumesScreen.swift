@@ -167,7 +167,7 @@ extension FindPerfumesScreen {
 
                 TextField("", text: text, prompt: Text(placeholder))
                     .accessibilityLabel(accessibilityLabel(title: title, field: field))
-                    .accessibilityHint(field == .first ? Text(placeholder) : Text(""))
+                    .accessibilityHint(Text(L10n.Discover.FindSimilar.firstPerfumeSubtitle))
                     .focused($focusedField, equals: field)
                     .submitLabel(.done)
                     .textInputAutocapitalization(.never)

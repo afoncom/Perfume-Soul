@@ -156,23 +156,26 @@ extension ProfileScreen {
             if let elementBalance = viewModel.profileCalculation?.elementBalance {
                 let elementItems = makeElementBalanceItems(elementBalance: elementBalance)
 
-                makeElementBalanceBar(elementItems: elementItems)
+                if elementItems.isEmpty {
+                    makeProfileCalculationStateView()
+                } else {
+                    makeElementBalanceBar(elementItems: elementItems)
 
-                LazyVGrid(
-                    columns: Array(
-                        // Element balance is weighted from sun, moon, and ascendant only.
-                        repeating: GridItem(.flexible(), spacing: 4, alignment: .leading),
-                        count: 3
-                    ),
-                    spacing: 8
-                ) {
-                    ForEach(elementItems, id: \.element) { item in
-                        makeElementItem(
-                            element: item.element,
-                            percent: "\(item.value)%",
-                            title: item.title,
-                            color: item.color
-                        )
+                    LazyVGrid(
+                        columns: Array(
+                            repeating: GridItem(.flexible(), spacing: 4, alignment: .leading),
+                            count: min(elementItems.count, 4)
+                        ),
+                        spacing: 8
+                    ) {
+                        ForEach(elementItems, id: \.element) { item in
+                            makeElementItem(
+                                element: item.element,
+                                percent: "\(item.value)%",
+                                title: item.title,
+                                color: item.color
+                            )
+                        }
                     }
                 }
             } else {

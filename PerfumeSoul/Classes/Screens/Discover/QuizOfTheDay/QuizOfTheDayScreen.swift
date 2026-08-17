@@ -360,6 +360,25 @@ extension QuizOfTheDayScreen {
             .padding(.top, 28)
             .padding(.bottom, 18)
             .background(Color(.backgroundPrimary))
+        } else {
+            VStack {
+                Button {
+                    isShowingExplanation = false
+                } label: {
+                    Text(L10n.QuizOfTheDay.closeExplanationButton)
+                        .font(.system(size: 18, weight: .semibold, design: .rounded))
+                        .foregroundStyle(Color(.textOnAccent))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 15)
+                        .background(Color(.pinkButton))
+                        .clipShape(Capsule())
+                }
+                .buttonStyle(.plain)
+            }
+            .padding(.horizontal, 24)
+            .padding(.top, 28)
+            .padding(.bottom, 18)
+            .background(Color(.backgroundPrimary))
         }
     }
 
