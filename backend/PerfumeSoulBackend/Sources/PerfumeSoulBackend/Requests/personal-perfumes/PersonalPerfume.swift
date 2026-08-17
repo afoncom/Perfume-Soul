@@ -147,6 +147,20 @@ enum PersonalPerfumeLoader {
         on database: any Database
     ) async throws -> [PerfumeModel] {
         try await PerfumeModel.query(on: database)
+            // Keep projected fields in sync with PerfumeProfile.init(model:).
+            .field(\.$id)
+            .field(\.$perfumeName)
+            .field(\.$longevityScore)
+            .field(\.$sillageScore)
+            .field(\.$concentration)
+            .field(\.$fragranceFamily)
+            .field(\.$seasonProfile)
+            .field(\.$occasionProfile)
+            .field(\.$styleProfile)
+            .field(\.$genderProfile)
+            .field(\.$moodProfile)
+            .field(\.$marketSegment)
+            .field(\.$brand.$id)
             .filter(\.$marketSegment == marketSegment.rawValue)
             .sort(\.$id)
             .range(offset..<(offset + limit))

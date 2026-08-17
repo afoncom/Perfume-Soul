@@ -62,7 +62,10 @@ enum PerfumeDetailsTextFormatter {
         }
     }
 
-    static func localizedProfilePhrase(_ value: String?) -> String? {
+    static func localizedProfilePhrase(
+        _ value: String?,
+        accordLookup: (String) -> String? = localizedAccordKey
+    ) -> String? {
         guard let value = nonBlank(value) else {
             return nil
         }
@@ -74,7 +77,7 @@ enum PerfumeDetailsTextFormatter {
 
         let phrase = normalizedValue
             .split(separator: " ")
-            .map { localizedAccordKey(String($0))?.lowercased() ?? String($0) }
+            .map { accordLookup(String($0))?.lowercased() ?? String($0) }
             .joined(separator: " ")
 
         guard let first = phrase.first else {

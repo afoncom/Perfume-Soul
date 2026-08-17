@@ -52,6 +52,9 @@ enum PerfumeLoader {
         let upperBound = offset + limit + 1
 
         let query = PerfumeModel.query(on: database)
+            .field(\.$id)
+            .field(\.$perfumeName)
+            .field(\.$brand.$id)
             .with(\.$brand)
             .join(parent: \.$brand)
             .sort(BrandModel.self, \.$name)

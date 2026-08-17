@@ -17,6 +17,9 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
         "cozy indulgent", "refined grounded", "bright energetic",
         "warm indulgent", "rich sensual", "bright romantic"
     ]
+    private let backendConcentrations = [
+        "eau de toilette", "eau de parfum", "parfum", "extrait"
+    ]
 
     func testLocalizedAccordCoversBackendVocabulary() {
         for accord in backendAccords {
@@ -36,6 +39,16 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
         }
     }
 
+    func testLocalizedConcentrationCoversBackendVocabulary() {
+        for concentration in backendConcentrations {
+            XCTAssertNotEqual(
+                PerfumeDetailsTextFormatter.localizedConcentration(concentration),
+                concentration,
+                "Missing localization for \(concentration)"
+            )
+        }
+    }
+
     func testLocalizedProfilePhraseKeepsUnknownPhraseTogether() {
         XCTAssertEqual(
             PerfumeDetailsTextFormatter.localizedProfilePhrase("rare vintage profile"),
@@ -44,11 +57,12 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
     }
 
     func testLocalizedProfilePhraseFallsBackToLocalizedAccordTokens() {
-        let phrase = "\(L10n.PersonalPerfume.Accord.smoky) \(L10n.PersonalPerfume.Accord.woody)"
-
         XCTAssertEqual(
-            PerfumeDetailsTextFormatter.localizedProfilePhrase("smoky woody"),
-            phrase.prefix(1).uppercased() + phrase.dropFirst().lowercased()
+            PerfumeDetailsTextFormatter.localizedProfilePhrase(
+                "smoky woody",
+                accordLookup: { ["smoky": "Дымный", "woody": "древесный"][$0] }
+            ),
+            "Дымный древесный"
         )
     }
 
