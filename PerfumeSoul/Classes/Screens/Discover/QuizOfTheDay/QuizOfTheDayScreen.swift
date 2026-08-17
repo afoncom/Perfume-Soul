@@ -273,6 +273,7 @@ extension QuizOfTheDayScreen {
                 .font(.system(size: 17, weight: .semibold, design: .rounded))
                 .foregroundStyle(Color(.textPrimary))
                 .lineLimit(1)
+                .minimumScaleFactor(0.6)
 
             Spacer(minLength: 0)
 
