@@ -25,6 +25,7 @@ final class QuizOfTheDayPresenterImpl {
     private let dailyQuizStateStorage: DailyQuizStateStorage
     private let quizProgressService: QuizProgressService
     private let dayKeyProvider: QuizDayKeyProvider
+    private var didCompleteQuizInSession = false
     
     init(
         viewModel: QuizOfTheDayViewModel,
@@ -101,10 +102,15 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
         viewModel.updateQuizProgress(updatedQuizProgress)
         saveCurrentState()
         router.registerQuizCompletion(for: quizDayKey)
+        didCompleteQuizInSession = true
     }
 
     @MainActor
     func quizCompletedCardAppeared() {
+        guard didCompleteQuizInSession else {
+            return
+        }
+
         router.requestAppReviewIfEligible()
     }
 
