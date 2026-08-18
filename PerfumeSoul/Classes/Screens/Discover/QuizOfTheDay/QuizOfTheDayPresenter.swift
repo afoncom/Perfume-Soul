@@ -11,9 +11,9 @@ protocol QuizOfTheDayPresenter {
     func selectAnswer(id: String)
     func submitAnswer()
     func goToNextQuestion()
+    // StoreKit review requests must run on the main actor.
     @MainActor
     func quizCompletedCardAppeared()
-    // StoreKit review requests must run on the main actor.
     @MainActor
     func finishQuiz()
 }
