@@ -55,8 +55,10 @@ func routes(_ app: Application) throws {
         return try jsonResponse(
             try await PerfumeRecommendationLoader.load(
                 perfumeIDs: perfumeIDs,
-                on: req.db
-            )
+                on: req.db,
+                language: req.headers.first(name: "Accept-Language")
+            ),
+            varyByLanguage: true
         )
     }
 

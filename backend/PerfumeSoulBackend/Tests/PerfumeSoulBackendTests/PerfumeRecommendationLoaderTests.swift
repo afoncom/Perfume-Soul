@@ -76,6 +76,32 @@ struct PerfumeRecommendationLoaderTests {
         #expect(recommendations[0].matchPercentage > 0)
     }
 
+    @Test("Matching notes use display names without changing scoring keys")
+    func matchingNotesUseDisplayNamesWithoutChangingScoringKeys() throws {
+        let selectedPerfume = PerfumeProfile(
+            id: 1,
+            perfumeName: "Selected",
+            brandName: "Brand",
+            topNotes: ["Бергамот"],
+            noteDisplayNames: [
+                PerfumeRecommendationLoader.normalize("Бергамот"): "Bergamot"
+            ]
+        )
+        let candidate = PerfumeProfile(
+            id: 2,
+            perfumeName: "Candidate",
+            brandName: "Brand",
+            topNotes: ["Бергамот"]
+        )
+
+        let recommendations = try PerfumeRecommendationLoader.load(
+            perfumeProfiles: [selectedPerfume, candidate],
+            selectedPerfumeIDs: [selectedPerfume.id]
+        )
+
+        #expect(recommendations.map(\.matchingNotes) == [["Bergamot"]])
+    }
+
     @Test("Equal scores use deterministic brand, perfume, and id tie-breakers")
     func deterministicTieBreakersForEqualScores() throws {
         let selectedPerfume = PerfumeProfile(

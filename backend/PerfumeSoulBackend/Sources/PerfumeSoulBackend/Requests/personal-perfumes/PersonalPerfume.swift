@@ -108,7 +108,7 @@ enum PersonalPerfumeLoader {
                 on: database
             )
 
-            return perfumeModels.compactMap(PerfumeProfile.init(model:))
+            return perfumeModels.compactMap { PerfumeProfile(model: $0) }
         }
     }
 
