@@ -114,6 +114,7 @@
 "screen.calculationCreateProfile" = "Создай свой профиль";
 "screen.todayEnergy" = "Гороскоп дня";
 "quizOfTheDay.nextQuestion" = "Следующий вопрос";
+"quizOfTheDay.correctAnswerAccessibility" = "Правильный ответ";
 "quizOfTheDay.correctResult" = "Правильно!";
 "quizOfTheDay.completedSubtitle" = "На сегодня вопросы закончились. Возвращайтесь завтра за новым квизом и продолжайте набирать баллы.";
 "quizOfTheDay.completedTitle" = "Квиз на сегодня завершен";
@@ -127,6 +128,7 @@
 "quizOfTheDay.scoreHint" = "1 правильный ответ = 1 балл";
 "quizOfTheDay.scoreToday" = "Баллы за сегодня";
 "quizOfTheDay.selectOneAnswer" = "Выберите один правильный ответ";
+"quizOfTheDay.selectedAnswerAccessibility" = "Выбранный ответ";
 "quizOfTheDay.streakDays" = "Серия дней";
 "quizOfTheDay.submitAnswer" = "Проверить ответ";
 "quizOfTheDay.title" = "Квиз";

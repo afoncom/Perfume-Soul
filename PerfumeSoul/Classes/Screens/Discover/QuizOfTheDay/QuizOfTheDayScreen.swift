@@ -248,6 +248,13 @@ extension QuizOfTheDayScreen {
                     .font(.system(size: 18, weight: .regular, design: .rounded))
                     .foregroundStyle(Color(.textPrimary))
 
+                if isSubmitted, isCorrect {
+                    Image(systemName: "checkmark")
+                        .font(.footnote.weight(.bold))
+                        .foregroundStyle(Color(.textPrimary))
+                        .accessibilityHidden(true)
+                }
+
                 Spacer(minLength: 0)
             }
             .padding(.horizontal, 16)
@@ -263,6 +270,37 @@ extension QuizOfTheDayScreen {
             )
         }
         .buttonStyle(.plain)
+        .disabled(isSubmitted)
+        .accessibilityLabel(
+            makeAnswerLabel(
+                letter: letter,
+                title: title,
+                isSelected: isSelected,
+                isCorrect: isCorrect,
+                isSubmitted: isSubmitted
+            )
+        )
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
+
+    private func makeAnswerLabel(
+        letter: String,
+        title: String,
+        isSelected: Bool,
+        isCorrect: Bool,
+        isSubmitted: Bool
+    ) -> String {
+        var components = ["\(letter), \(title)"]
+
+        if isSelected {
+            components.append(L10n.QuizOfTheDay.selectedAnswerAccessibility)
+        }
+
+        if isSubmitted, isCorrect {
+            components.append(L10n.QuizOfTheDay.correctAnswerAccessibility)
+        }
+
+        return components.joined(separator: ", ")
     }
 
     func makeAnswerResultPill(isCorrect: Bool) -> some View {

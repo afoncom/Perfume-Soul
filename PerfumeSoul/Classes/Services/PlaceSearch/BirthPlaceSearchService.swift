@@ -80,10 +80,7 @@ final class BirthPlaceSearchService: NSObject {
             throw BirthPlaceSearchError.missingTimeZone
         }
 
-        let displayName = BirthPlaceNameFormatter.format(
-            title: completion.title,
-            subtitle: completion.subtitle
-        )
+        let displayName = try makeDisplayName(for: completion, mapItem: mapItem)
 
         guard !displayName.isEmpty else {
             throw BirthPlaceSearchError.missingDisplayName
@@ -111,6 +108,30 @@ final class BirthPlaceSearchService: NSObject {
         return placemarks?.first?.timeZone?.identifier
     }
 
+    private func makeDisplayName(
+        for completion: MKLocalSearchCompletion,
+        mapItem: MKMapItem
+    ) throws -> String {
+        guard isRunningQueryFallback else {
+            return BirthPlaceNameFormatter.format(
+                title: completion.title,
+                subtitle: completion.subtitle
+            )
+        }
+
+        let placemark = mapItem.placemark
+        guard placemark.locality != nil || placemark.administrativeArea != nil else {
+            throw BirthPlaceSearchError.missingDisplayName
+        }
+
+        return BirthPlaceNameFormatter.format(
+            title: placemark.locality ?? placemark.administrativeArea ?? "",
+            subtitle: [placemark.administrativeArea, placemark.country]
+                .compactMap { $0 }
+                .joined(separator: ", ")
+        )
+    }
+
     private func finishSearch(with results: [MKLocalSearchCompletion]) {
         guard searchContinuation != nil else {
             return
@@ -119,6 +140,7 @@ final class BirthPlaceSearchService: NSObject {
         if results.isEmpty, !isRunningQueryFallback {
             isRunningQueryFallback = true
             completer.resultTypes = [.query]
+            completer.queryFragment = ""
             completer.queryFragment = searchQuery
             return
         }
