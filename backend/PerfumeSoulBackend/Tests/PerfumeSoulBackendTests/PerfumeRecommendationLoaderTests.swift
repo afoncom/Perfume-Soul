@@ -85,7 +85,8 @@ struct PerfumeRecommendationLoaderTests {
             topNotes: ["Бергамот"],
             noteDisplayNames: [
                 PerfumeRecommendationLoader.normalize("Бергамот"): "Bergamot"
-            ]
+            ],
+            usesLocalizedNoteDisplayNames: true
         )
         let candidate = PerfumeProfile(
             id: 2,
@@ -100,6 +101,71 @@ struct PerfumeRecommendationLoaderTests {
         )
 
         #expect(recommendations.map(\.matchingNotes) == [["Bergamot"]])
+    }
+
+    @Test("Selected perfumes fall back to base note names when any selected display map is incomplete")
+    func selectedPerfumesFallBackToBaseNoteNamesWhenAnyDisplayMapIsIncomplete() throws {
+        let englishSelectedPerfume = PerfumeProfile(
+            id: 1,
+            perfumeName: "English Selected",
+            brandName: "Brand",
+            topNotes: ["Бергамот"],
+            noteDisplayNames: [
+                PerfumeRecommendationLoader.normalize("Бергамот"): "Bergamot"
+            ],
+            usesLocalizedNoteDisplayNames: true
+        )
+        let fallbackSelectedPerfume = PerfumeProfile(
+            id: 2,
+            perfumeName: "Fallback Selected",
+            brandName: "Brand",
+            topNotes: ["Жасмин"]
+        )
+        let candidate = PerfumeProfile(
+            id: 3,
+            perfumeName: "Candidate",
+            brandName: "Brand",
+            topNotes: ["Бергамот", "Жасмин"]
+        )
+
+        let recommendations = try PerfumeRecommendationLoader.load(
+            perfumeProfiles: [englishSelectedPerfume, fallbackSelectedPerfume, candidate],
+            selectedPerfumeIDs: [englishSelectedPerfume.id, fallbackSelectedPerfume.id]
+        )
+
+        #expect(recommendations.map(\.matchingNotes) == [["Бергамот", "Жасмин"]])
+    }
+
+    @Test("Matching notes keep the same cutoff before applying display names")
+    func matchingNotesKeepSameCutoffBeforeApplyingDisplayNames() throws {
+        let selectedPerfume = PerfumeProfile(
+            id: 1,
+            perfumeName: "Selected",
+            brandName: "Brand",
+            topNotes: ["Бергамот", "Ваниль", "Жасмин", "Кедр", "Мускус", "Роза"],
+            noteDisplayNames: [
+                PerfumeRecommendationLoader.normalize("Бергамот"): "Bergamot",
+                PerfumeRecommendationLoader.normalize("Ваниль"): "Vanilla",
+                PerfumeRecommendationLoader.normalize("Жасмин"): "Jasmine",
+                PerfumeRecommendationLoader.normalize("Кедр"): "Cedar",
+                PerfumeRecommendationLoader.normalize("Мускус"): "Musk",
+                PerfumeRecommendationLoader.normalize("Роза"): "Rose"
+            ],
+            usesLocalizedNoteDisplayNames: true
+        )
+        let candidate = PerfumeProfile(
+            id: 2,
+            perfumeName: "Candidate",
+            brandName: "Brand",
+            topNotes: ["Бергамот", "Ваниль", "Жасмин", "Кедр", "Мускус", "Роза"]
+        )
+
+        let recommendations = try PerfumeRecommendationLoader.load(
+            perfumeProfiles: [selectedPerfume, candidate],
+            selectedPerfumeIDs: [selectedPerfume.id]
+        )
+
+        #expect(recommendations.map(\.matchingNotes) == [["Bergamot", "Vanilla", "Jasmine", "Cedar", "Musk"]])
     }
 
     @Test("Equal scores use deterministic brand, perfume, and id tie-breakers")
