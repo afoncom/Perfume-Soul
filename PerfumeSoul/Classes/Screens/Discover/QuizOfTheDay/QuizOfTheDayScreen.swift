@@ -248,14 +248,14 @@ extension QuizOfTheDayScreen {
                     .font(.system(size: 18, weight: .regular, design: .rounded))
                     .foregroundStyle(Color(.textPrimary))
 
+                Spacer(minLength: 10)
+
                 if isSubmitted, isCorrect {
                     Image(systemName: "checkmark")
                         .font(.footnote.weight(.bold))
                         .foregroundStyle(Color(.textPrimary))
                         .accessibilityHidden(true)
                 }
-
-                Spacer(minLength: 0)
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 16)

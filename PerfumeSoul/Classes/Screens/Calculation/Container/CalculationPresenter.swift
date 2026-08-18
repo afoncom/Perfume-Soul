@@ -6,12 +6,10 @@
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
-import MapKit
-
 protocol CalculationPresenter {
     func continueButtonTapped() async
     func birthPlaceDidChange(_ query: String) async
-    func birthPlaceCompletionTapped(_ completion: MKLocalSearchCompletion) async
+    func birthPlaceSuggestionTapped(_ suggestion: BirthPlaceSuggestion) async
     @MainActor
     func clearBirthPlaceSearch()
 }
@@ -65,20 +63,20 @@ extension CalculationPresenterImpl: CalculationPresenter {
             viewModel.birthPlaceErrorMessage = nil
         }
 
-        let completions = await birthPlaceSearch.search(query)
+        let suggestions = await birthPlaceSearch.search(query)
         await MainActor.run {
-            viewModel.birthPlaceCompletions = completions
+            viewModel.birthPlaceSuggestions = suggestions
         }
     }
 
-    func birthPlaceCompletionTapped(_ completion: MKLocalSearchCompletion) async {
+    func birthPlaceSuggestionTapped(_ suggestion: BirthPlaceSuggestion) async {
         do {
-            let selection = try await birthPlaceSearch.resolve(completion)
+            let selection = try await birthPlaceSearch.resolve(suggestion)
 
             await MainActor.run {
                 viewModel.birthPlace = selection.displayName
                 viewModel.selectedBirthPlace = selection
-                viewModel.birthPlaceCompletions = []
+                viewModel.birthPlaceSuggestions = []
                 viewModel.birthPlaceErrorMessage = nil
             }
 
@@ -93,7 +91,7 @@ extension CalculationPresenterImpl: CalculationPresenter {
     
     @MainActor
     func clearBirthPlaceSearch() {
-        viewModel.birthPlaceCompletions = []
+        viewModel.birthPlaceSuggestions = []
         viewModel.birthPlaceErrorMessage = nil
         birthPlaceSearch.clear()
     }

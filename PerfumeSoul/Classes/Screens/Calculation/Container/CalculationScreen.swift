@@ -195,19 +195,16 @@ extension CalculationScreen {
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             
-            if focusedField == .birthPlace, !viewModel.birthPlaceCompletions.isEmpty {
+            if focusedField == .birthPlace, !viewModel.birthPlaceSuggestions.isEmpty {
                 VStack(spacing: 0) {
-                    ForEach(Array(viewModel.birthPlaceCompletions.prefix(5).enumerated()), id: \.offset) { index, completion in
+                    ForEach(Array(viewModel.birthPlaceSuggestions.prefix(5).enumerated()), id: \.offset) { index, suggestion in
                         Button {
                             focusedField = nil
                             Task {
-                                await presenter.birthPlaceCompletionTapped(completion)
+                                await presenter.birthPlaceSuggestionTapped(suggestion)
                             }
                         } label: {
-                            Text(BirthPlaceNameFormatter.format(
-                                title: completion.title,
-                                subtitle: completion.subtitle
-                            ))
+                            Text(suggestion.displayName)
                             .font(.headline)
                             .foregroundStyle(Color(.textPrimary))
                             .lineLimit(2)
@@ -217,7 +214,7 @@ extension CalculationScreen {
                         }
                         .buttonStyle(.plain)
                         
-                        if index < min(viewModel.birthPlaceCompletions.count, 5) - 1 {
+                        if index < min(viewModel.birthPlaceSuggestions.count, 5) - 1 {
                             Divider()
                                 .padding(.leading, 16)
                         }

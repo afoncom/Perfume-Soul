@@ -16,6 +16,13 @@ struct BirthPlaceSelection: Equatable {
     let timeZoneIdentifier: String
 }
 
+struct BirthPlaceSuggestion: Identifiable {
+    let id = UUID()
+    let displayName: String
+    let completion: MKLocalSearchCompletion
+    let isQueryFallback: Bool
+}
+
 enum BirthPlaceSearchError: Error {
     case searchFailed
     case missingDisplayName
@@ -26,9 +33,9 @@ enum BirthPlaceSearchError: Error {
 final class BirthPlaceSearchService: NSObject {
     private let completer = MKLocalSearchCompleter()
     private let geocoder = CLGeocoder()
-    private var searchContinuation: CheckedContinuation<[MKLocalSearchCompletion], Never>?
+    private var searchContinuation: CheckedContinuation<[BirthPlaceSuggestion], Never>?
     private var searchQuery = ""
-    private var isRunningQueryFallback = false
+    private var activeSearchPass: SearchPass?
 
     override init() {
         super.init()
@@ -36,7 +43,7 @@ final class BirthPlaceSearchService: NSObject {
         completer.resultTypes = [.address]
     }
 
-    func search(_ query: String) async -> [MKLocalSearchCompletion] {
+    func search(_ query: String) async -> [BirthPlaceSuggestion] {
         let trimmedQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
         
         guard trimmedQuery.count >= 2 else {
@@ -48,9 +55,11 @@ final class BirthPlaceSearchService: NSObject {
             searchContinuation?.resume(returning: [])
             searchContinuation = continuation
             searchQuery = trimmedQuery
-            isRunningQueryFallback = false
-            completer.resultTypes = [.address]
-            completer.queryFragment = trimmedQuery
+            startSearchPass(
+                queryFragment: trimmedQuery,
+                resultTypes: [.address],
+                isQueryFallback: false
+            )
         }
     }
     
@@ -59,11 +68,11 @@ final class BirthPlaceSearchService: NSObject {
         searchContinuation?.resume(returning: [])
         searchContinuation = nil
         searchQuery = ""
-        isRunningQueryFallback = false
+        activeSearchPass = nil
     }
 
-    func resolve(_ completion: MKLocalSearchCompletion) async throws -> BirthPlaceSelection {
-        let request = MKLocalSearch.Request(completion: completion)
+    func resolve(_ suggestion: BirthPlaceSuggestion) async throws -> BirthPlaceSelection {
+        let request = MKLocalSearch.Request(completion: suggestion.completion)
         let search = MKLocalSearch(request: request)
 
         guard
@@ -80,7 +89,7 @@ final class BirthPlaceSearchService: NSObject {
             throw BirthPlaceSearchError.missingTimeZone
         }
 
-        let displayName = try makeDisplayName(for: completion, mapItem: mapItem)
+        let displayName = try makeDisplayName(for: suggestion, mapItem: mapItem)
 
         guard !displayName.isEmpty else {
             throw BirthPlaceSearchError.missingDisplayName
@@ -109,43 +118,109 @@ final class BirthPlaceSearchService: NSObject {
     }
 
     private func makeDisplayName(
-        for completion: MKLocalSearchCompletion,
+        for suggestion: BirthPlaceSuggestion,
         mapItem: MKMapItem
     ) throws -> String {
-        guard isRunningQueryFallback else {
+        guard suggestion.isQueryFallback else {
             return BirthPlaceNameFormatter.format(
-                title: completion.title,
-                subtitle: completion.subtitle
+                title: suggestion.completion.title,
+                subtitle: suggestion.completion.subtitle
             )
         }
 
         let placemark = mapItem.placemark
-        guard placemark.locality != nil || placemark.administrativeArea != nil else {
+        let resolvedName = placemark.locality ?? placemark.administrativeArea
+        guard
+            let resolvedName,
+            isSamePlaceComponent(resolvedName, suggestion.completion.title)
+        else {
             throw BirthPlaceSearchError.missingDisplayName
         }
 
         return BirthPlaceNameFormatter.format(
-            title: placemark.locality ?? placemark.administrativeArea ?? "",
+            title: resolvedName,
             subtitle: [placemark.administrativeArea, placemark.country]
                 .compactMap { $0 }
                 .joined(separator: ", ")
         )
     }
 
-    private func finishSearch(with results: [MKLocalSearchCompletion]) {
-        guard searchContinuation != nil else {
+    private func isSamePlaceComponent(_ lhs: String, _ rhs: String) -> Bool {
+        let normalizedLHS = normalizePlaceComponent(lhs)
+        let rhsComponents = rhs
+            .split(separator: ",")
+            .map(String.init)
+            .map(normalizePlaceComponent)
+
+        return rhsComponents.contains(normalizedLHS)
+    }
+
+    private func normalizePlaceComponent(_ value: String) -> String {
+        value
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .folding(options: [.caseInsensitive, .diacriticInsensitive], locale: .current)
+    }
+
+    private func startSearchPass(
+        queryFragment: String,
+        resultTypes: MKLocalSearchCompleter.ResultType,
+        isQueryFallback: Bool
+    ) {
+        activeSearchPass = SearchPass(
+            queryFragment: queryFragment,
+            isQueryFallback: isQueryFallback
+        )
+        completer.resultTypes = resultTypes
+        completer.queryFragment = queryFragment
+    }
+
+    private func finishSearch(
+        with results: [MKLocalSearchCompletion],
+        queryFragment: String
+    ) {
+        guard
+            searchContinuation != nil,
+            let currentSearchPass = activeSearchPass,
+            currentSearchPass.queryFragment == queryFragment
+        else {
             return
         }
 
-        if results.isEmpty, !isRunningQueryFallback {
-            isRunningQueryFallback = true
-            completer.resultTypes = [.query]
+        if results.isEmpty, !currentSearchPass.isQueryFallback {
             completer.queryFragment = ""
-            completer.queryFragment = searchQuery
+            activeSearchPass = nil
+            let fallbackQuery = searchQuery
+            Task { @MainActor [weak self] in
+                guard
+                    let self,
+                    self.searchContinuation != nil,
+                    self.activeSearchPass == nil,
+                    self.searchQuery == fallbackQuery
+                else {
+                    return
+                }
+
+                self.startSearchPass(
+                    queryFragment: fallbackQuery,
+                    resultTypes: [.query],
+                    isQueryFallback: true
+                )
+            }
             return
         }
 
-        searchContinuation?.resume(returning: results)
+        searchContinuation?.resume(
+            returning: results.map {
+                BirthPlaceSuggestion(
+                    displayName: makeSuggestionDisplayName(
+                        for: $0,
+                        isQueryFallback: currentSearchPass.isQueryFallback
+                    ),
+                    completion: $0,
+                    isQueryFallback: currentSearchPass.isQueryFallback
+                )
+            }
+        )
         searchContinuation = nil
     }
 
@@ -157,8 +232,12 @@ final class BirthPlaceSearchService: NSObject {
 
 extension BirthPlaceSearchService: MKLocalSearchCompleterDelegate {
     nonisolated func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        let queryFragment = completer.queryFragment
         Task { @MainActor [weak self] in
-            self?.finishSearch(with: completer.results)
+            self?.finishSearch(
+                with: completer.results,
+                queryFragment: queryFragment
+            )
         }
     }
 
@@ -167,4 +246,23 @@ extension BirthPlaceSearchService: MKLocalSearchCompleterDelegate {
             self?.failSearch()
         }
     }
+}
+
+private struct SearchPass {
+    let queryFragment: String
+    let isQueryFallback: Bool
+}
+
+private func makeSuggestionDisplayName(
+    for completion: MKLocalSearchCompletion,
+    isQueryFallback: Bool
+) -> String {
+    guard !isQueryFallback else {
+        return completion.title
+    }
+
+    return BirthPlaceNameFormatter.format(
+        title: completion.title,
+        subtitle: completion.subtitle
+    )
 }
