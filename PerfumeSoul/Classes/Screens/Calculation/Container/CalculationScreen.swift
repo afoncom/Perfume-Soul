@@ -187,6 +187,13 @@ extension CalculationScreen {
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
                     .stroke(Color(.inputBorder), lineWidth: 1)
             )
+
+            if let birthPlaceErrorMessage = viewModel.birthPlaceErrorMessage {
+                Text(birthPlaceErrorMessage)
+                    .font(.footnote)
+                    .foregroundStyle(Color(.pinkButton))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
             
             if focusedField == .birthPlace, !viewModel.birthPlaceCompletions.isEmpty {
                 VStack(spacing: 0) {

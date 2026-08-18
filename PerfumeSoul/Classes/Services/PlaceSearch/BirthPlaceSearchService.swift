@@ -16,11 +16,19 @@ struct BirthPlaceSelection: Equatable {
     let timeZoneIdentifier: String
 }
 
+enum BirthPlaceSearchError: Error {
+    case searchFailed
+    case missingDisplayName
+    case missingTimeZone
+}
+
 @MainActor
 final class BirthPlaceSearchService: NSObject {
     private let completer = MKLocalSearchCompleter()
     private let geocoder = CLGeocoder()
     private var searchContinuation: CheckedContinuation<[MKLocalSearchCompletion], Never>?
+    private var searchQuery = ""
+    private var isRunningQueryFallback = false
 
     override init() {
         super.init()
@@ -39,6 +47,9 @@ final class BirthPlaceSearchService: NSObject {
         return await withCheckedContinuation { continuation in
             searchContinuation?.resume(returning: [])
             searchContinuation = continuation
+            searchQuery = trimmedQuery
+            isRunningQueryFallback = false
+            completer.resultTypes = [.address]
             completer.queryFragment = trimmedQuery
         }
     }
@@ -47,9 +58,11 @@ final class BirthPlaceSearchService: NSObject {
         completer.queryFragment = ""
         searchContinuation?.resume(returning: [])
         searchContinuation = nil
+        searchQuery = ""
+        isRunningQueryFallback = false
     }
 
-    func resolve(_ completion: MKLocalSearchCompletion) async -> BirthPlaceSelection? {
+    func resolve(_ completion: MKLocalSearchCompletion) async throws -> BirthPlaceSelection {
         let request = MKLocalSearch.Request(completion: completion)
         let search = MKLocalSearch(request: request)
 
@@ -57,14 +70,14 @@ final class BirthPlaceSearchService: NSObject {
             let response = try? await search.start(),
             let mapItem = response.mapItems.first
         else {
-            return nil
+            throw BirthPlaceSearchError.searchFailed
         }
 
         let coordinate = mapItem.placemark.coordinate
         let timeZoneIdentifier = await resolveTimeZoneIdentifier(for: mapItem.placemark)
 
         guard let timeZoneIdentifier else {
-            return nil
+            throw BirthPlaceSearchError.missingTimeZone
         }
 
         let displayName = BirthPlaceNameFormatter.format(
@@ -73,7 +86,7 @@ final class BirthPlaceSearchService: NSObject {
         )
 
         guard !displayName.isEmpty else {
-            return nil
+            throw BirthPlaceSearchError.missingDisplayName
         }
 
         return BirthPlaceSelection(
@@ -99,6 +112,17 @@ final class BirthPlaceSearchService: NSObject {
     }
 
     private func finishSearch(with results: [MKLocalSearchCompletion]) {
+        guard searchContinuation != nil else {
+            return
+        }
+
+        if results.isEmpty, !isRunningQueryFallback {
+            isRunningQueryFallback = true
+            completer.resultTypes = [.query]
+            completer.queryFragment = searchQuery
+            return
+        }
+
         searchContinuation?.resume(returning: results)
         searchContinuation = nil
     }

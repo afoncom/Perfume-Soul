@@ -62,6 +62,7 @@ extension CalculationPresenterImpl: CalculationPresenter {
             if viewModel.selectedBirthPlace?.displayName != query {
                 viewModel.selectedBirthPlace = nil
             }
+            viewModel.birthPlaceErrorMessage = nil
         }
 
         let completions = await birthPlaceSearch.search(query)
@@ -71,22 +72,29 @@ extension CalculationPresenterImpl: CalculationPresenter {
     }
 
     func birthPlaceCompletionTapped(_ completion: MKLocalSearchCompletion) async {
-        guard let selection = await birthPlaceSearch.resolve(completion) else {
-            return
-        }
+        do {
+            let selection = try await birthPlaceSearch.resolve(completion)
 
-        await MainActor.run {
-            viewModel.birthPlace = selection.displayName
-            viewModel.selectedBirthPlace = selection
-            viewModel.birthPlaceCompletions = []
-        }
+            await MainActor.run {
+                viewModel.birthPlace = selection.displayName
+                viewModel.selectedBirthPlace = selection
+                viewModel.birthPlaceCompletions = []
+                viewModel.birthPlaceErrorMessage = nil
+            }
 
-        await birthPlaceSearch.clear()
+            await birthPlaceSearch.clear()
+        } catch {
+            await MainActor.run {
+                viewModel.selectedBirthPlace = nil
+                viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceSelectionError
+            }
+        }
     }
     
     @MainActor
     func clearBirthPlaceSearch() {
         viewModel.birthPlaceCompletions = []
+        viewModel.birthPlaceErrorMessage = nil
         birthPlaceSearch.clear()
     }
 }

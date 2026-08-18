@@ -27,6 +27,7 @@ struct SettingsScreen: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 28) {
                 makeNotificationsSection()
+                makePrivacySection()
                 makeSupportSection()
                 makeAboutSection()
             }
@@ -119,6 +120,31 @@ extension SettingsScreen {
                     subtitle: L10n.Settings.Support.supportDeveloperSubtitle
                 )
                 // TODO: Restore Rate App when App Store ID is available and open the write-review URL.
+            }
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .background(Color(.surfacePrimary))
+            .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+            .shadow(color: Color(.cardShadowSubtle), radius: 9, x: 0, y: 4)
+        }
+    }
+
+    private func makePrivacySection() -> some View {
+        VStack(alignment: .leading, spacing: 14) {
+            makeSectionTitle(L10n.Settings.privacyTitle)
+
+            VStack(spacing: 0) {
+                Button {
+                    presenter.privacyPolicyTapped()
+                } label: {
+                    makeActionRow(
+                        icon: "shield",
+                        iconColor: Color(.zodiacPurple),
+                        title: L10n.Settings.Privacy.privacyPolicyTitle,
+                        subtitle: L10n.Settings.Privacy.privacyPolicySubtitle
+                    )
+                }
+                .buttonStyle(.plain)
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)

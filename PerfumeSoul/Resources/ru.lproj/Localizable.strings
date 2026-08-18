@@ -157,6 +157,9 @@
 "sendFeedback.subtitle" = "Напишите разработчику, если хотите поделиться идеей, отзывом или предложением по улучшению приложения.";
 "sendFeedback.title" = "Отзывы и пожелания";
 "settings.notificationsTitle" = "Уведомления";
+"settings.privacy.privacyPolicySubtitle" = "Узнайте, как Perfume Soul обрабатывает ваши данные";
+"settings.privacy.privacyPolicyTitle" = "Политика конфиденциальности";
+"settings.privacyTitle" = "Конфиденциальность";
 "settings.support.supportDeveloperSubtitle" = "Если приложение вам нравится, вы можете поддержать его развитие";
 "settings.support.supportDeveloperTitle" = "Поддержать разработчика";
 "settings.supportTitle" = "Поддержка";
@@ -187,6 +190,7 @@
 "today.recommended.title" = "Рекомендовано для тебя";
 "calculation.birthDateTitle" = "Дата рождения";
 "calculation.birthPlacePlaceholder" = "Введите город или населенный пункт";
+"calculation.birthPlaceSelectionError" = "Не удалось выбрать это место. Проверьте подключение и попробуйте еще раз.";
 "calculation.birthPlaceTitle" = "Место рождения";
 "calculation.birthTimeTitle" = "Время рождения";
 "calculation.picker.doneButton" = "Готово";

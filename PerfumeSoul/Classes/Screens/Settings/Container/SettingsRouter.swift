@@ -10,11 +10,13 @@ import UIKit
 
 protocol SettingsRouter {
     func showSendFeedback()
+    func openPrivacyPolicy()
     func openSystemSettings()
 }
 
 final class SettingsRouterImpl {
     private weak var navigationController: UINavigationController?
+    private let privacyPolicyURL = URL(string: "https://afon.com/privacy-policy")
 
     init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
@@ -27,6 +29,14 @@ extension SettingsRouterImpl: SettingsRouter {
             SendFeedbackModule.build(navigationController: navigationController),
             animated: true
         )
+    }
+
+    func openPrivacyPolicy() {
+        guard let privacyPolicyURL else {
+            return
+        }
+
+        UIApplication.shared.open(privacyPolicyURL)
     }
 
     func openSystemSettings() {

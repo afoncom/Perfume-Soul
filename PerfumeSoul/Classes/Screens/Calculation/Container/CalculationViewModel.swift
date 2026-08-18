@@ -17,6 +17,7 @@ import Observation
     var birthPlace = ""
     var selectedBirthPlace: BirthPlaceSelection?
     var birthPlaceCompletions: [MKLocalSearchCompletion] = []
+    var birthPlaceErrorMessage: String?
 
     var isContinueEnabled: Bool {
         !firstName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&

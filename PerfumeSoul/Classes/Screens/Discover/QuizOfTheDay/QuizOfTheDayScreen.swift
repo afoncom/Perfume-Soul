@@ -206,7 +206,9 @@ extension QuizOfTheDayScreen {
                     makeAnswerRow(
                         letter: answer.id,
                         title: answer.text,
-                        isSelected: viewModel.isAnswerSelected(answer.id)
+                        isSelected: viewModel.isAnswerSelected(answer.id),
+                        isCorrect: answer.isCorrect,
+                        isSubmitted: viewModel.isAnswerSubmitted
                     ) {
                         presenter.selectAnswer(id: answer.id)
                     }
@@ -223,18 +225,23 @@ extension QuizOfTheDayScreen {
         letter: String,
         title: String,
         isSelected: Bool,
+        isCorrect: Bool,
+        isSubmitted: Bool,
         onTap: @escaping () -> Void
     ) -> some View {
-        Button(action: onTap) {
+        let isRevealedCorrectAnswer = isSubmitted && isCorrect
+        let accentColor = isRevealedCorrectAnswer ? Color(.zodiacMint) : Color(.pinkButton)
+
+        return Button(action: onTap) {
             HStack(spacing: 14) {
                 ZStack {
                     Circle()
-                        .fill(isSelected ? Color(.pinkButton) : Color(.placeholderSoft))
+                        .fill(isSelected || isRevealedCorrectAnswer ? accentColor : Color(.placeholderSoft))
                         .frame(width: 48, height: 48)
 
                     Text(letter)
                         .font(.system(size: 17, weight: .medium, design: .rounded))
-                        .foregroundStyle(isSelected ? Color(.textOnAccent) : Color(.textSecondary))
+                        .foregroundStyle(isSelected || isRevealedCorrectAnswer ? Color(.textPrimary) : Color(.textSecondary))
                 }
 
                 Text(title)
@@ -249,7 +256,10 @@ extension QuizOfTheDayScreen {
             .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 22, style: .continuous)
-                    .stroke(isSelected ? Color(.pinkButton) : Color(.cardBorder), lineWidth: isSelected ? 2 : 1)
+                    .stroke(
+                        isSelected || isRevealedCorrectAnswer ? accentColor : Color(.cardBorder),
+                        lineWidth: isSelected || isRevealedCorrectAnswer ? 2 : 1
+                    )
             )
         }
         .buttonStyle(.plain)
@@ -326,18 +336,18 @@ extension QuizOfTheDayScreen {
 
                     VStack(alignment: .leading, spacing: 4) {
                         Text(L10n.QuizOfTheDay.explanationTitle)
-                            .font(.system(size: 14, weight: .medium, design: .rounded))
+                            .font(.subheadline.weight(.medium))
                             .foregroundStyle(Color(.textSecondary))
 
                         Text(isCorrect ? L10n.QuizOfTheDay.correctResult : L10n.QuizOfTheDay.incorrectResult)
-                            .font(.system(size: 24, weight: .semibold, design: .rounded))
+                            .font(.title2.weight(.semibold))
                             .foregroundStyle(Color(.textPrimary))
                     }
                 }
 
                 ScrollView(.vertical, showsIndicators: false) {
                     Text(currentQuestion.explanation)
-                        .font(.system(size: 17, weight: .regular, design: .rounded))
+                        .font(.body)
                         .foregroundStyle(Color(.descriptionText))
                         .lineSpacing(3)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -357,7 +367,7 @@ extension QuizOfTheDayScreen {
             isShowingExplanation = false
         } label: {
             Text(L10n.QuizOfTheDay.closeExplanationButton)
-                .font(.system(size: 18, weight: .semibold, design: .rounded))
+                .font(.headline.weight(.semibold))
                 .foregroundStyle(Color(.textOnAccent))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 15)

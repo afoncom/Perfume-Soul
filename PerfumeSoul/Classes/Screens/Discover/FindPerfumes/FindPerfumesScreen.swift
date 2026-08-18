@@ -167,7 +167,7 @@ extension FindPerfumesScreen {
 
                 TextField("", text: text, prompt: Text(placeholder))
                     .accessibilityLabel(accessibilityLabel(title: title, field: field))
-                    .accessibilityHint(Text(L10n.Discover.FindSimilar.firstPerfumeSubtitle))
+                    .accessibilityHint(accessibilityHint(field: field))
                     .focused($focusedField, equals: field)
                     .submitLabel(.done)
                     .textInputAutocapitalization(.never)
@@ -218,6 +218,10 @@ extension FindPerfumesScreen {
         }
 
         return "\(fieldNumber(field)). \(title), \(L10n.Discover.FindSimilar.optionalSubtitle)"
+    }
+
+    private func accessibilityHint(field: FindPerfumeField) -> Text {
+        field == .first ? Text("") : Text(L10n.Discover.FindSimilar.optionalSubtitle)
     }
 
     @ViewBuilder

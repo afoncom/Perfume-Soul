@@ -150,6 +150,9 @@
 "settings.notification.dayInPerfumerySubtitle" = "Historical events and facts";
 "settings.notification.dayInPerfumeryTitle" = "This Day in Perfumery";
 "settings.notificationsTitle" = "Notifications";
+"settings.privacy.privacyPolicySubtitle" = "Read how Perfume Soul handles your data";
+"settings.privacy.privacyPolicyTitle" = "Privacy Policy";
+"settings.privacyTitle" = "Privacy";
 "sendFeedback.button" = "Write to the Developer";
 "sendFeedback.emailSubtitle" = "If mail is not configured, you can write to this address manually.";
 "sendFeedback.emailTitle" = "Developer email";
@@ -187,6 +190,7 @@
 "today.recommended.title" = "Recommended for You";
 "calculation.birthDateTitle" = "Birth Date";
 "calculation.birthPlacePlaceholder" = "Enter city or town";
+"calculation.birthPlaceSelectionError" = "Unable to select this place. Check your connection and try again.";
 "calculation.birthPlaceTitle" = "Birth Place";
 "calculation.birthTimeTitle" = "Birth Time";
 "calculation.picker.doneButton" = "Done";
