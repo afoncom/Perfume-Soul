@@ -29,6 +29,10 @@ jobs:
         echo "PerfumeSoul.xcodeproj is missing. Generating from Project.swift..."
         tuist version
         tuist generate --no-open
+    - name: Run backend tests
+      shell: bash
+      working-directory: backend/PerfumeSoulBackend
+      run: swift test
     - name: Run tests
       shell: bash
       run: |

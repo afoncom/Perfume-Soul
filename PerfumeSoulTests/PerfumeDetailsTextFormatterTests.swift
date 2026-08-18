@@ -57,10 +57,12 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
     }
 
     func testLocalizedProfilePhraseFallsBackToLocalizedAccordTokens() {
+        let accordLookup: (String) -> String? = { ["smoky": "Дымный", "woody": "древесный"][$0] }
+
         XCTAssertEqual(
             PerfumeDetailsTextFormatter.localizedProfilePhrase(
                 "smoky woody",
-                accordLookup: { ["smoky": "Дымный", "woody": "древесный"][$0] }
+                accordLookup: accordLookup
             ),
             "Дымный древесный"
         )
@@ -93,7 +95,7 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
         let perfumeDetails = makePerfumeDetails(
             recommendationReason: nil,
             notesLanguage: SupportedAppLanguage.currentCode,
-            topNotes: ["bergamot"]
+            topNotes: ["Bergamot"]
         )
 
         XCTAssertEqual(
@@ -157,9 +159,63 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
         XCTAssertNil(PerfumeDetailsTextFormatter.fullStory(for: perfumeDetails))
     }
 
+    func testShortDescriptionPrefersTrimmedServerCopy() {
+        let perfumeDetails = makePerfumeDetails(
+            shortDescription: "  A radiant amber trail. ",
+            recommendationReason: nil,
+            notesLanguage: nil,
+            topNotes: []
+        )
+
+        XCTAssertEqual(
+            PerfumeDetailsTextFormatter.shortDescription(for: perfumeDetails),
+            "A radiant amber trail."
+        )
+    }
+
+    func testShortDescriptionFallsBackToFirstTwoLocalizedAccords() {
+        let perfumeDetails = makePerfumeDetails(
+            shortDescription: nil,
+            recommendationReason: nil,
+            accords: [
+                PerfumeAccord(name: "Woody", weight: 1),
+                PerfumeAccord(name: " amber ", weight: 0.9),
+                PerfumeAccord(name: "citrus", weight: 0.8)
+            ],
+            notesLanguage: nil,
+            topNotes: []
+        )
+        let accents = [
+            L10n.PersonalPerfume.Accord.woody,
+            L10n.PersonalPerfume.Accord.amber
+        ].joined(separator: ", ")
+
+        XCTAssertEqual(
+            PerfumeDetailsTextFormatter.shortDescription(for: perfumeDetails),
+            L10n.PerfumeDetails.defaultSummaryFormat(accents)
+        )
+    }
+
+    func testShortDescriptionFallsBackToDefaultSummaryWithoutAccords() {
+        let perfumeDetails = makePerfumeDetails(
+            shortDescription: nil,
+            recommendationReason: nil,
+            accords: [],
+            notesLanguage: nil,
+            topNotes: []
+        )
+
+        XCTAssertEqual(
+            PerfumeDetailsTextFormatter.shortDescription(for: perfumeDetails),
+            L10n.PerfumeDetails.defaultSummary
+        )
+    }
+
     private func makePerfumeDetails(
+        shortDescription: String? = nil,
         recommendationReason: String?,
         fullStory: String? = nil,
+        accords: [PerfumeAccord] = [],
         notesLanguage: String?,
         topNotes: [String]
     ) -> PerfumeDetails {
@@ -178,10 +234,10 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
             sillageScore: nil,
             releaseYear: nil,
             perfumer: nil,
-            shortDescription: nil,
+            shortDescription: shortDescription,
             recommendationReason: recommendationReason,
             fullStory: fullStory,
-            accords: [],
+            accords: accords,
             notesLanguage: notesLanguage,
             topNotes: topNotes,
             middleNotes: [],

@@ -23,20 +23,7 @@ enum PerfumeRecommendationLoader {
         }
 
         let perfumeModels = try await PerfumeModel.query(on: database)
-            // Keep projected fields in sync with PerfumeProfile.init(model:).
-            .field(\.$id)
-            .field(\.$perfumeName)
-            .field(\.$longevityScore)
-            .field(\.$sillageScore)
-            .field(\.$concentration)
-            .field(\.$fragranceFamily)
-            .field(\.$seasonProfile)
-            .field(\.$occasionProfile)
-            .field(\.$styleProfile)
-            .field(\.$genderProfile)
-            .field(\.$moodProfile)
-            .field(\.$marketSegment)
-            .field(\.$brand.$id)
+            .withPerfumeProfileFields()
             .with(\.$brand)
             .with(\.$notes) { query in
                 query.with(\.$note)
@@ -856,5 +843,24 @@ struct PerfumeProfile {
             "longevity:\(longevityPart)",
             "sillage:\(sillagePart)"
         ].joined(separator: "||")
+    }
+}
+
+extension QueryBuilder where Model == PerfumeModel {
+    /// Fields read by `PerfumeProfile.init(model:)`.
+    func withPerfumeProfileFields() -> Self {
+        field(\.$id)
+            .field(\.$perfumeName)
+            .field(\.$longevityScore)
+            .field(\.$sillageScore)
+            .field(\.$concentration)
+            .field(\.$fragranceFamily)
+            .field(\.$seasonProfile)
+            .field(\.$occasionProfile)
+            .field(\.$styleProfile)
+            .field(\.$genderProfile)
+            .field(\.$moodProfile)
+            .field(\.$marketSegment)
+            .field(\.$brand.$id)
     }
 }

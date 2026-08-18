@@ -1,7 +1,7 @@
 UPDATE perfumes
-SET short_description_en = story.short_description_en,
-    recommendation_reason_en = story.recommendation_reason_en,
-    full_story_en = story.full_story_en
+SET short_description_en = COALESCE(perfumes.short_description_en, story.short_description_en),
+    recommendation_reason_en = COALESCE(perfumes.recommendation_reason_en, story.recommendation_reason_en),
+    full_story_en = COALESCE(perfumes.full_story_en, story.full_story_en)
 FROM (
     VALUES
         (
@@ -35,5 +35,4 @@ FROM (
 JOIN brands
     ON brands.brand = story.brand_name
 WHERE perfumes.brand_id = brands.id
-    AND perfumes.perfume_name = story.perfume_name
-    AND perfumes.full_story_en IS NULL;
+    AND perfumes.perfume_name = story.perfume_name;

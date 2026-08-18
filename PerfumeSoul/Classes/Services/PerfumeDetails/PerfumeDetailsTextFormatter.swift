@@ -30,6 +30,7 @@ enum PerfumeDetailsTextFormatter {
         let notes = (perfumeDetails.topNotes + perfumeDetails.middleNotes + perfumeDetails.baseNotes)
             .compactMap(nonBlank)
             .prefix(3)
+            .map(\.localizedLowercase)
             .joined(separator: ", ")
 
         guard !notes.isEmpty else {
