@@ -17,6 +17,7 @@ final class QuizOfTheDayPresenterTests: XCTestCase {
         presenter.quizCompletedCardAppeared()
 
         XCTAssertFalse(router.didRequestAppReview)
+        XCTAssertTrue(router.registeredQuizDayKeys.isEmpty)
     }
 
     @MainActor
@@ -31,10 +32,11 @@ final class QuizOfTheDayPresenterTests: XCTestCase {
         presenter.quizCompletedCardAppeared()
 
         XCTAssertTrue(router.didRequestAppReview)
+        XCTAssertEqual(router.registeredQuizDayKeys, ["2026-08-18"])
     }
 
     private func makePresenter(
-        router: QuizOfTheDayRouterMock = QuizOfTheDayRouterMock()
+        router: QuizOfTheDayRouterMock
     ) -> QuizOfTheDayPresenterImpl {
         QuizOfTheDayPresenterImpl(
             viewModel: QuizOfTheDayViewModel(),
