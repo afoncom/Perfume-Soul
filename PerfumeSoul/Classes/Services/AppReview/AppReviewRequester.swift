@@ -53,7 +53,7 @@ final class AppReviewRequesterImpl {
         }
 
         userDefaults.set(appVersion, forKey: Keys.lastRequestedVersion)
-        resetCompletedQuizCount()
+        userDefaults.removeObject(forKey: Keys.completedQuizCount)
         return true
     }
 }

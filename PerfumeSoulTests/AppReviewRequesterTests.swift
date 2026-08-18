@@ -95,6 +95,21 @@ final class AppReviewRequesterTests: XCTestCase {
     }
 
     @MainActor
+    func testConsumingReviewSlotKeepsTheLastCountedQuizDay() {
+        let requester = makeRequester()
+
+        requester.registerQuizCompletion(for: "2026-08-14")
+        requester.registerQuizCompletion(for: "2026-08-15")
+        requester.registerQuizCompletion(for: "2026-08-16")
+
+        XCTAssertTrue(requester.consumeReviewRequestSlot())
+
+        requester.registerQuizCompletion(for: "2026-08-16")
+
+        XCTAssertEqual(userDefaults.integer(forKey: "appReview.completedQuizCount"), 0)
+    }
+
+    @MainActor
     func testResetCompletedQuizCountRestartsQuizCounting() {
         let requester = makeRequester()
 

@@ -38,14 +38,17 @@ final class ProfileAvatarBuilderTests: XCTestCase {
     }
 
     func testMakeAvatarKeepsStableGradientColorsForPlaceholderProfiles() {
-        let gradients = ProfilePresenterImpl.placeholderProfileNames.map {
-            builder.makeAvatar(name: $0).gradientColors
-        }
+        let expected: [String: [ProfileAvatarColor]] = [
+            "Laura": [.zodiacPink, .avatarOcean],
+            "Alex": [.avatarAmber, .zodiacBlue],
+            "Emma": [.zodiacPurple, .zodiacPink]
+        ]
 
-        XCTAssertEqual(gradients[0], [.zodiacPink, .avatarOcean])
-        XCTAssertEqual(gradients[1], [.avatarAmber, .zodiacBlue])
-        XCTAssertEqual(gradients[2], [.zodiacPurple, .zodiacPink])
-        XCTAssertEqual(Set(gradients).count, gradients.count, "Placeholder profile gradients should be distinct")
+        XCTAssertEqual(Set(ProfilePresenterImpl.placeholderProfileNames), Set(expected.keys))
+
+        for (name, colors) in expected {
+            XCTAssertEqual(builder.makeAvatar(name: name).gradientColors, colors, name)
+        }
     }
 
     func testMakeAvatarKeysGradientByFullNameInsteadOfInitials() {
