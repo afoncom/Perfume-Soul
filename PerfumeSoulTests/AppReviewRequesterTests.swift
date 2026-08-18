@@ -28,6 +28,7 @@ final class AppReviewRequesterTests: XCTestCase {
         super.tearDown()
     }
 
+    @MainActor
     func testReviewSlotOpensOnThirdQuizCompletion() {
         let requester = makeRequester()
 
@@ -41,6 +42,7 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
+    @MainActor
     func testSameQuizDayIsCountedOnlyOnce() {
         let requester = makeRequester()
 
@@ -55,7 +57,23 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
-    func testReviewSlotIsConsumedOnlyOncePerVersion() {
+    @MainActor
+    func testEarlierQuizDayIsNotCountedAfterNewerQuizDay() {
+        let requester = makeRequester()
+
+        requester.registerQuizCompletion(for: "2026-08-16")
+        requester.registerQuizCompletion(for: "2026-08-17")
+        requester.registerQuizCompletion(for: "2026-08-16")
+
+        XCTAssertFalse(requester.consumeReviewRequestSlot())
+
+        requester.registerQuizCompletion(for: "2026-08-18")
+
+        XCTAssertTrue(requester.consumeReviewRequestSlot())
+    }
+
+    @MainActor
+    func testReviewSlotRequiresFreshQuizCompletionsAfterVersionChanges() {
         let requester = makeRequester()
 
         requester.registerQuizCompletion(for: "2026-08-14")
@@ -67,9 +85,31 @@ final class AppReviewRequesterTests: XCTestCase {
 
         appVersionProvider.appVersion = "1.1"
 
+        XCTAssertFalse(requester.consumeReviewRequestSlot())
+
+        requester.registerQuizCompletion(for: "2026-08-17")
+        requester.registerQuizCompletion(for: "2026-08-18")
+        requester.registerQuizCompletion(for: "2026-08-19")
+
         XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
+    @MainActor
+    func testConsumingReviewSlotKeepsTheLastCountedQuizDay() {
+        let requester = makeRequester()
+
+        requester.registerQuizCompletion(for: "2026-08-14")
+        requester.registerQuizCompletion(for: "2026-08-15")
+        requester.registerQuizCompletion(for: "2026-08-16")
+
+        XCTAssertTrue(requester.consumeReviewRequestSlot())
+
+        requester.registerQuizCompletion(for: "2026-08-16")
+
+        XCTAssertEqual(userDefaults.integer(forKey: "appReview.completedQuizCount"), 0)
+    }
+
+    @MainActor
     func testResetCompletedQuizCountRestartsQuizCounting() {
         let requester = makeRequester()
 
@@ -88,6 +128,7 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
+    @MainActor
     func testResetCompletedQuizCountKeepsReviewSlotConsumedUntilVersionChanges() {
         let requester = makeRequester()
 
@@ -110,6 +151,7 @@ final class AppReviewRequesterTests: XCTestCase {
         XCTAssertTrue(requester.consumeReviewRequestSlot())
     }
 
+    @MainActor
     func testMissingVersionDoesNotConsumeReviewSlot() {
         let requester = makeRequester()
 

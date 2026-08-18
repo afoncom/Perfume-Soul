@@ -115,9 +115,9 @@ extension ProfilePresenterImpl: ProfilePresenter {
         await profileService.deleteProfile(profile)
         quizProgressService.resetProgress()
         dailyQuizStateStorage.clearState()
-        appReviewRequester.resetCompletedQuizCount()
         
         await MainActor.run {
+            appReviewRequester.resetCompletedQuizCount()
             setProfile(nil)
             viewModel.profileCalculationState = .idle
             viewModel.totalCorrectQuizAnswers = 0

@@ -29,6 +29,7 @@ private final class AppReviewRequesterMock: AppReviewRequester {
     var registeredQuizDayKeys: [String] = []
     var didRequestReview = false
 
+    @MainActor
     func registerQuizCompletion(for quizDayKey: String) {
         registeredQuizDayKeys.append(quizDayKey)
     }
@@ -38,5 +39,6 @@ private final class AppReviewRequesterMock: AppReviewRequester {
         didRequestReview = true
     }
 
+    @MainActor
     func resetCompletedQuizCount() { }
 }
