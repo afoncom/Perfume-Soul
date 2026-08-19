@@ -33,11 +33,19 @@ enum BirthPlaceNameFormatter {
         return result?.isEmpty == false ? result : nil
     }
 
-    private static func isSamePlaceComponent(_ lhs: String, _ rhs: String) -> Bool {
-        lhs.compare(
-            rhs,
-            options: [.caseInsensitive, .diacriticInsensitive],
-            locale: .current
-        ) == .orderedSame
+    static func isSamePlaceComponent(_ lhs: String, _ rhs: String) -> Bool {
+        let normalizedLHS = normalizePlaceComponent(lhs)
+        let rhsComponents = rhs
+            .split(separator: ",")
+            .map(String.init)
+            .map(normalizePlaceComponent)
+
+        return rhsComponents.contains(normalizedLHS)
+    }
+
+    private static func normalizePlaceComponent(_ value: String) -> String {
+        value
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .folding(options: [.caseInsensitive, .diacriticInsensitive], locale: .current)
     }
 }

@@ -19,7 +19,7 @@ protocol SettingsRouter {
 final class SettingsRouterImpl {
     private weak var navigationController: UINavigationController?
     // TODO: Replace with the hosted Privacy Policy URL before App Store submission.
-    private let privacyPolicyURL: URL?
+    private let privacyPolicyURL: URL? = nil
 
     init(navigationController: UINavigationController?) {
         self.navigationController = navigationController

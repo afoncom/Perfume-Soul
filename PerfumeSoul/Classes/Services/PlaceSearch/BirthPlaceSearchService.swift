@@ -31,7 +31,8 @@ enum BirthPlaceSearchError: Error {
 
 @MainActor
 final class BirthPlaceSearchService: NSObject {
-    private let completer = MKLocalSearchCompleter()
+    private let addressCompleter = MKLocalSearchCompleter()
+    private let fallbackCompleter = MKLocalSearchCompleter()
     private let geocoder = CLGeocoder()
     private var searchContinuation: CheckedContinuation<[BirthPlaceSuggestion], Never>?
     private var searchQuery = ""
@@ -39,8 +40,10 @@ final class BirthPlaceSearchService: NSObject {
 
     override init() {
         super.init()
-        completer.delegate = self
-        completer.resultTypes = [.address]
+        addressCompleter.delegate = self
+        addressCompleter.resultTypes = [.address]
+        fallbackCompleter.delegate = self
+        fallbackCompleter.resultTypes = [.query]
     }
 
     func search(_ query: String) async -> [BirthPlaceSuggestion] {
@@ -57,14 +60,14 @@ final class BirthPlaceSearchService: NSObject {
             searchQuery = trimmedQuery
             startSearchPass(
                 queryFragment: trimmedQuery,
-                resultTypes: [.address],
                 isQueryFallback: false
             )
         }
     }
     
     func clear() {
-        completer.queryFragment = ""
+        addressCompleter.queryFragment = ""
+        fallbackCompleter.queryFragment = ""
         searchContinuation?.resume(returning: [])
         searchContinuation = nil
         searchQuery = ""
@@ -132,7 +135,7 @@ final class BirthPlaceSearchService: NSObject {
         let resolvedName = placemark.locality ?? placemark.administrativeArea
         guard
             let resolvedName,
-            isSamePlaceComponent(resolvedName, suggestion.completion.title)
+            BirthPlaceNameFormatter.isSamePlaceComponent(resolvedName, suggestion.completion.title)
         else {
             throw BirthPlaceSearchError.missingDisplayName
         }
@@ -145,67 +148,38 @@ final class BirthPlaceSearchService: NSObject {
         )
     }
 
-    private func isSamePlaceComponent(_ lhs: String, _ rhs: String) -> Bool {
-        let normalizedLHS = normalizePlaceComponent(lhs)
-        let rhsComponents = rhs
-            .split(separator: ",")
-            .map(String.init)
-            .map(normalizePlaceComponent)
-
-        return rhsComponents.contains(normalizedLHS)
-    }
-
-    private func normalizePlaceComponent(_ value: String) -> String {
-        value
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .folding(options: [.caseInsensitive, .diacriticInsensitive], locale: .current)
-    }
-
     private func startSearchPass(
         queryFragment: String,
-        resultTypes: MKLocalSearchCompleter.ResultType,
         isQueryFallback: Bool
     ) {
         activeSearchPass = SearchPass(
             queryFragment: queryFragment,
             isQueryFallback: isQueryFallback
         )
-        completer.resultTypes = resultTypes
-        completer.queryFragment = queryFragment
+
+        if isQueryFallback {
+            fallbackCompleter.queryFragment = queryFragment
+        } else {
+            addressCompleter.queryFragment = queryFragment
+        }
     }
 
     private func finishSearch(
         with results: [MKLocalSearchCompletion],
+        from completer: MKLocalSearchCompleter,
         queryFragment: String
     ) {
         guard
             searchContinuation != nil,
             let currentSearchPass = activeSearchPass,
-            currentSearchPass.queryFragment == queryFragment
+            currentSearchPass.queryFragment == queryFragment,
+            matchesActiveSearchPass(for: completer)
         else {
             return
         }
 
         if results.isEmpty, !currentSearchPass.isQueryFallback {
-            completer.queryFragment = ""
-            activeSearchPass = nil
-            let fallbackQuery = searchQuery
-            Task { @MainActor [weak self] in
-                guard
-                    let self,
-                    self.searchContinuation != nil,
-                    self.activeSearchPass == nil,
-                    self.searchQuery == fallbackQuery
-                else {
-                    return
-                }
-
-                self.startSearchPass(
-                    queryFragment: fallbackQuery,
-                    resultTypes: [.query],
-                    isQueryFallback: true
-                )
-            }
+            startSearchPass(queryFragment: searchQuery, isQueryFallback: true)
             return
         }
 
@@ -224,18 +198,40 @@ final class BirthPlaceSearchService: NSObject {
         searchContinuation = nil
     }
 
-    private func failSearch() {
+    private func failSearch(from completer: MKLocalSearchCompleter) {
+        guard matchesActiveSearchPass(for: completer) else {
+            return
+        }
+
         searchContinuation?.resume(returning: [])
         searchContinuation = nil
+    }
+
+    private func matchesActiveSearchPass(for completer: MKLocalSearchCompleter) -> Bool {
+        guard let activeSearchPass else {
+            return false
+        }
+
+        if completer === addressCompleter {
+            return !activeSearchPass.isQueryFallback
+        }
+
+        if completer === fallbackCompleter {
+            return activeSearchPass.isQueryFallback
+        }
+
+        return false
     }
 }
 
 extension BirthPlaceSearchService: MKLocalSearchCompleterDelegate {
     nonisolated func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         let queryFragment = completer.queryFragment
+        let results = completer.results
         Task { @MainActor [weak self] in
             self?.finishSearch(
-                with: completer.results,
+                with: results,
+                from: completer,
                 queryFragment: queryFragment
             )
         }
@@ -243,7 +239,7 @@ extension BirthPlaceSearchService: MKLocalSearchCompleterDelegate {
 
     nonisolated func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: any Error) {
         Task { @MainActor [weak self] in
-            self?.failSearch()
+            self?.failSearch(from: completer)
         }
     }
 }
