@@ -8,12 +8,9 @@
 
 @MainActor
 protocol SettingsPresenter {
-    var isPrivacyPolicyAvailable: Bool { get }
-
     func onAppear() async
     func dailyHoroscopeNotificationToggled(isEnabled: Bool)
     func feedbackButtonTapped()
-    func privacyPolicyTapped()
     func openSystemSettingsTapped()
     func notificationAlertDismissed()
 }
@@ -36,10 +33,6 @@ final class SettingsPresenterImpl {
 }
 
 extension SettingsPresenterImpl: SettingsPresenter {
-    var isPrivacyPolicyAvailable: Bool {
-        router.isPrivacyPolicyAvailable
-    }
-
     @MainActor
     func onAppear() async {
         viewModel.isDailyHoroscopeNotificationEnabled = dailyHoroscopeNotificationService.isDailyHoroscopeNotificationEnabled()
@@ -90,10 +83,6 @@ extension SettingsPresenterImpl: SettingsPresenter {
 
     func feedbackButtonTapped() {
         router.showSendFeedback()
-    }
-
-    func privacyPolicyTapped() {
-        router.openPrivacyPolicy()
     }
 
     func openSystemSettingsTapped() {

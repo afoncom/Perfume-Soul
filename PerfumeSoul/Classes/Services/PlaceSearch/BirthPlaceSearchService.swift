@@ -205,6 +205,7 @@ final class BirthPlaceSearchService: NSObject {
     }
 
     private func startSearchTimeout() {
+        searchTimeoutTask?.cancel()
         searchTimeoutTask = Task { [weak self] in
             try? await Task.sleep(for: .seconds(3))
             guard !Task.isCancelled else {
@@ -241,6 +242,7 @@ final class BirthPlaceSearchService: NSObject {
             return
         case .escalate:
             startSearchPass(queryFragment: searchQuery, isQueryFallback: true)
+            startSearchTimeout()
             return
         case .resume:
             resumeSearch(with: results, isQueryFallback: currentSearchPass.isQueryFallback)
