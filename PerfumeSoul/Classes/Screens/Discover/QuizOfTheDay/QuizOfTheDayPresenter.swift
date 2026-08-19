@@ -11,6 +11,10 @@ protocol QuizOfTheDayPresenter {
     func selectAnswer(id: String)
     func submitAnswer()
     func goToNextQuestion()
+    // StoreKit review requests must run on the main actor.
+    @MainActor
+    func quizCompletedCardAppeared()
+    @MainActor
     func finishQuiz()
 }
 
@@ -21,6 +25,7 @@ final class QuizOfTheDayPresenterImpl {
     private let dailyQuizStateStorage: DailyQuizStateStorage
     private let quizProgressService: QuizProgressService
     private let dayKeyProvider: QuizDayKeyProvider
+    private var didCompleteQuizInSession = false
     
     init(
         viewModel: QuizOfTheDayViewModel,
@@ -67,7 +72,9 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
     }
 
     func submitAnswer() {
-        guard let result = viewModel.submitAnswer() else { return }
+        guard let result = viewModel.submitAnswer() else {
+            return
+        }
 
         if result.wasCorrect {
             let updatedQuizProgress = quizProgressService.recordCorrectAnswer(
@@ -85,12 +92,26 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
         saveCurrentState()
     }
 
+    @MainActor
     func finishQuiz() {
-        guard let quizDayKey = viewModel.finishQuiz() else { return }
+        guard let quizDayKey = viewModel.finishQuiz() else {
+            return
+        }
 
         let updatedQuizProgress = quizProgressService.completeQuiz(for: quizDayKey)
         viewModel.updateQuizProgress(updatedQuizProgress)
         saveCurrentState()
+        router.registerQuizCompletion(for: quizDayKey)
+        didCompleteQuizInSession = true
+    }
+
+    @MainActor
+    func quizCompletedCardAppeared() {
+        guard didCompleteQuizInSession else {
+            return
+        }
+
+        router.requestAppReviewIfEligible()
     }
 
     private func resolveSession(from questions: [QuizOfTheDayQuestion]) -> (questions: [QuizOfTheDayQuestion], state: DailyQuizState) {
@@ -143,7 +164,10 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
     }
 
     private func saveCurrentState() {
-        guard let currentDailyQuizState = viewModel.currentDailyQuizState else { return }
+        guard let currentDailyQuizState = viewModel.currentDailyQuizState else {
+            return
+        }
+
         dailyQuizStateStorage.saveState(currentDailyQuizState)
     }
 }

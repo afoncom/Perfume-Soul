@@ -17,10 +17,13 @@ final class QuizDayKeyProviderImpl {
     private let calendar: Calendar
     private let formatter: DateFormatter
 
-    init(calendar: Calendar = .current) {
+    init(calendar: Calendar = Calendar(identifier: .gregorian)) {
         self.calendar = calendar
 
         let formatter = DateFormatter()
+        // Day keys are storage identifiers, not display dates. This release pins them to Gregorian
+        // after older builds followed the user's calendar, so non-Gregorian persisted quiz state can
+        // reset once on upgrade instead of keeping calendar-dependent keys forever.
         formatter.calendar = calendar
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.timeZone = calendar.timeZone

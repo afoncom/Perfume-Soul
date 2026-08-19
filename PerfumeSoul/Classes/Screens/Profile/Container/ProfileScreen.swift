@@ -26,7 +26,7 @@ struct ProfileScreen: View {
             if let profile = viewModel.profile {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 10) {
-                        makeProfileScreen(profile: profile)
+                        makeProfileScreen(profile: profile, avatar: viewModel.avatar)
                             .padding(.horizontal, 16)
                         
                         makeMyNatalChart()
@@ -76,11 +76,15 @@ struct ProfileScreen: View {
 }
 
 extension ProfileScreen {
-    func makeProfileScreen(profile: Profile) -> some View {
+    func makeProfileScreen(profile: Profile, avatar: ProfileAvatar) -> some View {
         HStack(spacing: 12) {
             Circle()
-                .fill(Color(.placeholderStrong))
+                .fill(makeProfileAvatarGradient(colors: avatar.gradientColors))
                 .frame(width: 74, height: 74)
+                .overlay {
+                    makeProfileAvatarInitials(avatar.initials, font: .title3)
+                }
+                .accessibilityHidden(true)
             
             VStack(alignment: .leading, spacing: 8) {
                 Text(profile.name)
@@ -488,9 +492,9 @@ extension ProfileScreen {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
-                    makeAddedProfileItem(name: "Laura")
-                    makeAddedProfileItem(name: "Alex")
-                    makeAddedProfileItem(name: "Ada")
+                    ForEach(viewModel.addedProfileItems) { item in
+                        makeAddedProfileItem(item: item)
+                    }
                 }
             }
         }
@@ -527,6 +531,44 @@ extension ProfileScreen {
         }
 
         return DailyHoroscope(sign: sign, energyOfDay: "")
+    }
+
+    func makeProfileAvatarGradient(colors: [ProfileAvatarColor]) -> LinearGradient {
+        LinearGradient(
+            colors: colors.map(makeProfileAvatarColor),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+
+    func makeProfileAvatarColor(_ color: ProfileAvatarColor) -> Color {
+        switch color {
+        case .zodiacBlue:
+            return Color(.zodiacBlue)
+        case .zodiacPurple:
+            return Color(.zodiacPurple)
+        case .zodiacBrown:
+            return Color(.zodiacBrown)
+        case .zodiacPink:
+            return Color(.zodiacPink)
+        case .zodiacGray:
+            return Color(.zodiacGray)
+        case .avatarOcean:
+            return Color(.avatarOcean)
+        case .avatarTeal:
+            return Color(.avatarTeal)
+        case .avatarAmber:
+            return Color(.avatarAmber)
+        }
+    }
+
+    private func makeProfileAvatarInitials(_ initials: String, font: Font) -> some View {
+        Text(initials)
+            .font(font)
+            .fontWeight(.semibold)
+            .foregroundStyle(Color(.textOnAccent))
+            .lineLimit(1)
+            .minimumScaleFactor(0.8)
     }
 
     func makeZodiacBadge(zodiacInfo: DailyHoroscope) -> some View {
@@ -730,13 +772,17 @@ extension ProfileScreen {
 // MARK: - Added Profile Item
 
 extension ProfileScreen {
-    func makeAddedProfileItem(name: String) -> some View {
+    func makeAddedProfileItem(item: AddedProfileItem) -> some View {
         VStack(spacing: 8) {
             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(Color(.placeholderMedium))
+                .fill(makeProfileAvatarGradient(colors: item.avatar.gradientColors))
                 .frame(width: 92, height: 92)
+                .overlay {
+                    makeProfileAvatarInitials(item.avatar.initials, font: .title2)
+                }
+                .accessibilityHidden(true)
             
-            Text(name)
+            Text(item.name)
                 .font(.headline)
                 .foregroundStyle(Color(.textPrimary))
         }
