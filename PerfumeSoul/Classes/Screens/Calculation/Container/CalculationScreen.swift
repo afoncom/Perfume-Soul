@@ -68,15 +68,6 @@ extension CalculationScreen {
 }
 
 extension CalculationScreen {
-    func makeTopSafeAreaMask() -> some View {
-        GeometryReader { proxy in
-            Color(.backgroundPrimary)
-                .frame(height: proxy.safeAreaInsets.top)
-                .ignoresSafeArea(edges: .top)
-        }
-        .allowsHitTesting(false)
-    }
-
     func makeHeaderView() -> some View {
         VStack(spacing: 12) {
             Text(L10n.Screen.calculationCreateProfile)

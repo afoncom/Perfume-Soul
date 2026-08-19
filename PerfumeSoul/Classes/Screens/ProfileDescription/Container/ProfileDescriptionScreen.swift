@@ -41,15 +41,6 @@ struct ProfileDescriptionScreen: View {
 }
 
 extension ProfileDescriptionScreen {
-    private func makeTopSafeAreaMask() -> some View {
-        GeometryReader { proxy in
-            Color(.backgroundPrimary)
-                .frame(height: proxy.safeAreaInsets.top)
-                .ignoresSafeArea(edges: .top)
-        }
-        .allowsHitTesting(false)
-    }
-
     @ViewBuilder
     private func makeContentView() -> some View {
         switch viewModel.state {

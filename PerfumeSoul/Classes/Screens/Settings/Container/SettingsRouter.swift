@@ -9,6 +9,8 @@
 import UIKit
 
 protocol SettingsRouter {
+    var isPrivacyPolicyAvailable: Bool { get }
+
     func showSendFeedback()
     func openPrivacyPolicy()
     func openSystemSettings()
@@ -17,7 +19,7 @@ protocol SettingsRouter {
 final class SettingsRouterImpl {
     private weak var navigationController: UINavigationController?
     // TODO: Replace with the hosted Privacy Policy URL before App Store submission.
-    private let privacyPolicyURL = URL(string: "https://afon.com/privacy-policy")
+    private let privacyPolicyURL: URL?
 
     init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
@@ -25,6 +27,10 @@ final class SettingsRouterImpl {
 }
 
 extension SettingsRouterImpl: SettingsRouter {
+    var isPrivacyPolicyAvailable: Bool {
+        privacyPolicyURL != nil
+    }
+
     func showSendFeedback() {
         navigationController?.pushViewController(
             SendFeedbackModule.build(navigationController: navigationController),

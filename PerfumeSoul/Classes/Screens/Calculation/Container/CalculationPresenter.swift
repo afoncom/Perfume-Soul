@@ -81,6 +81,11 @@ extension CalculationPresenterImpl: CalculationPresenter {
             }
 
             await birthPlaceSearch.clear()
+        } catch BirthPlaceSearchError.missingDisplayName, BirthPlaceSearchError.missingTimeZone {
+            await MainActor.run {
+                viewModel.selectedBirthPlace = nil
+                viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceUnresolvedError
+            }
         } catch {
             await MainActor.run {
                 viewModel.selectedBirthPlace = nil

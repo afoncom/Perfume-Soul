@@ -194,6 +194,7 @@
 "calculation.birthPlacePlaceholder" = "Enter city or town";
 "calculation.birthPlaceSelectionError" = "Unable to select this place. Check your connection and try again.";
 "calculation.birthPlaceTitle" = "Birth Place";
+"calculation.birthPlaceUnresolvedError" = "We couldn't pin down this place. Try the nearest city.";
 "calculation.birthTimeTitle" = "Birth Time";
 "calculation.picker.doneButton" = "Done";
 "calculation.picker.day" = "Day";

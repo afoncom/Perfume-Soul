@@ -27,7 +27,9 @@ struct SettingsScreen: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 28) {
                 makeNotificationsSection()
-                makePrivacySection()
+                if presenter.isPrivacyPolicyAvailable {
+                    makePrivacySection()
+                }
                 makeSupportSection()
                 makeAboutSection()
             }
