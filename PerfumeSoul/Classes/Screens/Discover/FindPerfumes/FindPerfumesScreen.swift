@@ -151,7 +151,7 @@ extension FindPerfumesScreen {
                 HStack(spacing: 8) {
                     Text(fieldNumber(field))
                         .font(.footnote.weight(.semibold))
-                        .foregroundStyle(Color(.textOnAccent))
+                        .foregroundStyle(Color(.textPrimary))
                         .minimumScaleFactor(0.8)
                         .frame(width: badgeSize, height: badgeSize)
                         .background(Color(.pinkButton))

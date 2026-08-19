@@ -179,7 +179,11 @@ final class BirthPlaceSearchService: NSObject {
             return
         }
 
-        if results.isEmpty, !isSearching, !currentSearchPass.isQueryFallback {
+        if results.isEmpty, isSearching {
+            return
+        }
+
+        if results.isEmpty, !currentSearchPass.isQueryFallback {
             startSearchPass(queryFragment: searchQuery, isQueryFallback: true)
             return
         }
@@ -201,6 +205,7 @@ final class BirthPlaceSearchService: NSObject {
 
     private func failSearch(from completer: MKLocalSearchCompleter) {
         guard
+            searchContinuation != nil,
             matchesActiveSearchPass(for: completer),
             let currentSearchPass = activeSearchPass
         else {

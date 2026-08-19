@@ -409,7 +409,7 @@ extension QuizOfTheDayScreen {
         } label: {
             Text(L10n.QuizOfTheDay.closeExplanationButton)
                 .font(.headline.weight(.semibold))
-                .foregroundStyle(Color(.textOnAccent))
+                .foregroundStyle(Color(.textPrimary))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 15)
                 .background(Color(.pinkButton))
