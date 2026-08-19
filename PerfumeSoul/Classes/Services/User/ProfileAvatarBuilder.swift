@@ -24,7 +24,7 @@ struct ProfileAvatar: Equatable {
 // users' avatars. Treat palette edits as a visible product change and update the
 // golden avatar tests deliberately when that reshuffle is intended.
 // The zodiac* cases share assets with the horoscope feature; re-check initials contrast when those asset values change.
-enum ProfileAvatarColor: CaseIterable, Equatable {
+enum ProfileAvatarColor: CaseIterable, Hashable {
     case zodiacBlue
     case zodiacPurple
     case zodiacBrown
