@@ -68,6 +68,16 @@ final class BirthPlaceNameFormatterTests: XCTestCase {
         )
     }
 
+    func testFormatDropsRepeatedCityStateComponents() {
+        XCTAssertEqual(
+            BirthPlaceNameFormatter.format(
+                title: "Москва",
+                subtitle: "Москва, Москва, Россия"
+            ),
+            "Москва, Россия"
+        )
+    }
+
     func testPlaceMatchesComponentInsideMultiComponentValue() {
         XCTAssertTrue(BirthPlaceNameFormatter.place("Москва", matchesComponentIn: "Москва, Россия"))
         XCTAssertFalse(BirthPlaceNameFormatter.place("Тверь", matchesComponentIn: "Москва, Россия"))

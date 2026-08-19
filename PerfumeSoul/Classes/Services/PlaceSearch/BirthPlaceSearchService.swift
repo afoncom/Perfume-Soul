@@ -29,6 +29,30 @@ enum BirthPlaceSearchError: Error {
     case missingTimeZone
 }
 
+enum BirthPlaceSearchOutcome: Equatable {
+    case wait
+    case escalate
+    case resume
+}
+
+enum BirthPlaceSearchPassResolver {
+    static func outcome(
+        isEmpty: Bool,
+        isSearching: Bool,
+        isQueryFallback: Bool
+    ) -> BirthPlaceSearchOutcome {
+        if isSearching {
+            return .wait
+        }
+
+        if isEmpty, !isQueryFallback {
+            return .escalate
+        }
+
+        return .resume
+    }
+}
+
 @MainActor
 final class BirthPlaceSearchService: NSObject {
     private let addressCompleter = MKLocalSearchCompleter()
@@ -179,28 +203,31 @@ final class BirthPlaceSearchService: NSObject {
             return
         }
 
-        if results.isEmpty, isSearching {
+        switch BirthPlaceSearchPassResolver.outcome(
+            isEmpty: results.isEmpty,
+            isSearching: isSearching,
+            isQueryFallback: currentSearchPass.isQueryFallback
+        ) {
+        case .wait:
             return
-        }
-
-        if results.isEmpty, !currentSearchPass.isQueryFallback {
+        case .escalate:
             startSearchPass(queryFragment: searchQuery, isQueryFallback: true)
             return
-        }
-
-        searchContinuation?.resume(
-            returning: results.map {
-                BirthPlaceSuggestion(
-                    displayName: makeSuggestionDisplayName(
-                        for: $0,
+        case .resume:
+            searchContinuation?.resume(
+                returning: results.map {
+                    BirthPlaceSuggestion(
+                        displayName: makeSuggestionDisplayName(
+                            for: $0,
+                            isQueryFallback: currentSearchPass.isQueryFallback
+                        ),
+                        completion: $0,
                         isQueryFallback: currentSearchPass.isQueryFallback
-                    ),
-                    completion: $0,
-                    isQueryFallback: currentSearchPass.isQueryFallback
-                )
-            }
-        )
-        searchContinuation = nil
+                    )
+                }
+            )
+            searchContinuation = nil
+        }
     }
 
     private func failSearch(from completer: MKLocalSearchCompleter) {

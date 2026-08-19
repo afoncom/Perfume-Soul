@@ -8,14 +8,21 @@ import Foundation
 enum BirthPlaceNameFormatter {
     static func format(title: String?, subtitle: String?) -> String {
         let primary = trimmed(title) ?? ""
-        var components = subtitle?
+        let components = (subtitle?
             .split(separator: ",")
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-            .filter { !$0.isEmpty } ?? []
+            .filter { !$0.isEmpty } ?? [])
+            .reduce(into: [String]()) { result, component in
+                guard !place(component, matchesComponentIn: primary) else {
+                    return
+                }
 
-        if let first = components.first, place(primary, matchesComponentIn: first) {
-            components.removeFirst()
-        }
+                guard !result.contains(where: { place(component, matchesComponentIn: $0) }) else {
+                    return
+                }
+
+                result.append(component)
+            }
 
         guard !primary.isEmpty else {
             return components.joined(separator: ", ")
