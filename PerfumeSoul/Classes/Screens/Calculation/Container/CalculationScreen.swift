@@ -36,6 +36,13 @@ struct CalculationScreen: View {
         .background(Color(.backgroundPrimary))
         .modifier(TopSafeAreaBackground(isEnabled: true))
         .scrollDismissesKeyboard(.interactively)
+        .onChange(of: focusedField) { _, newValue in
+            guard newValue != .birthPlace else {
+                return
+            }
+
+            presenter.clearBirthPlaceSearch()
+        }
         .sheet(item: $activePicker) { picker in
             switch picker {
             case .birthDate:
@@ -197,7 +204,7 @@ extension CalculationScreen {
             
             if focusedField == .birthPlace, !viewModel.birthPlaceSuggestions.isEmpty {
                 VStack(spacing: 0) {
-                    ForEach(Array(viewModel.birthPlaceSuggestions.prefix(5).enumerated()), id: \.offset) { index, suggestion in
+                    ForEach(Array(viewModel.birthPlaceSuggestions.prefix(5).enumerated()), id: \.element.id) { index, suggestion in
                         Button {
                             focusedField = nil
                             Task {

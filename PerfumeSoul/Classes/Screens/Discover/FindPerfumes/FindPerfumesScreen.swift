@@ -212,11 +212,7 @@ extension FindPerfumesScreen {
     }
 
     private func accessibilityLabel(title: String, field: FindPerfumeField) -> String {
-        guard field != .first else {
-            return "\(fieldNumber(field)). \(title)"
-        }
-
-        return "\(fieldNumber(field)). \(title), \(L10n.Discover.FindSimilar.optionalSubtitle)"
+        "\(fieldNumber(field)). \(title)"
     }
 
     @ViewBuilder

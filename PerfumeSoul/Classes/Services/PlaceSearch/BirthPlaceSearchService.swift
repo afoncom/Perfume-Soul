@@ -8,6 +8,9 @@
 
 import CoreLocation
 import MapKit
+import os
+
+private let birthPlaceSearchLogger = Logger(subsystem: "PerfumeSoul", category: "BirthPlaceSearch")
 
 struct BirthPlaceSelection: Equatable {
     let displayName: String
@@ -59,8 +62,11 @@ final class BirthPlaceSearchService: NSObject {
     private let fallbackCompleter = MKLocalSearchCompleter()
     private let geocoder = CLGeocoder()
     private var searchContinuation: CheckedContinuation<[BirthPlaceSuggestion], Never>?
+    private var searchTimeoutTask: Task<Void, Never>?
     private var searchQuery = ""
     private var activeSearchPass: SearchPass?
+    private var latestSearchResults: [MKLocalSearchCompletion] = []
+    private var latestSearchPass: SearchPass?
 
     override init() {
         super.init()
@@ -79,23 +85,31 @@ final class BirthPlaceSearchService: NSObject {
         }
         
         return await withCheckedContinuation { continuation in
+            searchTimeoutTask?.cancel()
             searchContinuation?.resume(returning: [])
             searchContinuation = continuation
             searchQuery = trimmedQuery
+            latestSearchResults = []
+            latestSearchPass = nil
             startSearchPass(
                 queryFragment: trimmedQuery,
                 isQueryFallback: false
             )
+            startSearchTimeout()
         }
     }
     
     func clear() {
         addressCompleter.queryFragment = ""
         fallbackCompleter.queryFragment = ""
+        searchTimeoutTask?.cancel()
+        searchTimeoutTask = nil
         searchContinuation?.resume(returning: [])
         searchContinuation = nil
         searchQuery = ""
         activeSearchPass = nil
+        latestSearchResults = []
+        latestSearchPass = nil
     }
 
     func resolve(_ suggestion: BirthPlaceSuggestion) async throws -> BirthPlaceSelection {
@@ -180,11 +194,24 @@ final class BirthPlaceSearchService: NSObject {
             queryFragment: queryFragment,
             isQueryFallback: isQueryFallback
         )
+        latestSearchResults = []
+        latestSearchPass = activeSearchPass
 
         if isQueryFallback {
             fallbackCompleter.queryFragment = queryFragment
         } else {
             addressCompleter.queryFragment = queryFragment
+        }
+    }
+
+    private func startSearchTimeout() {
+        searchTimeoutTask = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(3))
+            guard !Task.isCancelled else {
+                return
+            }
+
+            self?.resumeWithLatestResults()
         }
     }
 
@@ -202,6 +229,8 @@ final class BirthPlaceSearchService: NSObject {
         else {
             return
         }
+        latestSearchResults = results
+        latestSearchPass = currentSearchPass
 
         switch BirthPlaceSearchPassResolver.outcome(
             isEmpty: results.isEmpty,
@@ -214,20 +243,43 @@ final class BirthPlaceSearchService: NSObject {
             startSearchPass(queryFragment: searchQuery, isQueryFallback: true)
             return
         case .resume:
-            searchContinuation?.resume(
-                returning: results.map {
-                    BirthPlaceSuggestion(
-                        displayName: makeSuggestionDisplayName(
-                            for: $0,
-                            isQueryFallback: currentSearchPass.isQueryFallback
-                        ),
-                        completion: $0,
-                        isQueryFallback: currentSearchPass.isQueryFallback
-                    )
-                }
-            )
-            searchContinuation = nil
+            resumeSearch(with: results, isQueryFallback: currentSearchPass.isQueryFallback)
         }
+    }
+
+    private func resumeWithLatestResults() {
+        guard searchContinuation != nil else {
+            return
+        }
+
+        resumeSearch(
+            with: latestSearchResults,
+            isQueryFallback: latestSearchPass?.isQueryFallback ?? false
+        )
+    }
+
+    private func resumeSearch(
+        with results: [MKLocalSearchCompletion],
+        isQueryFallback: Bool
+    ) {
+        searchTimeoutTask?.cancel()
+        searchTimeoutTask = nil
+        searchContinuation?.resume(
+            returning: results.map {
+                BirthPlaceSuggestion(
+                    displayName: makeSuggestionDisplayName(
+                        for: $0,
+                        isQueryFallback: isQueryFallback
+                    ),
+                    completion: $0,
+                    isQueryFallback: isQueryFallback
+                )
+            }
+        )
+        searchContinuation = nil
+        activeSearchPass = nil
+        latestSearchResults = []
+        latestSearchPass = nil
     }
 
     private func failSearch(from completer: MKLocalSearchCompleter) {
@@ -244,8 +296,7 @@ final class BirthPlaceSearchService: NSObject {
             return
         }
 
-        searchContinuation?.resume(returning: [])
-        searchContinuation = nil
+        resumeSearch(with: [], isQueryFallback: currentSearchPass.isQueryFallback)
     }
 
     private func matchesActiveSearchPass(for completer: MKLocalSearchCompleter) -> Bool {
@@ -270,6 +321,9 @@ extension BirthPlaceSearchService: MKLocalSearchCompleterDelegate {
         let queryFragment = completer.queryFragment
         let results = completer.results
         let isSearching = completer.isSearching
+        birthPlaceSearchLogger.debug(
+            "completerDidUpdateResults query=\(queryFragment, privacy: .public) results=\(results.count) isSearching=\(isSearching)"
+        )
         Task { @MainActor [weak self] in
             self?.finishSearch(
                 with: results,
