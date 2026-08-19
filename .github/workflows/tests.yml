@@ -29,6 +29,20 @@ jobs:
         echo "PerfumeSoul.xcodeproj is missing. Generating from Project.swift..."
         tuist version
         tuist generate --no-open
+    - name: Capture Swift toolchain version
+      shell: bash
+      run: swift --version > backend-swift-version.txt
+    - name: Cache backend SwiftPM build
+      uses: actions/cache@v4
+      with:
+        path: backend/PerfumeSoulBackend/.build
+        key: ${{ runner.os }}-backend-spm-${{ hashFiles('backend-swift-version.txt', 'backend/PerfumeSoulBackend/Package.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-backend-spm-${{ hashFiles('backend-swift-version.txt') }}-
+    - name: Run backend tests
+      shell: bash
+      working-directory: backend/PerfumeSoulBackend
+      run: swift test
     - name: Run tests
       shell: bash
       run: |

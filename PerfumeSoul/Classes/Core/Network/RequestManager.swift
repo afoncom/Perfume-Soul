@@ -48,11 +48,13 @@ extension RequestManagerImpl: RequestManager {
         urlRequest.httpMethod = request.httpMethod.rawValue
         urlRequest.httpBody = request.httpBody
 
+        urlRequest.setValue(SupportedAppLanguage.currentCode, forHTTPHeaderField: "Accept-Language")
+
         request.headers.forEach { key, value in
             urlRequest.setValue(value, forHTTPHeaderField: key)
         }
 
-        if request.httpBody != nil, request.headers["Content-Type"] == nil {
+        if request.httpBody != nil, urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
 

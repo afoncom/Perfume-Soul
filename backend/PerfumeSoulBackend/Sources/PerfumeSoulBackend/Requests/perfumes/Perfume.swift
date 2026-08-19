@@ -24,7 +24,13 @@ struct PerfumeNotesResponse: Codable, Equatable {
     let moodProfile: String?
     let longevityScore: Int?
     let sillageScore: Int?
+    let releaseYear: Int?
+    let perfumer: String?
+    let shortDescription: String?
+    let recommendationReason: String?
+    let fullStory: String?
     let accords: [PerfumeAccordResponse]
+    let notesLanguage: String
     let topNotes: [String]
     let middleNotes: [String]
     let baseNotes: [String]
@@ -46,6 +52,9 @@ enum PerfumeLoader {
         let upperBound = offset + limit + 1
 
         let query = PerfumeModel.query(on: database)
+            .field(\.$id)
+            .field(\.$perfumeName)
+            .field(\.$brand.$id)
             .with(\.$brand)
             .join(parent: \.$brand)
             .sort(BrandModel.self, \.$name)
@@ -76,7 +85,8 @@ enum PerfumeLoader {
 enum PerfumeNotesLoader {
     static func load(
         perfumeID: Int,
-        on database: any Database
+        on database: any Database,
+        language: String? = nil
     ) async throws -> PerfumeNotesResponse? {
         guard let perfume = try await PerfumeModel.query(on: database)
             .with(\.$brand)
@@ -99,6 +109,13 @@ enum PerfumeNotesLoader {
         var topNotes: [String] = []
         var middleNotes: [String] = []
         var baseNotes: [String] = []
+        let isEnglish = Self.prefersEnglish(acceptLanguage: language)
+        let useEnglishNotes = isEnglish && !perfumeNotes.isEmpty && perfumeNotes.allSatisfy {
+            $0.note.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+        }
+        if isEnglish, !useEnglishNotes, !perfumeNotes.isEmpty {
+            database.logger.debug("[perfumes] serving Russian notes for English request perfumeID=\(perfumeID)")
+        }
         let accords = perfumeAccords
             .sorted { lhs, rhs in
                 if lhs.weight == rhs.weight {
@@ -115,13 +132,21 @@ enum PerfumeNotesLoader {
             }
 
         for perfumeNote in perfumeNotes {
+            let noteName: String
+            if useEnglishNotes,
+                let englishName = perfumeNote.note.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines) {
+                noteName = englishName
+            } else {
+                noteName = perfumeNote.note.name
+            }
+
             switch perfumeNote.noteType {
             case .top:
-                topNotes.append(perfumeNote.note.name)
+                topNotes.append(noteName)
             case .middle:
-                middleNotes.append(perfumeNote.note.name)
+                middleNotes.append(noteName)
             case .base:
-                baseNotes.append(perfumeNote.note.name)
+                baseNotes.append(noteName)
             }
         }
 
@@ -142,16 +167,37 @@ enum PerfumeNotesLoader {
             moodProfile: perfume.moodProfile,
             longevityScore: perfume.longevityScore,
             sillageScore: perfume.sillageScore,
+            releaseYear: perfume.releaseYear,
+            perfumer: perfume.perfumer,
+            shortDescription: isEnglish
+                ? perfume.shortDescriptionEnglish
+                : perfume.shortDescription,
+            recommendationReason: isEnglish
+                ? perfume.recommendationReasonEnglish
+                : perfume.recommendationReason,
+            fullStory: isEnglish
+                ? perfume.fullStoryEnglish
+                : perfume.fullStory,
             accords: accords,
+            notesLanguage: useEnglishNotes ? "en" : "ru",
             topNotes: topNotes,
             middleNotes: middleNotes,
             baseNotes: baseNotes
         )
     }
+
+    static func prefersEnglish(acceptLanguage: String?) -> Bool {
+        acceptLanguage?
+            .lowercased()
+            .split(separator: ",")
+            .first?
+            .trimmingCharacters(in: .whitespaces)
+            .hasPrefix("en") == true
+    }
 }
 
-private extension Perfume {
-    init?(model: PerfumeModel) {
+extension Perfume {
+    fileprivate init?(model: PerfumeModel) {
         guard let id = model.id else {
             return nil
         }
@@ -173,8 +219,8 @@ private extension Perfume {
     }
 }
 
-private extension String {
-    var escapedForLikePattern: String {
+extension String {
+    fileprivate var escapedForLikePattern: String {
         replacingOccurrences(of: "\\", with: "\\\\")
             .replacingOccurrences(of: "%", with: "\\%")
             .replacingOccurrences(of: "_", with: "\\_")
