@@ -13,8 +13,6 @@ struct PersonalPerfumeResponse: Decodable {
     let perfumeName: String
     let brandName: String
     let marketSegment: PersonalPerfumeMarketSegment
-    let matchingNoteKeys: [String]
-    let matchingAccordKeys: [String]
     let matchPercentage: Int
     let longevityScore: Int?
     let sillageScore: Int?

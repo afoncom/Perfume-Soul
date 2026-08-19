@@ -68,6 +68,15 @@ extension CalculationScreen {
 }
 
 extension CalculationScreen {
+    func makeTopSafeAreaMask() -> some View {
+        GeometryReader { proxy in
+            Color(.backgroundPrimary)
+                .frame(height: proxy.safeAreaInsets.top)
+                .ignoresSafeArea(edges: .top)
+        }
+        .allowsHitTesting(false)
+    }
+
     func makeHeaderView() -> some View {
         VStack(spacing: 12) {
             Text(L10n.Screen.calculationCreateProfile)
@@ -315,11 +324,9 @@ private struct BirthDatePickerSheet: View {
             }
 
             HStack(spacing: 0) {
-                makeWheelPicker(selection: $day, values: 1...daysInSelectedMonth)
-                makeWheelPicker(selection: $month, values: 1...12) { value in
-                    Self.monthFormatter.monthSymbols[value - 1]
+                ForEach(Self.dateComponentOrder, id: \.self) { component in
+                    makeDateComponentPicker(component)
                 }
-                makeWheelPicker(selection: $year, values: years)
             }
             .frame(height: 190)
             .onChange(of: month) { _, _ in
@@ -357,6 +364,49 @@ private struct BirthDatePickerSheet: View {
         dismiss()
     }
 
+    @ViewBuilder
+    private func makeDateComponentPicker(_ component: DateComponent) -> some View {
+        switch component {
+        case .day:
+            makeWheelPicker(
+                selection: $day,
+                values: 1...daysInSelectedMonth,
+                accessibilityLabel: localized("calculation.picker.day")
+            )
+        case .month:
+            makeWheelPicker(
+                selection: $month,
+                values: 1...12,
+                accessibilityLabel: localized("calculation.picker.month")
+            ) { value in
+                Self.monthFormatter.standaloneMonthSymbols[value - 1]
+            }
+        case .year:
+            makeWheelPicker(
+                selection: $year,
+                values: years,
+                accessibilityLabel: localized("calculation.picker.year")
+            )
+        }
+    }
+
+    private enum DateComponent: Character {
+        case day = "d"
+        case month = "M"
+        case year = "y"
+    }
+
+    private static let dateComponentOrder: [DateComponent] = {
+        let format = DateFormatter.dateFormat(fromTemplate: "yMMMd", options: 0, locale: .current) ?? "dMy"
+        let order = format.compactMap { DateComponent(rawValue: $0) }.reduce(into: [DateComponent]()) { result, component in
+            if !result.contains(component) {
+                result.append(component)
+            }
+        }
+
+        return order.isEmpty ? [.day, .month, .year] : order
+    }()
+
     private static let calendar = Calendar(identifier: .gregorian)
     private static let currentYear = calendar.component(.year, from: Date())
     private static let monthFormatter: DateFormatter = {
@@ -372,13 +422,16 @@ private struct BirthTimePickerSheet: View {
     @Environment(\.dismiss) private var dismiss
     @State private var hour: Int
     @State private var minute: Int
+    @State private var period: Int
 
     init(time: Binding<Date>) {
         _time = time
 
         let components = Self.calendar.dateComponents([.hour, .minute], from: time.wrappedValue)
-        _hour = State(initialValue: components.hour ?? 12)
+        let hour = components.hour ?? 12
+        _hour = State(initialValue: Self.usesTwelveHourClock ? Self.twelveHourValue(from: hour) : hour)
         _minute = State(initialValue: components.minute ?? 0)
+        _period = State(initialValue: hour >= 12 ? 1 : 0)
     }
 
     var body: some View {
@@ -388,8 +441,27 @@ private struct BirthTimePickerSheet: View {
             }
 
             HStack(spacing: 0) {
-                makeWheelPicker(selection: $hour, values: 0...23)
-                makeWheelPicker(selection: $minute, values: 0...59)
+                if Self.usesTwelveHourClock {
+                    makeWheelPicker(
+                        selection: $hour,
+                        values: 1...12,
+                        accessibilityLabel: localized("calculation.picker.hour")
+                    )
+                } else {
+                    makeWheelPicker(
+                        selection: $hour,
+                        values: 0...23,
+                        accessibilityLabel: localized("calculation.picker.hour")
+                    )
+                }
+                makeWheelPicker(
+                    selection: $minute,
+                    values: 0...59,
+                    accessibilityLabel: localized("calculation.picker.minute")
+                )
+                if Self.usesTwelveHourClock {
+                    makePeriodPicker()
+                }
             }
             .frame(height: 170)
         }
@@ -400,7 +472,7 @@ private struct BirthTimePickerSheet: View {
 
     private func applySelection() {
         let selectedTime = Self.calendar.date(
-            bySettingHour: hour,
+            bySettingHour: Self.usesTwelveHourClock ? twentyFourHourValue : hour,
             minute: minute,
             second: 0,
             of: time
@@ -413,7 +485,45 @@ private struct BirthTimePickerSheet: View {
         dismiss()
     }
 
+    private var twentyFourHourValue: Int {
+        if period == 0 {
+            return hour == 12 ? 0 : hour
+        }
+
+        return hour == 12 ? 12 : hour + 12
+    }
+
+    private func makePeriodPicker() -> some View {
+        Picker("", selection: $period) {
+            ForEach(0...1, id: \.self) { value in
+                Text(value == 0 ? Self.periodFormatter.amSymbol : Self.periodFormatter.pmSymbol)
+                    .font(.title2)
+                    .tag(value)
+            }
+        }
+        .pickerStyle(.wheel)
+        .labelsHidden()
+        .accessibilityLabel(localized("calculation.picker.period"))
+        .frame(maxWidth: .infinity)
+        .clipped()
+    }
+
+    private static func twelveHourValue(from hour: Int) -> Int {
+        let value = hour % 12
+        return value == 0 ? 12 : value
+    }
+
+    private static let usesTwelveHourClock: Bool = {
+        let format = DateFormatter.dateFormat(fromTemplate: "j", options: 0, locale: .current) ?? ""
+        return format.contains("a")
+    }()
+
     private static let calendar = Calendar(identifier: .gregorian)
+    private static let periodFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = .current
+        return formatter
+    }()
 }
 
 private func makeSheetHeader(
@@ -437,6 +547,7 @@ private func makeSheetHeader(
 private func makeWheelPicker<Values: RandomAccessCollection>(
     selection: Binding<Int>,
     values: Values,
+    accessibilityLabel: String,
     title: ((Int) -> String)? = nil
 ) -> some View where Values.Element == Int {
     Picker("", selection: selection) {
@@ -448,6 +559,7 @@ private func makeWheelPicker<Values: RandomAccessCollection>(
     }
     .pickerStyle(.wheel)
     .labelsHidden()
+    .accessibilityLabel(accessibilityLabel)
     .frame(maxWidth: .infinity)
     .clipped()
 }

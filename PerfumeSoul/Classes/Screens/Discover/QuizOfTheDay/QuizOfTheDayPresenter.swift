@@ -13,6 +13,8 @@ protocol QuizOfTheDayPresenter {
     func goToNextQuestion()
     // StoreKit review requests must run on the main actor.
     @MainActor
+    func quizCompletedCardAppeared()
+    @MainActor
     func finishQuiz()
 }
 
@@ -23,6 +25,7 @@ final class QuizOfTheDayPresenterImpl {
     private let dailyQuizStateStorage: DailyQuizStateStorage
     private let quizProgressService: QuizProgressService
     private let dayKeyProvider: QuizDayKeyProvider
+    private var didCompleteQuizInSession = false
     
     init(
         viewModel: QuizOfTheDayViewModel,
@@ -98,7 +101,17 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
         let updatedQuizProgress = quizProgressService.completeQuiz(for: quizDayKey)
         viewModel.updateQuizProgress(updatedQuizProgress)
         saveCurrentState()
-        router.requestAppReview(for: quizDayKey)
+        router.registerQuizCompletion(for: quizDayKey)
+        didCompleteQuizInSession = true
+    }
+
+    @MainActor
+    func quizCompletedCardAppeared() {
+        guard didCompleteQuizInSession else {
+            return
+        }
+
+        router.requestAppReviewIfEligible()
     }
 
     private func resolveSession(from questions: [QuizOfTheDayQuestion]) -> (questions: [QuizOfTheDayQuestion], state: DailyQuizState) {

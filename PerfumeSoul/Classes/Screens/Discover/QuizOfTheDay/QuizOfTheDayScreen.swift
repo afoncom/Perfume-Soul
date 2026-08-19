@@ -30,6 +30,9 @@ struct QuizOfTheDayScreen: View {
                     makeErrorCard(message: errorMessage)
                 } else if viewModel.isQuizCompleted {
                     makeQuizCompletedCard()
+                        .onAppear {
+                            presenter.quizCompletedCardAppeared()
+                        }
                 } else if let currentQuestion = viewModel.currentQuestion {
                     makeQuestionCard(question: currentQuestion)
                     if viewModel.isAnswerSubmitted {

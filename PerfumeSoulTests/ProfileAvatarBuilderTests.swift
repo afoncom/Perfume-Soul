@@ -47,6 +47,8 @@ final class ProfileAvatarBuilderTests: XCTestCase {
         for (name, colors) in expected {
             XCTAssertEqual(builder.makeAvatar(name: name).gradientColors, colors, name)
         }
+
+        XCTAssertEqual(Set(expected.values).count, expected.count, "Placeholder profile gradients should be distinct")
     }
 
     func testMakeAvatarKeysGradientByFullNameInsteadOfInitials() {

@@ -18,9 +18,21 @@ final class QuizOfTheDayRouterTests: XCTestCase {
             appReviewRequester: requester
         )
 
-        router.requestAppReview(for: "2026-08-16")
+        router.registerQuizCompletion(for: "2026-08-16")
 
         XCTAssertEqual(requester.registeredQuizDayKeys, ["2026-08-16"])
+    }
+
+    @MainActor
+    func testMissingWindowSceneDoesNotRequestReview() {
+        let requester = AppReviewRequesterMock()
+        let router = QuizOfTheDayRouterImpl(
+            navigationController: nil,
+            appReviewRequester: requester
+        )
+
+        router.requestAppReviewIfEligible()
+
         XCTAssertFalse(requester.didRequestReview)
     }
 }
