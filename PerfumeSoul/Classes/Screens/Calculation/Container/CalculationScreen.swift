@@ -34,9 +34,7 @@ struct CalculationScreen: View {
             .padding(.bottom, 24)
         }
         .background(Color(.backgroundPrimary))
-        .overlay(alignment: .top) {
-            makeTopSafeAreaMask()
-        }
+        .modifier(TopSafeAreaBackground(isEnabled: true))
         .scrollDismissesKeyboard(.interactively)
         .sheet(item: $activePicker) { picker in
             switch picker {
@@ -198,35 +196,34 @@ extension CalculationScreen {
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
                     .stroke(Color(.inputBorder), lineWidth: 1)
             )
+
+            if let birthPlaceErrorMessage = viewModel.birthPlaceErrorMessage {
+                Text(birthPlaceErrorMessage)
+                    .font(.footnote)
+                    .foregroundStyle(Color(.pinkButton))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
             
-            if focusedField == .birthPlace, !viewModel.birthPlaceCompletions.isEmpty {
+            if focusedField == .birthPlace, !viewModel.birthPlaceSuggestions.isEmpty {
                 VStack(spacing: 0) {
-                    ForEach(Array(viewModel.birthPlaceCompletions.prefix(5).enumerated()), id: \.offset) { index, completion in
+                    ForEach(Array(viewModel.birthPlaceSuggestions.prefix(5).enumerated()), id: \.offset) { index, suggestion in
                         Button {
                             focusedField = nil
                             Task {
-                                await presenter.birthPlaceCompletionTapped(completion)
+                                await presenter.birthPlaceSuggestionTapped(suggestion)
                             }
                         } label: {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(completion.title)
-                                    .font(.headline)
-                                    .foregroundStyle(Color(.textPrimary))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                
-                                if !completion.subtitle.isEmpty {
-                                    Text(completion.subtitle)
-                                        .font(.footnote)
-                                        .foregroundStyle(Color(.textSecondary))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                }
-                            }
+                            Text(suggestion.displayName)
+                            .font(.headline)
+                            .foregroundStyle(Color(.textPrimary))
+                            .lineLimit(2)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 16)
                             .padding(.vertical, 12)
                         }
                         .buttonStyle(.plain)
                         
-                        if index < min(viewModel.birthPlaceCompletions.count, 5) - 1 {
+                        if index < min(viewModel.birthPlaceSuggestions.count, 5) - 1 {
                             Divider()
                                 .padding(.leading, 16)
                         }
@@ -241,7 +238,7 @@ extension CalculationScreen {
             }
         }
     }
-    
+
     // MARK: - Continue Button
     func makeContinueButton() -> some View {
         Button {

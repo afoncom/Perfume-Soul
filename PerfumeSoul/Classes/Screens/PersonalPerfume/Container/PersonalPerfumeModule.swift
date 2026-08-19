@@ -22,12 +22,13 @@ final class PersonalPerfumeModule {
             router: router,
             service: service,
             profileCalculation: profileCalculation,
-            shouldShowContinueButton: onFinish != nil
+            isPresentedInOnboarding: onFinish != nil
         )
         
         let view = PersonalPerfumeScreen(viewModel: viewModel, presenter: presenter)
         let hostingController = UIHostingController(rootView: view)
-        hostingController.navigationItem.largeTitleDisplayMode = .never
+        hostingController.title = L10n.PersonalPerfume.navigationTitle
+        hostingController.navigationItem.largeTitleDisplayMode = .always
         hostingController.hidesBottomBarWhenPushed = true
 
         return hostingController

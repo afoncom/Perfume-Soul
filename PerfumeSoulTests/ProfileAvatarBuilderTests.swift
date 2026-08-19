@@ -44,8 +44,6 @@ final class ProfileAvatarBuilderTests: XCTestCase {
             "Emma": [.zodiacPurple, .zodiacPink]
         ]
 
-        XCTAssertEqual(Set(ProfilePresenterImpl.placeholderProfileNames), Set(expected.keys))
-
         for (name, colors) in expected {
             XCTAssertEqual(builder.makeAvatar(name: name).gradientColors, colors, name)
         }

@@ -108,44 +108,6 @@ extension SettingsScreen {
         }
     }
 
-    private func makePrivacySection() -> some View {
-        VStack(alignment: .leading, spacing: 14) {
-            makeSectionTitle(L10n.Settings.privacyTitle)
-
-            VStack(spacing: 0) {
-                makeActionRow(
-                    icon: "shield",
-                    iconColor: Color(.zodiacPurple),
-                    title: L10n.Settings.Privacy.howDataIsUsedTitle,
-                    subtitle: L10n.Settings.Privacy.howDataIsUsedSubtitle
-                )
-
-                makeDivider()
-
-                makeActionRow(
-                    icon: "trash",
-                    iconColor: Color(.pinkButton),
-                    title: L10n.Settings.Privacy.clearLocalDataTitle,
-                    subtitle: L10n.Settings.Privacy.clearLocalDataSubtitle
-                )
-
-                makeDivider()
-
-                makeActionRow(
-                    icon: "person",
-                    iconColor: Color(.zodiacOrange),
-                    title: L10n.Settings.Privacy.deleteAllProfilesTitle,
-                    subtitle: L10n.Settings.Privacy.deleteAllProfilesSubtitle
-                )
-            }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
-            .background(Color(.surfacePrimary))
-            .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
-            .shadow(color: Color(.cardShadowSubtle), radius: 9, x: 0, y: 4)
-        }
-    }
-
     private func makeSupportSection() -> some View {
         VStack(alignment: .leading, spacing: 14) {
             makeSectionTitle(L10n.Settings.supportTitle)
@@ -158,6 +120,31 @@ extension SettingsScreen {
                     subtitle: L10n.Settings.Support.supportDeveloperSubtitle
                 )
                 // TODO(#100): Restore Rate App when App Store ID is available and open the write-review URL.
+            }
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .background(Color(.surfacePrimary))
+            .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+            .shadow(color: Color(.cardShadowSubtle), radius: 9, x: 0, y: 4)
+        }
+    }
+
+    private func makePrivacySection() -> some View {
+        VStack(alignment: .leading, spacing: 14) {
+            makeSectionTitle(L10n.Settings.privacyTitle)
+
+            VStack(spacing: 0) {
+                Button {
+                    presenter.privacyPolicyTapped()
+                } label: {
+                    makeActionRow(
+                        icon: "shield",
+                        iconColor: Color(.zodiacPurple),
+                        title: L10n.Settings.Privacy.privacyPolicyTitle,
+                        subtitle: L10n.Settings.Privacy.privacyPolicySubtitle
+                    )
+                }
+                .buttonStyle(.plain)
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)

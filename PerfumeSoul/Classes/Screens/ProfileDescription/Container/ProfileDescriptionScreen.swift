@@ -21,17 +21,13 @@ struct ProfileDescriptionScreen: View {
     }
     
     var body: some View {
-        let bottomPadding = presenter.shouldShowContinueButton ? 140.0 : 32.0
-
         ZStack {
-            makeContentView(bottomPadding: bottomPadding)
+            makeContentView()
         }
         .background(Color(.backgroundPrimary).ignoresSafeArea())
-        .overlay(alignment: .top) {
-            makeTopSafeAreaMask()
-        }
+        .modifier(TopSafeAreaBackground(isEnabled: presenter.isPresentedInOnboarding))
         .safeAreaInset(edge: .bottom) {
-            if presenter.shouldShowContinueButton {
+            if presenter.isPresentedInOnboarding {
                 makeContinueButton()
                     .padding(.horizontal, 24)
                     .padding(.top, 12)
@@ -55,7 +51,7 @@ extension ProfileDescriptionScreen {
     }
 
     @ViewBuilder
-    private func makeContentView(bottomPadding: Double) -> some View {
+    private func makeContentView() -> some View {
         switch viewModel.state {
         case .idle, .loading:
             makeLoadingState()
@@ -67,14 +63,14 @@ extension ProfileDescriptionScreen {
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 28)
-                .padding(.bottom, bottomPadding)
+                .padding(.bottom, 32)
             }
         case .missingBirthPlaceData:
             makeUnavailableState(
                 title: L10n.ProfileDescription.unavailableTitle,
                 message: L10n.ProfileDescription.unavailableMessage,
                 canRetry: false,
-                canSkip: presenter.shouldShowContinueButton
+                canSkip: presenter.isPresentedInOnboarding
             )
             .padding(.horizontal, 24)
         case .invalidBirthData:
@@ -82,7 +78,7 @@ extension ProfileDescriptionScreen {
                 title: L10n.ProfileDescription.invalidBirthDataTitle,
                 message: L10n.ProfileDescription.invalidBirthDataMessage,
                 canRetry: false,
-                canSkip: presenter.shouldShowContinueButton
+                canSkip: presenter.isPresentedInOnboarding
             )
             .padding(.horizontal, 24)
         case .failed:
@@ -90,7 +86,7 @@ extension ProfileDescriptionScreen {
                 title: L10n.ProfileDescription.failedTitle,
                 message: L10n.ProfileDescription.failedMessage,
                 canRetry: true,
-                canSkip: presenter.shouldShowContinueButton
+                canSkip: presenter.isPresentedInOnboarding
             )
             .padding(.horizontal, 24)
         }

@@ -6,12 +6,10 @@
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
-import MapKit
-
 protocol CalculationPresenter {
     func continueButtonTapped() async
     func birthPlaceDidChange(_ query: String) async
-    func birthPlaceCompletionTapped(_ completion: MKLocalSearchCompletion) async
+    func birthPlaceSuggestionTapped(_ suggestion: BirthPlaceSuggestion) async
     @MainActor
     func clearBirthPlaceSearch()
 }
@@ -62,31 +60,39 @@ extension CalculationPresenterImpl: CalculationPresenter {
             if viewModel.selectedBirthPlace?.displayName != query {
                 viewModel.selectedBirthPlace = nil
             }
+            viewModel.birthPlaceErrorMessage = nil
         }
 
-        let completions = await birthPlaceSearch.search(query)
+        let suggestions = await birthPlaceSearch.search(query)
         await MainActor.run {
-            viewModel.birthPlaceCompletions = completions
+            viewModel.birthPlaceSuggestions = suggestions
         }
     }
 
-    func birthPlaceCompletionTapped(_ completion: MKLocalSearchCompletion) async {
-        guard let selection = await birthPlaceSearch.resolve(completion) else {
-            return
-        }
+    func birthPlaceSuggestionTapped(_ suggestion: BirthPlaceSuggestion) async {
+        do {
+            let selection = try await birthPlaceSearch.resolve(suggestion)
 
-        await MainActor.run {
-            viewModel.birthPlace = selection.displayName
-            viewModel.selectedBirthPlace = selection
-            viewModel.birthPlaceCompletions = []
-        }
+            await MainActor.run {
+                viewModel.birthPlace = selection.displayName
+                viewModel.selectedBirthPlace = selection
+                viewModel.birthPlaceSuggestions = []
+                viewModel.birthPlaceErrorMessage = nil
+            }
 
-        await birthPlaceSearch.clear()
+            await birthPlaceSearch.clear()
+        } catch {
+            await MainActor.run {
+                viewModel.selectedBirthPlace = nil
+                viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceSelectionError
+            }
+        }
     }
     
     @MainActor
     func clearBirthPlaceSearch() {
-        viewModel.birthPlaceCompletions = []
+        viewModel.birthPlaceSuggestions = []
+        viewModel.birthPlaceErrorMessage = nil
         birthPlaceSearch.clear()
     }
 }

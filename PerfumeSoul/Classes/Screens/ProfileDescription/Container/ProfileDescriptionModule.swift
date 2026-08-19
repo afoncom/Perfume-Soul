@@ -32,11 +32,13 @@ final class ProfileDescriptionModule {
             profileService: profileService,
             profileCalculationService: profileCalculationService,
             profileDescriptionBuilder: profileDescriptionBuilder,
-            shouldShowContinueButton: onFinish != nil
+            isPresentedInOnboarding: onFinish != nil
         )
         
         let view = ProfileDescriptionScreen(viewModel: viewModel, presenter: presenter)
         let hostingController = UIHostingController(rootView: view)
+        hostingController.navigationItem.largeTitleDisplayMode = .never
+        hostingController.hidesBottomBarWhenPushed = true
 
         return hostingController
     }

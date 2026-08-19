@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import MapKit
 import Observation
 
 @Observable final class CalculationViewModel {
@@ -16,7 +15,8 @@ import Observation
     var birthTime = CalculationViewModel.defaultBirthTime
     var birthPlace = ""
     var selectedBirthPlace: BirthPlaceSelection?
-    var birthPlaceCompletions: [MKLocalSearchCompletion] = []
+    var birthPlaceSuggestions: [BirthPlaceSuggestion] = []
+    var birthPlaceErrorMessage: String?
 
     var isContinueEnabled: Bool {
         !firstName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
