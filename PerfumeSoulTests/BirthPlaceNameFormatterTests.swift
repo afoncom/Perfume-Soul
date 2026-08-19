@@ -67,4 +67,9 @@ final class BirthPlaceNameFormatterTests: XCTestCase {
             "Illinois, United States"
         )
     }
+
+    func testPlaceMatchesComponentInsideMultiComponentValue() {
+        XCTAssertTrue(BirthPlaceNameFormatter.place("Москва", matchesComponentIn: "Москва, Россия"))
+        XCTAssertFalse(BirthPlaceNameFormatter.place("Тверь", matchesComponentIn: "Москва, Россия"))
+    }
 }

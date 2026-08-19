@@ -13,7 +13,7 @@ enum BirthPlaceNameFormatter {
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { !$0.isEmpty } ?? []
 
-        if let first = components.first, isSamePlaceComponent(primary, first) {
+        if let first = components.first, place(primary, matchesComponentIn: first) {
             components.removeFirst()
         }
 
@@ -33,14 +33,14 @@ enum BirthPlaceNameFormatter {
         return result?.isEmpty == false ? result : nil
     }
 
-    static func isSamePlaceComponent(_ lhs: String, _ rhs: String) -> Bool {
-        let normalizedLHS = normalizePlaceComponent(lhs)
-        let rhsComponents = rhs
+    static func place(_ name: String, matchesComponentIn value: String) -> Bool {
+        let normalizedName = normalizePlaceComponent(name)
+        let valueComponents = value
             .split(separator: ",")
             .map(String.init)
             .map(normalizePlaceComponent)
 
-        return rhsComponents.contains(normalizedLHS)
+        return valueComponents.contains(normalizedName)
     }
 
     private static func normalizePlaceComponent(_ value: String) -> String {

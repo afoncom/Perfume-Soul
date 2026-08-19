@@ -135,7 +135,7 @@ final class BirthPlaceSearchService: NSObject {
         let resolvedName = placemark.locality ?? placemark.administrativeArea
         guard
             let resolvedName,
-            BirthPlaceNameFormatter.isSamePlaceComponent(resolvedName, suggestion.completion.title)
+            BirthPlaceNameFormatter.place(resolvedName, matchesComponentIn: suggestion.completion.title)
         else {
             throw BirthPlaceSearchError.missingDisplayName
         }
@@ -167,7 +167,8 @@ final class BirthPlaceSearchService: NSObject {
     private func finishSearch(
         with results: [MKLocalSearchCompletion],
         from completer: MKLocalSearchCompleter,
-        queryFragment: String
+        queryFragment: String,
+        isSearching: Bool
     ) {
         guard
             searchContinuation != nil,
@@ -178,7 +179,7 @@ final class BirthPlaceSearchService: NSObject {
             return
         }
 
-        if results.isEmpty, !currentSearchPass.isQueryFallback {
+        if results.isEmpty, !isSearching, !currentSearchPass.isQueryFallback {
             startSearchPass(queryFragment: searchQuery, isQueryFallback: true)
             return
         }
@@ -199,7 +200,15 @@ final class BirthPlaceSearchService: NSObject {
     }
 
     private func failSearch(from completer: MKLocalSearchCompleter) {
-        guard matchesActiveSearchPass(for: completer) else {
+        guard
+            matchesActiveSearchPass(for: completer),
+            let currentSearchPass = activeSearchPass
+        else {
+            return
+        }
+
+        if !currentSearchPass.isQueryFallback {
+            startSearchPass(queryFragment: searchQuery, isQueryFallback: true)
             return
         }
 
@@ -228,11 +237,13 @@ extension BirthPlaceSearchService: MKLocalSearchCompleterDelegate {
     nonisolated func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         let queryFragment = completer.queryFragment
         let results = completer.results
+        let isSearching = completer.isSearching
         Task { @MainActor [weak self] in
             self?.finishSearch(
                 with: results,
                 from: completer,
-                queryFragment: queryFragment
+                queryFragment: queryFragment,
+                isSearching: isSearching
             )
         }
     }

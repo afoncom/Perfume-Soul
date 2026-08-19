@@ -191,7 +191,7 @@ extension CalculationScreen {
             if let birthPlaceErrorMessage = viewModel.birthPlaceErrorMessage {
                 Text(birthPlaceErrorMessage)
                     .font(.footnote)
-                    .foregroundStyle(Color(.pinkButton))
+                    .foregroundStyle(Color(.destructiveAccent))
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             
@@ -205,12 +205,12 @@ extension CalculationScreen {
                             }
                         } label: {
                             Text(suggestion.displayName)
-                            .font(.headline)
-                            .foregroundStyle(Color(.textPrimary))
-                            .lineLimit(2)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 12)
+                                .font(.headline)
+                                .foregroundStyle(Color(.textPrimary))
+                                .lineLimit(2)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 12)
                         }
                         .buttonStyle(.plain)
                         
@@ -227,6 +227,13 @@ extension CalculationScreen {
                         .stroke(Color(.inputBorder), lineWidth: 1)
                 )
             }
+        }
+        .onChange(of: viewModel.birthPlaceErrorMessage) { _, birthPlaceErrorMessage in
+            guard let birthPlaceErrorMessage else {
+                return
+            }
+
+            AccessibilityNotification.Announcement(birthPlaceErrorMessage).post()
         }
     }
 
