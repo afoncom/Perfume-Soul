@@ -329,6 +329,7 @@ extension QuizOfTheDayScreen {
                 Image(systemName: isCorrect ? "checkmark" : "xmark")
                     .font(.system(size: 16, weight: .bold))
                     .foregroundStyle(Color(.textPrimary))
+                    .accessibilityHidden(true)
             }
 
             Text(isCorrect ? L10n.QuizOfTheDay.correctResult : L10n.QuizOfTheDay.incorrectResult)
@@ -384,6 +385,7 @@ extension QuizOfTheDayScreen {
                         Image(systemName: isCorrect ? "checkmark" : "xmark")
                             .font(.title3.weight(.bold))
                             .foregroundStyle(Color(.textPrimary))
+                            .accessibilityHidden(true)
                     }
 
                     VStack(alignment: .leading, spacing: 4) {

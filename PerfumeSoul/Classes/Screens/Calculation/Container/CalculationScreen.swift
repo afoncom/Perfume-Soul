@@ -196,10 +196,21 @@ extension CalculationScreen {
             )
 
             if let birthPlaceErrorMessage = viewModel.birthPlaceErrorMessage {
-                Text(birthPlaceErrorMessage)
-                    .font(.footnote)
-                    .foregroundStyle(Color(.destructiveAccent))
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                HStack(alignment: .top, spacing: 8) {
+                    Image(systemName: "exclamationmark.circle.fill")
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(Color(.destructiveAccent))
+                        .accessibilityHidden(true)
+
+                    Text(birthPlaceErrorMessage)
+                        .font(.footnote)
+                        .foregroundStyle(Color(.destructiveAccent))
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color(.destructiveSurface))
+                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             }
             
             if focusedField == .birthPlace, !viewModel.birthPlaceSuggestions.isEmpty {
