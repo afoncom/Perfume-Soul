@@ -49,6 +49,17 @@ struct QuizOfTheDayScreen: View {
             .padding(.top, 12)
             .padding(.bottom, 28)
             .animation(.snappy, value: viewModel.isAnswerSubmitted)
+            .onChange(of: viewModel.isAnswerSubmitted) { _, isSubmitted in
+                guard isSubmitted else {
+                    return
+                }
+
+                AccessibilityNotification.Announcement(
+                    viewModel.isSelectedAnswerCorrect
+                        ? L10n.QuizOfTheDay.correctResult
+                        : L10n.QuizOfTheDay.incorrectResult
+                ).post()
+            }
         }
         .background {
             Color(.backgroundPrimary).ignoresSafeArea()

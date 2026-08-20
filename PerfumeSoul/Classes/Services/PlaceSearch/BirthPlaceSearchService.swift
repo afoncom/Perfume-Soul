@@ -8,9 +8,6 @@
 
 import CoreLocation
 import MapKit
-import os
-
-private let birthPlaceSearchLogger = Logger(subsystem: "PerfumeSoul", category: "BirthPlaceSearch")
 
 struct BirthPlaceSelection: Equatable {
     let displayName: String
@@ -20,7 +17,7 @@ struct BirthPlaceSelection: Equatable {
 }
 
 struct BirthPlaceSuggestion: Identifiable {
-    let id = UUID()
+    var id: String { "\(completion.title)|\(completion.subtitle)" }
     let displayName: String
     let completion: MKLocalSearchCompletion
     let isQueryFallback: Bool
@@ -324,9 +321,6 @@ extension BirthPlaceSearchService: MKLocalSearchCompleterDelegate {
         let queryFragment = completer.queryFragment
         let results = completer.results
         let isSearching = completer.isSearching
-        birthPlaceSearchLogger.debug(
-            "completerDidUpdateResults query=\(queryFragment, privacy: .public) results=\(results.count) isSearching=\(isSearching)"
-        )
         Task { @MainActor [weak self] in
             self?.finishSearch(
                 with: results,
