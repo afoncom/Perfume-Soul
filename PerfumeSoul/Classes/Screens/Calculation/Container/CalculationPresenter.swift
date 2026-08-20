@@ -97,7 +97,6 @@ extension CalculationPresenterImpl: CalculationPresenter {
     @MainActor
     func clearBirthPlaceSearch() {
         viewModel.birthPlaceSuggestions = []
-        viewModel.birthPlaceErrorMessage = nil
         birthPlaceSearch.clear()
     }
 }
