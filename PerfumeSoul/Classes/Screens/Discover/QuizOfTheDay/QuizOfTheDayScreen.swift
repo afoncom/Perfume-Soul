@@ -79,7 +79,7 @@ extension QuizOfTheDayScreen {
             } label: {
                 Text(L10n.QuizOfTheDay.retryButton)
                     .font(.system(size: 17, weight: .semibold, design: .rounded))
-                    .foregroundStyle(Color(.textOnAccent))
+                    .foregroundStyle(Color(.textPrimary))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 14)
                     .background(Color(.pinkButton))
@@ -456,7 +456,7 @@ extension QuizOfTheDayScreen {
                 Button(action: handlePrimaryAction) {
                     Text(primaryButtonTitle)
                         .font(.system(size: 21, weight: .medium, design: .rounded))
-                        .foregroundStyle(Color(.textOnAccent))
+                        .foregroundStyle(Color(.textPrimary))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 18)
                         .background(Color(.pinkButton))

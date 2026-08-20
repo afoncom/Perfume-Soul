@@ -295,6 +295,7 @@ final class BirthPlaceSearchService: NSObject {
 
         if !currentSearchPass.isQueryFallback {
             startSearchPass(queryFragment: searchQuery, isQueryFallback: true)
+            startSearchTimeout()
             return
         }
 

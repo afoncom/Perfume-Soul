@@ -55,7 +55,6 @@ final class ProfilePresenterTests: XCTestCase {
 }
 
 private final class ProfileRouterMock: ProfileRouter {
-    func showAddedNewProfiles() { }
     func showPersonalPerfumes(profileCalculation: ProfileCalculation?) { }
     func showProfileDescription() { }
     func showProfileSetupScreen(profile: Profile) { }
