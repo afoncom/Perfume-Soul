@@ -61,11 +61,14 @@ extension CalculationPresenterImpl: CalculationPresenter {
                 viewModel.selectedBirthPlace = nil
             }
             viewModel.birthPlaceErrorMessage = nil
+            viewModel.birthPlaceSuggestions = []
+            viewModel.isSearchingBirthPlace = true
         }
 
         let suggestions = await birthPlaceSearch.search(query)
         await MainActor.run {
             viewModel.birthPlaceSuggestions = suggestions
+            viewModel.isSearchingBirthPlace = false
         }
     }
 

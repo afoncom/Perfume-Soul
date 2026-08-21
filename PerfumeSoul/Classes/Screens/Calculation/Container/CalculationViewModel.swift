@@ -15,6 +15,7 @@ import Observation
     var birthTime = CalculationViewModel.defaultBirthTime
     var birthPlace = ""
     var selectedBirthPlace: BirthPlaceSelection?
+    var isSearchingBirthPlace = false
     var birthPlaceSuggestions: [BirthPlaceSuggestion] = []
     var birthPlaceErrorMessage: String?
 
