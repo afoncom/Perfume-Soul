@@ -167,11 +167,7 @@ final class BirthPlaceSearchService: NSObject {
         }
 
         let placemark = mapItem.placemark
-        let resolvedName = placemark.locality ?? placemark.administrativeArea
-        guard
-            let resolvedName,
-            BirthPlaceNameFormatter.place(resolvedName, matchesComponentIn: suggestion.completion.title)
-        else {
+        guard let resolvedName = placemark.locality ?? placemark.administrativeArea else {
             throw BirthPlaceSearchError.missingDisplayName
         }
 
