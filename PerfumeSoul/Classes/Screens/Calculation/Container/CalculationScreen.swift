@@ -36,13 +36,6 @@ struct CalculationScreen: View {
         .background(Color(.backgroundPrimary))
         .modifier(TopSafeAreaBackground(isEnabled: true))
         .scrollDismissesKeyboard(.interactively)
-        .onChange(of: focusedField) { oldValue, newValue in
-            guard oldValue == .birthPlace, newValue != nil else {
-                return
-            }
-
-            presenter.clearBirthPlaceSearch()
-        }
         .sheet(item: $activePicker) { picker in
             switch picker {
             case .birthDate:
@@ -213,13 +206,19 @@ extension CalculationScreen {
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             }
             
-            if focusedField == .birthPlace,
-               viewModel.isSearchingBirthPlace || !viewModel.birthPlaceSuggestions.isEmpty {
+            if focusedField == .birthPlace, birthPlaceSearchQuery.count >= 2 {
                 VStack(spacing: 0) {
                     if viewModel.isSearchingBirthPlace, viewModel.birthPlaceSuggestions.isEmpty {
                         ProgressView()
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 14)
+                    } else if viewModel.birthPlaceSuggestions.isEmpty {
+                        Text(L10n.Calculation.birthPlaceNoResults)
+                            .font(.subheadline)
+                            .foregroundStyle(Color(.textSecondary))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 12)
                     }
 
                     ForEach(Array(viewModel.birthPlaceSuggestions.prefix(5).enumerated()), id: \.offset) { index, suggestion in

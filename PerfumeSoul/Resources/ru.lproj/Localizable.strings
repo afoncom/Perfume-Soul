@@ -181,6 +181,7 @@
 "today.history.title" = "Этот день в парфюмерии";
 "today.recommended.title" = "Рекомендовано для тебя";
 "calculation.birthDateTitle" = "Дата рождения";
+"calculation.birthPlaceNoResults" = "Места не найдены. Проверьте написание или попробуйте ближайший город.";
 "calculation.birthPlacePlaceholder" = "Введите город или населенный пункт";
 "calculation.birthPlaceSelectionError" = "Не удалось выбрать это место. Проверьте подключение и попробуйте еще раз.";
 "calculation.birthPlaceTitle" = "Место рождения";

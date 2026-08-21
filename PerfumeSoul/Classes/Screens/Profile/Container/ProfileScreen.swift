@@ -525,7 +525,7 @@ extension ProfileScreen {
         Text(initials)
             .font(font)
             .fontWeight(.semibold)
-            .foregroundStyle(Color(.textOnAccent))
+            .foregroundStyle(Color(.textOnAvatar))
             .lineLimit(1)
             .minimumScaleFactor(0.8)
     }
