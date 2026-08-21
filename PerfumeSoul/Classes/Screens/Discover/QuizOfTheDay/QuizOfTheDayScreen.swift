@@ -12,7 +12,6 @@ struct QuizOfTheDayScreen: View {
     private let viewModel: QuizOfTheDayViewModel
     private let presenter: QuizOfTheDayPresenter
     @State private var isShowingExplanation = false
-    @State private var hasLoadedSession = false
     @ScaledMetric(relativeTo: .body) private var explanationDetentHeight = 280.0
 
     init(
@@ -50,23 +49,12 @@ struct QuizOfTheDayScreen: View {
             .padding(.top, 12)
             .padding(.bottom, 28)
             .animation(.snappy, value: viewModel.isAnswerSubmitted)
-            .onChange(of: viewModel.isAnswerSubmitted) { _, isSubmitted in
-                guard isSubmitted, hasLoadedSession else {
-                    return
-                }
-                
-                let result = viewModel.isSelectedAnswerCorrect
-                    ? L10n.QuizOfTheDay.correctResult
-                    : L10n.QuizOfTheDay.incorrectResult
-                AccessibilityNotification.Announcement(result).post()
-            }
         }
         .background {
             Color(.backgroundPrimary).ignoresSafeArea()
         }
         .task {
             await presenter.onAppear()
-            hasLoadedSession = true
         }
         .sheet(isPresented: $isShowingExplanation) {
             makeExplanationSheet()
@@ -507,6 +495,18 @@ extension QuizOfTheDayScreen {
             presenter.goToNextQuestion()
         } else {
             presenter.submitAnswer()
+            announceAnswerResultIfSubmitted()
         }
+    }
+
+    private func announceAnswerResultIfSubmitted() {
+        guard viewModel.isAnswerSubmitted else {
+            return
+        }
+
+        let result = viewModel.isSelectedAnswerCorrect
+            ? L10n.QuizOfTheDay.correctResult
+            : L10n.QuizOfTheDay.incorrectResult
+        AccessibilityNotification.Announcement(result).post()
     }
 }
