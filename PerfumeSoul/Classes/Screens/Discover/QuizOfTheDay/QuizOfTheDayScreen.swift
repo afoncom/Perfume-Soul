@@ -79,7 +79,7 @@ extension QuizOfTheDayScreen {
             } label: {
                 Text(L10n.QuizOfTheDay.retryButton)
                     .font(.system(size: 17, weight: .semibold, design: .rounded))
-                    .foregroundStyle(Color(.textPrimary))
+                    .foregroundStyle(Color(.textOnAccent))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 14)
                     .background(Color(.pinkButton))
@@ -234,6 +234,14 @@ extension QuizOfTheDayScreen {
     ) -> some View {
         let isRevealedCorrectAnswer = isSubmitted && isCorrect
         let accentColor = isRevealedCorrectAnswer ? Color(.zodiacMint) : Color(.pinkButton)
+        let answerLetterColor: Color
+        if isRevealedCorrectAnswer {
+            answerLetterColor = Color(.textPrimary)
+        } else if isSelected {
+            answerLetterColor = Color(.textOnAccent)
+        } else {
+            answerLetterColor = Color(.textSecondary)
+        }
 
         return Button(action: onTap) {
             HStack(spacing: 14) {
@@ -244,7 +252,7 @@ extension QuizOfTheDayScreen {
 
                     Text(letter)
                         .font(.system(size: 17, weight: .medium, design: .rounded))
-                        .foregroundStyle(isSelected || isRevealedCorrectAnswer ? Color(.textPrimary) : Color(.textSecondary))
+                        .foregroundStyle(answerLetterColor)
                 }
 
                 Text(title)
@@ -411,7 +419,7 @@ extension QuizOfTheDayScreen {
         } label: {
             Text(L10n.QuizOfTheDay.closeExplanationButton)
                 .font(.headline.weight(.semibold))
-                .foregroundStyle(Color(.textPrimary))
+                .foregroundStyle(Color(.textOnAccent))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 15)
                 .background(Color(.pinkButton))
@@ -458,7 +466,7 @@ extension QuizOfTheDayScreen {
                 Button(action: handlePrimaryAction) {
                     Text(primaryButtonTitle)
                         .font(.system(size: 21, weight: .medium, design: .rounded))
-                        .foregroundStyle(Color(.textPrimary))
+                        .foregroundStyle(Color(.textOnAccent))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 18)
                         .background(Color(.pinkButton))

@@ -12,8 +12,6 @@ protocol CalculationPresenter {
     func continueButtonTapped() async
     func birthPlaceDidChange(_ query: String) async
     func birthPlaceSuggestionTapped(_ suggestion: BirthPlaceSuggestion) async
-    @MainActor
-    func clearBirthPlaceSearch()
 }
 
 final class CalculationPresenterImpl {
@@ -104,13 +102,5 @@ extension CalculationPresenterImpl: CalculationPresenter {
                 viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceSelectionError
             }
         }
-    }
-    
-    @MainActor
-    func clearBirthPlaceSearch() {
-        viewModel.birthPlaceSuggestions = []
-        viewModel.isSearchingBirthPlace = false
-        viewModel.activeBirthPlaceSearchQuery = ""
-        birthPlaceSearch.clear()
     }
 }

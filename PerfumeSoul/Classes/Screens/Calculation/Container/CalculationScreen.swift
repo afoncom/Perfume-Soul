@@ -212,7 +212,8 @@ extension CalculationScreen {
                         ProgressView()
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 14)
-                    } else if viewModel.birthPlaceSuggestions.isEmpty {
+                    } else if viewModel.birthPlaceSuggestions.isEmpty,
+                              viewModel.activeBirthPlaceSearchQuery == birthPlaceSearchQuery {
                         Text(L10n.Calculation.birthPlaceNoResults)
                             .font(.subheadline)
                             .foregroundStyle(Color(.textSecondary))
