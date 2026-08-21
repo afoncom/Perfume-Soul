@@ -53,12 +53,11 @@ struct QuizOfTheDayScreen: View {
                 guard isSubmitted else {
                     return
                 }
-
-                AccessibilityNotification.Announcement(
-                    viewModel.isSelectedAnswerCorrect
-                        ? L10n.QuizOfTheDay.correctResult
-                        : L10n.QuizOfTheDay.incorrectResult
-                ).post()
+                
+                let result = viewModel.isSelectedAnswerCorrect
+                ? L10n.QuizOfTheDay.correctResult
+                : L10n.QuizOfTheDay.incorrectResult
+                AccessibilityNotification.Announcement(result).post()
             }
         }
         .background {
