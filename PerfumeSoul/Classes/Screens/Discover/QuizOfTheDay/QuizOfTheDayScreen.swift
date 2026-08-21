@@ -11,6 +11,8 @@ import SwiftUI
 struct QuizOfTheDayScreen: View {
     private let viewModel: QuizOfTheDayViewModel
     private let presenter: QuizOfTheDayPresenter
+    @State private var isShowingExplanation = false
+    @ScaledMetric(relativeTo: .body) private var explanationDetentHeight = 280.0
 
     init(
         viewModel: QuizOfTheDayViewModel,
@@ -34,10 +36,7 @@ struct QuizOfTheDayScreen: View {
                 } else if let currentQuestion = viewModel.currentQuestion {
                     makeQuestionCard(question: currentQuestion)
                     if viewModel.isAnswerSubmitted {
-                        makeExplanationCard(
-                            explanation: currentQuestion.explanation,
-                            isCorrect: viewModel.isSelectedAnswerCorrect
-                        )
+                        makeAnswerResultPill(isCorrect: viewModel.isSelectedAnswerCorrect)
                     }
                 } else {
                     ProgressView()
@@ -49,12 +48,18 @@ struct QuizOfTheDayScreen: View {
             .padding(.horizontal, 16)
             .padding(.top, 12)
             .padding(.bottom, 28)
+            .animation(.snappy, value: viewModel.isAnswerSubmitted)
         }
         .background {
             Color(.backgroundPrimary).ignoresSafeArea()
         }
         .task {
             await presenter.onAppear()
+        }
+        .sheet(isPresented: $isShowingExplanation) {
+            makeExplanationSheet()
+                .presentationDetents([.height(explanationDetentHeight), .medium, .large])
+                .presentationDragIndicator(.visible)
         }
     }
 }
@@ -99,7 +104,6 @@ extension QuizOfTheDayScreen {
                     trailingValue: "/ \(viewModel.totalQuestions)"
                 )
 
-                
                 Spacer(minLength: 8)
 
                 makeStatItem(
@@ -205,7 +209,9 @@ extension QuizOfTheDayScreen {
                     makeAnswerRow(
                         letter: answer.id,
                         title: answer.text,
-                        isSelected: viewModel.isAnswerSelected(answer.id)
+                        isSelected: viewModel.isAnswerSelected(answer.id),
+                        isCorrect: answer.isCorrect,
+                        isSubmitted: viewModel.isAnswerSubmitted
                     ) {
                         presenter.selectAnswer(id: answer.id)
                     }
@@ -222,25 +228,45 @@ extension QuizOfTheDayScreen {
         letter: String,
         title: String,
         isSelected: Bool,
+        isCorrect: Bool,
+        isSubmitted: Bool,
         onTap: @escaping () -> Void
     ) -> some View {
-        Button(action: onTap) {
+        let isRevealedCorrectAnswer = isSubmitted && isCorrect
+        let accentColor = isRevealedCorrectAnswer ? Color(.zodiacMint) : Color(.pinkButton)
+        let answerLetterColor: Color
+        if isRevealedCorrectAnswer {
+            answerLetterColor = Color(.textPrimary)
+        } else if isSelected {
+            answerLetterColor = Color(.textOnAccent)
+        } else {
+            answerLetterColor = Color(.textSecondary)
+        }
+
+        return Button(action: onTap) {
             HStack(spacing: 14) {
                 ZStack {
                     Circle()
-                        .fill(isSelected ? Color(.pinkButton) : Color(.placeholderSoft))
+                        .fill(isSelected || isRevealedCorrectAnswer ? accentColor : Color(.placeholderSoft))
                         .frame(width: 48, height: 48)
 
                     Text(letter)
                         .font(.system(size: 17, weight: .medium, design: .rounded))
-                        .foregroundStyle(isSelected ? Color(.textOnAccent) : Color(.textSecondary))
+                        .foregroundStyle(answerLetterColor)
                 }
 
                 Text(title)
                     .font(.system(size: 18, weight: .regular, design: .rounded))
                     .foregroundStyle(Color(.textPrimary))
 
-                Spacer(minLength: 0)
+                Spacer(minLength: 10)
+
+                if isSubmitted, isCorrect {
+                    Image(systemName: "checkmark")
+                        .font(.footnote.weight(.bold))
+                        .foregroundStyle(Color(.textPrimary))
+                        .accessibilityHidden(true)
+                }
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 16)
@@ -248,52 +274,158 @@ extension QuizOfTheDayScreen {
             .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 22, style: .continuous)
-                    .stroke(isSelected ? Color(.pinkButton) : Color(.cardBorder), lineWidth: isSelected ? 2 : 1)
+                    .stroke(
+                        isSelected || isRevealedCorrectAnswer ? accentColor : Color(.cardBorder),
+                        lineWidth: isSelected || isRevealedCorrectAnswer ? 2 : 1
+                    )
             )
         }
         .buttonStyle(.plain)
+        .disabled(isSubmitted)
+        .accessibilityLabel(
+            makeAnswerLabel(
+                letter: letter,
+                title: title,
+                isSelected: isSelected,
+                isCorrect: isCorrect,
+                isSubmitted: isSubmitted
+            )
+        )
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 
-    func makeExplanationCard(explanation: String, isCorrect: Bool) -> some View {
+    private func makeAnswerLabel(
+        letter: String,
+        title: String,
+        isSelected: Bool,
+        isCorrect: Bool,
+        isSubmitted: Bool
+    ) -> String {
+        var components = ["\(letter), \(title)"]
+
+        if isSelected {
+            components.append(L10n.QuizOfTheDay.selectedAnswerAccessibility)
+        }
+
+        if isSubmitted, isCorrect {
+            components.append(L10n.QuizOfTheDay.correctAnswerAccessibility)
+        }
+
+        return components.joined(separator: ", ")
+    }
+
+    func makeAnswerResultPill(isCorrect: Bool) -> some View {
         let accentColor = isCorrect ? Color(.zodiacMint) : Color(.pinkButton)
 
-        return VStack(alignment: .leading, spacing: 14) {
-            HStack(spacing: 12) {
-                ZStack {
-                    Circle()
-                        .fill(accentColor)
-                        .frame(width: 46, height: 46)
+        return HStack(spacing: 12) {
+            ZStack {
+                Circle()
+                    .fill(accentColor)
+                    .frame(width: 38, height: 38)
 
-                    Image(systemName: isCorrect ? "checkmark" : "xmark")
-                        .font(.title3.weight(.bold))
-                        .foregroundStyle(Color(.surfacePrimary))
-                }
-
-                Text(isCorrect ? L10n.QuizOfTheDay.correctResult : L10n.QuizOfTheDay.incorrectResult)
-                    .font(.system(size: 24, weight: .semibold, design: .rounded))
-                    .foregroundStyle(accentColor)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
-
-                Spacer(minLength: 0)
+                Image(systemName: isCorrect ? "checkmark" : "xmark")
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundStyle(Color(.textPrimary))
+                    .accessibilityHidden(true)
             }
 
-            Text(explanation)
-                .font(.system(size: 17, weight: .regular, design: .rounded))
-                .foregroundStyle(Color(.descriptionText))
-                .lineSpacing(3)
-                .fixedSize(horizontal: false, vertical: true)
+            Text(isCorrect ? L10n.QuizOfTheDay.correctResult : L10n.QuizOfTheDay.incorrectResult)
+                .font(.system(size: 17, weight: .semibold, design: .rounded))
+                .foregroundStyle(Color(.textPrimary))
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
+
+            Spacer(minLength: 0)
+
+            Button {
+                isShowingExplanation = true
+            } label: {
+                HStack(spacing: 6) {
+                    Text(L10n.QuizOfTheDay.explanationButton)
+                        .font(.system(size: 15, weight: .semibold, design: .rounded))
+
+                    Image(systemName: "questionmark.circle.fill")
+                        .font(.system(size: 16, weight: .semibold))
+                }
+                .foregroundStyle(Color(.textPrimary))
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .frame(minHeight: 44)
+                .background(accentColor.opacity(0.12))
+                .clipShape(Capsule())
+            }
+            .buttonStyle(.plain)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 18)
-        .padding(.vertical, 20)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
         .background(accentColor.opacity(0.08))
-        .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
         .overlay(
-            RoundedRectangle(cornerRadius: 28, style: .continuous)
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
                 .stroke(accentColor.opacity(0.16), lineWidth: 1)
         )
-        .shadow(color: Color(.cardShadowSubtle), radius: 10, x: 0, y: 4)
+        .transition(.scale(scale: 0.96).combined(with: .opacity))
+    }
+
+    func makeExplanationSheet() -> some View {
+        VStack(alignment: .leading, spacing: 18) {
+            if let currentQuestion = viewModel.currentQuestion {
+                let isCorrect = viewModel.isSelectedAnswerCorrect
+                let accentColor = isCorrect ? Color(.zodiacMint) : Color(.pinkButton)
+
+                HStack(spacing: 12) {
+                    ZStack {
+                        Circle()
+                            .fill(accentColor)
+                            .frame(width: 46, height: 46)
+
+                        Image(systemName: isCorrect ? "checkmark" : "xmark")
+                            .font(.title3.weight(.bold))
+                            .foregroundStyle(Color(.textPrimary))
+                            .accessibilityHidden(true)
+                    }
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(L10n.QuizOfTheDay.explanationTitle)
+                            .font(.subheadline.weight(.medium))
+                            .foregroundStyle(Color(.textSecondary))
+
+                        Text(isCorrect ? L10n.QuizOfTheDay.correctResult : L10n.QuizOfTheDay.incorrectResult)
+                            .font(.title2.weight(.semibold))
+                            .foregroundStyle(Color(.textPrimary))
+                    }
+                }
+
+                ScrollView(.vertical, showsIndicators: false) {
+                    Text(currentQuestion.explanation)
+                        .font(.body)
+                        .foregroundStyle(Color(.descriptionText))
+                        .lineSpacing(3)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+
+            makeCloseExplanationButton()
+        }
+        .padding(.horizontal, 24)
+        .padding(.top, 28)
+        .padding(.bottom, 18)
+        .background(Color(.backgroundPrimary))
+    }
+
+    private func makeCloseExplanationButton() -> some View {
+        Button {
+            isShowingExplanation = false
+        } label: {
+            Text(L10n.QuizOfTheDay.closeExplanationButton)
+                .font(.headline.weight(.semibold))
+                .foregroundStyle(Color(.textOnAccent))
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 15)
+                .background(Color(.pinkButton))
+                .clipShape(Capsule())
+        }
+        .buttonStyle(.plain)
     }
 
     func makeQuizCompletedCard() -> some View {
@@ -371,6 +503,18 @@ extension QuizOfTheDayScreen {
             presenter.goToNextQuestion()
         } else {
             presenter.submitAnswer()
+            announceAnswerResultIfSubmitted()
         }
+    }
+
+    private func announceAnswerResultIfSubmitted() {
+        guard viewModel.isAnswerSubmitted else {
+            return
+        }
+
+        let result = viewModel.isSelectedAnswerCorrect
+            ? L10n.QuizOfTheDay.correctResult
+            : L10n.QuizOfTheDay.incorrectResult
+        AccessibilityNotification.Announcement(result).post()
     }
 }

@@ -34,9 +34,7 @@ struct CalculationScreen: View {
             .padding(.bottom, 24)
         }
         .background(Color(.backgroundPrimary))
-        .overlay(alignment: .top) {
-            makeTopSafeAreaMask()
-        }
+        .modifier(TopSafeAreaBackground(isEnabled: true))
         .scrollDismissesKeyboard(.interactively)
         .sheet(item: $activePicker) { picker in
             switch picker {
@@ -70,15 +68,6 @@ extension CalculationScreen {
 }
 
 extension CalculationScreen {
-    func makeTopSafeAreaMask() -> some View {
-        GeometryReader { proxy in
-            Color(.backgroundPrimary)
-                .frame(height: proxy.safeAreaInsets.top)
-                .ignoresSafeArea(edges: .top)
-        }
-        .allowsHitTesting(false)
-    }
-
     func makeHeaderView() -> some View {
         VStack(spacing: 12) {
             Text(L10n.Screen.calculationCreateProfile)
@@ -182,12 +171,12 @@ extension CalculationScreen {
                             viewModel.selectedBirthPlace = nil
                         }
                     }
-                    .task(id: viewModel.birthPlace) {
+                    .task(id: birthPlaceSearchQuery) {
                         try? await Task.sleep(for: .seconds(0.5))
                         guard focusedField == .birthPlace && !Task.isCancelled else {
                             return
                         }
-                        await presenter.birthPlaceDidChange(viewModel.birthPlace)
+                        await presenter.birthPlaceDidChange(birthPlaceSearchQuery)
                     }
             }
             .padding(.horizontal, 16)
@@ -198,35 +187,64 @@ extension CalculationScreen {
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
                     .stroke(Color(.inputBorder), lineWidth: 1)
             )
+
+            if let birthPlaceErrorMessage = viewModel.birthPlaceErrorMessage {
+                HStack(alignment: .top, spacing: 8) {
+                    Image(systemName: "exclamationmark.circle.fill")
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(Color(.destructiveAccent))
+                        .accessibilityHidden(true)
+
+                    Text(birthPlaceErrorMessage)
+                        .font(.footnote)
+                        .foregroundStyle(Color(.destructiveAccent))
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color(.destructiveSurface))
+                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            }
             
-            if focusedField == .birthPlace, !viewModel.birthPlaceCompletions.isEmpty {
+            if focusedField == .birthPlace, birthPlaceSearchQuery.count >= 2 {
                 VStack(spacing: 0) {
-                    ForEach(Array(viewModel.birthPlaceCompletions.prefix(5).enumerated()), id: \.offset) { index, completion in
+                    if viewModel.isSearchingBirthPlace, viewModel.birthPlaceSuggestions.isEmpty {
+                        ProgressView()
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                    } else if viewModel.birthPlaceSuggestions.isEmpty,
+                              viewModel.activeBirthPlaceSearchQuery == birthPlaceSearchQuery {
+                        Text(L10n.Calculation.birthPlaceNoResults)
+                            .font(.subheadline)
+                            .foregroundStyle(Color(.textSecondary))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 12)
+                    }
+
+                    ForEach(Array(viewModel.birthPlaceSuggestions.prefix(5).enumerated()), id: \.offset) { index, suggestion in
                         Button {
                             focusedField = nil
                             Task {
-                                await presenter.birthPlaceCompletionTapped(completion)
-                            }
-                        } label: {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(completion.title)
-                                    .font(.headline)
-                                    .foregroundStyle(Color(.textPrimary))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                
-                                if !completion.subtitle.isEmpty {
-                                    Text(completion.subtitle)
-                                        .font(.footnote)
-                                        .foregroundStyle(Color(.textSecondary))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                await presenter.birthPlaceSuggestionTapped(suggestion)
+                                await MainActor.run {
+                                    if viewModel.birthPlaceErrorMessage != nil {
+                                        focusedField = .birthPlace
+                                    }
                                 }
                             }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 12)
+                        } label: {
+                            Text(suggestion.displayName)
+                                .font(.headline)
+                                .foregroundStyle(Color(.textPrimary))
+                                .lineLimit(2)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 12)
                         }
                         .buttonStyle(.plain)
                         
-                        if index < min(viewModel.birthPlaceCompletions.count, 5) - 1 {
+                        if index < min(viewModel.birthPlaceSuggestions.count, 5) - 1 {
                             Divider()
                                 .padding(.leading, 16)
                         }
@@ -240,8 +258,19 @@ extension CalculationScreen {
                 )
             }
         }
+        .onChange(of: viewModel.birthPlaceErrorMessage) { _, birthPlaceErrorMessage in
+            guard let birthPlaceErrorMessage else {
+                return
+            }
+
+            AccessibilityNotification.Announcement(birthPlaceErrorMessage).post()
+        }
     }
-    
+
+    var birthPlaceSearchQuery: String {
+        viewModel.birthPlace.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
     // MARK: - Continue Button
     func makeContinueButton() -> some View {
         Button {

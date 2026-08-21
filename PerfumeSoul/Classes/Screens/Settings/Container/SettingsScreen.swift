@@ -27,7 +27,7 @@ struct SettingsScreen: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 28) {
                 makeNotificationsSection()
-                makePrivacySection()
+                // TODO(#103): Restore Privacy Policy row when the hosted URL is available.
                 makeSupportSection()
                 makeAboutSection()
             }
@@ -98,44 +98,6 @@ extension SettingsScreen {
                     title: L10n.Settings.Notification.dayInPerfumeryTitle,
                     subtitle: L10n.Settings.Notification.dayInPerfumerySubtitle,
                     isOn: $dayInPerfumeryEnabled
-                )
-            }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
-            .background(Color(.surfacePrimary))
-            .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
-            .shadow(color: Color(.cardShadowSubtle), radius: 9, x: 0, y: 4)
-        }
-    }
-
-    private func makePrivacySection() -> some View {
-        VStack(alignment: .leading, spacing: 14) {
-            makeSectionTitle(L10n.Settings.privacyTitle)
-
-            VStack(spacing: 0) {
-                makeActionRow(
-                    icon: "shield",
-                    iconColor: Color(.zodiacPurple),
-                    title: L10n.Settings.Privacy.howDataIsUsedTitle,
-                    subtitle: L10n.Settings.Privacy.howDataIsUsedSubtitle
-                )
-
-                makeDivider()
-
-                makeActionRow(
-                    icon: "trash",
-                    iconColor: Color(.pinkButton),
-                    title: L10n.Settings.Privacy.clearLocalDataTitle,
-                    subtitle: L10n.Settings.Privacy.clearLocalDataSubtitle
-                )
-
-                makeDivider()
-
-                makeActionRow(
-                    icon: "person",
-                    iconColor: Color(.zodiacOrange),
-                    title: L10n.Settings.Privacy.deleteAllProfilesTitle,
-                    subtitle: L10n.Settings.Privacy.deleteAllProfilesSubtitle
                 )
             }
             .padding(.horizontal, 14)

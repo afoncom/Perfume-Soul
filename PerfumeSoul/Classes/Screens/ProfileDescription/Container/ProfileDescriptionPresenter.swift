@@ -7,7 +7,7 @@
 //
 
 protocol ProfileDescriptionPresenter {
-    var shouldShowContinueButton: Bool { get }
+    var isPresentedInOnboarding: Bool { get }
 
     func continueButtonTapped()
     func retryButtonTapped() async
@@ -21,7 +21,7 @@ final class ProfileDescriptionPresenterImpl {
     private let profileService: ProfileService
     private let profileCalculationService: ProfileCalculationService
     private let profileDescriptionBuilder: ProfileDescriptionBuilder
-    let shouldShowContinueButton: Bool
+    let isPresentedInOnboarding: Bool
     
     init(
         viewModel: ProfileDescriptionViewModel,
@@ -29,14 +29,14 @@ final class ProfileDescriptionPresenterImpl {
         profileService: ProfileService,
         profileCalculationService: ProfileCalculationService,
         profileDescriptionBuilder: ProfileDescriptionBuilder,
-        shouldShowContinueButton: Bool
+        isPresentedInOnboarding: Bool
     ) {
         self.viewModel = viewModel
         self.router = router
         self.profileService = profileService
         self.profileCalculationService = profileCalculationService
         self.profileDescriptionBuilder = profileDescriptionBuilder
-        self.shouldShowContinueButton = shouldShowContinueButton
+        self.isPresentedInOnboarding = isPresentedInOnboarding
     }
 }
 

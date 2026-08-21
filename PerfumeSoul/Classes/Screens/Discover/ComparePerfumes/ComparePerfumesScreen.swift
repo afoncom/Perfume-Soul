@@ -516,6 +516,7 @@ extension ComparePerfumesScreen {
                     ]
                 )
             }
+            .fixedSize(horizontal: false, vertical: true)
         }
         .padding(16)
         .background(Color(.surfacePrimary))
@@ -538,6 +539,7 @@ extension ComparePerfumesScreen {
                 Text(brand)
                     .font(.footnote.weight(.semibold))
                     .foregroundStyle(Color(.textSecondary))
+                    .lineLimit(2)
                 
                 Text(name)
                     .font(.headline)
@@ -555,7 +557,7 @@ extension ComparePerfumesScreen {
                 }
             }
         }
-        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .padding(14)
         .background(Color(.rowBackground))
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
