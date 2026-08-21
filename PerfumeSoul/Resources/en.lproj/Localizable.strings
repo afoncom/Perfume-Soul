@@ -13,9 +13,9 @@
 "discover.findSimilar.headerSubtitle" = "Add the perfumes you have, and we will find similar scents.";
 "discover.findSimilar.hint" = "The more perfumes you add, the more accurate the recommendations will be.";
 "discover.findSimilar.optionalSubtitle" = "Optional";
-"discover.findSimilar.secondPerfumeTitle" = "Additional perfume (optional)";
+"discover.findSimilar.secondPerfumeTitle" = "Additional perfume";
 "discover.findSimilar.subtitle" = "Enter perfumes you own to find similar scents.";
-"discover.findSimilar.thirdPerfumeTitle" = "Additional perfume (optional)";
+"discover.findSimilar.thirdPerfumeTitle" = "Additional perfume";
 "discover.findSimilar.title" = "Find Similar Perfumes";
 "discover.scentArchetype.button" = "Start quiz";
 "discover.scentArchetype.title" = "Find Your Scent Archetype";
