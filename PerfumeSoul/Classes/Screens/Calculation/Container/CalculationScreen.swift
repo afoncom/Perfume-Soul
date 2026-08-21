@@ -36,8 +36,8 @@ struct CalculationScreen: View {
         .background(Color(.backgroundPrimary))
         .modifier(TopSafeAreaBackground(isEnabled: true))
         .scrollDismissesKeyboard(.interactively)
-        .onChange(of: focusedField) { _, newValue in
-            guard newValue != .birthPlace else {
+        .onChange(of: focusedField) { oldValue, newValue in
+            guard oldValue == .birthPlace, newValue != nil else {
                 return
             }
 
@@ -178,12 +178,12 @@ extension CalculationScreen {
                             viewModel.selectedBirthPlace = nil
                         }
                     }
-                    .task(id: viewModel.birthPlace) {
+                    .task(id: birthPlaceSearchQuery) {
                         try? await Task.sleep(for: .seconds(0.5))
                         guard focusedField == .birthPlace && !Task.isCancelled else {
                             return
                         }
-                        await presenter.birthPlaceDidChange(viewModel.birthPlace)
+                        await presenter.birthPlaceDidChange(birthPlaceSearchQuery)
                     }
             }
             .padding(.horizontal, 16)
@@ -213,13 +213,25 @@ extension CalculationScreen {
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             }
             
-            if focusedField == .birthPlace, !viewModel.birthPlaceSuggestions.isEmpty {
+            if focusedField == .birthPlace,
+               viewModel.isSearchingBirthPlace || !viewModel.birthPlaceSuggestions.isEmpty {
                 VStack(spacing: 0) {
-                    ForEach(Array(viewModel.birthPlaceSuggestions.prefix(5).enumerated()), id: \.element.id) { index, suggestion in
+                    if viewModel.isSearchingBirthPlace, viewModel.birthPlaceSuggestions.isEmpty {
+                        ProgressView()
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                    }
+
+                    ForEach(Array(viewModel.birthPlaceSuggestions.prefix(5).enumerated()), id: \.offset) { index, suggestion in
                         Button {
                             focusedField = nil
                             Task {
                                 await presenter.birthPlaceSuggestionTapped(suggestion)
+                                await MainActor.run {
+                                    if viewModel.birthPlaceErrorMessage != nil {
+                                        focusedField = .birthPlace
+                                    }
+                                }
                             }
                         } label: {
                             Text(suggestion.displayName)
@@ -253,6 +265,10 @@ extension CalculationScreen {
 
             AccessibilityNotification.Announcement(birthPlaceErrorMessage).post()
         }
+    }
+
+    var birthPlaceSearchQuery: String {
+        viewModel.birthPlace.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     // MARK: - Continue Button

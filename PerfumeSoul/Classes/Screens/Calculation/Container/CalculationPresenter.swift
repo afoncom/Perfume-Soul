@@ -6,6 +6,8 @@
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
+import Foundation
+
 protocol CalculationPresenter {
     func continueButtonTapped() async
     func birthPlaceDidChange(_ query: String) async
@@ -56,6 +58,8 @@ extension CalculationPresenterImpl: CalculationPresenter {
     }
     
     func birthPlaceDidChange(_ query: String) async {
+        let searchQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
+
         await MainActor.run {
             if viewModel.selectedBirthPlace?.displayName != query {
                 viewModel.selectedBirthPlace = nil
@@ -63,10 +67,15 @@ extension CalculationPresenterImpl: CalculationPresenter {
             viewModel.birthPlaceErrorMessage = nil
             viewModel.birthPlaceSuggestions = []
             viewModel.isSearchingBirthPlace = true
+            viewModel.activeBirthPlaceSearchQuery = searchQuery
         }
 
         let suggestions = await birthPlaceSearch.search(query)
         await MainActor.run {
+            guard viewModel.activeBirthPlaceSearchQuery == searchQuery else {
+                return
+            }
+
             viewModel.birthPlaceSuggestions = suggestions
             viewModel.isSearchingBirthPlace = false
         }
@@ -100,6 +109,8 @@ extension CalculationPresenterImpl: CalculationPresenter {
     @MainActor
     func clearBirthPlaceSearch() {
         viewModel.birthPlaceSuggestions = []
+        viewModel.isSearchingBirthPlace = false
+        viewModel.activeBirthPlaceSearchQuery = ""
         birthPlaceSearch.clear()
     }
 }

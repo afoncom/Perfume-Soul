@@ -16,6 +16,7 @@ import Observation
     var birthPlace = ""
     var selectedBirthPlace: BirthPlaceSelection?
     var isSearchingBirthPlace = false
+    var activeBirthPlaceSearchQuery = ""
     var birthPlaceSuggestions: [BirthPlaceSuggestion] = []
     var birthPlaceErrorMessage: String?
 
