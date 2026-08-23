@@ -73,6 +73,7 @@
 "quizOfTheDay.explanationTitle" = "Explanation";
 "quizOfTheDay.finishQuiz" = "Finish Quiz";
 "quizOfTheDay.incorrectResult" = "Incorrect";
+"quizOfTheDay.incorrectAnswerAccessibility" = "Incorrect answer";
 "quizOfTheDay.nextQuestion" = "Next Question";
 "quizOfTheDay.retryButton" = "Retry";
 "quizOfTheDay.scoreHint" = "1 correct answer = 1 point";

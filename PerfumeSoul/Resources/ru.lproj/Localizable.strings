@@ -73,6 +73,7 @@
 "quizOfTheDay.explanationTitle" = "Пояснение";
 "quizOfTheDay.finishQuiz" = "Завершить квиз";
 "quizOfTheDay.incorrectResult" = "Неправильно";
+"quizOfTheDay.incorrectAnswerAccessibility" = "Неправильный ответ";
 "quizOfTheDay.nextQuestion" = "Следующий вопрос";
 "quizOfTheDay.retryButton" = "Повторить";
 "quizOfTheDay.scoreHint" = "1 правильный ответ = 1 балл";

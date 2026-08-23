@@ -23,6 +23,11 @@ struct BirthPlaceSuggestion: Identifiable {
     let isQueryFallback: Bool
 }
 
+enum BirthPlaceSearchResult {
+    case suggestions([BirthPlaceSuggestion])
+    case failed
+}
+
 enum BirthPlaceSearchError: Error {
     case searchFailed
     case missingDisplayName
@@ -56,7 +61,7 @@ enum BirthPlaceSearchPassResolver {
 @MainActor
 final class BirthPlaceSearchService: NSObject {
     private let geocoder = CLGeocoder()
-    private var searchContinuations: [CheckedContinuation<[BirthPlaceSuggestion], Never>] = []
+    private var searchContinuations: [CheckedContinuation<BirthPlaceSearchResult, Never>] = []
     private var searchTimeoutTask: Task<Void, Never>?
     private var searchQuery = ""
     private var activeSearchPass: SearchPass?
@@ -67,12 +72,12 @@ final class BirthPlaceSearchService: NSObject {
         super.init()
     }
 
-    func search(_ query: String) async -> [BirthPlaceSuggestion] {
+    func search(_ query: String) async -> BirthPlaceSearchResult {
         let trimmedQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
         
         guard trimmedQuery.count >= 2 else {
             clear()
-            return []
+            return .suggestions([])
         }
 
         guard trimmedQuery != searchQuery || searchContinuations.isEmpty else {
@@ -83,7 +88,7 @@ final class BirthPlaceSearchService: NSObject {
         
         return await withCheckedContinuation { continuation in
             searchTimeoutTask?.cancel()
-            resumeSearchContinuations(with: [])
+            resumeSearchContinuations(with: .suggestions([]))
             searchContinuations = [continuation]
             searchQuery = trimmedQuery
             latestSearchResults = []
@@ -100,7 +105,7 @@ final class BirthPlaceSearchService: NSObject {
         activeSearchPass?.completer.delegate = nil
         searchTimeoutTask?.cancel()
         searchTimeoutTask = nil
-        resumeSearchContinuations(with: [])
+        resumeSearchContinuations(with: .suggestions([]))
         searchQuery = ""
         activeSearchPass = nil
         latestSearchResults = []
@@ -260,7 +265,7 @@ final class BirthPlaceSearchService: NSObject {
         searchTimeoutTask?.cancel()
         searchTimeoutTask = nil
         resumeSearchContinuations(
-            with: results.map {
+            with: .suggestions(results.map {
                 BirthPlaceSuggestion(
                     displayName: makeSuggestionDisplayName(
                         for: $0,
@@ -269,18 +274,18 @@ final class BirthPlaceSearchService: NSObject {
                     completion: $0,
                     isQueryFallback: isQueryFallback
                 )
-            }
+            })
         )
         activeSearchPass = nil
         latestSearchResults = []
         latestSearchPass = nil
     }
 
-    private func resumeSearchContinuations(with suggestions: [BirthPlaceSuggestion]) {
+    private func resumeSearchContinuations(with result: BirthPlaceSearchResult) {
         let continuations = searchContinuations
         searchContinuations = []
         continuations.forEach {
-            $0.resume(returning: suggestions)
+            $0.resume(returning: result)
         }
     }
 
@@ -299,7 +304,12 @@ final class BirthPlaceSearchService: NSObject {
             return
         }
 
-        resumeSearch(with: [], isQueryFallback: currentSearchPass.isQueryFallback)
+        searchTimeoutTask?.cancel()
+        searchTimeoutTask = nil
+        resumeSearchContinuations(with: .failed)
+        activeSearchPass = nil
+        latestSearchResults = []
+        latestSearchPass = nil
     }
 
     private func matchesActiveSearchPass(for completer: MKLocalSearchCompleter) -> Bool {

@@ -233,11 +233,21 @@ extension QuizOfTheDayScreen {
         onTap: @escaping () -> Void
     ) -> some View {
         let isRevealedCorrectAnswer = isSubmitted && isCorrect
-        let accentColor = isRevealedCorrectAnswer ? Color(.zodiacMint) : Color(.pinkButton)
+        let isRevealedIncorrectAnswer = isSubmitted && isSelected && !isCorrect
+        let accentColor: Color
+        if isRevealedCorrectAnswer {
+            accentColor = Color(.zodiacMint)
+        } else if isRevealedIncorrectAnswer {
+            accentColor = Color(.destructiveAccent)
+        } else {
+            accentColor = Color(.pinkButton)
+        }
         let answerLetterColor: Color
         if isRevealedCorrectAnswer {
             answerLetterColor = Color(.textPrimary)
-        } else if isSelected {
+        } else if isRevealedIncorrectAnswer {
+            answerLetterColor = Color(.backgroundPrimary)
+        } else if isSelected || isRevealedIncorrectAnswer {
             answerLetterColor = Color(.textOnAccent)
         } else {
             answerLetterColor = Color(.textSecondary)
@@ -261,10 +271,10 @@ extension QuizOfTheDayScreen {
 
                 Spacer(minLength: 10)
 
-                if isSubmitted, isCorrect {
-                    Image(systemName: "checkmark")
+                if isSubmitted, isCorrect || isSelected {
+                    Image(systemName: isCorrect ? "checkmark" : "xmark")
                         .font(.footnote.weight(.bold))
-                        .foregroundStyle(Color(.textPrimary))
+                        .foregroundStyle(isCorrect ? Color(.textPrimary) : Color(.destructiveAccent))
                         .accessibilityHidden(true)
                 }
             }
@@ -309,6 +319,10 @@ extension QuizOfTheDayScreen {
 
         if isSubmitted, isCorrect {
             components.append(L10n.QuizOfTheDay.correctAnswerAccessibility)
+        }
+
+        if isSubmitted, isSelected, !isCorrect {
+            components.append(L10n.QuizOfTheDay.incorrectAnswerAccessibility)
         }
 
         return components.joined(separator: ", ")

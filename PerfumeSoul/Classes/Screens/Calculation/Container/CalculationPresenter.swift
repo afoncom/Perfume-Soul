@@ -68,18 +68,31 @@ extension CalculationPresenterImpl: CalculationPresenter {
             viewModel.activeBirthPlaceSearchQuery = searchQuery
         }
 
-        let suggestions = await birthPlaceSearch.search(query)
+        let result = await birthPlaceSearch.search(query)
         await MainActor.run {
             guard viewModel.activeBirthPlaceSearchQuery == searchQuery else {
                 return
             }
 
-            viewModel.birthPlaceSuggestions = suggestions
             viewModel.isSearchingBirthPlace = false
+            switch result {
+            case let .suggestions(suggestions):
+                viewModel.birthPlaceSuggestions = suggestions
+            case .failed:
+                viewModel.birthPlaceSuggestions = []
+                viewModel.activeBirthPlaceSearchQuery = ""
+                viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceSelectionError
+            }
         }
     }
 
     func birthPlaceSuggestionTapped(_ suggestion: BirthPlaceSuggestion) async {
+        await MainActor.run {
+            viewModel.birthPlaceSuggestions = []
+            viewModel.birthPlaceErrorMessage = nil
+            viewModel.isSearchingBirthPlace = true
+        }
+
         do {
             let selection = try await birthPlaceSearch.resolve(suggestion)
 
@@ -87,6 +100,7 @@ extension CalculationPresenterImpl: CalculationPresenter {
                 viewModel.birthPlace = selection.displayName
                 viewModel.selectedBirthPlace = selection
                 viewModel.birthPlaceSuggestions = []
+                viewModel.isSearchingBirthPlace = false
                 viewModel.birthPlaceErrorMessage = nil
             }
 
@@ -94,11 +108,13 @@ extension CalculationPresenterImpl: CalculationPresenter {
         } catch BirthPlaceSearchError.missingDisplayName, BirthPlaceSearchError.missingTimeZone {
             await MainActor.run {
                 viewModel.selectedBirthPlace = nil
+                viewModel.isSearchingBirthPlace = false
                 viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceUnresolvedError
             }
         } catch {
             await MainActor.run {
                 viewModel.selectedBirthPlace = nil
+                viewModel.isSearchingBirthPlace = false
                 viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceSelectionError
             }
         }

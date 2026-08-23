@@ -171,7 +171,7 @@ extension CalculationScreen {
                             viewModel.selectedBirthPlace = nil
                         }
                     }
-                    .task(id: birthPlaceSearchQuery) {
+                    .task(id: "\(focusedField == .birthPlace)|\(birthPlaceSearchQuery)") {
                         try? await Task.sleep(for: .seconds(0.5))
                         guard focusedField == .birthPlace && !Task.isCancelled else {
                             return
@@ -206,7 +206,11 @@ extension CalculationScreen {
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             }
             
-            if focusedField == .birthPlace, birthPlaceSearchQuery.count >= 2 {
+            let hasDropdownContent = viewModel.isSearchingBirthPlace
+                || !viewModel.birthPlaceSuggestions.isEmpty
+                || viewModel.activeBirthPlaceSearchQuery == birthPlaceSearchQuery
+
+            if focusedField == .birthPlace, birthPlaceSearchQuery.count >= 2, hasDropdownContent {
                 VStack(spacing: 0) {
                     if viewModel.isSearchingBirthPlace, viewModel.birthPlaceSuggestions.isEmpty {
                         ProgressView()
@@ -222,31 +226,30 @@ extension CalculationScreen {
                             .padding(.vertical, 12)
                     }
 
-                    ForEach(Array(viewModel.birthPlaceSuggestions.prefix(5).enumerated()), id: \.offset) { index, suggestion in
-                        Button {
-                            focusedField = nil
-                            Task {
-                                await presenter.birthPlaceSuggestionTapped(suggestion)
-                                await MainActor.run {
-                                    if viewModel.birthPlaceErrorMessage != nil {
-                                        focusedField = .birthPlace
+                    if viewModel.activeBirthPlaceSearchQuery == birthPlaceSearchQuery {
+                        ForEach(Array(viewModel.birthPlaceSuggestions.prefix(5).enumerated()), id: \.offset) { index, suggestion in
+                            Button {
+                                Task {
+                                    await presenter.birthPlaceSuggestionTapped(suggestion)
+                                    await MainActor.run {
+                                        focusedField = viewModel.birthPlaceErrorMessage == nil ? nil : .birthPlace
                                     }
                                 }
+                            } label: {
+                                Text(suggestion.displayName)
+                                    .font(.headline)
+                                    .foregroundStyle(Color(.textPrimary))
+                                    .lineLimit(2)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 12)
                             }
-                        } label: {
-                            Text(suggestion.displayName)
-                                .font(.headline)
-                                .foregroundStyle(Color(.textPrimary))
-                                .lineLimit(2)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 12)
-                        }
-                        .buttonStyle(.plain)
-                        
-                        if index < min(viewModel.birthPlaceSuggestions.count, 5) - 1 {
-                            Divider()
-                                .padding(.leading, 16)
+                            .buttonStyle(.plain)
+
+                            if index < min(viewModel.birthPlaceSuggestions.count, 5) - 1 {
+                                Divider()
+                                    .padding(.leading, 16)
+                            }
                         }
                     }
                 }
