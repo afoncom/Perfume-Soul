@@ -56,7 +56,7 @@ enum BirthPlaceSearchPassResolver {
 @MainActor
 final class BirthPlaceSearchService: NSObject {
     private let geocoder = CLGeocoder()
-    private var searchContinuation: CheckedContinuation<[BirthPlaceSuggestion], Never>?
+    private var searchContinuations: [CheckedContinuation<[BirthPlaceSuggestion], Never>] = []
     private var searchTimeoutTask: Task<Void, Never>?
     private var searchQuery = ""
     private var activeSearchPass: SearchPass?
@@ -75,23 +75,16 @@ final class BirthPlaceSearchService: NSObject {
             return []
         }
 
-        guard trimmedQuery != searchQuery || searchContinuation == nil else {
-            return latestSearchResults.map {
-                BirthPlaceSuggestion(
-                    displayName: makeSuggestionDisplayName(
-                        for: $0,
-                        isQueryFallback: latestSearchPass?.isQueryFallback ?? false
-                    ),
-                    completion: $0,
-                    isQueryFallback: latestSearchPass?.isQueryFallback ?? false
-                )
+        guard trimmedQuery != searchQuery || searchContinuations.isEmpty else {
+            return await withCheckedContinuation { continuation in
+                searchContinuations.append(continuation)
             }
         }
         
         return await withCheckedContinuation { continuation in
             searchTimeoutTask?.cancel()
-            searchContinuation?.resume(returning: [])
-            searchContinuation = continuation
+            resumeSearchContinuations(with: [])
+            searchContinuations = [continuation]
             searchQuery = trimmedQuery
             latestSearchResults = []
             latestSearchPass = nil
@@ -107,8 +100,7 @@ final class BirthPlaceSearchService: NSObject {
         activeSearchPass?.completer.delegate = nil
         searchTimeoutTask?.cancel()
         searchTimeoutTask = nil
-        searchContinuation?.resume(returning: [])
-        searchContinuation = nil
+        resumeSearchContinuations(with: [])
         searchQuery = ""
         activeSearchPass = nil
         latestSearchResults = []
@@ -224,7 +216,7 @@ final class BirthPlaceSearchService: NSObject {
         isSearching: Bool
     ) {
         guard
-            searchContinuation != nil,
+            !searchContinuations.isEmpty,
             let currentSearchPass = activeSearchPass,
             currentSearchPass.queryFragment == queryFragment,
             matchesActiveSearchPass(for: completer)
@@ -251,7 +243,7 @@ final class BirthPlaceSearchService: NSObject {
     }
 
     private func resumeWithLatestResults() {
-        guard searchContinuation != nil else {
+        guard !searchContinuations.isEmpty else {
             return
         }
 
@@ -267,8 +259,8 @@ final class BirthPlaceSearchService: NSObject {
     ) {
         searchTimeoutTask?.cancel()
         searchTimeoutTask = nil
-        searchContinuation?.resume(
-            returning: results.map {
+        resumeSearchContinuations(
+            with: results.map {
                 BirthPlaceSuggestion(
                     displayName: makeSuggestionDisplayName(
                         for: $0,
@@ -279,15 +271,22 @@ final class BirthPlaceSearchService: NSObject {
                 )
             }
         )
-        searchContinuation = nil
         activeSearchPass = nil
         latestSearchResults = []
         latestSearchPass = nil
     }
 
+    private func resumeSearchContinuations(with suggestions: [BirthPlaceSuggestion]) {
+        let continuations = searchContinuations
+        searchContinuations = []
+        continuations.forEach {
+            $0.resume(returning: suggestions)
+        }
+    }
+
     private func failSearch(from completer: MKLocalSearchCompleter) {
         guard
-            searchContinuation != nil,
+            !searchContinuations.isEmpty,
             matchesActiveSearchPass(for: completer),
             let currentSearchPass = activeSearchPass
         else {
