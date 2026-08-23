@@ -78,6 +78,12 @@ extension CalculationPresenterImpl: CalculationPresenter {
             switch result {
             case let .suggestions(suggestions):
                 viewModel.birthPlaceSuggestions = suggestions
+            case let .timedOut(suggestions):
+                viewModel.birthPlaceSuggestions = suggestions
+                if suggestions.isEmpty {
+                    viewModel.activeBirthPlaceSearchQuery = ""
+                    viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceSelectionError
+                }
             case .failed:
                 viewModel.birthPlaceSuggestions = []
                 viewModel.activeBirthPlaceSearchQuery = ""
@@ -87,10 +93,12 @@ extension CalculationPresenterImpl: CalculationPresenter {
     }
 
     func birthPlaceSuggestionTapped(_ suggestion: BirthPlaceSuggestion) async {
-        await MainActor.run {
+        let previousSuggestions = await MainActor.run { () -> [BirthPlaceSuggestion] in
+            let suggestions = viewModel.birthPlaceSuggestions
             viewModel.birthPlaceSuggestions = []
             viewModel.birthPlaceErrorMessage = nil
             viewModel.isSearchingBirthPlace = true
+            return suggestions
         }
 
         do {
@@ -108,12 +116,14 @@ extension CalculationPresenterImpl: CalculationPresenter {
         } catch BirthPlaceSearchError.missingDisplayName, BirthPlaceSearchError.missingTimeZone {
             await MainActor.run {
                 viewModel.selectedBirthPlace = nil
+                viewModel.birthPlaceSuggestions = previousSuggestions
                 viewModel.isSearchingBirthPlace = false
                 viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceUnresolvedError
             }
         } catch {
             await MainActor.run {
                 viewModel.selectedBirthPlace = nil
+                viewModel.birthPlaceSuggestions = previousSuggestions
                 viewModel.isSearchingBirthPlace = false
                 viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceSelectionError
             }

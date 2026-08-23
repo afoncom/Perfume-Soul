@@ -184,6 +184,7 @@
 "calculation.birthDateTitle" = "Дата рождения";
 "calculation.birthPlaceNoResults" = "Места не найдены. Проверьте написание или попробуйте ближайший город.";
 "calculation.birthPlacePlaceholder" = "Введите город или населенный пункт";
+"calculation.birthPlaceRetryButton" = "Повторить поиск места";
 "calculation.birthPlaceSelectionError" = "Не удалось выбрать это место. Проверьте подключение и попробуйте еще раз.";
 "calculation.birthPlaceTitle" = "Место рождения";
 "calculation.birthPlaceUnresolvedError" = "Не удалось точно определить это место. Попробуйте ближайший город.";

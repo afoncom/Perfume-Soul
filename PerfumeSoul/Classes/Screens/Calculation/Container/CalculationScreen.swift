@@ -171,7 +171,7 @@ extension CalculationScreen {
                             viewModel.selectedBirthPlace = nil
                         }
                     }
-                    .task(id: "\(focusedField == .birthPlace)|\(birthPlaceSearchQuery)") {
+                    .task(id: "\(focusedField == .birthPlace)|\(birthPlaceSearchQuery)|\(viewModel.birthPlaceSearchRetryID)") {
                         try? await Task.sleep(for: .seconds(0.5))
                         guard focusedField == .birthPlace && !Task.isCancelled else {
                             return
@@ -198,6 +198,20 @@ extension CalculationScreen {
                     Text(birthPlaceErrorMessage)
                         .font(.footnote)
                         .foregroundStyle(Color(.destructiveAccent))
+
+                    Spacer(minLength: 0)
+
+                    Button {
+                        focusedField = .birthPlace
+                        viewModel.birthPlaceSearchRetryID += 1
+                    } label: {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.footnote.weight(.semibold))
+                            .foregroundStyle(Color(.destructiveAccent))
+                            .frame(width: 28, height: 28)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(L10n.Calculation.birthPlaceRetryButton)
                 }
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)

@@ -184,6 +184,7 @@
 "calculation.birthDateTitle" = "Birth Date";
 "calculation.birthPlaceNoResults" = "No places found. Check the spelling or try the nearest city.";
 "calculation.birthPlacePlaceholder" = "Enter city or town";
+"calculation.birthPlaceRetryButton" = "Retry place search";
 "calculation.birthPlaceSelectionError" = "Unable to select this place. Check your connection and try again.";
 "calculation.birthPlaceTitle" = "Birth Place";
 "calculation.birthPlaceUnresolvedError" = "We couldn't pin down this place. Try the nearest city.";

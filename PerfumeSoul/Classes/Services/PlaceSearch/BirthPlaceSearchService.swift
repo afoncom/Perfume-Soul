@@ -25,6 +25,7 @@ struct BirthPlaceSuggestion: Identifiable {
 
 enum BirthPlaceSearchResult {
     case suggestions([BirthPlaceSuggestion])
+    case timedOut([BirthPlaceSuggestion])
     case failed
 }
 
@@ -252,10 +253,19 @@ final class BirthPlaceSearchService: NSObject {
             return
         }
 
-        resumeSearch(
-            with: latestSearchResults,
-            isQueryFallback: latestSearchPass?.isQueryFallback ?? false
+        searchTimeoutTask?.cancel()
+        searchTimeoutTask = nil
+        resumeSearchContinuations(
+            with: .timedOut(
+                makeSuggestions(
+                    from: latestSearchResults,
+                    isQueryFallback: latestSearchPass?.isQueryFallback ?? false
+                )
+            )
         )
+        activeSearchPass = nil
+        latestSearchResults = []
+        latestSearchPass = nil
     }
 
     private func resumeSearch(
@@ -265,20 +275,29 @@ final class BirthPlaceSearchService: NSObject {
         searchTimeoutTask?.cancel()
         searchTimeoutTask = nil
         resumeSearchContinuations(
-            with: .suggestions(results.map {
-                BirthPlaceSuggestion(
-                    displayName: makeSuggestionDisplayName(
-                        for: $0,
-                        isQueryFallback: isQueryFallback
-                    ),
-                    completion: $0,
-                    isQueryFallback: isQueryFallback
-                )
-            })
+            with: .suggestions(
+                makeSuggestions(from: results, isQueryFallback: isQueryFallback)
+            )
         )
         activeSearchPass = nil
         latestSearchResults = []
         latestSearchPass = nil
+    }
+
+    private func makeSuggestions(
+        from results: [MKLocalSearchCompletion],
+        isQueryFallback: Bool
+    ) -> [BirthPlaceSuggestion] {
+        results.map {
+            BirthPlaceSuggestion(
+                displayName: makeSuggestionDisplayName(
+                    for: $0,
+                    isQueryFallback: isQueryFallback
+                ),
+                completion: $0,
+                isQueryFallback: isQueryFallback
+            )
+        }
     }
 
     private func resumeSearchContinuations(with result: BirthPlaceSearchResult) {

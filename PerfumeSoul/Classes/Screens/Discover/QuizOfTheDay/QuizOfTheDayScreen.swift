@@ -246,8 +246,8 @@ extension QuizOfTheDayScreen {
         if isRevealedCorrectAnswer {
             answerLetterColor = Color(.textPrimary)
         } else if isRevealedIncorrectAnswer {
-            answerLetterColor = Color(.backgroundPrimary)
-        } else if isSelected || isRevealedIncorrectAnswer {
+            answerLetterColor = Color(.textOnAvatar)
+        } else if isSelected {
             answerLetterColor = Color(.textOnAccent)
         } else {
             answerLetterColor = Color(.textSecondary)
@@ -329,7 +329,8 @@ extension QuizOfTheDayScreen {
     }
 
     func makeAnswerResultPill(isCorrect: Bool) -> some View {
-        let accentColor = isCorrect ? Color(.zodiacMint) : Color(.pinkButton)
+        let accentColor = isCorrect ? Color(.zodiacMint) : Color(.destructiveAccent)
+        let iconColor = isCorrect ? Color(.textPrimary) : Color(.textOnAvatar)
 
         return HStack(spacing: 12) {
             ZStack {
@@ -339,7 +340,7 @@ extension QuizOfTheDayScreen {
 
                 Image(systemName: isCorrect ? "checkmark" : "xmark")
                     .font(.system(size: 16, weight: .bold))
-                    .foregroundStyle(Color(.textPrimary))
+                    .foregroundStyle(iconColor)
                     .accessibilityHidden(true)
             }
 
@@ -385,7 +386,8 @@ extension QuizOfTheDayScreen {
         VStack(alignment: .leading, spacing: 18) {
             if let currentQuestion = viewModel.currentQuestion {
                 let isCorrect = viewModel.isSelectedAnswerCorrect
-                let accentColor = isCorrect ? Color(.zodiacMint) : Color(.pinkButton)
+                let accentColor = isCorrect ? Color(.zodiacMint) : Color(.destructiveAccent)
+                let iconColor = isCorrect ? Color(.textPrimary) : Color(.textOnAvatar)
 
                 HStack(spacing: 12) {
                     ZStack {
@@ -395,7 +397,7 @@ extension QuizOfTheDayScreen {
 
                         Image(systemName: isCorrect ? "checkmark" : "xmark")
                             .font(.title3.weight(.bold))
-                            .foregroundStyle(Color(.textPrimary))
+                            .foregroundStyle(iconColor)
                             .accessibilityHidden(true)
                     }
 
