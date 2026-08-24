@@ -66,9 +66,7 @@ extension CalculationPresenterImpl: CalculationPresenter {
         }
 
         await MainActor.run {
-            if viewModel.selectedBirthPlace?.displayName != query {
-                viewModel.selectedBirthPlace = nil
-            }
+            viewModel.selectedBirthPlace = nil
             viewModel.birthPlaceErrorMessage = nil
             viewModel.canRetryBirthPlaceSearch = false
             viewModel.birthPlaceSuggestions = []

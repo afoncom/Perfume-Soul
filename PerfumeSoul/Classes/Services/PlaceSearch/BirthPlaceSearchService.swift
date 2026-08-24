@@ -246,7 +246,6 @@ final class BirthPlaceSearchService: NSObject {
             return
         case .escalate:
             startSearchPass(queryFragment: searchQuery, isQueryFallback: true)
-            startSearchTimeout()
             return
         case .resume:
             resumeSearch(with: results, isQueryFallback: currentSearchPass.isQueryFallback)
@@ -315,14 +314,13 @@ final class BirthPlaceSearchService: NSObject {
             return
         }
 
-        if !currentSearchPass.isQueryFallback {
-            guard latestSearchResults.isEmpty else {
-                resumeSearch(with: latestSearchResults, isQueryFallback: false)
-                return
-            }
+        guard latestSearchResults.isEmpty else {
+            resumeSearch(with: latestSearchResults, isQueryFallback: currentSearchPass.isQueryFallback)
+            return
+        }
 
+        if !currentSearchPass.isQueryFallback {
             startSearchPass(queryFragment: searchQuery, isQueryFallback: true)
-            startSearchTimeout()
             return
         }
 
