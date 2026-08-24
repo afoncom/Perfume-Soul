@@ -103,15 +103,11 @@ final class BirthPlaceSearchService: NSObject {
     }
     
     func clear() {
-        activeSearchPass?.completer.cancel()
-        activeSearchPass?.completer.delegate = nil
         searchTimeoutTask?.cancel()
         searchTimeoutTask = nil
         resumeSearchContinuations(with: .suggestions([]))
         searchQuery = ""
-        activeSearchPass = nil
-        latestSearchResults = []
-        latestSearchPass = nil
+        cancelActiveSearchPass()
     }
 
     func resolve(_ suggestion: BirthPlaceSuggestion) async throws -> BirthPlaceSelection {
@@ -188,8 +184,7 @@ final class BirthPlaceSearchService: NSObject {
         queryFragment: String,
         isQueryFallback: Bool
     ) {
-        activeSearchPass?.completer.cancel()
-        activeSearchPass?.completer.delegate = nil
+        cancelActiveSearchPass()
 
         let completer = MKLocalSearchCompleter()
         completer.delegate = self
@@ -203,6 +198,14 @@ final class BirthPlaceSearchService: NSObject {
         latestSearchPass = activeSearchPass
 
         completer.queryFragment = queryFragment
+    }
+
+    private func cancelActiveSearchPass() {
+        activeSearchPass?.completer.cancel()
+        activeSearchPass?.completer.delegate = nil
+        activeSearchPass = nil
+        latestSearchResults = []
+        latestSearchPass = nil
     }
 
     private func startSearchTimeout() {
@@ -255,19 +258,14 @@ final class BirthPlaceSearchService: NSObject {
             return
         }
 
+        let suggestions = makeSuggestions(
+            from: latestSearchResults,
+            isQueryFallback: latestSearchPass?.isQueryFallback ?? false
+        )
         searchTimeoutTask?.cancel()
         searchTimeoutTask = nil
-        resumeSearchContinuations(
-            with: .timedOut(
-                makeSuggestions(
-                    from: latestSearchResults,
-                    isQueryFallback: latestSearchPass?.isQueryFallback ?? false
-                )
-            )
-        )
-        activeSearchPass = nil
-        latestSearchResults = []
-        latestSearchPass = nil
+        resumeSearchContinuations(with: .timedOut(suggestions))
+        cancelActiveSearchPass()
     }
 
     private func resumeSearch(
@@ -281,9 +279,7 @@ final class BirthPlaceSearchService: NSObject {
                 makeSuggestions(from: results, isQueryFallback: isQueryFallback)
             )
         )
-        activeSearchPass = nil
-        latestSearchResults = []
-        latestSearchPass = nil
+        cancelActiveSearchPass()
     }
 
     private func makeSuggestions(
@@ -320,6 +316,11 @@ final class BirthPlaceSearchService: NSObject {
         }
 
         if !currentSearchPass.isQueryFallback {
+            guard latestSearchResults.isEmpty else {
+                resumeSearch(with: latestSearchResults, isQueryFallback: false)
+                return
+            }
+
             startSearchPass(queryFragment: searchQuery, isQueryFallback: true)
             startSearchTimeout()
             return
@@ -328,9 +329,7 @@ final class BirthPlaceSearchService: NSObject {
         searchTimeoutTask?.cancel()
         searchTimeoutTask = nil
         resumeSearchContinuations(with: .failed)
-        activeSearchPass = nil
-        latestSearchResults = []
-        latestSearchPass = nil
+        cancelActiveSearchPass()
     }
 
     private func matchesActiveSearchPass(for completer: MKLocalSearchCompleter) -> Bool {

@@ -57,6 +57,13 @@ extension CalculationPresenterImpl: CalculationPresenter {
     
     func birthPlaceDidChange(_ query: String) async {
         let searchQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        let isAlreadySelected = await MainActor.run {
+            viewModel.selectedBirthPlace?.displayName == searchQuery
+        }
+
+        guard !isAlreadySelected else {
+            return
+        }
 
         await MainActor.run {
             if viewModel.selectedBirthPlace?.displayName != query {
