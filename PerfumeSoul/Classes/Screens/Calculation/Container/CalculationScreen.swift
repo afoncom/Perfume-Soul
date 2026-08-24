@@ -201,17 +201,20 @@ extension CalculationScreen {
 
                     Spacer(minLength: 0)
 
-                    Button {
-                        focusedField = .birthPlace
-                        viewModel.birthPlaceSearchRetryID += 1
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
-                            .font(.footnote.weight(.semibold))
-                            .foregroundStyle(Color(.destructiveAccent))
-                            .frame(width: 28, height: 28)
+                    if viewModel.canRetryBirthPlaceSearch {
+                        Button {
+                            focusedField = .birthPlace
+                            viewModel.birthPlaceSearchRetryID += 1
+                        } label: {
+                            Image(systemName: "arrow.clockwise")
+                                .font(.footnote.weight(.semibold))
+                                .foregroundStyle(Color(.destructiveAccent))
+                                .frame(width: 44, height: 44)
+                                .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel(L10n.Calculation.birthPlaceRetryButton)
                     }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel(L10n.Calculation.birthPlaceRetryButton)
                 }
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)

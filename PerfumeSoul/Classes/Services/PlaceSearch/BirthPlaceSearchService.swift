@@ -103,6 +103,7 @@ final class BirthPlaceSearchService: NSObject {
     }
     
     func clear() {
+        activeSearchPass?.completer.cancel()
         activeSearchPass?.completer.delegate = nil
         searchTimeoutTask?.cancel()
         searchTimeoutTask = nil
@@ -187,6 +188,7 @@ final class BirthPlaceSearchService: NSObject {
         queryFragment: String,
         isQueryFallback: Bool
     ) {
+        activeSearchPass?.completer.cancel()
         activeSearchPass?.completer.delegate = nil
 
         let completer = MKLocalSearchCompleter()

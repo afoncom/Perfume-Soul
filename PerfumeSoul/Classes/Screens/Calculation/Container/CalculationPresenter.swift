@@ -63,6 +63,7 @@ extension CalculationPresenterImpl: CalculationPresenter {
                 viewModel.selectedBirthPlace = nil
             }
             viewModel.birthPlaceErrorMessage = nil
+            viewModel.canRetryBirthPlaceSearch = false
             viewModel.birthPlaceSuggestions = []
             viewModel.isSearchingBirthPlace = true
             viewModel.activeBirthPlaceSearchQuery = searchQuery
@@ -78,16 +79,21 @@ extension CalculationPresenterImpl: CalculationPresenter {
             switch result {
             case let .suggestions(suggestions):
                 viewModel.birthPlaceSuggestions = suggestions
+                viewModel.canRetryBirthPlaceSearch = false
             case let .timedOut(suggestions):
                 viewModel.birthPlaceSuggestions = suggestions
                 if suggestions.isEmpty {
                     viewModel.activeBirthPlaceSearchQuery = ""
-                    viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceSelectionError
+                    viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceSearchError
+                    viewModel.canRetryBirthPlaceSearch = true
+                } else {
+                    viewModel.canRetryBirthPlaceSearch = false
                 }
             case .failed:
                 viewModel.birthPlaceSuggestions = []
                 viewModel.activeBirthPlaceSearchQuery = ""
-                viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceSelectionError
+                viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceSearchError
+                viewModel.canRetryBirthPlaceSearch = true
             }
         }
     }
@@ -97,6 +103,7 @@ extension CalculationPresenterImpl: CalculationPresenter {
             let suggestions = viewModel.birthPlaceSuggestions
             viewModel.birthPlaceSuggestions = []
             viewModel.birthPlaceErrorMessage = nil
+            viewModel.canRetryBirthPlaceSearch = false
             viewModel.isSearchingBirthPlace = true
             return suggestions
         }
@@ -110,6 +117,7 @@ extension CalculationPresenterImpl: CalculationPresenter {
                 viewModel.birthPlaceSuggestions = []
                 viewModel.isSearchingBirthPlace = false
                 viewModel.birthPlaceErrorMessage = nil
+                viewModel.canRetryBirthPlaceSearch = false
             }
 
             await birthPlaceSearch.clear()
@@ -119,6 +127,7 @@ extension CalculationPresenterImpl: CalculationPresenter {
                 viewModel.birthPlaceSuggestions = previousSuggestions
                 viewModel.isSearchingBirthPlace = false
                 viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceUnresolvedError
+                viewModel.canRetryBirthPlaceSearch = false
             }
         } catch {
             await MainActor.run {
@@ -126,6 +135,7 @@ extension CalculationPresenterImpl: CalculationPresenter {
                 viewModel.birthPlaceSuggestions = previousSuggestions
                 viewModel.isSearchingBirthPlace = false
                 viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceSelectionError
+                viewModel.canRetryBirthPlaceSearch = false
             }
         }
     }

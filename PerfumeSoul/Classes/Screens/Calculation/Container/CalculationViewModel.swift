@@ -20,6 +20,7 @@ import Observation
     var birthPlaceSearchRetryID = 0
     var birthPlaceSuggestions: [BirthPlaceSuggestion] = []
     var birthPlaceErrorMessage: String?
+    var canRetryBirthPlaceSearch = false
 
     var isContinueEnabled: Bool {
         !firstName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
