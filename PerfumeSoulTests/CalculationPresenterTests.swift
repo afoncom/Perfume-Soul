@@ -123,8 +123,9 @@ final class CalculationPresenterTests: XCTestCase {
             birthPlaceSearch: birthPlaceSearch
         )
 
-        await presenter.birthPlaceSuggestionTapped(parisSuggestion)
+        let isStillCurrent = await presenter.birthPlaceSuggestionTapped(parisSuggestion)
 
+        XCTAssertFalse(isStillCurrent)
         XCTAssertEqual(viewModel.birthPlace, "Berlin")
         XCTAssertNil(viewModel.selectedBirthPlace)
         XCTAssertEqual(viewModel.activeBirthPlaceSearchQuery, "Berlin")
@@ -154,8 +155,9 @@ final class CalculationPresenterTests: XCTestCase {
             birthPlaceSearch: birthPlaceSearch
         )
 
-        await presenter.birthPlaceSuggestionTapped(parisSuggestion)
+        let isStillCurrent = await presenter.birthPlaceSuggestionTapped(parisSuggestion)
 
+        XCTAssertFalse(isStillCurrent)
         XCTAssertEqual(viewModel.birthPlace, "Berlin")
         XCTAssertNil(viewModel.selectedBirthPlace)
         XCTAssertEqual(viewModel.activeBirthPlaceSearchQuery, "Berlin")

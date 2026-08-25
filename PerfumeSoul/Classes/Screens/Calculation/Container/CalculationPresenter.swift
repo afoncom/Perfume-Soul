@@ -11,7 +11,8 @@ import Foundation
 protocol CalculationPresenter {
     func continueButtonTapped() async
     func birthPlaceDidChange(_ query: String) async
-    func birthPlaceSuggestionTapped(_ suggestion: BirthPlaceSuggestion) async
+    @discardableResult
+    func birthPlaceSuggestionTapped(_ suggestion: BirthPlaceSuggestion) async -> Bool
 }
 
 final class CalculationPresenterImpl {
@@ -103,7 +104,8 @@ extension CalculationPresenterImpl: CalculationPresenter {
         }
     }
 
-    func birthPlaceSuggestionTapped(_ suggestion: BirthPlaceSuggestion) async {
+    @discardableResult
+    func birthPlaceSuggestionTapped(_ suggestion: BirthPlaceSuggestion) async -> Bool {
         let (previousSuggestions, requestQuery) = await MainActor.run { () -> ([BirthPlaceSuggestion], String) in
             let suggestions = viewModel.birthPlaceSuggestions
             viewModel.birthPlaceSuggestions = []
@@ -132,14 +134,15 @@ extension CalculationPresenterImpl: CalculationPresenter {
             }
 
             guard didApplySelection else {
-                return
+                return false
             }
 
             await birthPlaceSearch.clear()
+            return true
         } catch BirthPlaceSearchError.missingDisplayName, BirthPlaceSearchError.missingTimeZone {
-            await MainActor.run {
+            return await MainActor.run { () -> Bool in
                 guard viewModel.activeBirthPlaceSearchQuery == requestQuery else {
-                    return
+                    return false
                 }
 
                 viewModel.selectedBirthPlace = nil
@@ -147,11 +150,12 @@ extension CalculationPresenterImpl: CalculationPresenter {
                 viewModel.isSearchingBirthPlace = false
                 viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceUnresolvedError
                 viewModel.canRetryBirthPlaceSearch = false
+                return true
             }
         } catch {
-            await MainActor.run {
+            return await MainActor.run { () -> Bool in
                 guard viewModel.activeBirthPlaceSearchQuery == requestQuery else {
-                    return
+                    return false
                 }
 
                 viewModel.selectedBirthPlace = nil
@@ -159,6 +163,7 @@ extension CalculationPresenterImpl: CalculationPresenter {
                 viewModel.isSearchingBirthPlace = false
                 viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceSelectionError
                 viewModel.canRetryBirthPlaceSearch = false
+                return true
             }
         }
     }

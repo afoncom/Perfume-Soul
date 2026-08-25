@@ -16,8 +16,7 @@ struct BirthPlaceSelection: Equatable {
     let timeZoneIdentifier: String
 }
 
-struct BirthPlaceSuggestion: Identifiable {
-    var id: String { "\(completion.title)|\(completion.subtitle)" }
+struct BirthPlaceSuggestion {
     let displayName: String
     let completion: MKLocalSearchCompletion
     let isQueryFallback: Bool

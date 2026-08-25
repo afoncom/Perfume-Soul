@@ -252,7 +252,11 @@ extension CalculationScreen {
                         ForEach(Array(viewModel.birthPlaceSuggestions.prefix(5).enumerated()), id: \.offset) { index, suggestion in
                             Button {
                                 Task {
-                                    await presenter.birthPlaceSuggestionTapped(suggestion)
+                                    let isStillCurrent = await presenter.birthPlaceSuggestionTapped(suggestion)
+                                    guard isStillCurrent else {
+                                        return
+                                    }
+
                                     await MainActor.run {
                                         focusedField = viewModel.birthPlaceErrorMessage == nil ? nil : .birthPlace
                                     }

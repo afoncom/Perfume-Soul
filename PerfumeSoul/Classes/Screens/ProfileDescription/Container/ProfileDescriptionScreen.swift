@@ -25,6 +25,7 @@ struct ProfileDescriptionScreen: View {
             makeContentView()
         }
         .background(Color(.backgroundPrimary).ignoresSafeArea())
+        .modifier(TopSafeAreaBackground(isEnabled: presenter.isPresentedInOnboarding))
         .safeAreaInset(edge: .bottom) {
             if presenter.isPresentedInOnboarding {
                 makeContinueButton()
