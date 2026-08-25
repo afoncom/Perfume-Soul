@@ -60,6 +60,13 @@ enum BirthPlaceSearchPassResolver {
 }
 
 @MainActor
+protocol BirthPlaceSearching {
+    func search(_ query: String) async -> BirthPlaceSearchResult
+    func resolve(_ suggestion: BirthPlaceSuggestion) async throws -> BirthPlaceSelection
+    func clear()
+}
+
+@MainActor
 final class BirthPlaceSearchService: NSObject {
     private let geocoder = CLGeocoder()
     private var searchContinuations: [CheckedContinuation<BirthPlaceSearchResult, Never>] = []
@@ -338,6 +345,8 @@ final class BirthPlaceSearchService: NSObject {
         return completer === activeSearchPass.completer
     }
 }
+
+extension BirthPlaceSearchService: BirthPlaceSearching { }
 
 extension BirthPlaceSearchService: MKLocalSearchCompleterDelegate {
     nonisolated func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {

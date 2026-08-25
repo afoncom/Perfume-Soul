@@ -18,13 +18,13 @@ final class CalculationPresenterImpl {
     private let viewModel: CalculationViewModel
     private let router: CalculationRouter
     private let profileService: ProfileService
-    private let birthPlaceSearch: BirthPlaceSearchService
+    private let birthPlaceSearch: BirthPlaceSearching
     
     init(
         viewModel: CalculationViewModel,
         router: CalculationRouter,
         profileService: ProfileService,
-        birthPlaceSearch: BirthPlaceSearchService
+        birthPlaceSearch: BirthPlaceSearching
     ) {
         self.viewModel = viewModel
         self.router = router
@@ -120,6 +120,7 @@ extension CalculationPresenterImpl: CalculationPresenter {
                 viewModel.birthPlace = selection.displayName
                 viewModel.selectedBirthPlace = selection
                 viewModel.birthPlaceSuggestions = []
+                viewModel.activeBirthPlaceSearchQuery = ""
                 viewModel.isSearchingBirthPlace = false
                 viewModel.birthPlaceErrorMessage = nil
                 viewModel.canRetryBirthPlaceSearch = false
