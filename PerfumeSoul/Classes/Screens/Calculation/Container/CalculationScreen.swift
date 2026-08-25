@@ -34,7 +34,7 @@ struct CalculationScreen: View {
             .padding(.bottom, 24)
         }
         .background(Color(.backgroundPrimary))
-        .modifier(TopSafeAreaBackground(isEnabled: true))
+        .modifier(TopSafeAreaBackground())
         .scrollDismissesKeyboard(.interactively)
         .sheet(item: $activePicker) { picker in
             switch picker {
@@ -174,6 +174,11 @@ extension CalculationScreen {
                     .task(id: "\(focusedField == .birthPlace)|\(birthPlaceSearchQuery)|\(viewModel.birthPlaceSearchRetryID)") {
                         try? await Task.sleep(for: .seconds(0.5))
                         guard focusedField == .birthPlace && !Task.isCancelled else {
+                            return
+                        }
+                        guard viewModel.birthPlaceSuggestions.isEmpty
+                            || viewModel.activeBirthPlaceSearchQuery != birthPlaceSearchQuery
+                        else {
                             return
                         }
                         await presenter.birthPlaceDidChange(birthPlaceSearchQuery)

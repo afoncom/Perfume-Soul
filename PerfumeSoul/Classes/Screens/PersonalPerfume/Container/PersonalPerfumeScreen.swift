@@ -40,7 +40,6 @@ struct PersonalPerfumeScreen: View {
             )
             .ignoresSafeArea()
         )
-        .modifier(TopSafeAreaBackground(isEnabled: presenter.isPresentedInOnboarding))
         .task {
             await presenter.onAppear()
         }
