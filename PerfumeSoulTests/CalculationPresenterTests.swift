@@ -98,6 +98,73 @@ final class CalculationPresenterTests: XCTestCase {
     }
 
     @MainActor
+    func testResolveResultDoesNotOverwriteNewerBirthPlaceQuery() async {
+        let viewModel = CalculationViewModel()
+        let parisSuggestion = makeSuggestion(displayName: "Paris, France")
+        let berlinSuggestion = makeSuggestion(displayName: "Berlin, Germany")
+        viewModel.birthPlace = "Par"
+        viewModel.activeBirthPlaceSearchQuery = "Par"
+        viewModel.birthPlaceSuggestions = [parisSuggestion]
+        let birthPlaceSearch = BirthPlaceSearchMock()
+        birthPlaceSearch.resolveSelection = BirthPlaceSelection(
+            displayName: "Paris, France",
+            latitude: 48.8566,
+            longitude: 2.3522,
+            timeZoneIdentifier: "Europe/Paris"
+        )
+        birthPlaceSearch.beforeResolveReturns = {
+            viewModel.birthPlace = "Berlin"
+            viewModel.activeBirthPlaceSearchQuery = "Berlin"
+            viewModel.birthPlaceSuggestions = [berlinSuggestion]
+            viewModel.isSearchingBirthPlace = false
+        }
+        let presenter = makePresenter(
+            viewModel: viewModel,
+            birthPlaceSearch: birthPlaceSearch
+        )
+
+        await presenter.birthPlaceSuggestionTapped(parisSuggestion)
+
+        XCTAssertEqual(viewModel.birthPlace, "Berlin")
+        XCTAssertNil(viewModel.selectedBirthPlace)
+        XCTAssertEqual(viewModel.activeBirthPlaceSearchQuery, "Berlin")
+        XCTAssertEqual(viewModel.birthPlaceSuggestions.map(\.displayName), ["Berlin, Germany"])
+        XCTAssertFalse(viewModel.isSearchingBirthPlace)
+        XCTAssertFalse(birthPlaceSearch.didClear)
+    }
+
+    @MainActor
+    func testResolveErrorDoesNotRestorePreviousSuggestionsForNewerBirthPlaceQuery() async {
+        let viewModel = CalculationViewModel()
+        let parisSuggestion = makeSuggestion(displayName: "Paris, France")
+        let berlinSuggestion = makeSuggestion(displayName: "Berlin, Germany")
+        viewModel.birthPlace = "Par"
+        viewModel.activeBirthPlaceSearchQuery = "Par"
+        viewModel.birthPlaceSuggestions = [parisSuggestion]
+        let birthPlaceSearch = BirthPlaceSearchMock()
+        birthPlaceSearch.resolveError = BirthPlaceSearchError.missingTimeZone
+        birthPlaceSearch.beforeResolveReturns = {
+            viewModel.birthPlace = "Berlin"
+            viewModel.activeBirthPlaceSearchQuery = "Berlin"
+            viewModel.birthPlaceSuggestions = [berlinSuggestion]
+            viewModel.isSearchingBirthPlace = false
+        }
+        let presenter = makePresenter(
+            viewModel: viewModel,
+            birthPlaceSearch: birthPlaceSearch
+        )
+
+        await presenter.birthPlaceSuggestionTapped(parisSuggestion)
+
+        XCTAssertEqual(viewModel.birthPlace, "Berlin")
+        XCTAssertNil(viewModel.selectedBirthPlace)
+        XCTAssertEqual(viewModel.activeBirthPlaceSearchQuery, "Berlin")
+        XCTAssertEqual(viewModel.birthPlaceSuggestions.map(\.displayName), ["Berlin, Germany"])
+        XCTAssertNil(viewModel.birthPlaceErrorMessage)
+        XCTAssertFalse(viewModel.isSearchingBirthPlace)
+    }
+
+    @MainActor
     private func makePresenter(
         viewModel: CalculationViewModel,
         birthPlaceSearch: BirthPlaceSearchMock
@@ -140,6 +207,7 @@ private final class BirthPlaceSearchMock: BirthPlaceSearching {
         timeZoneIdentifier: "Europe/Madrid"
     )
     var resolveError: Error?
+    var beforeResolveReturns: (() -> Void)?
     var didClear = false
 
     func search(_ query: String) async -> BirthPlaceSearchResult {
@@ -147,6 +215,8 @@ private final class BirthPlaceSearchMock: BirthPlaceSearching {
     }
 
     func resolve(_ suggestion: BirthPlaceSuggestion) async throws -> BirthPlaceSelection {
+        beforeResolveReturns?()
+
         if let resolveError {
             throw resolveError
         }

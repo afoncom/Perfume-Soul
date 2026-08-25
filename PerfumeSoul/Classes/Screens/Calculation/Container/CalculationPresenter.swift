@@ -104,19 +104,23 @@ extension CalculationPresenterImpl: CalculationPresenter {
     }
 
     func birthPlaceSuggestionTapped(_ suggestion: BirthPlaceSuggestion) async {
-        let previousSuggestions = await MainActor.run { () -> [BirthPlaceSuggestion] in
+        let (previousSuggestions, requestQuery) = await MainActor.run { () -> ([BirthPlaceSuggestion], String) in
             let suggestions = viewModel.birthPlaceSuggestions
             viewModel.birthPlaceSuggestions = []
             viewModel.birthPlaceErrorMessage = nil
             viewModel.canRetryBirthPlaceSearch = false
             viewModel.isSearchingBirthPlace = true
-            return suggestions
+            return (suggestions, viewModel.activeBirthPlaceSearchQuery)
         }
 
         do {
             let selection = try await birthPlaceSearch.resolve(suggestion)
 
-            await MainActor.run {
+            let didApplySelection = await MainActor.run { () -> Bool in
+                guard viewModel.activeBirthPlaceSearchQuery == requestQuery else {
+                    return false
+                }
+
                 viewModel.birthPlace = selection.displayName
                 viewModel.selectedBirthPlace = selection
                 viewModel.birthPlaceSuggestions = []
@@ -124,11 +128,20 @@ extension CalculationPresenterImpl: CalculationPresenter {
                 viewModel.isSearchingBirthPlace = false
                 viewModel.birthPlaceErrorMessage = nil
                 viewModel.canRetryBirthPlaceSearch = false
+                return true
+            }
+
+            guard didApplySelection else {
+                return
             }
 
             await birthPlaceSearch.clear()
         } catch BirthPlaceSearchError.missingDisplayName, BirthPlaceSearchError.missingTimeZone {
             await MainActor.run {
+                guard viewModel.activeBirthPlaceSearchQuery == requestQuery else {
+                    return
+                }
+
                 viewModel.selectedBirthPlace = nil
                 viewModel.birthPlaceSuggestions = previousSuggestions
                 viewModel.isSearchingBirthPlace = false
@@ -137,6 +150,10 @@ extension CalculationPresenterImpl: CalculationPresenter {
             }
         } catch {
             await MainActor.run {
+                guard viewModel.activeBirthPlaceSearchQuery == requestQuery else {
+                    return
+                }
+
                 viewModel.selectedBirthPlace = nil
                 viewModel.birthPlaceSuggestions = previousSuggestions
                 viewModel.isSearchingBirthPlace = false
