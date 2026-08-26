@@ -176,11 +176,10 @@ extension CalculationScreen {
                         guard focusedField == .birthPlace && !Task.isCancelled else {
                             return
                         }
-                        guard viewModel.birthPlaceSuggestions.isEmpty
-                            || viewModel.activeBirthPlaceSearchQuery != birthPlaceSearchQuery
-                        else {
+                        guard viewModel.activeBirthPlaceSearchQuery != birthPlaceSearchQuery else {
                             return
                         }
+
                         await presenter.birthPlaceDidChange(birthPlaceSearchQuery)
                     }
             }

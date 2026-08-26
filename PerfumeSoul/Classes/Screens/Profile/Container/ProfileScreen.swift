@@ -166,10 +166,8 @@ extension ProfileScreen {
 
                     LazyVGrid(
                         columns: Array(
-                            // Element balance is weighted from sun, moon and ascendant only,
-                            // so at most three elements can be non-zero after the > 0 filter.
                             repeating: GridItem(.flexible(), spacing: 4, alignment: .leading),
-                            count: 3
+                            count: elementItems.count
                         ),
                         spacing: 8
                     ) {
