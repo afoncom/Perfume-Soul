@@ -232,7 +232,7 @@ extension CalculationScreen {
 
             if focusedField == .birthPlace,
                birthPlaceSearchQuery.count >= 2,
-               viewModel.birthPlaceErrorMessage == nil,
+               viewModel.birthPlaceErrorMessage == nil || !viewModel.birthPlaceSuggestions.isEmpty,
                viewModel.selectedBirthPlace?.displayName != birthPlaceSearchQuery {
                 VStack(spacing: 0) {
                     if isBirthPlaceSearchPending {

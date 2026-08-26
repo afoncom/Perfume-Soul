@@ -107,7 +107,7 @@ extension FindPerfumesScreen {
             )
 
             makePerfumeField(
-                title: L10n.Discover.FindSimilar.secondPerfumeTitle,
+                title: L10n.Discover.FindSimilar.additionalPerfumeTitle,
                 placeholder: L10n.Discover.FindSimilar.perfumePlaceholder,
                 text: Binding(
                     get: { viewModel.secondSearchText },
@@ -123,7 +123,7 @@ extension FindPerfumesScreen {
             )
 
             makePerfumeField(
-                title: L10n.Discover.FindSimilar.thirdPerfumeTitle,
+                title: L10n.Discover.FindSimilar.additionalPerfumeTitle,
                 placeholder: L10n.Discover.FindSimilar.perfumePlaceholder,
                 text: Binding(
                     get: { viewModel.thirdSearchText },
