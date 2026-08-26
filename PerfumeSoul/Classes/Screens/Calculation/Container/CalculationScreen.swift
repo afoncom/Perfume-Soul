@@ -230,7 +230,10 @@ extension CalculationScreen {
             let isBirthPlaceSearchPending = viewModel.isSearchingBirthPlace
                 || viewModel.activeBirthPlaceSearchQuery != birthPlaceSearchQuery
 
-            if focusedField == .birthPlace, birthPlaceSearchQuery.count >= 2 {
+            if focusedField == .birthPlace,
+               birthPlaceSearchQuery.count >= 2,
+               viewModel.birthPlaceErrorMessage == nil,
+               viewModel.selectedBirthPlace?.displayName != birthPlaceSearchQuery {
                 VStack(spacing: 0) {
                     if isBirthPlaceSearchPending {
                         ProgressView()
