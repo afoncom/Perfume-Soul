@@ -404,7 +404,7 @@ extension QuizOfTheDayScreen {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(L10n.QuizOfTheDay.explanationTitle)
                             .font(.subheadline.weight(.medium))
-                            .foregroundStyle(Color(.textSecondary))
+                            .foregroundStyle(Color(.descriptionText))
 
                         Text(isCorrect ? L10n.QuizOfTheDay.correctResult : L10n.QuizOfTheDay.incorrectResult)
                             .font(.title2.weight(.semibold))

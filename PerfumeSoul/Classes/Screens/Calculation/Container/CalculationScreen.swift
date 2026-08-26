@@ -227,27 +227,23 @@ extension CalculationScreen {
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             }
             
-            let hasDropdownContent = viewModel.isSearchingBirthPlace
-                || !viewModel.birthPlaceSuggestions.isEmpty
-                || viewModel.activeBirthPlaceSearchQuery == birthPlaceSearchQuery
+            let isBirthPlaceSearchPending = viewModel.isSearchingBirthPlace
+                || viewModel.activeBirthPlaceSearchQuery != birthPlaceSearchQuery
 
-            if focusedField == .birthPlace, birthPlaceSearchQuery.count >= 2, hasDropdownContent {
+            if focusedField == .birthPlace, birthPlaceSearchQuery.count >= 2 {
                 VStack(spacing: 0) {
-                    if viewModel.isSearchingBirthPlace, viewModel.birthPlaceSuggestions.isEmpty {
+                    if isBirthPlaceSearchPending {
                         ProgressView()
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 14)
-                    } else if viewModel.birthPlaceSuggestions.isEmpty,
-                              viewModel.activeBirthPlaceSearchQuery == birthPlaceSearchQuery {
+                    } else if viewModel.birthPlaceSuggestions.isEmpty {
                         Text(L10n.Calculation.birthPlaceNoResults)
                             .font(.subheadline)
-                            .foregroundStyle(Color(.textSecondary))
+                            .foregroundStyle(Color(.descriptionText))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 16)
                             .padding(.vertical, 12)
-                    }
-
-                    if viewModel.activeBirthPlaceSearchQuery == birthPlaceSearchQuery {
+                    } else {
                         ForEach(Array(viewModel.birthPlaceSuggestions.prefix(5).enumerated()), id: \.offset) { index, suggestion in
                             Button {
                                 Task {

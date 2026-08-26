@@ -159,7 +159,7 @@ extension ProfileScreen {
                 if elementItems.isEmpty {
                     Text(L10n.Profile.ElementBalance.unavailable)
                         .font(.footnote)
-                        .foregroundStyle(Color(.textSecondary))
+                        .foregroundStyle(Color(.descriptionText))
                         .frame(maxWidth: .infinity, alignment: .leading)
                 } else {
                     makeElementBalanceBar(elementItems: elementItems)

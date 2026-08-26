@@ -5,7 +5,7 @@
 "discover.compare.placeholderB" = "Аромат B";
 "discover.compare.title" = "Сравнение ароматов";
 "discover.findSimilar.button" = "Найти";
-"discover.findSimilar.firstPerfumeSubtitle" = "Найдите или выберите аромат";
+"discover.findSimilar.perfumePlaceholder" = "Найдите или выберите аромат";
 "discover.findSimilar.firstPerfumeValidationMessage" = "Выберите хотя бы один аромат из списка.";
 "discover.findSimilar.selectionValidationMessage" = "Если вы ввели дополнительный аромат, выберите его из списка.";
 "discover.findSimilar.samePerfumesValidationMessage" = "Для рекомендаций выберите разные ароматы.";

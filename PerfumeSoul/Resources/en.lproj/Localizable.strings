@@ -5,7 +5,7 @@
 "discover.compare.placeholderB" = "Perfume B";
 "discover.compare.title" = "Compare Perfumes";
 "discover.findSimilar.button" = "Find";
-"discover.findSimilar.firstPerfumeSubtitle" = "Find or select a perfume";
+"discover.findSimilar.perfumePlaceholder" = "Find or select a perfume";
 "discover.findSimilar.firstPerfumeValidationMessage" = "Select at least one perfume from the list.";
 "discover.findSimilar.selectionValidationMessage" = "If you entered an optional perfume, select it from the list.";
 "discover.findSimilar.samePerfumesValidationMessage" = "Choose different perfumes for recommendations.";
