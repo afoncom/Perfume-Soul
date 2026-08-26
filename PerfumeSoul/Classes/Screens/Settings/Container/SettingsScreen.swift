@@ -117,7 +117,8 @@ extension SettingsScreen {
                     icon: "heart.fill",
                     iconColor: Color(.pinkButton),
                     title: L10n.Settings.Support.supportDeveloperTitle,
-                    subtitle: L10n.Settings.Support.supportDeveloperSubtitle
+                    subtitle: L10n.Settings.Support.supportDeveloperSubtitle,
+                    showsDisclosure: false
                 )
                 // TODO(#100): Restore Rate App when App Store ID is available and open the write-review URL.
             }
@@ -152,7 +153,8 @@ extension SettingsScreen {
                     icon: "info.circle",
                     iconColor: Color(.zodiacPurple),
                     title: L10n.Settings.About.aboutAppTitle,
-                    subtitle: L10n.Settings.About.aboutAppSubtitle
+                    subtitle: L10n.Settings.About.aboutAppSubtitle,
+                    showsDisclosure: false
                 )
             }
             .padding(.horizontal, 14)
@@ -204,7 +206,8 @@ extension SettingsScreen {
         icon: String,
         iconColor: Color,
         title: String,
-        subtitle: String
+        subtitle: String,
+        showsDisclosure: Bool = true
     ) -> some View {
         HStack(spacing: 14) {
             makeIconCircle(icon: icon, iconColor: iconColor)
@@ -222,9 +225,12 @@ extension SettingsScreen {
 
             Spacer(minLength: 10)
 
-            Image(systemName: "chevron.right")
-                .font(.headline)
-                .foregroundStyle(Color(.textSecondary))
+            if showsDisclosure {
+                Image(systemName: "chevron.right")
+                    .font(.headline)
+                    .foregroundStyle(Color(.textSecondary))
+                    .accessibilityHidden(true)
+            }
         }
         .padding(.vertical, 14)
     }

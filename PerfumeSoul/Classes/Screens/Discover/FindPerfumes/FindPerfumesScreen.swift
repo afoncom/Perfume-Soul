@@ -108,7 +108,7 @@ extension FindPerfumesScreen {
 
             makePerfumeField(
                 title: L10n.Discover.FindSimilar.secondPerfumeTitle,
-                placeholder: L10n.Discover.FindSimilar.optionalSubtitle,
+                placeholder: L10n.Discover.FindSimilar.firstPerfumeSubtitle,
                 text: Binding(
                     get: { viewModel.secondSearchText },
                     set: { newValue in
@@ -124,7 +124,7 @@ extension FindPerfumesScreen {
 
             makePerfumeField(
                 title: L10n.Discover.FindSimilar.thirdPerfumeTitle,
-                placeholder: L10n.Discover.FindSimilar.optionalSubtitle,
+                placeholder: L10n.Discover.FindSimilar.firstPerfumeSubtitle,
                 text: Binding(
                     get: { viewModel.thirdSearchText },
                     set: { newValue in
@@ -163,6 +163,13 @@ extension FindPerfumesScreen {
                         .fontWeight(.medium)
                         .foregroundStyle(Color(.textPrimary))
                         .accessibilityHidden(true)
+
+                    if field != .first {
+                        Text(L10n.Discover.FindSimilar.optionalSubtitle)
+                            .font(.caption)
+                            .foregroundStyle(Color(.textSecondary))
+                            .accessibilityHidden(true)
+                    }
                 }
 
                 TextField("", text: text, prompt: Text(placeholder))
