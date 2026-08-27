@@ -25,6 +25,11 @@ final class ProfileModule {
             dayKeyProvider: dayKeyProvider
         )
         let dailyQuizStateStorage = DailyQuizStateStorageImpl(userDefaults: .standard)
+        let appVersionProvider = AppVersionProviderImpl()
+        let appReviewRequester = AppReviewRequesterImpl(
+            userDefaults: .standard,
+            appVersionProvider: appVersionProvider
+        )
         let profileAvatarBuilder = ProfileAvatarBuilderImpl()
         let router = ProfileRouterImpl(
             navigationController: navigationController,
@@ -38,13 +43,14 @@ final class ProfileModule {
             profileService: profileService,
             profileCalculationService: profileCalculationService,
             quizProgressService: quizProgressService,
-            dailyQuizStateStorage: dailyQuizStateStorage
+            dailyQuizStateStorage: dailyQuizStateStorage,
+            appReviewRequester: appReviewRequester,
+            profileAvatarBuilder: profileAvatarBuilder
         )
         
         let view = ProfileScreen(
             viewModel: viewModel,
-            presenter: presenter,
-            profileAvatarBuilder: profileAvatarBuilder
+            presenter: presenter
         )
         
         let hostingController = UIHostingController(rootView: view)

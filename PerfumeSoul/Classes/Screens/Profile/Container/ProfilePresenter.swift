@@ -7,7 +7,6 @@
 //
 
 protocol ProfilePresenter {
-    func addedNewProfilesButtonTab()
     func personalPerfumesButtonTapped() async
     func profileDescriptionButtonTapped()
     func retryProfileCalculationButtonTapped() async
@@ -23,6 +22,8 @@ final class ProfilePresenterImpl {
     private let profileCalculationService: ProfileCalculationService
     private let quizProgressService: QuizProgressService
     private let dailyQuizStateStorage: DailyQuizStateStorage
+    private let appReviewRequester: AppReviewRequester
+    private let profileAvatarBuilder: ProfileAvatarBuilder
     
     init(
         viewModel: ProfileViewModel,
@@ -30,7 +31,9 @@ final class ProfilePresenterImpl {
         profileService: ProfileService,
         profileCalculationService: ProfileCalculationService,
         quizProgressService: QuizProgressService,
-        dailyQuizStateStorage: DailyQuizStateStorage
+        dailyQuizStateStorage: DailyQuizStateStorage,
+        appReviewRequester: AppReviewRequester,
+        profileAvatarBuilder: ProfileAvatarBuilder
     ) {
         self.viewModel = viewModel
         self.router = router
@@ -38,14 +41,12 @@ final class ProfilePresenterImpl {
         self.profileCalculationService = profileCalculationService
         self.quizProgressService = quizProgressService
         self.dailyQuizStateStorage = dailyQuizStateStorage
+        self.appReviewRequester = appReviewRequester
+        self.profileAvatarBuilder = profileAvatarBuilder
     }
 }
 
 extension ProfilePresenterImpl: ProfilePresenter {
-    func addedNewProfilesButtonTab() {
-        router.showAddedNewProfiles()
-    }
-    
     func personalPerfumesButtonTapped() async {
         let profileCalculationState = await MainActor.run {
             viewModel.profileCalculationState
@@ -96,7 +97,7 @@ extension ProfilePresenterImpl: ProfilePresenter {
         let quizProgress = quizProgressService.loadProgress()
 
         await MainActor.run {
-            viewModel.profile = profile
+            setProfile(profile)
             viewModel.totalCorrectQuizAnswers = quizProgress.totalCorrectQuizAnswers
         }
 
@@ -116,7 +117,8 @@ extension ProfilePresenterImpl: ProfilePresenter {
         dailyQuizStateStorage.clearState()
         
         await MainActor.run {
-            viewModel.profile = nil
+            appReviewRequester.resetCompletedQuizCount()
+            setProfile(nil)
             viewModel.profileCalculationState = .idle
             viewModel.totalCorrectQuizAnswers = 0
             router.showCalculationScreen()
@@ -171,7 +173,7 @@ extension ProfilePresenterImpl {
             await profileService.replaceProfile(updatedProfile)
 
             await MainActor.run {
-                viewModel.profile = updatedProfile
+                setProfile(updatedProfile)
                 viewModel.profileCalculationState = .loaded(profileCalculation)
             }
         } catch is ProfileCalculationError {
@@ -183,5 +185,10 @@ extension ProfilePresenterImpl {
                 viewModel.profileCalculationState = .failed
             }
         }
+    }
+
+    private func setProfile(_ profile: Profile?) {
+        viewModel.profile = profile
+        viewModel.avatar = profile.map { profileAvatarBuilder.makeAvatar(name: $0.name) } ?? .placeholder
     }
 }

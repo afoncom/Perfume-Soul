@@ -32,7 +32,7 @@ struct PersonalPerfumeScreen: View {
             }
             .padding(.horizontal, 16)
             .padding(.top, 24)
-            .padding(.bottom, bottomPadding)
+            .padding(.bottom, 32)
         }
         .background(
             LinearGradient(
@@ -44,6 +44,7 @@ struct PersonalPerfumeScreen: View {
             )
             .ignoresSafeArea()
         )
+        .modifier(TopSafeAreaBackground(isEnabled: presenter.isPresentedInOnboarding))
         .task {
             await presenter.onAppear()
         }
@@ -53,7 +54,7 @@ struct PersonalPerfumeScreen: View {
             }
         }
         .safeAreaInset(edge: .bottom) {
-            if presenter.shouldShowContinueButton {
+            if presenter.isPresentedInOnboarding {
                 makeContinueButton()
                     .padding(.horizontal, 24)
                     .padding(.top, 12)
@@ -88,24 +89,26 @@ extension PersonalPerfumeScreen {
                 title: L10n.PersonalPerfume.Error.MissingProfile.title,
                 subtitle: L10n.PersonalPerfume.Error.MissingProfile.subtitle,
                 canRetry: false,
-                canSkip: presenter.shouldShowContinueButton
+                canSkip: presenter.isPresentedInOnboarding
             )
         case .requestFailed:
             makeErrorState(
                 title: L10n.PersonalPerfume.Error.RequestFailed.title,
                 subtitle: L10n.PersonalPerfume.Error.RequestFailed.subtitle,
                 canRetry: true,
-                canSkip: presenter.shouldShowContinueButton
+                canSkip: presenter.isPresentedInOnboarding
             )
         }
     }
 
     private func makeHeaderView() -> some View {
         VStack(spacing: 8) {
-            Text(L10n.PersonalPerfume.title)
-                .font(.system(size: 28, weight: .medium, design: .rounded))
-                .foregroundStyle(Color(.titleText))
-                .multilineTextAlignment(.center)
+            if presenter.isPresentedInOnboarding {
+                Text(L10n.PersonalPerfume.title)
+                    .font(.system(size: 28, weight: .medium, design: .rounded))
+                    .foregroundStyle(Color(.titleText))
+                    .multilineTextAlignment(.center)
+            }
 
             Text(L10n.PersonalPerfume.subtitle)
                 .font(.system(size: 18, weight: .regular, design: .rounded))

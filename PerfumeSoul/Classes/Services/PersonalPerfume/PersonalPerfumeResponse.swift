@@ -2,7 +2,7 @@
 //  PersonalPerfumeResponse.swift
 //  PerfumeSoul
 //
-//  Created by Codex on 18.07.2026.
+//  Created by afon.com on 18.07.2026.
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
@@ -13,8 +13,6 @@ struct PersonalPerfumeResponse: Decodable {
     let perfumeName: String
     let brandName: String
     let marketSegment: PersonalPerfumeMarketSegment
-    let matchingNoteKeys: [String]
-    let matchingAccordKeys: [String]
     let matchPercentage: Int
     let longevityScore: Int?
     let sillageScore: Int?

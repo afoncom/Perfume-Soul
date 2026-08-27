@@ -2,7 +2,7 @@
 //  ProfileAvatarBuilderTests.swift
 //  PerfumeSoulTests
 //
-//  Created by Codex on 04.08.2026.
+//  Created by afon.com on 04.08.2026.
 //
 
 import XCTest
@@ -17,6 +17,12 @@ final class ProfileAvatarBuilderTests: XCTestCase {
         XCTAssertEqual(avatar.initials, "DI")
     }
 
+    func testMakeAvatarClampsUppercasedUnicodeInitials() {
+        let avatar = builder.makeAvatar(name: "ßeta Öz")
+
+        XCTAssertEqual(avatar.initials, "SÖ")
+    }
+
     func testMakeAvatarUsesFallbackForEmptyName() {
         let avatar = builder.makeAvatar(name: "   ")
 
@@ -29,5 +35,23 @@ final class ProfileAvatarBuilderTests: XCTestCase {
 
         XCTAssertEqual(firstAvatar.gradientColors, secondAvatar.gradientColors)
         XCTAssertEqual(firstAvatar.gradientColors.count, 2)
+    }
+
+    func testMakeAvatarKeysGradientByFullNameInsteadOfInitials() {
+        let firstAvatar = builder.makeAvatar(name: "Alex")
+        let secondAvatar = builder.makeAvatar(name: "Ada")
+
+        XCTAssertEqual(firstAvatar.initials, secondAvatar.initials)
+        XCTAssertNotEqual(firstAvatar.gradientColors, secondAvatar.gradientColors)
+    }
+
+    func testMakeAvatarNormalizesNameBeforeHashing() {
+        let firstAvatar = builder.makeAvatar(name: "Maria Elena")
+        let secondAvatar = builder.makeAvatar(name: "  maria   elena ")
+        let precomposedAvatar = builder.makeAvatar(name: "José Álvarez")
+        let decomposedAvatar = builder.makeAvatar(name: "Jose\u{301} A\u{301}lvarez")
+
+        XCTAssertEqual(firstAvatar.gradientColors, secondAvatar.gradientColors)
+        XCTAssertEqual(precomposedAvatar.gradientColors, decomposedAvatar.gradientColors)
     }
 }

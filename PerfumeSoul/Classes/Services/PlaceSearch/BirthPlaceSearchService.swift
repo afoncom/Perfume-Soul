@@ -16,59 +16,157 @@ struct BirthPlaceSelection: Equatable {
     let timeZoneIdentifier: String
 }
 
+struct BirthPlaceSuggestion {
+    let displayName: String
+    let completion: MKLocalSearchCompletion
+    let isQueryFallback: Bool
+}
+
+enum BirthPlaceSearchResult {
+    case suggestions([BirthPlaceSuggestion])
+    case timedOut([BirthPlaceSuggestion])
+    case failed
+}
+
+enum BirthPlaceSearchError: Error {
+    case searchFailed
+    case missingDisplayName
+    case missingTimeZone
+}
+
+enum BirthPlaceSearchOutcome: Equatable {
+    case wait
+    case escalate
+    case resume
+}
+
+enum BirthPlaceSearchPassResolver {
+    static func outcome(
+        isEmpty: Bool,
+        isSearching: Bool,
+        isQueryFallback: Bool
+    ) -> BirthPlaceSearchOutcome {
+        if isSearching {
+            return .wait
+        }
+
+        if isEmpty, !isQueryFallback {
+            return .escalate
+        }
+
+        return .resume
+    }
+}
+
+@MainActor
+protocol BirthPlaceSearching {
+    func search(_ query: String) async -> BirthPlaceSearchResult
+    func resolve(_ suggestion: BirthPlaceSuggestion) async throws -> BirthPlaceSelection
+    func clear()
+}
+
 @MainActor
 final class BirthPlaceSearchService: NSObject {
-    private let completer = MKLocalSearchCompleter()
-    private let geocoder = CLGeocoder()
-    private var searchContinuation: CheckedContinuation<[MKLocalSearchCompletion], Never>?
+    private var searchContinuations: [CheckedContinuation<BirthPlaceSearchResult, Never>] = []
+    private var searchTimeoutTask: Task<Void, Never>?
+    private var searchQuery = ""
+    private var activeSearchPass: SearchPass?
+    private var latestSearchResults: [MKLocalSearchCompletion] = []
+    private var latestSearchPass: SearchPass?
 
     override init() {
         super.init()
-        completer.delegate = self
-        completer.resultTypes = [.address, .query]
     }
 
-    func search(_ query: String) async -> [MKLocalSearchCompletion] {
+    func search(_ query: String) async -> BirthPlaceSearchResult {
         let trimmedQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
         
         guard trimmedQuery.count >= 2 else {
             clear()
-            return []
+            return .suggestions([])
+        }
+
+        guard trimmedQuery != searchQuery || searchContinuations.isEmpty else {
+            return await withCheckedContinuation { continuation in
+                searchContinuations.append(continuation)
+            }
         }
         
         return await withCheckedContinuation { continuation in
-            searchContinuation?.resume(returning: [])
-            searchContinuation = continuation
-            completer.queryFragment = trimmedQuery
+            searchTimeoutTask?.cancel()
+            resumeSearchContinuations(with: .suggestions([]))
+            searchContinuations = [continuation]
+            searchQuery = trimmedQuery
+            latestSearchResults = []
+            latestSearchPass = nil
+            startSearchPass(
+                queryFragment: trimmedQuery,
+                isQueryFallback: false
+            )
+            startSearchTimeout()
         }
     }
     
     func clear() {
-        completer.queryFragment = ""
-        searchContinuation?.resume(returning: [])
-        searchContinuation = nil
+        searchTimeoutTask?.cancel()
+        searchTimeoutTask = nil
+        resumeSearchContinuations(with: .suggestions([]))
+        searchQuery = ""
+        cancelActiveSearchPass()
     }
 
-    func resolve(_ completion: MKLocalSearchCompletion) async -> BirthPlaceSelection? {
-        let request = MKLocalSearch.Request(completion: completion)
+    func resolve(_ suggestion: BirthPlaceSuggestion) async throws -> BirthPlaceSelection {
+        try await withThrowingTaskGroup(of: BirthPlaceSelection.self) { group in
+            group.addTask { @MainActor in
+                try await self.resolveSelection(suggestion)
+            }
+            group.addTask {
+                try await Task.sleep(for: .seconds(3))
+                throw BirthPlaceSearchError.searchFailed
+            }
+
+            defer {
+                group.cancelAll()
+            }
+
+            guard let selection = try await group.next() else {
+                throw BirthPlaceSearchError.searchFailed
+            }
+
+            return selection
+        }
+    }
+
+    private func resolveSelection(_ suggestion: BirthPlaceSuggestion) async throws -> BirthPlaceSelection {
+        let request = MKLocalSearch.Request(completion: suggestion.completion)
         let search = MKLocalSearch(request: request)
 
         guard
-            let response = try? await search.start(),
+            let response = try? await withTaskCancellationHandler(operation: {
+                try await search.start()
+            }, onCancel: {
+                search.cancel()
+            }),
             let mapItem = response.mapItems.first
         else {
-            return nil
+            throw BirthPlaceSearchError.searchFailed
         }
 
         let coordinate = mapItem.placemark.coordinate
         let timeZoneIdentifier = await resolveTimeZoneIdentifier(for: mapItem.placemark)
 
         guard let timeZoneIdentifier else {
-            return nil
+            throw BirthPlaceSearchError.missingTimeZone
+        }
+
+        let displayName = try makeDisplayName(for: suggestion, mapItem: mapItem)
+
+        guard !displayName.isEmpty else {
+            throw BirthPlaceSearchError.missingDisplayName
         }
 
         return BirthPlaceSelection(
-            displayName: makeDisplayName(from: mapItem.placemark, fallback: completion),
+            displayName: displayName,
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
             timeZoneIdentifier: timeZoneIdentifier
@@ -85,60 +183,240 @@ final class BirthPlaceSearchService: NSObject {
             longitude: placemark.coordinate.longitude
         )
 
-        let placemarks = try? await geocoder.reverseGeocodeLocation(location)
+        let geocoder = CLGeocoder()
+        let placemarks = try? await withTaskCancellationHandler(operation: {
+            try await geocoder.reverseGeocodeLocation(location)
+        }, onCancel: {
+            geocoder.cancelGeocode()
+        })
         return placemarks?.first?.timeZone?.identifier
     }
 
     private func makeDisplayName(
-        from placemark: MKPlacemark,
-        fallback completion: MKLocalSearchCompletion
-    ) -> String {
-        let title = trimmed(completion.title) ?? trimmed(placemark.name) ?? ""
-        guard let administrativeArea = trimmed(placemark.administrativeArea) else {
-            return title
+        for suggestion: BirthPlaceSuggestion,
+        mapItem: MKMapItem
+    ) throws -> String {
+        guard suggestion.isQueryFallback else {
+            return BirthPlaceNameFormatter.format(
+                title: suggestion.completion.title,
+                subtitle: suggestion.completion.subtitle
+            )
         }
 
-        guard !isSamePlaceComponent(title, administrativeArea) else {
-            return title
+        let placemark = mapItem.placemark
+        guard let resolvedName = placemark.locality ?? placemark.administrativeArea else {
+            throw BirthPlaceSearchError.missingDisplayName
         }
 
-        return "\(title), \(administrativeArea)"
+        return BirthPlaceNameFormatter.format(
+            title: resolvedName,
+            subtitle: [placemark.administrativeArea, placemark.country]
+                .compactMap { $0 }
+                .joined(separator: ", ")
+        )
     }
 
-    private func trimmed(_ value: String?) -> String? {
-        let trimmedValue = value?.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmedValue?.isEmpty == false ? trimmedValue : nil
+    private func startSearchPass(
+        queryFragment: String,
+        isQueryFallback: Bool
+    ) {
+        cancelActiveSearchPass()
+
+        let completer = MKLocalSearchCompleter()
+        completer.delegate = self
+        completer.resultTypes = isQueryFallback ? [.query] : [.address]
+        activeSearchPass = SearchPass(
+            queryFragment: queryFragment,
+            isQueryFallback: isQueryFallback,
+            completer: completer
+        )
+        latestSearchResults = []
+        latestSearchPass = activeSearchPass
+
+        completer.queryFragment = queryFragment
     }
 
-    private func isSamePlaceComponent(_ lhs: String, _ rhs: String) -> Bool {
-        lhs.compare(
-            rhs,
-            options: [.caseInsensitive, .diacriticInsensitive],
-            locale: .current
-        ) == .orderedSame
+    private func cancelActiveSearchPass() {
+        activeSearchPass?.completer.cancel()
+        activeSearchPass?.completer.delegate = nil
+        activeSearchPass = nil
+        latestSearchResults = []
+        latestSearchPass = nil
     }
 
-    private func finishSearch(with results: [MKLocalSearchCompletion]) {
-        searchContinuation?.resume(returning: results)
-        searchContinuation = nil
+    private func startSearchTimeout() {
+        searchTimeoutTask?.cancel()
+        searchTimeoutTask = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(3))
+            guard !Task.isCancelled else {
+                return
+            }
+
+            self?.resumeWithLatestResults()
+        }
     }
 
-    private func failSearch() {
-        searchContinuation?.resume(returning: [])
-        searchContinuation = nil
+    private func finishSearch(
+        with results: [MKLocalSearchCompletion],
+        from completer: MKLocalSearchCompleter,
+        queryFragment: String,
+        isSearching: Bool
+    ) {
+        guard
+            !searchContinuations.isEmpty,
+            let currentSearchPass = activeSearchPass,
+            currentSearchPass.queryFragment == queryFragment,
+            matchesActiveSearchPass(for: completer)
+        else {
+            return
+        }
+        latestSearchResults = results
+        latestSearchPass = currentSearchPass
+
+        switch BirthPlaceSearchPassResolver.outcome(
+            isEmpty: results.isEmpty,
+            isSearching: isSearching,
+            isQueryFallback: currentSearchPass.isQueryFallback
+        ) {
+        case .wait:
+            return
+        case .escalate:
+            startSearchPass(queryFragment: searchQuery, isQueryFallback: true)
+            startSearchTimeout()
+            return
+        case .resume:
+            resumeSearch(with: results, isQueryFallback: currentSearchPass.isQueryFallback)
+        }
+    }
+
+    private func resumeWithLatestResults() {
+        guard !searchContinuations.isEmpty else {
+            return
+        }
+
+        let suggestions = makeSuggestions(
+            from: latestSearchResults,
+            isQueryFallback: latestSearchPass?.isQueryFallback ?? false
+        )
+        searchTimeoutTask?.cancel()
+        searchTimeoutTask = nil
+        resumeSearchContinuations(with: .timedOut(suggestions))
+        cancelActiveSearchPass()
+    }
+
+    private func resumeSearch(
+        with results: [MKLocalSearchCompletion],
+        isQueryFallback: Bool
+    ) {
+        searchTimeoutTask?.cancel()
+        searchTimeoutTask = nil
+        resumeSearchContinuations(
+            with: .suggestions(
+                makeSuggestions(from: results, isQueryFallback: isQueryFallback)
+            )
+        )
+        cancelActiveSearchPass()
+    }
+
+    private func makeSuggestions(
+        from results: [MKLocalSearchCompletion],
+        isQueryFallback: Bool
+    ) -> [BirthPlaceSuggestion] {
+        results.map {
+            BirthPlaceSuggestion(
+                displayName: makeSuggestionDisplayName(
+                    for: $0,
+                    isQueryFallback: isQueryFallback
+                ),
+                completion: $0,
+                isQueryFallback: isQueryFallback
+            )
+        }
+    }
+
+    private func resumeSearchContinuations(with result: BirthPlaceSearchResult) {
+        let continuations = searchContinuations
+        searchContinuations = []
+        continuations.forEach {
+            $0.resume(returning: result)
+        }
+    }
+
+    private func failSearch(from completer: MKLocalSearchCompleter) {
+        guard
+            !searchContinuations.isEmpty,
+            matchesActiveSearchPass(for: completer),
+            let currentSearchPass = activeSearchPass
+        else {
+            return
+        }
+
+        guard latestSearchResults.isEmpty else {
+            resumeSearch(with: latestSearchResults, isQueryFallback: currentSearchPass.isQueryFallback)
+            return
+        }
+
+        if !currentSearchPass.isQueryFallback {
+            startSearchPass(queryFragment: searchQuery, isQueryFallback: true)
+            startSearchTimeout()
+            return
+        }
+
+        searchTimeoutTask?.cancel()
+        searchTimeoutTask = nil
+        resumeSearchContinuations(with: .failed)
+        cancelActiveSearchPass()
+    }
+
+    private func matchesActiveSearchPass(for completer: MKLocalSearchCompleter) -> Bool {
+        guard let activeSearchPass else {
+            return false
+        }
+
+        return completer === activeSearchPass.completer
     }
 }
 
+extension BirthPlaceSearchService: BirthPlaceSearching { }
+
 extension BirthPlaceSearchService: MKLocalSearchCompleterDelegate {
     nonisolated func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        let queryFragment = completer.queryFragment
+        let results = completer.results
+        let isSearching = completer.isSearching
         Task { @MainActor [weak self] in
-            self?.finishSearch(with: completer.results)
+            self?.finishSearch(
+                with: results,
+                from: completer,
+                queryFragment: queryFragment,
+                isSearching: isSearching
+            )
         }
     }
 
     nonisolated func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: any Error) {
         Task { @MainActor [weak self] in
-            self?.failSearch()
+            self?.failSearch(from: completer)
         }
     }
+}
+
+private struct SearchPass {
+    let queryFragment: String
+    let isQueryFallback: Bool
+    let completer: MKLocalSearchCompleter
+}
+
+private func makeSuggestionDisplayName(
+    for completion: MKLocalSearchCompletion,
+    isQueryFallback: Bool
+) -> String {
+    guard !isQueryFallback else {
+        return completion.title
+    }
+
+    return BirthPlaceNameFormatter.format(
+        title: completion.title,
+        subtitle: completion.subtitle
+    )
 }

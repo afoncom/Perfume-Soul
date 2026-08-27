@@ -9,7 +9,7 @@
 import Foundation
 
 protocol PersonalPerfumePresenter {
-    var shouldShowContinueButton: Bool { get }
+    var isPresentedInOnboarding: Bool { get }
 
     func onAppear() async
     func retryButtonTapped() async
@@ -22,20 +22,20 @@ final class PersonalPerfumePresenterImpl {
     private let router: PersonalPerfumeRouter
     private let service: PersonalPerfumeService
     private let profileCalculation: ProfileCalculation?
-    let shouldShowContinueButton: Bool
+    let isPresentedInOnboarding: Bool
     
     init(
         viewModel: PersonalPerfumeViewModel,
         router: PersonalPerfumeRouter,
         service: PersonalPerfumeService,
         profileCalculation: ProfileCalculation?,
-        shouldShowContinueButton: Bool
+        isPresentedInOnboarding: Bool
     ) {
         self.viewModel = viewModel
         self.router = router
         self.service = service
         self.profileCalculation = profileCalculation
-        self.shouldShowContinueButton = shouldShowContinueButton
+        self.isPresentedInOnboarding = isPresentedInOnboarding
     }
 }
 

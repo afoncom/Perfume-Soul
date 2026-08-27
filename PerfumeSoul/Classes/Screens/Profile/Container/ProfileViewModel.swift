@@ -20,6 +20,7 @@ enum ProfileCalculationState: Equatable {
 
 @Observable final class ProfileViewModel {
     var profile: Profile?
+    var avatar: ProfileAvatar = .placeholder
     var profileCalculationState: ProfileCalculationState = .idle
     var isShowingDeleteProfileAlert = false
     var totalCorrectQuizAnswers = 0

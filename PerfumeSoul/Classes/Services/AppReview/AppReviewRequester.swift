@@ -9,15 +9,19 @@
 import StoreKit
 import UIKit
 
-protocol AppReviewRequesting {
+protocol AppReviewRequester {
     @MainActor
-    func requestReviewAfterQuizCompletion(in windowScene: UIWindowScene)
+    func registerQuizCompletion(for quizDayKey: String)
+    @MainActor
+    func requestReviewIfEligible(in windowScene: UIWindowScene)
+    @MainActor
+    func resetCompletedQuizCount()
 }
 
 final class AppReviewRequesterImpl {
     private enum Keys {
         static let completedQuizCount = "appReview.completedQuizCount"
-        static let completedQuizCountVersion = "appReview.completedQuizCountVersion"
+        static let lastCountedQuizDayKey = "appReview.lastCountedQuizDayKey"
         static let lastRequestedVersion = "appReview.lastRequestedVersion"
     }
 
@@ -34,21 +38,12 @@ final class AppReviewRequesterImpl {
     }
 
     @MainActor
-    func requestReviewAfterQuizCompletion(in windowScene: UIWindowScene) {
-        guard shouldRequestReviewAfterQuizCompletion() else {
-            return
+    func consumeReviewRequestSlot() -> Bool {
+        guard let appVersion = appVersionProvider.currentAppVersion() else {
+            return false
         }
 
-        requestReview(in: windowScene)
-    }
-
-    func shouldRequestReviewAfterQuizCompletion() -> Bool {
-        let appVersion = appVersionProvider.currentAppVersion()
-        resetCompletedQuizCountIfNeeded(for: appVersion)
-
-        let completedQuizCount = userDefaults.integer(forKey: Keys.completedQuizCount) + 1
-        userDefaults.set(completedQuizCount, forKey: Keys.completedQuizCount)
-
+        let completedQuizCount = userDefaults.integer(forKey: Keys.completedQuizCount)
         guard completedQuizCount >= minimumCompletedQuizCount else {
             return false
         }
@@ -58,22 +53,38 @@ final class AppReviewRequesterImpl {
         }
 
         userDefaults.set(appVersion, forKey: Keys.lastRequestedVersion)
+        userDefaults.removeObject(forKey: Keys.completedQuizCount)
         return true
-    }
-
-    @MainActor
-    private func requestReview(in windowScene: UIWindowScene) {
-        AppStore.requestReview(in: windowScene)
-    }
-
-    private func resetCompletedQuizCountIfNeeded(for appVersion: String) {
-        guard userDefaults.string(forKey: Keys.completedQuizCountVersion) != appVersion else {
-            return
-        }
-
-        userDefaults.set(0, forKey: Keys.completedQuizCount)
-        userDefaults.set(appVersion, forKey: Keys.completedQuizCountVersion)
     }
 }
 
-extension AppReviewRequesterImpl: AppReviewRequesting {}
+extension AppReviewRequesterImpl: AppReviewRequester {
+    @MainActor
+    func registerQuizCompletion(for quizDayKey: String) {
+        if
+            let lastCountedQuizDayKey = userDefaults.string(forKey: Keys.lastCountedQuizDayKey),
+            quizDayKey <= lastCountedQuizDayKey
+        {
+            return
+        }
+
+        userDefaults.set(quizDayKey, forKey: Keys.lastCountedQuizDayKey)
+        let completedQuizCount = userDefaults.integer(forKey: Keys.completedQuizCount) + 1
+        userDefaults.set(completedQuizCount, forKey: Keys.completedQuizCount)
+    }
+
+    @MainActor
+    func requestReviewIfEligible(in windowScene: UIWindowScene) {
+        guard consumeReviewRequestSlot() else {
+            return
+        }
+
+        AppStore.requestReview(in: windowScene)
+    }
+
+    @MainActor
+    func resetCompletedQuizCount() {
+        userDefaults.removeObject(forKey: Keys.completedQuizCount)
+        userDefaults.removeObject(forKey: Keys.lastCountedQuizDayKey)
+    }
+}

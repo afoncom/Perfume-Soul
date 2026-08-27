@@ -11,17 +11,16 @@ import SwiftUI
 struct ProfileScreen: View {
     @Bindable private var viewModel: ProfileViewModel
     @State private var selectedElement: ProfileElement?
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @ScaledMetric(relativeTo: .title3) private var signBadgeSize = 40.0
     private let presenter: ProfilePresenter
-    private let profileAvatarBuilder: ProfileAvatarBuilder
     
     init(
         viewModel: ProfileViewModel,
-        presenter: ProfilePresenter,
-        profileAvatarBuilder: ProfileAvatarBuilder
+        presenter: ProfilePresenter
     ) {
         self.viewModel = viewModel
         self.presenter = presenter
-        self.profileAvatarBuilder = profileAvatarBuilder
     }
     
     var body: some View {
@@ -29,7 +28,7 @@ struct ProfileScreen: View {
             if let profile = viewModel.profile {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 10) {
-                        makeProfileScreen(profile: profile)
+                        makeProfileScreen(profile: profile, avatar: viewModel.avatar)
                             .padding(.horizontal, 16)
                         
                         makeMyNatalChart()
@@ -46,10 +45,6 @@ struct ProfileScreen: View {
 
                         makeProfileDescriptionRow()
                             .padding(.horizontal, 16)
-                        
-                        // TODO: Re-enable multi-profile switcher after the V1 profile flow supports it.
-                        // makeAddedNewProfiless()
-                        //     .padding(.horizontal, 16)
                         
                         makeDeleteProfileAction()
                             .padding(.horizontal, 16)
@@ -80,19 +75,14 @@ struct ProfileScreen: View {
 }
 
 extension ProfileScreen {
-    func makeProfileScreen(profile: Profile) -> some View {
-        let avatar = profileAvatarBuilder.makeAvatar(name: profile.name)
-
-        return HStack(spacing: 12) {
+    func makeProfileScreen(profile: Profile, avatar: ProfileAvatar) -> some View {
+        HStack(spacing: 12) {
             Circle()
                 .fill(makeProfileAvatarGradient(colors: avatar.gradientColors))
                 .frame(width: 74, height: 74)
-                .overlay(
-                    Text(avatar.initials)
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(Color(.textOnAccent))
-                )
+                .overlay {
+                    makeProfileAvatarInitials(avatar.initials, font: .title3)
+                }
                 .accessibilityHidden(true)
             
             VStack(alignment: .leading, spacing: 8) {
@@ -166,22 +156,29 @@ extension ProfileScreen {
             if let elementBalance = viewModel.profileCalculation?.elementBalance {
                 let elementItems = makeElementBalanceItems(elementBalance: elementBalance)
 
-                makeElementBalanceBar(elementBalance: elementBalance)
+                if elementItems.isEmpty {
+                    Text(L10n.Profile.ElementBalance.unavailable)
+                        .font(.footnote)
+                        .foregroundStyle(Color(.descriptionText))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                } else {
+                    makeElementBalanceBar(elementItems: elementItems)
 
-                LazyVGrid(
-                    columns: Array(
-                        repeating: GridItem(.flexible(), spacing: 4, alignment: .leading),
-                        count: max(1, min(elementItems.count, 4))
-                    ),
-                    spacing: 8
-                ) {
-                    ForEach(elementItems, id: \.element) { item in
-                        makeElementItem(
-                            element: item.element,
-                            percent: "\(item.value)%",
-                            title: item.title,
-                            color: item.color
-                        )
+                    LazyVGrid(
+                        columns: Array(
+                            repeating: GridItem(.flexible(), spacing: 4, alignment: .leading),
+                            count: elementItems.count
+                        ),
+                        spacing: 8
+                    ) {
+                        ForEach(elementItems, id: \.element) { item in
+                            makeElementItem(
+                                element: item.element,
+                                percent: "\(item.value)%",
+                                title: item.title,
+                                color: item.color
+                            )
+                        }
                     }
                 }
             } else {
@@ -212,7 +209,7 @@ extension ProfileScreen {
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(L10n.Profile.PersonalPerfumes.title)
+                    Text(L10n.PersonalPerfume.navigationTitle)
                         .font(.title3)
                         .fontWeight(.medium)
                         .foregroundStyle(Color(.textPrimary))
@@ -466,39 +463,6 @@ extension ProfileScreen {
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
     
-    func makeAddedNewProfiless() -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text(L10n.Profile.Profiles.title)
-                    .font(.title3)
-                    .fontWeight(.medium)
-                
-                Spacer()
-                
-                Button(action: {
-                    presenter.addedNewProfilesButtonTab()
-                }) {
-                    Image(systemName: "plus")
-                        .font(.headline.weight(.medium))
-                        .foregroundStyle(Color(.textSecondary))
-                        .frame(width: 28, height: 28)
-                }
-            }
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
-                    makeAddedProfileItem(name: "Laura")
-                    makeAddedProfileItem(name: "Alex")
-                    makeAddedProfileItem(name: "Ada")
-                }
-            }
-        }
-        .padding(14)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
-    }
-    
     func makeDeleteProfileAction() -> some View {
         Button {
             viewModel.isShowingDeleteProfileAlert = true
@@ -542,7 +506,28 @@ extension ProfileScreen {
             return Color(.zodiacBlue)
         case .zodiacPurple:
             return Color(.zodiacPurple)
+        case .zodiacBrown:
+            return Color(.zodiacBrown)
+        case .zodiacPink:
+            return Color(.zodiacPink)
+        case .zodiacGray:
+            return Color(.zodiacGray)
+        case .avatarOcean:
+            return Color(.avatarOcean)
+        case .avatarTeal:
+            return Color(.avatarTeal)
+        case .avatarAmber:
+            return Color(.avatarAmber)
         }
+    }
+
+    private func makeProfileAvatarInitials(_ initials: String, font: Font) -> some View {
+        Text(initials)
+            .font(font)
+            .fontWeight(.semibold)
+            .foregroundStyle(Color(.textOnAvatar))
+            .lineLimit(1)
+            .minimumScaleFactor(0.8)
     }
 
     func makeZodiacBadge(zodiacInfo: DailyHoroscope) -> some View {
@@ -639,29 +624,36 @@ extension ProfileScreen {
                         .font(.headline)
                         .foregroundColor(symbolColor)
                 )
+                .accessibilityHidden(true)
             
             VStack(alignment: .leading, spacing: 3) {
                 Text(title)
                     .font(.caption)
                     .fontWeight(.medium)
-                    .foregroundStyle(Color(.textSecondary))
+                    .foregroundStyle(Color(.textPrimary))
                 
                 Text(horoscope.displayName)
                     .font(.headline)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
                     .foregroundStyle(Color(.textPrimary))
             }
             
             Spacer()
-            
-            Text(horoscope.symbol)
-                .font(.title3)
-                .fontWeight(.semibold)
-                .foregroundStyle(symbolColor)
-                .frame(width: 40, height: 40)
-                .background(color)
-                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+
+            if !dynamicTypeSize.isAccessibilitySize {
+                Text(horoscope.symbol)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .minimumScaleFactor(0.8)
+                    .foregroundStyle(Color(.textPrimary))
+                    .frame(width: signBadgeSize, height: signBadgeSize)
+                    .background(color)
+                    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    .accessibilityHidden(true)
+            }
         }
+        .accessibilityElement(children: .combine)
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
         .background(
@@ -674,11 +666,11 @@ extension ProfileScreen {
                 endPoint: .trailing
             )
         )
+        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: 18, style: .continuous)
                 .stroke(symbolColor.opacity(0.12), lineWidth: 1)
         )
-        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 }
 
@@ -692,7 +684,9 @@ private enum ProfileElement: Hashable {
 }
 
 extension ProfileScreen {
-    func makeElementBalanceBar(elementBalance: ElementBalance) -> some View {
+    private func makeElementBalanceBar(
+        elementItems: [(element: ProfileElement, value: Int, title: String, color: Color)]
+    ) -> some View {
         GeometryReader { proxy in
             let width = Double(proxy.size.width)
             let elementItems = makeElementBalanceItems(elementBalance: elementBalance)
@@ -761,21 +755,5 @@ extension ProfileScreen {
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
         .buttonStyle(.plain)
-    }
-}
-
-// MARK: - Added Profile Item
-
-extension ProfileScreen {
-    func makeAddedProfileItem(name: String) -> some View {
-        VStack(spacing: 8) {
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(Color(.placeholderMedium))
-                .frame(width: 92, height: 92)
-            
-            Text(name)
-                .font(.headline)
-                .foregroundStyle(Color(.textPrimary))
-        }
     }
 }

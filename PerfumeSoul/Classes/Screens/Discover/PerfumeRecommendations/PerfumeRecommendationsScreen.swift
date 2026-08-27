@@ -242,7 +242,7 @@ extension PerfumeRecommendationsScreen {
     private func makeMatchingNotesSection(notes: [String]) -> some View {
         if !notes.isEmpty {
             VStack(alignment: .leading, spacing: 6) {
-                Text(String(localized: "perfumeRecommendations.matchingNotesTitle"))
+                Text(L10n.PerfumeRecommendations.matchingNotesTitle)
                     .font(.caption)
                     .foregroundStyle(Color(.textSecondary))
 
