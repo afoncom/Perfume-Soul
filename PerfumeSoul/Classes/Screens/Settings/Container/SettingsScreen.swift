@@ -12,9 +12,6 @@ struct SettingsScreen: View {
     @Bindable private var viewModel: SettingsViewModel
     private let presenter: SettingsPresenter
 
-    @State private var aromaOfTheDayEnabled = true
-    @State private var dayInPerfumeryEnabled = false
-
     init(
         viewModel: SettingsViewModel,
         presenter: SettingsPresenter
@@ -27,7 +24,7 @@ struct SettingsScreen: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 28) {
                 makeNotificationsSection()
-                // TODO(#103): Restore Privacy section rows: Privacy Policy, Clear Local Data, and Delete All Profiles.
+                // TODO(#103): Restore Privacy section rows and re-add their en/ru translations.
                 makeSupportSection()
                 makeAboutSection()
             }
@@ -80,25 +77,6 @@ extension SettingsScreen {
                     )
                 )
 
-                makeDivider()
-
-                makeToggleRow(
-                    icon: "sparkles",
-                    iconColor: Color(.zodiacPurple),
-                    title: L10n.Settings.Notification.aromaOfTheDayTitle,
-                    subtitle: L10n.Settings.Notification.aromaOfTheDaySubtitle,
-                    isOn: $aromaOfTheDayEnabled
-                )
-
-                makeDivider()
-
-                makeToggleRow(
-                    icon: "calendar",
-                    iconColor: Color(.zodiacOrange),
-                    title: L10n.Settings.Notification.dayInPerfumeryTitle,
-                    subtitle: L10n.Settings.Notification.dayInPerfumerySubtitle,
-                    isOn: $dayInPerfumeryEnabled
-                )
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
