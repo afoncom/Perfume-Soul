@@ -169,6 +169,7 @@ extension CalculationScreen {
                     .onChange(of: birthPlaceSearchQuery) { _, newValue in
                         if viewModel.selectedBirthPlace?.displayName != newValue {
                             viewModel.selectedBirthPlace = nil
+                            viewModel.activeBirthPlaceSearchQuery = ""
                         }
                     }
                     .task(id: "\(focusedField == .birthPlace)|\(birthPlaceSearchQuery)|\(viewModel.birthPlaceSearchRetryID)") {

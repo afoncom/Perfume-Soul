@@ -142,7 +142,11 @@ final class BirthPlaceSearchService: NSObject {
         let search = MKLocalSearch(request: request)
 
         guard
-            let response = try? await search.start(),
+            let response = try? await withTaskCancellationHandler(operation: {
+                try await search.start()
+            }, onCancel: {
+                search.cancel()
+            }),
             let mapItem = response.mapItems.first
         else {
             throw BirthPlaceSearchError.searchFailed
@@ -179,7 +183,12 @@ final class BirthPlaceSearchService: NSObject {
             longitude: placemark.coordinate.longitude
         )
 
-        let placemarks = try? await CLGeocoder().reverseGeocodeLocation(location)
+        let geocoder = CLGeocoder()
+        let placemarks = try? await withTaskCancellationHandler(operation: {
+            try await geocoder.reverseGeocodeLocation(location)
+        }, onCancel: {
+            geocoder.cancelGeocode()
+        })
         return placemarks?.first?.timeZone?.identifier
     }
 
