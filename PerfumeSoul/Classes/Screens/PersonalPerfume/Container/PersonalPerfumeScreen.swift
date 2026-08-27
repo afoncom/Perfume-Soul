@@ -32,7 +32,7 @@ struct PersonalPerfumeScreen: View {
             }
             .padding(.horizontal, 16)
             .padding(.top, 24)
-            .padding(.bottom, 32)
+            .padding(.bottom, bottomPadding)
         }
         .background(
             LinearGradient(
@@ -44,7 +44,6 @@ struct PersonalPerfumeScreen: View {
             )
             .ignoresSafeArea()
         )
-        .modifier(TopSafeAreaBackground(isEnabled: presenter.isPresentedInOnboarding))
         .task {
             await presenter.onAppear()
         }
@@ -54,7 +53,7 @@ struct PersonalPerfumeScreen: View {
             }
         }
         .safeAreaInset(edge: .bottom) {
-            if presenter.isPresentedInOnboarding {
+            if presenter.shouldShowContinueButton {
                 makeContinueButton()
                     .padding(.horizontal, 24)
                     .padding(.top, 12)

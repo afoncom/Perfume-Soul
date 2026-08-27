@@ -689,7 +689,6 @@ extension ProfileScreen {
     ) -> some View {
         GeometryReader { proxy in
             let width = Double(proxy.size.width)
-            let elementItems = makeElementBalanceItems(elementBalance: elementBalance)
 
             HStack(spacing: 0) {
                 ForEach(elementItems, id: \.element) { item in

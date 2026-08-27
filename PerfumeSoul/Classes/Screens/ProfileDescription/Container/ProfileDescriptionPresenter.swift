@@ -8,6 +8,7 @@
 
 protocol ProfileDescriptionPresenter {
     var isPresentedInOnboarding: Bool { get }
+    var shouldShowContinueButton: Bool { get }
 
     func continueButtonTapped()
     func retryButtonTapped() async
@@ -22,6 +23,10 @@ final class ProfileDescriptionPresenterImpl {
     private let profileCalculationService: ProfileCalculationService
     private let profileDescriptionBuilder: ProfileDescriptionBuilder
     let isPresentedInOnboarding: Bool
+
+    var shouldShowContinueButton: Bool {
+        isPresentedInOnboarding && viewModel.canContinue
+    }
     
     init(
         viewModel: ProfileDescriptionViewModel,
