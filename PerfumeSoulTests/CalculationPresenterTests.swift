@@ -239,7 +239,7 @@ private final class BirthPlaceSearchMock: BirthPlaceSearching {
 
     func search(_ query: String) async -> BirthPlaceSearchResult {
         searchedQueries.append(query)
-        searchResult
+        return searchResult
     }
 
     func resolve(_ suggestion: BirthPlaceSuggestion) async throws -> BirthPlaceSelection {
