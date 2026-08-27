@@ -77,6 +77,168 @@ Run tests:
 swift test
 ```
 
+## Docker Compose run
+
+Docker Compose runs the backend together with PostgreSQL 18. Use `docker-compose.yml` for local builds and `docker-compose.production.yml` on the VPS when pulling the backend image from GitHub Container Registry.
+
+Create an env file from the example:
+
+```bash
+cp .env.compose.example .env.production
+```
+
+Set a real database password in `.env.production`:
+
+```env
+POSTGRES_PASSWORD=change-this-password
+```
+
+Start PostgreSQL and the backend:
+
+```bash
+docker compose --env-file .env.production up -d --build
+```
+
+The backend listens on `127.0.0.1:8080` on the host and connects to PostgreSQL through the internal Compose service name `postgres`. PostgreSQL is not published on a host port, and its data is stored in the `postgres_data` Docker volume.
+
+Check service status and logs:
+
+```bash
+docker compose ps
+docker compose logs -f backend
+docker compose logs -f postgres
+```
+
+Stop services:
+
+```bash
+docker compose down
+```
+
+### Publish backend image to GHCR
+
+Use GitHub Container Registry for private image delivery to the VPS:
+
+```text
+ghcr.io/afoncom/perfume-soul-backend:latest
+```
+
+Create a GitHub personal access token with `write:packages` for publishing. Login locally:
+
+```bash
+echo "YOUR_GITHUB_TOKEN" | docker login ghcr.io -u afoncom --password-stdin
+```
+
+Build and push the backend image:
+
+```bash
+docker build -t ghcr.io/afoncom/perfume-soul-backend:latest .
+docker push ghcr.io/afoncom/perfume-soul-backend:latest
+```
+
+Optional immutable tag based on git commit:
+
+```bash
+docker build \
+  -t ghcr.io/afoncom/perfume-soul-backend:latest \
+  -t ghcr.io/afoncom/perfume-soul-backend:$(git rev-parse --short HEAD) \
+  .
+docker push ghcr.io/afoncom/perfume-soul-backend:latest
+docker push ghcr.io/afoncom/perfume-soul-backend:$(git rev-parse --short HEAD)
+```
+
+### Docker seed/backfill
+
+Fluent migrations run automatically when the backend starts. Data seed and backfill scripts still need to be run manually.
+
+```bash
+docker compose --env-file .env.production exec -T postgres \
+  psql -U perfumesoul -d perfumesoul < scripts/seed_perfumery_history.sql
+
+docker compose --env-file .env.production exec -T postgres \
+  psql -U perfumesoul -d perfumesoul < scripts/seed_daily_horoscopes.sql
+
+docker compose --env-file .env.production exec -T postgres \
+  psql -U perfumesoul -d perfumesoul < scripts/fill_perfume_profile_metadata.sql
+
+docker compose --env-file .env.production exec -T postgres \
+  psql -U perfumesoul -d perfumesoul < scripts/fill_perfume_accords.sql
+
+docker compose --env-file .env.production exec -T postgres \
+  psql -U perfumesoul -d perfumesoul < scripts/fill_perfume_story_metadata.sql
+
+docker compose --env-file .env.production exec -T postgres \
+  psql -U perfumesoul -d perfumesoul < scripts/fill_perfume_story_english_metadata.sql
+
+docker compose --env-file .env.production exec -T postgres \
+  psql -U perfumesoul -d perfumesoul < scripts/fill_note_english_names.sql
+```
+
+### VPS deployment
+
+Install Docker, Compose, Nginx, Certbot, and Git:
+
+```bash
+apt update
+apt install -y docker.io docker-compose-plugin nginx certbot python3-certbot-nginx git
+systemctl enable docker
+systemctl start docker
+```
+
+Clone the repository and start the backend:
+
+```bash
+mkdir -p /opt/perfumesoul
+cd /opt/perfumesoul
+git clone git@github.com:afoncom/Perfume-Soul.git .
+cd backend/PerfumeSoulBackend
+cp .env.compose.example .env.production
+nano .env.production
+docker compose -f docker-compose.production.yml --env-file .env.production up -d
+```
+
+If the GHCR package is private, create a GitHub personal access token with `read:packages` and login on the VPS before pulling:
+
+```bash
+echo "YOUR_GITHUB_TOKEN" | docker login ghcr.io -u afoncom --password-stdin
+docker compose -f docker-compose.production.yml --env-file .env.production pull
+docker compose -f docker-compose.production.yml --env-file .env.production up -d
+```
+
+Update an existing deployment:
+
+```bash
+cd /opt/perfumesoul
+git pull
+cd backend/PerfumeSoulBackend
+docker compose -f docker-compose.production.yml --env-file .env.production pull
+docker compose -f docker-compose.production.yml --env-file .env.production up -d
+```
+
+Nginx reverse proxy example:
+
+```nginx
+server {
+    server_name api.your-domain.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_http_version 1.1;
+
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+Enable HTTPS after DNS points to the VPS:
+
+```bash
+certbot --nginx -d api.your-domain.com
+```
+
 ## Open in browser
 
 After `swift run`, open:

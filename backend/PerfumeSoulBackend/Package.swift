@@ -32,6 +32,7 @@ let package = Package(
                 .product(name: "NIOCore", package: "swift-nio"),
                 .product(name: "NIOPosix", package: "swift-nio")
             ],
+            path: "Sources/PerfumeSoulBackend",
             resources: [
                 .process("Requests/quiz-of-the-day/Resources")
             ],
