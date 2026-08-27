@@ -12,9 +12,6 @@ struct SettingsScreen: View {
     @Bindable private var viewModel: SettingsViewModel
     private let presenter: SettingsPresenter
 
-    @State private var aromaOfTheDayEnabled = true
-    @State private var dayInPerfumeryEnabled = false
-
     init(
         viewModel: SettingsViewModel,
         presenter: SettingsPresenter
@@ -27,7 +24,7 @@ struct SettingsScreen: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 28) {
                 makeNotificationsSection()
-                makePrivacySection()
+                // TODO(#103): Restore Privacy section rows and re-add their en/ru translations.
                 makeSupportSection()
                 makeAboutSection()
             }
@@ -80,63 +77,6 @@ extension SettingsScreen {
                     )
                 )
 
-                makeDivider()
-
-                makeToggleRow(
-                    icon: "sparkles",
-                    iconColor: Color(.zodiacPurple),
-                    title: L10n.Settings.Notification.aromaOfTheDayTitle,
-                    subtitle: L10n.Settings.Notification.aromaOfTheDaySubtitle,
-                    isOn: $aromaOfTheDayEnabled
-                )
-
-                makeDivider()
-
-                makeToggleRow(
-                    icon: "calendar",
-                    iconColor: Color(.zodiacOrange),
-                    title: L10n.Settings.Notification.dayInPerfumeryTitle,
-                    subtitle: L10n.Settings.Notification.dayInPerfumerySubtitle,
-                    isOn: $dayInPerfumeryEnabled
-                )
-            }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
-            .background(Color(.surfacePrimary))
-            .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
-            .shadow(color: Color(.cardShadowSubtle), radius: 9, x: 0, y: 4)
-        }
-    }
-
-    private func makePrivacySection() -> some View {
-        VStack(alignment: .leading, spacing: 14) {
-            makeSectionTitle(L10n.Settings.privacyTitle)
-
-            VStack(spacing: 0) {
-                makeActionRow(
-                    icon: "shield",
-                    iconColor: Color(.zodiacPurple),
-                    title: L10n.Settings.Privacy.howDataIsUsedTitle,
-                    subtitle: L10n.Settings.Privacy.howDataIsUsedSubtitle
-                )
-
-                makeDivider()
-
-                makeActionRow(
-                    icon: "trash",
-                    iconColor: Color(.pinkButton),
-                    title: L10n.Settings.Privacy.clearLocalDataTitle,
-                    subtitle: L10n.Settings.Privacy.clearLocalDataSubtitle
-                )
-
-                makeDivider()
-
-                makeActionRow(
-                    icon: "person",
-                    iconColor: Color(.zodiacOrange),
-                    title: L10n.Settings.Privacy.deleteAllProfilesTitle,
-                    subtitle: L10n.Settings.Privacy.deleteAllProfilesSubtitle
-                )
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
@@ -155,7 +95,8 @@ extension SettingsScreen {
                     icon: "heart.fill",
                     iconColor: Color(.pinkButton),
                     title: L10n.Settings.Support.supportDeveloperTitle,
-                    subtitle: L10n.Settings.Support.supportDeveloperSubtitle
+                    subtitle: L10n.Settings.Support.supportDeveloperSubtitle,
+                    showsDisclosure: false
                 )
                 // TODO(#100): Restore Rate App when App Store ID is available and open the write-review URL.
             }
@@ -190,7 +131,8 @@ extension SettingsScreen {
                     icon: "info.circle",
                     iconColor: Color(.zodiacPurple),
                     title: L10n.Settings.About.aboutAppTitle,
-                    subtitle: L10n.Settings.About.aboutAppSubtitle
+                    subtitle: L10n.Settings.About.aboutAppSubtitle,
+                    showsDisclosure: false
                 )
             }
             .padding(.horizontal, 14)
@@ -242,7 +184,8 @@ extension SettingsScreen {
         icon: String,
         iconColor: Color,
         title: String,
-        subtitle: String
+        subtitle: String,
+        showsDisclosure: Bool = true
     ) -> some View {
         HStack(spacing: 14) {
             makeIconCircle(icon: icon, iconColor: iconColor)
@@ -260,9 +203,12 @@ extension SettingsScreen {
 
             Spacer(minLength: 10)
 
-            Image(systemName: "chevron.right")
-                .font(.headline)
-                .foregroundStyle(Color(.textSecondary))
+            if showsDisclosure {
+                Image(systemName: "chevron.right")
+                    .font(.headline)
+                    .foregroundStyle(Color(.textSecondary))
+                    .accessibilityHidden(true)
+            }
         }
         .padding(.vertical, 14)
     }

@@ -7,7 +7,6 @@
 //
 
 protocol ProfilePresenter {
-    func addedNewProfilesButtonTab()
     func personalPerfumesButtonTapped() async
     func profileDescriptionButtonTapped()
     func retryProfileCalculationButtonTapped() async
@@ -17,8 +16,6 @@ protocol ProfilePresenter {
 }
 
 final class ProfilePresenterImpl {
-    static let placeholderProfileNames = ["Laura", "Alex", "Emma"]
-
     private let viewModel: ProfileViewModel
     private let router: ProfileRouter
     private let profileService: ProfileService
@@ -50,10 +47,6 @@ final class ProfilePresenterImpl {
 }
 
 extension ProfilePresenterImpl: ProfilePresenter {
-    func addedNewProfilesButtonTab() {
-        router.showAddedNewProfiles()
-    }
-    
     func personalPerfumesButtonTapped() async {
         let profileCalculationState = await MainActor.run {
             viewModel.profileCalculationState
@@ -102,11 +95,9 @@ extension ProfilePresenterImpl: ProfilePresenter {
     func onAppear() async {
         let profile = await profileService.fetchProfile()
         let quizProgress = quizProgressService.loadProgress()
-        let addedProfileItems = makeAddedProfileItems()
 
         await MainActor.run {
             setProfile(profile)
-            viewModel.addedProfileItems = addedProfileItems
             viewModel.totalCorrectQuizAnswers = quizProgress.totalCorrectQuizAnswers
         }
 
@@ -147,16 +138,6 @@ extension ProfilePresenterImpl {
             await MainActor.run {
                 router.showPersonalPerfumes(profileCalculation: profileCalculation)
             }
-        }
-    }
-
-    private func makeAddedProfileItems() -> [AddedProfileItem] {
-        Self.placeholderProfileNames.map { name in
-            AddedProfileItem(
-                id: name,
-                name: name,
-                avatar: profileAvatarBuilder.makeAvatar(name: name)
-            )
         }
     }
 

@@ -6,27 +6,26 @@
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
-import MapKit
+import Foundation
 
 protocol CalculationPresenter {
     func continueButtonTapped() async
     func birthPlaceDidChange(_ query: String) async
-    func birthPlaceCompletionTapped(_ completion: MKLocalSearchCompletion) async
-    @MainActor
-    func clearBirthPlaceSearch()
+    @discardableResult
+    func birthPlaceSuggestionTapped(_ suggestion: BirthPlaceSuggestion) async -> Bool
 }
 
 final class CalculationPresenterImpl {
     private let viewModel: CalculationViewModel
     private let router: CalculationRouter
     private let profileService: ProfileService
-    private let birthPlaceSearch: BirthPlaceSearchService
+    private let birthPlaceSearch: BirthPlaceSearching
     
     init(
         viewModel: CalculationViewModel,
         router: CalculationRouter,
         profileService: ProfileService,
-        birthPlaceSearch: BirthPlaceSearchService
+        birthPlaceSearch: BirthPlaceSearching
     ) {
         self.viewModel = viewModel
         self.router = router
@@ -58,35 +57,117 @@ extension CalculationPresenterImpl: CalculationPresenter {
     }
     
     func birthPlaceDidChange(_ query: String) async {
-        await MainActor.run {
-            if viewModel.selectedBirthPlace?.displayName != query {
-                viewModel.selectedBirthPlace = nil
+        let searchQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        let isAlreadySelected = await MainActor.run {
+            viewModel.selectedBirthPlace?.displayName == searchQuery
+        }
+
+        guard !isAlreadySelected else {
+            await MainActor.run {
+                viewModel.activeBirthPlaceSearchQuery = searchQuery
             }
-        }
-
-        let completions = await birthPlaceSearch.search(query)
-        await MainActor.run {
-            viewModel.birthPlaceCompletions = completions
-        }
-    }
-
-    func birthPlaceCompletionTapped(_ completion: MKLocalSearchCompletion) async {
-        guard let selection = await birthPlaceSearch.resolve(completion) else {
             return
         }
 
         await MainActor.run {
-            viewModel.birthPlace = selection.displayName
-            viewModel.selectedBirthPlace = selection
-            viewModel.birthPlaceCompletions = []
+            viewModel.selectedBirthPlace = nil
+            viewModel.birthPlaceErrorMessage = nil
+            viewModel.canRetryBirthPlaceSearch = false
+            viewModel.birthPlaceSuggestions = []
+            viewModel.isSearchingBirthPlace = true
+            viewModel.activeBirthPlaceSearchQuery = searchQuery
         }
 
-        await birthPlaceSearch.clear()
+        let result = await birthPlaceSearch.search(query)
+        await MainActor.run {
+            guard viewModel.activeBirthPlaceSearchQuery == searchQuery else {
+                return
+            }
+
+            viewModel.isSearchingBirthPlace = false
+            switch result {
+            case let .suggestions(suggestions):
+                viewModel.birthPlaceSuggestions = suggestions
+                viewModel.canRetryBirthPlaceSearch = false
+            case let .timedOut(suggestions):
+                viewModel.birthPlaceSuggestions = suggestions
+                if suggestions.isEmpty {
+                    viewModel.activeBirthPlaceSearchQuery = ""
+                    viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceSearchError
+                    viewModel.canRetryBirthPlaceSearch = true
+                } else {
+                    viewModel.canRetryBirthPlaceSearch = false
+                }
+            case .failed:
+                viewModel.birthPlaceSuggestions = []
+                viewModel.activeBirthPlaceSearchQuery = ""
+                viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceSearchError
+                viewModel.canRetryBirthPlaceSearch = true
+            }
+        }
     }
-    
-    @MainActor
-    func clearBirthPlaceSearch() {
-        viewModel.birthPlaceCompletions = []
-        birthPlaceSearch.clear()
+
+    @discardableResult
+    func birthPlaceSuggestionTapped(_ suggestion: BirthPlaceSuggestion) async -> Bool {
+        let (previousSuggestions, requestQuery) = await MainActor.run { () -> ([BirthPlaceSuggestion], String) in
+            let suggestions = viewModel.birthPlaceSuggestions
+            viewModel.birthPlaceSuggestions = []
+            viewModel.birthPlaceErrorMessage = nil
+            viewModel.canRetryBirthPlaceSearch = false
+            viewModel.isSearchingBirthPlace = true
+            return (suggestions, viewModel.activeBirthPlaceSearchQuery)
+        }
+
+        do {
+            let selection = try await birthPlaceSearch.resolve(suggestion)
+
+            let didApplySelection = await MainActor.run { () -> Bool in
+                guard viewModel.activeBirthPlaceSearchQuery == requestQuery else {
+                    return false
+                }
+
+                viewModel.birthPlace = selection.displayName
+                viewModel.selectedBirthPlace = selection
+                viewModel.birthPlaceSuggestions = []
+                viewModel.activeBirthPlaceSearchQuery = ""
+                viewModel.isSearchingBirthPlace = false
+                viewModel.birthPlaceErrorMessage = nil
+                viewModel.canRetryBirthPlaceSearch = false
+                return true
+            }
+
+            guard didApplySelection else {
+                return false
+            }
+
+            await birthPlaceSearch.clear()
+            return true
+        } catch BirthPlaceSearchError.missingDisplayName, BirthPlaceSearchError.missingTimeZone {
+            return await MainActor.run { () -> Bool in
+                guard viewModel.activeBirthPlaceSearchQuery == requestQuery else {
+                    return false
+                }
+
+                viewModel.selectedBirthPlace = nil
+                viewModel.birthPlaceSuggestions = previousSuggestions
+                viewModel.isSearchingBirthPlace = false
+                viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceUnresolvedError
+                viewModel.canRetryBirthPlaceSearch = false
+                return true
+            }
+        } catch {
+            return await MainActor.run { () -> Bool in
+                guard viewModel.activeBirthPlaceSearchQuery == requestQuery else {
+                    return false
+                }
+
+                viewModel.selectedBirthPlace = nil
+                viewModel.birthPlaceSuggestions = previousSuggestions
+                viewModel.isSearchingBirthPlace = false
+                viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceSelectionError
+                viewModel.canRetryBirthPlaceSearch = false
+                return true
+            }
+        }
     }
 }

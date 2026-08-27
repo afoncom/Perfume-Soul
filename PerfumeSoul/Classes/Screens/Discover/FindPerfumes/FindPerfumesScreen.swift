@@ -11,6 +11,7 @@ import SwiftUI
 struct FindPerfumesScreen: View {
     @Bindable private var viewModel: FindPerfumesViewModel
     @FocusState private var focusedField: FindPerfumeField?
+    @ScaledMetric(relativeTo: .footnote) private var badgeSize = 24.0
     private let presenter: FindPerfumesPresenter
 
     init(
@@ -91,7 +92,7 @@ extension FindPerfumesScreen {
         VStack(spacing: 14) {
             makePerfumeField(
                 title: L10n.Discover.FindSimilar.firstPerfumeTitle,
-                placeholder: L10n.Discover.FindSimilar.firstPerfumeSubtitle,
+                placeholder: L10n.Discover.FindSimilar.perfumePlaceholder,
                 text: Binding(
                     get: { viewModel.firstSearchText },
                     set: { newValue in
@@ -106,8 +107,8 @@ extension FindPerfumesScreen {
             )
 
             makePerfumeField(
-                title: L10n.Discover.FindSimilar.secondPerfumeTitle,
-                placeholder: L10n.Discover.FindSimilar.optionalSubtitle,
+                title: L10n.Discover.FindSimilar.additionalPerfumeTitle,
+                placeholder: L10n.Discover.FindSimilar.perfumePlaceholder,
                 text: Binding(
                     get: { viewModel.secondSearchText },
                     set: { newValue in
@@ -122,8 +123,8 @@ extension FindPerfumesScreen {
             )
 
             makePerfumeField(
-                title: L10n.Discover.FindSimilar.thirdPerfumeTitle,
-                placeholder: L10n.Discover.FindSimilar.optionalSubtitle,
+                title: L10n.Discover.FindSimilar.additionalPerfumeTitle,
+                placeholder: L10n.Discover.FindSimilar.perfumePlaceholder,
                 text: Binding(
                     get: { viewModel.thirdSearchText },
                     set: { newValue in
@@ -145,30 +146,40 @@ extension FindPerfumesScreen {
         text: Binding<String>,
         field: FindPerfumeField
     ) -> some View {
-        HStack(spacing: 14) {
-            ZStack {
-                Circle()
-                    .fill(Color(.surfaceOverlay))
-                    .frame(width: 46, height: 46)
-
-                Image(systemName: "bag")
-                    .font(.headline)
-                    .foregroundStyle(field == .first ? Color(.pinkButton) : Color(.textSecondary))
-            }
-
+        HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 6) {
-                Text(title)
-                    .font(.headline)
-                    .fontWeight(.medium)
-                    .foregroundStyle(Color(.textPrimary))
+                HStack(spacing: 8) {
+                    Text(fieldNumber(field))
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(Color(.textPrimary))
+                        .minimumScaleFactor(0.8)
+                        .frame(width: badgeSize, height: badgeSize)
+                        .background(Color(.pinkButton))
+                        .clipShape(Circle())
+                        .accessibilityHidden(true)
 
-                TextField(placeholder, text: text)
+                    Text(title)
+                        .font(.headline)
+                        .fontWeight(.medium)
+                        .foregroundStyle(Color(.textPrimary))
+                        .accessibilityHidden(true)
+
+                    if field != .first {
+                        Text(L10n.Discover.FindSimilar.optionalSubtitle)
+                            .font(.caption)
+                            .foregroundStyle(Color(.descriptionText))
+                            .accessibilityHidden(true)
+                    }
+                }
+
+                TextField("", text: text, prompt: Text(placeholder))
+                    .accessibilityLabel(accessibilityLabel(title: title, field: field))
                     .focused($focusedField, equals: field)
                     .submitLabel(.done)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                     .font(.subheadline)
-                    .foregroundStyle(Color(.textSecondary))
+                    .foregroundStyle(Color(.textPrimary))
             }
 
             Spacer()
@@ -176,6 +187,7 @@ extension FindPerfumesScreen {
             Image(systemName: "magnifyingglass")
                 .font(.title3)
                 .foregroundStyle(Color(.textSecondary))
+                .accessibilityHidden(true)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 18)
@@ -183,11 +195,35 @@ extension FindPerfumesScreen {
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .stroke(Color(.cardBorder), lineWidth: 1)
+                .stroke(
+                    focusedField == field ? Color(.pinkButton) : Color(.cardBorder),
+                    lineWidth: focusedField == field ? 1.5 : 1
+                )
         )
+        .contentShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
         .onTapGesture {
             focusedField = field
+        }
+    }
+
+    private func fieldNumber(_ field: FindPerfumeField) -> String {
+        switch field {
+        case .first:
+            return "1"
+        case .second:
+            return "2"
+        case .third:
+            return "3"
+        }
+    }
+
+    private func accessibilityLabel(title: String, field: FindPerfumeField) -> String {
+        switch field {
+        case .first:
+            return "\(fieldNumber(field)). \(title)"
+        case .second, .third:
+            return "\(fieldNumber(field)). \(title), \(L10n.Discover.FindSimilar.optionalSubtitle)"
         }
     }
 

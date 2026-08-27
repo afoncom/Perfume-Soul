@@ -21,7 +21,6 @@ enum ProfileCalculationState: Equatable {
 @Observable final class ProfileViewModel {
     var profile: Profile?
     var avatar: ProfileAvatar = .placeholder
-    var addedProfileItems: [AddedProfileItem] = []
     var profileCalculationState: ProfileCalculationState = .idle
     var isShowingDeleteProfileAlert = false
     var totalCorrectQuizAnswers = 0
@@ -79,10 +78,4 @@ enum ProfileCalculationState: Equatable {
         let progress = Double(totalCorrectQuizAnswers - lowerBound) / Double(upperBound - lowerBound)
         return min(max(progress, 0), 1)
     }
-}
-
-struct AddedProfileItem: Identifiable, Equatable {
-    let id: String
-    let name: String
-    let avatar: ProfileAvatar
 }
