@@ -63,6 +63,9 @@ extension CalculationPresenterImpl: CalculationPresenter {
         }
 
         guard !isAlreadySelected else {
+            await MainActor.run {
+                viewModel.activeBirthPlaceSearchQuery = searchQuery
+            }
             return
         }
 

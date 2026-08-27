@@ -166,7 +166,7 @@ extension CalculationScreen {
                     .textInputAutocapitalization(.words)
                     .textContentType(.addressCity)
                     .autocorrectionDisabled()
-                    .onChange(of: viewModel.birthPlace) { _, newValue in
+                    .onChange(of: birthPlaceSearchQuery) { _, newValue in
                         if viewModel.selectedBirthPlace?.displayName != newValue {
                             viewModel.selectedBirthPlace = nil
                         }

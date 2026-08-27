@@ -27,7 +27,7 @@ struct SettingsScreen: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 28) {
                 makeNotificationsSection()
-                // TODO(#103): Restore Privacy Policy row when the hosted URL is available.
+                // TODO(#103): Restore Privacy section rows: Privacy Policy, Clear Local Data, and Delete All Profiles.
                 makeSupportSection()
                 makeAboutSection()
             }

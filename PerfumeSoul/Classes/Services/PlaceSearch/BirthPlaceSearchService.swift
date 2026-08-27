@@ -67,7 +67,6 @@ protocol BirthPlaceSearching {
 
 @MainActor
 final class BirthPlaceSearchService: NSObject {
-    private let geocoder = CLGeocoder()
     private var searchContinuations: [CheckedContinuation<BirthPlaceSearchResult, Never>] = []
     private var searchTimeoutTask: Task<Void, Never>?
     private var searchQuery = ""
@@ -117,6 +116,28 @@ final class BirthPlaceSearchService: NSObject {
     }
 
     func resolve(_ suggestion: BirthPlaceSuggestion) async throws -> BirthPlaceSelection {
+        try await withThrowingTaskGroup(of: BirthPlaceSelection.self) { group in
+            group.addTask { @MainActor in
+                try await self.resolveSelection(suggestion)
+            }
+            group.addTask {
+                try await Task.sleep(for: .seconds(3))
+                throw BirthPlaceSearchError.searchFailed
+            }
+
+            defer {
+                group.cancelAll()
+            }
+
+            guard let selection = try await group.next() else {
+                throw BirthPlaceSearchError.searchFailed
+            }
+
+            return selection
+        }
+    }
+
+    private func resolveSelection(_ suggestion: BirthPlaceSuggestion) async throws -> BirthPlaceSelection {
         let request = MKLocalSearch.Request(completion: suggestion.completion)
         let search = MKLocalSearch(request: request)
 
@@ -158,7 +179,7 @@ final class BirthPlaceSearchService: NSObject {
             longitude: placemark.coordinate.longitude
         )
 
-        let placemarks = try? await geocoder.reverseGeocodeLocation(location)
+        let placemarks = try? await CLGeocoder().reverseGeocodeLocation(location)
         return placemarks?.first?.timeZone?.identifier
     }
 
