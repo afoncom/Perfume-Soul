@@ -79,29 +79,29 @@ swift test
 
 ## Docker Compose run
 
-Docker Compose runs the backend together with PostgreSQL 18. Use `docker-compose.yml` for local builds and `docker-compose.production.yml` on the VPS when pulling the backend image from GitHub Container Registry.
+Docker Compose runs the backend together with PostgreSQL 18. `docker-compose.yml` is the production base file that pulls the backend image from GitHub Container Registry. `docker-compose.override.yml` is used automatically for local development and adds the local Docker build.
 
 Create an env file from the example:
 
 ```bash
-cp .env.compose.example .env.production
+cp .env.compose.example .env
 ```
 
-Set a real database password in `.env.production`:
+Set a real database password in `.env`:
 
 ```env
 POSTGRES_PASSWORD=change-this-password
 ```
 
-If the password contains URL-reserved characters like `@`, `:`, `/`, `#`, `?`, or `&`, percent-encode them before using it in the interpolated `DATABASE_URL`.
+Use an alphanumeric password because this value is interpolated into `DATABASE_URL`.
 
 Start PostgreSQL and the backend:
 
 ```bash
-docker compose --env-file .env.production up -d --build
+docker compose up -d --build
 ```
 
-The backend listens on `127.0.0.1:8080` on the host and connects to PostgreSQL through the internal Compose service name `postgres`. PostgreSQL is not published on a host port, and its data is stored in the `postgres_data` Docker volume.
+The backend listens on `127.0.0.1:8080` on the host and connects to PostgreSQL through the internal Compose service name `postgres`. PostgreSQL is not published on a host port, and its data is stored in the `postgres_data` Docker volume. Docker Compose runs the backend with `VAPOR_ENV=production` so the local container mirrors production logging and error behavior; use `swift run PerfumeSoulBackend` for a development Vapor environment.
 
 Check service status and logs:
 
@@ -115,6 +115,7 @@ Smoke check the backend and bundled quiz resources:
 
 ```bash
 curl -f http://127.0.0.1:8080/health
+curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
 ```
 
@@ -143,18 +144,15 @@ Build and push the backend image for a typical x86_64 VPS:
 ```bash
 docker buildx build --platform linux/amd64 \
   -t ghcr.io/afoncom/perfume-soul-backend:latest \
+  -t ghcr.io/afoncom/perfume-soul-backend:$(git rev-parse --short HEAD) \
   --push \
   .
 ```
 
-Optional immutable tag based on git commit:
+Deploy or roll back to a specific commit tag by setting `BACKEND_IMAGE_TAG` in `.env` on the VPS:
 
-```bash
-docker buildx build --platform linux/amd64 \
-  -t ghcr.io/afoncom/perfume-soul-backend:latest \
-  -t ghcr.io/afoncom/perfume-soul-backend:$(git rev-parse --short HEAD) \
-  --push \
-  .
+```env
+BACKEND_IMAGE_TAG=abc1234
 ```
 
 ### Docker seed/backfill
@@ -162,58 +160,71 @@ docker buildx build --platform linux/amd64 \
 Fluent migrations run automatically when the backend starts. Data seed and backfill scripts still need to be run manually.
 
 ```bash
-docker compose --env-file .env.production exec -T postgres \
-  psql -U perfumesoul -d perfumesoul < scripts/seed_perfumery_history.sql
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_perfumery_history.sql
 
-docker compose --env-file .env.production exec -T postgres \
-  psql -U perfumesoul -d perfumesoul < scripts/seed_daily_horoscopes.sql
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_daily_horoscopes.sql
 
-docker compose --env-file .env.production exec -T postgres \
-  psql -U perfumesoul -d perfumesoul < scripts/fill_perfume_profile_metadata.sql
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/fill_perfume_profile_metadata.sql
 
-docker compose --env-file .env.production exec -T postgres \
-  psql -U perfumesoul -d perfumesoul < scripts/fill_perfume_accords.sql
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/fill_perfume_accords.sql
 
-docker compose --env-file .env.production exec -T postgres \
-  psql -U perfumesoul -d perfumesoul < scripts/fill_perfume_story_metadata.sql
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/fill_perfume_story_metadata.sql
 
-docker compose --env-file .env.production exec -T postgres \
-  psql -U perfumesoul -d perfumesoul < scripts/fill_perfume_story_english_metadata.sql
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/fill_perfume_story_english_metadata.sql
 
-docker compose --env-file .env.production exec -T postgres \
-  psql -U perfumesoul -d perfumesoul < scripts/fill_note_english_names.sql
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/fill_note_english_names.sql
 ```
 
 ### VPS deployment
 
-Install Docker, Compose, Nginx, Certbot, and Git:
+Target Ubuntu 22.04 LTS, 24.04 LTS, or 26.04 LTS. Install Docker and Compose from Docker's official apt repository, then install Nginx, Certbot, and Git:
 
 ```bash
 apt update
-apt install -y docker.io docker-compose-plugin nginx certbot python3-certbot-nginx git
+apt install -y ca-certificates curl
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+cat > /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Architectures: $(dpkg --print-architecture)
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+apt update
+apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin nginx certbot python3-certbot-nginx git
 systemctl enable docker
 systemctl start docker
 ```
 
-Clone the repository and start the backend:
+Clone the repository and create `.env`. If the repository is private, authenticate HTTPS with a GitHub personal access token that can read the repository, or use an SSH deploy key instead.
 
 ```bash
 mkdir -p /opt/perfumesoul
 cd /opt/perfumesoul
-git clone git@github.com:afoncom/Perfume-Soul.git .
+git clone https://github.com/afoncom/Perfume-Soul.git .
 cd backend/PerfumeSoulBackend
-cp .env.compose.example .env.production
-nano .env.production
-docker compose -f docker-compose.production.yml --env-file .env.production up -d
+cp .env.compose.example .env
+nano .env
 ```
 
-If the GHCR package is private, create a GitHub personal access token with `read:packages` and login on the VPS before pulling:
+If the GHCR package is private, create a GitHub personal access token with `read:packages` and login on the VPS before pulling. Skip `docker login` if the GHCR package is public. Then pull and start the stack:
 
 ```bash
 echo "YOUR_GITHUB_TOKEN" | docker login ghcr.io -u afoncom --password-stdin
-docker compose -f docker-compose.production.yml --env-file .env.production pull
-docker compose -f docker-compose.production.yml --env-file .env.production up -d
+docker compose -f docker-compose.yml pull
+docker compose -f docker-compose.yml up -d
 curl -f http://127.0.0.1:8080/health
+curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
 ```
 
@@ -223,8 +234,20 @@ Update an existing deployment:
 cd /opt/perfumesoul
 git pull
 cd backend/PerfumeSoulBackend
-docker compose -f docker-compose.production.yml --env-file .env.production pull
-docker compose -f docker-compose.production.yml --env-file .env.production up -d
+docker compose -f docker-compose.yml pull
+docker compose -f docker-compose.yml up -d
+curl -f http://127.0.0.1:8080/health
+curl -f http://127.0.0.1:8080/ready
+curl -f http://127.0.0.1:8080/quiz-of-the-day
+```
+
+Deploy a pinned image tag or roll back:
+
+```bash
+cd /opt/perfumesoul/backend/PerfumeSoulBackend
+nano .env
+docker compose -f docker-compose.yml pull
+docker compose -f docker-compose.yml up -d
 ```
 
 Nginx reverse proxy example:

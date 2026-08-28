@@ -1,9 +1,19 @@
 import Fluent
+import FluentSQL
 import Vapor
 
 func routes(_ app: Application) throws {
     app.get("health") { _ async throws -> Response in
         try jsonResponse(["status": "ok"])
+    }
+
+    app.get("ready") { req async throws -> Response in
+        guard let sqlDatabase = req.db as? any SQLDatabase else {
+            throw Abort(.internalServerError)
+        }
+
+        try await sqlDatabase.raw("SELECT 1").run()
+        return try jsonResponse(["status": "ready"])
     }
 
     app.post("profile", "calculate") { req async throws -> Response in
