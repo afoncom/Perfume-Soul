@@ -93,6 +93,8 @@ Set a real database password in `.env.production`:
 POSTGRES_PASSWORD=change-this-password
 ```
 
+If the password contains URL-reserved characters like `@`, `:`, `/`, `#`, `?`, or `&`, percent-encode them before using it in the interpolated `DATABASE_URL`.
+
 Start PostgreSQL and the backend:
 
 ```bash
@@ -107,6 +109,13 @@ Check service status and logs:
 docker compose ps
 docker compose logs -f backend
 docker compose logs -f postgres
+```
+
+Smoke check the backend and bundled quiz resources:
+
+```bash
+curl -f http://127.0.0.1:8080/health
+curl -f http://127.0.0.1:8080/quiz-of-the-day
 ```
 
 Stop services:
@@ -129,22 +138,23 @@ Create a GitHub personal access token with `write:packages` for publishing. Logi
 echo "YOUR_GITHUB_TOKEN" | docker login ghcr.io -u afoncom --password-stdin
 ```
 
-Build and push the backend image:
+Build and push the backend image for a typical x86_64 VPS:
 
 ```bash
-docker build -t ghcr.io/afoncom/perfume-soul-backend:latest .
-docker push ghcr.io/afoncom/perfume-soul-backend:latest
+docker buildx build --platform linux/amd64 \
+  -t ghcr.io/afoncom/perfume-soul-backend:latest \
+  --push \
+  .
 ```
 
 Optional immutable tag based on git commit:
 
 ```bash
-docker build \
+docker buildx build --platform linux/amd64 \
   -t ghcr.io/afoncom/perfume-soul-backend:latest \
   -t ghcr.io/afoncom/perfume-soul-backend:$(git rev-parse --short HEAD) \
+  --push \
   .
-docker push ghcr.io/afoncom/perfume-soul-backend:latest
-docker push ghcr.io/afoncom/perfume-soul-backend:$(git rev-parse --short HEAD)
 ```
 
 ### Docker seed/backfill
@@ -203,6 +213,8 @@ If the GHCR package is private, create a GitHub personal access token with `read
 echo "YOUR_GITHUB_TOKEN" | docker login ghcr.io -u afoncom --password-stdin
 docker compose -f docker-compose.production.yml --env-file .env.production pull
 docker compose -f docker-compose.production.yml --env-file .env.production up -d
+curl -f http://127.0.0.1:8080/health
+curl -f http://127.0.0.1:8080/quiz-of-the-day
 ```
 
 Update an existing deployment:

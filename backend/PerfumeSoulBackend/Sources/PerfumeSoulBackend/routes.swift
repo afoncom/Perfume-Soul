@@ -2,6 +2,10 @@ import Fluent
 import Vapor
 
 func routes(_ app: Application) throws {
+    app.get("health") { _ async throws -> Response in
+        try jsonResponse(["status": "ok"])
+    }
+
     app.post("profile", "calculate") { req async throws -> Response in
         let request = try req.content.decode(ProfileCalculationRequest.self)
         return try jsonResponse(try ProfileCalculationLoader.load(request: request))

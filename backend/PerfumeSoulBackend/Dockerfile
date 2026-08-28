@@ -3,13 +3,16 @@ FROM swift:6.0-jammy AS build
 WORKDIR /build
 
 COPY Package.swift Package.resolved ./
+RUN swift package resolve
+
 COPY Sources ./Sources
 COPY Tests ./Tests
 
-RUN swift build -c release --static-swift-stdlib
-RUN mkdir -p /staging \
-    && cp .build/release/PerfumeSoulBackend /staging/ \
-    && find .build/release -maxdepth 1 -name "*.resources" -exec cp -R {} /staging/ \;
+RUN swift build -c release --static-swift-stdlib \
+    && BIN_PATH="$(swift build -c release --static-swift-stdlib --show-bin-path)" \
+    && mkdir -p /staging \
+    && cp "$BIN_PATH/PerfumeSoulBackend" /staging/ \
+    && find "$BIN_PATH/" -maxdepth 1 -name "*.resources" -exec cp -R {} /staging/ \;
 
 FROM ubuntu:22.04
 
@@ -17,14 +20,17 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
-    libpq5 \
+    curl \
     tzdata \
     && rm -rf /var/lib/apt/lists/*
+
+RUN useradd --user-group --create-home --system --skel /dev/null --home-dir /app vapor
 
 WORKDIR /app
 
 COPY --from=build /staging /app
-COPY scripts ./scripts
+RUN chown -R vapor:vapor /app
+USER vapor:vapor
 
 EXPOSE 8080
 
