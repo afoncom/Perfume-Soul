@@ -87,10 +87,11 @@ Create an env file from the example:
 cp .env.compose.example .env
 ```
 
-Set a real database password in `.env`:
+Set a real database password in `.env`. The same `.env` file is shared by local `swift run` and Docker Compose. Compose overrides `DATABASE_URL` for the backend container, so the local `DATABASE_URL` remains for direct Swift runs only.
 
 ```env
 POSTGRES_PASSWORD=change-this-password
+DATABASE_URL=postgresql://postgres:change-this-password@localhost:5432/postgres
 ```
 
 Use an alphanumeric password because this value is interpolated into `DATABASE_URL`.
@@ -167,10 +168,10 @@ docker compose exec -T postgres \
   psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_daily_horoscopes.sql
 
 docker compose exec -T postgres \
-  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/fill_perfume_profile_metadata.sql
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 < scripts/fill_perfume_profile_metadata.sql
 
 docker compose exec -T postgres \
-  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/fill_perfume_accords.sql
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 < scripts/fill_perfume_accords.sql
 
 docker compose exec -T postgres \
   psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/fill_perfume_story_metadata.sql
@@ -217,12 +218,18 @@ cp .env.compose.example .env
 nano .env
 ```
 
+Set `COMPOSE_FILE=docker-compose.yml` in `.env` on the VPS so Compose uses the GHCR image and does not auto-merge the local build override:
+
+```env
+COMPOSE_FILE=docker-compose.yml
+```
+
 If the GHCR package is private, create a GitHub personal access token with `read:packages` and login on the VPS before pulling. Skip `docker login` if the GHCR package is public. Then pull and start the stack:
 
 ```bash
 echo "YOUR_GITHUB_TOKEN" | docker login ghcr.io -u afoncom --password-stdin
-docker compose -f docker-compose.yml pull
-docker compose -f docker-compose.yml up -d
+docker compose pull
+docker compose up -d
 curl -f http://127.0.0.1:8080/health
 curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
@@ -234,11 +241,26 @@ Update an existing deployment:
 cd /opt/perfumesoul
 git pull
 cd backend/PerfumeSoulBackend
-docker compose -f docker-compose.yml pull
-docker compose -f docker-compose.yml up -d
+docker compose pull
+docker compose up -d
 curl -f http://127.0.0.1:8080/health
 curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
+```
+
+Back up the Docker PostgreSQL database before updates:
+
+```bash
+cd /opt/perfumesoul/backend/PerfumeSoulBackend
+mkdir -p backups
+docker compose exec -T postgres pg_dump -U perfumesoul perfumesoul | gzip > backups/perfumesoul-$(date +%Y%m%d%H%M%S).sql.gz
+```
+
+Restore a backup into the Docker PostgreSQL database:
+
+```bash
+cd /opt/perfumesoul/backend/PerfumeSoulBackend
+gunzip -c backups/perfumesoul-backup.sql.gz | docker compose exec -T postgres psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1
 ```
 
 Deploy a pinned image tag or roll back:
@@ -246,8 +268,8 @@ Deploy a pinned image tag or roll back:
 ```bash
 cd /opt/perfumesoul/backend/PerfumeSoulBackend
 nano .env
-docker compose -f docker-compose.yml pull
-docker compose -f docker-compose.yml up -d
+docker compose pull
+docker compose up -d
 ```
 
 Nginx reverse proxy example:

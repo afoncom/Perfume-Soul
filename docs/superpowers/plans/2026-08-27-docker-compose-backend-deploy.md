@@ -4,7 +4,7 @@
 
 **Goal:** Add a Docker Compose deployment path for the Vapor backend and PostgreSQL so the service can be deployed to a VPS.
 
-**Architecture:** `backend/PerfumeSoulBackend` owns its deployment files. Local Docker Compose runs two services: `postgres` with a persistent volume and `backend` built from a Swift multi-stage Dockerfile. Production Docker Compose pulls the backend image from GitHub Container Registry and keeps Nginx/HTTPS outside Compose on the VPS.
+**Architecture:** `backend/PerfumeSoulBackend` owns its deployment files. `docker-compose.yml` is the shared production base that runs `postgres` with a persistent volume and pulls the backend image from GitHub Container Registry. Local Docker Compose auto-merges `docker-compose.override.yml` to build the backend from the Swift multi-stage Dockerfile. Nginx/HTTPS stays outside Compose on the VPS.
 
 **Tech Stack:** Swift 6, Vapor 4, Fluent PostgreSQL, PostgreSQL 18, Docker Compose.
 
@@ -17,7 +17,7 @@
 - Backend must receive `DATABASE_URL` from environment.
 - Backend container must listen on `0.0.0.0:8080`.
 - Compose must bind exposed ports to `127.0.0.1` for use behind Nginx.
-- Production backend image must be `ghcr.io/afoncom/perfume-soul-backend:latest`.
+- Production backend image must default to `ghcr.io/afoncom/perfume-soul-backend:latest` and support `BACKEND_IMAGE_TAG` for pinned deploys.
 - PostgreSQL data must persist through a named Docker volume.
 
 ---
@@ -29,7 +29,7 @@
 - Modify: `backend/PerfumeSoulBackend/.dockerignore`
 
 **Interfaces:**
-- Consumes: `Package.swift`, `Package.resolved`, `Sources`, `scripts`
+- Consumes: `Package.swift`, `Package.resolved`, `Sources`
 - Produces: Docker image running `/app/PerfumeSoulBackend serve --hostname 0.0.0.0 --port 8080`
 
 - [ ] **Step 1: Add Dockerfile**
@@ -50,7 +50,7 @@ Expected: image builds successfully on a machine with Docker and network access.
 
 **Files:**
 - Create: `backend/PerfumeSoulBackend/docker-compose.yml`
-- Create: `backend/PerfumeSoulBackend/docker-compose.production.yml`
+- Create: `backend/PerfumeSoulBackend/docker-compose.override.yml`
 - Create: `backend/PerfumeSoulBackend/.env.compose.example`
 
 **Interfaces:**
@@ -59,25 +59,25 @@ Expected: image builds successfully on a machine with Docker and network access.
 
 - [ ] **Step 1: Add environment example**
 
-Add `.env.compose.example` with `POSTGRES_PASSWORD=change-me`.
+Add `.env.compose.example` with `POSTGRES_PASSWORD=change-me`, local `DATABASE_URL`, optional `BACKEND_IMAGE_TAG`, and optional VPS-only `COMPOSE_FILE=docker-compose.yml`.
 
 - [ ] **Step 2: Add docker-compose.yml**
 
-Define `postgres` with database/user/password and named volume. Define `backend` with `DATABASE_URL=postgres://perfumesoul:${POSTGRES_PASSWORD}@postgres:5432/perfumesoul`.
+Define `postgres` with database/user/password and named volume. Define `backend` with `image: ghcr.io/afoncom/perfume-soul-backend:${BACKEND_IMAGE_TAG:-latest}`, `DATABASE_URL=postgresql://perfumesoul:${POSTGRES_PASSWORD}@postgres:5432/perfumesoul`, `VAPOR_ENV=production`, and a `/ready` healthcheck.
 
-- [ ] **Step 3: Add docker-compose.production.yml**
+- [ ] **Step 3: Add docker-compose.override.yml**
 
-Define the same `postgres` service and a `backend` service using `image: ghcr.io/afoncom/perfume-soul-backend:latest` instead of local `build`.
+Define only local `backend.build` settings so `docker compose up` builds locally while the VPS can pin `COMPOSE_FILE=docker-compose.yml` and pull the GHCR image.
 
 - [ ] **Step 4: Verify Compose syntax**
 
-Run: `docker compose --env-file .env.compose.example config` from `backend/PerfumeSoulBackend`.
+Run: `POSTGRES_PASSWORD=change-me docker compose config` from `backend/PerfumeSoulBackend`.
 
-Expected: Compose renders both services and the named volume without validation errors.
+Expected: local Compose renders both services, the local build override, and the named volume without validation errors.
 
-Run: `docker compose -f docker-compose.production.yml --env-file .env.compose.example config`.
+Run: `POSTGRES_PASSWORD=change-me docker compose -f docker-compose.yml config`.
 
-Expected: production Compose renders the GHCR backend image without validation errors.
+Expected: production Compose renders the GHCR backend image without the local build override.
 
 ### Task 3: Documentation
 
@@ -90,15 +90,15 @@ Expected: production Compose renders the GHCR backend image without validation e
 
 - [ ] **Step 1: Add Docker Compose section**
 
-Document copying `.env.compose.example` to `.env.production`, starting Compose, checking logs, and testing endpoints.
+Document copying `.env.compose.example` to `.env`, starting Compose, checking logs, and testing `/health`, `/ready`, and `/quiz-of-the-day`.
 
 - [ ] **Step 2: Add seed/backfill commands**
 
-Document how to pipe existing SQL scripts into the PostgreSQL container.
+Document how to pipe existing SQL scripts into the PostgreSQL container with `ON_ERROR_STOP=1` and transactions where the script does not already manage its own transaction.
 
 - [ ] **Step 3: Add GHCR publish commands**
 
-Document `docker login ghcr.io`, `docker build`, and `docker push` for `ghcr.io/afoncom/perfume-soul-backend:latest`.
+Document `docker login ghcr.io` and `docker buildx build --platform linux/amd64 --push` for `ghcr.io/afoncom/perfume-soul-backend:latest` and the current commit tag.
 
 - [ ] **Step 4: Add VPS deployment commands**
 
