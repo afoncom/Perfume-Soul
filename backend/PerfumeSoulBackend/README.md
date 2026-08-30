@@ -118,7 +118,7 @@ Smoke check the backend and bundled quiz resources:
 curl -f http://127.0.0.1:8080/health
 curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
-curl -f "http://127.0.0.1:8080/perfumes?searchText=&offset=0&limit=1"
+curl -f http://127.0.0.1:8080/perfumes/1/notes
 ```
 
 Stop services:
@@ -234,7 +234,7 @@ docker compose up -d
 curl -f http://127.0.0.1:8080/health
 curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
-curl -f "http://127.0.0.1:8080/perfumes?searchText=&offset=0&limit=1"
+curl -f http://127.0.0.1:8080/perfumes/1/notes
 ```
 
 A brand-new Docker PostgreSQL volume starts with schema only. Restore a dump from the existing database before relying on catalog endpoints; the seed/backfill scripts below do not insert `brands`, `perfumes`, `notes`, or `perfume_notes` rows.
@@ -250,7 +250,7 @@ docker compose up -d
 curl -f http://127.0.0.1:8080/health
 curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
-curl -f "http://127.0.0.1:8080/perfumes?searchText=&offset=0&limit=1"
+curl -f http://127.0.0.1:8080/perfumes/1/notes
 ```
 
 Back up the Docker PostgreSQL database before updates:

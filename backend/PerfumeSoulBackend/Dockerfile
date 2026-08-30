@@ -5,8 +5,8 @@ WORKDIR /build
 COPY Package.swift Package.resolved ./
 RUN swift package resolve
 
+RUN mkdir -p Tests/PerfumeSoulBackendTests
 COPY Sources ./Sources
-COPY Tests ./Tests
 
 RUN swift build -c release --static-swift-stdlib \
     && BIN_PATH="$(swift build -c release --static-swift-stdlib --show-bin-path)" \

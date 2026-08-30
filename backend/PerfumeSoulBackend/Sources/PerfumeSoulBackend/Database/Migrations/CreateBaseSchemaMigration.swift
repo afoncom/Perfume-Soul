@@ -7,6 +7,7 @@ struct CreateBaseSchemaMigration: AsyncMigration {
             throw DatabaseMigrationError.sqlDatabaseIsRequired
         }
 
+        // Keep this idempotent for restored databases whose enum type exists outside Fluent metadata.
         try await sqlDatabase.raw("""
             DO $$
             BEGIN
