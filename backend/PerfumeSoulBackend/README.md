@@ -118,6 +118,7 @@ Smoke check the backend and bundled quiz resources:
 curl -f http://127.0.0.1:8080/health
 curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
+curl -f "http://127.0.0.1:8080/perfumes?searchText=&offset=0&limit=1"
 ```
 
 Stop services:
@@ -233,7 +234,10 @@ docker compose up -d
 curl -f http://127.0.0.1:8080/health
 curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
+curl -f "http://127.0.0.1:8080/perfumes?searchText=&offset=0&limit=1"
 ```
+
+A brand-new Docker PostgreSQL volume starts with schema only. Restore a dump from the existing database before relying on catalog endpoints; the seed/backfill scripts below do not insert `brands`, `perfumes`, `notes`, or `perfume_notes` rows.
 
 Update an existing deployment:
 
@@ -246,6 +250,7 @@ docker compose up -d
 curl -f http://127.0.0.1:8080/health
 curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
+curl -f "http://127.0.0.1:8080/perfumes?searchText=&offset=0&limit=1"
 ```
 
 Back up the Docker PostgreSQL database before updates:
@@ -253,14 +258,18 @@ Back up the Docker PostgreSQL database before updates:
 ```bash
 cd /opt/perfumesoul/backend/PerfumeSoulBackend
 mkdir -p backups
-docker compose exec -T postgres pg_dump -U perfumesoul perfumesoul | gzip > backups/perfumesoul-$(date +%Y%m%d%H%M%S).sql.gz
+docker compose exec -T postgres \
+  pg_dump --clean --if-exists -U perfumesoul perfumesoul | gzip > backups/perfumesoul-$(date +%Y%m%d%H%M%S).sql.gz
 ```
 
 Restore a backup into the Docker PostgreSQL database:
 
 ```bash
 cd /opt/perfumesoul/backend/PerfumeSoulBackend
-gunzip -c backups/perfumesoul-backup.sql.gz | docker compose exec -T postgres psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1
+docker compose stop backend
+gunzip -c backups/perfumesoul-backup.sql.gz | docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1
+docker compose start backend
 ```
 
 Deploy a pinned image tag or roll back:
