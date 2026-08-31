@@ -79,7 +79,7 @@ swift test
 
 ## Docker Compose run
 
-Docker Compose runs the backend together with PostgreSQL 18. `docker-compose.yml` is the production base file that pulls the backend image from GitHub Container Registry. `docker-compose.override.yml` is used automatically for local development and adds the local Docker build.
+Docker Compose runs the backend together with PostgreSQL 18. `docker-compose.yml` is the production base file that pulls the backend image from GitHub Container Registry. `docker-compose.override.yml` is used automatically for local development, adds the local Docker build, and publishes PostgreSQL on `127.0.0.1:5432` for direct `swift run` and `psql` commands.
 
 Create an env file from the example:
 
@@ -91,7 +91,7 @@ Set a real database password in `.env`. The same `.env` file is shared by local 
 
 ```env
 POSTGRES_PASSWORD=change-this-password
-DATABASE_URL=postgresql://postgres:change-this-password@localhost:5432/postgres
+DATABASE_URL=postgresql://perfumesoul:change-this-password@localhost:5432/perfumesoul
 ```
 
 Use an alphanumeric password because this value is interpolated into `DATABASE_URL`.
@@ -102,7 +102,7 @@ Start PostgreSQL and the backend:
 docker compose up -d --build --wait
 ```
 
-The backend listens on `127.0.0.1:8080` on the host and connects to PostgreSQL through the internal Compose service name `postgres`. PostgreSQL is not published on a host port, and its data is stored in the `postgres_data` Docker volume. Docker Compose runs the backend with `VAPOR_ENV=production` so the local container mirrors production logging and error behavior; use `swift run PerfumeSoulBackend` for a development Vapor environment.
+The backend listens on `127.0.0.1:8080` on the host and connects to PostgreSQL through the internal Compose service name `postgres`. Local Compose publishes PostgreSQL on `127.0.0.1:5432` for direct `swift run` and `psql` commands; the VPS base compose file does not publish PostgreSQL on a host port. Database data is stored in the `postgres_data` Docker volume. Docker Compose runs the backend with `VAPOR_ENV=production` so the local container mirrors production logging and error behavior; use `swift run PerfumeSoulBackend` for a development Vapor environment.
 
 Check service status and logs:
 
@@ -137,7 +137,9 @@ ghcr.io/afoncom/perfume-soul-backend:latest
 Create a GitHub personal access token with `write:packages` for publishing. Login locally:
 
 ```bash
-echo "YOUR_GITHUB_TOKEN" | docker login ghcr.io -u afoncom --password-stdin
+read -rs GHCR_TOKEN
+echo "$GHCR_TOKEN" | docker login ghcr.io -u afoncom --password-stdin
+unset GHCR_TOKEN
 ```
 
 Build and push the backend image for a typical x86_64 VPS:
@@ -227,16 +229,22 @@ COMPOSE_FILE=docker-compose.yml
 If the GHCR package is private, create a GitHub personal access token with `read:packages` and login on the VPS before pulling. Skip `docker login` if the GHCR package is public. Then pull the backend image:
 
 ```bash
-echo "YOUR_GITHUB_TOKEN" | docker login ghcr.io -u afoncom --password-stdin
+read -rs GHCR_TOKEN
+echo "$GHCR_TOKEN" | docker login ghcr.io -u afoncom --password-stdin
+unset GHCR_TOKEN
 docker compose pull
 ```
 
 For the first deploy with an existing PostgreSQL database, create an import dump on the machine hosting the existing database:
 
 ```bash
+set -o pipefail
 pg_dump --clean --if-exists --no-owner --no-privileges \
   -U postgres postgres | gzip > perfumesoul-import.sql.gz
+gunzip -c perfumesoul-import.sql.gz | tail -1
 ```
+
+The final command should print `-- PostgreSQL database dump complete`.
 
 Create the ignored backups directory on the VPS, copy `perfumesoul-import.sql.gz` to `/opt/perfumesoul/backend/PerfumeSoulBackend/backups/`, then restore it before the backend runs migrations:
 
@@ -255,7 +263,7 @@ curl -f http://127.0.0.1:8080/health
 curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
 curl -f http://127.0.0.1:8080/horoscope/daily
-curl -f http://127.0.0.1:8080/perfumes/1/notes
+curl -fs "http://127.0.0.1:8080/perfumes?searchText=&offset=0&limit=1" | grep -q '"id"'
 ```
 
 A brand-new Docker PostgreSQL volume starts with schema only. The seed/backfill scripts above create `perfumery_history` and `daily_horoscopes`, but do not insert `brands`, `perfumes`, `notes`, or `perfume_notes` rows. If no dump is imported, start the stack, run the Docker seed/backfill section above, then smoke check the seed-only path:
@@ -286,9 +294,14 @@ Back up the Docker PostgreSQL database before updates:
 ```bash
 cd /opt/perfumesoul/backend/PerfumeSoulBackend
 mkdir -p backups
+set -o pipefail
+BACKUP_FILE="backups/perfumesoul-$(date +%Y%m%d%H%M%S).sql.gz"
 docker compose exec -T postgres \
-  pg_dump --clean --if-exists -U perfumesoul perfumesoul | gzip > backups/perfumesoul-$(date +%Y%m%d%H%M%S).sql.gz
+  pg_dump --clean --if-exists -U perfumesoul perfumesoul | gzip > "$BACKUP_FILE"
+gunzip -c "$BACKUP_FILE" | tail -1
 ```
+
+The final command should print `-- PostgreSQL database dump complete`.
 
 Restore a backup into the Docker PostgreSQL database:
 
@@ -311,8 +324,15 @@ docker compose up -d --wait --wait-timeout 120
 
 Nginx reverse proxy example:
 
+Create the Nginx server block:
+
+```bash
+nano /etc/nginx/sites-available/api.your-domain.com
+```
+
 ```nginx
 server {
+    listen 80;
     server_name api.your-domain.com;
 
     location / {
@@ -327,9 +347,13 @@ server {
 }
 ```
 
-Enable HTTPS after DNS points to the VPS:
+Enable the server block and verify the proxy after DNS points to the VPS:
 
 ```bash
+ln -s /etc/nginx/sites-available/api.your-domain.com /etc/nginx/sites-enabled/
+nginx -t
+systemctl reload nginx
+curl -f http://api.your-domain.com/health
 certbot --nginx -d api.your-domain.com
 ```
 
