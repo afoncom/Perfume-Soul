@@ -225,12 +225,11 @@ Set `COMPOSE_FILE=docker-compose.yml` in `.env` on the VPS so Compose uses the G
 COMPOSE_FILE=docker-compose.yml
 ```
 
-If the GHCR package is private, create a GitHub personal access token with `read:packages` and login on the VPS before pulling. Skip `docker login` if the GHCR package is public. Then pull and start the stack:
+If the GHCR package is private, create a GitHub personal access token with `read:packages` and login on the VPS before pulling. Skip `docker login` if the GHCR package is public. Then pull the backend image:
 
 ```bash
 echo "YOUR_GITHUB_TOKEN" | docker login ghcr.io -u afoncom --password-stdin
 docker compose pull
-docker compose up -d
 ```
 
 For the first deploy with an existing PostgreSQL database, create an import dump on the machine hosting the existing database:
@@ -240,18 +239,17 @@ pg_dump --clean --if-exists --no-owner --no-privileges \
   -U postgres postgres | gzip > perfumesoul-import.sql.gz
 ```
 
-Copy `perfumesoul-import.sql.gz` to `/opt/perfumesoul/backend/PerfumeSoulBackend` on the VPS, then restore it into the Docker PostgreSQL database:
+Create the ignored backups directory on the VPS, copy `perfumesoul-import.sql.gz` to `/opt/perfumesoul/backend/PerfumeSoulBackend/backups/`, then restore it before the backend runs migrations:
 
 ```bash
-docker compose stop backend
-gunzip -c perfumesoul-import.sql.gz | docker compose exec -T postgres \
-  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1
-docker compose start backend
+mkdir -p backups
+docker compose up -d postgres
+gunzip -c backups/perfumesoul-import.sql.gz | docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction
+docker compose up -d
 ```
 
-On a brand-new Docker PostgreSQL volume, either restore the existing database dump before checking catalog endpoints, or run the Docker seed/backfill section above before checking `perfumery_history` and `daily_horoscopes`.
-
-Smoke check the first deploy:
+Smoke check the first deploy after importing a dump:
 
 ```bash
 curl -f http://127.0.0.1:8080/health
@@ -261,7 +259,15 @@ curl -f http://127.0.0.1:8080/horoscope/daily
 curl -f http://127.0.0.1:8080/perfumes/1/notes
 ```
 
-A brand-new Docker PostgreSQL volume starts with schema only. The seed/backfill scripts above create `perfumery_history` and `daily_horoscopes`, but do not insert `brands`, `perfumes`, `notes`, or `perfume_notes` rows.
+A brand-new Docker PostgreSQL volume starts with schema only. The seed/backfill scripts above create `perfumery_history` and `daily_horoscopes`, but do not insert `brands`, `perfumes`, `notes`, or `perfume_notes` rows. If no dump is imported, start the stack, run the Docker seed/backfill section above, then smoke check the seed-only path:
+
+```bash
+docker compose up -d
+curl -f http://127.0.0.1:8080/health
+curl -f http://127.0.0.1:8080/ready
+curl -f http://127.0.0.1:8080/quiz-of-the-day
+curl -f http://127.0.0.1:8080/horoscope/daily
+```
 
 Update an existing deployment:
 
@@ -292,7 +298,7 @@ Restore a backup into the Docker PostgreSQL database:
 cd /opt/perfumesoul/backend/PerfumeSoulBackend
 docker compose stop backend
 gunzip -c backups/perfumesoul-backup.sql.gz | docker compose exec -T postgres \
-  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction
 docker compose start backend
 ```
 

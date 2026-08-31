@@ -5,6 +5,7 @@ WORKDIR /build
 COPY Package.swift Package.resolved ./
 RUN swift package resolve
 
+# SwiftPM needs the declared test target directory to exist, even for release builds.
 RUN mkdir -p Tests/PerfumeSoulBackendTests
 COPY Sources ./Sources
 
