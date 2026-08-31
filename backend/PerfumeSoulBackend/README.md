@@ -251,6 +251,7 @@ Create the ignored backups directory on the VPS, copy `perfumesoul-import.sql.gz
 ```bash
 mkdir -p backups
 docker compose up -d --wait postgres
+set -o pipefail
 gunzip -c backups/perfumesoul-import.sql.gz | docker compose exec -T postgres \
   psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction
 docker compose up -d --wait --wait-timeout 120
@@ -307,8 +308,11 @@ Restore a backup into the Docker PostgreSQL database:
 
 ```bash
 cd /opt/perfumesoul/backend/PerfumeSoulBackend
+set -o pipefail
+ls backups/
+BACKUP_FILE="backups/perfumesoul-<timestamp>.sql.gz"
 docker compose stop backend
-gunzip -c backups/perfumesoul-backup.sql.gz | docker compose exec -T postgres \
+gunzip -c "$BACKUP_FILE" | docker compose exec -T postgres \
   psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction
 docker compose start backend
 ```
