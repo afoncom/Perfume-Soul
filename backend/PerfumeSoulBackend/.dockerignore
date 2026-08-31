@@ -4,6 +4,7 @@
 .env.*
 !.env.example
 !.env.compose.example
+backups/
 .git/
 .gitignore
 Dockerfile

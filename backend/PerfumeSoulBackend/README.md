@@ -118,7 +118,6 @@ Smoke check the backend and bundled quiz resources:
 curl -f http://127.0.0.1:8080/health
 curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
-curl -f http://127.0.0.1:8080/perfumes/1/notes
 ```
 
 Stop services:
@@ -243,7 +242,7 @@ Create the ignored backups directory on the VPS, copy `perfumesoul-import.sql.gz
 
 ```bash
 mkdir -p backups
-docker compose up -d postgres
+docker compose up -d --wait postgres
 gunzip -c backups/perfumesoul-import.sql.gz | docker compose exec -T postgres \
   psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction
 docker compose up -d
