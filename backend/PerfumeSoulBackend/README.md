@@ -231,13 +231,37 @@ If the GHCR package is private, create a GitHub personal access token with `read
 echo "YOUR_GITHUB_TOKEN" | docker login ghcr.io -u afoncom --password-stdin
 docker compose pull
 docker compose up -d
+```
+
+For the first deploy with an existing PostgreSQL database, create an import dump on the machine hosting the existing database:
+
+```bash
+pg_dump --clean --if-exists --no-owner --no-privileges \
+  -U postgres postgres | gzip > perfumesoul-import.sql.gz
+```
+
+Copy `perfumesoul-import.sql.gz` to `/opt/perfumesoul/backend/PerfumeSoulBackend` on the VPS, then restore it into the Docker PostgreSQL database:
+
+```bash
+docker compose stop backend
+gunzip -c perfumesoul-import.sql.gz | docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1
+docker compose start backend
+```
+
+On a brand-new Docker PostgreSQL volume, either restore the existing database dump before checking catalog endpoints, or run the Docker seed/backfill section above before checking `perfumery_history` and `daily_horoscopes`.
+
+Smoke check the first deploy:
+
+```bash
 curl -f http://127.0.0.1:8080/health
 curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
+curl -f http://127.0.0.1:8080/horoscope/daily
 curl -f http://127.0.0.1:8080/perfumes/1/notes
 ```
 
-A brand-new Docker PostgreSQL volume starts with schema only. Restore a dump from the existing database before relying on catalog endpoints; the seed/backfill scripts below do not insert `brands`, `perfumes`, `notes`, or `perfume_notes` rows.
+A brand-new Docker PostgreSQL volume starts with schema only. The seed/backfill scripts above create `perfumery_history` and `daily_horoscopes`, but do not insert `brands`, `perfumes`, `notes`, or `perfume_notes` rows.
 
 Update an existing deployment:
 
