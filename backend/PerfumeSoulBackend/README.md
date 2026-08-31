@@ -99,7 +99,7 @@ Use an alphanumeric password because this value is interpolated into `DATABASE_U
 Start PostgreSQL and the backend:
 
 ```bash
-docker compose up -d --build
+docker compose up -d --build --wait
 ```
 
 The backend listens on `127.0.0.1:8080` on the host and connects to PostgreSQL through the internal Compose service name `postgres`. PostgreSQL is not published on a host port, and its data is stored in the `postgres_data` Docker volume. Docker Compose runs the backend with `VAPOR_ENV=production` so the local container mirrors production logging and error behavior; use `swift run PerfumeSoulBackend` for a development Vapor environment.
@@ -245,7 +245,7 @@ mkdir -p backups
 docker compose up -d --wait postgres
 gunzip -c backups/perfumesoul-import.sql.gz | docker compose exec -T postgres \
   psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction
-docker compose up -d
+docker compose up -d --wait --wait-timeout 120
 ```
 
 Smoke check the first deploy after importing a dump:
@@ -261,7 +261,7 @@ curl -f http://127.0.0.1:8080/perfumes/1/notes
 A brand-new Docker PostgreSQL volume starts with schema only. The seed/backfill scripts above create `perfumery_history` and `daily_horoscopes`, but do not insert `brands`, `perfumes`, `notes`, or `perfume_notes` rows. If no dump is imported, start the stack, run the Docker seed/backfill section above, then smoke check the seed-only path:
 
 ```bash
-docker compose up -d
+docker compose up -d --wait --wait-timeout 120
 curl -f http://127.0.0.1:8080/health
 curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
@@ -275,11 +275,10 @@ cd /opt/perfumesoul
 git pull
 cd backend/PerfumeSoulBackend
 docker compose pull
-docker compose up -d
+docker compose up -d --wait --wait-timeout 120
 curl -f http://127.0.0.1:8080/health
 curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
-curl -f http://127.0.0.1:8080/perfumes/1/notes
 ```
 
 Back up the Docker PostgreSQL database before updates:
@@ -307,7 +306,7 @@ Deploy a pinned image tag or roll back:
 cd /opt/perfumesoul/backend/PerfumeSoulBackend
 nano .env
 docker compose pull
-docker compose up -d
+docker compose up -d --wait --wait-timeout 120
 ```
 
 Nginx reverse proxy example:
