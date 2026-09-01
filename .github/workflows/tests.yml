@@ -104,7 +104,7 @@ jobs:
         load: true
         tags: ${{ steps.image.outputs.tags }}
         cache-from: type=gha
-        cache-to: type=gha,mode=max
+        cache-to: ${{ github.event_name == 'push' && 'type=gha,mode=max' || '' }}
     - name: Smoke check Docker Compose stack
       working-directory: backend/PerfumeSoulBackend
       env:
@@ -118,6 +118,12 @@ jobs:
         code="$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/perfumes/1/notes)"
         echo "/perfumes/1/notes -> $code"
         [[ "$code" == "404" || "$code" == "200" ]]
+        docker compose exec -T postgres \
+          psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_perfumery_history.sql
+        docker compose exec -T postgres \
+          psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_daily_horoscopes.sql
+        curl -f http://127.0.0.1:8080/horoscope/daily
+        curl -f http://127.0.0.1:8080/perfumery-history
     - name: Dump Compose logs
       if: failure()
       working-directory: backend/PerfumeSoulBackend
@@ -151,9 +157,9 @@ jobs:
       uses: actions/cache@v4
       with:
         path: backend/PerfumeSoulBackend/.build
-        key: linux-backend-spm-${{ hashFiles('backend-swift-version.txt', 'backend/PerfumeSoulBackend/Package.resolved') }}
+        key: linux-backend-spm-${{ hashFiles('backend-swift-version.txt') }}-${{ hashFiles('backend/PerfumeSoulBackend/Package.resolved') }}
         restore-keys: |
-          linux-backend-spm-
+          linux-backend-spm-${{ hashFiles('backend-swift-version.txt') }}-
     - name: Run backend tests
       working-directory: backend/PerfumeSoulBackend
       run: swift test

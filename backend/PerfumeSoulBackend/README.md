@@ -136,7 +136,11 @@ Use GitHub Container Registry for private image delivery to the VPS:
 ghcr.io/afoncom/perfume-soul-backend:latest
 ```
 
-GitHub Actions builds the Linux image and smoke checks the Docker Compose stack on backend pull requests. After the same checks pass on `main`, CI publishes `latest`, the short commit SHA, and the full commit SHA tags to GHCR.
+GitHub Actions builds the Linux image and smoke checks the Docker Compose stack on backend pull requests. After the same checks pass on `main`, CI publishes `latest`, the short commit SHA, and the full commit SHA tags to GHCR. Runs are serialised per branch, so several merges in quick succession may skip the intermediate commits' tags — confirm a tag exists before pinning to it.
+
+```bash
+docker manifest inspect ghcr.io/afoncom/perfume-soul-backend:abc1234 > /dev/null && echo ok
+```
 
 Deploy or roll back to a specific commit tag by setting `BACKEND_IMAGE_TAG` in `.env` on the VPS:
 
