@@ -33,19 +33,25 @@ jobs:
           BASE="${{ github.event.before }}"
         fi
 
-        changed_files="$(git diff --name-only "$BASE" HEAD || true)"
-        echo "$changed_files"
-
         backend=false
         ios=false
 
-        if grep -Eq '^(backend/PerfumeSoulBackend/|\.github/workflows/tests\.yml$)' <<< "$changed_files"; then
+        if ! changed_files="$(git diff --name-only "$BASE" HEAD)"; then
+          echo "Cannot diff against $BASE; running every job."
+          changed_files=""
           backend=true
+          ios=true
+        else
+          if grep -Eq '^(backend/PerfumeSoulBackend/|\.github/workflows/tests\.yml$)' <<< "$changed_files"; then
+            backend=true
+          fi
+
+          if grep -Eq '^(PerfumeSoul/|PerfumeSoulTests/|PerfumeSoulUITests/|Models/|Tuist/|Project\.swift|\.swiftlint\.yml|\.github/workflows/tests\.yml$)' <<< "$changed_files"; then
+            ios=true
+          fi
         fi
 
-        if grep -Eq '^(PerfumeSoul/|PerfumeSoulTests/|PerfumeSoulUITests/|Models/|Project\.swift|\.swiftlint\.yml|\.github/workflows/tests\.yml$)' <<< "$changed_files"; then
-          ios=true
-        fi
+        echo "$changed_files"
 
         {
           echo "backend=$backend"
@@ -61,6 +67,7 @@ jobs:
       packages: write
     env:
       IMAGE_NAME: ghcr.io/afoncom/perfume-soul-backend
+      POSTGRES_PASSWORD: ci-password
     steps:
     - uses: actions/checkout@v5
     - uses: docker/setup-buildx-action@v3
@@ -95,18 +102,26 @@ jobs:
       working-directory: backend/PerfumeSoulBackend
       env:
         BACKEND_IMAGE_TAG: ${{ steps.image.outputs.short_sha }}
-        POSTGRES_PASSWORD: ci-password
       run: |
         set -eo pipefail
         docker compose up -d --wait --wait-timeout 180
         curl -f http://127.0.0.1:8080/health
         curl -f http://127.0.0.1:8080/ready
         curl -f http://127.0.0.1:8080/quiz-of-the-day
+        code="$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/perfumes/1/notes)"
+        echo "/perfumes/1/notes -> $code"
+        [[ "$code" == "404" || "$code" == "200" ]]
+    - name: Dump Compose logs
+      if: failure()
+      working-directory: backend/PerfumeSoulBackend
+      env:
+        BACKEND_IMAGE_TAG: ${{ steps.image.outputs.short_sha }}
+      run: docker compose logs --no-color --timestamps
     - name: Stop Docker Compose stack
       if: always()
       working-directory: backend/PerfumeSoulBackend
       env:
-        POSTGRES_PASSWORD: ci-password
+        BACKEND_IMAGE_TAG: ${{ steps.image.outputs.short_sha }}
       run: docker compose down -v
     - name: Push backend Docker image
       if: github.event_name == 'push'
@@ -115,6 +130,22 @@ jobs:
         docker push "$IMAGE_NAME:latest"
         docker push "$IMAGE_NAME:${{ steps.image.outputs.short_sha }}"
         docker push "$IMAGE_NAME:$GITHUB_SHA"
+
+  backend-tests:
+    needs: changes
+    if: needs.changes.outputs.backend == 'true'
+    runs-on: ubuntu-latest
+    container: swift:6.2-jammy
+    steps:
+    - uses: actions/checkout@v5
+    - name: Cache backend SwiftPM build
+      uses: actions/cache@v4
+      with:
+        path: backend/PerfumeSoulBackend/.build
+        key: linux-backend-spm-${{ hashFiles('backend/PerfumeSoulBackend/Package.resolved') }}
+    - name: Run backend tests
+      working-directory: backend/PerfumeSoulBackend
+      run: swift test
 
   test:
     needs: changes
@@ -140,20 +171,6 @@ jobs:
         echo "PerfumeSoul.xcodeproj is missing. Generating from Project.swift..."
         tuist version
         tuist generate --no-open
-    - name: Capture Swift toolchain version
-      shell: bash
-      run: swift --version > backend-swift-version.txt
-    - name: Cache backend SwiftPM build
-      uses: actions/cache@v4
-      with:
-        path: backend/PerfumeSoulBackend/.build
-        key: ${{ runner.os }}-backend-spm-${{ hashFiles('backend-swift-version.txt', 'backend/PerfumeSoulBackend/Package.resolved') }}
-        restore-keys: |
-          ${{ runner.os }}-backend-spm-${{ hashFiles('backend-swift-version.txt') }}-
-    - name: Run backend tests
-      shell: bash
-      working-directory: backend/PerfumeSoulBackend
-      run: swift test
     - name: Run tests
       shell: bash
       run: |
