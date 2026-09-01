@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   changes:
     runs-on: ubuntu-latest
@@ -68,6 +72,7 @@ jobs:
     env:
       IMAGE_NAME: ghcr.io/afoncom/perfume-soul-backend
       POSTGRES_PASSWORD: ci-password
+      COMPOSE_FILE: docker-compose.yml
     steps:
     - uses: actions/checkout@v5
     - uses: docker/setup-buildx-action@v3
@@ -98,6 +103,8 @@ jobs:
         platforms: linux/amd64
         load: true
         tags: ${{ steps.image.outputs.tags }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
     - name: Smoke check Docker Compose stack
       working-directory: backend/PerfumeSoulBackend
       env:
@@ -138,11 +145,15 @@ jobs:
     container: swift:6.2-jammy
     steps:
     - uses: actions/checkout@v5
+    - name: Capture Swift toolchain version
+      run: swift --version > backend-swift-version.txt
     - name: Cache backend SwiftPM build
       uses: actions/cache@v4
       with:
         path: backend/PerfumeSoulBackend/.build
-        key: linux-backend-spm-${{ hashFiles('backend/PerfumeSoulBackend/Package.resolved') }}
+        key: linux-backend-spm-${{ hashFiles('backend-swift-version.txt', 'backend/PerfumeSoulBackend/Package.resolved') }}
+        restore-keys: |
+          linux-backend-spm-
     - name: Run backend tests
       working-directory: backend/PerfumeSoulBackend
       run: swift test
