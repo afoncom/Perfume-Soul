@@ -79,7 +79,7 @@ swift test
 
 ## Docker Compose run
 
-Docker Compose runs the backend together with PostgreSQL 18. `docker-compose.yml` is the production base file that pulls the backend image from GitHub Container Registry. `docker-compose.override.yml` is used automatically for local development, adds the local Docker build, and publishes PostgreSQL on `127.0.0.1:5432` for direct `swift run` and `psql` commands.
+Docker Compose runs the backend together with PostgreSQL 18. `docker-compose.yml` is the production base file that pulls the backend image from GitHub Container Registry. `docker-compose.override.yml` is used automatically for local development, adds the local Docker build, and publishes PostgreSQL on `127.0.0.1:5433` for direct `swift run` and `psql` commands.
 
 Create an env file from the example:
 
@@ -91,7 +91,7 @@ Set a real database password in `.env`. The same `.env` file is shared by local 
 
 ```env
 POSTGRES_PASSWORD=change-this-password
-DATABASE_URL=postgresql://perfumesoul:change-this-password@localhost:5432/perfumesoul
+DATABASE_URL=postgresql://perfumesoul:change-this-password@localhost:5433/perfumesoul
 ```
 
 Use an alphanumeric password because this value is interpolated into `DATABASE_URL`.
@@ -102,7 +102,9 @@ Start PostgreSQL and the backend:
 docker compose up -d --build --wait
 ```
 
-The backend listens on `127.0.0.1:8080` on the host and connects to PostgreSQL through the internal Compose service name `postgres`. Local Compose publishes PostgreSQL on `127.0.0.1:5432` for direct `swift run` and `psql` commands; the VPS base compose file does not publish PostgreSQL on a host port. Database data is stored in the `postgres_data` Docker volume. Docker Compose runs the backend with `VAPOR_ENV=production` so the local container mirrors production logging and error behavior; use `swift run PerfumeSoulBackend` for a development Vapor environment.
+The backend listens on `127.0.0.1:8080` on the host and connects to PostgreSQL through the internal Compose service name `postgres`. Local Compose publishes PostgreSQL on `127.0.0.1:5433` for direct `swift run` and `psql` commands, so it can run alongside a native PostgreSQL server on `5432`; the VPS base compose file does not publish PostgreSQL on a host port. Database data is stored in the `postgres_data` Docker volume. Docker Compose runs the backend with `VAPOR_ENV=production` so the local container mirrors production logging and error behavior; use `swift run PerfumeSoulBackend` for a development Vapor environment.
+
+Treat PostgreSQL major upgrades as dump/restore operations; do not point a newer major image tag at the existing `postgres_data` volume.
 
 Check service status and logs:
 

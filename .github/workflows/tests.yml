@@ -4,9 +4,16 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
 
 jobs:
+  backend-image:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+    - name: Build backend Docker image
+      working-directory: backend/PerfumeSoulBackend
+      run: docker build -t perfumesoul-backend .
+
   test:
     runs-on: macos-latest
     env:
