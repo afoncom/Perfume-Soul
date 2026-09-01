@@ -136,23 +136,7 @@ Use GitHub Container Registry for private image delivery to the VPS:
 ghcr.io/afoncom/perfume-soul-backend:latest
 ```
 
-Create a GitHub personal access token with `write:packages` for publishing. Login locally:
-
-```bash
-read -rs GHCR_TOKEN
-echo "$GHCR_TOKEN" | docker login ghcr.io -u afoncom --password-stdin
-unset GHCR_TOKEN
-```
-
-Build and push the backend image for a typical x86_64 VPS:
-
-```bash
-docker buildx build --platform linux/amd64 \
-  -t ghcr.io/afoncom/perfume-soul-backend:latest \
-  -t ghcr.io/afoncom/perfume-soul-backend:$(git rev-parse --short HEAD) \
-  --push \
-  .
-```
+GitHub Actions builds the Linux image and smoke checks the Docker Compose stack on backend pull requests. After the same checks pass on `main`, CI publishes `latest`, the short commit SHA, and the full commit SHA tags to GHCR.
 
 Deploy or roll back to a specific commit tag by setting `BACKEND_IMAGE_TAG` in `.env` on the VPS:
 
