@@ -1,2 +1,17 @@
 .build/
 .swiftpm/
+.env
+.env.*
+!.env.example
+!.env.compose.example
+backups/
+.git/
+.gitignore
+Dockerfile
+docker-compose*.yml
+README.md
+*.xcodeproj
+*.xcworkspace
+xcuserdata/
+DerivedData/
+.DS_Store
