@@ -21,14 +21,18 @@ struct PersonalPerfumeScreen: View {
     }
 
     var body: some View {
+        let bottomPadding = presenter.shouldShowContinueButton ? 96.0 : 32.0
+
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 18) {
-                makeHeaderView()
+                if presenter.shouldShowContinueButton {
+                    makeHeaderView()
+                }
                 makeSectionsView()
             }
             .padding(.horizontal, 16)
             .padding(.top, 24)
-            .padding(.bottom, 32)
+            .padding(.bottom, bottomPadding)
         }
         .background(
             LinearGradient(
@@ -40,12 +44,16 @@ struct PersonalPerfumeScreen: View {
             )
             .ignoresSafeArea()
         )
-        .modifier(TopSafeAreaBackground(isEnabled: presenter.isPresentedInOnboarding))
         .task {
             await presenter.onAppear()
         }
+        .overlay(alignment: .top) {
+            if presenter.shouldShowContinueButton {
+                makeTopSafeAreaBackground()
+            }
+        }
         .safeAreaInset(edge: .bottom) {
-            if presenter.isPresentedInOnboarding {
+            if presenter.shouldShowContinueButton {
                 makeContinueButton()
                     .padding(.horizontal, 24)
                     .padding(.top, 12)
@@ -56,6 +64,16 @@ struct PersonalPerfumeScreen: View {
 }
 
 extension PersonalPerfumeScreen {
+    private func makeTopSafeAreaBackground() -> some View {
+        GeometryReader { proxy in
+            Color(.backgroundPrimary)
+                .frame(height: proxy.safeAreaInsets.top)
+                .frame(maxHeight: .infinity, alignment: .top)
+                .ignoresSafeArea(edges: .top)
+        }
+        .allowsHitTesting(false)
+    }
+
     @ViewBuilder
     private func makeSectionsView() -> some View {
         switch viewModel.state {

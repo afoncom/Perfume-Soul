@@ -45,6 +45,11 @@ final class RequestManagerTests: XCTestCase {
 
     func testSendRequestDecodesSuccessfulResponse() async throws {
         MockURLProtocol.requestHandler = { request in
+            XCTAssertEqual(
+                request.value(forHTTPHeaderField: "Accept-Language"),
+                SupportedAppLanguage.currentCode
+            )
+
             let response = try XCTUnwrap(
                 HTTPURLResponse(
                     url: try XCTUnwrap(request.url),
@@ -67,6 +72,66 @@ final class RequestManagerTests: XCTestCase {
         XCTAssertEqual(response.value, "ok")
     }
 
+    func testCustomAcceptLanguageOverridesDefaultCaseInsensitively() async throws {
+        MockURLProtocol.requestHandler = { request in
+            XCTAssertEqual(request.value(forHTTPHeaderField: "Accept-Language"), "de")
+
+            let response = try XCTUnwrap(
+                HTTPURLResponse(
+                    url: try XCTUnwrap(request.url),
+                    statusCode: 200,
+                    httpVersion: nil,
+                    headerFields: nil
+                )
+            )
+            let data = Data(#"{"value":"ok"}"#.utf8)
+            return (response, data)
+        }
+
+        let requestManager = RequestManagerImpl(
+            urlSession: makeURLSession(),
+            baseURL: "https://example.com"
+        )
+
+        let response: TestResponse = try await requestManager.sendRequest(
+            request: TestRequest(headers: ["accept-language": "de"])
+        )
+
+        XCTAssertEqual(response.value, "ok")
+    }
+
+    func testCustomContentTypePreventsJSONDefaultCaseInsensitively() async throws {
+        MockURLProtocol.requestHandler = { request in
+            XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "text/plain")
+
+            let response = try XCTUnwrap(
+                HTTPURLResponse(
+                    url: try XCTUnwrap(request.url),
+                    statusCode: 200,
+                    httpVersion: nil,
+                    headerFields: nil
+                )
+            )
+            let data = Data(#"{"value":"ok"}"#.utf8)
+            return (response, data)
+        }
+
+        let requestManager = RequestManagerImpl(
+            urlSession: makeURLSession(),
+            baseURL: "https://example.com"
+        )
+
+        let response: TestResponse = try await requestManager.sendRequest(
+            request: TestRequest(
+                httpMethod: .post,
+                headers: ["content-type": "text/plain"],
+                httpBody: Data("body".utf8)
+            )
+        )
+
+        XCTAssertEqual(response.value, "ok")
+    }
+
     private func makeURLSession() -> URLSession {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [MockURLProtocol.self]
@@ -76,7 +141,19 @@ final class RequestManagerTests: XCTestCase {
 
 private struct TestRequest: Request {
     let path = "/test"
-    let httpMethod: HTTPMethod = .get
+    let httpMethod: HTTPMethod
+    let headers: [String: String]
+    let httpBody: Data?
+
+    init(
+        httpMethod: HTTPMethod = .get,
+        headers: [String: String] = [:],
+        httpBody: Data? = nil
+    ) {
+        self.httpMethod = httpMethod
+        self.headers = headers
+        self.httpBody = httpBody
+    }
 }
 
 private struct TestResponse: Decodable {

@@ -21,13 +21,14 @@ struct ProfileDescriptionScreen: View {
     }
     
     var body: some View {
+        let bottomPadding = presenter.shouldShowContinueButton ? 96.0 : 32.0
+
         ZStack {
-            makeContentView()
+            makeContentView(bottomPadding: bottomPadding)
         }
         .background(Color(.backgroundPrimary).ignoresSafeArea())
-        .modifier(TopSafeAreaBackground(isEnabled: presenter.isPresentedInOnboarding))
         .safeAreaInset(edge: .bottom) {
-            if presenter.isPresentedInOnboarding {
+            if presenter.shouldShowContinueButton {
                 makeContinueButton()
                     .padding(.horizontal, 24)
                     .padding(.top, 12)
@@ -37,12 +38,27 @@ struct ProfileDescriptionScreen: View {
         .task {
             await presenter.onAppear()
         }
+        .overlay(alignment: .top) {
+            if presenter.shouldShowContinueButton {
+                makeTopSafeAreaBackground()
+            }
+        }
     }
 }
 
 extension ProfileDescriptionScreen {
+    private func makeTopSafeAreaBackground() -> some View {
+        GeometryReader { proxy in
+            Color(.backgroundPrimary)
+                .frame(height: proxy.safeAreaInsets.top)
+                .frame(maxHeight: .infinity, alignment: .top)
+                .ignoresSafeArea(edges: .top)
+        }
+        .allowsHitTesting(false)
+    }
+
     @ViewBuilder
-    private func makeContentView() -> some View {
+    private func makeContentView(bottomPadding: Double) -> some View {
         switch viewModel.state {
         case .idle, .loading:
             makeLoadingState()
@@ -54,7 +70,7 @@ extension ProfileDescriptionScreen {
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 28)
-                .padding(.bottom, 32)
+                .padding(.bottom, bottomPadding)
             }
         case .missingBirthPlaceData:
             makeUnavailableState(

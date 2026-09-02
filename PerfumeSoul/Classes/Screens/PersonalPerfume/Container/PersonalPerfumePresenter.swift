@@ -10,6 +10,7 @@ import Foundation
 
 protocol PersonalPerfumePresenter {
     var isPresentedInOnboarding: Bool { get }
+    var shouldShowContinueButton: Bool { get }
 
     func onAppear() async
     func retryButtonTapped() async
@@ -23,6 +24,10 @@ final class PersonalPerfumePresenterImpl {
     private let service: PersonalPerfumeService
     private let profileCalculation: ProfileCalculation?
     let isPresentedInOnboarding: Bool
+
+    var shouldShowContinueButton: Bool {
+        isPresentedInOnboarding && viewModel.canContinue
+    }
     
     init(
         viewModel: PersonalPerfumeViewModel,

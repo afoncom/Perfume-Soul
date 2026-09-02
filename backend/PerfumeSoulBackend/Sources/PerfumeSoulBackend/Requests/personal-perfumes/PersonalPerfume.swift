@@ -108,7 +108,7 @@ enum PersonalPerfumeLoader {
                 on: database
             )
 
-            return perfumeModels.compactMap(PerfumeProfile.init(model:))
+            return perfumeModels.compactMap { PerfumeProfile(model: $0) }
         }
     }
 
@@ -147,6 +147,7 @@ enum PersonalPerfumeLoader {
         on database: any Database
     ) async throws -> [PerfumeModel] {
         try await PerfumeModel.query(on: database)
+            .withPerfumeProfileFields()
             .filter(\.$marketSegment == marketSegment.rawValue)
             .sort(\.$id)
             .range(offset..<(offset + limit))

@@ -15,7 +15,8 @@ struct PerfumeRecommendation: Codable, Equatable {
 enum PerfumeRecommendationLoader {
     static func load(
         perfumeIDs: [Int],
-        on database: any Database
+        on database: any Database,
+        language: String? = nil
     ) async throws -> [PerfumeRecommendation] {
         let selectedPerfumeIDs = uniquePerfumeIDs(from: perfumeIDs)
         guard !selectedPerfumeIDs.isEmpty else {
@@ -23,6 +24,7 @@ enum PerfumeRecommendationLoader {
         }
 
         let perfumeModels = try await PerfumeModel.query(on: database)
+            .withPerfumeProfileFields()
             .with(\.$brand)
             .with(\.$notes) { query in
                 query.with(\.$note)
@@ -32,7 +34,9 @@ enum PerfumeRecommendationLoader {
             }
             .all()
 
-        let perfumeProfiles = perfumeModels.compactMap(PerfumeProfile.init(model:))
+        let perfumeProfiles = perfumeModels.compactMap {
+            PerfumeProfile(model: $0, language: language)
+        }
         return try load(
             perfumeProfiles: perfumeProfiles,
             selectedPerfumeIDs: selectedPerfumeIDs
@@ -52,7 +56,10 @@ enum PerfumeRecommendationLoader {
             throw Abort(.notFound)
         }
 
-        let targetProfile = RecommendationTargetProfile(perfumeProfiles: selectedPerfumeProfiles)
+        let targetProfile = RecommendationTargetProfile(
+            perfumeProfiles: selectedPerfumeProfiles,
+            usesLocalizedNoteDisplayNames: selectedPerfumeProfiles.allSatisfy(\.usesLocalizedNoteDisplayNames)
+        )
         let scoreRanges = ScoreRanges(perfumeProfiles: perfumeProfiles)
 
         return perfumeProfiles
@@ -291,7 +298,7 @@ extension PerfumeRecommendationLoader {
         candidateNoteWeights: [String: Int]
     ) -> [String] {
         targetProfile.noteWeights.keys
-            .compactMap { normalizedNote -> (String, Int)? in
+            .compactMap { normalizedNote -> (normalizedNote: String, displayName: String, overlapWeight: Int)? in
                 guard let candidateWeight = candidateNoteWeights[normalizedNote] else {
                     return nil
                 }
@@ -305,17 +312,17 @@ extension PerfumeRecommendationLoader {
                     candidateWeight
                 )
 
-                return (displayName, overlapWeight)
+                return (normalizedNote, displayName, overlapWeight)
             }
             .sorted { lhs, rhs in
-                if lhs.1 == rhs.1 {
-                    return lhs.0 < rhs.0
+                if lhs.overlapWeight == rhs.overlapWeight {
+                    return lhs.normalizedNote < rhs.normalizedNote
                 }
 
-                return lhs.1 > rhs.1
+                return lhs.overlapWeight > rhs.overlapWeight
             }
             .prefix(5)
-            .map { $0.0 }
+            .map(\.displayName)
     }
 
     fileprivate static func matchedDistinctNotesCount(
@@ -535,7 +542,10 @@ private struct RecommendationTargetProfile {
     let averageLongevityScore: Double?
     let averageSillageScore: Double?
 
-    init(perfumeProfiles: [PerfumeProfile]) {
+    init(
+        perfumeProfiles: [PerfumeProfile],
+        usesLocalizedNoteDisplayNames: Bool
+    ) {
         var noteWeights: [String: Int] = [:]
         var noteDisplayNames: [String: String] = [:]
         var accordWeights: [String: Double] = [:]
@@ -544,18 +554,21 @@ private struct RecommendationTargetProfile {
             Self.addNotes(
                 perfumeProfile.topNotes,
                 weight: 3,
+                displayNames: usesLocalizedNoteDisplayNames ? perfumeProfile.noteDisplayNames : [:],
                 noteWeights: &noteWeights,
                 noteDisplayNames: &noteDisplayNames
             )
             Self.addNotes(
                 perfumeProfile.middleNotes,
                 weight: 2,
+                displayNames: usesLocalizedNoteDisplayNames ? perfumeProfile.noteDisplayNames : [:],
                 noteWeights: &noteWeights,
                 noteDisplayNames: &noteDisplayNames
             )
             Self.addNotes(
                 perfumeProfile.baseNotes,
                 weight: 1,
+                displayNames: usesLocalizedNoteDisplayNames ? perfumeProfile.noteDisplayNames : [:],
                 noteWeights: &noteWeights,
                 noteDisplayNames: &noteDisplayNames
             )
@@ -604,13 +617,14 @@ private struct RecommendationTargetProfile {
     private static func addNotes(
         _ notes: [String],
         weight: Int,
+        displayNames: [String: String],
         noteWeights: inout [String: Int],
         noteDisplayNames: inout [String: String]
     ) {
         for note in notes {
             let normalizedNote = PerfumeRecommendationLoader.normalize(note)
             noteWeights[normalizedNote, default: 0] += weight
-            noteDisplayNames[normalizedNote] = note
+            noteDisplayNames[normalizedNote] = displayNames[normalizedNote] ?? note
         }
     }
 
@@ -675,6 +689,8 @@ struct PerfumeProfile {
     let topNotes: [String]
     let middleNotes: [String]
     let baseNotes: [String]
+    let noteDisplayNames: [String: String]
+    let usesLocalizedNoteDisplayNames: Bool
     let accordWeights: [String: Double]
     let concentration: String?
     let fragranceFamily: String?
@@ -695,6 +711,8 @@ struct PerfumeProfile {
         topNotes: [String] = [],
         middleNotes: [String] = [],
         baseNotes: [String] = [],
+        noteDisplayNames: [String: String] = [:],
+        usesLocalizedNoteDisplayNames: Bool = false,
         accordWeights: [String: Double] = [:],
         concentration: String? = nil,
         fragranceFamily: String? = nil,
@@ -713,6 +731,8 @@ struct PerfumeProfile {
         self.topNotes = topNotes
         self.middleNotes = middleNotes
         self.baseNotes = baseNotes
+        self.noteDisplayNames = noteDisplayNames
+        self.usesLocalizedNoteDisplayNames = usesLocalizedNoteDisplayNames
         self.accordWeights = accordWeights
         self.concentration = concentration
         self.fragranceFamily = fragranceFamily
@@ -739,7 +759,7 @@ struct PerfumeProfile {
         )
     }
 
-    init?(model: PerfumeModel) {
+    init?(model: PerfumeModel, language: String? = nil) {
         guard let id = model.id else {
             return nil
         }
@@ -761,6 +781,10 @@ struct PerfumeProfile {
         let sortedNotes = model.notes.sorted { lhs, rhs in
             lhs.sortOrder < rhs.sortOrder
         }
+        let isEnglish = PerfumeNotesLoader.prefersEnglish(acceptLanguage: language)
+        let useEnglishNotes = isEnglish && !sortedNotes.isEmpty && sortedNotes.allSatisfy {
+            $0.note.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+        }
 
         self.topNotes = sortedNotes
             .filter { $0.noteType == .top }
@@ -771,6 +795,11 @@ struct PerfumeProfile {
         self.baseNotes = sortedNotes
             .filter { $0.noteType == .base }
             .map { $0.note.name }
+        self.noteDisplayNames = Self.makeNoteDisplayNames(
+            notes: sortedNotes,
+            useEnglishNotes: useEnglishNotes
+        )
+        self.usesLocalizedNoteDisplayNames = useEnglishNotes
         self.accordWeights = Dictionary(
             uniqueKeysWithValues: model.accords.map {
                 (PerfumeRecommendationLoader.normalize($0.accord.name), $0.weight)
@@ -791,6 +820,27 @@ struct PerfumeProfile {
             longevityScore: self.longevityScore,
             sillageScore: self.sillageScore
         )
+    }
+
+    private static func makeNoteDisplayNames(
+        notes: [PerfumeNoteModel],
+        useEnglishNotes: Bool
+    ) -> [String: String] {
+        var noteDisplayNames: [String: String] = [:]
+        for perfumeNote in notes {
+            let noteName = perfumeNote.note.name
+            let displayName: String
+            if useEnglishNotes,
+                let englishName = perfumeNote.note.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines) {
+                displayName = englishName
+            } else {
+                displayName = noteName
+            }
+
+            noteDisplayNames[PerfumeRecommendationLoader.normalize(noteName)] = displayName
+        }
+
+        return noteDisplayNames
     }
 
     private static func makeSignature(
@@ -842,5 +892,24 @@ struct PerfumeProfile {
             "longevity:\(longevityPart)",
             "sillage:\(sillagePart)"
         ].joined(separator: "||")
+    }
+}
+
+extension QueryBuilder where Model == PerfumeModel {
+    /// Fields read by `PerfumeProfile.init(model:)`.
+    func withPerfumeProfileFields() -> Self {
+        field(\.$id)
+            .field(\.$perfumeName)
+            .field(\.$longevityScore)
+            .field(\.$sillageScore)
+            .field(\.$concentration)
+            .field(\.$fragranceFamily)
+            .field(\.$seasonProfile)
+            .field(\.$occasionProfile)
+            .field(\.$styleProfile)
+            .field(\.$genderProfile)
+            .field(\.$moodProfile)
+            .field(\.$marketSegment)
+            .field(\.$brand.$id)
     }
 }

@@ -150,7 +150,7 @@ extension CalculationScreen {
     func makeBirthPlaceField() -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(L10n.Calculation.birthPlaceTitle)
-                .font(.title3)
+                .font (.title3)
                 .fontWeight(.medium)
             
             HStack(spacing: 12) {

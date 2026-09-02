@@ -57,6 +57,14 @@ Backfill perfume accords:
 psql "$DATABASE_URL" -f scripts/fill_perfume_accords.sql
 ```
 
+Backfill perfume stories and English note names:
+
+```bash
+psql "$DATABASE_URL" -f scripts/fill_perfume_story_metadata.sql
+psql "$DATABASE_URL" -f scripts/fill_perfume_story_english_metadata.sql
+psql "$DATABASE_URL" -f scripts/fill_note_english_names.sql
+```
+
 Run the server:
 
 ```bash
@@ -67,6 +75,280 @@ Run tests:
 
 ```bash
 swift test
+```
+
+## Docker Compose run
+
+Docker Compose runs the backend together with PostgreSQL 18. `docker-compose.yml` is the production base file that pulls the backend image from GitHub Container Registry. `docker-compose.override.yml` is used automatically for local development, adds the local Docker build, and publishes PostgreSQL on `127.0.0.1:5433` for direct `swift run` and `psql` commands.
+
+Create an env file from the example:
+
+```bash
+cp .env.compose.example .env
+```
+
+Set a real database password in `.env`. The same `.env` file is shared by local `swift run` and Docker Compose. Compose overrides `DATABASE_URL` for the backend container, so the local `DATABASE_URL` remains for direct Swift runs only.
+
+```env
+POSTGRES_PASSWORD=change-this-password
+DATABASE_URL=postgresql://perfumesoul:change-this-password@localhost:5433/perfumesoul
+```
+
+Use an alphanumeric password because this value is interpolated into `DATABASE_URL`.
+
+Start PostgreSQL and the backend:
+
+```bash
+docker compose up -d --build --wait
+```
+
+The backend listens on `127.0.0.1:8080` on the host and connects to PostgreSQL through the internal Compose service name `postgres`. Local Compose publishes PostgreSQL on `127.0.0.1:5433` for direct `swift run` and `psql` commands, so it can run alongside a native PostgreSQL server on `5432`; the VPS base compose file does not publish PostgreSQL on a host port. Database data is stored in the `postgres_data` Docker volume. Docker Compose runs the backend with `VAPOR_ENV=production` so the local container mirrors production logging and error behavior; use `swift run PerfumeSoulBackend` for a development Vapor environment.
+
+Treat PostgreSQL major upgrades as dump/restore operations; do not point a newer major image tag at the existing `postgres_data` volume.
+
+Check service status and logs:
+
+```bash
+docker compose ps
+docker compose logs -f backend
+docker compose logs -f postgres
+```
+
+Smoke check the backend and bundled quiz resources:
+
+```bash
+curl -f http://127.0.0.1:8080/health
+curl -f http://127.0.0.1:8080/ready
+curl -f http://127.0.0.1:8080/quiz-of-the-day
+```
+
+Stop services:
+
+```bash
+docker compose down
+```
+
+### Publish backend image to GHCR
+
+Use GitHub Container Registry for private image delivery to the VPS:
+
+```text
+ghcr.io/afoncom/perfume-soul-backend:latest
+```
+
+GitHub Actions builds the Linux image and smoke checks the Docker Compose stack on backend pull requests. After the same checks pass on `main`, CI publishes `latest`, the short commit SHA, and the full commit SHA tags to GHCR. Runs are serialised per branch, so several merges in quick succession may skip the intermediate commits' tags — confirm a tag exists before pinning to it.
+
+```bash
+docker manifest inspect ghcr.io/afoncom/perfume-soul-backend:abc1234 > /dev/null && echo ok
+```
+
+Deploy or roll back to a specific commit tag by setting `BACKEND_IMAGE_TAG` in `.env` on the VPS:
+
+```env
+BACKEND_IMAGE_TAG=abc1234
+```
+
+### Docker seed/backfill
+
+Fluent migrations run automatically when the backend starts. Data seed and backfill scripts still need to be run manually.
+
+```bash
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_perfumery_history.sql
+
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_daily_horoscopes.sql
+
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 < scripts/fill_perfume_profile_metadata.sql
+
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 < scripts/fill_perfume_accords.sql
+
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/fill_perfume_story_metadata.sql
+
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/fill_perfume_story_english_metadata.sql
+
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/fill_note_english_names.sql
+```
+
+### VPS deployment
+
+Target Ubuntu 22.04 LTS, 24.04 LTS, or 26.04 LTS. Install Docker and Compose from Docker's official apt repository, then install Nginx, Certbot, and Git:
+
+```bash
+apt update
+apt install -y ca-certificates curl
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+cat > /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Architectures: $(dpkg --print-architecture)
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+apt update
+apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin nginx certbot python3-certbot-nginx git
+systemctl enable docker
+systemctl start docker
+```
+
+Clone the repository and create `.env`. If the repository is private, authenticate HTTPS with a GitHub personal access token that can read the repository, or use an SSH deploy key instead.
+
+```bash
+mkdir -p /opt/perfumesoul
+cd /opt/perfumesoul
+git clone https://github.com/afoncom/Perfume-Soul.git .
+cd backend/PerfumeSoulBackend
+cp .env.compose.example .env
+nano .env
+```
+
+Set `COMPOSE_FILE=docker-compose.yml` in `.env` on the VPS so Compose uses the GHCR image and does not auto-merge the local build override:
+
+```env
+COMPOSE_FILE=docker-compose.yml
+```
+
+If the GHCR package is private, create a GitHub personal access token with `read:packages` and login on the VPS before pulling. Skip `docker login` if the GHCR package is public. Then pull the backend image:
+
+```bash
+read -rs GHCR_TOKEN
+echo "$GHCR_TOKEN" | docker login ghcr.io -u afoncom --password-stdin
+unset GHCR_TOKEN
+docker compose pull
+```
+
+For the first deploy with an existing PostgreSQL database, create an import dump on the machine hosting the existing database:
+
+```bash
+set -o pipefail
+pg_dump --clean --if-exists --no-owner --no-privileges \
+  -U postgres postgres | gzip > perfumesoul-import.sql.gz
+gunzip -c perfumesoul-import.sql.gz | tail -1
+```
+
+The final command should print `-- PostgreSQL database dump complete`.
+
+Create the ignored backups directory on the VPS, copy `perfumesoul-import.sql.gz` to `/opt/perfumesoul/backend/PerfumeSoulBackend/backups/`, then restore it before the backend runs migrations:
+
+```bash
+mkdir -p backups
+docker compose up -d --wait postgres
+set -o pipefail
+gunzip -c backups/perfumesoul-import.sql.gz | docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction
+docker compose up -d --wait --wait-timeout 120
+```
+
+Smoke check the first deploy after importing a dump:
+
+```bash
+curl -f http://127.0.0.1:8080/health
+curl -f http://127.0.0.1:8080/ready
+curl -f http://127.0.0.1:8080/quiz-of-the-day
+curl -f http://127.0.0.1:8080/horoscope/daily
+curl -fs "http://127.0.0.1:8080/perfumes?searchText=&offset=0&limit=1" | grep -q '"id"'
+```
+
+A brand-new Docker PostgreSQL volume starts with schema only. The seed/backfill scripts above create `perfumery_history` and `daily_horoscopes`, but do not insert `brands`, `perfumes`, `notes`, or `perfume_notes` rows. If no dump is imported, start the stack, run the Docker seed/backfill section above, then smoke check the seed-only path:
+
+```bash
+docker compose up -d --wait --wait-timeout 120
+curl -f http://127.0.0.1:8080/health
+curl -f http://127.0.0.1:8080/ready
+curl -f http://127.0.0.1:8080/quiz-of-the-day
+curl -f http://127.0.0.1:8080/horoscope/daily
+```
+
+Update an existing deployment:
+
+```bash
+cd /opt/perfumesoul
+git pull
+cd backend/PerfumeSoulBackend
+docker compose pull
+docker compose up -d --wait --wait-timeout 120
+curl -f http://127.0.0.1:8080/health
+curl -f http://127.0.0.1:8080/ready
+curl -f http://127.0.0.1:8080/quiz-of-the-day
+```
+
+Back up the Docker PostgreSQL database before updates:
+
+```bash
+cd /opt/perfumesoul/backend/PerfumeSoulBackend
+mkdir -p backups
+set -o pipefail
+BACKUP_FILE="backups/perfumesoul-$(date +%Y%m%d%H%M%S).sql.gz"
+docker compose exec -T postgres \
+  pg_dump --clean --if-exists -U perfumesoul perfumesoul | gzip > "$BACKUP_FILE"
+gunzip -c "$BACKUP_FILE" | tail -1
+```
+
+The final command should print `-- PostgreSQL database dump complete`.
+
+Restore a backup into the Docker PostgreSQL database:
+
+```bash
+cd /opt/perfumesoul/backend/PerfumeSoulBackend
+set -o pipefail
+ls backups/
+BACKUP_FILE="backups/perfumesoul-<timestamp>.sql.gz"
+docker compose stop backend
+gunzip -c "$BACKUP_FILE" | docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction
+docker compose start backend
+```
+
+Deploy a pinned image tag or roll back:
+
+```bash
+cd /opt/perfumesoul/backend/PerfumeSoulBackend
+nano .env
+docker compose pull
+docker compose up -d --wait --wait-timeout 120
+```
+
+Nginx reverse proxy example:
+
+Create the Nginx server block:
+
+```bash
+nano /etc/nginx/sites-available/api.your-domain.com
+```
+
+```nginx
+server {
+    listen 80;
+    server_name api.your-domain.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_http_version 1.1;
+
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+Enable the server block and verify the proxy after DNS points to the VPS:
+
+```bash
+ln -s /etc/nginx/sites-available/api.your-domain.com /etc/nginx/sites-enabled/
+nginx -t
+systemctl reload nginx
+curl -f http://api.your-domain.com/health
+certbot --nginx -d api.your-domain.com
 ```
 
 ## Open in browser

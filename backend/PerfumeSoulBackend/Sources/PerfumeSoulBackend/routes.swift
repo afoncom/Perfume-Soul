@@ -1,7 +1,21 @@
 import Fluent
+import FluentSQL
 import Vapor
 
 func routes(_ app: Application) throws {
+    app.get("health") { _ async throws -> Response in
+        try jsonResponse(["status": "ok"])
+    }
+
+    app.get("ready") { req async throws -> Response in
+        guard let sqlDatabase = req.db as? any SQLDatabase else {
+            throw Abort(.internalServerError)
+        }
+
+        try await sqlDatabase.raw("SELECT 1").run()
+        return try jsonResponse(["status": "ready"])
+    }
+
     app.post("profile", "calculate") { req async throws -> Response in
         let request = try req.content.decode(ProfileCalculationRequest.self)
         return try jsonResponse(try ProfileCalculationLoader.load(request: request))
@@ -55,8 +69,10 @@ func routes(_ app: Application) throws {
         return try jsonResponse(
             try await PerfumeRecommendationLoader.load(
                 perfumeIDs: perfumeIDs,
-                on: req.db
-            )
+                on: req.db,
+                language: req.headers.first(name: "Accept-Language")
+            ),
+            varyByLanguage: true
         )
     }
 
@@ -79,20 +95,27 @@ func routes(_ app: Application) throws {
 
         guard let perfumeNotes = try await PerfumeNotesLoader.load(
             perfumeID: perfumeID,
-            on: req.db
+            on: req.db,
+            language: req.headers.first(name: "Accept-Language")
         ) else {
             throw Abort(.notFound)
         }
 
-        return try jsonResponse(perfumeNotes)
+        return try jsonResponse(perfumeNotes, varyByLanguage: true)
     }
 }
 
-private func jsonResponse<T: Encodable>(_ value: T) throws -> Response {
+private func jsonResponse<T: Encodable>(
+    _ value: T,
+    varyByLanguage: Bool = false
+) throws -> Response {
     let data = try JSONEncoder().encode(value)
 
     var headers = HTTPHeaders()
     headers.contentType = .json
+    if varyByLanguage {
+        headers.add(name: "Vary", value: "Accept-Language")
+    }
 
     return Response(status: .ok, headers: headers, body: .init(data: data))
 }
