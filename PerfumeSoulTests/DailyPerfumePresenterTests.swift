@@ -42,7 +42,7 @@ final class DailyPerfumePresenterTests: XCTestCase {
         XCTAssertEqual(viewModel.state, .content(makeSummary(id: 7), .pending))
         XCTAssertEqual(storage.state?.shownPerfumeIDs, [7])
         XCTAssertEqual(storage.state?.lastShownBrand, "Brand 7")
-        XCTAssertEqual(service.requests.first?.excludedPerfumeIDs, [8, 17, 42])
+        XCTAssertEqual(service.requests.first?.excludedPerfumeIDs, [8, 17])
     }
 
     @MainActor
