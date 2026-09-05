@@ -12,5 +12,6 @@ import Observation
     var historyFact: PerfumeHistory?
     var dailyHoroscopes: [DailyHoroscope] = []
     var personalHoroscope: DailyHoroscope?
+    var profile: Profile?
     var viewState: TodayScreen.ViewState = .loading
 }

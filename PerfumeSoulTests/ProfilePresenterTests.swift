@@ -25,9 +25,26 @@ final class ProfilePresenterTests: XCTestCase {
         XCTAssertTrue(appReviewRequester.didResetCompletedQuizCount)
     }
 
+    @MainActor
+    func testDeleteProfileClearsDailyPerfumeState() async {
+        let viewModel = ProfileViewModel()
+        let dailyPerfumeStateStorage = DailyPerfumeStateStorageMock()
+        viewModel.profile = makeProfile()
+        let presenter = makePresenter(
+            viewModel: viewModel,
+            appReviewRequester: AppReviewRequesterMock(),
+            dailyPerfumeStateStorage: dailyPerfumeStateStorage
+        )
+
+        await presenter.deleteProfile()
+
+        XCTAssertTrue(dailyPerfumeStateStorage.didClearState)
+    }
+
     private func makePresenter(
         viewModel: ProfileViewModel,
-        appReviewRequester: AppReviewRequesterMock
+        appReviewRequester: AppReviewRequesterMock,
+        dailyPerfumeStateStorage: DailyPerfumeStateStorage = DailyPerfumeStateStorageMock()
     ) -> ProfilePresenterImpl {
         ProfilePresenterImpl(
             viewModel: viewModel,
@@ -36,6 +53,7 @@ final class ProfilePresenterTests: XCTestCase {
             profileCalculationService: ProfileCalculationServiceMock(),
             quizProgressService: QuizProgressServiceMock(),
             dailyQuizStateStorage: DailyQuizStateStorageMock(),
+            dailyPerfumeStateStorage: dailyPerfumeStateStorage,
             appReviewRequester: appReviewRequester,
             profileAvatarBuilder: ProfileAvatarBuilderMock()
         )
@@ -55,6 +73,7 @@ final class ProfilePresenterTests: XCTestCase {
 }
 
 private final class ProfileRouterMock: ProfileRouter {
+    func showCabinet() { }
     func showPersonalPerfumes(profileCalculation: ProfileCalculation?) { }
     func showProfileDescription() { }
     func showProfileSetupScreen(profile: Profile) { }
@@ -85,6 +104,17 @@ private final class DailyQuizStateStorageMock: DailyQuizStateStorage {
     func loadState() -> DailyQuizState? { nil }
     func saveState(_ state: DailyQuizState) { }
     func clearState() { }
+}
+
+private final class DailyPerfumeStateStorageMock: DailyPerfumeStateStorage {
+    var didClearState = false
+
+    func loadState() -> DailyPerfumeState? { nil }
+    func saveState(_ state: DailyPerfumeState) { }
+
+    func clearState() {
+        didClearState = true
+    }
 }
 
 private final class AppReviewRequesterMock: AppReviewRequester {

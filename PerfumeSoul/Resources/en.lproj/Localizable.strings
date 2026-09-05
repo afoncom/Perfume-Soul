@@ -223,6 +223,13 @@
 "today.aroma.secondaryAction" = "Not today";
 "today.aroma.tags" = "Warm · Deep · Magnetic";
 "today.aroma.title" = "Aroma of the Day";
+"today.aroma.dismissedMessage" = "This choice is complete. A new aroma will appear tomorrow.";
+"today.aroma.exhausted" = "New recommendations will appear after the catalog expands.";
+"today.aroma.failed" = "Could not load today's aroma. Please try again.";
+"today.aroma.loading" = "Loading today's aroma…";
+"today.aroma.missingProfile" = "Complete your natal profile to receive a daily aroma.";
+"today.aroma.retry" = "Retry";
+"today.aroma.savedMessage" = "The fragrance was saved to your Cabinet. A new choice will appear tomorrow.";
 "today.energy.description" = "Your emotions are deeper and more intense today.";
 "today.energy.listTitle" = "Today's Horoscopes";
 "today.energy.moonTitle" = "Moon in Scorpio";
@@ -286,6 +293,10 @@
 "personalPerfume.section.niche.title" = "Niche Picks";
 "personalPerfume.section.niche.description" = "Distinctive niche fragrances that fit your personal aromatic vector.";
 "profile.calculation.unavailableMessage" = "Natal profile calculation is unavailable. Retry from Personal Perfumes.";
+"profile.cabinet.empty" = "The fragrances you want to keep will appear here.";
+"profile.cabinet.header" = "Fragrances that resonate with your story";
+"profile.cabinet.subtitle" = "Your saved fragrances";
+"profile.cabinet.title" = "Cabinet";
 "profile.personalPerfumes.loadingSubtitle" = "Calculating your natal scent profile...";
 "profile.personalPerfumes.retrySubtitle" = "Natal profile calculation failed. Tap to retry.";
 "profile.calculation.failed.button" = "Retry";

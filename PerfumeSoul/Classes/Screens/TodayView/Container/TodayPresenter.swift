@@ -19,19 +19,22 @@ final class TodayPresenterImpl {
     private let perfumeHistoryService: PerfumeHistoryService
     private let dailyHoroscopeService: DailyHoroscopeService
     private let profileService: ProfileService
+    private let dailyPerfumePresenter: DailyPerfumePresenter
     
     init(
         viewModel: TodayViewModel,
         router: TodayRouter,
         perfumeHistoryService: PerfumeHistoryService,
         dailyHoroscopeService: DailyHoroscopeService,
-        profileService: ProfileService
+        profileService: ProfileService,
+        dailyPerfumePresenter: DailyPerfumePresenter
     ) {
         self.viewModel = viewModel
         self.router = router
         self.perfumeHistoryService = perfumeHistoryService
         self.dailyHoroscopeService = dailyHoroscopeService
         self.profileService = profileService
+        self.dailyPerfumePresenter = dailyPerfumePresenter
     }
 }
 
@@ -44,9 +47,12 @@ extension TodayPresenterImpl: TodayPresenter {
             async let dailyHoroscopesTask = dailyHoroscopeService.requestDailyHoroscope()
             async let profileTask = profileService.fetchProfile()
             
+            let profile = await profileTask
+            viewModel.profile = profile
+            await dailyPerfumePresenter.resolve(profile: profile)
+
             let historyFact = try await historyFactTask
             let dailyHoroscopes = try await dailyHoroscopesTask
-            let profile = await profileTask
             let userSign = profile?.preferredZodiacSign
             
             viewModel.historyFact = historyFact
