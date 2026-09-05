@@ -223,6 +223,13 @@
 "today.aroma.secondaryAction" = "Не сегодня";
 "today.aroma.tags" = "Теплый · Глубокий · Магнетический";
 "today.aroma.title" = "Аромат дня";
+"today.aroma.dismissedMessage" = "Выбор на сегодня завершён. Новый аромат появится завтра.";
+"today.aroma.exhausted" = "Новые рекомендации появятся после расширения каталога.";
+"today.aroma.failed" = "Не удалось загрузить аромат дня. Попробуйте ещё раз.";
+"today.aroma.loading" = "Загружаем аромат дня…";
+"today.aroma.missingProfile" = "Заполните натальный профиль, чтобы получить аромат дня.";
+"today.aroma.retry" = "Повторить";
+"today.aroma.savedMessage" = "Аромат сохранён в шкатулку. Новый выбор появится завтра.";
 "today.energy.description" = "Сегодня твои эмоции глубже и интенсивнее.";
 "today.energy.listTitle" = "Гороскопы на сегодня";
 "today.energy.moonTitle" = "Луна в Скорпионе";
@@ -286,6 +293,10 @@
 "personalPerfume.section.niche.title" = "Нишевая подборка";
 "personalPerfume.section.niche.description" = "Самобытные нишевые ароматы, которые подходят вашему ароматическому вектору.";
 "profile.calculation.unavailableMessage" = "Расчет натального профиля недоступен. Повторите через Персональные ароматы.";
+"profile.cabinet.empty" = "Здесь появятся ароматы, которые захочется сохранить.";
+"profile.cabinet.header" = "Ароматы, которые откликаются в твоей истории";
+"profile.cabinet.subtitle" = "Ваши сохранённые ароматы";
+"profile.cabinet.title" = "Шкатулка";
 "profile.personalPerfumes.loadingSubtitle" = "Рассчитываем ваш натальный ароматический профиль...";
 "profile.personalPerfumes.retrySubtitle" = "Не удалось рассчитать натальный профиль. Нажмите, чтобы повторить.";
 "profile.calculation.failed.button" = "Повторить";

@@ -189,6 +189,14 @@ private struct ScoredPersonalPerfume {
     let signature: String
 }
 
+struct RankedPersonalPerfume {
+    let id: Int
+    let perfumeName: String
+    let brandName: String
+    let rawScore: Double
+    let signature: String
+}
+
 private struct WeightedScore {
     let value: Double
     let weight: Double
@@ -319,6 +327,43 @@ private struct PersonalPerfumePreference {
 }
 
 extension PersonalPerfumeScorer {
+    static func rankedCandidates(
+        request: PersonalPerfumesRequest,
+        perfumeProfiles: [PerfumeProfile]
+    ) -> [RankedPersonalPerfume] {
+        let preference = PersonalPerfumePreference(request: request)
+
+        return scoreCandidates(
+            perfumeProfiles: perfumeProfiles,
+            preference: preference
+        )
+            .map {
+                RankedPersonalPerfume(
+                    id: $0.response.id,
+                    perfumeName: $0.response.perfumeName,
+                    brandName: $0.response.brandName,
+                    rawScore: $0.rawScore,
+                    signature: $0.signature
+                )
+            }
+    }
+
+    static func areSortedForDailyCandidateRanking(
+        lhs: RankedPersonalPerfume,
+        rhs: RankedPersonalPerfume
+    ) -> Bool {
+        areSortedForRecommendationRanking(
+            lhsRawScore: lhs.rawScore,
+            lhsBrandName: lhs.brandName,
+            lhsPerfumeName: lhs.perfumeName,
+            lhsID: lhs.id,
+            rhsRawScore: rhs.rawScore,
+            rhsBrandName: rhs.brandName,
+            rhsPerfumeName: rhs.perfumeName,
+            rhsID: rhs.id
+        )
+    }
+
     fileprivate static func scoreCandidates(
         perfumeProfiles: [PerfumeProfile],
         preference: PersonalPerfumePreference
@@ -640,19 +685,41 @@ extension PersonalPerfumeScorer {
         lhs: ScoredPersonalPerfume,
         rhs: ScoredPersonalPerfume
     ) -> Bool {
-        if lhs.rawScore == rhs.rawScore {
-            if lhs.response.brandName == rhs.response.brandName {
-                if lhs.response.perfumeName == rhs.response.perfumeName {
-                    return lhs.response.id < rhs.response.id
+        areSortedForRecommendationRanking(
+            lhsRawScore: lhs.rawScore,
+            lhsBrandName: lhs.response.brandName,
+            lhsPerfumeName: lhs.response.perfumeName,
+            lhsID: lhs.response.id,
+            rhsRawScore: rhs.rawScore,
+            rhsBrandName: rhs.response.brandName,
+            rhsPerfumeName: rhs.response.perfumeName,
+            rhsID: rhs.response.id
+        )
+    }
+
+    private static func areSortedForRecommendationRanking(
+        lhsRawScore: Double,
+        lhsBrandName: String,
+        lhsPerfumeName: String,
+        lhsID: Int,
+        rhsRawScore: Double,
+        rhsBrandName: String,
+        rhsPerfumeName: String,
+        rhsID: Int
+    ) -> Bool {
+        if lhsRawScore == rhsRawScore {
+            if lhsBrandName == rhsBrandName {
+                if lhsPerfumeName == rhsPerfumeName {
+                    return lhsID < rhsID
                 }
 
-                return lhs.response.perfumeName < rhs.response.perfumeName
+                return lhsPerfumeName < rhsPerfumeName
             }
 
-            return lhs.response.brandName < rhs.response.brandName
+            return lhsBrandName < rhsBrandName
         }
 
-        return lhs.rawScore > rhs.rawScore
+        return lhsRawScore > rhsRawScore
     }
 
     fileprivate static func noteWeights(for perfumeProfile: PerfumeProfile) -> [String: Double] {
