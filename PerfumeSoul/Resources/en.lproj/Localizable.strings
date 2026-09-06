@@ -221,12 +221,10 @@
 "screen.calculationCreateProfile" = "Create your profile";
 "today.aroma.primaryAction" = "My vibe";
 "today.aroma.secondaryAction" = "Not today";
-"today.aroma.tags" = "Warm · Deep · Magnetic";
 "today.aroma.title" = "Aroma of the Day";
 "today.aroma.dismissedMessage" = "This choice is complete. A new aroma will appear tomorrow.";
 "today.aroma.exhausted" = "New recommendations will appear after the catalog expands.";
 "today.aroma.failed" = "Could not load today's aroma. Please try again.";
-"today.aroma.loading" = "Loading today's aroma…";
 "today.aroma.missingProfile" = "Complete your natal profile to receive a daily aroma.";
 "today.aroma.retry" = "Retry";
 "today.aroma.savedMessage" = "The fragrance was saved to your Cabinet. A new choice will appear tomorrow.";

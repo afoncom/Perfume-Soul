@@ -38,6 +38,7 @@ struct DailyPerfumeCandidate: Content, Equatable {
 enum DailyPerfumeCandidateLoader {
     static let maximumCandidateLimit = 20
     private static let candidatePageSize = 100
+    private static let candidatePoolLimit = 100
 
     static func load(
         request: DailyPerfumeCandidatesRequest,
@@ -63,11 +64,23 @@ enum DailyPerfumeCandidateLoader {
         pageProvider: (_ offset: Int, _ limit: Int) async throws -> [PerfumeProfile]
     ) async throws -> [DailyPerfumeCandidate] {
         var offset = 0
-        var perfumeProfiles: [PerfumeProfile] = []
+        var rankedCandidates: [RankedPersonalPerfume] = []
+        let excludedPerfumeIDs = Set(request.excludedPerfumeIDs)
+        let personalPerfumesRequest = PersonalPerfumesRequest(
+            sun: request.sun,
+            moon: request.moon,
+            ascendant: request.ascendant,
+            elementBalance: request.elementBalance
+        )
 
         while true {
             let page = try await pageProvider(offset, pageSize)
-            perfumeProfiles += page
+            let pageCandidates = PersonalPerfumeScorer.rankedCandidates(
+                request: personalPerfumesRequest,
+                perfumeProfiles: page
+            )
+                .filter { !excludedPerfumeIDs.contains($0.id) }
+            rankedCandidates = keepingTopCandidates(rankedCandidates + pageCandidates)
 
             guard page.count == pageSize else {
                 break
@@ -76,19 +89,6 @@ enum DailyPerfumeCandidateLoader {
             offset += pageSize
         }
 
-        let excludedPerfumeIDs = Set(request.excludedPerfumeIDs)
-        let personalPerfumesRequest = PersonalPerfumesRequest(
-            sun: request.sun,
-            moon: request.moon,
-            ascendant: request.ascendant,
-            elementBalance: request.elementBalance
-        )
-        let rankedCandidates = PersonalPerfumeScorer.rankedCandidates(
-            request: personalPerfumesRequest,
-            perfumeProfiles: perfumeProfiles
-        )
-            .filter { !excludedPerfumeIDs.contains($0.id) }
-            .sorted(by: PersonalPerfumeScorer.areSortedForDailyCandidateRanking)
         let uniqueCandidates = uniqueBySignature(rankedCandidates)
         let candidates = candidatesAvoidingLastShownBrand(
             uniqueCandidates,
@@ -109,6 +109,16 @@ enum DailyPerfumeCandidateLoader {
 }
 
 private extension DailyPerfumeCandidateLoader {
+    static func keepingTopCandidates(
+        _ candidates: [RankedPersonalPerfume]
+    ) -> [RankedPersonalPerfume] {
+        Array(
+            candidates
+                .sorted(by: PersonalPerfumeScorer.areSortedForDailyCandidateRanking)
+                .prefix(candidatePoolLimit)
+        )
+    }
+
     static func loadCandidates(
         offset: Int,
         limit: Int,

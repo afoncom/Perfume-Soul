@@ -48,8 +48,6 @@ extension TodayPresenterImpl: TodayPresenter {
             async let profileTask = profileService.fetchProfile()
             
             let profile = await profileTask
-            viewModel.profile = profile
-            await dailyPerfumePresenter.resolve(profile: profile)
 
             let historyFact = try await historyFactTask
             let dailyHoroscopes = try await dailyHoroscopesTask
@@ -63,6 +61,8 @@ extension TodayPresenterImpl: TodayPresenter {
             
             viewModel.viewState = .loaded(historyFact: historyFact)
             print(historyFact)
+
+            await dailyPerfumePresenter.resolve(profile: profile)
         } catch let error {
             print(error)
         }

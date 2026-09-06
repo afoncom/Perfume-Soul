@@ -221,12 +221,10 @@
 "horoscope.sign.virgo" = "Дева";
 "today.aroma.primaryAction" = "Мое настроение";
 "today.aroma.secondaryAction" = "Не сегодня";
-"today.aroma.tags" = "Теплый · Глубокий · Магнетический";
 "today.aroma.title" = "Аромат дня";
 "today.aroma.dismissedMessage" = "Выбор на сегодня завершён. Новый аромат появится завтра.";
 "today.aroma.exhausted" = "Новые рекомендации появятся после расширения каталога.";
 "today.aroma.failed" = "Не удалось загрузить аромат дня. Попробуйте ещё раз.";
-"today.aroma.loading" = "Загружаем аромат дня…";
 "today.aroma.missingProfile" = "Заполните натальный профиль, чтобы получить аромат дня.";
 "today.aroma.retry" = "Повторить";
 "today.aroma.savedMessage" = "Аромат сохранён в шкатулку. Новый выбор появится завтра.";
