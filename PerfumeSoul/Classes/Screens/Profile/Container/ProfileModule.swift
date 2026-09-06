@@ -25,6 +25,7 @@ final class ProfileModule {
             dayKeyProvider: dayKeyProvider
         )
         let dailyQuizStateStorage = DailyQuizStateStorageImpl(userDefaults: .standard)
+        let dailyPerfumeStateStorage = DailyPerfumeStateStorageImpl(userDefaults: .standard)
         let appVersionProvider = AppVersionProviderImpl()
         let appReviewRequester = AppReviewRequesterImpl(
             userDefaults: .standard,
@@ -35,6 +36,7 @@ final class ProfileModule {
             navigationController: navigationController,
             container: container,
             requestManager: requestManager,
+            dailyPerfumeStateStorage: dailyPerfumeStateStorage,
             onProfileSetupRequested: onProfileSetupRequested
         )
         let presenter = ProfilePresenterImpl(
@@ -44,6 +46,7 @@ final class ProfileModule {
             profileCalculationService: profileCalculationService,
             quizProgressService: quizProgressService,
             dailyQuizStateStorage: dailyQuizStateStorage,
+            dailyPerfumeStateStorage: dailyPerfumeStateStorage,
             appReviewRequester: appReviewRequester,
             profileAvatarBuilder: profileAvatarBuilder
         )

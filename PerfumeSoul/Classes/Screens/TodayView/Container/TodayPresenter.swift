@@ -44,9 +44,10 @@ extension TodayPresenterImpl: TodayPresenter {
             async let dailyHoroscopesTask = dailyHoroscopeService.requestDailyHoroscope()
             async let profileTask = profileService.fetchProfile()
             
+            let profile = await profileTask
+
             let historyFact = try await historyFactTask
             let dailyHoroscopes = try await dailyHoroscopesTask
-            let profile = await profileTask
             let userSign = profile?.preferredZodiacSign
             
             viewModel.historyFact = historyFact
@@ -57,6 +58,7 @@ extension TodayPresenterImpl: TodayPresenter {
             
             viewModel.viewState = .loaded(historyFact: historyFact)
             print(historyFact)
+
         } catch let error {
             print(error)
         }

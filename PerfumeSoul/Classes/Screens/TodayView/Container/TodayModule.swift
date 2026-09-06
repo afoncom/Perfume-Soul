@@ -19,6 +19,11 @@ final class TodayModule {
         let perfumeHistoryService = PerfumeHistoryServiceImpl(requestManager: requestManager)
         let dailyHoroscopeService = DailyHoroscopeServiceImpl(requestManager: requestManager)
         let profileService = ProfileServiceImpl(container: container)
+        let dailyPerfumeModule = DailyPerfumeModule.build(
+            navigationController: navigationController,
+            requestManager: requestManager,
+            profileService: profileService
+        )
         let presenter = TodayPresenterImpl(
             viewModel: viewModel,
             router: router,
@@ -27,7 +32,11 @@ final class TodayModule {
             profileService: profileService
         )
         
-        let view = TodayScreen(viewModel: viewModel, presenter: presenter)
+        let view = TodayScreen(
+            viewModel: viewModel,
+            dailyPerfumeScreen: dailyPerfumeModule,
+            presenter: presenter
+        )
         
         let hostingController = UIHostingController(rootView: view)
         hostingController.title = L10n.Screen.today

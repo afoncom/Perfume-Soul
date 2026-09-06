@@ -9,13 +9,16 @@ import SwiftUI
 
 struct TodayScreen: View {
     @Bindable private var viewModel: TodayViewModel
+    private let dailyPerfumeScreen: DailyPerfumeScreen
     private let presenter: TodayPresenter
     
     init(
         viewModel: TodayViewModel,
+        dailyPerfumeScreen: DailyPerfumeScreen,
         presenter: TodayPresenter
     ) {
         self.viewModel = viewModel
+        self.dailyPerfumeScreen = dailyPerfumeScreen
         self.presenter = presenter
     }
     
@@ -85,58 +88,7 @@ extension TodayScreen {
     }
     
     private func makeAromaDay() -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(L10n.Today.Aroma.title)
-                .font(.title3)
-                .fontWeight(.medium)
-            
-            
-            HStack(alignment: .bottom, spacing: 10) {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("Tom Ford\nOud Wood")
-                        .font(.title3)
-                        .fontWeight(.medium)
-                    
-                    Text(L10n.Today.Aroma.tags)
-                        .font(.footnote)
-                        .foregroundStyle(Color(.textSecondary))
-                    
-                    HStack(spacing: 6) {
-                        Button(action: {}) {
-                            Text(L10n.Today.Aroma.primaryAction)
-                                .font(.caption)
-                                .foregroundStyle(Color(.textOnAccent))
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 7)
-                                .background(Color(.pinkButton))
-                                .clipShape(Capsule())
-                        }
-                        
-                        Button(action: {}) {
-                            Text(L10n.Today.Aroma.secondaryAction)
-                                .font(.caption)
-                                .foregroundStyle(Color(.textSecondary))
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 7)
-                                .background(Color(.secondaryButtonBackground))
-                                .overlay(
-                                    Capsule()
-                                        .stroke(Color(.secondaryButtonBorder), lineWidth: 1)
-                                )
-                        }
-                    }
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .fill(Color(.placeholderMedium))
-                    .frame(width: 82, height: 112)
-            }
-        }
-        .padding(16)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-        .shadow(color: Color(.cardShadow), radius: 10, x: 0, y: 4)
+        dailyPerfumeScreen
     }
     
     private func makeRecommendedForYou() -> some View {

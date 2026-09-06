@@ -40,6 +40,9 @@ struct ProfileScreen: View {
                         makePerfumeExpertiseLevel()
                             .padding(.horizontal, 16)
 
+                        makeCabinetRow()
+                            .padding(.horizontal, 16)
+
                         makePersonalPerfumesRow()
                             .padding(.horizontal, 16)
 
@@ -75,6 +78,33 @@ struct ProfileScreen: View {
 }
 
 extension ProfileScreen {
+    func makeCabinetRow() -> some View {
+        Button {
+            presenter.cabinetButtonTapped()
+        } label: {
+            HStack(spacing: 14) {
+                Image(systemName: "archivebox")
+                    .font(.headline)
+                    .foregroundStyle(Color(.purpleIcon))
+                    .frame(width: 46, height: 46)
+                    .background(Color(.purpleTable).opacity(0.18))
+                    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(L10n.Profile.Cabinet.title).font(.title3).fontWeight(.medium).foregroundStyle(Color(.textPrimary))
+                    Text(L10n.Profile.Cabinet.subtitle).font(.footnote).foregroundStyle(Color(.textSecondary))
+                }
+                Spacer()
+                Image(systemName: "chevron.right").foregroundStyle(Color(.textSecondary))
+            }
+            .padding(.horizontal, 16).padding(.vertical, 14)
+            .background(Color(.surfacePrimary))
+            .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+            .overlay { RoundedRectangle(cornerRadius: 22, style: .continuous).stroke(Color(.cardBorder), lineWidth: 1) }
+            .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
+        }
+        .buttonStyle(.plain)
+    }
+
     func makeProfileScreen(profile: Profile, avatar: ProfileAvatar) -> some View {
         HStack(spacing: 12) {
             Circle()

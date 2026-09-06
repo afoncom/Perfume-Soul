@@ -7,6 +7,7 @@
 //
 
 protocol ProfilePresenter {
+    @MainActor func cabinetButtonTapped()
     func personalPerfumesButtonTapped() async
     func profileDescriptionButtonTapped()
     func retryProfileCalculationButtonTapped() async
@@ -22,6 +23,7 @@ final class ProfilePresenterImpl {
     private let profileCalculationService: ProfileCalculationService
     private let quizProgressService: QuizProgressService
     private let dailyQuizStateStorage: DailyQuizStateStorage
+    private let dailyPerfumeStateStorage: DailyPerfumeStateStorage
     private let appReviewRequester: AppReviewRequester
     private let profileAvatarBuilder: ProfileAvatarBuilder
     
@@ -32,6 +34,7 @@ final class ProfilePresenterImpl {
         profileCalculationService: ProfileCalculationService,
         quizProgressService: QuizProgressService,
         dailyQuizStateStorage: DailyQuizStateStorage,
+        dailyPerfumeStateStorage: DailyPerfumeStateStorage,
         appReviewRequester: AppReviewRequester,
         profileAvatarBuilder: ProfileAvatarBuilder
     ) {
@@ -41,12 +44,18 @@ final class ProfilePresenterImpl {
         self.profileCalculationService = profileCalculationService
         self.quizProgressService = quizProgressService
         self.dailyQuizStateStorage = dailyQuizStateStorage
+        self.dailyPerfumeStateStorage = dailyPerfumeStateStorage
         self.appReviewRequester = appReviewRequester
         self.profileAvatarBuilder = profileAvatarBuilder
     }
 }
 
 extension ProfilePresenterImpl: ProfilePresenter {
+    @MainActor
+    func cabinetButtonTapped() {
+        router.showCabinet()
+    }
+
     func personalPerfumesButtonTapped() async {
         let profileCalculationState = await MainActor.run {
             viewModel.profileCalculationState
@@ -115,6 +124,7 @@ extension ProfilePresenterImpl: ProfilePresenter {
         await profileService.deleteProfile(profile)
         quizProgressService.resetProgress()
         dailyQuizStateStorage.clearState()
+        dailyPerfumeStateStorage.clearState()
         
         await MainActor.run {
             appReviewRequester.resetCompletedQuizCount()
