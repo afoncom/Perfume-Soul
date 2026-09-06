@@ -11,13 +11,15 @@ import UIKit
 final class DailyPerfumeModule {
     static func build(
         navigationController: UINavigationController?,
-        requestManager: RequestManager
-    ) -> (screen: DailyPerfumeScreen, presenter: DailyPerfumePresenter) {
+        requestManager: RequestManager,
+        profileService: ProfileService
+    ) -> DailyPerfumeScreen {
         let viewModel = DailyPerfumeViewModel()
         let presenter = DailyPerfumePresenterImpl(
             viewModel: viewModel,
             router: DailyPerfumeRouterImpl(navigationController: navigationController),
             service: DailyPerfumeServiceImpl(requestManager: requestManager),
+            profileService: profileService,
             stateStorage: DailyPerfumeStateStorageImpl(userDefaults: .standard),
             dayKeyProvider: DailyPerfumeDayKeyProviderImpl(),
             selectionService: DailyPerfumeSelectionServiceImpl(
@@ -25,9 +27,6 @@ final class DailyPerfumeModule {
             )
         )
 
-        return (
-            screen: DailyPerfumeScreen(viewModel: viewModel, presenter: presenter),
-            presenter: presenter
-        )
+        return DailyPerfumeScreen(viewModel: viewModel, presenter: presenter)
     }
 }

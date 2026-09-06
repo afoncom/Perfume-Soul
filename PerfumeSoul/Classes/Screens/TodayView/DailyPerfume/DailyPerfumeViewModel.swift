@@ -19,4 +19,5 @@ enum DailyPerfumeViewState: Equatable {
 
 @Observable final class DailyPerfumeViewModel {
     var state: DailyPerfumeViewState = .loading
+    var isResolving = false
 }

@@ -21,20 +21,20 @@ final class TodayModule {
         let profileService = ProfileServiceImpl(container: container)
         let dailyPerfumeModule = DailyPerfumeModule.build(
             navigationController: navigationController,
-            requestManager: requestManager
+            requestManager: requestManager,
+            profileService: profileService
         )
         let presenter = TodayPresenterImpl(
             viewModel: viewModel,
             router: router,
             perfumeHistoryService: perfumeHistoryService,
             dailyHoroscopeService: dailyHoroscopeService,
-            profileService: profileService,
-            dailyPerfumePresenter: dailyPerfumeModule.presenter
+            profileService: profileService
         )
         
         let view = TodayScreen(
             viewModel: viewModel,
-            dailyPerfumeScreen: dailyPerfumeModule.screen,
+            dailyPerfumeScreen: dailyPerfumeModule,
             presenter: presenter
         )
         

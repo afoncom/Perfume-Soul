@@ -32,6 +32,9 @@ struct DailyPerfumeScreen: View {
         .background(Color(.surfacePrimary))
         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
         .shadow(color: Color(.cardShadow), radius: 10, x: 0, y: 4)
+        .task {
+            await presenter.resolve()
+        }
     }
 }
 

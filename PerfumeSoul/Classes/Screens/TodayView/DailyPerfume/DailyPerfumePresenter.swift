@@ -9,7 +9,7 @@
 import Foundation
 
 protocol DailyPerfumePresenter {
-    func resolve(profile: Profile?) async
+    func resolve() async
     @MainActor
     func saveCurrentPerfume()
     @MainActor
@@ -25,15 +25,16 @@ final class DailyPerfumePresenterImpl {
     private let viewModel: DailyPerfumeViewModel
     private let router: DailyPerfumeRouter
     private let service: DailyPerfumeService
+    private let profileService: ProfileService
     private let stateStorage: DailyPerfumeStateStorage
     private let dayKeyProvider: DailyPerfumeDayKeyProvider
     private let selectionService: DailyPerfumeSelectionService
-    private var profile: Profile?
 
     init(
         viewModel: DailyPerfumeViewModel,
         router: DailyPerfumeRouter,
         service: DailyPerfumeService,
+        profileService: ProfileService,
         stateStorage: DailyPerfumeStateStorage,
         dayKeyProvider: DailyPerfumeDayKeyProvider,
         selectionService: DailyPerfumeSelectionService
@@ -41,6 +42,7 @@ final class DailyPerfumePresenterImpl {
         self.viewModel = viewModel
         self.router = router
         self.service = service
+        self.profileService = profileService
         self.stateStorage = stateStorage
         self.dayKeyProvider = dayKeyProvider
         self.selectionService = selectionService
@@ -48,9 +50,27 @@ final class DailyPerfumePresenterImpl {
 }
 
 extension DailyPerfumePresenterImpl: DailyPerfumePresenter {
-    func resolve(profile: Profile?) async {
-        self.profile = profile
+    func resolve() async {
+        let shouldResolve = await MainActor.run {
+            guard !viewModel.isResolving else {
+                return false
+            }
+
+            viewModel.isResolving = true
+            return true
+        }
+        guard shouldResolve else {
+            return
+        }
+        defer {
+            Task { @MainActor in
+                viewModel.isResolving = false
+            }
+        }
+
         await setState(.loading)
+
+        let profile = await profileService.fetchProfile()
 
         guard
             let profile,
@@ -135,7 +155,7 @@ extension DailyPerfumePresenterImpl: DailyPerfumePresenter {
     }
 
     func retry() async {
-        await resolve(profile: profile)
+        await resolve()
     }
 
     @MainActor

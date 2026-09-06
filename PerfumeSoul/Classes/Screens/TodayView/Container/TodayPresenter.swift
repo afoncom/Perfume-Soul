@@ -19,22 +19,19 @@ final class TodayPresenterImpl {
     private let perfumeHistoryService: PerfumeHistoryService
     private let dailyHoroscopeService: DailyHoroscopeService
     private let profileService: ProfileService
-    private let dailyPerfumePresenter: DailyPerfumePresenter
     
     init(
         viewModel: TodayViewModel,
         router: TodayRouter,
         perfumeHistoryService: PerfumeHistoryService,
         dailyHoroscopeService: DailyHoroscopeService,
-        profileService: ProfileService,
-        dailyPerfumePresenter: DailyPerfumePresenter
+        profileService: ProfileService
     ) {
         self.viewModel = viewModel
         self.router = router
         self.perfumeHistoryService = perfumeHistoryService
         self.dailyHoroscopeService = dailyHoroscopeService
         self.profileService = profileService
-        self.dailyPerfumePresenter = dailyPerfumePresenter
     }
 }
 
@@ -62,7 +59,6 @@ extension TodayPresenterImpl: TodayPresenter {
             viewModel.viewState = .loaded(historyFact: historyFact)
             print(historyFact)
 
-            await dailyPerfumePresenter.resolve(profile: profile)
         } catch let error {
             print(error)
         }
