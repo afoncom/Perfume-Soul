@@ -148,37 +148,42 @@ extension PersonalPerfumeScreen {
     }
 
     private func makePerfumeItem(perfume: PersonalPerfumeItem) -> some View {
-        VStack(spacing: 10) {
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .fill(Color(.surfacePrimary))
-                .frame(height: 108)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 16, style: .continuous)
-                        .stroke(Color(.cardBorder), lineWidth: 1)
-                )
+        Button {
+            presenter.perfumeTapped(perfume)
+        } label: {
+            VStack(spacing: 10) {
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .fill(Color(.surfacePrimary))
+                    .frame(height: 108)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                            .stroke(Color(.cardBorder), lineWidth: 1)
+                    )
 
-            VStack(spacing: 4) {
-                Text(perfume.name)
-                    .font(.system(size: 15, weight: .medium, design: .rounded))
-                    .foregroundStyle(Color(.titleText))
-                    .multilineTextAlignment(.center)
-                    .lineLimit(2)
+                VStack(spacing: 4) {
+                    Text(perfume.name)
+                        .font(.system(size: 15, weight: .medium, design: .rounded))
+                        .foregroundStyle(Color(.titleText))
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
 
-                Text(perfume.subtitle)
-                    .font(.system(size: 14, weight: .regular, design: .rounded))
-                    .foregroundStyle(Color(.descriptionText))
-                    .multilineTextAlignment(.center)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
-                    .frame(minHeight: 18, alignment: .top)
+                    Text(perfume.subtitle)
+                        .font(.system(size: 14, weight: .regular, design: .rounded))
+                        .foregroundStyle(Color(.descriptionText))
+                        .multilineTextAlignment(.center)
+                        .lineLimit(1)
+                        .truncationMode(.tail)
+                        .frame(minHeight: 18, alignment: .top)
 
-                Spacer(minLength: 0)
+                    Spacer(minLength: 0)
 
-                makeMatchBadge(matchPercentage: perfume.matchPercentage)
+                    makeMatchBadge(matchPercentage: perfume.matchPercentage)
+                }
+                .frame(minHeight: 80, alignment: .top)
             }
-            .frame(minHeight: 80, alignment: .top)
         }
         .frame(maxWidth: .infinity, alignment: .top)
+        .buttonStyle(.plain)
     }
 
     private func makeMatchBadge(matchPercentage: Int) -> some View {

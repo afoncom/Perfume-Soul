@@ -12,17 +12,23 @@ final class PersonalPerfumeModule {
     static func build(
         profileCalculation: ProfileCalculation?,
         requestManager: RequestManager,
+        navigationController: UINavigationController?,
         onFinish: (() -> Void)? = nil
     ) -> UIViewController {
         let viewModel = PersonalPerfumeViewModel()
-        let router = PersonalPerfumeRouterImpl(onFinish: onFinish)
+        let router = PersonalPerfumeRouterImpl(
+            navigationController: navigationController,
+            onFinish: onFinish
+        )
         let service = PersonalPerfumeServiceImpl(requestManager: requestManager)
         let presenter = PersonalPerfumePresenterImpl(
             viewModel: viewModel,
             router: router,
             service: service,
             profileCalculation: profileCalculation,
-            isPresentedInOnboarding: onFinish != nil
+            isPresentedInOnboarding: onFinish != nil,
+            topStorage: PersonalPerfumeTopStorageImpl(userDefaults: .standard),
+            recommendedStateStorage: RecommendedPerfumeStateStorageImpl(userDefaults: .standard)
         )
         
         let view = PersonalPerfumeScreen(viewModel: viewModel, presenter: presenter)

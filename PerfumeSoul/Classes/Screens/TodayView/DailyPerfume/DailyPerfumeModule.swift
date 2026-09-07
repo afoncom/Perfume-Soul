@@ -12,7 +12,8 @@ final class DailyPerfumeModule {
     static func build(
         navigationController: UINavigationController?,
         requestManager: RequestManager,
-        profileService: ProfileService
+        profileService: ProfileService,
+        collectionService: PerfumeCollectionService
     ) -> DailyPerfumeScreen {
         let viewModel = DailyPerfumeViewModel()
         let presenter = DailyPerfumePresenterImpl(
@@ -21,6 +22,7 @@ final class DailyPerfumeModule {
             service: DailyPerfumeServiceImpl(requestManager: requestManager),
             profileService: profileService,
             stateStorage: DailyPerfumeStateStorageImpl(userDefaults: .standard),
+            collectionService: collectionService,
             dayKeyProvider: DailyPerfumeDayKeyProviderImpl(),
             selectionService: DailyPerfumeSelectionServiceImpl(
                 randomSource: SystemDailyPerfumeRandomSource()

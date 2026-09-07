@@ -19,11 +19,25 @@ final class TodayModule {
         let perfumeHistoryService = PerfumeHistoryServiceImpl(requestManager: requestManager)
         let dailyHoroscopeService = DailyHoroscopeServiceImpl(requestManager: requestManager)
         let profileService = ProfileServiceImpl(container: container)
+        let collectionService = PerfumeCollectionServiceImpl(
+            storage: PerfumeCollectionStorageImpl(
+                userDefaults: .standard
+            )
+        )
         let dailyPerfumeModule = DailyPerfumeModule.build(
             navigationController: navigationController,
             requestManager: requestManager,
-            profileService: profileService
+            profileService: profileService,
+            collectionService: collectionService
         )
+
+        let recommendedPerfumeModule = RecommendedPerfumeModule.build(
+            navigationController: navigationController,
+            requestManager: requestManager,
+            profileService: profileService,
+            collectionService: collectionService
+        )
+
         let presenter = TodayPresenterImpl(
             viewModel: viewModel,
             router: router,
@@ -35,6 +49,7 @@ final class TodayModule {
         let view = TodayScreen(
             viewModel: viewModel,
             dailyPerfumeScreen: dailyPerfumeModule,
+            recommendedPerfumeScreen: recommendedPerfumeModule,
             presenter: presenter
         )
         

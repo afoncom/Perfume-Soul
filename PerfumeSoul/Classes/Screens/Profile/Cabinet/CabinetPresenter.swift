@@ -9,50 +9,44 @@
 protocol CabinetPresenter {
     func onAppear()
     @MainActor
-    func perfumeTapped(_ perfume: DailyPerfumeSummary)
+    func perfumeTapped(_ perfume: PerfumeCollectionPerfume)
     @MainActor
-    func removePerfume(_ perfume: DailyPerfumeSummary)
+    func removePerfume(_ perfume: PerfumeCollectionPerfume)
 }
 
 final class CabinetPresenterImpl {
     private let viewModel: CabinetViewModel
     private let router: CabinetRouter
-    private let stateStorage: DailyPerfumeStateStorage
+    private let collectionService: PerfumeCollectionService
 
     init(
         viewModel: CabinetViewModel,
         router: CabinetRouter,
-        stateStorage: DailyPerfumeStateStorage
+        collectionService: PerfumeCollectionService
     ) {
         self.viewModel = viewModel
         self.router = router
-        self.stateStorage = stateStorage
+        self.collectionService = collectionService
     }
 }
 
 extension CabinetPresenterImpl: CabinetPresenter {
     func onAppear() {
-        let perfumes = stateStorage.loadState()?.savedPerfumes ?? []
+        let perfumes = collectionService.loadState().savedPerfumes
         viewModel.state = perfumes.isEmpty ? .empty : .content(perfumes)
     }
 
     @MainActor
-    func perfumeTapped(_ perfume: DailyPerfumeSummary) {
+    func perfumeTapped(_ perfume: PerfumeCollectionPerfume) {
         router.showPerfumeDetailsScreen(
             perfume: SearchPerfumeItem(id: perfume.id, name: perfume.perfumeName)
         )
     }
 
     @MainActor
-    func removePerfume(_ perfume: DailyPerfumeSummary) {
-        guard var state = stateStorage.loadState() else {
-            return
-        }
-
-        state.savedPerfumes.removeAll { $0.id == perfume.id }
-        stateStorage.saveState(state)
-
-        let perfumes = state.savedPerfumes
+    func removePerfume(_ perfume: PerfumeCollectionPerfume) {
+        collectionService.removeSavedPerfume(id: perfume.id)
+        let perfumes = collectionService.loadState().savedPerfumes
         viewModel.state = perfumes.isEmpty ? .empty : .content(perfumes)
     }
 }

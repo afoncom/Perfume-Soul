@@ -18,7 +18,12 @@ final class PerfumeDetailsModule {
         let presenter = PerfumeDetailsPresenterImpl(
             viewModel: viewModel,
             router: router,
-            perfumeDetailsService: perfumeDetailsService
+            perfumeDetailsService: perfumeDetailsService,
+            collectionService: PerfumeCollectionServiceImpl(
+                storage: PerfumeCollectionStorageImpl(
+                    userDefaults: .standard
+                )
+            )
         )
 
         let view = PerfumeDetailsScreen(viewModel: viewModel, presenter: presenter)

@@ -10,6 +10,7 @@ import Foundation
 protocol PerfumeDetailsPresenter {
     func onAppear() async
     func retryTapped() async
+    @MainActor func savePerfume(brandName: String)
 }
 
 @MainActor
@@ -17,15 +18,18 @@ final class PerfumeDetailsPresenterImpl {
     private let viewModel: PerfumeDetailsViewModel
     private let router: PerfumeDetailsRouter
     private let perfumeDetailsService: PerfumeDetailsService
+    private let collectionService: PerfumeCollectionService
 
     init(
         viewModel: PerfumeDetailsViewModel,
         router: PerfumeDetailsRouter,
-        perfumeDetailsService: PerfumeDetailsService
+        perfumeDetailsService: PerfumeDetailsService,
+        collectionService: PerfumeCollectionService
     ) {
         self.viewModel = viewModel
         self.router = router
         self.perfumeDetailsService = perfumeDetailsService
+        self.collectionService = collectionService
     }
 }
 
@@ -37,6 +41,17 @@ extension PerfumeDetailsPresenterImpl: PerfumeDetailsPresenter {
 
     func retryTapped() async {
         await loadPerfumeDetails()
+    }
+
+    func savePerfume(brandName: String) {
+        collectionService.save(
+            PerfumeCollectionPerfume(
+                id: viewModel.perfume.id,
+                perfumeName: viewModel.perfume.name,
+                brandName: brandName,
+                source: .manual
+            )
+        )
     }
 }
 

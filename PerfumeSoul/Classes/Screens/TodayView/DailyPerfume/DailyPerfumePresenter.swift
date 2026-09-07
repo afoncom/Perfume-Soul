@@ -27,6 +27,7 @@ final class DailyPerfumePresenterImpl {
     private let service: DailyPerfumeService
     private let profileService: ProfileService
     private let stateStorage: DailyPerfumeStateStorage
+    private let collectionService: PerfumeCollectionService
     private let dayKeyProvider: DailyPerfumeDayKeyProvider
     private let selectionService: DailyPerfumeSelectionService
 
@@ -36,6 +37,7 @@ final class DailyPerfumePresenterImpl {
         service: DailyPerfumeService,
         profileService: ProfileService,
         stateStorage: DailyPerfumeStateStorage,
+        collectionService: PerfumeCollectionService,
         dayKeyProvider: DailyPerfumeDayKeyProvider,
         selectionService: DailyPerfumeSelectionService
     ) {
@@ -44,6 +46,7 @@ final class DailyPerfumePresenterImpl {
         self.service = service
         self.profileService = profileService
         self.stateStorage = stateStorage
+        self.collectionService = collectionService
         self.dayKeyProvider = dayKeyProvider
         self.selectionService = selectionService
     }
@@ -133,12 +136,15 @@ extension DailyPerfumePresenterImpl: DailyPerfumePresenter {
     @MainActor
     func saveCurrentPerfume() {
         mutateCurrentPerfume(
-            { state, perfume in
-                guard !state.savedPerfumes.contains(where: { $0.id == perfume.id }) else {
-                    return
-                }
-
-                state.savedPerfumes.append(perfume)
+            { _, perfume in
+                self.collectionService.save(
+                    PerfumeCollectionPerfume(
+                        id: perfume.id,
+                        perfumeName: perfume.perfumeName,
+                        brandName: perfume.brandName,
+                        source: .dailyPerfume
+                    )
+                )
             },
             reaction: .saved
         )
@@ -147,8 +153,8 @@ extension DailyPerfumePresenterImpl: DailyPerfumePresenter {
     @MainActor
     func dismissCurrentPerfume() {
         mutateCurrentPerfume(
-            { state, perfume in
-                appendUnique(perfume.id, to: &state.dislikedPerfumeIDs)
+            { _, perfume in
+                self.collectionService.dislikePerfume(id: perfume.id)
             },
             reaction: .dismissed
         )
@@ -231,10 +237,11 @@ private extension DailyPerfumePresenterImpl {
     }
 
     func excludedPerfumeIDs(from state: DailyPerfumeState) -> [Int] {
-        Set(
+        let collectionState = collectionService.loadState()
+        return Set(
             state.shownPerfumeIDs
-                + state.savedPerfumes.map(\.id)
-                + state.dislikedPerfumeIDs
+                + collectionState.savedPerfumes.map(\.id)
+                + collectionState.dislikedPerfumeIDs
         )
             .sorted()
     }

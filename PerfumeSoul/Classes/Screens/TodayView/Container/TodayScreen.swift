@@ -10,15 +10,18 @@ import SwiftUI
 struct TodayScreen: View {
     @Bindable private var viewModel: TodayViewModel
     private let dailyPerfumeScreen: DailyPerfumeScreen
+    private let recommendedPerfumeScreen: RecommendedPerfumeScreen
     private let presenter: TodayPresenter
     
     init(
         viewModel: TodayViewModel,
         dailyPerfumeScreen: DailyPerfumeScreen,
+        recommendedPerfumeScreen: RecommendedPerfumeScreen,
         presenter: TodayPresenter
     ) {
         self.viewModel = viewModel
         self.dailyPerfumeScreen = dailyPerfumeScreen
+        self.recommendedPerfumeScreen = recommendedPerfumeScreen
         self.presenter = presenter
     }
     
@@ -92,40 +95,7 @@ extension TodayScreen {
     }
     
     private func makeRecommendedForYou() -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(L10n.Today.Recommended.title)
-                .font(.title3)
-                .fontWeight(.medium)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 10) {
-                    ForEach(0..<8, id: \.self) { _ in
-                        VStack(alignment: .leading, spacing: 6) {
-                            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                                .fill(Color(.placeholderMedium))
-                                .frame(width: 84, height: 96)
-                            
-                            Text("Byredo")
-                                .font(.subheadline)
-                                .foregroundStyle(Color(.textPrimary))
-                                .lineLimit(1)
-                            
-                            Text("Gypsy Water")
-                                .font(.caption)
-                                .foregroundStyle(Color(.textSecondary))
-                                .lineLimit(1)
-                        }
-                        .padding(10)
-                        .frame(width: 104, alignment: .leading)
-                        .background(Color(.surfacePrimary))
-                        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-                        .shadow(color: Color(.cardShadowSoft), radius: 8, x: 0, y: 3)
-                    }
-                    
-                }
-            }
-            .padding(.vertical, 4)
-        }
+        recommendedPerfumeScreen
     }
     
     private func makeThisDayInPerfumery() -> some View {

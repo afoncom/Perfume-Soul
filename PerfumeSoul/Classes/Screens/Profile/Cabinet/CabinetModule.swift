@@ -11,14 +11,15 @@ import UIKit
 
 final class CabinetModule {
     @MainActor static func build(
-        navigationController: UINavigationController?,
-        stateStorage: DailyPerfumeStateStorage
+        navigationController: UINavigationController?
     ) -> UIViewController {
         let viewModel = CabinetViewModel()
         let presenter = CabinetPresenterImpl(
             viewModel: viewModel,
             router: CabinetRouterImpl(navigationController: navigationController),
-            stateStorage: stateStorage
+            collectionService: PerfumeCollectionServiceImpl(
+                storage: PerfumeCollectionStorageImpl(userDefaults: .standard)
+            )
         )
         let controller = UIHostingController(rootView: CabinetScreen(viewModel: viewModel, presenter: presenter))
         controller.title = L10n.Profile.Cabinet.title

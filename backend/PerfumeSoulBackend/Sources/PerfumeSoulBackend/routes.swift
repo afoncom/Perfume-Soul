@@ -43,6 +43,17 @@ func routes(_ app: Application) throws {
         )
     }
 
+    app.post("recommended-perfumes", "candidates") { req async throws -> Response in
+        let request = try req.content.decode(DailyPerfumeCandidatesRequest.self)
+        try request.validate()
+        return try jsonResponse(
+            try await RecommendedPerfumeCandidateLoader.load(
+                request: request,
+                on: req.db
+            )
+        )
+    }
+
     app.get("perfumery-history") { req async throws -> Response in
         guard let item = try await PerfumeryHistoryLoader.load(
             dateKey: "2026-04-18",

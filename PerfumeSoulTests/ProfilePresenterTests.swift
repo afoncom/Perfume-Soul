@@ -54,6 +54,9 @@ final class ProfilePresenterTests: XCTestCase {
             quizProgressService: QuizProgressServiceMock(),
             dailyQuizStateStorage: DailyQuizStateStorageMock(),
             dailyPerfumeStateStorage: dailyPerfumeStateStorage,
+            collectionService: PerfumeCollectionServiceMock(),
+            personalPerfumeTopStorage: PersonalPerfumeTopStorageMock(),
+            recommendedPerfumeStateStorage: RecommendedPerfumeStateStorageMock(),
             appReviewRequester: appReviewRequester,
             profileAvatarBuilder: ProfileAvatarBuilderMock()
         )
@@ -115,6 +118,26 @@ private final class DailyPerfumeStateStorageMock: DailyPerfumeStateStorage {
     func clearState() {
         didClearState = true
     }
+}
+
+private final class PerfumeCollectionServiceMock: PerfumeCollectionService {
+    func loadState() -> PerfumeCollectionState { .empty }
+    func save(_ perfume: PerfumeCollectionPerfume) { }
+    func removeSavedPerfume(id: Int) { }
+    func dislikePerfume(id: Int) { }
+    func clearState() { }
+}
+
+private final class PersonalPerfumeTopStorageMock: PersonalPerfumeTopStorage {
+    func loadPerfumeIDs() -> [Int] { [] }
+    func savePerfumeIDs(_ perfumeIDs: [Int]) { }
+    func clear() { }
+}
+
+private final class RecommendedPerfumeStateStorageMock: RecommendedPerfumeStateStorage {
+    func loadState() -> RecommendedPerfumeState? { nil }
+    func saveState(_ state: RecommendedPerfumeState) { }
+    func clearState() { }
 }
 
 private final class AppReviewRequesterMock: AppReviewRequester {

@@ -117,6 +117,15 @@ extension PerfumeDetailsScreen {
                         .font(.footnote)
                         .foregroundStyle(Color(.descriptionText))
                         .fixedSize(horizontal: false, vertical: true)
+
+                    Button {
+                        presenter.savePerfume(brandName: perfumeDetails.brand)
+                    } label: {
+                        Image(systemName: "heart")
+                            .foregroundStyle(Color(.pinkButton))
+                            .frame(width: 36, height: 36)
+                    }
+                    .buttonStyle(.plain)
                 }
             }
 

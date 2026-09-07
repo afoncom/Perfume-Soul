@@ -42,7 +42,7 @@ final class ProfileRouterImpl {
 extension ProfileRouterImpl: ProfileRouter {
     @MainActor func showCabinet() {
         navigationController?.pushViewController(
-            CabinetModule.build(navigationController: navigationController, stateStorage: dailyPerfumeStateStorage),
+            CabinetModule.build(navigationController: navigationController),
             animated: true
         )
     }
@@ -50,7 +50,8 @@ extension ProfileRouterImpl: ProfileRouter {
     func showPersonalPerfumes(profileCalculation: ProfileCalculation?) {
         let screen = PersonalPerfumeModule.build(
             profileCalculation: profileCalculation,
-            requestManager: requestManager
+            requestManager: requestManager,
+            navigationController: navigationController
         )
         navigationController?.pushViewController(screen, animated: true)
     }
