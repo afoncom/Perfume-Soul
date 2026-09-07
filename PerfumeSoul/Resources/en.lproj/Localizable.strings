@@ -238,6 +238,7 @@
 "today.history.title" = "On This Day in Perfumery";
 "today.recommended.title" = "Recommended for You";
 "today.recommended.subtitle" = "Selected from your natal profile";
+"today.recommended.retry" = "Try again";
 "calculation.birthDateTitle" = "Birth Date";
 "calculation.birthPlaceNoResults" = "No places found. Check the spelling or try the nearest city.";
 "calculation.birthPlacePlaceholder" = "Enter city or town";

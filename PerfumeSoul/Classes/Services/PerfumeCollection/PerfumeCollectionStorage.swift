@@ -17,6 +17,7 @@ final class PerfumeCollectionStorageImpl {
     private enum Keys {
         static let state = "perfumeCollection.state"
         static let legacyDailyState = "dailyPerfume.state"
+        static let didMigrateLegacyState = "perfumeCollection.didMigrateLegacyState"
     }
 
     private let userDefaults: UserDefaults
@@ -31,8 +32,12 @@ final class PerfumeCollectionStorageImpl {
 extension PerfumeCollectionStorageImpl: PerfumeCollectionStorage {
     func loadState() -> PerfumeCollectionState {
         if let data = userDefaults.data(forKey: Keys.state),
-           let state = try? decoder.decode(PerfumeCollectionState.self, from: data) {
+            let state = try? decoder.decode(PerfumeCollectionState.self, from: data) {
             return state
+        }
+
+        guard !userDefaults.bool(forKey: Keys.didMigrateLegacyState) else {
+            return .empty
         }
 
         guard
@@ -54,6 +59,7 @@ extension PerfumeCollectionStorageImpl: PerfumeCollectionStorage {
             dislikedPerfumeIDs: legacyState.dislikedPerfumeIDs
         )
         saveState(migratedState)
+        userDefaults.set(true, forKey: Keys.didMigrateLegacyState)
         return migratedState
     }
 
@@ -67,5 +73,6 @@ extension PerfumeCollectionStorageImpl: PerfumeCollectionStorage {
 
     func clearState() {
         userDefaults.removeObject(forKey: Keys.state)
+        userDefaults.set(true, forKey: Keys.didMigrateLegacyState)
     }
 }

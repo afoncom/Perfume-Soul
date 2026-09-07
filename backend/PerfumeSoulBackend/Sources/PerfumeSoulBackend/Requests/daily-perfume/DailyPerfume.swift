@@ -63,6 +63,37 @@ enum DailyPerfumeCandidateLoader {
         pageSize: Int,
         pageProvider: (_ offset: Int, _ limit: Int) async throws -> [PerfumeProfile]
     ) async throws -> [DailyPerfumeCandidate] {
+        let candidates = try await loadRankedCandidates(
+            request: request,
+            pageSize: pageSize,
+            pageProvider: pageProvider
+        )
+
+        return Array(candidates.prefix(min(request.limit, maximumCandidateLimit)))
+    }
+
+    static func loadRankedCandidates(
+        request: DailyPerfumeCandidatesRequest,
+        on database: any Database
+    ) async throws -> [DailyPerfumeCandidate] {
+        try await loadRankedCandidates(
+            request: request,
+            pageSize: candidatePageSize
+        ) { offset, limit in
+            let perfumeModels = try await loadCandidates(
+                offset: offset,
+                limit: limit,
+                on: database
+            )
+            return perfumeModels.compactMap { PerfumeProfile(model: $0) }
+        }
+    }
+
+    static func loadRankedCandidates(
+        request: DailyPerfumeCandidatesRequest,
+        pageSize: Int,
+        pageProvider: (_ offset: Int, _ limit: Int) async throws -> [PerfumeProfile]
+    ) async throws -> [DailyPerfumeCandidate] {
         var offset = 0
         var rankedCandidates: [RankedPersonalPerfume] = []
         let excludedPerfumeIDs = Set(request.excludedPerfumeIDs)
@@ -95,9 +126,7 @@ enum DailyPerfumeCandidateLoader {
             lastShownBrand: request.lastShownBrand
         )
 
-        return candidates
-            .prefix(min(request.limit, maximumCandidateLimit))
-            .map {
+        return candidates.map {
                 DailyPerfumeCandidate(
                     id: $0.id,
                     perfumeName: $0.perfumeName,

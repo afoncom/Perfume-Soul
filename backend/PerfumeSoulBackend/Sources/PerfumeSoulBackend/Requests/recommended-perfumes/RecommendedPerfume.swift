@@ -6,27 +6,24 @@ enum RecommendedPerfumeCandidateLoader {
         request: DailyPerfumeCandidatesRequest,
         on database: any Database
     ) async throws -> [DailyPerfumeCandidate] {
-        let dailyRequest = DailyPerfumeCandidatesRequest(
-            sun: request.sun,
-            moon: request.moon,
-            ascendant: request.ascendant,
-            elementBalance: request.elementBalance,
-            excludedPerfumeIDs: request.excludedPerfumeIDs,
-            lastShownBrand: nil,
-            limit: DailyPerfumeCandidateLoader.maximumCandidateLimit
-        )
-        let candidates = try await DailyPerfumeCandidateLoader.load(
-            request: dailyRequest,
+        let candidates = try await DailyPerfumeCandidateLoader.loadRankedCandidates(
+            request: request,
             on: database
         )
-        let requiredCount = min(request.limit, candidates.count)
+        return candidatesApplyingBrandCap(candidates, limit: request.limit)
+    }
+
+    static func candidatesApplyingBrandCap(
+        _ candidates: [DailyPerfumeCandidate],
+        limit: Int
+    ) -> [DailyPerfumeCandidate] {
+        let requiredCount = min(limit, DailyPerfumeCandidateLoader.maximumCandidateLimit)
         for maximumPerBrand in [2, 3, Int.max] {
             let selected = candidatesWithBrandCap(candidates, maximumPerBrand: maximumPerBrand)
             if selected.count >= requiredCount || maximumPerBrand == Int.max {
-                return Array(selected.prefix(request.limit))
+                return Array(selected.prefix(requiredCount))
             }
         }
-
         return []
     }
 }

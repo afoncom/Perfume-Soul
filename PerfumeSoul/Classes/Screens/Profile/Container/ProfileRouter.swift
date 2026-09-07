@@ -21,20 +21,17 @@ final class ProfileRouterImpl {
     private weak var navigationController: UINavigationController?
     private let container: NSPersistentContainer
     private let requestManager: RequestManager
-    private let dailyPerfumeStateStorage: DailyPerfumeStateStorage
     private let onProfileSetupRequested: (Profile?) -> Void
     
     init(
         navigationController: UINavigationController?,
         container: NSPersistentContainer,
         requestManager: RequestManager,
-        dailyPerfumeStateStorage: DailyPerfumeStateStorage,
         onProfileSetupRequested: @escaping (Profile?) -> Void
     ) {
         self.navigationController = navigationController
         self.container = container
         self.requestManager = requestManager
-        self.dailyPerfumeStateStorage = dailyPerfumeStateStorage
         self.onProfileSetupRequested = onProfileSetupRequested
     }
 }

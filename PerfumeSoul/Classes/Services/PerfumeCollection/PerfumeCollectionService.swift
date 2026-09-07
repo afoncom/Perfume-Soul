@@ -28,7 +28,9 @@ extension PerfumeCollectionServiceImpl: PerfumeCollectionService {
 
     func save(_ perfume: PerfumeCollectionPerfume) {
         var state = storage.loadState()
-        guard !state.savedPerfumes.contains(where: { $0.id == perfume.id }) else { return }
+        guard !state.savedPerfumes.contains(where: { $0.id == perfume.id }) else {
+            return
+        }
         state.savedPerfumes.append(perfume)
         storage.saveState(state)
     }
@@ -41,7 +43,9 @@ extension PerfumeCollectionServiceImpl: PerfumeCollectionService {
 
     func dislikePerfume(id: Int) {
         var state = storage.loadState()
-        guard !state.dislikedPerfumeIDs.contains(id) else { return }
+        guard !state.dislikedPerfumeIDs.contains(id) else {
+            return
+        }
         state.dislikedPerfumeIDs.append(id)
         storage.saveState(state)
     }

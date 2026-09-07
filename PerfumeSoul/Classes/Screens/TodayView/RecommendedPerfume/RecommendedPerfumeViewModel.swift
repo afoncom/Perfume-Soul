@@ -12,6 +12,7 @@ enum RecommendedPerfumeViewState: Equatable {
     case loading
     case content([DailyPerfumeSummary])
     case empty
+    case failed
 }
 
 @Observable final class RecommendedPerfumeViewModel {

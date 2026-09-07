@@ -43,7 +43,6 @@ final class ProfileModule {
             navigationController: navigationController,
             container: container,
             requestManager: requestManager,
-            dailyPerfumeStateStorage: dailyPerfumeStateStorage,
             onProfileSetupRequested: onProfileSetupRequested
         )
         let presenter = ProfilePresenterImpl(
