@@ -121,7 +121,7 @@ extension PerfumeDetailsScreen {
                     Button {
                         presenter.savePerfume(brandName: perfumeDetails.brand)
                     } label: {
-                        Image(systemName: "heart")
+                        Image(systemName: viewModel.isSaved ? "heart.fill" : "heart")
                             .foregroundStyle(Color(.pinkButton))
                             .frame(width: 36, height: 36)
                     }

@@ -35,6 +35,8 @@ final class PerfumeDetailsPresenterImpl {
 
 extension PerfumeDetailsPresenterImpl: PerfumeDetailsPresenter {
     func onAppear() async {
+        updateSavedPerfumeState()
+
         guard !viewModel.hasLoadedOnce else { return }
         await loadPerfumeDetails()
     }
@@ -52,10 +54,17 @@ extension PerfumeDetailsPresenterImpl: PerfumeDetailsPresenter {
                 source: .manual
             )
         )
+        updateSavedPerfumeState()
     }
 }
 
 extension PerfumeDetailsPresenterImpl {
+    private func updateSavedPerfumeState() {
+        viewModel.isSaved = collectionService.loadState().savedPerfumes.contains {
+            $0.id == viewModel.perfume.id
+        }
+    }
+
     private func loadPerfumeDetails() async {
         guard !viewModel.isLoading else { return }
 

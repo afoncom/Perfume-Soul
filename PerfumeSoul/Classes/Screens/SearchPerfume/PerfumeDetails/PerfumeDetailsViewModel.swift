@@ -13,6 +13,7 @@ import Observation
     var isLoading = false
     var hasLoadedOnce = false
     var errorMessage: String?
+    var isSaved = false
 
     init(perfume: SearchPerfumeItem) {
         self.perfume = perfume
