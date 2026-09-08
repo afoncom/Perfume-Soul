@@ -39,7 +39,10 @@ final class ProfileRouterImpl {
 extension ProfileRouterImpl: ProfileRouter {
     @MainActor func showCabinet() {
         navigationController?.pushViewController(
-            CabinetModule.build(navigationController: navigationController),
+            CabinetModule.build(
+                navigationController: navigationController,
+                requestManager: requestManager
+            ),
             animated: true
         )
     }

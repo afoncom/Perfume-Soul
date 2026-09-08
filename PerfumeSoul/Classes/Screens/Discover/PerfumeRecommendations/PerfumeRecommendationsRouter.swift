@@ -15,16 +15,24 @@ protocol PerfumeRecommendationsRouter {
 
 final class PerfumeRecommendationsRouterImpl {
     private weak var navigationController: UINavigationController?
+    private let requestManager: RequestManager
 
-    init(navigationController: UINavigationController?) {
+    init(
+        navigationController: UINavigationController?,
+        requestManager: RequestManager
+    ) {
         self.navigationController = navigationController
+        self.requestManager = requestManager
     }
 }
 
 extension PerfumeRecommendationsRouterImpl: PerfumeRecommendationsRouter {
     @MainActor func showPerfumeDetailsScreen(perfume: SearchPerfumeItem) {
         navigationController?.pushViewController(
-            PerfumeDetailsModule.build(perfume: perfume),
+            PerfumeDetailsModule.build(
+                perfume: perfume,
+                requestManager: requestManager
+            ),
             animated: true
         )
     }
