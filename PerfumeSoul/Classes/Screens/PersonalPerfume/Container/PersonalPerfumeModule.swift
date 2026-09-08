@@ -18,6 +18,7 @@ final class PersonalPerfumeModule {
         let viewModel = PersonalPerfumeViewModel()
         let router = PersonalPerfumeRouterImpl(
             navigationController: navigationController,
+            requestManager: requestManager,
             onFinish: onFinish
         )
         let service = PersonalPerfumeServiceImpl(requestManager: requestManager)

@@ -14,14 +14,25 @@ protocol CabinetRouter {
 
 final class CabinetRouterImpl {
     private weak var navigationController: UINavigationController?
+    private let requestManager: RequestManager
 
-    init(navigationController: UINavigationController?) {
+    init(
+        navigationController: UINavigationController?,
+        requestManager: RequestManager
+    ) {
         self.navigationController = navigationController
+        self.requestManager = requestManager
     }
 }
 
 extension CabinetRouterImpl: CabinetRouter {
     @MainActor func showPerfumeDetailsScreen(perfume: SearchPerfumeItem) {
-        navigationController?.pushViewController(PerfumeDetailsModule.build(perfume: perfume), animated: true)
+        navigationController?.pushViewController(
+            PerfumeDetailsModule.build(
+                perfume: perfume,
+                requestManager: requestManager
+            ),
+            animated: true
+        )
     }
 }

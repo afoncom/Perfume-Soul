@@ -9,11 +9,11 @@ import SwiftUI
 
 final class PerfumeDetailsModule {
     @MainActor static func build(
-        perfume: SearchPerfumeItem
+        perfume: SearchPerfumeItem,
+        requestManager: RequestManager
     ) -> UIViewController {
         let viewModel = PerfumeDetailsViewModel(perfume: perfume)
         let router = PerfumeDetailsRouterImpl()
-        let requestManager = RequestManagerImpl(urlSession: URLSession.shared, baseURL: "http://127.0.0.1:8080")
         let perfumeDetailsService = PerfumeDetailsServiceImpl(requestManager: requestManager)
         let presenter = PerfumeDetailsPresenterImpl(
             viewModel: viewModel,

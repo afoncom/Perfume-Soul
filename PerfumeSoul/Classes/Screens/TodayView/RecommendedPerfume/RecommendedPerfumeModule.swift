@@ -22,7 +22,10 @@ final class RecommendedPerfumeModule {
             collectionService: collectionService,
             topStorage: PersonalPerfumeTopStorageImpl(userDefaults: .standard),
             stateStorage: RecommendedPerfumeStateStorageImpl(userDefaults: .standard),
-            router: RecommendedPerfumeRouterImpl(navigationController: navigationController)
+            router: RecommendedPerfumeRouterImpl(
+                navigationController: navigationController,
+                requestManager: requestManager
+            )
         )
         return RecommendedPerfumeScreen(viewModel: viewModel, presenter: presenter)
     }

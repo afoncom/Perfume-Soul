@@ -11,12 +11,16 @@ import UIKit
 
 final class CabinetModule {
     @MainActor static func build(
-        navigationController: UINavigationController?
+        navigationController: UINavigationController?,
+        requestManager: RequestManager
     ) -> UIViewController {
         let viewModel = CabinetViewModel()
         let presenter = CabinetPresenterImpl(
             viewModel: viewModel,
-            router: CabinetRouterImpl(navigationController: navigationController),
+            router: CabinetRouterImpl(
+                navigationController: navigationController,
+                requestManager: requestManager
+            ),
             collectionService: PerfumeCollectionServiceImpl(
                 storage: PerfumeCollectionStorageImpl(userDefaults: .standard)
             )

@@ -16,7 +16,10 @@ final class PerfumeRecommendationsModule {
         requestManager: RequestManager
     ) -> UIViewController {
         let viewModel = PerfumeRecommendationsViewModel(selectedPerfumes: selectedPerfumes)
-        let router = PerfumeRecommendationsRouterImpl(navigationController: navigationController)
+        let router = PerfumeRecommendationsRouterImpl(
+            navigationController: navigationController,
+            requestManager: requestManager
+        )
         let perfumeRecommendationService = PerfumeRecommendationServiceImpl(requestManager: requestManager)
         let presenter = PerfumeRecommendationsPresenterImpl(
             viewModel: viewModel,

@@ -16,12 +16,15 @@ protocol PersonalPerfumeRouter {
 final class PersonalPerfumeRouterImpl {
     private let onFinish: (() -> Void)?
     private weak var navigationController: UINavigationController?
+    private let requestManager: RequestManager
 
     init(
         navigationController: UINavigationController?,
+        requestManager: RequestManager,
         onFinish: (() -> Void)? = nil
     ) {
         self.navigationController = navigationController
+        self.requestManager = requestManager
         self.onFinish = onFinish
     }
 }
@@ -33,7 +36,10 @@ extension PersonalPerfumeRouterImpl: PersonalPerfumeRouter {
 
     @MainActor func showPerfumeDetailsScreen(perfume: SearchPerfumeItem) {
         navigationController?.pushViewController(
-            PerfumeDetailsModule.build(perfume: perfume),
+            PerfumeDetailsModule.build(
+                perfume: perfume,
+                requestManager: requestManager
+            ),
             animated: true
         )
     }

@@ -18,7 +18,10 @@ final class DailyPerfumeModule {
         let viewModel = DailyPerfumeViewModel()
         let presenter = DailyPerfumePresenterImpl(
             viewModel: viewModel,
-            router: DailyPerfumeRouterImpl(navigationController: navigationController),
+            router: DailyPerfumeRouterImpl(
+                navigationController: navigationController,
+                requestManager: requestManager
+            ),
             service: DailyPerfumeServiceImpl(requestManager: requestManager),
             profileService: profileService,
             stateStorage: DailyPerfumeStateStorageImpl(userDefaults: .standard),

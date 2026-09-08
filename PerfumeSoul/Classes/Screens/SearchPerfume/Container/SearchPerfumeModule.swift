@@ -13,7 +13,10 @@ final class SearchPerfumeModule {
         let viewModel = SearchPerfumeViewModel()
         let searchPerfumeService = SearchPerfumeServiceImpl(requestManager: requestManager)
         let navigationController = UINavigationController()
-        let router = SearchPerfumeRouterImpl(navigationController: navigationController)
+        let router = SearchPerfumeRouterImpl(
+            navigationController: navigationController,
+            requestManager: requestManager
+        )
         let presenter = SearchPerfumePresenterImpl(
             viewModel: viewModel,
             router: router,
