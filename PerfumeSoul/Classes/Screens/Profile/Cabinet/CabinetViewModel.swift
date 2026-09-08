@@ -11,7 +11,7 @@ import Observation
 enum CabinetViewState: Equatable {
     case loading
     case empty
-    case content([DailyPerfumeSummary])
+    case content([PerfumeCollectionPerfume])
 }
 
 @Observable final class CabinetViewModel {

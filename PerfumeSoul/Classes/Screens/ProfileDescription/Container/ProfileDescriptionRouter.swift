@@ -34,6 +34,7 @@ extension ProfileDescriptionRouterImpl: ProfileDescriptionRouter {
         let screen = PersonalPerfumeModule.build(
             profileCalculation: profileCalculation,
             requestManager: requestManager,
+            navigationController: navigationController,
             onFinish: onFinish
         )
         navigationController?.pushViewController(screen, animated: true)

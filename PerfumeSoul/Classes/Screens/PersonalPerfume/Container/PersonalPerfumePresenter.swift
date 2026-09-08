@@ -16,6 +16,7 @@ protocol PersonalPerfumePresenter {
     func retryButtonTapped() async
     func skipButtonTapped()
     func continueButtonTapped()
+    @MainActor func perfumeTapped(_ perfume: PersonalPerfumeItem)
 }
 
 final class PersonalPerfumePresenterImpl {
@@ -23,6 +24,8 @@ final class PersonalPerfumePresenterImpl {
     private let router: PersonalPerfumeRouter
     private let service: PersonalPerfumeService
     private let profileCalculation: ProfileCalculation?
+    private let topStorage: PersonalPerfumeTopStorage
+    private let recommendedStateStorage: RecommendedPerfumeStateStorage
     let isPresentedInOnboarding: Bool
 
     var shouldShowContinueButton: Bool {
@@ -34,12 +37,16 @@ final class PersonalPerfumePresenterImpl {
         router: PersonalPerfumeRouter,
         service: PersonalPerfumeService,
         profileCalculation: ProfileCalculation?,
-        isPresentedInOnboarding: Bool
+        isPresentedInOnboarding: Bool,
+        topStorage: PersonalPerfumeTopStorage,
+        recommendedStateStorage: RecommendedPerfumeStateStorage
     ) {
         self.viewModel = viewModel
         self.router = router
         self.service = service
         self.profileCalculation = profileCalculation
+        self.topStorage = topStorage
+        self.recommendedStateStorage = recommendedStateStorage
         self.isPresentedInOnboarding = isPresentedInOnboarding
     }
 }
@@ -64,6 +71,12 @@ extension PersonalPerfumePresenterImpl: PersonalPerfumePresenter {
 
         router.finishOnboarding()
     }
+
+    @MainActor func perfumeTapped(_ perfume: PersonalPerfumeItem) {
+        router.showPerfumeDetailsScreen(
+            perfume: SearchPerfumeItem(id: perfume.id, name: perfume.subtitle)
+        )
+    }
 }
 
 extension PersonalPerfumePresenterImpl {
@@ -83,6 +96,11 @@ extension PersonalPerfumePresenterImpl {
             let perfumes = try await service.requestPersonalPerfumes(
                 profile: makeProfileRequest(profileCalculation: profileCalculation)
             )
+            let topPerfumeIDs = perfumes.map(\.id)
+            if topStorage.loadPerfumeIDs() != topPerfumeIDs {
+                topStorage.savePerfumeIDs(topPerfumeIDs)
+                recommendedStateStorage.clearState()
+            }
             let sections = makeSections(perfumes: perfumes)
 
             await MainActor.run {
@@ -120,6 +138,7 @@ extension PersonalPerfumePresenterImpl {
                 title: title(for: segment),
                 perfumes: segmentPerfumes.map { perfume in
                     PersonalPerfumeItem(
+                        id: perfume.id,
                         name: perfume.brandName,
                         subtitle: perfume.perfumeName,
                         matchPercentage: perfume.matchPercentage

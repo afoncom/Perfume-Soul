@@ -26,6 +26,13 @@ final class ProfileModule {
         )
         let dailyQuizStateStorage = DailyQuizStateStorageImpl(userDefaults: .standard)
         let dailyPerfumeStateStorage = DailyPerfumeStateStorageImpl(userDefaults: .standard)
+        let collectionService = PerfumeCollectionServiceImpl(
+            storage: PerfumeCollectionStorageImpl(
+                userDefaults: .standard
+            )
+        )
+        let personalPerfumeTopStorage = PersonalPerfumeTopStorageImpl(userDefaults: .standard)
+        let recommendedPerfumeStateStorage = RecommendedPerfumeStateStorageImpl(userDefaults: .standard)
         let appVersionProvider = AppVersionProviderImpl()
         let appReviewRequester = AppReviewRequesterImpl(
             userDefaults: .standard,
@@ -36,7 +43,6 @@ final class ProfileModule {
             navigationController: navigationController,
             container: container,
             requestManager: requestManager,
-            dailyPerfumeStateStorage: dailyPerfumeStateStorage,
             onProfileSetupRequested: onProfileSetupRequested
         )
         let presenter = ProfilePresenterImpl(
@@ -47,6 +53,9 @@ final class ProfileModule {
             quizProgressService: quizProgressService,
             dailyQuizStateStorage: dailyQuizStateStorage,
             dailyPerfumeStateStorage: dailyPerfumeStateStorage,
+            collectionService: collectionService,
+            personalPerfumeTopStorage: personalPerfumeTopStorage,
+            recommendedPerfumeStateStorage: recommendedPerfumeStateStorage,
             appReviewRequester: appReviewRequester,
             profileAvatarBuilder: profileAvatarBuilder
         )

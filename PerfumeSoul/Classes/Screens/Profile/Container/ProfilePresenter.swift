@@ -24,6 +24,9 @@ final class ProfilePresenterImpl {
     private let quizProgressService: QuizProgressService
     private let dailyQuizStateStorage: DailyQuizStateStorage
     private let dailyPerfumeStateStorage: DailyPerfumeStateStorage
+    private let collectionService: PerfumeCollectionService
+    private let personalPerfumeTopStorage: PersonalPerfumeTopStorage
+    private let recommendedPerfumeStateStorage: RecommendedPerfumeStateStorage
     private let appReviewRequester: AppReviewRequester
     private let profileAvatarBuilder: ProfileAvatarBuilder
     
@@ -35,6 +38,9 @@ final class ProfilePresenterImpl {
         quizProgressService: QuizProgressService,
         dailyQuizStateStorage: DailyQuizStateStorage,
         dailyPerfumeStateStorage: DailyPerfumeStateStorage,
+        collectionService: PerfumeCollectionService,
+        personalPerfumeTopStorage: PersonalPerfumeTopStorage,
+        recommendedPerfumeStateStorage: RecommendedPerfumeStateStorage,
         appReviewRequester: AppReviewRequester,
         profileAvatarBuilder: ProfileAvatarBuilder
     ) {
@@ -45,6 +51,9 @@ final class ProfilePresenterImpl {
         self.quizProgressService = quizProgressService
         self.dailyQuizStateStorage = dailyQuizStateStorage
         self.dailyPerfumeStateStorage = dailyPerfumeStateStorage
+        self.collectionService = collectionService
+        self.personalPerfumeTopStorage = personalPerfumeTopStorage
+        self.recommendedPerfumeStateStorage = recommendedPerfumeStateStorage
         self.appReviewRequester = appReviewRequester
         self.profileAvatarBuilder = profileAvatarBuilder
     }
@@ -125,6 +134,9 @@ extension ProfilePresenterImpl: ProfilePresenter {
         quizProgressService.resetProgress()
         dailyQuizStateStorage.clearState()
         dailyPerfumeStateStorage.clearState()
+        collectionService.clearState()
+        personalPerfumeTopStorage.clear()
+        recommendedPerfumeStateStorage.clearState()
         
         await MainActor.run {
             appReviewRequester.resetCompletedQuizCount()
