@@ -33,7 +33,7 @@ extension RecommendedPerfumePresenterImpl: RecommendedPerfumePresenter {
     func resolve() async {
         await MainActor.run { viewModel.state = .loading }
         guard let profile = await profileService.fetchProfile(), let calculation = profile.cachedProfileCalculation else {
-            await show([])
+            await setState(.missingProfile)
             return
         }
         let topIDs = topStorage.loadPerfumeIDs()
@@ -42,12 +42,47 @@ extension RecommendedPerfumePresenterImpl: RecommendedPerfumePresenter {
         let weekKey = Self.currentWeekKey()
 
         let storedState = stateStorage.loadState()
-        if let state = storedState, state.profileCalculationCacheKey == profile.profileCalculationCacheKey, state.topPerfumeIDs == topIDs, state.weekKey == weekKey {
+        var fallbackPerfumes: [DailyPerfumeSummary] = []
+
+        if let state = storedState,
+            state.profileCalculationCacheKey == profile.profileCalculationCacheKey,
+            state.topPerfumeIDs == topIDs,
+            state.weekKey == weekKey {
             let valid = state.perfumes.filter { !exclusions.contains($0.id) }
-            if valid.count == state.perfumes.count {
-                await show(valid)
+            let validReserve = state.reservePerfumes.filter { perfume in
+                !exclusions.contains(perfume.id) && !valid.contains { $0.id == perfume.id }
+            }
+            let replacementCount = max(0, Self.visibleCount - valid.count)
+            let replacements = Array(validReserve.prefix(replacementCount))
+            let perfumes = valid + replacements
+            let reserve = Array(validReserve.dropFirst(replacements.count))
+
+            if perfumes != state.perfumes || reserve != state.reservePerfumes {
+                stateStorage.saveState(
+                    RecommendedPerfumeState(
+                        perfumes: perfumes,
+                        reservePerfumes: reserve,
+                        topPerfumeIDs: topIDs,
+                        profileCalculationCacheKey: profile.profileCalculationCacheKey,
+                        weekKey: weekKey
+                    )
+                )
+            }
+
+            if perfumes.count == Self.visibleCount {
+                await show(perfumes)
                 return
             }
+
+            fallbackPerfumes = perfumes
+        } else if let state = storedState,
+            state.profileCalculationCacheKey == profile.profileCalculationCacheKey,
+            state.topPerfumeIDs == topIDs {
+            fallbackPerfumes = Array(
+                state.perfumes
+                    .filter { !exclusions.contains($0.id) }
+                    .prefix(8)
+            )
         }
 
         do {
@@ -63,18 +98,11 @@ extension RecommendedPerfumePresenterImpl: RecommendedPerfumePresenter {
                     brandName: $0.brandName
                 )
             }
-            let old: [DailyPerfumeSummary]
-            if let state = storedState,
-                state.profileCalculationCacheKey == profile.profileCalculationCacheKey,
-                state.topPerfumeIDs == topIDs {
-                old = state.perfumes.filter { !exclusions.contains($0.id) }
-            } else {
-                old = []
+            let additions = candidates.filter { candidate in
+                !exclusions.contains(candidate.id) && !fallbackPerfumes.contains { $0.id == candidate.id }
             }
-            let retained = Array(old.prefix(8))
-            let additions = candidates.filter { candidate in !retained.contains(where: { $0.id == candidate.id }) }
-            let perfumes = Array((retained + additions).prefix(Self.visibleCount))
-            let reserve = Array(additions.dropFirst(max(0, Self.visibleCount - retained.count)))
+            let perfumes = Array((fallbackPerfumes + additions).prefix(Self.visibleCount))
+            let reserve = Array(additions.dropFirst(max(0, Self.visibleCount - fallbackPerfumes.count)))
             stateStorage.saveState(
                 RecommendedPerfumeState(
                     perfumes: perfumes,
@@ -86,7 +114,11 @@ extension RecommendedPerfumePresenterImpl: RecommendedPerfumePresenter {
             )
             await show(perfumes)
         } catch {
-            await MainActor.run { viewModel.state = .failed }
+            if fallbackPerfumes.isEmpty {
+                await setState(.failed)
+            } else {
+                await show(fallbackPerfumes)
+            }
         }
     }
 
@@ -133,7 +165,11 @@ extension RecommendedPerfumePresenterImpl {
     }
 
     private func show(_ perfumes: [DailyPerfumeSummary]) async {
-        await MainActor.run { viewModel.state = perfumes.isEmpty ? .empty : .content(perfumes) }
+        await setState(perfumes.isEmpty ? .empty : .content(perfumes))
+    }
+
+    private func setState(_ state: RecommendedPerfumeViewState) async {
+        await MainActor.run { viewModel.state = state }
     }
 
     private static func currentWeekKey() -> String {

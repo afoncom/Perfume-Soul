@@ -12,6 +12,7 @@ enum RecommendedPerfumeViewState: Equatable {
     case loading
     case content([DailyPerfumeSummary])
     case empty
+    case missingProfile
     case failed
 }
 

@@ -21,12 +21,16 @@ final class RecommendedPerfumeStateStorageImpl: RecommendedPerfumeStateStorage {
     init(userDefaults: UserDefaults) { self.userDefaults = userDefaults }
 
     func loadState() -> RecommendedPerfumeState? {
-        guard let data = userDefaults.data(forKey: key) else { return nil }
+        guard let data = userDefaults.data(forKey: key) else {
+            return nil
+        }
         return try? JSONDecoder().decode(RecommendedPerfumeState.self, from: data)
     }
 
     func saveState(_ state: RecommendedPerfumeState) {
-        guard let data = try? JSONEncoder().encode(state) else { return }
+        guard let data = try? JSONEncoder().encode(state) else {
+            return
+        }
         userDefaults.set(data, forKey: key)
     }
 
