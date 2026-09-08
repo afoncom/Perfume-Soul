@@ -127,13 +127,13 @@ enum DailyPerfumeCandidateLoader {
         )
 
         return candidates.map {
-                DailyPerfumeCandidate(
-                    id: $0.id,
-                    perfumeName: $0.perfumeName,
-                    brandName: $0.brandName,
-                    natalScore: $0.rawScore
-                )
-            }
+            DailyPerfumeCandidate(
+                id: $0.id,
+                perfumeName: $0.perfumeName,
+                brandName: $0.brandName,
+                natalScore: $0.rawScore
+            )
+        }
     }
 }
 

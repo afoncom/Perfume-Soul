@@ -6,6 +6,7 @@ struct RecommendedPerfumeState: Codable, Equatable {
     var topPerfumeIDs: [Int]
     var profileCalculationCacheKey: String?
     var weekKey: String
+    var resolvedExcludedPerfumeIDs: [Int]?
 }
 
 protocol RecommendedPerfumeStateStorage {
@@ -18,7 +19,9 @@ final class RecommendedPerfumeStateStorageImpl: RecommendedPerfumeStateStorage {
     private let userDefaults: UserDefaults
     private let key = "recommendedPerfume.state"
 
-    init(userDefaults: UserDefaults) { self.userDefaults = userDefaults }
+    init(userDefaults: UserDefaults) {
+        self.userDefaults = userDefaults
+    }
 
     func loadState() -> RecommendedPerfumeState? {
         guard let data = userDefaults.data(forKey: key) else {
@@ -34,5 +37,7 @@ final class RecommendedPerfumeStateStorageImpl: RecommendedPerfumeStateStorage {
         userDefaults.set(data, forKey: key)
     }
 
-    func clearState() { userDefaults.removeObject(forKey: key) }
+    func clearState() {
+        userDefaults.removeObject(forKey: key)
+    }
 }

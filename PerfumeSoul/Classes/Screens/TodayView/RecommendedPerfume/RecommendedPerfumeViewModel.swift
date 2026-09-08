@@ -18,4 +18,6 @@ enum RecommendedPerfumeViewState: Equatable {
 
 @Observable final class RecommendedPerfumeViewModel {
     var state: RecommendedPerfumeViewState = .loading
+    var isResolving = false
+    var shouldRefreshAfterResolving = false
 }

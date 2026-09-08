@@ -8,7 +8,11 @@
 import Foundation
 
 protocol RecommendedPerfumeService {
-    func requestCandidates(profile: DailyPerfumeProfileRequest, excludedPerfumeIDs: [Int], limit: Int) async throws -> [DailyPerfumeCandidateResponse]
+    func requestCandidates(
+        profile: DailyPerfumeProfileRequest,
+        excludedPerfumeIDs: [Int],
+        limit: Int
+    ) async throws -> [DailyPerfumeCandidateResponse]
 }
 
 final class RecommendedPerfumeServiceImpl {
@@ -20,8 +24,18 @@ final class RecommendedPerfumeServiceImpl {
 }
 
 extension RecommendedPerfumeServiceImpl: RecommendedPerfumeService {
-    func requestCandidates(profile: DailyPerfumeProfileRequest, excludedPerfumeIDs: [Int], limit: Int) async throws -> [DailyPerfumeCandidateResponse] {
-        try await requestManager.sendRequest(request: RecommendedPerfumeRequest(profile: profile, excludedPerfumeIDs: excludedPerfumeIDs, limit: limit))
+    func requestCandidates(
+        profile: DailyPerfumeProfileRequest,
+        excludedPerfumeIDs: [Int],
+        limit: Int
+    ) async throws -> [DailyPerfumeCandidateResponse] {
+        try await requestManager.sendRequest(
+            request: RecommendedPerfumeRequest(
+                profile: profile,
+                excludedPerfumeIDs: excludedPerfumeIDs,
+                limit: limit
+            )
+        )
     }
 }
 
@@ -33,7 +47,17 @@ private struct RecommendedPerfumeRequest: Request {
     let httpMethod: HTTPMethod = .post
 
     var httpBody: Data? {
-        try? JSONEncoder().encode(Body(sun: profile.sun, moon: profile.moon, ascendant: profile.ascendant, elementBalance: profile.elementBalance, excludedPerfumeIDs: excludedPerfumeIDs, lastShownBrand: nil, limit: limit))
+        try? JSONEncoder().encode(
+            Body(
+                sun: profile.sun,
+                moon: profile.moon,
+                ascendant: profile.ascendant,
+                elementBalance: profile.elementBalance,
+                excludedPerfumeIDs: excludedPerfumeIDs,
+                lastShownBrand: nil,
+                limit: limit
+            )
+        )
     }
 
     private struct Body: Encodable {

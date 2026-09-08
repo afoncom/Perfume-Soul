@@ -18,7 +18,15 @@ final class RecommendedPerfumePresenterImpl {
     private let stateStorage: RecommendedPerfumeStateStorage
     private let router: RecommendedPerfumeRouter
 
-    init(viewModel: RecommendedPerfumeViewModel, service: RecommendedPerfumeService, profileService: ProfileService, collectionService: PerfumeCollectionService, topStorage: PersonalPerfumeTopStorage, stateStorage: RecommendedPerfumeStateStorage, router: RecommendedPerfumeRouter) {
+    init(
+        viewModel: RecommendedPerfumeViewModel,
+        service: RecommendedPerfumeService,
+        profileService: ProfileService,
+        collectionService: PerfumeCollectionService,
+        topStorage: PersonalPerfumeTopStorage,
+        stateStorage: RecommendedPerfumeStateStorage,
+        router: RecommendedPerfumeRouter
+    ) {
         self.viewModel = viewModel
         self.service = service
         self.profileService = profileService
@@ -31,7 +39,13 @@ final class RecommendedPerfumePresenterImpl {
 
 extension RecommendedPerfumePresenterImpl: RecommendedPerfumePresenter {
     func resolve() async {
-        await MainActor.run { viewModel.state = .loading }
+        guard await beginResolving() else {
+            return
+        }
+        defer {
+            finishResolving()
+        }
+
         guard let profile = await profileService.fetchProfile(), let calculation = profile.cachedProfileCalculation else {
             await setState(.missingProfile)
             return
@@ -39,6 +53,7 @@ extension RecommendedPerfumePresenterImpl: RecommendedPerfumePresenter {
         let topIDs = topStorage.loadPerfumeIDs()
         let collection = collectionService.loadState()
         let exclusions = Set(topIDs + collection.savedPerfumes.map(\.id) + collection.dislikedPerfumeIDs)
+        let excludedPerfumeIDs = exclusions.sorted()
         let weekKey = Self.currentWeekKey()
 
         let storedState = stateStorage.loadState()
@@ -64,7 +79,8 @@ extension RecommendedPerfumePresenterImpl: RecommendedPerfumePresenter {
                         reservePerfumes: reserve,
                         topPerfumeIDs: topIDs,
                         profileCalculationCacheKey: profile.profileCalculationCacheKey,
-                        weekKey: weekKey
+                        weekKey: weekKey,
+                        resolvedExcludedPerfumeIDs: state.resolvedExcludedPerfumeIDs
                     )
                 )
             }
@@ -75,6 +91,11 @@ extension RecommendedPerfumePresenterImpl: RecommendedPerfumePresenter {
             }
 
             fallbackPerfumes = perfumes
+
+            if state.resolvedExcludedPerfumeIDs == excludedPerfumeIDs {
+                await show(fallbackPerfumes)
+                return
+            }
         } else if let state = storedState,
             state.profileCalculationCacheKey == profile.profileCalculationCacheKey,
             state.topPerfumeIDs == topIDs {
@@ -85,10 +106,12 @@ extension RecommendedPerfumePresenterImpl: RecommendedPerfumePresenter {
             )
         }
 
+        let stateBeforeRequest = stateStorage.loadState()
+
         do {
             let responses = try await service.requestCandidates(
                 profile: makeProfileRequest(calculation),
-                excludedPerfumeIDs: exclusions.sorted(),
+                excludedPerfumeIDs: excludedPerfumeIDs,
                 limit: Self.candidateLimit
             )
             let candidates = responses.map {
@@ -101,6 +124,16 @@ extension RecommendedPerfumePresenterImpl: RecommendedPerfumePresenter {
             let additions = candidates.filter { candidate in
                 !exclusions.contains(candidate.id) && !fallbackPerfumes.contains { $0.id == candidate.id }
             }
+
+            guard isRequestStateCurrent(
+                stateBeforeRequest: stateBeforeRequest,
+                collection: collection,
+                topPerfumeIDs: topIDs
+            ) else {
+                await scheduleRefreshAfterResolving()
+                return
+            }
+
             let perfumes = Array((fallbackPerfumes + additions).prefix(Self.visibleCount))
             let reserve = Array(additions.dropFirst(max(0, Self.visibleCount - fallbackPerfumes.count)))
             stateStorage.saveState(
@@ -109,11 +142,21 @@ extension RecommendedPerfumePresenterImpl: RecommendedPerfumePresenter {
                     reservePerfumes: reserve,
                     topPerfumeIDs: topIDs,
                     profileCalculationCacheKey: profile.profileCalculationCacheKey,
-                    weekKey: weekKey
+                    weekKey: weekKey,
+                    resolvedExcludedPerfumeIDs: excludedPerfumeIDs
                 )
             )
             await show(perfumes)
         } catch {
+            guard isRequestStateCurrent(
+                stateBeforeRequest: stateBeforeRequest,
+                collection: collection,
+                topPerfumeIDs: topIDs
+            ) else {
+                await scheduleRefreshAfterResolving()
+                return
+            }
+
             if fallbackPerfumes.isEmpty {
                 await setState(.failed)
             } else {
@@ -131,12 +174,20 @@ extension RecommendedPerfumePresenterImpl: RecommendedPerfumePresenter {
     }
 
     @MainActor func savePerfume(_ perfume: DailyPerfumeSummary) {
-        collectionService.save(PerfumeCollectionPerfume(id: perfume.id, perfumeName: perfume.perfumeName, brandName: perfume.brandName, source: .manual))
+        collectionService.save(
+            PerfumeCollectionPerfume(
+                id: perfume.id,
+                perfumeName: perfume.perfumeName,
+                brandName: perfume.brandName,
+                source: .manual
+            )
+        )
         guard var state = stateStorage.loadState() else {
             if case var .content(perfumes) = viewModel.state {
                 perfumes.removeAll { $0.id == perfume.id }
                 viewModel.state = perfumes.isEmpty ? .empty : .content(perfumes)
             }
+            scheduleRefreshAfterResolvingIfNeeded()
             return
         }
         state.perfumes.removeAll { $0.id == perfume.id }
@@ -146,6 +197,7 @@ extension RecommendedPerfumePresenterImpl: RecommendedPerfumePresenter {
         }
         stateStorage.saveState(state)
         viewModel.state = state.perfumes.isEmpty ? .empty : .content(state.perfumes)
+        scheduleRefreshAfterResolvingIfNeeded()
     }
 }
 
@@ -170,6 +222,65 @@ extension RecommendedPerfumePresenterImpl {
 
     private func setState(_ state: RecommendedPerfumeViewState) async {
         await MainActor.run { viewModel.state = state }
+    }
+
+    private func beginResolving() async -> Bool {
+        await MainActor.run {
+            guard !viewModel.isResolving else {
+                return false
+            }
+
+            viewModel.isResolving = true
+
+            if case .content = viewModel.state {
+                return true
+            }
+
+            viewModel.state = .loading
+            return true
+        }
+    }
+
+    private func finishResolving() {
+        Task { @MainActor [weak self] in
+            guard let self else {
+                return
+            }
+
+            viewModel.isResolving = false
+
+            guard viewModel.shouldRefreshAfterResolving else {
+                return
+            }
+
+            viewModel.shouldRefreshAfterResolving = false
+            await resolve()
+        }
+    }
+
+    private func isRequestStateCurrent(
+        stateBeforeRequest: RecommendedPerfumeState?,
+        collection: PerfumeCollectionState,
+        topPerfumeIDs: [Int]
+    ) -> Bool {
+        stateStorage.loadState() == stateBeforeRequest &&
+            collectionService.loadState() == collection &&
+            topStorage.loadPerfumeIDs() == topPerfumeIDs
+    }
+
+    private func scheduleRefreshAfterResolving() async {
+        await MainActor.run {
+            viewModel.shouldRefreshAfterResolving = true
+        }
+    }
+
+    @MainActor
+    private func scheduleRefreshAfterResolvingIfNeeded() {
+        guard viewModel.isResolving else {
+            return
+        }
+
+        viewModel.shouldRefreshAfterResolving = true
     }
 
     private static func currentWeekKey() -> String {
