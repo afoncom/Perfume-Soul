@@ -109,8 +109,8 @@ private extension SearchPerfumePresenterImpl {
                 limit: pageSize
             )
 
-            await MainActor.run {
-                guard requestID == activeRequestID else { return }
+            let shouldLogUnfoundSearch = await MainActor.run { () -> Bool in
+                guard requestID == activeRequestID else { return false }
 
                 if resetResults {
                     viewModel.perfumes = result.items
@@ -124,6 +124,15 @@ private extension SearchPerfumePresenterImpl {
                 viewModel.hasLoadedOnce = true
                 viewModel.isLoading = false
                 viewModel.isLoadingMore = false
+
+                return resetResults && result.items.isEmpty && searchText.count >= 3
+            }
+
+            if shouldLogUnfoundSearch {
+                await searchPerfumeService.recordUnfoundSearch(
+                    query: searchText,
+                    context: .library
+                )
             }
         } catch {
             await MainActor.run {

@@ -23,6 +23,7 @@ final class ComparePerfumesPresenterImpl {
     private let searchPerfumeService: SearchPerfumeService
     private let comparePerfumeSelectionService: ComparePerfumeSelectionService
     private let pageSize = 10
+    private var searchTask: Task<Void, Never>?
     private var activeSearchRequestID = UUID()
     private var activeComparisonRequestID = UUID()
     
@@ -47,6 +48,7 @@ extension ComparePerfumesPresenterImpl: ComparePerfumesPresenter {
         clearComparisonState()
 
         guard !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            searchTask?.cancel()
             activeSearchRequestID = UUID()
             viewModel.searchResults = []
             viewModel.isSearching = false
@@ -54,7 +56,19 @@ extension ComparePerfumesPresenterImpl: ComparePerfumesPresenter {
             return
         }
 
-        await loadSearchResults(searchText: searchText)
+        searchTask?.cancel()
+        searchTask = Task { [weak self] in
+            do {
+                try await Task.sleep(for: .milliseconds(350))
+            } catch {
+                return
+            }
+
+            guard !Task.isCancelled else {
+                return
+            }
+            await self?.loadSearchResults(searchText: searchText)
+        }
     }
 
     func searchResultTapped(
@@ -138,6 +152,13 @@ private extension ComparePerfumesPresenterImpl {
             viewModel.searchResults = result.items
             viewModel.isSearching = false
             viewModel.searchErrorMessage = nil
+
+            if result.items.isEmpty {
+                await searchPerfumeService.recordUnfoundSearch(
+                    query: trimmedSearchText,
+                    context: .compare
+                )
+            }
         } catch {
             guard requestID == activeSearchRequestID else {
                 return

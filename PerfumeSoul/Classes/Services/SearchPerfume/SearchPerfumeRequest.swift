@@ -24,3 +24,23 @@ struct SearchPerfumeRequest: Request {
         ]
     }
 }
+
+struct UnfoundSearchLogRequest: Request {
+    let query: String
+    let context: PerfumeSearchContext
+    let path = "/perfumes/unfound-searches"
+    let httpMethod: HTTPMethod = .post
+
+    var httpBody: Data? {
+        try? JSONEncoder().encode(Body(query: query, context: context.rawValue))
+    }
+
+    private struct Body: Encodable {
+        let query: String
+        let context: String
+    }
+}
+
+struct UnfoundSearchLogResponse: Decodable {
+    let accepted: Bool
+}
