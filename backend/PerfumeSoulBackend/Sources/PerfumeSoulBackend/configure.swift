@@ -18,6 +18,7 @@ public func configure(_ app: Application, needsDatabase: Bool = true) throws {
     }
 
     app.databases.use(try .postgres(url: databaseURL), as: .psql)
+    app.configurePerfumeProfileCache()
     app.migrations.add(CreateBaseSchemaMigration())
     app.migrations.add(AddPerfumeScoreColumnsMigration())
     app.migrations.add(AddPerfumeProfileMetadataMigration())

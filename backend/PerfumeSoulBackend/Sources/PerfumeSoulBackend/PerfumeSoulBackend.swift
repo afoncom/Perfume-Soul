@@ -17,8 +17,13 @@ enum Entrypoint {
                 app,
                 needsDatabase: commandName != "catalog-audit"
             )
-            if commandName == "serve" {
-                _ = try await app.perfumeProfileCache.profiles(on: app.db)
+            if commandName == nil || commandName == "serve" {
+                do {
+                    _ = try await app.perfumeProfileCache.profiles(on: app.db, language: "ru")
+                    _ = try await app.perfumeProfileCache.profiles(on: app.db, language: "en")
+                } catch {
+                    app.logger.warning("Unable to preload perfume profile cache: \(error)")
+                }
             }
             try await app.execute()
         } catch {

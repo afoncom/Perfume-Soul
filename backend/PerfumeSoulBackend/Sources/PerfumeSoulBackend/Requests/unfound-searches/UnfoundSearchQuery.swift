@@ -1,4 +1,5 @@
 import Fluent
+import FluentSQL
 import Foundation
 import Vapor
 
@@ -47,21 +48,20 @@ struct UnfoundSearchQueryEvent {
 
 enum UnfoundSearchQueryLogger {
     static func record(_ event: UnfoundSearchQueryEvent, on database: any Database) async throws {
-        if let existing = try await UnfoundSearchQueryModel.query(on: database)
-            .filter(\.$normalizedQuery == event.normalizedQuery)
-            .filter(\.$searchContext == event.context.rawValue)
-            .first() {
-            existing.queryText = event.queryText
-            existing.occurrenceCount += 1
-            try await existing.update(on: database)
-            return
+        guard let sqlDatabase = database as? any SQLDatabase else {
+            throw DatabaseMigrationError.sqlDatabaseIsRequired
         }
-
-        try await UnfoundSearchQueryModel(
-            queryText: event.queryText,
-            normalizedQuery: event.normalizedQuery,
-            searchContext: event.context.rawValue
-        ).create(on: database)
+        try await sqlDatabase.raw("""
+            INSERT INTO unfound_search_queries
+                (query_text, normalized_query, search_context, occurrence_count, first_seen_at, last_seen_at)
+            VALUES
+                (\(bind: event.queryText), \(bind: event.normalizedQuery), \(bind: event.context.rawValue), 1, NOW(), NOW())
+            ON CONFLICT (normalized_query, search_context)
+            DO UPDATE SET
+                query_text = EXCLUDED.query_text,
+                occurrence_count = unfound_search_queries.occurrence_count + 1,
+                last_seen_at = NOW()
+            """).run()
     }
 }
 

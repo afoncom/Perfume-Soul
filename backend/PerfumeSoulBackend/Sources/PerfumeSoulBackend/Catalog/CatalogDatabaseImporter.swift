@@ -29,6 +29,10 @@ enum CatalogDatabaseImporter {
             var createdAccordCount = 0
 
             for perfume in preparedPerfumes {
+                guard existingPerfumeKeys.insert(perfume.identity).inserted else {
+                    skippedExistingPerfumeCount += 1
+                    continue
+                }
                 let brand = try await resolveBrand(
                     named: perfume.brandName,
                     brandsByName: &brandsByName,
@@ -37,11 +41,6 @@ enum CatalogDatabaseImporter {
                 )
                 guard let brandID = brand.id else {
                     throw CatalogImportError.missingPersistedIdentifier
-                }
-
-                guard existingPerfumeKeys.insert(perfume.identity).inserted else {
-                    skippedExistingPerfumeCount += 1
-                    continue
                 }
 
                 let perfumeModel = PerfumeModel(
@@ -105,7 +104,7 @@ enum CatalogDatabaseImporter {
 
     private static func existingBrands(on database: any Database) async throws -> [String: BrandModel] {
         let brands = try await BrandModel.query(on: database).all()
-        return Dictionary(uniqueKeysWithValues: brands.map { (normalized($0.name), $0) })
+        return Dictionary(brands.map { (normalized($0.name), $0) }, uniquingKeysWith: { first, _ in first })
     }
 
     private static func existingNotes(on database: any Database) async throws -> [String: NoteModel] {
@@ -122,7 +121,7 @@ enum CatalogDatabaseImporter {
 
     private static func existingAccords(on database: any Database) async throws -> [String: AccordModel] {
         let accords = try await AccordModel.query(on: database).all()
-        return Dictionary(uniqueKeysWithValues: accords.map { (normalized($0.name), $0) })
+        return Dictionary(accords.map { (normalized($0.name), $0) }, uniquingKeysWith: { first, _ in first })
     }
 
     static func existingPerfumeIdentities(on database: any Database) async throws -> Set<String> {
