@@ -57,6 +57,7 @@ extension ComparePerfumesPresenterImpl: ComparePerfumesPresenter {
         }
 
         searchTask?.cancel()
+        activeSearchRequestID = UUID()
         searchTask = Task { [weak self] in
             do {
                 try await Task.sleep(for: .milliseconds(350))
@@ -154,6 +155,14 @@ private extension ComparePerfumesPresenterImpl {
             viewModel.searchErrorMessage = nil
 
             if result.items.isEmpty {
+                do {
+                    try await Task.sleep(for: .seconds(2))
+                } catch {
+                    return
+                }
+                guard requestID == activeSearchRequestID else {
+                    return
+                }
                 await searchPerfumeService.recordUnfoundSearch(
                     query: trimmedSearchText,
                     context: .compare

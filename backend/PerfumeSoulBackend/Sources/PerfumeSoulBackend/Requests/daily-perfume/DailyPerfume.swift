@@ -179,7 +179,11 @@ private extension DailyPerfumeCandidateLoader {
     ) async throws -> [PerfumeModel] {
         try await PerfumeModel.query(on: database)
             .withPerfumeProfileFields()
-            .filter(\.$marketSegment != "unclassified")
+            .group(.or) { group in
+                for segment in PersonalPerfumeMarketSegment.allCases {
+                    group.filter(\.$marketSegment == segment.rawValue)
+                }
+            }
             .sort(\.$id)
             .range(offset..<(offset + limit))
             .with(\.$brand)

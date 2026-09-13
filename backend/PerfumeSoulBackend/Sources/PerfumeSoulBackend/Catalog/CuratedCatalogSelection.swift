@@ -35,17 +35,19 @@ struct CatalogSourcePerfume: Equatable, Sendable {
 
 enum CatalogSourcePerfumeParser {
     static func parse(_ csv: String) throws -> [CatalogSourcePerfume] {
-        let lines = csv
-            .split(whereSeparator: \.isNewline)
-            .map { String($0).trimmingCharacters(in: .newlines) }
+        let lines = records(from: csv)
         guard let headerLine = lines.first else {
             return []
         }
 
         let header = parseLine(headerLine)
-        let headerPositions = Dictionary(
-            uniqueKeysWithValues: header.enumerated().map { ($0.element, $0.offset) }
-        )
+        var headerPositions: [String: Int] = [:]
+        for (offset, field) in header.enumerated() {
+            guard headerPositions[field] == nil else {
+                throw CatalogSourcePerfumeParserError.duplicateHeader(field)
+            }
+            headerPositions[field] = offset
+        }
         try validateHeaders(headerPositions)
 
         return lines.dropFirst().compactMap { line in
@@ -85,6 +87,41 @@ enum CatalogSourcePerfumeParser {
                 ].filter { !normalized($0).isEmpty }
             )
         }
+    }
+
+    private static func records(from csv: String) -> [String] {
+        var records: [String] = []
+        var record = ""
+        var isInsideQuotes = false
+        var index = csv.startIndex
+
+        while index < csv.endIndex {
+            let character = csv[index]
+            if character == "\"" {
+                let nextIndex = csv.index(after: index)
+                if isInsideQuotes, nextIndex < csv.endIndex, csv[nextIndex] == "\"" {
+                    record.append(character)
+                    record.append(character)
+                    index = nextIndex
+                } else {
+                    isInsideQuotes.toggle()
+                    record.append(character)
+                }
+            } else if character.isNewline, !isInsideQuotes {
+                if !record.isEmpty {
+                    records.append(record)
+                }
+                record = ""
+            } else {
+                record.append(character)
+            }
+            index = csv.index(after: index)
+        }
+
+        if !record.isEmpty {
+            records.append(record)
+        }
+        return records
     }
 
     private static func validateHeaders(_ positions: [String: Int]) throws {
@@ -137,6 +174,7 @@ enum CatalogSourcePerfumeParser {
 
 enum CatalogSourcePerfumeParserError: Error, Equatable {
     case missingRequiredHeaders
+    case duplicateHeader(String)
 }
 
 struct CatalogSelectionPolicy: Sendable {

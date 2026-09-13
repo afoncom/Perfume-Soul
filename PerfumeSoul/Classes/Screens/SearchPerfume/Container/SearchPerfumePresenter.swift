@@ -64,7 +64,7 @@ extension SearchPerfumePresenterImpl: SearchPerfumePresenter {
 
     func searchSubmitted() async {
         searchTask?.cancel()
-        await loadPerfumes(resetResults: true)
+        await loadPerfumes(resetResults: true, logsUnfoundSearch: true)
     }
 
     func perfumeItemAppeared(at index: Int) async {
@@ -82,7 +82,7 @@ extension SearchPerfumePresenterImpl: SearchPerfumePresenter {
 }
 
 private extension SearchPerfumePresenterImpl {
-    func loadPerfumes(resetResults: Bool) async {
+    func loadPerfumes(resetResults: Bool, logsUnfoundSearch: Bool = false) async {
         let searchText = resetResults
             ? viewModel.searchText.trimmingCharacters(in: .whitespacesAndNewlines)
             : viewModel.activeSearchText
@@ -125,7 +125,7 @@ private extension SearchPerfumePresenterImpl {
                 viewModel.isLoading = false
                 viewModel.isLoadingMore = false
 
-                return resetResults && result.items.isEmpty && searchText.count >= 3
+                return logsUnfoundSearch && resetResults && result.items.isEmpty && searchText.count >= 3
             }
 
             if shouldLogUnfoundSearch {
