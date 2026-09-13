@@ -65,6 +65,37 @@ enum UnfoundSearchQueryLogger {
     }
 }
 
+actor UnfoundSearchRateLimiter {
+    private let dailyLimit = 100
+    private var counts: [String: (day: Date, count: Int)] = [:]
+
+    func allows(ipAddress: String, now: Date = .now) -> Bool {
+        let day = Calendar.current.startOfDay(for: now)
+        let current = counts[ipAddress]
+        let count = current?.day == day ? current?.count ?? 0 : 0
+        guard count < dailyLimit else { return false }
+        counts[ipAddress] = (day, count + 1)
+        return true
+    }
+}
+
+private struct UnfoundSearchRateLimiterKey: StorageKey {
+    typealias Value = UnfoundSearchRateLimiter
+}
+
+extension Application {
+    var unfoundSearchRateLimiter: UnfoundSearchRateLimiter {
+        guard let limiter = storage[UnfoundSearchRateLimiterKey.self] else {
+            fatalError("UnfoundSearchRateLimiter must be configured before use.")
+        }
+        return limiter
+    }
+
+    func configureUnfoundSearchRateLimiter() {
+        storage[UnfoundSearchRateLimiterKey.self] = UnfoundSearchRateLimiter()
+    }
+}
+
 struct UnfoundSearchQueryResponse: Content {
     let accepted: Bool
 }

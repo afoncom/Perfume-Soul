@@ -59,10 +59,10 @@ enum PersonalPerfumeLoader {
         profileCache: PerfumeProfileCache? = nil
     ) async throws -> [PersonalPerfumeResponse] {
         if let profileCache {
-            return PersonalPerfumeScorer.score(
-                request: request,
-                perfumeProfiles: try await profileCache.profiles(on: database)
-            )
+            let eligibleProfiles = try await profileCache.profiles(on: database).filter {
+                $0.marketSegment.flatMap(PersonalPerfumeMarketSegment.init(rawValue:)) != nil
+            }
+            return PersonalPerfumeScorer.score(request: request, perfumeProfiles: eligibleProfiles)
         }
 
         let preference = PersonalPerfumePreference(request: request)

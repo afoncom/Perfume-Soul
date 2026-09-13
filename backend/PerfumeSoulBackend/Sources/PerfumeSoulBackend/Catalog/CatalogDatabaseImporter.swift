@@ -251,4 +251,5 @@ enum CatalogDatabaseImporter {
 
 enum CatalogImportError: Error {
     case missingPersistedIdentifier
+    case invalidSourceEncoding
 }

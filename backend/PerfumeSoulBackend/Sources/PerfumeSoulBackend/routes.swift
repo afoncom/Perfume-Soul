@@ -117,6 +117,10 @@ func routes(_ app: Application) throws {
     }
 
     app.post("perfumes", "unfound-searches") { req async throws -> Response in
+        let ipAddress = req.remoteAddress?.ipAddress ?? "unknown"
+        guard await req.application.unfoundSearchRateLimiter.allows(ipAddress: ipAddress) else {
+            throw Abort(.tooManyRequests, reason: "Too many unfound search events.")
+        }
         let event = try req.content
             .decode(UnfoundSearchQueryRequest.self)
             .validatedEvent()

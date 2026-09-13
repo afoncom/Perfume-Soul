@@ -47,7 +47,7 @@ enum DailyPerfumeCandidateLoader {
     ) async throws -> [DailyPerfumeCandidate] {
         if let profileCache {
             let profiles = try await profileCache.profiles(on: database)
-                .filter { $0.marketSegment != "unclassified" }
+                .filter { $0.marketSegment.flatMap(PersonalPerfumeMarketSegment.init(rawValue:)) != nil }
             return try await loadCandidates(
                 request: request,
                 pageSize: candidatePageSize
@@ -91,7 +91,7 @@ enum DailyPerfumeCandidateLoader {
     ) async throws -> [DailyPerfumeCandidate] {
         if let profileCache {
             let profiles = try await profileCache.profiles(on: database)
-                .filter { $0.marketSegment != "unclassified" }
+                .filter { $0.marketSegment.flatMap(PersonalPerfumeMarketSegment.init(rawValue:)) != nil }
             return try await loadRankedCandidates(
                 request: request,
                 pageSize: candidatePageSize

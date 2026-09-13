@@ -21,10 +21,11 @@ struct CatalogImportCommand: AsyncCommand {
     let help = "Imports one curated catalogue batch from a semicolon-delimited CSV."
 
     func run(using context: CommandContext, signature: Signature) async throws {
-        let source = try String(
-            contentsOf: URL(fileURLWithPath: signature.inputPath),
-            encoding: .isoLatin1
-        )
+        let sourceData = try Data(contentsOf: URL(fileURLWithPath: signature.inputPath))
+        guard let source = String(data: sourceData, encoding: .utf8)
+            ?? String(data: sourceData, encoding: .isoLatin1) else {
+            throw CatalogImportError.invalidSourceEncoding
+        }
         let targetCount = signature.targetCount ?? 15_000
         let batchSize = min(max(signature.batchSize ?? 500, 1), 1_000)
         let currentCatalogCount = try await PerfumeModel.query(on: context.application.db).count()
