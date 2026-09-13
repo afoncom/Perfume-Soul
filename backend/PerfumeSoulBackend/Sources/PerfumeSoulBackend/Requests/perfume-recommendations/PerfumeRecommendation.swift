@@ -16,26 +16,31 @@ enum PerfumeRecommendationLoader {
     static func load(
         perfumeIDs: [Int],
         on database: any Database,
-        language: String? = nil
+        language: String? = nil,
+        profileCache: PerfumeProfileCache? = nil
     ) async throws -> [PerfumeRecommendation] {
         let selectedPerfumeIDs = uniquePerfumeIDs(from: perfumeIDs)
         guard !selectedPerfumeIDs.isEmpty else {
             return []
         }
 
-        let perfumeModels = try await PerfumeModel.query(on: database)
-            .withPerfumeProfileFields()
-            .with(\.$brand)
-            .with(\.$notes) { query in
-                query.with(\.$note)
+        let perfumeProfiles: [PerfumeProfile]
+        if let profileCache {
+            perfumeProfiles = try await profileCache.profiles(on: database, language: language)
+        } else {
+            let perfumeModels = try await PerfumeModel.query(on: database)
+                .withPerfumeProfileFields()
+                .with(\.$brand)
+                .with(\.$notes) { query in
+                    query.with(\.$note)
+                }
+                .with(\.$accords) { query in
+                    query.with(\.$accord)
+                }
+                .all()
+            perfumeProfiles = perfumeModels.compactMap {
+                PerfumeProfile(model: $0, language: language)
             }
-            .with(\.$accords) { query in
-                query.with(\.$accord)
-            }
-            .all()
-
-        let perfumeProfiles = perfumeModels.compactMap {
-            PerfumeProfile(model: $0, language: language)
         }
         return try load(
             perfumeProfiles: perfumeProfiles,
@@ -680,7 +685,7 @@ private struct ScoreRanges {
     }
 }
 
-struct PerfumeProfile {
+struct PerfumeProfile: Sendable {
     let id: Int
     let perfumeName: String
     let brandName: String

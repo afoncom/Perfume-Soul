@@ -27,7 +27,8 @@ func routes(_ app: Application) throws {
         return try jsonResponse(
             try await PersonalPerfumeLoader.load(
                 request: request,
-                on: req.db
+                on: req.db,
+                profileCache: req.application.perfumeProfileCache
             )
         )
     }
@@ -38,7 +39,8 @@ func routes(_ app: Application) throws {
         return try jsonResponse(
             try await DailyPerfumeCandidateLoader.load(
                 request: request,
-                on: req.db
+                on: req.db,
+                profileCache: req.application.perfumeProfileCache
             )
         )
     }
@@ -49,7 +51,8 @@ func routes(_ app: Application) throws {
         return try jsonResponse(
             try await RecommendedPerfumeCandidateLoader.load(
                 request: request,
-                on: req.db
+                on: req.db,
+                profileCache: req.application.perfumeProfileCache
             )
         )
     }
@@ -92,7 +95,8 @@ func routes(_ app: Application) throws {
             try await PerfumeRecommendationLoader.load(
                 perfumeIDs: perfumeIDs,
                 on: req.db,
-                language: req.headers.first(name: "Accept-Language")
+                language: req.headers.first(name: "Accept-Language"),
+                profileCache: req.application.perfumeProfileCache
             ),
             varyByLanguage: true
         )
@@ -110,6 +114,14 @@ func routes(_ app: Application) throws {
         )
 
         return try jsonResponse(page)
+    }
+
+    app.post("perfumes", "unfound-searches") { req async throws -> Response in
+        let event = try req.content
+            .decode(UnfoundSearchQueryRequest.self)
+            .validatedEvent()
+        try await UnfoundSearchQueryLogger.record(event, on: req.db)
+        return try jsonResponse(UnfoundSearchQueryResponse(accepted: true))
     }
 
     app.get("perfumes", ":perfumeID", "notes") { req async throws -> Response in

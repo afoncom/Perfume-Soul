@@ -12,7 +12,14 @@ enum Entrypoint {
         let app = try await Application.make(env)
 
         do {
-            try configure(app)
+            let commandName = CommandLine.arguments.dropFirst().first
+            try configure(
+                app,
+                needsDatabase: commandName != "catalog-audit"
+            )
+            if commandName == "serve" {
+                _ = try await app.perfumeProfileCache.profiles(on: app.db)
+            }
             try await app.execute()
         } catch {
             app.logger.report(error: error)

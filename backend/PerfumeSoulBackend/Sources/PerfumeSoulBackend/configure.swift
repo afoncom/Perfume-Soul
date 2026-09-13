@@ -2,9 +2,16 @@ import Fluent
 import FluentPostgresDriver
 import Vapor
 
-public func configure(_ app: Application) throws {
+public func configure(_ app: Application, needsDatabase: Bool = true) throws {
     // Uncomment this if you want to serve files from /Public.
     // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+
+    app.commands.use(CatalogAuditCommand(), as: "catalog-audit")
+    app.asyncCommands.use(CatalogImportCommand(), as: "catalog-import")
+
+    guard needsDatabase else {
+        return
+    }
 
     guard let databaseURL = Environment.get("DATABASE_URL") else {
         throw DatabaseConfigurationError.missingDatabaseURL
@@ -19,6 +26,8 @@ public func configure(_ app: Application) throws {
     app.migrations.add(AddPerfumeStoryMetadataMigration())
     app.migrations.add(AddPerfumeStoryEnglishMetadataMigration())
     app.migrations.add(AddNoteEnglishNameMigration())
+    app.migrations.add(AddCatalogImportSupportMigration())
+    app.migrations.add(CreateUnfoundSearchQueriesMigration())
 
     try app.autoMigrate().wait()
 

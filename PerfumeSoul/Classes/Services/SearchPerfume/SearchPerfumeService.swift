@@ -12,6 +12,17 @@ protocol SearchPerfumeService {
         offset: Int,
         limit: Int
     ) async throws -> SearchPerfumePage
+
+    func recordUnfoundSearch(
+        query: String,
+        context: PerfumeSearchContext
+    ) async
+}
+
+enum PerfumeSearchContext: String {
+    case library
+    case similarFinder = "similar_finder"
+    case compare
 }
 
 final class SearchPerfumeServiceImpl {
@@ -39,6 +50,20 @@ extension SearchPerfumeServiceImpl: SearchPerfumeService {
         return SearchPerfumePage(
             items: response.items.map { SearchPerfumeItem(response: $0) },
             hasMore: response.hasMore
+        )
+    }
+
+    func recordUnfoundSearch(
+        query: String,
+        context: PerfumeSearchContext
+    ) async {
+        let trimmedQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard (3...120).contains(trimmedQuery.count) else {
+            return
+        }
+
+        let _: UnfoundSearchLogResponse? = try? await requestManager.sendRequest(
+            request: UnfoundSearchLogRequest(query: trimmedQuery, context: context)
         )
     }
 }
