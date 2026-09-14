@@ -9,6 +9,13 @@ func catalogSourceFileDecoderPrefersUTF8() throws {
     #expect(decoded == "Chloé")
 }
 
+@Test("CSV source decoder falls back to Latin-1")
+func catalogSourceFileDecoderFallsBackToLatin1() throws {
+    let decoded = try CatalogSourceFileDecoder.decode(Data([0x43, 0x68, 0x6C, 0x6F, 0xE9]))
+
+    #expect(decoded == "Chloé")
+}
+
 @Test("CSV parser preserves quoted semicolons in perfume fields")
 func catalogCSVParserPreservesQuotedSemicolons() throws {
     let headers = [
