@@ -42,9 +42,21 @@ enum DailyPerfumeCandidateLoader {
 
     static func load(
         request: DailyPerfumeCandidatesRequest,
-        on database: any Database
+        on database: any Database,
+        profileCache: PerfumeProfileCache? = nil
     ) async throws -> [DailyPerfumeCandidate] {
-        try await loadCandidates(
+        if let profileCache {
+            let profiles = try await profileCache.profiles(on: database)
+                .filter { $0.marketSegment.flatMap(PersonalPerfumeMarketSegment.init(rawValue:)) != nil }
+            return try await loadCandidates(
+                request: request,
+                pageSize: candidatePageSize
+            ) { offset, limit in
+                Array(profiles.dropFirst(offset).prefix(limit))
+            }
+        }
+
+        return try await loadCandidates(
             request: request,
             pageSize: candidatePageSize
         ) { offset, limit in
@@ -74,9 +86,21 @@ enum DailyPerfumeCandidateLoader {
 
     static func loadRankedCandidates(
         request: DailyPerfumeCandidatesRequest,
-        on database: any Database
+        on database: any Database,
+        profileCache: PerfumeProfileCache? = nil
     ) async throws -> [DailyPerfumeCandidate] {
-        try await loadRankedCandidates(
+        if let profileCache {
+            let profiles = try await profileCache.profiles(on: database)
+                .filter { $0.marketSegment.flatMap(PersonalPerfumeMarketSegment.init(rawValue:)) != nil }
+            return try await loadRankedCandidates(
+                request: request,
+                pageSize: candidatePageSize
+            ) { offset, limit in
+                Array(profiles.dropFirst(offset).prefix(limit))
+            }
+        }
+
+        return try await loadRankedCandidates(
             request: request,
             pageSize: candidatePageSize
         ) { offset, limit in
@@ -155,6 +179,11 @@ private extension DailyPerfumeCandidateLoader {
     ) async throws -> [PerfumeModel] {
         try await PerfumeModel.query(on: database)
             .withPerfumeProfileFields()
+            .group(.or) { group in
+                for segment in PersonalPerfumeMarketSegment.allCases {
+                    group.filter(\.$marketSegment == segment.rawValue)
+                }
+            }
             .sort(\.$id)
             .range(offset..<(offset + limit))
             .with(\.$brand)

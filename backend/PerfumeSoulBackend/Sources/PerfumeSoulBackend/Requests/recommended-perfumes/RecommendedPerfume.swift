@@ -4,11 +4,13 @@ import Vapor
 enum RecommendedPerfumeCandidateLoader {
     static func load(
         request: DailyPerfumeCandidatesRequest,
-        on database: any Database
+        on database: any Database,
+        profileCache: PerfumeProfileCache? = nil
     ) async throws -> [DailyPerfumeCandidate] {
         let candidates = try await DailyPerfumeCandidateLoader.loadRankedCandidates(
             request: request,
-            on: database
+            on: database,
+            profileCache: profileCache
         )
         return candidatesApplyingBrandCap(candidates, limit: request.limit)
     }

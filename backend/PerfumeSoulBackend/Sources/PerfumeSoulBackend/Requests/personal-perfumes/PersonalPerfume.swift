@@ -55,8 +55,16 @@ enum PersonalPerfumeLoader {
 
     static func load(
         request: PersonalPerfumesRequest,
-        on database: any Database
+        on database: any Database,
+        profileCache: PerfumeProfileCache? = nil
     ) async throws -> [PersonalPerfumeResponse] {
+        if let profileCache {
+            let eligibleProfiles = try await profileCache.profiles(on: database).filter {
+                $0.marketSegment.flatMap(PersonalPerfumeMarketSegment.init(rawValue:)) != nil
+            }
+            return PersonalPerfumeScorer.score(request: request, perfumeProfiles: eligibleProfiles)
+        }
+
         let preference = PersonalPerfumePreference(request: request)
         var recommendations: [PersonalPerfumeResponse] = []
 
