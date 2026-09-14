@@ -1,5 +1,19 @@
 import Foundation
 
+enum CatalogSourceFileDecoder {
+    static func decode(_ data: Data) throws -> String {
+        guard let source = String(bytes: data, encoding: .utf8)
+            ?? String(bytes: data, encoding: .isoLatin1) else {
+            throw CatalogSourceFileDecoderError.invalidSourceEncoding
+        }
+        return source
+    }
+}
+
+enum CatalogSourceFileDecoderError: Error {
+    case invalidSourceEncoding
+}
+
 struct CatalogSourcePerfume: Equatable, Sendable {
     let sourceURL: String
     let perfumeName: String

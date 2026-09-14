@@ -16,6 +16,7 @@ actor PerfumeProfileCache {
     private let ttl: TimeInterval
     private var profilesByLanguage: [String: Entry] = [:]
     private var loadingTasks: [String: Task<[PerfumeProfile], any Error>] = [:]
+    private var generation = 0
 
     init(ttl: TimeInterval = 300) {
         self.ttl = ttl
@@ -34,6 +35,7 @@ actor PerfumeProfileCache {
             return try await loadingTask.value
         }
 
+        let loadingGeneration = generation
         let loadingTask = Task { [database] in
             let perfumeModels = try await PerfumeModel.query(on: database)
                 .withPerfumeProfileFields()
@@ -44,13 +46,21 @@ actor PerfumeProfileCache {
             return perfumeModels.compactMap { PerfumeProfile(model: $0, language: language) }
         }
         loadingTasks[languageKey] = loadingTask
-        defer { loadingTasks[languageKey] = nil }
+        defer {
+            if generation == loadingGeneration {
+                loadingTasks[languageKey] = nil
+            }
+        }
         let profiles = try await loadingTask.value
+        guard generation == loadingGeneration else {
+            return try await self.profiles(on: database, language: language)
+        }
         profilesByLanguage[languageKey] = Entry(profiles: profiles, createdAt: .now)
         return profiles
     }
 
     func invalidate() {
+        generation &+= 1
         profilesByLanguage = [:]
         loadingTasks = [:]
     }

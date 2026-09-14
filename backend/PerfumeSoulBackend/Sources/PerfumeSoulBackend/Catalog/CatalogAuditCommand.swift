@@ -19,7 +19,7 @@ struct CatalogAuditCommand: Command {
 
     func run(using context: CommandContext, signature: Signature) throws {
         let url = URL(fileURLWithPath: signature.inputPath)
-        let contents = try String(contentsOf: url, encoding: .isoLatin1)
+        let contents = try CatalogSourceFileDecoder.decode(Data(contentsOf: url))
         let sourcePerfumes = try CatalogSourcePerfumeParser.parse(contents)
         let report = CatalogImportAudit.makeReport(
             sourcePerfumes: sourcePerfumes,

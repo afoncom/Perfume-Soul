@@ -25,3 +25,15 @@ func unfoundSearchRateLimiterEnforcesDailyLimit() async {
     let isAllowed = await limiter.allows(ipAddress: "127.0.0.1", now: now)
     #expect(!isAllowed)
 }
+
+@Test("Unfound search client address prefers the trusted proxy header")
+func unfoundSearchClientAddressPrefersProxyHeader() {
+    #expect(UnfoundSearchClientAddress.resolve(
+        realIP: "203.0.113.7",
+        remoteAddress: "172.18.0.1"
+    ) == "203.0.113.7")
+    #expect(UnfoundSearchClientAddress.resolve(
+        realIP: "   ",
+        remoteAddress: "127.0.0.1"
+    ) == "127.0.0.1")
+}

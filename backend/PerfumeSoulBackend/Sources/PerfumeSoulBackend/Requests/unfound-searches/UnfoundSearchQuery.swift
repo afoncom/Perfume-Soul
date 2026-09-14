@@ -65,12 +65,30 @@ enum UnfoundSearchQueryLogger {
     }
 }
 
+enum UnfoundSearchClientAddress {
+    static func resolve(request: Request) -> String {
+        resolve(
+            realIP: request.headers.first(name: "X-Real-IP"),
+            remoteAddress: request.remoteAddress?.ipAddress
+        )
+    }
+
+    static func resolve(realIP: String?, remoteAddress: String?) -> String {
+        let trustedProxyAddress = realIP?.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let trustedProxyAddress, !trustedProxyAddress.isEmpty {
+            return trustedProxyAddress
+        }
+        return remoteAddress ?? "unknown"
+    }
+}
+
 actor UnfoundSearchRateLimiter {
     private let dailyLimit = 100
     private var counts: [String: (day: Date, count: Int)] = [:]
 
     func allows(ipAddress: String, now: Date = .now) -> Bool {
         let day = Calendar.current.startOfDay(for: now)
+        counts = counts.filter { $0.value.day == day }
         let current = counts[ipAddress]
         let count = current?.day == day ? current?.count ?? 0 : 0
         guard count < dailyLimit else { return false }

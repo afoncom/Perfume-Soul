@@ -1,5 +1,13 @@
+import Foundation
 import Testing
 @testable import PerfumeSoulBackend
+
+@Test("CSV source decoder prefers UTF-8 before Latin-1 fallback")
+func catalogSourceFileDecoderPrefersUTF8() throws {
+    let decoded = try CatalogSourceFileDecoder.decode(Data("Chloé".utf8))
+
+    #expect(decoded == "Chloé")
+}
 
 @Test("CSV parser preserves quoted semicolons in perfume fields")
 func catalogCSVParserPreservesQuotedSemicolons() throws {

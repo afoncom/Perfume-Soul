@@ -6,16 +6,16 @@
 -- values for recommendation continuity; verified public aggregate values are
 -- applied later through explicit manual updates and never overwritten here.
 UPDATE perfumes
-SET longevity_score = CASE
+SET longevity_score = COALESCE(longevity_score, CASE
         WHEN perfume_name ILIKE '%Elixir%' THEN 9
         WHEN perfume_name ILIKE '%Extrait%' OR perfume_name ILIKE '%Parfum%' OR perfume_name ILIKE '%Intense%' THEN 8
         WHEN perfume_name ILIKE '%Cologne%' OR perfume_name ILIKE '%Eau Fraiche%' THEN 5
         ELSE 6
-    END,
-    sillage_score = CASE
+    END),
+    sillage_score = COALESCE(sillage_score, CASE
         WHEN perfume_name ILIKE '%Elixir%' THEN 9
         WHEN perfume_name ILIKE '%Extrait%' OR perfume_name ILIKE '%Parfum%' OR perfume_name ILIKE '%Intense%' THEN 7
         WHEN perfume_name ILIKE '%Cologne%' OR perfume_name ILIKE '%Eau Fraiche%' THEN 4
         ELSE 6
-    END
+    END)
 WHERE longevity_score IS NULL OR sillage_score IS NULL;

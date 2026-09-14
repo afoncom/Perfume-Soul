@@ -22,10 +22,7 @@ struct CatalogImportCommand: AsyncCommand {
 
     func run(using context: CommandContext, signature: Signature) async throws {
         let sourceData = try Data(contentsOf: URL(fileURLWithPath: signature.inputPath))
-        guard let source = String(data: sourceData, encoding: .utf8)
-            ?? String(data: sourceData, encoding: .isoLatin1) else {
-            throw CatalogImportError.invalidSourceEncoding
-        }
+        let source = try CatalogSourceFileDecoder.decode(sourceData)
         let targetCount = signature.targetCount ?? 15_000
         let batchSize = min(max(signature.batchSize ?? 500, 1), 1_000)
         let currentCatalogCount = try await PerfumeModel.query(on: context.application.db).count()
