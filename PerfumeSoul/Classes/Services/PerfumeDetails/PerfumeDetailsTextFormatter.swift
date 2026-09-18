@@ -23,6 +23,8 @@ enum PerfumeDetailsTextFormatter {
             return recommendationReason
         }
 
+        // The fallback is a localized sentence built from note names, so do not
+        // construct it when those names are in a different language.
         guard notesMatchCurrentLanguage(perfumeDetails.notesLanguage) else {
             return nil
         }

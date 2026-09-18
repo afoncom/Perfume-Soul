@@ -362,6 +362,9 @@ extension PerfumeDetailsScreen {
     }
 
     private func makeNotesSection(perfumeDetails: PerfumeDetails) -> some View {
+        // Note names remain useful in their source language. Unlike the
+        // localized fallback recommendation, this section is intentionally
+        // shown regardless of notesLanguage.
         VStack(alignment: .leading, spacing: 14) {
             makeSectionTitle(L10n.PerfumeDetails.notesSectionTitle)
 
