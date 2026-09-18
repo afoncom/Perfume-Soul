@@ -6,8 +6,8 @@
 import Foundation
 
 enum BirthPlaceNameFormatter {
-    static func format(title: String?, subtitle: String?) -> String {
-        let primary = trimmed(title) ?? ""
+    static func format(title: String, subtitle: String?) -> String {
+        let primary = title.trimmingCharacters(in: .whitespacesAndNewlines)
         let components = (subtitle?
             .split(separator: ",")
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -24,20 +24,11 @@ enum BirthPlaceNameFormatter {
                 result.append(component)
             }
 
-        guard !primary.isEmpty else {
-            return components.joined(separator: ", ")
-        }
-
         guard !components.isEmpty else {
             return primary
         }
 
         return "\(primary), \(components.joined(separator: ", "))"
-    }
-
-    private static func trimmed(_ value: String?) -> String? {
-        let result = value?.trimmingCharacters(in: .whitespacesAndNewlines)
-        return result?.isEmpty == false ? result : nil
     }
 
     static func place(_ name: String, matchesComponentIn value: String) -> Bool {
