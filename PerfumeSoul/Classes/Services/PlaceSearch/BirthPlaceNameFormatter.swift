@@ -8,6 +8,10 @@ import Foundation
 enum BirthPlaceNameFormatter {
     static func format(title: String, subtitle: String?) -> String {
         let primary = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !primary.isEmpty else {
+            return ""
+        }
+
         let components = (subtitle?
             .split(separator: ",")
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
