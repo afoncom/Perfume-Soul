@@ -95,7 +95,9 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
         let perfumeDetails = makePerfumeDetails(
             recommendationReason: nil,
             notesLanguage: "zz",
-            topNotes: ["bergamot"]
+            topNotes: ["bergamot"],
+            middleNotes: ["jasmine"],
+            baseNotes: ["cedar"]
         )
 
         let notes = PerfumeDetailsTextFormatter.notes(for: perfumeDetails)
@@ -244,7 +246,9 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
         fullStory: String? = nil,
         accords: [PerfumeAccord] = [],
         notesLanguage: String?,
-        topNotes: [String]
+        topNotes: [String],
+        middleNotes: [String] = [],
+        baseNotes: [String] = []
     ) -> PerfumeDetails {
         PerfumeDetails(
             id: 1,
@@ -267,8 +271,8 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
             accords: accords,
             notesLanguage: notesLanguage,
             topNotes: topNotes,
-            middleNotes: [],
-            baseNotes: []
+            middleNotes: middleNotes,
+            baseNotes: baseNotes
         )
     }
 }
