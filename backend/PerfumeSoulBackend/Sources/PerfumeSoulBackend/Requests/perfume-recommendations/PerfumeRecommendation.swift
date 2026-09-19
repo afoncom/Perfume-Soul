@@ -27,25 +27,41 @@ enum PerfumeRecommendationLoader {
         let perfumeProfiles: [PerfumeProfile]
         if let profileCache {
             perfumeProfiles = try await profileCache.profiles(on: database, language: language)
-        } else {
-            let perfumeModels = try await PerfumeModel.query(on: database)
+            return try load(
+                perfumeProfiles: perfumeProfiles,
+                selectedPerfumeIDs: selectedPerfumeIDs
+            )
+        }
+
+        let selectedModels = try await PerfumeModel.query(on: database)
+            .withPerfumeProfileFields()
+            .filter(\.$id ~~ selectedPerfumeIDs)
+            .with(\.$brand)
+            .with(\.$notes) { query in query.with(\.$note) }
+            .with(\.$accords) { query in query.with(\.$accord) }
+            .all()
+        let selectedProfiles = selectedModels.compactMap {
+            PerfumeProfile(model: $0, language: language)
+        }
+        guard selectedProfiles.count == selectedPerfumeIDs.count else {
+            throw Abort(.notFound)
+        }
+        return try await loadRecommendations(
+            selectedPerfumeProfiles: selectedProfiles,
+            pageSize: 100
+        ) { offset, limit in
+            let models = try await PerfumeModel.query(on: database)
                 .withPerfumeProfileFields()
+                .sort(\.$id)
+                .range(offset..<(offset + limit))
                 .with(\.$brand)
-                .with(\.$notes) { query in
-                    query.with(\.$note)
-                }
-                .with(\.$accords) { query in
-                    query.with(\.$accord)
-                }
+                .with(\.$notes) { query in query.with(\.$note) }
+                .with(\.$accords) { query in query.with(\.$accord) }
                 .all()
-            perfumeProfiles = perfumeModels.compactMap {
+            return models.compactMap {
                 PerfumeProfile(model: $0, language: language)
             }
         }
-        return try load(
-            perfumeProfiles: perfumeProfiles,
-            selectedPerfumeIDs: selectedPerfumeIDs
-        )
     }
 
     static func load(
@@ -78,6 +94,61 @@ enum PerfumeRecommendationLoader {
             }
             .sorted(by: areSortedForRecommendationRanking)
             .uniqueBySignature()
+            .prefix(5)
+            .map(\.recommendation)
+    }
+
+    static func loadRecommendations(
+        selectedPerfumeProfiles: [PerfumeProfile],
+        pageSize: Int,
+        pageProvider: (_ offset: Int, _ limit: Int) async throws -> [PerfumeProfile]
+    ) async throws -> [PerfumeRecommendation] {
+        guard pageSize > 0 else {
+            return []
+        }
+
+        var longevityValues: [Int] = []
+        var sillageValues: [Int] = []
+        var offset = 0
+        while true {
+            let page = try await pageProvider(offset, pageSize)
+            longevityValues += page.compactMap(\.longevityScore)
+            sillageValues += page.compactMap(\.sillageScore)
+            guard page.count == pageSize else { break }
+            offset += pageSize
+        }
+
+        let targetProfile = RecommendationTargetProfile(
+            perfumeProfiles: selectedPerfumeProfiles,
+            usesLocalizedNoteDisplayNames: selectedPerfumeProfiles.allSatisfy(\.usesLocalizedNoteDisplayNames)
+        )
+        let scoreRanges = ScoreRanges(
+            longevityValues: longevityValues,
+            sillageValues: sillageValues
+        )
+        let selectedIDs = Set(selectedPerfumeProfiles.map(\.id))
+        var bestBySignature: [String: ScoredPerfumeRecommendation] = [:]
+        offset = 0
+        while true {
+            let page = try await pageProvider(offset, pageSize)
+            for profile in page where !selectedIDs.contains(profile.id) {
+                guard let scored = makeScoredRecommendation(
+                    perfumeProfile: profile,
+                    targetProfile: targetProfile,
+                    scoreRanges: scoreRanges
+                ) else { continue }
+                if let current = bestBySignature[scored.signature],
+                   !areSortedForRecommendationRanking(lhs: scored, rhs: current) {
+                    continue
+                }
+                bestBySignature[scored.signature] = scored
+            }
+            guard page.count == pageSize else { break }
+            offset += pageSize
+        }
+
+        return Array(bestBySignature.values)
+            .sorted(by: areSortedForRecommendationRanking)
             .prefix(5)
             .map(\.recommendation)
     }
@@ -665,12 +736,15 @@ private struct ScoreRanges {
     let sillage: ClosedRange<Int>?
 
     init(perfumeProfiles: [PerfumeProfile]) {
-        self.longevity = Self.makeRange(
-            values: perfumeProfiles.compactMap(\.longevityScore)
+        self.init(
+            longevityValues: perfumeProfiles.compactMap(\.longevityScore),
+            sillageValues: perfumeProfiles.compactMap(\.sillageScore)
         )
-        self.sillage = Self.makeRange(
-            values: perfumeProfiles.compactMap(\.sillageScore)
-        )
+    }
+
+    init(longevityValues: [Int], sillageValues: [Int]) {
+        self.longevity = Self.makeRange(values: longevityValues)
+        self.sillage = Self.makeRange(values: sillageValues)
     }
 
     private static func makeRange(values: [Int]) -> ClosedRange<Int>? {

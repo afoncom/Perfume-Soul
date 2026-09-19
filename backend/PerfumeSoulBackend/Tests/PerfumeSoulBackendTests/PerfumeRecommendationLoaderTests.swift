@@ -247,6 +247,38 @@ struct PerfumeRecommendationLoaderTests {
         #expect(recommendations[0].id == 2)
         #expect(recommendations[0].matchPercentage > recommendations[1].matchPercentage)
     }
+
+    @Test("Paged similar finder keeps a best match beyond the first page")
+    func pagedSimilarFinderKeepsBestMatchBeyondFirstPage() async throws {
+        let selected = makeSelectedPerfume(id: 1)
+        let weakerCandidate = PerfumeProfile(
+            id: 2,
+            perfumeName: "Weaker",
+            brandName: "Brand A",
+            topNotes: ["Бергамот"]
+        )
+        let bestCandidate = PerfumeProfile(
+            id: 3,
+            perfumeName: "Best",
+            brandName: "Brand B",
+            longevityScore: 7,
+            sillageScore: 7,
+            topNotes: ["Бергамот", "Лимон"],
+            middleNotes: ["Жасмин"],
+            baseNotes: ["Кедр"],
+            accordWeights: ["citrus": 1, "fresh": 0.6]
+        )
+        let allProfiles = [selected, weakerCandidate, bestCandidate]
+
+        let recommendations = try await PerfumeRecommendationLoader.loadRecommendations(
+            selectedPerfumeProfiles: [selected],
+            pageSize: 2
+        ) { offset, limit in
+            Array(allProfiles.dropFirst(offset).prefix(limit))
+        }
+
+        #expect(recommendations.first?.id == bestCandidate.id)
+    }
 }
 
 extension PerfumeRecommendationLoaderTests {
