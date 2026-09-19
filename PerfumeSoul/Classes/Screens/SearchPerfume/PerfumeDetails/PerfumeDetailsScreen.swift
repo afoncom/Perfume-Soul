@@ -365,13 +365,15 @@ extension PerfumeDetailsScreen {
         // Note names remain useful in their source language. Unlike the
         // localized fallback recommendation, this section is intentionally
         // shown regardless of notesLanguage.
-        VStack(alignment: .leading, spacing: 14) {
+        let notes = PerfumeDetailsTextFormatter.notes(for: perfumeDetails)
+
+        return VStack(alignment: .leading, spacing: 14) {
             makeSectionTitle(L10n.PerfumeDetails.notesSectionTitle)
 
             makeNotesCard(
-                topNotes: perfumeDetails.topNotes,
-                middleNotes: perfumeDetails.middleNotes,
-                baseNotes: perfumeDetails.baseNotes
+                topNotes: notes.top,
+                middleNotes: notes.middle,
+                baseNotes: notes.base
             )
         }
         .padding(16)

@@ -81,7 +81,7 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
     func testRecommendationReasonReturnsExplicitReason() {
         let perfumeDetails = makePerfumeDetails(
             recommendationReason: "Best for warm evenings.",
-            notesLanguage: nil,
+            notesLanguage: SupportedAppLanguage.currentCode,
             topNotes: []
         )
 
@@ -89,6 +89,20 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
             PerfumeDetailsTextFormatter.recommendationReason(for: perfumeDetails),
             "Best for warm evenings."
         )
+    }
+
+    func testNotesRemainAvailableWhenNotesLanguageDoesNotMatch() {
+        let perfumeDetails = makePerfumeDetails(
+            recommendationReason: nil,
+            notesLanguage: "zz",
+            topNotes: ["bergamot"]
+        )
+
+        let notes = PerfumeDetailsTextFormatter.notes(for: perfumeDetails)
+
+        XCTAssertEqual(notes.top, ["bergamot"])
+        XCTAssertEqual(notes.middle, ["jasmine"])
+        XCTAssertEqual(notes.base, ["cedar"])
     }
 
     func testRecommendationReasonReturnsExplicitReasonWhenNotesLanguageDoesNotMatch() {

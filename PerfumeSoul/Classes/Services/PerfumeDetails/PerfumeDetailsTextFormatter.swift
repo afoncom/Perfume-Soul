@@ -1,6 +1,20 @@
 import Foundation
 
 enum PerfumeDetailsTextFormatter {
+    struct Notes {
+        let top: [String]
+        let middle: [String]
+        let base: [String]
+    }
+
+    static func notes(for perfumeDetails: PerfumeDetails) -> Notes {
+        Notes(
+            top: perfumeDetails.topNotes,
+            middle: perfumeDetails.middleNotes,
+            base: perfumeDetails.baseNotes
+        )
+    }
+
     static func shortDescription(for perfumeDetails: PerfumeDetails) -> String {
         if let shortDescription = nonBlank(perfumeDetails.shortDescription) {
             return shortDescription
