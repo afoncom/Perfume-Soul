@@ -23,6 +23,7 @@ struct BirthPlaceResolvedPlace {
     let subAdministrativeArea: String?
     let country: String?
     let isPointOfInterest: Bool
+    let hasStreetAddress: Bool
 
     init(
         locality: String? = nil,
@@ -30,7 +31,8 @@ struct BirthPlaceResolvedPlace {
         administrativeArea: String? = nil,
         subAdministrativeArea: String? = nil,
         country: String? = nil,
-        isPointOfInterest: Bool = false
+        isPointOfInterest: Bool = false,
+        hasStreetAddress: Bool = false
     ) {
         self.locality = locality
         self.subLocality = subLocality
@@ -38,12 +40,13 @@ struct BirthPlaceResolvedPlace {
         self.subAdministrativeArea = subAdministrativeArea
         self.country = country
         self.isPointOfInterest = isPointOfInterest
+        self.hasStreetAddress = hasStreetAddress
     }
 }
 
 enum BirthPlaceResolvedPlaceValidator {
     static func isSupported(_ place: BirthPlaceResolvedPlace) -> Bool {
-        guard !place.isPointOfInterest else {
+        guard !place.isPointOfInterest, !place.hasStreetAddress else {
             return false
         }
 
@@ -174,7 +177,9 @@ final class BirthPlaceSearchService: NSObject {
                 administrativeArea: placemark.administrativeArea,
                 subAdministrativeArea: placemark.subAdministrativeArea,
                 country: placemark.country,
-                isPointOfInterest: mapItem.pointOfInterestCategory != nil
+                isPointOfInterest: mapItem.pointOfInterestCategory != nil,
+                hasStreetAddress: placemark.thoroughfare?.isEmpty == false
+                    || placemark.subThoroughfare?.isEmpty == false
             )
         ) else {
             throw BirthPlaceSearchError.unsupportedPlace

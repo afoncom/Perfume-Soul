@@ -249,6 +249,7 @@
 "calculation.birthPlaceSelectionError" = "Не удалось выбрать это место. Проверьте подключение и попробуйте еще раз.";
 "calculation.birthPlaceTitle" = "Место рождения";
 "calculation.birthPlaceUnresolvedError" = "Не удалось точно определить это место. Попробуйте ближайший город.";
+"calculation.birthPlaceUnsupportedError" = "Выберите город, регион или страну.";
 "calculation.birthTimeTitle" = "Время рождения";
 "calculation.picker.doneButton" = "Готово";
 "calculation.picker.day" = "День";

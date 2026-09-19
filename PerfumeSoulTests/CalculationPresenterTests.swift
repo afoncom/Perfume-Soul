@@ -109,7 +109,7 @@ final class CalculationPresenterTests: XCTestCase {
 
         XCTAssertNil(viewModel.selectedBirthPlace)
         XCTAssertEqual(viewModel.birthPlaceSuggestions.map(\.displayName), ["Coffee"])
-        XCTAssertEqual(viewModel.birthPlaceErrorMessage, L10n.Calculation.birthPlaceUnresolvedError)
+        XCTAssertEqual(viewModel.birthPlaceErrorMessage, L10n.Calculation.birthPlaceUnsupportedError)
     }
 
     @MainActor

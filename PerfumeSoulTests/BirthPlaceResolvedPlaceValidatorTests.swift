@@ -30,6 +30,15 @@ final class BirthPlaceResolvedPlaceValidatorTests: XCTestCase {
         XCTAssertFalse(BirthPlaceResolvedPlaceValidator.isSupported(place))
     }
 
+    func testRejectsStreetLevelAddressEvenWhenItHasCountry() {
+        let place = BirthPlaceResolvedPlace(
+            country: "Россия",
+            hasStreetAddress: true
+        )
+
+        XCTAssertFalse(BirthPlaceResolvedPlaceValidator.isSupported(place))
+    }
+
     func testRejectsPlaceWithoutGeographicComponent() {
         XCTAssertFalse(BirthPlaceResolvedPlaceValidator.isSupported(.init()))
     }
