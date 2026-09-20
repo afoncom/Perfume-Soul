@@ -9,9 +9,9 @@ enum PerfumeDetailsTextFormatter {
 
     static func notes(for perfumeDetails: PerfumeDetails) -> Notes {
         Notes(
-            top: perfumeDetails.topNotes,
-            middle: perfumeDetails.middleNotes,
-            base: perfumeDetails.baseNotes
+            top: sanitizedNotes(perfumeDetails.topNotes),
+            middle: sanitizedNotes(perfumeDetails.middleNotes),
+            base: sanitizedNotes(perfumeDetails.baseNotes)
         )
     }
 
@@ -180,6 +180,12 @@ enum PerfumeDetailsTextFormatter {
 
         let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmed.isEmpty ? nil : trimmed
+    }
+
+    private static func sanitizedNotes(_ notes: [String]) -> [String] {
+        var seen = Set<String>()
+
+        return notes.compactMap(nonBlank).filter { seen.insert($0).inserted }
     }
 
     private static func notesMatchCurrentLanguage(_ notesLanguage: String?) -> Bool {
