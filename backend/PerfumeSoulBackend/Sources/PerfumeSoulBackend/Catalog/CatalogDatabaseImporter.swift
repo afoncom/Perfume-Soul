@@ -9,6 +9,11 @@ struct CatalogImportBatchResult: Codable, Sendable {
     let createdAccordCount: Int
 }
 
+struct CatalogUnclassifiedReport: Codable, Sendable {
+    let perfumeCount: Int
+    let perfumeCountByBrand: [String: Int]
+}
+
 enum CatalogDatabaseImporter {
     static func importBatch(
         _ sourcePerfumes: [CatalogSourcePerfume],
@@ -138,6 +143,21 @@ enum CatalogDatabaseImporter {
         return perfumes.reduce(into: [String: Int]()) { counts, perfume in
             counts[normalized(perfume.brand.name), default: 0] += 1
         }
+    }
+
+    static func unclassifiedReport(on database: any Database) async throws -> CatalogUnclassifiedReport {
+        let perfumes = try await PerfumeModel.query(on: database)
+            .filter(\.$marketSegment == "unclassified")
+            .with(\.$brand)
+            .all()
+        let perfumeCountByBrand = perfumes.reduce(into: [String: Int]()) { counts, perfume in
+            counts[perfume.brand.name, default: 0] += 1
+        }
+
+        return CatalogUnclassifiedReport(
+            perfumeCount: perfumes.count,
+            perfumeCountByBrand: perfumeCountByBrand
+        )
     }
 
     private static func resolveBrand(

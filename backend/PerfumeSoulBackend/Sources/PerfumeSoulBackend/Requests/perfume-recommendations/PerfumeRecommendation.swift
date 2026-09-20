@@ -1,4 +1,5 @@
 import Fluent
+import FluentSQL
 import Foundation
 import Vapor
 
@@ -16,21 +17,11 @@ enum PerfumeRecommendationLoader {
     static func load(
         perfumeIDs: [Int],
         on database: any Database,
-        language: String? = nil,
-        profileCache: PerfumeProfileCache? = nil
+        language: String? = nil
     ) async throws -> [PerfumeRecommendation] {
         let selectedPerfumeIDs = uniquePerfumeIDs(from: perfumeIDs)
         guard !selectedPerfumeIDs.isEmpty else {
             return []
-        }
-
-        let perfumeProfiles: [PerfumeProfile]
-        if let profileCache {
-            perfumeProfiles = try await profileCache.profiles(on: database, language: language)
-            return try load(
-                perfumeProfiles: perfumeProfiles,
-                selectedPerfumeIDs: selectedPerfumeIDs
-            )
         }
 
         let selectedModels = try await PerfumeModel.query(on: database)
@@ -46,8 +37,10 @@ enum PerfumeRecommendationLoader {
         guard selectedProfiles.count == selectedPerfumeIDs.count else {
             throw Abort(.notFound)
         }
+        let scoreRanges = try await ScoreRanges.load(on: database)
         return try await loadRecommendations(
             selectedPerfumeProfiles: selectedProfiles,
+            scoreRanges: scoreRanges,
             pageSize: 100
         ) { offset, limit in
             let models = try await PerfumeModel.query(on: database)
@@ -58,48 +51,18 @@ enum PerfumeRecommendationLoader {
                 .with(\.$notes) { query in query.with(\.$note) }
                 .with(\.$accords) { query in query.with(\.$accord) }
                 .all()
-            return models.compactMap {
-                PerfumeProfile(model: $0, language: language)
+            return try models.map { model in
+                guard let profile = PerfumeProfile(model: model, language: language) else {
+                    throw Abort(.internalServerError, reason: "Unable to build perfume profile.")
+                }
+                return profile
             }
         }
-    }
-
-    static func load(
-        perfumeProfiles: [PerfumeProfile],
-        selectedPerfumeIDs: [Int]
-    ) throws -> [PerfumeRecommendation] {
-        let uniqueSelectedPerfumeIDs = uniquePerfumeIDs(from: selectedPerfumeIDs)
-        let selectedPerfumeProfiles = uniqueSelectedPerfumeIDs.compactMap { perfumeID in
-            perfumeProfiles.first { $0.id == perfumeID }
-        }
-
-        guard selectedPerfumeProfiles.count == uniqueSelectedPerfumeIDs.count else {
-            throw Abort(.notFound)
-        }
-
-        let targetProfile = RecommendationTargetProfile(
-            perfumeProfiles: selectedPerfumeProfiles,
-            usesLocalizedNoteDisplayNames: selectedPerfumeProfiles.allSatisfy(\.usesLocalizedNoteDisplayNames)
-        )
-        let scoreRanges = ScoreRanges(perfumeProfiles: perfumeProfiles)
-
-        return perfumeProfiles
-            .filter { !uniqueSelectedPerfumeIDs.contains($0.id) }
-            .compactMap { perfumeProfile in
-                makeScoredRecommendation(
-                    perfumeProfile: perfumeProfile,
-                    targetProfile: targetProfile,
-                    scoreRanges: scoreRanges
-                )
-            }
-            .sorted(by: areSortedForRecommendationRanking)
-            .uniqueBySignature()
-            .prefix(5)
-            .map(\.recommendation)
     }
 
     static func loadRecommendations(
         selectedPerfumeProfiles: [PerfumeProfile],
+        scoreRanges: ScoreRanges,
         pageSize: Int,
         pageProvider: (_ offset: Int, _ limit: Int) async throws -> [PerfumeProfile]
     ) async throws -> [PerfumeRecommendation] {
@@ -107,28 +70,13 @@ enum PerfumeRecommendationLoader {
             return []
         }
 
-        var longevityValues: [Int] = []
-        var sillageValues: [Int] = []
-        var offset = 0
-        while true {
-            let page = try await pageProvider(offset, pageSize)
-            longevityValues += page.compactMap(\.longevityScore)
-            sillageValues += page.compactMap(\.sillageScore)
-            guard page.count == pageSize else { break }
-            offset += pageSize
-        }
-
         let targetProfile = RecommendationTargetProfile(
             perfumeProfiles: selectedPerfumeProfiles,
             usesLocalizedNoteDisplayNames: selectedPerfumeProfiles.allSatisfy(\.usesLocalizedNoteDisplayNames)
         )
-        let scoreRanges = ScoreRanges(
-            longevityValues: longevityValues,
-            sillageValues: sillageValues
-        )
         let selectedIDs = Set(selectedPerfumeProfiles.map(\.id))
         var bestBySignature: [String: ScoredPerfumeRecommendation] = [:]
-        offset = 0
+        var offset = 0
         while true {
             let page = try await pageProvider(offset, pageSize)
             for profile in page where !selectedIDs.contains(profile.id) {
@@ -143,6 +91,12 @@ enum PerfumeRecommendationLoader {
                 }
                 bestBySignature[scored.signature] = scored
             }
+            bestBySignature = Dictionary(
+                uniqueKeysWithValues: bestBySignature.values
+                    .sorted(by: areSortedForRecommendationRanking)
+                    .prefix(50)
+                    .map { ($0.signature, $0) }
+            )
             guard page.count == pageSize else { break }
             offset += pageSize
         }
@@ -731,7 +685,7 @@ private struct RecommendationTargetProfile {
     }
 }
 
-private struct ScoreRanges {
+struct ScoreRanges {
     let longevity: ClosedRange<Int>?
     let sillage: ClosedRange<Int>?
 
@@ -747,6 +701,24 @@ private struct ScoreRanges {
         self.sillage = Self.makeRange(values: sillageValues)
     }
 
+    static func load(on database: any Database) async throws -> ScoreRanges {
+        guard let sqlDatabase = database as? any SQLDatabase else {
+            throw Abort(.internalServerError)
+        }
+        let aggregate = try await sqlDatabase.raw("""
+            SELECT
+                MIN(longevity_score) AS min_longevity,
+                MAX(longevity_score) AS max_longevity,
+                MIN(sillage_score) AS min_sillage,
+                MAX(sillage_score) AS max_sillage
+            FROM perfumes
+            """).first(decoding: ScoreRangeAggregate.self)
+        return ScoreRanges(
+            longevityValues: [aggregate?.minLongevity, aggregate?.maxLongevity].compactMap { $0 },
+            sillageValues: [aggregate?.minSillage, aggregate?.maxSillage].compactMap { $0 }
+        )
+    }
+
     private static func makeRange(values: [Int]) -> ClosedRange<Int>? {
         guard
             let minValue = values.min(),
@@ -756,6 +728,20 @@ private struct ScoreRanges {
         }
 
         return minValue...maxValue
+    }
+}
+
+private struct ScoreRangeAggregate: Decodable {
+    let minLongevity: Int?
+    let maxLongevity: Int?
+    let minSillage: Int?
+    let maxSillage: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case minLongevity = "min_longevity"
+        case maxLongevity = "max_longevity"
+        case minSillage = "min_sillage"
+        case maxSillage = "max_sillage"
     }
 }
 

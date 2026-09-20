@@ -55,16 +55,8 @@ enum PersonalPerfumeLoader {
 
     static func load(
         request: PersonalPerfumesRequest,
-        on database: any Database,
-        profileCache: PerfumeProfileCache? = nil
+        on database: any Database
     ) async throws -> [PersonalPerfumeResponse] {
-        if let profileCache {
-            let eligibleProfiles = try await profileCache.profiles(on: database).filter {
-                $0.marketSegment.flatMap(PersonalPerfumeMarketSegment.init(rawValue:)) != nil
-            }
-            return PersonalPerfumeScorer.score(request: request, perfumeProfiles: eligibleProfiles)
-        }
-
         let preference = PersonalPerfumePreference(request: request)
         var recommendations: [PersonalPerfumeResponse] = []
 
@@ -116,7 +108,12 @@ enum PersonalPerfumeLoader {
                 on: database
             )
 
-            return perfumeModels.compactMap { PerfumeProfile(model: $0) }
+            return try perfumeModels.map { model in
+                guard let profile = PerfumeProfile(model: model) else {
+                    throw Abort(.internalServerError, reason: "Unable to build perfume profile.")
+                }
+                return profile
+            }
         }
     }
 

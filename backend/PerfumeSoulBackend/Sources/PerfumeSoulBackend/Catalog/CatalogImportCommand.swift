@@ -63,15 +63,17 @@ struct CatalogImportCommand: AsyncCommand {
         let remainingCount = targetCount - currentCatalogCount
         let batch = Array(candidates.prefix(min(batchSize, remainingCount)))
         let result = try await CatalogDatabaseImporter.importBatch(batch, on: context.application.db)
-        await context.application.perfumeProfileCache.invalidate()
-
         let catalogCountAfterImport = try await PerfumeModel.query(on: context.application.db).count()
+        let unclassifiedReport = try await CatalogDatabaseImporter.unclassifiedReport(
+            on: context.application.db
+        )
         let output = CatalogImportCommandResult(
             targetCatalogCount: targetCount,
             catalogCountBeforeImport: currentCatalogCount,
             catalogCountAfterImport: catalogCountAfterImport,
             matchingCandidatesRemaining: candidates.count - batch.count,
-            batch: result
+            batch: result,
+            unclassifiedReport: unclassifiedReport
         )
 
         let encoder = JSONEncoder()
@@ -86,4 +88,5 @@ private struct CatalogImportCommandResult: Codable {
     let catalogCountAfterImport: Int
     let matchingCandidatesRemaining: Int
     let batch: CatalogImportBatchResult
+    let unclassifiedReport: CatalogUnclassifiedReport
 }

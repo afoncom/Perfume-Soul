@@ -1,9 +1,10 @@
 import Testing
+import Vapor
 @testable import PerfumeSoulBackend
 
 struct PerfumeRecommendationLoaderTests {
     @Test("Duplicate signatures are deduplicated after ranking")
-    func duplicateSignaturesAreDeduplicated() throws {
+    func duplicateSignaturesAreDeduplicated() async throws {
         let selectedPerfume = makeSelectedPerfume(id: 1)
         let firstDuplicate = PerfumeProfile(
             id: 2,
@@ -39,7 +40,7 @@ struct PerfumeRecommendationLoaderTests {
             accordWeights: ["citrus": 1]
         )
 
-        let recommendations = try PerfumeRecommendationLoader.load(
+        let recommendations = try await loadRecommendations(
             perfumeProfiles: [selectedPerfume, firstDuplicate, secondDuplicate, distinctCandidate],
             selectedPerfumeIDs: [selectedPerfume.id]
         )
@@ -48,7 +49,7 @@ struct PerfumeRecommendationLoaderTests {
     }
 
     @Test("Empty accords and optional metadata do not prevent scoring")
-    func emptyAccordsAndMetadataStillProduceRecommendation() throws {
+    func emptyAccordsAndMetadataStillProduceRecommendation() async throws {
         let selectedPerfume = PerfumeProfile(
             id: 1,
             perfumeName: "Selected",
@@ -66,7 +67,7 @@ struct PerfumeRecommendationLoaderTests {
             baseNotes: ["Кедр"]
         )
 
-        let recommendations = try PerfumeRecommendationLoader.load(
+        let recommendations = try await loadRecommendations(
             perfumeProfiles: [selectedPerfume, candidate],
             selectedPerfumeIDs: [selectedPerfume.id]
         )
@@ -77,7 +78,7 @@ struct PerfumeRecommendationLoaderTests {
     }
 
     @Test("Matching notes use display names without changing scoring keys")
-    func matchingNotesUseDisplayNamesWithoutChangingScoringKeys() throws {
+    func matchingNotesUseDisplayNamesWithoutChangingScoringKeys() async throws {
         let selectedPerfume = PerfumeProfile(
             id: 1,
             perfumeName: "Selected",
@@ -95,7 +96,7 @@ struct PerfumeRecommendationLoaderTests {
             topNotes: ["Бергамот"]
         )
 
-        let recommendations = try PerfumeRecommendationLoader.load(
+        let recommendations = try await loadRecommendations(
             perfumeProfiles: [selectedPerfume, candidate],
             selectedPerfumeIDs: [selectedPerfume.id]
         )
@@ -104,7 +105,7 @@ struct PerfumeRecommendationLoaderTests {
     }
 
     @Test("Selected perfumes fall back to base note names when any selected display map is incomplete")
-    func selectedPerfumesFallBackToBaseNoteNamesWhenAnyDisplayMapIsIncomplete() throws {
+    func selectedPerfumesFallBackToBaseNoteNamesWhenAnyDisplayMapIsIncomplete() async throws {
         let englishSelectedPerfume = PerfumeProfile(
             id: 1,
             perfumeName: "English Selected",
@@ -128,7 +129,7 @@ struct PerfumeRecommendationLoaderTests {
             topNotes: ["Бергамот", "Жасмин"]
         )
 
-        let recommendations = try PerfumeRecommendationLoader.load(
+        let recommendations = try await loadRecommendations(
             perfumeProfiles: [englishSelectedPerfume, fallbackSelectedPerfume, candidate],
             selectedPerfumeIDs: [englishSelectedPerfume.id, fallbackSelectedPerfume.id]
         )
@@ -137,7 +138,7 @@ struct PerfumeRecommendationLoaderTests {
     }
 
     @Test("Matching notes keep the same cutoff before applying display names")
-    func matchingNotesKeepSameCutoffBeforeApplyingDisplayNames() throws {
+    func matchingNotesKeepSameCutoffBeforeApplyingDisplayNames() async throws {
         let selectedPerfume = PerfumeProfile(
             id: 1,
             perfumeName: "Selected",
@@ -160,7 +161,7 @@ struct PerfumeRecommendationLoaderTests {
             topNotes: ["Бергамот", "Ваниль", "Жасмин", "Кедр", "Мускус", "Роза"]
         )
 
-        let recommendations = try PerfumeRecommendationLoader.load(
+        let recommendations = try await loadRecommendations(
             perfumeProfiles: [selectedPerfume, candidate],
             selectedPerfumeIDs: [selectedPerfume.id]
         )
@@ -169,7 +170,7 @@ struct PerfumeRecommendationLoaderTests {
     }
 
     @Test("Equal scores use deterministic brand, perfume, and id tie-breakers")
-    func deterministicTieBreakersForEqualScores() throws {
+    func deterministicTieBreakersForEqualScores() async throws {
         let selectedPerfume = PerfumeProfile(
             id: 1,
             perfumeName: "Selected",
@@ -196,7 +197,7 @@ struct PerfumeRecommendationLoaderTests {
             occasionProfile: "day"
         )
 
-        let recommendations = try PerfumeRecommendationLoader.load(
+        let recommendations = try await loadRecommendations(
             perfumeProfiles: [selectedPerfume, sameBrandFirstID, sameBrandSecondID, laterBrand],
             selectedPerfumeIDs: [selectedPerfume.id]
         )
@@ -205,7 +206,7 @@ struct PerfumeRecommendationLoaderTests {
     }
 
     @Test("Both nil metadata is excluded from weighted string components")
-    func bothNilMetadataDoesNotActAsMismatch() throws {
+    func bothNilMetadataDoesNotActAsMismatch() async throws {
         let selectedPerfume = PerfumeProfile(
             id: 1,
             perfumeName: "Selected",
@@ -238,7 +239,7 @@ struct PerfumeRecommendationLoaderTests {
             fragranceFamily: "woody"
         )
 
-        let recommendations = try PerfumeRecommendationLoader.load(
+        let recommendations = try await loadRecommendations(
             perfumeProfiles: [selectedPerfume, candidateWithoutMetadata, candidateWithMismatchMetadata],
             selectedPerfumeIDs: [selectedPerfume.id]
         )
@@ -272,6 +273,7 @@ struct PerfumeRecommendationLoaderTests {
 
         let recommendations = try await PerfumeRecommendationLoader.loadRecommendations(
             selectedPerfumeProfiles: [selected],
+            scoreRanges: ScoreRanges(perfumeProfiles: allProfiles),
             pageSize: 2
         ) { offset, limit in
             Array(allProfiles.dropFirst(offset).prefix(limit))
@@ -282,6 +284,26 @@ struct PerfumeRecommendationLoaderTests {
 }
 
 extension PerfumeRecommendationLoaderTests {
+    func loadRecommendations(
+        perfumeProfiles: [PerfumeProfile],
+        selectedPerfumeIDs: [Int]
+    ) async throws -> [PerfumeRecommendation] {
+        let selectedPerfumeProfiles = selectedPerfumeIDs.compactMap { perfumeID in
+            perfumeProfiles.first { $0.id == perfumeID }
+        }
+        guard selectedPerfumeProfiles.count == selectedPerfumeIDs.count else {
+            throw Abort(.notFound)
+        }
+
+        return try await PerfumeRecommendationLoader.loadRecommendations(
+            selectedPerfumeProfiles: selectedPerfumeProfiles,
+            scoreRanges: ScoreRanges(perfumeProfiles: perfumeProfiles),
+            pageSize: max(perfumeProfiles.count, 1)
+        ) { offset, limit in
+            Array(perfumeProfiles.dropFirst(offset).prefix(limit))
+        }
+    }
+
     func makeSelectedPerfume(id: Int) -> PerfumeProfile {
         PerfumeProfile(
             id: id,

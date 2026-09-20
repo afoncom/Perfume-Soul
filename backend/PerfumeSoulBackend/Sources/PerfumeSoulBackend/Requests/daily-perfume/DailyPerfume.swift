@@ -42,20 +42,8 @@ enum DailyPerfumeCandidateLoader {
 
     static func load(
         request: DailyPerfumeCandidatesRequest,
-        on database: any Database,
-        profileCache: PerfumeProfileCache? = nil
+        on database: any Database
     ) async throws -> [DailyPerfumeCandidate] {
-        if let profileCache {
-            let profiles = try await profileCache.profiles(on: database)
-                .filter { $0.marketSegment.flatMap(PersonalPerfumeMarketSegment.init(rawValue:)) != nil }
-            return try await loadCandidates(
-                request: request,
-                pageSize: candidatePageSize
-            ) { offset, limit in
-                Array(profiles.dropFirst(offset).prefix(limit))
-            }
-        }
-
         return try await loadCandidates(
             request: request,
             pageSize: candidatePageSize
@@ -66,7 +54,12 @@ enum DailyPerfumeCandidateLoader {
                 on: database
             )
 
-            return perfumeModels.compactMap { PerfumeProfile(model: $0) }
+            return try perfumeModels.map { model in
+                guard let profile = PerfumeProfile(model: model) else {
+                    throw Abort(.internalServerError, reason: "Unable to build perfume profile.")
+                }
+                return profile
+            }
         }
     }
 
@@ -86,20 +79,8 @@ enum DailyPerfumeCandidateLoader {
 
     static func loadRankedCandidates(
         request: DailyPerfumeCandidatesRequest,
-        on database: any Database,
-        profileCache: PerfumeProfileCache? = nil
+        on database: any Database
     ) async throws -> [DailyPerfumeCandidate] {
-        if let profileCache {
-            let profiles = try await profileCache.profiles(on: database)
-                .filter { $0.marketSegment.flatMap(PersonalPerfumeMarketSegment.init(rawValue:)) != nil }
-            return try await loadRankedCandidates(
-                request: request,
-                pageSize: candidatePageSize
-            ) { offset, limit in
-                Array(profiles.dropFirst(offset).prefix(limit))
-            }
-        }
-
         return try await loadRankedCandidates(
             request: request,
             pageSize: candidatePageSize
@@ -109,7 +90,12 @@ enum DailyPerfumeCandidateLoader {
                 limit: limit,
                 on: database
             )
-            return perfumeModels.compactMap { PerfumeProfile(model: $0) }
+            return try perfumeModels.map { model in
+                guard let profile = PerfumeProfile(model: model) else {
+                    throw Abort(.internalServerError, reason: "Unable to build perfume profile.")
+                }
+                return profile
+            }
         }
     }
 
