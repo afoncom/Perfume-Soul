@@ -58,13 +58,13 @@ final class BirthPlaceNameFormatterTests: XCTestCase {
         )
     }
 
-    func testFormatReturnsSubtitleWhenPrimaryIsEmpty() {
+    func testFormatRejectsWhitespaceOnlyTitle() {
         XCTAssertEqual(
             BirthPlaceNameFormatter.format(
-                title: nil,
+                title: "  \n ",
                 subtitle: "Illinois, United States"
             ),
-            "Illinois, United States"
+            ""
         )
     }
 
