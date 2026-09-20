@@ -94,6 +94,25 @@ final class CalculationPresenterTests: XCTestCase {
     }
 
     @MainActor
+    func testUnsupportedResolvedPlaceDoesNotSaveBirthPlaceSelection() async {
+        let viewModel = CalculationViewModel()
+        let suggestion = makeSuggestion(displayName: "Coffee")
+        viewModel.birthPlaceSuggestions = [suggestion]
+        let birthPlaceSearch = BirthPlaceSearchMock()
+        birthPlaceSearch.resolveError = BirthPlaceSearchError.unsupportedPlace
+        let presenter = makePresenter(
+            viewModel: viewModel,
+            birthPlaceSearch: birthPlaceSearch
+        )
+
+        await presenter.birthPlaceSuggestionTapped(suggestion)
+
+        XCTAssertNil(viewModel.selectedBirthPlace)
+        XCTAssertEqual(viewModel.birthPlaceSuggestions.map(\.displayName), ["Coffee"])
+        XCTAssertEqual(viewModel.birthPlaceErrorMessage, L10n.Calculation.birthPlaceUnsupportedError)
+    }
+
+    @MainActor
     func testSuccessfulResolveClearsActiveBirthPlaceSearchQuery() async {
         let viewModel = CalculationViewModel()
         let suggestion = makeSuggestion(displayName: "Paris, France")
@@ -206,8 +225,7 @@ final class CalculationPresenterTests: XCTestCase {
     private func makeSuggestion(displayName: String) -> BirthPlaceSuggestion {
         BirthPlaceSuggestion(
             displayName: displayName,
-            completion: MKLocalSearchCompletion(),
-            isQueryFallback: false
+            completion: MKLocalSearchCompletion()
         )
     }
 }

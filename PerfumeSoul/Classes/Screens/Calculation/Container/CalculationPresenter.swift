@@ -142,7 +142,21 @@ extension CalculationPresenterImpl: CalculationPresenter {
 
             await birthPlaceSearch.clear()
             return true
-        } catch BirthPlaceSearchError.missingDisplayName, BirthPlaceSearchError.missingTimeZone {
+        } catch BirthPlaceSearchError.unsupportedPlace {
+            return await MainActor.run { () -> Bool in
+                guard viewModel.activeBirthPlaceSearchQuery == requestQuery else {
+                    return false
+                }
+
+                viewModel.selectedBirthPlace = nil
+                viewModel.birthPlaceSuggestions = previousSuggestions
+                viewModel.isSearchingBirthPlace = false
+                viewModel.birthPlaceErrorMessage = L10n.Calculation.birthPlaceUnsupportedError
+                viewModel.canRetryBirthPlaceSearch = false
+                return true
+            }
+        } catch BirthPlaceSearchError.missingDisplayName,
+            BirthPlaceSearchError.missingTimeZone {
             return await MainActor.run { () -> Bool in
                 guard viewModel.activeBirthPlaceSearchQuery == requestQuery else {
                     return false
