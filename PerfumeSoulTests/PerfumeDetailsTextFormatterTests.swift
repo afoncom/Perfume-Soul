@@ -91,6 +91,35 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
         )
     }
 
+    func testNotesAreSanitizedWhenNotesLanguageDoesNotMatch() {
+        let perfumeDetails = makePerfumeDetails(
+            recommendationReason: nil,
+            notesLanguage: "zz",
+            topNotes: [" bergamot ", "", "bergamot"],
+            middleNotes: ["jasmine", "   ", "jasmine"],
+            baseNotes: ["cedar", "cedar"]
+        )
+
+        let notes = PerfumeDetailsTextFormatter.notes(for: perfumeDetails)
+
+        XCTAssertEqual(notes.top, ["bergamot"])
+        XCTAssertEqual(notes.middle, ["jasmine"])
+        XCTAssertEqual(notes.base, ["cedar"])
+    }
+
+    func testRecommendationReasonReturnsExplicitReasonWhenNotesLanguageDoesNotMatch() {
+        let perfumeDetails = makePerfumeDetails(
+            recommendationReason: "Best for warm evenings.",
+            notesLanguage: "zz",
+            topNotes: ["bergamot"]
+        )
+
+        XCTAssertEqual(
+            PerfumeDetailsTextFormatter.recommendationReason(for: perfumeDetails),
+            "Best for warm evenings."
+        )
+    }
+
     func testRecommendationReasonUsesMatchingLanguageNotes() {
         let perfumeDetails = makePerfumeDetails(
             recommendationReason: nil,
@@ -217,7 +246,9 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
         fullStory: String? = nil,
         accords: [PerfumeAccord] = [],
         notesLanguage: String?,
-        topNotes: [String]
+        topNotes: [String],
+        middleNotes: [String] = [],
+        baseNotes: [String] = []
     ) -> PerfumeDetails {
         PerfumeDetails(
             id: 1,
@@ -240,8 +271,8 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
             accords: accords,
             notesLanguage: notesLanguage,
             topNotes: topNotes,
-            middleNotes: [],
-            baseNotes: []
+            middleNotes: middleNotes,
+            baseNotes: baseNotes
         )
     }
 }

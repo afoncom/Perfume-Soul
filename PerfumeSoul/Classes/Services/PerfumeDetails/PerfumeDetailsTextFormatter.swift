@@ -1,6 +1,20 @@
 import Foundation
 
 enum PerfumeDetailsTextFormatter {
+    struct Notes {
+        let top: [String]
+        let middle: [String]
+        let base: [String]
+    }
+
+    static func notes(for perfumeDetails: PerfumeDetails) -> Notes {
+        Notes(
+            top: sanitizedNotes(perfumeDetails.topNotes),
+            middle: sanitizedNotes(perfumeDetails.middleNotes),
+            base: sanitizedNotes(perfumeDetails.baseNotes)
+        )
+    }
+
     static func shortDescription(for perfumeDetails: PerfumeDetails) -> String {
         if let shortDescription = nonBlank(perfumeDetails.shortDescription) {
             return shortDescription
@@ -23,6 +37,8 @@ enum PerfumeDetailsTextFormatter {
             return recommendationReason
         }
 
+        // The fallback is a localized sentence built from note names, so do not
+        // construct it when those names are in a different language.
         guard notesMatchCurrentLanguage(perfumeDetails.notesLanguage) else {
             return nil
         }
@@ -164,6 +180,12 @@ enum PerfumeDetailsTextFormatter {
 
         let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmed.isEmpty ? nil : trimmed
+    }
+
+    private static func sanitizedNotes(_ notes: [String]) -> [String] {
+        var seen = Set<String>()
+
+        return notes.compactMap(nonBlank).filter { seen.insert($0).inserted }
     }
 
     private static func notesMatchCurrentLanguage(_ notesLanguage: String?) -> Bool {
