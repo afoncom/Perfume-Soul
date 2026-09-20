@@ -234,15 +234,7 @@ final class BirthPlaceSearchService: NSObject {
         let completer = MKLocalSearchCompleter()
         completer.delegate = self
         completer.resultTypes = [.address]
-        completer.addressFilter = MKAddressFilter(
-            including: [
-                .locality,
-                .subLocality,
-                .administrativeArea,
-                .subAdministrativeArea,
-                .country
-            ]
-        )
+        completer.addressFilter = MKAddressFilter(excluding: [.postalCode])
         activeSearchPass = SearchPass(
             queryFragment: queryFragment,
             completer: completer
