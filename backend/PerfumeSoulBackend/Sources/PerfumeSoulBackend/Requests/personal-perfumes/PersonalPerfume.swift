@@ -167,26 +167,7 @@ enum PersonalPerfumeLoader {
     }
 }
 
-enum PersonalPerfumeScorer {
-    static func score(
-        request: PersonalPerfumesRequest,
-        perfumeProfiles: [PerfumeProfile]
-    ) -> [PersonalPerfumeResponse] {
-        let preference = PersonalPerfumePreference(request: request)
-        let scoredPerfumes = scoreCandidates(
-            perfumeProfiles: perfumeProfiles,
-            preference: preference
-        )
-
-        return PersonalPerfumeMarketSegment.allCases.flatMap { segment in
-            topScoredPerfumes(
-                scoredPerfumes: scoredPerfumes,
-                marketSegment: segment
-            )
-                .map(\.response)
-        }
-    }
-}
+enum PersonalPerfumeScorer { }
 
 private struct ScoredPersonalPerfume {
     let response: PersonalPerfumeResponse

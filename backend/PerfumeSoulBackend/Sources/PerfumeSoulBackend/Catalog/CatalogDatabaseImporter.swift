@@ -1,4 +1,6 @@
 import Fluent
+import FluentSQL
+import Vapor
 
 struct CatalogImportBatchResult: Codable, Sendable {
     let requestedCount: Int
@@ -146,16 +148,22 @@ enum CatalogDatabaseImporter {
     }
 
     static func unclassifiedReport(on database: any Database) async throws -> CatalogUnclassifiedReport {
-        let perfumes = try await PerfumeModel.query(on: database)
-            .filter(\.$marketSegment == "unclassified")
-            .with(\.$brand)
-            .all()
-        let perfumeCountByBrand = perfumes.reduce(into: [String: Int]()) { counts, perfume in
-            counts[perfume.brand.name, default: 0] += 1
+        guard let sqlDatabase = database as? any SQLDatabase else {
+            throw Abort(.internalServerError)
         }
+        let brandCounts = try await sqlDatabase.raw("""
+            SELECT brands.brand AS brand_name, COUNT(*) AS perfume_count
+            FROM perfumes
+            INNER JOIN brands ON brands.id = perfumes.brand_id
+            WHERE perfumes.market_segment = 'unclassified'
+            GROUP BY brands.brand
+            """).all(decoding: UnclassifiedBrandCount.self)
+        let perfumeCountByBrand = Dictionary(
+            uniqueKeysWithValues: brandCounts.map { ($0.brandName, $0.perfumeCount) }
+        )
 
         return CatalogUnclassifiedReport(
-            perfumeCount: perfumes.count,
+            perfumeCount: brandCounts.reduce(0) { $0 + $1.perfumeCount },
             perfumeCountByBrand: perfumeCountByBrand
         )
     }
@@ -266,6 +274,16 @@ enum CatalogDatabaseImporter {
                 weight: weight
             ).create(on: database)
         }
+    }
+}
+
+private struct UnclassifiedBrandCount: Decodable {
+    let brandName: String
+    let perfumeCount: Int
+
+    enum CodingKeys: String, CodingKey {
+        case brandName = "brand_name"
+        case perfumeCount = "perfume_count"
     }
 }
 
