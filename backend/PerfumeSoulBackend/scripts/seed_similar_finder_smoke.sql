@@ -6,13 +6,15 @@ VALUES
 ON CONFLICT (id) DO UPDATE SET brand = EXCLUDED.brand;
 
 INSERT INTO notes (id, name, name_en)
-VALUES (91001, 'Бергамот', ' Bergamot ')
+VALUES
+    (91001, 'Бергамот', ' Bergamot '),
+    (91002, 'Жасмин', ' Jasmine ')
 ON CONFLICT (id) DO UPDATE SET
     name = EXCLUDED.name,
     name_en = EXCLUDED.name_en;
 
 INSERT INTO accords (id, name)
-VALUES (91001, 'citrus')
+VALUES (91001, 'smoke-citrus')
 ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name;
 
 INSERT INTO perfumes (
@@ -60,8 +62,10 @@ ON CONFLICT (id) DO UPDATE SET
 INSERT INTO perfume_notes (perfume_id, note_id, note_type, sort_order)
 VALUES
     (91001, 91001, 'top', 0),
+    (91001, 91002, 'middle', 1),
     (93001, 91001, 'top', 0),
-    (93002, 91001, 'top', 0)
+    (93002, 91001, 'top', 0),
+    (93002, 91002, 'middle', 1)
 ON CONFLICT (perfume_id, note_id, note_type) DO UPDATE SET sort_order = EXCLUDED.sort_order;
 
 INSERT INTO perfume_accords (perfume_id, accord_id, weight)

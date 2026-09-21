@@ -612,19 +612,6 @@ extension PerfumeRecommendationLoader {
     }
 }
 
-extension Array where Element == ScoredPerfumeRecommendation {
-    fileprivate func uniqueBySignature() -> [ScoredPerfumeRecommendation] {
-        var seenSignatures = Set<String>()
-        var uniqueRecommendations: [ScoredPerfumeRecommendation] = []
-
-        for recommendation in self where seenSignatures.insert(recommendation.signature).inserted {
-            uniqueRecommendations.append(recommendation)
-        }
-
-        return uniqueRecommendations
-    }
-}
-
 private struct RecommendationTargetProfile {
     let noteWeights: [String: Int]
     let noteDisplayNames: [String: String]
