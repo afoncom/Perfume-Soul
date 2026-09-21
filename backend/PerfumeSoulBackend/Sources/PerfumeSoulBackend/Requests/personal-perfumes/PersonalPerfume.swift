@@ -99,7 +99,7 @@ enum PersonalPerfumeLoader {
         try await loadScoredRecommendations(
             marketSegment: marketSegment,
             pageSize: pageSize,
-        preference: preference
+            preference: preference
         ) { afterID, limit in
             try await PerfumeProfilePageLoader.load(
                 afterID: afterID,

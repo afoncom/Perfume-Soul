@@ -115,6 +115,16 @@ jobs:
         curl -f http://127.0.0.1:8080/health
         curl -f http://127.0.0.1:8080/ready
         curl -f http://127.0.0.1:8080/quiz-of-the-day
+        docker compose exec -T postgres \
+          psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_similar_finder_smoke.sql
+        curl -fsS \
+          -H 'Accept-Language: en-US' \
+          'http://127.0.0.1:8080/perfumes/recommendations?perfumeIDs=91001' \
+          -o similar-finder.json
+        jq -e '
+          any(.[]; .id == 93001 and .matchingNotes == ["Bergamot"])
+          and all(.[]; .id != 93002)
+        ' similar-finder.json
         code="$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/perfumes/1/notes)"
         echo "/perfumes/1/notes -> $code"
         [[ "$code" == "404" || "$code" == "200" ]]

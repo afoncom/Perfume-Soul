@@ -3,6 +3,34 @@ import Vapor
 @testable import PerfumeSoulBackend
 
 struct PerfumeRecommendationLoaderTests {
+    @Test("SQL profile mapping preserves notes, accords and localized names")
+    func sqlProfileMappingPreservesNotesAccordsAndLocalizedNames() throws {
+        let row = SimilarPerfumeProfileRow(
+            id: 1,
+            perfumeName: "Perfume",
+            brandName: "Brand",
+            longevityScore: nil,
+            sillageScore: nil,
+            concentration: nil,
+            fragranceFamily: nil,
+            seasonProfile: nil,
+            occasionProfile: nil,
+            styleProfile: nil,
+            genderProfile: nil,
+            moodProfile: nil,
+            marketSegment: "daily",
+            notesJSON: "[{\"name\":\"Мускус\",\"nameEnglish\":\" Musk \",\"noteType\":\"base\",\"sortOrder\":1},{\"name\":\"Бергамот\",\"nameEnglish\":\" Bergamot \",\"noteType\":\"top\",\"sortOrder\":0}]",
+            accordsJSON: "[{\"name\":\"citrus\",\"weight\":0.8}]"
+        )
+
+        let profile = try row.makeProfile(language: "en-US")
+
+        #expect(profile.topNotes == ["Бергамот"])
+        #expect(profile.baseNotes == ["Мускус"])
+        #expect(profile.noteDisplayNames["бергамот"] == "Bergamot")
+        #expect(profile.accordWeights == ["citrus": 0.8])
+    }
+
     @Test("Duplicate signatures are deduplicated after ranking")
     func duplicateSignaturesAreDeduplicated() async throws {
         let selectedPerfume = makeSelectedPerfume(id: 1)
