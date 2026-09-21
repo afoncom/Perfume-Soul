@@ -6,7 +6,7 @@ import Vapor
 struct PersonalPerfumeLoaderTests {
     @Test("Personal perfume loader pages SQL candidates per market segment")
     func loaderPagesCandidatesPerMarketSegment() {
-        #expect(PersonalPerfumeLoader.candidatePageSize == 100)
+        #expect(PersonalPerfumeLoader.candidatePageSize == 1_000)
     }
 
     @Test("Paged ranking can recommend a matching perfume beyond the first page")
@@ -31,9 +31,9 @@ struct PersonalPerfumeLoaderTests {
             request: request,
             marketSegment: .daily,
             pageSize: PersonalPerfumeLoader.candidatePageSize
-        ) { offset, _ in
-            switch offset {
-            case 0:
+        ) { afterID, _ in
+            switch afterID {
+            case nil:
                 return firstPage
             case PersonalPerfumeLoader.candidatePageSize:
                 return secondPage
@@ -211,7 +211,8 @@ struct PersonalPerfumeLoaderTests {
                 makeAirRankingPerfume(id: 101, name: "Daily Air", accordScale: 1),
                 makeAirRankingPerfume(id: 301, name: "Luxury Air", segment: "luxury", accordScale: 1),
                 makeAirRankingPerfume(id: 302, name: "Luxury Clean", segment: "luxury", accordScale: 0.7)
-            ]
+            ],
+            filtersProfilesBySegment: false
         )
 
         #expect(recommendations.map(\.marketSegment) == [.luxury, .luxury, .daily])
@@ -227,7 +228,8 @@ struct PersonalPerfumeLoaderTests {
             perfumeProfiles: [
                 makeAirRankingPerfume(id: 101, name: "Unclassified Air", segment: "unclassified", accordScale: 1),
                 makeAirRankingPerfume(id: 102, name: "Daily Air", segment: "daily", accordScale: 0.5)
-            ]
+            ],
+            filtersProfilesBySegment: false
         )
 
         #expect(recommendations.map(\.id) == [102])
@@ -321,20 +323,23 @@ extension PersonalPerfumeLoaderTests {
     private func loadProductionRecommendations(
         request: PersonalPerfumesRequest,
         perfumeProfiles: [PerfumeProfile],
+        filtersProfilesBySegment: Bool = true,
         pageSize: Int = 2
     ) async throws -> [PersonalPerfumeResponse] {
         var recommendations: [PersonalPerfumeResponse] = []
 
         for marketSegment in PersonalPerfumeMarketSegment.allCases {
-            let segmentProfiles = perfumeProfiles.filter {
-                $0.marketSegment == marketSegment.rawValue
-            }
+            let segmentProfiles = filtersProfilesBySegment
+                ? perfumeProfiles.filter { $0.marketSegment == marketSegment.rawValue }
+                : perfumeProfiles
             let segmentRecommendations = try await PersonalPerfumeLoader.loadRecommendations(
                 request: request,
                 marketSegment: marketSegment,
                 pageSize: pageSize
-            ) { offset, limit in
-                Array(segmentProfiles.dropFirst(offset).prefix(limit))
+            ) { afterID, limit in
+                Array(segmentProfiles.sorted { $0.id < $1.id }.filter { profile in
+                    afterID.map { profile.id > $0 } ?? true
+                }.prefix(limit))
             }
             recommendations += segmentRecommendations
         }

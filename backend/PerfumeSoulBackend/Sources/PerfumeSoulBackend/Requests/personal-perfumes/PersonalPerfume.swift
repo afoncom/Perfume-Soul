@@ -51,7 +51,7 @@ enum PersonalPerfumeMarketSegment: String, Codable, CaseIterable {
 }
 
 enum PersonalPerfumeLoader {
-    static let candidatePageSize = 100
+    static let candidatePageSize = 1_000
 
     static func load(
         request: PersonalPerfumesRequest,
@@ -77,7 +77,7 @@ enum PersonalPerfumeLoader {
         request: PersonalPerfumesRequest,
         marketSegment: PersonalPerfumeMarketSegment,
         pageSize: Int,
-        pageProvider: (_ offset: Int, _ limit: Int) async throws -> [PerfumeProfile]
+        pageProvider: (_ afterID: Int?, _ limit: Int) async throws -> [PerfumeProfile]
     ) async throws -> [PersonalPerfumeResponse] {
         let preference = PersonalPerfumePreference(request: request)
         let scoredPerfumes = try await loadScoredRecommendations(
@@ -99,21 +99,14 @@ enum PersonalPerfumeLoader {
         try await loadScoredRecommendations(
             marketSegment: marketSegment,
             pageSize: pageSize,
-            preference: preference
-        ) { offset, limit in
-            let perfumeModels = try await loadCandidates(
-                marketSegment: marketSegment,
-                offset: offset,
+        preference: preference
+        ) { afterID, limit in
+            try await PerfumeProfilePageLoader.load(
+                afterID: afterID,
                 limit: limit,
+                marketSegment: marketSegment,
                 on: database
             )
-
-            return try perfumeModels.map { model in
-                guard let profile = PerfumeProfile(model: model) else {
-                    throw Abort(.internalServerError, reason: "Unable to build perfume profile.")
-                }
-                return profile
-            }
         }
     }
 
@@ -121,13 +114,13 @@ enum PersonalPerfumeLoader {
         marketSegment: PersonalPerfumeMarketSegment,
         pageSize: Int,
         preference: PersonalPerfumePreference,
-        pageProvider: (_ offset: Int, _ limit: Int) async throws -> [PerfumeProfile]
+        pageProvider: (_ afterID: Int?, _ limit: Int) async throws -> [PerfumeProfile]
     ) async throws -> [ScoredPersonalPerfume] {
-        var offset = 0
+        var lastID: Int?
         var topScoredPerfumes: [ScoredPersonalPerfume] = []
 
         while true {
-            let perfumeProfiles = try await pageProvider(offset, pageSize)
+            let perfumeProfiles = try await pageProvider(lastID, pageSize)
             let scoredPage = PersonalPerfumeScorer.scoreCandidates(
                 perfumeProfiles: perfumeProfiles,
                 preference: preference
@@ -141,33 +134,11 @@ enum PersonalPerfumeLoader {
                 return topScoredPerfumes
             }
 
-            offset += pageSize
+            lastID = perfumeProfiles.last?.id
         }
     }
 
-    private static func loadCandidates(
-        marketSegment: PersonalPerfumeMarketSegment,
-        offset: Int,
-        limit: Int,
-        on database: any Database
-    ) async throws -> [PerfumeModel] {
-        try await PerfumeModel.query(on: database)
-            .withPerfumeProfileFields()
-            .filter(\.$marketSegment == marketSegment.rawValue)
-            .sort(\.$id)
-            .range(offset..<(offset + limit))
-            .with(\.$brand)
-            .with(\.$notes) { query in
-                query.with(\.$note)
-            }
-            .with(\.$accords) { query in
-                query.with(\.$accord)
-            }
-            .all()
-    }
 }
-
-enum PersonalPerfumeScorer { }
 
 private struct ScoredPersonalPerfume {
     let response: PersonalPerfumeResponse
@@ -312,7 +283,7 @@ private struct PersonalPerfumePreference {
     }
 }
 
-extension PersonalPerfumeScorer {
+enum PersonalPerfumeScorer {
     static func rankedCandidates(
         request: PersonalPerfumesRequest,
         perfumeProfiles: [PerfumeProfile]

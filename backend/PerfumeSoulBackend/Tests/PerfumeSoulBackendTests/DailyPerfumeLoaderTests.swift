@@ -80,8 +80,10 @@ struct DailyPerfumeLoaderTests {
         let candidates = try await DailyPerfumeCandidateLoader.loadCandidates(
             request: request,
             pageSize: 10
-        ) { offset, limit in
-            Array(perfumes.dropFirst(offset).prefix(limit))
+        ) { afterID, limit in
+            Array(perfumes.filter { profile in
+                afterID.map { profile.id > $0 } ?? true
+            }.prefix(limit))
         }
 
         #expect(candidates.count == 20)
@@ -131,8 +133,10 @@ private extension DailyPerfumeLoaderTests {
         try await DailyPerfumeCandidateLoader.loadCandidates(
             request: request,
             pageSize: 100
-        ) { _, _ in
-            perfumeProfiles
+        ) { afterID, limit in
+            Array(perfumeProfiles.sorted { $0.id < $1.id }.filter { profile in
+                afterID.map { profile.id > $0 } ?? true
+            }.prefix(limit))
         }
     }
 

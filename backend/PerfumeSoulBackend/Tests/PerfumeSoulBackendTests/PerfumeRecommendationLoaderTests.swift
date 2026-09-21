@@ -275,11 +275,51 @@ struct PerfumeRecommendationLoaderTests {
             selectedPerfumeProfiles: [selected],
             scoreRanges: ScoreRanges(perfumeProfiles: allProfiles),
             pageSize: 2
-        ) { offset, limit in
-            Array(allProfiles.dropFirst(offset).prefix(limit))
+        ) { afterID, limit in
+            Array(allProfiles.filter { profile in
+                afterID.map { profile.id > $0 } ?? true
+            }.prefix(limit))
         }
 
         #expect(recommendations.first?.id == bestCandidate.id)
+    }
+
+    @Test("Similar finder excludes unclassified candidates")
+    func similarFinderExcludesUnclassifiedCandidates() async throws {
+        let selected = makeSelectedPerfume(id: 1)
+        let unclassifiedCandidate = PerfumeProfile(
+            id: 2,
+            perfumeName: "Unclassified",
+            brandName: "Brand A",
+            topNotes: ["Бергамот", "Лимон"],
+            middleNotes: ["Жасмин"],
+            baseNotes: ["Кедр"],
+            accordWeights: ["citrus": 1, "fresh": 0.6],
+            marketSegment: "unclassified"
+        )
+        let eligibleCandidate = PerfumeProfile(
+            id: 3,
+            perfumeName: "Eligible",
+            brandName: "Brand B",
+            topNotes: ["Бергамот"],
+            middleNotes: ["Жасмин"],
+            baseNotes: ["Кедр"],
+            marketSegment: "daily"
+        )
+        let profiles = [selected, unclassifiedCandidate, eligibleCandidate]
+
+        let recommendations = try await PerfumeRecommendationLoader.loadRecommendations(
+            selectedPerfumeProfiles: [selected],
+            scoreRanges: ScoreRanges(perfumeProfiles: profiles),
+            pageSize: 2,
+            eligibleMarketSegmentsOnly: true
+        ) { afterID, limit in
+            Array(profiles.filter { profile in
+                afterID.map { profile.id > $0 } ?? true
+            }.prefix(limit))
+        }
+
+        #expect(recommendations.map(\.id) == [eligibleCandidate.id])
     }
 }
 
@@ -299,8 +339,10 @@ extension PerfumeRecommendationLoaderTests {
             selectedPerfumeProfiles: selectedPerfumeProfiles,
             scoreRanges: ScoreRanges(perfumeProfiles: perfumeProfiles),
             pageSize: max(perfumeProfiles.count, 1)
-        ) { offset, limit in
-            Array(perfumeProfiles.dropFirst(offset).prefix(limit))
+        ) { afterID, limit in
+            Array(perfumeProfiles.sorted { $0.id < $1.id }.filter { profile in
+                afterID.map { profile.id > $0 } ?? true
+            }.prefix(limit))
         }
     }
 

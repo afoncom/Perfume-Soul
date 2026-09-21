@@ -14,6 +14,8 @@ struct PerfumeRecommendation: Codable, Equatable {
 }
 
 enum PerfumeRecommendationLoader {
+    private static let candidatePageSize = 1_000
+
     static func load(
         perfumeIDs: [Int],
         on database: any Database,
@@ -41,30 +43,93 @@ enum PerfumeRecommendationLoader {
         return try await loadRecommendations(
             selectedPerfumeProfiles: selectedProfiles,
             scoreRanges: scoreRanges,
-            pageSize: 100
-        ) { offset, limit in
-            let models = try await PerfumeModel.query(on: database)
-                .withPerfumeProfileFields()
-                .sort(\.$id)
-                .range(offset..<(offset + limit))
-                .with(\.$brand)
-                .with(\.$notes) { query in query.with(\.$note) }
-                .with(\.$accords) { query in query.with(\.$accord) }
-                .all()
-            return try models.map { model in
-                guard let profile = PerfumeProfile(model: model, language: language) else {
-                    throw Abort(.internalServerError, reason: "Unable to build perfume profile.")
-                }
-                return profile
-            }
+            pageSize: candidatePageSize,
+            eligibleMarketSegmentsOnly: true
+        ) { afterID, limit in
+            try await PerfumeProfilePageLoader.load(
+                afterID: afterID,
+                limit: limit,
+                language: language,
+                on: database
+            )
         }
     }
+}
 
+enum PerfumeProfilePageLoader {
+    static func load(
+        afterID: Int?,
+        limit: Int,
+        marketSegment: PersonalPerfumeMarketSegment? = nil,
+        language: String? = nil,
+        on database: any Database
+    ) async throws -> [PerfumeProfile] {
+        guard let sqlDatabase = database as? any SQLDatabase else {
+            throw Abort(.internalServerError)
+        }
+
+        let selectedMarketSegment = marketSegment?.rawValue ?? ""
+        let rows = try await sqlDatabase.raw("""
+            SELECT
+                p.id,
+                p.perfume_name,
+                b.brand AS brand_name,
+                p.longevity_score,
+                p.sillage_score,
+                p.concentration,
+                p.fragrance_family,
+                p.season_profile,
+                p.occasion_profile,
+                p.style_profile,
+                p.gender_profile,
+                p.mood_profile,
+                p.market_segment,
+                COALESCE((
+                    SELECT jsonb_agg(
+                        jsonb_build_object(
+                            'name', n.name,
+                            'nameEnglish', n.name_en,
+                            'noteType', pn.note_type,
+                            'sortOrder', pn.sort_order
+                        )
+                        ORDER BY pn.sort_order
+                    )
+                    FROM perfume_notes pn
+                    JOIN notes n ON n.id = pn.note_id
+                    WHERE pn.perfume_id = p.id
+                ), '[]'::jsonb)::text AS notes_json,
+                COALESCE((
+                    SELECT jsonb_agg(
+                        jsonb_build_object(
+                            'name', a.name,
+                            'weight', pa.weight
+                        )
+                        ORDER BY a.name
+                    )
+                    FROM perfume_accords pa
+                    JOIN accords a ON a.id = pa.accord_id
+                    WHERE pa.perfume_id = p.id
+                ), '[]'::jsonb)::text AS accords_json
+            FROM perfumes p
+            JOIN brands b ON b.id = p.brand_id
+            WHERE p.id > \(bind: afterID ?? 0)
+                AND p.market_segment IN ('daily', 'luxury', 'niche')
+                AND (\(bind: selectedMarketSegment) = '' OR p.market_segment = \(bind: selectedMarketSegment))
+            ORDER BY p.id
+            LIMIT \(bind: limit)
+            """).all(decoding: SimilarPerfumeProfileRow.self)
+
+        return try rows.map { try $0.makeProfile(language: language) }
+    }
+}
+
+extension PerfumeRecommendationLoader {
     static func loadRecommendations(
         selectedPerfumeProfiles: [PerfumeProfile],
         scoreRanges: ScoreRanges,
         pageSize: Int,
-        pageProvider: (_ offset: Int, _ limit: Int) async throws -> [PerfumeProfile]
+        eligibleMarketSegmentsOnly: Bool = false,
+        pageProvider: (_ afterID: Int?, _ limit: Int) async throws -> [PerfumeProfile]
     ) async throws -> [PerfumeRecommendation] {
         guard pageSize > 0 else {
             return []
@@ -76,10 +141,15 @@ enum PerfumeRecommendationLoader {
         )
         let selectedIDs = Set(selectedPerfumeProfiles.map(\.id))
         var bestBySignature: [String: ScoredPerfumeRecommendation] = [:]
-        var offset = 0
+        var lastID: Int?
         while true {
-            let page = try await pageProvider(offset, pageSize)
+            let page = try await pageProvider(lastID, pageSize)
             for profile in page where !selectedIDs.contains(profile.id) {
+                guard !eligibleMarketSegmentsOnly || profile.marketSegment.flatMap(
+                    PersonalPerfumeMarketSegment.init(rawValue:)
+                ) != nil else {
+                    continue
+                }
                 guard let scored = makeScoredRecommendation(
                     perfumeProfile: profile,
                     targetProfile: targetProfile,
@@ -98,7 +168,7 @@ enum PerfumeRecommendationLoader {
                     .map { ($0.signature, $0) }
             )
             guard page.count == pageSize else { break }
-            offset += pageSize
+            lastID = page.last?.id
         }
 
         return Array(bestBySignature.values)
@@ -712,6 +782,7 @@ struct ScoreRanges {
                 MIN(sillage_score) AS min_sillage,
                 MAX(sillage_score) AS max_sillage
             FROM perfumes
+            WHERE market_segment IN ('daily', 'luxury', 'niche')
             """).first(decoding: ScoreRangeAggregate.self)
         return ScoreRanges(
             longevityValues: [aggregate?.minLongevity, aggregate?.maxLongevity].compactMap { $0 },
@@ -742,6 +813,96 @@ private struct ScoreRangeAggregate: Decodable {
         case maxLongevity = "max_longevity"
         case minSillage = "min_sillage"
         case maxSillage = "max_sillage"
+    }
+}
+
+private struct SimilarPerfumeProfileRow: Decodable {
+    let id: Int
+    let perfumeName: String
+    let brandName: String
+    let longevityScore: Int?
+    let sillageScore: Int?
+    let concentration: String?
+    let fragranceFamily: String?
+    let seasonProfile: String?
+    let occasionProfile: String?
+    let styleProfile: String?
+    let genderProfile: String?
+    let moodProfile: String?
+    let marketSegment: String?
+    let notesJSON: String
+    let accordsJSON: String
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case perfumeName = "perfume_name"
+        case brandName = "brand_name"
+        case longevityScore = "longevity_score"
+        case sillageScore = "sillage_score"
+        case concentration = "concentration"
+        case fragranceFamily = "fragrance_family"
+        case seasonProfile = "season_profile"
+        case occasionProfile = "occasion_profile"
+        case styleProfile = "style_profile"
+        case genderProfile = "gender_profile"
+        case moodProfile = "mood_profile"
+        case marketSegment = "market_segment"
+        case notesJSON = "notes_json"
+        case accordsJSON = "accords_json"
+    }
+
+    func makeProfile(language: String?) throws -> PerfumeProfile {
+        let decoder = JSONDecoder()
+        let notes = try decoder.decode([Note].self, from: Data(notesJSON.utf8))
+        let accords = try decoder.decode([Accord].self, from: Data(accordsJSON.utf8))
+        let useEnglishNotes = PerfumeNotesLoader.prefersEnglish(acceptLanguage: language)
+            && !notes.isEmpty
+            && notes.allSatisfy {
+                $0.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+            }
+        var noteDisplayNames: [String: String] = [:]
+        for note in notes {
+            let displayName = useEnglishNotes ? note.nameEnglish! : note.name
+            noteDisplayNames[PerfumeRecommendationLoader.normalize(note.name)] = displayName
+        }
+
+        return PerfumeProfile(
+            id: id,
+            perfumeName: perfumeName,
+            brandName: brandName,
+            longevityScore: longevityScore,
+            sillageScore: sillageScore,
+            topNotes: notes.filter { $0.noteType == PerfumeNoteType.top.rawValue }.map(\.name),
+            middleNotes: notes.filter { $0.noteType == PerfumeNoteType.middle.rawValue }.map(\.name),
+            baseNotes: notes.filter { $0.noteType == PerfumeNoteType.base.rawValue }.map(\.name),
+            noteDisplayNames: noteDisplayNames,
+            usesLocalizedNoteDisplayNames: useEnglishNotes,
+            accordWeights: Dictionary(
+                uniqueKeysWithValues: accords.map {
+                    (PerfumeRecommendationLoader.normalize($0.name), $0.weight)
+                }
+            ),
+            concentration: concentration,
+            fragranceFamily: fragranceFamily,
+            seasonProfile: seasonProfile,
+            occasionProfile: occasionProfile,
+            styleProfile: styleProfile,
+            genderProfile: genderProfile,
+            moodProfile: moodProfile,
+            marketSegment: marketSegment
+        )
+    }
+
+    private struct Note: Decodable {
+        let name: String
+        let nameEnglish: String?
+        let noteType: String
+        let sortOrder: Int
+    }
+
+    private struct Accord: Decodable {
+        let name: String
+        let weight: Double
     }
 }
 
