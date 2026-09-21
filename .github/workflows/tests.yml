@@ -130,7 +130,7 @@ jobs:
         docker compose exec -T postgres \
           psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/classify_curated_catalog_segments.sql
         segmented_count="$(docker compose exec -T postgres \
-          psql -U perfumesoul -d perfumesoul -At -c \"
+          psql -U perfumesoul -d perfumesoul -At -c "
             SELECT COUNT(*)
             FROM perfumes AS perfume
             JOIN brands AS brand ON brand.id = perfume.brand_id
@@ -139,7 +139,7 @@ jobs:
               ('creed', 'niche'),
               ('zara', 'daily')
             )
-          \")"
+          ")"
         [[ "$segmented_count" == "3" ]]
         code="$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/perfumes/1/notes)"
         echo "/perfumes/1/notes -> $code"
