@@ -125,6 +125,22 @@ jobs:
           any(.[]; .id == 93001 and .matchingNotes == ["Bergamot"])
           and all(.[]; .id != 93002)
         ' similar-finder.json
+        docker compose exec -T postgres \
+          psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_catalog_segmentation_smoke.sql
+        docker compose exec -T postgres \
+          psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/classify_curated_catalog_segments.sql
+        segmented_count="$(docker compose exec -T postgres \
+          psql -U perfumesoul -d perfumesoul -At -c \"
+            SELECT COUNT(*)
+            FROM perfumes AS perfume
+            JOIN brands AS brand ON brand.id = perfume.brand_id
+            WHERE (lower(btrim(brand.brand)), perfume.market_segment) IN (
+              ('chanel', 'luxury'),
+              ('creed', 'niche'),
+              ('zara', 'daily')
+            )
+          \")"
+        [[ "$segmented_count" == "3" ]]
         code="$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/perfumes/1/notes)"
         echo "/perfumes/1/notes -> $code"
         [[ "$code" == "404" || "$code" == "200" ]]
