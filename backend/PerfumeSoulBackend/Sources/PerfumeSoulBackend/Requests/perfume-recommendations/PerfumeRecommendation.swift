@@ -747,13 +747,6 @@ struct ScoreRanges {
     let longevity: ClosedRange<Int>?
     let sillage: ClosedRange<Int>?
 
-    init(perfumeProfiles: [PerfumeProfile]) {
-        self.init(
-            longevityValues: perfumeProfiles.compactMap(\.longevityScore),
-            sillageValues: perfumeProfiles.compactMap(\.sillageScore)
-        )
-    }
-
     init(longevityValues: [Int], sillageValues: [Int]) {
         self.longevity = Self.makeRange(values: longevityValues)
         self.sillage = Self.makeRange(values: sillageValues)

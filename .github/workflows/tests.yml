@@ -125,6 +125,12 @@ jobs:
           any(.[]; .id == 93001 and .matchingNotes == ["Bergamot"])
           and all(.[]; .id != 93002)
         ' similar-finder.json
+        curl -fsS -X POST \
+          -H 'Content-Type: application/json' \
+          --data '{"sun":"leo","moon":"cancer","ascendant":"scorpio","elementBalance":{"fire":45,"earth":15,"air":10,"water":30}}' \
+          http://127.0.0.1:8080/personal-perfumes \
+          -o personal-perfumes.json
+        jq -e 'any(.[]; .id == 93001 and .marketSegment == "daily")' personal-perfumes.json
         docker compose exec -T postgres \
           psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_catalog_segmentation_smoke.sql
         docker compose exec -T postgres \

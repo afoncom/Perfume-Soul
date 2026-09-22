@@ -301,7 +301,10 @@ struct PerfumeRecommendationLoaderTests {
 
         let recommendations = try await PerfumeRecommendationLoader.loadRecommendations(
             selectedPerfumeProfiles: [selected],
-            scoreRanges: ScoreRanges(perfumeProfiles: allProfiles),
+            scoreRanges: ScoreRanges(
+                longevityValues: [weakerCandidate, bestCandidate].compactMap(\.longevityScore),
+                sillageValues: [weakerCandidate, bestCandidate].compactMap(\.sillageScore)
+            ),
             pageSize: 2
         ) { afterID, limit in
             Array(allProfiles.filter { profile in
@@ -338,7 +341,10 @@ struct PerfumeRecommendationLoaderTests {
 
         let recommendations = try await PerfumeRecommendationLoader.loadRecommendations(
             selectedPerfumeProfiles: [selected],
-            scoreRanges: ScoreRanges(perfumeProfiles: profiles),
+            scoreRanges: ScoreRanges(
+                longevityValues: [eligibleCandidate].compactMap(\.longevityScore),
+                sillageValues: [eligibleCandidate].compactMap(\.sillageScore)
+            ),
             pageSize: 2,
             eligibleMarketSegmentsOnly: true
         ) { afterID, limit in
@@ -362,10 +368,16 @@ extension PerfumeRecommendationLoaderTests {
         guard selectedPerfumeProfiles.count == selectedPerfumeIDs.count else {
             throw Abort(.notFound)
         }
+        let candidateProfiles = perfumeProfiles.filter { profile in
+            !selectedPerfumeIDs.contains(profile.id)
+        }
 
         return try await PerfumeRecommendationLoader.loadRecommendations(
             selectedPerfumeProfiles: selectedPerfumeProfiles,
-            scoreRanges: ScoreRanges(perfumeProfiles: perfumeProfiles),
+            scoreRanges: ScoreRanges(
+                longevityValues: candidateProfiles.compactMap(\.longevityScore),
+                sillageValues: candidateProfiles.compactMap(\.sillageScore)
+            ),
             pageSize: max(perfumeProfiles.count, 1)
         ) { afterID, limit in
             Array(perfumeProfiles.sorted { $0.id < $1.id }.filter { profile in
