@@ -155,7 +155,8 @@ enum CatalogDatabaseImporter {
             SELECT brands.brand AS brand_name, COUNT(*) AS perfume_count
             FROM perfumes
             INNER JOIN brands ON brands.id = perfumes.brand_id
-            WHERE perfumes.market_segment = 'unclassified'
+            WHERE perfumes.market_segment IS NULL
+                OR perfumes.market_segment = 'unclassified'
             GROUP BY brands.brand
             """).all(decoding: UnclassifiedBrandCount.self)
         let perfumeCountByBrand = Dictionary(

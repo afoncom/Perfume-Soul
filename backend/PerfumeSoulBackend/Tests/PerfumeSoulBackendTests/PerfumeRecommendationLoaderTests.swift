@@ -315,6 +315,49 @@ struct PerfumeRecommendationLoaderTests {
         #expect(recommendations.first?.id == bestCandidate.id)
     }
 
+    @Test("Paged similar finder keeps the best duplicate signature from a later page")
+    func pagedSimilarFinderKeepsBestDuplicateSignatureFromLaterPage() async throws {
+        let selected = makeSelectedPerfume(id: 1)
+        let firstDuplicate = PerfumeProfile(
+            id: 2,
+            perfumeName: "Same Perfume",
+            brandName: "Z Brand",
+            longevityScore: 7,
+            sillageScore: 7,
+            topNotes: ["Бергамот", "Лимон"],
+            middleNotes: ["Жасмин"],
+            baseNotes: ["Кедр"],
+            accordWeights: ["citrus": 1, "fresh": 0.6]
+        )
+        let betterDuplicate = PerfumeProfile(
+            id: 3,
+            perfumeName: "Same Perfume",
+            brandName: "A Brand",
+            longevityScore: 7,
+            sillageScore: 7,
+            topNotes: ["Бергамот", "Лимон"],
+            middleNotes: ["Жасмин"],
+            baseNotes: ["Кедр"],
+            accordWeights: ["citrus": 1, "fresh": 0.6]
+        )
+        let allProfiles = [selected, firstDuplicate, betterDuplicate]
+
+        let recommendations = try await PerfumeRecommendationLoader.loadRecommendations(
+            selectedPerfumeProfiles: [selected],
+            scoreRanges: ScoreRanges(
+                longevityValues: [firstDuplicate, betterDuplicate].compactMap(\.longevityScore),
+                sillageValues: [firstDuplicate, betterDuplicate].compactMap(\.sillageScore)
+            ),
+            pageSize: 1
+        ) { afterID, limit in
+            Array(allProfiles.filter { profile in
+                afterID.map { profile.id > $0 } ?? true
+            }.prefix(limit))
+        }
+
+        #expect(recommendations.map(\.id) == [betterDuplicate.id])
+    }
+
     @Test("Similar finder excludes unclassified candidates")
     func similarFinderExcludesUnclassifiedCandidates() async throws {
         let selected = makeSelectedPerfume(id: 1)

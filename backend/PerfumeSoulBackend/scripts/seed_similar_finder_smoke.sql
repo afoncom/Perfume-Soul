@@ -1,3 +1,4 @@
+-- CI smoke test only. Do not run against a working or imported database.
 INSERT INTO brands (id, brand)
 VALUES
     (91001, 'Smoke Selected Brand'),
