@@ -33,9 +33,10 @@ enum PerfumeRecommendationLoader {
             .with(\.$notes) { query in query.with(\.$note) }
             .with(\.$accords) { query in query.with(\.$accord) }
             .all()
-        let selectedProfiles = selectedModels.compactMap {
-            PerfumeProfile(model: $0, language: language)
-        }
+        let selectedProfiles = selectedProfiles(
+            from: selectedModels.compactMap { PerfumeProfile(model: $0, language: language) },
+            orderedBy: selectedPerfumeIDs
+        )
         guard selectedProfiles.count == selectedPerfumeIDs.count else {
             throw Abort(.notFound)
         }
@@ -214,6 +215,14 @@ extension PerfumeRecommendationLoader {
         }
 
         return Array(uniquePerfumeIDs.prefix(3))
+    }
+
+    static func selectedProfiles(
+        from profiles: [PerfumeProfile],
+        orderedBy perfumeIDs: [Int]
+    ) -> [PerfumeProfile] {
+        let profilesByID = Dictionary(uniqueKeysWithValues: profiles.map { ($0.id, $0) })
+        return perfumeIDs.compactMap { profilesByID[$0] }
     }
 
     fileprivate static func makeScoredRecommendation(

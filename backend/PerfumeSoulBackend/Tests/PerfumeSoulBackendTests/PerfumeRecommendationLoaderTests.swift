@@ -132,6 +132,51 @@ struct PerfumeRecommendationLoaderTests {
         #expect(recommendations.map(\.matchingNotes) == [["Bergamot"]])
     }
 
+    @Test("Selected profiles keep request order for localized note display")
+    func selectedProfilesKeepRequestOrderForLocalizedNoteDisplay() async throws {
+        let firstRequested = PerfumeProfile(
+            id: 1,
+            perfumeName: "First Requested",
+            brandName: "Brand",
+            topNotes: ["Бергамот"],
+            noteDisplayNames: [
+                PerfumeRecommendationLoader.normalize("Бергамот"): "Bergamot First"
+            ],
+            usesLocalizedNoteDisplayNames: true
+        )
+        let secondRequested = PerfumeProfile(
+            id: 2,
+            perfumeName: "Second Requested",
+            brandName: "Brand",
+            topNotes: ["Бергамот"],
+            noteDisplayNames: [
+                PerfumeRecommendationLoader.normalize("Бергамот"): "Bergamot Second"
+            ],
+            usesLocalizedNoteDisplayNames: true
+        )
+        let candidate = PerfumeProfile(
+            id: 3,
+            perfumeName: "Candidate",
+            brandName: "Brand",
+            topNotes: ["Бергамот"]
+        )
+
+        let selectedProfiles = PerfumeRecommendationLoader.selectedProfiles(
+            from: [secondRequested, firstRequested],
+            orderedBy: [firstRequested.id, secondRequested.id]
+        )
+        let recommendations = try await PerfumeRecommendationLoader.loadRecommendations(
+            selectedPerfumeProfiles: selectedProfiles,
+            scoreRanges: ScoreRanges(longevityValues: [], sillageValues: []),
+            pageSize: 1
+        ) { afterID, _ in
+            afterID == nil ? [candidate] : []
+        }
+
+        #expect(selectedProfiles.map(\.id) == [firstRequested.id, secondRequested.id])
+        #expect(recommendations.map(\.matchingNotes) == [["Bergamot Second"]])
+    }
+
     @Test("Selected perfumes fall back to base note names when any selected display map is incomplete")
     func selectedPerfumesFallBackToBaseNoteNamesWhenAnyDisplayMapIsIncomplete() async throws {
         let englishSelectedPerfume = PerfumeProfile(
