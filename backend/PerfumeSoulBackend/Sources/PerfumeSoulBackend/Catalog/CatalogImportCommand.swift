@@ -73,7 +73,8 @@ struct CatalogImportCommand: AsyncCommand {
             catalogCountAfterImport: catalogCountAfterImport,
             matchingCandidatesRemaining: candidates.count - batch.count,
             batch: result,
-            unclassifiedReport: unclassifiedReport
+            unclassifiedReport: unclassifiedReport,
+            segmentationNextStep: "All imported perfumes start as unclassified. Run scripts/classify_curated_catalog_segments.sql, then manually classify the remaining brands listed in unclassifiedReport."
         )
 
         let encoder = JSONEncoder()
@@ -89,4 +90,5 @@ private struct CatalogImportCommandResult: Codable {
     let matchingCandidatesRemaining: Int
     let batch: CatalogImportBatchResult
     let unclassifiedReport: CatalogUnclassifiedReport
+    let segmentationNextStep: String
 }

@@ -8,7 +8,7 @@ ON CONFLICT (id) DO UPDATE SET brand = EXCLUDED.brand;
 
 INSERT INTO perfumes (id, perfume_name, brand_id, market_segment)
 VALUES
-    (94001, 'Smoke Chanel', 94001, 'unclassified'),
+    (94001, 'Smoke Chanel', 94001, NULL),
     (94002, 'Smoke Creed', 94002, 'unclassified'),
     (94003, 'Smoke Zara', 94003, 'unclassified')
 ON CONFLICT (id) DO UPDATE SET

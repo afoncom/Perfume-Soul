@@ -831,6 +831,9 @@ SET market_segment = segment_map.market_segment
 FROM brands AS brand
 JOIN segment_map ON lower(btrim(brand.brand)) = lower(btrim(segment_map.brand))
 WHERE perfume.brand_id = brand.id
-  AND perfume.market_segment = 'unclassified';
+  AND (
+      perfume.market_segment IS NULL
+      OR perfume.market_segment = 'unclassified'
+  );
 
 COMMIT;
