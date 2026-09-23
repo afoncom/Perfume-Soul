@@ -1,4 +1,6 @@
 import Fluent
+import FluentSQL
+import Vapor
 
 struct CatalogImportBatchResult: Codable, Sendable {
     let requestedCount: Int
@@ -7,6 +9,11 @@ struct CatalogImportBatchResult: Codable, Sendable {
     let createdBrandCount: Int
     let createdNoteCount: Int
     let createdAccordCount: Int
+}
+
+struct CatalogUnclassifiedReport: Codable, Sendable {
+    let perfumeCount: Int
+    let perfumeCountByBrand: [String: Int]
 }
 
 enum CatalogDatabaseImporter {
@@ -140,6 +147,28 @@ enum CatalogDatabaseImporter {
         }
     }
 
+    static func unclassifiedReport(on database: any Database) async throws -> CatalogUnclassifiedReport {
+        guard let sqlDatabase = database as? any SQLDatabase else {
+            throw Abort(.internalServerError)
+        }
+        let brandCounts = try await sqlDatabase.raw("""
+            SELECT brands.brand AS brand_name, COUNT(*) AS perfume_count
+            FROM perfumes
+            INNER JOIN brands ON brands.id = perfumes.brand_id
+            WHERE perfumes.market_segment IS NULL
+                OR perfumes.market_segment = 'unclassified'
+            GROUP BY brands.brand
+            """).all(decoding: UnclassifiedBrandCount.self)
+        let perfumeCountByBrand = Dictionary(
+            uniqueKeysWithValues: brandCounts.map { ($0.brandName, $0.perfumeCount) }
+        )
+
+        return CatalogUnclassifiedReport(
+            perfumeCount: brandCounts.reduce(0) { $0 + $1.perfumeCount },
+            perfumeCountByBrand: perfumeCountByBrand
+        )
+    }
+
     private static func resolveBrand(
         named name: String,
         brandsByName: inout [String: BrandModel],
@@ -246,6 +275,16 @@ enum CatalogDatabaseImporter {
                 weight: weight
             ).create(on: database)
         }
+    }
+}
+
+private struct UnclassifiedBrandCount: Decodable {
+    let brandName: String
+    let perfumeCount: Int
+
+    enum CodingKeys: String, CodingKey {
+        case brandName = "brand_name"
+        case perfumeCount = "perfume_count"
     }
 }
 

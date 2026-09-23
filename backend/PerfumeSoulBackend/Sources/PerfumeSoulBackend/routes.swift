@@ -27,8 +27,7 @@ func routes(_ app: Application) throws {
         return try jsonResponse(
             try await PersonalPerfumeLoader.load(
                 request: request,
-                on: req.db,
-                profileCache: req.application.perfumeProfileCache
+                on: req.db
             )
         )
     }
@@ -39,8 +38,7 @@ func routes(_ app: Application) throws {
         return try jsonResponse(
             try await DailyPerfumeCandidateLoader.load(
                 request: request,
-                on: req.db,
-                profileCache: req.application.perfumeProfileCache
+                on: req.db
             )
         )
     }
@@ -51,8 +49,7 @@ func routes(_ app: Application) throws {
         return try jsonResponse(
             try await RecommendedPerfumeCandidateLoader.load(
                 request: request,
-                on: req.db,
-                profileCache: req.application.perfumeProfileCache
+                on: req.db
             )
         )
     }
@@ -95,8 +92,7 @@ func routes(_ app: Application) throws {
             try await PerfumeRecommendationLoader.load(
                 perfumeIDs: perfumeIDs,
                 on: req.db,
-                language: req.headers.first(name: "Accept-Language"),
-                profileCache: req.application.perfumeProfileCache
+                language: req.headers.first(name: "Accept-Language")
             ),
             varyByLanguage: true
         )

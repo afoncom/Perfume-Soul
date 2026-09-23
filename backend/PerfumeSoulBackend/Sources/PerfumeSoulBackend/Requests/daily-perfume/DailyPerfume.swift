@@ -37,43 +37,29 @@ struct DailyPerfumeCandidate: Content, Equatable {
 
 enum DailyPerfumeCandidateLoader {
     static let maximumCandidateLimit = 20
-    private static let candidatePageSize = 100
+    private static let candidatePageSize = 1_000
     private static let candidatePoolLimit = 100
 
     static func load(
         request: DailyPerfumeCandidatesRequest,
-        on database: any Database,
-        profileCache: PerfumeProfileCache? = nil
+        on database: any Database
     ) async throws -> [DailyPerfumeCandidate] {
-        if let profileCache {
-            let profiles = try await profileCache.profiles(on: database)
-                .filter { $0.marketSegment.flatMap(PersonalPerfumeMarketSegment.init(rawValue:)) != nil }
-            return try await loadCandidates(
-                request: request,
-                pageSize: candidatePageSize
-            ) { offset, limit in
-                Array(profiles.dropFirst(offset).prefix(limit))
-            }
-        }
-
         return try await loadCandidates(
             request: request,
             pageSize: candidatePageSize
-        ) { offset, limit in
-            let perfumeModels = try await loadCandidates(
-                offset: offset,
+        ) { afterID, limit in
+            try await PerfumeProfilePageLoader.load(
+                afterID: afterID,
                 limit: limit,
                 on: database
             )
-
-            return perfumeModels.compactMap { PerfumeProfile(model: $0) }
         }
     }
 
     static func loadCandidates(
         request: DailyPerfumeCandidatesRequest,
         pageSize: Int,
-        pageProvider: (_ offset: Int, _ limit: Int) async throws -> [PerfumeProfile]
+        pageProvider: (_ afterID: Int?, _ limit: Int) async throws -> [PerfumeProfile]
     ) async throws -> [DailyPerfumeCandidate] {
         let candidates = try await loadRankedCandidates(
             request: request,
@@ -86,39 +72,26 @@ enum DailyPerfumeCandidateLoader {
 
     static func loadRankedCandidates(
         request: DailyPerfumeCandidatesRequest,
-        on database: any Database,
-        profileCache: PerfumeProfileCache? = nil
+        on database: any Database
     ) async throws -> [DailyPerfumeCandidate] {
-        if let profileCache {
-            let profiles = try await profileCache.profiles(on: database)
-                .filter { $0.marketSegment.flatMap(PersonalPerfumeMarketSegment.init(rawValue:)) != nil }
-            return try await loadRankedCandidates(
-                request: request,
-                pageSize: candidatePageSize
-            ) { offset, limit in
-                Array(profiles.dropFirst(offset).prefix(limit))
-            }
-        }
-
         return try await loadRankedCandidates(
             request: request,
             pageSize: candidatePageSize
-        ) { offset, limit in
-            let perfumeModels = try await loadCandidates(
-                offset: offset,
+        ) { afterID, limit in
+            try await PerfumeProfilePageLoader.load(
+                afterID: afterID,
                 limit: limit,
                 on: database
             )
-            return perfumeModels.compactMap { PerfumeProfile(model: $0) }
         }
     }
 
     static func loadRankedCandidates(
         request: DailyPerfumeCandidatesRequest,
         pageSize: Int,
-        pageProvider: (_ offset: Int, _ limit: Int) async throws -> [PerfumeProfile]
+        pageProvider: (_ afterID: Int?, _ limit: Int) async throws -> [PerfumeProfile]
     ) async throws -> [DailyPerfumeCandidate] {
-        var offset = 0
+        var lastID: Int?
         var rankedCandidates: [RankedPersonalPerfume] = []
         let excludedPerfumeIDs = Set(request.excludedPerfumeIDs)
         let personalPerfumesRequest = PersonalPerfumesRequest(
@@ -129,7 +102,7 @@ enum DailyPerfumeCandidateLoader {
         )
 
         while true {
-            let page = try await pageProvider(offset, pageSize)
+            let page = try await pageProvider(lastID, pageSize)
             let pageCandidates = PersonalPerfumeScorer.rankedCandidates(
                 request: personalPerfumesRequest,
                 perfumeProfiles: page
@@ -141,7 +114,7 @@ enum DailyPerfumeCandidateLoader {
                 break
             }
 
-            offset += pageSize
+            lastID = page.last?.id
         }
 
         let uniqueCandidates = uniqueBySignature(rankedCandidates)
@@ -170,30 +143,6 @@ private extension DailyPerfumeCandidateLoader {
                 .sorted(by: PersonalPerfumeScorer.areSortedForDailyCandidateRanking)
                 .prefix(candidatePoolLimit)
         )
-    }
-
-    static func loadCandidates(
-        offset: Int,
-        limit: Int,
-        on database: any Database
-    ) async throws -> [PerfumeModel] {
-        try await PerfumeModel.query(on: database)
-            .withPerfumeProfileFields()
-            .group(.or) { group in
-                for segment in PersonalPerfumeMarketSegment.allCases {
-                    group.filter(\.$marketSegment == segment.rawValue)
-                }
-            }
-            .sort(\.$id)
-            .range(offset..<(offset + limit))
-            .with(\.$brand)
-            .with(\.$notes) { query in
-                query.with(\.$note)
-            }
-            .with(\.$accords) { query in
-                query.with(\.$accord)
-            }
-            .all()
     }
 
     static func uniqueBySignature(

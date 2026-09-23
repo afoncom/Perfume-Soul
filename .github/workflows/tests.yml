@@ -115,6 +115,38 @@ jobs:
         curl -f http://127.0.0.1:8080/health
         curl -f http://127.0.0.1:8080/ready
         curl -f http://127.0.0.1:8080/quiz-of-the-day
+        docker compose exec -T postgres \
+          psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_similar_finder_smoke.sql
+        curl -fsS \
+          -H 'Accept-Language: en-US' \
+          'http://127.0.0.1:8080/perfumes/recommendations?perfumeIDs=91001' \
+          -o similar-finder.json
+        jq -e '
+          any(.[]; .id == 93001 and .matchingNotes == ["Bergamot"])
+          and all(.[]; .id != 93002)
+        ' similar-finder.json
+        curl -fsS -X POST \
+          -H 'Content-Type: application/json' \
+          --data '{"sun":"leo","moon":"cancer","ascendant":"scorpio","elementBalance":{"fire":45,"earth":15,"air":10,"water":30}}' \
+          http://127.0.0.1:8080/personal-perfumes \
+          -o personal-perfumes.json
+        jq -e 'any(.[]; .id == 93001 and .marketSegment == "daily")' personal-perfumes.json
+        docker compose exec -T postgres \
+          psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_catalog_segmentation_smoke.sql
+        docker compose exec -T postgres \
+          psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/classify_curated_catalog_segments.sql
+        segmented_count="$(docker compose exec -T postgres \
+          psql -U perfumesoul -d perfumesoul -At -c "
+            SELECT COUNT(*)
+            FROM perfumes AS perfume
+            JOIN brands AS brand ON brand.id = perfume.brand_id
+            WHERE (lower(btrim(brand.brand)), perfume.market_segment) IN (
+              ('chanel', 'luxury'),
+              ('creed', 'niche'),
+              ('zara', 'daily')
+            )
+          ")"
+        [[ "$segmented_count" == "3" ]]
         code="$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/perfumes/1/notes)"
         echo "/perfumes/1/notes -> $code"
         [[ "$code" == "404" || "$code" == "200" ]]

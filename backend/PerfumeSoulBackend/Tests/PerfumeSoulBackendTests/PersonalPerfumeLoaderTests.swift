@@ -6,7 +6,7 @@ import Vapor
 struct PersonalPerfumeLoaderTests {
     @Test("Personal perfume loader pages SQL candidates per market segment")
     func loaderPagesCandidatesPerMarketSegment() {
-        #expect(PersonalPerfumeLoader.candidatePageSize == 100)
+        #expect(PersonalPerfumeLoader.candidatePageSize == 1_000)
     }
 
     @Test("Paged ranking can recommend a matching perfume beyond the first page")
@@ -31,9 +31,9 @@ struct PersonalPerfumeLoaderTests {
             request: request,
             marketSegment: .daily,
             pageSize: PersonalPerfumeLoader.candidatePageSize
-        ) { offset, _ in
-            switch offset {
-            case 0:
+        ) { afterID, _ in
+            switch afterID {
+            case nil:
                 return firstPage
             case PersonalPerfumeLoader.candidatePageSize:
                 return secondPage
@@ -96,7 +96,7 @@ struct PersonalPerfumeLoaderTests {
     }
 
     @Test("Personal perfume loader returns three perfumes per market segment")
-    func returnsThreePerfumesPerMarketSegment() {
+    func returnsThreePerfumesPerMarketSegment() async throws {
         let request = PersonalPerfumesRequest(
             sun: .leo,
             moon: .cancer,
@@ -109,7 +109,7 @@ struct PersonalPerfumeLoaderTests {
             )
         )
 
-        let recommendations = PersonalPerfumeScorer.score(
+        let recommendations = try await loadProductionRecommendations(
             request: request,
             perfumeProfiles: makePerfumes()
         )
@@ -122,9 +122,9 @@ struct PersonalPerfumeLoaderTests {
     }
 
     @Test("Known profile returns exact ranked perfume ids")
-    func knownProfileReturnsExactRankedPerfumeIDs() {
+    func knownProfileReturnsExactRankedPerfumeIDs() async throws {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
-        let recommendations = PersonalPerfumeScorer.score(
+        let recommendations = try await loadProductionRecommendations(
             request: request,
             perfumeProfiles: makeAirRankingPerfumes()
         )
@@ -135,9 +135,9 @@ struct PersonalPerfumeLoaderTests {
     }
 
     @Test("Recommendation exposes stable match keys instead of display strings")
-    func recommendationExposesStableMatchKeys() throws {
+    func recommendationExposesStableMatchKeys() async throws {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
-        let recommendations = PersonalPerfumeScorer.score(
+        let recommendations = try await loadProductionRecommendations(
             request: request,
             perfumeProfiles: [makeAirRankingPerfume(id: 101, name: "Perfect Air", accordScale: 1)]
         )
@@ -157,13 +157,13 @@ struct PersonalPerfumeLoaderTests {
     }
 
     @Test("Known profile ranking is independent from input order")
-    func knownProfileRankingIsIndependentFromInputOrder() {
+    func knownProfileRankingIsIndependentFromInputOrder() async throws {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
-        let recommendations = PersonalPerfumeScorer.score(
+        let recommendations = try await loadProductionRecommendations(
             request: request,
             perfumeProfiles: makeAirRankingPerfumes()
         )
-        let reversedRecommendations = PersonalPerfumeScorer.score(
+        let reversedRecommendations = try await loadProductionRecommendations(
             request: request,
             perfumeProfiles: makeAirRankingPerfumes().reversed()
         )
@@ -173,9 +173,9 @@ struct PersonalPerfumeLoaderTests {
     }
 
     @Test("Equal scores use deterministic brand, perfume, and id tie-breakers")
-    func equalScoresUseDeterministicTieBreakers() {
+    func equalScoresUseDeterministicTieBreakers() async throws {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
-        let recommendations = PersonalPerfumeScorer.score(
+        let recommendations = try await loadProductionRecommendations(
             request: request,
             perfumeProfiles: [
                 makeTieBreakerPerfume(id: 4, brand: "Beta", name: "Another", note: "Дым"),
@@ -188,9 +188,9 @@ struct PersonalPerfumeLoaderTests {
     }
 
     @Test("Duplicate signatures are removed after ranking")
-    func duplicateSignaturesAreRemovedAfterRanking() {
+    func duplicateSignaturesAreRemovedAfterRanking() async throws {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
-        let recommendations = PersonalPerfumeScorer.score(
+        let recommendations = try await loadProductionRecommendations(
             request: request,
             perfumeProfiles: [
                 makeAirRankingPerfume(id: 102, name: "Air Secondary", accordScale: 0.5),
@@ -203,15 +203,16 @@ struct PersonalPerfumeLoaderTests {
     }
 
     @Test("Segment returns fewer than three perfumes without borrowing from another segment")
-    func shortSegmentDoesNotBorrowFromAnotherSegment() {
+    func shortSegmentDoesNotBorrowFromAnotherSegment() async throws {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
-        let recommendations = PersonalPerfumeScorer.score(
+        let recommendations = try await loadProductionRecommendations(
             request: request,
             perfumeProfiles: [
                 makeAirRankingPerfume(id: 101, name: "Daily Air", accordScale: 1),
                 makeAirRankingPerfume(id: 301, name: "Luxury Air", segment: "luxury", accordScale: 1),
                 makeAirRankingPerfume(id: 302, name: "Luxury Clean", segment: "luxury", accordScale: 0.7)
-            ]
+            ],
+            filtersProfilesBySegment: false
         )
 
         #expect(recommendations.map(\.marketSegment) == [.luxury, .luxury, .daily])
@@ -220,14 +221,15 @@ struct PersonalPerfumeLoaderTests {
     }
 
     @Test("Unclassified perfumes are excluded from recommendations")
-    func unclassifiedPerfumesAreExcludedFromRecommendations() {
+    func unclassifiedPerfumesAreExcludedFromRecommendations() async throws {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
-        let recommendations = PersonalPerfumeScorer.score(
+        let recommendations = try await loadProductionRecommendations(
             request: request,
             perfumeProfiles: [
                 makeAirRankingPerfume(id: 101, name: "Unclassified Air", segment: "unclassified", accordScale: 1),
                 makeAirRankingPerfume(id: 102, name: "Daily Air", segment: "daily", accordScale: 0.5)
-            ]
+            ],
+            filtersProfilesBySegment: false
         )
 
         #expect(recommendations.map(\.id) == [102])
@@ -235,9 +237,9 @@ struct PersonalPerfumeLoaderTests {
     }
 
     @Test("Insufficient metadata is excluded from recommendations")
-    func insufficientMetadataIsExcludedFromRecommendations() {
+    func insufficientMetadataIsExcludedFromRecommendations() async throws {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
-        let recommendations = PersonalPerfumeScorer.score(
+        let recommendations = try await loadProductionRecommendations(
             request: request,
             perfumeProfiles: [
                 PerfumeProfile(
@@ -253,9 +255,9 @@ struct PersonalPerfumeLoaderTests {
     }
 
     @Test("Partially missing metadata is renormalized instead of scored as zero")
-    func partiallyMissingMetadataIsRenormalized() {
+    func partiallyMissingMetadataIsRenormalized() async throws {
         let request = makeRequest(fire: 0, earth: 0, air: 100, water: 0)
-        let recommendations = PersonalPerfumeScorer.score(
+        let recommendations = try await loadProductionRecommendations(
             request: request,
             perfumeProfiles: [
                 makeAirAccordOnlyPerfume(id: 1, name: "Air Accord Only"),
@@ -279,7 +281,7 @@ struct PersonalPerfumeLoaderTests {
     }
 
     @Test("Dominant element profile scores matching descriptors and wear higher than balanced profile")
-    func dominantElementWeightsDescriptorsAndWearProportionally() {
+    func dominantElementWeightsDescriptorsAndWearProportionally() async throws {
         let firePerfume = PerfumeProfile(
             id: 1,
             perfumeName: "Fire Descriptor",
@@ -304,11 +306,11 @@ struct PersonalPerfumeLoaderTests {
             water: 25
         )
 
-        let fireDominantMatch = PersonalPerfumeScorer.score(
+        let fireDominantMatch = try await loadProductionRecommendations(
             request: fireDominantRequest,
             perfumeProfiles: [firePerfume]
         )[0].matchPercentage
-        let balancedMatch = PersonalPerfumeScorer.score(
+        let balancedMatch = try await loadProductionRecommendations(
             request: balancedRequest,
             perfumeProfiles: [firePerfume]
         )[0].matchPercentage
@@ -318,6 +320,33 @@ struct PersonalPerfumeLoaderTests {
 }
 
 extension PersonalPerfumeLoaderTests {
+    private func loadProductionRecommendations(
+        request: PersonalPerfumesRequest,
+        perfumeProfiles: [PerfumeProfile],
+        filtersProfilesBySegment: Bool = true,
+        pageSize: Int = 2
+    ) async throws -> [PersonalPerfumeResponse] {
+        var recommendations: [PersonalPerfumeResponse] = []
+
+        for marketSegment in PersonalPerfumeMarketSegment.allCases {
+            let segmentProfiles = filtersProfilesBySegment
+                ? perfumeProfiles.filter { $0.marketSegment == marketSegment.rawValue }
+                : perfumeProfiles
+            let segmentRecommendations = try await PersonalPerfumeLoader.loadRecommendations(
+                request: request,
+                marketSegment: marketSegment,
+                pageSize: pageSize
+            ) { afterID, limit in
+                Array(segmentProfiles.sorted { $0.id < $1.id }.filter { profile in
+                    afterID.map { profile.id > $0 } ?? true
+                }.prefix(limit))
+            }
+            recommendations += segmentRecommendations
+        }
+
+        return recommendations
+    }
+
     private func expectBadRequest(
         fire: Int,
         earth: Int,
