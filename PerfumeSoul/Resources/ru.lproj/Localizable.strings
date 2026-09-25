@@ -175,7 +175,7 @@
 "screen.searchPerfume" = "Библиотека ароматов";
 "screen.settings" = "Настройки";
 "screen.today" = "Сегодня";
-"screen.calculationCreateProfile" = "Создай свой профиль";
+"screen.calculationCreateProfile" = "Создайте\nсвой профиль.\nНайдите свой аромат.";
 "screen.todayEnergy" = "Гороскоп дня";
 "settings.about.aboutAppSubtitle" = "Версия 1.0.0";
 "settings.about.aboutAppTitle" = "О приложении";
@@ -260,7 +260,6 @@
 "calculation.picker.year" = "Год";
 "calculation.namePlaceholder" = "Ваше имя";
 "calculation.nameTitle" = "Имя";
-"calculation.subtitle" = "Введите данные рождения, чтобы открыть персональные рекомендации.";
 "common.continueButton" = "Продолжить";
 "personalPerfume.navigationTitle" = "Мои ароматы";
 "personalPerfume.subtitle" = "Откройте персональную подборку ароматов.";
