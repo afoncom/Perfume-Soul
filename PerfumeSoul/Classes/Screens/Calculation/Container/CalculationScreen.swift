@@ -24,17 +24,23 @@ struct CalculationScreen: View {
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            VStack(spacing: 28) {
+            VStack(alignment: .leading, spacing: 0) {
                 makeHeaderView()
+                    .padding(.bottom, 48)
                 makeFormCard()
                 makeContinueButton()
+                    .padding(.top, 32)
             }
-            .padding(.horizontal, 20)
-            .padding(.top, 36)
-            .padding(.bottom, 24)
+            .padding(.horizontal, 24)
+            .padding(.top, 48)
+            .padding(.bottom, 180)
         }
-        .background(Color(.backgroundPrimary))
-        .modifier(TopSafeAreaBackground())
+        .background {
+            Image(.calculationBackground)
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+        }
         .scrollDismissesKeyboard(.interactively)
         .sheet(item: $activePicker) { picker in
             switch picker {
@@ -69,66 +75,48 @@ extension CalculationScreen {
 
 extension CalculationScreen {
     func makeHeaderView() -> some View {
-        VStack(spacing: 12) {
-            Text(L10n.Screen.calculationCreateProfile)
-                .font(.largeTitle)
-                .fontWeight(.semibold)
-                .multilineTextAlignment(.center)
-
-            Text(L10n.Calculation.subtitle)
-                .font(.title3)
-                .foregroundStyle(Color(.textSecondary))
-                .multilineTextAlignment(.center)
-                .lineSpacing(4)
-        }
-        .padding(.horizontal, 12)
+        Text(L10n.Screen.calculationCreateProfile)
+            .font(.system(size: 34, weight: .regular, design: .serif))
+            .foregroundStyle(Color(.textPrimary))
+            .lineLimit(3)
+            .minimumScaleFactor(0.8)
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     func makeFormCard() -> some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: 0) {
             makeNameField()
+            Divider()
             makeBirthDateField()
+            Divider()
             makeBirthTimeField()
+            Divider()
             makeBirthPlaceField()
         }
-        .padding(22)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-        .shadow(color: Color(.cardShadowSoft), radius: 18, x: 0, y: 8)
     }
     
     func makeNameField() -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 6) {
             Text(L10n.Calculation.nameTitle)
-                .font(.title3)
-                .fontWeight(.medium)
+                .font(.subheadline)
+                .foregroundStyle(Color(.textPrimary))
             
-            HStack(spacing: 12) {
-                Image(systemName: "person")
-                    .font(.headline)
-                    .foregroundStyle(Color(.textPrimary))
-                
-                TextField(L10n.Calculation.namePlaceholder, text: $viewModel.firstName)
-                    .focused($focusedField, equals: .name)
-                    .submitLabel(.next)
-                    .font(.title3)
-                    .foregroundStyle(Color(.textPrimary))
-                    .textInputAutocapitalization(.words)
-                    .onSubmit {
-                        focusedField = .birthPlace
-                    }
-            }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 16)
-            .background(Color(.surfacePrimary))
-            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+            TextField(L10n.Calculation.namePlaceholder, text: $viewModel.firstName)
+                .focused($focusedField, equals: .name)
+                .submitLabel(.next)
+                .font(.body)
+                .foregroundStyle(Color(.textPrimary))
+                .textInputAutocapitalization(.words)
+                .onSubmit {
+                    focusedField = .birthPlace
+                }
         }
+        .padding(.vertical, 16)
     }
     
     func makeBirthDateField() -> some View {
         makePickerButton(
             title: L10n.Calculation.birthDateTitle,
-            systemImage: "calendar",
             value: viewModel.birthDate.formatted(.dateTime.day().month(.wide).year())
         ) {
             focusedField = nil
@@ -139,7 +127,6 @@ extension CalculationScreen {
     func makeBirthTimeField() -> some View {
         makePickerButton(
             title: L10n.Calculation.birthTimeTitle,
-            systemImage: "clock",
             value: viewModel.birthTime.formatted(.dateTime.hour().minute())
         ) {
             focusedField = nil
@@ -148,50 +135,39 @@ extension CalculationScreen {
     }
     
     func makeBirthPlaceField() -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 6) {
             Text(L10n.Calculation.birthPlaceTitle)
-                .font (.title3)
-                .fontWeight(.medium)
+                .font(.subheadline)
+                .foregroundStyle(Color(.textPrimary))
             
-            HStack(spacing: 12) {
-                Image(systemName: "location")
-                    .font(.headline)
-                    .foregroundStyle(Color(.textPrimary))
-                
-                TextField(L10n.Calculation.birthPlacePlaceholder, text: $viewModel.birthPlace)
-                    .focused($focusedField, equals: .birthPlace)
-                    .submitLabel(.done)
-                    .font(.title3)
-                    .foregroundStyle(Color(.textPrimary))
-                    .textInputAutocapitalization(.words)
-                    .textContentType(.addressCity)
-                    .autocorrectionDisabled()
-                    .onChange(of: birthPlaceSearchQuery) { _, newValue in
-                        if viewModel.selectedBirthPlace?.displayName != newValue {
-                            viewModel.selectedBirthPlace = nil
-                            viewModel.activeBirthPlaceSearchQuery = ""
-                        }
+            TextField(L10n.Calculation.birthPlacePlaceholder, text: $viewModel.birthPlace)
+                .focused($focusedField, equals: .birthPlace)
+                .submitLabel(.done)
+                .font(.body)
+                .foregroundStyle(Color(.textPrimary))
+                .textInputAutocapitalization(.words)
+                .textContentType(.addressCity)
+                .autocorrectionDisabled()
+                .onChange(of: birthPlaceSearchQuery) { _, newValue in
+                    if viewModel.selectedBirthPlace?.displayName != newValue {
+                        viewModel.selectedBirthPlace = nil
+                        viewModel.activeBirthPlaceSearchQuery = ""
                     }
-                    .task(id: "\(focusedField == .birthPlace)|\(birthPlaceSearchQuery)|\(viewModel.birthPlaceSearchRetryID)") {
-                        try? await Task.sleep(for: .seconds(0.5))
-                        guard focusedField == .birthPlace && !Task.isCancelled else {
-                            return
-                        }
-                        guard viewModel.activeBirthPlaceSearchQuery != birthPlaceSearchQuery else {
-                            return
-                        }
+                }
+                .task(id: "\(focusedField == .birthPlace)|\(birthPlaceSearchQuery)|\(viewModel.birthPlaceSearchRetryID)") {
+                    try? await Task.sleep(for: .seconds(0.5))
+                    guard focusedField == .birthPlace && !Task.isCancelled else {
+                        return
+                    }
+                    guard viewModel.activeBirthPlaceSearchQuery != birthPlaceSearchQuery else {
+                        return
+                    }
 
-                        await presenter.birthPlaceDidChange(birthPlaceSearchQuery)
-                    }
-            }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 16)
-            .background(Color(.surfacePrimary))
-            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .stroke(Color(.inputBorder), lineWidth: 1)
-            )
+                    await presenter.birthPlaceDidChange(birthPlaceSearchQuery)
+                }
+                .padding(.bottom, 16)
+
+            Divider()
 
             if let birthPlaceErrorMessage = viewModel.birthPlaceErrorMessage {
                 HStack(alignment: .top, spacing: 8) {
@@ -232,9 +208,9 @@ extension CalculationScreen {
                 || viewModel.activeBirthPlaceSearchQuery != birthPlaceSearchQuery
 
             if focusedField == .birthPlace,
-               birthPlaceSearchQuery.count >= 2,
-               viewModel.birthPlaceErrorMessage == nil || !viewModel.birthPlaceSuggestions.isEmpty,
-               viewModel.selectedBirthPlace?.displayName != birthPlaceSearchQuery {
+                birthPlaceSearchQuery.count >= 2,
+                viewModel.birthPlaceErrorMessage == nil || !viewModel.birthPlaceSuggestions.isEmpty,
+                viewModel.selectedBirthPlace?.displayName != birthPlaceSearchQuery {
                 VStack(spacing: 0) {
                     if isBirthPlaceSearchPending {
                         ProgressView()
@@ -309,55 +285,36 @@ extension CalculationScreen {
             Text(L10n.Common.continueButton)
                 .font(.title2)
                 .fontWeight(.medium)
-                .foregroundStyle(Color(.textOnAccent))
+                .foregroundStyle(Color(.backgroundPrimary))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 14)
-                .background(Color(.pinkButton))
+                .background(Color(.textPrimary))
                 .clipShape(Capsule())
         }
         .disabled(!viewModel.isContinueEnabled)
-        .opacity(viewModel.isContinueEnabled ? 1 : 0.6)
-        .shadow(color: Color(.buttonShadow), radius: 12, x: 0, y: 6)
     }
     
     // MARK: - Display info view
     func makePickerButton(
         title: String,
-        systemImage: String,
         value: String,
         action: @escaping () -> Void
     ) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(title)
-                .font(.title3)
-                .fontWeight(.medium)
+        Button(action: action) {
+            VStack(alignment: .leading, spacing: 6) {
+                Text(title)
+                    .font(.subheadline)
+                    .foregroundStyle(Color(.textPrimary))
 
-            Button(action: action) {
-                HStack(spacing: 12) {
-                    Image(systemName: systemImage)
-                        .font(.headline)
-                        .foregroundStyle(Color(.textPrimary))
-
-                    Text(value)
-                        .font(.title3)
-                        .foregroundStyle(Color(.textPrimary))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-
-                    Image(systemName: "chevron.down")
-                        .font(.subheadline)
-                        .foregroundStyle(Color(.textSecondary))
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 16)
-                .background(Color(.surfacePrimary))
-                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 18, style: .continuous)
-                        .stroke(Color(.inputBorder), lineWidth: 1)
-                )
+                Text(value)
+                    .font(.body)
+                    .foregroundStyle(Color(.descriptionText))
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .buttonStyle(.plain)
+            .padding(.vertical, 16)
+            .contentShape(Rectangle())
         }
+        .buttonStyle(.plain)
     }
 }
 

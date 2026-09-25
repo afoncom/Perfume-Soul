@@ -218,7 +218,7 @@
 "horoscope.sign.scorpio" = "Scorpio";
 "horoscope.sign.taurus" = "Taurus";
 "horoscope.sign.virgo" = "Virgo";
-"screen.calculationCreateProfile" = "Create your profile";
+"screen.calculationCreateProfile" = "Create\nyour profile.\nFind your scent.";
 "today.aroma.primaryAction" = "My vibe";
 "today.aroma.secondaryAction" = "Not today";
 "today.aroma.title" = "Aroma of the Day";
@@ -260,7 +260,6 @@
 "calculation.picker.year" = "Year";
 "calculation.namePlaceholder" = "Your first name";
 "calculation.nameTitle" = "Name";
-"calculation.subtitle" = "Enter your birth details to unlock personalized insights.";
 "common.continueButton" = "Continue";
 "personalPerfume.navigationTitle" = "My Scents";
 "personalPerfume.subtitle" = "Discover your curated fragrance selection.";
