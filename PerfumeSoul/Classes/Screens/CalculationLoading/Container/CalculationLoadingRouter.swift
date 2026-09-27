@@ -1,19 +1,18 @@
 //
-//  CalculationRouter.swift
+//  CalculationLoadingRouter.swift
 //  PerfumeSoul
-//
-//  Created by afon.com on 26.03.2026.
-//  Copyright © 2026 afon.com. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-protocol CalculationRouter {
-    @MainActor func showCalculationLoading()
+@MainActor
+protocol CalculationLoadingRouter {
+    func showProfileDescription()
+    func showCalculationScreen()
 }
 
-final class CalculationRouterImpl {
+final class CalculationLoadingRouterImpl {
     private weak var navigationController: UINavigationController?
     private let container: NSPersistentContainer
     private let requestManager: RequestManager
@@ -32,14 +31,23 @@ final class CalculationRouterImpl {
     }
 }
 
-extension CalculationRouterImpl: CalculationRouter {
-    func showCalculationLoading() {
-        let screen = CalculationLoadingModule.build(
+extension CalculationLoadingRouterImpl: CalculationLoadingRouter {
+    func showProfileDescription() {
+        guard let navigationController, let calculationScreen = navigationController.viewControllers.first else {
+            return
+        }
+
+        let screen = ProfileDescriptionModule.build(
             container: container,
             requestManager: requestManager,
             navigationController: navigationController,
             onFinish: onFinish
         )
-        navigationController?.pushViewController(screen, animated: true)
+        
+        navigationController.setViewControllers([calculationScreen, screen], animated: true)
+    }
+
+    func showCalculationScreen() {
+        navigationController?.popViewController(animated: true)
     }
 }
