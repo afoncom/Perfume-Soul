@@ -242,6 +242,7 @@
 "today.recommended.missingProfile" = "Заполните натальный профиль, чтобы получить рекомендации.";
 "today.recommended.retry" = "Попробовать снова";
 "calculation.birthDateTitle" = "Дата рождения";
+"calculation.birthPlaceClearSearch" = "Очистить поиск места";
 "calculation.birthPlaceNoResults" = "Места не найдены. Проверьте написание или попробуйте ближайший город.";
 "calculation.birthPlacePlaceholder" = "Введите город или населенный пункт";
 "calculation.birthPlaceRetryButton" = "Повторить поиск места";

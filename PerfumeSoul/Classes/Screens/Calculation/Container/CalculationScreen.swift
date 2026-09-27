@@ -52,6 +52,10 @@ struct CalculationScreen: View {
                 BirthTimePickerSheet(time: $viewModel.birthTime)
                     .presentationDetents([.height(320)])
                     .presentationDragIndicator(.visible)
+            case .birthPlace:
+                BirthPlaceSearchSheet(viewModel: viewModel, presenter: presenter)
+                    .presentationDetents([.medium, .large])
+                    .presentationDragIndicator(.visible)
             }
         }
     }
@@ -60,12 +64,12 @@ struct CalculationScreen: View {
 extension CalculationScreen {
     enum Field {
         case name
-        case birthPlace
     }
 
     enum PickerSheet: Identifiable {
         case birthDate
         case birthTime
+        case birthPlace
 
         var id: Self {
             self
@@ -108,7 +112,8 @@ extension CalculationScreen {
                 .foregroundStyle(Color(.textPrimary))
                 .textInputAutocapitalization(.words)
                 .onSubmit {
-                    focusedField = .birthPlace
+                    focusedField = nil
+                    activePicker = .birthPlace
                 }
         }
         .padding(.vertical, 16)
@@ -139,140 +144,22 @@ extension CalculationScreen {
             Text(L10n.Calculation.birthPlaceTitle)
                 .font(.subheadline)
                 .foregroundStyle(Color(.textPrimary))
-            
-            TextField(L10n.Calculation.birthPlacePlaceholder, text: $viewModel.birthPlace)
-                .focused($focusedField, equals: .birthPlace)
-                .submitLabel(.done)
-                .font(.body)
-                .foregroundStyle(Color(.textPrimary))
-                .textInputAutocapitalization(.words)
-                .textContentType(.addressCity)
-                .autocorrectionDisabled()
-                .onChange(of: birthPlaceSearchQuery) { _, newValue in
-                    if viewModel.selectedBirthPlace?.displayName != newValue {
-                        viewModel.selectedBirthPlace = nil
-                        viewModel.activeBirthPlaceSearchQuery = ""
-                    }
-                }
-                .task(id: "\(focusedField == .birthPlace)|\(birthPlaceSearchQuery)|\(viewModel.birthPlaceSearchRetryID)") {
-                    try? await Task.sleep(for: .seconds(0.5))
-                    guard focusedField == .birthPlace && !Task.isCancelled else {
-                        return
-                    }
-                    guard viewModel.activeBirthPlaceSearchQuery != birthPlaceSearchQuery else {
-                        return
-                    }
 
-                    await presenter.birthPlaceDidChange(birthPlaceSearchQuery)
-                }
-                .padding(.bottom, 16)
+            Button {
+                focusedField = nil
+                activePicker = .birthPlace
+            } label: {
+                Text(viewModel.birthPlace.isEmpty ? L10n.Calculation.birthPlacePlaceholder : viewModel.birthPlace)
+                    .font(.body)
+                    .foregroundStyle(viewModel.birthPlace.isEmpty ? Color(.descriptionText) : Color(.textPrimary))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom, 16)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
 
             Divider()
-
-            if let birthPlaceErrorMessage = viewModel.birthPlaceErrorMessage {
-                HStack(alignment: .top, spacing: 8) {
-                    Image(systemName: "exclamationmark.circle.fill")
-                        .font(.footnote.weight(.semibold))
-                        .foregroundStyle(Color(.destructiveAccent))
-                        .accessibilityHidden(true)
-
-                    Text(birthPlaceErrorMessage)
-                        .font(.footnote)
-                        .foregroundStyle(Color(.destructiveAccent))
-
-                    Spacer(minLength: 0)
-
-                    if viewModel.canRetryBirthPlaceSearch {
-                        Button {
-                            focusedField = .birthPlace
-                            viewModel.birthPlaceSearchRetryID += 1
-                        } label: {
-                            Image(systemName: "arrow.clockwise")
-                                .font(.footnote.weight(.semibold))
-                                .foregroundStyle(Color(.destructiveAccent))
-                                .frame(width: 44, height: 44)
-                                .contentShape(Rectangle())
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel(L10n.Calculation.birthPlaceRetryButton)
-                    }
-                }
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(.destructiveSurface))
-                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-            }
-            
-            let isBirthPlaceSearchPending = viewModel.isSearchingBirthPlace
-                || viewModel.activeBirthPlaceSearchQuery != birthPlaceSearchQuery
-
-            if focusedField == .birthPlace,
-                birthPlaceSearchQuery.count >= 2,
-                viewModel.birthPlaceErrorMessage == nil || !viewModel.birthPlaceSuggestions.isEmpty,
-                viewModel.selectedBirthPlace?.displayName != birthPlaceSearchQuery {
-                VStack(spacing: 0) {
-                    if isBirthPlaceSearchPending {
-                        ProgressView()
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                    } else if viewModel.birthPlaceSuggestions.isEmpty {
-                        Text(L10n.Calculation.birthPlaceNoResults)
-                            .font(.subheadline)
-                            .foregroundStyle(Color(.descriptionText))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 12)
-                    } else {
-                        ForEach(Array(viewModel.birthPlaceSuggestions.prefix(5).enumerated()), id: \.offset) { index, suggestion in
-                            Button {
-                                Task {
-                                    let isStillCurrent = await presenter.birthPlaceSuggestionTapped(suggestion)
-                                    guard isStillCurrent else {
-                                        return
-                                    }
-
-                                    await MainActor.run {
-                                        focusedField = viewModel.birthPlaceErrorMessage == nil ? nil : .birthPlace
-                                    }
-                                }
-                            } label: {
-                                Text(suggestion.displayName)
-                                    .font(.headline)
-                                    .foregroundStyle(Color(.textPrimary))
-                                    .lineLimit(2)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.horizontal, 16)
-                                    .padding(.vertical, 12)
-                            }
-                            .buttonStyle(.plain)
-
-                            if index < min(viewModel.birthPlaceSuggestions.count, 5) - 1 {
-                                Divider()
-                                    .padding(.leading, 16)
-                            }
-                        }
-                    }
-                }
-                .background(Color(.surfacePrimary))
-                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 18, style: .continuous)
-                        .stroke(Color(.inputBorder), lineWidth: 1)
-                )
-            }
         }
-        .onChange(of: viewModel.birthPlaceErrorMessage) { _, birthPlaceErrorMessage in
-            guard let birthPlaceErrorMessage else {
-                return
-            }
-
-            AccessibilityNotification.Announcement(birthPlaceErrorMessage).post()
-        }
-    }
-
-    var birthPlaceSearchQuery: String {
-        viewModel.birthPlace.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     // MARK: - Continue Button
@@ -292,6 +179,7 @@ extension CalculationScreen {
                 .clipShape(Capsule())
         }
         .disabled(!viewModel.isContinueEnabled)
+        .opacity(viewModel.isContinueEnabled ? 1 : 0.6)
     }
     
     // MARK: - Display info view
@@ -315,6 +203,211 @@ extension CalculationScreen {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+    }
+}
+
+private struct BirthPlaceSearchSheet: View {
+    @Bindable private var viewModel: CalculationViewModel
+    @Environment(\.dismiss) private var dismiss
+    @FocusState private var isSearchFocused: Bool
+    @State private var query = ""
+    @State private var didSelectPlace = false
+
+    private let presenter: CalculationPresenter
+    private let initialBirthPlace: String
+    private let initialSelection: BirthPlaceSelection?
+
+    init(viewModel: CalculationViewModel, presenter: CalculationPresenter) {
+        self.viewModel = viewModel
+        self.presenter = presenter
+        initialBirthPlace = viewModel.birthPlace
+        initialSelection = viewModel.selectedBirthPlace
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(L10n.Calculation.birthPlaceTitle)
+                .font(.system(size: 30, weight: .regular, design: .serif))
+                .foregroundStyle(Color(.textPrimary))
+                .padding(.bottom, 16)
+
+            makeSearchField()
+                .padding(.bottom, 12)
+
+            Divider()
+
+            if let errorMessage = viewModel.birthPlaceErrorMessage {
+                makeErrorView(message: errorMessage)
+            }
+
+            makeSuggestionsView()
+        }
+        .padding(.horizontal, 24)
+        .padding(.top, 28)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .background(Color(.backgroundPrimary))
+        .task {
+            isSearchFocused = true
+        }
+        .onChange(of: viewModel.birthPlaceErrorMessage) { _, errorMessage in
+            guard let errorMessage else {
+                return
+            }
+
+            AccessibilityNotification.Announcement(errorMessage).post()
+        }
+        .onDisappear {
+            presenter.birthPlaceSearchDismissed()
+            if !didSelectPlace {
+                viewModel.birthPlace = initialBirthPlace
+                viewModel.selectedBirthPlace = initialSelection
+            }
+        }
+    }
+
+    private var searchQuery: String {
+        query.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private func makeSearchField() -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: "magnifyingglass")
+                .foregroundStyle(Color(.descriptionText))
+                .accessibilityHidden(true)
+
+            TextField(L10n.Calculation.birthPlacePlaceholder, text: $query)
+                .focused($isSearchFocused)
+                .submitLabel(.search)
+                .textInputAutocapitalization(.words)
+                .autocorrectionDisabled()
+                .accessibilityLabel(L10n.Calculation.birthPlaceTitle)
+                .task(id: "\(searchQuery)|\(viewModel.birthPlaceSearchRetryID)") {
+                    try? await Task.sleep(for: .seconds(0.5))
+                    guard !Task.isCancelled else {
+                        return
+                    }
+                    guard !searchQuery.isEmpty || !viewModel.activeBirthPlaceSearchQuery.isEmpty else {
+                        return
+                    }
+                    guard viewModel.activeBirthPlaceSearchQuery != searchQuery else {
+                        return
+                    }
+
+                    await presenter.birthPlaceDidChange(searchQuery)
+                }
+
+            if !query.isEmpty {
+                Button {
+                    query = ""
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundStyle(Color(.descriptionText))
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(L10n.Calculation.birthPlaceClearSearch)
+            }
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 12)
+        .background(Color(.placeholderSoft))
+        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                .stroke(Color(.inputBorder), lineWidth: 1)
+        )
+    }
+
+    @ViewBuilder
+    private func makeSuggestionsView() -> some View {
+        if searchQuery.count >= 2,
+            viewModel.birthPlaceErrorMessage == nil || !viewModel.birthPlaceSuggestions.isEmpty {
+            if viewModel.isSearchingBirthPlace || viewModel.activeBirthPlaceSearchQuery != searchQuery {
+                ProgressView()
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 24)
+            } else if viewModel.birthPlaceSuggestions.isEmpty {
+                Text(L10n.Calculation.birthPlaceNoResults)
+                    .font(.subheadline)
+                    .foregroundStyle(Color(.descriptionText))
+                    .padding(.top, 20)
+            } else {
+                ScrollView(.vertical, showsIndicators: false) {
+                    LazyVStack(spacing: 0) {
+                        ForEach(Array(viewModel.birthPlaceSuggestions.enumerated()), id: \.offset) { index, suggestion in
+                            Button {
+                                Task {
+                                    let isStillCurrent = await presenter.birthPlaceSuggestionTapped(suggestion)
+                                    guard isStillCurrent else {
+                                        return
+                                    }
+
+                                    await MainActor.run {
+                                        if viewModel.birthPlaceErrorMessage == nil {
+                                            didSelectPlace = true
+                                            isSearchFocused = false
+                                            dismiss()
+                                        }
+                                    }
+                                }
+                            } label: {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(suggestion.completion.title.isEmpty ? suggestion.displayName : suggestion.completion.title)
+                                        .font(.system(size: 21, weight: .regular, design: .serif))
+                                        .foregroundStyle(Color(.textPrimary))
+
+                                    if !suggestion.completion.subtitle.isEmpty {
+                                        Text(suggestion.completion.subtitle)
+                                            .font(.subheadline)
+                                            .foregroundStyle(Color(.descriptionText))
+                                    }
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.vertical, 12)
+                                .contentShape(Rectangle())
+                            }
+                            .buttonStyle(.plain)
+
+                            if index < viewModel.birthPlaceSuggestions.count - 1 {
+                                Divider()
+                            }
+                        }
+                    }
+                }
+                .scrollDismissesKeyboard(.never)
+            }
+        } else {
+            Spacer(minLength: 0)
+        }
+    }
+
+    private func makeErrorView(message: String) -> some View {
+        HStack(alignment: .top, spacing: 8) {
+            Image(systemName: "exclamationmark.circle.fill")
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(Color(.destructiveAccent))
+                .accessibilityHidden(true)
+
+            Text(message)
+                .font(.footnote)
+                .foregroundStyle(Color(.destructiveAccent))
+
+            Spacer(minLength: 0)
+
+            if viewModel.canRetryBirthPlaceSearch {
+                Button {
+                    viewModel.birthPlaceSearchRetryID += 1
+                } label: {
+                    Image(systemName: "arrow.clockwise")
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(Color(.destructiveAccent))
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(L10n.Calculation.birthPlaceRetryButton)
+            }
+        }
+        .padding(.vertical, 12)
     }
 }
 

@@ -242,6 +242,7 @@
 "today.recommended.missingProfile" = "Complete your natal profile to receive recommendations.";
 "today.recommended.retry" = "Try again";
 "calculation.birthDateTitle" = "Birth Date";
+"calculation.birthPlaceClearSearch" = "Clear place search";
 "calculation.birthPlaceNoResults" = "No places found. Check the spelling or try the nearest city.";
 "calculation.birthPlacePlaceholder" = "Enter city or town";
 "calculation.birthPlaceRetryButton" = "Retry place search";

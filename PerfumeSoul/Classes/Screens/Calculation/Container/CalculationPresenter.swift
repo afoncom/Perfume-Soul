@@ -13,6 +13,7 @@ protocol CalculationPresenter {
     func birthPlaceDidChange(_ query: String) async
     @discardableResult
     func birthPlaceSuggestionTapped(_ suggestion: BirthPlaceSuggestion) async -> Bool
+    @MainActor func birthPlaceSearchDismissed()
 }
 
 final class CalculationPresenterImpl {
@@ -35,6 +36,15 @@ final class CalculationPresenterImpl {
 }
 
 extension CalculationPresenterImpl: CalculationPresenter {
+    func birthPlaceSearchDismissed() {
+        viewModel.activeBirthPlaceSearchQuery = ""
+        viewModel.birthPlaceSuggestions = []
+        viewModel.birthPlaceErrorMessage = nil
+        viewModel.canRetryBirthPlaceSearch = false
+        viewModel.isSearchingBirthPlace = false
+        birthPlaceSearch.clear()
+    }
+
     func continueButtonTapped() async {
         guard let selectedBirthPlace = viewModel.selectedBirthPlace else {
             return
