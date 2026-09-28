@@ -52,7 +52,7 @@ extension CalculationPresenterImpl: CalculationPresenter {
 
         await profileService.replaceProfile(profile)
         await MainActor.run {
-            router.showProfileDescription()
+            router.showCalculationLoading()
         }
     }
     
