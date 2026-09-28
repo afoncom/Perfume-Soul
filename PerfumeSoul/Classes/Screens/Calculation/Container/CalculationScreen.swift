@@ -113,7 +113,9 @@ extension CalculationScreen {
                 .textInputAutocapitalization(.words)
                 .onSubmit {
                     focusedField = nil
-                    activePicker = .birthPlace
+                    if viewModel.selectedBirthPlace == nil {
+                        activePicker = .birthPlace
+                    }
                 }
         }
         .padding(.vertical, 16)
@@ -140,23 +142,15 @@ extension CalculationScreen {
     }
     
     func makeBirthPlaceField() -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(L10n.Calculation.birthPlaceTitle)
-                .font(.subheadline)
-                .foregroundStyle(Color(.textPrimary))
-
-            Button {
+        VStack(alignment: .leading, spacing: 0) {
+            makePickerButton(
+                title: L10n.Calculation.birthPlaceTitle,
+                value: viewModel.birthPlace.isEmpty ? L10n.Calculation.birthPlacePlaceholder : viewModel.birthPlace,
+                valueColor: viewModel.birthPlace.isEmpty ? Color(.descriptionText) : Color(.textPrimary)
+            ) {
                 focusedField = nil
                 activePicker = .birthPlace
-            } label: {
-                Text(viewModel.birthPlace.isEmpty ? L10n.Calculation.birthPlacePlaceholder : viewModel.birthPlace)
-                    .font(.body)
-                    .foregroundStyle(viewModel.birthPlace.isEmpty ? Color(.descriptionText) : Color(.textPrimary))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, 16)
-                    .contentShape(Rectangle())
             }
-            .buttonStyle(.plain)
 
             Divider()
         }
@@ -186,6 +180,7 @@ extension CalculationScreen {
     func makePickerButton(
         title: String,
         value: String,
+        valueColor: Color = Color(.descriptionText),
         action: @escaping () -> Void
     ) -> some View {
         Button(action: action) {
@@ -196,7 +191,7 @@ extension CalculationScreen {
 
                 Text(value)
                     .font(.body)
-                    .foregroundStyle(Color(.descriptionText))
+                    .foregroundStyle(valueColor)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(.vertical, 16)
