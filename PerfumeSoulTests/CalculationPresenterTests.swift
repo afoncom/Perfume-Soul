@@ -233,7 +233,7 @@ final class CalculationPresenterTests: XCTestCase {
 }
 
 private final class CalculationRouterMock: CalculationRouter {
-    func showProfileDescription() { }
+    func showCalculationLoading() { }
 }
 
 private final class CalculationProfileServiceMock: ProfileService {

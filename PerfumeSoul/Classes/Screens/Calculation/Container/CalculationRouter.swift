@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 protocol CalculationRouter {
-    func showProfileDescription()
+    @MainActor func showCalculationLoading()
 }
 
 final class CalculationRouterImpl {
@@ -33,8 +33,8 @@ final class CalculationRouterImpl {
 }
 
 extension CalculationRouterImpl: CalculationRouter {
-    func showProfileDescription() {
-        let screen = ProfileDescriptionModule.build(
+    func showCalculationLoading() {
+        let screen = CalculationLoadingModule.build(
             container: container,
             requestManager: requestManager,
             navigationController: navigationController,
