@@ -50,7 +50,7 @@ final class CalculationPresenterTests: XCTestCase {
     }
 
     @MainActor
-    func testAlreadySelectedBirthPlaceStampsActiveQueryWithoutSearching() async {
+    func testSearchingSelectedBirthPlaceReturnsSuggestions() async {
         let viewModel = CalculationViewModel()
         let selection = BirthPlaceSelection(
             displayName: "Paris, France",
@@ -61,6 +61,7 @@ final class CalculationPresenterTests: XCTestCase {
         viewModel.birthPlace = selection.displayName
         viewModel.selectedBirthPlace = selection
         let birthPlaceSearch = BirthPlaceSearchMock()
+        birthPlaceSearch.searchResult = .suggestions([makeSuggestion(displayName: "Paris, France")])
         let presenter = makePresenter(
             viewModel: viewModel,
             birthPlaceSearch: birthPlaceSearch
@@ -69,8 +70,9 @@ final class CalculationPresenterTests: XCTestCase {
         await presenter.birthPlaceDidChange(selection.displayName)
 
         XCTAssertEqual(viewModel.activeBirthPlaceSearchQuery, selection.displayName)
-        XCTAssertEqual(viewModel.selectedBirthPlace, selection)
-        XCTAssertTrue(birthPlaceSearch.searchedQueries.isEmpty)
+        XCTAssertNil(viewModel.selectedBirthPlace)
+        XCTAssertEqual(birthPlaceSearch.searchedQueries, ["Paris, France"])
+        XCTAssertEqual(viewModel.birthPlaceSuggestions.map(\.displayName), ["Paris, France"])
     }
 
     @MainActor

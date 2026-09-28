@@ -218,7 +218,7 @@
 "horoscope.sign.scorpio" = "Scorpio";
 "horoscope.sign.taurus" = "Taurus";
 "horoscope.sign.virgo" = "Virgo";
-"screen.calculationCreateProfile" = "Create your profile";
+"screen.calculationCreateProfile" = "Create\nyour profile.\nFind your scent.";
 "today.aroma.primaryAction" = "My vibe";
 "today.aroma.secondaryAction" = "Not today";
 "today.aroma.title" = "Aroma of the Day";
@@ -242,6 +242,7 @@
 "today.recommended.missingProfile" = "Complete your natal profile to receive recommendations.";
 "today.recommended.retry" = "Try again";
 "calculation.birthDateTitle" = "Birth Date";
+"calculation.birthPlaceClearSearch" = "Clear place search";
 "calculation.birthPlaceNoResults" = "No places found. Check the spelling or try the nearest city.";
 "calculation.birthPlacePlaceholder" = "Enter city or town";
 "calculation.birthPlaceRetryButton" = "Retry place search";

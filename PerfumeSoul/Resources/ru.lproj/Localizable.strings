@@ -175,7 +175,7 @@
 "screen.searchPerfume" = "Библиотека ароматов";
 "screen.settings" = "Настройки";
 "screen.today" = "Сегодня";
-"screen.calculationCreateProfile" = "Создай свой профиль";
+"screen.calculationCreateProfile" = "Создайте\nсвой профиль.\nНайдите свой аромат.";
 "screen.todayEnergy" = "Гороскоп дня";
 "settings.about.aboutAppSubtitle" = "Версия 1.0.0";
 "settings.about.aboutAppTitle" = "О приложении";
@@ -242,6 +242,7 @@
 "today.recommended.missingProfile" = "Заполните натальный профиль, чтобы получить рекомендации.";
 "today.recommended.retry" = "Попробовать снова";
 "calculation.birthDateTitle" = "Дата рождения";
+"calculation.birthPlaceClearSearch" = "Очистить поиск места";
 "calculation.birthPlaceNoResults" = "Места не найдены. Проверьте написание или попробуйте ближайший город.";
 "calculation.birthPlacePlaceholder" = "Введите город или населенный пункт";
 "calculation.birthPlaceRetryButton" = "Повторить поиск места";
