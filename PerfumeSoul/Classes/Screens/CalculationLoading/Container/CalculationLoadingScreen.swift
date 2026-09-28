@@ -42,7 +42,7 @@ struct CalculationLoadingScreen: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
-        .task {
+        .task(id: viewModel.retryAttempt) {
             await presenter.onAppear()
         }
     }
@@ -190,9 +190,7 @@ extension CalculationLoadingScreen {
 
             if failure != .invalidBirthData {
                 Button {
-                    Task {
-                        await presenter.retryButtonTapped()
-                    }
+                    presenter.retryButtonTapped()
                 } label: {
                     Text(L10n.ProfileDescription.retryButton)
                         .font(.headline)

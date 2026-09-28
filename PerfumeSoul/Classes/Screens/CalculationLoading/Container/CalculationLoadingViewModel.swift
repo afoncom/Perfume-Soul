@@ -19,6 +19,7 @@ enum CalculationLoadingFailure {
 
 @Observable final class CalculationLoadingViewModel {
     var hasStartedLoading = false
+    var retryAttempt = 0
     var progress = 0.0
     var activeStage: CalculationLoadingStage = .birthData
     var failure: CalculationLoadingFailure?
