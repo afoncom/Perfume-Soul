@@ -68,7 +68,7 @@ extension ProfileDescriptionBuilderImpl: ProfileDescriptionBuilder {
         )
 
         return ProfileDescription(
-            title: localized("profileDescription.title", profile.name),
+            title: localized("profileDescription.title"),
             subtitle: subtitle(
                 sun: natalChart.sun.sign,
                 moon: natalChart.moon.sign,
@@ -112,21 +112,21 @@ extension ProfileDescriptionBuilderImpl {
             return ProfileDescriptionInsight(
                 iconSystemName: "sun.max.fill",
                 style: .sun,
-                title: localized("profileDescription.placement.sun.title", sign.displayName),
+                title: localized("profileDescription.placement.sun.title", sign.placementDisplayName),
                 description: localized("profileDescription.sun.\(sign.rawValue)")
             )
         case .moon:
             return ProfileDescriptionInsight(
                 iconSystemName: "moon.fill",
                 style: .moon,
-                title: localized("profileDescription.placement.moon.title", sign.displayName),
+                title: localized("profileDescription.placement.moon.title", sign.placementDisplayName),
                 description: localized("profileDescription.moon.\(sign.rawValue)")
             )
         case .ascendant:
             return ProfileDescriptionInsight(
                 iconSystemName: "circle.grid.3x3.fill",
                 style: .ascendant,
-                title: localized("profileDescription.placement.ascendant.title", sign.displayName),
+                title: localized("profileDescription.placement.ascendant.title", sign.placementDisplayName),
                 description: localized("profileDescription.ascendant.\(sign.rawValue)")
             )
         }
@@ -310,6 +310,10 @@ extension ProfileDescriptionBuilderImpl {
 extension ZodiacSign {
     fileprivate var displayName: String {
         Bundle.main.localizedString(forKey: "horoscope.sign.\(rawValue)", value: nil, table: nil)
+    }
+
+    fileprivate var placementDisplayName: String {
+        Bundle.main.localizedString(forKey: "profileDescription.placement.sign.\(rawValue)", value: nil, table: nil)
     }
 }
 

@@ -8,9 +8,26 @@
 
 import SwiftUI
 
+private struct ProfileDescriptionCardSizeKey: PreferenceKey {
+    static var defaultValue: CGSize = .zero
+
+    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
+        value = nextValue()
+    }
+}
+
 struct ProfileDescriptionScreen: View {
     @Bindable private var viewModel: ProfileDescriptionViewModel
     private let presenter: ProfileDescriptionPresenter
+    @State private var selectedInsightIndex: Int?
+    @State private var selectedCardFrame: CGRect = .zero
+    @State private var expandedCardSize: CGSize = .zero
+    @State private var isWaitingForCardHeight = false
+    @State private var isCardExpanded = false
+    @State private var isFrontContentVisible = true
+    @State private var isCardRevealed = false
+    @State private var isCardAnimating = false
+    @State private var cardRotation = 0.0
     
     init(
         viewModel: ProfileDescriptionViewModel,
@@ -23,40 +40,43 @@ struct ProfileDescriptionScreen: View {
     var body: some View {
         let bottomPadding = presenter.shouldShowContinueButton ? 96.0 : 32.0
 
-        ZStack {
-            makeContentView(bottomPadding: bottomPadding)
+        GeometryReader { geometry in
+            ZStack {
+                makeContentView(bottomPadding: bottomPadding)
+
+                if case let .content(_, profileDescription) = viewModel.state,
+                    let selectedInsightIndex,
+                    profileDescription.insights.indices.contains(selectedInsightIndex) {
+                    makeExpandedCard(profileDescription.insights[selectedInsightIndex], in: geometry.size)
+                        .zIndex(1)
+                }
+            }
+            .frame(width: geometry.size.width, height: geometry.size.height)
+            .coordinateSpace(name: "profileDescription")
         }
-        .background(Color(.backgroundPrimary).ignoresSafeArea())
+        .background {
+            Image(.profileDescriptionBackground)
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+        }
         .safeAreaInset(edge: .bottom) {
             if presenter.shouldShowContinueButton {
                 makeContinueButton()
                     .padding(.horizontal, 24)
                     .padding(.top, 12)
                     .padding(.bottom, 8)
+                    .opacity(selectedInsightIndex == nil ? 1 : 0)
+                    .allowsHitTesting(selectedInsightIndex == nil)
             }
         }
         .task {
             await presenter.onAppear()
         }
-        .overlay(alignment: .top) {
-            if presenter.shouldShowContinueButton {
-                makeTopSafeAreaBackground()
-            }
-        }
     }
 }
 
 extension ProfileDescriptionScreen {
-    private func makeTopSafeAreaBackground() -> some View {
-        GeometryReader { proxy in
-            Color(.backgroundPrimary)
-                .frame(height: proxy.safeAreaInsets.top)
-                .frame(maxHeight: .infinity, alignment: .top)
-                .ignoresSafeArea(edges: .top)
-        }
-        .allowsHitTesting(false)
-    }
-
     @ViewBuilder
     private func makeContentView(bottomPadding: Double) -> some View {
         switch viewModel.state {
@@ -64,14 +84,15 @@ extension ProfileDescriptionScreen {
             makeLoadingState()
         case let .content(_, profileDescription):
             ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: 26) {
+                VStack(spacing: 28) {
                     makeHeaderView(profileDescription: profileDescription)
                     makeInsightCards(profileDescription: profileDescription)
                 }
-                .padding(.horizontal, 20)
-                .padding(.top, 28)
+                .padding(.horizontal, 24)
+                .padding(.top, 48)
                 .padding(.bottom, bottomPadding)
             }
+            .scrollDisabled(selectedInsightIndex != nil)
         case .missingBirthPlaceData:
             makeUnavailableState(
                 title: L10n.ProfileDescription.unavailableTitle,
@@ -100,87 +121,217 @@ extension ProfileDescriptionScreen {
     }
 
     private func makeHeaderView(profileDescription: ProfileDescription) -> some View {
-        VStack(spacing: 10) {
+        VStack(alignment: .leading, spacing: 4) {
+            if let name = viewModel.profile?.name {
+                Text(name)
+                    .font(.system(size: 15, weight: .regular, design: .serif))
+                    .foregroundStyle(Color(.descriptionText))
+            }
+
             Text(profileDescription.title)
-                .font(.system(size: 26, weight: .medium, design: .rounded))
-                .foregroundStyle(Color(.titleText))
-                .multilineTextAlignment(.center)
+                .font(.system(size: 36, weight: .regular, design: .serif))
+                .foregroundStyle(Color(.textPrimary))
+                .lineLimit(2)
+                .minimumScaleFactor(0.85)
 
-            Text(profileDescription.subtitle)
-                .font(.system(size: 20, weight: .regular, design: .rounded))
-                .foregroundStyle(Color(.bodyText))
-                .multilineTextAlignment(.center)
-                .lineSpacing(4)
+            Rectangle()
+                .fill(Color(.descriptionText).opacity(0.2))
+                .frame(height: 1)
+                .padding(.vertical, 10)
 
-            Text(profileDescription.summary)
-                .font(.system(size: 17, weight: .regular, design: .rounded))
+            Text(L10n.ProfileDescription.headerHint)
+                .font(.system(size: 15))
                 .foregroundStyle(Color(.descriptionText))
-                .multilineTextAlignment(.center)
-                .lineSpacing(4)
-                .padding(.top, 6)
+                .fixedSize(horizontal: false, vertical: true)
         }
-        .padding(.top, 8)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     private func makeInsightCards(profileDescription: ProfileDescription) -> some View {
         VStack(spacing: 14) {
-            ForEach(Array(profileDescription.insights.enumerated()), id: \.offset) { _, insight in
-                let colors = colors(for: insight.style)
-
-                makeInsightCard(
-                    symbol: insight.iconSystemName,
-                    iconBackground: colors.background,
-                    iconTint: colors.tint,
-                    title: insight.title,
-                    description: insight.description
-                )
+            ForEach(Array(profileDescription.insights.enumerated()), id: \.offset) { index, insight in
+                GeometryReader { geometry in
+                    Button {
+                        openCard(at: index, frame: geometry.frame(in: .named("profileDescription")))
+                    } label: {
+                        makeInsightCard(insight)
+                    }
+                    .buttonStyle(.plain)
+                    .opacity(selectedInsightIndex == index ? 0 : 1)
+                    .disabled(selectedInsightIndex != nil)
+                }
+                .frame(height: 112)
             }
         }
         .frame(maxWidth: .infinity)
     }
     
-    private func makeInsightCard(
-        symbol: String,
-        iconBackground: Color,
-        iconTint: Color,
-        title: String,
-        description: String
-    ) -> some View {
-        HStack(spacing: 14) {
+    private func makeInsightCard(_ insight: ProfileDescriptionInsight) -> some View {
+        ZStack(alignment: .leading) {
             ZStack {
                 Circle()
-                    .fill(iconBackground)
-                    .frame(width: 42, height: 42)
+                    .fill(Color(.rowBackground))
+                    .frame(width: 64, height: 64)
                 
-                Image(systemName: symbol)
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(iconTint)
+                Image(systemName: insight.iconSystemName)
+                    .font(.system(size: 27, weight: .light))
+                    .foregroundStyle(Color(.textPrimary))
             }
-            .frame(width: 42, height: 42, alignment: .top)
-            
-            VStack(alignment: .leading, spacing: 6) {
-                Text(title)
-                    .font(.system(size: 17, weight: .semibold, design: .rounded))
-                    .foregroundStyle(Color(.titleText))
-                
-                Text(description)
-                    .font(.system(size: 16, weight: .regular, design: .rounded))
-                    .foregroundStyle(Color(.descriptionText))
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-            
-            Spacer(minLength: 8)
-            
+            .frame(width: 64, height: 64)
+            .padding(.leading, 16)
+
+            Text(insight.title)
+                .font(.system(size: 20, weight: .regular, design: .serif))
+                .foregroundStyle(Color(.textPrimary))
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 82)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 18)
-        .background(Color(.surfaceOverlay))
-        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .frame(maxWidth: .infinity)
+        .frame(height: 112)
+        .background(Color(.surfacePrimary))
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
         .overlay(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
                 .stroke(Color(.glassBorder), lineWidth: 1)
         )
-        .shadow(color: Color(.insightCardShadow), radius: 18, x: 0, y: 10)
+        .shadow(color: Color(.cardShadow), radius: 22, x: 0, y: 12)
+    }
+
+    private func makeExpandedCard(_ insight: ProfileDescriptionInsight, in size: CGSize) -> some View {
+        let expandedWidth = min(size.width - 48, 430)
+        let cardWidth = isCardExpanded ? expandedWidth : selectedCardFrame.width
+        let cardHeight = isCardExpanded ? expandedCardSize.height : selectedCardFrame.height
+
+        return ZStack {
+            Color(.textPrimary).opacity(isCardExpanded ? 0.42 : 0)
+                .ignoresSafeArea()
+
+            ZStack {
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .fill(Color(.surfacePrimary))
+
+                makeInsightCard(insight)
+                    .opacity(isFrontContentVisible ? 1 : 0)
+
+                ScrollView(.vertical, showsIndicators: false) {
+                    makeCardBackContent(insight)
+                }
+                .frame(width: cardWidth, height: cardHeight)
+                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                .opacity(isCardRevealed ? 1 : 0)
+            }
+            .frame(width: cardWidth, height: cardHeight)
+            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .stroke(Color(.glassBorder), lineWidth: 1)
+            )
+            .shadow(color: Color(.cardShadow), radius: 24, x: 0, y: 14)
+            .rotation3DEffect(.degrees(cardRotation), axis: (x: 0, y: 1, z: 0))
+            .position(
+                x: isCardExpanded ? size.width / 2 : selectedCardFrame.midX,
+                y: isCardExpanded ? size.height / 2 : selectedCardFrame.midY
+            )
+        }
+        .frame(width: size.width, height: size.height)
+        .background {
+            makeCardBackContent(insight)
+                .frame(width: expandedWidth)
+                .fixedSize(horizontal: false, vertical: true)
+                .background {
+                    GeometryReader { geometry in
+                        Color.clear.preference(key: ProfileDescriptionCardSizeKey.self, value: geometry.size)
+                    }
+                }
+                .hidden()
+        }
+        .onPreferenceChange(ProfileDescriptionCardSizeKey.self) { measuredSize in
+            if measuredSize.height > 0 {
+                expandedCardSize.height = min(size.height - 32, max(112, measuredSize.height))
+                if isWaitingForCardHeight {
+                    isWaitingForCardHeight = false
+                    animateOpeningCard()
+                }
+            }
+        }
+        .contentShape(Rectangle())
+        .onTapGesture(count: 2) {
+            closeCard()
+        }
+    }
+
+    private func makeCardBackContent(_ insight: ProfileDescriptionInsight) -> some View {
+        VStack(alignment: .leading, spacing: 22) {
+            HStack(spacing: 16) {
+                Image(systemName: insight.iconSystemName)
+                    .font(.system(size: 32, weight: .light))
+
+                Text(insight.title)
+                    .font(.system(size: 32, weight: .regular, design: .serif))
+            }
+
+            Text(insight.description)
+                .font(.system(size: 18))
+                .foregroundStyle(Color(.descriptionText))
+        }
+        .foregroundStyle(Color(.textPrimary))
+        .padding(28)
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private func openCard(at index: Int, frame: CGRect) {
+        guard selectedInsightIndex == nil else {
+            return
+        }
+
+        selectedCardFrame = frame
+        expandedCardSize = .zero
+        isCardAnimating = true
+        isWaitingForCardHeight = true
+        selectedInsightIndex = index
+    }
+
+    private func animateOpeningCard() {
+        Task { @MainActor in
+            withAnimation(.easeInOut(duration: 1.45)) {
+                isCardExpanded = true
+                cardRotation = 900
+            }
+            withAnimation(.easeOut(duration: 0.2)) {
+                isFrontContentVisible = false
+            }
+            try? await Task.sleep(for: .milliseconds(1250))
+            withAnimation(.easeIn(duration: 0.2)) {
+                isCardRevealed = true
+            }
+            try? await Task.sleep(for: .milliseconds(200))
+            isCardAnimating = false
+        }
+    }
+
+    private func closeCard() {
+        guard !isCardAnimating else {
+            return
+        }
+
+        isCardAnimating = true
+        withAnimation(.easeOut(duration: 0.2)) {
+            isCardRevealed = false
+        }
+
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(200))
+            withAnimation(.easeInOut(duration: 1.35)) {
+                isCardExpanded = false
+                cardRotation = 1800
+            }
+            try? await Task.sleep(for: .milliseconds(1350))
+            selectedInsightIndex = nil
+            isFrontContentVisible = true
+            cardRotation = 0
+            isCardAnimating = false
+        }
     }
 
     private func makeLoadingState() -> some View {
@@ -248,33 +399,16 @@ extension ProfileDescriptionScreen {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    private func colors(for style: ProfileDescriptionInsightStyle) -> (background: Color, tint: Color) {
-        switch style {
-        case .sun:
-            (Color(.natalSunSurface), Color(.natalSunAccent))
-        case .moon:
-            (Color(.natalMoonSurface), Color(.natalMoonAccent))
-        case .ascendant:
-            (Color(.natalAscendantSurface), Color(.zodiacPurple))
-        case .dominantElement:
-            (Color(.pinkIconSurface), Color(.pinkIcon))
-        case .weakElement:
-            (Color(.purpleIconSurface), Color(.purpleIcon))
-        case .synthesis:
-            (Color(.surfaceOverlay), Color(.pinkButton))
-        }
-    }
-
     private func makeContinueButton() -> some View {
         Button {
             presenter.continueButtonTapped()
         } label: {
             Text(L10n.Common.continueButton)
-                .font(.system(size: 24, weight: .medium, design: .rounded))
-                .foregroundStyle(Color(.textOnAccent))
+                .font(.system(size: 20, weight: .medium))
+                .foregroundStyle(Color(.backgroundPrimary))
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 17)
-                .background(Color(.pinkButton))
+                .padding(.vertical, 16)
+                .background(Color(.textPrimary))
                 .clipShape(Capsule())
         }
         .disabled(!viewModel.canContinue)

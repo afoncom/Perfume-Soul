@@ -356,6 +356,7 @@
 "profileDescription.element.weakTitle" = "%@ требует поддержки";
 "profileDescription.failedMessage" = "Попробуйте повторить расчет натального профиля.";
 "profileDescription.failedTitle" = "Не удалось рассчитать профиль";
+"profileDescription.headerHint" = "Откройте карточку, чтобы узнать больше о влиянии планет.";
 "profileDescription.invalidBirthDataMessage" = "Некоторые данные рождения не описывают существующее локальное время. Обновите данные в профиле перед повторным открытием описания.";
 "profileDescription.invalidBirthDataTitle" = "Обновите данные рождения";
 "profileDescription.retryButton" = "Повторить";
@@ -374,6 +375,18 @@
 "profileDescription.moon.virgo" = "Вы регулируете эмоции через порядок, полезность и маленькие улучшения вокруг.";
 "profileDescription.placement.ascendant.title" = "Асцендент в %@";
 "profileDescription.placement.moon.title" = "Луна в %@";
+"profileDescription.placement.sign.aquarius" = "Водолее";
+"profileDescription.placement.sign.aries" = "Овне";
+"profileDescription.placement.sign.cancer" = "Раке";
+"profileDescription.placement.sign.capricorn" = "Козероге";
+"profileDescription.placement.sign.gemini" = "Близнецах";
+"profileDescription.placement.sign.leo" = "Льве";
+"profileDescription.placement.sign.libra" = "Весах";
+"profileDescription.placement.sign.pisces" = "Рыбах";
+"profileDescription.placement.sign.sagittarius" = "Стрельце";
+"profileDescription.placement.sign.scorpio" = "Скорпионе";
+"profileDescription.placement.sign.taurus" = "Тельце";
+"profileDescription.placement.sign.virgo" = "Деве";
 "profileDescription.placement.sun.title" = "Солнце в %@";
 "profileDescription.subtitle" = "Ядро: %@ - эмоции: %@ - первое впечатление: %@";
 "profileDescription.sun.aquarius" = "Ваше ядро независимое, концептуальное и направленное в будущее. Вам нужны оригинальность и свобода мысли.";
@@ -415,6 +428,6 @@
 "profileDescription.synthesis.visibleEmotional.description" = "Луна и Асцендент находятся в одной стихии, поэтому эмоциональный ритм часто виден в общении и самопрезентации.";
 "profileDescription.synthesis.visibleEmotional.summary" = "Внутренние реакции и внешнее поведение поддерживают друг друга, даже если Солнце хочет другого.";
 "profileDescription.synthesis.visibleEmotional.title" = "Заметный эмоциональный тон";
-"profileDescription.title" = "%@, ваш ароматический профиль";
+"profileDescription.title" = "Натальная\nкарта";
 "profileDescription.unavailableMessage" = "Нужны дата, время, место рождения, координаты и часовой пояс, чтобы рассчитать динамическое описание профиля.";
 "profileDescription.unavailableTitle" = "Заполните данные рождения";
