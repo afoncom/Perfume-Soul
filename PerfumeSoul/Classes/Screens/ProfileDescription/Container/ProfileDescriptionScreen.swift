@@ -235,6 +235,9 @@ extension ProfileDescriptionScreen {
             )
         }
         .frame(width: size.width, height: size.height)
+        .accessibilityAction(.escape) {
+            closeCard()
+        }
         .background {
             makeCardBackContent(insight)
                 .frame(width: expandedWidth)
@@ -245,6 +248,7 @@ extension ProfileDescriptionScreen {
                     }
                 }
                 .hidden()
+                .accessibilityHidden(true)
         }
         .onPreferenceChange(ProfileDescriptionCardSizeKey.self) { measuredSize in
             if measuredSize.height > 0 {
@@ -255,14 +259,10 @@ extension ProfileDescriptionScreen {
                 }
             }
         }
-        .contentShape(Rectangle())
-        .onTapGesture(count: 2) {
-            closeCard()
-        }
     }
 
     private func makeCardBackContent(_ insight: ProfileDescriptionInsight) -> some View {
-        VStack(alignment: .leading, spacing: 22) {
+        VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 16) {
                 Image(systemName: insight.iconSystemName)
                     .font(.system(size: 32, weight: .light))
@@ -270,6 +270,11 @@ extension ProfileDescriptionScreen {
                 Text(insight.title)
                     .font(.system(size: 32, weight: .regular, design: .serif))
             }
+            .padding(.trailing, 40)
+
+            Rectangle()
+                .fill(Color(.descriptionText).opacity(0.25))
+                .frame(height: 1)
 
             Text(insight.description)
                 .font(.system(size: 18))
@@ -278,6 +283,26 @@ extension ProfileDescriptionScreen {
         .foregroundStyle(Color(.textPrimary))
         .padding(28)
         .frame(maxWidth: .infinity, alignment: .leading)
+        .overlay(alignment: .topTrailing) {
+            Button {
+                closeCard()
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.system(size: 12, weight: .light))
+                    .foregroundStyle(Color(.textPrimary))
+                    .frame(width: 32, height: 32)
+                    .overlay(
+                        Circle()
+                            .stroke(Color(.descriptionText).opacity(0.5), lineWidth: 1)
+                    )
+                    .frame(width: 44, height: 44)
+            }
+            .buttonStyle(.plain)
+            .disabled(isCardAnimating)
+            .accessibilityLabel(L10n.ProfileDescription.closeCard)
+            .padding(.top, 14)
+            .padding(.trailing, 14)
+        }
     }
 
     private func openCard(at index: Int, frame: CGRect) {
