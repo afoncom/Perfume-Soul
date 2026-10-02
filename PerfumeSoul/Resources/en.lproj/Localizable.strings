@@ -344,6 +344,7 @@
 "profileDescription.ascendant.scorpio" = "Your first impression can be magnetic, private, and intense. People may feel there is more underneath.";
 "profileDescription.ascendant.taurus" = "Your first impression is calm, tactile, and composed. People may read you as steady and self-contained.";
 "profileDescription.ascendant.virgo" = "You come across as clean, attentive, and thoughtful. Details shape your first impression.";
+"profileDescription.closeCard" = "Close card";
 "profileDescription.element.dominant.air" = "Air dominance adds movement, ideas, and social intelligence. You need mental space and conversation.";
 "profileDescription.element.dominant.earth" = "Earth dominance adds practicality, sensuality, and patience. You trust what is stable and tangible.";
 "profileDescription.element.dominant.fire" = "Fire dominance adds impulse, confidence, and expressive force. You are drawn to choices that feel alive.";
@@ -356,6 +357,7 @@
 "profileDescription.element.weakTitle" = "%@ needs support";
 "profileDescription.failedMessage" = "Please try the natal profile calculation again.";
 "profileDescription.failedTitle" = "Calculation failed";
+"profileDescription.headerHint" = "Open a card to discover how the planets shape you.";
 "profileDescription.invalidBirthDataMessage" = "Some birth details do not describe a valid local time. Update your birth data from Profile before opening the description again.";
 "profileDescription.invalidBirthDataTitle" = "Update birth data";
 "profileDescription.retryButton" = "Retry";
@@ -374,6 +376,18 @@
 "profileDescription.moon.virgo" = "You regulate emotions through order, usefulness, and small improvements that make life cleaner.";
 "profileDescription.placement.ascendant.title" = "Ascendant in %@";
 "profileDescription.placement.moon.title" = "Moon in %@";
+"profileDescription.placement.sign.aquarius" = "Aquarius";
+"profileDescription.placement.sign.aries" = "Aries";
+"profileDescription.placement.sign.cancer" = "Cancer";
+"profileDescription.placement.sign.capricorn" = "Capricorn";
+"profileDescription.placement.sign.gemini" = "Gemini";
+"profileDescription.placement.sign.leo" = "Leo";
+"profileDescription.placement.sign.libra" = "Libra";
+"profileDescription.placement.sign.pisces" = "Pisces";
+"profileDescription.placement.sign.sagittarius" = "Sagittarius";
+"profileDescription.placement.sign.scorpio" = "Scorpio";
+"profileDescription.placement.sign.taurus" = "Taurus";
+"profileDescription.placement.sign.virgo" = "Virgo";
 "profileDescription.placement.sun.title" = "Sun in %@";
 "profileDescription.subtitle" = "%@ core - %@ emotions - %@ impression";
 "profileDescription.sun.aquarius" = "Your core is independent, conceptual, and future-facing. You need originality and room to think differently.";
@@ -415,6 +429,6 @@
 "profileDescription.synthesis.visibleEmotional.description" = "Your Moon and Ascendant share an element, so your emotional rhythm is often visible in how you communicate and present yourself.";
 "profileDescription.synthesis.visibleEmotional.summary" = "Your inner reactions and outer behavior support each other, even if your Sun wants something different.";
 "profileDescription.synthesis.visibleEmotional.title" = "Visible emotional tone";
-"profileDescription.title" = "%@, your scent profile";
+"profileDescription.title" = "Natal\nchart";
 "profileDescription.unavailableMessage" = "We need birth date, time, place, coordinates, and timezone to calculate your dynamic profile description.";
 "profileDescription.unavailableTitle" = "Complete birth data";
