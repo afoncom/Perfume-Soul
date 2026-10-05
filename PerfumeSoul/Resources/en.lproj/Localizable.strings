@@ -374,7 +374,9 @@
 "profileDescription.moon.scorpio" = "You feel deeply and privately. Trust matters more than speed, and emotional truth is essential.";
 "profileDescription.moon.taurus" = "Your emotional body calms down through stability, touch, routine, and familiar pleasures.";
 "profileDescription.moon.virgo" = "You regulate emotions through order, usefulness, and small improvements that make life cleaner.";
+"profileDescription.placement.ascendant.leoTitle" = "Ascendant in %@";
 "profileDescription.placement.ascendant.title" = "Ascendant in %@";
+"profileDescription.placement.moon.leoTitle" = "Moon in %@";
 "profileDescription.placement.moon.title" = "Moon in %@";
 "profileDescription.placement.sign.aquarius" = "Aquarius";
 "profileDescription.placement.sign.aries" = "Aries";
@@ -388,6 +390,7 @@
 "profileDescription.placement.sign.scorpio" = "Scorpio";
 "profileDescription.placement.sign.taurus" = "Taurus";
 "profileDescription.placement.sign.virgo" = "Virgo";
+"profileDescription.placement.sun.leoTitle" = "Sun in %@";
 "profileDescription.placement.sun.title" = "Sun in %@";
 "profileDescription.subtitle" = "%@ core - %@ emotions - %@ impression";
 "profileDescription.sun.aquarius" = "Your core is independent, conceptual, and future-facing. You need originality and room to think differently.";
@@ -407,7 +410,7 @@
 "profileDescription.synthesis.alignedInner.title" = "Aligned inner rhythm";
 "profileDescription.synthesis.balanced.description" = "Your placements do not push one temperament too strongly. This makes your profile flexible and easier to adapt to different people and contexts.";
 "profileDescription.synthesis.balanced.summary" = "Your chart is balanced, so the full combination matters more than one dominant trait.";
-"profileDescription.synthesis.balanced.title" = "Balanced profile";
+"profileDescription.synthesis.balanced.title" = "Element balance";
 "profileDescription.synthesis.clearOuter.description" = "Your Ascendant supports your Sun, so your first impression usually matches your main direction. The Moon adds a more private emotional layer.";
 "profileDescription.synthesis.clearOuter.summary" = "People often read your main energy quickly, while your emotional world has more nuance.";
 "profileDescription.synthesis.clearOuter.title" = "Clear outer expression";
@@ -428,7 +431,7 @@
 "profileDescription.synthesis.veryFocused.title" = "Very focused profile";
 "profileDescription.synthesis.visibleEmotional.description" = "Your Moon and Ascendant share an element, so your emotional rhythm is often visible in how you communicate and present yourself.";
 "profileDescription.synthesis.visibleEmotional.summary" = "Your inner reactions and outer behavior support each other, even if your Sun wants something different.";
-"profileDescription.synthesis.visibleEmotional.title" = "Visible emotional tone";
+"profileDescription.synthesis.visibleEmotional.title" = "Visible emotions";
 "profileDescription.title" = "Natal\nchart";
 "profileDescription.unavailableMessage" = "We need birth date, time, place, coordinates, and timezone to calculate your dynamic profile description.";
 "profileDescription.unavailableTitle" = "Complete birth data";

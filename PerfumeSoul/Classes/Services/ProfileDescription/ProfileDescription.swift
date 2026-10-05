@@ -15,7 +15,6 @@ struct ProfileDescription: Equatable {
 }
 
 struct ProfileDescriptionInsight: Equatable {
-    let iconSystemName: String
     let style: ProfileDescriptionInsightStyle
     let title: String
     let description: String
