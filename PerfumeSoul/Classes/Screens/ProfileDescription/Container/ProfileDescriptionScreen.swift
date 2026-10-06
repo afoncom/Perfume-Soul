@@ -264,7 +264,7 @@ extension ProfileDescriptionScreen {
                 makeEmblem(for: insight.style, size: 56)
 
                 Text(insight.title)
-                    .font(.system(size: insight.style == .synthesis ? 22 : 32, weight: .regular, design: .serif))
+                    .font(.system(size: 22, weight: .regular, design: .serif))
             }
             .padding(.trailing, 40)
 
