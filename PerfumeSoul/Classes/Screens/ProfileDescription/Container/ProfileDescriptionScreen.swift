@@ -167,26 +167,23 @@ extension ProfileDescriptionScreen {
     }
     
     private func makeInsightCard(_ insight: ProfileDescriptionInsight) -> some View {
-        ZStack(alignment: .leading) {
+        HStack(spacing: 16) {
             ZStack {
                 Circle()
                     .fill(Color(.rowBackground))
                     .frame(width: 64, height: 64)
                 
-                Image(systemName: insight.iconSystemName)
-                    .font(.system(size: 27, weight: .light))
-                    .foregroundStyle(Color(.textPrimary))
+                makeEmblem(for: insight.style, size: 56)
             }
             .frame(width: 64, height: 64)
-            .padding(.leading, 16)
 
             Text(insight.title)
                 .font(.system(size: 20, weight: .regular, design: .serif))
                 .foregroundStyle(Color(.textPrimary))
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
-                .padding(.horizontal, 82)
         }
+        .padding(.horizontal, 16)
         .frame(maxWidth: .infinity)
         .frame(height: 112)
         .background(Color(.surfacePrimary))
@@ -264,11 +261,10 @@ extension ProfileDescriptionScreen {
     private func makeCardBackContent(_ insight: ProfileDescriptionInsight) -> some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 16) {
-                Image(systemName: insight.iconSystemName)
-                    .font(.system(size: 32, weight: .light))
+                makeEmblem(for: insight.style, size: 56)
 
                 Text(insight.title)
-                    .font(.system(size: 32, weight: .regular, design: .serif))
+                    .font(.system(size: 22, weight: .regular, design: .serif))
             }
             .padding(.trailing, 40)
 
@@ -303,6 +299,31 @@ extension ProfileDescriptionScreen {
             .padding(.top, 14)
             .padding(.trailing, 14)
         }
+    }
+
+    private func makeEmblem(for style: ProfileDescriptionInsightStyle, size: Double) -> some View {
+        let image: Image
+
+        switch style {
+        case .sun:
+            image = Image(.natalSunEmblem)
+        case .moon:
+            image = Image(.natalMoonEmblem)
+        case .ascendant:
+            image = Image(.natalAscendantEmblem)
+        case .dominantElement:
+            image = Image(.natalDominantElementEmblem)
+        case .weakElement:
+            image = Image(.natalWeakElementEmblem)
+        case .synthesis:
+            image = Image(.natalSynthesisEmblem)
+        }
+
+        return image
+            .resizable()
+            .scaledToFit()
+            .frame(width: size, height: size)
+            .accessibilityHidden(true)
     }
 
     private func openCard(at index: Int, frame: CGRect) {

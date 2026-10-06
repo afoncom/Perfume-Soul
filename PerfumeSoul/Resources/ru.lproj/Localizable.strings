@@ -374,7 +374,9 @@
 "profileDescription.moon.scorpio" = "Вы чувствуете глубоко и приватно. Доверие важнее скорости, а эмоциональная честность необходима.";
 "profileDescription.moon.taurus" = "Ваши эмоции успокаиваются через стабильность, телесность, рутину и знакомые удовольствия.";
 "profileDescription.moon.virgo" = "Вы регулируете эмоции через порядок, полезность и маленькие улучшения вокруг.";
+"profileDescription.placement.ascendant.leoTitle" = "Асцендент во %@";
 "profileDescription.placement.ascendant.title" = "Асцендент в %@";
+"profileDescription.placement.moon.leoTitle" = "Луна во %@";
 "profileDescription.placement.moon.title" = "Луна в %@";
 "profileDescription.placement.sign.aquarius" = "Водолее";
 "profileDescription.placement.sign.aries" = "Овне";
@@ -388,6 +390,7 @@
 "profileDescription.placement.sign.scorpio" = "Скорпионе";
 "profileDescription.placement.sign.taurus" = "Тельце";
 "profileDescription.placement.sign.virgo" = "Деве";
+"profileDescription.placement.sun.leoTitle" = "Солнце во %@";
 "profileDescription.placement.sun.title" = "Солнце в %@";
 "profileDescription.subtitle" = "Ядро: %@ - эмоции: %@ - первое впечатление: %@";
 "profileDescription.sun.aquarius" = "Ваше ядро независимое, концептуальное и направленное в будущее. Вам нужны оригинальность и свобода мысли.";
@@ -407,7 +410,7 @@
 "profileDescription.synthesis.alignedInner.title" = "Согласованный внутренний ритм";
 "profileDescription.synthesis.balanced.description" = "Позиции не давят одной стихией слишком сильно. Это делает профиль гибким и легче адаптируемым к разным людям и контекстам.";
 "profileDescription.synthesis.balanced.summary" = "Карта сбалансирована, поэтому вся комбинация важнее одной доминирующей черты.";
-"profileDescription.synthesis.balanced.title" = "Сбалансированный профиль";
+"profileDescription.synthesis.balanced.title" = "Баланс стихий";
 "profileDescription.synthesis.clearOuter.description" = "Асцендент поддерживает Солнце, поэтому первое впечатление обычно совпадает с главным направлением личности. Луна добавляет более приватный эмоциональный слой.";
 "profileDescription.synthesis.clearOuter.summary" = "Люди быстро считывают вашу основную энергию, а эмоциональный мир остается более нюансным.";
 "profileDescription.synthesis.clearOuter.title" = "Ясное внешнее выражение";
@@ -428,7 +431,7 @@
 "profileDescription.synthesis.veryFocused.title" = "Сфокусированный профиль";
 "profileDescription.synthesis.visibleEmotional.description" = "Луна и Асцендент находятся в одной стихии, поэтому эмоциональный ритм часто виден в общении и самопрезентации.";
 "profileDescription.synthesis.visibleEmotional.summary" = "Внутренние реакции и внешнее поведение поддерживают друг друга, даже если Солнце хочет другого.";
-"profileDescription.synthesis.visibleEmotional.title" = "Заметный эмоциональный тон";
+"profileDescription.synthesis.visibleEmotional.title" = "Эмоции на виду";
 "profileDescription.title" = "Натальная\nкарта";
 "profileDescription.unavailableMessage" = "Нужны дата, время, место рождения, координаты и часовой пояс, чтобы рассчитать динамическое описание профиля.";
 "profileDescription.unavailableTitle" = "Заполните данные рождения";

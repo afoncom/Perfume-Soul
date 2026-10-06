@@ -60,7 +60,6 @@ extension ProfileDescriptionBuilderImpl: ProfileDescriptionBuilder {
 
         insights.append(
             ProfileDescriptionInsight(
-                iconSystemName: "sparkles",
                 style: .synthesis,
                 title: synthesis.title,
                 description: synthesis.description
@@ -110,23 +109,31 @@ extension ProfileDescriptionBuilderImpl {
         switch placement {
         case .sun:
             return ProfileDescriptionInsight(
-                iconSystemName: "sun.max.fill",
                 style: .sun,
-                title: localized("profileDescription.placement.sun.title", sign.placementDisplayName),
+                title: localized(
+                    sign == .leo ? "profileDescription.placement.sun.leoTitle" : "profileDescription.placement.sun.title",
+                    sign.placementDisplayName
+                ),
                 description: localized("profileDescription.sun.\(sign.rawValue)")
             )
         case .moon:
             return ProfileDescriptionInsight(
-                iconSystemName: "moon.fill",
                 style: .moon,
-                title: localized("profileDescription.placement.moon.title", sign.placementDisplayName),
+                title: localized(
+                    sign == .leo ? "profileDescription.placement.moon.leoTitle" : "profileDescription.placement.moon.title",
+                    sign.placementDisplayName
+                ),
                 description: localized("profileDescription.moon.\(sign.rawValue)")
             )
         case .ascendant:
             return ProfileDescriptionInsight(
-                iconSystemName: "circle.grid.3x3.fill",
                 style: .ascendant,
-                title: localized("profileDescription.placement.ascendant.title", sign.placementDisplayName),
+                title: localized(
+                    sign == .leo
+                        ? "profileDescription.placement.ascendant.leoTitle"
+                        : "profileDescription.placement.ascendant.title",
+                    sign.placementDisplayName
+                ),
                 description: localized("profileDescription.ascendant.\(sign.rawValue)")
             )
         }
@@ -137,7 +144,6 @@ extension ProfileDescriptionBuilderImpl {
         isDominant: Bool
     ) -> ProfileDescriptionInsight {
         ProfileDescriptionInsight(
-            iconSystemName: isDominant ? "flame.fill" : "leaf.fill",
             style: isDominant ? .dominantElement : .weakElement,
             title: isDominant
                 ? localized("profileDescription.element.dominantTitle", element.displayName)
