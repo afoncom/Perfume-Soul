@@ -35,6 +35,14 @@ import Observation
         Self.birthTimeFormatter.string(from: birthTime)
     }
 
+    var birthDateDisplayText: String {
+        birthDate.formatted(.dateTime.day().month(.twoDigits).year())
+    }
+
+    var birthTimeDisplayText: String {
+        birthTime.formatted(.dateTime.hour().minute())
+    }
+
     init() {
     }
 
