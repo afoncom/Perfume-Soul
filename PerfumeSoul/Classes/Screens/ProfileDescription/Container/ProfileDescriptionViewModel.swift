@@ -41,3 +41,16 @@ enum ProfileDescriptionScreenState: Equatable {
         profileCalculation != nil
     }
 }
+
+extension ProfileDescriptionViewModel {
+    func insightCategory(for style: ProfileDescriptionInsightStyle) -> String {
+        switch style {
+        case .sun: L10n.PerfumeFlow.personality
+        case .moon: L10n.PerfumeFlow.emotions
+        case .ascendant: L10n.PerfumeFlow.firstImpression
+        case .dominantElement: L10n.PerfumeFlow.strength
+        case .weakElement: L10n.PerfumeFlow.balance
+        case .synthesis: L10n.PerfumeFlow.overview
+        }
+    }
+}

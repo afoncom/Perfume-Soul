@@ -2,73 +2,82 @@
 //  ProfileDescriptionScreen.swift
 //  PerfumeSoul
 //
-//  Created by afon.com on 12.04.2026.
-//  Copyright © 2026 afon.com. All rights reserved.
-//
 
 import SwiftUI
-
-private struct ProfileDescriptionCardSizeKey: PreferenceKey {
-    static var defaultValue: CGSize = .zero
-
-    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
-        value = nextValue()
-    }
-}
 
 struct ProfileDescriptionScreen: View {
     @Bindable private var viewModel: ProfileDescriptionViewModel
     private let presenter: ProfileDescriptionPresenter
-    @State private var selectedInsightIndex: Int?
-    @State private var selectedCardFrame: CGRect = .zero
-    @State private var expandedCardSize: CGSize = .zero
-    @State private var isWaitingForCardHeight = false
-    @State private var isCardExpanded = false
-    @State private var isFrontContentVisible = true
-    @State private var isCardRevealed = false
-    @State private var isCardAnimating = false
-    @State private var cardRotation = 0.0
-    
-    init(
-        viewModel: ProfileDescriptionViewModel,
-        presenter: ProfileDescriptionPresenter
-    ) {
+    @State private var selectedInsight: SelectedInsight?
+    @State private var visibleInsightIndex: Int? = 0
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @ScaledMetric(relativeTo: .largeTitle) private var headingSize = 32
+    @ScaledMetric(relativeTo: .title2) private var cardTitleSize = 24
+
+    init(viewModel: ProfileDescriptionViewModel, presenter: ProfileDescriptionPresenter) {
         self.viewModel = viewModel
         self.presenter = presenter
     }
-    
+
     var body: some View {
-        let bottomPadding = presenter.shouldShowContinueButton ? 96.0 : 32.0
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack(alignment: .leading, spacing: 0) {
+                PerfumeFlowHeader(
+                    section: L10n.PerfumeFlow.resultSection,
+                    step: presenter.isPresentedInOnboarding ? 3 : nil
+                )
+                .padding(.horizontal, 24)
+                .padding(.bottom, 32)
 
-        GeometryReader { geometry in
-            ZStack {
-                makeContentView(bottomPadding: bottomPadding)
-
-                if case let .content(_, profileDescription) = viewModel.state,
-                    let selectedInsightIndex,
-                    profileDescription.insights.indices.contains(selectedInsightIndex) {
-                    makeExpandedCard(profileDescription.insights[selectedInsightIndex], in: geometry.size)
-                        .zIndex(1)
+                switch viewModel.state {
+                case .idle, .loading:
+                    ProgressView()
+                        .tint(Color(.textPrimary))
+                        .frame(maxWidth: .infinity, minHeight: 300)
+                case let .content(_, profileDescription):
+                    makeResult(profileDescription)
+                case .missingBirthPlaceData:
+                    makeUnavailableState(
+                        title: L10n.ProfileDescription.unavailableTitle,
+                        message: L10n.ProfileDescription.unavailableMessage,
+                        canRetry: false
+                    )
+                case .invalidBirthData:
+                    makeUnavailableState(
+                        title: L10n.ProfileDescription.invalidBirthDataTitle,
+                        message: L10n.ProfileDescription.invalidBirthDataMessage,
+                        canRetry: false
+                    )
+                case .failed:
+                    makeUnavailableState(
+                        title: L10n.ProfileDescription.failedTitle,
+                        message: L10n.ProfileDescription.failedMessage,
+                        canRetry: true
+                    )
                 }
             }
-            .frame(width: geometry.size.width, height: geometry.size.height)
-            .coordinateSpace(name: "profileDescription")
+            .padding(.top, 20)
+            .padding(.bottom, 32)
         }
-        .background {
-            Image(.profileDescriptionBackground)
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
-        }
-        .safeAreaInset(edge: .bottom) {
+        .background(Color(.backgroundPrimary))
+        .preferredColorScheme(.light)
+        .safeAreaInset(edge: .bottom, spacing: 0) {
             if presenter.shouldShowContinueButton {
-                makeContinueButton()
-                    .padding(.horizontal, 24)
-                    .padding(.top, 12)
-                    .padding(.bottom, 8)
-                    .opacity(selectedInsightIndex == nil ? 1 : 0)
-                    .allowsHitTesting(selectedInsightIndex == nil)
+                PerfumePrimaryButton(title: L10n.PerfumeFlow.findPerfumes) {
+                    presenter.continueButtonTapped()
+                }
+                .padding(.horizontal, 24)
+                .padding(.top, 12)
+                .padding(.bottom, 8)
+                .background(Color(.backgroundPrimary).ignoresSafeArea(edges: .bottom))
             }
+        }
+        .sheet(item: $selectedInsight) { selection in
+            makeInsightDetail(selection)
+                .presentationDetents([.large])
+                .presentationDragIndicator(.visible)
+                .presentationBackground(Color(.backgroundPrimary))
         }
         .task {
             await presenter.onAppear()
@@ -77,388 +86,267 @@ struct ProfileDescriptionScreen: View {
 }
 
 extension ProfileDescriptionScreen {
-    @ViewBuilder
-    private func makeContentView(bottomPadding: Double) -> some View {
-        switch viewModel.state {
-        case .idle, .loading:
-            makeLoadingState()
-        case let .content(_, profileDescription):
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: 28) {
-                    makeHeaderView(profileDescription: profileDescription)
-                    makeInsightCards(profileDescription: profileDescription)
+    private struct SelectedInsight: Identifiable {
+        let index: Int
+        let insight: ProfileDescriptionInsight
+
+        var id: Int { index }
+    }
+
+    private func makeResult(_ profileDescription: ProfileDescription) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            makeHeader(profileDescription)
+                .padding(.horizontal, 24)
+
+            VStack(alignment: .leading, spacing: 14) {
+                Text(L10n.PerfumeFlow.summaryTitle.uppercased())
+                    .font(.caption.weight(.medium))
+                    .tracking(0.8)
+                    .foregroundStyle(Color(.descriptionText))
+
+                Text(profileDescription.summary)
+                    .font(.title3.weight(.medium))
+                    .foregroundStyle(Color(.textPrimary))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .lineSpacing(3)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(20)
+            .background(Color(.textPrimary).opacity(0.035))
+            .padding(.horizontal, 24)
+            .padding(.top, 26)
+
+            HStack(alignment: .firstTextBaseline) {
+                Text(L10n.PerfumeFlow.insightsTitle)
+                    .font(.title2.weight(.semibold))
+                    .tracking(-0.4)
+
+                Spacer()
+
+                Text(String(format: "%02d", profileDescription.insights.count))
+                    .font(.caption.monospacedDigit())
+                    .foregroundStyle(Color(.descriptionText))
+            }
+            .foregroundStyle(Color(.textPrimary))
+            .padding(.horizontal, 24)
+            .padding(.top, 34)
+
+            Text(L10n.ProfileDescription.headerHint)
+                .font(.subheadline)
+                .foregroundStyle(Color(.descriptionText))
+                .padding(.horizontal, 24)
+                .padding(.top, 8)
+                .padding(.bottom, 20)
+
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(spacing: 12) {
+                    ForEach(Array(profileDescription.insights.enumerated()), id: \.offset) { index, insight in
+                        makeInsightCard(insight, index: index, isCompact: false)
+                    }
                 }
                 .padding(.horizontal, 24)
-                .padding(.top, 48)
-                .padding(.bottom, bottomPadding)
+            } else {
+                makeInsightCarousel(profileDescription)
             }
-            .scrollDisabled(selectedInsightIndex != nil)
-        case .missingBirthPlaceData:
-            makeUnavailableState(
-                title: L10n.ProfileDescription.unavailableTitle,
-                message: L10n.ProfileDescription.unavailableMessage,
-                canRetry: false,
-                canSkip: presenter.isPresentedInOnboarding
-            )
-            .padding(.horizontal, 24)
-        case .invalidBirthData:
-            makeUnavailableState(
-                title: L10n.ProfileDescription.invalidBirthDataTitle,
-                message: L10n.ProfileDescription.invalidBirthDataMessage,
-                canRetry: false,
-                canSkip: presenter.isPresentedInOnboarding
-            )
-            .padding(.horizontal, 24)
-        case .failed:
-            makeUnavailableState(
-                title: L10n.ProfileDescription.failedTitle,
-                message: L10n.ProfileDescription.failedMessage,
-                canRetry: true,
-                canSkip: presenter.isPresentedInOnboarding
-            )
-            .padding(.horizontal, 24)
         }
     }
 
-    private func makeHeaderView(profileDescription: ProfileDescription) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            if let name = viewModel.profile?.name {
+    private func makeHeader(_ profileDescription: ProfileDescription) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            if let name = viewModel.profile?.name, !name.isEmpty {
                 Text(name)
-                    .font(.system(size: 15, weight: .regular, design: .serif))
+                    .font(.subheadline)
                     .foregroundStyle(Color(.descriptionText))
             }
 
             Text(profileDescription.title)
-                .font(.system(size: 36, weight: .regular, design: .serif))
+                .font(.system(size: headingSize, weight: .semibold))
+                .tracking(-0.8)
                 .foregroundStyle(Color(.textPrimary))
-                .lineLimit(2)
-                .minimumScaleFactor(0.85)
+                .fixedSize(horizontal: false, vertical: true)
 
-            Rectangle()
-                .fill(Color(.descriptionText).opacity(0.2))
-                .frame(height: 1)
-                .padding(.vertical, 10)
-
-            Text(L10n.ProfileDescription.headerHint)
-                .font(.system(size: 15))
+            Text(profileDescription.subtitle)
+                .font(.subheadline)
                 .foregroundStyle(Color(.descriptionText))
                 .fixedSize(horizontal: false, vertical: true)
+                .lineSpacing(3)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
-    
-    private func makeInsightCards(profileDescription: ProfileDescription) -> some View {
-        VStack(spacing: 14) {
-            ForEach(Array(profileDescription.insights.enumerated()), id: \.offset) { index, insight in
-                GeometryReader { geometry in
-                    Button {
-                        openCard(at: index, frame: geometry.frame(in: .named("profileDescription")))
-                    } label: {
-                        makeInsightCard(insight)
-                    }
-                    .buttonStyle(.plain)
-                    .opacity(selectedInsightIndex == index ? 0 : 1)
-                    .disabled(selectedInsightIndex != nil)
-                }
-                .frame(height: 112)
-            }
-        }
-        .frame(maxWidth: .infinity)
-    }
-    
-    private func makeInsightCard(_ insight: ProfileDescriptionInsight) -> some View {
-        HStack(spacing: 16) {
-            ZStack {
-                Circle()
-                    .fill(Color(.rowBackground))
-                    .frame(width: 64, height: 64)
-                
-                makeEmblem(for: insight.style, size: 56)
-            }
-            .frame(width: 64, height: 64)
 
-            Text(insight.title)
-                .font(.system(size: 20, weight: .regular, design: .serif))
-                .foregroundStyle(Color(.textPrimary))
-                .multilineTextAlignment(.center)
-                .frame(maxWidth: .infinity)
-        }
-        .padding(.horizontal, 16)
-        .frame(maxWidth: .infinity)
-        .frame(height: 112)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .stroke(Color(.glassBorder), lineWidth: 1)
-        )
-        .shadow(color: Color(.cardShadow), radius: 22, x: 0, y: 12)
-    }
-
-    private func makeExpandedCard(_ insight: ProfileDescriptionInsight, in size: CGSize) -> some View {
-        let expandedWidth = min(size.width - 48, 430)
-        let cardWidth = isCardExpanded ? expandedWidth : selectedCardFrame.width
-        let cardHeight = isCardExpanded ? expandedCardSize.height : selectedCardFrame.height
-
-        return ZStack {
-            Color(.textPrimary).opacity(isCardExpanded ? 0.42 : 0)
-                .ignoresSafeArea()
-
-            ZStack {
-                RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .fill(Color(.surfacePrimary))
-
-                makeInsightCard(insight)
-                    .opacity(isFrontContentVisible ? 1 : 0)
-
-                ScrollView(.vertical, showsIndicators: false) {
-                    makeCardBackContent(insight)
-                }
-                .frame(width: cardWidth, height: cardHeight)
-                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
-                .opacity(isCardRevealed ? 1 : 0)
-            }
-            .frame(width: cardWidth, height: cardHeight)
-            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .stroke(Color(.glassBorder), lineWidth: 1)
-            )
-            .shadow(color: Color(.cardShadow), radius: 24, x: 0, y: 14)
-            .rotation3DEffect(.degrees(cardRotation), axis: (x: 0, y: 1, z: 0))
-            .position(
-                x: isCardExpanded ? size.width / 2 : selectedCardFrame.midX,
-                y: isCardExpanded ? size.height / 2 : selectedCardFrame.midY
-            )
-        }
-        .frame(width: size.width, height: size.height)
-        .accessibilityAction(.escape) {
-            closeCard()
-        }
-        .background {
-            makeCardBackContent(insight)
-                .frame(width: expandedWidth)
-                .fixedSize(horizontal: false, vertical: true)
-                .background {
-                    GeometryReader { geometry in
-                        Color.clear.preference(key: ProfileDescriptionCardSizeKey.self, value: geometry.size)
+    private func makeInsightCarousel(_ profileDescription: ProfileDescription) -> some View {
+        VStack(spacing: 16) {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    ForEach(Array(profileDescription.insights.enumerated()), id: \.offset) { index, insight in
+                        makeInsightCard(insight, index: index, isCompact: true)
+                            .id(index)
+                            .scrollTransition(.interactive, axis: .horizontal) { [reduceMotion] content, phase in
+                                content
+                                    .opacity(reduceMotion || phase.isIdentity ? 1 : 0.7)
+                                    .scaleEffect(reduceMotion || phase.isIdentity ? 1 : 0.98)
+                            }
                     }
                 }
-                .hidden()
-                .accessibilityHidden(true)
-        }
-        .onPreferenceChange(ProfileDescriptionCardSizeKey.self) { measuredSize in
-            if measuredSize.height > 0 {
-                expandedCardSize.height = min(size.height - 32, max(112, measuredSize.height))
-                if isWaitingForCardHeight {
-                    isWaitingForCardHeight = false
-                    animateOpeningCard()
-                }
+                .scrollTargetLayout()
             }
+            .contentMargins(.horizontal, 24, for: .scrollContent)
+            .scrollTargetBehavior(.viewAligned)
+            .scrollPosition(id: $visibleInsightIndex, anchor: .leading)
+
+            HStack {
+                Text(L10n.PerfumeFlow.swipeHint)
+                Spacer()
+                Text(String(format: "%02d / %02d", (visibleInsightIndex ?? 0) + 1, profileDescription.insights.count))
+                    .monospacedDigit()
+            }
+            .font(.caption)
+            .foregroundStyle(Color(.descriptionText))
+            .padding(.horizontal, 24)
         }
     }
 
-    private func makeCardBackContent(_ insight: ProfileDescriptionInsight) -> some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack(spacing: 16) {
-                makeEmblem(for: insight.style, size: 56)
+    private func makeInsightCard(_ insight: ProfileDescriptionInsight, index: Int, isCompact: Bool) -> some View {
+        Button {
+            selectedInsight = SelectedInsight(index: index, insight: insight)
+        } label: {
+            VStack(alignment: .leading, spacing: 16) {
+                HStack(alignment: .firstTextBaseline) {
+                    Text(viewModel.insightCategory(for: insight.style).uppercased())
+                        .tracking(0.6)
+
+                    Spacer(minLength: 8)
+
+                    Text(String(format: "%02d", index + 1))
+                        .monospacedDigit()
+                }
+                .font(.caption2.weight(.medium))
+                .foregroundStyle(Color(.descriptionText))
 
                 Text(insight.title)
-                    .font(.system(size: 22, weight: .regular, design: .serif))
-            }
-            .padding(.trailing, 40)
+                    .font(.system(size: cardTitleSize, weight: .semibold))
+                    .tracking(-0.5)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
 
-            Rectangle()
-                .fill(Color(.descriptionText).opacity(0.25))
-                .frame(height: 1)
+                Text(insight.description)
+                    .font(.subheadline)
+                    .foregroundStyle(Color(.descriptionText))
+                    .lineLimit(isCompact ? 3 : nil)
+                    .multilineTextAlignment(.leading)
 
-            Text(insight.description)
-                .font(.system(size: 18))
-                .foregroundStyle(Color(.descriptionText))
-        }
-        .foregroundStyle(Color(.textPrimary))
-        .padding(28)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .overlay(alignment: .topTrailing) {
-            Button {
-                closeCard()
-            } label: {
-                Image(systemName: "xmark")
-                    .font(.system(size: 12, weight: .light))
-                    .foregroundStyle(Color(.textPrimary))
-                    .frame(width: 32, height: 32)
-                    .overlay(
-                        Circle()
-                            .stroke(Color(.descriptionText).opacity(0.5), lineWidth: 1)
-                    )
-                    .frame(width: 44, height: 44)
+                Spacer(minLength: 8)
+
+                Rectangle()
+                    .fill(Color(.inputBorder))
+                    .frame(height: 1)
+
+                HStack {
+                    Text(L10n.PerfumeFlow.readMore)
+                        .font(.subheadline.weight(.medium))
+                    Spacer()
+                    Image(systemName: "arrow.right")
+                        .font(.subheadline)
+                        .accessibilityHidden(true)
+                }
             }
-            .buttonStyle(.plain)
-            .disabled(isCardAnimating)
-            .accessibilityLabel(L10n.ProfileDescription.closeCard)
-            .padding(.top, 14)
-            .padding(.trailing, 14)
+            .foregroundStyle(Color(.textPrimary))
+            .padding(20)
+            .frame(width: isCompact ? 280 : nil)
+            .frame(maxWidth: isCompact ? nil : .infinity, minHeight: 270)
+            .background(Color(.backgroundPrimary))
+            .overlay {
+                Rectangle().stroke(Color(.inputBorder), lineWidth: 1)
+            }
+            .contentShape(Rectangle())
         }
+        .buttonStyle(.plain)
+        .accessibilityHint(L10n.PerfumeFlow.readMore)
     }
 
-    private func makeEmblem(for style: ProfileDescriptionInsightStyle, size: Double) -> some View {
-        let image: Image
+    private func makeInsightDetail(_ selection: SelectedInsight) -> some View {
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack(alignment: .leading, spacing: 0) {
+                HStack {
+                    Text(viewModel.insightCategory(for: selection.insight.style).uppercased())
+                        .font(.caption.weight(.medium))
+                        .tracking(0.8)
+                        .foregroundStyle(Color(.descriptionText))
 
-        switch style {
-        case .sun:
-            image = Image(.natalSunEmblem)
-        case .moon:
-            image = Image(.natalMoonEmblem)
-        case .ascendant:
-            image = Image(.natalAscendantEmblem)
-        case .dominantElement:
-            image = Image(.natalDominantElementEmblem)
-        case .weakElement:
-            image = Image(.natalWeakElementEmblem)
-        case .synthesis:
-            image = Image(.natalSynthesisEmblem)
-        }
+                    Spacer()
 
-        return image
-            .resizable()
-            .scaledToFit()
-            .frame(width: size, height: size)
-            .accessibilityHidden(true)
-    }
+                    Button {
+                        selectedInsight = nil
+                    } label: {
+                        Image(systemName: "xmark")
+                            .font(.body)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(L10n.ProfileDescription.closeCard)
+                }
 
-    private func openCard(at index: Int, frame: CGRect) {
-        guard selectedInsightIndex == nil else {
-            return
-        }
+                Rectangle()
+                    .fill(Color(.inputBorder))
+                    .frame(height: 1)
+                    .padding(.top, 8)
 
-        selectedCardFrame = frame
-        expandedCardSize = .zero
-        isCardAnimating = true
-        isWaitingForCardHeight = true
-        selectedInsightIndex = index
-    }
+                Text(selection.insight.title)
+                    .font(.system(size: headingSize, weight: .semibold))
+                    .tracking(-0.8)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.top, 32)
 
-    private func animateOpeningCard() {
-        Task { @MainActor in
-            withAnimation(.easeInOut(duration: 1.45)) {
-                isCardExpanded = true
-                cardRotation = 900
+                Text(selection.insight.description)
+                    .font(.body)
+                    .foregroundStyle(Color(.descriptionText))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .lineSpacing(5)
+                    .padding(.top, 22)
             }
-            withAnimation(.easeOut(duration: 0.2)) {
-                isFrontContentVisible = false
-            }
-            try? await Task.sleep(for: .milliseconds(1250))
-            withAnimation(.easeIn(duration: 0.2)) {
-                isCardRevealed = true
-            }
-            try? await Task.sleep(for: .milliseconds(200))
-            isCardAnimating = false
+            .foregroundStyle(Color(.textPrimary))
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 24)
+            .padding(.top, 24)
+            .padding(.bottom, 40)
         }
+        .background(Color(.backgroundPrimary))
     }
 
-    private func closeCard() {
-        guard !isCardAnimating else {
-            return
-        }
-
-        isCardAnimating = true
-        withAnimation(.easeOut(duration: 0.2)) {
-            isCardRevealed = false
-        }
-
-        Task { @MainActor in
-            try? await Task.sleep(for: .milliseconds(200))
-            withAnimation(.easeInOut(duration: 1.35)) {
-                isCardExpanded = false
-                cardRotation = 1800
-            }
-            try? await Task.sleep(for: .milliseconds(1350))
-            selectedInsightIndex = nil
-            isFrontContentVisible = true
-            cardRotation = 0
-            isCardAnimating = false
-        }
-    }
-
-    private func makeLoadingState() -> some View {
-        ProgressView()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
-    private func makeUnavailableState(
-        title: String,
-        message: String,
-        canRetry: Bool,
-        canSkip: Bool
-    ) -> some View {
-        VStack(spacing: 14) {
-            Image(systemName: "sparkles")
-                .font(.system(size: 28, weight: .semibold))
-                .foregroundStyle(Color(.pinkIcon))
-
+    private func makeUnavailableState(title: String, message: String, canRetry: Bool) -> some View {
+        VStack(alignment: .leading, spacing: 18) {
             Text(title)
-                .font(.system(size: 22, weight: .semibold, design: .rounded))
-                .foregroundStyle(Color(.titleText))
+                .font(.system(size: headingSize, weight: .semibold))
+                .foregroundStyle(Color(.textPrimary))
 
             Text(message)
-                .font(.system(size: 16, weight: .regular, design: .rounded))
+                .font(.body)
                 .foregroundStyle(Color(.descriptionText))
-                .multilineTextAlignment(.center)
-                .lineSpacing(4)
+                .fixedSize(horizontal: false, vertical: true)
 
             if canRetry {
-                Button {
+                PerfumePrimaryButton(title: L10n.ProfileDescription.retryButton) {
                     Task {
                         await presenter.retryButtonTapped()
                     }
-                } label: {
-                    Text(L10n.ProfileDescription.retryButton)
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color(.textPrimary))
-                        .padding(.horizontal, 18)
-                        .padding(.vertical, 10)
-                        .background(Color(.surfacePrimary))
-                        .clipShape(Capsule())
-                        .overlay(
-                            Capsule()
-                                .stroke(Color(.cardBorder), lineWidth: 1)
-                        )
                 }
-                .buttonStyle(.plain)
+                .padding(.top, 16)
             }
 
-            if canSkip {
+            if presenter.isPresentedInOnboarding {
                 Button {
                     presenter.skipButtonTapped()
                 } label: {
                     Text(L10n.ProfileDescription.skipButton)
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color(.textOnAccent))
-                        .padding(.horizontal, 18)
-                        .padding(.vertical, 10)
-                        .background(Color(.pinkButton))
-                        .clipShape(Capsule())
+                        .font(.body)
+                        .foregroundStyle(Color(.textPrimary))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 17)
                 }
-                .buttonStyle(.plain)
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
-    private func makeContinueButton() -> some View {
-        Button {
-            presenter.continueButtonTapped()
-        } label: {
-            Text(L10n.Common.continueButton)
-                .font(.system(size: 20, weight: .medium))
-                .foregroundStyle(Color(.backgroundPrimary))
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-                .background(Color(.textPrimary))
-                .clipShape(Capsule())
-        }
-        .disabled(!viewModel.canContinue)
-        .opacity(viewModel.canContinue ? 1 : 0.55)
-        .background(Color(.surfaceHighlight))
+        .padding(.horizontal, 24)
     }
 }

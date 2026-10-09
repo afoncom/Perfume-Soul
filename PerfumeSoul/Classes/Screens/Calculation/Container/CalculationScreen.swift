@@ -2,9 +2,6 @@
 //  CalculationScreen.swift
 //  PerfumeSoul
 //
-//  Created by afon.com on 26.03.2026.
-//  Copyright © 2026 afon.com. All rights reserved.
-//
 
 import SwiftUI
 
@@ -13,33 +10,62 @@ struct CalculationScreen: View {
     private let presenter: CalculationPresenter
     @FocusState private var focusedField: Field?
     @State private var activePicker: PickerSheet?
-    
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @ScaledMetric(relativeTo: .title2) private var headingSize = 27
+
     init(
-        viewModel: CalculationViewModel,
-        presenter: CalculationPresenter
+        viewModel: CalculationViewModel, presenter: CalculationPresenter
     ) {
         self.viewModel = viewModel
         self.presenter = presenter
     }
-    
+
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 0) {
-                makeHeaderView()
-                    .padding(.bottom, 48)
-                makeFormCard()
-                makeContinueButton()
-                    .padding(.top, 32)
+                PerfumeFlowHeader(section: L10n.PerfumeFlow.inputSection, step: 1)
+                    .padding(.bottom, 24)
+
+                PerfumeStudioBanner(
+                    title: L10n.PerfumeFlow.heroTitle,
+                    caption: L10n.PerfumeFlow.heroCaption
+                )
+                .padding(.bottom, 28)
+
+                Text(L10n.Screen.calculationCreateProfile)
+                    .font(.system(size: headingSize, weight: .semibold))
+                    .tracking(-0.7)
+                    .foregroundStyle(Color(.textPrimary))
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Text(L10n.Calculation.subtitle)
+                    .font(.subheadline)
+                    .foregroundStyle(Color(.descriptionText))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .lineSpacing(3)
+                    .padding(.top, 10)
+                    .padding(.bottom, 22)
+
+                makeForm()
             }
             .padding(.horizontal, 24)
-            .padding(.top, 48)
-            .padding(.bottom, 180)
+            .padding(.top, 20)
+            .padding(.bottom, 28)
         }
-        .background {
-            Image(.calculationBackground)
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
+        .background(Color(.backgroundPrimary))
+        .preferredColorScheme(.light)
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            PerfumePrimaryButton(title: L10n.PerfumeFlow.createProfile) {
+                focusedField = nil
+                Task {
+                    await presenter.continueButtonTapped()
+                }
+            }
+            .disabled(!viewModel.isContinueEnabled)
+            .padding(.horizontal, 24)
+            .padding(.top, 12)
+            .padding(.bottom, 8)
+            .background(Color(.backgroundPrimary).ignoresSafeArea(edges: .bottom))
         }
         .scrollDismissesKeyboard(.interactively)
         .sheet(item: $activePicker) { picker in
@@ -71,40 +97,40 @@ extension CalculationScreen {
         case birthTime
         case birthPlace
 
-        var id: Self {
-            self
-        }
+        var id: Self { self }
     }
-}
 
-extension CalculationScreen {
-    func makeHeaderView() -> some View {
-        Text(L10n.Screen.calculationCreateProfile)
-            .font(.system(size: 34, weight: .regular, design: .serif))
-            .foregroundStyle(Color(.textPrimary))
-            .lineLimit(3)
-            .minimumScaleFactor(0.8)
-            .frame(maxWidth: .infinity, alignment: .leading)
-    }
-    
-    func makeFormCard() -> some View {
-        VStack(alignment: .leading, spacing: 0) {
+    private func makeForm() -> some View {
+        VStack(spacing: 12) {
             makeNameField()
-            Divider()
-            makeBirthDateField()
-            Divider()
-            makeBirthTimeField()
-            Divider()
-            makeBirthPlaceField()
+
+            if dynamicTypeSize.isAccessibilitySize {
+                makeBirthDateField()
+                makeBirthTimeField()
+            } else {
+                HStack(alignment: .top, spacing: 12) {
+                    makeBirthDateField()
+                    makeBirthTimeField()
+                }
+            }
+
+            makePickerButton(
+                title: L10n.Calculation.birthPlaceTitle,
+                value: viewModel.birthPlace.isEmpty ? L10n.Calculation.birthPlacePlaceholder : viewModel.birthPlace,
+                isPlaceholder: viewModel.birthPlace.isEmpty
+            ) {
+                focusedField = nil
+                activePicker = .birthPlace
+            }
         }
     }
-    
-    func makeNameField() -> some View {
-        VStack(alignment: .leading, spacing: 6) {
+
+    private func makeNameField() -> some View {
+        VStack(alignment: .leading, spacing: 8) {
             Text(L10n.Calculation.nameTitle)
-                .font(.subheadline)
-                .foregroundStyle(Color(.textPrimary))
-            
+                .font(.caption)
+                .foregroundStyle(Color(.descriptionText))
+
             TextField(L10n.Calculation.namePlaceholder, text: $viewModel.firstName)
                 .focused($focusedField, equals: .name)
                 .submitLabel(.next)
@@ -118,86 +144,63 @@ extension CalculationScreen {
                     }
                 }
         }
-        .padding(.vertical, 16)
+        .padding(16)
+        .frame(maxWidth: .infinity, minHeight: 82, alignment: .leading)
+        .background(Color(.textPrimary).opacity(0.035))
     }
-    
-    func makeBirthDateField() -> some View {
+
+    private func makeBirthDateField() -> some View {
         makePickerButton(
             title: L10n.Calculation.birthDateTitle,
-            value: viewModel.birthDate.formatted(.dateTime.day().month(.wide).year())
+            value: viewModel.birthDateDisplayText
         ) {
             focusedField = nil
             activePicker = .birthDate
         }
     }
-    
-    func makeBirthTimeField() -> some View {
+
+    private func makeBirthTimeField() -> some View {
         makePickerButton(
             title: L10n.Calculation.birthTimeTitle,
-            value: viewModel.birthTime.formatted(.dateTime.hour().minute())
+            value: viewModel.birthTimeDisplayText
         ) {
             focusedField = nil
             activePicker = .birthTime
         }
     }
-    
-    func makeBirthPlaceField() -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            makePickerButton(
-                title: L10n.Calculation.birthPlaceTitle,
-                value: viewModel.birthPlace.isEmpty ? L10n.Calculation.birthPlacePlaceholder : viewModel.birthPlace,
-                valueColor: viewModel.birthPlace.isEmpty ? Color(.descriptionText) : Color(.textPrimary)
-            ) {
-                focusedField = nil
-                activePicker = .birthPlace
-            }
 
-            Divider()
-        }
-    }
-
-    // MARK: - Continue Button
-    func makeContinueButton() -> some View {
-        Button {
-            Task {
-                await presenter.continueButtonTapped()
-            }
-        } label: {
-            Text(L10n.Common.continueButton)
-                .font(.title2)
-                .fontWeight(.medium)
-                .foregroundStyle(Color(.backgroundPrimary))
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 14)
-                .background(Color(.textPrimary))
-                .clipShape(Capsule())
-        }
-        .disabled(!viewModel.isContinueEnabled)
-        .opacity(viewModel.isContinueEnabled ? 1 : 0.6)
-    }
-    
-    // MARK: - Display info view
-    func makePickerButton(
+    private func makePickerButton(
         title: String,
         value: String,
-        valueColor: Color = Color(.descriptionText),
+        isPlaceholder: Bool = false,
         action: @escaping () -> Void
     ) -> some View {
         Button(action: action) {
-            VStack(alignment: .leading, spacing: 6) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text(title)
-                    .font(.subheadline)
-                    .foregroundStyle(Color(.textPrimary))
+                    .font(.caption)
+                    .foregroundStyle(Color(.descriptionText))
 
-                Text(value)
-                    .font(.body)
-                    .foregroundStyle(valueColor)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    Text(value)
+                        .font(.body)
+                        .foregroundStyle(isPlaceholder ? Color(.descriptionText) : Color(.textPrimary))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    Image(systemName: "chevron.down")
+                        .font(.system(size: 10, weight: .medium))
+                        .foregroundStyle(Color(.textPrimary))
+                        .accessibilityHidden(true)
+                }
             }
-            .padding(.vertical, 16)
+            .padding(16)
+            .frame(maxWidth: .infinity, minHeight: 82, alignment: .leading)
+            .background(Color(.textPrimary).opacity(0.035))
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .accessibilityElement(children: .combine)
     }
 }
 
@@ -222,7 +225,7 @@ private struct BirthPlaceSearchSheet: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(L10n.Calculation.birthPlaceTitle)
-                .font(.system(size: 30, weight: .regular, design: .serif))
+                .font(.title2.weight(.semibold))
                 .foregroundStyle(Color(.textPrimary))
                 .padding(.bottom, 16)
 
@@ -302,14 +305,12 @@ private struct BirthPlaceSearchSheet: View {
                 .accessibilityLabel(L10n.Calculation.birthPlaceClearSearch)
             }
         }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 12)
-        .background(Color(.placeholderSoft))
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .stroke(Color(.inputBorder), lineWidth: 1)
-        )
+        .padding(.vertical, 16)
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(Color(.textPrimary))
+                .frame(height: 1)
+        }
     }
 
     @ViewBuilder
@@ -347,7 +348,7 @@ private struct BirthPlaceSearchSheet: View {
                             } label: {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(suggestion.completion.title.isEmpty ? suggestion.displayName : suggestion.completion.title)
-                                        .font(.system(size: 21, weight: .regular, design: .serif))
+                                        .font(.body.weight(.medium))
                                         .foregroundStyle(Color(.textPrimary))
 
                                     if !suggestion.completion.subtitle.isEmpty {
@@ -379,12 +380,12 @@ private struct BirthPlaceSearchSheet: View {
         HStack(alignment: .top, spacing: 8) {
             Image(systemName: "exclamationmark.circle.fill")
                 .font(.footnote.weight(.semibold))
-                .foregroundStyle(Color(.destructiveAccent))
+                .foregroundStyle(Color(.textPrimary))
                 .accessibilityHidden(true)
 
             Text(message)
                 .font(.footnote)
-                .foregroundStyle(Color(.destructiveAccent))
+                .foregroundStyle(Color(.textPrimary))
 
             Spacer(minLength: 0)
 
@@ -394,7 +395,7 @@ private struct BirthPlaceSearchSheet: View {
                 } label: {
                     Image(systemName: "arrow.clockwise")
                         .font(.footnote.weight(.semibold))
-                        .foregroundStyle(Color(.destructiveAccent))
+                        .foregroundStyle(Color(.textPrimary))
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
                 }
@@ -645,7 +646,7 @@ private func makeSheetHeader(
 
         Button(localized("calculation.picker.doneButton"), action: onDone)
             .font(.headline)
-            .foregroundStyle(Color(.pinkButton))
+            .foregroundStyle(Color(.textPrimary))
     }
 }
 

@@ -11,87 +11,103 @@ import SwiftUI
 struct PersonalPerfumeScreen: View {
     @Bindable private var viewModel: PersonalPerfumeViewModel
     private let presenter: PersonalPerfumePresenter
+    @ScaledMetric(relativeTo: .largeTitle) private var headingSize = 32
 
-    init(
-        viewModel: PersonalPerfumeViewModel,
-        presenter: PersonalPerfumePresenter
-    ) {
+    init(viewModel: PersonalPerfumeViewModel, presenter: PersonalPerfumePresenter) {
         self.viewModel = viewModel
         self.presenter = presenter
     }
 
     var body: some View {
-        let bottomPadding = presenter.shouldShowContinueButton ? 96.0 : 32.0
-
         ScrollView(.vertical, showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 18) {
-                if presenter.shouldShowContinueButton {
-                    makeHeaderView()
-                }
-                makeSectionsView()
+            VStack(alignment: .leading, spacing: 32) {
+                makeHeader()
+                    .padding(.horizontal, 24)
+
+                makeSections()
             }
-            .padding(.horizontal, 16)
-            .padding(.top, 24)
-            .padding(.bottom, bottomPadding)
+            .padding(.top, 20)
+            .padding(.bottom, 32)
         }
-        .background(
-            LinearGradient(
-                colors: [
-                    Color(.backgroundPrimary)
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-        )
+        .background(Color(.backgroundPrimary))
+        .preferredColorScheme(.light)
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            if presenter.shouldShowContinueButton {
+                PerfumePrimaryButton(title: L10n.Common.continueButton) {
+                    presenter.continueButtonTapped()
+                }
+                .disabled(!viewModel.canContinue)
+                .padding(.horizontal, 24)
+                .padding(.top, 12)
+                .padding(.bottom, 8)
+                .background(Color(.backgroundPrimary).ignoresSafeArea(edges: .bottom))
+            }
+        }
         .task {
             await presenter.onAppear()
-        }
-        .overlay(alignment: .top) {
-            if presenter.shouldShowContinueButton {
-                makeTopSafeAreaBackground()
-            }
-        }
-        .safeAreaInset(edge: .bottom) {
-            if presenter.shouldShowContinueButton {
-                makeContinueButton()
-                    .padding(.horizontal, 24)
-                    .padding(.top, 12)
-                    .padding(.bottom, 8)
-            }
         }
     }
 }
 
 extension PersonalPerfumeScreen {
-    private func makeTopSafeAreaBackground() -> some View {
-        GeometryReader { proxy in
-            Color(.backgroundPrimary)
-                .frame(height: proxy.safeAreaInsets.top)
-                .frame(maxHeight: .infinity, alignment: .top)
-                .ignoresSafeArea(edges: .top)
+    private func makeHeader() -> some View {
+        VStack(alignment: .leading, spacing: 28) {
+            PerfumeFlowHeader(section: L10n.PersonalPerfume.collectionSection, step: nil)
+
+            VStack(alignment: .leading, spacing: 12) {
+                Text(L10n.PersonalPerfume.title)
+                    .font(.system(size: headingSize, weight: .semibold))
+                    .tracking(-0.8)
+                    .foregroundStyle(Color(.textPrimary))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityAddTraits(.isHeader)
+
+                Text(L10n.PersonalPerfume.subtitle)
+                    .font(.subheadline)
+                    .foregroundStyle(Color(.descriptionText))
+                    .lineSpacing(3)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
         }
-        .allowsHitTesting(false)
     }
 
     @ViewBuilder
-    private func makeSectionsView() -> some View {
+    private func makeSections() -> some View {
         switch viewModel.state {
         case .loading:
-            makeLoadingState()
+            VStack(spacing: 16) {
+                ProgressView()
+                    .tint(Color(.textPrimary))
+                Text(L10n.PersonalPerfume.loading)
+                    .font(.subheadline)
+                    .foregroundStyle(Color(.descriptionText))
+            }
+            .frame(maxWidth: .infinity, minHeight: 240)
+            .padding(.horizontal, 24)
         case let .content(sections):
-            makeContentState(sections: sections)
+            VStack(spacing: 36) {
+                ForEach(Array(sections.enumerated()), id: \.offset) { index, section in
+                    PersonalPerfumeCollectionSection(section: section, index: index) { perfume in
+                        presenter.perfumeTapped(perfume)
+                    }
+                }
+            }
         case .empty:
-            makeEmptyState()
+            makeMessage(
+                title: L10n.PersonalPerfume.Empty.title,
+                subtitle: L10n.PersonalPerfume.Empty.subtitle,
+                canRetry: false,
+                canSkip: false
+            )
         case .missingProfileCalculation:
-            makeErrorState(
+            makeMessage(
                 title: L10n.PersonalPerfume.Error.MissingProfile.title,
                 subtitle: L10n.PersonalPerfume.Error.MissingProfile.subtitle,
                 canRetry: false,
                 canSkip: presenter.isPresentedInOnboarding
             )
         case .requestFailed:
-            makeErrorState(
+            makeMessage(
                 title: L10n.PersonalPerfume.Error.RequestFailed.title,
                 subtitle: L10n.PersonalPerfume.Error.RequestFailed.subtitle,
                 canRetry: true,
@@ -100,178 +116,27 @@ extension PersonalPerfumeScreen {
         }
     }
 
-    private func makeHeaderView() -> some View {
-        VStack(spacing: 8) {
-            if presenter.isPresentedInOnboarding {
-                Text(L10n.PersonalPerfume.title)
-                    .font(.system(size: 28, weight: .medium, design: .rounded))
-                    .foregroundStyle(Color(.titleText))
-                    .multilineTextAlignment(.center)
-            }
+    private func makeMessage(title: String, subtitle: String, canRetry: Bool, canSkip: Bool) -> some View {
+        VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 12) {
+                Text(title)
+                    .font(.title2.weight(.semibold))
+                    .foregroundStyle(Color(.textPrimary))
 
-            Text(L10n.PersonalPerfume.subtitle)
-                .font(.system(size: 18, weight: .regular, design: .rounded))
-                .foregroundStyle(Color(.descriptionText))
-                .multilineTextAlignment(.center)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.top, 8)
-        .padding(.bottom, 8)
-    }
-
-    private func makePerfumeSection(section: PersonalPerfumeSection) -> some View {
-        VStack(alignment: .leading, spacing: 14) {
-            Text(section.title)
-                .font(.system(size: 22, weight: .medium, design: .rounded))
-                .foregroundStyle(Color(.titleText))
-
-            VStack(alignment: .leading, spacing: 16) {
-                HStack(alignment: .top, spacing: 12) {
-                    ForEach(Array(section.perfumes.enumerated()), id: \.offset) { _, perfume in
-                        makePerfumeItem(perfume: perfume)
-                    }
-                }
-
-                Text(section.description)
-                    .font(.system(size: 16, weight: .regular, design: .rounded))
+                Text(subtitle)
+                    .font(.subheadline)
                     .foregroundStyle(Color(.descriptionText))
-                    .fixedSize(horizontal: false, vertical: true)
+                    .lineSpacing(3)
             }
-            .padding(14)
-            .background(Color(.purpleTable))
-            .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: 22, style: .continuous)
-                    .stroke(Color(.tableBorder), lineWidth: 1)
-            )
-        }
-    }
-
-    private func makePerfumeItem(perfume: PersonalPerfumeItem) -> some View {
-        Button {
-            presenter.perfumeTapped(perfume)
-        } label: {
-            VStack(spacing: 10) {
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .fill(Color(.surfacePrimary))
-                    .frame(height: 108)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .stroke(Color(.cardBorder), lineWidth: 1)
-                    )
-
-                VStack(spacing: 4) {
-                    Text(perfume.name)
-                        .font(.system(size: 15, weight: .medium, design: .rounded))
-                        .foregroundStyle(Color(.titleText))
-                        .multilineTextAlignment(.center)
-                        .lineLimit(2)
-
-                    Text(perfume.subtitle)
-                        .font(.system(size: 14, weight: .regular, design: .rounded))
-                        .foregroundStyle(Color(.descriptionText))
-                        .multilineTextAlignment(.center)
-                        .lineLimit(1)
-                        .truncationMode(.tail)
-                        .frame(minHeight: 18, alignment: .top)
-
-                    Spacer(minLength: 0)
-
-                    makeMatchBadge(matchPercentage: perfume.matchPercentage)
-                }
-                .frame(minHeight: 80, alignment: .top)
-            }
-        }
-        .frame(maxWidth: .infinity, alignment: .top)
-        .buttonStyle(.plain)
-    }
-
-    private func makeMatchBadge(matchPercentage: Int) -> some View {
-        Text(L10n.PersonalPerfume.matchFormat(matchPercentage))
-            .font(.system(size: 11, weight: .bold, design: .rounded))
-            .lineLimit(1)
-            .minimumScaleFactor(0.75)
-            .frame(maxWidth: .infinity)
-            .padding(.horizontal, 6)
-            .padding(.vertical, 5)
-            .foregroundStyle(Color(.pinkButton))
-            .background(Color(.pinkButton).opacity(0.12))
-            .clipShape(Capsule())
-    }
-
-    private func makeContentState(sections: [PersonalPerfumeSection]) -> some View {
-        VStack(alignment: .leading, spacing: 18) {
-            ForEach(Array(sections.enumerated()), id: \.offset) { _, section in
-                makePerfumeSection(section: section)
-            }
-        }
-    }
-
-    private func makeLoadingState() -> some View {
-        ProgressView()
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 32)
-    }
-
-    private func makeErrorState(
-        title: String,
-        subtitle: String,
-        canRetry: Bool,
-        canSkip: Bool
-    ) -> some View {
-        makeMessageState(
-            title: title,
-            subtitle: subtitle,
-            canRetry: canRetry,
-            canSkip: canSkip
-        )
-    }
-
-    private func makeEmptyState() -> some View {
-        makeMessageState(
-            title: L10n.PersonalPerfume.Empty.title,
-            subtitle: L10n.PersonalPerfume.Empty.subtitle,
-            canRetry: false,
-            canSkip: false
-        )
-    }
-
-    private func makeMessageState(
-        title: String,
-        subtitle: String,
-        canRetry: Bool,
-        canSkip: Bool
-    ) -> some View {
-        VStack(spacing: 12) {
-            Text(title)
-                .font(.headline)
-                .foregroundStyle(Color(.textPrimary))
-                .multilineTextAlignment(.center)
-
-            Text(subtitle)
-                .font(.subheadline)
-                .foregroundStyle(Color(.textSecondary))
-                .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(20)
+            .background(Color(.textPrimary).opacity(0.035))
 
             if canRetry {
-                Button {
-                    Task {
-                        await presenter.retryButtonTapped()
-                    }
-                } label: {
-                    Text(L10n.PersonalPerfume.retryButton)
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color(.textPrimary))
-                        .padding(.horizontal, 18)
-                        .padding(.vertical, 10)
-                        .background(Color(.surfacePrimary))
-                        .clipShape(Capsule())
-                        .overlay(
-                            Capsule()
-                                .stroke(Color(.cardBorder), lineWidth: 1)
-                        )
+                PerfumePrimaryButton(title: L10n.PersonalPerfume.retryButton) {
+                    Task { await presenter.retryButtonTapped() }
                 }
-                .buttonStyle(.plain)
             }
 
             if canSkip {
@@ -279,42 +144,180 @@ extension PersonalPerfumeScreen {
                     presenter.skipButtonTapped()
                 } label: {
                     Text(L10n.PersonalPerfume.skipButton)
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color(.textOnAccent))
-                        .padding(.horizontal, 18)
-                        .padding(.vertical, 10)
-                        .background(Color(.pinkButton))
-                        .clipShape(Capsule())
+                        .font(.body.weight(.medium))
+                        .foregroundStyle(Color(.textPrimary))
+                        .padding(16)
+                        .frame(maxWidth: .infinity, minHeight: 56)
+                        .overlay {
+                            Rectangle().stroke(Color(.inputBorder), lineWidth: 1)
+                        }
+                        .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
             }
         }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 32)
-        .padding(.horizontal, 20)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .stroke(Color(.cardBorder), lineWidth: 1)
-        )
-        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
+        .padding(.horizontal, 24)
+    }
+}
+
+private struct PersonalPerfumeCollectionSection: View {
+    let section: PersonalPerfumeSection
+    let index: Int
+    let onSelect: (PersonalPerfumeItem) -> Void
+
+    @State private var visiblePerfumeID: Int?
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 12) {
+                Rectangle()
+                    .fill(Color(.inputBorder))
+                    .frame(height: 1)
+                    .accessibilityHidden(true)
+
+                HStack(alignment: .firstTextBaseline, spacing: 16) {
+                    Text(section.title)
+                        .font(.title2.weight(.semibold))
+                        .tracking(-0.4)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityAddTraits(.isHeader)
+
+                    Spacer(minLength: 0)
+
+                    Text(String(format: "%02d", index + 1))
+                        .font(.caption.monospacedDigit())
+                        .foregroundStyle(Color(.descriptionText))
+                        .accessibilityHidden(true)
+                }
+                .foregroundStyle(Color(.textPrimary))
+
+                Text(section.description)
+                    .font(.subheadline)
+                    .foregroundStyle(Color(.descriptionText))
+                    .lineSpacing(3)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(.horizontal, 24)
+
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(spacing: 28) {
+                    ForEach(section.perfumes, id: \.id) { perfume in
+                        PersonalPerfumeCard(perfume: perfume) { onSelect(perfume) }
+                    }
+                }
+                .padding(.horizontal, 24)
+            } else {
+                carousel
+            }
+        }
     }
 
-    private func makeContinueButton() -> some View {
-        Button {
-            presenter.continueButtonTapped()
-        } label: {
-            Text(L10n.Common.continueButton)
-                .font(.system(size: 24, weight: .medium, design: .rounded))
-                .foregroundStyle(Color(.textOnAccent))
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 17)
-                .background(Color(.pinkButton))
-                .clipShape(Capsule())
+    private var carousel: some View {
+        VStack(spacing: 16) {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .top, spacing: 16) {
+                    ForEach(section.perfumes, id: \.id) { perfume in
+                        PersonalPerfumeCard(perfume: perfume) { onSelect(perfume) }
+                            .frame(width: 216)
+                            .id(perfume.id)
+                            .scrollTransition(.interactive, axis: .horizontal) { [reduceMotion] content, phase in
+                                content
+                                    .opacity(reduceMotion || phase.isIdentity ? 1 : 0.8)
+                                    .scaleEffect(reduceMotion || phase.isIdentity ? 1 : 0.98)
+                            }
+                    }
+                }
+                .scrollTargetLayout()
+            }
+            .contentMargins(.horizontal, 24, for: .scrollContent)
+            .scrollTargetBehavior(.viewAligned)
+            .scrollPosition(id: $visiblePerfumeID, anchor: .leading)
+
+            if section.perfumes.count > 1 {
+                HStack(alignment: .firstTextBaseline) {
+                    Text(L10n.PersonalPerfume.swipeHint)
+                    Spacer(minLength: 12)
+                    Text(String(format: "%02d / %02d", visibleIndex + 1, section.perfumes.count))
+                        .monospacedDigit()
+                        .fixedSize()
+                }
+                .font(.caption)
+                .foregroundStyle(Color(.descriptionText))
+                .padding(.horizontal, 24)
+            }
         }
-        .disabled(!viewModel.canContinue)
-        .opacity(viewModel.canContinue ? 1 : 0.55)
-        .background(Color(.surfaceHighlight))
+    }
+
+    private var visibleIndex: Int {
+        section.perfumes.firstIndex { $0.id == visiblePerfumeID } ?? 0
+    }
+}
+
+private struct PersonalPerfumeCard: View {
+    let perfume: PersonalPerfumeItem
+    let onSelect: () -> Void
+
+    var body: some View {
+        Button(action: onSelect) {
+            VStack(alignment: .leading, spacing: 16) {
+                // Reserved for a product photograph; intentionally blank until images are supplied.
+                Rectangle()
+                    .fill(Color(.textPrimary).opacity(0.035))
+                    .aspectRatio(1, contentMode: .fit)
+                    .overlay {
+                        Rectangle().strokeBorder(Color(.inputBorder), lineWidth: 1)
+                    }
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: 7) {
+                    Text(perfume.name.uppercased())
+                        .font(.caption.weight(.medium))
+                        .tracking(0.8)
+                        .foregroundStyle(Color(.descriptionText))
+
+                    Text(perfume.subtitle)
+                        .font(.title3.weight(.medium))
+                        .tracking(-0.3)
+                }
+                .fixedSize(horizontal: false, vertical: true)
+
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    Text(L10n.PersonalPerfume.matchFormat(perfume.matchPercentage))
+                        .font(.caption.weight(.medium))
+                        .monospacedDigit()
+                    Spacer(minLength: 0)
+                    Image(systemName: "arrow.up.right")
+                        .font(.subheadline)
+                        .accessibilityHidden(true)
+                }
+                .padding(.top, 12)
+                .overlay(alignment: .top) {
+                    Rectangle().fill(Color(.inputBorder)).frame(height: 1)
+                }
+            }
+            .foregroundStyle(Color(.textPrimary))
+            .multilineTextAlignment(.leading)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(PersonalPerfumeCardStyle())
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(
+            "\(perfume.name), \(perfume.subtitle), \(L10n.PersonalPerfume.matchFormat(perfume.matchPercentage))"
+        )
+        .accessibilityHint(L10n.PersonalPerfume.openDetailsHint)
+    }
+}
+
+private struct PersonalPerfumeCardStyle: ButtonStyle {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .opacity(configuration.isPressed ? 0.7 : 1)
+            .scaleEffect(configuration.isPressed && !reduceMotion ? 0.985 : 1)
+            .animation(reduceMotion ? nil : .easeOut(duration: 0.15), value: configuration.isPressed)
     }
 }
