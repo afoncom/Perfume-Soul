@@ -12,9 +12,17 @@ import CoreData
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     let coreDataManager: CoreDataManager = CoreDataManagerImpl()
-    private let requestManager: RequestManager = RequestManagerImpl(
+    private let isLocalServerEnabled = false
+
+    private var baseURL: String {
+        isLocalServerEnabled
+            ? "http://127.0.0.1:8080"
+            : "http://82.97.248.219"
+    }
+
+    private lazy var requestManager: RequestManager = RequestManagerImpl(
         urlSession: URLSession.shared,
-        baseURL: "http://127.0.0.1:8080"
+        baseURL: baseURL
     )
     
     func scene(
