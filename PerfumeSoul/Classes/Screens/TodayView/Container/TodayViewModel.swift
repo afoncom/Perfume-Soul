@@ -13,4 +13,12 @@ import Observation
     var dailyHoroscopes: [DailyHoroscope] = []
     var personalHoroscope: DailyHoroscope?
     var viewState: TodayScreen.ViewState = .loading
+
+    var dateText: String {
+        Date().formatted(.dateTime.weekday(.wide).day().month(.wide))
+    }
+
+    func historyDateText(year: Int) -> String {
+        "\(Date().formatted(.dateTime.day().month(.wide))) \(year)"
+    }
 }

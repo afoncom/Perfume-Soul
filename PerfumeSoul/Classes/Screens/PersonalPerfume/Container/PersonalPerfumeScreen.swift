@@ -75,14 +75,7 @@ extension PersonalPerfumeScreen {
     private func makeSections() -> some View {
         switch viewModel.state {
         case .loading:
-            VStack(spacing: 16) {
-                ProgressView()
-                    .tint(Color(.textPrimary))
-                Text(L10n.PersonalPerfume.loading)
-                    .font(.subheadline)
-                    .foregroundStyle(Color(.descriptionText))
-            }
-            .frame(maxWidth: .infinity, minHeight: 240)
+            PersonalPerfumeLoadingView()
             .padding(.horizontal, 24)
         case let .content(sections):
             VStack(spacing: 36) {
@@ -157,6 +150,53 @@ extension PersonalPerfumeScreen {
             }
         }
         .padding(.horizontal, 24)
+    }
+}
+
+private struct PersonalPerfumeLoadingView: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var isAnimating = false
+
+    var body: some View {
+        VStack(spacing: 28) {
+            HStack(spacing: 14) {
+                makeBlotter(height: 70, movement: 5, delay: 0)
+                makeBlotter(height: 94, movement: -7, delay: 0.12)
+                makeBlotter(height: 78, movement: 6, delay: 0.24)
+            }
+            .frame(height: 108)
+            .accessibilityHidden(true)
+
+            Text(L10n.PersonalPerfume.loading)
+                .font(.subheadline)
+                .foregroundStyle(Color(.descriptionText))
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, minHeight: 280)
+        .accessibilityElement(children: .combine)
+        .task {
+            guard !reduceMotion else {
+                return
+            }
+            isAnimating = true
+        }
+    }
+
+    private func makeBlotter(height: Double, movement: Double, delay: Double) -> some View {
+        Rectangle()
+            .fill(Color(.backgroundPrimary))
+            .frame(width: 22, height: height)
+            .overlay {
+                Rectangle().strokeBorder(Color(.textPrimary), lineWidth: 1)
+            }
+            .offset(y: reduceMotion ? 0 : (isAnimating ? movement : -movement))
+            .animation(
+                reduceMotion
+                    ? nil
+                    : .easeInOut(duration: 0.9).repeatForever(autoreverses: true).delay(delay),
+                value: isAnimating
+            )
     }
 }
 

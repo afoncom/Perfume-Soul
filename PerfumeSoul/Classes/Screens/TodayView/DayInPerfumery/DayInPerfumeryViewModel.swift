@@ -16,4 +16,8 @@ import Observation
     init(historyFact: PerfumeHistory) {
         self.historyFact = historyFact
     }
+
+    var dateText: String {
+        "\(Date().formatted(.dateTime.day().month(.wide))) \(historyFact.year)"
+    }
 }

@@ -11,7 +11,10 @@ import SwiftUI
 struct DayInPerfumeryScreen: View {
     @Bindable private var viewModel: DayInPerfumeryViewModel
     private let presenter: DayInPerfumeryPresenter
-    
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @ScaledMetric(relativeTo: .largeTitle) private var headingSize = 32
+    @ScaledMetric(relativeTo: .largeTitle) private var dateSize = 48
+
     init(
         viewModel: DayInPerfumeryViewModel,
         presenter: DayInPerfumeryPresenter
@@ -19,61 +22,76 @@ struct DayInPerfumeryScreen: View {
         self.viewModel = viewModel
         self.presenter = presenter
     }
-    
+
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            VStack(spacing: 20) {
-                makeHeaderView()
+            VStack(alignment: .leading, spacing: 32) {
+                PerfumeFlowHeader(section: L10n.Today.History.title, step: nil)
+
+                makeHeader()
                 makeImagePlaceholder()
-                makeDescriptionView()
+                makeStory()
             }
-            .padding(.horizontal, 18)
+            .padding(.horizontal, 24)
             .padding(.top, 20)
-            .padding(.bottom, 28)
+            .padding(.bottom, 40)
         }
-        .background(Color(.backgroundPrimary).ignoresSafeArea())
+        .background(Color(.backgroundPrimary))
+        .foregroundStyle(Color(.textPrimary))
+        .preferredColorScheme(.light)
         .navigationBarTitleDisplayMode(.inline)
     }
 }
 
-private extension DayInPerfumeryScreen {
-    func makeHeaderView() -> some View {
-        VStack(spacing: 8) {
+extension DayInPerfumeryScreen {
+    private func makeHeader() -> some View {
+        VStack(alignment: .leading, spacing: 24) {
+            Text(viewModel.dateText)
+                .font(
+                    dynamicTypeSize.isAccessibilitySize
+                        ? .title.weight(.light)
+                        : .system(size: dateSize, weight: .light)
+                )
+                .tracking(-1.5)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+
+            Rectangle()
+                .fill(Color(.inputBorder))
+                .frame(height: 1)
+                .accessibilityHidden(true)
+
             Text(viewModel.historyFact.perfumeName)
-                .font(.title2)
-                .fontWeight(.semibold)
-                .foregroundStyle(Color(.textPrimary))
-                .multilineTextAlignment(.center)
-        }
-        .frame(maxWidth: .infinity)
-    }
-    
-    func makeImagePlaceholder() -> some View {
-        RoundedRectangle(cornerRadius: 24, style: .continuous)
-            .fill(Color(.placeholderMedium))
-            .frame(height: 220)
-            .overlay {
-                VStack(spacing: 10) {
-                    Image(systemName: "sparkles")
-                        .font(.title)
-                        .foregroundStyle(Color(.pinkButton))
-                    
-                    Text(viewModel.historyFact.perfumeName)
-                        .font(.title3)
-                        .fontWeight(.medium)
-                        .foregroundStyle(Color(.textPrimary))
-                }
-            }
-    }
-    
-    func makeDescriptionView() -> some View {
-        VStack(alignment: .leading, spacing: 18) {
-            Text(viewModel.historyFact.fullStory)
+                .font(.system(size: headingSize, weight: .semibold))
+                .tracking(-0.8)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityAddTraits(.isHeader)
+
+            Text(viewModel.historyFact.shortStory)
+                .font(.title3)
+                .foregroundStyle(Color(.descriptionText))
+                .lineSpacing(5)
                 .fixedSize(horizontal: false, vertical: true)
         }
-        .font(.body)
-        .foregroundStyle(Color(.textPrimary))
-        .lineSpacing(4)
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private func makeImagePlaceholder() -> some View {
+        // Reserved for the historical fragrance photograph.
+        Rectangle()
+            .fill(Color(.textPrimary).opacity(0.035))
+            .aspectRatio(4.0 / 3.0, contentMode: .fit)
+            .overlay {
+                Rectangle().strokeBorder(Color(.inputBorder), lineWidth: 1)
+            }
+            .accessibilityHidden(true)
+    }
+
+    private func makeStory() -> some View {
+        Text(viewModel.historyFact.fullStory)
+            .font(.body)
+            .lineSpacing(7)
+            .fixedSize(horizontal: false, vertical: true)
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
