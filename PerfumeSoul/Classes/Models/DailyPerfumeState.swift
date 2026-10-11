@@ -20,7 +20,7 @@ enum DailyPerfumeReaction: String, Codable, Equatable {
     case dismissed
 }
 
-struct DailyPerfumeState: Codable, Equatable {
+struct DailyPerfumeState: StorableViewState, Equatable {
     var profileCalculationCacheKey: String?
     var dayKey: String
     var currentPerfume: DailyPerfumeSummary?

@@ -19,7 +19,10 @@ final class PerfumeCollectionStorageTests: XCTestCase {
     }
 
     func testStorageMigratesSavedAndDislikedPerfumesFromDailyState() {
-        DailyPerfumeStateStorageImpl(userDefaults: userDefaults).saveState(
+        ViewStateStorage<DailyPerfumeState>(
+            userDefaults: userDefaults,
+            storableKey: "dailyPerfume.state"
+        ).saveState(
             DailyPerfumeState(profileCalculationCacheKey: nil, dayKey: "2026-09-07", currentPerfume: nil, currentReaction: nil, shownPerfumeIDs: [], savedPerfumes: [DailyPerfumeSummary(id: 42, perfumeName: "Blanche", brandName: "Byredo")], dislikedPerfumeIDs: [8], lastShownBrand: nil)
         )
 

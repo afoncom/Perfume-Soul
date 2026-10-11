@@ -11,7 +11,7 @@ final class PersonalPerfumePresenterTests: XCTestCase {
             profileCalculation: try makeCalculation(),
             isPresentedInOnboarding: false,
             topStorage: PersonalPerfumeTopStorageMock(),
-            recommendedStateStorage: RecommendedPerfumeStateStorageMock()
+            recommendedStateStorage: makeRecommendedStateStorage()
         )
 
         await presenter.onAppear()
@@ -33,7 +33,7 @@ final class PersonalPerfumePresenterTests: XCTestCase {
             profileCalculation: try makeCalculation(),
             isPresentedInOnboarding: false,
             topStorage: PersonalPerfumeTopStorageMock(),
-            recommendedStateStorage: RecommendedPerfumeStateStorageMock()
+            recommendedStateStorage: makeRecommendedStateStorage()
         )
 
         presenter.perfumeTapped(
@@ -63,14 +63,15 @@ private final class PersonalPerfumeTopStorageMock: PersonalPerfumeTopStorage {
     func clear() { }
 }
 
-private final class RecommendedPerfumeStateStorageMock: RecommendedPerfumeStateStorage {
-    func loadState() -> RecommendedPerfumeState? { nil }
-    func saveState(_ state: RecommendedPerfumeState) { }
-    func clearState() { }
-}
+extension PersonalPerfumePresenterTests {
+    private func makeRecommendedStateStorage() -> ViewStateStorage<RecommendedPerfumeState> {
+        ViewStateStorage(
+            userDefaults: .standard,
+            storableKey: "tests.recommendedPerfume.\(UUID().uuidString)"
+        )
+    }
 
-private extension PersonalPerfumePresenterTests {
-    func makeCalculation() throws -> ProfileCalculation {
+    private func makeCalculation() throws -> ProfileCalculation {
         try JSONDecoder().decode(ProfileCalculation.self, from: Data("""
         { "natalChart": { "sun": { "sign": "aries", "longitude": 0 }, "moon": { "sign": "taurus", "longitude": 30 }, "ascendant": { "sign": "gemini", "longitude": 60 } }, "elementBalance": { "fire": 25, "earth": 25, "air": 25, "water": 25 } }
         """.utf8))

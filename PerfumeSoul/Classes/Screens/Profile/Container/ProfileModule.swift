@@ -24,15 +24,24 @@ final class ProfileModule {
             userDefaults: .standard,
             dayKeyProvider: dayKeyProvider
         )
-        let dailyQuizStateStorage = DailyQuizStateStorageImpl(userDefaults: .standard)
-        let dailyPerfumeStateStorage = DailyPerfumeStateStorageImpl(userDefaults: .standard)
+        let dailyQuizStateStorage = ViewStateStorage<DailyQuizState>(
+            userDefaults: .standard,
+            storableKey: "quiz.dailyState"
+        )
+        let dailyPerfumeStateStorage = ViewStateStorage<DailyPerfumeState>(
+            userDefaults: .standard,
+            storableKey: "dailyPerfume.state"
+        )
         let collectionService = PerfumeCollectionServiceImpl(
             storage: PerfumeCollectionStorageImpl(
                 userDefaults: .standard
             )
         )
         let personalPerfumeTopStorage = PersonalPerfumeTopStorageImpl(userDefaults: .standard)
-        let recommendedPerfumeStateStorage = RecommendedPerfumeStateStorageImpl(userDefaults: .standard)
+        let recommendedPerfumeStateStorage = ViewStateStorage<RecommendedPerfumeState>(
+            userDefaults: .standard,
+            storableKey: "recommendedPerfume.state"
+        )
         let appVersionProvider = AppVersionProviderImpl()
         let appReviewRequester = AppReviewRequesterImpl(
             userDefaults: .standard,

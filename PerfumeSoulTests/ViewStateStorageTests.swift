@@ -1,14 +1,14 @@
 import XCTest
 @testable import PerfumeSoul
 
-final class DailyPerfumeStateStorageTests: XCTestCase {
+final class ViewStateStorageTests: XCTestCase {
     private var userDefaults: UserDefaults!
     private var suiteName: String!
 
     override func setUp() {
         super.setUp()
 
-        suiteName = "DailyPerfumeStateStorageTests.\(UUID().uuidString)"
+        suiteName = "ViewStateStorageTests.\(UUID().uuidString)"
         userDefaults = UserDefaults(suiteName: suiteName)
         userDefaults.removePersistentDomain(forName: suiteName)
     }
@@ -22,7 +22,7 @@ final class DailyPerfumeStateStorageTests: XCTestCase {
     }
 
     func testStorageRoundTripsDailyPerfumeState() {
-        let storage = DailyPerfumeStateStorageImpl(userDefaults: userDefaults)
+        let storage = makeStorage()
         let expected = makeState()
 
         storage.saveState(expected)
@@ -32,15 +32,15 @@ final class DailyPerfumeStateStorageTests: XCTestCase {
 
     func testStorageRestoresStateAfterStorageRecreation() {
         let expected = makeState()
-        DailyPerfumeStateStorageImpl(userDefaults: userDefaults).saveState(expected)
+        makeStorage().saveState(expected)
 
-        let restoredState = DailyPerfumeStateStorageImpl(userDefaults: userDefaults).loadState()
+        let restoredState = makeStorage().loadState()
 
         XCTAssertEqual(restoredState, expected)
     }
 
     func testClearStateRemovesPersistedDailyPerfumeState() {
-        let storage = DailyPerfumeStateStorageImpl(userDefaults: userDefaults)
+        let storage = makeStorage()
         storage.saveState(makeState())
 
         storage.clearState()
@@ -56,17 +56,21 @@ final class DailyPerfumeStateStorageTests: XCTestCase {
                 from: DateComponents(year: 2026, month: 9, day: 5, hour: 12)
             )
         )
-        let provider = DailyPerfumeDayKeyProviderImpl(
-            calendar: calendar,
-            now: { date }
-        )
+        let provider = DailyPerfumeDayKeyProviderImpl(calendar: calendar) { date }
 
         XCTAssertEqual(provider.todayKey(), "2026-09-05")
     }
 }
 
-private extension DailyPerfumeStateStorageTests {
-    func makeState() -> DailyPerfumeState {
+extension ViewStateStorageTests {
+    private func makeStorage() -> ViewStateStorage<DailyPerfumeState> {
+        ViewStateStorage(
+            userDefaults: userDefaults,
+            storableKey: "dailyPerfume.state"
+        )
+    }
+
+    private func makeState() -> DailyPerfumeState {
         DailyPerfumeState(
             profileCalculationCacheKey: "profileCalculation:v1|1990-01-01",
             dayKey: "2026-09-05",

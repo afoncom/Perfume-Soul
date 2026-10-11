@@ -24,7 +24,10 @@ final class DailyPerfumeModule {
             ),
             service: DailyPerfumeServiceImpl(requestManager: requestManager),
             profileService: profileService,
-            stateStorage: DailyPerfumeStateStorageImpl(userDefaults: .standard),
+            stateStorage: ViewStateStorage<DailyPerfumeState>(
+                userDefaults: .standard,
+                storableKey: "dailyPerfume.state"
+            ),
             collectionService: collectionService,
             dayKeyProvider: DailyPerfumeDayKeyProviderImpl(),
             selectionService: DailyPerfumeSelectionServiceImpl(

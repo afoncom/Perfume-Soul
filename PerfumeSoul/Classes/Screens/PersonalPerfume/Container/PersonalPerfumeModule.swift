@@ -29,7 +29,10 @@ final class PersonalPerfumeModule {
             profileCalculation: profileCalculation,
             isPresentedInOnboarding: onFinish != nil,
             topStorage: PersonalPerfumeTopStorageImpl(userDefaults: .standard),
-            recommendedStateStorage: RecommendedPerfumeStateStorageImpl(userDefaults: .standard)
+            recommendedStateStorage: ViewStateStorage<RecommendedPerfumeState>(
+                userDefaults: .standard,
+                storableKey: "recommendedPerfume.state"
+            )
         )
         
         let view = PersonalPerfumeScreen(viewModel: viewModel, presenter: presenter)

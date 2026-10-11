@@ -25,7 +25,7 @@ final class PersonalPerfumePresenterImpl {
     private let service: PersonalPerfumeService
     private let profileCalculation: ProfileCalculation?
     private let topStorage: PersonalPerfumeTopStorage
-    private let recommendedStateStorage: RecommendedPerfumeStateStorage
+    private let recommendedStateStorage: ViewStateStorage<RecommendedPerfumeState>
     let isPresentedInOnboarding: Bool
 
     var shouldShowContinueButton: Bool {
@@ -39,7 +39,7 @@ final class PersonalPerfumePresenterImpl {
         profileCalculation: ProfileCalculation?,
         isPresentedInOnboarding: Bool,
         topStorage: PersonalPerfumeTopStorage,
-        recommendedStateStorage: RecommendedPerfumeStateStorage
+        recommendedStateStorage: ViewStateStorage<RecommendedPerfumeState>
     ) {
         self.viewModel = viewModel
         self.router = router
