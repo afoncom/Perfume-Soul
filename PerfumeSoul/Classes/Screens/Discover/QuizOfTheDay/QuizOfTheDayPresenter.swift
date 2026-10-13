@@ -22,7 +22,7 @@ final class QuizOfTheDayPresenterImpl {
     private let viewModel: QuizOfTheDayViewModel
     private let router: QuizOfTheDayRouter
     private let service: QuizOfTheDayService
-    private let dailyQuizStateStorage: DailyQuizStateStorage
+    private let dailyQuizStateStorage: ViewStateStorage<DailyQuizState>
     private let quizProgressService: QuizProgressService
     private let dayKeyProvider: QuizDayKeyProvider
     private var didCompleteQuizInSession = false
@@ -31,7 +31,7 @@ final class QuizOfTheDayPresenterImpl {
         viewModel: QuizOfTheDayViewModel,
         router: QuizOfTheDayRouter,
         service: QuizOfTheDayService,
-        dailyQuizStateStorage: DailyQuizStateStorage,
+        dailyQuizStateStorage: ViewStateStorage<DailyQuizState>,
         quizProgressService: QuizProgressService,
         dayKeyProvider: QuizDayKeyProvider
     ) {

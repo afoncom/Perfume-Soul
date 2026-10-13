@@ -22,11 +22,11 @@ final class ProfilePresenterImpl {
     private let profileService: ProfileService
     private let profileCalculationService: ProfileCalculationService
     private let quizProgressService: QuizProgressService
-    private let dailyQuizStateStorage: DailyQuizStateStorage
-    private let dailyPerfumeStateStorage: DailyPerfumeStateStorage
+    private let dailyQuizStateStorage: ViewStateStorage<DailyQuizState>
+    private let dailyPerfumeStateStorage: ViewStateStorage<DailyPerfumeState>
     private let collectionService: PerfumeCollectionService
     private let personalPerfumeTopStorage: PersonalPerfumeTopStorage
-    private let recommendedPerfumeStateStorage: RecommendedPerfumeStateStorage
+    private let recommendedPerfumeStateStorage: ViewStateStorage<RecommendedPerfumeState>
     private let appReviewRequester: AppReviewRequester
     private let profileAvatarBuilder: ProfileAvatarBuilder
     
@@ -36,11 +36,11 @@ final class ProfilePresenterImpl {
         profileService: ProfileService,
         profileCalculationService: ProfileCalculationService,
         quizProgressService: QuizProgressService,
-        dailyQuizStateStorage: DailyQuizStateStorage,
-        dailyPerfumeStateStorage: DailyPerfumeStateStorage,
+        dailyQuizStateStorage: ViewStateStorage<DailyQuizState>,
+        dailyPerfumeStateStorage: ViewStateStorage<DailyPerfumeState>,
         collectionService: PerfumeCollectionService,
         personalPerfumeTopStorage: PersonalPerfumeTopStorage,
-        recommendedPerfumeStateStorage: RecommendedPerfumeStateStorage,
+        recommendedPerfumeStateStorage: ViewStateStorage<RecommendedPerfumeState>,
         appReviewRequester: AppReviewRequester,
         profileAvatarBuilder: ProfileAvatarBuilder
     ) {

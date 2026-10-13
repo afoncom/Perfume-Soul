@@ -4,7 +4,7 @@ import XCTest
 final class DailyPerfumePresenterTests: XCTestCase {
     @MainActor
     func testResolveRestoresCurrentDayPerfumeWithoutRequest() async {
-        let storage = DailyPerfumeStateStorageMock(state: makeState())
+        let storage = makeStorage(state: makeState())
         let service = DailyPerfumeServiceMock(candidates: [])
         let collectionService = DailyPerfumeCollectionServiceMock(stateStorage: storage)
         let viewModel = DailyPerfumeViewModel()
@@ -28,7 +28,7 @@ final class DailyPerfumePresenterTests: XCTestCase {
         previousState.currentPerfume = nil
         previousState.currentReaction = nil
         previousState.shownPerfumeIDs = []
-        let storage = DailyPerfumeStateStorageMock(state: previousState)
+        let storage = makeStorage(state: previousState)
         let service = DailyPerfumeServiceMock(
             candidates: [makeCandidate(id: 7, score: 0.8)]
         )
@@ -42,14 +42,14 @@ final class DailyPerfumePresenterTests: XCTestCase {
         await presenter.resolve()
 
         XCTAssertEqual(viewModel.state, .content(makeSummary(id: 7), .pending))
-        XCTAssertEqual(storage.state?.shownPerfumeIDs, [7])
-        XCTAssertEqual(storage.state?.lastShownBrand, "Brand 7")
+        XCTAssertEqual(storage.loadState()?.shownPerfumeIDs, [7])
+        XCTAssertEqual(storage.loadState()?.lastShownBrand, "Brand 7")
         XCTAssertEqual(service.requests.first?.excludedPerfumeIDs, [8, 17])
     }
 
     @MainActor
     func testSaveCurrentPerfumeAddsOneCabinetSummaryWithoutRequestingReplacement() async {
-        let storage = DailyPerfumeStateStorageMock(state: makeState())
+        let storage = makeStorage(state: makeState())
         let service = DailyPerfumeServiceMock(candidates: [])
         let collectionService = DailyPerfumeCollectionServiceMock(stateStorage: storage)
         let viewModel = DailyPerfumeViewModel()
@@ -71,7 +71,7 @@ final class DailyPerfumePresenterTests: XCTestCase {
 
     @MainActor
     func testDismissCurrentPerfumeAddsPermanentExclusionWithoutReplacement() async {
-        let storage = DailyPerfumeStateStorageMock(state: makeState())
+        let storage = makeStorage(state: makeState())
         let service = DailyPerfumeServiceMock(candidates: [])
         let collectionService = DailyPerfumeCollectionServiceMock(stateStorage: storage)
         let viewModel = DailyPerfumeViewModel()
@@ -99,7 +99,7 @@ final class DailyPerfumePresenterTests: XCTestCase {
         previousState.shownPerfumeIDs = [42, 5]
         previousState.savedPerfumes = [makeSummary(id: 17), makeSummary(id: 9)]
         previousState.dislikedPerfumeIDs = [8, 11]
-        let storage = DailyPerfumeStateStorageMock(state: previousState)
+        let storage = makeStorage(state: previousState)
         let service = DailyPerfumeServiceMock(
             candidates: [makeCandidate(id: 7, score: 0.8)]
         )
@@ -122,7 +122,7 @@ final class DailyPerfumePresenterTests: XCTestCase {
         previousState.currentPerfume = nil
         previousState.currentReaction = nil
         previousState.shownPerfumeIDs = []
-        let storage = DailyPerfumeStateStorageMock(state: previousState)
+        let storage = makeStorage(state: previousState)
         let service = DailyPerfumeServiceMock(
             candidates: [makeCandidate(id: 7, score: 0.8)],
             suspendsRequests: true
@@ -169,7 +169,7 @@ final class DailyPerfumePresenterTests: XCTestCase {
         previousState.dayKey = "2026-09-04"
         previousState.currentPerfume = nil
         previousState.currentReaction = nil
-        let storage = DailyPerfumeStateStorageMock(state: previousState)
+        let storage = makeStorage(state: previousState)
         let service = DailyPerfumeServiceMock(
             responses: [
                 .success([]),
@@ -197,7 +197,7 @@ final class DailyPerfumePresenterTests: XCTestCase {
         previousState.dayKey = "2026-09-04"
         previousState.currentPerfume = nil
         previousState.currentReaction = nil
-        let storage = DailyPerfumeStateStorageMock(state: previousState)
+        let storage = makeStorage(state: previousState)
         let service = DailyPerfumeServiceMock(
             responses: [.success([]), .success([])]
         )
@@ -220,7 +220,7 @@ final class DailyPerfumePresenterTests: XCTestCase {
         previousState.dayKey = "2026-09-04"
         previousState.currentPerfume = nil
         previousState.currentReaction = nil
-        let storage = DailyPerfumeStateStorageMock(state: previousState)
+        let storage = makeStorage(state: previousState)
         let service = DailyPerfumeServiceMock(
             responses: [.success([]), .failure(DailyPerfumeServiceMockError.requestFailed)]
         )
@@ -258,11 +258,11 @@ final class DailyPerfumePresenterTests: XCTestCase {
     }
 }
 
-private extension DailyPerfumePresenterTests {
-    func makePresenter(
+extension DailyPerfumePresenterTests {
+    private func makePresenter(
         viewModel: DailyPerfumeViewModel,
         service: DailyPerfumeServiceMock,
-        storage: DailyPerfumeStateStorageMock,
+        storage: ViewStateStorage<DailyPerfumeState>,
         collectionService: DailyPerfumeCollectionServiceMock? = nil,
         randomValue: Double = 0.5
     ) -> DailyPerfumePresenterImpl {
@@ -280,7 +280,20 @@ private extension DailyPerfumePresenterTests {
         )
     }
 
-    func makeProfile() -> Profile {
+    private func makeStorage(
+        state: DailyPerfumeState? = nil
+    ) -> ViewStateStorage<DailyPerfumeState> {
+        let storage = ViewStateStorage<DailyPerfumeState>(
+            userDefaults: .standard,
+            storableKey: "tests.dailyPerfume.\(UUID().uuidString)"
+        )
+        if let state {
+            storage.saveState(state)
+        }
+        return storage
+    }
+
+    private func makeProfile() -> Profile {
         Profile(
             name: "Alex",
             birthDate: "01.01.1990",
@@ -302,7 +315,7 @@ private extension DailyPerfumePresenterTests {
         )
     }
 
-    func makeState() -> DailyPerfumeState {
+    private func makeState() -> DailyPerfumeState {
         DailyPerfumeState(
             profileCalculationCacheKey: makeProfile().profileCalculationCacheKey,
             dayKey: "2026-09-05",
@@ -315,7 +328,7 @@ private extension DailyPerfumePresenterTests {
         )
     }
 
-    func makeSummary(id: Int) -> DailyPerfumeSummary {
+    private func makeSummary(id: Int) -> DailyPerfumeSummary {
         DailyPerfumeSummary(
             id: id,
             perfumeName: "Perfume \(id)",
@@ -323,7 +336,7 @@ private extension DailyPerfumePresenterTests {
         )
     }
 
-    func makeCandidate(id: Int, score: Double) -> DailyPerfumeCandidateResponse {
+    private func makeCandidate(id: Int, score: Double) -> DailyPerfumeCandidateResponse {
         DailyPerfumeCandidateResponse(
             id: id,
             perfumeName: "Perfume \(id)",
@@ -429,29 +442,11 @@ private final class DailyPerfumeServiceMock: DailyPerfumeService {
     }
 }
 
-private final class DailyPerfumeStateStorageMock: DailyPerfumeStateStorage {
-    var state: DailyPerfumeState?
-
-    init(state: DailyPerfumeState? = nil) {
-        self.state = state
-    }
-
-    func loadState() -> DailyPerfumeState? {
-        state
-    }
-
-    func saveState(_ state: DailyPerfumeState) {
-        self.state = state
-    }
-
-    func clearState() { }
-}
-
 private final class DailyPerfumeCollectionServiceMock: PerfumeCollectionService {
-    private let stateStorage: DailyPerfumeStateStorageMock
+    private let stateStorage: ViewStateStorage<DailyPerfumeState>
     private(set) var state: PerfumeCollectionState
 
-    init(stateStorage: DailyPerfumeStateStorageMock) {
+    init(stateStorage: ViewStateStorage<DailyPerfumeState>) {
         self.stateStorage = stateStorage
         let dailyState = stateStorage.loadState()
         state = PerfumeCollectionState(

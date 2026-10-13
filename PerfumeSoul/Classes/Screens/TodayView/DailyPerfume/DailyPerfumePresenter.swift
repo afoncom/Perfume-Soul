@@ -26,7 +26,7 @@ final class DailyPerfumePresenterImpl {
     private let router: DailyPerfumeRouter
     private let service: DailyPerfumeService
     private let profileService: ProfileService
-    private let stateStorage: DailyPerfumeStateStorage
+    private let stateStorage: ViewStateStorage<DailyPerfumeState>
     private let collectionService: PerfumeCollectionService
     private let dayKeyProvider: DailyPerfumeDayKeyProvider
     private let selectionService: DailyPerfumeSelectionService
@@ -36,7 +36,7 @@ final class DailyPerfumePresenterImpl {
         router: DailyPerfumeRouter,
         service: DailyPerfumeService,
         profileService: ProfileService,
-        stateStorage: DailyPerfumeStateStorage,
+        stateStorage: ViewStateStorage<DailyPerfumeState>,
         collectionService: PerfumeCollectionService,
         dayKeyProvider: DailyPerfumeDayKeyProvider,
         selectionService: DailyPerfumeSelectionService
@@ -91,7 +91,7 @@ extension DailyPerfumePresenterImpl: DailyPerfumePresenter {
         )
 
         if let currentPerfume = state.currentPerfume,
-           let reaction = state.currentReaction {
+            let reaction = state.currentReaction {
             await setState(.content(currentPerfume, reaction))
             return
         }
@@ -172,8 +172,8 @@ extension DailyPerfumePresenterImpl: DailyPerfumePresenter {
     }
 }
 
-private extension DailyPerfumePresenterImpl {
-    func preparedState(
+extension DailyPerfumePresenterImpl {
+    private func preparedState(
         storedState: DailyPerfumeState?,
         profileCalculationCacheKey: String?,
         dayKey: String
@@ -210,7 +210,7 @@ private extension DailyPerfumePresenterImpl {
         return storedState
     }
 
-    func makeProfileRequest(profileCalculation: ProfileCalculation) -> DailyPerfumeProfileRequest {
+    private func makeProfileRequest(profileCalculation: ProfileCalculation) -> DailyPerfumeProfileRequest {
         DailyPerfumeProfileRequest(
             sun: profileCalculation.natalChart.sun.sign.rawValue,
             moon: profileCalculation.natalChart.moon.sign.rawValue,
@@ -224,7 +224,7 @@ private extension DailyPerfumePresenterImpl {
         )
     }
 
-    func requestCandidates(
+    private func requestCandidates(
         profileCalculation: ProfileCalculation,
         state: DailyPerfumeState
     ) async throws -> [DailyPerfumeCandidateResponse] {
@@ -236,7 +236,7 @@ private extension DailyPerfumePresenterImpl {
         )
     }
 
-    func excludedPerfumeIDs(from state: DailyPerfumeState) -> [Int] {
+    private func excludedPerfumeIDs(from state: DailyPerfumeState) -> [Int] {
         let collectionState = collectionService.loadState()
         return Set(
             state.shownPerfumeIDs
@@ -247,7 +247,7 @@ private extension DailyPerfumePresenterImpl {
     }
 
     @MainActor
-    func mutateCurrentPerfume(
+    private func mutateCurrentPerfume(
         _ mutation: (inout DailyPerfumeState, DailyPerfumeSummary) -> Void,
         reaction: DailyPerfumeReaction
     ) {
@@ -266,7 +266,7 @@ private extension DailyPerfumePresenterImpl {
         viewModel.state = .content(currentPerfume, reaction)
     }
 
-    func appendUnique(_ perfumeID: Int, to perfumeIDs: inout [Int]) {
+    private func appendUnique(_ perfumeID: Int, to perfumeIDs: inout [Int]) {
         guard !perfumeIDs.contains(perfumeID) else {
             return
         }
@@ -275,7 +275,7 @@ private extension DailyPerfumePresenterImpl {
     }
 
     @MainActor
-    func setState(_ state: DailyPerfumeViewState) {
+    private func setState(_ state: DailyPerfumeViewState) {
         viewModel.state = state
     }
 }

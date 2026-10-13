@@ -23,7 +23,7 @@ struct DailyQuizQuestionState: Codable, Equatable {
     }
 }
 
-struct DailyQuizState: Codable, Equatable {
+struct DailyQuizState: StorableViewState, Equatable {
     let quizDayKey: String
     let questionIDs: [Int]
     var currentQuestionIndex: Int
@@ -44,7 +44,7 @@ struct DailyQuizState: Codable, Equatable {
     }
 
     func questionState(for questionID: Int) -> DailyQuizQuestionState? {
-        questionStates.first(where: { $0.questionID == questionID })
+        questionStates.first { $0.questionID == questionID }
     }
 
     mutating func updateQuestionState(

@@ -18,7 +18,10 @@ final class QuizOfTheDayModule {
             userDefaults: .standard,
             dayKeyProvider: dayKeyProvider
         )
-        let dailyQuizStateStorage = DailyQuizStateStorageImpl(userDefaults: .standard)
+        let viewStateStorage = ViewStateStorage<DailyQuizState>(
+            userDefaults: .standard,
+            storableKey: "quiz.dailyState"
+        )
         let viewModel = QuizOfTheDayViewModel()
         let appVersionProvider = AppVersionProviderImpl()
         let appReviewRequester = AppReviewRequesterImpl(
@@ -34,7 +37,7 @@ final class QuizOfTheDayModule {
             viewModel: viewModel,
             router: router,
             service: service,
-            dailyQuizStateStorage: dailyQuizStateStorage,
+            dailyQuizStateStorage: viewStateStorage,
             quizProgressService: quizProgressService,
             dayKeyProvider: dayKeyProvider
         )

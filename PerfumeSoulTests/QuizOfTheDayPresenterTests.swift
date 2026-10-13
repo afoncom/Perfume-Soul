@@ -42,7 +42,10 @@ final class QuizOfTheDayPresenterTests: XCTestCase {
             viewModel: QuizOfTheDayViewModel(),
             router: router,
             service: QuizOfTheDayServiceMock(),
-            dailyQuizStateStorage: DailyQuizStateStorageMock(),
+            dailyQuizStateStorage: ViewStateStorage<DailyQuizState>(
+                userDefaults: .standard,
+                storableKey: "tests.dailyQuiz.\(UUID().uuidString)"
+            ),
             quizProgressService: QuizProgressServiceMock(),
             dayKeyProvider: QuizDayKeyProviderMock()
         )
@@ -77,22 +80,6 @@ private final class QuizOfTheDayServiceMock: QuizOfTheDayService {
                 explanation: "Bergamot is a citrus note."
             )
         ]
-    }
-}
-
-private final class DailyQuizStateStorageMock: DailyQuizStateStorage {
-    private var state: DailyQuizState?
-
-    func loadState() -> DailyQuizState? {
-        state
-    }
-
-    func saveState(_ state: DailyQuizState) {
-        self.state = state
-    }
-
-    func clearState() {
-        state = nil
     }
 }
 

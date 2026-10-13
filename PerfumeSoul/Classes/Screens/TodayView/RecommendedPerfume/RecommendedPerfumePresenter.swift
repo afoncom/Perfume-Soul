@@ -15,7 +15,7 @@ final class RecommendedPerfumePresenterImpl {
     private let profileService: ProfileService
     private let collectionService: PerfumeCollectionService
     private let topStorage: PersonalPerfumeTopStorage
-    private let stateStorage: RecommendedPerfumeStateStorage
+    private let stateStorage: ViewStateStorage<RecommendedPerfumeState>
     private let router: RecommendedPerfumeRouter
 
     init(
@@ -24,7 +24,7 @@ final class RecommendedPerfumePresenterImpl {
         profileService: ProfileService,
         collectionService: PerfumeCollectionService,
         topStorage: PersonalPerfumeTopStorage,
-        stateStorage: RecommendedPerfumeStateStorage,
+        stateStorage: ViewStateStorage<RecommendedPerfumeState>,
         router: RecommendedPerfumeRouter
     ) {
         self.viewModel = viewModel

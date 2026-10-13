@@ -21,7 +21,10 @@ final class RecommendedPerfumeModule {
             profileService: profileService,
             collectionService: collectionService,
             topStorage: PersonalPerfumeTopStorageImpl(userDefaults: .standard),
-            stateStorage: RecommendedPerfumeStateStorageImpl(userDefaults: .standard),
+            stateStorage: ViewStateStorage<RecommendedPerfumeState>(
+                userDefaults: .standard,
+                storableKey: "recommendedPerfume.state"
+            ),
             router: RecommendedPerfumeRouterImpl(
                 navigationController: navigationController,
                 requestManager: requestManager
