@@ -51,9 +51,7 @@ struct PersonalPerfumeScreen: View {
 
 extension PersonalPerfumeScreen {
     private func makeHeader() -> some View {
-        VStack(alignment: .leading, spacing: 28) {
-            PerfumeFlowHeader(section: L10n.PersonalPerfume.collectionSection, step: nil)
-
+        VStack(alignment: .leading, spacing: 0) {
             VStack(alignment: .leading, spacing: 12) {
                 Text(L10n.PersonalPerfume.title)
                     .font(.system(size: headingSize, weight: .semibold))
@@ -212,11 +210,6 @@ private struct PersonalPerfumeCollectionSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 12) {
-                Rectangle()
-                    .fill(Color(.inputBorder))
-                    .frame(height: 1)
-                    .accessibilityHidden(true)
-
                 HStack(alignment: .firstTextBaseline, spacing: 16) {
                     Text(section.title)
                         .font(.title2.weight(.semibold))
@@ -233,12 +226,22 @@ private struct PersonalPerfumeCollectionSection: View {
                 }
                 .foregroundStyle(Color(.textPrimary))
 
-                Text(section.description)
-                    .font(.subheadline)
-                    .foregroundStyle(Color(.descriptionText))
-                    .lineSpacing(3)
-                    .fixedSize(horizontal: false, vertical: true)
+                DisclosureGroup {
+                    Text(section.description)
+                        .font(.subheadline)
+                        .foregroundStyle(Color(.descriptionText))
+                        .lineSpacing(4)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.top, 8)
+                } label: {
+                    Text(L10n.PersonalPerfume.aboutSelection)
+                        .font(.subheadline)
+                        .foregroundStyle(Color(.descriptionText))
+                }
+                .tint(Color(.textPrimary))
             }
+            .padding(20)
+            .background(Color(.textPrimary).opacity(0.035))
             .padding(.horizontal, 24)
 
             if dynamicTypeSize.isAccessibilitySize {

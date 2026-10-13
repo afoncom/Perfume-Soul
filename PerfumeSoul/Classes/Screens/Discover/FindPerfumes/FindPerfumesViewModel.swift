@@ -10,10 +10,12 @@ import Foundation
 import Combine
 import Observation
 
-enum FindPerfumeField: Hashable {
+enum FindPerfumeField: Hashable, Identifiable {
     case first
     case second
     case third
+
+    var id: Self { self }
 }
 
 @Observable final class FindPerfumesViewModel {
@@ -36,5 +38,25 @@ enum FindPerfumeField: Hashable {
             thirdSelectedPerfume
         ]
         .compactMap { $0 }
+    }
+
+    func title(for field: FindPerfumeField) -> String {
+        field == .first ? L10n.Discover.FindSimilar.firstPerfumeTitle : L10n.Discover.FindSimilar.additionalPerfumeTitle
+    }
+
+    func number(for field: FindPerfumeField) -> String {
+        switch field {
+        case .first: "01"
+        case .second: "02"
+        case .third: "03"
+        }
+    }
+
+    func selectedPerfume(for field: FindPerfumeField) -> SearchPerfumeItem? {
+        switch field {
+        case .first: firstSelectedPerfume
+        case .second: secondSelectedPerfume
+        case .third: thirdSelectedPerfume
+        }
     }
 }

@@ -11,6 +11,7 @@ import SwiftUI
 struct PerfumeRecommendationsScreen: View {
     @Bindable private var viewModel: PerfumeRecommendationsViewModel
     private let presenter: PerfumeRecommendationsPresenter
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     init(
         viewModel: PerfumeRecommendationsViewModel,
@@ -22,16 +23,13 @@ struct PerfumeRecommendationsScreen: View {
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 18) {
+            VStack(alignment: .leading, spacing: 32) {
                 makeBasedOnSection()
-                if shouldShowHintCard {
-                    makeHintCard()
-                }
                 makeRecommendationsSection()
             }
-            .padding(.horizontal, 16)
-            .padding(.top, 20)
-            .padding(.bottom, 28)
+            .padding(.horizontal, 24)
+            .padding(.top, 24)
+            .padding(.bottom, 36)
         }
         .background {
             Color(.backgroundPrimary).ignoresSafeArea()
@@ -44,19 +42,17 @@ struct PerfumeRecommendationsScreen: View {
 }
 
 extension PerfumeRecommendationsScreen {
-    private var shouldShowHintCard: Bool {
-        !viewModel.isLoading &&
-        viewModel.errorMessage == nil &&
-        !viewModel.perfumeRecommendations.isEmpty
-    }
-
     private func makeBasedOnSection() -> some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 20) {
             Text(L10n.PerfumeRecommendations.selectedPerfumesTitle)
-                .font(.headline)
-                .foregroundStyle(Color(.textPrimary))
+                .font(.caption.weight(.medium))
+                .tracking(0.8)
+                .foregroundStyle(Color(.descriptionText))
 
-            HStack(spacing: 12) {
+            let layout = dynamicTypeSize.isAccessibilitySize
+                ? AnyLayout(VStackLayout(alignment: .leading, spacing: 20))
+                : AnyLayout(HStackLayout(alignment: .top, spacing: 12))
+            layout {
                 ForEach(viewModel.selectedPerfumes) { perfume in
                     makeBasePerfumeItem(title: perfume.name)
                 }
@@ -81,31 +77,9 @@ extension PerfumeRecommendationsScreen {
         .frame(maxWidth: .infinity)
     }
 
-    private func makeHintCard() -> some View {
-        HStack(spacing: 12) {
-            Image(systemName: "sparkles")
-                .font(.title3)
-                .foregroundStyle(Color(.zodiacPurple))
-
-            Text(L10n.PerfumeRecommendations.hint)
-                .font(.subheadline)
-                .foregroundStyle(Color(.descriptionText))
-
-            Spacer()
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 16)
-        .background(Color(.purpleTable))
-        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .stroke(Color(.tableBorder), lineWidth: 1)
-        )
-    }
-
     @ViewBuilder
     private func makeRecommendationsSection() -> some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 24) {
             if viewModel.isLoading {
                 makeLoadingState()
             } else if let errorMessage = viewModel.errorMessage {
@@ -126,9 +100,7 @@ extension PerfumeRecommendationsScreen {
     }
 
     private func makeLoadingState() -> some View {
-        ProgressView()
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 32)
+        PerfumeBlotterLoadingView(title: L10n.Discover.FindSimilar.loading)
     }
 
     private func makeErrorState(message: String) -> some View {
@@ -146,13 +118,8 @@ extension PerfumeRecommendationsScreen {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 32)
         .padding(.horizontal, 20)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .stroke(Color(.cardBorder), lineWidth: 1)
-        )
-        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
+        .background(Color(.textPrimary).opacity(0.035))
+        .overlay { Rectangle().strokeBorder(Color(.inputBorder), lineWidth: 1) }
     }
 
     private func makeEmptyStateView() -> some View {
@@ -168,13 +135,9 @@ extension PerfumeRecommendationsScreen {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 32)
         .padding(.horizontal, 20)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .stroke(Color(.cardBorder), lineWidth: 1)
-        )
-        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
+        .multilineTextAlignment(.center)
+        .background(Color(.textPrimary).opacity(0.035))
+        .overlay { Rectangle().strokeBorder(Color(.inputBorder), lineWidth: 1) }
     }
 
     private func makeRecommendationCard(perfume: PerfumeRecommendation) -> some View {
@@ -193,17 +156,13 @@ extension PerfumeRecommendationsScreen {
                     .font(.subheadline)
                     .foregroundStyle(Color(.textSecondary))
 
-                makeMatchingNotesSection(notes: perfume.matchingNotes)
+                makeMatchingNotesSection(notes: viewModel.displayNotes(perfume.matchingNotes))
 
-                Text(
-                    L10n.PerfumeRecommendations.wearFormat(
-                        scoreText(perfume.longevityScore),
-                        scoreText(perfume.sillageScore)
-                    )
-                )
-                .font(.footnote)
-                .foregroundStyle(Color(.textSecondary))
-                .fixedSize(horizontal: false, vertical: true)
+                VStack(alignment: .leading, spacing: 4) {
+                    wearMetric(title: L10n.PerfumeDetails.longevityTitle, score: perfume.longevityScore)
+                    wearMetric(title: L10n.PerfumeDetails.sillageTitle, score: perfume.sillageScore)
+                }
+                .padding(.top, 4)
             }
 
             Spacer(minLength: 8)
@@ -276,7 +235,22 @@ extension PerfumeRecommendationsScreen {
             .clipShape(Capsule())
     }
 
-    private func scoreText(_ score: Int?) -> String {
-        score.map(String.init) ?? L10n.PerfumeDetails.emptyNotesPlaceholder
+    private func wearMetric(title: String, score: Int?) -> some View {
+        ViewThatFits(in: .horizontal) {
+            HStack(alignment: .firstTextBaseline, spacing: 6) {
+                Text(title)
+                Spacer(minLength: 0)
+                Text(viewModel.scoreText(score)).monospacedDigit().fixedSize()
+            }
+            .fixedSize(horizontal: true, vertical: false)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                Text(viewModel.scoreText(score)).monospacedDigit()
+            }
+        }
+        .font(.footnote)
+        .foregroundStyle(Color(.textSecondary))
+        .accessibilityElement(children: .combine)
     }
 }

@@ -6,11 +6,14 @@
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
+import Foundation
 import Observation
 
-enum ComparePerfumeField: Hashable {
+enum ComparePerfumeField: Hashable, Identifiable {
     case left
     case right
+
+    var id: Self { self }
 }
 
 @Observable final class ComparePerfumesViewModel {
@@ -31,5 +34,48 @@ enum ComparePerfumeField: Hashable {
 
     var hasComparison: Bool {
         leftPerfume != nil && rightPerfume != nil
+    }
+
+    var canCompare: Bool {
+        leftSelectedPerfume != nil && rightSelectedPerfume != nil
+    }
+
+    func title(for field: ComparePerfumeField) -> String {
+        field == .left ? L10n.ComparePerfumes.leftPlaceholder : L10n.ComparePerfumes.rightPlaceholder
+    }
+
+    func symbol(for field: ComparePerfumeField) -> String {
+        field == .left ? "A" : "B"
+    }
+
+    func selectedPerfume(for field: ComparePerfumeField) -> SearchPerfumeItem? {
+        field == .left ? leftSelectedPerfume : rightSelectedPerfume
+    }
+
+    func selectionAccessibilityLabel(for field: ComparePerfumeField) -> String {
+        [title(for: field), selectedPerfume(for: field)?.name]
+            .compactMap { $0 }.joined(separator: ", ")
+    }
+
+    func isSharedNote(_ note: String, in notes: [String]) -> Bool {
+        notes.contains { $0.localizedCaseInsensitiveCompare(note) == .orderedSame }
+    }
+
+    var notesLanguage: String {
+        let notes = [leftPerfume, rightPerfume].compactMap { $0 }
+            .flatMap { $0.topNotes + $0.middleNotes + $0.baseNotes }
+        return PerfumeNoteFormatter.language(for: notes)
+    }
+
+    func displayNotes(_ notes: [String]) -> [String] {
+        PerfumeNoteFormatter.names(notes, language: notesLanguage)
+    }
+
+    func scoreText(_ score: Int?) -> String {
+        score.map { "\($0) / 10" } ?? L10n.PerfumeDetails.emptyNotesPlaceholder
+    }
+
+    func scoreFraction(_ score: Int?) -> Double {
+        Double(min(max(score ?? 0, 0), 10)) / 10
     }
 }

@@ -25,6 +25,7 @@ final class TodayEnergyModule {
         
         let hostingController = UIHostingController(rootView: view)
         hostingController.title = L10n.Screen.todayEnergy
+        hostingController.navigationItem.largeTitleDisplayMode = .never
         
         return hostingController
     }

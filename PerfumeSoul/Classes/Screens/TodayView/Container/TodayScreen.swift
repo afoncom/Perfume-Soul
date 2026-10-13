@@ -31,7 +31,7 @@ struct TodayScreen: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 40) {
-                PerfumeFlowHeader(section: viewModel.dateText, step: nil)
+                PerfumeFlowHeader(section: viewModel.dateText, step: nil, title: L10n.Screen.today)
                     .padding(.horizontal, 24)
 
                 TodayOverviewBanner()

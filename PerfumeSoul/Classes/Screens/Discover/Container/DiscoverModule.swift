@@ -27,9 +27,10 @@ final class DiscoverModule {
         
         let hostingController = UIHostingController(rootView: view)
         hostingController.title = L10n.Screen.discover
+        hostingController.navigationItem.largeTitleDisplayMode = .never
         
         navigationController.viewControllers = [hostingController]
-        navigationController.navigationBar.prefersLargeTitles = true
+        navigationController.navigationBar.prefersLargeTitles = false
 
         return NavigationControllerContainer(navigationController: navigationController)
     }
