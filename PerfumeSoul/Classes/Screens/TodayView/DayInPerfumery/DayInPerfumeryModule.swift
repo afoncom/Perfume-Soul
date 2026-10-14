@@ -20,7 +20,8 @@ final class DayInPerfumeryModule {
         let view = DayInPerfumeryScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: view)
-        hostingController.title = L10n.Screen.dayInPerfumery
+        hostingController.title = nil
+        hostingController.navigationItem.largeTitleDisplayMode = .never
         
         return hostingController
     }

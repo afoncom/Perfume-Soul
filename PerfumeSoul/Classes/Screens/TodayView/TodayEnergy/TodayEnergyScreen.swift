@@ -11,7 +11,8 @@ import SwiftUI
 struct TodayEnergyScreen: View {
     @Bindable private var viewModel: TodayEnergyViewModel
     private let presenter: TodayEnergyPresenter
-    
+    @ScaledMetric(relativeTo: .largeTitle) private var headingSize = 38
+
     init(
         viewModel: TodayEnergyViewModel,
         presenter: TodayEnergyPresenter
@@ -19,17 +20,22 @@ struct TodayEnergyScreen: View {
         self.viewModel = viewModel
         self.presenter = presenter
     }
-    
+
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 18) {
+            VStack(alignment: .leading, spacing: 36) {
+                PerfumeFlowHeader(section: L10n.Today.Energy.title, step: nil)
+
                 makePersonalSection()
                 makeHoroscopeSection()
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
+            .padding(.horizontal, 24)
+            .padding(.top, 20)
+            .padding(.bottom, 40)
         }
         .background(Color(.backgroundPrimary))
+        .foregroundStyle(Color(.textPrimary))
+        .preferredColorScheme(.light)
         .navigationTitle(L10n.Screen.todayEnergy)
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -37,84 +43,66 @@ struct TodayEnergyScreen: View {
 
 extension TodayEnergyScreen {
     private func makePersonalSection() -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(L10n.Today.Energy.personalTitle)
-                .font(.title3)
-                .fontWeight(.medium)
-            
-            makeInfoCard(
-                icon: viewModel.personalDailyHoroscope.symbol,
-                iconColor: viewModel.personalDailyHoroscope.iconColor,
-                title: viewModel.personalDailyHoroscope.displayName,
-                subtitle: viewModel.personalDailyHoroscope.energyOfDay
-            )
+        VStack(alignment: .leading, spacing: 24) {
+            Text(L10n.Today.Energy.personalTitle.uppercased())
+                .font(.caption.weight(.medium))
+                .tracking(1.2)
+                .foregroundStyle(Color(.descriptionText))
+
+            Text(viewModel.personalDailyHoroscope.displayName)
+                .font(.system(size: headingSize, weight: .medium))
+                .tracking(-1)
+                .accessibilityAddTraits(.isHeader)
+
+            Rectangle()
+                .fill(Color(.textPrimary))
+                .frame(width: 40, height: 2)
+                .accessibilityHidden(true)
+
+            Text(viewModel.personalDailyHoroscope.energyOfDay)
+                .font(.body)
+                .lineSpacing(6)
         }
-        .padding(14)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
+        .fixedSize(horizontal: false, vertical: true)
+        .padding(24)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color(.textPrimary).opacity(0.035))
     }
-    
+
     private func makeHoroscopeSection() -> some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 32) {
             Text(L10n.Today.Energy.listTitle)
-                .font(.title3)
-                .fontWeight(.medium)
-            
-            VStack(spacing: 10) {
-                ForEach(viewModel.dailyHoroscopes, id: \.sign) { dailyHoroscope in
-                    makeInfoCard(
-                        icon: dailyHoroscope.symbol,
-                        iconColor: dailyHoroscope.iconColor,
-                        title: dailyHoroscope.displayName,
-                        subtitle: dailyHoroscope.energyOfDay
-                    )
+                .font(.title2.weight(.semibold))
+                .tracking(-0.5)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityAddTraits(.isHeader)
+
+            LazyVStack(alignment: .leading, spacing: 32) {
+                ForEach(viewModel.dailyHoroscopes, id: \.sign) { horoscope in
+                    makeHoroscopeCard(horoscope)
                 }
             }
         }
-        .padding(14)
-        .background(Color(.surfacePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
-    
-    private func makeInfoCard(
-        icon: String,
-        iconColor: Color,
-        title: String,
-        subtitle: String
-    ) -> some View {
-        HStack(alignment: .top, spacing: 12) {
-            ZStack {
-                Circle()
-                    .fill(iconColor.opacity(0.12))
-                    .frame(width: 42, height: 42)
-                
-                Text(icon)
-                    .font(.system(size: 24, weight: .medium))
-                    .foregroundStyle(iconColor)
-            }
-            
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title)
-                    .font(.headline)
-                    .foregroundStyle(Color(.textPrimary))
-                
-                Text(subtitle)
-                    .font(.footnote)
-                    .foregroundStyle(Color(.textSecondary))
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-            
-            Spacer()
+
+    private func makeHoroscopeCard(_ horoscope: DailyHoroscope) -> some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Rectangle()
+                .fill(Color(.inputBorder))
+                .frame(height: 1)
+                .accessibilityHidden(true)
+
+            Text(horoscope.displayName)
+                .font(.title.weight(.medium))
+                .tracking(-0.6)
+                .accessibilityAddTraits(.isHeader)
+
+            Text(horoscope.energyOfDay)
+                .font(.body)
+                .foregroundStyle(Color(.descriptionText))
+                .lineSpacing(6)
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 12)
-        .background(Color(.rowBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .stroke(Color(.cardBorder), lineWidth: 1)
-        )
+        .fixedSize(horizontal: false, vertical: true)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
