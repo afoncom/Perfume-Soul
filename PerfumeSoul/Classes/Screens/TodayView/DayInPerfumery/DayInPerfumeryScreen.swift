@@ -53,8 +53,9 @@ extension DayInPerfumeryScreen {
                         : .system(size: dateSize, weight: .light)
                 )
                 .tracking(-1.5)
-                .lineLimit(1)
-                .minimumScaleFactor(0.7)
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
+                .minimumScaleFactor(dynamicTypeSize.isAccessibilitySize ? 1 : 0.7)
+                .fixedSize(horizontal: false, vertical: true)
 
             Rectangle()
                 .fill(Color(.inputBorder))
