@@ -11,8 +11,6 @@ import SwiftUI
 struct ProfileScreen: View {
     @Bindable private var viewModel: ProfileViewModel
     @State private var selectedElement: ProfileElement?
-    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @ScaledMetric(relativeTo: .title3) private var signBadgeSize = 40.0
     private let presenter: ProfilePresenter
     
     init(
@@ -144,7 +142,7 @@ extension ProfileScreen {
                 .fontWeight(.medium)
             if let natalChart = viewModel.profileCalculation?.natalChart {
                 VStack(spacing: 8) {
-                    makeNatalChartRow(
+                    NatalChartRow(
                         color: Color(.natalSunSurface),
                         symbol: "sun.max.fill",
                         symbolColor: Color(.natalSunAccent),
@@ -152,7 +150,7 @@ extension ProfileScreen {
                         placement: natalChart.sun
                     )
 
-                    makeNatalChartRow(
+                    NatalChartRow(
                         color: Color(.natalMoonSurface),
                         symbol: "moon.fill",
                         symbolColor: Color(.natalMoonAccent),
@@ -160,7 +158,7 @@ extension ProfileScreen {
                         placement: natalChart.moon
                     )
 
-                    makeNatalChartRow(
+                    NatalChartRow(
                         color: Color(.natalAscendantSurface),
                         symbol: "circle.hexagongrid.fill",
                         symbolColor: Color(.pinkButton),
@@ -285,82 +283,6 @@ extension ProfileScreen {
         }
     }
 
-    @ViewBuilder
-    func makeProfileCalculationStateView() -> some View {
-        switch viewModel.profileCalculationState {
-        case .idle, .loading:
-            ProgressView()
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.vertical, 20)
-        case .loaded:
-            EmptyView()
-        case .missingBirthPlaceData:
-            makeProfileCalculationActionState(
-                title: L10n.Profile.Calculation.MissingBirthData.title,
-                subtitle: L10n.Profile.Calculation.MissingBirthData.subtitle,
-                buttonTitle: L10n.Profile.Calculation.MissingBirthData.button
-            ) {
-                Task {
-                    await presenter.completeBirthDataButtonTapped()
-                }
-            }
-        case .invalidBirthData:
-            makeProfileCalculationActionState(
-                title: L10n.Profile.Calculation.InvalidBirthData.title,
-                subtitle: L10n.Profile.Calculation.InvalidBirthData.subtitle,
-                buttonTitle: L10n.Profile.Calculation.InvalidBirthData.button
-            ) {
-                Task {
-                    await presenter.completeBirthDataButtonTapped()
-                }
-            }
-        case .failed:
-            makeProfileCalculationActionState(
-                title: L10n.Profile.Calculation.Failed.title,
-                subtitle: L10n.Profile.Calculation.Failed.subtitle,
-                buttonTitle: L10n.Profile.Calculation.Failed.button
-            ) {
-                Task {
-                    await presenter.retryProfileCalculationButtonTapped()
-                }
-            }
-        }
-    }
-
-    func makeProfileCalculationActionState(
-        title: String,
-        subtitle: String,
-        buttonTitle: String,
-        action: @escaping () -> Void
-    ) -> some View {
-        VStack(spacing: 10) {
-            Text(title)
-                .font(.headline)
-                .foregroundStyle(Color(.textPrimary))
-                .multilineTextAlignment(.center)
-
-            Text(subtitle)
-                .font(.footnote)
-                .foregroundStyle(Color(.textSecondary))
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
-
-            Button(action: action) {
-                Text(buttonTitle)
-                    .font(.footnote.weight(.semibold))
-                    .foregroundStyle(Color(.textOnAccent))
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 10)
-                    .background(Color(.pinkButton))
-                    .clipShape(Capsule())
-            }
-            .buttonStyle(.plain)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 14)
-        .padding(.horizontal, 12)
-    }
-
     func makeProfileDescriptionRow() -> some View {
         Button {
             presenter.profileDescriptionButtonTapped()
@@ -424,7 +346,7 @@ extension ProfileScreen {
                         .fontWeight(.medium)
                         .foregroundStyle(Color(.textPrimary))
 
-                    Text(expertiseLevelTitle)
+                    Text(viewModel.perfumeExpertiseLevel.title)
                         .font(.headline)
                         .foregroundStyle(Color(.pinkButton))
                 }
@@ -440,7 +362,7 @@ extension ProfileScreen {
                     .clipShape(Capsule())
             }
 
-            Text(expertiseLevelDescription)
+            Text(viewModel.perfumeExpertiseLevel.description)
                 .font(.footnote)
                 .foregroundStyle(Color(.textSecondary))
                 .fixedSize(horizontal: false, vertical: true)
@@ -578,36 +500,6 @@ extension ProfileScreen {
         )
     }
 
-    var expertiseLevelTitle: String {
-        switch viewModel.perfumeExpertiseLevel {
-        case .novice:
-            return L10n.Profile.Expertise.Level.novice
-        case .noteExplorer:
-            return L10n.Profile.Expertise.Level.noteExplorer
-        case .accordExpert:
-            return L10n.Profile.Expertise.Level.accordExpert
-        case .fragranceAnalyst:
-            return L10n.Profile.Expertise.Level.fragranceAnalyst
-        case .perfumer:
-            return L10n.Profile.Expertise.Level.perfumer
-        }
-    }
-
-    var expertiseLevelDescription: String {
-        switch viewModel.perfumeExpertiseLevel {
-        case .novice:
-            return L10n.Profile.Expertise.Description.novice
-        case .noteExplorer:
-            return L10n.Profile.Expertise.Description.noteExplorer
-        case .accordExpert:
-            return L10n.Profile.Expertise.Description.accordExpert
-        case .fragranceAnalyst:
-            return L10n.Profile.Expertise.Description.fragranceAnalyst
-        case .perfumer:
-            return L10n.Profile.Expertise.Description.perfumer
-        }
-    }
-
     var personalPerfumesSubtitle: String {
         if viewModel.isProfileCalculationLoading {
             return L10n.Profile.PersonalPerfumes.loadingSubtitle
@@ -633,77 +525,6 @@ extension ProfileScreen {
 
 }
 
-// MARK: - Natal Chart Row
-
-extension ProfileScreen {
-    func makeNatalChartRow(
-        color: Color,
-        symbol: String,
-        symbolColor: Color,
-        title: String,
-        placement: ZodiacPlacement
-    ) -> some View {
-        let horoscope = DailyHoroscope(sign: placement.sign.rawValue, energyOfDay: "")
-
-        return HStack(spacing: 12) {
-            Circle()
-                .fill(color)
-                .frame(width: 42, height: 42)
-                .overlay(
-                    Image(systemName: symbol)
-                        .font(.headline)
-                        .foregroundColor(symbolColor)
-                )
-                .accessibilityHidden(true)
-            
-            VStack(alignment: .leading, spacing: 3) {
-                Text(title)
-                    .font(.caption)
-                    .fontWeight(.medium)
-                    .foregroundStyle(Color(.textPrimary))
-                
-                Text(horoscope.displayName)
-                    .font(.headline)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
-                    .foregroundStyle(Color(.textPrimary))
-            }
-            
-            Spacer()
-
-            if !dynamicTypeSize.isAccessibilitySize {
-                Text(horoscope.symbol)
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                    .minimumScaleFactor(0.8)
-                    .foregroundStyle(Color(.textPrimary))
-                    .frame(width: signBadgeSize, height: signBadgeSize)
-                    .background(color)
-                    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-                    .accessibilityHidden(true)
-            }
-        }
-        .accessibilityElement(children: .combine)
-        .padding(.horizontal, 10)
-        .padding(.vertical, 8)
-        .background(
-            LinearGradient(
-                colors: [
-                    color.opacity(0.55),
-                    Color(.rowBackground)
-                ],
-                startPoint: .leading,
-                endPoint: .trailing
-            )
-        )
-        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .stroke(symbolColor.opacity(0.12), lineWidth: 1)
-        )
-    }
-}
-
 // MARK: - Element Item
 
 private enum ProfileElement: Hashable {
@@ -722,21 +543,16 @@ extension ProfileScreen {
 
             HStack(spacing: 0) {
                 ForEach(elementItems, id: \.element) { item in
-                    makeElementBalanceSegment(
-                        color: item.color,
-                        width: width * .init(item.value) / 100
-                    )
+                    item.color
+                        .frame(
+                            width: width * .init(item.value) / 100
+                        )
                 }
             }
             .background(Color(.placeholderSoft))
             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         }
         .frame(height: 34)
-    }
-
-    func makeElementBalanceSegment(color: Color, width: Double) -> some View {
-        color
-            .frame(width: .init(width))
     }
 
     private func makeElementBalanceItems(elementBalance: ElementBalance) -> [
