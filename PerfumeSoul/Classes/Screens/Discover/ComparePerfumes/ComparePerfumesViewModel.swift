@@ -61,14 +61,8 @@ enum ComparePerfumeField: Hashable, Identifiable {
         notes.contains { $0.localizedCaseInsensitiveCompare(note) == .orderedSame }
     }
 
-    var notesLanguage: String {
-        let notes = [leftPerfume, rightPerfume].compactMap { $0 }
-            .flatMap { $0.topNotes + $0.middleNotes + $0.baseNotes }
-        return PerfumeNoteFormatter.language(for: notes)
-    }
-
     func displayNotes(_ notes: [String]) -> [String] {
-        PerfumeNoteFormatter.names(notes, language: notesLanguage)
+        PerfumeNoteFormatter.names(notes)
     }
 
     func scoreText(_ score: Int?) -> String {

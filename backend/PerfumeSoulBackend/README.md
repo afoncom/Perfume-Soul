@@ -62,7 +62,7 @@ Backfill perfume stories and English note names:
 ```bash
 psql "$DATABASE_URL" -f scripts/fill_perfume_story_metadata.sql
 psql "$DATABASE_URL" -f scripts/fill_perfume_story_english_metadata.sql
-psql "$DATABASE_URL" -f scripts/fill_note_english_names.sql
+psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f scripts/fill_note_localized_names.sql
 ```
 
 Run the server:

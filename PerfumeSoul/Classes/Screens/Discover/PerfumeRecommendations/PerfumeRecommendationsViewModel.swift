@@ -22,8 +22,7 @@ import Observation
     }
 
     func displayNotes(_ notes: [String]) -> [String] {
-        let language = PerfumeNoteFormatter.language(for: perfumeRecommendations.flatMap(\.matchingNotes))
-        return PerfumeNoteFormatter.names(notes, language: language)
+        PerfumeNoteFormatter.names(notes)
     }
 
     func scoreText(_ score: Int?) -> String {

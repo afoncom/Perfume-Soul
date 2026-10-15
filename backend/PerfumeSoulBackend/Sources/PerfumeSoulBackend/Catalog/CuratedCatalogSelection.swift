@@ -526,49 +526,51 @@ private enum CatalogDisplayNameFormatter {
 
 enum CatalogNoteNameNormalizer {
     static func russianName(for sourceName: String) -> String? {
-        russianNames[normalized(sourceName)]
+        russianNames[normalizedNoteName(sourceName)]
     }
 
-    private static let russianNames: [String: String] = [
-        "agarwood oud": "Уд",
-        "amber": "Амбра",
-        "ambroxan": "Амброксан",
-        "apple": "Яблоко",
-        "bergamot": "Бергамот",
-        "cardamom": "Кардамон",
-        "cedar": "Кедр",
-        "coffee": "Кофе",
-        "coconut": "Кокос",
-        "fig": "Инжир",
-        "grapefruit": "Грейпфрут",
-        "incense": "Ладан",
-        "iris": "Ирис",
-        "jasmine": "Жасмин",
-        "labdanum": "Лабданум",
-        "lavender": "Лаванда",
-        "leather": "Кожа",
-        "lemon": "Лимон",
-        "marine notes": "Морские ноты",
-        "mint": "Мята",
-        "musk": "Мускус",
-        "neroli": "Нероли",
-        "nutmeg": "Мускатный орех",
-        "orange blossom": "Апельсиновый цвет",
-        "oud": "Уд",
-        "patchouli": "Пачули",
-        "pear": "Груша",
-        "pepper": "Перец",
-        "pink pepper": "Розовый перец",
-        "rose": "Роза",
-        "rosewood": "Палисандр",
-        "rum": "Ром",
-        "saffron": "Шафран",
-        "sandalwood": "Сандал",
-        "tea": "Чай",
-        "tonka bean": "Бобы тонка",
-        "vanilla": "Ваниль",
-        "vetiver": "Ветивер"
-    ]
+    private static let russianNames: [String: String] = {
+        guard let url = Bundle.module.url(forResource: "note_translations", withExtension: "tsv") else {
+            fatalError("Missing note_translations.tsv backend resource")
+        }
+
+        do {
+            let contents = try String(contentsOf: url, encoding: .utf8)
+            var translations: [String: String] = [:]
+            for line in contents.split(whereSeparator: \Character.isNewline).dropFirst() {
+                let columns = line.split(separator: "\t", maxSplits: 1, omittingEmptySubsequences: false)
+                guard columns.count == 2 else {
+                    fatalError("Invalid note translation row: \(line)")
+                }
+
+                let englishName = String(columns[0]).trimmingCharacters(in: .whitespacesAndNewlines)
+                let russianName = String(columns[1]).trimmingCharacters(in: .whitespacesAndNewlines)
+                guard !englishName.isEmpty, !russianName.isEmpty else {
+                    fatalError("Empty note translation row: \(line)")
+                }
+
+                let key = normalizedNoteName(englishName)
+                if let existingName = translations[key], existingName != russianName {
+                    fatalError("Conflicting translations for \(englishName)")
+                }
+                translations[key] = russianName
+            }
+            return translations
+        } catch {
+            fatalError("Unable to load note translations: \(error)")
+        }
+    }()
+
+    private static func normalizedNoteName(_ value: String) -> String {
+        normalized(
+            value
+                .replacingOccurrences(of: "\u{0092}", with: "'")
+                .components(separatedBy: .controlCharacters)
+                .joined()
+                .replacingOccurrences(of: "®", with: "")
+                .replacingOccurrences(of: "™", with: "")
+        )
+    }
 }
 
 func normalized(_ value: String) -> String {
