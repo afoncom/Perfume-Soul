@@ -151,6 +151,7 @@ BACKEND_IMAGE_TAG=abc1234
 ### Docker seed/backfill
 
 Fluent migrations run automatically when the backend starts. Data seed and backfill scripts still need to be run manually.
+The PostgreSQL container mounts `scripts/` and the note translation TSV read-only under `/catalog` for the localized-note backfill.
 
 ```bash
 docker compose exec -T postgres \
@@ -171,8 +172,8 @@ docker compose exec -T postgres \
 docker compose exec -T postgres \
   psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/fill_perfume_story_english_metadata.sql
 
-docker compose exec -T postgres \
-  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/fill_note_english_names.sql
+docker compose exec -T -w /catalog postgres \
+  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 -f scripts/fill_note_localized_names.sql
 ```
 
 ### VPS deployment

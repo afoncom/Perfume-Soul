@@ -464,9 +464,15 @@ struct CatalogPreparedPerfume: Sendable {
         self.genderProfile = Self.genderProfile(from: source.gender)
         self.releaseYear = source.releaseYear
         self.perfumer = source.perfumers.isEmpty ? nil : source.perfumers.joined(separator: ", ")
-        self.topNotes = source.topNotes.map(CatalogDisplayNameFormatter.noteName(from:))
-        self.middleNotes = source.middleNotes.map(CatalogDisplayNameFormatter.noteName(from:))
-        self.baseNotes = source.baseNotes.map(CatalogDisplayNameFormatter.noteName(from:))
+        self.topNotes = source.topNotes.map {
+            CatalogNoteNameNormalizer.canonicalEnglishName(for: CatalogDisplayNameFormatter.noteName(from: $0))
+        }
+        self.middleNotes = source.middleNotes.map {
+            CatalogNoteNameNormalizer.canonicalEnglishName(for: CatalogDisplayNameFormatter.noteName(from: $0))
+        }
+        self.baseNotes = source.baseNotes.map {
+            CatalogNoteNameNormalizer.canonicalEnglishName(for: CatalogDisplayNameFormatter.noteName(from: $0))
+        }
         self.accords = source.canonicalAccords
         self.longevityScore = nil
         self.sillageScore = nil
@@ -525,6 +531,17 @@ private enum CatalogDisplayNameFormatter {
 }
 
 enum CatalogNoteNameNormalizer {
+    static func canonicalEnglishName(for sourceName: String) -> String {
+        switch normalizedNoteName(sourceName) {
+        case "marine notes":
+            return "Sea Notes"
+        case "agarwood oud":
+            return "Agarwood (Oud)"
+        default:
+            return sourceName
+        }
+    }
+
     static func russianName(for sourceName: String) -> String? {
         russianNames[normalizedNoteName(sourceName)]
     }
