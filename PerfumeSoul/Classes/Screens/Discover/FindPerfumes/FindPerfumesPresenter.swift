@@ -11,6 +11,8 @@ import Foundation
 protocol FindPerfumesPresenter {
     func searchTextChanged(_ searchText: String, for field: FindPerfumeField) async
     func searchResultTapped(_ perfume: SearchPerfumeItem, for field: FindPerfumeField)
+    func cancelSearch()
+    func removePerfume(for field: FindPerfumeField)
     func findSimilarPerfumesButtonTapped()
 }
 
@@ -35,19 +37,13 @@ final class FindPerfumesPresenterImpl {
 
 extension FindPerfumesPresenterImpl: FindPerfumesPresenter {
     @MainActor func searchTextChanged(_ searchText: String, for field: FindPerfumeField) async {
-        updateSelectedPerfumeIfNeeded(for: field, searchText: searchText)
+        cancelSearch()
 
         guard !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            searchTask?.cancel()
-            activeSearchRequestID = UUID()
-            viewModel.searchResults = []
-            viewModel.isSearching = false
-            viewModel.searchErrorMessage = nil
             return
         }
 
-        searchTask?.cancel()
-        activeSearchRequestID = UUID()
+        viewModel.isSearching = true
         searchTask = Task { [weak self] in
             do {
                 try await Task.sleep(for: .milliseconds(350))
@@ -63,6 +59,7 @@ extension FindPerfumesPresenterImpl: FindPerfumesPresenter {
     }
 
     @MainActor func searchResultTapped(_ perfume: SearchPerfumeItem, for field: FindPerfumeField) {
+        cancelSearch()
         switch field {
         case .first:
             viewModel.firstSearchText = perfume.name
@@ -77,6 +74,30 @@ extension FindPerfumesPresenterImpl: FindPerfumesPresenter {
 
         viewModel.searchResults = []
         viewModel.searchErrorMessage = nil
+    }
+
+    @MainActor func cancelSearch() {
+        searchTask?.cancel()
+        activeSearchRequestID = UUID()
+        viewModel.searchResults = []
+        viewModel.isSearching = false
+        viewModel.searchErrorMessage = nil
+    }
+
+    @MainActor func removePerfume(for field: FindPerfumeField) {
+        switch field {
+        case .first:
+            viewModel.firstSearchText = ""
+            viewModel.firstSelectedPerfume = nil
+        case .second:
+            viewModel.secondSearchText = viewModel.thirdSearchText
+            viewModel.secondSelectedPerfume = viewModel.thirdSelectedPerfume
+            viewModel.thirdSearchText = ""
+            viewModel.thirdSelectedPerfume = nil
+        case .third:
+            viewModel.thirdSearchText = ""
+            viewModel.thirdSelectedPerfume = nil
+        }
     }
 
     @MainActor func findSimilarPerfumesButtonTapped() {
@@ -157,26 +178,6 @@ extension FindPerfumesPresenterImpl {
             viewModel.searchResults = []
             viewModel.isSearching = false
             viewModel.searchErrorMessage = L10n.Common.Error.message
-        }
-    }
-
-    @MainActor private func updateSelectedPerfumeIfNeeded(
-        for field: FindPerfumeField,
-        searchText: String
-    ) {
-        switch field {
-        case .first:
-            if viewModel.firstSelectedPerfume?.name != searchText {
-                viewModel.firstSelectedPerfume = nil
-            }
-        case .second:
-            if viewModel.secondSelectedPerfume?.name != searchText {
-                viewModel.secondSelectedPerfume = nil
-            }
-        case .third:
-            if viewModel.thirdSelectedPerfume?.name != searchText {
-                viewModel.thirdSelectedPerfume = nil
-            }
         }
     }
 

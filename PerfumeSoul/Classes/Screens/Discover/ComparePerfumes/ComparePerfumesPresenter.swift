@@ -11,6 +11,7 @@ import Foundation
 protocol ComparePerfumesPresenter {
     func searchTextChanged(_ searchText: String, for field: ComparePerfumeField) async
     func searchResultTapped(_ perfume: SearchPerfumeItem, for field: ComparePerfumeField)
+    func cancelSearch()
     func compareTapped() async
     func retryTapped() async
 }
@@ -44,20 +45,13 @@ final class ComparePerfumesPresenterImpl {
 
 extension ComparePerfumesPresenterImpl: ComparePerfumesPresenter {
     func searchTextChanged(_ searchText: String, for field: ComparePerfumeField) async {
-        updateSelectedPerfumeIfNeeded(for: field, searchText: searchText)
-        clearComparisonState()
+        cancelSearch()
 
         guard !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            searchTask?.cancel()
-            activeSearchRequestID = UUID()
-            viewModel.searchResults = []
-            viewModel.isSearching = false
-            viewModel.searchErrorMessage = nil
             return
         }
 
-        searchTask?.cancel()
-        activeSearchRequestID = UUID()
+        viewModel.isSearching = true
         searchTask = Task { [weak self] in
             do {
                 try await Task.sleep(for: .milliseconds(350))
@@ -76,6 +70,8 @@ extension ComparePerfumesPresenterImpl: ComparePerfumesPresenter {
         _ perfume: SearchPerfumeItem,
         for field: ComparePerfumeField
     ) {
+        cancelSearch()
+        clearComparisonState()
         switch field {
         case .left:
             viewModel.leftSearchText = perfume.name
@@ -86,6 +82,14 @@ extension ComparePerfumesPresenterImpl: ComparePerfumesPresenter {
         }
 
         viewModel.searchResults = []
+        viewModel.searchErrorMessage = nil
+    }
+
+    func cancelSearch() {
+        searchTask?.cancel()
+        activeSearchRequestID = UUID()
+        viewModel.searchResults = []
+        viewModel.isSearching = false
         viewModel.searchErrorMessage = nil
     }
 
@@ -130,8 +134,8 @@ extension ComparePerfumesPresenterImpl: ComparePerfumesPresenter {
     }
 }
 
-private extension ComparePerfumesPresenterImpl {
-    func loadSearchResults(searchText: String) async {
+extension ComparePerfumesPresenterImpl {
+    private func loadSearchResults(searchText: String) async {
         let trimmedSearchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         let requestID = UUID()
         activeSearchRequestID = requestID
@@ -179,7 +183,7 @@ private extension ComparePerfumesPresenterImpl {
         }
     }
 
-    func loadComparison(selection: ComparePerfumeSelection) async {
+    private func loadComparison(selection: ComparePerfumeSelection) async {
         let requestID = UUID()
         activeComparisonRequestID = requestID
 
@@ -214,23 +218,7 @@ private extension ComparePerfumesPresenterImpl {
         }
     }
 
-    func updateSelectedPerfumeIfNeeded(
-        for field: ComparePerfumeField,
-        searchText: String
-    ) {
-        switch field {
-        case .left:
-            if viewModel.leftSelectedPerfume?.name != searchText {
-                viewModel.leftSelectedPerfume = nil
-            }
-        case .right:
-            if viewModel.rightSelectedPerfume?.name != searchText {
-                viewModel.rightSelectedPerfume = nil
-            }
-        }
-    }
-
-    func clearComparisonState() {
+    private func clearComparisonState() {
         activeComparisonRequestID = UUID()
         viewModel.leftPerfume = nil
         viewModel.rightPerfume = nil
@@ -239,7 +227,7 @@ private extension ComparePerfumesPresenterImpl {
         viewModel.errorMessage = nil
     }
 
-    func showValidationMessage(_ message: String) {
+    private func showValidationMessage(_ message: String) {
         viewModel.validationMessage = message
         viewModel.isShowingValidationAlert = true
     }

@@ -29,7 +29,8 @@ final class FindPerfumesModule {
         let view = FindPerfumesScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: view)
-        hostingController.title = L10n.Screen.findPerfumes
+        hostingController.title = L10n.Discover.FindSimilar.title
+        hostingController.navigationItem.largeTitleDisplayMode = .never
         
         return hostingController
     }

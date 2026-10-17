@@ -30,7 +30,8 @@ final class PerfumeRecommendationsModule {
         let view = PerfumeRecommendationsScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: view)
-        hostingController.title = L10n.Screen.perfumeRecommendations
+        hostingController.title = L10n.Discover.FindSimilar.resultsTitle
+        hostingController.navigationItem.largeTitleDisplayMode = .never
         
         return hostingController
     }

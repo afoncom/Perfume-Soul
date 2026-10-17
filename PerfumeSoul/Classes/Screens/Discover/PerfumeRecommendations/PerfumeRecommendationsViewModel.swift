@@ -20,4 +20,12 @@ import Observation
     init(selectedPerfumes: [SearchPerfumeItem]) {
         self.selectedPerfumes = selectedPerfumes
     }
+
+    func displayNotes(_ notes: [String]) -> [String] {
+        PerfumeNoteFormatter.names(notes)
+    }
+
+    func scoreText(_ score: Int?) -> String {
+        score.map { "\($0)/10" } ?? "—"
+    }
 }

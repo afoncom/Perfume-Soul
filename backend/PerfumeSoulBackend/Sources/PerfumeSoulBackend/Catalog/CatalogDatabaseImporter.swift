@@ -231,8 +231,13 @@ enum CatalogDatabaseImporter {
             return note
         }
 
-        let displayName = CatalogNoteNameNormalizer.russianName(for: englishName) ?? englishName
-        if let note = notesByName[normalized(displayName)] {
+        guard let displayName = CatalogNoteNameNormalizer.russianName(for: englishName) else {
+            throw CatalogImportError.missingNoteTranslation(englishName)
+        }
+        if let note = notesByName[normalized(displayName)],
+            note.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty != false {
+            note.nameEnglish = englishName
+            try await note.update(on: database)
             notesByName[key] = note
             return note
         }
@@ -290,5 +295,6 @@ private struct UnclassifiedBrandCount: Decodable {
 
 enum CatalogImportError: Error {
     case missingPersistedIdentifier
+    case missingNoteTranslation(String)
     case invalidSourceEncoding
 }

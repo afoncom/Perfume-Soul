@@ -19,6 +19,14 @@ Use Swift with 4-space indentation and keep SwiftLint clean. Prefer `isEmpty`, `
 
 Use only generated asset symbols from `PerfumeSoul/Resources/Assets.xcassets`. In SwiftUI, use `Color(.textPrimary)` or `LinearGradient(colors: [Color(.buttonShine), Color(.pinkButton)], ...)`. In UIKit, use `UIColor(resource: .backgroundPrimary)`. Do not hardcode system or string-based colors.
 
+## Design Work
+
+Before changing any app UI, read `docs/design/perfume-flow-fashion.md`. It is the
+canonical continuation guide for the current visual direction, interaction patterns,
+accessibility behavior, image policy and the completed Today flow. Continue that
+language on newly named screens without redesigning completed screens or expanding
+the requested scope.
+
 ## Testing Guidelines
 
 iOS tests use XCTest; backend tests use Swift Testing with `VaporTesting`. Add focused tests near the target they cover and name them with `test...` or descriptive backend `@Test` cases. Run the relevant Tuist test target for app changes and `swift test` for backend work.

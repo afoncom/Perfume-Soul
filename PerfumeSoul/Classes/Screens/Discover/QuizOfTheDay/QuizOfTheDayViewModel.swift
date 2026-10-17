@@ -34,17 +34,21 @@ import Observation
     }
 
     var currentQuestion: QuizOfTheDayQuestion? {
-        guard questions.indices.contains(currentQuestionIndex) else { return nil }
+        guard questions.indices.contains(currentQuestionIndex) else {
+            return nil
+        }
         return questions[currentQuestionIndex]
     }
 
     private var currentQuestionState: DailyQuizQuestionState? {
-        guard let questionID = currentQuestion?.id else { return nil }
+        guard let questionID = currentQuestion?.id else {
+            return nil
+        }
         return dailyQuizState?.questionState(for: questionID)
     }
 
     var selectedAnswer: QuizOfTheDayAnswer? {
-        currentQuestion?.answers.first(where: { $0.id == selectedAnswerId })
+        currentQuestion?.answers.first { $0.id == selectedAnswerId }
     }
 
     var currentQuestionIndex: Int {
@@ -111,12 +115,54 @@ import Observation
         "\(Int(progressValue * 100))%"
     }
 
+    var questionProgressTitle: String {
+        L10n.QuizOfTheDay.questionProgress(currentQuestionNumber, totalQuestions)
+    }
+
+    var scoreSummary: String {
+        "\(scoreToday) / \(totalQuestions)"
+    }
+
+    var scoreAccessibilityLabel: String {
+        L10n.QuizOfTheDay.scoreSummary(scoreToday, totalQuestions)
+    }
+
+    var canPerformPrimaryAction: Bool {
+        !isQuizCompleted && (canFinishQuiz || (isAnswerSubmitted ? canGoToNextQuestion : canSubmitAnswer))
+    }
+
+    var primaryActionTitle: String {
+        if canFinishQuiz {
+            return L10n.QuizOfTheDay.finishQuiz
+        }
+        return isAnswerSubmitted ? L10n.QuizOfTheDay.nextQuestion : L10n.QuizOfTheDay.submitAnswer
+    }
+
+    var answerResultTitle: String {
+        isSelectedAnswerCorrect ? L10n.QuizOfTheDay.correctResult : L10n.QuizOfTheDay.incorrectResult
+    }
+
+    func accessibilityLabel(for answer: QuizOfTheDayAnswer) -> String {
+        var components = [answer.id, answer.text]
+        if isAnswerSelected(answer.id) {
+            components.append(L10n.QuizOfTheDay.selectedAnswerAccessibility)
+        }
+        if isAnswerSubmitted, answer.isCorrect {
+            components.append(L10n.QuizOfTheDay.correctAnswerAccessibility)
+        } else if isAnswerSubmitted, isAnswerSelected(answer.id) {
+            components.append(L10n.QuizOfTheDay.incorrectAnswerAccessibility)
+        }
+        return components.joined(separator: ", ")
+    }
+
     func isAnswerSelected(_ id: String) -> Bool {
         selectedAnswerId == id
     }
 
     func selectAnswer(id: String) {
-        guard !isAnswerSubmitted, let questionID = currentQuestion?.id else { return }
+        guard !isAnswerSubmitted, let questionID = currentQuestion?.id else {
+            return
+        }
         updateDailyQuizState { state in
             state.updateQuestionState(questionID: questionID) { questionState in
                 questionState.selectedAnswerID = id
@@ -146,7 +192,9 @@ import Observation
     }
 
     func goToNextQuestion() {
-        guard canGoToNextQuestion else { return }
+        guard canGoToNextQuestion else {
+            return
+        }
 
         updateDailyQuizState { state in
             state.currentQuestionIndex += 1
@@ -173,7 +221,9 @@ import Observation
     }
 
     private func updateDailyQuizState(_ update: (inout DailyQuizState) -> Void) {
-        guard var dailyQuizState else { return }
+        guard var dailyQuizState else {
+            return
+        }
         update(&dailyQuizState)
         self.dailyQuizState = dailyQuizState
     }

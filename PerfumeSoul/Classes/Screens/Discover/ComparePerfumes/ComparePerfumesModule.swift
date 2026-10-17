@@ -30,6 +30,7 @@ final class ComparePerfumesModule {
         
         let hostingController = UIHostingController(rootView: view)
         hostingController.title = L10n.Screen.comparePerfumes
+        hostingController.navigationItem.largeTitleDisplayMode = .never
         
         return hostingController
     }
