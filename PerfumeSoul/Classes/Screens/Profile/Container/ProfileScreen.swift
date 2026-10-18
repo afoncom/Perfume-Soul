@@ -218,6 +218,48 @@ extension ProfileScreen {
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
         .shadow(color: Color(.cardShadowSubtle), radius: 7, x: 0, y: 3)
     }
+    
+    @ViewBuilder
+    func makeProfileCalculationStateView() -> some View {
+        switch viewModel.profileCalculationState {
+        case .idle, .loading:
+            ProgressView()
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.vertical, 20)
+        case .loaded:
+            EmptyView()
+        case .missingBirthPlaceData:
+            CalculationStateView(
+                title: L10n.Profile.Calculation.MissingBirthData.title,
+                subtitle: L10n.Profile.Calculation.MissingBirthData.subtitle,
+                buttonTitle: L10n.Profile.Calculation.MissingBirthData.button
+            ) {
+                Task {
+                    await presenter.completeBirthDataButtonTapped()
+                }
+            }
+        case .invalidBirthData:
+            CalculationStateView(
+                title: L10n.Profile.Calculation.InvalidBirthData.title,
+                subtitle: L10n.Profile.Calculation.InvalidBirthData.subtitle,
+                buttonTitle: L10n.Profile.Calculation.InvalidBirthData.button
+            ) {
+                Task {
+                    await presenter.completeBirthDataButtonTapped()
+                }
+            }
+        case .failed:
+            CalculationStateView(
+                title: L10n.Profile.Calculation.Failed.title,
+                subtitle: L10n.Profile.Calculation.Failed.subtitle,
+                buttonTitle: L10n.Profile.Calculation.Failed.button
+            ) {
+                Task {
+                    await presenter.retryProfileCalculationButtonTapped()
+                }
+            }
+        }
+    }
 
     func makePersonalPerfumesRow() -> some View {
         Button {
