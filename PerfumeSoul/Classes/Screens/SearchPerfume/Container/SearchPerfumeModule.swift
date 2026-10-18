@@ -9,7 +9,7 @@
 import SwiftUI
 
 final class SearchPerfumeModule {
-    static func build(requestManager: RequestManager) -> NavigationControllerContainer {
+    @MainActor static func build(requestManager: RequestManager) -> NavigationControllerContainer {
         let viewModel = SearchPerfumeViewModel()
         let searchPerfumeService = SearchPerfumeServiceImpl(requestManager: requestManager)
         let navigationController = UINavigationController()
@@ -20,12 +20,17 @@ final class SearchPerfumeModule {
         let presenter = SearchPerfumePresenterImpl(
             viewModel: viewModel,
             router: router,
-            searchPerfumeService: searchPerfumeService
+            catalogService: CatalogServiceImpl(requestManager: requestManager),
+            searchPerfumeService: searchPerfumeService,
+            collectionService: PerfumeCollectionServiceImpl(
+                storage: PerfumeCollectionStorageImpl(userDefaults: .standard)
+            ),
+            favoritesStorage: CatalogFavoritesStorage(userDefaults: .standard)
         )
 
         let view = SearchPerfumeScreen(viewModel: viewModel, presenter: presenter)
         let hostingController = UIHostingController(rootView: view)
-        hostingController.title = L10n.Screen.searchPerfume
+        hostingController.title = String(localized: "catalog.title")
         navigationController.setViewControllers([hostingController], animated: false)
         navigationController.navigationBar.prefersLargeTitles = true
 

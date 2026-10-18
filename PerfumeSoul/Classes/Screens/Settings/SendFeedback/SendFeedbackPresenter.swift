@@ -5,6 +5,8 @@
 //  Created by afon.com on 16.05.2026.
 //
 
+import Foundation
+
 protocol SendFeedbackPresenter {
     func onAppear()
     func sendFeedbackButtonTapped()
@@ -34,7 +36,7 @@ extension SendFeedbackPresenterImpl: SendFeedbackPresenter {
     func sendFeedbackButtonTapped() {
         router.presentMailComposer(
             email: viewModel.developerEmail,
-            subject: "PerfumeSoul Feedback"
+            subject: String(localized: "sendFeedback.subject")
         )
     }
 }

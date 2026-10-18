@@ -10,78 +10,100 @@ import SwiftUI
 
 struct CabinetScreen: View {
     @Bindable private var viewModel: CabinetViewModel
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     private let presenter: CabinetPresenter
 
-    init(
-        viewModel: CabinetViewModel,
-        presenter: CabinetPresenter
-    ) {
+    init(viewModel: CabinetViewModel, presenter: CabinetPresenter) {
         self.viewModel = viewModel
         self.presenter = presenter
     }
 
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(spacing: 18) {
-                Text(L10n.Profile.Cabinet.header)
-                    .font(.title3)
-                    .italic()
-                    .multilineTextAlignment(.center)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 28) {
+                Text(L10n.Profile.Cabinet.subtitle)
+                    .font(.body)
                     .foregroundStyle(Color(.textSecondary))
-                    .padding(.horizontal, 28)
+                    .fixedSize(horizontal: false, vertical: true)
 
                 switch viewModel.state {
                 case .loading:
                     ProgressView().frame(maxWidth: .infinity, minHeight: 180)
                 case .empty:
-                    Text(L10n.Profile.Cabinet.empty)
-                        .foregroundStyle(Color(.textSecondary))
-                        .multilineTextAlignment(.center)
-                        .frame(maxWidth: .infinity, minHeight: 220)
+                    VStack(alignment: .leading, spacing: 16) {
+                        Image(systemName: "heart")
+                            .font(.largeTitle.weight(.ultraLight))
+                            .accessibilityHidden(true)
+                        Text(L10n.Profile.Cabinet.empty)
+                            .font(.title3)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .padding(24)
+                    .frame(maxWidth: .infinity, minHeight: 220, alignment: .leading)
+                    .background(Color(.placeholderSoft))
                 case let .content(perfumes):
-                    LazyVStack(spacing: 10) {
+                    LazyVStack(spacing: 24) {
                         ForEach(perfumes) { perfume in
-                            HStack(spacing: 12) {
-                                Button {
-                                    presenter.perfumeTapped(perfume)
-                                } label: {
-                                    HStack(spacing: 14) {
-                                        RoundedRectangle(cornerRadius: 14, style: .continuous)
-                                            .fill(Color(.placeholderMedium))
-                                            .frame(width: 58, height: 72)
-                                            .overlay { Image(systemName: "bottle.fill").foregroundStyle(Color(.textSecondary)) }
-                                        VStack(alignment: .leading, spacing: 4) {
-                                            Text(perfume.brandName).font(.subheadline).foregroundStyle(Color(.textSecondary))
-                                            Text(perfume.perfumeName).font(.title3).fontWeight(.medium).foregroundStyle(Color(.textPrimary))
-                                        }
-                                        Spacer()
-                                        Image(systemName: "chevron.right").foregroundStyle(Color(.textSecondary))
-                                    }
-                                    .padding(12)
-                                }
-                                .buttonStyle(.plain)
-
-                                Button {
-                                    presenter.removePerfume(perfume)
-                                } label: {
-                                    Image(systemName: "trash")
-                                        .foregroundStyle(Color(.textSecondary))
-                                        .frame(width: 44, height: 44)
-                                }
-                                .buttonStyle(.plain)
-                            }
-                            .background(Color(.surfacePrimary))
-                            .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-                            .overlay { RoundedRectangle(cornerRadius: 22, style: .continuous).stroke(Color(.cardBorder), lineWidth: 1) }
+                            perfumeRow(perfume)
+                            Rectangle().fill(Color(.cardBorder)).frame(height: 1)
                         }
                     }
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
+            .padding(.horizontal, 24)
+            .padding(.vertical, 24)
         }
-        .onAppear {
-            presenter.onAppear()
+        .background(Color(.backgroundPrimary))
+        .foregroundStyle(Color(.textPrimary))
+        .tint(Color(.textPrimary))
+        .preferredColorScheme(.light)
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear { presenter.onAppear() }
+    }
+
+    private func perfumeRow(_ perfume: PerfumeCollectionPerfume) -> some View {
+        let layout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 16))
+            : AnyLayout(HStackLayout(alignment: .top, spacing: 20))
+        return VStack(alignment: .leading, spacing: 12) {
+            Button {
+                presenter.perfumeTapped(perfume)
+            } label: {
+                layout {
+                    Rectangle()
+                        .fill(Color(.placeholderSoft))
+                        .frame(width: 96, height: 96)
+                        .overlay { Rectangle().stroke(Color(.cardBorder), lineWidth: 1) }
+                        .accessibilityHidden(true)
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(perfume.brandName.uppercased())
+                            .font(.caption.weight(.semibold))
+                            .tracking(0.8)
+                        Text(perfume.perfumeName)
+                            .font(.title3.weight(.medium))
+                        Image(systemName: "arrow.up.right")
+                            .font(.subheadline)
+                            .padding(.top, 4)
+                            .accessibilityHidden(true)
+                    }
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+
+            Button {
+                presenter.removePerfume(perfume)
+            } label: {
+                Label(String(localized: "catalog.unsave"), systemImage: "heart.fill")
+                    .font(.footnote)
+                    .foregroundStyle(Color(.textSecondary))
+                    .frame(minHeight: 44)
+            }
+            .buttonStyle(.plain)
+            .accessibilityValue(perfume.perfumeName)
         }
     }
 }

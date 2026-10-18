@@ -66,7 +66,8 @@ final class ProfileModule {
             personalPerfumeTopStorage: personalPerfumeTopStorage,
             recommendedPerfumeStateStorage: recommendedPerfumeStateStorage,
             appReviewRequester: appReviewRequester,
-            profileAvatarBuilder: profileAvatarBuilder
+            profileAvatarBuilder: profileAvatarBuilder,
+            catalogFavoritesStorage: CatalogFavoritesStorage(userDefaults: .standard)
         )
         
         let view = ProfileScreen(

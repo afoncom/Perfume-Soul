@@ -9,6 +9,7 @@
 import Observation
 
 @Observable final class SettingsViewModel {
+    var appVersion = "—"
     var isDailyHoroscopeNotificationEnabled = false
     var notificationAlertTitle: String?
     var notificationAlertMessage: String?
