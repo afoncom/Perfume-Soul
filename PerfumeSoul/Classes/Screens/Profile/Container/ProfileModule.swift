@@ -21,7 +21,7 @@ final class ProfileModule {
         let profileCalculationService = ProfileCalculationServiceImpl(requestManager: requestManager)
         let dayKeyProvider = QuizDayKeyProviderImpl()
         let quizProgressService = QuizProgressServiceImpl(
-            userDefaults: .standard,
+            container: container,
             dayKeyProvider: dayKeyProvider
         )
         let dailyQuizStateStorage = ViewStateStorage<DailyQuizState>(

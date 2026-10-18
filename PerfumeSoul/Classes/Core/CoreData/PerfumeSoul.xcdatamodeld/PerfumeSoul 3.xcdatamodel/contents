@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24901" systemVersion="25F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24901" systemVersion="25G241" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="CDProfile" representedClassName="CDProfile" syncable="YES" codeGenerationType="class">
         <attribute name="birthDate" optional="YES" attributeType="String"/>
         <attribute name="birthLatitude" optional="YES" attributeType="String"/>
@@ -11,5 +11,10 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="profileCalculationCacheKey" optional="YES" attributeType="String"/>
         <attribute name="profileCalculationJSON" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="CDQuizProgress" representedClassName="CDQuizProgress" syncable="YES" codeGenerationType="class">
+        <attribute name="correctAnswerKeys" optional="YES" attributeType="String"/>
+        <attribute name="lastCompletedQuizDayKey" optional="YES" attributeType="String"/>
+        <attribute name="streakDays" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
 </model>

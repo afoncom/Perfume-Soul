@@ -67,7 +67,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let settingsScreen = SettingsModule.build(
             container: container
         )
-        let discoverScreen = DiscoverModule.build(requestManager: requestManager)
+        let discoverScreen = DiscoverModule.build(
+            container: container,
+            requestManager: requestManager
+        )
         let profileScreen = ProfileModule.build(
             container: container,
             requestManager: requestManager

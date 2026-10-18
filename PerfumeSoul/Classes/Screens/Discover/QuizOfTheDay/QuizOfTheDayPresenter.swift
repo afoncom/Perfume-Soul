@@ -9,13 +9,13 @@
 protocol QuizOfTheDayPresenter {
     func onAppear() async
     func selectAnswer(id: String)
-    func submitAnswer()
+    func submitAnswer() async
     func goToNextQuestion()
     // StoreKit review requests must run on the main actor.
     @MainActor
     func quizCompletedCardAppeared()
     @MainActor
-    func finishQuiz()
+    func finishQuiz() async
 }
 
 final class QuizOfTheDayPresenterImpl {
@@ -46,7 +46,7 @@ final class QuizOfTheDayPresenterImpl {
 
 extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
     func onAppear() async {
-        let quizProgress = quizProgressService.loadProgress()
+        let quizProgress = await quizProgressService.loadProgress()
 
         do {
             let questions = try await service.requestQuizOfTheDayQuestions()
@@ -71,13 +71,13 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
         saveCurrentState()
     }
 
-    func submitAnswer() {
+    func submitAnswer() async {
         guard let result = viewModel.submitAnswer() else {
             return
         }
 
         if result.wasCorrect {
-            let updatedQuizProgress = quizProgressService.recordCorrectAnswer(
+            let updatedQuizProgress = await quizProgressService.recordCorrectAnswer(
                 questionID: result.questionID,
                 quizDayKey: result.quizDayKey
             )
@@ -93,12 +93,12 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
     }
 
     @MainActor
-    func finishQuiz() {
+    func finishQuiz() async {
         guard let quizDayKey = viewModel.finishQuiz() else {
             return
         }
 
-        let updatedQuizProgress = quizProgressService.completeQuiz(for: quizDayKey)
+        let updatedQuizProgress = await quizProgressService.completeQuiz(for: quizDayKey)
         viewModel.updateQuizProgress(updatedQuizProgress)
         saveCurrentState()
         router.registerQuizCompletion(for: quizDayKey)

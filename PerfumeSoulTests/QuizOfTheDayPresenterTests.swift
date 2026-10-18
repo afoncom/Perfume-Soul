@@ -27,8 +27,8 @@ final class QuizOfTheDayPresenterTests: XCTestCase {
 
         await presenter.onAppear()
         presenter.selectAnswer(id: "A")
-        presenter.submitAnswer()
-        presenter.finishQuiz()
+        await presenter.submitAnswer()
+        await presenter.finishQuiz()
         presenter.quizCompletedCardAppeared()
 
         XCTAssertTrue(router.didRequestAppReview)
@@ -86,22 +86,22 @@ private final class QuizOfTheDayServiceMock: QuizOfTheDayService {
 private final class QuizProgressServiceMock: QuizProgressService {
     private var progress = QuizProgress.initial
 
-    func loadProgress() -> QuizProgress {
+    func loadProgress() async -> QuizProgress {
         progress
     }
 
-    func recordCorrectAnswer(questionID: Int, quizDayKey: String) -> QuizProgress {
+    func recordCorrectAnswer(questionID: Int, quizDayKey: String) async -> QuizProgress {
         progress.correctAnswerKeys.insert("\(quizDayKey)_\(questionID)")
         return progress
     }
 
-    func completeQuiz(for quizDayKey: String) -> QuizProgress {
+    func completeQuiz(for quizDayKey: String) async -> QuizProgress {
         progress.lastCompletedQuizDayKey = quizDayKey
         progress.streakDays = 1
         return progress
     }
 
-    func resetProgress() {
+    func resetProgress() async {
         progress = .initial
     }
 }

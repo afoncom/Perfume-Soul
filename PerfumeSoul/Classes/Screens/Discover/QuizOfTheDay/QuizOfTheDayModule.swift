@@ -7,15 +7,17 @@
 //
 
 import SwiftUI
+import CoreData
 
 final class QuizOfTheDayModule {
     static func build(
         navigationController: UINavigationController?,
+        container: NSPersistentContainer,
         requestManager: RequestManager
     ) -> UIViewController {
         let dayKeyProvider = QuizDayKeyProviderImpl()
         let quizProgressService = QuizProgressServiceImpl(
-            userDefaults: .standard,
+            container: container,
             dayKeyProvider: dayKeyProvider
         )
         let viewStateStorage = ViewStateStorage<DailyQuizState>(

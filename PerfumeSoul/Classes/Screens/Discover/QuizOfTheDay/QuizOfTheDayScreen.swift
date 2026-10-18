@@ -240,14 +240,16 @@ struct QuizOfTheDayScreen: View {
     }
 
     private func handlePrimaryAction() {
-        if viewModel.canFinishQuiz {
-            presenter.finishQuiz()
-        } else if viewModel.isAnswerSubmitted {
-            presenter.goToNextQuestion()
-        } else {
-            presenter.submitAnswer()
-            if viewModel.isAnswerSubmitted {
-                AccessibilityNotification.Announcement(viewModel.answerResultTitle).post()
+        Task { @MainActor in
+            if viewModel.canFinishQuiz {
+                await presenter.finishQuiz()
+            } else if viewModel.isAnswerSubmitted {
+                presenter.goToNextQuestion()
+            } else {
+                await presenter.submitAnswer()
+                if viewModel.isAnswerSubmitted {
+                    AccessibilityNotification.Announcement(viewModel.answerResultTitle).post()
+                }
             }
         }
     }
