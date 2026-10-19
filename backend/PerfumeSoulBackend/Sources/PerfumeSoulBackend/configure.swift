@@ -27,6 +27,7 @@ public func configure(_ app: Application, needsDatabase: Bool = true) throws {
     app.migrations.add(AddPerfumeStoryMetadataMigration())
     app.migrations.add(AddPerfumeStoryEnglishMetadataMigration())
     app.migrations.add(AddNoteEnglishNameMigration())
+    app.migrations.add(AllowDuplicateLocalizedNoteNamesMigration())
     app.migrations.add(AddCatalogImportSupportMigration())
     app.migrations.add(CreateUnfoundSearchQueriesMigration())
 

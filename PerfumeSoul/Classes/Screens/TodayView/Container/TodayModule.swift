@@ -54,10 +54,10 @@ final class TodayModule {
         )
         
         let hostingController = UIHostingController(rootView: view)
-        hostingController.title = L10n.Screen.today
+        hostingController.navigationItem.largeTitleDisplayMode = .never
 
         navigationController.viewControllers = [hostingController]
-        navigationController.navigationBar.prefersLargeTitles = true
+        navigationController.navigationBar.prefersLargeTitles = false
         
         return NavigationControllerContainer(navigationController: navigationController)
     }

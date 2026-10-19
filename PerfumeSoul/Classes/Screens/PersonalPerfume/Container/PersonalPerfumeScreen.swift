@@ -51,9 +51,7 @@ struct PersonalPerfumeScreen: View {
 
 extension PersonalPerfumeScreen {
     private func makeHeader() -> some View {
-        VStack(alignment: .leading, spacing: 28) {
-            PerfumeFlowHeader(section: L10n.PersonalPerfume.collectionSection, step: nil)
-
+        VStack(alignment: .leading, spacing: 0) {
             VStack(alignment: .leading, spacing: 12) {
                 Text(L10n.PersonalPerfume.title)
                     .font(.system(size: headingSize, weight: .semibold))
@@ -75,14 +73,7 @@ extension PersonalPerfumeScreen {
     private func makeSections() -> some View {
         switch viewModel.state {
         case .loading:
-            VStack(spacing: 16) {
-                ProgressView()
-                    .tint(Color(.textPrimary))
-                Text(L10n.PersonalPerfume.loading)
-                    .font(.subheadline)
-                    .foregroundStyle(Color(.descriptionText))
-            }
-            .frame(maxWidth: .infinity, minHeight: 240)
+            PersonalPerfumeLoadingView()
             .padding(.horizontal, 24)
         case let .content(sections):
             VStack(spacing: 36) {
@@ -160,6 +151,53 @@ extension PersonalPerfumeScreen {
     }
 }
 
+private struct PersonalPerfumeLoadingView: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var isAnimating = false
+
+    var body: some View {
+        VStack(spacing: 28) {
+            HStack(spacing: 14) {
+                makeBlotter(height: 70, movement: 5, delay: 0)
+                makeBlotter(height: 94, movement: -7, delay: 0.12)
+                makeBlotter(height: 78, movement: 6, delay: 0.24)
+            }
+            .frame(height: 108)
+            .accessibilityHidden(true)
+
+            Text(L10n.PersonalPerfume.loading)
+                .font(.subheadline)
+                .foregroundStyle(Color(.descriptionText))
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, minHeight: 280)
+        .accessibilityElement(children: .combine)
+        .task {
+            guard !reduceMotion else {
+                return
+            }
+            isAnimating = true
+        }
+    }
+
+    private func makeBlotter(height: Double, movement: Double, delay: Double) -> some View {
+        Rectangle()
+            .fill(Color(.backgroundPrimary))
+            .frame(width: 22, height: height)
+            .overlay {
+                Rectangle().strokeBorder(Color(.textPrimary), lineWidth: 1)
+            }
+            .offset(y: reduceMotion ? 0 : (isAnimating ? movement : -movement))
+            .animation(
+                reduceMotion
+                    ? nil
+                    : .easeInOut(duration: 0.9).repeatForever(autoreverses: true).delay(delay),
+                value: isAnimating
+            )
+    }
+}
+
 private struct PersonalPerfumeCollectionSection: View {
     let section: PersonalPerfumeSection
     let index: Int
@@ -172,11 +210,6 @@ private struct PersonalPerfumeCollectionSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 12) {
-                Rectangle()
-                    .fill(Color(.inputBorder))
-                    .frame(height: 1)
-                    .accessibilityHidden(true)
-
                 HStack(alignment: .firstTextBaseline, spacing: 16) {
                     Text(section.title)
                         .font(.title2.weight(.semibold))
@@ -193,12 +226,22 @@ private struct PersonalPerfumeCollectionSection: View {
                 }
                 .foregroundStyle(Color(.textPrimary))
 
-                Text(section.description)
-                    .font(.subheadline)
-                    .foregroundStyle(Color(.descriptionText))
-                    .lineSpacing(3)
-                    .fixedSize(horizontal: false, vertical: true)
+                DisclosureGroup {
+                    Text(section.description)
+                        .font(.subheadline)
+                        .foregroundStyle(Color(.descriptionText))
+                        .lineSpacing(4)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.top, 8)
+                } label: {
+                    Text(L10n.PersonalPerfume.aboutSelection)
+                        .font(.subheadline)
+                        .foregroundStyle(Color(.descriptionText))
+                }
+                .tint(Color(.textPrimary))
             }
+            .padding(20)
+            .background(Color(.textPrimary).opacity(0.035))
             .padding(.horizontal, 24)
 
             if dynamicTypeSize.isAccessibilitySize {

@@ -10,224 +10,82 @@ import SwiftUI
 
 struct SettingsScreen: View {
     @Bindable private var viewModel: SettingsViewModel
+    @Environment(\.scenePhase) private var scenePhase
     private let presenter: SettingsPresenter
 
-    init(
-        viewModel: SettingsViewModel,
-        presenter: SettingsPresenter
-    ) {
+    init(viewModel: SettingsViewModel, presenter: SettingsPresenter) {
         self.viewModel = viewModel
         self.presenter = presenter
     }
 
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 28) {
-                makeNotificationsSection()
-                // TODO(#103): Restore Privacy section rows and re-add their en/ru translations.
-                makeSupportSection()
-                makeAboutSection()
+        Form {
+            Section {
+                Toggle(isOn: Binding(
+                    get: { viewModel.isDailyHoroscopeNotificationEnabled },
+                    set: { presenter.dailyHoroscopeNotificationToggled(isEnabled: $0) }
+                )) {
+                    Label(L10n.Settings.Notification.dailyHoroscopeTitle, systemImage: "bell")
+                }
+                .listRowBackground(Color(.backgroundPrimary))
+            } header: {
+                Text(L10n.Settings.notificationsTitle)
+            } footer: {
+                Text(L10n.Settings.Notification.dailyHoroscopeSubtitle)
             }
-            .padding(.horizontal, 16)
-            .padding(.top, 12)
-            .padding(.bottom, 28)
+
+            Section(L10n.Settings.supportTitle) {
+                Button {
+                    presenter.feedbackButtonTapped()
+                } label: {
+                    HStack {
+                        Label(L10n.Settings.About.feedbackTitle, systemImage: "envelope")
+                        Spacer(minLength: 12)
+                        Image(systemName: "chevron.right")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(Color(.textSecondary))
+                            .accessibilityHidden(true)
+                    }
+                    .padding(.vertical, 4)
+                }
+                .listRowBackground(Color(.backgroundPrimary))
+            }
+
+            Section {
+                LabeledContent(String(localized: "settings.version"), value: viewModel.appVersion)
+                    .listRowBackground(Color(.backgroundPrimary))
+            } header: {
+                Text(L10n.Settings.aboutTitle)
+            } footer: {
+                Text("PerfumeSoul")
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 24)
+                    .accessibilityHidden(true)
+            }
         }
-        .background {
-            Color(.backgroundPrimary).ignoresSafeArea()
+        .scrollContentBackground(.hidden)
+        .background(Color(.placeholderSoft).ignoresSafeArea())
+        .foregroundStyle(Color(.textPrimary))
+        .tint(Color(.textPrimary))
+        .preferredColorScheme(.light)
+        .task { await presenter.onAppear() }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active {
+                Task { await presenter.onAppear() }
+            }
         }
-        .task {
-            await presenter.onAppear()
-        }
-        .alert(
-            viewModel.notificationAlertTitle ?? "",
-            isPresented: $viewModel.isShowingNotificationAlert
-        ) {
+        .alert(viewModel.notificationAlertTitle ?? "", isPresented: $viewModel.isShowingNotificationAlert) {
             if viewModel.showsNotificationSettingsAction {
                 Button(L10n.Settings.Notification.openSettingsButton) {
                     presenter.openSystemSettingsTapped()
                     presenter.notificationAlertDismissed()
                 }
             }
-
             Button(L10n.Settings.Notification.dismissButton, role: .cancel) {
                 presenter.notificationAlertDismissed()
             }
         } message: {
             Text(viewModel.notificationAlertMessage ?? "")
         }
-    }
-}
-
-extension SettingsScreen {
-    private func makeNotificationsSection() -> some View {
-        VStack(alignment: .leading, spacing: 14) {
-            makeSectionTitle(L10n.Settings.notificationsTitle)
-
-            VStack(spacing: 0) {
-                makeToggleRow(
-                    icon: "bell",
-                    iconColor: Color(.pinkButton),
-                    title: L10n.Settings.Notification.dailyHoroscopeTitle,
-                    subtitle: L10n.Settings.Notification.dailyHoroscopeSubtitle,
-                    isOn: Binding(
-                        get: { viewModel.isDailyHoroscopeNotificationEnabled },
-                        set: { isEnabled in
-                            presenter.dailyHoroscopeNotificationToggled(isEnabled: isEnabled)
-                        }
-                    )
-                )
-
-            }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
-            .background(Color(.surfacePrimary))
-            .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
-            .shadow(color: Color(.cardShadowSubtle), radius: 9, x: 0, y: 4)
-        }
-    }
-
-    private func makeSupportSection() -> some View {
-        VStack(alignment: .leading, spacing: 14) {
-            makeSectionTitle(L10n.Settings.supportTitle)
-
-            VStack(spacing: 0) {
-                makeActionRow(
-                    icon: "heart.fill",
-                    iconColor: Color(.pinkButton),
-                    title: L10n.Settings.Support.supportDeveloperTitle,
-                    subtitle: L10n.Settings.Support.supportDeveloperSubtitle,
-                    showsDisclosure: false
-                )
-                // TODO(#100): Restore Rate App when App Store ID is available and open the write-review URL.
-            }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
-            .background(Color(.surfacePrimary))
-            .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
-            .shadow(color: Color(.cardShadowSubtle), radius: 9, x: 0, y: 4)
-        }
-    }
-
-    private func makeAboutSection() -> some View {
-        VStack(alignment: .leading, spacing: 14) {
-            makeSectionTitle(L10n.Settings.aboutTitle)
-
-            VStack(spacing: 0) {
-                Button {
-                    presenter.feedbackButtonTapped()
-                } label: {
-                    makeActionRow(
-                        icon: "envelope",
-                        iconColor: Color(.zodiacBlue),
-                        title: L10n.Settings.About.feedbackTitle,
-                        subtitle: L10n.Settings.About.feedbackSubtitle
-                    )
-                }
-                .buttonStyle(.plain)
-
-                makeDivider()
-
-                makeActionRow(
-                    icon: "info.circle",
-                    iconColor: Color(.zodiacPurple),
-                    title: L10n.Settings.About.aboutAppTitle,
-                    subtitle: L10n.Settings.About.aboutAppSubtitle,
-                    showsDisclosure: false
-                )
-            }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
-            .background(Color(.surfacePrimary))
-            .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
-            .shadow(color: Color(.cardShadowSubtle), radius: 9, x: 0, y: 4)
-        }
-    }
-
-    private func makeSectionTitle(_ title: String) -> some View {
-        Text(title)
-            .font(.system(size: 20, weight: .semibold, design: .rounded))
-            .foregroundStyle(Color(.textPrimary))
-            .padding(.horizontal, 4)
-    }
-
-    private func makeToggleRow(
-        icon: String,
-        iconColor: Color,
-        title: String,
-        subtitle: String,
-        isOn: Binding<Bool>
-    ) -> some View {
-        HStack(spacing: 14) {
-            makeIconCircle(icon: icon, iconColor: iconColor)
-
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title)
-                    .font(.system(size: 18, weight: .medium, design: .rounded))
-                    .foregroundStyle(Color(.textPrimary))
-
-                Text(subtitle)
-                    .font(.system(size: 14, weight: .regular, design: .rounded))
-                    .foregroundStyle(Color(.textSecondary))
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-
-            Spacer(minLength: 10)
-
-            Toggle("", isOn: isOn)
-                .labelsHidden()
-                .tint(Color(.pinkButton))
-        }
-        .padding(.vertical, 14)
-    }
-
-    private func makeActionRow(
-        icon: String,
-        iconColor: Color,
-        title: String,
-        subtitle: String,
-        showsDisclosure: Bool = true
-    ) -> some View {
-        HStack(spacing: 14) {
-            makeIconCircle(icon: icon, iconColor: iconColor)
-
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title)
-                    .font(.system(size: 18, weight: .medium, design: .rounded))
-                    .foregroundStyle(Color(.textPrimary))
-
-                Text(subtitle)
-                    .font(.system(size: 14, weight: .regular, design: .rounded))
-                    .foregroundStyle(Color(.textSecondary))
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-
-            Spacer(minLength: 10)
-
-            if showsDisclosure {
-                Image(systemName: "chevron.right")
-                    .font(.headline)
-                    .foregroundStyle(Color(.textSecondary))
-                    .accessibilityHidden(true)
-            }
-        }
-        .padding(.vertical, 14)
-    }
-
-    private func makeIconCircle(icon: String, iconColor: Color) -> some View {
-        ZStack {
-            Circle()
-                .fill(Color(.surfaceOverlay))
-                .frame(width: 50, height: 50)
-
-            Image(systemName: icon)
-                .font(.system(size: 22, weight: .medium))
-                .foregroundStyle(iconColor)
-        }
-    }
-
-    private func makeDivider() -> some View {
-        Divider()
-            .overlay(Color(.cardBorder))
-            .padding(.leading, 64)
     }
 }

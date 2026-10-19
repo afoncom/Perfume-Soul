@@ -8,146 +8,233 @@
 
 import Foundation
 
+@MainActor
 protocol SearchPerfumePresenter {
     func onAppear() async
-    func searchTextChanged(_ searchText: String) async
+    func searchTextChanged(_ searchText: String)
     func searchSubmitted() async
-    func perfumeItemAppeared(at index: Int) async
-    @MainActor
-    func perfumeTapped(_ perfume: SearchPerfumeItem)
+    func selectTab(_ tab: CatalogTab) async
+    func savedScopeChanged() async
+    func selectBrand(_ brand: CatalogBrand?) async
+    func retry() async
+    func perfumeItemAppeared(id: Int) async
+    func perfumeTapped(_ perfume: CatalogPerfume)
+    func toggleSaved(_ perfume: CatalogPerfume)
+    func toggleBrand(_ brand: CatalogBrand)
 }
 
+@MainActor
 final class SearchPerfumePresenterImpl {
     private let viewModel: SearchPerfumeViewModel
     private let router: SearchPerfumeRouter
+    private let catalogService: CatalogService
     private let searchPerfumeService: SearchPerfumeService
-    private let pageSize = 10
+    private let collectionService: PerfumeCollectionService
+    private let favoritesStorage: CatalogFavoritesStorage
     private var searchTask: Task<Void, Never>?
-    @MainActor private var activeRequestID = UUID()
+    private var activeRequestID = UUID()
+    private var handledQuery = ""
     
     init(
         viewModel: SearchPerfumeViewModel,
         router: SearchPerfumeRouter,
-        searchPerfumeService: SearchPerfumeService
+        catalogService: CatalogService,
+        searchPerfumeService: SearchPerfumeService,
+        collectionService: PerfumeCollectionService,
+        favoritesStorage: CatalogFavoritesStorage
     ) {
         self.viewModel = viewModel
         self.router = router
+        self.catalogService = catalogService
         self.searchPerfumeService = searchPerfumeService
+        self.collectionService = collectionService
+        self.favoritesStorage = favoritesStorage
     }
 }
 
 extension SearchPerfumePresenterImpl: SearchPerfumePresenter {
     func onAppear() async {
-        guard !viewModel.hasLoadedOnce else { return }
-        await loadPerfumes(resetResults: true)
+        refreshSaved()
+        viewModel.favoriteBrandIDs = favoritesStorage.load()
+        if viewModel.isShowingBrands {
+            await loadBrands()
+        } else if viewModel.tab == .perfumes, !viewModel.hasLoadedOnce {
+            await loadPerfumes(reset: true)
+        }
     }
 
-    func searchTextChanged(_ searchText: String) async {
-        let trimmedSearchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-
-        guard trimmedSearchText != viewModel.activeSearchText || !viewModel.hasLoadedOnce else {
+    func searchTextChanged(_ searchText: String) {
+        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard query != handledQuery else {
             return
         }
-
-        searchTask?.cancel()
+        handledQuery = query
+        invalidateSearch()
+        guard viewModel.tab == .perfumes else {
+            return
+        }
+        viewModel.perfumes = []
+        viewModel.isLoading = true
         searchTask = Task { [weak self] in
             do {
-                try await Task.sleep(for: .milliseconds(350))
-            } catch {
-                return
-            }
-
-            guard !Task.isCancelled else { return }
-            await self?.loadPerfumes(resetResults: true)
+                try await Task.sleep(for: .milliseconds(300))
+                try Task.checkCancellation()
+                await self?.loadPerfumes(reset: true)
+            } catch { }
         }
     }
 
     func searchSubmitted() async {
-        searchTask?.cancel()
-        await loadPerfumes(resetResults: true, logsUnfoundSearch: true)
-    }
-
-    func perfumeItemAppeared(at index: Int) async {
-        guard index == viewModel.perfumes.count - 1 else { return }
-        guard viewModel.canLoadMore else { return }
-        guard viewModel.errorMessage == nil else { return }
-        guard !viewModel.isLoading, !viewModel.isLoadingMore else { return }
-
-        await loadPerfumes(resetResults: false)
-    }
-
-    @MainActor func perfumeTapped(_ perfume: SearchPerfumeItem) {
-        router.showPerfumeDetailsScreen(perfume: perfume)
-    }
-}
-
-private extension SearchPerfumePresenterImpl {
-    func loadPerfumes(resetResults: Bool, logsUnfoundSearch: Bool = false) async {
-        let searchText = resetResults
-            ? viewModel.searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-            : viewModel.activeSearchText
-        let offset = resetResults ? 0 : viewModel.perfumes.count
-        let requestID = await MainActor.run { () -> UUID in
-            viewModel.errorMessage = nil
-
-            if resetResults {
-                let newRequestID = UUID()
-                activeRequestID = newRequestID
-                viewModel.isLoading = true
-                viewModel.canLoadMore = false
-                return newRequestID
-            } else {
-                viewModel.isLoadingMore = true
-                return activeRequestID
-            }
+        invalidateSearch()
+        guard viewModel.tab == .perfumes else {
+            return
         }
+        await loadPerfumes(reset: true, logsUnfoundSearch: true)
+    }
 
-        do {
-            let result = try await searchPerfumeService.requestPerfumes(
-                searchText: searchText,
-                offset: offset,
-                limit: pageSize
-            )
+    func selectTab(_ tab: CatalogTab) async {
+        invalidateSearch()
+        viewModel.tab = tab
+        viewModel.selectedBrand = nil
+        refreshSaved()
+        if viewModel.isShowingBrands {
+            await loadBrands()
+        } else if tab == .perfumes {
+            await loadPerfumes(reset: true)
+        }
+    }
 
-            let shouldLogUnfoundSearch = await MainActor.run { () -> Bool in
-                guard requestID == activeRequestID else { return false }
+    func savedScopeChanged() async {
+        if viewModel.isShowingBrands { await loadBrands() }
+    }
 
-                if resetResults {
-                    viewModel.perfumes = result.items
-                    viewModel.activeSearchText = searchText
-                } else {
-                    viewModel.perfumes.append(contentsOf: result.items)
-                }
+    func selectBrand(_ brand: CatalogBrand?) async {
+        invalidateSearch()
+        viewModel.selectedBrand = brand
+        viewModel.tab = .perfumes
+        handledQuery = ""
+        viewModel.searchText = ""
+        await loadPerfumes(reset: true)
+    }
 
-                viewModel.canLoadMore = result.hasMore
-                viewModel.errorMessage = nil
-                viewModel.hasLoadedOnce = true
-                viewModel.isLoading = false
-                viewModel.isLoadingMore = false
+    func retry() async {
+        guard !viewModel.isLoading, !viewModel.isLoadingMore else {
+            return
+        }
+        if viewModel.isShowingBrands {
+            await loadBrands()
+        } else {
+            await loadPerfumes(reset: viewModel.perfumes.isEmpty)
+        }
+    }
 
-                return logsUnfoundSearch && resetResults && result.items.isEmpty && searchText.count >= 3
-            }
+    func perfumeItemAppeared(id: Int) async {
+        guard viewModel.tab == .perfumes,
+            id == viewModel.perfumes.last?.id,
+            viewModel.canLoadMore,
+            !viewModel.isLoading,
+            !viewModel.isLoadingMore,
+            viewModel.errorMessage == nil else {
+            return
+        }
+        await loadPerfumes(reset: false)
+    }
 
-            if shouldLogUnfoundSearch {
-                await searchPerfumeService.recordUnfoundSearch(
-                    query: searchText,
-                    context: .library
+    func perfumeTapped(_ perfume: CatalogPerfume) {
+        router.showPerfumeDetailsScreen(perfume: perfume.searchItem)
+    }
+
+    func toggleSaved(_ perfume: CatalogPerfume) {
+        if viewModel.savedIDs.contains(perfume.id) {
+            collectionService.removeSavedPerfume(id: perfume.id)
+        } else {
+            collectionService.save(
+                PerfumeCollectionPerfume(
+                    id: perfume.id,
+                    perfumeName: perfume.name,
+                    brandName: perfume.brand,
+                    source: .manual
                 )
+            )
+        }
+        refreshSaved()
+    }
+
+    func toggleBrand(_ brand: CatalogBrand) {
+        if viewModel.favoriteBrandIDs.contains(brand.id) {
+            viewModel.favoriteBrandIDs.remove(brand.id)
+        } else {
+            viewModel.favoriteBrandIDs.insert(brand.id)
+        }
+        favoritesStorage.save(viewModel.favoriteBrandIDs)
+    }
+
+    private func refreshSaved() {
+        viewModel.savedPerfumes = collectionService.loadState().savedPerfumes
+    }
+
+    private func invalidateSearch() {
+        searchTask?.cancel()
+        activeRequestID = UUID()
+        viewModel.isLoading = false
+        viewModel.isLoadingMore = false
+        viewModel.canLoadMore = false
+        viewModel.errorMessage = nil
+    }
+
+    private func loadBrands() async {
+        guard !viewModel.isLoadingBrands, !viewModel.hasLoadedBrands else {
+            return
+        }
+        viewModel.isLoadingBrands = true
+        viewModel.brandsErrorMessage = nil
+        defer { viewModel.isLoadingBrands = false }
+        do {
+            viewModel.brands = try await catalogService.brands()
+            viewModel.hasLoadedBrands = true
+        } catch {
+            viewModel.brandsErrorMessage = L10n.Common.Error.message
+        }
+    }
+
+    private func loadPerfumes(reset: Bool, logsUnfoundSearch: Bool = false) async {
+        let requestID = reset ? UUID() : activeRequestID
+        activeRequestID = requestID
+        let query = viewModel.query
+        let brandID = viewModel.selectedBrand?.id
+        let offset = reset ? 0 : viewModel.perfumes.count
+        viewModel.errorMessage = nil
+        if reset {
+            viewModel.isLoading = true
+            viewModel.isLoadingMore = false
+            viewModel.perfumes = []
+        } else {
+            viewModel.isLoadingMore = true
+        }
+        do {
+            let page = try await catalogService.perfumes(search: query, brandID: brandID, offset: offset)
+            guard requestID == activeRequestID, !Task.isCancelled else {
+                return
+            }
+            if reset {
+                viewModel.perfumes = page.items
+            } else {
+                viewModel.perfumes.append(contentsOf: page.items)
+            }
+            viewModel.canLoadMore = page.hasMore
+            viewModel.hasLoadedOnce = true
+            viewModel.isLoading = false
+            viewModel.isLoadingMore = false
+            if logsUnfoundSearch, reset, page.items.isEmpty, brandID == nil {
+                await searchPerfumeService.recordUnfoundSearch(query: query, context: .library)
             }
         } catch {
-            await MainActor.run {
-                guard requestID == activeRequestID else { return }
-
-                if resetResults {
-                    viewModel.perfumes = []
-                    viewModel.canLoadMore = false
-                }
-
-                viewModel.errorMessage = L10n.Common.Error.message
-                viewModel.hasLoadedOnce = true
-                viewModel.isLoading = false
-                viewModel.isLoadingMore = false
+            guard requestID == activeRequestID else {
+                return
             }
+            viewModel.errorMessage = L10n.Common.Error.message
+            viewModel.isLoading = false
+            viewModel.isLoadingMore = false
         }
     }
 }

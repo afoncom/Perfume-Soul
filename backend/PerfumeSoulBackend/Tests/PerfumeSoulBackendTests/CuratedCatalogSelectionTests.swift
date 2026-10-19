@@ -113,6 +113,32 @@ func catalogAccordNormalizerProducesControlledVocabulary() {
     #expect(accords == ["floral", "spicy", "marine"])
 }
 
+@Test("Catalog import resolves legacy marine and agarwood note aliases from CSV")
+func catalogImportResolvesLegacyNoteAliases() throws {
+    let headers = [
+        "url", "Perfume", "Brand", "Country", "Gender", "Rating Value", "Rating Count", "Year",
+        "Top", "Middle", "Base", "Perfumer1", "Perfumer2", "mainaccord1", "mainaccord2",
+        "mainaccord3", "mainaccord4", "mainaccord5"
+    ]
+    let values = [
+        "https://example.com/alias-perfume", "Alias Perfume", "Maison Test", "France", "unisex",
+        "4.5", "10", "2024", "marine notes", "agarwood oud", "agarwood-oud", "Test Perfumer", "",
+        "woody", "citrus", "powdery", "", ""
+    ]
+    let csv = headers.joined(separator: ";") + "\n" + values.joined(separator: ";")
+    let source = try #require(CatalogSourcePerfumeParser.parse(csv).first)
+    let prepared = try CatalogPreparedPerfume(source: source)
+
+    #expect(prepared.topNotes == ["Sea Notes"])
+    #expect(prepared.middleNotes == ["Agarwood (Oud)"])
+    #expect(prepared.baseNotes == ["Agarwood (Oud)"])
+    #expect(CatalogNoteNameNormalizer.russianName(for: "Marine Notes") == "Морские ноты")
+    #expect(CatalogNoteNameNormalizer.russianName(for: "Agarwood Oud") == "Агаровое дерево (уд)")
+    let localizedNotes = (prepared.topNotes + prepared.middleNotes + prepared.baseNotes)
+        .map(CatalogNoteNameNormalizer.russianName(for:))
+    #expect(localizedNotes == ["Морские ноты", "Агаровое дерево (уд)", "Агаровое дерево (уд)"])
+}
+
 private func catalogPerfume(
     name: String,
     brand: String,

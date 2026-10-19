@@ -6,7 +6,14 @@
 //  Copyright © 2026 afon.com. All rights reserved.
 //
 
+import Foundation
 import Observation
+
+struct NatalPlacementSummary: Identifiable {
+    let id: String
+    let title: String
+    let sign: String
+}
 
 enum ProfileDescriptionScreenState: Equatable {
     case idle
@@ -39,6 +46,25 @@ enum ProfileDescriptionScreenState: Equatable {
 
     var canContinue: Bool {
         profileCalculation != nil
+    }
+
+    var placements: [NatalPlacementSummary] {
+        guard let chart = profileCalculation?.natalChart else {
+            return []
+        }
+        return [
+            placement("sun", title: L10n.Profile.NatalChart.sun, sign: chart.sun.sign),
+            placement("moon", title: L10n.Profile.NatalChart.moon, sign: chart.moon.sign),
+            placement("ascendant", title: L10n.Profile.NatalChart.ascendant, sign: chart.ascendant.sign)
+        ]
+    }
+
+    private func placement(_ id: String, title: String, sign: ZodiacSign) -> NatalPlacementSummary {
+        NatalPlacementSummary(
+            id: id,
+            title: title,
+            sign: Bundle.main.localizedString(forKey: "horoscope.sign.\(sign.rawValue)", value: nil, table: nil)
+        )
     }
 }
 

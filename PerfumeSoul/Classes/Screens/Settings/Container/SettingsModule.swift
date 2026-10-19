@@ -18,6 +18,7 @@ final class SettingsModule {
             profileService: profileService
         )
         let viewModel = SettingsViewModel()
+        viewModel.appVersion = AppVersionProviderImpl().currentAppVersion() ?? "—"
         let navigationController = UINavigationController()
         let router = SettingsRouterImpl(navigationController: navigationController)
         let presenter = SettingsPresenterImpl(

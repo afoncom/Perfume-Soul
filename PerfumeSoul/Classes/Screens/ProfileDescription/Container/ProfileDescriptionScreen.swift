@@ -23,12 +23,14 @@ struct ProfileDescriptionScreen: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 0) {
-                PerfumeFlowHeader(
-                    section: L10n.PerfumeFlow.resultSection,
-                    step: presenter.isPresentedInOnboarding ? 3 : nil
-                )
-                .padding(.horizontal, 24)
-                .padding(.bottom, 32)
+                if presenter.isPresentedInOnboarding {
+                    PerfumeFlowHeader(
+                        section: L10n.PerfumeFlow.resultSection,
+                        step: 3
+                    )
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 28)
+                }
 
                 switch viewModel.state {
                 case .idle, .loading:
@@ -98,18 +100,22 @@ extension ProfileDescriptionScreen {
             makeHeader(profileDescription)
                 .padding(.horizontal, 24)
 
-            VStack(alignment: .leading, spacing: 14) {
-                Text(L10n.PerfumeFlow.summaryTitle.uppercased())
-                    .font(.caption.weight(.medium))
-                    .tracking(0.8)
-                    .foregroundStyle(Color(.descriptionText))
+            makePlacements()
+                .padding(.horizontal, 24)
+                .padding(.top, 28)
 
+            DisclosureGroup {
                 Text(profileDescription.summary)
-                    .font(.title3.weight(.medium))
+                    .font(.body)
                     .foregroundStyle(Color(.textPrimary))
                     .fixedSize(horizontal: false, vertical: true)
-                    .lineSpacing(3)
+                    .lineSpacing(5)
+                    .padding(.top, 16)
+            } label: {
+                Text(L10n.PerfumeFlow.summaryTitle)
+                    .font(.body.weight(.medium))
             }
+            .tint(Color(.textPrimary))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(20)
             .background(Color(.textPrimary).opacity(0.035))
@@ -131,13 +137,6 @@ extension ProfileDescriptionScreen {
             .padding(.horizontal, 24)
             .padding(.top, 34)
 
-            Text(L10n.ProfileDescription.headerHint)
-                .font(.subheadline)
-                .foregroundStyle(Color(.descriptionText))
-                .padding(.horizontal, 24)
-                .padding(.top, 8)
-                .padding(.bottom, 20)
-
             if dynamicTypeSize.isAccessibilitySize {
                 VStack(spacing: 12) {
                     ForEach(Array(profileDescription.insights.enumerated()), id: \.offset) { index, insight in
@@ -145,8 +144,10 @@ extension ProfileDescriptionScreen {
                     }
                 }
                 .padding(.horizontal, 24)
+                .padding(.top, 20)
             } else {
                 makeInsightCarousel(profileDescription)
+                    .padding(.top, 20)
             }
         }
     }
@@ -165,13 +166,34 @@ extension ProfileDescriptionScreen {
                 .foregroundStyle(Color(.textPrimary))
                 .fixedSize(horizontal: false, vertical: true)
 
-            Text(profileDescription.subtitle)
-                .font(.subheadline)
-                .foregroundStyle(Color(.descriptionText))
-                .fixedSize(horizontal: false, vertical: true)
-                .lineSpacing(3)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private func makePlacements() -> some View {
+        VStack(spacing: 0) {
+            ForEach(viewModel.placements) { placement in
+                let layout = dynamicTypeSize.isAccessibilitySize
+                    ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8))
+                    : AnyLayout(HStackLayout(alignment: .firstTextBaseline, spacing: 20))
+                layout {
+                    Text(placement.title)
+                        .font(.subheadline)
+                        .foregroundStyle(Color(.descriptionText))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Text(placement.sign)
+                        .font(.body.weight(.medium))
+                        .foregroundStyle(Color(.textPrimary))
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(.vertical, 16)
+                .accessibilityElement(children: .combine)
+                Rectangle().fill(Color(.inputBorder)).frame(height: 1)
+            }
+        }
+        .overlay(alignment: .top) {
+            Rectangle().fill(Color(.inputBorder)).frame(height: 1)
+        }
     }
 
     private func makeInsightCarousel(_ profileDescription: ProfileDescription) -> some View {

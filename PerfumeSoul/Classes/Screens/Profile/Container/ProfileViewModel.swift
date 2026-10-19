@@ -25,6 +25,70 @@ enum ProfileCalculationState: Equatable {
     var isShowingDeleteProfileAlert = false
     var totalCorrectQuizAnswers = 0
 
+    var birthInfo: String {
+        guard let profile else {
+            return ""
+        }
+        return [profile.birthDate, profile.birthTime, profile.birthPlace]
+            .filter { !$0.isEmpty }.joined(separator: " · ")
+    }
+
+    var natalRows: [(title: String, value: String)] {
+        guard let chart = profileCalculation?.natalChart else {
+            return []
+        }
+        return [
+            (L10n.Profile.NatalChart.sun, chart.sun),
+            (L10n.Profile.NatalChart.moon, chart.moon),
+            (L10n.Profile.NatalChart.ascendant, chart.ascendant)
+        ].map { ($0.0, DailyHoroscope(sign: $0.1.sign.rawValue, energyOfDay: "").displayName) }
+    }
+
+    var elementRows: [(title: String, value: Int)] {
+        guard let balance = profileCalculation?.elementBalance else {
+            return []
+        }
+        return [
+            (L10n.Profile.Element.fire, balance.fire),
+            (L10n.Profile.Element.earth, balance.earth),
+            (L10n.Profile.Element.air, balance.air),
+            (L10n.Profile.Element.water, balance.water)
+        ]
+        .filter { $0.1 > 0 }
+    }
+
+    var expertiseTitle: String {
+        switch perfumeExpertiseLevel {
+        case .novice: return L10n.Profile.Expertise.Level.novice
+        case .noteExplorer: return L10n.Profile.Expertise.Level.noteExplorer
+        case .accordExpert: return L10n.Profile.Expertise.Level.accordExpert
+        case .fragranceAnalyst: return L10n.Profile.Expertise.Level.fragranceAnalyst
+        case .perfumer: return L10n.Profile.Expertise.Level.perfumer
+        }
+    }
+
+    var expertiseProgressText: String {
+        let next = answersToNextLevel.map { L10n.Profile.Expertise.nextLevelFormat($0) }
+            ?? L10n.Profile.Expertise.maxLevel
+        return L10n.Profile.Expertise.correctAnswersFormat(totalCorrectQuizAnswers) + " · " + next
+    }
+
+    var calculationMessage: String {
+        switch profileCalculationState {
+        case .missingBirthPlaceData: return L10n.Profile.Calculation.MissingBirthData.subtitle
+        case .invalidBirthData: return L10n.Profile.Calculation.InvalidBirthData.subtitle
+        default: return L10n.Profile.Calculation.Failed.subtitle
+        }
+    }
+
+    var calculationActionTitle: String {
+        switch profileCalculationState {
+        case .missingBirthPlaceData: return L10n.Profile.Calculation.MissingBirthData.button
+        case .invalidBirthData: return L10n.Profile.Calculation.InvalidBirthData.button
+        default: return L10n.Profile.Calculation.Failed.button
+        }
+    }
+
     var profileCalculation: ProfileCalculation? {
         guard case let .loaded(profileCalculation) = profileCalculationState else {
             return nil

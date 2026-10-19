@@ -33,6 +33,7 @@ let package = Package(
                 .product(name: "NIOPosix", package: "swift-nio")
             ],
             resources: [
+                .process("Catalog/Resources"),
                 .process("Requests/quiz-of-the-day/Resources")
             ],
             swiftSettings: swiftSettings
