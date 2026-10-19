@@ -18,8 +18,8 @@ protocol QuizProgressService {
 final class QuizProgressServiceImpl<QuizProgressStorage: DatabaseStorage>
 where QuizProgressStorage.DatabaseModel == QuizProgress {
     private enum Keys {
-        static let legacyProgress = "quiz.progress"
-        static let didMigrateToCoreData = "quiz.progress.didMigrateToCoreData"
+        static var legacyProgress: String { "quiz.progress" }
+        static var didMigrateToCoreData: String { "quiz.progress.didMigrateToCoreData" }
     }
 
     private actor OperationLock {
