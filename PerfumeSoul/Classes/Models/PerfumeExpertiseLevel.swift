@@ -29,6 +29,36 @@ enum PerfumeExpertiseLevel: CaseIterable {
         }
     }
 
+    var title: String {
+        switch self {
+        case .novice:
+            return L10n.Profile.Expertise.Level.novice
+        case .noteExplorer:
+            return L10n.Profile.Expertise.Level.noteExplorer
+        case .accordExpert:
+            return L10n.Profile.Expertise.Level.accordExpert
+        case .fragranceAnalyst:
+            return L10n.Profile.Expertise.Level.fragranceAnalyst
+        case .perfumer:
+            return L10n.Profile.Expertise.Level.perfumer
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .novice:
+            return L10n.Profile.Expertise.Description.novice
+        case .noteExplorer:
+            return L10n.Profile.Expertise.Description.noteExplorer
+        case .accordExpert:
+            return L10n.Profile.Expertise.Description.accordExpert
+        case .fragranceAnalyst:
+            return L10n.Profile.Expertise.Description.fragranceAnalyst
+        case .perfumer:
+            return L10n.Profile.Expertise.Description.perfumer
+        }
+    }
+    
     var nextLevelStart: Int? {
         guard
             let currentIndex = Self.allCases.firstIndex(of: self),
