@@ -35,8 +35,36 @@ final class QuizOfTheDayPresenterTests: XCTestCase {
         XCTAssertEqual(router.registeredQuizDayKeys, ["2026-08-18"])
     }
 
+    @MainActor
+    func testCompletionRequestsReviewWhenCardAppearsWhileProgressIsSaving() async {
+        let router = QuizOfTheDayRouterMock()
+        let quizProgressService = DelayedQuizProgressServiceMock()
+        let presenter = makePresenter(
+            router: router,
+            quizProgressService: quizProgressService
+        )
+
+        await presenter.onAppear()
+        presenter.selectAnswer(id: "A")
+        await presenter.submitAnswer()
+        let finishTask = Task { @MainActor in
+            await presenter.finishQuiz()
+        }
+        await quizProgressService.waitUntilCompletionStarts()
+        presenter.quizCompletedCardAppeared()
+
+        XCTAssertFalse(router.didRequestAppReview)
+
+        await quizProgressService.resumeCompletion()
+        await finishTask.value
+
+        XCTAssertTrue(router.didRequestAppReview)
+        XCTAssertEqual(router.registeredQuizDayKeys, ["2026-08-18"])
+    }
+
     private func makePresenter(
-        router: QuizOfTheDayRouterMock
+        router: QuizOfTheDayRouterMock,
+        quizProgressService: QuizProgressService = QuizProgressServiceMock()
     ) -> QuizOfTheDayPresenterImpl {
         QuizOfTheDayPresenterImpl(
             viewModel: QuizOfTheDayViewModel(),
@@ -46,9 +74,53 @@ final class QuizOfTheDayPresenterTests: XCTestCase {
                 userDefaults: .standard,
                 storableKey: "tests.dailyQuiz.\(UUID().uuidString)"
             ),
-            quizProgressService: QuizProgressServiceMock(),
+            quizProgressService: quizProgressService,
             dayKeyProvider: QuizDayKeyProviderMock()
         )
+    }
+}
+
+private actor DelayedQuizProgressServiceMock: QuizProgressService {
+    private var progress = QuizProgress.initial
+    private var completionStartedContinuation: CheckedContinuation<Void, Never>?
+    private var completionResumeContinuation: CheckedContinuation<Void, Never>?
+    private var didStartCompletion = false
+
+    func loadProgress() -> QuizProgress { progress }
+
+    func recordCorrectAnswer(questionID: Int, quizDayKey: String) -> QuizProgress {
+        progress.correctAnswerKeys.insert("\(quizDayKey)_\(questionID)")
+        return progress
+    }
+
+    func completeQuiz(for quizDayKey: String) async -> QuizProgress {
+        didStartCompletion = true
+        completionStartedContinuation?.resume()
+        completionStartedContinuation = nil
+        await withCheckedContinuation { continuation in
+            completionResumeContinuation = continuation
+        }
+        progress.lastCompletedQuizDayKey = quizDayKey
+        progress.streakDays = 1
+        return progress
+    }
+
+    func resetProgress() {
+        progress = .initial
+    }
+
+    func waitUntilCompletionStarts() async {
+        if didStartCompletion {
+            return
+        }
+        await withCheckedContinuation { continuation in
+            completionStartedContinuation = continuation
+        }
+    }
+
+    func resumeCompletion() {
+        completionResumeContinuation?.resume()
+        completionResumeContinuation = nil
     }
 }
 

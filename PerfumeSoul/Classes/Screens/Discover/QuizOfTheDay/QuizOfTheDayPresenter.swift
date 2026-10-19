@@ -26,6 +26,8 @@ final class QuizOfTheDayPresenterImpl {
     private let quizProgressService: QuizProgressService
     private let dayKeyProvider: QuizDayKeyProvider
     private var didCompleteQuizInSession = false
+    private var didShowQuizCompletionCard = false
+    private var didRequestReviewInSession = false
     
     init(
         viewModel: QuizOfTheDayViewModel,
@@ -103,14 +105,26 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
         saveCurrentState()
         router.registerQuizCompletion(for: quizDayKey)
         didCompleteQuizInSession = true
+        requestAppReviewIfReady()
     }
 
     @MainActor
     func quizCompletedCardAppeared() {
-        guard didCompleteQuizInSession else {
+        didShowQuizCompletionCard = true
+        requestAppReviewIfReady()
+    }
+
+    @MainActor
+    private func requestAppReviewIfReady() {
+        guard
+            didCompleteQuizInSession,
+            didShowQuizCompletionCard,
+            !didRequestReviewInSession
+        else {
             return
         }
 
+        didRequestReviewInSession = true
         router.requestAppReviewIfEligible()
     }
 
