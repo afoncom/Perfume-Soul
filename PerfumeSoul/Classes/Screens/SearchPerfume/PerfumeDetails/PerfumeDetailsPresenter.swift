@@ -37,7 +37,9 @@ extension PerfumeDetailsPresenterImpl: PerfumeDetailsPresenter {
     func onAppear() async {
         updateSavedPerfumeState()
 
-        guard !viewModel.hasLoadedOnce else { return }
+        guard !viewModel.hasLoadedOnce else {
+            return
+        }
         await loadPerfumeDetails()
     }
 
@@ -46,10 +48,15 @@ extension PerfumeDetailsPresenterImpl: PerfumeDetailsPresenter {
     }
 
     func savePerfume(brandName: String) {
+        if viewModel.isSaved {
+            collectionService.removeSavedPerfume(id: viewModel.perfume.id)
+            updateSavedPerfumeState()
+            return
+        }
         collectionService.save(
             PerfumeCollectionPerfume(
                 id: viewModel.perfume.id,
-                perfumeName: viewModel.perfume.name,
+                perfumeName: viewModel.perfumeDetails?.name ?? viewModel.perfume.name,
                 brandName: brandName,
                 source: .manual
             )
@@ -66,7 +73,9 @@ extension PerfumeDetailsPresenterImpl {
     }
 
     private func loadPerfumeDetails() async {
-        guard !viewModel.isLoading else { return }
+        guard !viewModel.isLoading else {
+            return
+        }
 
         viewModel.isLoading = true
         viewModel.errorMessage = nil

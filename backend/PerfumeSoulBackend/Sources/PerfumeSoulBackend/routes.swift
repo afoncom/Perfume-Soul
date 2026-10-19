@@ -3,6 +3,8 @@ import FluentSQL
 import Vapor
 
 func routes(_ app: Application) throws {
+    try app.register(collection: CatalogRoutes())
+
     app.get("health") { _ async throws -> Response in
         try jsonResponse(["status": "ok"])
     }

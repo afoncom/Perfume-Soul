@@ -29,6 +29,7 @@ final class ProfilePresenterImpl {
     private let recommendedPerfumeStateStorage: ViewStateStorage<RecommendedPerfumeState>
     private let appReviewRequester: AppReviewRequester
     private let profileAvatarBuilder: ProfileAvatarBuilder
+    private let catalogFavoritesStorage: CatalogFavoritesStorage
     
     init(
         viewModel: ProfileViewModel,
@@ -42,7 +43,8 @@ final class ProfilePresenterImpl {
         personalPerfumeTopStorage: PersonalPerfumeTopStorage,
         recommendedPerfumeStateStorage: ViewStateStorage<RecommendedPerfumeState>,
         appReviewRequester: AppReviewRequester,
-        profileAvatarBuilder: ProfileAvatarBuilder
+        profileAvatarBuilder: ProfileAvatarBuilder,
+        catalogFavoritesStorage: CatalogFavoritesStorage = CatalogFavoritesStorage(userDefaults: .standard)
     ) {
         self.viewModel = viewModel
         self.router = router
@@ -56,6 +58,7 @@ final class ProfilePresenterImpl {
         self.recommendedPerfumeStateStorage = recommendedPerfumeStateStorage
         self.appReviewRequester = appReviewRequester
         self.profileAvatarBuilder = profileAvatarBuilder
+        self.catalogFavoritesStorage = catalogFavoritesStorage
     }
 }
 
@@ -135,6 +138,7 @@ extension ProfilePresenterImpl: ProfilePresenter {
         dailyQuizStateStorage.clearState()
         dailyPerfumeStateStorage.clearState()
         collectionService.clearState()
+        catalogFavoritesStorage.clear()
         personalPerfumeTopStorage.clear()
         recommendedPerfumeStateStorage.clearState()
         
