@@ -9,6 +9,7 @@
 protocol QuizOfTheDayPresenter {
     func onAppear() async
     func selectAnswer(id: String)
+    @MainActor
     func submitAnswer() async
     func goToNextQuestion()
     // StoreKit review requests must run on the main actor.
@@ -73,6 +74,7 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
         saveCurrentState()
     }
 
+    @MainActor
     func submitAnswer() async {
         guard let result = viewModel.submitAnswer() else {
             return

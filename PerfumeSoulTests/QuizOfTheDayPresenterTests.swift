@@ -5,6 +5,7 @@
 //  Created by afon.com on 18.08.2026.
 //
 
+import Observation
 import XCTest
 @testable import PerfumeSoul
 
@@ -62,12 +63,38 @@ final class QuizOfTheDayPresenterTests: XCTestCase {
         XCTAssertEqual(router.registeredQuizDayKeys, ["2026-08-18"])
     }
 
+    @MainActor
+    func testSubmitAnswerChangesObservedScreenStateOnMainThread() async {
+        let viewModel = QuizOfTheDayViewModel()
+        let presenter = makePresenter(
+            router: QuizOfTheDayRouterMock(),
+            viewModel: viewModel
+        )
+        await presenter.onAppear()
+        presenter.selectAnswer(id: "A")
+        var didObserveChange = false
+        var observationRanOnMainThread = false
+        withObservationTracking {
+            _ = viewModel.isAnswerSubmitted
+        } onChange: {
+            didObserveChange = true
+            observationRanOnMainThread = Thread.isMainThread
+        }
+
+        await presenter.submitAnswer()
+
+        XCTAssertTrue(didObserveChange)
+        XCTAssertTrue(observationRanOnMainThread)
+        XCTAssertTrue(viewModel.isAnswerSubmitted)
+    }
+
     private func makePresenter(
         router: QuizOfTheDayRouterMock,
+        viewModel: QuizOfTheDayViewModel = QuizOfTheDayViewModel(),
         quizProgressService: QuizProgressService = QuizProgressServiceMock()
     ) -> QuizOfTheDayPresenterImpl {
         QuizOfTheDayPresenterImpl(
-            viewModel: QuizOfTheDayViewModel(),
+            viewModel: viewModel,
             router: router,
             service: QuizOfTheDayServiceMock(),
             dailyQuizStateStorage: ViewStateStorage<DailyQuizState>(

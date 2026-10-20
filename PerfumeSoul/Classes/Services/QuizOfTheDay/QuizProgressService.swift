@@ -15,6 +15,33 @@ protocol QuizProgressService {
     func resetProgress() async
 }
 
+private actor QuizProgressOperationLock {
+    private var isLocked = false
+    private var waiters: [CheckedContinuation<Void, Never>] = []
+
+    func acquire() async {
+        guard isLocked else {
+            isLocked = true
+            return
+        }
+
+        await withCheckedContinuation { continuation in
+            waiters.append(continuation)
+        }
+    }
+
+    func release() {
+        guard !waiters.isEmpty else {
+            isLocked = false
+            return
+        }
+
+        waiters.removeFirst().resume()
+    }
+}
+
+private let quizProgressOperationLock = QuizProgressOperationLock()
+
 final class QuizProgressServiceImpl<QuizProgressStorage: DatabaseStorage>
 where QuizProgressStorage.DatabaseModel == QuizProgress {
     private enum Keys {
@@ -22,36 +49,10 @@ where QuizProgressStorage.DatabaseModel == QuizProgress {
         static var didMigrateToCoreData: String { "quiz.progress.didMigrateToCoreData" }
     }
 
-    private actor OperationLock {
-        private var isLocked = false
-        private var waiters: [CheckedContinuation<Void, Never>] = []
-
-        func acquire() async {
-            guard isLocked else {
-                isLocked = true
-                return
-            }
-
-            await withCheckedContinuation { continuation in
-                waiters.append(continuation)
-            }
-        }
-
-        func release() {
-            guard !waiters.isEmpty else {
-                isLocked = false
-                return
-            }
-
-            waiters.removeFirst().resume()
-        }
-    }
-
     private let quizProgressStorage: QuizProgressStorage
     private let dayKeyProvider: QuizDayKeyProvider
     private let userDefaults: UserDefaults
     private let decoder = JSONDecoder()
-    private let operationLock = OperationLock()
 
     init(
         quizProgressStorage: QuizProgressStorage,
@@ -172,9 +173,9 @@ extension QuizProgressServiceImpl {
     private func withExclusiveAccess<Result>(
         _ operation: () async -> Result
     ) async -> Result {
-        await operationLock.acquire()
+        await quizProgressOperationLock.acquire()
         let result = await operation()
-        await operationLock.release()
+        await quizProgressOperationLock.release()
         return result
     }
 

@@ -76,6 +76,43 @@ final class QuizProgressServiceTests: XCTestCase {
         XCTAssertEqual(progress.streakDays, 1)
     }
 
+    func testMigrationInOneServiceDoesNotOverwriteAnswerFromAnotherService() async throws {
+        let userDefaults = try makeUserDefaults()
+        let legacyProgress = QuizProgress(
+            streakDays: 3,
+            lastCompletedQuizDayKey: "2026-10-18",
+            correctAnswerKeys: ["2026-10-18_1"]
+        )
+        userDefaults.set(try JSONEncoder().encode(legacyProgress), forKey: "quiz.progress")
+        let storage = QuizProgressDatabaseStorageMock(suspendsFirstSave: true)
+        let profileService = QuizProgressServiceImpl(
+            quizProgressStorage: storage,
+            dayKeyProvider: QuizProgressDayKeyProviderMock(),
+            userDefaults: userDefaults
+        )
+        let quizService = QuizProgressServiceImpl(
+            quizProgressStorage: storage,
+            dayKeyProvider: QuizProgressDayKeyProviderMock(),
+            userDefaults: userDefaults
+        )
+
+        let migrationTask = Task { await profileService.loadProgress() }
+        await storage.waitUntilFirstSaveStarts()
+        let answerTask = Task {
+            await quizService.recordCorrectAnswer(questionID: 7, quizDayKey: "2026-10-19")
+        }
+        try? await Task.sleep(for: .milliseconds(50))
+        await storage.resumeFirstSave()
+
+        _ = await migrationTask.value
+        _ = await answerTask.value
+        let storedModels = await storage.storedModels()
+
+        XCTAssertEqual(storedModels.count, 1)
+        XCTAssertEqual(storedModels.first?.correctAnswerKeys, ["2026-10-18_1", "2026-10-19_7"])
+        XCTAssertEqual(storedModels.first?.streakDays, 3)
+    }
+
     private func makeUserDefaults() throws -> UserDefaults {
         let suiteName = "QuizProgressServiceTests.\(UUID().uuidString)"
         let userDefaults = try XCTUnwrap(UserDefaults(suiteName: suiteName))
