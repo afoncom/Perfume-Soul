@@ -7,15 +7,20 @@
 //
 
 import SwiftUI
+import CoreData
 
 final class DiscoverModule {
-    static func build(requestManager: RequestManager) -> NavigationControllerContainer {
+    static func build(
+        container: NSPersistentContainer,
+        requestManager: RequestManager
+    ) -> NavigationControllerContainer {
         let viewModel = DiscoverViewModel()
         let navigationController = UINavigationController()
         let comparePerfumeSelectionService = ComparePerfumeSelectionServiceImpl()
         let router = DiscoverRouterImpl(
             navigationController: navigationController,
             comparePerfumeSelectionService: comparePerfumeSelectionService,
+            container: container,
             requestManager: requestManager
         )
         let presenter = DiscoverPresenterImpl(

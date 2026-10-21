@@ -9,13 +9,14 @@
 protocol QuizOfTheDayPresenter {
     func onAppear() async
     func selectAnswer(id: String)
-    func submitAnswer()
+    @MainActor
+    func submitAnswer() async
     func goToNextQuestion()
     // StoreKit review requests must run on the main actor.
     @MainActor
     func quizCompletedCardAppeared()
     @MainActor
-    func finishQuiz()
+    func finishQuiz() async
 }
 
 final class QuizOfTheDayPresenterImpl {
@@ -26,6 +27,8 @@ final class QuizOfTheDayPresenterImpl {
     private let quizProgressService: QuizProgressService
     private let dayKeyProvider: QuizDayKeyProvider
     private var didCompleteQuizInSession = false
+    private var didShowQuizCompletionCard = false
+    private var didRequestReviewInSession = false
     
     init(
         viewModel: QuizOfTheDayViewModel,
@@ -46,7 +49,7 @@ final class QuizOfTheDayPresenterImpl {
 
 extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
     func onAppear() async {
-        let quizProgress = quizProgressService.loadProgress()
+        let quizProgress = await quizProgressService.loadProgress()
 
         do {
             let questions = try await service.requestQuizOfTheDayQuestions()
@@ -71,13 +74,14 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
         saveCurrentState()
     }
 
-    func submitAnswer() {
+    @MainActor
+    func submitAnswer() async {
         guard let result = viewModel.submitAnswer() else {
             return
         }
 
         if result.wasCorrect {
-            let updatedQuizProgress = quizProgressService.recordCorrectAnswer(
+            let updatedQuizProgress = await quizProgressService.recordCorrectAnswer(
                 questionID: result.questionID,
                 quizDayKey: result.quizDayKey
             )
@@ -93,24 +97,36 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
     }
 
     @MainActor
-    func finishQuiz() {
+    func finishQuiz() async {
         guard let quizDayKey = viewModel.finishQuiz() else {
             return
         }
 
-        let updatedQuizProgress = quizProgressService.completeQuiz(for: quizDayKey)
+        let updatedQuizProgress = await quizProgressService.completeQuiz(for: quizDayKey)
         viewModel.updateQuizProgress(updatedQuizProgress)
         saveCurrentState()
         router.registerQuizCompletion(for: quizDayKey)
         didCompleteQuizInSession = true
+        requestAppReviewIfReady()
     }
 
     @MainActor
     func quizCompletedCardAppeared() {
-        guard didCompleteQuizInSession else {
+        didShowQuizCompletionCard = true
+        requestAppReviewIfReady()
+    }
+
+    @MainActor
+    private func requestAppReviewIfReady() {
+        guard
+            didCompleteQuizInSession,
+            didShowQuizCompletionCard,
+            !didRequestReviewInSession
+        else {
             return
         }
 
+        didRequestReviewInSession = true
         router.requestAppReviewIfEligible()
     }
 

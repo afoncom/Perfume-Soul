@@ -5,50 +5,178 @@
 //  Created by afon.com on 08.06.2026.
 //
 
+import CoreData
 import Foundation
 
 protocol QuizProgressService {
-    func loadProgress() -> QuizProgress
-    func recordCorrectAnswer(questionID: Int, quizDayKey: String) -> QuizProgress
-    func completeQuiz(for quizDayKey: String) -> QuizProgress
-    func resetProgress()
+    func loadProgress() async -> QuizProgress
+    func recordCorrectAnswer(questionID: Int, quizDayKey: String) async -> QuizProgress
+    func completeQuiz(for quizDayKey: String) async -> QuizProgress
+    func resetProgress() async
 }
 
-final class QuizProgressServiceImpl {
-    private enum Keys {
-        static let progress = "quiz.progress"
-    }
+private actor QuizProgressOperationLock {
+    private var isLocked = false
+    private var waiters: [CheckedContinuation<Void, Never>] = []
 
-    private let userDefaults: UserDefaults
-    private let dayKeyProvider: QuizDayKeyProvider
-    private let decoder = JSONDecoder()
-    private let encoder = JSONEncoder()
-
-    init(
-        userDefaults: UserDefaults,
-        dayKeyProvider: QuizDayKeyProvider
-    ) {
-        self.userDefaults = userDefaults
-        self.dayKeyProvider = dayKeyProvider
-    }
-
-    private func storedProgress() -> QuizProgress {
-        guard
-            let data = userDefaults.data(forKey: Keys.progress),
-            let progress = try? decoder.decode(QuizProgress.self, from: data)
-        else {
-            return .initial
-        }
-
-        return progress
-    }
-
-    private func saveProgress(_ progress: QuizProgress) {
-        guard let data = try? encoder.encode(progress) else {
+    func acquire() async {
+        guard isLocked else {
+            isLocked = true
             return
         }
 
-        userDefaults.set(data, forKey: Keys.progress)
+        await withCheckedContinuation { continuation in
+            waiters.append(continuation)
+        }
+    }
+
+    func release() {
+        guard !waiters.isEmpty else {
+            isLocked = false
+            return
+        }
+
+        waiters.removeFirst().resume()
+    }
+}
+
+private let quizProgressOperationLock = QuizProgressOperationLock()
+
+final class QuizProgressServiceImpl<QuizProgressStorage: DatabaseStorage>
+where QuizProgressStorage.DatabaseModel == QuizProgress {
+    private enum Keys {
+        static var legacyProgress: String { "quiz.progress" }
+        static var didMigrateToCoreData: String { "quiz.progress.didMigrateToCoreData" }
+    }
+
+    private let quizProgressStorage: QuizProgressStorage
+    private let dayKeyProvider: QuizDayKeyProvider
+    private let userDefaults: UserDefaults
+    private let decoder = JSONDecoder()
+
+    init(
+        quizProgressStorage: QuizProgressStorage,
+        dayKeyProvider: QuizDayKeyProvider,
+        userDefaults: UserDefaults = .standard
+    ) {
+        self.quizProgressStorage = quizProgressStorage
+        self.dayKeyProvider = dayKeyProvider
+        self.userDefaults = userDefaults
+    }
+}
+
+extension QuizProgressServiceImpl where QuizProgressStorage == DatabaseStorageImpl<QuizProgress> {
+    convenience init(
+        container: NSPersistentContainer,
+        dayKeyProvider: QuizDayKeyProvider,
+        userDefaults: UserDefaults = .standard
+    ) {
+        self.init(
+            quizProgressStorage: DatabaseStorageImpl<QuizProgress>(container: container),
+            dayKeyProvider: dayKeyProvider,
+            userDefaults: userDefaults
+        )
+    }
+}
+
+extension QuizProgressServiceImpl: QuizProgressService {
+    func loadProgress() async -> QuizProgress {
+        await withExclusiveAccess {
+            resolvedProgress(from: await storedProgress())
+        }
+    }
+
+    func recordCorrectAnswer(questionID: Int, quizDayKey: String) async -> QuizProgress {
+        await withExclusiveAccess {
+            var progress = await storedProgress()
+            progress.correctAnswerKeys.insert(
+                correctAnswerKey(
+                    questionID: questionID,
+                    quizDayKey: quizDayKey
+                )
+            )
+            await saveProgress(progress)
+            return resolvedProgress(from: progress)
+        }
+    }
+
+    func completeQuiz(for quizDayKey: String) async -> QuizProgress {
+        await withExclusiveAccess {
+            var progress = await storedProgress()
+            let resolvedProgress = resolvedProgress(from: progress)
+
+            if progress.lastCompletedQuizDayKey == quizDayKey {
+                return resolvedProgress
+            }
+
+            if
+                let lastCompletedQuizDayKey = progress.lastCompletedQuizDayKey,
+                dayKeyProvider.isNextDay(quizDayKey, after: lastCompletedQuizDayKey)
+            {
+                progress.streakDays = resolvedProgress.streakDays + 1
+            } else {
+                progress.streakDays = 1
+            }
+
+            progress.lastCompletedQuizDayKey = quizDayKey
+            await saveProgress(progress)
+            return progress
+        }
+    }
+
+    func resetProgress() async {
+        await withExclusiveAccess {
+            await quizProgressStorage.deleteAll()
+            userDefaults.removeObject(forKey: Keys.legacyProgress)
+            userDefaults.set(true, forKey: Keys.didMigrateToCoreData)
+        }
+    }
+}
+
+extension QuizProgressServiceImpl {
+    private func storedProgress() async -> QuizProgress {
+        if let progress = (await quizProgressStorage.fechAll()).first {
+            return progress
+        }
+
+        return await migrateLegacyProgress() ?? .initial
+    }
+
+    private func saveProgress(_ progress: QuizProgress) async {
+        await quizProgressStorage.replaceAll(with: progress)
+    }
+
+    private func migrateLegacyProgress() async -> QuizProgress? {
+        guard !userDefaults.bool(forKey: Keys.didMigrateToCoreData) else {
+            return nil
+        }
+
+        guard
+            let data = userDefaults.data(forKey: Keys.legacyProgress),
+            let progress = try? decoder.decode(QuizProgress.self, from: data)
+        else {
+            userDefaults.set(true, forKey: Keys.didMigrateToCoreData)
+            return nil
+        }
+
+        await saveProgress(progress)
+
+        guard (await quizProgressStorage.fechAll()).first == progress else {
+            return progress
+        }
+
+        userDefaults.set(true, forKey: Keys.didMigrateToCoreData)
+        userDefaults.removeObject(forKey: Keys.legacyProgress)
+        return progress
+    }
+
+    private func withExclusiveAccess<Result>(
+        _ operation: () async -> Result
+    ) async -> Result {
+        await quizProgressOperationLock.acquire()
+        let result = await operation()
+        await quizProgressOperationLock.release()
+        return result
     }
 
     private func correctAnswerKey(
@@ -76,49 +204,5 @@ final class QuizProgressServiceImpl {
         }
 
         return progress
-    }
-}
-
-extension QuizProgressServiceImpl: QuizProgressService {
-    func loadProgress() -> QuizProgress {
-        resolvedProgress(from: storedProgress())
-    }
-
-    func recordCorrectAnswer(questionID: Int, quizDayKey: String) -> QuizProgress {
-        var progress = storedProgress()
-        progress.correctAnswerKeys.insert(
-            correctAnswerKey(
-                questionID: questionID,
-                quizDayKey: quizDayKey
-            )
-        )
-        saveProgress(progress)
-        return resolvedProgress(from: progress)
-    }
-
-    func completeQuiz(for quizDayKey: String) -> QuizProgress {
-        var progress = storedProgress()
-        let resolvedProgress = resolvedProgress(from: progress)
-
-        if progress.lastCompletedQuizDayKey == quizDayKey {
-            return resolvedProgress
-        }
-
-        if
-            let lastCompletedQuizDayKey = progress.lastCompletedQuizDayKey,
-            dayKeyProvider.isNextDay(quizDayKey, after: lastCompletedQuizDayKey)
-        {
-            progress.streakDays = resolvedProgress.streakDays + 1
-        } else {
-            progress.streakDays = 1
-        }
-
-        progress.lastCompletedQuizDayKey = quizDayKey
-        saveProgress(progress)
-        return progress
-    }
-
-    func resetProgress() {
-        userDefaults.removeObject(forKey: Keys.progress)
     }
 }

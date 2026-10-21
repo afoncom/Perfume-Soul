@@ -118,10 +118,10 @@ private final class ProfileCalculationServiceMock: ProfileCalculationService {
 }
 
 private final class QuizProgressServiceMock: QuizProgressService {
-    func loadProgress() -> QuizProgress { .initial }
-    func recordCorrectAnswer(questionID: Int, quizDayKey: String) -> QuizProgress { .initial }
-    func completeQuiz(for quizDayKey: String) -> QuizProgress { .initial }
-    func resetProgress() { }
+    func loadProgress() async -> QuizProgress { .initial }
+    func recordCorrectAnswer(questionID: Int, quizDayKey: String) async -> QuizProgress { .initial }
+    func completeQuiz(for quizDayKey: String) async -> QuizProgress { .initial }
+    func resetProgress() async { }
 }
 
 private final class PerfumeCollectionServiceMock: PerfumeCollectionService {

@@ -115,7 +115,7 @@ extension ProfilePresenterImpl: ProfilePresenter {
 
     func onAppear() async {
         let profile = await profileService.fetchProfile()
-        let quizProgress = quizProgressService.loadProgress()
+        let quizProgress = await quizProgressService.loadProgress()
 
         await MainActor.run {
             setProfile(profile)
@@ -134,7 +134,7 @@ extension ProfilePresenterImpl: ProfilePresenter {
         }
         
         await profileService.deleteProfile(profile)
-        quizProgressService.resetProgress()
+        await quizProgressService.resetProgress()
         dailyQuizStateStorage.clearState()
         dailyPerfumeStateStorage.clearState()
         collectionService.clearState()
