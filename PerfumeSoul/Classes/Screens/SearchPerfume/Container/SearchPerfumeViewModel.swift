@@ -64,7 +64,7 @@ struct CatalogBrandSection: Equatable {
         }
         return savedPerfumes
             .filter { query.isEmpty || $0.perfumeName.localizedStandardContains(query) || $0.brandName.localizedStandardContains(query) }
-            .map { CatalogPerfume(id: $0.id, name: $0.perfumeName, brand: $0.brandName, brandID: nil) }
+            .map { CatalogPerfume(id: $0.id, name: $0.perfumeName, brand: $0.brandName, brandID: nil, imageURL: $0.imageURL) }
             .sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
     }
 

@@ -153,7 +153,8 @@ extension SearchPerfumePresenterImpl: SearchPerfumePresenter {
                     id: perfume.id,
                     perfumeName: perfume.name,
                     brandName: perfume.brand,
-                    source: .manual
+                    source: .manual,
+                    imageURL: perfume.imageURL
                 )
             )
         }

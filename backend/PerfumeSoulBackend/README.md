@@ -532,3 +532,9 @@ Backend recommendation logic has focused tests for:
 - `GET /horoscope/daily` now reads from PostgreSQL, so `daily_horoscopes` must be seeded before local run.
 - quiz data still uses packaged backend resources under `Sources/PerfumeSoulBackend/Requests/quiz-of-the-day/Resources`.
 - If the server is running, stop it with `Control + C`.
+
+### Catalog product images
+
+Set `FRAGELLA_API_KEY` in the backend environment to enable product photos. The key is never sent to iOS. `GET /catalog/perfumes/:perfumeID/image` returns `{ "imageURL": "https://cdn.fragella.com/images/..." }` for an exact brand/name/concentration match; an unavailable match or missing configuration returns an empty optional URL. Unknown perfume IDs return 404; invalid IDs return 400. Provider/network errors remain errors so the client can retry.
+
+The endpoint reuses the Fragella matching mechanism from `feature/added-one-imagePerfume`. Concurrent requests for the same perfume share one lookup. Successful matches remain in a bounded server memory cache for seven days; missing matches are cached for one hour. iOS separately caches decoded images (32 MiB), downloaded files and resolved URLs (100 MiB, seven days); missing matches expire after five minutes. Cache files live in `Library/Caches` and may be removed by the OS. The catalog fetches photos when cards appear, without loading the full catalog's images upfront.

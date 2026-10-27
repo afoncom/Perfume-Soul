@@ -28,7 +28,13 @@ final class SearchPerfumeModule {
             favoritesStorage: CatalogFavoritesStorage(userDefaults: .standard)
         )
 
-        let view = SearchPerfumeScreen(viewModel: viewModel, presenter: presenter)
+        let imageLoader = PerfumeImageLoader { id in
+            let response: CatalogPerfumeImageResponse = try await requestManager.sendRequest(
+                request: CatalogPerfumeImageRequest(perfumeID: id)
+            )
+            return response.imageURL
+        }
+        let view = SearchPerfumeScreen(viewModel: viewModel, presenter: presenter, imageLoader: imageLoader)
         let hostingController = UIHostingController(rootView: view)
         hostingController.title = String(localized: "catalog.title")
         navigationController.setViewControllers([hostingController], animated: false)
