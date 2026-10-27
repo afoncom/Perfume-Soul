@@ -12,7 +12,11 @@ import CoreData
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     let coreDataManager: CoreDataManager = CoreDataManagerImpl()
+    #if DEBUG && targetEnvironment(simulator)
+    private let isLocalServerEnabled = true
+    #else
     private let isLocalServerEnabled = false
+    #endif
 
     private var baseURL: String {
         isLocalServerEnabled

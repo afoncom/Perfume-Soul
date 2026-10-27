@@ -30,6 +30,7 @@ struct PerfumeDetailsResponse: Decodable {
     let topNotes: [String]
     let middleNotes: [String]
     let baseNotes: [String]
+    let imageURL: String?
 
     private enum CodingKeys: String, CodingKey {
         case id
@@ -54,6 +55,7 @@ struct PerfumeDetailsResponse: Decodable {
         case topNotes
         case middleNotes
         case baseNotes
+        case imageURL
     }
 
     init(from decoder: any Decoder) throws {
@@ -81,6 +83,7 @@ struct PerfumeDetailsResponse: Decodable {
         self.topNotes = try container.decode([String].self, forKey: .topNotes)
         self.middleNotes = try container.decode([String].self, forKey: .middleNotes)
         self.baseNotes = try container.decode([String].self, forKey: .baseNotes)
+        self.imageURL = try container.decodeIfPresent(String.self, forKey: .imageURL)
     }
 }
 

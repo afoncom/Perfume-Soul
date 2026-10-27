@@ -28,6 +28,8 @@ Then set `DATABASE_URL`, for example:
 DATABASE_URL=postgresql://postgres:your-password@localhost:5432/postgres
 ```
 
+Set `FRAGELLA_API_KEY` in the backend `.env` to show Fragella bottle photos on perfume detail pages. The key stays on the server. Without it, or when Fragella has no exact match, the existing image placeholder remains. Perfume names and notes continue to come from our database. The backend uses only Fragella CDN image URLs; it does not download or store the photos.
+
 Schema changes for perfume profile metadata and accords are now applied by Fluent migrations during app startup.
 The same migration also adds `market_segment` to `perfumes` and backfills it with `luxury`, `daily`, or `niche`.
 

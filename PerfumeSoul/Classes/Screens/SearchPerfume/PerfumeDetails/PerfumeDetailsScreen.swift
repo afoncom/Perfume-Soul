@@ -59,8 +59,11 @@ struct PerfumeDetailsScreen: View {
 
     private func productHeader(_ details: PerfumeDetails) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            Rectangle()
-                .fill(Color(.placeholderSoft))
+            AsyncImage(url: details.imageURL) { image in
+                image.resizable().scaledToFit()
+            } placeholder: {
+                Rectangle().fill(Color(.placeholderSoft))
+            }
                 .aspectRatio(dynamicTypeSize.isAccessibilitySize ? 1.6 : 1, contentMode: .fit)
                 .overlay { Rectangle().stroke(Color(.cardBorder), lineWidth: 1) }
                 .accessibilityHidden(true)

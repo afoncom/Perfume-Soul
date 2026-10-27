@@ -35,6 +35,7 @@ struct PerfumeDetails {
     let topNotes: [String]
     let middleNotes: [String]
     let baseNotes: [String]
+    let imageURL: URL?
 }
 
 extension PerfumeDetails {
@@ -66,5 +67,6 @@ extension PerfumeDetails {
         self.topNotes = response.topNotes
         self.middleNotes = response.middleNotes
         self.baseNotes = response.baseNotes
+        self.imageURL = response.imageURL.flatMap(URL.init(string:))
     }
 }

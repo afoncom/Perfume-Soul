@@ -132,7 +132,9 @@ func routes(_ app: Application) throws {
         guard let perfumeNotes = try await PerfumeNotesLoader.load(
             perfumeID: perfumeID,
             on: req.db,
-            language: req.headers.first(name: "Accept-Language")
+            language: req.headers.first(name: "Accept-Language"),
+            client: req.client,
+            fragellaAPIKey: Environment.get("FRAGELLA_API_KEY")
         ) else {
             throw Abort(.notFound)
         }

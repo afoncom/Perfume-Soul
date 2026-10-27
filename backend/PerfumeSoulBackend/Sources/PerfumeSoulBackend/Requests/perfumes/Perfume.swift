@@ -1,5 +1,6 @@
 import Fluent
 import Foundation
+import Vapor
 
 struct Perfume: Codable, Equatable {
     let id: Int
@@ -34,6 +35,90 @@ struct PerfumeNotesResponse: Codable, Equatable {
     let topNotes: [String]
     let middleNotes: [String]
     let baseNotes: [String]
+    let imageURL: String?
+    let imageSource: String?
+}
+
+struct FragellaFragrance: Decodable {
+    let name: String
+    let brand: String
+    let imageURL: String?
+    let concentration: String?
+
+    enum CodingKeys: String, CodingKey {
+        case name = "Name"
+        case brand = "Brand"
+        case imageURL = "Image URL"
+        case concentration = "OilType"
+    }
+}
+
+enum FragellaImageLookup {
+    static func lookup(client: any Client, apiKey: String?, brand: String, name: String, concentration: String?) async -> String? {
+        guard let apiKey, !apiKey.isEmpty, name.count >= 3 else {
+            return nil
+        }
+        var components = URLComponents(string: "https://api.fragella.com/api/v1/fragrances")
+        components?.queryItems = [
+            URLQueryItem(name: "search", value: name),
+            URLQueryItem(name: "limit", value: "10")
+        ]
+        guard let url = components?.url else {
+            return nil
+        }
+        do {
+            let response = try await client.get(URI(string: url.absoluteString)) { request in
+                request.headers.add(name: "x-api-key", value: apiKey)
+            }
+            guard response.status == .ok else {
+                return nil
+            }
+            let matches = try response.content.decode([FragellaFragrance].self)
+            return imageURL(in: matches, brand: brand, name: name, concentration: concentration)
+        } catch {
+            return nil
+        }
+    }
+
+    static func imageURL(
+        in matches: [FragellaFragrance],
+        brand: String,
+        name: String,
+        concentration: String? = nil
+    ) -> String? {
+        let expectedBrand = normalized(brand)
+        let expectedName = normalized(name)
+        let match = matches.first { match in
+            let matchBrand = normalized(match.brand)
+            let brandMatches = matchBrand == expectedBrand
+                || (expectedBrand == "dior" && matchBrand == "christian dior")
+            let matchName = normalized(match.name)
+            let unbrandedName = matchName.hasPrefix(expectedBrand + " ")
+                ? String(matchName.dropFirst(expectedBrand.count + 1)) : matchName
+            let concentrationMatches = concentration == nil || match.concentration == nil
+                || normalized(concentration ?? "") == normalized(match.concentration ?? "")
+            return brandMatches
+                && (matchName == expectedName || unbrandedName == expectedName)
+                && concentrationMatches
+                && validImageURL(match.imageURL)
+        }
+        return match?.imageURL
+    }
+
+    private static func normalized(_ value: String) -> String {
+        value.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "en_US_POSIX"))
+            .components(separatedBy: CharacterSet.alphanumerics.inverted)
+            .filter { !$0.isEmpty }
+            .joined(separator: " ")
+    }
+
+    private static func validImageURL(_ value: String?) -> Bool {
+        guard let value, let url = URLComponents(string: value) else {
+            return false
+        }
+        return url.scheme == "https" && url.host == "cdn.fragella.com"
+            && url.path.hasPrefix("/images/") && url.user == nil && url.password == nil
+    }
 }
 
 struct PerfumeAccordResponse: Codable, Equatable {
@@ -86,7 +171,9 @@ enum PerfumeNotesLoader {
     static func load(
         perfumeID: Int,
         on database: any Database,
-        language: String? = nil
+        language: String? = nil,
+        client: (any Client)? = nil,
+        fragellaAPIKey: String? = nil
     ) async throws -> PerfumeNotesResponse? {
         guard let perfume = try await PerfumeModel.query(on: database)
             .with(\.$brand)
@@ -154,6 +241,19 @@ enum PerfumeNotesLoader {
             return nil
         }
 
+        let imageURL: String?
+        if let client {
+            imageURL = await FragellaImageLookup.lookup(
+                client: client,
+                apiKey: fragellaAPIKey,
+                brand: perfume.brand.name,
+                name: perfume.perfumeName,
+                concentration: perfume.concentration
+            )
+        } else {
+            imageURL = nil
+        }
+
         return PerfumeNotesResponse(
             id: id,
             brand: perfume.brand.name,
@@ -182,7 +282,9 @@ enum PerfumeNotesLoader {
             notesLanguage: useEnglishNotes ? "en" : "ru",
             topNotes: topNotes,
             middleNotes: middleNotes,
-            baseNotes: baseNotes
+            baseNotes: baseNotes,
+            imageURL: imageURL,
+            imageSource: imageURL == nil ? nil : "Fragella"
         )
     }
 
