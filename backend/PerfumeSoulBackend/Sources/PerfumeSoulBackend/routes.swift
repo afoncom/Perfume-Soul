@@ -2,7 +2,12 @@ import Fluent
 import FluentSQL
 import Vapor
 
-func routes(_ app: Application) throws {
+typealias PerfumeImageProvider = @Sendable (String, String, String?) async throws -> String?
+
+func routes(
+    _ app: Application,
+    imageProvider: @escaping PerfumeImageProvider = { _, _, _ in nil }
+) throws {
     try app.register(collection: CatalogRoutes())
 
     app.get("health") { _ async throws -> Response in
@@ -132,15 +137,37 @@ func routes(_ app: Application) throws {
         guard let perfumeNotes = try await PerfumeNotesLoader.load(
             perfumeID: perfumeID,
             on: req.db,
-            language: req.headers.first(name: "Accept-Language"),
-            client: req.client,
-            fragellaAPIKey: Environment.get("FRAGELLA_API_KEY")
+            language: req.headers.first(name: "Accept-Language")
         ) else {
             throw Abort(.notFound)
         }
 
         return try jsonResponse(perfumeNotes, varyByLanguage: true)
     }
+
+    app.get("perfumes", ":perfumeID", "image") { req async throws -> Response in
+        let perfumeID = try req.parameters.require("perfumeID", as: Int.self)
+        guard let perfume = try await PerfumeModel.find(perfumeID, on: req.db) else {
+            throw Abort(.notFound)
+        }
+        try await perfume.$brand.load(on: req.db)
+
+        let imageURL: String?
+        do {
+            imageURL = try await imageProvider(perfume.brand.name, perfume.perfumeName, perfume.concentration)
+        } catch {
+            imageURL = nil
+        }
+        return try jsonResponse(PerfumeImageResponse(
+            imageURL: imageURL,
+            imageSource: imageURL == nil ? nil : "Fragella"
+        ))
+    }
+}
+
+private struct PerfumeImageResponse: Encodable {
+    let imageURL: String?
+    let imageSource: String?
 }
 
 private func jsonResponse<T: Encodable>(

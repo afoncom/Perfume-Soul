@@ -42,6 +42,7 @@ let package = Package(
             name: "PerfumeSoulBackendTests",
             dependencies: [
                 .target(name: "PerfumeSoulBackend"),
+                .product(name: "XCTFluent", package: "fluent-kit"),
                 .product(name: "VaporTesting", package: "vapor")
             ],
             swiftSettings: swiftSettings

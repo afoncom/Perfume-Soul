@@ -59,7 +59,7 @@ struct PerfumeDetailsScreen: View {
 
     private func productHeader(_ details: PerfumeDetails) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            AsyncImage(url: details.imageURL) { image in
+            AsyncImage(url: viewModel.imageURL) { image in
                 image.resizable().scaledToFit()
             } placeholder: {
                 Rectangle().fill(Color(.placeholderSoft))

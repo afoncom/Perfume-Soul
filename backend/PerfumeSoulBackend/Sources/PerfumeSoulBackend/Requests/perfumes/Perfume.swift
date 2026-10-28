@@ -171,9 +171,7 @@ enum PerfumeNotesLoader {
     static func load(
         perfumeID: Int,
         on database: any Database,
-        language: String? = nil,
-        client: (any Client)? = nil,
-        fragellaAPIKey: String? = nil
+        language: String? = nil
     ) async throws -> PerfumeNotesResponse? {
         guard let perfume = try await PerfumeModel.query(on: database)
             .with(\.$brand)
@@ -241,19 +239,6 @@ enum PerfumeNotesLoader {
             return nil
         }
 
-        let imageURL: String?
-        if let client {
-            imageURL = await FragellaImageLookup.lookup(
-                client: client,
-                apiKey: fragellaAPIKey,
-                brand: perfume.brand.name,
-                name: perfume.perfumeName,
-                concentration: perfume.concentration
-            )
-        } else {
-            imageURL = nil
-        }
-
         return PerfumeNotesResponse(
             id: id,
             brand: perfume.brand.name,
@@ -283,8 +268,8 @@ enum PerfumeNotesLoader {
             topNotes: topNotes,
             middleNotes: middleNotes,
             baseNotes: baseNotes,
-            imageURL: imageURL,
-            imageSource: imageURL == nil ? nil : "Fragella"
+            imageURL: nil,
+            imageSource: nil
         )
     }
 
