@@ -152,12 +152,7 @@ func routes(
         }
         try await perfume.$brand.load(on: req.db)
 
-        let imageURL: String?
-        do {
-            imageURL = try await imageProvider(perfume.brand.name, perfume.perfumeName, perfume.concentration)
-        } catch {
-            imageURL = nil
-        }
+        let imageURL = try await imageProvider(perfume.brand.name, perfume.perfumeName, perfume.concentration)
         return try jsonResponse(PerfumeImageResponse(
             imageURL: imageURL,
             imageSource: imageURL == nil ? nil : "Fragella"

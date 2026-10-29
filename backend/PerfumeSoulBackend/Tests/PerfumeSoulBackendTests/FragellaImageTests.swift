@@ -1,8 +1,59 @@
 import Foundation
+import NIOCore
 import Testing
+import Vapor
+import VaporTesting
 @testable import PerfumeSoulBackend
 
 struct FragellaImageTests {
+    @Test("Temporary HTTP provider failures are thrown", arguments: [
+        HTTPResponseStatus.tooManyRequests, HTTPResponseStatus.serviceUnavailable
+    ])
+    func httpProviderFailureIsThrown(status: HTTPResponseStatus) async throws {
+        try await withApp { app in
+            let client = FragellaFailureClient(
+                eventLoop: app.eventLoopGroup.next(),
+                result: .success(ClientResponse(status: status))
+            )
+            await #expect(throws: Abort.self) {
+                try await FragellaImageLookup.lookup(
+                    client: client, apiKey: "test-key", brand: "Dior", name: "Sauvage", concentration: nil
+                )
+            }
+        }
+    }
+
+    @Test("Provider timeouts are thrown instead of returning a missing photo")
+    func providerTimeoutIsThrown() async throws {
+        try await withApp { app in
+            let client = FragellaFailureClient(
+                eventLoop: app.eventLoopGroup.next(),
+                result: .failure(URLError(.timedOut))
+            )
+            await #expect(throws: URLError.self) {
+                try await FragellaImageLookup.lookup(
+                    client: client, apiKey: "test-key", brand: "Dior", name: "Sauvage", concentration: nil
+                )
+            }
+        }
+    }
+
+    @Test("A successful empty provider response returns nil")
+    func successfulLookupWithoutPhotoReturnsNil() async throws {
+        try await withApp { app in
+            let client = FragellaFailureClient(
+                eventLoop: app.eventLoopGroup.next(),
+                result: .success(ClientResponse(
+                    status: .ok, headers: ["Content-Type": "application/json"], body: ByteBuffer(string: "[]")
+                ))
+            )
+            let imageURL = try await FragellaImageLookup.lookup(
+                client: client, apiKey: "test-key", brand: "Dior", name: "Sauvage", concentration: nil
+            )
+            #expect(imageURL == nil)
+        }
+    }
+
     @Test("Selects only an exact fragrance from the same brand")
     func exactMatch() throws {
         let response = """
@@ -51,5 +102,21 @@ struct FragellaImageTests {
         #expect(FragellaImageLookup.imageURL(
             in: matches, brand: "Dior", name: "Sauvage", concentration: "eau de toilette"
         ) == "https://cdn.fragella.com/images/dior-sauvage.jpg")
+    }
+}
+
+private struct FragellaFailureClient: Client {
+    let eventLoop: any EventLoop
+    let result: Result<ClientResponse, any Error>
+
+    func delegating(to eventLoop: any EventLoop) -> any Client {
+        FragellaFailureClient(eventLoop: eventLoop, result: result)
+    }
+
+    func send(_ request: ClientRequest) -> EventLoopFuture<ClientResponse> {
+        switch result {
+        case .success(let response): return eventLoop.makeSucceededFuture(response)
+        case .failure(let error): return eventLoop.makeFailedFuture(error)
+        }
     }
 }

@@ -30,6 +30,8 @@ DATABASE_URL=postgresql://postgres:your-password@localhost:5432/postgres
 
 Set `FRAGELLA_API_KEY` in the backend `.env` to show Fragella bottle photos on perfume detail pages. The key stays on the server. `GET /perfumes/:id/notes` returns database details without waiting for the photo provider; iOS requests the optional photo separately through `GET /perfumes/:id/image`. Without a key, when no exact match exists, or when the provider fails, the existing image placeholder remains. The backend uses only Fragella CDN image URLs; it does not download or store the photos.
 
+A successful image lookup without a matching photo returns HTTP 200 without `imageURL`. Provider failures return an error from `/image`, so the same details screen can retry the photo on its next appearance; the loaded details stay available.
+
 The iOS app keeps its remote backend by default, including Debug launches in the Simulator. To use a local backend, set `PERFUME_SOUL_BACKEND_URL=http://127.0.0.1:8080` in the Xcode scheme's Run → Arguments → Environment Variables. Remove the override to return to the default server.
 
 Schema changes for perfume profile metadata and accords are now applied by Fluent migrations during app startup.

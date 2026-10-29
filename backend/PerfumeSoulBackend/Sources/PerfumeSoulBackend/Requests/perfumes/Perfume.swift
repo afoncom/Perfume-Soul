@@ -54,7 +54,7 @@ struct FragellaFragrance: Decodable {
 }
 
 enum FragellaImageLookup {
-    static func lookup(client: any Client, apiKey: String?, brand: String, name: String, concentration: String?) async -> String? {
+    static func lookup(client: any Client, apiKey: String?, brand: String, name: String, concentration: String?) async throws -> String? {
         guard let apiKey, !apiKey.isEmpty, name.count >= 3 else {
             return nil
         }
@@ -66,18 +66,14 @@ enum FragellaImageLookup {
         guard let url = components?.url else {
             return nil
         }
-        do {
-            let response = try await client.get(URI(string: url.absoluteString)) { request in
-                request.headers.add(name: "x-api-key", value: apiKey)
-            }
-            guard response.status == .ok else {
-                return nil
-            }
-            let matches = try response.content.decode([FragellaFragrance].self)
-            return imageURL(in: matches, brand: brand, name: name, concentration: concentration)
-        } catch {
-            return nil
+        let response = try await client.get(URI(string: url.absoluteString)) { request in
+            request.headers.add(name: "x-api-key", value: apiKey)
         }
+        guard response.status == .ok else {
+            throw Abort(.badGateway, reason: "Image provider is unavailable.")
+        }
+        let matches = try response.content.decode([FragellaFragrance].self)
+        return imageURL(in: matches, brand: brand, name: name, concentration: concentration)
     }
 
     static func imageURL(

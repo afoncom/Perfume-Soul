@@ -35,7 +35,7 @@ public func configure(_ app: Application, needsDatabase: Bool = true) throws {
 
     let fragellaAPIKey = Environment.get("FRAGELLA_API_KEY")
     try routes(app) { brand, name, concentration in
-        await FragellaImageLookup.lookup(
+        try await FragellaImageLookup.lookup(
             client: app.client,
             apiKey: fragellaAPIKey,
             brand: brand,
