@@ -2,10 +2,33 @@ import Fluent
 import Vapor
 
 struct CatalogRoutes: RouteCollection {
+    let imageCache: CatalogImageCache
+    let imageProvider: PerfumeImageProvider
+
     func boot(routes: any RoutesBuilder) throws {
         let catalog = routes.grouped("catalog")
         catalog.get("brands", use: brands)
         catalog.get("perfumes", use: perfumes)
+        catalog.get("perfumes", ":perfumeID", "image", use: image)
+    }
+
+    private func image(_ request: Request) async throws -> CatalogImageResponse {
+        guard let id = request.parameters.get("perfumeID", as: Int.self), id > 0 else {
+            throw Abort(.badRequest)
+        }
+        guard let perfume = try await PerfumeModel.query(on: request.db)
+            .filter(\.$id == id)
+            .with(\.$brand)
+            .first() else {
+            throw Abort(.notFound)
+        }
+        let brand = perfume.brand.name
+        let name = perfume.perfumeName
+        let concentration = perfume.concentration
+        let url = try await imageCache.imageURL(for: id) {
+            try await imageProvider(brand, name, concentration)
+        }
+        return CatalogImageResponse(imageURL: url)
     }
 
     private func brands(_ request: Request) async throws -> [CatalogBrandResponse] {
@@ -89,4 +112,8 @@ private struct CatalogPerfumeResponse: Content {
 private struct CatalogPageResponse: Content {
     let items: [CatalogPerfumeResponse]
     let hasMore: Bool
+}
+
+private struct CatalogImageResponse: Content {
+    let imageURL: String?
 }

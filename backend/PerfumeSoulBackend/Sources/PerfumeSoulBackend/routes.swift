@@ -2,13 +2,12 @@ import Fluent
 import FluentSQL
 import Vapor
 
-typealias PerfumeImageProvider = @Sendable (String, String, String?) async throws -> String?
-
 func routes(
     _ app: Application,
+    imageCache: CatalogImageCache = CatalogImageCache(),
     imageProvider: @escaping PerfumeImageProvider = { _, _, _ in nil }
 ) throws {
-    try app.register(collection: CatalogRoutes())
+    try app.register(collection: CatalogRoutes(imageCache: imageCache, imageProvider: imageProvider))
 
     app.get("health") { _ async throws -> Response in
         try jsonResponse(["status": "ok"])
@@ -152,7 +151,12 @@ func routes(
         }
         try await perfume.$brand.load(on: req.db)
 
-        let imageURL = try await imageProvider(perfume.brand.name, perfume.perfumeName, perfume.concentration)
+        let brand = perfume.brand.name
+        let name = perfume.perfumeName
+        let concentration = perfume.concentration
+        let imageURL = try await imageCache.imageURL(for: perfumeID) {
+            try await imageProvider(brand, name, concentration)
+        }
         return try jsonResponse(PerfumeImageResponse(
             imageURL: imageURL,
             imageSource: imageURL == nil ? nil : "Fragella"

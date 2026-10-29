@@ -54,3 +54,13 @@ private struct CatalogPerfumesRequest: Request {
         return items
     }
 }
+
+struct CatalogPerfumeImageRequest: Request {
+    let perfumeID: Int
+    let httpMethod: HTTPMethod = .get
+    var path: String { "/catalog/perfumes/\(perfumeID)/image" }
+}
+
+struct CatalogPerfumeImageResponse: Decodable {
+    let imageURL: URL?
+}

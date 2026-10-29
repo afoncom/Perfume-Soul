@@ -6,6 +6,68 @@ import XCTFluent
 @testable import PerfumeSoulBackend
 
 struct PerfumeImageRouteTests {
+    @Test("Both image endpoints reuse the same successful lookup", arguments: [false, true])
+    func endpointsSharePhotoCache(catalogFirst: Bool) async throws {
+        try await expectSharedLookup(catalogFirst: catalogFirst, imageURL: Self.expectedURL)
+    }
+
+    @Test("Both image endpoints reuse a successful missing-photo lookup", arguments: [false, true])
+    func endpointsShareMissingPhotoCache(catalogFirst: Bool) async throws {
+        try await expectSharedLookup(catalogFirst: catalogFirst, imageURL: nil)
+    }
+
+    @Test("A provider failure through either endpoint can recover through the other", arguments: [false, true])
+    func endpointsShareRecovery(catalogFirst: Bool) async throws {
+        let database = ArrayTestDatabase()
+        for _ in 0..<3 { appendPerfume(to: database) }
+        let provider = RecoveringPhotoProvider()
+        let first = catalogFirst ? "/catalog/perfumes/1/image" : "/perfumes/1/image"
+        let second = catalogFirst ? "/perfumes/1/image" : "/catalog/perfumes/1/image"
+
+        try await withApp { app in
+            app.databases.use(database.configuration, as: .psql)
+            try routes(app) { _, _, _ in try await provider.imageURL() }
+            try await app.testing().test(.GET, first) { response in
+                #expect(response.status == .serviceUnavailable)
+            }
+            for path in [second, first] {
+                try await app.testing().test(.GET, path) { response in
+                    #expect(response.status == .ok)
+                    let image = try JSONDecoder().decode(ImageResponse.self, from: Data(response.body.string.utf8))
+                    #expect(image.imageURL == Self.expectedURL)
+                }
+            }
+            #expect(await provider.calls == 2)
+        }
+    }
+
+    private static let expectedURL = "https://cdn.fragella.com/images/dior-sauvage.jpg"
+
+    private func expectSharedLookup(catalogFirst: Bool, imageURL: String?) async throws {
+        let database = ArrayTestDatabase()
+        for _ in 0..<2 { appendPerfume(to: database) }
+        let provider = CountingPhotoProvider(url: imageURL)
+        let paths = ["/perfumes/1/image", "/catalog/perfumes/1/image"]
+
+        try await withApp { app in
+            app.databases.use(database.configuration, as: .psql)
+            try routes(app) { brand, name, concentration in
+                #expect(brand == "Dior")
+                #expect(name == "Sauvage")
+                #expect(concentration == nil)
+                return await provider.imageURL()
+            }
+            for path in catalogFirst ? Array(paths.reversed()) : paths {
+                try await app.testing().test(.GET, path) { response in
+                    #expect(response.status == .ok)
+                    let image = try JSONDecoder().decode(ImageResponse.self, from: Data(response.body.string.utf8))
+                    #expect(image.imageURL == imageURL)
+                }
+            }
+            #expect(await provider.calls == 1)
+        }
+    }
+
     @Test("Photo provider failure leaves database details available")
     func failingPhotoProvider() async throws {
         let database = ArrayTestDatabase()
@@ -131,9 +193,11 @@ private struct ImageResponse: Decodable {
 }
 
 private actor RecoveringPhotoProvider {
+    private(set) var calls = 0
     private var shouldFail = true
 
     func imageURL() throws -> String? {
+        calls += 1
         if shouldFail {
             shouldFail = false
             throw Abort(.serviceUnavailable)
@@ -164,5 +228,19 @@ private actor DelayedPhotoProvider {
     func release() {
         imageContinuation?.resume(returning: "https://cdn.fragella.com/images/dior-sauvage.jpg")
         imageContinuation = nil
+    }
+}
+
+private actor CountingPhotoProvider {
+    private(set) var calls = 0
+    let url: String?
+
+    init(url: String?) {
+        self.url = url
+    }
+
+    func imageURL() -> String? {
+        calls += 1
+        return url
     }
 }
