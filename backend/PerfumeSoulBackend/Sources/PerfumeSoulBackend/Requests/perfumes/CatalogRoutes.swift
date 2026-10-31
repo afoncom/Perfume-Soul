@@ -2,7 +2,9 @@ import Fluent
 import Vapor
 
 struct CatalogRoutes: RouteCollection {
-    private let imageCache = CatalogImageCache()
+    let imageCache: CatalogImageCache
+    let imageProvider: PerfumeImageProvider
+
     func boot(routes: any RoutesBuilder) throws {
         let catalog = routes.grouped("catalog")
         catalog.get("brands", use: brands)
@@ -20,19 +22,11 @@ struct CatalogRoutes: RouteCollection {
             .first() else {
             throw Abort(.notFound)
         }
-        // Reuse the lookup from feature/added-one-imagePerfume; the API key stays on the server.
-        let apiKey = Environment.get("FRAGELLA_API_KEY")
-        guard let apiKey, !apiKey.isEmpty else {
-            return CatalogImageResponse(imageURL: nil)
-        }
         let brand = perfume.brand.name
         let name = perfume.perfumeName
         let concentration = perfume.concentration
-        let client = request.client
         let url = try await imageCache.imageURL(for: id) {
-            try await FragellaImageLookup.lookup(
-                client: client, apiKey: apiKey, brand: brand, name: name, concentration: concentration
-            )
+            try await imageProvider(brand, name, concentration)
         }
         return CatalogImageResponse(imageURL: url)
     }

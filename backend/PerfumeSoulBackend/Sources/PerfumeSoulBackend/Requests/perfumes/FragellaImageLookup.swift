@@ -1,6 +1,8 @@
 import Foundation
 import Vapor
 
+typealias PerfumeImageProvider = @Sendable (String, String, String?) async throws -> String?
+
 struct FragellaFragrance: Decodable {
     let name: String
     let brand: String

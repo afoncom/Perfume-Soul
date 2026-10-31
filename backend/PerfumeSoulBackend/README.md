@@ -28,6 +28,12 @@ Then set `DATABASE_URL`, for example:
 DATABASE_URL=postgresql://postgres:your-password@localhost:5432/postgres
 ```
 
+Set `FRAGELLA_API_KEY` in the backend `.env` to show Fragella bottle photos on perfume detail pages. The key stays on the server. `GET /perfumes/:id/notes` returns database details without waiting for the photo provider; iOS requests the optional photo separately through `GET /perfumes/:id/image`. Without a key, when no exact match exists, or when the provider fails, the existing image placeholder remains. The backend uses only Fragella CDN image URLs; it does not download or store the photos.
+
+A successful image lookup without a matching photo returns HTTP 200 without `imageURL`. Provider failures return an error from `/image`, so the same details screen can retry the photo on its next appearance; the loaded details stay available.
+
+The iOS app keeps its remote backend by default, including Debug launches in the Simulator. To use a local backend, set `PERFUME_SOUL_BACKEND_URL=http://127.0.0.1:8080` in the Xcode scheme's Run → Arguments → Environment Variables. Remove the override to return to the default server.
+
 Schema changes for perfume profile metadata and accords are now applied by Fluent migrations during app startup.
 The same migration also adds `market_segment` to `perfumes` and backfills it with `luxury`, `daily`, or `niche`.
 
@@ -537,4 +543,4 @@ Backend recommendation logic has focused tests for:
 
 Set `FRAGELLA_API_KEY` in the backend environment to enable product photos. The key is never sent to iOS. `GET /catalog/perfumes/:perfumeID/image` returns `{ "imageURL": "https://cdn.fragella.com/images/..." }` for an exact brand/name/concentration match; an unavailable match or missing configuration returns an empty optional URL. Unknown perfume IDs return 404; invalid IDs return 400. Provider/network errors remain errors so the client can retry.
 
-The endpoint reuses the Fragella matching mechanism from `feature/added-one-imagePerfume`. Concurrent requests for the same perfume share one lookup. Successful matches remain in a bounded server memory cache for seven days; missing matches are cached for one hour. iOS separately caches decoded images (32 MiB), downloaded files and resolved URLs (100 MiB, seven days); missing matches expire after five minutes. Cache files live in `Library/Caches` and may be removed by the OS. The catalog fetches photos when cards appear, without loading the full catalog's images upfront.
+Catalog and detail image endpoints share one Fragella adapter and backend URL cache, injected in `configure`. Concurrent requests for the same perfume share one lookup. Provider errors are not cached, allowing the next request through either endpoint to retry. Successful matches remain in a bounded server memory cache for seven days; missing matches are cached for one hour. iOS separately caches decoded images (32 MiB), downloaded files and resolved URLs (100 MiB, seven days); missing matches expire after five minutes. Cache files live in `Library/Caches` and may be removed by the OS. The catalog fetches photos when cards appear, without loading the full catalog's images upfront.
