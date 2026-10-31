@@ -55,5 +55,19 @@ let project = Project(
                 .target(name: "PerfumeSoul")
             ]
         )
+    ],
+    schemes: [
+        .scheme(
+            name: "PerfumeSoul-Local",
+            shared: true,
+            buildAction: .buildAction(targets: ["PerfumeSoul"]),
+            runAction: .runAction(
+                configuration: .debug,
+                executable: "PerfumeSoul",
+                arguments: .arguments(environmentVariables: [
+                    "PERFUME_SOUL_BACKEND_URL": "http://127.0.0.1:8080"
+                ])
+            )
+        )
     ]
 )

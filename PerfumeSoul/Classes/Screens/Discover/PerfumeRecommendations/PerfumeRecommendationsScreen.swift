@@ -10,15 +10,18 @@ import SwiftUI
 
 struct PerfumeRecommendationsScreen: View {
     @Bindable private var viewModel: PerfumeRecommendationsViewModel
+    private let imageLoader: PerfumeImageLoader
     private let presenter: PerfumeRecommendationsPresenter
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     init(
         viewModel: PerfumeRecommendationsViewModel,
-        presenter: PerfumeRecommendationsPresenter
+        presenter: PerfumeRecommendationsPresenter,
+        imageLoader: PerfumeImageLoader
     ) {
         self.viewModel = viewModel
         self.presenter = presenter
+        self.imageLoader = imageLoader
     }
 
     var body: some View {
@@ -54,19 +57,20 @@ extension PerfumeRecommendationsScreen {
                 : AnyLayout(HStackLayout(alignment: .top, spacing: 12))
             layout {
                 ForEach(viewModel.selectedPerfumes) { perfume in
-                    makeBasePerfumeItem(title: perfume.name)
+                    makeBasePerfumeItem(perfume: perfume)
                 }
             }
         }
     }
 
-    private func makeBasePerfumeItem(title: String) -> some View {
+    private func makeBasePerfumeItem(perfume: SearchPerfumeItem) -> some View {
         VStack(spacing: 8) {
             RoundedRectangle(cornerRadius: 18, style: .continuous)
                 .fill(Color(.placeholderMedium))
                 .frame(height: 78)
+                .overlay { PerfumeProductImage(perfumeID: perfume.id, loader: imageLoader) }
 
-            Text(title)
+            Text(perfume.name)
                 .font(.caption)
                 .foregroundStyle(Color(.textPrimary))
                 .multilineTextAlignment(.center)
@@ -79,7 +83,7 @@ extension PerfumeRecommendationsScreen {
 
     @ViewBuilder
     private func makeRecommendationsSection() -> some View {
-        VStack(spacing: 24) {
+        LazyVStack(spacing: 24) {
             if viewModel.isLoading {
                 makeLoadingState()
             } else if let errorMessage = viewModel.errorMessage {
@@ -145,6 +149,7 @@ extension PerfumeRecommendationsScreen {
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .fill(Color(.placeholderMedium))
                 .frame(width: 72, height: 96)
+                .overlay { PerfumeProductImage(perfumeID: perfume.id, loader: imageLoader) }
 
             VStack(alignment: .leading, spacing: 6) {
                 Text(perfume.perfumeName)

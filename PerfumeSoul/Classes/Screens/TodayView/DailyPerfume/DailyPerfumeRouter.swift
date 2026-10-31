@@ -14,14 +14,17 @@ protocol DailyPerfumeRouter {
 
 final class DailyPerfumeRouterImpl {
     private weak var navigationController: UINavigationController?
+    private let imageLoader: PerfumeImageLoader
     private let requestManager: RequestManager
 
     init(
         navigationController: UINavigationController?,
-        requestManager: RequestManager
+        requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader
     ) {
         self.navigationController = navigationController
         self.requestManager = requestManager
+        self.imageLoader = imageLoader
     }
 }
 
@@ -30,7 +33,8 @@ extension DailyPerfumeRouterImpl: DailyPerfumeRouter {
         navigationController?.pushViewController(
             PerfumeDetailsModule.build(
                 perfume: perfume,
-                requestManager: requestManager
+                requestManager: requestManager,
+                imageLoader: imageLoader
             ),
             animated: true
         )

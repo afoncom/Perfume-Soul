@@ -15,16 +15,19 @@ protocol ProfileDescriptionRouter {
 
 final class ProfileDescriptionRouterImpl {
     private weak var navigationController: UINavigationController?
+    private let imageLoader: PerfumeImageLoader
     private let requestManager: RequestManager
     private let onFinish: (() -> Void)?
 
     init(
         navigationController: UINavigationController?,
         requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader,
         onFinish: (() -> Void)? = nil
     ) {
         self.navigationController = navigationController
         self.requestManager = requestManager
+        self.imageLoader = imageLoader
         self.onFinish = onFinish
     }
 }
@@ -34,6 +37,7 @@ extension ProfileDescriptionRouterImpl: ProfileDescriptionRouter {
         let screen = PersonalPerfumeModule.build(
             profileCalculation: profileCalculation,
             requestManager: requestManager,
+            imageLoader: imageLoader,
             navigationController: navigationController,
             onFinish: onFinish
         )

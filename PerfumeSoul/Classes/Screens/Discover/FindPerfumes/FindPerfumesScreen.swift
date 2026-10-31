@@ -2,14 +2,16 @@ import SwiftUI
 
 struct FindPerfumesScreen: View {
     @Bindable private var viewModel: FindPerfumesViewModel
+    private let imageLoader: PerfumeImageLoader
     private let presenter: FindPerfumesPresenter
     @State private var activeField: FindPerfumeField?
     @State private var visibleFieldCount = 1
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    init(viewModel: FindPerfumesViewModel, presenter: FindPerfumesPresenter) {
+    init(viewModel: FindPerfumesViewModel, presenter: FindPerfumesPresenter, imageLoader: PerfumeImageLoader) {
         self.viewModel = viewModel
         self.presenter = presenter
+        self.imageLoader = imageLoader
     }
 
     var body: some View {
@@ -65,6 +67,7 @@ struct FindPerfumesScreen: View {
             PerfumeSearchSheet(
                 title: viewModel.title(for: field),
                 results: viewModel.searchResults,
+                imageLoader: imageLoader,
                 isSearching: viewModel.isSearching,
                 errorMessage: viewModel.searchErrorMessage,
                 search: { await presenter.searchTextChanged($0, for: field) },
@@ -101,6 +104,14 @@ struct FindPerfumesScreen: View {
                     .font(.caption.weight(.medium))
                     .foregroundStyle(Color(.descriptionText))
 
+                    if let perfume = viewModel.selectedPerfume(for: field) {
+                        Rectangle()
+                            .fill(Color(.placeholderSoft))
+                            .frame(width: 56, height: 56)
+                            .overlay { PerfumeProductImage(perfumeID: perfume.id, loader: imageLoader) }
+                            .overlay { Rectangle().stroke(Color(.cardBorder), lineWidth: 1) }
+                            .accessibilityHidden(true)
+                    }
                     Text(viewModel.selectedPerfume(for: field)?.name ?? L10n.Discover.FindSimilar.perfumePlaceholder)
                         .font(.title3.weight(.medium))
                         .fixedSize(horizontal: false, vertical: true)
