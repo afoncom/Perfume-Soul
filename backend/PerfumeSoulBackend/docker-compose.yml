@@ -29,6 +29,7 @@ services:
         condition: service_healthy
     environment:
       DATABASE_URL: postgresql://perfumesoul:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}@postgres:5432/perfumesoul
+      FRAGELLA_API_KEY: ${FRAGELLA_API_KEY:-}
       VAPOR_ENV: production
     ports:
       - "127.0.0.1:8080:8080"

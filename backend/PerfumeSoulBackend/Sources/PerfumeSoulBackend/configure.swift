@@ -33,7 +33,17 @@ public func configure(_ app: Application, needsDatabase: Bool = true) throws {
 
     try app.autoMigrate().wait()
 
-    try routes(app)
+    let fragellaAPIKey = Environment.get("FRAGELLA_API_KEY")
+    let imageCache = CatalogImageCache()
+    try routes(app, imageCache: imageCache) { brand, name, concentration in
+        try await FragellaImageLookup.lookup(
+            client: app.client,
+            apiKey: fragellaAPIKey,
+            brand: brand,
+            name: name,
+            concentration: concentration
+        )
+    }
 }
 
 private enum DatabaseConfigurationError: LocalizedError {

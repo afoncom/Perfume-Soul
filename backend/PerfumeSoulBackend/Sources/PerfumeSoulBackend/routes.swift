@@ -2,8 +2,12 @@ import Fluent
 import FluentSQL
 import Vapor
 
-func routes(_ app: Application) throws {
-    try app.register(collection: CatalogRoutes())
+func routes(
+    _ app: Application,
+    imageCache: CatalogImageCache = CatalogImageCache(),
+    imageProvider: @escaping PerfumeImageProvider = { _, _, _ in nil }
+) throws {
+    try app.register(collection: CatalogRoutes(imageCache: imageCache, imageProvider: imageProvider))
 
     app.get("health") { _ async throws -> Response in
         try jsonResponse(["status": "ok"])
@@ -139,6 +143,30 @@ func routes(_ app: Application) throws {
 
         return try jsonResponse(perfumeNotes, varyByLanguage: true)
     }
+
+    app.get("perfumes", ":perfumeID", "image") { req async throws -> Response in
+        let perfumeID = try req.parameters.require("perfumeID", as: Int.self)
+        guard let perfume = try await PerfumeModel.find(perfumeID, on: req.db) else {
+            throw Abort(.notFound)
+        }
+        try await perfume.$brand.load(on: req.db)
+
+        let brand = perfume.brand.name
+        let name = perfume.perfumeName
+        let concentration = perfume.concentration
+        let imageURL = try await imageCache.imageURL(for: perfumeID) {
+            try await imageProvider(brand, name, concentration)
+        }
+        return try jsonResponse(PerfumeImageResponse(
+            imageURL: imageURL,
+            imageSource: imageURL == nil ? nil : "Fragella"
+        ))
+    }
+}
+
+private struct PerfumeImageResponse: Encodable {
+    let imageURL: String?
+    let imageSource: String?
 }
 
 private func jsonResponse<T: Encodable>(

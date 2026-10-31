@@ -272,7 +272,8 @@ final class PerfumeDetailsTextFormatterTests: XCTestCase {
             notesLanguage: notesLanguage,
             topNotes: topNotes,
             middleNotes: middleNotes,
-            baseNotes: baseNotes
+            baseNotes: baseNotes,
+            imageURL: nil
         )
     }
 }

@@ -12,17 +12,26 @@ import CoreData
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     let coreDataManager: CoreDataManager = CoreDataManagerImpl()
-    private let isLocalServerEnabled = false
 
-    private var baseURL: String {
-        isLocalServerEnabled
-            ? "http://127.0.0.1:8080"
-            : "http://82.97.248.219"
+    static func backendBaseURL(environment: [String: String]) -> String {
+        let defaultURL = "http://82.97.248.219"
+        guard let override = environment["PERFUME_SOUL_BACKEND_URL"],
+            let url = URL(string: override),
+            let scheme = url.scheme,
+            ["http", "https"].contains(scheme),
+            url.host != nil else {
+            return defaultURL
+        }
+        var baseURL = override
+        while baseURL.hasSuffix("/") {
+            baseURL.removeLast()
+        }
+        return baseURL
     }
 
     private lazy var requestManager: RequestManager = RequestManagerImpl(
         urlSession: URLSession.shared,
-        baseURL: baseURL
+        baseURL: Self.backendBaseURL(environment: ProcessInfo.processInfo.environment)
     )
     
     func scene(

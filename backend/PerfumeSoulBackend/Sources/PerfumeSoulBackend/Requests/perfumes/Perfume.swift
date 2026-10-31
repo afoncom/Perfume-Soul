@@ -1,5 +1,6 @@
 import Fluent
 import Foundation
+import Vapor
 
 struct Perfume: Codable, Equatable {
     let id: Int
@@ -34,6 +35,8 @@ struct PerfumeNotesResponse: Codable, Equatable {
     let topNotes: [String]
     let middleNotes: [String]
     let baseNotes: [String]
+    let imageURL: String?
+    let imageSource: String?
 }
 
 struct PerfumeAccordResponse: Codable, Equatable {
@@ -182,7 +185,9 @@ enum PerfumeNotesLoader {
             notesLanguage: useEnglishNotes ? "en" : "ru",
             topNotes: topNotes,
             middleNotes: middleNotes,
-            baseNotes: baseNotes
+            baseNotes: baseNotes,
+            imageURL: nil,
+            imageSource: nil
         )
     }
 

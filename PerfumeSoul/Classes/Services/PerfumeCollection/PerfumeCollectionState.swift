@@ -17,6 +17,7 @@ struct PerfumeCollectionPerfume: Codable, Equatable, Identifiable {
     let perfumeName: String
     let brandName: String
     let source: PerfumeCollectionSource?
+    var imageURL: URL?
 }
 
 struct PerfumeCollectionState: Codable, Equatable {

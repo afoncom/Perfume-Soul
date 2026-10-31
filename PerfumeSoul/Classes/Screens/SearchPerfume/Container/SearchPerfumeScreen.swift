@@ -14,10 +14,12 @@ struct SearchPerfumeScreen: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @FocusState private var isSearchFocused: Bool
     private let presenter: SearchPerfumePresenter
+    private let imageLoader: PerfumeImageLoader
 
-    init(viewModel: SearchPerfumeViewModel, presenter: SearchPerfumePresenter) {
+    init(viewModel: SearchPerfumeViewModel, presenter: SearchPerfumePresenter, imageLoader: PerfumeImageLoader) {
         self.viewModel = viewModel
         self.presenter = presenter
+        self.imageLoader = imageLoader
     }
 
     var body: some View {
@@ -147,47 +149,32 @@ struct SearchPerfumeScreen: View {
         }
     }
 
-    private var perfumeContent: some View {
-        ScrollView {
-            VStack(spacing: 24) {
-                if viewModel.tab == .perfumes && viewModel.isLoading {
-                    loading
-                } else if viewModel.displayedPerfumes.isEmpty {
-                    state(
-                        message: viewModel.tab == .perfumes
-                            ? viewModel.errorMessage ?? viewModel.emptyMessage
-                            : viewModel.emptyMessage,
-                        allowsRetry: viewModel.tab == .perfumes && viewModel.errorMessage != nil
-                    )
-                } else {
-                    LazyVGrid(
-                        columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: dynamicTypeSize.isAccessibilitySize ? 1 : 2),
-                        alignment: .leading,
-                        spacing: 32
-                    ) {
-                        ForEach(viewModel.displayedPerfumes) { perfume in
-                            CatalogPerfumeCard(
-                                perfume: perfume,
-                                isSaved: viewModel.savedIDs.contains(perfume.id),
-                                onOpen: { presenter.perfumeTapped(perfume) },
-                                onSave: { presenter.toggleSaved(perfume) }
-                            )
-                            .onAppear {
-                                Task { await presenter.perfumeItemAppeared(id: perfume.id) }
-                            }
-                        }
-                    }
-                    if viewModel.isLoadingMore { ProgressView().padding(20) }
-                    if viewModel.tab == .perfumes, let error = viewModel.errorMessage {
-                        state(message: error, allowsRetry: true)
-                    }
-                }
-            }
-            .padding(.horizontal, 24)
-            .padding(.bottom, 32)
+    @ViewBuilder private var perfumeContent: some View {
+        if viewModel.tab == .perfumes && viewModel.isLoading {
+            loading
+        } else if viewModel.displayedPerfumes.isEmpty {
+            state(
+                message: viewModel.tab == .perfumes
+                    ? viewModel.errorMessage ?? viewModel.emptyMessage
+                    : viewModel.emptyMessage,
+                allowsRetry: viewModel.tab == .perfumes && viewModel.errorMessage != nil
+            )
+        } else {
+            CatalogPerfumeList(
+                perfumes: viewModel.displayedPerfumes,
+                savedIDs: viewModel.savedIDs,
+                columns: dynamicTypeSize.isAccessibilitySize ? 1 : 2,
+                imageLoader: imageLoader,
+                isLoadingMore: viewModel.isLoadingMore,
+                errorMessage: viewModel.tab == .perfumes ? viewModel.errorMessage : nil,
+                onOpen: { presenter.perfumeTapped($0) },
+                onSave: { presenter.toggleSaved($0) },
+                onAppear: { perfume in
+                    Task { await presenter.perfumeItemAppeared(id: perfume.id) }
+                },
+                onRetry: { Task { await presenter.retry() } }
+            )
         }
-        .scrollDismissesKeyboard(.interactively)
-        .animation(reduceMotion ? nil : .easeOut(duration: 0.2), value: viewModel.tab)
     }
 
     private var loading: some View {
@@ -210,51 +197,5 @@ struct SearchPerfumeScreen: View {
         }
         .padding(24)
         .frame(maxWidth: .infinity, minHeight: 220, alignment: .topLeading)
-    }
-}
-
-private struct CatalogPerfumeCard: View {
-    let perfume: CatalogPerfume
-    let isSaved: Bool
-    let onOpen: () -> Void
-    let onSave: () -> Void
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-
-    var body: some View {
-        Button(action: onOpen) {
-            VStack(alignment: .leading, spacing: 10) {
-                Rectangle()
-                    .fill(Color(.placeholderSoft))
-                    .aspectRatio(1, contentMode: .fit)
-                    .overlay { Rectangle().stroke(Color(.cardBorder), lineWidth: 1) }
-                    .accessibilityHidden(true)
-                Text(perfume.brand.uppercased())
-                    .font(.caption.weight(.semibold))
-                    .tracking(0.8)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.top, 4)
-                Text(perfume.name)
-                    .font(.subheadline)
-                    .foregroundStyle(Color(.textSecondary))
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
-        .overlay(alignment: .topTrailing) {
-            Button(action: onSave) {
-                Image(systemName: isSaved ? "heart.fill" : "heart")
-                    .font(.body)
-                    .contentTransition(reduceMotion ? .identity : .symbolEffect(.replace))
-                    .frame(width: 44, height: 44)
-                    .background(Color(.backgroundPrimary))
-            }
-            .buttonStyle(.plain)
-            .padding(6)
-            .accessibilityLabel(isSaved ? String(localized: "catalog.unsave") : String(localized: "catalog.save"))
-            .accessibilityValue(perfume.name)
-            .transaction { if reduceMotion { $0.animation = nil } }
-        }
     }
 }
