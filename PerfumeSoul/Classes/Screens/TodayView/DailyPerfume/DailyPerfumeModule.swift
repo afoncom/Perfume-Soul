@@ -12,6 +12,7 @@ final class DailyPerfumeModule {
     static func build(
         navigationController: UINavigationController?,
         requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader,
         profileService: ProfileService,
         collectionService: PerfumeCollectionService
     ) -> DailyPerfumeScreen {
@@ -20,7 +21,8 @@ final class DailyPerfumeModule {
             viewModel: viewModel,
             router: DailyPerfumeRouterImpl(
                 navigationController: navigationController,
-                requestManager: requestManager
+                requestManager: requestManager,
+                imageLoader: imageLoader
             ),
             service: DailyPerfumeServiceImpl(requestManager: requestManager),
             profileService: profileService,
@@ -35,6 +37,6 @@ final class DailyPerfumeModule {
             )
         )
 
-        return DailyPerfumeScreen(viewModel: viewModel, presenter: presenter)
+        return DailyPerfumeScreen(viewModel: viewModel, presenter: presenter, imageLoader: imageLoader)
     }
 }

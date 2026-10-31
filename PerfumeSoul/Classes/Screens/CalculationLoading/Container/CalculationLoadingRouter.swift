@@ -17,6 +17,7 @@ final class CalculationLoadingRouterImpl {
     private weak var navigationController: UINavigationController?
     private let container: NSPersistentContainer
     private let requestManager: RequestManager
+    private let imageLoader: PerfumeImageLoader
     private let onFinish: () -> Void
     private var previousInteractivePopEnabled = false
     private var isBackNavigationLocked = false
@@ -25,11 +26,13 @@ final class CalculationLoadingRouterImpl {
         navigationController: UINavigationController?,
         container: NSPersistentContainer,
         requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader,
         onFinish: @escaping () -> Void
     ) {
         self.navigationController = navigationController
         self.container = container
         self.requestManager = requestManager
+        self.imageLoader = imageLoader
         self.onFinish = onFinish
     }
 }
@@ -62,6 +65,7 @@ extension CalculationLoadingRouterImpl: CalculationLoadingRouter {
         let screen = ProfileDescriptionModule.build(
             container: container,
             requestManager: requestManager,
+            imageLoader: imageLoader,
             navigationController: navigationController,
             onFinish: onFinish
         )

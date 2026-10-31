@@ -12,7 +12,8 @@ import CoreData
 final class DiscoverModule {
     static func build(
         container: NSPersistentContainer,
-        requestManager: RequestManager
+        requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader
     ) -> NavigationControllerContainer {
         let viewModel = DiscoverViewModel()
         let navigationController = UINavigationController()
@@ -21,7 +22,8 @@ final class DiscoverModule {
             navigationController: navigationController,
             comparePerfumeSelectionService: comparePerfumeSelectionService,
             container: container,
-            requestManager: requestManager
+            requestManager: requestManager,
+            imageLoader: imageLoader
         )
         let presenter = DiscoverPresenterImpl(
             viewModel: viewModel,

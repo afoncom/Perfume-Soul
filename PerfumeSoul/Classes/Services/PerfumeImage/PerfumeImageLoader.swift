@@ -1,6 +1,6 @@
 import UIKit
 
-/// Shared by the catalog module, rather than created for each reused cell.
+/// Shared by perfume screens, rather than created for each card or reused cell.
 @MainActor
 final class PerfumeImageLoader {
     private let memory = NSCache<NSURL, UIImage>()
@@ -20,6 +20,15 @@ final class PerfumeImageLoader {
         memory.totalCostLimit = 32 * 1024 * 1024
     }
 
+    convenience init(requestManager: RequestManager) {
+        self.init { id in
+            let response: CatalogPerfumeImageResponse = try await requestManager.sendRequest(
+                request: CatalogPerfumeImageRequest(perfumeID: id)
+            )
+            return response.imageURL
+        }
+    }
+
     nonisolated static var defaultCacheDirectory: URL? {
         FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?
             .appendingPathComponent("PerfumeImages", isDirectory: true)
@@ -30,36 +39,44 @@ final class PerfumeImageLoader {
     }
 
     func cachedImage(for perfume: CatalogPerfume) -> UIImage? {
-        guard let url = perfume.imageURL ?? locations[perfume.id]?.url else {
+        cachedImage(for: perfume.id, imageURL: perfume.imageURL)
+    }
+
+    func cachedImage(for perfumeID: Int, imageURL: URL? = nil) -> UIImage? {
+        guard let url = imageURL ?? locations[perfumeID]?.url else {
             return nil
         }
         return cachedImage(for: url)
     }
 
     func image(for perfume: CatalogPerfume) async throws -> UIImage? {
+        try await image(for: perfume.id, imageURL: perfume.imageURL)
+    }
+
+    func image(for perfumeID: Int, imageURL: URL? = nil) async throws -> UIImage? {
         let url: URL?
-        if let known = perfume.imageURL {
+        if let known = imageURL {
             url = known
-        } else if let location = locations[perfume.id], location.expires > Date() {
+        } else if let location = locations[perfumeID], location.expires > Date() {
             url = location.url
-        } else if let task = locationTasks[perfume.id] {
+        } else if let task = locationTasks[perfumeID] {
             url = try await task.value
         } else if let resolveImageURL {
             let task = Task { [disk] in
-                if let stored = await disk.location(for: perfume.id) {
+                if let stored = await disk.location(for: perfumeID) {
                     return stored.url
                 }
-                let resolved = try await resolveImageURL(perfume.id)
+                let resolved = try await resolveImageURL(perfumeID)
                 let location = PerfumeImageLocation(
                     url: resolved, expires: Date().addingTimeInterval(resolved == nil ? 300 : 7 * 24 * 3600)
                 )
-                await disk.store(location, for: perfume.id)
+                await disk.store(location, for: perfumeID)
                 return resolved
             }
-            locationTasks[perfume.id] = task
-            defer { locationTasks[perfume.id] = nil }
+            locationTasks[perfumeID] = task
+            defer { locationTasks[perfumeID] = nil }
             url = try await task.value
-            locations[perfume.id] = PerfumeImageLocation(
+            locations[perfumeID] = PerfumeImageLocation(
                 url: url, expires: Date().addingTimeInterval(url == nil ? 300 : 7 * 24 * 3600)
             )
         } else {

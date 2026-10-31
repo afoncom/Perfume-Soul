@@ -10,12 +10,14 @@ import SwiftUI
 
 struct PersonalPerfumeScreen: View {
     @Bindable private var viewModel: PersonalPerfumeViewModel
+    private let imageLoader: PerfumeImageLoader
     private let presenter: PersonalPerfumePresenter
     @ScaledMetric(relativeTo: .largeTitle) private var headingSize = 32
 
-    init(viewModel: PersonalPerfumeViewModel, presenter: PersonalPerfumePresenter) {
+    init(viewModel: PersonalPerfumeViewModel, presenter: PersonalPerfumePresenter, imageLoader: PerfumeImageLoader) {
         self.viewModel = viewModel
         self.presenter = presenter
+        self.imageLoader = imageLoader
     }
 
     var body: some View {
@@ -76,9 +78,9 @@ extension PersonalPerfumeScreen {
             PersonalPerfumeLoadingView()
             .padding(.horizontal, 24)
         case let .content(sections):
-            VStack(spacing: 36) {
+            LazyVStack(spacing: 36) {
                 ForEach(Array(sections.enumerated()), id: \.offset) { index, section in
-                    PersonalPerfumeCollectionSection(section: section, index: index) { perfume in
+                    PersonalPerfumeCollectionSection(section: section, index: index, imageLoader: imageLoader) { perfume in
                         presenter.perfumeTapped(perfume)
                     }
                 }
@@ -201,6 +203,7 @@ private struct PersonalPerfumeLoadingView: View {
 private struct PersonalPerfumeCollectionSection: View {
     let section: PersonalPerfumeSection
     let index: Int
+    let imageLoader: PerfumeImageLoader
     let onSelect: (PersonalPerfumeItem) -> Void
 
     @State private var visiblePerfumeID: Int?
@@ -245,9 +248,9 @@ private struct PersonalPerfumeCollectionSection: View {
             .padding(.horizontal, 24)
 
             if dynamicTypeSize.isAccessibilitySize {
-                VStack(spacing: 28) {
+                LazyVStack(spacing: 28) {
                     ForEach(section.perfumes, id: \.id) { perfume in
-                        PersonalPerfumeCard(perfume: perfume) { onSelect(perfume) }
+                        PersonalPerfumeCard(perfume: perfume, imageLoader: imageLoader) { onSelect(perfume) }
                     }
                 }
                 .padding(.horizontal, 24)
@@ -260,9 +263,9 @@ private struct PersonalPerfumeCollectionSection: View {
     private var carousel: some View {
         VStack(spacing: 16) {
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .top, spacing: 16) {
+                LazyHStack(alignment: .top, spacing: 16) {
                     ForEach(section.perfumes, id: \.id) { perfume in
-                        PersonalPerfumeCard(perfume: perfume) { onSelect(perfume) }
+                        PersonalPerfumeCard(perfume: perfume, imageLoader: imageLoader) { onSelect(perfume) }
                             .frame(width: 216)
                             .id(perfume.id)
                             .scrollTransition(.interactive, axis: .horizontal) { [reduceMotion] content, phase in
@@ -300,15 +303,16 @@ private struct PersonalPerfumeCollectionSection: View {
 
 private struct PersonalPerfumeCard: View {
     let perfume: PersonalPerfumeItem
+    let imageLoader: PerfumeImageLoader
     let onSelect: () -> Void
 
     var body: some View {
         Button(action: onSelect) {
             VStack(alignment: .leading, spacing: 16) {
-                // Reserved for a product photograph; intentionally blank until images are supplied.
                 Rectangle()
                     .fill(Color(.textPrimary).opacity(0.035))
                     .aspectRatio(1, contentMode: .fit)
+                    .overlay { PerfumeProductImage(perfumeID: perfume.id, loader: imageLoader) }
                     .overlay {
                         Rectangle().strokeBorder(Color(.inputBorder), lineWidth: 1)
                     }

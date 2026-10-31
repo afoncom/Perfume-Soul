@@ -10,15 +10,18 @@ import SwiftUI
 
 struct DailyPerfumeScreen: View {
     @Bindable private var viewModel: DailyPerfumeViewModel
+    private let imageLoader: PerfumeImageLoader
     private let presenter: DailyPerfumePresenter
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     init(
         viewModel: DailyPerfumeViewModel,
-        presenter: DailyPerfumePresenter
+        presenter: DailyPerfumePresenter,
+        imageLoader: PerfumeImageLoader
     ) {
         self.viewModel = viewModel
         self.presenter = presenter
+        self.imageLoader = imageLoader
     }
 
     var body: some View {
@@ -83,10 +86,10 @@ extension DailyPerfumeScreen {
                 presenter.perfumeTapped(perfume)
             } label: {
                 VStack(alignment: .leading, spacing: 20) {
-                    // Reserved for the actual fragrance photograph.
                     Rectangle()
                         .fill(Color(.textPrimary).opacity(0.035))
                         .aspectRatio(1.2, contentMode: .fit)
+                        .overlay { PerfumeProductImage(perfumeID: perfume.id, loader: imageLoader) }
                         .overlay {
                             Rectangle().strokeBorder(Color(.inputBorder), lineWidth: 1)
                         }
@@ -157,10 +160,10 @@ extension DailyPerfumeScreen {
                     makeEditorialImage()
                 }
 
-                // Reserved for the actual fragrance photograph.
                 Rectangle()
                     .fill(Color(.textPrimary).opacity(0.035))
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .overlay { PerfumeProductImage(perfumeID: perfume.id, loader: imageLoader) }
                     .overlay {
                         Rectangle().strokeBorder(Color(.inputBorder), lineWidth: 1)
                     }

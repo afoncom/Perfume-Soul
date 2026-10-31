@@ -13,11 +13,13 @@ struct PerfumeDetailsScreen: View {
     @State private var isStoryExpanded = false
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    private let imageLoader: PerfumeImageLoader
     private let presenter: PerfumeDetailsPresenter
 
-    init(viewModel: PerfumeDetailsViewModel, presenter: PerfumeDetailsPresenter) {
+    init(viewModel: PerfumeDetailsViewModel, presenter: PerfumeDetailsPresenter, imageLoader: PerfumeImageLoader) {
         self.viewModel = viewModel
         self.presenter = presenter
+        self.imageLoader = imageLoader
     }
 
     var body: some View {
@@ -59,11 +61,9 @@ struct PerfumeDetailsScreen: View {
 
     private func productHeader(_ details: PerfumeDetails) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            AsyncImage(url: viewModel.imageURL) { image in
-                image.resizable().scaledToFit()
-            } placeholder: {
-                Rectangle().fill(Color(.placeholderSoft))
-            }
+            Rectangle()
+                .fill(Color(.placeholderSoft))
+                .overlay { PerfumeProductImage(imageURL: viewModel.imageURL, loader: imageLoader) }
                 .aspectRatio(dynamicTypeSize.isAccessibilitySize ? 1.6 : 1, contentMode: .fit)
                 .overlay { Rectangle().stroke(Color(.cardBorder), lineWidth: 1) }
                 .accessibilityHidden(true)

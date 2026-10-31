@@ -20,6 +20,7 @@ protocol ProfileRouter {
 final class ProfileRouterImpl {
     private weak var navigationController: UINavigationController?
     private let container: NSPersistentContainer
+    private let imageLoader: PerfumeImageLoader
     private let requestManager: RequestManager
     private let onProfileSetupRequested: (Profile?) -> Void
     
@@ -27,11 +28,13 @@ final class ProfileRouterImpl {
         navigationController: UINavigationController?,
         container: NSPersistentContainer,
         requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader,
         onProfileSetupRequested: @escaping (Profile?) -> Void
     ) {
         self.navigationController = navigationController
         self.container = container
         self.requestManager = requestManager
+        self.imageLoader = imageLoader
         self.onProfileSetupRequested = onProfileSetupRequested
     }
 }
@@ -41,7 +44,8 @@ extension ProfileRouterImpl: ProfileRouter {
         navigationController?.pushViewController(
             CabinetModule.build(
                 navigationController: navigationController,
-                requestManager: requestManager
+                requestManager: requestManager,
+                imageLoader: imageLoader
             ),
             animated: true
         )
@@ -51,6 +55,7 @@ extension ProfileRouterImpl: ProfileRouter {
         let screen = PersonalPerfumeModule.build(
             profileCalculation: profileCalculation,
             requestManager: requestManager,
+            imageLoader: imageLoader,
             navigationController: navigationController
         )
         navigationController?.pushViewController(screen, animated: true)
@@ -59,7 +64,8 @@ extension ProfileRouterImpl: ProfileRouter {
     func showProfileDescription() {
         let screen = ProfileDescriptionModule.build(
             container: container,
-            requestManager: requestManager
+            requestManager: requestManager,
+            imageLoader: imageLoader
         )
         navigationController?.pushViewController(screen, animated: true)
     }

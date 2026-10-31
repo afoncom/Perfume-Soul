@@ -11,6 +11,7 @@ final class CalculationLoadingModule {
     static func build(
         container: NSPersistentContainer,
         requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader,
         navigationController: UINavigationController?,
         onFinish: @escaping () -> Void
     ) -> UIViewController {
@@ -19,6 +20,7 @@ final class CalculationLoadingModule {
             navigationController: navigationController,
             container: container,
             requestManager: requestManager,
+            imageLoader: imageLoader,
             onFinish: onFinish
         )
         

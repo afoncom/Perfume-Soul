@@ -9,16 +9,19 @@ import SwiftUI
 
 struct RecommendedPerfumeScreen: View {
     @Bindable private var viewModel: RecommendedPerfumeViewModel
+    private let imageLoader: PerfumeImageLoader
     private let presenter: RecommendedPerfumePresenter
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     init(
         viewModel: RecommendedPerfumeViewModel,
-        presenter: RecommendedPerfumePresenter
+        presenter: RecommendedPerfumePresenter,
+        imageLoader: PerfumeImageLoader
     ) {
         self.viewModel = viewModel
         self.presenter = presenter
+        self.imageLoader = imageLoader
     }
 
     var body: some View {
@@ -127,6 +130,7 @@ extension RecommendedPerfumeScreen {
         RecommendedPerfumeCompactCard(
             perfume: perfume,
             index: index,
+            imageLoader: imageLoader,
             onSelect: { presenter.perfumeTapped(perfume) },
             onSave: { presenter.savePerfume(perfume) }
         )
@@ -147,6 +151,7 @@ extension RecommendedPerfumeScreen {
 private struct RecommendedPerfumeCompactCard: View {
     let perfume: DailyPerfumeSummary
     let index: Int
+    let imageLoader: PerfumeImageLoader
     let onSelect: () -> Void
     let onSave: () -> Void
 
@@ -228,7 +233,6 @@ private struct RecommendedPerfumeCompactCard: View {
     }
 
     private func makeImagePlaceholder(isWide: Bool) -> some View {
-        // Reserved for the actual fragrance photograph.
         Rectangle()
             .fill(Color(.backgroundPrimary))
             .frame(
@@ -236,6 +240,7 @@ private struct RecommendedPerfumeCompactCard: View {
                 minHeight: isWide ? 160 : 132,
                 maxHeight: isWide ? 160 : 132
             )
+            .overlay { PerfumeProductImage(perfumeID: perfume.id, loader: imageLoader) }
             .overlay {
                 Rectangle().strokeBorder(Color(.inputBorder), lineWidth: 1)
             }

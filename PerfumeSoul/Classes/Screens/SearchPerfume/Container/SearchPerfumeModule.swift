@@ -9,13 +9,14 @@
 import SwiftUI
 
 final class SearchPerfumeModule {
-    @MainActor static func build(requestManager: RequestManager) -> NavigationControllerContainer {
+    @MainActor static func build(requestManager: RequestManager, imageLoader: PerfumeImageLoader) -> NavigationControllerContainer {
         let viewModel = SearchPerfumeViewModel()
         let searchPerfumeService = SearchPerfumeServiceImpl(requestManager: requestManager)
         let navigationController = UINavigationController()
         let router = SearchPerfumeRouterImpl(
             navigationController: navigationController,
-            requestManager: requestManager
+            requestManager: requestManager,
+            imageLoader: imageLoader
         )
         let presenter = SearchPerfumePresenterImpl(
             viewModel: viewModel,
@@ -28,12 +29,6 @@ final class SearchPerfumeModule {
             favoritesStorage: CatalogFavoritesStorage(userDefaults: .standard)
         )
 
-        let imageLoader = PerfumeImageLoader { id in
-            let response: CatalogPerfumeImageResponse = try await requestManager.sendRequest(
-                request: CatalogPerfumeImageRequest(perfumeID: id)
-            )
-            return response.imageURL
-        }
         let view = SearchPerfumeScreen(viewModel: viewModel, presenter: presenter, imageLoader: imageLoader)
         let hostingController = UIHostingController(rootView: view)
         hostingController.title = String(localized: "catalog.title")

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct DayInPerfumeryScreen: View {
     @Bindable private var viewModel: DayInPerfumeryViewModel
+    private let imageLoader: PerfumeImageLoader
     private let presenter: DayInPerfumeryPresenter
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @ScaledMetric(relativeTo: .largeTitle) private var headingSize = 32
@@ -17,10 +18,12 @@ struct DayInPerfumeryScreen: View {
 
     init(
         viewModel: DayInPerfumeryViewModel,
-        presenter: DayInPerfumeryPresenter
+        presenter: DayInPerfumeryPresenter,
+        imageLoader: PerfumeImageLoader
     ) {
         self.viewModel = viewModel
         self.presenter = presenter
+        self.imageLoader = imageLoader
     }
 
     var body: some View {
@@ -78,10 +81,12 @@ extension DayInPerfumeryScreen {
     }
 
     private func makeImagePlaceholder() -> some View {
-        // Reserved for the historical fragrance photograph.
         Rectangle()
             .fill(Color(.textPrimary).opacity(0.035))
             .aspectRatio(4.0 / 3.0, contentMode: .fit)
+            .overlay {
+                PerfumeProductImage(imageURL: URL(string: viewModel.historyFact.imageUrl), loader: imageLoader)
+            }
             .overlay {
                 Rectangle().strokeBorder(Color(.inputBorder), lineWidth: 1)
             }

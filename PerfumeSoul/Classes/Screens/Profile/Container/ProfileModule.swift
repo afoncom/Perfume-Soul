@@ -13,6 +13,7 @@ final class ProfileModule {
     static func build(
         container: NSPersistentContainer,
         requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader,
         onProfileSetupRequested: @escaping (Profile?) -> Void
     ) -> NavigationControllerContainer {
         let viewModel = ProfileViewModel()
@@ -52,6 +53,7 @@ final class ProfileModule {
             navigationController: navigationController,
             container: container,
             requestManager: requestManager,
+            imageLoader: imageLoader,
             onProfileSetupRequested: onProfileSetupRequested
         )
         let presenter = ProfilePresenterImpl(

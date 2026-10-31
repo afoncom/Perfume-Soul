@@ -10,7 +10,8 @@ import SwiftUI
 final class PerfumeDetailsModule {
     @MainActor static func build(
         perfume: SearchPerfumeItem,
-        requestManager: RequestManager
+        requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader
     ) -> UIViewController {
         let viewModel = PerfumeDetailsViewModel(perfume: perfume)
         let router = PerfumeDetailsRouterImpl()
@@ -26,7 +27,7 @@ final class PerfumeDetailsModule {
             )
         )
 
-        let view = PerfumeDetailsScreen(viewModel: viewModel, presenter: presenter)
+        let view = PerfumeDetailsScreen(viewModel: viewModel, presenter: presenter, imageLoader: imageLoader)
         let hostingController = UIHostingController(rootView: view)
         hostingController.title = L10n.Screen.perfumeDetails
 

@@ -2,15 +2,17 @@ import SwiftUI
 
 struct ComparePerfumesScreen: View {
     @Bindable private var viewModel: ComparePerfumesViewModel
+    private let imageLoader: PerfumeImageLoader
     private let presenter: ComparePerfumesPresenter
     @State private var activeField: ComparePerfumeField?
     @State private var showsWear = false
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    init(viewModel: ComparePerfumesViewModel, presenter: ComparePerfumesPresenter) {
+    init(viewModel: ComparePerfumesViewModel, presenter: ComparePerfumesPresenter, imageLoader: PerfumeImageLoader) {
         self.viewModel = viewModel
         self.presenter = presenter
+        self.imageLoader = imageLoader
     }
 
     var body: some View {
@@ -54,6 +56,7 @@ struct ComparePerfumesScreen: View {
             PerfumeSearchSheet(
                 title: viewModel.title(for: field),
                 results: viewModel.searchResults,
+                imageLoader: imageLoader,
                 isSearching: viewModel.isSearching,
                 errorMessage: viewModel.searchErrorMessage,
                 search: { await presenter.searchTextChanged($0, for: field) },
@@ -93,6 +96,14 @@ struct ComparePerfumesScreen: View {
                         .font(.body)
                         .accessibilityHidden(true)
                 }
+                if let perfume = viewModel.selectedPerfume(for: field) {
+                    Rectangle()
+                        .fill(Color(.placeholderSoft))
+                        .frame(width: 56, height: 56)
+                        .overlay { PerfumeProductImage(perfumeID: perfume.id, loader: imageLoader) }
+                        .overlay { Rectangle().stroke(Color(.cardBorder), lineWidth: 1) }
+                        .accessibilityHidden(true)
+                }
                 Text(viewModel.selectedPerfume(for: field)?.name ?? viewModel.title(for: field))
                     .font(.body.weight(.medium))
                     .fixedSize(horizontal: false, vertical: true)
@@ -124,11 +135,13 @@ struct ComparePerfumesScreen: View {
                 Rectangle().fill(Color(.inputBorder)).frame(height: 1)
                 pairLayout {
                     makePerfumeCard(
+                        perfumeID: left.id,
                         brand: left.brand,
                         name: left.name,
                         type: L10n.PerfumeDetails.Concentration.eauDeParfum
                     )
                     makePerfumeCard(
+                        perfumeID: right.id,
                         brand: right.brand,
                         name: right.name,
                         type: L10n.PerfumeDetails.Concentration.eauDeParfum
@@ -172,6 +185,7 @@ struct ComparePerfumesScreen: View {
     }
 
     private func makePerfumeCard(
+        perfumeID: Int,
         brand: String,
         name: String,
         type: String
@@ -180,6 +194,7 @@ struct ComparePerfumesScreen: View {
             RoundedRectangle(cornerRadius: 24, style: .continuous)
                 .fill(Color(.placeholderMedium))
                 .frame(height: 156)
+                .overlay { PerfumeProductImage(perfumeID: perfumeID, loader: imageLoader) }
             
             VStack(spacing: 4) {
                 Text(brand)
