@@ -9,7 +9,6 @@ import Foundation
 
 protocol PerfumeDetailsService {
     func requestPerfumeDetails(perfumeID: Int) async throws -> PerfumeDetails
-    func requestPerfumeImage(perfumeID: Int) async throws -> URL?
 }
 
 final class PerfumeDetailsServiceImpl {
@@ -28,15 +27,4 @@ extension PerfumeDetailsServiceImpl: PerfumeDetailsService {
 
         return PerfumeDetails(response: response)
     }
-
-    func requestPerfumeImage(perfumeID: Int) async throws -> URL? {
-        let response: PerfumeImageResponse = try await requestManager.sendRequest(
-            request: PerfumeImageRequest(perfumeID: perfumeID)
-        )
-        return response.imageURL.flatMap(URL.init(string:))
-    }
-}
-
-private struct PerfumeImageResponse: Decodable {
-    let imageURL: String?
 }

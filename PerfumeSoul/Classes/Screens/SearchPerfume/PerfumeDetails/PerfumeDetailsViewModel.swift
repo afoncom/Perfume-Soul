@@ -25,7 +25,6 @@ enum PerfumeDetailsSection: CaseIterable {
 @Observable final class PerfumeDetailsViewModel {
     let perfume: SearchPerfumeItem
     var perfumeDetails: PerfumeDetails?
-    var imageURL: URL?
     var isLoading = false
     var hasLoadedOnce = false
     var errorMessage: String?

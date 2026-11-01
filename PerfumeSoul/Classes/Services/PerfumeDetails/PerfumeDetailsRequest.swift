@@ -15,12 +15,3 @@ struct PerfumeDetailsRequest: Request {
         "/perfumes/\(perfumeID)/notes"
     }
 }
-
-struct PerfumeImageRequest: Request {
-    let perfumeID: Int
-    let httpMethod: HTTPMethod = .get
-
-    var path: String {
-        "/perfumes/\(perfumeID)/image"
-    }
-}

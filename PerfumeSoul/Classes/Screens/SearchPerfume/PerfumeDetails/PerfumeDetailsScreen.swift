@@ -63,7 +63,7 @@ struct PerfumeDetailsScreen: View {
         VStack(alignment: .leading, spacing: 16) {
             Rectangle()
                 .fill(Color(.placeholderSoft))
-                .overlay { PerfumeProductImage(imageURL: viewModel.imageURL, loader: imageLoader) }
+                .overlay { PerfumeProductImage(perfumeID: viewModel.perfume.id, loader: imageLoader) }
                 .aspectRatio(dynamicTypeSize.isAccessibilitySize ? 1.6 : 1, contentMode: .fit)
                 .overlay { Rectangle().stroke(Color(.cardBorder), lineWidth: 1) }
                 .accessibilityHidden(true)

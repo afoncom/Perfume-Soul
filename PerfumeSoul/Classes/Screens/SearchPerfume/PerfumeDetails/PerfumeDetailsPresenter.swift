@@ -19,8 +19,6 @@ final class PerfumeDetailsPresenterImpl {
     private let router: PerfumeDetailsRouter
     private let perfumeDetailsService: PerfumeDetailsService
     private let collectionService: PerfumeCollectionService
-    private var isLoadingImage = false
-    private var hasLoadedImage = false
 
     init(
         viewModel: PerfumeDetailsViewModel,
@@ -42,12 +40,10 @@ extension PerfumeDetailsPresenterImpl: PerfumeDetailsPresenter {
         if !viewModel.hasLoadedOnce {
             await loadPerfumeDetails()
         }
-        await loadPerfumeImage()
     }
 
     func retryTapped() async {
         await loadPerfumeDetails()
-        await loadPerfumeImage()
     }
 
     func savePerfume(brandName: String) {
@@ -69,23 +65,6 @@ extension PerfumeDetailsPresenterImpl: PerfumeDetailsPresenter {
 }
 
 extension PerfumeDetailsPresenterImpl {
-    private func loadPerfumeImage() async {
-        guard viewModel.hasLoadedOnce, !isLoadingImage, !hasLoadedImage, !Task.isCancelled else {
-            return
-        }
-        isLoadingImage = true
-        defer { isLoadingImage = false }
-
-        do {
-            let imageURL = try await perfumeDetailsService.requestPerfumeImage(perfumeID: viewModel.perfume.id)
-            try Task.checkCancellation()
-            viewModel.imageURL = imageURL
-            hasLoadedImage = true
-        } catch {
-            // A photo failure must not change the already loaded details or their error state.
-        }
-    }
-
     private func updateSavedPerfumeState() {
         viewModel.isSaved = collectionService.loadState().savedPerfumes.contains {
             $0.id == viewModel.perfume.id
