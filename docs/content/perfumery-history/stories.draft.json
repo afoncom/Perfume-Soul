@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "status": "partial_draft_catalog",
+  "publicationWindow": {
+    "startDate": "2026-12-01",
+    "endDate": "2028-11-30",
+    "expectedStoryCount": 731
+  },
+  "stories": [
+    {
+      "status": "draft",
+      "publicationDate": "2026-12-01",
+      "eventId": "decorte-kimono-japan-launch-2020",
+      "eventGroupId": "decorte-kimono-japan-launch-2020",
+      "eventDate": "2020-12-01",
+      "category": "fragrance_history",
+      "localizations": {
+        "ru": {
+          "title": "Кимоно, переведённое в аромат",
+          "fullStory": "1 декабря 2020 года в Японии вышла коллекция DECORTÉ Kimono. Её отправной точкой стало ощущение от одежды: как меняются осанка, движения и собственное настроение, когда надеваешь кимоно. Этот образ бренд предложил выразить через четыре аромата — Kihin, Yui, Urara и Rin.\n\nИдея заметна ещё до первого распыления. Вокруг флакона повязана лента, напоминающая пояс кимоно. Упаковка даёт зрительную подсказку к замыслу коллекции: запах здесь становится частью того, как человек ощущает себя. Цвет, форма и аромат рассказывают одну историю разными средствами.\n\nПри этом у четырёх композиций разные характеры. В описании Kihin появляется ирисовый образ и цветочный шипр. Urara соединяет впечатление от яблока с водяной лилией. Rin начинается со сливовой ноты и обращается к древесно-цветочному звучанию. Это предложенные домом образы: названия цветов и плодов помогают представить запах, но сами по себе не раскрывают состав формулы.\n\nОсобенно подробно эту игру можно проследить в Yui. В описании бренда сначала появляются судачи и розовый перец, затем — апельсиновый цвет, а в завершении — древесные ноты и мягкая ваниль. Последовательность переводит внимание от цитрусовой свежести к более тёплому впечатлению. Так у общего замысла возникает собственный ритм: лёгкое начало, цветочный центр, спокойное завершение.\n\nЗа названиями стоят конкретные авторы. В первоначальной брошюре создателем Yui названа Каролин Дюмюр, а Rin — Жюльен Раскине. В общей коллекции слышны разные решения парфюмеров. Связывающая деталь тоже есть: по данным KOSÉ, все четыре композиции содержат натуральную розовую эссенцию Sublime Rose, дистиллированную в Грассе.\n\nВ этой истории интересно соседство японского образа одежды, работы парфюмеров и французского сырья. У коллекции появляется несколько способов говорить об одном ощущении. Можно начать с ленты на стекле, различить знакомый фруктовый или цветочный образ, а затем заметить, как он меняется в окружении других нот. Кимоно становится приглашением внимательнее прислушаться к этим переходам."
+        },
+        "en": {
+          "title": "A Kimono Translated into Scent",
+          "fullStory": "On 1 December 2020, DECORTÉ released its Kimono fragrance collection in Japan. Its starting point was the feeling of wearing a garment: the posture, movements and change of mood that the brand associated with putting on a kimono. Four fragrances explored that idea: Kihin, Yui, Urara and Rin.\n\nThe connection is visible before the first spray. A ribbon wraps around each bottle like a kimono sash. It gives the collection a visual introduction, linking the fragrance with a way of carrying yourself. Colour, shape and scent become different ways of approaching the same idea. The bottle offers something to look at; the composition offers something to follow as it unfolds.\n\nEach fragrance has its own character. The brand describes Kihin as a floral chypre with an iris impression. Urara brings together apple and water lily, while Rin opens with a plum note within a woody floral composition. These are the house’s descriptions of how the scents are intended to feel. A named flower or fruit does not, by itself, tell us what ingredients are in the formula.\n\nYui makes those transitions particularly easy to imagine. In the brand’s account, sudachi citrus and pink pepper lead into orange blossom, followed by woody notes and soft vanilla. The movement is from citrus freshness towards a warmer impression, giving this interpretation of the collection’s theme a rhythm of its own.\n\nThe original brochure also names the people behind the fragrances. Yui was created by Caroline Dumur, and Rin by Julien Rasquinet. Individual perfumers brought different solutions to the shared concept. There was a common material too: according to KOSÉ, all four contained natural Sublime Rose essence distilled in Grasse.\n\nA Japanese image of clothing, the work of perfumers and a French fragrance material meet in this collection. You can begin with the ribbon around the glass, recognise a familiar floral or fruity impression, then follow how its surroundings change. The kimono becomes an invitation to pay closer attention to those transitions."
+        }
+      },
+      "sourceIds": [
+        "cosme-kimono-yui",
+        "kose-kimono-release",
+        "decorte-kimono-booklet",
+        "decorte-kimono-design"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Начало продаж в Японии: 1 декабря 2020 года.",
+          "factIds": [
+            "kimono-date"
+          ],
+          "sourceIds": [
+            "cosme-kimono-yui",
+            "kose-kimono-release"
+          ]
+        },
+        {
+          "claim": "Первоначальная коллекция: KIHIN, YUI, URARA, RIN.",
+          "factIds": [
+            "kimono-original-four"
+          ],
+          "sourceIds": [
+            "kose-kimono-release"
+          ]
+        },
+        {
+          "claim": "Замысел коллекции — передать связанный с кимоно образ элегантности и движений.",
+          "factIds": [
+            "kimono-concept"
+          ],
+          "sourceIds": [
+            "kose-kimono-release"
+          ]
+        },
+        {
+          "claim": "Лента на флаконе напоминает пояс кимоно.",
+          "factIds": [
+            "kimono-design"
+          ],
+          "sourceIds": [
+            "decorte-kimono-design"
+          ]
+        },
+        {
+          "claim": "KOSÉ сообщает об общей натуральной Sublime Rose essence, дистиллированной в Грассе.",
+          "factIds": [
+            "kimono-shared-rose"
+          ],
+          "sourceIds": [
+            "kose-kimono-release"
+          ]
+        },
+        {
+          "claim": "В описаниях бренда: KIHIN — ирисовый цветочный шипр; URARA — яблоко и водяная лилия; RIN — сливовая нота и древесно-цветочный характер.",
+          "factIds": [
+            "kimono-contrasts"
+          ],
+          "sourceIds": [
+            "decorte-kimono-design"
+          ]
+        },
+        {
+          "claim": "В YUI бренд описывает судачи, розовый перец, апельсиновый цвет, древесные ноты и ваниль.",
+          "factIds": [
+            "kimono-yui"
+          ],
+          "sourceIds": [
+            "cosme-kimono-yui"
+          ]
+        },
+        {
+          "claim": "В исходной брошюре автор YUI — Caroline Dumur, автор RIN — Julien Rasquinet.",
+          "factIds": [
+            "kimono-authors"
+          ],
+          "sourceIds": [
+            "decorte-kimono-booklet"
+          ]
+        }
+      ]
+    }
+  ]
+}

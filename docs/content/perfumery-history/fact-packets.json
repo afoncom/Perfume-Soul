@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "status": "research_in_progress",
+  "packets": [
+    {
+      "eventId": "decorte-kimono-japan-launch-2020",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "kimono-date",
+          "claim": "Начало продаж в Японии: 1 декабря 2020 года.",
+          "sourceIds": [
+            "cosme-kimono-yui",
+            "kose-kimono-release"
+          ],
+          "locator": "@cosme: 発売日; релиз KOSÉ: стр. 1, 3"
+        },
+        {
+          "id": "kimono-original-four",
+          "claim": "Первоначальная коллекция: KIHIN, YUI, URARA, RIN.",
+          "sourceIds": [
+            "kose-kimono-release"
+          ],
+          "locator": "Стр. 1 и 3"
+        },
+        {
+          "id": "kimono-concept",
+          "claim": "Замысел коллекции — передать связанный с кимоно образ элегантности и движений.",
+          "sourceIds": [
+            "kose-kimono-release"
+          ],
+          "locator": "Стр. 1, абзац 今回発売する"
+        },
+        {
+          "id": "kimono-design",
+          "claim": "Лента на флаконе напоминает пояс кимоно.",
+          "sourceIds": [
+            "decorte-kimono-design"
+          ],
+          "locator": "DESIGN"
+        },
+        {
+          "id": "kimono-shared-rose",
+          "claim": "KOSÉ сообщает об общей натуральной Sublime Rose essence, дистиллированной в Грассе.",
+          "sourceIds": [
+            "kose-kimono-release"
+          ],
+          "locator": "Стр. 2, первый абзац после описаний"
+        },
+        {
+          "id": "kimono-contrasts",
+          "claim": "В описаниях бренда: KIHIN — ирисовый цветочный шипр; URARA — яблоко и водяная лилия; RIN — сливовая нота и древесно-цветочный характер.",
+          "sourceIds": [
+            "decorte-kimono-design"
+          ],
+          "locator": "LINE UP / KIMONO KIHIN, URARA, RIN"
+        },
+        {
+          "id": "kimono-yui",
+          "claim": "В YUI бренд описывает судачи, розовый перец, апельсиновый цвет, древесные ноты и ваниль.",
+          "sourceIds": [
+            "cosme-kimono-yui"
+          ],
+          "locator": "商品説明"
+        },
+        {
+          "id": "kimono-authors",
+          "claim": "В исходной брошюре автор YUI — Caroline Dumur, автор RIN — Julien Rasquinet.",
+          "sourceIds": [
+            "decorte-kimono-booklet"
+          ],
+          "locator": "Стр. 4 и 6: PERFUMER"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление парфюмерного образа с одеждой — редакционная интерпретация задокументированного замысла.",
+        "Описания нот атрибутированы бренду и не заявляют раскрытие формулы."
+      ],
+      "excludedClaimsRu": [
+        "Мировой запуск всех четырёх ароматов в тот же день.",
+        "Современный расширенный ассортимент существовал уже в декабре 2020 года.",
+        "Название ноты доказывает наличие натурального экстракта соответствующего растения."
+      ]
+    }
+  ]
+}
