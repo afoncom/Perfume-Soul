@@ -12,12 +12,14 @@ import UIKit
 final class FindPerfumesModule {
     static func build(
         navigationController: UINavigationController?,
-        requestManager: RequestManager
+        requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader
     ) -> UIViewController {
         let viewModel = FindPerfumesViewModel()
         let router = FindPerfumesRouterImpl(
             navigationController: navigationController,
-            requestManager: requestManager
+            requestManager: requestManager,
+            imageLoader: imageLoader
         )
         let searchPerfumeService = SearchPerfumeServiceImpl(requestManager: requestManager)
         let presenter = FindPerfumesPresenterImpl(
@@ -26,7 +28,7 @@ final class FindPerfumesModule {
             searchPerfumeService: searchPerfumeService
         )
         
-        let view = FindPerfumesScreen(viewModel: viewModel, presenter: presenter)
+        let view = FindPerfumesScreen(viewModel: viewModel, presenter: presenter, imageLoader: imageLoader)
         
         let hostingController = UIHostingController(rootView: view)
         hostingController.title = L10n.Discover.FindSimilar.title

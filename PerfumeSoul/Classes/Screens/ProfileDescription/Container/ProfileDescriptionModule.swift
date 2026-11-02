@@ -14,6 +14,7 @@ final class ProfileDescriptionModule {
     static func build(
         container: NSPersistentContainer,
         requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader,
         navigationController: UINavigationController? = nil,
         onFinish: (() -> Void)? = nil
     ) -> UIViewController {
@@ -21,6 +22,7 @@ final class ProfileDescriptionModule {
         let router = ProfileDescriptionRouterImpl(
             navigationController: navigationController,
             requestManager: requestManager,
+            imageLoader: imageLoader,
             onFinish: onFinish
         )
         let profileService = ProfileServiceImpl(container: container)

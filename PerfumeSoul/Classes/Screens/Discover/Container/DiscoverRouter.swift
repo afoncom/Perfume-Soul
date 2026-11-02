@@ -19,18 +19,21 @@ final class DiscoverRouterImpl {
     private weak var navigationController: UINavigationController?
     private let comparePerfumeSelectionService: ComparePerfumeSelectionService
     private let container: NSPersistentContainer
+    private let imageLoader: PerfumeImageLoader
     private let requestManager: RequestManager
     
     init(
         navigationController: UINavigationController?,
         comparePerfumeSelectionService: ComparePerfumeSelectionService,
         container: NSPersistentContainer,
-        requestManager: RequestManager
+        requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader
     ) {
         self.navigationController = navigationController
         self.comparePerfumeSelectionService = comparePerfumeSelectionService
         self.container = container
         self.requestManager = requestManager
+        self.imageLoader = imageLoader
     }
 }
 
@@ -39,7 +42,8 @@ extension DiscoverRouterImpl: DiscoverRouter {
         navigationController?.pushViewController(
             FindPerfumesModule.build(
                 navigationController: navigationController,
-                requestManager: requestManager
+                requestManager: requestManager,
+                imageLoader: imageLoader
             ),
             animated: true
         )
@@ -50,7 +54,8 @@ extension DiscoverRouterImpl: DiscoverRouter {
             ComparePerfumesModule.build(
                 navigationController: navigationController,
                 comparePerfumeSelectionService: comparePerfumeSelectionService,
-                requestManager: requestManager
+                requestManager: requestManager,
+                imageLoader: imageLoader
             ),
             animated: true
         )

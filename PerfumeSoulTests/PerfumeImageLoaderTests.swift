@@ -54,6 +54,64 @@ final class PerfumeImageLoaderTests: XCTestCase {
         XCTAssertEqual(original.size, restored.size)
     }
 
+    func testIDAndCatalogRequestsShareTheDecodedPhoto() async throws {
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [ImageURLProtocol.self]
+        let session = URLSession(configuration: configuration)
+        defer { session.invalidateAndCancel() }
+        let url = try XCTUnwrap(URL(string: "https://example.com/bottle.png"))
+        var resolutions = 0
+        let loader = PerfumeImageLoader(session: session, cacheDirectory: nil) { id in
+            XCTAssertEqual(id, 10)
+            resolutions += 1
+            return url
+        }
+        let first = try await loader.image(for: 10)
+        let catalog = CatalogPerfume(id: 10, name: "One", brand: "Brand", brandID: nil)
+        let second = try await loader.image(for: catalog)
+        let image = try XCTUnwrap(first)
+        XCTAssertTrue(image === second)
+        XCTAssertTrue(image === loader.cachedImage(for: 10))
+        XCTAssertEqual(resolutions, 1)
+    }
+
+    func testTemporaryMetadataFailureCanBeRetriedByID() async throws {
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [ImageURLProtocol.self]
+        let session = URLSession(configuration: configuration)
+        defer { session.invalidateAndCancel() }
+        let url = try XCTUnwrap(URL(string: "https://example.com/bottle.png"))
+        var attempts = 0
+        let loader = PerfumeImageLoader(session: session, cacheDirectory: nil) { _ in
+            attempts += 1
+            if attempts == 1 { throw URLError(.timedOut) }
+            return url
+        }
+        do {
+            _ = try await loader.image(for: 10)
+            XCTFail("Expected the temporary metadata error")
+        } catch let error as URLError {
+            XCTAssertEqual(error.code, .timedOut)
+        }
+        let recovered = try await loader.image(for: 10)
+        XCTAssertNotNil(recovered)
+        XCTAssertEqual(attempts, 2)
+    }
+
+    func testMissingPhotoIsCachedAcrossIDAndCatalogRequests() async throws {
+        var resolutions = 0
+        let loader = PerfumeImageLoader(cacheDirectory: nil) { _ in
+            resolutions += 1
+            return nil
+        }
+        let first = try await loader.image(for: 10)
+        let catalog = CatalogPerfume(id: 10, name: "One", brand: "Brand", brandID: nil)
+        let second = try await loader.image(for: catalog)
+        XCTAssertNil(first)
+        XCTAssertNil(second)
+        XCTAssertEqual(resolutions, 1)
+    }
+
     func testMissingAndInvalidImageURLsDoNotBreakCatalogPage() throws {
         let data = Data("""
         {"items":[

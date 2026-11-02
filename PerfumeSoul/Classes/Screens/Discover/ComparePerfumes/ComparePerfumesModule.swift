@@ -12,7 +12,8 @@ final class ComparePerfumesModule {
     @MainActor static func build(
         navigationController: UINavigationController?,
         comparePerfumeSelectionService: ComparePerfumeSelectionService,
-        requestManager: RequestManager
+        requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader
     ) -> UIViewController {
         let viewModel = ComparePerfumesViewModel()
         let router = ComparePerfumesRouterImpl(navigationController: navigationController)
@@ -26,7 +27,7 @@ final class ComparePerfumesModule {
             comparePerfumeSelectionService: comparePerfumeSelectionService
         )
         
-        let view = ComparePerfumesScreen(viewModel: viewModel, presenter: presenter)
+        let view = ComparePerfumesScreen(viewModel: viewModel, presenter: presenter, imageLoader: imageLoader)
         
         let hostingController = UIHostingController(rootView: view)
         hostingController.title = L10n.Screen.comparePerfumes

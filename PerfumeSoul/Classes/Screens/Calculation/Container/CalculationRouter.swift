@@ -17,17 +17,20 @@ final class CalculationRouterImpl {
     private weak var navigationController: UINavigationController?
     private let container: NSPersistentContainer
     private let requestManager: RequestManager
+    private let imageLoader: PerfumeImageLoader
     private let onFinish: () -> Void
 
     init(
         navigationController: UINavigationController?,
         container: NSPersistentContainer,
         requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader,
         onFinish: @escaping () -> Void
     ) {
         self.navigationController = navigationController
         self.container = container
         self.requestManager = requestManager
+        self.imageLoader = imageLoader
         self.onFinish = onFinish
     }
 }
@@ -37,6 +40,7 @@ extension CalculationRouterImpl: CalculationRouter {
         let screen = CalculationLoadingModule.build(
             container: container,
             requestManager: requestManager,
+            imageLoader: imageLoader,
             navigationController: navigationController,
             onFinish: onFinish
         )

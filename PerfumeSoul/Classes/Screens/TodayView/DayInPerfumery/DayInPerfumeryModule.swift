@@ -11,13 +11,14 @@ import SwiftUI
 final class DayInPerfumeryModule {
     static func build(
         navigationController: UINavigationController?,
-        historyFact: PerfumeHistory
+        historyFact: PerfumeHistory,
+        imageLoader: PerfumeImageLoader
     ) -> UIViewController {
         let viewModel = DayInPerfumeryViewModel(historyFact: historyFact)
         let router = DayInPerfumeryRouterImpl(navigationController: navigationController)
         let presenter = DayInPerfumeryPresenterImpl(viewModel: viewModel, router: router)
         
-        let view = DayInPerfumeryScreen(viewModel: viewModel, presenter: presenter)
+        let view = DayInPerfumeryScreen(viewModel: viewModel, presenter: presenter, imageLoader: imageLoader)
         
         let hostingController = UIHostingController(rootView: view)
         hostingController.title = nil

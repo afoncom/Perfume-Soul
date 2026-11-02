@@ -11,11 +11,13 @@ import SwiftUI
 struct CabinetScreen: View {
     @Bindable private var viewModel: CabinetViewModel
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    private let imageLoader: PerfumeImageLoader
     private let presenter: CabinetPresenter
 
-    init(viewModel: CabinetViewModel, presenter: CabinetPresenter) {
+    init(viewModel: CabinetViewModel, presenter: CabinetPresenter, imageLoader: PerfumeImageLoader) {
         self.viewModel = viewModel
         self.presenter = presenter
+        self.imageLoader = imageLoader
     }
 
     var body: some View {
@@ -73,6 +75,9 @@ struct CabinetScreen: View {
                     Rectangle()
                         .fill(Color(.placeholderSoft))
                         .frame(width: 96, height: 96)
+                        .overlay {
+                            PerfumeProductImage(perfumeID: perfume.id, imageURL: perfume.imageURL, loader: imageLoader)
+                        }
                         .overlay { Rectangle().stroke(Color(.cardBorder), lineWidth: 1) }
                         .accessibilityHidden(true)
                     VStack(alignment: .leading, spacing: 8) {

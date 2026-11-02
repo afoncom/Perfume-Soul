@@ -43,7 +43,8 @@ final class CalculationLoadingPresenterTests: XCTestCase {
         let router = CalculationLoadingRouterImpl(
             navigationController: navigationController,
             container: NSPersistentContainer(name: "PerfumeSoul"),
-            requestManager: LoadingRequestManagerMock()
+            requestManager: LoadingRequestManagerMock(),
+            imageLoader: PerfumeImageLoader(cacheDirectory: nil)
         ) { }
         let calculationService = LoadingCalculationServiceMock()
         let started = expectation(description: "Calculation started")

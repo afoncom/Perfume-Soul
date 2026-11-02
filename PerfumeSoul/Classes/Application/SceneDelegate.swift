@@ -34,6 +34,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         baseURL: Self.backendBaseURL(environment: ProcessInfo.processInfo.environment)
     )
     
+    private lazy var imageLoader = PerfumeImageLoader(requestManager: requestManager)
+
     func scene(
         _ scene: UIScene,
         willConnectTo session: UISceneSession,
@@ -71,22 +73,25 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func showMainScreen(container: NSPersistentContainer) {
         let todayScreen = TodayModule.build(
             container: container,
-            requestManager: requestManager
+            requestManager: requestManager,
+            imageLoader: imageLoader
         )
         let settingsScreen = SettingsModule.build(
             container: container
         )
         let discoverScreen = DiscoverModule.build(
             container: container,
-            requestManager: requestManager
+            requestManager: requestManager,
+            imageLoader: imageLoader
         )
         let profileScreen = ProfileModule.build(
             container: container,
-            requestManager: requestManager
+            requestManager: requestManager,
+            imageLoader: imageLoader
         ) { [weak self] initialProfile in
             self?.showCalculationScreen(container: container, initialProfile: initialProfile)
         }
-        let searchPerfumeScreen = SearchPerfumeModule.build(requestManager: requestManager)
+        let searchPerfumeScreen = SearchPerfumeModule.build(requestManager: requestManager, imageLoader: imageLoader)
         
         let mainTabView = MainTabView(
             todayScreen: todayScreen,
@@ -106,6 +111,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let calculationScreen = CalculationModule.build(
             container: container,
             requestManager: requestManager,
+            imageLoader: imageLoader,
             initialProfile: initialProfile
         ) { [weak self] in
             self?.finishCalculationFlow()

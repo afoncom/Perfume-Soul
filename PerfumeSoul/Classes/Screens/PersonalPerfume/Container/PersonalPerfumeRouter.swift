@@ -16,15 +16,18 @@ protocol PersonalPerfumeRouter {
 final class PersonalPerfumeRouterImpl {
     private let onFinish: (() -> Void)?
     private weak var navigationController: UINavigationController?
+    private let imageLoader: PerfumeImageLoader
     private let requestManager: RequestManager
 
     init(
         navigationController: UINavigationController?,
         requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader,
         onFinish: (() -> Void)? = nil
     ) {
         self.navigationController = navigationController
         self.requestManager = requestManager
+        self.imageLoader = imageLoader
         self.onFinish = onFinish
     }
 }
@@ -38,7 +41,8 @@ extension PersonalPerfumeRouterImpl: PersonalPerfumeRouter {
         navigationController?.pushViewController(
             PerfumeDetailsModule.build(
                 perfume: perfume,
-                requestManager: requestManager
+                requestManager: requestManager,
+                imageLoader: imageLoader
             ),
             animated: true
         )

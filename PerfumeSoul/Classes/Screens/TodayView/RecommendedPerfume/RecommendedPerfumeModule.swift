@@ -11,6 +11,7 @@ final class RecommendedPerfumeModule {
     static func build(
         navigationController: UINavigationController?,
         requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader,
         profileService: ProfileService,
         collectionService: PerfumeCollectionService
     ) -> RecommendedPerfumeScreen {
@@ -27,9 +28,10 @@ final class RecommendedPerfumeModule {
             ),
             router: RecommendedPerfumeRouterImpl(
                 navigationController: navigationController,
-                requestManager: requestManager
+                requestManager: requestManager,
+                imageLoader: imageLoader
             )
         )
-        return RecommendedPerfumeScreen(viewModel: viewModel, presenter: presenter)
+        return RecommendedPerfumeScreen(viewModel: viewModel, presenter: presenter, imageLoader: imageLoader)
     }
 }

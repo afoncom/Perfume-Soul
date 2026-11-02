@@ -11,11 +11,12 @@ import CoreData
 final class TodayModule {
     static func build(
         container: NSPersistentContainer,
-        requestManager: RequestManager
+        requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader
     ) -> NavigationControllerContainer {
         let viewModel = TodayViewModel()
         let navigationController = UINavigationController()
-        let router = TodayRouterImpl(navigationController: navigationController)
+        let router = TodayRouterImpl(navigationController: navigationController, imageLoader: imageLoader)
         let perfumeHistoryService = PerfumeHistoryServiceImpl(requestManager: requestManager)
         let dailyHoroscopeService = DailyHoroscopeServiceImpl(requestManager: requestManager)
         let profileService = ProfileServiceImpl(container: container)
@@ -27,6 +28,7 @@ final class TodayModule {
         let dailyPerfumeModule = DailyPerfumeModule.build(
             navigationController: navigationController,
             requestManager: requestManager,
+            imageLoader: imageLoader,
             profileService: profileService,
             collectionService: collectionService
         )
@@ -34,6 +36,7 @@ final class TodayModule {
         let recommendedPerfumeModule = RecommendedPerfumeModule.build(
             navigationController: navigationController,
             requestManager: requestManager,
+            imageLoader: imageLoader,
             profileService: profileService,
             collectionService: collectionService
         )

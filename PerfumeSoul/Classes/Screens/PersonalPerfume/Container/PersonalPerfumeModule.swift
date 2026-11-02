@@ -12,6 +12,7 @@ final class PersonalPerfumeModule {
     static func build(
         profileCalculation: ProfileCalculation?,
         requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader,
         navigationController: UINavigationController?,
         onFinish: (() -> Void)? = nil
     ) -> UIViewController {
@@ -19,6 +20,7 @@ final class PersonalPerfumeModule {
         let router = PersonalPerfumeRouterImpl(
             navigationController: navigationController,
             requestManager: requestManager,
+            imageLoader: imageLoader,
             onFinish: onFinish
         )
         let service = PersonalPerfumeServiceImpl(requestManager: requestManager)
@@ -35,7 +37,7 @@ final class PersonalPerfumeModule {
             )
         )
         
-        let view = PersonalPerfumeScreen(viewModel: viewModel, presenter: presenter)
+        let view = PersonalPerfumeScreen(viewModel: viewModel, presenter: presenter, imageLoader: imageLoader)
         let hostingController = UIHostingController(rootView: view)
         hostingController.navigationItem.largeTitleDisplayMode = .never
         hostingController.hidesBottomBarWhenPushed = true

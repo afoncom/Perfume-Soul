@@ -3,6 +3,7 @@ import SwiftUI
 struct PerfumeSearchSheet: View {
     let title: String
     let results: [SearchPerfumeItem]
+    let imageLoader: PerfumeImageLoader
     let isSearching: Bool
     let errorMessage: String?
     let search: (String) async -> Void
@@ -91,7 +92,13 @@ struct PerfumeSearchSheet: View {
                         select(perfume)
                         dismiss()
                     } label: {
-                        HStack(alignment: .firstTextBaseline, spacing: 16) {
+                        HStack(spacing: 16) {
+                            Rectangle()
+                                .fill(Color(.placeholderSoft))
+                                .frame(width: 56, height: 56)
+                                .overlay { PerfumeProductImage(perfumeID: perfume.id, loader: imageLoader) }
+                                .overlay { Rectangle().stroke(Color(.cardBorder), lineWidth: 1) }
+                                .accessibilityHidden(true)
                             Text(perfume.name)
                                 .font(.body)
                                 .fixedSize(horizontal: false, vertical: true)

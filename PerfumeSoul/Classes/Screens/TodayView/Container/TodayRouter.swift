@@ -16,10 +16,12 @@ protocol TodayRouter {
 }
 
 final class TodayRouterImpl {
+    private let imageLoader: PerfumeImageLoader
     private weak var navigationController: UINavigationController?
     
-    init(navigationController: UINavigationController?) {
+    init(navigationController: UINavigationController?, imageLoader: PerfumeImageLoader) {
         self.navigationController = navigationController
+        self.imageLoader = imageLoader
     }
 }
 
@@ -42,7 +44,8 @@ extension TodayRouterImpl: TodayRouter {
         navigationController?.pushViewController(
             DayInPerfumeryModule.build(
                 navigationController: navigationController,
-                historyFact: historyFact
+                historyFact: historyFact,
+                imageLoader: imageLoader
             ),
             animated: true
         )

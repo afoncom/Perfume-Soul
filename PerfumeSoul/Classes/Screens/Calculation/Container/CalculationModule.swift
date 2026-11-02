@@ -14,6 +14,7 @@ final class CalculationModule {
     static func build(
         container: NSPersistentContainer,
         requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader,
         initialProfile: Profile? = nil,
         onFinish: @escaping () -> Void
     ) -> UIViewController {
@@ -27,6 +28,7 @@ final class CalculationModule {
             navigationController: navigationController,
             container: container,
             requestManager: requestManager,
+            imageLoader: imageLoader,
             onFinish: onFinish
         )
         let profileService = ProfileServiceImpl(container: container)
