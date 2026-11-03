@@ -9,7 +9,7 @@ import Foundation
 
 protocol RecommendedPerfumeService {
     func requestCandidates(
-        profile: DailyPerfumeProfileRequest,
+        calculation: ProfileCalculation,
         excludedPerfumeIDs: [Int],
         limit: Int
     ) async throws -> [DailyPerfumeCandidateResponse]
@@ -25,13 +25,13 @@ final class RecommendedPerfumeServiceImpl {
 
 extension RecommendedPerfumeServiceImpl: RecommendedPerfumeService {
     func requestCandidates(
-        profile: DailyPerfumeProfileRequest,
+        calculation: ProfileCalculation,
         excludedPerfumeIDs: [Int],
         limit: Int
     ) async throws -> [DailyPerfumeCandidateResponse] {
         try await requestManager.sendRequest(
             request: RecommendedPerfumeRequest(
-                profile: profile,
+                profile: makeProfileData(for: calculation),
                 excludedPerfumeIDs: excludedPerfumeIDs,
                 limit: limit
             )
@@ -39,8 +39,24 @@ extension RecommendedPerfumeServiceImpl: RecommendedPerfumeService {
     }
 }
 
+private extension RecommendedPerfumeServiceImpl {
+    func makeProfileData(for calculation: ProfileCalculation) -> DailyPerfumeProfile {
+        DailyPerfumeProfile(
+            sun: calculation.natalChart.sun.sign.rawValue,
+            moon: calculation.natalChart.moon.sign.rawValue,
+            ascendant: calculation.natalChart.ascendant.sign.rawValue,
+            elementBalance: DailyPerfumeElementBalance(
+                fire: calculation.elementBalance.fire,
+                earth: calculation.elementBalance.earth,
+                air: calculation.elementBalance.air,
+                water: calculation.elementBalance.water
+            )
+        )
+    }
+}
+
 private struct RecommendedPerfumeRequest: Request {
-    let profile: DailyPerfumeProfileRequest
+    let profile: DailyPerfumeProfile
     let excludedPerfumeIDs: [Int]
     let limit: Int
     let path = "/recommended-perfumes/candidates"
@@ -64,7 +80,7 @@ private struct RecommendedPerfumeRequest: Request {
         let sun: String
         let moon: String
         let ascendant: String
-        let elementBalance: DailyPerfumeElementBalanceRequest
+        let elementBalance: DailyPerfumeElementBalance
         let excludedPerfumeIDs: [Int]
         let lastShownBrand: String?
         let limit: Int

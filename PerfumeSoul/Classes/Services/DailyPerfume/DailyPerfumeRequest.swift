@@ -9,7 +9,7 @@
 import Foundation
 
 struct DailyPerfumeRequest: Request {
-    let profile: DailyPerfumeProfileRequest
+    let profile: DailyPerfumeProfile
     let excludedPerfumeIDs: [Int]
     let lastShownBrand: String?
     let limit: Int
@@ -31,14 +31,14 @@ struct DailyPerfumeRequest: Request {
     }
 }
 
-struct DailyPerfumeProfileRequest: Encodable, Equatable {
+struct DailyPerfumeProfile: Encodable, Equatable {
     let sun: String
     let moon: String
     let ascendant: String
-    let elementBalance: DailyPerfumeElementBalanceRequest
+    let elementBalance: DailyPerfumeElementBalance
 }
 
-struct DailyPerfumeElementBalanceRequest: Encodable, Equatable {
+struct DailyPerfumeElementBalance: Encodable, Equatable {
     let fire: Int
     let earth: Int
     let air: Int
@@ -49,7 +49,7 @@ private struct DailyPerfumeRequestBody: Encodable {
     let sun: String
     let moon: String
     let ascendant: String
-    let elementBalance: DailyPerfumeElementBalanceRequest
+    let elementBalance: DailyPerfumeElementBalance
     let excludedPerfumeIDs: [Int]
     let lastShownBrand: String?
     let limit: Int

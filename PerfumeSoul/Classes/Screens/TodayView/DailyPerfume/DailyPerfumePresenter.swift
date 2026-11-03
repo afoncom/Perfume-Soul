@@ -210,12 +210,12 @@ extension DailyPerfumePresenterImpl {
         return storedState
     }
 
-    private func makeProfileRequest(profileCalculation: ProfileCalculation) -> DailyPerfumeProfileRequest {
-        DailyPerfumeProfileRequest(
+    private func makeProfileRequest(profileCalculation: ProfileCalculation) -> DailyPerfumeProfile {
+        DailyPerfumeProfile(
             sun: profileCalculation.natalChart.sun.sign.rawValue,
             moon: profileCalculation.natalChart.moon.sign.rawValue,
             ascendant: profileCalculation.natalChart.ascendant.sign.rawValue,
-            elementBalance: DailyPerfumeElementBalanceRequest(
+            elementBalance: DailyPerfumeElementBalance(
                 fire: profileCalculation.elementBalance.fire,
                 earth: profileCalculation.elementBalance.earth,
                 air: profileCalculation.elementBalance.air,

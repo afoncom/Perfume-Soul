@@ -8,7 +8,7 @@
 
 protocol DailyPerfumeService {
     func requestCandidates(
-        profile: DailyPerfumeProfileRequest,
+        profile: DailyPerfumeProfile,
         excludedPerfumeIDs: [Int],
         lastShownBrand: String?,
         limit: Int
@@ -25,7 +25,7 @@ final class DailyPerfumeServiceImpl {
 
 extension DailyPerfumeServiceImpl: DailyPerfumeService {
     func requestCandidates(
-        profile: DailyPerfumeProfileRequest,
+        profile: DailyPerfumeProfile,
         excludedPerfumeIDs: [Int],
         lastShownBrand: String?,
         limit: Int
