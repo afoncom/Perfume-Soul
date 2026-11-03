@@ -89,6 +89,15 @@
       "checkedOn": "2026-11-02"
     },
     {
+      "id": "mad-five-year-report-2008-2013",
+      "publisher": "Museum of Arts and Design",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://madmuseum.org/sites/default/files/programs/%3Cem%3EEdit%20Overview,%20Reports%20and%20Bulletins%3C/em%3E%20Reports%20and%20Bulletins/MAD%205-Year%20Report%202008-2013.pdf",
+      "checkedOn": "2026-11-03"
+    },
+    {
       "id": "somerset-perfume",
       "publisher": "Somerset House",
       "type": "primary",
@@ -1540,12 +1549,13 @@
       "evidenceLevel": "primary",
       "eventGroupId": "art-of-scent-opening-2012",
       "sourceIds": [
-        "mad-art-of-scent"
+        "mad-art-of-scent",
+        "mad-five-year-report-2008-2013"
       ],
       "dateEvidence": {
-        "sourceId": "mad-art-of-scent",
-        "locator": "PDF, стр. 1, заголовок и первые абзацы",
-        "summaryRu": "Пресс-релиз MAD прямо указывает открытие 20 ноября 2012 года и перенос из-за урагана Sandy."
+        "sourceId": "mad-five-year-report-2008-2013",
+        "locator": "Five-Year Report 2008–2013, стр. 12 PDF, раздел Exhibitions / The Art of Scent 1889–2012",
+        "summaryRu": "Ретроспективный отчёт MAD описывает состоявшуюся выставку и прямо указывает её период: 20 ноября 2012 года — 3 марта 2013 года."
       },
       "storyAngleRu": "Аромат как произведение искусства: фокус на запахе вместо узнаваемого флакона.",
       "researchNotesRu": "Дата пресс-релиза 6 ноября не является датой открытия. Не заимствовать музейные утверждения о мировом первенстве без оговорок."
