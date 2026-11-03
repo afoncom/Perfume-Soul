@@ -1,0 +1,1823 @@
+{
+  "schemaVersion": 1,
+  "status": "research_in_progress",
+  "researchDate": "2026-11-02",
+  "publicationWindow": {
+    "startDate": "2026-12-01",
+    "endDate": "2028-11-30",
+    "expectedStoryCount": 731
+  },
+  "categories": [
+    "fragrance_history",
+    "brand",
+    "perfumer",
+    "ingredient",
+    "cultural_fact",
+    "creation_technique"
+  ],
+  "sources": [
+    {
+      "id": "chanel-birth",
+      "publisher": "CHANEL",
+      "type": "primary",
+      "language": "da",
+      "access": "opened",
+      "url": "https://www.chanel.com/dk/about-chanel/the-house-of-chanel/1883/",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "chanel-death",
+      "publisher": "CHANEL",
+      "type": "primary",
+      "language": "ja",
+      "access": "opened",
+      "url": "https://www.chanel.com/jp/about-chanel/the-house-of-chanel/1970/",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "chanel-no5-date",
+      "publisher": "CHANEL",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.chanel.com/ae-en/fragrance/p/105848/n5-the-white-gold-body-oil/",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "dior-timeline",
+      "publisher": "La Galerie Dior",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.galeriedior.com/en/history",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "osmotheque-history",
+      "publisher": "Osmothèque",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.osmotheque.fr/a-propos/",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "unesco-grasse",
+      "publisher": "UNESCO",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.unesco.org/en/articles/intangible-heritage-nine-elements-inscribed-representative-list?hub=412",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "grand-palais-chanel",
+      "publisher": "Grand Palais",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.grandpalais.fr/fr/programme/le-grand-numero-de-chanel",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "mad-art-of-scent",
+      "publisher": "Museum of Arts and Design",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://madmuseum.org/sites/default/files/static/press/Art%20of%20Scent%20Release_Nov%209.pdf",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "mad-five-year-report-2008-2013",
+      "publisher": "Museum of Arts and Design",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://madmuseum.org/sites/default/files/programs/%3Cem%3EEdit%20Overview,%20Reports%20and%20Bulletins%3C/em%3E%20Reports%20and%20Bulletins/MAD%205-Year%20Report%202008-2013.pdf",
+      "checkedOn": "2026-11-03"
+    },
+    {
+      "id": "somerset-perfume",
+      "publisher": "Somerset House",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.somersethouse.org.uk/whats-on/perfume",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "moellhausen-lombardo",
+      "publisher": "Moellhausen",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.moellhausen.com/wp-content/uploads/2023/07/Moellhausen-Booklet-Profumiere-Mariaceleste-Lombardo-pag.-affiancate-WEB-LOW.pdf",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "lalique-biography",
+      "publisher": "Lalique Museum Doesburg",
+      "type": "museum",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.laliquemuseum.nl/fr/actuellement-visible/a-propos-de-rene-lalique/",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "mfk-lvmh-announcement",
+      "publisher": "LVMH / Financière Agache",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.financiereagache-finance.com/pdf/d/1/74/Prospectus-2017-2022.PDF",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "jcb-giacobetti",
+      "publisher": "JCB Parfums",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://jcbfragrance.com/pages/olivia-giacobetti",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "vogue-125-launch",
+      "publisher": "Vogue / Condé Nast",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.vogue.com/article/vogue-perfume-125-anniversary-comme-des-garcons-dover-street-market-fragrance",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "versace-encyclopedia",
+      "publisher": "Encyclopedia.com / Encyclopedia of World Biography",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.encyclopedia.com/people/literature-and-arts/fashion-biographies/gianni-versace",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "versace-equality-biography",
+      "publisher": "Equality Forum",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "url": "https://lgbthistorymonth.com/sites/default/files/icon_multimedia_pdfs/2008/Versace_Bio.pdf",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "spears-biography",
+      "publisher": "Biography.com / Hearst",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.biography.com/musicians/britney-spears",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "arden-sec-curious",
+      "publisher": "Elizabeth Arden / SEC",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.sec.gov/Archives/edgar/data/95052/000009505205000013/form_10q.htm",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "patent-vanillin-151119",
+      "publisher": "US Patent Office / Google Patents",
+      "type": "patent",
+      "language": "en",
+      "access": "opened",
+      "url": "https://patents.google.com/patent/US151119A/en",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "patent-terpenes-ep0053717",
+      "publisher": "European Patent Office / Google Patents",
+      "type": "patent",
+      "language": "de",
+      "access": "opened",
+      "url": "https://patents.google.com/patent/EP0053717B1/en",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "patent-odorants-us3517031",
+      "publisher": "US Patent Office / Google Patents",
+      "type": "patent",
+      "language": "en",
+      "access": "opened",
+      "url": "https://patents.google.com/patent/US3517031A/en",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "kurkdjian-barreau",
+      "publisher": "Conférence du Barreau des Hauts-de-Seine",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://conference.barreau92.com/uploads/PDF/Albums/Barreau%20des%20Hauts%20de%20Seine-2022.pdf",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "nez-carles",
+      "publisher": "Auparfum / Nez",
+      "type": "specialist",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://auparfum.bynez.com/histoire-de-parfumeurs-jean-carles-grassois-pedagogue-5359",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "nez-aime",
+      "publisher": "Auparfum / Nez",
+      "type": "specialist",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://auparfum.bynez.com/histoire-de-parfumeurs-aime-guerlain-tradition-et-rupture,5329",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "nez-daltroff",
+      "publisher": "Auparfum / Nez",
+      "type": "specialist",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://auparfum.bynez.com/histoire-de-parfumeurs-ernest-daltroff-autodidacte-cultive-caron-5331",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "nez-jacques",
+      "publisher": "Auparfum / Nez",
+      "type": "specialist",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://auparfum.bynez.com/histoire-de-parfumeurs-jacques-guerlain-genie-prolifique,5332",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "nez-coty",
+      "publisher": "Auparfum / Nez",
+      "type": "specialist",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://auparfum.bynez.com/histoire-de-parfumeurs-francois-coty-industriel-visionnaire,5334",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "nez-henri-robert",
+      "publisher": "Auparfum / Nez",
+      "type": "specialist",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://auparfum.bynez.com/histoire-de-parfumeurs-henri-robert-maitre-du-vert-5357",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "nez-vacher",
+      "publisher": "Auparfum / Nez",
+      "type": "specialist",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://auparfum.bynez.com/histoire-de-parfumeurs-paul-vacher-le-parfum-au-dela-du-luxe,5364",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "nez-cellier",
+      "publisher": "Auparfum / Nez",
+      "type": "specialist",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://auparfum.bynez.com/histoire-de-parfumeurs-germaine-cellier-parfumeuse-fougueuse,5366",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "nez-grojsman",
+      "publisher": "Auparfum / Nez",
+      "type": "specialist",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://auparfum.bynez.com/histoire-de-parfumeurs-sophia-grojsman-virtuose-de-la-rose-5376",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "cosme-kimono-yui",
+      "publisher": "@cosme / DECORTÉ",
+      "type": "brand_approved_product_record",
+      "language": "ja",
+      "access": "opened",
+      "url": "https://www.cosme.net/products/10200354/",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "kose-kimono-release",
+      "publisher": "KOSÉ",
+      "type": "primary",
+      "language": "ja",
+      "access": "opened",
+      "url": "https://corp.kose.co.jp/ja/content/uploads/2020/08/20200901.pdf",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "catapano-family-obituary",
+      "publisher": "Family obituary / Edwin L. Bennett Funeral Homes",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.dignitymemorial.com/obituaries/scarsdale-ny/josephine-catapano-5103394",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "eth-ruzicka",
+      "publisher": "ETH Library / ETH Zurich",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://library.ethz.ch/en/collections-and-archives/short-portraits/ruzicka-leopold-1887-1976.html",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "uzh-ruzicka",
+      "publisher": "University of Zurich",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.uzh.ch/en/researchinnovation/excellence/nobelprize/ruzicka.html",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "ndb-haarmann",
+      "publisher": "Neue Deutsche Biographie / Deutsche Biographie",
+      "type": "scholarly_reference",
+      "language": "de",
+      "access": "opened",
+      "url": "https://www.deutsche-biographie.de/gnd117640670.html",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "mep-lutens",
+      "publisher": "Maison Européenne de la Photographie",
+      "type": "museum",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.mep-fr.org/event/serge-lutens/",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "culture-mip-registry",
+      "publisher": "Ministère de la Culture / POP",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://pop.culture.gouv.fr/notice/museo/M0877",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "fashionz-zambesi",
+      "publisher": "FashioNZ",
+      "type": "specialist_press",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.fashionz.co.nz/zambesi-1979-fragrance/",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "newbeauty-me-espresso",
+      "publisher": "NewBeauty",
+      "type": "specialist_press",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.newbeauty.com/view/sabrina-carpenter-me-espresso-fragrance",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "accademia-casa-2018",
+      "publisher": "Accademia del Profumo",
+      "type": "primary",
+      "language": "it",
+      "access": "opened",
+      "url": "https://accademiadelprofumo.it/giornata-del-profumo/giornata-del-profumo-2018/casa-del-profumo-santa-maria-maggiore-2/",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "corriere-casa-2018",
+      "publisher": "Corriere di Novara",
+      "type": "press",
+      "language": "it",
+      "access": "opened",
+      "url": "https://corrieredinovara.it/cultura/casa-del-profumo-e-gia-boom-di-visitatori/",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "unifrance-perfume-2006",
+      "publisher": "Unifrance",
+      "type": "industry_registry",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.unifrance.org/film/27791/le-parfum-histoire-d-un-meurtrier",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "unifrance-les-parfums",
+      "publisher": "Unifrance",
+      "type": "industry_registry",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.unifrance.org/film/46973/les-parfums",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "lalique-museum-inauguration",
+      "publisher": "Musée Lalique",
+      "type": "museum",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.musee-lalique.com/le-syndicat-mixte-du-musee-lalique/",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "fff-dinand-2017",
+      "publisher": "The Fragrance Foundation France",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.fragrancefoundation.fr/2017/10/pierre-dinand-60-ans-de-creation-au-grand-musee-du-parfum/",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "fff-grasse-2019",
+      "publisher": "The Fragrance Foundation France",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.fragrancefoundation.fr/2019/07/grasse-en-fete/",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "dsm-firmenich-research-2023",
+      "publisher": "dsm-firmenich / Integrated Annual Report 2023",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://annualreport.dsm-firmenich.com/2023/our-company/science-research.html",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "dsm-firmenich-launch-history",
+      "publisher": "dsm-firmenich / Integrated Annual Report 2024",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://annualreport.dsm-firmenich.com/2024/our-company/about-dsm-firmenich/our-history.html",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "firmenich-geneva-campus-2022",
+      "publisher": "Firmenich",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://our-company.dsm-firmenich.com/en/our-company/news/press-releases/legacy-archive/firmenich/firmenich-inaugurates-new-campus-geneva.html",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "givaudan-singapore-school-2015",
+      "publisher": "Givaudan",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.givaudan.com/media/media-releases/2015/givaudan-opens-fragrance-creative-centre-perfumery-school-and-production",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "decorte-kimono-booklet",
+      "publisher": "DECORTÉ / KOSÉ",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pso.qrtranslator.com/kose/decorte_fragrancepamphlet_en.pdf",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "decorte-kimono-design",
+      "publisher": "DECORTÉ",
+      "type": "primary",
+      "language": "ja",
+      "access": "opened",
+      "url": "https://www.decorte.com/site/decortekimono/r/r3035_sscd/",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "rvf-ellena-interview",
+      "publisher": "La Revue du vin de France",
+      "url": "https://www.larvf.com/,vins-parfums-jean-claude-ellena-parfumeur-hermes-luxe,4517517.asp",
+      "language": "fr",
+      "type": "interview",
+      "access": "opened",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "prh-little-book-perfumes",
+      "publisher": "Penguin Random House / Viking",
+      "url": "https://www.penguinrandomhouse.com/books/530620/the-little-book-of-perfumes-by-luca-turin/",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "livreshebdo-atlas-2020",
+      "publisher": "Livres Hebdo / Electre",
+      "url": "https://www.livreshebdo.fr/livres/atlas-de-botanique-parfumee-arthaud-9782081489141",
+      "language": "fr",
+      "type": "industry_registry",
+      "access": "opened",
+      "checkedOn": "2026-11-02"
+    },
+    {
+      "id": "buck-axel-cell-1991",
+      "publisher": "Cell / PubMed, US National Library of Medicine",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/1840504/",
+      "language": "en",
+      "type": "primary_research_abstract",
+      "access": "opened",
+      "checkedOn": "2026-11-02"
+    }
+  ],
+  "events": [
+    {
+      "id": "gabrielle-chanel-death-1971",
+      "eventDate": "1971-01-10",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "death",
+      "titleRu": "Уход Габриэль Шанель",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "gabrielle-chanel-death-1971",
+      "sourceIds": [
+        "chanel-death"
+      ],
+      "dateEvidence": {
+        "sourceId": "chanel-death",
+        "locator": "Раздел 1971",
+        "summaryRu": "История дома указывает смерть в Ritz 10 января под заголовком 1971."
+      },
+      "storyAngleRu": "Продолжение парфюмерной линии после основательницы. Не повторять историю создания № 5 из материала о рождении.",
+      "researchNotesRu": ""
+    },
+    {
+      "id": "jean-carles-birth-1892",
+      "eventDate": "1892-01-12",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "birth",
+      "titleRu": "Рождение Жана Карля",
+      "status": "verified",
+      "evidenceLevel": "specialist",
+      "eventGroupId": "jean-carles-birth-1892",
+      "sourceIds": [
+        "nez-carles"
+      ],
+      "dateEvidence": {
+        "sourceId": "nez-carles",
+        "locator": "Биография, абзац с полным именем",
+        "summaryRu": "Исторический материал Nez прямо указывает 12 января 1892 года."
+      },
+      "storyAngleRu": "Парфюмер, который не только создавал композиции, но и учил других понимать сырьё.",
+      "researchNotesRu": ""
+    },
+    {
+      "id": "christian-dior-birth-1905",
+      "eventDate": "1905-01-21",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Рождение Кристиана Диора",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "christian-dior-birth-1905",
+      "sourceIds": [
+        "dior-timeline"
+      ],
+      "dateEvidence": {
+        "sourceId": "dior-timeline",
+        "locator": "1905 / Childhood in Granville",
+        "summaryRu": "В хронологии музея под 1905 годом указано рождение 21 января."
+      },
+      "storyAngleRu": "Детские сады как вход в историю цветочного языка ароматов Dior; перед написанием подтвердить конкретные связи отдельными источниками.",
+      "researchNotesRu": ""
+    },
+    {
+      "id": "paul-vacher-birth-1902",
+      "eventDate": "1902-02-19",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "birth",
+      "titleRu": "Рождение Поля Ваше",
+      "status": "verified",
+      "evidenceLevel": "specialist",
+      "eventGroupId": "paul-vacher-birth-1902",
+      "sourceIds": [
+        "nez-vacher"
+      ],
+      "dateEvidence": {
+        "sourceId": "nez-vacher",
+        "locator": "Первый биографический абзац",
+        "summaryRu": "Статья указывает рождение 19 февраля 1902 года."
+      },
+      "storyAngleRu": "Le Galion и автор, работавший между собственным домом и композициями для других марок.",
+      "researchNotesRu": ""
+    },
+    {
+      "id": "aime-guerlain-death-1910",
+      "eventDate": "1910-02-26",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "death",
+      "titleRu": "Уход Эме Герлена",
+      "status": "verified",
+      "evidenceLevel": "specialist",
+      "eventGroupId": "aime-guerlain-death-1910",
+      "sourceIds": [
+        "nez-aime"
+      ],
+      "dateEvidence": {
+        "sourceId": "nez-aime",
+        "locator": "Последний биографический абзац",
+        "summaryRu": "Исторический материал прямо указывает смерть 26 февраля 1910 года."
+      },
+      "storyAngleRu": "Переход от подражания природным запахам к самостоятельным композициям.",
+      "researchNotesRu": ""
+    },
+    {
+      "id": "henkel-terpene-fragrance-patent-1984",
+      "eventDate": "1984-02-29",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "patent_publication",
+      "titleRu": "Публикация патента на душистые производные терпенов",
+      "status": "verified",
+      "evidenceLevel": "patent",
+      "eventGroupId": "henkel-terpene-fragrance-patent-1984",
+      "sourceIds": [
+        "patent-terpenes-ep0053717"
+      ],
+      "dateEvidence": {
+        "sourceId": "patent-terpenes-ep0053717",
+        "locator": "Info / Publication date; Publications / EP0053717B1; Description",
+        "summaryRu": "Европейская публикация EP0053717B1 датирована 29 февраля 1984 года; документ посвящён получению и парфюмерному применению производных терпенов."
+      },
+      "storyAngleRu": "Как химики расширяют палитру парфюмера, изменяя строение исходных соединений.",
+      "researchNotesRu": "Не называть датой изобретения терпенов, открытия запаха или коммерческого запуска. Другие публикации этой патентной семьи не использовать для повторного рассказа."
+    },
+    {
+      "id": "parfums-christian-dior-foundation-1947",
+      "eventDate": "1947-03-04",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "foundation",
+      "titleRu": "Основание Parfums Christian Dior",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "parfums-christian-dior-foundation-1947",
+      "sourceIds": [
+        "dior-timeline"
+      ],
+      "dateEvidence": {
+        "sourceId": "dior-timeline",
+        "locator": "1947 / Parfums Christian Dior",
+        "summaryRu": "Хронология датирует основание парфюмерной компании 4 марта 1947 года."
+      },
+      "storyAngleRu": "Почему парфюмерии понадобились собственная компания и руководитель Серж Эфтлер-Луиш.",
+      "researchNotesRu": ""
+    },
+    {
+      "id": "sophia-grojsman-birth-1945",
+      "eventDate": "1945-03-08",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "birth",
+      "titleRu": "Рождение Софии Гройсман",
+      "status": "verified",
+      "evidenceLevel": "specialist",
+      "eventGroupId": "sophia-grojsman-birth-1945",
+      "sourceIds": [
+        "nez-grojsman"
+      ],
+      "dateEvidence": {
+        "sourceId": "nez-grojsman",
+        "locator": "Первый биографический абзац",
+        "summaryRu": "Статья прямо указывает 8 марта 1945 года."
+      },
+      "storyAngleRu": "Почему один и тот же цветочный образ может раскрыться по-разному в White Linen, Paris и Trésor.",
+      "researchNotesRu": "Не объявлять одну торговую ноту доказательством точного состава формулы."
+    },
+    {
+      "id": "serge-lutens-birth-1942",
+      "eventDate": "1942-03-14",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Рождение Сержа Лютанса",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "serge-lutens-birth-1942",
+      "sourceIds": [
+        "mep-lutens"
+      ],
+      "dateEvidence": {
+        "sourceId": "mep-lutens",
+        "locator": "Биографический абзац выставочной страницы",
+        "summaryRu": "Музей указывает рождение 14 марта 1942 года и описывает его связь с миром ароматов."
+      },
+      "storyAngleRu": "Когда фотография, образ и аромат становятся частями одного авторского мира.",
+      "researchNotesRu": "Различать художественное руководство и авторство парфюмерных формул."
+    },
+    {
+      "id": "mfk-lvmh-association-announcement-2017",
+      "eventDate": "2017-03-20",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "partnership_announcement",
+      "titleRu": "Объявление о союзе Maison Francis Kurkdjian и LVMH",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "mfk-lvmh-association-announcement-2017",
+      "sourceIds": [
+        "mfk-lvmh-announcement"
+      ],
+      "dateEvidence": {
+        "sourceId": "mfk-lvmh-announcement",
+        "locator": "PDF, стр. 40 (печатная 41), пресс-релиз",
+        "summaryRu": "Совместное сообщение датировано 20 марта 2017 года и объявляет соглашение о приобретении контрольной доли."
+      },
+      "storyAngleRu": "Как устроена пара парфюмер — предприниматель и идея парфюмерного гардероба.",
+      "researchNotesRu": "Событие — публичное объявление соглашения. Не называть датой юридического закрытия сделки."
+    },
+    {
+      "id": "casa-profumo-exhibition-inauguration-2018",
+      "eventDate": "2018-03-24",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_inauguration",
+      "titleRu": "Открытие мультимедийной экспозиции Casa del Profumo",
+      "status": "verified",
+      "evidenceLevel": "corroborated_primary",
+      "eventGroupId": "casa-profumo-exhibition-inauguration-2018",
+      "sourceIds": [
+        "accademia-casa-2018",
+        "corriere-casa-2018"
+      ],
+      "dateEvidence": {
+        "sourceId": "accademia-casa-2018",
+        "locator": "Accademia: Sabato 24 Marzo 2018; Corriere: репортаж 28 марта",
+        "summaryRu": "Профессиональная ассоциация называет инаугурацию 24 марта 2018 года. Последующий репортаж подтверждает состоявшееся открытие в субботу и посещение экспозиции."
+      },
+      "storyAngleRu": "Как музей рассказывает историю одеколона через людей, места и запахи.",
+      "researchNotesRu": "Часть музея работала с 2016 года; речь о дополненной мультимедийной экспозиции. Версии о единственном изобретателе одеколона не переносить без проверки."
+    },
+    {
+      "id": "germaine-cellier-birth-1909",
+      "eventDate": "1909-03-26",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "birth",
+      "titleRu": "Рождение Жермен Селье",
+      "status": "verified",
+      "evidenceLevel": "specialist",
+      "eventGroupId": "germaine-cellier-birth-1909",
+      "sourceIds": [
+        "nez-cellier"
+      ],
+      "dateEvidence": {
+        "sourceId": "nez-cellier",
+        "locator": "Первый биографический абзац",
+        "summaryRu": "Биография с полным именем прямо указывает 26 марта 1909 года."
+      },
+      "storyAngleRu": "Bandit и Fracas: смелость композиции через два разных характера.",
+      "researchNotesRu": "Не использовать некорректную дату 9 февраля по памяти; каждое название и характеристику опереть на отдельный факт-пакет."
+    },
+    {
+      "id": "buck-axel-odorant-receptors-paper-1991",
+      "eventDate": "1991-04-05",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "research_publication",
+      "titleRu": "Публикация исследования Бак и Акселя об обонятельных рецепторах",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "buck-axel-odorant-receptors-paper-1991",
+      "sourceIds": [
+        "buck-axel-cell-1991"
+      ],
+      "dateEvidence": {
+        "sourceId": "buck-axel-cell-1991",
+        "locator": "Cell 65(1):175–187 / дата и Abstract",
+        "summaryRu": "Запись статьи указывает 1991 Apr 5 и авторов L. Buck, R. Axel; прочитан авторский abstract."
+      },
+      "storyAngleRu": "Что стоит за встречей молекулы запаха с нашим обонянием.",
+      "researchNotesRu": "Дата публикации, не день эксперимента или Нобелевской премии. Не представлять работу как исследование конкретного парфюма и не выводить из неё терапевтических свойств ароматов."
+    },
+    {
+      "id": "rene-lalique-birth-1860",
+      "eventDate": "1860-04-06",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "birth",
+      "titleRu": "Рождение Рене Лалика",
+      "status": "verified",
+      "evidenceLevel": "museum",
+      "eventGroupId": "rene-lalique-birth-1860",
+      "sourceIds": [
+        "lalique-biography"
+      ],
+      "dateEvidence": {
+        "sourceId": "lalique-biography",
+        "locator": "René Lalique, первая строка биографии",
+        "summaryRu": "Музей указывает дату рождения 6 апреля 1860 года."
+      },
+      "storyAngleRu": "Как флакон стал частью восприятия аромата.",
+      "researchNotesRu": "Перед написанием подтвердить сотрудничество с Coty и конкретные флаконы; дата рождения сама по себе не подтверждает историю упаковки."
+    },
+    {
+      "id": "jean-claude-ellena-birth-1947",
+      "eventDate": "1947-04-07",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "birth",
+      "titleRu": "Рождение Жан-Клода Эллена",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "jean-claude-ellena-birth-1947",
+      "sourceIds": [
+        "rvf-ellena-interview"
+      ],
+      "dateEvidence": {
+        "sourceId": "rvf-ellena-interview",
+        "locator": "Fiche d’identité",
+        "summaryRu": "Интервью содержит биографическую строку: 7 avril 1947."
+      },
+      "storyAngleRu": "Авторский почерк: ясность композиции и небольшая палитра сырья.",
+      "researchNotesRu": "Профессиональную должность в старом интервью не выдавать за текущую."
+    },
+    {
+      "id": "olivia-giacobetti-birth-1966",
+      "eventDate": "1966-04-09",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "birth",
+      "titleRu": "Рождение Оливии Джакобетти",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "olivia-giacobetti-birth-1966",
+      "sourceIds": [
+        "jcb-giacobetti"
+      ],
+      "dateEvidence": {
+        "sourceId": "jcb-giacobetti",
+        "locator": "Биография парфюмера на странице партнёрского дома",
+        "summaryRu": "JCB Parfums указывает 9 апреля 1966 года и перечисляет её работы для дома."
+      },
+      "storyAngleRu": "Почему ощущение простоты может требовать сложной композиции.",
+      "researchNotesRu": "Не превращать парфюмерный образ в сведения о секретной формуле. Дополнительные известные работы требуют отдельных источников."
+    },
+    {
+      "id": "osmotheque-inauguration-1990",
+      "eventDate": "1990-04-26",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "inauguration",
+      "titleRu": "Открытие Осмотеки",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "osmotheque-inauguration-1990",
+      "sourceIds": [
+        "osmotheque-history"
+      ],
+      "dateEvidence": {
+        "sourceId": "osmotheque-history",
+        "locator": "À PROPOS, второй пункт",
+        "summaryRu": "Осмотека прямо указывает дату своего открытия: 26 апреля 1990 года."
+      },
+      "storyAngleRu": "Можно ли сохранить исчезнувший аромат и чем живая коллекция отличается от витрины с флаконами.",
+      "researchNotesRu": "Не использовать изменяющееся число ароматов как актуальное: страница содержит старые и новые показатели."
+    },
+    {
+      "id": "jacques-guerlain-death-1963",
+      "eventDate": "1963-05-02",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "death",
+      "titleRu": "Уход Жака Герлена",
+      "status": "verified",
+      "evidenceLevel": "specialist",
+      "eventGroupId": "jacques-guerlain-death-1963",
+      "sourceIds": [
+        "nez-jacques"
+      ],
+      "dateEvidence": {
+        "sourceId": "nez-jacques",
+        "locator": "Завершающий абзац биографии перед парфюмографией",
+        "summaryRu": "Статья прямо указывает смерть 2 мая 1963 года."
+      },
+      "storyAngleRu": "Передача парфюмерного мастерства следующему поколению через совместную работу над Ode.",
+      "researchNotesRu": "Сюжет о передаче мастерства должен отличаться от истории отдельных шедевров на день рождения."
+    },
+    {
+      "id": "chanel-no5-introduction-1921",
+      "eventDate": "1921-05-05",
+      "calendar": "gregorian",
+      "category": "fragrance_history",
+      "eventType": "presentation",
+      "titleRu": "Представление Chanel № 5",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "chanel-no5-introduction-1921",
+      "sourceIds": [
+        "chanel-no5-date"
+      ],
+      "dateEvidence": {
+        "sourceId": "chanel-no5-date",
+        "locator": "INSPIRATION",
+        "summaryRu": "CHANEL датирует представление № 5, созданного Эрнестом Бо, 5 мая 1921 года."
+      },
+      "storyAngleRu": "Абстрактная цветочная композиция и роль альдегидов.",
+      "researchNotesRu": "Не называть первым ароматом с альдегидами. Не выдавать легенду об ошибке ассистента за факт. Дату представления атрибутировать дому CHANEL."
+    },
+    {
+      "id": "dsm-firmenich-launch-2023",
+      "eventDate": "2023-05-08",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "company_launch",
+      "titleRu": "Начало работы dsm-firmenich",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "dsm-firmenich-launch-2023",
+      "sourceIds": [
+        "dsm-firmenich-launch-history"
+      ],
+      "dateEvidence": {
+        "sourceId": "dsm-firmenich-launch-history",
+        "locator": "Our history, первый абзац",
+        "summaryRu": "Ретроспективный годовой отчёт прямо указывает официальный запуск объединённой компании 8 мая 2023 года."
+      },
+      "storyAngleRu": "Почему за известными ароматами стоят компании, названий которых часто нет на флаконе.",
+      "researchNotesRu": "Не превращать корпоративное объединение в день изобретения конкретной молекулы. Событие запуска компании, не дата первого объявления о намерениях."
+    },
+    {
+      "id": "francis-kurkdjian-birth-1969",
+      "eventDate": "1969-05-14",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "birth",
+      "titleRu": "Рождение Франсиса Куркджяна",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "francis-kurkdjian-birth-1969",
+      "sourceIds": [
+        "kurkdjian-barreau"
+      ],
+      "dateEvidence": {
+        "sourceId": "kurkdjian-barreau",
+        "locator": "PDF, стр. 20, вступление к встрече с Francis Kurkdjian",
+        "summaryRu": "В опубликованном организатором выступлении дата рождения участника прямо названа: 14 мая 1969 года."
+      },
+      "storyAngleRu": "Le Male и путь к собственной парфюмерной свободе.",
+      "researchNotesRu": "Материал встречи содержит шуточный судебный процесс; использовать только биографическое вступление и проверяемые факты, не сюжет инсценировки. Авторство и годы работ подтвердить источниками домов."
+    },
+    {
+      "id": "josephine-catapano-death-2012",
+      "eventDate": "2012-05-14",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "death",
+      "titleRu": "Уход Жозефины Катапано",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "josephine-catapano-death-2012",
+      "sourceIds": [
+        "catapano-family-obituary"
+      ],
+      "dateEvidence": {
+        "sourceId": "catapano-family-obituary",
+        "locator": "Заголовок и первые два абзаца некролога",
+        "summaryRu": "В тексте прямо указано, что Катапано умерла 14 мая 2012 года; названы IFF и профессиональные награды."
+      },
+      "storyAngleRu": "Как профессия научилась замечать имя автора аромата: признание и наследие Катапано.",
+      "researchNotesRu": "Не заявлять первенство среди всех женщин-парфюмеров. Наставничество требует отдельного источника."
+    },
+    {
+      "id": "vanillin-haarmann-us-patent-1874",
+      "eventDate": "1874-05-19",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "patent_publication",
+      "titleRu": "Патент Хаармана на получение ванилина",
+      "status": "verified",
+      "evidenceLevel": "patent",
+      "eventGroupId": "vanillin-haarmann-us-patent-1874",
+      "sourceIds": [
+        "patent-vanillin-151119"
+      ],
+      "dateEvidence": {
+        "sourceId": "patent-vanillin-151119",
+        "locator": "Description, Specification forming part of Letters Patent No. 151,119; Info / Publication date",
+        "summaryRu": "Текст патента и карточка документа прямо указывают 19 мая 1874 года."
+      },
+      "storyAngleRu": "Как знакомое звучание ванили стало доступно через работу химика с другим исходным сырьём.",
+      "researchNotesRu": "Это дата конкретного американского патента, не день открытия ванилина и не выпуск аромата. Не описывать опасный лабораторный процесс как бытовую инструкцию."
+    },
+    {
+      "id": "wilhelm-haarmann-birth-1847",
+      "eventDate": "1847-05-24",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "birth",
+      "titleRu": "Рождение Вильгельма Хаармана",
+      "status": "verified",
+      "evidenceLevel": "scholarly_reference",
+      "eventGroupId": "wilhelm-haarmann-birth-1847",
+      "sourceIds": [
+        "ndb-haarmann"
+      ],
+      "dateEvidence": {
+        "sourceId": "ndb-haarmann",
+        "locator": "Биографическая строка: 24.5.1847",
+        "summaryRu": "Научная биография прямо указывает рождение 24 мая 1847 года и описывает производство душистых веществ."
+      },
+      "storyAngleRu": "От лабораторной работы к производству: люди и сотрудничество за новой палитрой парфюмерии.",
+      "researchNotesRu": "Не повторять технический сюжет отдельного события о патенте на ванилин."
+    },
+    {
+      "id": "germaine-cellier-death-1976",
+      "eventDate": "1976-06-12",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "death",
+      "titleRu": "Уход Жермен Селье",
+      "status": "verified",
+      "evidenceLevel": "specialist",
+      "eventGroupId": "germaine-cellier-death-1976",
+      "sourceIds": [
+        "nez-cellier"
+      ],
+      "dateEvidence": {
+        "sourceId": "nez-cellier",
+        "locator": "Последний биографический абзац",
+        "summaryRu": "Источник прямо датирует смерть 12 июня 1976 года."
+      },
+      "storyAngleRu": "Как сохраняются имя и творческое наследие женщины в профессии, долго остававшейся за кулисами.",
+      "researchNotesRu": "Отличать рассказ о памяти автора от истории рождения и создания Fracas."
+    },
+    {
+      "id": "somerset-perfume-opening-2017",
+      "eventDate": "2017-06-21",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Открытие выставки Perfume в Somerset House",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "somerset-perfume-opening-2017",
+      "sourceIds": [
+        "somerset-perfume"
+      ],
+      "dateEvidence": {
+        "sourceId": "somerset-perfume",
+        "locator": "Archived Series / Dates",
+        "summaryRu": "Архив площадки указывает начало выставки 21 июня 2017 года."
+      },
+      "storyAngleRu": "Как запах может изображать место и почему в парфюмерии бывают намеренно непривычные ноты.",
+      "researchNotesRu": "Конец выставки в разных анонсах различается; для этой записи нужна только согласующаяся дата открытия."
+    },
+    {
+      "id": "pfizer-benzodioxepin-odorants-patent-1970",
+      "eventDate": "1970-06-23",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "patent_publication",
+      "titleRu": "Публикация патента Pfizer на душистые бензодиоксепиноны",
+      "status": "verified",
+      "evidenceLevel": "patent",
+      "eventGroupId": "pfizer-benzodioxepin-odorants-patent-1970",
+      "sourceIds": [
+        "patent-odorants-us3517031"
+      ],
+      "dateEvidence": {
+        "sourceId": "patent-odorants-us3517031",
+        "locator": "Info / Publication date; Description / Patented June 23, 1970",
+        "summaryRu": "Документ US3517031A опубликован и выдан 23 июня 1970 года."
+      },
+      "storyAngleRu": "Как лабораторный поиск душистых веществ открывает неожиданные направления парфюмерии.",
+      "researchNotesRu": "Сначала подтвердить связь конкретного вещества с торговым названием Calone отдельным надёжным источником. Не утверждать, что морская парфюмерия возникла в день патента."
+    },
+    {
+      "id": "french-perfumery-union-foundation-1890",
+      "eventDate": "1890-06-25",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "professional_organization_foundation",
+      "titleRu": "Создание французского парфюмерного синдиката",
+      "status": "verified",
+      "evidenceLevel": "specialist",
+      "eventGroupId": "french-perfumery-union-foundation-1890",
+      "sourceIds": [
+        "nez-aime"
+      ],
+      "dateEvidence": {
+        "sourceId": "nez-aime",
+        "locator": "Абзац о профессиональной организации после Jicky",
+        "summaryRu": "Статья датирует создание Aimé Guerlain и Charles Gallet французского парфюмерного синдиката 25 июня 1890 года."
+      },
+      "storyAngleRu": "Почему парфюмерам понадобилось объединение для защиты профессии.",
+      "researchNotesRu": "Не приравнивать исторический синдикат к любой современной ассоциации без документированной преемственности."
+    },
+    {
+      "id": "parfum-tous-sens-grasse-inauguration-2019",
+      "eventDate": "2019-06-29",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_inauguration",
+      "titleRu": "Инаугурация «Le parfum dans tous les sens» в Грассе",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "parfum-tous-sens-grasse-inauguration-2019",
+      "sourceIds": [
+        "fff-grasse-2019"
+      ],
+      "dateEvidence": {
+        "sourceId": "fff-grasse-2019",
+        "locator": "Речь мэра в публикации 11 июля: inaugurée le samedi 29 juin",
+        "summaryRu": "Организатор выставки сообщает, что её открытие в Грассе состоялось в субботу 29 июня 2019 года."
+      },
+      "storyAngleRu": "Как рассказ о невидимом запахе вышел из музея на улицы города.",
+      "researchNotesRu": "Не датировать этим днём создание самой выставки в 2015 году или открытие всех мероприятий фестиваля."
+    },
+    {
+      "id": "lalique-museum-inauguration-2011",
+      "eventDate": "2011-07-01",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "museum_inauguration",
+      "titleRu": "Инаугурация музея Lalique",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "lalique-museum-inauguration-2011",
+      "sourceIds": [
+        "lalique-museum-inauguration"
+      ],
+      "dateEvidence": {
+        "sourceId": "lalique-museum-inauguration",
+        "locator": "Un projet porté par les collectivités",
+        "summaryRu": "Сайт музея прямо сообщает о состоявшейся инаугурации 1 июля 2011 года."
+      },
+      "storyAngleRu": "Флакон как самостоятельное произведение: что сохраняет музей стекла и парфюмерной упаковки.",
+      "researchNotesRu": "Именно инаугурация: предварительные программы называют публичный доступ со 2 июля. Не разделять эти этапы одного открытия на два события."
+    },
+    {
+      "id": "les-parfums-france-release-2020",
+      "eventDate": "2020-07-01",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "film_release",
+      "titleRu": "Фильм «Аромат» вышел во французский прокат",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "les-parfums-france-release-2020",
+      "sourceIds": [
+        "unifrance-les-parfums"
+      ],
+      "dateEvidence": {
+        "sourceId": "unifrance-les-parfums",
+        "locator": "Mentions techniques: Sortie en France, Etat d’avancement",
+        "summaryRu": "Карточка фильма Les Parfums указывает выход 01/07/2020 и статус Sorti."
+      },
+      "storyAngleRu": "Профессия парфюмера на экране: талант, повседневная работа и отношение к запахам.",
+      "researchNotesRu": "Не выдавать поведение вымышленной героини за биографию реального парфюмера. Не повторять сюжет о передаче запаха в фильме «Парфюмер»."
+    },
+    {
+      "id": "henri-robert-death-1987",
+      "eventDate": "1987-07-07",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "death",
+      "titleRu": "Уход Анри Робера",
+      "status": "verified",
+      "evidenceLevel": "specialist",
+      "eventGroupId": "henri-robert-death-1987",
+      "sourceIds": [
+        "nez-henri-robert"
+      ],
+      "dateEvidence": {
+        "sourceId": "nez-henri-robert",
+        "locator": "Последний биографический абзац перед парфюмографией",
+        "summaryRu": "Статья указывает смерть в Мужене 7 июля 1987 года."
+      },
+      "storyAngleRu": "Наследие парфюмерных баз и роль работы за пределами известного имени на флаконе.",
+      "researchNotesRu": "Не пересказывать на эту дату тот же сюжет о № 19, что и в материале о рождении."
+    },
+    {
+      "id": "jean-carles-death-1966",
+      "eventDate": "1966-07-08",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "death",
+      "titleRu": "Уход Жана Карля",
+      "status": "verified",
+      "evidenceLevel": "specialist",
+      "eventGroupId": "jean-carles-death-1966",
+      "sourceIds": [
+        "nez-carles"
+      ],
+      "dateEvidence": {
+        "sourceId": "nez-carles",
+        "locator": "Последний биографический абзац",
+        "summaryRu": "Профессиональная историческая статья указывает смерть в Грассе 8 июля 1966 года."
+      },
+      "storyAngleRu": "Метод как наследство: зачем парфюмер учится различать сырьё в сравнении.",
+      "researchNotesRu": "Развести с историей рождения: здесь педагогика и передача знаний, там создание ароматов. Не объявлять потерю обоняния установленным фактом без дополнительных доказательств."
+    },
+    {
+      "id": "francois-coty-death-1934",
+      "eventDate": "1934-07-25",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "death",
+      "titleRu": "Уход Франсуа Коти",
+      "status": "verified",
+      "evidenceLevel": "specialist",
+      "eventGroupId": "francois-coty-death-1934",
+      "sourceIds": [
+        "nez-coty"
+      ],
+      "dateEvidence": {
+        "sourceId": "nez-coty",
+        "locator": "Последний абзац биографии",
+        "summaryRu": "Материал прямо датирует смерть 25 июля 1934 года."
+      },
+      "storyAngleRu": "Что осталось в парфюмерии от соединения авторской композиции, упаковки и промышленного масштаба.",
+      "researchNotesRu": "Не превращать легенду о разбитом флаконе в факт и не умалчивать о политическом контексте, если он затрагивается."
+    },
+    {
+      "id": "gabrielle-chanel-birth-1883",
+      "eventDate": "1883-08-19",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Рождение Габриэль Шанель",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "gabrielle-chanel-birth-1883",
+      "sourceIds": [
+        "chanel-birth"
+      ],
+      "dateEvidence": {
+        "sourceId": "chanel-birth",
+        "locator": "1883, основной текст",
+        "summaryRu": "История дома прямо указывает рождение 19 августа 1883 года."
+      },
+      "storyAngleRu": "Как аромат стал самостоятельным выражением стиля модного дома. Для подробностей о № 5 и № 19 нужны отдельные фактические источники.",
+      "researchNotesRu": ""
+    },
+    {
+      "id": "leopold-ruzicka-birth-1887",
+      "eventDate": "1887-09-13",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "birth",
+      "titleRu": "Рождение Леопольда Ружички",
+      "status": "verified",
+      "evidenceLevel": "corroborated_primary",
+      "eventGroupId": "leopold-ruzicka-birth-1887",
+      "sourceIds": [
+        "eth-ruzicka",
+        "uzh-ruzicka"
+      ],
+      "dateEvidence": {
+        "sourceId": "eth-ruzicka",
+        "locator": "ETH: первый абзац; UZH: биографические сведения",
+        "summaryRu": "Оба университета указывают рождение 13 сентября 1887 года; UZH описывает исследование мускона и циветона."
+      },
+      "storyAngleRu": "Почему устройство молекулы оказалось важным для истории мускусных запахов.",
+      "researchNotesRu": "Не называть химика парфюмером. Дата смерти между этими источниками расходится и в календарь не внесена."
+    },
+    {
+      "id": "henri-robert-birth-1899",
+      "eventDate": "1899-09-30",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "birth",
+      "titleRu": "Рождение Анри Робера",
+      "status": "verified",
+      "evidenceLevel": "specialist",
+      "eventGroupId": "henri-robert-birth-1899",
+      "sourceIds": [
+        "nez-henri-robert"
+      ],
+      "dateEvidence": {
+        "sourceId": "nez-henri-robert",
+        "locator": "Первый биографический абзац",
+        "summaryRu": "Историческая биография прямо указывает 30 сентября 1899 года."
+      },
+      "storyAngleRu": "Зелёные ноты и автор, связавший разные поколения парфюмерии CHANEL.",
+      "researchNotesRu": ""
+    },
+    {
+      "id": "perfume-film-france-release-2006",
+      "eventDate": "2006-10-04",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "film_release",
+      "titleRu": "Выход фильма «Парфюмер» во Франции",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "perfume-film-france-release-2006",
+      "sourceIds": [
+        "unifrance-perfume-2006"
+      ],
+      "dateEvidence": {
+        "sourceId": "unifrance-perfume-2006",
+        "locator": "Mentions techniques: Sortie en France, Etat d’avancement",
+        "summaryRu": "Ретроспективная карточка указывает французский прокат 04/10/2006 и статус Sorti."
+      },
+      "storyAngleRu": "Как кино передаёт запах средствами изображения и звука.",
+      "researchNotesRu": "События вымышленного сюжета не являются фактами истории парфюмерии. Другие национальные релизы этого фильма не использовать для заполнения следующих дат."
+    },
+    {
+      "id": "jacques-guerlain-birth-1874",
+      "eventDate": "1874-10-07",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "birth",
+      "titleRu": "Рождение Жака Герлена",
+      "status": "verified",
+      "evidenceLevel": "specialist",
+      "eventGroupId": "jacques-guerlain-birth-1874",
+      "sourceIds": [
+        "nez-jacques"
+      ],
+      "dateEvidence": {
+        "sourceId": "nez-jacques",
+        "locator": "Первый биографический абзац",
+        "summaryRu": "В статье прямо указано рождение 7 октября 1874 года."
+      },
+      "storyAngleRu": "Как один автор создал разные парфюмерные миры, ставшие частью языка Guerlain.",
+      "researchNotesRu": "Не включать спорные точные даты запуска его ароматов только по годам в биографии."
+    },
+    {
+      "id": "givaudan-singapore-school-opening-2015",
+      "eventDate": "2015-10-07",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "school_campus_opening",
+      "titleRu": "Открытие сингапурского кампуса школы парфюмерии Givaudan",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "givaudan-singapore-school-opening-2015",
+      "sourceIds": [
+        "givaudan-singapore-school-2015"
+      ],
+      "dateEvidence": {
+        "sourceId": "givaudan-singapore-school-2015",
+        "locator": "Релиз 07 Oct 2015: today officially opened; первый абзац",
+        "summaryRu": "Релиз прямо датирует состоявшееся сегодняшнее открытие 7 октября 2015 года и описывает первый кампус школы вне Франции."
+      },
+      "storyAngleRu": "Как обучают будущих авторов ароматов: расширение школы в Азии.",
+      "researchNotesRu": "Кампус, творческий центр и производство открылись вместе: это одна группа событий, не три отдельных дня."
+    },
+    {
+      "id": "firmenich-geneva-campus-inauguration-2022",
+      "eventDate": "2022-10-11",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "campus_inauguration",
+      "titleRu": "Инаугурация кампуса Firmenich в Женеве",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "firmenich-geneva-campus-inauguration-2022",
+      "sourceIds": [
+        "firmenich-geneva-campus-2022"
+      ],
+      "dateEvidence": {
+        "sourceId": "firmenich-geneva-campus-2022",
+        "locator": "Датировка Geneva October 11th 2022 и today officially inaugurated",
+        "summaryRu": "Фирменный релиз прямо сообщает о состоявшейся в этот день церемонии 11 октября 2022 года."
+      },
+      "storyAngleRu": "Как аромат проходит путь от замысла и лабораторной пробы к воспроизводимому производству.",
+      "researchNotesRu": "Отличать церемонию 2022 года от завершения оборудования в феврале 2021 года. Не повторять сюжет об исследовательском центре 2023 года."
+    },
+    {
+      "id": "mip-grasse-reopening-2008",
+      "eventDate": "2008-10-18",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "museum_reopening",
+      "titleRu": "Музей парфюмерии в Грассе вновь открылся после реконструкции",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "mip-grasse-reopening-2008",
+      "sourceIds": [
+        "culture-mip-registry"
+      ],
+      "dateEvidence": {
+        "sourceId": "culture-mip-registry",
+        "locator": "Historique",
+        "summaryRu": "Государственный музейный реестр прямо указывает состоявшееся повторное открытие 18 октября 2008 года."
+      },
+      "storyAngleRu": "Как музей сохраняет аромат, если обычная витрина показывает только флакон.",
+      "researchNotesRu": "Повторное открытие после работ, не первоначальное основание музея в 1989 году."
+    },
+    {
+      "id": "dinand-parfums-legende-inauguration-2017",
+      "eventDate": "2017-10-18",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_inauguration",
+      "titleRu": "Инаугурация выставки «Parfums de Légende» Пьера Динана",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "dinand-parfums-legende-inauguration-2017",
+      "sourceIds": [
+        "fff-dinand-2017"
+      ],
+      "dateEvidence": {
+        "sourceId": "fff-dinand-2017",
+        "locator": "Первый абзац: Inaugurée le 18 octobre; публикация 20 октября 2017",
+        "summaryRu": "Ассоциация прямо указывает состоявшуюся инаугурацию 18 октября."
+      },
+      "storyAngleRu": "Почему у парфюма бывает два автора образа: композитор запаха и дизайнер флакона.",
+      "researchNotesRu": "Внизу страницы период выставки начинается 17 октября: не путать с отдельно названной церемонией 18 октября. Сам Динан — дизайнер флаконов."
+    },
+    {
+      "id": "little-book-perfumes-publication-2011",
+      "eventDate": "2011-10-27",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "book_publication",
+      "titleRu": "Выход The Little Book of Perfumes",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "little-book-perfumes-publication-2011",
+      "sourceIds": [
+        "prh-little-book-perfumes"
+      ],
+      "dateEvidence": {
+        "sourceId": "prh-little-book-perfumes",
+        "locator": "Product Details / ISBN 9781101545331",
+        "summaryRu": "Издатель указывает Published on Oct 27, 2011 для электронного издания."
+      },
+      "storyAngleRu": "Как об ароматах научились спорить и писать как о произведениях искусства.",
+      "researchNotesRu": "Именно указанное электронное издание; не дата другого труда Perfumes: The Guide 2008 года. Оценки авторов не являются объективным рейтингом."
+    },
+    {
+      "id": "ellena-atlas-botanique-publication-2020",
+      "eventDate": "2020-10-28",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "book_publication",
+      "titleRu": "Выход Atlas de botanique parfumée",
+      "status": "verified",
+      "evidenceLevel": "industry_registry",
+      "eventGroupId": "ellena-atlas-botanique-publication-2020",
+      "sourceIds": [
+        "livreshebdo-atlas-2020"
+      ],
+      "dateEvidence": {
+        "sourceId": "livreshebdo-atlas-2020",
+        "locator": "Parution / ISBN 9782081489141",
+        "summaryRu": "Отраслевая библиографическая карточка прямо указывает 28 octobre 2020."
+      },
+      "storyAngleRu": "Растение глазами парфюмера: связь ботаники, географии и памяти.",
+      "researchNotesRu": "Не путать с продолжением 2025 года. Для конкретных историй о растениях нужен текст книги или другие проверенные материалы."
+    },
+    {
+      "id": "paul-vacher-death-1975",
+      "eventDate": "1975-11-12",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "death",
+      "titleRu": "Уход Поля Ваше",
+      "status": "verified",
+      "evidenceLevel": "specialist",
+      "eventGroupId": "paul-vacher-death-1975",
+      "sourceIds": [
+        "nez-vacher"
+      ],
+      "dateEvidence": {
+        "sourceId": "nez-vacher",
+        "locator": "Завершающий биографический абзац",
+        "summaryRu": "После описания выхода на пенсию в 1975 году статья датирует смерть 12 ноября того же года."
+      },
+      "storyAngleRu": "Как композиции продолжают жить после создателя и почему авторство важно для истории аромата.",
+      "researchNotesRu": "Не называть изменённые современные версии точными копиями исторических формул."
+    },
+    {
+      "id": "ernest-daltroff-birth-1867",
+      "eventDate": "1867-11-17",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "birth",
+      "titleRu": "Рождение Эрнеста Дальтроффа",
+      "status": "verified",
+      "evidenceLevel": "specialist",
+      "eventGroupId": "ernest-daltroff-birth-1867",
+      "sourceIds": [
+        "nez-daltroff"
+      ],
+      "dateEvidence": {
+        "sourceId": "nez-daltroff",
+        "locator": "Biographie, первый абзац",
+        "summaryRu": "Историческая биография прямо указывает 17 ноября 1867 года."
+      },
+      "storyAngleRu": "Caron и путь автора, пришедшего в парфюмерию без специального образования.",
+      "researchNotesRu": "Рассказы о детском впечатлении и происхождении названия требуют явной атрибуции, не реконструкции сцены."
+    },
+    {
+      "id": "art-of-scent-opening-2012",
+      "eventDate": "2012-11-20",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Открытие The Art of Scent в Нью-Йорке",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "art-of-scent-opening-2012",
+      "sourceIds": [
+        "mad-art-of-scent",
+        "mad-five-year-report-2008-2013"
+      ],
+      "dateEvidence": {
+        "sourceId": "mad-five-year-report-2008-2013",
+        "locator": "Five-Year Report 2008–2013, стр. 12 PDF, раздел Exhibitions / The Art of Scent 1889–2012",
+        "summaryRu": "Ретроспективный отчёт MAD описывает состоявшуюся выставку и прямо указывает её период: 20 ноября 2012 года — 3 марта 2013 года."
+      },
+      "storyAngleRu": "Аромат как произведение искусства: фокус на запахе вместо узнаваемого флакона.",
+      "researchNotesRu": "Дата пресс-релиза 6 ноября не является датой открытия. Не заимствовать музейные утверждения о мировом первенстве без оговорок."
+    },
+    {
+      "id": "grasse-unesco-inscription-2018",
+      "eventDate": "2018-11-28",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "heritage_inscription",
+      "titleRu": "Парфюмерные знания Грасса в списке UNESCO",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "grasse-unesco-inscription-2018",
+      "sourceIds": [
+        "unesco-grasse"
+      ],
+      "dateEvidence": {
+        "sourceId": "unesco-grasse",
+        "locator": "Сообщение о решениях комитета от 28 November 2018",
+        "summaryRu": "UNESCO сообщает 28 ноября 2018 года о внесении навыков Грасса в Репрезентативный список."
+      },
+      "storyAngleRu": "Три связанные профессии: выращивание растений, обработка сырья и составление ароматов.",
+      "researchNotesRu": "Не называть внесение города в список Всемирного наследия; признаны знания и навыки."
+    },
+    {
+      "id": "mariaceleste-lombardo-birth-1986",
+      "eventDate": "1986-11-30",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "birth",
+      "titleRu": "Рождение Мариачелесте Ломбардо",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "mariaceleste-lombardo-birth-1986",
+      "sourceIds": [
+        "moellhausen-lombardo"
+      ],
+      "dateEvidence": {
+        "sourceId": "moellhausen-lombardo",
+        "locator": "PDF, стр. 3, биография",
+        "summaryRu": "Moellhausen датирует рождение своего парфюмера 30 ноября 1986 года."
+      },
+      "storyAngleRu": "Путь от косметической химии и контроля качества к композиции ароматов.",
+      "researchNotesRu": "Для истории о конкретном аромате сначала установить её авторство по отдельному источнику."
+    },
+    {
+      "id": "vogue125-launch-2017",
+      "eventDate": "2017-12-01",
+      "calendar": "gregorian",
+      "category": "fragrance_history",
+      "eventType": "launch",
+      "titleRu": "Выход Vogue 125 — аромата журнала Vogue",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "vogue125-launch-2017",
+      "sourceIds": [
+        "vogue-125-launch"
+      ],
+      "dateEvidence": {
+        "sourceId": "vogue-125-launch",
+        "locator": "Статья от 1 December 2017, основной текст: debuts today",
+        "summaryRu": "Участник коллаборации сообщает о выходе аромата именно в день публикации, 1 декабря 2017 года."
+      },
+      "storyAngleRu": "Как журнал передал свою историю через ландыш, чернила и образ печатной страницы.",
+      "researchNotesRu": "В отличие от произвольной даты статьи, в тексте прямо сказано о сегодняшнем выходе. Не приписывать креативному директору самостоятельное авторство формулы без дополнительного источника."
+    },
+    {
+      "id": "decorte-kimono-japan-launch-2020",
+      "eventDate": "2020-12-01",
+      "calendar": "gregorian",
+      "category": "fragrance_history",
+      "eventType": "collection_launch",
+      "titleRu": "Выход коллекции DECORTÉ Kimono в Японии",
+      "status": "verified",
+      "evidenceLevel": "corroborated_primary",
+      "eventGroupId": "decorte-kimono-japan-launch-2020",
+      "sourceIds": [
+        "cosme-kimono-yui",
+        "kose-kimono-release",
+        "decorte-kimono-booklet",
+        "decorte-kimono-design"
+      ],
+      "dateEvidence": {
+        "sourceId": "cosme-kimono-yui",
+        "locator": "@cosme: 発売日; KOSÉ: стр. 1",
+        "summaryRu": "Карточка с предоставленной или одобренной брендом информацией указывает 2020/12/1. Релиз KOSÉ относит старт четырёх ароматов в Японии к этому дню."
+      },
+      "storyAngleRu": "Как образ кимоно переводят в язык ароматов и оформления флакона.",
+      "researchNotesRu": "Только японский старт, не мировая дата. KIHIN, YUI, URARA и RIN составляют одну группу запуска; не разделять на четыре события. Позднейшая дополнительная дата относится к ассортименту."
+    },
+    {
+      "id": "gianni-versace-birth-1946",
+      "eventDate": "1946-12-02",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Рождение Джанни Версаче",
+      "status": "verified",
+      "evidenceLevel": "corroborated_reference",
+      "eventGroupId": "gianni-versace-birth-1946",
+      "sourceIds": [
+        "versace-encyclopedia",
+        "versace-equality-biography"
+      ],
+      "dateEvidence": {
+        "sourceId": "versace-encyclopedia",
+        "locator": "Encyclopedia of World Biography, начало; Equality Forum, строка b.",
+        "summaryRu": "Два независимых биографических источника прямо указывают 2 декабря 1946 года."
+      },
+      "storyAngleRu": "Парфюмерия как продолжение визуального языка Versace.",
+      "researchNotesRu": "День рождения основателя, не дата запуска бренда. Перед рассказом добавить проверенные факты именно о парфюмерной линии; не объявлять дизайнера автором формулы."
+    },
+    {
+      "id": "britney-spears-birth-1981",
+      "eventDate": "1981-12-02",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Рождение Бритни Спирс",
+      "status": "verified",
+      "evidenceLevel": "reference",
+      "eventGroupId": "britney-spears-birth-1981",
+      "sourceIds": [
+        "spears-biography",
+        "arden-sec-curious"
+      ],
+      "dateEvidence": {
+        "sourceId": "spears-biography",
+        "locator": "Biography.com / Quick Facts; SEC / Results of Operations",
+        "summaryRu": "Биография указывает 2 декабря 1981 года. Отчётность Elizabeth Arden подтверждает связь с Curious."
+      },
+      "storyAngleRu": "Curious и роль публичной личности в создании парфюмерного бренда.",
+      "researchNotesRu": "Не называть певицу парфюмером или автором формулы. Начало продаж Curious в отчёте дано с точностью до месяца; не назначать ему конкретный день."
+    },
+    {
+      "id": "dsm-firmenich-research-hub-inauguration-2023",
+      "eventDate": "2023-12-06",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "research_hub_inauguration",
+      "titleRu": "Открытие исследовательского центра dsm-firmenich в Кайзераугсте",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "dsm-firmenich-research-hub-inauguration-2023",
+      "sourceIds": [
+        "dsm-firmenich-research-2023"
+      ],
+      "dateEvidence": {
+        "sourceId": "dsm-firmenich-research-2023",
+        "locator": "Pushing the envelope, завершающий абзац",
+        "summaryRu": "Годовой отчёт прямо датирует состоявшуюся инаугурацию 6 декабря 2023 года."
+      },
+      "storyAngleRu": "Что происходит до появления флакона: аналитика, химия и поиск новых душистых веществ.",
+      "researchNotesRu": "Центр работает и за пределами парфюмерии; не называть его исключительно парфюмерной лабораторией и не приписывать ему любую разработку группы."
+    },
+    {
+      "id": "zambesi-1979-launch-2023",
+      "eventDate": "2023-12-07",
+      "calendar": "gregorian",
+      "category": "fragrance_history",
+      "eventType": "launch",
+      "titleRu": "Выход аромата Zambesi 1979",
+      "status": "verified",
+      "evidenceLevel": "specialist",
+      "eventGroupId": "zambesi-1979-launch-2023",
+      "sourceIds": [
+        "fashionz-zambesi"
+      ],
+      "dateEvidence": {
+        "sourceId": "fashionz-zambesi",
+        "locator": "Статья 7 December 2023, абзац available from December 7",
+        "summaryRu": "Публикация в день запуска прямо называет начало доступности 7 декабря."
+      },
+      "storyAngleRu": "Как новозеландский модный дом перевёл свой характер в аромат.",
+      "researchNotesRu": "Не выдавать 1979 в названии за год выпуска парфюма. До рассказа проверить авторство и конкретные ноты."
+    },
+    {
+      "id": "sabrina-me-espresso-presentation-2024",
+      "eventDate": "2024-12-08",
+      "calendar": "gregorian",
+      "category": "fragrance_history",
+      "eventType": "public_presentation",
+      "titleRu": "Сабрина Карпентер представила Me Espresso",
+      "status": "verified",
+      "evidenceLevel": "specialist",
+      "eventGroupId": "sabrina-me-espresso-presentation-2024",
+      "sourceIds": [
+        "newbeauty-me-espresso"
+      ],
+      "dateEvidence": {
+        "sourceId": "newbeauty-me-espresso",
+        "locator": "Статья 9 December 2024, указание Sunday December 8 и цитата available now",
+        "summaryRu": "Материал прямо датирует объявление 8 декабря и приводит сообщение о доступности аромата."
+      },
+      "storyAngleRu": "Кофейный гурманский аромат на пересечении музыки и парфюмерной культуры.",
+      "researchNotesRu": "Дата публичной презентации, не дата изготовления и не начало продаж во всех странах. Не называть певицу автором формулы."
+    },
+    {
+      "id": "le-grand-numero-chanel-opening-2022",
+      "eventDate": "2022-12-15",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Открытие Le Grand Numéro de Chanel",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "le-grand-numero-chanel-opening-2022",
+      "sourceIds": [
+        "grand-palais-chanel"
+      ],
+      "dateEvidence": {
+        "sourceId": "grand-palais-chanel",
+        "locator": "Название и даты выставки",
+        "summaryRu": "Grand Palais указывает начало выставки о парфюмерии CHANEL 15 декабря 2022 года."
+      },
+      "storyAngleRu": "Как невидимый аромат превращают в музейное пространство.",
+      "researchNotesRu": ""
+    },
+    {
+      "id": "miss-dior-launch-invitation-1947",
+      "eventDate": "1947-12-17",
+      "calendar": "gregorian",
+      "category": "fragrance_history",
+      "eventType": "launch_event",
+      "titleRu": "Приглашение на запуск первого Miss Dior",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "miss-dior-launch-invitation-1947",
+      "sourceIds": [
+        "dior-timeline"
+      ],
+      "dateEvidence": {
+        "sourceId": "dior-timeline",
+        "locator": "1947 / подпись к Invitation card",
+        "summaryRu": "Подпись музейного архива датирует приглашение на запуск первого Miss Dior 17 декабря 1947 года."
+      },
+      "storyAngleRu": "Первый аромат дома через сохранившееся приглашение и связь моды с запахом.",
+      "researchNotesRu": "Не превращать дату приглашения в доказательство первой продажи во всех странах. Не датировать коммерческий запуск первым показом 12 февраля."
+    },
+    {
+      "id": "josephine-catapano-birth-1918",
+      "eventDate": "1918-12-29",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "birth",
+      "titleRu": "Рождение Жозефины Катапано",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "josephine-catapano-birth-1918",
+      "sourceIds": [
+        "catapano-family-obituary"
+      ],
+      "dateEvidence": {
+        "sourceId": "catapano-family-obituary",
+        "locator": "Заголовок и первый абзац некролога",
+        "summaryRu": "Семейный некролог прямо указывает рождение 29 декабря 1918 года и работу над Youth Dew, Fidji и другими ароматами."
+      },
+      "storyAngleRu": "Автор за знакомым флаконом: Youth Dew и изменение роли парфюма в повседневной жизни.",
+      "researchNotesRu": "Для истории о самостоятельной покупке Youth Dew добавить отдельный источник. Не повторять сюжет наследия из события о смерти."
+    }
+  ],
+  "inclusionRule": "Only events with an exact historical date read and verified in the cited source. No candidates, disputed dates, inferred dates, or merely planned events.",
+  "verificationScope": "Exact date and the narrowly stated event are verified. Story angles are editorial proposals and require sourced fact packets before writing."
+}
