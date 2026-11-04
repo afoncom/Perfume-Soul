@@ -505,6 +505,62 @@
       ]
     },
     {
+      "eventId": "n4r-grand-musee-opening-2016",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4r-grand-musee-opening-2016-f1",
+          "claim": "Grand Musée du Parfum открылся для публики 22 декабря 2016 года в Париже.",
+          "sourceIds": [
+            "n4r-grand-musee-opening-2016-s1",
+            "n4r-grand-musee-opening-2016-s2",
+            "n4r-grand-musee-opening-2016-s3"
+          ],
+          "locator": "SNCFстр.1; Projectilesвступление; репортажDélicesянварь2017"
+        },
+        {
+          "id": "n4r-grand-musee-opening-2016-f2",
+          "claim": "Разработанный Projectiles музейный маршрут включал три крупных этапа, историческую часть от Египта до современности и более70 запахов.",
+          "sourceIds": [
+            "n4r-grand-musee-opening-2016-s2"
+          ],
+          "locator": "Вступление"
+        },
+        {
+          "id": "n4r-grand-musee-opening-2016-f3",
+          "claim": "Во внестенной инсталляции100%ILLUSION Роберта Стадлера на вокзале Saint-Lazare были пять колпаков.",
+          "sourceIds": [
+            "n4r-grand-musee-opening-2016-s1",
+            "n4r-grand-musee-bonjour"
+          ],
+          "locator": "Стр.1, первые абзацы; Bonjour Paris,23janvier2017, paragraphes2–3"
+        },
+        {
+          "id": "n4r-grand-musee-opening-2016-f4",
+          "claim": "Четыре колпака представляли amyl vinyl carbinol, линалилацетат, камфору и кумарин; пятый, больший, — составленный из них лавандовый аккорд.",
+          "sourceIds": [
+            "n4r-grand-musee-opening-2016-s1"
+          ],
+          "locator": "Стр.1, абзацCinqcloches"
+        },
+        {
+          "id": "n4r-grand-musee-opening-2016-f5",
+          "claim": "Публичный репортаж января2017 описывает музей на rue du Faubourg Saint-Honoré и его три части.",
+          "sourceIds": [
+            "n4r-grand-musee-opening-2016-s3"
+          ],
+          "locator": "Основной текст"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Объяснение отношений между запахом, зрительным образом и личным впечатлением — редакционная интерпретация."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать дизайнеру или знаменитости единоличное авторство формулы.",
+        "Рекламные образы не являются доказательством состава."
+      ]
+    },
+    {
       "eventId": "josephine-catapano-birth-1918",
       "status": "verified_fact_packet",
       "facts": [
@@ -628,9 +684,10 @@
           "id": "r-jeanne-lanvin-birth-1867-f2",
           "claim": "Arpège выпущен в 1927 году и посвящён тридцатилетию дочери Маргерит, пианистки.",
           "sourceIds": [
-            "r-lanvin-galliera"
+            "r-lanvin-galliera",
+            "r-arpege-museum"
           ],
-          "locator": "Стр. 6 / From logo to black & gold; хронология"
+          "locator": "Стр. 6 / From logo to black & gold; хронология; Musées de Boulogne-Billancourt, Contexte: pianiste"
         },
         {
           "id": "r-jeanne-lanvin-birth-1867-f3",
@@ -1059,7 +1116,7 @@
         },
         {
           "id": "r-paco-rabanne-birth-1934-f5",
-          "claim": "Дом описывает Calandre как свежую металлическую розу во флаконе из металла и стекла.",
+          "claim": "Дом описывает Calandre как свежую металлическую розу в стеклянном флаконе с металлическим оформлением.",
           "sourceIds": [
             "r-rabanne-calandre"
           ],
@@ -1445,6 +1502,66 @@
       ]
     },
     {
+      "eventId": "c-cernuschi-parfums-chine-2018",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-cernuschi-parfums-chine-2018-f1",
+          "claim": "Выставка Parfums de Chine в музее Чернуски открылась 9 марта 2018 года.",
+          "sourceIds": [
+            "c-cernuschi-exhibition"
+          ],
+          "locator": "Média, подпись к видео: Du 9 mars au 26 août 2018"
+        },
+        {
+          "id": "c-cernuschi-parfums-chine-2018-f2",
+          "claim": "Охват выставки: III век до нашей эры — XIX век.",
+          "sourceIds": [
+            "c-cernuschi-exhibition"
+          ],
+          "locator": "Présentation"
+        },
+        {
+          "id": "c-cernuschi-parfums-chine-2018-f3",
+          "claim": "В экспозиции были курильницы, столики для благовоний, керамика, лак, живопись и каллиграфия.",
+          "sourceIds": [
+            "c-cernuschi-exhibition"
+          ],
+          "locator": "Présentation"
+        },
+        {
+          "id": "c-cernuschi-parfums-chine-2018-f4",
+          "claim": "Франсуа Демаши переосмыслил древние рецепты, переведённые и отобранные Фредериком Обренже.",
+          "sourceIds": [
+            "c-cernuschi-press"
+          ],
+          "locator": "Страница4, Un parcours olfactif"
+        },
+        {
+          "id": "c-cernuschi-parfums-chine-2018-f5",
+          "claim": "Картина Чэнь Хуншоу показывает женщину, которая держит рукава над курильницей в форме утки.",
+          "sourceIds": [
+            "c-cernuschi-press"
+          ],
+          "locator": "Страница4, Une peinture de Chen Hongshou"
+        },
+        {
+          "id": "c-cernuschi-parfums-chine-2018-f6",
+          "claim": "Детский путеводитель включает пять станций с рецептами и перечисляет среди ингредиентов жасмин, гвоздику, корицу и агаровое дерево.",
+          "sourceIds": [
+            "c-cernuschi-booklet"
+          ],
+          "locator": "Страницы1 и5, Les ingrédients des recettes"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
+      ]
+    },
+    {
       "eventId": "r-hubert-givenchy-death-2018",
       "status": "verified_fact_packet",
       "facts": [
@@ -1495,6 +1612,66 @@
       "excludedClaimsRu": [
         "Точная дата выпуска аромата, если источник подтверждает только год.",
         "Авторство формулы у дизайнера или знаменитости без отдельного подтверждения."
+      ]
+    },
+    {
+      "eventId": "c-perkin-birth-1838",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-perkin-birth-1838-f1",
+          "claim": "Уильям Генри Перкин родился 12 марта 1838 года в Лондоне.",
+          "sourceIds": [
+            "c-perkin-1911"
+          ],
+          "locator": "Начало статьи, born in London on the12th ofMarch1838"
+        },
+        {
+          "id": "c-perkin-birth-1838-f2",
+          "claim": "В 1856 году при опытах с получением хинина Перкин получил краситель мовеин; производство началось в 1857 году.",
+          "sourceIds": [
+            "c-perkin-1911"
+          ],
+          "locator": "Абзацы о mauve и GreenfordGreen"
+        },
+        {
+          "id": "c-perkin-birth-1838-f3",
+          "claim": "Перкин синтезировал кумарин, связанный с развитием синтетической парфюмерии.",
+          "sourceIds": [
+            "c-perkin-bristol"
+          ],
+          "locator": "Абзац After he retired"
+        },
+        {
+          "id": "c-perkin-birth-1838-f4",
+          "claim": "Запах кумарина описывают через ваниль и свежескошенное сено.",
+          "sourceIds": [
+            "c-perkin-coumarin"
+          ],
+          "locator": "The Coumarins, первыйабзац"
+        },
+        {
+          "id": "c-perkin-birth-1838-f5",
+          "claim": "Название кумарина связано с cumaru, деревом, дающим бобы тонка.",
+          "sourceIds": [
+            "c-perkin-coumarin"
+          ],
+          "locator": "The Coumarins, второйабзац"
+        },
+        {
+          "id": "c-perkin-birth-1838-f6",
+          "claim": "В 1874 году Перкин оставил производство и посвятил себя исследованиям.",
+          "sourceIds": [
+            "c-perkin-1911"
+          ],
+          "locator": "Абзац About1874"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
       ]
     },
     {
@@ -1725,6 +1902,58 @@
       ]
     },
     {
+      "eventId": "c-sjp-birth-1965",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-sjp-birth-1965-f1",
+          "claim": "Сара Джессика Паркер родилась 25 марта 1965 года в Нельсонвилле, штат Огайо.",
+          "sourceIds": [
+            "c-sjp-bio"
+          ],
+          "locator": "Биографическая карточка, Birthday и Born"
+        },
+        {
+          "id": "c-sjp-birth-1965-f2",
+          "claim": "Чандлер Бёрр описывает встречу Паркер с агентом 29 октября 2004 года и её давнее желание создать парфюм.",
+          "sourceIds": [
+            "c-sjp-burr"
+          ],
+          "locator": "Книжный отрывок, первая сцена 29 October 2004"
+        },
+        {
+          "id": "c-sjp-birth-1965-f3",
+          "claim": "Бёрр различает роль художественного руководителя, задающего направление, и работу парфюмеров над формулой.",
+          "sourceIds": [
+            "c-sjp-burr"
+          ],
+          "locator": "Отрывок, объяснение задачи artistic director"
+        },
+        {
+          "id": "c-sjp-birth-1965-f4",
+          "claim": "Осмотека датирует Lovely 2005 годом и называет Клемана Гаварри и Лорана Ле Гернека.",
+          "sourceIds": [
+            "c-osmotheque-collection"
+          ],
+          "locator": "Строка Lovely, SARAH JESSICA PARKER"
+        },
+        {
+          "id": "c-sjp-birth-1965-f5",
+          "claim": "Официальная палитра Lovely включает лаванду и яблочный мартини, пачули и белые цветы, кедр, белую амбру и мускусы.",
+          "sourceIds": [
+            "c-sjp-lovely"
+          ],
+          "locator": "FAQ, What does Lovely smell like?"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
+      ]
+    },
+    {
       "eventId": "germaine-cellier-birth-1909",
       "status": "verified_fact_packet",
       "facts": [
@@ -1786,6 +2015,66 @@
       ]
     },
     {
+      "eventId": "c-wallach-birth-1847",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-wallach-birth-1847-f1",
+          "claim": "Отто Валлах родился 27 марта 1847 года в Кёнигсберге.",
+          "sourceIds": [
+            "c-wallach-uni"
+          ],
+          "locator": "Lebenslauf, строка 27.3.1847"
+        },
+        {
+          "id": "c-wallach-birth-1847-f2",
+          "claim": "В 1869 году он защитил диссертацию в Гёттингене, в 1889–1915 годах был там профессором химии.",
+          "sourceIds": [
+            "c-wallach-uni"
+          ],
+          "locator": "Lebenslauf, строки 1869 и 1889–1915"
+        },
+        {
+          "id": "c-wallach-birth-1847-f3",
+          "claim": "Его исследования состава эфирных масел, терпенов и камфоры содействовали развитию промышленности синтетических душистых веществ.",
+          "sourceIds": [
+            "c-wallach-school"
+          ],
+          "locator": "Основной очерк, второй абзац"
+        },
+        {
+          "id": "c-wallach-birth-1847-f4",
+          "claim": "В 1910 году он получил Нобелевскую премию за работы в области алициклических соединений.",
+          "sourceIds": [
+            "c-wallach-school"
+          ],
+          "locator": "Основной очерк, первый абзац"
+        },
+        {
+          "id": "c-wallach-birth-1847-f5",
+          "claim": "Начиная с 1884 года более 125 публикаций Валлаха исследовали важные терпеноидные составляющие эфирных масел, включая пинен и лимонен.",
+          "sourceIds": [
+            "c-wallach-wiley"
+          ],
+          "locator": "Scent and Chemistry, 2-е издание, глава1, с.5"
+        },
+        {
+          "id": "c-wallach-birth-1847-f6",
+          "claim": "Точные структуры и стереохимия ряда сесквитерпенов были установлены позднее другими группами; первые легко выделяемые кристаллизацией материалы включали камфору, борнеол и цедрол.",
+          "sourceIds": [
+            "c-wallach-wiley"
+          ],
+          "locator": "Глава1, с.5–6"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
+      ]
+    },
+    {
       "eventId": "r-helena-rubinstein-death-1965",
       "status": "verified_fact_packet",
       "facts": [
@@ -1828,6 +2117,74 @@
       "excludedClaimsRu": [
         "Точная дата выпуска аромата, если источник подтверждает только год.",
         "Авторство формулы у дизайнера или знаменитости без отдельного подтверждения."
+      ]
+    },
+    {
+      "eventId": "c-prado-olfactory-opening-2022",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-prado-olfactory-opening-2022-f1",
+          "claim": "Инсталляция La esencia de un cuadro проходила в Прадо с 4 апреля по 17 июля 2022 года.",
+          "sourceIds": [
+            "c-prado-report"
+          ],
+          "locator": "Memoria2022, страница290(индексPDF289), заголовок выставки"
+        },
+        {
+          "id": "c-prado-olfactory-opening-2022-f2",
+          "claim": "Основой стала картина «Обоняние» Яна Брейгеля Старшего и Рубенса 1617–1618 годов.",
+          "sourceIds": [
+            "c-prado-report"
+          ],
+          "locator": "Страница290, описание серии Los cinco sentidos"
+        },
+        {
+          "id": "c-prado-olfactory-opening-2022-f3",
+          "claim": "Грегорио Сола создал 10 запахов; сокуратором был Алехандро Вергара.",
+          "sourceIds": [
+            "c-prado-puig"
+          ],
+          "locator": "Страница1, заголовок и описание"
+        },
+        {
+          "id": "c-prado-olfactory-opening-2022-f4",
+          "claim": "Композиция Allegory основана на розе, жасмине и гвоздике из букета аллегорической фигуры.",
+          "sourceIds": [
+            "c-prado-puig"
+          ],
+          "locator": "Страница3, ALLEGORY"
+        },
+        {
+          "id": "c-prado-olfactory-opening-2022-f5",
+          "claim": "Запах перчаток опирался на рецепт 1696 года с амбровым характером.",
+          "sourceIds": [
+            "c-prado-puig"
+          ],
+          "locator": "Страница3, PERFUMED GLOVES"
+        },
+        {
+          "id": "c-prado-olfactory-opening-2022-f6",
+          "claim": "Fig Tree передавал зелёный растительный образ фигового дерева; устройства AirParfum позволяли выбирать запахи.",
+          "sourceIds": [
+            "c-prado-smithsonian"
+          ],
+          "locator": "Основной текст, FigTree и AirParfum"
+        },
+        {
+          "id": "c-prado-olfactory-opening-2022-f7",
+          "claim": "На картине насчитывается более 80 видов растений и цветов; представлены перчатки, душистые вещества, перегонное оборудование.",
+          "sourceIds": [
+            "c-prado-report"
+          ],
+          "locator": "Страница290, El olfato evoca"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
       ]
     },
     {
@@ -2082,6 +2439,76 @@
       ]
     },
     {
+      "eventId": "c-miyake-birth-1938",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-miyake-birth-1938-f1",
+          "claim": "Иссэй Миякэ родился 22 апреля 1938 года в Хиросиме.",
+          "sourceIds": [
+            "c-miyake-bio"
+          ],
+          "locator": "Born on April 22, 1938"
+        },
+        {
+          "id": "c-miyake-birth-1938-f2",
+          "claim": "Миякэ основал Miyake Design Studio в 1970 году; учился в Tama, затем работал в Париже у Лароша и Живанши.",
+          "sourceIds": [
+            "c-miyake-bio"
+          ],
+          "locator": "Биографический абзац"
+        },
+        {
+          "id": "c-miyake-birth-1938-f3",
+          "claim": "Первый аромат L’Eau d’Issey вышел в 1992 году совместно с Beauté Prestige International.",
+          "sourceIds": [
+            "c-miyake-product"
+          ],
+          "locator": "ISSEY MIYAKE PARFUMS"
+        },
+        {
+          "id": "c-miyake-birth-1938-f4",
+          "claim": "Концепция аромата связана с чистой водой; автор композиции Жак Кавалье.",
+          "sourceIds": [
+            "c-miyake-product",
+            "c-miyake-rosewood"
+          ],
+          "locator": "L’EAU D’ISSEY"
+        },
+        {
+          "id": "c-miyake-birth-1938-f5",
+          "claim": "Флакон разработали Иссэй Миякэ, Фабьен Барон и Ален де Мург.",
+          "sourceIds": [
+            "c-miyake-product"
+          ],
+          "locator": "Bottle designed by"
+        },
+        {
+          "id": "c-miyake-birth-1938-f6",
+          "claim": "Студия описывает концепцию флакона как впечатление от полной луны над Эйфелевой башней; форма — конус с металлическим горлышком и шаром.",
+          "sourceIds": [
+            "c-miyake-product",
+            "c-miyake-rosewood"
+          ],
+          "locator": "The bottle and package design"
+        },
+        {
+          "id": "c-miyake-birth-1938-f7",
+          "claim": "Марка связывает свою парфюмерию с теми же принципами, что и одежду: современная жизнь и поиск существенного.",
+          "sourceIds": [
+            "c-miyake-parfums"
+          ],
+          "locator": "Вводное описание бренда"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
+      ]
+    },
+    {
       "eventId": "r-estee-lauder-death-2004",
       "status": "verified_fact_packet",
       "facts": [
@@ -2095,44 +2522,35 @@
         },
         {
           "id": "r-estee-lauder-death-2004-f2",
-          "claim": "Youth-Dew появился в 1953 году как масло для ванны, пригодное и для использования в качестве духов.",
+          "claim": "Марка рассказывает о личной коллекции эссенций и первоначальном личном использовании Private Collection; публичный выпуск датирован 1973 годом.",
           "sourceIds": [
-            "e-lauder-date",
-            "e-lauder-heritage"
+            "n4-private-collection"
           ],
-          "locator": "1953/Youth-Dew Sensation"
+          "locator": "Product Details / The Inspiration"
         },
         {
           "id": "r-estee-lauder-death-2004-f3",
-          "claim": "Компания объясняет этот формат желанием Лаудер побудить женщин покупать аромат самостоятельно, а не ждать подарка.",
+          "claim": "Марка описывает цветы, зелёные листья и пряности через образ частной оранжереи.",
           "sourceIds": [
-            "e-lauder-founder"
+            "n4-private-collection"
           ],
-          "locator": "Pushing the Boundaries of Beauty"
+          "locator": "Product Details"
         },
         {
           "id": "r-estee-lauder-death-2004-f4",
-          "claim": "В фирменном описании Youth-Dew упоминаются роза, жасмин, ветивер и пачули.",
-          "sourceIds": [
-            "e-lauder-founder"
-          ],
-          "locator": "Pushing the Boundaries of Beauty"
-        },
-        {
-          "id": "r-estee-lauder-death-2004-f5",
-          "claim": "Хронология связывает дальнейшее развитие парфюмерного гардероба с Estée, Azurée, White Linen и Private Collection.",
+          "claim": "В корпоративной хронологии развитие парфюмерного гардероба связано с Estée, Azurée, White Linen и Private Collection.",
           "sourceIds": [
             "e-lauder-heritage"
           ],
-          "locator": "1970s/A Wardrobe of Scents"
+          "locator": "1970s / A Wardrobe of Scents"
         }
       ],
       "editorialInterpretationsRu": [
-        "Сопоставления запаха, дизайна и творческого решения являются редакционной интерпретацией подтверждённых материалов."
+        "Отношения личного и общедоступного в названии и восприятии аромата — редакционное прочтение."
       ],
       "excludedClaimsRu": [
-        "Точная дата выпуска аромата, если источник подтверждает только год.",
-        "Авторство формулы у дизайнера или знаменитости без отдельного подтверждения."
+        "История происхождения атрибутирована самой марке, без выдуманных диалогов.",
+        "Лаудер не приписывается единоличное авторство формулы."
       ]
     },
     {
@@ -2447,6 +2865,66 @@
       ]
     },
     {
+      "eventId": "c-balmain-birth-1914",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-balmain-birth-1914-f1",
+          "claim": "Пьер Бальмен родился 18 мая 1914 года в Сен-Жан-де-Морьене.",
+          "sourceIds": [
+            "c-balmain-bio"
+          ],
+          "locator": "Born"
+        },
+        {
+          "id": "c-balmain-birth-1914-f2",
+          "claim": "Дом Бальмен основан в 1945 году.",
+          "sourceIds": [
+            "c-balmain-history"
+          ],
+          "locator": "Вводныйабзац"
+        },
+        {
+          "id": "c-balmain-birth-1914-f3",
+          "claim": "Первый аромат Élysées 64-83 (1946) получил имя по первому телефонному номеру дома.",
+          "sourceIds": [
+            "c-balmain-history"
+          ],
+          "locator": "1946-ÉLYSÉES64-83"
+        },
+        {
+          "id": "c-balmain-birth-1914-f4",
+          "claim": "Vent Vert вышел в 1947 году, автор — Жермен Селье; в каталоге Осмотеки отнесён к цветочным зелёным ароматам.",
+          "sourceIds": [
+            "c-osmotheque-collection"
+          ],
+          "locator": "Страница11,строкиBALMAIN/VentVert"
+        },
+        {
+          "id": "c-balmain-birth-1914-f5",
+          "claim": "В истории дома Ivoire связан с цветом слоновой кости, любимым цветом элегантности Бальмена.",
+          "sourceIds": [
+            "c-balmain-history"
+          ],
+          "locator": "1979-IVOIRE"
+        },
+        {
+          "id": "c-balmain-birth-1914-f6",
+          "claim": "Бальмен учился архитектуре и работал у Молинё и Люсьена Лелонга.",
+          "sourceIds": [
+            "c-balmain-bio"
+          ],
+          "locator": "EducationиCareer"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
+      ]
+    },
+    {
       "eventId": "vanillin-haarmann-us-patent-1874",
       "status": "verified_fact_packet",
       "facts": [
@@ -2587,6 +3065,58 @@
       ]
     },
     {
+      "eventId": "c-petitjean-birth-1884",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-petitjean-birth-1884-f1",
+          "claim": "Арман Петижан родился 30 мая 1884 года в Сен-Лу-сюр-Семузе, в семье, связанной с дистилляцией.",
+          "sourceIds": [
+            "c-petitjean-date"
+          ],
+          "locator": "L'Écho №210, апрель–май 2021, PDF с.5"
+        },
+        {
+          "id": "c-petitjean-birth-1884-f2",
+          "claim": "Он занимался коммерцией в Южной Америке, позднее работал с Coty, затем основал Lancôme в 1935 году.",
+          "sourceIds": [
+            "c-petitjean-date"
+          ],
+          "locator": "Биографический очерк, PDF с.5"
+        },
+        {
+          "id": "c-petitjean-birth-1884-f3",
+          "claim": "Первую группу составили Tropiques, Kypre, Bocages, Conquête и Tendres Nuits.",
+          "sourceIds": [
+            "c-petitjean-brand"
+          ],
+          "locator": "Рассказ о первых пяти ароматах 1935 года"
+        },
+        {
+          "id": "c-petitjean-birth-1884-f4",
+          "claim": "Бренд связывает эти названия с путешествиями: Bocages — с Северной Европой, Kypre — с Востоком, Tropiques — с дальними странами.",
+          "sourceIds": [
+            "c-petitjean-brand"
+          ],
+          "locator": "Объяснения названий первых ароматов"
+        },
+        {
+          "id": "c-petitjean-birth-1884-f5",
+          "claim": "В 2006 году прессе представили новое прочтение Tropiques в Collection Voyage: фруктово-цветочный аромат и тяжёлый стеклянный флакон с акварельным цветком.",
+          "sourceIds": [
+            "c-petitjean-travel"
+          ],
+          "locator": "Абзацы о press show, Collection Voyage, juice и flacon"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
+      ]
+    },
+    {
       "eventId": "germaine-cellier-death-1976",
       "status": "verified_fact_packet",
       "facts": [
@@ -2645,6 +3175,74 @@
       "excludedClaimsRu": [
         "Датой события не является дата публикации поздней статьи.",
         "Описания нот не раскрывают формулу."
+      ]
+    },
+    {
+      "eventId": "c-roudnitska-death-1996",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-roudnitska-death-1996-f1",
+          "claim": "Эдмон Рудницка умер 17 июня 1996 года.",
+          "sourceIds": [
+            "c-roudnitska-fff"
+          ],
+          "locator": "Первый абзац Hommage à Edmond Roudnitska"
+        },
+        {
+          "id": "c-roudnitska-death-1996-f2",
+          "claim": "Art & Parfum создали Эдмон и Тереза Рудницка в 1946 году.",
+          "sourceIds": [
+            "c-roudnitska-art"
+          ],
+          "locator": "The way to make and experience perfume"
+        },
+        {
+          "id": "c-roudnitska-death-1996-f3",
+          "claim": "Рудницка создал Eau Sauvage, Diorissimo, Femme и Eau d’Hermès.",
+          "sourceIds": [
+            "c-roudnitska-art"
+          ],
+          "locator": "The legend, перечень работ"
+        },
+        {
+          "id": "c-roudnitska-death-1996-f4",
+          "claim": "Фонд Эдмона Рудницка учреждён в 1978 году; поддерживает исследования распознавания, кодирования и эстетики запахов, связи химической структуры и запаха.",
+          "sourceIds": [
+            "c-roudnitska-foundation"
+          ],
+          "locator": "Cahier des fondateurs 2023, печатная с.35 (PDF с.18), Edmond Roudnitska"
+        },
+        {
+          "id": "c-roudnitska-death-1996-f5",
+          "claim": "В эссе он описывает методическое изучение материалов, классификацию и движение от простых сочетаний к сложным.",
+          "sourceIds": [
+            "c-roudnitska-essay"
+          ],
+          "locator": "Страница2, Working with a Method"
+        },
+        {
+          "id": "c-roudnitska-death-1996-f6",
+          "claim": "В эссе значение компонента определяется отношениями с остальными компонентами и целой формулой.",
+          "sourceIds": [
+            "c-roudnitska-essay"
+          ],
+          "locator": "Страница2, Among the principles"
+        },
+        {
+          "id": "c-roudnitska-death-1996-f7",
+          "claim": "Le Parfum de Thérèse при жизни Рудницка носила только Тереза; после его смерти она доверила формулу Фредерику Малю.",
+          "sourceIds": [
+            "c-roudnitska-malle"
+          ],
+          "locator": "Биография Edmond Roudnitska, заключительный абзац"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
       ]
     },
     {
@@ -2982,6 +3580,58 @@
       ]
     },
     {
+      "eventId": "c-cardin-birth-1922",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-cardin-birth-1922-f1",
+          "claim": "Пьер Карден родился 2 июля 1922 года в Италии.",
+          "sourceIds": [
+            "c-cardin-bio"
+          ],
+          "locator": "Биографическая справка, раздел Personal"
+        },
+        {
+          "id": "c-cardin-birth-1922-f2",
+          "claim": "Он работал у Paquin и Dior; собственный дом основал в 1950 году, развивал геометрический язык одежды.",
+          "sourceIds": [
+            "c-cardin-bio"
+          ],
+          "locator": "Биографическая справка и очерк творчества"
+        },
+        {
+          "id": "c-cardin-birth-1922-f3",
+          "claim": "Первый мужской аромат Pour Monsieur появился в 1972 году, флакон описан как напоминающий замок.",
+          "sourceIds": [
+            "c-cardin-vabel"
+          ],
+          "locator": "Must-have fragrances of French perfumery"
+        },
+        {
+          "id": "c-cardin-birth-1922-f4",
+          "claim": "Первый женский аромат Choc вышел в 1981 году; его флакон составлен из трёх переплетённых кругов, верхний служит крышкой.",
+          "sourceIds": [
+            "c-cardin-choc"
+          ],
+          "locator": "Основной текст, первый абзац"
+        },
+        {
+          "id": "c-cardin-birth-1922-f5",
+          "claim": "Описание Choc соединяет мускатный шалфей, ландыш, пачули и кожаные ноты.",
+          "sourceIds": [
+            "c-cardin-choc"
+          ],
+          "locator": "Основной текст, второй абзац"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
+      ]
+    },
+    {
       "eventId": "henri-robert-death-1987",
       "status": "verified_fact_packet",
       "facts": [
@@ -3103,6 +3753,118 @@
       ]
     },
     {
+      "eventId": "c-armani-birth-1934",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-armani-birth-1934-f1",
+          "claim": "Джорджо Армани родился 11 июля 1934 года в Пьяченце.",
+          "sourceIds": [
+            "c-armani-bio"
+          ],
+          "locator": "Born, вводнаябиографическаякарточка"
+        },
+        {
+          "id": "c-armani-birth-1934-f2",
+          "claim": "Армани работал в La Rinascente, затем с Нино Черрути; собственные коллекции появились в 1970-е годы.",
+          "sourceIds": [
+            "c-armani-bio"
+          ],
+          "locator": "Career"
+        },
+        {
+          "id": "c-armani-birth-1934-f3",
+          "claim": "Acqua di Giò для мужчин вышел в 1996 году; автор — Альберто Морийяс.",
+          "sourceIds": [
+            "c-armani-adp"
+          ],
+          "locator": "anno lancio и naso"
+        },
+        {
+          "id": "c-armani-birth-1934-f4",
+          "claim": "В карточке описаны цитрусы и розмарин, гедион, фрезия, цикламен, кедр, пачули и мускусные образы.",
+          "sourceIds": [
+            "c-armani-adp"
+          ],
+          "locator": "testa,cuore,fondo"
+        },
+        {
+          "id": "c-armani-birth-1934-f5",
+          "claim": "Дом связывает вдохновение с вулканическим островом Пантеллерия, морем, светом и воздухом.",
+          "sourceIds": [
+            "c-armani-story"
+          ],
+          "locator": "GiorgioArmani’sfirstintuition"
+        },
+        {
+          "id": "c-armani-birth-1934-f6",
+          "claim": "Дом описывает флакон через чистые линии, скруглённые края и полупрозрачность, напоминающую отполированную морем форму.",
+          "sourceIds": [
+            "c-armani-story"
+          ],
+          "locator": "THESEA,CAPTUREDINABOTTLE"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
+      ]
+    },
+    {
+      "eventId": "c-oscar-birth-1932",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-oscar-birth-1932-f1",
+          "claim": "Оскар де ла Рента родился 22 июля 1932 года в Санто-Доминго.",
+          "sourceIds": [
+            "c-oscar-museum"
+          ],
+          "locator": "Хронология, раздел 1932"
+        },
+        {
+          "id": "c-oscar-birth-1932-f2",
+          "claim": "Он учился изобразительному искусству в Доминиканской Республике и затем в Мадриде; работал в EISA, Lanvin-Castillo и Elizabeth Arden.",
+          "sourceIds": [
+            "c-oscar-museum"
+          ],
+          "locator": "Разделы 1946, 1952, 1954, 1961, 1963"
+        },
+        {
+          "id": "c-oscar-birth-1932-f3",
+          "claim": "Его профессиональная биография соединяет Мадрид, Париж и Нью-Йорк.",
+          "sourceIds": [
+            "c-oscar-bio"
+          ],
+          "locator": "Биографический очерк"
+        },
+        {
+          "id": "c-oscar-birth-1932-f4",
+          "claim": "Собственная компания появилась в 1965 году; первый парфюм Oscar — в 1977-м.",
+          "sourceIds": [
+            "c-oscar-museum"
+          ],
+          "locator": "Разделы 1965 и 1977"
+        },
+        {
+          "id": "c-oscar-birth-1932-f5",
+          "claim": "Каталог Осмотеки называет авторами Oscar Жан-Луи Сьёзака и Кристиана Бастара-Лаффита.",
+          "sourceIds": [
+            "c-osmotheque-collection"
+          ],
+          "locator": "Строка Oscar, марка OSCAR DE LA RENTA, 1977"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
+      ]
+    },
+    {
       "eventId": "francois-coty-death-1934",
       "status": "verified_fact_packet",
       "facts": [
@@ -3163,63 +3925,281 @@
       ]
     },
     {
+      "eventId": "c-ysl-birth-1936",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-ysl-birth-1936-f1",
+          "claim": "Ив Сен-Лоран родился 1 августа 1936 года в Оране.",
+          "sourceIds": [
+            "c-ysl-birth"
+          ],
+          "locator": "Страница1, Yves Mathieu-Saint-Laurent was born"
+        },
+        {
+          "id": "c-ysl-birth-1936-f2",
+          "claim": "Его ранние интересы включали театр; он делал миниатюрные декорации и костюмы для картонных персонажей.",
+          "sourceIds": [
+            "c-ysl-birth"
+          ],
+          "locator": "Страница1–2, Illustre Petit Théâtre"
+        },
+        {
+          "id": "c-ysl-birth-1936-f3",
+          "claim": "В 1964 году появился первый аромат дома Y; музей описывает желание кутюрье получить насыщенный, тяжёлый, томный характер.",
+          "sourceIds": [
+            "c-ysl-y"
+          ],
+          "locator": "Абзац In 1964"
+        },
+        {
+          "id": "c-ysl-birth-1936-f4",
+          "claim": "В 1971 году дом выпустил rive gauche для женщин и Pour Homme для мужчин.",
+          "sourceIds": [
+            "c-ysl-1971"
+          ],
+          "locator": "Первый абзац"
+        },
+        {
+          "id": "c-ysl-birth-1936-f5",
+          "claim": "Сен-Лоран позировал обнажённым Жанлу Сьеффу для рекламы Pour Homme.",
+          "sourceIds": [
+            "c-ysl-1971"
+          ],
+          "locator": "Первый абзац и подпись к фотографии"
+        },
+        {
+          "id": "c-ysl-birth-1936-f6",
+          "claim": "Пьер Берже в 1997 году говорил, что первоначально фотографию почти не печатали, а культовый статус она приобрела позднее.",
+          "sourceIds": [
+            "c-ysl-1971"
+          ],
+          "locator": "Цитата Pierre Bergé, Dutch, 1997"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
+      ]
+    },
+    {
+      "eventId": "n4r-domenico-dolce-birth-1958",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4r-domenico-dolce-birth-1958-f1",
+          "claim": "Доменико Дольче родился 13 августа 1958 года в Полицци-Дженероза на Сицилии.",
+          "sourceIds": [
+            "n4r-domenico-dolce-birth-1958-s1"
+          ],
+          "locator": "Биографическая справка"
+        },
+        {
+          "id": "n4r-domenico-dolce-birth-1958-f2",
+          "claim": "Дом связывает Velvet Collection с местами, воспоминаниями и культурой Италии.",
+          "sourceIds": [
+            "n4r-domenico-dolce-birth-1958-s2"
+          ],
+          "locator": "Введение"
+        },
+        {
+          "id": "n4r-domenico-dolce-birth-1958-f3",
+          "claim": "Дольче и Габбана объясняли коллекцию через общие воспоминания и сицилийские и итальянские корни.",
+          "sourceIds": [
+            "n4r-domenico-dolce-birth-1958-s3"
+          ],
+          "locator": "Абзац158"
+        },
+        {
+          "id": "n4r-domenico-dolce-birth-1958-f4",
+          "claim": "Velvet Mimosa Bloom описан через мимозу, нарцисс, лист фиалки и цитрусовые; Velvet Exotic Leather — через кожу, лабданум, стиракс и древесные оттенки.",
+          "sourceIds": [
+            "n4r-domenico-dolce-birth-1958-s3"
+          ],
+          "locator": "Абзацы159–160"
+        },
+        {
+          "id": "n4r-domenico-dolce-birth-1958-f5",
+          "claim": "Официальное описание оформления Velvet Collection упоминает стеклянные флаконы, бархатные колпачки и золотистую отделку.",
+          "sourceIds": [
+            "n4r-domenico-dolce-birth-1958-s2"
+          ],
+          "locator": "Абзац80"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Объяснение отношений между запахом, зрительным образом и личным впечатлением — редакционная интерпретация."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать дизайнеру или знаменитости единоличное авторство формулы.",
+        "Рекламные образы не являются доказательством состава."
+      ]
+    },
+    {
+      "eventId": "n4r-madonna-birth-1958",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4r-madonna-birth-1958-f1",
+          "claim": "Мадонна родилась 16 августа 1958 года.",
+          "sourceIds": [
+            "n4r-madonna-birth-1958-s1"
+          ],
+          "locator": "Født"
+        },
+        {
+          "id": "n4r-madonna-birth-1958-f2",
+          "claim": "Truth or Dare публично представлен в Нью-Йорке в 2012 году; на встрече Мадонна связывала замысел с памятью о запахе матери: гардении и туберозе.",
+          "sourceIds": [
+            "n4r-madonna-birth-1958-s2"
+          ],
+          "locator": "Абзацы189–190"
+        },
+        {
+          "id": "n4r-madonna-birth-1958-f3",
+          "claim": "Мадонна рассказывала о гардениях в своих домах в Лос-Анджелесе и Майами и о желании создать новое прочтение знакомого запаха.",
+          "sourceIds": [
+            "n4r-madonna-birth-1958-s2"
+          ],
+          "locator": "Абзацы190–192"
+        },
+        {
+          "id": "n4r-madonna-birth-1958-f4",
+          "claim": "Профессиональная публикация связывает композицию с парфюмером Stephen Nilsen и описывает белые цветы, ваниль, амбру и мускус.",
+          "sourceIds": [
+            "n4r-madonna-birth-1958-s3"
+          ],
+          "locator": "Основное описание аромата; в публикации фамилия передана Nielsen"
+        },
+        {
+          "id": "n4r-madonna-birth-1958-f5",
+          "claim": "Белое и золотистое оформление флакона связано с сотрудничеством Мадонны и Фабьена Барона.",
+          "sourceIds": [
+            "n4r-madonna-birth-1958-s3"
+          ],
+          "locator": "Описание флакона и оформления"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Объяснение отношений между запахом, зрительным образом и личным впечатлением — редакционная интерпретация."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать дизайнеру или знаменитости единоличное авторство формулы.",
+        "Рекламные образы не являются доказательством состава."
+      ]
+    },
+    {
       "eventId": "gabrielle-chanel-birth-1883",
       "status": "verified_fact_packet",
       "facts": [
         {
-          "id": "b-4-date",
-          "claim": "История дома прямо указывает рождение 19 августа 1883 года.",
+          "id": "b-4-f1",
+          "claim": "Габриэль Шанель родилась в Сомюре 19 августа 1883 года.",
           "sourceIds": [
             "chanel-birth"
           ],
-          "locator": "1883, основной текст"
+          "locator": "1883"
         },
         {
-          "id": "b-4-1",
-          "claim": "Шанель и Эрнест Бо сотрудничали над N°5, выпущенным в 1921 году.",
+          "id": "b-4-f2",
+          "claim": "N°5 появился в 1921 году.",
           "sourceIds": [
             "b-chanel-1920"
           ],
           "locator": "1921"
         },
         {
-          "id": "b-4-2",
-          "claim": "V&A описывает удобство, простоту и свободу движения в одежде Шанель.",
-          "sourceIds": [
-            "a-no5-va"
-          ],
-          "locator": "Introduction and Jersey"
-        },
-        {
-          "id": "b-4-3",
-          "claim": "V&A описывает геометрический флакон и светлую этикетку N°5.",
-          "sourceIds": [
-            "a-no5-va"
-          ],
-          "locator": "CHANEL N°5"
-        },
-        {
-          "id": "b-4-4",
-          "claim": "N°22 создан Бо и назван по 1922 году.",
+          "id": "b-4-f3",
+          "claim": "N°22 создан Эрнестом Бо в 1922 году; номер отсылает к году; дом описывает пудровый цветочный характер с туберозой.",
           "sourceIds": [
             "b-chanel-1920"
           ],
           "locator": "1922"
         },
         {
-          "id": "b-4-5",
-          "claim": "Société des Parfums CHANEL учреждена в 1924 для парфюмерии и косметики.",
+          "id": "b-4-f4",
+          "claim": "Société des Parfums CHANEL создана в 1924 году для производства и продажи парфюмерии и косметики.",
           "sourceIds": [
             "b-chanel-1920"
           ],
           "locator": "1924"
+        },
+        {
+          "id": "b-4-f5",
+          "claim": "Gardénia создана Габриэль Шанель вместе с Эрнестом Бо в 1925 году.",
+          "sourceIds": [
+            "b-chanel-1920"
+          ],
+          "locator": "1925"
         }
       ],
       "editorialInterpretationsRu": [
-        "Связь сдержанного флакона и языка одежды — интерпретация; Шанель не названа автором формулы."
+        "Сравнение номеров и цветочного имени и чтение коллекции как пространства выбора — редакционное объяснение."
       ],
       "excludedClaimsRu": [
         "Нет утверждения о точной неизменной формуле или всемирном первенстве."
+      ]
+    },
+    {
+      "eventId": "c-tom-ford-birth-1961",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-tom-ford-birth-1961-f1",
+          "claim": "Том Форд родился 27 августа 1961 года в Остине.",
+          "sourceIds": [
+            "c-tom-bio"
+          ],
+          "locator": "QuickFacts иEarlyLife"
+        },
+        {
+          "id": "c-tom-ford-birth-1961-f2",
+          "claim": "Глобальное лицензионное соглашение с Estée Lauder подписано в 2005 году.",
+          "sourceIds": [
+            "c-tom-report"
+          ],
+          "locator": "Страница51, TOMFORDBEAUTY"
+        },
+        {
+          "id": "c-tom-ford-birth-1961-f3",
+          "claim": "Black Orchid появился в ноябре 2006 года как первый аромат Tom Ford Beauty.",
+          "sourceIds": [
+            "c-tom-report"
+          ],
+          "locator": "Страница51"
+        },
+        {
+          "id": "c-tom-ford-birth-1961-f4",
+          "claim": "Затем появилась Private Blend, первоначально линия из 12 унисекс-ароматов.",
+          "sourceIds": [
+            "c-tom-report"
+          ],
+          "locator": "Страница51"
+        },
+        {
+          "id": "c-tom-ford-birth-1961-f5",
+          "claim": "Рецензия 2006 года описывает чёрный рифлёный стеклянный флакон с металлической табличкой.",
+          "sourceIds": [
+            "c-tom-nst"
+          ],
+          "locator": "Основнойтекст, Thepackaging"
+        },
+        {
+          "id": "c-tom-ford-birth-1961-f6",
+          "claim": "В рецензии отмечены сочетания сладких цветочных и фруктовых впечатлений с землистым тёмным характером и ванилью; это оценка рецензента.",
+          "sourceIds": [
+            "c-tom-nst"
+          ],
+          "locator": "Абзацы BlackOrchidstarts иAsitdriesdown"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
       ]
     },
     {
@@ -3283,6 +4263,135 @@
       ]
     },
     {
+      "eventId": "va-marie-antoinette-style-opening-2025",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "d-va-marie-antoinette-style-opening-2025-date",
+          "claim": "Marie Antoinette Style проходила в V&A South Kensington с20сентября2025 по22марта2026.",
+          "sourceIds": [
+            "d-va-marie-exhibition"
+          ],
+          "locator": "Past exhibition / Ran from 20 September 2025"
+        },
+        {
+          "id": "d-va-marie-antoinette-style-opening-2025-1",
+          "claim": "Таша Маркс создала интерактивный ароматический опыт через 3D-печатные бюсты-диффузоры.",
+          "sourceIds": [
+            "d-tasha-interview"
+          ],
+          "locator": "Marie Antoinette question"
+        },
+        {
+          "id": "d-va-marie-antoinette-style-opening-2025-2",
+          "claim": "Опыт обращался к придворным ароматам и косметическим запахам; Маркс исследует тему и работает с кураторами, оформителями, хранителями.",
+          "sourceIds": [
+            "d-tasha-interview"
+          ],
+          "locator": "research / exhibition answers"
+        },
+        {
+          "id": "d-va-marie-antoinette-style-opening-2025-3",
+          "claim": "V&A выделяет хрустальный флакон Eau de Cologne из несессера королевы.",
+          "sourceIds": [
+            "d-va-marie-exhibition"
+          ],
+          "locator": "Exhibition highlights"
+        },
+        {
+          "id": "d-va-marie-antoinette-style-opening-2025-4",
+          "claim": "Версаль предоставил около20произведений: портрет с розой, фарфор, мебель, театральные аксессуары.",
+          "sourceIds": [
+            "d-va-marie-loans"
+          ],
+          "locator": "Exceptional loans"
+        },
+        {
+          "id": "d-va-marie-antoinette-style-opening-2025-5",
+          "claim": "Экспозиция показывает влияние на более250лет дизайна, моды, кино; представлены исторические вещи и современные интерпретации.",
+          "sourceIds": [
+            "d-va-marie-about"
+          ],
+          "locator": "main text"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Отличаются исторический предмет и современная обонятельная интерпретация."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждается сохранение исходных духовXVIIIвека в бюстах.",
+        "Не повторяется предметный сюжет фонтанчика из истории рождения королевы."
+      ]
+    },
+    {
+      "eventId": "c-ima-parfums-orient-2023",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-ima-parfums-orient-2023-f1",
+          "claim": "Публичный период выставки Parfums d’Orient начался 26 сентября 2023 года.",
+          "sourceIds": [
+            "c-ima-exhibition"
+          ],
+          "locator": "Заголовок: Du 26 septembre 2023 au 17 mars 2024"
+        },
+        {
+          "id": "c-ima-parfums-orient-2023-f2",
+          "claim": "Выставка соединяла около 200 произведений с пахучими материалами и инсталляциями.",
+          "sourceIds": [
+            "c-ima-exhibition"
+          ],
+          "locator": "Présentation, près de200œuvres"
+        },
+        {
+          "id": "c-ima-parfums-orient-2023-f3",
+          "claim": "Кураторы выставки — Агнес Карайон и Ханна Боганим.",
+          "sourceIds": [
+            "c-ima-arabnews"
+          ],
+          "locator": "Основной текст, предложена HannaBoghanim et AgnèsCarayon"
+        },
+        {
+          "id": "c-ima-parfums-orient-2023-f4",
+          "claim": "Экспозиция проходила от сырья и природных пространств через город к частному дому.",
+          "sourceIds": [
+            "c-ima-press"
+          ],
+          "locator": "Страницы4–5, Le propos des commissaires"
+        },
+        {
+          "id": "c-ima-parfums-orient-2023-f5",
+          "claim": "Кристофер Шелдрейк создал 31 запах при поддержке Givaudan; студия Magique разработала обонятельные устройства.",
+          "sourceIds": [
+            "c-ima-press"
+          ],
+          "locator": "Страницы30–31, Les dispositifs olfactifs"
+        },
+        {
+          "id": "c-ima-parfums-orient-2023-f6",
+          "claim": "Для мускуса и амбры Шелдрейк использовал синтетические реконструкции; в уде сочетал натуральный продукт с эффектом дыма.",
+          "sourceIds": [
+            "c-ima-press"
+          ],
+          "locator": "Страницы28–29, Quatre questions"
+        },
+        {
+          "id": "c-ima-parfums-orient-2023-f7",
+          "claim": "В домашнем разделе показано угощение гостей ароматами с помощью цветочных вод и курильниц.",
+          "sourceIds": [
+            "c-ima-exhibition"
+          ],
+          "locator": "Au cœur de l’intimité de la maison"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
+      ]
+    },
+    {
       "eventId": "henri-robert-birth-1899",
       "status": "verified_fact_packet",
       "facts": [
@@ -3340,6 +4449,61 @@
       ],
       "excludedClaimsRu": [
         "Нет утверждения о точной неизменной формуле или всемирном первенстве."
+      ]
+    },
+    {
+      "eventId": "n4r-donna-karan-birth-1948",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4r-donna-karan-birth-1948-f1",
+          "claim": "Донна Каран родилась 2 октября 1948 года.",
+          "sourceIds": [
+            "n4r-donna-karan-birth-1948-s1"
+          ],
+          "locator": "Født"
+        },
+        {
+          "id": "n4r-donna-karan-birth-1948-f2",
+          "claim": "Black Cashmere появился в США в 2002 году; материал сентября2003 называет американский выпуск прошлогодним.",
+          "sourceIds": [
+            "n4r-donna-karan-birth-1948-s2",
+            "n4r-donna-karan-birth-1948-s4"
+          ],
+          "locator": "Абзац189 / вступление рецензии"
+        },
+        {
+          "id": "n4r-donna-karan-birth-1948-f3",
+          "claim": "Каран объясняла замысел через успокаивающее и защищающее ощущение чёрного кашемира и городской характер Нью-Йорка.",
+          "sourceIds": [
+            "n4r-donna-karan-birth-1948-s2"
+          ],
+          "locator": "Абзацы189–191"
+        },
+        {
+          "id": "n4r-donna-karan-birth-1948-f4",
+          "claim": "Автором Black Cashmere назван Родриго Флорес-Ру; среди описанных нот — шафран, белый перец, древесные и ладанные оттенки.",
+          "sourceIds": [
+            "n4r-donna-karan-birth-1948-s4",
+            "n4r-donna-karan-birth-1948-s2"
+          ],
+          "locator": "Первый и второй абзацы рецензии / описание аромата"
+        },
+        {
+          "id": "n4r-donna-karan-birth-1948-f5",
+          "claim": "Cashmere Mist относится к 1994 году; Black Cashmere — к 2002, это разные работы.",
+          "sourceIds": [
+            "n4r-donna-karan-birth-1948-s3"
+          ],
+          "locator": "Перечень ароматов"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Объяснение отношений между запахом, зрительным образом и личным впечатлением — редакционная интерпретация."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать дизайнеру или знаменитости единоличное авторство формулы.",
+        "Рекламные образы не являются доказательством состава."
       ]
     },
     {
@@ -3523,6 +4687,74 @@
       ]
     },
     {
+      "eventId": "c-ralph-lauren-birth-1939",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-ralph-lauren-birth-1939-f1",
+          "claim": "Ральф Лорен родился 14 октября 1939 года в Бронксе под именем Ральф Лифшиц.",
+          "sourceIds": [
+            "c-ralph-bio"
+          ],
+          "locator": "BackgroundandEarlyLife"
+        },
+        {
+          "id": "c-ralph-lauren-birth-1939-f2",
+          "claim": "Polo for Men появился в 1978 году; зелёный флакон навеян старинной флягой.",
+          "sourceIds": [
+            "c-ralph-history"
+          ],
+          "locator": "1978,RalphintroducesPoloforMen"
+        },
+        {
+          "id": "c-ralph-lauren-birth-1939-f3",
+          "claim": "Дом описывает Polo нотами сосны, кожи и табака; сообщает о рекламе с игроками в поло.",
+          "sourceIds": [
+            "c-ralph-history"
+          ],
+          "locator": "1978"
+        },
+        {
+          "id": "c-ralph-lauren-birth-1939-f4",
+          "claim": "Карлос Бенаим называет Polo своим первым большим успехом.",
+          "sourceIds": [
+            "c-ralph-perfumer"
+          ],
+          "locator": "Страница1,PatchouliHeart"
+        },
+        {
+          "id": "c-ralph-lauren-birth-1939-f5",
+          "claim": "В 2009 году Бенаим говорил, что Polo содержит более 20 процентов масла пачули; это историческое свидетельство, а не текущая формула.",
+          "sourceIds": [
+            "c-ralph-perfumer"
+          ],
+          "locator": "Страница1,Myfirstbigsuccess"
+        },
+        {
+          "id": "c-ralph-lauren-birth-1939-f6",
+          "claim": "Работая с Кристофом Лодамьелем над Polo Blue 2002 года, Бенаим использовал другую фракцию пачули в свежем морском контексте.",
+          "sourceIds": [
+            "c-ralph-perfumer"
+          ],
+          "locator": "Страницы1–2,linkbacktotheoriginal"
+        },
+        {
+          "id": "c-ralph-lauren-birth-1939-f7",
+          "claim": "IFF указывает Polo Green 1978 года как работу Карлоса Бенаима, Polo Blue 2002 года — как его совместную работу с Кристофом Лодамьелем.",
+          "sourceIds": [
+            "c-ralph-iff"
+          ],
+          "locator": "Fragrance Creations, Polo Green (1978), Polo Blue (2002)"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
+      ]
+    },
+    {
       "eventId": "mip-grasse-reopening-2008",
       "status": "verified_fact_packet",
       "facts": [
@@ -3703,6 +4935,69 @@
       ]
     },
     {
+      "eventId": "marie-antoinette-birth-1755",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "d-marie-antoinette-birth-1755-date",
+          "claim": "Мария-Антуанетта родилась в Вене 2 ноября 1755 года.",
+          "sourceIds": [
+            "d-marie-versailles"
+          ],
+          "locator": "Biography, born in Vienna paragraph"
+        },
+        {
+          "id": "d-marie-antoinette-birth-1755-1",
+          "claim": "В Лувре хранится парфюмерный фонтан OA7 из бирюзового фарфора и позолоченной бронзы; высота 29см.",
+          "sourceIds": [
+            "d-marie-fountain"
+          ],
+          "locator": "metadata / dimensions"
+        },
+        {
+          "id": "d-marie-antoinette-birth-1755-2",
+          "claim": "Пять фарфоровых объектов: сосуд, два буддийских льва, чашечка и поднос; бронзовые крепления. Основание имеет четыре лапчатые опоры.",
+          "sourceIds": [
+            "d-marie-fountain"
+          ],
+          "locator": "Description / Décor: quatre pieds griffus"
+        },
+        {
+          "id": "d-marie-antoinette-birth-1755-3",
+          "claim": "Версаль описывает превращение урны с цветочными и плодовыми мотивами в фонтан с краном.",
+          "sourceIds": [
+            "d-versailles-china"
+          ],
+          "locator": "p22 / Perfume fountain"
+        },
+        {
+          "id": "d-marie-antoinette-birth-1755-4",
+          "claim": "Фарфор начала XVIII века, парижская оправа позднего XVIII века.",
+          "sourceIds": [
+            "d-marie-fountain",
+            "d-versailles-china"
+          ],
+          "locator": "dates / object description"
+        },
+        {
+          "id": "d-marie-antoinette-birth-1755-5",
+          "claim": "Королева распорядилась передать предмет Дагерру и Линьерё 10октября1789; далее Тюильри, Сен-Клу и Лувр.",
+          "sourceIds": [
+            "d-marie-fountain"
+          ],
+          "locator": "Historique"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Предмет рассматривается как материальный след обращения с запахом."
+      ],
+      "excludedClaimsRu": [
+        "Не реконструируется неизвестное содержимое фонтана.",
+        "В заголовке карточки Louvre Japon, но в описании Chine; страна происхождения в читательском тексте не указана.",
+        "Точный год бронзовой оправы разнится около1780/1785: используется позднийXVIIIвек."
+      ]
+    },
+    {
       "eventId": "paul-vacher-death-1975",
       "status": "verified_fact_packet",
       "facts": [
@@ -3873,6 +5168,66 @@
       ],
       "excludedClaimsRu": [
         "Нет утверждения о точной неизменной формуле или всемирном первенстве."
+      ]
+    },
+    {
+      "eventId": "c-calvin-klein-birth-1942",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-calvin-klein-birth-1942-f1",
+          "claim": "Кельвин Кляйн родился 19 ноября 1942 года в Бронксе.",
+          "sourceIds": [
+            "c-calvin-bio"
+          ],
+          "locator": "EarlyLife"
+        },
+        {
+          "id": "c-calvin-klein-birth-1942-f2",
+          "claim": "Кляйн и Барри Шварц основали компанию в 1968 году.",
+          "sourceIds": [
+            "c-calvin-coty"
+          ],
+          "locator": "AboutCalvinKleinInc"
+        },
+        {
+          "id": "c-calvin-klein-birth-1942-f3",
+          "claim": "CK One вышел в 1994 году; парфюмеры — Альберто Морийяс и Гарри Фремон, упаковка — Фабьен Барон.",
+          "sourceIds": [
+            "c-calvin-ckone"
+          ],
+          "locator": "anno lancio / naso / packaging"
+        },
+        {
+          "id": "c-calvin-klein-birth-1942-f4",
+          "claim": "Accademia del Profumo связывает идею CK One с вниманием Кляйна к поколению дочери Марси и совместному пользованию вещами.",
+          "sourceIds": [
+            "c-calvin-ckone"
+          ],
+          "locator": "Заключительныйабзац"
+        },
+        {
+          "id": "c-calvin-klein-birth-1942-f5",
+          "claim": "В описании Coty CK One предназначен для совместного пользования и соединяет цитрусовые, цветочные и мускусные ноты.",
+          "sourceIds": [
+            "c-calvin-coty"
+          ],
+          "locator": "AboutCKONEfragrance"
+        },
+        {
+          "id": "c-calvin-klein-birth-1942-f6",
+          "claim": "В кампании 2018 года режиссёром стал Зал Батманглидж, фотографом — Вилли Вандерперре; тема — связь между людьми.",
+          "sourceIds": [
+            "c-calvin-coty"
+          ],
+          "locator": "Directedby и описаниекампании"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
       ]
     },
     {
@@ -4347,6 +5702,248 @@
       ]
     },
     {
+      "eventId": "c-patou-death-1936",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-patou-death-1936-f1",
+          "claim": "Жан Пату умер 8 марта 1936 года.",
+          "sourceIds": [
+            "c-patou-city"
+          ],
+          "locator": "Historique du bâtiment, первый абзац"
+        },
+        {
+          "id": "c-patou-death-1936-f2",
+          "claim": "В 1928 году Пату занял в Сент-Уэне парфюмерное здание, построенное Féret frères в 1914 году.",
+          "sourceIds": [
+            "c-patou-city"
+          ],
+          "locator": "Historique du bâtiment, первый абзац"
+        },
+        {
+          "id": "c-patou-death-1936-f3",
+          "claim": "Предприятие работало до конца 1970-х; в 2010 году здесь разместилась муниципальная школа изящных искусств, в 2018-м — научный центр ATLAS.",
+          "sourceIds": [
+            "c-patou-city"
+          ],
+          "locator": "Historique du bâtiment, последний абзац"
+        },
+        {
+          "id": "c-patou-death-1936-f4",
+          "claim": "После смерти основателя дом возглавили его сестра Мадлен и её муж Раймон Барбас.",
+          "sourceIds": [
+            "c-patou-history"
+          ],
+          "locator": "История дома, абзац после 1929 crisis"
+        },
+        {
+          "id": "c-patou-death-1936-f5",
+          "claim": "После закрытия модного дома в 1987 году парфюмерная деятельность сохраняла его имя.",
+          "sourceIds": [
+            "c-patou-history"
+          ],
+          "locator": "Perfumes can keep a name alive; раздел о Christian Lacroix"
+        },
+        {
+          "id": "c-patou-death-1936-f6",
+          "claim": "Осмотека указывает Анри Альмераса как автора Joy и Жана Керлео как автора Sublime.",
+          "sourceIds": [
+            "c-osmotheque-collection"
+          ],
+          "locator": "Строки Joy и Sublime, раздел JEAN PATOU"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
+      ]
+    },
+    {
+      "eventId": "patrick-suskind-birth-1949",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "d-patrick-suskind-birth-1949-date",
+          "claim": "Патрик Зюскинд родился 26 марта 1949 года в Амбахе.",
+          "sourceIds": [
+            "d-suskind-munzinger"
+          ],
+          "locator": "Biographical header and Herkunft"
+        },
+        {
+          "id": "d-patrick-suskind-birth-1949-1",
+          "claim": "Роман Das Parfum опубликован в 1985; Зюскинд изучал историю в Мюнхене и Экс-ан-Провансе, работал над сценариями.",
+          "sourceIds": [
+            "d-suskind-diogenes"
+          ],
+          "locator": "biography"
+        },
+        {
+          "id": "d-patrick-suskind-birth-1949-2",
+          "claim": "Роман разворачивается во Франции XVIII века и рассказывает о Гренуе с необычайным обонянием.",
+          "sourceIds": [
+            "d-perfume-penguin",
+            "d-perfume-guide"
+          ],
+          "locator": "synopsis / introduction"
+        },
+        {
+          "id": "d-patrick-suskind-birth-1949-3",
+          "claim": "Гренуй не имеет собственного запаха; парфюмер Бальдини становится его работодателем.",
+          "sourceIds": [
+            "d-perfume-guide"
+          ],
+          "locator": "Introduction"
+        },
+        {
+          "id": "d-patrick-suskind-birth-1949-4",
+          "claim": "Издатель предлагает обсуждение таланта, опыта и ремесла в связи с Бальдини.",
+          "sourceIds": [
+            "d-perfume-guide"
+          ],
+          "locator": "Question 7"
+        },
+        {
+          "id": "d-patrick-suskind-birth-1949-5",
+          "claim": "Подзаголовок The Story of a Murderer и сюжет связывают обоняние героя с преступлениями.",
+          "sourceIds": [
+            "d-perfume-penguin"
+          ],
+          "locator": "subtitle / synopsis"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Трактовка запаха как социального присутствия и страницы как места встречи — редакционный литературный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Фантастические возможности Гренуя не представлены как научный факт.",
+        "Сюжет отличается от отдельной истории кинопремьеры."
+      ]
+    },
+    {
+      "eventId": "c-gaultier-birth-1952",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-gaultier-birth-1952-f1",
+          "claim": "Жан-Поль Готье родился 24 апреля 1952 года в Аркёе.",
+          "sourceIds": [
+            "c-gaultier-bio"
+          ],
+          "locator": "Биографическая справка, Born"
+        },
+        {
+          "id": "c-gaultier-birth-1952-f2",
+          "claim": "Первый аромат 1993 года первоначально носил имя Jean Paul Gaultier и позднее стал Classique; композицию создал Жак Кавалье.",
+          "sourceIds": [
+            "c-gaultier-fff"
+          ],
+          "locator": "Основной очерк Classique, первые абзацы"
+        },
+        {
+          "id": "c-gaultier-birth-1952-f3",
+          "claim": "Бюст во флаконе и металлическая банка сопровождали аромат; источник связывает образ с манекеном Stockman и памятью о бабушке Мари.",
+          "sourceIds": [
+            "c-gaultier-fff"
+          ],
+          "locator": "Основной очерк, описание флакона и воспоминаний"
+        },
+        {
+          "id": "c-gaultier-birth-1952-f4",
+          "claim": "Дом описывает воспоминания о бабушкиной косметике и выпечке как часть замысла; цветы соединены с ванильным и мускусным фоном.",
+          "sourceIds": [
+            "c-gaultier-classique"
+          ],
+          "locator": "A signature scent of 30 years, рассказ о fragrance"
+        },
+        {
+          "id": "c-gaultier-birth-1952-f5",
+          "claim": "Для стеклянного корсета требовались округлые формы, пудровые оттенки и мастерство французских стекольщиков.",
+          "sourceIds": [
+            "c-gaultier-couture"
+          ],
+          "locator": "Haute Parfumerie"
+        },
+        {
+          "id": "c-gaultier-birth-1952-f6",
+          "claim": "Первая коллекция haute couture Готье появилась в 1997 году, после парфюмерного дебюта 1993 года.",
+          "sourceIds": [
+            "c-gaultier-couture"
+          ],
+          "locator": "From designer to couturier"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
+      ]
+    },
+    {
+      "eventId": "c-eugenie-birth-1826",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "c-eugenie-birth-1826-f1",
+          "claim": "Евгения де Гусман родилась 5 мая 1826 года в Гранаде.",
+          "sourceIds": [
+            "c-eugenie-bio"
+          ],
+          "locator": "Начало биографического очерка"
+        },
+        {
+          "id": "c-eugenie-birth-1826-f2",
+          "claim": "В 1853 году она стала женой Наполеона III и императрицей французов.",
+          "sourceIds": [
+            "c-eugenie-bio"
+          ],
+          "locator": "Раздел о браке 1853 года"
+        },
+        {
+          "id": "c-eugenie-birth-1826-f3",
+          "claim": "В 1853 году Пьер-Франсуа-Паскаль Герлен посвятил ей Eau de Cologne Impériale и получил придворный титул.",
+          "sourceIds": [
+            "c-eugenie-guerlain"
+          ],
+          "locator": "1853, Bespoke and the Bee Bottle"
+        },
+        {
+          "id": "c-eugenie-birth-1826-f4",
+          "claim": "Флакон изготовила стекольная мануфактура Pochet du Courval; фестоны отсылают к Вандомской колонне.",
+          "sourceIds": [
+            "c-eugenie-guerlain"
+          ],
+          "locator": "1853, Bespoke and the Bee Bottle"
+        },
+        {
+          "id": "c-eugenie-birth-1826-f5",
+          "claim": "На флаконе 69 пчёл — имперская эмблема; в золотом исполнении их и фестоны расписывают вручную тонким золотом.",
+          "sourceIds": [
+            "c-eugenie-bee"
+          ],
+          "locator": "The Bee Bottle, Imperial in its design"
+        },
+        {
+          "id": "c-eugenie-birth-1826-f6",
+          "claim": "Современная персонализация включает выбор аромата, размера и оформления флакона, шнура и печати, гравировки.",
+          "sourceIds": [
+            "c-eugenie-bee"
+          ],
+          "locator": "The Art of Personalisation, Steps 1–4"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснение значения документированных решений являются редакционной интерпретацией."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать владельцу марки авторство формул; не объявлять историческую формулу тождественной современной."
+      ]
+    },
+    {
       "eventId": "josephine-catapano-death-2012",
       "status": "verified_fact_packet",
       "facts": [
@@ -4398,6 +5995,76 @@
       "excludedClaimsRu": [
         "Датой события не является дата публикации поздней статьи.",
         "Описания нот не раскрывают формулу."
+      ]
+    },
+    {
+      "eventId": "versailles-perfumer-garden-opening-2023",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "d-versailles-perfumer-garden-opening-2023-date",
+          "claim": "Сад открыт публике 30 мая 2023 года; ретроспективный релиз 2024 подтверждает открытие в 2023.",
+          "sourceIds": [
+            "d-versailles-garden-opening",
+            "d-versailles-parterre-2024"
+          ],
+          "locator": "Opening announcement, paragraph On May 30th; corroboration in 2024 parterre release"
+        },
+        {
+          "id": "d-versailles-perfumer-garden-opening-2023-1",
+          "claim": "Сад создан совместно садовниками Трианона и Maison Francis Kurkdjian; выбрано почти 300 растений в 9 категориях.",
+          "sourceIds": [
+            "d-versailles-garden-opening"
+          ],
+          "locator": "The Perfumer’s Garden"
+        },
+        {
+          "id": "d-versailles-perfumer-garden-opening-2023-2",
+          "claim": "Разные растения дают листья, семена, кожуру, древесину, корневища.",
+          "sourceIds": [
+            "d-versailles-garden-opening"
+          ],
+          "locator": "Patchouli delivers paragraph"
+        },
+        {
+          "id": "d-versailles-perfumer-garden-opening-2023-3",
+          "claim": "Есть шоколадная космея, яблочный пеларгониум и неприятно пахнущие растения.",
+          "sourceIds": [
+            "d-versailles-garden-opening"
+          ],
+          "locator": "species paragraph"
+        },
+        {
+          "id": "d-versailles-perfumer-garden-opening-2023-4",
+          "claim": "Три части сада: Garden of Curiosities, Beneath the Trees, Secret Garden у оранжереи Châteauneuf.",
+          "sourceIds": [
+            "d-versailles-garden"
+          ],
+          "locator": "three garden sections"
+        },
+        {
+          "id": "d-versailles-perfumer-garden-opening-2023-5",
+          "claim": "Исторические сады Трианона выращивали жасмин, туберозы, гиацинты; придворные пользовались саше, перчатками, веерами.",
+          "sourceIds": [
+            "d-versailles-garden"
+          ],
+          "locator": "Perfume at Versailles"
+        },
+        {
+          "id": "d-versailles-perfumer-garden-opening-2023-6",
+          "claim": "В 2024 устроен отдельный Perfume Parterre в Grand Trianon, продолжавший тему сада.",
+          "sourceIds": [
+            "d-versailles-parterre-2024"
+          ],
+          "locator": "opening"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Обратный маршрут от духов к растению — редакционный способ объяснить устройство сада."
+      ],
+      "excludedClaimsRu": [
+        "Не обещается актуальный режим посещений в 2028.",
+        "Не заявляется, что все растения дают натуральные парфюмерные экстракты."
       ]
     },
     {
@@ -4458,6 +6125,120 @@
       ],
       "excludedClaimsRu": [
         "Нет утверждения о точной неизменной формуле или всемирном первенстве."
+      ]
+    },
+    {
+      "eventId": "n4r-stella-mccartney-birth-1971",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4r-stella-mccartney-birth-1971-f1",
+          "claim": "Стелла Маккартни родилась 13 сентября 1971 года в Лондоне.",
+          "sourceIds": [
+            "n4r-stella-mccartney-birth-1971-s1"
+          ],
+          "locator": "Early Life"
+        },
+        {
+          "id": "n4r-stella-mccartney-birth-1971-f2",
+          "claim": "Первый Stella появился в 2003 году; его замысел соединял розу и древесно-амбровый характер.",
+          "sourceIds": [
+            "n4r-stella-mccartney-birth-1971-s2"
+          ],
+          "locator": "Абзацы о выпуске и композиции"
+        },
+        {
+          "id": "n4r-stella-mccartney-birth-1971-f3",
+          "claim": "В 2006 году в Лондоне представили Stella In Two: Peony в жидком формате EDT и Amber в твёрдом.",
+          "sourceIds": [
+            "n4r-stella-mccartney-birth-1971-s3"
+          ],
+          "locator": "Абзацы192–196"
+        },
+        {
+          "id": "n4r-stella-mccartney-birth-1971-f4",
+          "claim": "Предлагалось носить Peony и Amber отдельно или вместе; Маккартни объясняла твёрдый формат удобством переноски и поездок.",
+          "sourceIds": [
+            "n4r-stella-mccartney-birth-1971-s3"
+          ],
+          "locator": "Абзацы192,214,216–218"
+        },
+        {
+          "id": "n4r-stella-mccartney-birth-1971-f5",
+          "claim": "Первоначальный Stella оформлен в гранёный флакон аметистового цвета, спроектированный самой Маккартни.",
+          "sourceIds": [
+            "n4r-stella-mccartney-birth-1971-s2"
+          ],
+          "locator": "Описание флакона"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Объяснение отношений между запахом, зрительным образом и личным впечатлением — редакционная интерпретация."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать дизайнеру или знаменитости единоличное авторство формулы.",
+        "Рекламные образы не являются доказательством состава."
+      ]
+    },
+    {
+      "eventId": "nobel-olfaction-award-announcement-2004",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "d-nobel-olfaction-award-announcement-2004-date",
+          "claim": "4октября2004 объявлена Нобелевская премия по физиологии и медицине Линде Бак и Ричарду Акселю.",
+          "sourceIds": [
+            "a-buck-hutch"
+          ],
+          "locator": "Dateline / SEATTLE — Oct.4,2004 — today was named"
+        },
+        {
+          "id": "d-nobel-olfaction-award-announcement-2004-1",
+          "claim": "Премию разделили Бак и Аксель за обонятельные рецепторы и организацию обонятельной системы.",
+          "sourceIds": [
+            "a-buck-hutch"
+          ],
+          "locator": "opening"
+        },
+        {
+          "id": "d-nobel-olfaction-award-announcement-2004-2",
+          "claim": "Репортаж фиксирует ранний звонок около2:30утра в понедельник и пресс-конференцию.",
+          "sourceIds": [
+            "d-buck-surprise"
+          ],
+          "locator": "news call paragraphs"
+        },
+        {
+          "id": "d-nobel-olfaction-award-announcement-2004-3",
+          "claim": "На пресс-конференции вместе с Бак были Томас и Хартвелл, лауреаты за трансплантацию костного мозга и клеточное деление.",
+          "sourceIds": [
+            "d-buck-surprise"
+          ],
+          "locator": "photo caption / opening"
+        },
+        {
+          "id": "d-nobel-olfaction-award-announcement-2004-4",
+          "claim": "Бак подчёркивала поддержку базовых исследований в институте.",
+          "sourceIds": [
+            "d-buck-surprise"
+          ],
+          "locator": "press conference statements"
+        },
+        {
+          "id": "d-nobel-olfaction-award-announcement-2004-5",
+          "claim": "Фонд John Merck отмечает Бак как стипендиата1993; программа поддерживала молодых исследователей по потенциалу фундаментального открытия.",
+          "sourceIds": [
+            "d-merck-research"
+          ],
+          "locator": "Basic brain research 1990–2014"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Нобелевский сюжет посвящён общественному признанию и поддержке науки, а не повторению содержания статьи1991."
+      ],
+      "excludedClaimsRu": [
+        "Дата объявления не заменяется датой церемонии в декабре.",
+        "Не обещаются лечебные эффекты духов."
       ]
     },
     {
