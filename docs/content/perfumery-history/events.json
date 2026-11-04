@@ -2589,6 +2589,1383 @@
       "type": "press",
       "access": "opened",
       "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-huysmans-publisher",
+      "publisher": "Éditions Sillage",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://editions-sillage.fr/?page_id=807",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-huysmans-novel",
+      "publisher": "J.-K. Huysmans / Project Gutenberg",
+      "type": "primary_public_domain",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.gutenberg.org/cache/epub/12341/pg12341-images.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-huysmans-nst",
+      "publisher": "Now Smell This",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "url": "https://nstperfume.com/2005/11/18/perfume-books-against-nature-by-joris-karl-huysmans/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-baudelaire-bnf",
+      "publisher": "Bibliothèque nationale de France",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://catalogue.bnf.fr/ark:/12148/cb118905823",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-baudelaire-correspondances",
+      "publisher": "Fleursdumal.org / Charles Baudelaire",
+      "type": "primary_public_domain",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://fleursdumal.org/poem/103",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-baudelaire-fleurs",
+      "publisher": "Charles Baudelaire / Project Gutenberg",
+      "type": "primary_public_domain",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.gutenberg.org/files/6099/old/8flrm10h.htm",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-coty-bnf",
+      "publisher": "Bibliothèque nationale de France",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://catalogue.bnf.fr/ark:/12148/cb12241032g",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-coty-origan",
+      "publisher": "Nez / Auparfum",
+      "type": "specialist",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://auparfum.bynez.com/l-origan-coty-1998",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-coty-reconstructions",
+      "publisher": "Nez / Auparfum",
+      "type": "specialist",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://auparfum.bynez.com/coty-le-retour-de-trois-legendes-en-edition-limitee,4919",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-coty-profile",
+      "publisher": "Nez / Auparfum",
+      "type": "specialist",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://auparfum.bynez.com/francois-coty",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-tiemann-ndb",
+      "publisher": "Neue Deutsche Biographie / Bayerische Akademie der Wissenschaften",
+      "type": "reference",
+      "language": "de",
+      "access": "opened",
+      "url": "https://www.deutsche-biographie.de/sfz34655.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-tiemann-kruger-history",
+      "publisher": "Pharmazie / G. A. Petroianu",
+      "type": "scholarly",
+      "language": "en",
+      "access": "opened",
+      "url": "https://storage.imrpress.com/IMR/hmed/application/10.1691/ph.2019.9013.pdf",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-tiemann-ionone-patent",
+      "publisher": "United States Patent Office / Google Patents",
+      "type": "primary_public_domain",
+      "language": "en",
+      "access": "opened",
+      "url": "https://patents.google.com/patent/US556943A/en",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-hedione-swiss",
+      "publisher": "Swiss Patent Office / Google Patents",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://patents.google.com/patent/CH382731A/fr",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-hedione-us",
+      "publisher": "United States Patent Office / Google Patents",
+      "type": "primary_public_domain",
+      "language": "en",
+      "access": "opened",
+      "url": "https://patents.google.com/patent/US3158644A/en",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-hedione-chapuis",
+      "publisher": "Christian Chapuis / Firmenich / Perfumer & Flavorist",
+      "type": "scholarly",
+      "language": "en",
+      "access": "opened",
+      "url": "https://img.perfumerflavorist.com/files/base/allured/all/document/2011/11/pf.PF_36_12_036_13.pdf",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-hedione-scentree",
+      "publisher": "ScenTree",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.scentree.co/en/Hedione%C2%AE.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-or51-paper",
+      "publisher": "Billesbølle et al. / Nature / University of California eScholarship",
+      "type": "scholarly",
+      "language": "en",
+      "access": "opened",
+      "url": "https://escholarship.org/content/qt6j3836qd/qt6j3836qd.pdf",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-or51-ucsf",
+      "publisher": "University of California San Francisco",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.ucsf.edu/news/2023/03/424956/making-sense-scents",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-olfaction-nidcd",
+      "publisher": "US National Institute on Deafness and Other Communication Disorders",
+      "type": "primary_public_domain",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nidcd.nih.gov/health/smell-disorders",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-mummies-paper",
+      "publisher": "Emma Paolin et al. / Journal of the American Chemical Society",
+      "type": "scholarly",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11869298/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-mummies-ucl",
+      "publisher": "University College London",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.ucl.ac.uk/news/2025/feb/ancient-egyptian-mummified-bodies-smell-woody-spicy-and-sweet",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-mummies-bembibre",
+      "publisher": "Cecilia Bembibre / UCL / The Conversation",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.ucl.ac.uk/news/2025/feb/commentary-my-sniffer-teams-surprise-findings-what-mummified-bodies-smell",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-venice-archive",
+      "publisher": "Fondazione Musei Civici di Venezia",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://archivio-mocenigo.visitmuve.it/en/mostre-en/archivio-mostre-en/exhibition-es-senze/2022/02/19608/es-senze-exhibition/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-venice-report-2022",
+      "publisher": "Fondazione Musei Civici di Venezia",
+      "type": "primary",
+      "language": "it",
+      "access": "opened",
+      "url": "https://www.visitmuve.it/wp-content/uploads/2018/09/FMC_Attivita-Anno-2022_.pdf",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-venice-curatorial",
+      "publisher": "The Merchant of Venice",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.themerchantofvenice.com/en/blog/news/discover-es-senze-the-olfactory-exhibition-at-the-museum-of-palazzo-mocenigo",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-hk-fragrance-archive",
+      "publisher": "Hong Kong Museum of Art",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://hk.art.museum/en/web/ma/exhibitions-and-events/fragrance-of-time.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-hk-fragrance-government",
+      "publisher": "Hong Kong Information Services Department",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.news.gov.hk/eng/2024/06/20240627/20240627_200307_812.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-hk-ten-fragrances",
+      "publisher": "Hong Kong Museum of Art",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://hk.art.museum/en/web/ma/exhibitions-and-events/gathering-of-ten-fragrances.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-hk-raindrop",
+      "publisher": "Hong Kong Museum of Art",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://hk.art.museum/en/web/ma/exhibitions-and-events/scent-of-raindrop.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-met-sleeping-archive",
+      "publisher": "The Metropolitan Museum of Art",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.metmuseum.org/exhibitions/sleeping-beauties-reawakening-fashion",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-met-sleeping-text",
+      "publisher": "The Metropolitan Museum of Art",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://cdn.sanity.io/files/cctd4ker/production/b3275df325e9c974d0cb8d2cf94c643a29ff75cb.pdf",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-met-tolaas-vogue",
+      "publisher": "British Vogue / Laird Borrelli-Persson",
+      "type": "primary_interview",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.vogue.co.uk/article/sissel-tolaas-interview",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-met-tolaas-bomb",
+      "publisher": "BOMB / Emily Zimmerman and Sissel Tolaas",
+      "type": "primary_interview",
+      "language": "en",
+      "access": "opened",
+      "url": "https://bombmagazine.org/articles/2024/08/28/sissel-tolaas-by-emily-zimmerman/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-mauritshuis-report",
+      "publisher": "Mauritshuis",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.mauritshuis.nl/media/ghikup0l/mauritshuis-annual-report-2021.pdf",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-mauritshuis-digital",
+      "publisher": "Mauritshuis",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.mauritshuis.nl/en/press-releases/mauritshuis-introduces-interactive-look-and-smell-tour-for-the-public-fleeting-scents-in-colour",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4a-mauritshuis-composition",
+      "publisher": "Essencional; Karen Marin, interviews with exhibition participants",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.essencional.com/en/posts/fragrant-moments-in-time-smelling-the-past-in-the-hague-1/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5a-vitone-nbk",
+      "url": "https://www.nbk.org/en/editionen/vitone_parfum",
+      "publisher": "Neuer Berliner Kunstverein",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5a-vitone-artist",
+      "url": "https://antinomie.it/index.php/2023/02/21/odore-come-scultura-una-questione-di-linguaggio/",
+      "publisher": "Antinomie; Luca Vitone",
+      "type": "primary",
+      "language": "it",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5a-petrichor-nature",
+      "url": "https://www.nature.com/articles/201993a0",
+      "publisher": "Nature",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5a-petrichor-csiro",
+      "url": "https://www.csiro.au/en/news/All/Articles/2015/March/the-smell-of-rain-how-our-scientists-invented-a-new-word",
+      "publisher": "CSIRO",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5a-mitti-maker",
+      "url": "https://www.kannaujperfume.com/product/mitti-attar-the-scent-of-rain/",
+      "publisher": "Kannauj Perfume",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5a-books-crossmark",
+      "url": "https://crossmark.crossref.org/dialog/?doi=10.1186/s40494-016-0114-1",
+      "publisher": "Crossref / Springer Nature",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5a-books-paper",
+      "url": "https://www.nature.com/articles/s40494-016-0114-1.pdf",
+      "publisher": "Heritage Science; Cecilia Bembibre and Matija Strlič",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5a-books-ucl",
+      "url": "https://discovery.ucl.ac.uk/id/eprint/1554653/",
+      "publisher": "University College London",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5a-books-thesis",
+      "url": "https://discovery.ucl.ac.uk/id/eprint/10093605/1/Smell_of_Heritage_complete_thesis_Bembibre.pdf",
+      "publisher": "University College London; Cecilia Bembibre Jacobo",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5a-pom-monell",
+      "url": "https://monell.org/a-step-closer-to-digitizing-the-sense-of-smell-monell-center-osmo-model-describes-odors-better-than-human-panelists/",
+      "publisher": "Monell Chemical Senses Center",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5a-pom-google",
+      "url": "https://research.google/blog/digitizing-smell-using-molecular-maps-to-understand-odor/",
+      "publisher": "Google Research; Richard C.Gerkin and Alexander B.Wiltschko",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5a-pom-osmo",
+      "url": "https://www.prnewswire.com/news-releases/digital-olfaction-startup-osmo-introduces-scent-to-the-world-of-artificial-intelligence-in-breakthrough-science-paper-301915197.html",
+      "publisher": "Osmo via PRNewswire",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5a-senetnay-mpi",
+      "url": "https://www.gea.mpg.de/19754/scent-of-the-afterlife-reconstructed",
+      "publisher": "Max Planck Institute of Geoanthropology",
+      "type": "primary",
+      "language": "de",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5a-senetnay-paper",
+      "url": "https://discovery.ucl.ac.uk/10176248/1/Egyptian%20mummificaton%20balms-%20Huber%20et%20al%20Sci%20Rep.pdf",
+      "publisher": "Scientific Reports; Barbara Huber et al.",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5a-senetnay-perfumer",
+      "url": "https://www.iris-morphee.com/all-projects/the-scent-of-eternity",
+      "publisher": "Iris & Morphée; Carole Calvez",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5a-petrichor-growth",
+      "url": "https://www.nature.com/articles/2071415a0",
+      "publisher": "Nature; I. J. Bear and R. G. Thomas",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-kors-bio",
+      "publisher": "Biography",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.biography.com/history-culture/michael-kors",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-kors-loren",
+      "publisher": "The Daily Front Row",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://fashionweekdaily.com/scents-and-sensibility-the-michael-kors-way/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-kors-michael",
+      "publisher": "Now Smell This",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "url": "https://nstperfume.com/2007/10/24/michael-by-michael-kors-with-an-aside-on-very-michael-kors-and-a-quick-poll/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-kors-memory",
+      "publisher": "Allure",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.allure.com/story/michael-kors-talks-about-the-scents-of-his-life",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-lagerfeld-date",
+      "publisher": "Store norske leksikon",
+      "type": "reference",
+      "language": "no",
+      "access": "opened",
+      "url": "https://snl.no/Karl_Lagerfeld",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-paper-steidl",
+      "publisher": "Steidl",
+      "type": "primary",
+      "language": "de",
+      "access": "opened",
+      "url": "https://steidl.de/Buecher/Paper-Passion-Perfume-0332496160.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-paper-wallpaper",
+      "publisher": "Wallpaper*",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.wallpaper.com/lifestyle/paper-passion-by-geza-schoen-steidl-wallpaper-and-karl-lagerfeld",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-schiap-date",
+      "publisher": "Victoria and Albert Museum",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.vam.ac.uk/articles/elsa-schiaparelli-a-timeline",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-schiap-labels",
+      "publisher": "Victoria and Albert Museum",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.vam.ac.uk/info/schiaparelli-fashion-becomes-art-exhibition-large-print-guide",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-schiap-mae",
+      "publisher": "ASU FIDM Museum",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://asufidmmuseum.asu.edu/learn/articles/mae-west",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-schiap-object",
+      "publisher": "FIDM Museum / Google Arts & Culture",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://artsandculture.google.com/asset/shocking-perfume-bottle-and-packaging-elsa-schiaparelli/OQE9jk5gtZoYiQ?hl=en",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-jlo-bio",
+      "publisher": "Biography",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.biography.com/musicians/jennifer-lopez",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-jlo-sony",
+      "publisher": "Sony Music Japan",
+      "type": "primary",
+      "language": "ja",
+      "access": "opened",
+      "url": "https://www.sonymusic.co.jp/artist/JenniferLopez/info/12092",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-jlo-paper",
+      "publisher": "PAPER",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.papermag.com/glow-by-jlo-perfume",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-jlo-nst",
+      "publisher": "Now Smell This",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "url": "https://nstperfume.com/2006/01/30/j-lo-glow-by-jennifer-lopez-perfume-review/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-beyonce-date",
+      "publisher": "National Women’s History Museum",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.womenshistory.org/education-resources/biographies/beyonce-knowles-carter",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-beyonce-interview",
+      "publisher": "Irish Independent",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.independent.ie/style/celebrity/fierce-shy-beyonce/26668414.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-beyonce-heat-release",
+      "publisher": "ME NewsWire",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://menewswire.blogspot.com/2010/10/introducing-beyonces-first-fragrance.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-beyonce-campaign",
+      "publisher": "Hans Dorsinville",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://hansdorsinville.com/work/coty-fragrances",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-katy-date",
+      "publisher": "Biography",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.biography.com/musicians/katy-perry",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-katy-vogue",
+      "publisher": "British Vogue",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.vogue.co.uk/article/katy-perry-to-launch-perfume",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-katy-female",
+      "publisher": "Female Daily",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "url": "https://editorial.femaledaily.com/blog/2010/11/26/katy-perry-a-cool-cat-lady-with-purr",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-katy-allure",
+      "publisher": "Allure",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.allure.com/story/katy-perrys-beauty-news",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-banderas-date",
+      "publisher": "Encyclopedia.com",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.encyclopedia.com/people/literature-and-arts/film-and-television-biographies/antonio-banderas",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-banderas-puig",
+      "publisher": "Puig",
+      "type": "primary",
+      "language": "es",
+      "access": "opened",
+      "url": "https://www.puig.com/es/history/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-banderas-wanted",
+      "publisher": "Wanted",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.wantedonline.co.za/fashion-and-grooming/2018-09-19-watch--inside-the-20th-anniversary-celebration-of-antonio-banderas-fragrances-20th-anniversary-celebration/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-banderas-week",
+      "publisher": "The Week India",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.theweek.in/magazine/theweek/leisure/2021/06/17/antonio-banderas-on-his-cannes-victory-love-for-theatre-and-dominance-of-ott.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-eilish-date",
+      "publisher": "ReferencePoint Press",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.referencepointpress.com/pdfs/samples/billieeilish.pdf",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-eilish-parlux",
+      "publisher": "Parlux / PR Newswire",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.prnewswire.com/news-releases/introducing-eilish-the-debut-fragrance-from-billie-eilish-301421481.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-eilish-allure",
+      "publisher": "Allure",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.allure.com/story/billie-eilish-fragrance-launch-interview",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-eilish-vogue",
+      "publisher": "Vogue US",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.vogue.com/article/billie-eilish-on-launching-her-first-fragrance",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-eilish-fragrantica",
+      "publisher": "Fragrantica",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.fragrantica.com/perfume/Billie-Eilish/Eilish-70052.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-swift-date",
+      "publisher": "Store norske leksikon",
+      "type": "reference",
+      "language": "no",
+      "access": "opened",
+      "url": "https://snl.no/Taylor_Swift",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-swift-headline",
+      "publisher": "Headline Planet",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "url": "https://headlineplanet.com/home/2011/07/15/taylor-swift-launches-fragrance-based-on-enchanted-lyric/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-swift-moodie",
+      "publisher": "Moodie Davitt Report",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "url": "https://moodiedavittreport.com/taylor-swifts-wonderstruck-makes-asia-pacific-debut-at-changi/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-swift-osmoz",
+      "publisher": "OSMOZ",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.osmoz.com/perfumes/taylor-swift/364/wonderstruck",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-swift-report",
+      "publisher": "Elizabeth Arden",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.annualreports.co.uk/HostedData/AnnualReportArchive/e/NASDAQ_RDEN_2012.pdf",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-galliano-date",
+      "publisher": "Hrvatska enciklopedija",
+      "type": "reference",
+      "language": "hr",
+      "access": "opened",
+      "url": "https://www.enciklopedija.hr/clanak/galliano-john",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-galliano-vogue",
+      "publisher": "British Vogue",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.vogue.co.uk/article/john-galliano-launches-a-perfume",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-galliano-nez",
+      "publisher": "Auparfum / Nez",
+      "type": "specialist",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://auparfum.bynez.com/John-Galliano,368",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-galliano-relax",
+      "publisher": "Relaxnews / La Dépêche",
+      "type": "specialist",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.ladepeche.fr/article/2008/10/02/479252-premier-parfum-john-galliano-disponible-10-octobre-chez-sephora.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n4b-galliano-license",
+      "publisher": "Now Smell This",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "url": "https://nstperfume.com/2007/03/02/john-galliano-to-launch-a-fragrance-in-2008/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-rihanna-bio",
+      "url": "https://www.biography.com/musicians/rihanna",
+      "publisher": "Biography",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-rihanna-fenty",
+      "url": "https://fentybeauty.com/en-py/products/fenty-eau-de-parfum",
+      "publisher": "Fenty Beauty",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-rihanna-vogue",
+      "url": "https://www.vogue.com/article/rihanna-opens-up-about-fenty-parfum-fragrance",
+      "publisher": "Vogue",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-rihanna-newbeauty",
+      "url": "https://www.newbeauty.com/view/rihanna-fenty-fragrance",
+      "publisher": "NewBeauty",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-rihanna-fg",
+      "url": "https://www.fragrantica.com/perfume/Fenty/Fenty-68677.html",
+      "publisher": "Fragrantica",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-grande-bio",
+      "url": "https://www.biography.com/musicians/ariana-grande",
+      "publisher": "Biography",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-grande-cloud",
+      "url": "https://www.prnewswire.com/news-releases/multi-platinum-recording-artist-ariana-grande-takes-fragrance-franchise-beyond-the-clouds-with-a-dreamy-new-brand-300674162.html",
+      "publisher": "LUXE Brands / PR Newswire",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-grande-gavarry",
+      "url": "https://everfumed.com/ariana-grande-cloud/",
+      "publisher": "Everfumed / Richard Goller",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-grande-pink",
+      "url": "https://www.prnewswire.com/news-releases/the-clouds-give-way-as-ariana-grande-debuts-her-newest-fragrance-cloud-pink-301897366.html",
+      "publisher": "LUXE Brands / PR Newswire",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-aguilera-bio",
+      "url": "https://files.eric.ed.gov/fulltext/ED452104.pdf",
+      "publisher": "Biography Today / ERIC",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-aguilera-elle",
+      "url": "https://www.elle.com/culture/celebrities/news/a22546/christina-aguilera-interview/",
+      "publisher": "ELLE",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-aguilera-fab",
+      "url": "https://iamfabulicious.blogspot.com/2013/01/christina-aguilera-red-sin-interview.html",
+      "publisher": "I Am Fabulicious",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-aguilera-osmoz",
+      "url": "https://www.osmoz.com/perfumes/christina-aguilera/6826/red-sin",
+      "publisher": "OSMOZ",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-aguilera-teen",
+      "url": "https://www.teenvogue.com/story/christina-aguilera-red-sin",
+      "publisher": "Teen Vogue",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-beckham-bio",
+      "url": "https://www.realmadrid.com/en-US/the-club/history/football-legends/david-robert-joseph-beckham",
+      "publisher": "Real Madrid",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-beckham-gq",
+      "url": "https://www.gq-magazine.co.uk/grooming/article/david-beckham-eau-de-parfum-fragrance",
+      "publisher": "British GQ",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-beckham-esquire",
+      "url": "https://www.esquire.com/style/grooming/a45520495/david-beckham-fragrance-the-collection-interview/",
+      "publisher": "Esquire",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-beckham-society",
+      "url": "https://perfumesociety.org/wp-content/uploads/2016/05/scented-letter-issue-17-summer-2016.pdf",
+      "publisher": "The Perfume Society",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-beckham-brand",
+      "url": "https://www.beckham-fragrances.com/en/collection/the-collection",
+      "publisher": "David Beckham Fragrances / Coty",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-bieber-bio",
+      "url": "https://abc17news.com/news/national-world/cnn-national/2024/08/28/justin-bieber-fast-facts-3/",
+      "publisher": "CNN Editorial Research / ABC17",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-bieber-launch",
+      "url": "https://www.prnewswire.com/news-releases/worldwide-phenomenon-justin-bieber-introduces-someday-his-first-fragrance-122444568.html",
+      "publisher": "Give Back Brands / PR Newswire",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-bieber-mtv",
+      "url": "https://okmagazine.com/news/justin-bieber-wants-girls-smell-flowery-fruity/",
+      "publisher": "OK! / MTV interview",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-paper-voith",
+      "url": "https://www.voith.com/corp-en/2013-08-21_twogether34_bhorn_en_final_Einzelseiten_interaktiv_screen.pdf",
+      "publisher": "Voith Paper / twogether",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-paper-nst",
+      "url": "https://nstperfume.com/2012/06/26/paper-passion-new-fragrance/",
+      "publisher": "Now Smell This",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-schiap-curator",
+      "url": "https://www.dazeddigital.com/fashion/article/69984/1/schiaparelli-fashion-becomes-art-exhibition-london-most-shocking-designs",
+      "publisher": "Dazed / interview with V&A curator Sonnet Stanfill",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-banderas-fragroom",
+      "url": "https://fragroom.com/2017/10/31/antonio-banderas-interview/",
+      "publisher": "Fragroom / Richard Goller",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-grande-official",
+      "url": "https://arianagrandefragrances.com/collections/all-products-new/products/cloud",
+      "publisher": "Ariana Grande Fragrances",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-bieber-fg",
+      "url": "https://www.fragrantica.com/perfume/Justin-Bieber/Someday-12365.html",
+      "publisher": "Fragrantica",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-eilish-gci",
+      "url": "https://www.gcimagazine.com/brands-products/fragrance-home/news/21863627/parlux-and-billie-eilish-launch-eilish",
+      "publisher": "Global Cosmetic Industry",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-kors-trio",
+      "url": "https://www.vogue.in/content/perfume-trio-match-every-mood",
+      "publisher": "Vogue India",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-kors-gloss",
+      "url": "https://www.getthegloss.com/beauty/makeup/interview-michael-kors-style-rules/",
+      "publisher": "Get The Gloss / Susannah Taylor",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n5b-beyonce-fg",
+      "url": "https://www.fragrantica.com/perfume/Beyonce/Heat-7745.html",
+      "publisher": "Fragrantica",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-villoresi-home",
+      "publisher": "Museo Villoresi",
+      "url": "https://museovilloresi.it/?lang=en",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-villoresi-garden",
+      "publisher": "Museo Villoresi",
+      "url": "https://museovilloresi.it/giardino/?lang=en",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-villoresi-museum",
+      "publisher": "Museo Villoresi",
+      "url": "https://museovilloresi.it/museo/?lang=en",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-villoresi-visit",
+      "publisher": "L’Officiel UK",
+      "url": "https://lofficieluk.com/format/TheVilloresiPerfumeMuseuminFlorence.php?id=1896&table_name=master_table",
+      "language": "en",
+      "type": "participant_report",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-wellcome-announcement",
+      "publisher": "Wellcome Collection",
+      "url": "https://wellcomecollection.org/being-human--new-permanent-gallery-at-wellcome-collection-opening-in-autumn-2019-will-explore-trust--identity-and-health-in-a-changing-world",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-wellcome-object",
+      "publisher": "Wellcome Collection",
+      "url": "https://wellcomecollection.org/works/tn9ddg5x",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-wellcome-open",
+      "publisher": "Wellcome Collection",
+      "url": "https://wellcomecollection.org/being-human-opens",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-wellcome-avm",
+      "publisher": "AVM Curiosities",
+      "url": "https://www.avmcuriosities.com/5318008",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-sublime-about",
+      "publisher": "Resurrecting the Sublime / authors",
+      "url": "https://www.resurrectingthesublime.com/about",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-sublime-shows",
+      "publisher": "Resurrecting the Sublime / authors",
+      "url": "https://www.resurrectingthesublime.com/exhibitions",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-louvre-installation",
+      "publisher": "Louvre Abu Dhabi",
+      "url": "https://www.louvreabudhabi.ae/fr/art/installations",
+      "language": "fr",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-louvre-cloud",
+      "publisher": "Louvre Abu Dhabi",
+      "url": "https://www.louvreabudhabi.ae/fr/art/contemporary-commissions/mathilde-laurent-transsolar-klimaengineering",
+      "language": "fr",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-cartier-cloud",
+      "publisher": "Cartier",
+      "url": "https://www.cartier.cn/stories-events/1910-stories-osni",
+      "language": "zh",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-transsolar-cloud",
+      "publisher": "Transsolar KlimaEngineering",
+      "url": "https://transsolar.com/projects/uso-the-perfumed-cloud-louvre-abu-dhabi",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-transsolar-discrepancy",
+      "publisher": "Transsolar KlimaEngineering",
+      "url": "https://transsolar.com/news/uso-in-times-of-climate-change",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-lausanne-report",
+      "publisher": "Ville de Lausanne",
+      "url": "https://www.lausanne.ch/.binaryData/website/path/lausanne/officiel/municipalite/rapports-de-gestion/rapport-gestion-2019/contentAutogenerated/autogeneratedContainer/col1/01/linkList/01/websitedownload/2019_RG_CDU.2020-06-03-10-45-22.pdf",
+      "language": "fr",
+      "type": "institutional_report",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-mudac-domus",
+      "publisher": "Domus / curatorial interview",
+      "url": "https://www.domusweb.it/en/design/gallery/2019/04/25/lausanne-the-mudac-showcases-perfume-in-an-interactive-manner.html",
+      "language": "en",
+      "type": "participant_interview",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-mudac-marge",
+      "publisher": "Atelier Marge / exhibition collaborators",
+      "url": "https://www.atelier-marge.com/newsletter/janvier-2019/",
+      "language": "fr",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-mudac-visit",
+      "publisher": "La Voix du parfum / Isabelle Sadoux",
+      "url": "https://www.lavoixduparfum.fr/le-parfum-un-art-delicat-expose/",
+      "language": "fr",
+      "type": "specialist_visit",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-osmodrama-dates",
+      "publisher": "Wolfgang Georgsdorf",
+      "url": "https://georgsdorf.com/interdisciplinary/konzerttermine-performance-dates-3/",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-osmodrama-retrospective",
+      "publisher": "Wolfgang Georgsdorf",
+      "url": "https://georgsdorf.com/olfactory/osmodrama-festival-berlin-2016/",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-osmodrama-programme",
+      "publisher": "Osmodrama / Wolfgang Georgsdorf",
+      "url": "https://osmodrama.com/img/2016/06/Osmodrama_Programmheft_V11_RGB_engl_dt.pdf",
+      "language": "de/en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-osmodrama-shiner",
+      "publisher": "Larry Shiner / Oxford University Press",
+      "url": "https://academic.oup.com/book/33605/chapter/288098554",
+      "language": "en",
+      "type": "scholarly",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-mudac-glithero",
+      "publisher": "Glithero",
+      "url": "https://www.glithero.com/installations/nez-a-nez",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-mudac-goodsir",
+      "publisher": "Naomi Goodsir",
+      "url": "https://www.naomigoodsir.com/en/blog/2019/2/17/nez-a-nez-contemporary-perfumers-at-mudac-lausanne",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50r-mudac-archive",
+      "publisher": "mudac",
+      "url": "https://mudac.ch/en/exhibitions/nez-a-nez-contemporary-perfumers/",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
     }
   ],
   "events": [
@@ -4921,6 +6298,859 @@
       },
       "storyAngleRu": "Два цветка для одного характера",
       "researchNotesRu": "Точная дата относится к рождению дизайнера. Для выпусков Tatiana и Diane утверждается только подтверждённый год."
+    },
+    {
+      "id": "n4a-huysmans-birth-1848",
+      "eventDate": "1848-02-05",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "birth",
+      "titleRu": "Грамматика запахов Гюисманса",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n4a-huysmans-birth-1848",
+      "sourceIds": [
+        "n4a-huysmans-publisher",
+        "n4a-huysmans-novel",
+        "n4a-huysmans-nst"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4a-huysmans-publisher",
+        "locator": "Хронология, 1848",
+        "summaryRu": "Жорис-Карл Гюисманс родился в Париже 5 февраля 1848 года."
+      },
+      "storyAngleRu": "Парфюмерная лаборатория в десятой главе «Наоборот»: обучение восприятию и искусственная природа.",
+      "researchNotesRu": "Образы и действия дез Эссента явно обозначены как содержание романа. Основная опора — оригинальный текст 1884 года в общественном достоянии; никаких рецептов как практических инструкций."
+    },
+    {
+      "id": "n4a-baudelaire-birth-1821",
+      "eventDate": "1821-04-09",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "birth",
+      "titleRu": "Флакон, который помнит",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n4a-baudelaire-birth-1821",
+      "sourceIds": [
+        "n4a-baudelaire-bnf",
+        "n4a-baudelaire-correspondances",
+        "n4a-baudelaire-fleurs"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4a-baudelaire-bnf",
+        "locator": "Notice de personne, Naissance",
+        "summaryRu": "Шарль Бодлер родился в Париже 9 апреля 1821 года."
+      },
+      "storyAngleRu": "Аромат как образ памяти и связь между чувствами в поэзии Бодлера.",
+      "researchNotesRu": "Обсуждаются оригинальные французские стихотворения в общественном достоянии, без цитирования современных переводов. Художественные образы явно отнесены к стихотворениям."
+    },
+    {
+      "id": "n4a-coty-birth-1874",
+      "eventDate": "1874-05-03",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "birth",
+      "titleRu": "Букет, собранный из возможностей",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n4a-coty-birth-1874",
+      "sourceIds": [
+        "n4a-coty-bnf",
+        "n4a-coty-origan",
+        "n4a-coty-reconstructions",
+        "n4a-coty-profile"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4a-coty-bnf",
+        "locator": "Naissance",
+        "summaryRu": "Франсуа Коти родился 3 мая 1874 года в Аяччо; настоящее имя — Жозеф Мари Франсуа Спотюрно."
+      },
+      "storyAngleRu": "L’Origan и ранние цветочные композиции Коти: выразительные возможности натуральных материалов и синтетических баз.",
+      "researchNotesRu": "Отличается от уже имеющейся истории смерти Коти о производстве, флаконах и политике. Историческая структура баз атрибутирована специалистам, не выведена из перечня нот. Бюже явно автор современных реконструкций."
+    },
+    {
+      "id": "n4a-tiemann-birth-1848",
+      "eventDate": "1848-06-10",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "birth",
+      "titleRu": "Фиалка за пределами цветка",
+      "status": "verified",
+      "evidenceLevel": "reference",
+      "eventGroupId": "n4a-tiemann-birth-1848",
+      "sourceIds": [
+        "n4a-tiemann-ndb",
+        "n4a-tiemann-kruger-history",
+        "n4a-tiemann-ionone-patent"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4a-tiemann-ndb",
+        "locator": "NDB article, biographical heading",
+        "summaryRu": "Фердинанд Тиман родился 10 июня 1848 года в Рюбеланде."
+      },
+      "storyAngleRu": "Путь Фердинанда Тимана к ионону: промежуточное вещество и превращение, которое даёт запах.",
+      "researchNotesRu": ""
+    },
+    {
+      "id": "n4a-hedione-patent-filing-1960",
+      "eventDate": "1960-02-25",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "patent_filing",
+      "titleRu": "Жасмин, который расширяет композицию",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n4a-hedione-patent-filing-1960",
+      "sourceIds": [
+        "n4a-hedione-swiss",
+        "n4a-hedione-chapuis",
+        "n4a-hedione-us",
+        "n4a-hedione-scentree"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4a-hedione-swiss",
+        "locator": "Info, Filing date; Timeline, Application filed",
+        "summaryRu": "25 февраля 1960 года Firmenich & Cie подала швейцарскую заявку CH212160A, опубликованную позднее как CH382731A; изобретатели — Эдуар Демоль и Эдгар Ледерер."
+      },
+      "storyAngleRu": "Патентная заявка и переход от исследования жасмина к действию Hedione внутри композиции.",
+      "researchNotesRu": "Событие — подача заявки 25.02.1960, не публикация 15.10.1964. Ошибка английской ScenTree, называющая filing публикацией, исключена. Нет заявления о первом применении или феромонном эффекте."
+    },
+    {
+      "id": "n4a-or51e2-structure-publication-2023",
+      "eventDate": "2023-03-15",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "research_publication",
+      "titleRu": "Молекула внутри рецептора",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n4a-or51e2-structure-publication-2023",
+      "sourceIds": [
+        "n4a-or51-ucsf",
+        "n4a-or51-paper",
+        "n4a-olfaction-nidcd"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4a-or51-ucsf",
+        "locator": "Paragraph identifying online publication date",
+        "summaryRu": "Работа Structural basis of odorant recognition by a human odorant receptor опубликована онлайн в Nature 15 марта 2023 года."
+      },
+      "storyAngleRu": "Пространственный портрет связи OR51E2 и пропионата; трудности получения белка и проверка формы кармана.",
+      "researchNotesRu": "Дата — онлайн-публикация 15.03.2023, не дата журнального выпуска 23.03.2023. Прочитан авторский текст в репозитории UC; полная дата отдельно подтверждена сообщением участвовавшего университета. Без обещаний предсказывать любой аромат."
+    },
+    {
+      "id": "n4a-mummies-smell-study-publication-2025",
+      "eventDate": "2025-02-13",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "research_publication",
+      "titleRu": "Воздух из саркофага",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n4a-mummies-smell-study-publication-2025",
+      "sourceIds": [
+        "n4a-mummies-paper",
+        "n4a-mummies-bembibre",
+        "n4a-mummies-ucl"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4a-mummies-paper",
+        "locator": "Article citation header: 2025 Feb 13",
+        "summaryRu": "Исследование Ancient Egyptian Mummified Bodies: Cross-Disciplinary Analysis of Their Smell опубликовано онлайн 13 февраля 2025 года в JACS."
+      },
+      "storyAngleRu": "Сопоставление инструментального анализа и обученного носа: ароматическое наследие и разные слои консервации.",
+      "researchNotesRu": "13 февраля — дата самой онлайн-статьи JACS, не дата университетского сообщения 14 февраля и не номер журнала 26 февраля. Исследуется современный запах объектов, а не точная неизменная реконструкция древнего рецепта."
+    },
+    {
+      "id": "n4a-venice-es-senze-opening-2022",
+      "eventDate": "2022-04-21",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Запах становится скульптурой",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n4a-venice-es-senze-opening-2022",
+      "sourceIds": [
+        "n4a-venice-archive",
+        "n4a-venice-report-2022",
+        "n4a-venice-curatorial",
+        "n5a-vitone-nbk",
+        "n5a-vitone-artist"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4a-venice-report-2022",
+        "locator": "2022 activity report, Palazzo Mocenigo: ES-SENZE, 21 aprile–27 novembre",
+        "summaryRu": "Выставка Es-senze проходила в Palazzo Mocenigo в Венеции с 21 апреля по 27 ноября 2022 года."
+      },
+      "storyAngleRu": "Imperium в Es-senze: совместная работа художника и парфюмера над запахом власти.",
+      "researchNotesRu": "Checklist по старой ссылке возвращает404 и не использован. Дата открытия подтверждена ретроспективным архивом и годовым отчётом; сведения о Imperium — n.b.k. и свидетельством художника. Не приписывается объективный запах абстрактному понятию власти."
+    },
+    {
+      "id": "n4a-hk-fragrance-time-opening-2024",
+      "eventDate": "2024-06-28",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "От курильницы к запаху дождя",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n4a-hk-fragrance-time-opening-2024",
+      "sourceIds": [
+        "n4a-hk-fragrance-archive",
+        "n4a-hk-fragrance-government",
+        "n4a-hk-ten-fragrances",
+        "n4a-hk-raindrop"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4a-hk-fragrance-archive",
+        "locator": "Overview, Date 2024.06.28–2024.10.16",
+        "summaryRu": "Fragrance of Time — In Search of Chinese Art of Scent открылась в Hong Kong Museum of Art 28 июня 2024 года."
+      },
+      "storyAngleRu": "Китайская ароматическая культура и две современные гонконгские работы как продолжение музейной истории.",
+      "researchNotesRu": "Открытие 28 июня подтверждено ретроспективной музейной страницей; сообщение 27 июня описывает завтрашний старт и отдельно церемонию. Нет обещаний лечебного эффекта ароматов."
+    },
+    {
+      "id": "n4a-met-sleeping-beauties-opening-2024",
+      "eventDate": "2024-05-10",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "След духов внутри платья",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n4a-met-sleeping-beauties-opening-2024",
+      "sourceIds": [
+        "n4a-met-sleeping-archive",
+        "n4a-met-sleeping-text",
+        "n4a-met-tolaas-vogue",
+        "n4a-met-tolaas-bomb"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4a-met-sleeping-archive",
+        "locator": "Exhibition archive, May 10–September 2, 2024",
+        "summaryRu": "Sleeping Beauties: Reawakening Fashion открылась в Met 10 мая 2024 года и продолжалась до 2 сентября."
+      },
+      "storyAngleRu": "Ароматические следы в одежде: саше, молекулярные записи и перевод в музейные носители.",
+      "researchNotesRu": "Не заявлено, что анализ даёт точную биографию или однозначно устанавливает парфюм. Предположение музейного текста о La Rose de Rosine исключено. Использовано фактическое число 220 на ретроспективной странице, не предварительное 250."
+    },
+    {
+      "id": "n4a-mauritshuis-fleeting-opening-2021",
+      "eventDate": "2021-06-05",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Канал под красивой картиной",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n4a-mauritshuis-fleeting-opening-2021",
+      "sourceIds": [
+        "n4a-mauritshuis-report",
+        "n4a-mauritshuis-composition",
+        "n4a-mauritshuis-digital"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4a-mauritshuis-report",
+        "locator": "Annual Report 2021, printed p.12; Fleeting 5 June–29 August",
+        "summaryRu": "Fleeting — Scents in Colour в Mauritshuis проходила с 5 июня по 29 августа 2021 года."
+      },
+      "storyAngleRu": "Fleeting: намеренно неприятная композиция рядом с живописью и исторические ароматы помандера.",
+      "researchNotesRu": "Первоначальное плановое открытие 11 февраля не используется: музей был закрыт. Дата 5 июня подтверждена итоговым годовым отчётом. Историческая вера в защиту помандера от болезней явно описана как вера прошлого."
+    },
+    {
+      "id": "n5a-petrichor-paper-1964",
+      "eventDate": "1964-03-07",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "research_publication",
+      "titleRu": "Как запах земли получил имя",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n5a-petrichor-paper-1964",
+      "sourceIds": [
+        "n5a-petrichor-nature",
+        "n5a-petrichor-csiro",
+        "n5a-mitti-maker",
+        "n5a-petrichor-growth"
+      ],
+      "dateEvidence": {
+        "sourceId": "n5a-petrichor-nature",
+        "locator": "Article header: Published 07 March 1964; citation Nature 201, 993–995.",
+        "summaryRu": "7 марта 1964 года в Nature опубликована статья Nature of Argillaceous Odour Изабель Джой Беар и Ричарда Томаса."
+      },
+      "storyAngleRu": "Термин petrichor, выделение материала из камней, эксперименты Беар и Томаса 1965 года и самостоятельная практика mitti attar.",
+      "researchNotesRu": "Дата — публикация 1964 года, не открытие запаха дождя. Прочитаны доступная карточка Nature 1964 и CSIRO; дополнительные подробности — из фактически прочитанного abstract письма Беар и Томаса 1965 года. MIT 2015 исключён как пересекающийся с самостоятельной историей другого пакета. Современное изготовление mitti attar атрибутировано производителю. Не утверждается химическая тождественность всех образцов почвенного запаха."
+    },
+    {
+      "id": "n5a-smell-heritage-paper-2017",
+      "eventDate": "2017-04-07",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "research_publication",
+      "titleRu": "Библиотека, записанная носом",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n5a-smell-heritage-paper-2017",
+      "sourceIds": [
+        "n5a-books-crossmark",
+        "n5a-books-ucl",
+        "n5a-books-paper",
+        "n5a-books-thesis"
+      ],
+      "dateEvidence": {
+        "sourceId": "n5a-books-crossmark",
+        "locator": "Published Online; Article History: First Online 7 April 2017.",
+        "summaryRu": "Статья Сесилии Бембибре и Матии Стрлича Smell of heritage опубликована онлайн 7 апреля 2017 года."
+      },
+      "storyAngleRu": "Historic Book Odour Wheel: химические данные, описания посетителей и документирование запаха как наследия.",
+      "researchNotesRu": "Дата подтверждена открытой Crossmark; пресс-релиз 6 апреля не подменяет дату статьи 7 апреля. Прочитаны PDF издателя, глава 8 диссертации автора и abstract UCL. Шоколад и кофе не превращаются в универсальный состав всех книг; ограничения контекста сохранены."
+    },
+    {
+      "id": "n5a-principal-odor-map-print-2023",
+      "eventDate": "2023-09-01",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "research_publication",
+      "titleRu": "Карта, на которой соседствуют запахи",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n5a-principal-odor-map-print-2023",
+      "sourceIds": [
+        "n5a-pom-monell",
+        "n5a-pom-google",
+        "n5a-pom-osmo"
+      ],
+      "dateEvidence": {
+        "sourceId": "n5a-pom-monell",
+        "locator": "Introductory paragraph: Their research appears in the September 1 issue of Science. Monell dateline: August 31, 2023.",
+        "summaryRu": "Работа о Principal Odor Map вышла в номере Science от 1 сентября 2023 года; Monell прямо называет дату номера."
+      },
+      "storyAngleRu": "Печатный выпуск Science и Principal Odor Map: общий словарь, человеческая панель и контроль примесей.",
+      "researchNotesRu": "Событие — выход печатного номера 1 сентября, не онлайн-публикация 31 августа. Science 403 и PMC/PubMed captcha не использованы как прочитанное подтверждение. Google Research 2022 описывает более раннюю стадию той же работы; дата блога не подменяет дату 2023 года. Рекламные заявления Osmo о первенстве и управлении всеми запахами исключены. Показан конкретный тест со средним ответом панели."
+    },
+    {
+      "id": "n5a-senetnay-reconstruction-announcement-2023",
+      "eventDate": "2023-08-31",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "research_announcement",
+      "titleRu": "Бальзам, переведённый в современный аромат",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n5a-senetnay-reconstruction-announcement-2023",
+      "sourceIds": [
+        "n5a-senetnay-mpi",
+        "n5a-senetnay-paper",
+        "n5a-senetnay-perfumer"
+      ],
+      "dateEvidence": {
+        "sourceId": "n5a-senetnay-mpi",
+        "locator": "Dateline: 31. August 2023; opening paragraphs; paragraph beginning In enger Zusammenarbeit.",
+        "summaryRu": "31 августа 2023 года MPI-GEA опубликовал сообщение о результатах исследования бальзамов Сенетнай и уже выполненной ароматической реконструкции с Кароль Кальвез."
+      },
+      "storyAngleRu": "Состоявшееся сообщение MPI о биомолекулярном исследовании и работе CaroleCalvez: реконструкция как интерпретация данных.",
+      "researchNotesRu": "Событие — реальное сообщение MPI от 31.08.2023 о состоявшейся работе, не открытие будущей выставки. Точная дата статьи не приписана по недоступной карточке Nature. PDF прочитан через UCL; анализ остатков отличён от современной реконструкции. Даммар/Pistacia, лиственница и происхождение ванилиновой кислоты переданы с ограничениями. Здесь исследуются остатки в сосудах и их воплощение парфюмером; самостоятельная история 2025 года изучает воздух от девяти мумифицированных тел."
+    },
+    {
+      "id": "n4b-michael-kors-birth-1959",
+      "eventDate": "1959-08-09",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Родился Майкл Корс",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n4b-michael-kors-birth-1959",
+      "sourceIds": [
+        "n4b-kors-bio",
+        "n4b-kors-loren",
+        "n4b-kors-michael",
+        "n4b-kors-memory",
+        "n5b-kors-gloss",
+        "n5b-kors-trio"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4b-kors-bio",
+        "locator": "Early Life; Quick Facts",
+        "summaryRu": "Майкл Корс родился 9 августа 1959 года на Лонг-Айленде."
+      },
+      "storyAngleRu": "Слепое прослушивание материалов превращает три определения одежды в три аромата.",
+      "researchNotesRu": "Дата события подтверждена отдельно от дат публикаций. Описания нот переданы как заявленные образы аромата; авторство формулы не приписано дизайнеру или исполнителю."
+    },
+    {
+      "id": "n4b-karl-lagerfeld-birth-1933",
+      "eventDate": "1933-09-10",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Родился Карл Лагерфельд",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n4b-karl-lagerfeld-birth-1933",
+      "sourceIds": [
+        "n4b-lagerfeld-date",
+        "n4b-paper-steidl",
+        "n4b-paper-wallpaper",
+        "n5b-paper-voith",
+        "n5b-paper-nst"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4b-lagerfeld-date",
+        "locator": "Faktaboks: Født",
+        "summaryRu": "Карл Лагерфельд родился 10 сентября 1933 года в Гамбурге."
+      },
+      "storyAngleRu": "Paper Passion: книга становится упаковкой аромата печатной бумаги.",
+      "researchNotesRu": "Дата события подтверждена отдельно от дат публикаций. Описания нот переданы как заявленные образы аромата; авторство формулы не приписано дизайнеру или исполнителю."
+    },
+    {
+      "id": "n4b-elsa-schiaparelli-birth-1890",
+      "eventDate": "1890-09-10",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Родилась Эльза Скиапарелли",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n4b-elsa-schiaparelli-birth-1890",
+      "sourceIds": [
+        "n4b-schiap-date",
+        "n4b-schiap-labels",
+        "n4b-schiap-mae",
+        "n4b-schiap-object",
+        "n5b-schiap-curator"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4b-schiap-date",
+        "locator": "1890 timeline entry",
+        "summaryRu": "Эльза Скиапарелли родилась в Риме 10 сентября 1890 года."
+      },
+      "storyAngleRu": "Shocking: путь рабочего манекена из ателье во флакон.",
+      "researchNotesRu": "Дата события подтверждена отдельно от дат публикаций. Описания нот переданы как заявленные образы аромата; авторство формулы не приписано дизайнеру или исполнителю."
+    },
+    {
+      "id": "n4b-jennifer-lopez-birth-1969",
+      "eventDate": "1969-07-24",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Родилась Дженнифер Лопес",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n4b-jennifer-lopez-birth-1969",
+      "sourceIds": [
+        "n4b-jlo-bio",
+        "n4b-jlo-sony",
+        "n4b-jlo-paper",
+        "n4b-jlo-nst"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4b-jlo-bio",
+        "locator": "Early Life; Quick Facts",
+        "summaryRu": "Дженнифер Лопес родилась 24 июля 1969 года в Бронксе."
+      },
+      "storyAngleRu": "Glow: образ душа связывает рекламную фотографию, мыльный мускус и оформление.",
+      "researchNotesRu": "Дата события подтверждена отдельно от дат публикаций. Описания нот переданы как заявленные образы аромата; авторство формулы не приписано дизайнеру или исполнителю."
+    },
+    {
+      "id": "n4b-beyonce-birth-1981",
+      "eventDate": "1981-09-04",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Родилась Бейонсе",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n4b-beyonce-birth-1981",
+      "sourceIds": [
+        "n4b-beyonce-date",
+        "n4b-beyonce-interview",
+        "n4b-beyonce-heat-release",
+        "n4b-beyonce-campaign",
+        "n5b-beyonce-fg"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4b-beyonce-date",
+        "locator": "Early Life",
+        "summaryRu": "Бейонсе родилась 4 сентября 1981 года в Хьюстоне."
+      },
+      "storyAngleRu": "Heat объединяет огонь в стекле, сценическую песню Fever и воспоминание об антикварных флаконах.",
+      "researchNotesRu": "Дата события подтверждена отдельно от дат публикаций. Описания нот переданы как заявленные образы аромата; авторство формулы не приписано дизайнеру или исполнителю."
+    },
+    {
+      "id": "n4b-katy-perry-birth-1984",
+      "eventDate": "1984-10-25",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Родилась Кэти Перри",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n4b-katy-perry-birth-1984",
+      "sourceIds": [
+        "n4b-katy-date",
+        "n4b-katy-vogue",
+        "n4b-katy-female",
+        "n4b-katy-allure"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4b-katy-date",
+        "locator": "Early Life; Quick Facts",
+        "summaryRu": "Кэти Перри родилась 25 октября 1984 года в Санта-Барбаре."
+      },
+      "storyAngleRu": "Purr: каламбур и кошачий сценический образ превращаются в предмет для сохранения.",
+      "researchNotesRu": "Дата события подтверждена отдельно от дат публикаций. Описания нот переданы как заявленные образы аромата; авторство формулы не приписано дизайнеру или исполнителю."
+    },
+    {
+      "id": "n4b-antonio-banderas-birth-1960",
+      "eventDate": "1960-08-10",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Родился Антонио Бандерас",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n4b-antonio-banderas-birth-1960",
+      "sourceIds": [
+        "n4b-banderas-date",
+        "n4b-banderas-puig",
+        "n4b-banderas-wanted",
+        "n4b-banderas-week",
+        "n5b-banderas-fragroom"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4b-banderas-date",
+        "locator": "PERSONAL opening",
+        "summaryRu": "Антонио Бандерас родился 10 августа 1960 года в Малаге."
+      },
+      "storyAngleRu": "Как парфюмерная роль менялась от экранного героя к повседневному человеку.",
+      "researchNotesRu": "Дата события подтверждена отдельно от дат публикаций. Описания нот переданы как заявленные образы аромата; авторство формулы не приписано дизайнеру или исполнителю."
+    },
+    {
+      "id": "n4b-billie-eilish-birth-2001",
+      "eventDate": "2001-12-18",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Родилась Билли Айлиш",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n4b-billie-eilish-birth-2001",
+      "sourceIds": [
+        "n4b-eilish-date",
+        "n4b-eilish-parlux",
+        "n4b-eilish-allure",
+        "n4b-eilish-vogue",
+        "n4b-eilish-fragrantica",
+        "n5b-eilish-gci"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4b-eilish-date",
+        "locator": "Chapter One, printed page8 / PDF page3",
+        "summaryRu": "Билли Айлиш родилась 18 декабря 2001 года."
+      },
+      "storyAngleRu": "Eilish: найти давно воображаемый тёплый запах и поместить его в абстрактное тело.",
+      "researchNotesRu": "Дата события подтверждена отдельно от дат публикаций. Описания нот переданы как заявленные образы аромата; авторство формулы не приписано дизайнеру или исполнителю."
+    },
+    {
+      "id": "n4b-taylor-swift-birth-1989",
+      "eventDate": "1989-12-13",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Родилась Тейлор Свифт",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n4b-taylor-swift-birth-1989",
+      "sourceIds": [
+        "n4b-swift-date",
+        "n4b-swift-headline",
+        "n4b-swift-moodie",
+        "n4b-swift-osmoz",
+        "n4b-swift-report"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4b-swift-date",
+        "locator": "Faktaboks: Født",
+        "summaryRu": "Тейлор Свифт родилась 13 декабря 1989 года в Рединге, Пенсильвания."
+      },
+      "storyAngleRu": "Wonderstruck: слово песни становится названием, а флакон — собранием маленьких знаков.",
+      "researchNotesRu": "Дата события подтверждена отдельно от дат публикаций. Описания нот переданы как заявленные образы аромата; авторство формулы не приписано дизайнеру или исполнителю."
+    },
+    {
+      "id": "n4b-john-galliano-birth-1960",
+      "eventDate": "1960-11-28",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Родился Джон Гальяно",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n4b-john-galliano-birth-1960",
+      "sourceIds": [
+        "n4b-galliano-date",
+        "n4b-galliano-vogue",
+        "n4b-galliano-nez",
+        "n4b-galliano-relax",
+        "n4b-galliano-license"
+      ],
+      "dateEvidence": {
+        "sourceId": "n4b-galliano-date",
+        "locator": "Rođen(a) entry",
+        "summaryRu": "Джон Гальяно родился 28 ноября 1960 года в Гибралтаре."
+      },
+      "storyAngleRu": "Именной аромат2008года как шлейф костюма и многослойный театральный образ.",
+      "researchNotesRu": "Дата события подтверждена отдельно от дат публикаций. Описания нот переданы как заявленные образы аромата; авторство формулы не приписано дизайнеру или исполнителю."
+    },
+    {
+      "id": "n5b-rihanna-birth-1988",
+      "eventDate": "1988-02-20",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Рождение Рианны",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n5b-rihanna-birth-1988",
+      "sourceIds": [
+        "n5b-rihanna-bio",
+        "n5b-rihanna-fenty",
+        "n5b-rihanna-vogue",
+        "n5b-rihanna-newbeauty",
+        "n5b-rihanna-fg"
+      ],
+      "dateEvidence": {
+        "sourceId": "n5b-rihanna-bio",
+        "locator": "Quick Facts; Early Life",
+        "summaryRu": "Рианна родилась 20 февраля 1988 года в Сент-Майкле, Барбадос."
+      },
+      "storyAngleRu": "Телесный язык флакона Fenty и личная география задания парфюмеру.",
+      "researchNotesRu": "Дата рождения проверена отдельно от года выпуска аромата. Описания нот не выданы за формулу; исполнитель не назван парфюмером."
+    },
+    {
+      "id": "n5b-ariana-grande-birth-1993",
+      "eventDate": "1993-06-26",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Рождение Арианы Гранде",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n5b-ariana-grande-birth-1993",
+      "sourceIds": [
+        "n5b-grande-bio",
+        "n5b-grande-cloud",
+        "n5b-grande-gavarry",
+        "n5b-grande-pink",
+        "n5b-grande-official"
+      ],
+      "dateEvidence": {
+        "sourceId": "n5b-grande-bio",
+        "locator": "Quick Facts; Young Ariana Grande",
+        "summaryRu": "Ариана Гранде родилась 26 июня 1993 года в Бока-Ратоне, Флорида."
+      },
+      "storyAngleRu": "Cloud как встреча небесного образа, цифрового символа и работы Clement Gavarry.",
+      "researchNotesRu": "Дата рождения проверена отдельно от года выпуска аромата. Описания нот не выданы за формулу; исполнитель не назван парфюмером."
+    },
+    {
+      "id": "n5b-christina-aguilera-birth-1980",
+      "eventDate": "1980-12-18",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Рождение Кристины Агилеры",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n5b-christina-aguilera-birth-1980",
+      "sourceIds": [
+        "n5b-aguilera-bio",
+        "n5b-aguilera-elle",
+        "n5b-aguilera-fab",
+        "n5b-aguilera-osmoz",
+        "n5b-aguilera-teen"
+      ],
+      "dateEvidence": {
+        "sourceId": "n5b-aguilera-bio",
+        "locator": "Biography Today April 2000, printed p180, BIRTH",
+        "summaryRu": "Кристина Агилера родилась 18 декабря 1980 года на Статен-Айленде, Нью-Йорк."
+      },
+      "storyAngleRu": "Red Sin: выразительный красный флакон и более спокойный образ близости в кампании.",
+      "researchNotesRu": "Дата рождения проверена отдельно от года выпуска аромата. Описания нот не выданы за формулу; исполнитель не назван парфюмером."
+    },
+    {
+      "id": "n5b-david-beckham-birth-1975",
+      "eventDate": "1975-05-02",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Рождение Дэвида Бекхэма",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n5b-david-beckham-birth-1975",
+      "sourceIds": [
+        "n5b-beckham-bio",
+        "n5b-beckham-gq",
+        "n5b-beckham-esquire",
+        "n5b-beckham-society",
+        "n5b-beckham-brand"
+      ],
+      "dateEvidence": {
+        "sourceId": "n5b-beckham-bio",
+        "locator": "Date of birth; Place of birth",
+        "summaryRu": "Дэвид Бекхэм родился 2 мая 1975 года в Лондоне."
+      },
+      "storyAngleRu": "Личная география The Collection и технический выбор ветивера в Aqua Classic.",
+      "researchNotesRu": "Дата рождения проверена отдельно от года выпуска аромата. Описания нот не выданы за формулу; исполнитель не назван парфюмером."
+    },
+    {
+      "id": "n5b-justin-bieber-birth-1994",
+      "eventDate": "1994-03-01",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Рождение Джастина Бибера",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n5b-justin-bieber-birth-1994",
+      "sourceIds": [
+        "n5b-bieber-bio",
+        "n5b-bieber-launch",
+        "n5b-bieber-mtv",
+        "n4b-swift-report",
+        "n5b-bieber-fg"
+      ],
+      "dateEvidence": {
+        "sourceId": "n5b-bieber-bio",
+        "locator": "Personal: Birth date; Birth place",
+        "summaryRu": "Джастин Бибер родился 1 марта 1994 года в Лондоне, Онтарио."
+      },
+      "storyAngleRu": "Someday адресован поклонницам; съёмная подвеска, участие на гастролях и заявленная благотворительная модель.",
+      "researchNotesRu": "Дата рождения проверена отдельно от года выпуска аромата. Описания нот не выданы за формулу; исполнитель не назван парфюмером."
+    },
+    {
+      "id": "n50r-villoresi-museum-opening-2019",
+      "eventDate": "2019-06-01",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Библиотека, которую читают носом",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n50r-villoresi-museum-opening-2019",
+      "sourceIds": [
+        "n50r-villoresi-home",
+        "n50r-villoresi-visit",
+        "n50r-villoresi-museum",
+        "n50r-villoresi-garden"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50r-villoresi-home",
+        "locator": "Heading Museo Villoresi; Where we are",
+        "summaryRu": "Музей открыл двери 1 июня 2019 во Флоренции; адрес Via de’ Bardi12."
+      },
+      "storyAngleRu": "Библиотека, которую читают носом",
+      "researchNotesRu": "Не использовать ошибочные шаблонные биографии в разделе The Beginning музейной страницы. Современные числа коллекции не приписываются дню открытия."
+    },
+    {
+      "id": "n50r-wellcome-being-human-opening-2019",
+      "eventDate": "2019-09-05",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Запах внутри вопроса о человеке",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n50r-wellcome-being-human-opening-2019",
+      "sourceIds": [
+        "n50r-wellcome-announcement",
+        "n50r-wellcome-object",
+        "n50r-wellcome-avm",
+        "n50r-wellcome-open",
+        "n50r-sublime-about",
+        "n50r-sublime-shows"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50r-wellcome-announcement",
+        "locator": "Press preview / Public opening; object Exhibitions note",
+        "summaryRu": "Публичное открытие 5 сентября 2019, пресс-показ 4 сентября; состоявшийся показ подтверждает музейная карточка."
+      },
+      "storyAngleRu": "Запах внутри вопроса о человеке",
+      "researchNotesRu": "4 сентября — пресс-показ,5 сентября — публичное открытие. Не называть реконструкцию точным восстановлением запаха или воскрешением растения."
+    },
+    {
+      "id": "n50r-cartier-cloud-abu-dhabi-opening-2019",
+      "eventDate": "2019-10-30",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Аромат над облаком",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n50r-cartier-cloud-abu-dhabi-opening-2019",
+      "sourceIds": [
+        "n50r-louvre-installation",
+        "n50r-cartier-cloud",
+        "n50r-louvre-cloud",
+        "n50r-transsolar-cloud"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50r-louvre-installation",
+        "locator": "Le Nuage Parfumé / первый абзац; Cartier2019-10",
+        "summaryRu": "Начало показа 30 октября 2019 подтверждено музеем и Cartier; музейная ретроспектива подтверждает состоявшуюся инсталляцию."
+      },
+      "storyAngleRu": "Аромат над облаком",
+      "researchNotesRu": "Заметка Transsolar20.11.2019 ошибочно/необъяснённо называет 27 октября; музей и Cartier дают 30 октября. Дата публичного показа 30 октября поддержана итоговой англоязычной карточкой инженеров. Не утверждается всемирное первенство. Парижский показ не выделяется в отдельное событие."
+    },
+    {
+      "id": "n50r-mudac-nez-a-nez-opening-2019",
+      "eventDate": "2019-02-15",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Жест, который открывает аромат",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n50r-mudac-nez-a-nez-opening-2019",
+      "sourceIds": [
+        "n50r-lausanne-report",
+        "n50r-mudac-glithero",
+        "n50r-mudac-domus",
+        "n50r-mudac-visit",
+        "n50r-mudac-marge",
+        "n50r-mudac-goodsir",
+        "n50r-mudac-archive"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50r-mudac-archive",
+        "locator": "Date range15.02–16.06.2019; separate Opening14February6PM",
+        "summaryRu": "Публичный период выставки — 15 февраля–16 июня 2019; вернисаж 14 февраля с18:00 указан отдельно."
+      },
+      "storyAngleRu": "Жест, который открывает аромат",
+      "researchNotesRu": "15 февраля — начало публичного периода, не вернисаж 14 февраля. Ошибка 5 февраля в соседнем описании Quel flair у La Voix не используется. Дату подтверждает годовой отчёт города."
+    },
+    {
+      "id": "n50r-osmodrama-festival-opening-2016",
+      "eventDate": "2016-07-15",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Партитура из запахов",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n50r-osmodrama-festival-opening-2016",
+      "sourceIds": [
+        "n50r-osmodrama-dates",
+        "n50r-osmodrama-programme",
+        "n50r-osmodrama-retrospective",
+        "n50r-osmodrama-shiner"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50r-osmodrama-dates",
+        "locator": "Performance Dates / Opening + Premiere; programme p8 / FR15.07.2016",
+        "summaryRu": "Открытие и премьера Autocomplete15 июля 2016 в 19:30 в St Johannes Evangelist KircheBerlin."
+      },
+      "storyAngleRu": "Партитура из запахов",
+      "researchNotesRu": "15 июля — открытие и премьера,16 июля — начало регулярного режима. Участники дискуссии названы как заявленные в программе. Не заявлять всемирное первенство, универсальную реакцию или точное содержание воспоминаний."
     }
   ],
   "inclusionRule": "Only events with an exact historical date read and verified in the cited source. No candidates, disputed dates, inferred dates, or merely planned events.",

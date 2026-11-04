@@ -6360,6 +6360,2087 @@
       "excludedClaimsRu": [
         "Нет утверждения о точной неизменной формуле или всемирном первенстве."
       ]
+    },
+    {
+      "eventId": "n4a-huysmans-birth-1848",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4a-huysmans-birth-1848-f1",
+          "claim": "Жорис-Карл Гюисманс родился в Париже 5 февраля 1848 года.",
+          "sourceIds": [
+            "n4a-huysmans-publisher"
+          ],
+          "locator": "Хронология, 1848"
+        },
+        {
+          "id": "n4a-huysmans-birth-1848-f2",
+          "claim": "Роман À rebours вышел у Charpentier в 1884 году.",
+          "sourceIds": [
+            "n4a-huysmans-publisher"
+          ],
+          "locator": "Хронология, 1884"
+        },
+        {
+          "id": "n4a-huysmans-birth-1848-f3",
+          "claim": "В главе 10 дез Эссент испытывает обонятельную иллюзию духов frangipane; слуга ничего не чувствует.",
+          "sourceIds": [
+            "n4a-huysmans-novel"
+          ],
+          "locator": "Chapter 10, opening paragraphs"
+        },
+        {
+          "id": "n4a-huysmans-birth-1848-f4",
+          "claim": "Герой делит флаконы на простые запахи и составные букеты и сравнивает изучение запахов с грамматикой и синтаксисом.",
+          "sourceIds": [
+            "n4a-huysmans-novel"
+          ],
+          "locator": "Chapter 10, paragraphs beginning He set them / To achieve this end"
+        },
+        {
+          "id": "n4a-huysmans-birth-1848-f5",
+          "claim": "Герой изучает работы Atkinson, Lubin, Chardin, Violet, Legrand и Piesse и собирает обонятельные пейзажи, где возникают поля и фабрики.",
+          "sourceIds": [
+            "n4a-huysmans-novel"
+          ],
+          "locator": "Chapter 10, grammar paragraph and final experiments"
+        },
+        {
+          "id": "n4a-huysmans-birth-1848-f6",
+          "claim": "Парфюмер Феликс Кола ссылался на роман в Livre du Parfumeur (1930).",
+          "sourceIds": [
+            "n4a-huysmans-nst"
+          ],
+          "locator": "Main article, paragraph beginning As such"
+        }
+      ],
+      "editorialInterpretationsRu": [],
+      "excludedClaimsRu": []
+    },
+    {
+      "eventId": "n4a-baudelaire-birth-1821",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4a-baudelaire-birth-1821-f1",
+          "claim": "Шарль Бодлер родился в Париже 9 апреля 1821 года.",
+          "sourceIds": [
+            "n4a-baudelaire-bnf"
+          ],
+          "locator": "Naissance"
+        },
+        {
+          "id": "n4a-baudelaire-birth-1821-f2",
+          "claim": "В Correspondances запахи соотносятся со звуками и цветами; присутствуют сравнения с гобоем и зелёным лугом.",
+          "sourceIds": [
+            "n4a-baudelaire-correspondances"
+          ],
+          "locator": "French original, lines 9–15"
+        },
+        {
+          "id": "n4a-baudelaire-birth-1821-f3",
+          "claim": "В финале Correspondances названы амбра, мускус, бензоин и ладан.",
+          "sourceIds": [
+            "n4a-baudelaire-correspondances"
+          ],
+          "locator": "French original, final tercet"
+        },
+        {
+          "id": "n4a-baudelaire-birth-1821-f4",
+          "claim": "В Le Flacon открытый старый флакон вызывает образы возвращающейся души и старой любви.",
+          "sourceIds": [
+            "n4a-baudelaire-fleurs"
+          ],
+          "locator": "Le Flacon, stanzas 1–5"
+        },
+        {
+          "id": "n4a-baudelaire-birth-1821-f5",
+          "claim": "В финале Le Flacon лирический голос сам уподобляется забытому, треснувшему флакону.",
+          "sourceIds": [
+            "n4a-baudelaire-fleurs"
+          ],
+          "locator": "Le Flacon, final two stanzas"
+        },
+        {
+          "id": "n4a-baudelaire-birth-1821-f6",
+          "claim": "Les Fleurs du mal были собраны в книгу в 1857 году.",
+          "sourceIds": [
+            "n4a-baudelaire-fleurs"
+          ],
+          "locator": "Préface by Henry Frichet, opening paragraphs"
+        }
+      ],
+      "editorialInterpretationsRu": [],
+      "excludedClaimsRu": []
+    },
+    {
+      "eventId": "n4a-coty-birth-1874",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4a-coty-birth-1874-f1",
+          "claim": "Франсуа Коти родился 3 мая 1874 года в Аяччо; настоящее имя — Жозеф Мари Франсуа Спотюрно.",
+          "sourceIds": [
+            "n4a-coty-bnf"
+          ],
+          "locator": "Naissance; rejected names"
+        },
+        {
+          "id": "n4a-coty-birth-1874-f2",
+          "claim": "Коти учился работать с сырьём у Chiris и использовал возможности синтетических баз De Laire.",
+          "sourceIds": [
+            "n4a-coty-origan"
+          ],
+          "locator": "Paragraphs 45–49"
+        },
+        {
+          "id": "n4a-coty-birth-1874-f3",
+          "claim": "La Rose Jacqueminot появился в 1904, L’Origan и Ambre Antique — в 1905 году.",
+          "sourceIds": [
+            "n4a-coty-origan"
+          ],
+          "locator": "Paragraph 48"
+        },
+        {
+          "id": "n4a-coty-birth-1874-f4",
+          "claim": "Историческая структура L’Origan связывает Iralia с древесно-фиалковым эффектом, Dianthine с пряной гвоздикой и Ambréine с амбровым фоном.",
+          "sourceIds": [
+            "n4a-coty-origan"
+          ],
+          "locator": "Paragraph 49; specialist historical analysis"
+        },
+        {
+          "id": "n4a-coty-birth-1874-f5",
+          "claim": "La Rose Jacqueminot соединял розовые абсолюты с синтетическими материалами, усиливавшими впечатление цветка.",
+          "sourceIds": [
+            "n4a-coty-reconstructions"
+          ],
+          "locator": "La Rose Jacqueminot section"
+        },
+        {
+          "id": "n4a-coty-birth-1874-f6",
+          "claim": "В 2020 году Дaphné Bugey реконструировала для ассоциации François Coty три композиции по предоставленным историческим формулам с адаптацией к современным нормам.",
+          "sourceIds": [
+            "n4a-coty-reconstructions"
+          ],
+          "locator": "Opening paragraphs; names La Rose Jacqueminot, L’Origan, Jasmin de Corse"
+        },
+        {
+          "id": "n4a-coty-birth-1874-f7",
+          "claim": "Коти обращался к высококачественным абсолютам Chiris и новым синтетическим базам; Chypre появился в 1917 году.",
+          "sourceIds": [
+            "n4a-coty-profile"
+          ],
+          "locator": "Main biography"
+        }
+      ],
+      "editorialInterpretationsRu": [],
+      "excludedClaimsRu": []
+    },
+    {
+      "eventId": "n4a-tiemann-birth-1848",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4a-tiemann-birth-1848-f1",
+          "claim": "Фердинанд Тиман родился 10 июня 1848 года в Рюбеланде.",
+          "sourceIds": [
+            "n4a-tiemann-ndb"
+          ],
+          "locator": "NDB heading"
+        },
+        {
+          "id": "n4a-tiemann-birth-1848-f2",
+          "claim": "Тиман изучал химию и фармацию, работал с Августом Вильгельмом Гофманом в Берлине; исследовал душистые вещества и терпены.",
+          "sourceIds": [
+            "n4a-tiemann-ndb"
+          ],
+          "locator": "Biographie"
+        },
+        {
+          "id": "n4a-tiemann-birth-1848-f3",
+          "claim": "Тиман с Паулем Крюгером, затем Фридрихом Вильгельмом Земмлером разрабатывал получение ионона из цитраля и ацетона через промежуточное соединение и кислотную циклизацию.",
+          "sourceIds": [
+            "n4a-tiemann-kruger-history"
+          ],
+          "locator": "pp.443–444, abstract and introduction"
+        },
+        {
+          "id": "n4a-tiemann-birth-1848-f4",
+          "claim": "В патенте US556943A описан промежуточный кетон со слабовыраженным запахом и превращение его кислотами в пахнущий фиалками кетон.",
+          "sourceIds": [
+            "n4a-tiemann-ionone-patent"
+          ],
+          "locator": "Description, paragraphs beginning Though the odor and This product"
+        },
+        {
+          "id": "n4a-tiemann-birth-1848-f5",
+          "claim": "Цитраль в патенте указан как компонент лимонного масла и лемонграсса; конечный продукт плохо растворим в воде и растворим в спирте.",
+          "sourceIds": [
+            "n4a-tiemann-ionone-patent"
+          ],
+          "locator": "Description, paragraphs The citral and The second ketone"
+        },
+        {
+          "id": "n4a-tiemann-birth-1848-f6",
+          "claim": "Историческая работа отмечает промышленное производство ионона в Holzminden и многолетний вклад Крюгера в разработку метода.",
+          "sourceIds": [
+            "n4a-tiemann-kruger-history"
+          ],
+          "locator": "p.444, Introduction; p.445 Historical significance"
+        },
+        {
+          "id": "n4a-tiemann-birth-1848-f7",
+          "claim": "NDB относит открытие группы иононов к 1893 году и подчёркивает популярность их фиалкового запаха.",
+          "sourceIds": [
+            "n4a-tiemann-ndb"
+          ],
+          "locator": "Biographie, paragraph on terpenes"
+        }
+      ],
+      "editorialInterpretationsRu": [],
+      "excludedClaimsRu": []
+    },
+    {
+      "eventId": "n4a-hedione-patent-filing-1960",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4a-hedione-patent-filing-1960-f1",
+          "claim": "25 февраля 1960 года Firmenich & Cie подала швейцарскую заявку CH212160A; изобретатели — Эдуар Демоль и Эдгар Ледерер. Документ опубликован как CH382731A 15 октября 1964 года.",
+          "sourceIds": [
+            "n4a-hedione-swiss"
+          ],
+          "locator": "Info and filing timeline"
+        },
+        {
+          "id": "n4a-hedione-patent-filing-1960-f2",
+          "claim": "Демоль выделил метилжасмонат в 1957, синтезировал Hedione в 1958 и метилжасмонат в 1959 году.",
+          "sourceIds": [
+            "n4a-hedione-chapuis"
+          ],
+          "locator": "p.36, opening chronology"
+        },
+        {
+          "id": "n4a-hedione-patent-filing-1960-f3",
+          "claim": "Исследование жасмина искало недостающие компоненты: известная большая часть состава не давала полноценной обонятельной реконструкции.",
+          "sourceIds": [
+            "n4a-hedione-chapuis"
+          ],
+          "locator": "p.36 Discovery and Chemistry"
+        },
+        {
+          "id": "n4a-hedione-patent-filing-1960-f4",
+          "claim": "Американский патент той же семьи описывает кетоэфиры, их получение и применение в парфюмерных композициях; примеры включают шипровый и туберозный типы.",
+          "sourceIds": [
+            "n4a-hedione-us"
+          ],
+          "locator": "Description; Examples 6–7"
+        },
+        {
+          "id": "n4a-hedione-patent-filing-1960-f5",
+          "claim": "Hedione используется для придания объёма, цветочности и диффузности; его собственный запах относительно слаб.",
+          "sourceIds": [
+            "n4a-hedione-chapuis",
+            "n4a-hedione-scentree"
+          ],
+          "locator": "Chapuis p.38; ScenTree Uses in perfumery"
+        },
+        {
+          "id": "n4a-hedione-patent-filing-1960-f6",
+          "claim": "Роджер Фирмених отправлял образцы внешним парфюмерам; Рудницка применил материал в Eau Sauvage 1966 года.",
+          "sourceIds": [
+            "n4a-hedione-chapuis"
+          ],
+          "locator": "p.37, Hedione adoption"
+        },
+        {
+          "id": "n4a-hedione-patent-filing-1960-f7",
+          "claim": "Обычная Hedione представляет смесь изомеров с преобладанием trans; cis-обогащённые варианты имеют другие обонятельные свойства.",
+          "sourceIds": [
+            "n4a-hedione-scentree"
+          ],
+          "locator": "Isomerism"
+        }
+      ],
+      "editorialInterpretationsRu": [],
+      "excludedClaimsRu": []
+    },
+    {
+      "eventId": "n4a-or51e2-structure-publication-2023",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4a-or51e2-structure-publication-2023-f1",
+          "claim": "Работа Structural basis of odorant recognition by a human odorant receptor опубликована онлайн в Nature 15 марта 2023 года.",
+          "sourceIds": [
+            "n4a-or51-ucsf"
+          ],
+          "locator": "Opening paragraph, findings published online"
+        },
+        {
+          "id": "n4a-or51e2-structure-publication-2023-f2",
+          "claim": "Исследователи получили криоэлектронную структуру активного человеческого рецептора OR51E2 с пропионатом.",
+          "sourceIds": [
+            "n4a-or51-paper"
+          ],
+          "locator": "Abstract, PDF pp.1–2"
+        },
+        {
+          "id": "n4a-or51e2-structure-publication-2023-f3",
+          "claim": "Молекулы запаха активируют рецепторы обонятельных нейронов; нейроны передают сигналы в мозг, а одна молекула может взаимодействовать с комбинацией рецепторов.",
+          "sourceIds": [
+            "n4a-olfaction-nidcd"
+          ],
+          "locator": "How does your sense of smell work?"
+        },
+        {
+          "id": "n4a-or51e2-structure-publication-2023-f4",
+          "claim": "Пропионат участвует в запахе швейцарского сыра; OR51E2 выбрали в том числе из-за возможности получить белок и водорастворимости его лиганда.",
+          "sourceIds": [
+            "n4a-or51-ucsf"
+          ],
+          "locator": "A Picture Paints the Scent of Cheese"
+        },
+        {
+          "id": "n4a-or51e2-structure-publication-2023-f5",
+          "claim": "Кристиан Биллесбёлле разработал способ работы с сотой долей миллиграмма белка вместо типичного миллиграмма для криоэлектронных экспериментов.",
+          "sourceIds": [
+            "n4a-or51-ucsf"
+          ],
+          "locator": "A Picture Paints the Scent of Cheese, protein preparation"
+        },
+        {
+          "id": "n4a-or51e2-structure-publication-2023-f6",
+          "claim": "Изменение кармана рецептора влияло на распознавание жирных кислот разной длины; моделирование исследовало изменение формы рецептора при связывании.",
+          "sourceIds": [
+            "n4a-or51-paper"
+          ],
+          "locator": "Abstract; Tuning OR51E2 odorant selectivity; Activation mechanism"
+        }
+      ],
+      "editorialInterpretationsRu": [],
+      "excludedClaimsRu": []
+    },
+    {
+      "eventId": "n4a-mummies-smell-study-publication-2025",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4a-mummies-smell-study-publication-2025-f1",
+          "claim": "Исследование Ancient Egyptian Mummified Bodies: Cross-Disciplinary Analysis of Their Smell опубликовано онлайн 13 февраля 2025 года в JACS.",
+          "sourceIds": [
+            "n4a-mummies-paper"
+          ],
+          "locator": "Citation header"
+        },
+        {
+          "id": "n4a-mummies-smell-study-publication-2025-f2",
+          "claim": "Изучены девять мумифицированных тел в Египетском музее Каира: четыре в экспозиции и пять в хранилище.",
+          "sourceIds": [
+            "n4a-mummies-bembibre"
+          ],
+          "locator": "Opening project description"
+        },
+        {
+          "id": "n4a-mummies-smell-study-publication-2025-f3",
+          "claim": "Панель из восьми обученных оценщиков включала египетских музейных специалистов; исследовали отобранный воздух и отдельные вещества через обонятельный порт.",
+          "sourceIds": [
+            "n4a-mummies-bembibre"
+          ],
+          "locator": "Research section"
+        },
+        {
+          "id": "n4a-mummies-smell-study-publication-2025-f4",
+          "claim": "Работа сочетала сенсорную оценку, GC-MS-olfactometry, микробиологию и историко-консервационные данные; общие характеристики — древесный, пряный, сладкий.",
+          "sourceIds": [
+            "n4a-mummies-paper"
+          ],
+          "locator": "Abstract"
+        },
+        {
+          "id": "n4a-mummies-smell-study-publication-2025-f5",
+          "claim": "Летучие вещества разделены на источники: исходные материалы, поздние растительные масла, синтетические пестициды и продукты микробного разрушения; некоторые происхождения трудно отличить.",
+          "sourceIds": [
+            "n4a-mummies-paper"
+          ],
+          "locator": "Abstract; Results and discussion"
+        },
+        {
+          "id": "n4a-mummies-smell-study-publication-2025-f6",
+          "claim": "Авторы связывают исследование с сохранением обонятельного наследия; приятные запахи имели значение в древнеегипетских представлениях о чистоте и телах божеств.",
+          "sourceIds": [
+            "n4a-mummies-ucl"
+          ],
+          "locator": "Final paragraphs on ancient beliefs and heritage"
+        }
+      ],
+      "editorialInterpretationsRu": [],
+      "excludedClaimsRu": []
+    },
+    {
+      "eventId": "n4a-venice-es-senze-opening-2022",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4a-venice-es-senze-opening-2022-f1",
+          "claim": "Выставка Es-senze проходила в Palazzo Mocenigo с21апреля по27ноября2022; двенадцать инсталляций на первом этаже.",
+          "sourceIds": [
+            "n4a-venice-archive",
+            "n4a-venice-report-2022"
+          ],
+          "locator": "Archive overview; MUVE report2022 p.47"
+        },
+        {
+          "id": "n4a-venice-es-senze-opening-2022-f2",
+          "claim": "Перечень работ включает Born to be burnt, Spazio di luce и Imperium; куратор Pier Paolo Pancotto; поддержка Mavive и Accademia del Profumo.",
+          "sourceIds": [
+            "n4a-venice-curatorial"
+          ],
+          "locator": "Curatorial account and List of artists and works"
+        },
+        {
+          "id": "n4a-venice-es-senze-opening-2022-f3",
+          "claim": "Imperium2014 создана Лукой Витоне с Maria Candida Gentile; n.b.k. описывает запах власти, материалы и подписанный нумерованный10мл флакон.",
+          "sourceIds": [
+            "n5a-vitone-nbk"
+          ],
+          "locator": "Edition description; artist profile"
+        },
+        {
+          "id": "n4a-venice-es-senze-opening-2022-f4",
+          "claim": "Витоне познакомился с Джентиле при проекте для Венецианской биеннале2013; он предпочитает нейтральное слово odore и рассматривает запах как скульптуру.",
+          "sourceIds": [
+            "n5a-vitone-artist"
+          ],
+          "locator": "Author testimony, opening paragraphs; paragraphs after Fig.4"
+        },
+        {
+          "id": "n4a-venice-es-senze-opening-2022-f5",
+          "claim": "Куратор различает изображение аромата и использование аромата как самого материала произведения.",
+          "sourceIds": [
+            "n4a-venice-curatorial"
+          ],
+          "locator": "Paragraph beginning In fact"
+        }
+      ],
+      "editorialInterpretationsRu": [],
+      "excludedClaimsRu": []
+    },
+    {
+      "eventId": "n4a-hk-fragrance-time-opening-2024",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4a-hk-fragrance-time-opening-2024-f1",
+          "claim": "Fragrance of Time — In Search of Chinese Art of Scent открылась в Hong Kong Museum of Art 28 июня 2024 года.",
+          "sourceIds": [
+            "n4a-hk-fragrance-archive"
+          ],
+          "locator": "Overview, Date"
+        },
+        {
+          "id": "n4a-hk-fragrance-time-opening-2024-f2",
+          "claim": "Экспозиция объединила 160 комплектов предметов: 109 из Shanghai Museum и 51 из HKMoA.",
+          "sourceIds": [
+            "n4a-hk-fragrance-government"
+          ],
+          "locator": "Main article"
+        },
+        {
+          "id": "n4a-hk-fragrance-time-opening-2024-f3",
+          "claim": "В китайской ароматической культуре душистые саше, ароматизированная вода и окуривание одежды участвовали в повседневной жизни; курильницы сопровождали развитие практик.",
+          "sourceIds": [
+            "n4a-hk-fragrance-archive"
+          ],
+          "locator": "Overview"
+        },
+        {
+          "id": "n4a-hk-fragrance-time-opening-2024-f4",
+          "claim": "В числе экспонатов были картина Chen Hongshou Lady reclining on a cage over a censer, подвесная курильница с шестью ручками и вышитые поясные мешочки.",
+          "sourceIds": [
+            "n4a-hk-fragrance-government"
+          ],
+          "locator": "Highlighted exhibits"
+        },
+        {
+          "id": "n4a-hk-fragrance-time-opening-2024-f5",
+          "claim": "Чжок Ка-вай создала Gathering of Ten Fragrances: большой свиток с десятью душистыми растениями, связанными с повседневностью, культурой и литературой Гонконга.",
+          "sourceIds": [
+            "n4a-hk-ten-fragrances"
+          ],
+          "locator": "Overview and artwork metadata"
+        },
+        {
+          "id": "n4a-hk-fragrance-time-opening-2024-f6",
+          "claim": "So Wing Po создала Scent of Raindrop: лабораторную установку с природными и искусственными веществами, исследующую запахи дождевой воды.",
+          "sourceIds": [
+            "n4a-hk-raindrop"
+          ],
+          "locator": "Overview"
+        },
+        {
+          "id": "n4a-hk-fragrance-time-opening-2024-f7",
+          "claim": "So Wing Po выросла в семье врачей китайской медицины и использует знакомые с детства природные лекарственные материалы в искусстве.",
+          "sourceIds": [
+            "n4a-hk-raindrop"
+          ],
+          "locator": "Artist biography"
+        }
+      ],
+      "editorialInterpretationsRu": [],
+      "excludedClaimsRu": []
+    },
+    {
+      "eventId": "n4a-met-sleeping-beauties-opening-2024",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4a-met-sleeping-beauties-opening-2024-f1",
+          "claim": "Sleeping Beauties: Reawakening Fashion открылась в Met 10 мая 2024 года и продолжалась до 2 сентября.",
+          "sourceIds": [
+            "n4a-met-sleeping-archive"
+          ],
+          "locator": "Exhibition dates"
+        },
+        {
+          "id": "n4a-met-sleeping-beauties-opening-2024-f2",
+          "claim": "Выставка исследовала сенсорные свойства одежды; около 220 предметов охватывали четыре столетия, а особо хрупкие вещи не могли экспонироваться на манекенах.",
+          "sourceIds": [
+            "n4a-met-sleeping-archive"
+          ],
+          "locator": "Overview"
+        },
+        {
+          "id": "n4a-met-sleeping-beauties-opening-2024-f3",
+          "claim": "В платье Marguerite de Wagner сохранилось саше с маркировкой D’Orsay и Les Roses d’Orsay; в другом платье Drecoll — более простое саше с остатками порошка.",
+          "sourceIds": [
+            "n4a-met-sleeping-text"
+          ],
+          "locator": "The Specter of the Rose, printed pp.56–57"
+        },
+        {
+          "id": "n4a-met-sleeping-beauties-opening-2024-f4",
+          "claim": "Следы запахов платьев были переведены в душистую краску на стене; платье Poiret La Rose d’Iribe 1913 года принадлежало Дениз Пуаре.",
+          "sourceIds": [
+            "n4a-met-sleeping-text",
+            "n4a-met-tolaas-vogue"
+          ],
+          "locator": "The Specter of the Rose, pp.56–59; Vogue paragraph on four installations"
+        },
+        {
+          "id": "n4a-met-sleeping-beauties-opening-2024-f5",
+          "claim": "Толаас подготовила четыре интерактивные инсталляции, включая стену с запахом, трубки в зале Red Rose и флаконы на разных высотах для двух творений Dior в Garden.",
+          "sourceIds": [
+            "n4a-met-tolaas-vogue"
+          ],
+          "locator": "Main article, installation descriptions"
+        },
+        {
+          "id": "n4a-met-sleeping-beauties-opening-2024-f6",
+          "claim": "Работа с одеждой Millicent Rogers описана как попытка обонятельной биографии владелицы.",
+          "sourceIds": [
+            "n4a-met-tolaas-vogue"
+          ],
+          "locator": "Paragraph following installation description"
+        },
+        {
+          "id": "n4a-met-sleeping-beauties-opening-2024-f7",
+          "claim": "Толаас описывает извлечение запаха из контекста, близкое воспроизведение и разговор о нём без привычной этикетки.",
+          "sourceIds": [
+            "n4a-met-tolaas-bomb"
+          ],
+          "locator": "Interview, ST response beginning As the smell industry is opening up"
+        }
+      ],
+      "editorialInterpretationsRu": [],
+      "excludedClaimsRu": []
+    },
+    {
+      "eventId": "n4a-mauritshuis-fleeting-opening-2021",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4a-mauritshuis-fleeting-opening-2021-f1",
+          "claim": "Fleeting — Scents in Colour в Mauritshuis проходила с 5 июня по 29 августа 2021 года.",
+          "sourceIds": [
+            "n4a-mauritshuis-report"
+          ],
+          "locator": "Foreword, printed p.12"
+        },
+        {
+          "id": "n4a-mauritshuis-fleeting-opening-2021-f2",
+          "claim": "Для выставки разработаны восемь запахов, доступных через ножные помпы у произведений; в числе тем — каналы, бельё и исторические духи.",
+          "sourceIds": [
+            "n4a-mauritshuis-report"
+          ],
+          "locator": "Chapter 02, printed pp.22–23"
+        },
+        {
+          "id": "n4a-mauritshuis-fleeting-opening-2021-f3",
+          "claim": "У картины Jan van der Heyden View of Oudezijds Voorburgwal был создан запах отходов, попадавших в канал; у Haarlem ван Рёйсдала — запах отбеливания тканей.",
+          "sourceIds": [
+            "n4a-mauritshuis-report"
+          ],
+          "locator": "Chapter 02"
+        },
+        {
+          "id": "n4a-mauritshuis-fleeting-opening-2021-f4",
+          "claim": "Летний и зимний парфюмы для помандера составляли на основе исторических рецептов; в прошлом их считали защитой от болезней.",
+          "sourceIds": [
+            "n4a-mauritshuis-report"
+          ],
+          "locator": "Chapter 02, final paragraph"
+        },
+        {
+          "id": "n4a-mauritshuis-fleeting-opening-2021-f5",
+          "claim": "Композиции выполнила IFF; Bernardo Fleming подчёркивал связность с картиной и сознательное отсутствие задачи сделать запах приятным.",
+          "sourceIds": [
+            "n4a-mauritshuis-composition"
+          ],
+          "locator": "Adding Scent: direct interview with Bernardo Fleming, paragraphs beginning First of all and So all the smells."
+        },
+        {
+          "id": "n4a-mauritshuis-fleeting-opening-2021-f6",
+          "claim": "6 апреля 2021 музей начал цифровую экскурсию с набором четырёх запахов, пока зал оставался закрыт; коробка содержала суховоздушные помпы и QR-доступ к 30-минутной экскурсии.",
+          "sourceIds": [
+            "n4a-mauritshuis-digital"
+          ],
+          "locator": "Opening and Fragrance box sections"
+        },
+        {
+          "id": "n4a-mauritshuis-fleeting-opening-2021-f7",
+          "claim": "Для образа бакалейной лавки использованы гвоздика, мускатный орех и мацис; они представлены в картине Willem van Mieris.",
+          "sourceIds": [
+            "n4a-mauritshuis-digital"
+          ],
+          "locator": "The aroma of a grocer’s shop"
+        }
+      ],
+      "editorialInterpretationsRu": [],
+      "excludedClaimsRu": []
+    },
+    {
+      "eventId": "n5a-petrichor-paper-1964",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n5a-petrichor-paper-1964-f1",
+          "claim": "7 марта 1964 года в Nature опубликована статья Nature of Argillaceous Odour Изабель Джой Беар и Ричарда Томаса.",
+          "sourceIds": [
+            "n5a-petrichor-nature"
+          ],
+          "locator": "Article header: Published 07 March 1964; citation Nature 201, 993–995."
+        },
+        {
+          "id": "n5a-petrichor-paper-1964-f2",
+          "claim": "Авторы работали в Division of Mineral Chemistry CSIRO в Мельбурне; исследуя камни после жарких сухих условий, паровой дистилляцией получили желтоватое масло; petrichor образовано от греческих petra и ichor.",
+          "sourceIds": [
+            "n5a-petrichor-csiro"
+          ],
+          "locator": "Origins; paragraphs beginning Joy and Richard and By steam distilling"
+        },
+        {
+          "id": "n5a-petrichor-paper-1964-f3",
+          "claim": "В работе 1965 года Беар и Томас проверяли гипотезу стимуляции прорастания; экстракты, напротив, замедляли прорастание и ранний рост кресса, горчицы и трав. Сравнивались минеральные материалы после тёплой сухой выдержки, без неё и после дистилляции.",
+          "sourceIds": [
+            "n5a-petrichor-growth"
+          ],
+          "locator": "Abstract, paragraphs beginning IT is commonly believed, It was observed, Further it was found."
+        },
+        {
+          "id": "n5a-petrichor-paper-1964-f4",
+          "claim": "Kannauj Perfume описывает изготовление своего mitti attar: глину формуют и обжигают, нагревают с водой в медном deg, пар проходит по бамбуку в bhapka с сандаловым маслом.",
+          "sourceIds": [
+            "n5a-mitti-maker"
+          ],
+          "locator": "The Making of Authentic: steps 1–2; Technical Data."
+        }
+      ],
+      "editorialInterpretationsRu": [],
+      "excludedClaimsRu": []
+    },
+    {
+      "eventId": "n5a-smell-heritage-paper-2017",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n5a-smell-heritage-paper-2017-f1",
+          "claim": "Статья Сесилии Бембибре и Матии Стрлича Smell of heritage опубликована онлайн 7 апреля 2017 года.",
+          "sourceIds": [
+            "n5a-books-crossmark"
+          ],
+          "locator": "Published Online; Article History: First Online 7 April 2017."
+        },
+        {
+          "id": "n5a-smell-heritage-paper-2017-f2",
+          "claim": "Авторы предлагают последовательность оценки культурной значимости, химического анализа, сенсорного анализа и архивирования; рассмотрены запах исторической бумаги и библиотека собора Святого Павла.",
+          "sourceIds": [
+            "n5a-books-ucl"
+          ],
+          "locator": "Abstract, paragraphs 2–4."
+        },
+        {
+          "id": "n5a-smell-heritage-paper-2017-f3",
+          "claim": "В Birmingham Museum and Art Gallery 79 участников дали 120 описаний непомеченного запаха книги; чаще возникали chocolate, coffee, old. В библиотеке все оценщики выбрали woody.",
+          "sourceIds": [
+            "n5a-books-paper"
+          ],
+          "locator": "Results and discussion: Sensory analysis, printed pp. 6–7."
+        },
+        {
+          "id": "n5a-smell-heritage-paper-2017-f4",
+          "claim": "Авторы прямо отмечают влияние других ароматов и видимых/словесных подсказок; колесо соединяет категории, дескрипторы и вероятные химические вещества.",
+          "sourceIds": [
+            "n5a-books-paper"
+          ],
+          "locator": "Sensory analysis; Archive tool: historic paper odour wheel, printed pp. 6–8."
+        },
+        {
+          "id": "n5a-smell-heritage-paper-2017-f5",
+          "claim": "Библиотека собора Святого Павла находится в помещении XVIII века по проекту Кристофера Рена; книга отзывов фиксирует признание запаха посетителями. Автор рассматривает различие запаха места и вынесенного образца, важность контекста восприятия.",
+          "sourceIds": [
+            "n5a-books-thesis"
+          ],
+          "locator": "Chapter 8, Inhaling knowledge, printed pp. 37–38; sections 8.2 and 8.3."
+        }
+      ],
+      "editorialInterpretationsRu": [],
+      "excludedClaimsRu": []
+    },
+    {
+      "eventId": "n5a-principal-odor-map-print-2023",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n5a-principal-odor-map-print-2023-f1",
+          "claim": "Работа о Principal Odor Map вышла в номере Science от 1 сентября 2023 года; Monell прямо называет дату номера.",
+          "sourceIds": [
+            "n5a-pom-monell"
+          ],
+          "locator": "Introductory paragraph: Their research appears in the September 1 issue of Science. Monell dateline: August 31, 2023."
+        },
+        {
+          "id": "n5a-principal-odor-map-print-2023-f2",
+          "claim": "POM использует графовую нейросеть для сопоставления структуры молекулы и словесных запаховых характеристик; близкие запахи располагаются рядом на карте. Проверка 400 молекул с 55 дескрипторами сравнивала модель со средним мнением панели.",
+          "sourceIds": [
+            "n5a-pom-google"
+          ],
+          "locator": "POM definition; Test 1, paragraphs on 400 molecules, 55 labels and panel consensus."
+        },
+        {
+          "id": "n5a-principal-odor-map-print-2023-f3",
+          "claim": "Monell обучал 15 оценщиков с помощью наборов эталонов; различались musty и musky. Команда Джейн Паркер разделяла компоненты 50 образцов и проверяла влияние примесей; след реагента давал buttery-запах.",
+          "sourceIds": [
+            "n5a-pom-monell"
+          ],
+          "locator": "What is the smell of garlic or of ozone?; Quality control paragraphs."
+        },
+        {
+          "id": "n5a-principal-odor-map-print-2023-f4",
+          "claim": "Модель обучали на 5000 известных молекулах; обнаруживались сходные запахи у структурно разных молекул. Osmo заявил цели поиска новых душистых материалов и цифрового описания запахов; проект опирался на работу Google Research.",
+          "sourceIds": [
+            "n5a-pom-osmo"
+          ],
+          "locator": "Paragraph beginning Using graph neural networks; Moving forward; About Osmo."
+        }
+      ],
+      "editorialInterpretationsRu": [],
+      "excludedClaimsRu": []
+    },
+    {
+      "eventId": "n5a-senetnay-reconstruction-announcement-2023",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n5a-senetnay-reconstruction-announcement-2023-f1",
+          "claim": "31 августа 2023 года MPI-GEA опубликовал сообщение о результатах исследования бальзамов Сенетнай и уже выполненной ароматической реконструкции с Кароль Кальвез.",
+          "sourceIds": [
+            "n5a-senetnay-mpi"
+          ],
+          "locator": "Dateline: 31. August 2023; opening paragraphs; paragraph beginning In enger Zusammenarbeit."
+        },
+        {
+          "id": "n5a-senetnay-reconstruction-announcement-2023-f2",
+          "claim": "Сенетнай жила около 1450 года до н. э.; остатки бальзамов исследовали в сосудах, извлечённых Говардом Картером из KV42, ныне в Museum August Kestner. Названы воск, масла, жиры, битум, хвойные смолы, бальзамическое вещество и даммар либо Pistacia.",
+          "sourceIds": [
+            "n5a-senetnay-mpi"
+          ],
+          "locator": "Main body, paragraphs beginning Die Forschung, Wir analysierten, Das Forschungsteam."
+        },
+        {
+          "id": "n5a-senetnay-reconstruction-announcement-2023-f3",
+          "claim": "Два пустых сосуда предназначались для лёгких и печени; изучены шесть проб. Лариксол указывает на возможную лиственницу, но вывод основан на одном биомаркере. Даммар и Pistacia не разделяются однозначно; ванилиновая кислота вероятнее связана с разрушением древесной ткани, чем с ванилью.",
+          "sourceIds": [
+            "n5a-senetnay-paper"
+          ],
+          "locator": "Introduction, printed p. 2; Results, pp. 3–5: LC–MS/MS and GC–MS sections."
+        },
+        {
+          "id": "n5a-senetnay-reconstruction-announcement-2023-f4",
+          "claim": "Кароль Кальвез работала по заказу Барбары Хубер; участвовала София Коллетт Эрих. Кальвез описывает реконструкцию как древесную, смолистую, бальзамическую, пудровую и зелёную. Среди материалов названы воск, растительное масло, хвойные смолы и даммар; для музея подготовлен диффузор.",
+          "sourceIds": [
+            "n5a-senetnay-perfumer"
+          ],
+          "locator": "Project description; Additional tasks; Examples of scent presentations; Creation of the Perfume of Eternity."
+        }
+      ],
+      "editorialInterpretationsRu": [],
+      "excludedClaimsRu": []
+    },
+    {
+      "eventId": "n4b-michael-kors-birth-1959",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4b-michael-kors-birth-1959-f1",
+          "claim": "Майкл Корс родился 9 августа 1959 года на Лонг-Айленде.",
+          "sourceIds": [
+            "n4b-kors-bio"
+          ],
+          "locator": "Early Life; Quick Facts"
+        },
+        {
+          "id": "n4b-michael-kors-birth-1959-f2",
+          "claim": "Michael вышел в 2000 году; парфюмер Laurent Le Guernec, в заявленных нотах тубероза, османтус, ладан и древесные оттенки.",
+          "sourceIds": [
+            "n4b-kors-michael"
+          ],
+          "locator": "Opening paragraphs and perfumer paragraph"
+        },
+        {
+          "id": "n4b-michael-kors-birth-1959-f3",
+          "claim": "В 2013 году Trudi Loren рассказывала о разработке трёх ароматов Sporty, Sexy и Glam через слепую оценку материалов Корсом.",
+          "sourceIds": [
+            "n4b-kors-loren",
+            "n5b-kors-gloss"
+          ],
+          "locator": "Questions on involvement and why three fragrances; n5b-kors-gloss: Introduction on collection; Rule13 Use fragrance to change your mood"
+        },
+        {
+          "id": "n4b-michael-kors-birth-1959-f4",
+          "claim": "Любовь Корса к пачули оказалась неожиданностью для Loren; в трёх композициях она сохраняла общую нить цитрусов, цветов, древесины и пачули.",
+          "sourceIds": [
+            "n4b-kors-loren"
+          ],
+          "locator": "Questions on involvement and what else he loved"
+        },
+        {
+          "id": "n4b-michael-kors-birth-1959-f5",
+          "claim": "В 2013 году вышли Sporty Citrus, Sexy Amber и Glam Jasmine; Vogue India описывает цитрусы, амбру и жасмин как три различных акцента, сохраняющих цветочные и древесные связи.",
+          "sourceIds": [
+            "n5b-kors-trio"
+          ],
+          "locator": "Introduction and three fragrance paragraphs"
+        },
+        {
+          "id": "n4b-michael-kors-birth-1959-f6",
+          "claim": "В интервью 2011 года Корс связывал Shalimar с матерью, Youth Dew с бабушкой, а Halston Z-14 с собственной юностью.",
+          "sourceIds": [
+            "n4b-kors-memory"
+          ],
+          "locator": "Questions on youth fragrances"
+        },
+        {
+          "id": "n4b-michael-kors-birth-1959-f7",
+          "claim": "В Get The Gloss Корс объяснял смену настроения через мысленное перенесение из лондонского офиса в Бали с запахом жасмина.",
+          "sourceIds": [
+            "n5b-kors-gloss"
+          ],
+          "locator": "Rule13 Use fragrance to change your mood"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Слепое прослушивание материалов превращает три определения одежды в три аромата."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждается буквальное присутствие всех материалов из списка нот.",
+        "Не утверждаются неподтверждённые мировые первенства или точные дни выпуска ароматов."
+      ]
+    },
+    {
+      "eventId": "n4b-karl-lagerfeld-birth-1933",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4b-karl-lagerfeld-birth-1933-f1",
+          "claim": "Карл Лагерфельд родился 10 сентября 1933 года в Гамбурге.",
+          "sourceIds": [
+            "n4b-lagerfeld-date"
+          ],
+          "locator": "Faktaboks: Født"
+        },
+        {
+          "id": "n4b-karl-lagerfeld-birth-1933-f2",
+          "claim": "Paper Passion появился в 2012 году как совместный проект Geza Schoen, Steidl, Lagerfeld и Wallpaper*.",
+          "sourceIds": [
+            "n4b-paper-steidl",
+            "n4b-paper-wallpaper",
+            "n5b-paper-voith",
+            "n5b-paper-nst"
+          ],
+          "locator": "Steidl first edition 07/2012; Wallpaper opening; n5b-paper-voith: A Whiff of Paper, paragraphs1–2; n5b-paper-nst: Introduction and final quoted paragraph"
+        },
+        {
+          "id": "n4b-karl-lagerfeld-birth-1933-f3",
+          "claim": "Лагерфельд придумал название Paper Passion и упаковку в виде настоящей книги с вырезом для флакона.",
+          "sourceIds": [
+            "n4b-paper-wallpaper",
+            "n5b-paper-voith",
+            "n5b-paper-nst"
+          ],
+          "locator": "Origin and packaging paragraphs; n5b-paper-voith: A Whiff of Paper, paragraphs1–2; n5b-paper-nst: Introduction and final quoted paragraph"
+        },
+        {
+          "id": "n4b-karl-lagerfeld-birth-1933-f4",
+          "claim": "В льняном переплёте под 32 печатными страницами скрывался флакон; тексты написали Lagerfeld, Günter Grass, Schoen и Chambers. Издание на английском языке.",
+          "sourceIds": [
+            "n4b-paper-steidl",
+            "n5b-paper-voith",
+            "n5b-paper-nst"
+          ],
+          "locator": "Product description; n5b-paper-voith: A Whiff of Paper, paragraphs1–2; n5b-paper-nst: Introduction and final quoted paragraph"
+        },
+        {
+          "id": "n4b-karl-lagerfeld-birth-1933-f5",
+          "claim": "Geza Schoen исследовал бумагу и типографскую краску в типографии Steidl; издатель сообщает о 17 пробах.",
+          "sourceIds": [
+            "n4b-paper-steidl"
+          ],
+          "locator": "Product description"
+        },
+        {
+          "id": "n4b-karl-lagerfeld-birth-1933-f6",
+          "claim": "По рассказу Schoen, трудность заключалась в сухом и жирном характере печатной бумаги; он использовал четыре–пять компонентов, включая ethyl linoleate и древесные материалы.",
+          "sourceIds": [
+            "n4b-paper-wallpaper"
+          ],
+          "locator": "Schoen worked on capturing the scent paragraph"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Paper Passion: книга становится упаковкой аромата печатной бумаги."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждается буквальное присутствие всех материалов из списка нот.",
+        "Не утверждаются неподтверждённые мировые первенства или точные дни выпуска ароматов."
+      ]
+    },
+    {
+      "eventId": "n4b-elsa-schiaparelli-birth-1890",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4b-elsa-schiaparelli-birth-1890-f1",
+          "claim": "Эльза Скиапарелли родилась в Риме 10 сентября 1890 года.",
+          "sourceIds": [
+            "n4b-schiap-date"
+          ],
+          "locator": "1890 timeline entry"
+        },
+        {
+          "id": "n4b-elsa-schiaparelli-birth-1890-f2",
+          "claim": "Флакон Shocking 1937 года разработала художница Leonor Fini по заказу Schiaparelli; основой стал манекен Mae West.",
+          "sourceIds": [
+            "n4b-schiap-labels",
+            "n5b-schiap-curator"
+          ],
+          "locator": "Shocking section; n5b-schiap-curator: THE SHOCKING PERFUME BOTTLE (1937), Sonnet Stanfill answer"
+        },
+        {
+          "id": "n4b-elsa-schiaparelli-birth-1890-f3",
+          "claim": "Для костюмов фильма Every Day’s a Holiday 1937 года в парижское ателье прислали торс по меркам West, поскольку личная встреча была невозможна.",
+          "sourceIds": [
+            "n4b-schiap-mae"
+          ],
+          "locator": "Opening paragraphs"
+        },
+        {
+          "id": "n4b-elsa-schiaparelli-birth-1890-f4",
+          "claim": "Музейный экземпляр Shocking имеет прозрачное стекло, цветы у пробки, ленту на плечах, стеклянный колпак и розовую коробку.",
+          "sourceIds": [
+            "n4b-schiap-object"
+          ],
+          "locator": "Object description and date 1937"
+        },
+        {
+          "id": "n4b-elsa-schiaparelli-birth-1890-f5",
+          "claim": "Fini была недовольна добавлением маленьких цветов коммерческим директором; рекламу Shocking создавал Marcel Vertès.",
+          "sourceIds": [
+            "n4b-schiap-labels"
+          ],
+          "locator": "Shocking section"
+        },
+        {
+          "id": "n4b-elsa-schiaparelli-birth-1890-f6",
+          "claim": "Vertès оживлял флаконы в рекламе, помещая их в необычные ситуации, включая мастерскую художника и ипподром.",
+          "sourceIds": [
+            "n4b-schiap-labels"
+          ],
+          "locator": "Shocking section"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Shocking: путь рабочего манекена из ателье во флакон."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждается буквальное присутствие всех материалов из списка нот.",
+        "Не утверждаются неподтверждённые мировые первенства или точные дни выпуска ароматов."
+      ]
+    },
+    {
+      "eventId": "n4b-jennifer-lopez-birth-1969",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4b-jennifer-lopez-birth-1969-f1",
+          "claim": "Дженнифер Лопес родилась 24 июля 1969 года в Бронксе.",
+          "sourceIds": [
+            "n4b-jlo-bio"
+          ],
+          "locator": "Early Life; Quick Facts"
+        },
+        {
+          "id": "n4b-jennifer-lopez-birth-1969-f2",
+          "claim": "Glow вышел в 2002 году; формулу создала Louise Turner.",
+          "sourceIds": [
+            "n4b-jlo-nst"
+          ],
+          "locator": "Opening and perfumer paragraph"
+        },
+        {
+          "id": "n4b-jennifer-lopez-birth-1969-f3",
+          "claim": "Лопес хотела передать запах свежевымытой кожи; описание включает нероли, цветы апельсина, розу, мускус, ирис и ваниль.",
+          "sourceIds": [
+            "n4b-jlo-nst"
+          ],
+          "locator": "Perfumer paragraph and review"
+        },
+        {
+          "id": "n4b-jennifer-lopez-birth-1969-f4",
+          "claim": "Sony Music в сообщении 2002 года описывала мягкий запах мыла после душа, текстуру коробки как кожу Лопес и линии флакона как образ её фигуры.",
+          "sourceIds": [
+            "n4b-jlo-sony"
+          ],
+          "locator": "News item 2002.10.08, final paragraphs"
+        },
+        {
+          "id": "n4b-jennifer-lopez-birth-1969-f5",
+          "claim": "Флакон украшала подвеска со стразами; в рекламе Лопес показана в душе.",
+          "sourceIds": [
+            "n4b-jlo-paper"
+          ],
+          "locator": "Opening and campaign paragraphs"
+        },
+        {
+          "id": "n4b-jennifer-lopez-birth-1969-f6",
+          "claim": "PAPER сообщает о существенном участии Лопес в творческой разработке и её ясном пожелании свежести и чистоты.",
+          "sourceIds": [
+            "n4b-jlo-paper"
+          ],
+          "locator": "Final paragraphs on development"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Glow: образ душа связывает рекламную фотографию, мыльный мускус и оформление."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждается буквальное присутствие всех материалов из списка нот.",
+        "Не утверждаются неподтверждённые мировые первенства или точные дни выпуска ароматов."
+      ]
+    },
+    {
+      "eventId": "n4b-beyonce-birth-1981",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4b-beyonce-birth-1981-f1",
+          "claim": "Бейонсе родилась 4 сентября 1981 года в Хьюстоне.",
+          "sourceIds": [
+            "n4b-beyonce-date"
+          ],
+          "locator": "Early Life"
+        },
+        {
+          "id": "n4b-beyonce-birth-1981-f2",
+          "claim": "Heat стал её первым именным ароматом в 2010 году; в интервью она связывала его с ощущением силы и уверенности.",
+          "sourceIds": [
+            "n4b-beyonce-interview",
+            "n4b-beyonce-heat-release",
+            "n5b-beyonce-fg"
+          ],
+          "locator": "Interview opening and first fragrance paragraphs; release opening; Fragrantica introduction, paragraphs103–106"
+        },
+        {
+          "id": "n4b-beyonce-birth-1981-f3",
+          "claim": "Бейонсе рассказывала, что антикварные флаконы матери, с которыми она играла в детстве, вдохновили оформление Heat.",
+          "sourceIds": [
+            "n4b-beyonce-interview"
+          ],
+          "locator": "Paragraph on mother’s antique bottles"
+        },
+        {
+          "id": "n4b-beyonce-birth-1981-f4",
+          "claim": "Флакон имеет округлую основу, суженное квадратное горло, красный градиент как огонь изнутри и золотую полосу.",
+          "sourceIds": [
+            "n4b-beyonce-heat-release",
+            "n5b-beyonce-fg"
+          ],
+          "locator": "Beyoncé Heat: The Style; Fragrantica introduction, paragraphs103–106"
+        },
+        {
+          "id": "n4b-beyonce-birth-1981-f5",
+          "claim": "В заявленном описании Heat соединены магнолия, нероли, красная ванильная орхидея, персик, жимолость, миндальное печенье, мускус, секвойя, тонка и амбра.",
+          "sourceIds": [
+            "n4b-beyonce-heat-release",
+            "n5b-beyonce-fg"
+          ],
+          "locator": "The Fragrance; Fact Sheet; Fragrantica introduction, paragraphs103–106"
+        },
+        {
+          "id": "n4b-beyonce-birth-1981-f6",
+          "claim": "В рекламе режиссёра Jake Nava Бейонсе исполняет Fever; Hans Dorsinville указывает свою роль creative director проекта Coty.",
+          "sourceIds": [
+            "n4b-beyonce-campaign"
+          ],
+          "locator": "Role and campaign overview"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Heat объединяет огонь в стекле, сценическую песню Fever и воспоминание об антикварных флаконах."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждается буквальное присутствие всех материалов из списка нот.",
+        "Не утверждаются неподтверждённые мировые первенства или точные дни выпуска ароматов."
+      ]
+    },
+    {
+      "eventId": "n4b-katy-perry-birth-1984",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4b-katy-perry-birth-1984-f1",
+          "claim": "Кэти Перри родилась 25 октября 1984 года в Санта-Барбаре.",
+          "sourceIds": [
+            "n4b-katy-date"
+          ],
+          "locator": "Early Life; Quick Facts"
+        },
+        {
+          "id": "n4b-katy-perry-birth-1984-f2",
+          "claim": "Purr появился в 2010 году; название связано с кошачьим сценическим костюмом и игрой звуков perfume, perfect, Perry.",
+          "sourceIds": [
+            "n4b-katy-vogue"
+          ],
+          "locator": "Cat Woman article body"
+        },
+        {
+          "id": "n4b-katy-perry-birth-1984-f3",
+          "claim": "Перри связывала концепцию с привлекательностью съедобных запахов; заявлялись персиковый нектар, яблоко и ванильная орхидея.",
+          "sourceIds": [
+            "n4b-katy-vogue"
+          ],
+          "locator": "Article body"
+        },
+        {
+          "id": "n4b-katy-perry-birth-1984-f4",
+          "claim": "Фиолетовый кошачий флакон задумывался как предмет, который хочется сохранить пустым; Перри называла источниками влияния флаконы Fragile Jean Paul Gaultier.",
+          "sourceIds": [
+            "n4b-katy-female"
+          ],
+          "locator": "Quoted interview paragraphs22–23"
+        },
+        {
+          "id": "n4b-katy-perry-birth-1984-f5",
+          "claim": "Промоакция в Нью-Йорке включала фиолетовую молочную машину; композицию разработала Firmenich, в описании цитрус, жасмин, мускус.",
+          "sourceIds": [
+            "n4b-katy-female"
+          ],
+          "locator": "Paragraph21 and final product paragraph"
+        },
+        {
+          "id": "n4b-katy-perry-birth-1984-f6",
+          "claim": "В интервью Allure Перри рассказывала, что начинала с Clinique Happy, собирала пробники и не собиралась отказываться от других ароматов после Purr.",
+          "sourceIds": [
+            "n4b-katy-allure"
+          ],
+          "locator": "Questions on first fragrance and favourites"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Purr: каламбур и кошачий сценический образ превращаются в предмет для сохранения."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждается буквальное присутствие всех материалов из списка нот.",
+        "Не утверждаются неподтверждённые мировые первенства или точные дни выпуска ароматов.",
+        "Не переносится ошибочная редакционная идентификация корсетного флакона как Le Male из Female Daily; оставлен бесспорный Fragile."
+      ]
+    },
+    {
+      "eventId": "n4b-antonio-banderas-birth-1960",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4b-antonio-banderas-birth-1960-f1",
+          "claim": "Антонио Бандерас родился 10 августа 1960 года в Малаге.",
+          "sourceIds": [
+            "n4b-banderas-date"
+          ],
+          "locator": "PERSONAL opening"
+        },
+        {
+          "id": "n4b-antonio-banderas-birth-1960-f2",
+          "claim": "Официальная история Puig относит соглашение о производстве ароматов Бандераса и запуск Diavolo к 1997 году.",
+          "sourceIds": [
+            "n4b-banderas-puig"
+          ],
+          "locator": "1997 entry"
+        },
+        {
+          "id": "n4b-antonio-banderas-birth-1960-f3",
+          "claim": "В интервью Wanted Бандерас объяснял, что ранние ароматы опирались на его преувеличенные экранные роли, позднее встречи с парфюмерами приблизили проекты к его личности.",
+          "sourceIds": [
+            "n4b-banderas-wanted"
+          ],
+          "locator": "Final quoted interview paragraph"
+        },
+        {
+          "id": "n4b-antonio-banderas-birth-1960-f4",
+          "claim": "Бандерас предпочёл продолжительное деловое участие разовой рекламе; рассказывал о поездках с презентациями.",
+          "sourceIds": [
+            "n4b-banderas-wanted"
+          ],
+          "locator": "Paragraphs59–64"
+        },
+        {
+          "id": "n4b-antonio-banderas-birth-1960-f5",
+          "claim": "В интервью The Week 2021 года он говорил о работе над маркетингом и передавал создание ароматов профессиональным парфюмерам.",
+          "sourceIds": [
+            "n4b-banderas-week",
+            "n5b-banderas-fragroom"
+          ],
+          "locator": "Paragraph110; n5b-banderas-fragroom: First answer: I’m not a chemist. I’m not a perfumer; answers on longevity and motivation"
+        },
+        {
+          "id": "n4b-antonio-banderas-birth-1960-f6",
+          "claim": "К индийскому представлению The Icon он присоединился с Mario Casas; связывал развитие ароматов со своим возрастом и актёрским путём.",
+          "sourceIds": [
+            "n4b-banderas-week"
+          ],
+          "locator": "Paragraph110"
+        },
+        {
+          "id": "n4b-antonio-banderas-birth-1960-f7",
+          "claim": "В интервью Fragroom Бандерас рассказал о пробах без названий на лицевой стороне, включая Sunday morning, и связал Малагу с апельсиновым цветом, морем и ладаном Страстной недели.",
+          "sourceIds": [
+            "n5b-banderas-fragroom"
+          ],
+          "locator": "First answer and following Malaga paragraph"
+        },
+        {
+          "id": "n4b-antonio-banderas-birth-1960-f8",
+          "claim": "В Fragroom Бандерас называл Diavolo утренним выбором и связывал его свежесть с собой в молодости.",
+          "sourceIds": [
+            "n5b-banderas-fragroom"
+          ],
+          "locator": "Question So what are you wearing today?"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Как парфюмерная роль менялась от экранного героя к повседневному человеку."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждается буквальное присутствие всех материалов из списка нот.",
+        "Не утверждаются неподтверждённые мировые первенства или точные дни выпуска ароматов."
+      ]
+    },
+    {
+      "eventId": "n4b-billie-eilish-birth-2001",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4b-billie-eilish-birth-2001-f1",
+          "claim": "Билли Айлиш родилась 18 декабря 2001 года.",
+          "sourceIds": [
+            "n4b-eilish-date"
+          ],
+          "locator": "Chapter One, printed page8 / PDF page3"
+        },
+        {
+          "id": "n4b-billie-eilish-birth-2001-f2",
+          "claim": "Дебютный Eilish вышел 10 ноября 2021 года через собственный сайт; Parlux описывает многомесячную дистанционную разработку.",
+          "sourceIds": [
+            "n4b-eilish-parlux"
+          ],
+          "locator": "Launch opening and The Partnership"
+        },
+        {
+          "id": "n4b-billie-eilish-birth-2001-f3",
+          "claim": "Парфюмер Eilish — Steve DeMercado; описание сочетает ваниль, какао, ягоды, мандарин, пряности, тонка, мускус и древесину.",
+          "sourceIds": [
+            "n4b-eilish-fragrantica",
+            "n5b-eilish-gci"
+          ],
+          "locator": "Perfume description and perfumer credit; n5b-eilish-gci: Fragrance note paragraph"
+        },
+        {
+          "id": "n4b-billie-eilish-birth-2001-f4",
+          "claim": "Айлиш рассказывала Allure, что образ запаха существовал заранее, а первый образец Parlux почти довёл её до слёз точностью попадания.",
+          "sourceIds": [
+            "n4b-eilish-allure"
+          ],
+          "locator": "Paragraphs77–83"
+        },
+        {
+          "id": "n4b-billie-eilish-birth-2001-f5",
+          "claim": "В Vogue Айлиш связывала любовь к запаху ванили с выпечкой в детстве; абстрактный флакон не изображал конкретного человека.",
+          "sourceIds": [
+            "n4b-eilish-vogue",
+            "n4b-eilish-allure"
+          ],
+          "locator": "Paragraph90 and104–106; derived text budget100; n4b-eilish-allure: Paragraphs84–86: anonymous person, intended everyone could see themselves"
+        },
+        {
+          "id": "n4b-billie-eilish-birth-2001-f6",
+          "claim": "Бронзовый флакон подчёркивает грудь, шею и ключицы; Amanda Charchian сняла дебютную кампанию по выбору Айлиш.",
+          "sourceIds": [
+            "n4b-eilish-parlux",
+            "n5b-eilish-gci"
+          ],
+          "locator": "The Video and The Scent; n5b-eilish-gci: Bottle paragraph; photographer remains supported by Parlux"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Eilish: найти давно воображаемый тёплый запах и поместить его в абстрактное тело."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждается буквальное присутствие всех материалов из списка нот.",
+        "Не утверждаются неподтверждённые мировые первенства или точные дни выпуска ароматов."
+      ]
+    },
+    {
+      "eventId": "n4b-taylor-swift-birth-1989",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4b-taylor-swift-birth-1989-f1",
+          "claim": "Тейлор Свифт родилась 13 декабря 1989 года в Рединге, Пенсильвания.",
+          "sourceIds": [
+            "n4b-swift-date"
+          ],
+          "locator": "Faktaboks: Født"
+        },
+        {
+          "id": "n4b-taylor-swift-birth-1989-f2",
+          "claim": "Название Wonderstruck взято из Enchanted; Свифт связывала его с первой встречей и способностью запаха создавать воспоминания.",
+          "sourceIds": [
+            "n4b-swift-headline"
+          ],
+          "locator": "Announcement body and Swift quote"
+        },
+        {
+          "id": "n4b-taylor-swift-birth-1989-f3",
+          "claim": "Первый аромат Свифт с Elizabeth Arden вышел осенью 2011 года.",
+          "sourceIds": [
+            "n4b-swift-report"
+          ],
+          "locator": "Annual Report2012, printedpage4/PDFpage6, Key Fragrance Brand Developments"
+        },
+        {
+          "id": "n4b-taylor-swift-birth-1989-f4",
+          "claim": "Wonderstruck создан с парфюмером Olivier Gillotin из Givaudan.",
+          "sourceIds": [
+            "n4b-swift-headline",
+            "n4b-swift-moodie"
+          ],
+          "locator": "Announcement body; perfumer paragraph"
+        },
+        {
+          "id": "n4b-taylor-swift-birth-1989-f5",
+          "claim": "На фиолетовом переливающемся флаконе — выбранные Свифт золотистые подвески: моравская звезда, голубь и клетка; коробка напоминает лоскуты тканей из путешествий, присутствует число13.",
+          "sourceIds": [
+            "n4b-swift-moodie"
+          ],
+          "locator": "Packaging paragraph192"
+        },
+        {
+          "id": "n4b-taylor-swift-birth-1989-f6",
+          "claim": "OSMOZ описывает яблоко, малину, фрезию, ваниль, жимолость, гибискус, сандал, персик и амбру.",
+          "sourceIds": [
+            "n4b-swift-osmoz"
+          ],
+          "locator": "Olfactory pyramid and Description"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Wonderstruck: слово песни становится названием, а флакон — собранием маленьких знаков."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждается буквальное присутствие всех материалов из списка нот.",
+        "Не утверждаются неподтверждённые мировые первенства или точные дни выпуска ароматов."
+      ]
+    },
+    {
+      "eventId": "n4b-john-galliano-birth-1960",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n4b-john-galliano-birth-1960-f1",
+          "claim": "Джон Гальяно родился 28 ноября 1960 года в Гибралтаре.",
+          "sourceIds": [
+            "n4b-galliano-date"
+          ],
+          "locator": "Rođen(a) entry"
+        },
+        {
+          "id": "n4b-john-galliano-birth-1960-f2",
+          "claim": "Именной John Galliano вышел в 2008 году; Auparfum указывает парфюмеров Aurélien Guichard и Christine Nagel.",
+          "sourceIds": [
+            "n4b-galliano-nez"
+          ],
+          "locator": "Product heading Année and Créé par"
+        },
+        {
+          "id": "n4b-john-galliano-birth-1960-f3",
+          "claim": "Флакон задумывался подобным кутюрному наряду, сохраняющему образ женщины после её ухода.",
+          "sourceIds": [
+            "n4b-galliano-vogue"
+          ],
+          "locator": "Article body"
+        },
+        {
+          "id": "n4b-john-galliano-birth-1960-f4",
+          "claim": "Jeanne Doré описывает розово-чёрный флакон с готическойG и крупную иллюстрированную коробку.",
+          "sourceIds": [
+            "n4b-galliano-nez"
+          ],
+          "locator": "Couture baroque, packaging paragraph"
+        },
+        {
+          "id": "n4b-john-galliano-birth-1960-f5",
+          "claim": "В описании выпуска названы лаванда, роза, фиалка, бергамот, амбра и кедр; выпуск сопровождали средства для тела.",
+          "sourceIds": [
+            "n4b-galliano-relax"
+          ],
+          "locator": "Second paragraph"
+        },
+        {
+          "id": "n4b-john-galliano-birth-1960-f6",
+          "claim": "В рецензии Doré альдегиды и ладан соединены с пудровыми цветами; она связывает воспоминания дизайнера с церковным ладаном, театральными гримёрками и утюжкой в ателье.",
+          "sourceIds": [
+            "n4b-galliano-nez"
+          ],
+          "locator": "Review paragraphs46–47"
+        },
+        {
+          "id": "n4b-john-galliano-birth-1960-f7",
+          "claim": "Лицензию именного аромата держала Selective Beauty, которая заранее заявляла задачу передать индивидуальность Galliano запахом.",
+          "sourceIds": [
+            "n4b-galliano-license"
+          ],
+          "locator": "Opening paragraph"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Именной аромат2008года как шлейф костюма и многослойный театральный образ."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждается буквальное присутствие всех материалов из списка нот.",
+        "Не утверждаются неподтверждённые мировые первенства или точные дни выпуска ароматов."
+      ]
+    },
+    {
+      "eventId": "n5b-rihanna-birth-1988",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n5b-rihanna-birth-1988-f1",
+          "claim": "Рианна родилась 20 февраля 1988 года в Сент-Майкле, Барбадос.",
+          "sourceIds": [
+            "n5b-rihanna-bio"
+          ],
+          "locator": "Quick Facts; Early Life"
+        },
+        {
+          "id": "n5b-rihanna-birth-1988-f2",
+          "claim": "Fenty Eau de Parfum появился в 2021 году; парфюмер Jacques Cavallier-Belletrud работал непосредственно с Рианной.",
+          "sourceIds": [
+            "n5b-rihanna-fg",
+            "n5b-rihanna-fenty"
+          ],
+          "locator": "Product description; DETAILS"
+        },
+        {
+          "id": "n5b-rihanna-birth-1988-f3",
+          "claim": "Работа проходила в Грассе; вдохновением служили Барбадос, Нью-Йорк, Лос-Анджелес и Париж.",
+          "sourceIds": [
+            "n5b-rihanna-vogue",
+            "n5b-rihanna-newbeauty"
+          ],
+          "locator": "Vogue paragraphs beginning I didn’t just tell and It was symbolic; NewBeauty childhood memories paragraph"
+        },
+        {
+          "id": "n5b-rihanna-birth-1988-f4",
+          "claim": "В официальном описании названы магнолия, мускус, болгарская роза, мандарин и пачули; Fragrantica также называет чернику и герань.",
+          "sourceIds": [
+            "n5b-rihanna-fenty",
+            "n5b-rihanna-fg"
+          ],
+          "locator": "DETAILS; perfume introduction"
+        },
+        {
+          "id": "n5b-rihanna-birth-1988-f5",
+          "claim": "Рианна хотела коричневый, но прозрачный флакон, связывая цвет с собой; Cavallier-Belletrud передавал её пожелание о свете внутри.",
+          "sourceIds": [
+            "n5b-rihanna-newbeauty",
+            "n5b-rihanna-fg"
+          ],
+          "locator": "Paragraphs According to the brand and If I’m going to make; quoted press release"
+        },
+        {
+          "id": "n5b-rihanna-birth-1988-f6",
+          "claim": "Форма янтарного стекла ориентировалась на ладонь Рианны; аромат описан Vogue как гендерно-нейтральный.",
+          "sourceIds": [
+            "n5b-rihanna-vogue"
+          ],
+          "locator": "Final paragraph on bottle and gender-neutral eau de parfum"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Телесный язык флакона Fenty и личная география задания парфюмеру."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждаются мировые первенства, секретный состав или точный день выхода без доказательства."
+      ]
+    },
+    {
+      "eventId": "n5b-ariana-grande-birth-1993",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n5b-ariana-grande-birth-1993-f1",
+          "claim": "Ариана Гранде родилась 26 июня 1993 года в Бока-Ратоне, Флорида.",
+          "sourceIds": [
+            "n5b-grande-bio"
+          ],
+          "locator": "Quick Facts; Young Ariana Grande"
+        },
+        {
+          "id": "n5b-ariana-grande-birth-1993-f2",
+          "claim": "Cloud вышел в 2018 году, его создал Clement Gavarry; проект развивался с LUXE Brands.",
+          "sourceIds": [
+            "n5b-grande-gavarry",
+            "n5b-grande-cloud"
+          ],
+          "locator": "Opening on 2018 launch; press-release opening"
+        },
+        {
+          "id": "n5b-ariana-grande-birth-1993-f3",
+          "claim": "В описании Cloud названы лаванда, груша, бергамот, кокосовый крем, пралине, ванильная орхидея, мускус и сливочные древесные оттенки.",
+          "sourceIds": [
+            "n5b-grande-cloud",
+            "n5b-grande-official"
+          ],
+          "locator": "THE FRAGRANCE and note list; n5b-grande-official: Description and Notes"
+        },
+        {
+          "id": "n5b-ariana-grande-birth-1993-f4",
+          "claim": "Голубоватый флакон помещён в белое облако; голографическая пиксельная коробка связывала небесное облако с цифровым миром.",
+          "sourceIds": [
+            "n5b-grande-cloud"
+          ],
+          "locator": "THE DESIGN"
+        },
+        {
+          "id": "n5b-ariana-grande-birth-1993-f5",
+          "claim": "В 2023 году Cloud Pink был создан тем же Clement Gavarry; в описании амбровая древесина, magenta moss, пралине, ягоды, ванильная орхидея и амбретта.",
+          "sourceIds": [
+            "n5b-grande-pink"
+          ],
+          "locator": "Paragraph Created by Firmenich’s Clement Gavarry"
+        },
+        {
+          "id": "n5b-ariana-grande-birth-1993-f6",
+          "claim": "Cloud Pink получил розовый флакон на белом облаке и сочетание металлических и сатиновых поверхностей коробки.",
+          "sourceIds": [
+            "n5b-grande-pink"
+          ],
+          "locator": "THE PACKAGING"
+        },
+        {
+          "id": "n5b-ariana-grande-birth-1993-f7",
+          "claim": "Gavarry объяснял в интервью, что обсуждение ингредиентов со знаменитостями помогает общению и переводу личных предпочтений в аромат.",
+          "sourceIds": [
+            "n5b-grande-gavarry"
+          ],
+          "locator": "Final question on celebrity fragrances"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Cloud как встреча небесного образа, цифрового символа и работы Clement Gavarry."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждаются мировые первенства, секретный состав или точный день выхода без доказательства."
+      ]
+    },
+    {
+      "eventId": "n5b-christina-aguilera-birth-1980",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n5b-christina-aguilera-birth-1980-f1",
+          "claim": "Кристина Агилера родилась 18 декабря 1980 года на Статен-Айленде, Нью-Йорк.",
+          "sourceIds": [
+            "n5b-aguilera-bio"
+          ],
+          "locator": "Biography Today April 2000, printed p180, BIRTH"
+        },
+        {
+          "id": "n5b-christina-aguilera-birth-1980-f2",
+          "claim": "Red Sin появился в 2012 году; OSMOZ описывает красное яблоко, корицу, фиалку и цикламен, имбирь, сандал и белый мускус.",
+          "sourceIds": [
+            "n5b-aguilera-osmoz"
+          ],
+          "locator": "2012 Creation; Description"
+        },
+        {
+          "id": "n5b-christina-aguilera-birth-1980-f3",
+          "claim": "В интервью I Am Fabulicious Агилера связывала название с любимым красным цветом и говорила об участии в выборе нот, флаконов и упаковки.",
+          "sourceIds": [
+            "n5b-aguilera-fab"
+          ],
+          "locator": "Questions on name and involvement"
+        },
+        {
+          "id": "n5b-christina-aguilera-birth-1980-f4",
+          "claim": "Мускусную подложку Агилера называла общей подписью своих ароматов.",
+          "sourceIds": [
+            "n5b-aguilera-fab",
+            "n5b-aguilera-teen"
+          ],
+          "locator": "Signature fragrance question; opening direct quote"
+        },
+        {
+          "id": "n5b-christina-aguilera-birth-1980-f5",
+          "claim": "В рекламе Red Sin Агилера снималась на собственной кровати в мужской рубашке; в ELLE она объясняла отказ от необходимости вечернего платья и высоких каблуков.",
+          "sourceIds": [
+            "n5b-aguilera-elle"
+          ],
+          "locator": "Question What can you tell us about shooting the campaign"
+        },
+        {
+          "id": "n5b-christina-aguilera-birth-1980-f6",
+          "claim": "Изогнутый флакон украшен красным кружевным рисунком и чёрным бантом.",
+          "sourceIds": [
+            "n5b-aguilera-osmoz"
+          ],
+          "locator": "Bottle"
+        },
+        {
+          "id": "n5b-christina-aguilera-birth-1980-f7",
+          "claim": "В Teen Vogue Агилера говорила о любви к тёплым запахам и экспериментам с образами; Red Sin описывала через сладкие и цветочные штрихи.",
+          "sourceIds": [
+            "n5b-aguilera-teen"
+          ],
+          "locator": "Opening paragraphs and quotes before school recollections"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Red Sin: выразительный красный флакон и более спокойный образ близости в кампании."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждаются мировые первенства, секретный состав или точный день выхода без доказательства."
+      ]
+    },
+    {
+      "eventId": "n5b-david-beckham-birth-1975",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n5b-david-beckham-birth-1975-f1",
+          "claim": "Дэвид Бекхэм родился 2 мая 1975 года в Лондоне.",
+          "sourceIds": [
+            "n5b-beckham-bio"
+          ],
+          "locator": "Date of birth; Place of birth"
+        },
+        {
+          "id": "n5b-david-beckham-birth-1975-f2",
+          "claim": "В интервью GQ 2021 года Бекхэм связывал Infinite Aqua с поездкой по Pacific Coast Highway, Aromatic Greens — с загородными прогулками, Refined Woods — с путешествиями.",
+          "sourceIds": [
+            "n5b-beckham-gq"
+          ],
+          "locator": "Question on travelling and grounding"
+        },
+        {
+          "id": "n5b-david-beckham-birth-1975-f3",
+          "claim": "В Esquire Бекхэм рассказал о предложении Coty сделать три аромата о его поездках и жизни в разных странах и о внимании к шрифту, размеру этикетки и упаковке.",
+          "sourceIds": [
+            "n5b-beckham-esquire"
+          ],
+          "locator": "Questions on origin story and creative process"
+        },
+        {
+          "id": "n5b-david-beckham-birth-1975-f4",
+          "claim": "Официальная страница The Collection связывает Infinite Aqua с морским бризом и лимонными деревьями, Refined Woods — с древесиной, пряностями и открытиями.",
+          "sourceIds": [
+            "n5b-beckham-brand"
+          ],
+          "locator": "Infinite Aqua and Refined Woods product cards"
+        },
+        {
+          "id": "n5b-david-beckham-birth-1975-f5",
+          "claim": "Aqua Classic создала Alienor Massenet из IFF; работа заняла год, а ветивер был специально очищен от земляных оттенков.",
+          "sourceIds": [
+            "n5b-beckham-society"
+          ],
+          "locator": "The Scented Letter summer 2016, printed p24, introductory paragraph and What makes Aqua Classic unique"
+        },
+        {
+          "id": "n5b-david-beckham-birth-1975-f6",
+          "claim": "Massenet описывала в Aqua Classic лист фиалки, кардамон и лимон, шалфей, герань и полынь, замшевый аккорд, пачули и ветивер.",
+          "sourceIds": [
+            "n5b-beckham-society"
+          ],
+          "locator": "Printed p24, How would you describe it"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Личная география The Collection и технический выбор ветивера в Aqua Classic."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждаются мировые первенства, секретный состав или точный день выхода без доказательства."
+      ]
+    },
+    {
+      "eventId": "n5b-justin-bieber-birth-1994",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n5b-justin-bieber-birth-1994-f1",
+          "claim": "Джастин Бибер родился 1 марта 1994 года в Лондоне, Онтарио.",
+          "sourceIds": [
+            "n5b-bieber-bio"
+          ],
+          "locator": "Personal: Birth date; Birth place"
+        },
+        {
+          "id": "n5b-justin-bieber-birth-1994-f2",
+          "claim": "Someday, дебютный аромат Бибера, вышел в 2011 году с Give Back Brands и был адресован поклонницам.",
+          "sourceIds": [
+            "n5b-bieber-launch",
+            "n4b-swift-report"
+          ],
+          "locator": "Release opening; Elizabeth Arden 2012 report printed p13"
+        },
+        {
+          "id": "n5b-justin-bieber-birth-1994-f3",
+          "claim": "Бибер говорил MTV, что образцы привозили ему в поездки, а он выбирал флакон; собственные духи он менял.",
+          "sourceIds": [
+            "n5b-bieber-mtv"
+          ],
+          "locator": "Paragraphs long process and signature scent"
+        },
+        {
+          "id": "n5b-justin-bieber-birth-1994-f4",
+          "claim": "В описании Someday названы мандарин, груша и ягоды, жасмин и водяная лилия, сандал, ваниль и мягкий мускус.",
+          "sourceIds": [
+            "n5b-bieber-launch",
+            "n5b-bieber-fg"
+          ],
+          "locator": "THE FRAGRANCE; Top / Mid / Dry; n5b-bieber-fg: Introduction and Top/Heart/Base list; water lily and sandalwood independently remain in release"
+        },
+        {
+          "id": "n5b-justin-bieber-birth-1994-f5",
+          "claim": "Колпачок сформирован слоями сердец; съёмная подвеска включает хрустальное сердце-замок и ключ.",
+          "sourceIds": [
+            "n5b-bieber-launch",
+            "n5b-bieber-fg"
+          ],
+          "locator": "THE DESIGN; n5b-bieber-fg: Lance McGregor and bottle paragraph; precise lock/key detail in release"
+        },
+        {
+          "id": "n5b-justin-bieber-birth-1994-f6",
+          "claim": "Give Back Brands заявляла о намерении направлять свою выручку от операций на благотворительность; это заявление модели, а не проверенный итог пожертвований.",
+          "sourceIds": [
+            "n5b-bieber-launch"
+          ],
+          "locator": "Committed to the spirit of giving back; About Give Back Brands"
+        },
+        {
+          "id": "n5b-justin-bieber-birth-1994-f7",
+          "claim": "В июне 2012 года Elizabeth Arden приобрела глобальные лицензии и некоторые активы брендов Justin Bieber и Nicki Minaj у Give Back Brands, включая запасы ароматов Бибера.",
+          "sourceIds": [
+            "n4b-swift-report"
+          ],
+          "locator": "2012 annual report printed p13, paragraph In June 2012"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Someday адресован поклонницам; съёмная подвеска, участие на гастролях и заявленная благотворительная модель."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждаются мировые первенства, секретный состав или точный день выхода без доказательства."
+      ]
+    },
+    {
+      "eventId": "n50r-villoresi-museum-opening-2019",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50r-villoresi-museum-opening-2019-f1",
+          "claim": "Музей открыл двери 1 июня 2019 во Флоренции; адрес Via de’ Bardi12.",
+          "sourceIds": [
+            "n50r-villoresi-home"
+          ],
+          "locator": "Heading Museo Villoresi; Where we are"
+        },
+        {
+          "id": "n50r-villoresi-museum-opening-2019-f2",
+          "claim": "Osmorama — библиотека ароматического сырья; маршрут включает станции, карту, фильмы.",
+          "sourceIds": [
+            "n50r-villoresi-home"
+          ],
+          "locator": "A journey through scents"
+        },
+        {
+          "id": "n50r-villoresi-museum-opening-2019-f3",
+          "claim": "Репортаж упоминает пачули, кардамон, горький апельсин, крем-брюле и три уровня информации.",
+          "sourceIds": [
+            "n50r-villoresi-visit"
+          ],
+          "locator": "Абзацы Osmorama и To accommodate visitors"
+        },
+        {
+          "id": "n50r-villoresi-museum-opening-2019-f4",
+          "claim": "Первая мастерская занимала средневековые подвалы; после реставрации создан музей, двор и терраса — сад.",
+          "sourceIds": [
+            "n50r-villoresi-museum"
+          ],
+          "locator": "A bit of history / The Museum, последний абзац"
+        },
+        {
+          "id": "n50r-villoresi-museum-opening-2019-f5",
+          "claim": "Сад описывает листья, цветы, кожуру, ягоды; перечислены bergamot, yuzu, rose, jasmine, vetiver, patchouli.",
+          "sourceIds": [
+            "n50r-villoresi-garden"
+          ],
+          "locator": "GARDEN, первые три абзаца"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Связи между устройством показа и вниманием посетителя — редакционный анализ, не свидетельства о реакции конкретных людей."
+      ],
+      "excludedClaimsRu": [
+        "Не использовать ошибочные шаблонные биографии в разделе The Beginning музейной страницы. Современные числа коллекции не приписываются дню открытия."
+      ]
+    },
+    {
+      "eventId": "n50r-wellcome-being-human-opening-2019",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50r-wellcome-being-human-opening-2019-f1",
+          "claim": "Публичное открытие 5 сентября 2019, пресс-показ 4 сентября; состоявшийся показ подтверждает музейная карточка.",
+          "sourceIds": [
+            "n50r-wellcome-announcement",
+            "n50r-wellcome-object"
+          ],
+          "locator": "Press preview / Public opening; object Exhibitions note"
+        },
+        {
+          "id": "n50r-wellcome-being-human-opening-2019-f2",
+          "claim": "5318008 AVM Curiosities Таши Маркс — бронзовая ароматическая скульптура для Infection, образ грудного молока и бифидобактерий, тактильная и игровая.",
+          "sourceIds": [
+            "n50r-wellcome-avm"
+          ],
+          "locator": "Описание работы, первый и второй абзацы; Scented Bronze Sculpture"
+        },
+        {
+          "id": "n50r-wellcome-being-human-opening-2019-f3",
+          "claim": "Четыре раздела и около 50 объектов; присутствуют обе обонятельные работы.",
+          "sourceIds": [
+            "n50r-wellcome-open"
+          ],
+          "locator": "Введение; Infection; Environmental breakdown"
+        },
+        {
+          "id": "n50r-wellcome-being-human-opening-2019-f4",
+          "claim": "Участники проекта — Ginsberg, Tolaas, Agapakis/Ginkgo; ДНК гербария, предположительные гены ферментов, соответствующие/сопоставимые молекулы; пропорции утрачены.",
+          "sourceIds": [
+            "n50r-sublime-about"
+          ],
+          "locator": "ABOUT, paragraphs2–6"
+        },
+        {
+          "id": "n50r-wellcome-being-human-opening-2019-f5",
+          "claim": "В Being Human показывали Hibiscadelphus wilderianus с 5 сентября 2019.",
+          "sourceIds": [
+            "n50r-sublime-shows"
+          ],
+          "locator": "PAST EXHIBITIONS / Being Human"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Связи между устройством показа и вниманием посетителя — редакционный анализ, не свидетельства о реакции конкретных людей."
+      ],
+      "excludedClaimsRu": [
+        "4сентября — пресс-показ,5сентября — публичное открытие. Не называть реконструкцию точным восстановлением запаха или воскрешением растения."
+      ]
+    },
+    {
+      "eventId": "n50r-cartier-cloud-abu-dhabi-opening-2019",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50r-cartier-cloud-abu-dhabi-opening-2019-f1",
+          "claim": "Начало показа 30 октября 2019 подтверждено музеем и Cartier; музейная ретроспектива подтверждает состоявшуюся инсталляцию.",
+          "sourceIds": [
+            "n50r-louvre-installation",
+            "n50r-cartier-cloud",
+            "n50r-louvre-cloud"
+          ],
+          "locator": "Le Nuage Parfumé / первый абзац; Cartier2019-10"
+        },
+        {
+          "id": "n50r-cartier-cloud-abu-dhabi-opening-2019-f2",
+          "claim": "Авторы Laurent и Transsolar; сопутствует Ten Thousand Years of Luxury; винтовая лестница и запах наверху.",
+          "sourceIds": [
+            "n50r-louvre-cloud"
+          ],
+          "locator": "Commissioned work, первые два абзаца"
+        },
+        {
+          "id": "n50r-cartier-cloud-abu-dhabi-opening-2019-f3",
+          "claim": "Три температурных слоя, облако между холодным и тёплым, вдохновение L’Envol2016.",
+          "sourceIds": [
+            "n50r-cartier-cloud",
+            "n50r-louvre-cloud"
+          ],
+          "locator": "Основной текст, последние два абзаца"
+        },
+        {
+          "id": "n50r-cartier-cloud-abu-dhabi-opening-2019-f4",
+          "claim": "Устойчивая стратификация при изменениях температуры, влажности, ветра, солнца; адаптация к Эмиратам, плавучая платформа под кровлей; прежде Париж 2017.",
+          "sourceIds": [
+            "n50r-transsolar-cloud"
+          ],
+          "locator": "Towards an architecture of the immaterial"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Связи между устройством показа и вниманием посетителя — редакционный анализ, не свидетельства о реакции конкретных людей."
+      ],
+      "excludedClaimsRu": [
+        "Заметка Transsolar20.11.2019 ошибочно/необъяснённо называет27октября; музей и Cartier дают30октября. Дата публичного показа30октября поддержана итоговой карточкой инженеров во французской версии. Не утверждается всемирное первенство. Парижский показ не выделяется в отдельное событие."
+      ]
+    },
+    {
+      "eventId": "n50r-mudac-nez-a-nez-opening-2019",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50r-mudac-nez-a-nez-opening-2019-f1",
+          "claim": "Публичный период выставки — 15 февраля–16 июня 2019; вернисаж 14 февраля с18:00 указан отдельно.",
+          "sourceIds": [
+            "n50r-lausanne-report",
+            "n50r-mudac-archive"
+          ],
+          "locator": "PDF p19 / printed40, MUDAC / Expositions temporaires / Nez à nez; mudac archive: date range and Opening, Thursday14February6PM"
+        },
+        {
+          "id": "n50r-mudac-nez-a-nez-opening-2019-f2",
+          "claim": "Glithero описывает устройства с шарами и веерами и палитру едва подкрашенных белых тонов, поддерживающую восприятие ароматов. Куратор в Domus объясняет использование колпаков Валери де Рокморель, прочность устройств и раздельную различимость запахов.",
+          "sourceIds": [
+            "n50r-mudac-glithero",
+            "n50r-mudac-domus"
+          ],
+          "locator": "Glithero: first and last descriptive paragraphs; Domus: physical installations, glass bells, volatile substances"
+        },
+        {
+          "id": "n50r-mudac-nez-a-nez-opening-2019-f3",
+          "claim": "39 ароматов 13 парфюмеров разных профессиональных статусов; Nez и интервью авторов.",
+          "sourceIds": [
+            "n50r-mudac-visit"
+          ],
+          "locator": "Абзацы L’olfaction; Enjeu de l’exposition"
+        },
+        {
+          "id": "n50r-mudac-nez-a-nez-opening-2019-f4",
+          "claim": "Atelier Marge работала над визуальной идентичностью и изданием каталога.",
+          "sourceIds": [
+            "n50r-mudac-marge"
+          ],
+          "locator": "Mudac - musée de la main / Nez à Nez en Suisse"
+        },
+        {
+          "id": "n50r-mudac-nez-a-nez-opening-2019-f5",
+          "claim": "Участник показа Naomi Goodsir подтверждает 13 парфюмеров, 39 ароматов, даты 15.02–16.06.2019 и авторство Glithero.",
+          "sourceIds": [
+            "n50r-mudac-goodsir"
+          ],
+          "locator": "Opening paragraph dated February17,2019"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Связи между устройством показа и вниманием посетителя — редакционный анализ, не свидетельства о реакции конкретных людей."
+      ],
+      "excludedClaimsRu": [
+        "15февраля — начало публичного периода, не вернисаж14февраля. Ошибка5февраля в соседнем описании Quel flair у La Voix не используется. Дату подтверждает годовой отчёт города."
+      ]
+    },
+    {
+      "eventId": "n50r-osmodrama-festival-opening-2016",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50r-osmodrama-festival-opening-2016-f1",
+          "claim": "Открытие и премьера Autocomplete15 июля 2016 в 19:30 в St Johannes Evangelist KircheBerlin.",
+          "sourceIds": [
+            "n50r-osmodrama-dates",
+            "n50r-osmodrama-programme"
+          ],
+          "locator": "Performance Dates / Opening + Premiere; programme p8 / FR15.07.2016"
+        },
+        {
+          "id": "n50r-osmodrama-festival-opening-2016-f2",
+          "claim": "Фестиваль состоялся 15 июля–18 сентября 2016; девять недель, выставка/лаборатория/исполнение.",
+          "sourceIds": [
+            "n50r-osmodrama-retrospective"
+          ],
+          "locator": "What is happening in Berlin?"
+        },
+        {
+          "id": "n50r-osmodrama-festival-opening-2016-f3",
+          "claim": "Smeller2.0 создан с экспертами perfumery, ventilation, mechatronics, computing;64 канала,1.6 тонны, контролируемый воздух.",
+          "sourceIds": [
+            "n50r-osmodrama-retrospective"
+          ],
+          "locator": "What is Smeller2.0?"
+        },
+        {
+          "id": "n50r-osmodrama-festival-opening-2016-f4",
+          "claim": "Программа описывает отсутствие нежелательного смешения, Autocomplete54 минуты, дискуссия Hatt, Schön, Mattes, Reitz; зритель достраивает запаховую историю.",
+          "sourceIds": [
+            "n50r-osmodrama-programme"
+          ],
+          "locator": "PDF pp6–8 / SMELLER2.0; schedule; Autocomplete"
+        },
+        {
+          "id": "n50r-osmodrama-festival-opening-2016-f5",
+          "claim": "Шайнер ретроспективно подтверждает берлинский показ 2016 с литературой, кино, музыкой и самостоятельными запаховыми повествованиями.",
+          "sourceIds": [
+            "n50r-osmodrama-shiner"
+          ],
+          "locator": "Interlude: Smeller2.0 and the Osmodrama / доступный Extract, последний абзац"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Связи между устройством показа и вниманием посетителя — редакционный анализ, не свидетельства о реакции конкретных людей."
+      ],
+      "excludedClaimsRu": [
+        "15июля — открытие и премьера,16июля — начало регулярного режима. Участники дискуссии названы как заявленные в программе. Не заявлять всемирное первенство, универсальную реакцию или точное содержание воспоминаний."
+      ]
     }
   ]
 }
