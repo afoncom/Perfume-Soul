@@ -8441,6 +8441,1462 @@
       "excludedClaimsRu": [
         "15июля — открытие и премьера,16июля — начало регулярного режима. Участники дискуссии названы как заявленные в программе. Не заявлять всемирное первенство, универсальную реакцию или точное содержание воспоминаний."
       ]
+    },
+    {
+      "eventId": "n50c-tinguely-2015",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50c-tinguely-2015-f1",
+          "claim": "Выставка Belle Haleine проходила 11 февраля —17 мая 2015 в Музее Тэнгли; куратор Annja Müller-Alsbach.",
+          "sourceIds": [
+            "n50c-tinguely"
+          ],
+          "locator": "Заголовок и даты; заключительная строка L 213"
+        },
+        {
+          "id": "n50c-tinguely-2015-f2",
+          "claim": "В экспозиции были исторические изображения обоняния и проект Tolaas The FEAR of Smell — the Smell of FEAR.",
+          "sourceIds": [
+            "n50c-tinguely"
+          ],
+          "locator": "Абзацы L 199 и L 205; перечень участников"
+        },
+        {
+          "id": "n50c-tinguely-2015-f3",
+          "claim": "Belle Haleine 1921 — флакон с Рроз Селяви; violette заменено на voilette; работа играет с авторством.",
+          "sourceIds": [
+            "n50c-pompidou"
+          ],
+          "locator": "Описание произведения L 20–22"
+        },
+        {
+          "id": "n50c-tinguely-2015-f4",
+          "claim": "В отдельной Fear 2014 в Кочи Толаас воспроизводила собранные запахи пота, наносила микрокапсулы на камни, высвобождавшие запах при касании.",
+          "sourceIds": [
+            "n50c-tolaas"
+          ],
+          "locator": "Описание Fear L 48–52"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Пояснения значения эксперимента для читателя и образные сопоставления — редакционная интерпретация, не дополнительные результаты исследования."
+      ],
+      "excludedClaimsRu": [
+        "Результат отдельного исследования не переносится автоматически на все запахи, людей или готовые духи."
+      ]
+    },
+    {
+      "eventId": "n50c-or7d4-2007",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50c-or7d4-2007-f1",
+          "claim": "Онлайн-публикация Nature:16 сентября 2007; журнальный выпуск 27 сентября.",
+          "sourceIds": [
+            "n50c-or7d4-paper"
+          ],
+          "locator": "Published и About this article"
+        },
+        {
+          "id": "n50c-or7d4-2007-f2",
+          "claim": "Работа исследует андростенон, андростадиенон и рецептор OR7D4; WM хуже функционирует in vitro; носители в группе менее чувствительны и оценивают запахи менее негативно.",
+          "sourceIds": [
+            "n50c-or7d4-paper"
+          ],
+          "locator": "Abstract L 39–42"
+        },
+        {
+          "id": "n50c-or7d4-2007-f3",
+          "claim": "Почти 400 участников оценивали 66 запахов в двух концентрациях; сотрудничали Rockefeller и Duke.",
+          "sourceIds": [
+            "n50c-or7d4-rockefeller"
+          ],
+          "locator": "Абзацы L 24–28"
+        },
+        {
+          "id": "n50c-or7d4-2007-f4",
+          "claim": "Результат не равен доказательству человеческого феромона; поведенческие следствия названы вопросами дальнейших работ.",
+          "sourceIds": [
+            "n50c-or7d4-rockefeller"
+          ],
+          "locator": "Заключительные абзацы L 34–36"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Пояснения значения эксперимента для читателя и образные сопоставления — редакционная интерпретация, не дополнительные результаты исследования."
+      ],
+      "excludedClaimsRu": [
+        "Результат отдельного исследования не переносится автоматически на все запахи, людей или готовые духи."
+      ]
+    },
+    {
+      "eventId": "n50c-cultural-pleasantness-2022",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50c-cultural-pleasantness-2022-f1",
+          "claim": "Онлайн-публикация 4 апреля 2022;225 участников из 9 незападных культур.",
+          "sourceIds": [
+            "n50c-cultural-paper"
+          ],
+          "locator": "Epub 2022 Apr 4; Abstract"
+        },
+        {
+          "id": "n50c-cultural-pleasantness-2022-f2",
+          "claim": "Анализ: культура 6%, индивидуальная вариативность 54%, молекулярная принадлежность 41%.",
+          "sourceIds": [
+            "n50c-cultural-paper"
+          ],
+          "locator": "Abstract; округлённые показатели"
+        },
+        {
+          "id": "n50c-cultural-pleasantness-2022-f3",
+          "claim": "Включены охотники-собиратели и сообщества земледелия/рыболовства; ваниль и этилбутират приятнее изовалериановой кислоты.",
+          "sourceIds": [
+            "n50c-cultural-ki"
+          ],
+          "locator": "Indigenous populations; Vanilla was considered most pleasant"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Пояснения значения эксперимента для читателя и образные сопоставления — редакционная интерпретация, не дополнительные результаты исследования."
+      ],
+      "excludedClaimsRu": [
+        "Результат отдельного исследования не переносится автоматически на все запахи, людей или готовые духи."
+      ]
+    },
+    {
+      "eventId": "n50c-dream-2017",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50c-dream-2017-f1",
+          "claim": "Журнальный выпуск Science 24 февраля 2017; онлайн-публикация 20 февраля.",
+          "sourceIds": [
+            "n50c-dream-paper"
+          ],
+          "locator": "PDF footer:24 February 2017 наp 1–7; p 7 Published online 20 February 2017"
+        },
+        {
+          "id": "n50c-dream-2017-f2",
+          "claim": "49 человек оценивали 476 молекул;22 команды; часть данных скрыли для итоговой проверки.",
+          "sourceIds": [
+            "n50c-dream-paper",
+            "n50c-dream-highlight"
+          ],
+          "locator": "PDF p 1: dataset и разделение 338/69/69; Nature highlight, paragraphs L 31–32"
+        },
+        {
+          "id": "n50c-dream-2017-f3",
+          "claim": "Модели предсказывали интенсивность, приятность и 8 из 19 дескрипторов.",
+          "sourceIds": [
+            "n50c-dream-paper"
+          ],
+          "locator": "Abstract p 1"
+        },
+        {
+          "id": "n50c-dream-2017-f4",
+          "claim": "Данные включали ванилин; организаторы объединяли модели; результаты дескрипторов были неодинаковы.",
+          "sourceIds": [
+            "n50c-dream-release"
+          ],
+          "locator": "The good,the bad,and the odorless; A community effort; Filling in the gap"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Пояснения значения эксперимента для читателя и образные сопоставления — редакционная интерпретация, не дополнительные результаты исследования."
+      ],
+      "excludedClaimsRu": [
+        "Результат отдельного исследования не переносится автоматически на все запахи, людей или готовые духи."
+      ]
+    },
+    {
+      "eventId": "n50c-rose-genome-2018",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50c-rose-genome-2018-f1",
+          "claim": "Исследование Raymond et al опубликовано 30 апреля 2018; объект Rosa chinensis Old Blush.",
+          "sourceIds": [
+            "n50c-rose-inrae"
+          ],
+          "locator": "Вводный абзац; A high-quality reference genome"
+        },
+        {
+          "id": "n50c-rose-genome-2018-f2",
+          "claim": "Команда создала гомозиготную линию и применила длинные прочтения ДНК для сборки.",
+          "sourceIds": [
+            "n50c-rose-paper",
+            "n50c-rose-roadmap"
+          ],
+          "locator": "PDF p 1–2: Abstract; assembly strategy; roadmap PDF p 2, The rose genome sequences and Table 1"
+        },
+        {
+          "id": "n50c-rose-genome-2018-f3",
+          "claim": "La France получена в Лионе 1867; геном — мозаика нескольких предковых групп.",
+          "sourceIds": [
+            "n50c-rose-inrae",
+            "n50c-rose-roadmap"
+          ],
+          "locator": "The origins of modern roses explained; roadmap: Mosaic genomes in modern roses"
+        },
+        {
+          "id": "n50c-rose-genome-2018-f4",
+          "claim": "Работа предложила модель связанной регуляции цвета и запаха; исследовались пути пигментов и душистых веществ.",
+          "sourceIds": [
+            "n50c-rose-paper"
+          ],
+          "locator": "Abstract; p 4 Fig 3 и соответствующий текст"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Пояснения значения эксперимента для читателя и образные сопоставления — редакционная интерпретация, не дополнительные результаты исследования."
+      ],
+      "excludedClaimsRu": [
+        "Результат отдельного исследования не переносится автоматически на все запахи, людей или готовые духи."
+      ]
+    },
+    {
+      "eventId": "n50c-electronic-nose-1982",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50c-electronic-nose-1982-f1",
+          "claim": "Статья Persaud/Dodd включена в Nature 299 issue 5881 от 23 сентября 1982.",
+          "sourceIds": [
+            "n50c-enose-date"
+          ],
+          "locator": "Letter: Analysis of discrimination mechanisms..., строки 331–336"
+        },
+        {
+          "id": "n50c-electronic-nose-1982-f2",
+          "claim": "Авторский обзор описывает действующую модель 1982 из трёх metal oxide sensors и распознавание нескольких веществ.",
+          "sourceIds": [
+            "n50c-enose-author"
+          ],
+          "locator": "PDF p 2 Introduction"
+        },
+        {
+          "id": "n50c-electronic-nose-1982-f3",
+          "claim": "Принцип — массив с широкой перекрывающейся избирательностью; дальнейшие применения и ограничения коммерциализации.",
+          "sourceIds": [
+            "n50c-enose-author",
+            "n50c-enose-ieee"
+          ],
+          "locator": "Introduction pp 2–3"
+        },
+        {
+          "id": "n50c-electronic-nose-1982-f4",
+          "claim": "Массив датчиков с перекрывающимися реакциями распознаёт рисунки сигналов; приборы применяются в промышленном контроле, включая косметику.",
+          "sourceIds": [
+            "n50c-enose-ieee"
+          ],
+          "locator": "Electronic Noses Sniff Success: paragraphs on commercial uses L 72 and overlapping responses L 82–87"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Пояснения значения эксперимента для читателя и образные сопоставления — редакционная интерпретация, не дополнительные результаты исследования."
+      ],
+      "excludedClaimsRu": [
+        "Результат отдельного исследования не переносится автоматически на все запахи, людей или готовые духи."
+      ]
+    },
+    {
+      "eventId": "n50c-fingerprint-2015",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50c-fingerprint-2015-f1",
+          "claim": "Epub 22 июня 2015, журнальный выпуск 14 июля.",
+          "sourceIds": [
+            "n50c-fingerprint-paper"
+          ],
+          "locator": "Epub 2015 Jun 22, библиографическая строка"
+        },
+        {
+          "id": "n50c-fingerprint-2015-f2",
+          "claim": "Первый опыт:89 человек,28 запахов,54 дескриптора; индивидуальные рисунки; сопоставление с HLA и экстраполяция.",
+          "sourceIds": [
+            "n50c-fingerprint-paper"
+          ],
+          "locator": "Abstract"
+        },
+        {
+          "id": "n50c-fingerprint-2015-f3",
+          "claim": "28 запахов дают 378 пар; метод опирается на сходство и не требует согласия о каждом дескрипторе.",
+          "sourceIds": [
+            "n50c-fingerprint-release"
+          ],
+          "locator": "Основные абзацы метода, L 30–33"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Пояснения значения эксперимента для читателя и образные сопоставления — редакционная интерпретация, не дополнительные результаты исследования."
+      ],
+      "excludedClaimsRu": [
+        "Результат отдельного исследования не переносится автоматически на все запахи, людей или готовые духи."
+      ]
+    },
+    {
+      "eventId": "n50c-white-2012",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50c-white-2012-f1",
+          "claim": "PNAS опубликовал исследование 19 ноября 2012.",
+          "sourceIds": [
+            "n50c-white-release"
+          ],
+          "locator": "PDF p 1: research findings appeared November 19"
+        },
+        {
+          "id": "n50c-white-2012-f2",
+          "claim": "86 молекул, сопоставимая интенсивность, разные смеси; около 30 компонентов сходятся по восприятию; имя Laurax и нейтральные оценки.",
+          "sourceIds": [
+            "n50c-white-release",
+            "n50c-white-paper"
+          ],
+          "locator": "PDF pp 1–2; original PNAS paper pp 1–3, Abstract and Results"
+        },
+        {
+          "id": "n50c-white-2012-f3",
+          "claim": "Критический разбор отмечает сохранённое различение выше случайного уровня, оспаривает строгую аналогию с visual white.",
+          "sourceIds": [
+            "n50c-white-critique"
+          ],
+          "locator": "Раздел White odors"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Пояснения значения эксперимента для читателя и образные сопоставления — редакционная интерпретация, не дополнительные результаты исследования."
+      ],
+      "excludedClaimsRu": [
+        "Результат отдельного исследования не переносится автоматически на все запахи, людей или готовые духи."
+      ]
+    },
+    {
+      "eventId": "n50c-metamers-2020",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50c-metamers-2020-f1",
+          "claim": "Nature онлайн 11 ноября 2020;199 человек,49,788 парных оценок,242 смеси.",
+          "sourceIds": [
+            "n50c-metamers-paper"
+          ],
+          "locator": "Published; Abstract"
+        },
+        {
+          "id": "n50c-metamers-2020-f2",
+          "claim": "Мера из 21 характеристики; близкие по мере пары трудно различать; созданы пары без общих компонентов; Laudamiel разрабатывал формулы.",
+          "sourceIds": [
+            "n50c-metamers-paper"
+          ],
+          "locator": "Abstract; Author contributions"
+        },
+        {
+          "id": "n50c-metamers-2020-f3",
+          "claim": "Проверяли внешние данные и новые группы/смеси; угол описывает сходство; цифровое воспроизведение — перспектива.",
+          "sourceIds": [
+            "n50c-metamers-release"
+          ],
+          "locator": "Абзацы L 62–75"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Пояснения значения эксперимента для читателя и образные сопоставления — редакционная интерпретация, не дополнительные результаты исследования."
+      ],
+      "excludedClaimsRu": [
+        "Результат отдельного исследования не переносится автоматически на все запахи, людей или готовые духи."
+      ]
+    },
+    {
+      "eventId": "n50c-jahai-language-2013",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50c-jahai-language-2013-f1",
+          "claim": "Early online date 26 December 2013; выпуск Cognition 1 February 2014.",
+          "sourceIds": [
+            "n50c-jahai-york"
+          ],
+          "locator": "Таблица Early online date; Publication status"
+        },
+        {
+          "id": "n50c-jahai-language-2013-f2",
+          "claim": "Сравнение называния запахов и цветов носителями Jahai и английского; Jahai называют запахи столь же легко, как цвета.",
+          "sourceIds": [
+            "n50c-jahai-mpi"
+          ],
+          "locator": "Аннотация"
+        },
+        {
+          "id": "n50c-jahai-language-2013-f3",
+          "claim": "Сравнивали длину, тип и согласованность ответов; английские ответы о запахах впятеро длиннее цветовых; Jahai чаще употребляли абстрактные термины.",
+          "sourceIds": [
+            "n50c-jahai-release"
+          ],
+          "locator": "Абзацы L 95–100"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Пояснения значения эксперимента для читателя и образные сопоставления — редакционная интерпретация, не дополнительные результаты исследования."
+      ],
+      "excludedClaimsRu": [
+        "Результат отдельного исследования не переносится автоматически на все запахи, людей или готовые духи."
+      ]
+    },
+    {
+      "eventId": "n50c-temporal-sniff-2024",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50c-temporal-sniff-2024-f1",
+          "claim": "Публикация 14 октября 2024;229 участников; точность прибора 18 ms; различение порядков при SOA 60 ms.",
+          "sourceIds": [
+            "n50c-temporal-paper"
+          ],
+          "locator": "Published; Abstract"
+        },
+        {
+          "id": "n50c-temporal-sniff-2024-f2",
+          "claim": "Различение улучшалось при задержке и не требовало явного знания порядка.",
+          "sourceIds": [
+            "n50c-temporal-paper"
+          ],
+          "locator": "Abstract"
+        },
+        {
+          "id": "n50c-temporal-sniff-2024-f3",
+          "claim": "Проверены intensity,pleasantness,pungency,totalamount; два порядка A/B; значение для временного кода.",
+          "sourceIds": [
+            "n50c-temporal-cas"
+          ],
+          "locator": "Абзацы L 61–64"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Пояснения значения эксперимента для читателя и образные сопоставления — редакционная интерпретация, не дополнительные результаты исследования."
+      ],
+      "excludedClaimsRu": [
+        "Результат отдельного исследования не переносится автоматически на все запахи, людей или готовые духи."
+      ]
+    },
+    {
+      "eventId": "n50c-geosmin-enzyme-2007",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50c-geosmin-enzyme-2007-f1",
+          "claim": "Nature Chemical Biology опубликована 16 сентября 2007; авторы Jiang,He,Cane; объект Streptomyces coelicolor.",
+          "sourceIds": [
+            "n50c-geosmin-paper"
+          ],
+          "locator": "Published; Authors; Abstract"
+        },
+        {
+          "id": "n50c-geosmin-enzyme-2007-f2",
+          "claim": "Два домена фермента выполняют отдельные реакции; N-domain FPP→germacradienol/germacreneD, C-domain germacradienol→geosmin; мутагенез подтверждает.",
+          "sourceIds": [
+            "n50c-geosmin-paper"
+          ],
+          "locator": "Abstract"
+        },
+        {
+          "id": "n50c-geosmin-enzyme-2007-f3",
+          "claim": "Brown сравнивает белок с гантелью и отделяет предшествующий результат о едином белке от новой работы его двух частей.",
+          "sourceIds": [
+            "n50c-geosmin-brown"
+          ],
+          "locator": "Основные абзацы L 86–88"
+        },
+        {
+          "id": "n50c-geosmin-enzyme-2007-f4",
+          "claim": "Геосмин связан с земляным запахом почвы, привкусом воды и свёклой.",
+          "sourceIds": [
+            "n50c-geosmin-bristol"
+          ],
+          "locator": "Why is geosmin...; Does it occur anywhere apart from soil?"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Пояснения значения эксперимента для читателя и образные сопоставления — редакционная интерпретация, не дополнительные результаты исследования."
+      ],
+      "excludedClaimsRu": [
+        "Результат отдельного исследования не переносится автоматически на все запахи, людей или готовые духи."
+      ]
+    },
+    {
+      "eventId": "n50c-rain-aerosol-2015",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50c-rain-aerosol-2015-f1",
+          "claim": "Статья опубликована 14 января 2015; авторы Joung и Buie, MIT.",
+          "sourceIds": [
+            "n50c-aerosol-paper"
+          ],
+          "locator": "Published; Authors and affiliations"
+        },
+        {
+          "id": "n50c-rain-aerosol-2015-f2",
+          "claim": "Капли на пористых поверхностях порождают аэрозоль, способный переносить вещества материала; зависят от поверхности и удара.",
+          "sourceIds": [
+            "n50c-aerosol-paper"
+          ],
+          "locator": "Abstract; Figure 2 caption; SupplementaryMovies 3–4"
+        },
+        {
+          "id": "n50c-rain-aerosol-2015-f3",
+          "claim": "Около 600 опытов,28 поверхностей; капиллярное поднятие для проницаемости и высота падения для скорости.",
+          "sourceIds": [
+            "n50c-aerosol-mit"
+          ],
+          "locator": "Capturing a frenzy, in microseconds L 137–144"
+        },
+        {
+          "id": "n50c-rain-aerosol-2015-f4",
+          "claim": "Лёгкий/умеренный дождь давал больше аэрозоля; связь с petrichor названа гипотезой, не измерением всего запаха.",
+          "sourceIds": [
+            "n50c-aerosol-mit"
+          ],
+          "locator": "L 144–147; From the ground up"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Пояснения значения эксперимента для читателя и образные сопоставления — редакционная интерпретация, не дополнительные результаты исследования."
+      ],
+      "excludedClaimsRu": [
+        "Результат отдельного исследования не переносится автоматически на все запахи, людей или готовые духи."
+      ]
+    },
+    {
+      "eventId": "n50c-scent-tracking-2006",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50c-scent-tracking-2006-f1",
+          "claim": "Статья онлайн 17 декабря 2006; выпуск январь 2007.",
+          "sourceIds": [
+            "n50c-tracking-paper"
+          ],
+          "locator": "Published; библиография NatureNeuroscience 10,27–29(2007)"
+        },
+        {
+          "id": "n50c-scent-tracking-2006-f2",
+          "claim": "Люди идут по запаху, обучаются; ноздри отбирают пространственно различающиеся области; сравнение помогает.",
+          "sourceIds": [
+            "n50c-tracking-paper"
+          ],
+          "locator": "Abstract"
+        },
+        {
+          "id": "n50c-scent-tracking-2006-f3",
+          "claim": "След 10 m,32 человека,2/3 успеха;4 тренировались; повязки/перчатки/уши; блокировка ноздри и nasalprism.",
+          "sourceIds": [
+            "n50c-tracking-berkeley"
+          ],
+          "locator": "Основные абзацы L 18–33"
+        },
+        {
+          "id": "n50c-scent-tracking-2006-f4",
+          "claim": "Работа не доказывает одинаковую чувствительность ко всем запахам у людей и собак.",
+          "sourceIds": [
+            "n50c-tracking-nature"
+          ],
+          "locator": "Smart scents, абзацы L 47–49"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Пояснения значения эксперимента для читателя и образные сопоставления — редакционная интерпретация, не дополнительные результаты исследования."
+      ],
+      "excludedClaimsRu": [
+        "Результат отдельного исследования не переносится автоматически на все запахи, людей или готовые духи."
+      ]
+    },
+    {
+      "eventId": "n50c-single-neurons-2024",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n50c-single-neurons-2024-f1",
+          "claim": "Nature опубликована 9 октября 2024.",
+          "sourceIds": [
+            "n50c-neurons-paper"
+          ],
+          "locator": "Published; About this article"
+        },
+        {
+          "id": "n50c-single-neurons-2024-f2",
+          "claim": "2416 нейронов,27 сеансов,17 пациентов с предоперационным мониторингом эпилепсии; разные роли PC,amygdala,hippocampus; повторение снижает ответы.",
+          "sourceIds": [
+            "n50c-neurons-paper",
+            "n50c-neurons-highlight"
+          ],
+          "locator": "Results: Odours modulate humanPCandMTLfiring; Abstract; independent highlight PDF p 1, recording/regions/repetition"
+        },
+        {
+          "id": "n50c-single-neurons-2024-f3",
+          "claim": "Электроды установлены для диагностики; наблюдались ответы на запах, изображение и написанное слово banana.",
+          "sourceIds": [
+            "n50c-neurons-bonn",
+            "n50c-neurons-highlight"
+          ],
+          "locator": "Nerve cells in the brain identify odors; Nerve cells react to the smell,image and name of the banana; highlight PDF pp 1–2, clinical setup and banana modalities"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Пояснения значения эксперимента для читателя и образные сопоставления — редакционная интерпретация, не дополнительные результаты исследования."
+      ],
+      "excludedClaimsRu": [
+        "Результат отдельного исследования не переносится автоматически на все запахи, людей или готовые духи."
+      ]
+    },
+    {
+      "eventId": "nnexta-ao2014-calling-angels",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "nnexta-ao2014-calling-angels-f1",
+          "claim": "Первая церемония Art and Olfaction прошла 25 апреля 2014 года в Goethe-Institut в Лос-Анджелесе; Calling All Angels Таньи Бохниг получил награду Artisan.",
+          "sourceIds": [
+            "nnexta-ao-archive"
+          ],
+          "locator": "The First Art and Olfaction Awards, 2014; date, venue and Artisan winners"
+        },
+        {
+          "id": "nnexta-ao2014-calling-angels-f2",
+          "claim": "Бохниг вспоминала холодное впечатление от церковного ладана и желание сделать Calling All Angels тёплым, гурманским.",
+          "sourceIds": [
+            "nnexta-bochnig-interview"
+          ],
+          "locator": "Question I’ve read that you studied aromatherapy; paragraph Another important olfactive memory"
+        },
+        {
+          "id": "nnexta-ao2014-calling-angels-f3",
+          "claim": "April Aromatics описывает аромат через ладан, смолы, дымные и бальзамические оттенки; продукт содержит ботанические экстракты и эфирные масла в органическом спирте.",
+          "sourceIds": [
+            "nnexta-calling-angels"
+          ],
+          "locator": "Calling All Angels – Eau de Parfum; description and Ingredients"
+        },
+        {
+          "id": "nnexta-ao2014-calling-angels-f4",
+          "claim": "В интервью Бохниг говорит о работе с эфирными маслами, абсолютами и настойками; она отказалась от материалов животного происхождения.",
+          "sourceIds": [
+            "nnexta-bochnig-interview"
+          ],
+          "locator": "Question April Aromatics is a natural range. Can you explain to the readers what this means exactly."
+        },
+        {
+          "id": "nnexta-ao2014-calling-angels-f5",
+          "claim": "Перед церемонией гости пробовали финалистов в фойе и общались с парфюмерами; жюри оценивало более ста заявок вслепую в несколько раундов; среди судей — Christophe Laudamiel, Luca Turin и Mandy Aftel.",
+          "sourceIds": [
+            "nnexta-ao2014-eyewitness"
+          ],
+          "locator": "paragraphs Prior to the ceremony and Ilene Hoffman; judging discussion"
+        },
+        {
+          "id": "nnexta-ao2014-calling-angels-f6",
+          "claim": "В репортаже Calling All Angels описан как ладан с гурманской ванильной стороной; одновременно победителем Artisan стал Amber Jobin с John Frum.",
+          "sourceIds": [
+            "nnexta-ao2014-eyewitness",
+            "nnexta-ao-archive"
+          ],
+          "locator": "Calling All Angels award paragraph; archive Artisan category"
+        },
+        {
+          "id": "nnexta-ao2014-calling-angels-f7",
+          "claim": "Бохниг объяснила выбор чистого минималистичного белого оформления и участие мужа, разработчика бренда и графического дизайнера, в логотипе, линейке и сайте.",
+          "sourceIds": [
+            "nnexta-bochnig-interview"
+          ],
+          "locator": "Questions Your April Aromatics range is very distinctive and You have lovely, sharp branding and packaging"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Первая премия Art and Olfaction и конкретное ботаническое прочтение ладана Таньей Бохниг."
+      ],
+      "excludedClaimsRu": [
+        "Лечебные, энергетические и астрологические заявления бренда; три года разработки, не подтверждённые отдельно."
+      ]
+    },
+    {
+      "eventId": "nnexta-ao2015-famous-deaths",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "nnexta-ao2015-famous-deaths-f1",
+          "claim": "Вторая церемония Art and Olfaction состоялась 17 апреля 2015 года в Goethe-Institut в Лос-Анджелесе; Famous Deaths получил Sadakichi Award за экспериментальное использование запаха.",
+          "sourceIds": [
+            "nnexta-ao-archive"
+          ],
+          "locator": "The Second Art and Olfaction Awards, 2015; date, venue and Sadakichi winner"
+        },
+        {
+          "id": "nnexta-ao2015-famous-deaths-f2",
+          "claim": "Официальная карточка описывает четыре холодильные камеры морга, индивидуальное пребывание, звук и запах без изображения; отдельные портреты можно испытывать по одному.",
+          "sourceIds": [
+            "nnexta-famous-finalist"
+          ],
+          "locator": "ABOUT FAMOUS DEATHS, paragraph Famous Deaths is an installation"
+        },
+        {
+          "id": "nnexta-ao2015-famous-deaths-f3",
+          "claim": "Руководители проекта — Marcel van Brakel и Frederik Duerinck; ароматы и консультирование — Caro Verbeek, Jorg Hempenius, Peter de Cupere; в команде были программисты, дизайнеры и студенты.",
+          "sourceIds": [
+            "nnexta-famous-finalist"
+          ],
+          "locator": "Lead Designers; Coding; Fragrances and Advice; Design Team; Students"
+        },
+        {
+          "id": "nnexta-ao2015-famous-deaths-f4",
+          "claim": "Проект возник в исследовательской программе Sense of Smell направления Communication and Multimedia Design университета Avans в Бреде; программа исследовала коммуникацию, навигацию, рассказывание историй и медиа.",
+          "sourceIds": [
+            "nnexta-famous-finalist",
+            "nnexta-famous-vpro"
+          ],
+          "locator": "ABOUT SENSE OF SMELL; VPRO paragraph Famous Deaths is ontstaan"
+        },
+        {
+          "id": "nnexta-ao2015-famous-deaths-f5",
+          "claim": "IDFA описывает JFK-портрет с травой, кожаными сиденьями и духами Жаклин Кеннеди; архив прямо предупреждает, что о последних моментах можно лишь предполагать.",
+          "sourceIds": [
+            "nnexta-famous-idfa"
+          ],
+          "locator": "Synopsis beginning What exactly; final paragraph The fleeting moments"
+        },
+        {
+          "id": "nnexta-ao2015-famous-deaths-f6",
+          "claim": "В 2019 году VPRO беседовала с участником команды Mark Meeuwenoord; ведущая описала слышимые звуки купания и запах мыла в версии Whitney Houston; опыт длится примерно четыре-пять минут.",
+          "sourceIds": [
+            "nnexta-famous-vpro"
+          ],
+          "locator": "Het einde van een beroemdheid; first-person account and paragraphs four-five minutes / In vijf minuten"
+        },
+        {
+          "id": "nnexta-ao2015-famous-deaths-f7",
+          "claim": "IDFA включил Famous Deaths в программу фестиваля 2015 года.",
+          "sourceIds": [
+            "nnexta-famous-idfa"
+          ],
+          "locator": "Festival history: IDFA 2015"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Экспериментальная награда Famous Deaths: запах становится последовательностью сцен, соавторство технологий и ароматов."
+      ],
+      "excludedClaimsRu": [
+        "Утверждение, что известны реальные запахи последних минут; психологические и неврологические универсалии без исследования."
+      ]
+    },
+    {
+      "eventId": "nnexta-ao2025-sfumato",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "nnexta-ao2025-sfumato-f1",
+          "claim": "29 мая 2025 года на 11-й церемонии Art and Olfaction в Cicada Club в Лос-Анджелесе Sfumato Каролы Браги получил экспериментальную награду; соавтор — изготовитель благовоний Theo Bibancos.",
+          "sourceIds": [
+            "nnexta-ao-archive"
+          ],
+          "locator": "The Eleventh Art and Olfaction Awards, 2025; date, venue and Experimental category"
+        },
+        {
+          "id": "nnexta-ao2025-sfumato-f2",
+          "claim": "Sfumato был показан на Desert X AlUla 2024; инсталляция вдохновлена Путём благовоний, Ал-Ула как остановкой караванов; дым формировал дорожки в песке.",
+          "sourceIds": [
+            "nnexta-sfumato-desertx"
+          ],
+          "locator": "Sfumato project text, paragraphs In ancient times and Karola Braga’s work"
+        },
+        {
+          "id": "nnexta-ao2025-sfumato-f3",
+          "claim": "Для работы изготовили вручную 11 000 конусов из смол и растений; их ежедневно сжигали в сооружении, напоминающем дюну, где тепло, воздушные потоки и небольшое разрежение создавали видимые дорожки дыма.",
+          "sourceIds": [
+            "nnexta-sfumato-pipa"
+          ],
+          "locator": "paragraphs Presented at Desert X and These were burned daily"
+        },
+        {
+          "id": "nnexta-ao2025-sfumato-f4",
+          "claim": "В прямом интервью ANBA Брага рассказала, что возможность проекта появилась после знакомства с куратором Marcello Dantas на премии в Лос-Анджелесе в 2023 году, где она была финалисткой с работой для Bienal do Mercosul.",
+          "sourceIds": [
+            "nnexta-sfumato-anba"
+          ],
+          "locator": "paragraphs Ela também foi finalista and Foi em uma conversa"
+        },
+        {
+          "id": "nnexta-ao2025-sfumato-f5",
+          "claim": "ANBA указывает мирру и ладан среди запахов; художница предложила куратору идею надушить пустыню.",
+          "sourceIds": [
+            "nnexta-sfumato-anba"
+          ],
+          "locator": "paragraphs Ela também foi finalista and Para a mostra"
+        },
+        {
+          "id": "nnexta-ao2025-sfumato-f6",
+          "claim": "Организатор Desert X называет проект современным прочтением обонятельной атмосферы исторического маршрута; это не доказанная реконструкция древней формулы.",
+          "sourceIds": [
+            "nnexta-sfumato-desertx"
+          ],
+          "locator": "paragraph Serving as a bridge between ancient wisdom and contemporary interpretations"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Sfumato: современное обонятельное прочтение Пути благовоний и физическая видимость запаха в пустыне."
+      ],
+      "excludedClaimsRu": [
+        "Точная реконструкция древней формулы или доказанное первое в мире произведение такого типа."
+      ]
+    },
+    {
+      "eventId": "nnexta-ff2023-flipo",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "nnexta-ff2023-flipo-f1",
+          "claim": "Церемония Fragrance Foundation состоялась 15 июня 2023 года в David H. Koch Theater в Нью-Йорке; Anne Flipo — Lifetime Achievement Perfumer; наградам исполнилось 50 лет.",
+          "sourceIds": [
+            "nnexta-ff2023-event"
+          ],
+          "locator": "June 15, 2023; opening two paragraphs"
+        },
+        {
+          "id": "nnexta-ff2023-flipo-f2",
+          "claim": "Профиль фонда отмечает рукописные формулы Флипо; в интервью она говорит о переводе слов людей в аромат и соавторстве La Vie Est Belle с Olivier Polge и Dominique Ropion.",
+          "sourceIds": [
+            "nnexta-flipo-ff-interview"
+          ],
+          "locator": "Lifetime Achievement Perfumer introduction; questions What do you personally find / Which of your perfume creations"
+        },
+        {
+          "id": "nnexta-ff2023-flipo-f3",
+          "claim": "IFF подтверждает её авторское или соавторское участие в La Vie Est Belle, Libre, Invictus, L’Interdit и Synthetic Jungle и наставничество.",
+          "sourceIds": [
+            "nnexta-flipo-iff"
+          ],
+          "locator": "release dated June 16, 2023; body paragraphs 1–5"
+        },
+        {
+          "id": "nnexta-ff2023-flipo-f4",
+          "claim": "В прямом разговоре о Synthetic Jungle Malle описал совместное изучение старых формул и Private Collection как отправную точку; Flipo выбрала ландыш для организации цветочного аккорда вокруг зелёного.",
+          "sourceIds": [
+            "nnexta-flipo-conversation",
+            "nnexta-flipo-fff-france"
+          ],
+          "locator": "FFF France paragraphs 29–34; Frédéric Malle and Anne Flipo, opening dialogue, paragraphs I had an idea / At the beginning"
+        },
+        {
+          "id": "nnexta-ff2023-flipo-f5",
+          "claim": "В разговоре Malle объясняет роль синтетики в создании естественного запаха и название аромата; Flipo говорит о короткой формуле, выделенных ингредиентах, кассисе и цветочности.",
+          "sourceIds": [
+            "nnexta-flipo-conversation"
+          ],
+          "locator": "dialogue paragraphs The paradox and Making the formula very short"
+        },
+        {
+          "id": "nnexta-ff2023-flipo-f6",
+          "claim": "Страница дома Malle описывает Synthetic Jungle как её первое произведение для коллекции, выросшее из диалога с издателем, без ограничения по времени, соединяющее природное вдохновение и точность синтетики.",
+          "sourceIds": [
+            "nnexta-flipo-malle"
+          ],
+          "locator": "ANNE FLIPO; The Perfumer & Publisher"
+        },
+        {
+          "id": "nnexta-ff2023-flipo-f7",
+          "claim": "Фонд сообщает об авторском аромате Флипо для фойе церемонии, названном в честь сада её французского дома.",
+          "sourceIds": [
+            "nnexta-ff2023-event"
+          ],
+          "locator": "paragraph In the lobby"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Награда Флипо раскрывает профессиональное соавторство через La Vie Est Belle и диалог о Synthetic Jungle."
+      ],
+      "excludedClaimsRu": [
+        "Первенство IFF в совместной работе как универсальный исторический факт; полный состав по описанию нот."
+      ]
+    },
+    {
+      "eventId": "nnexta-ff2024-cavallier",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "nnexta-ff2024-cavallier-f1",
+          "claim": "5 июня 2024 года на церемонии Fragrance Foundation в David H. Koch Theater Jacques Cavallier-Belletrud получил Lifetime Achievement Perfumer; созданный им Rose Fields ароматизировал вход.",
+          "sourceIds": [
+            "nnexta-ff2024-event"
+          ],
+          "locator": "June 5, 2024; paragraphs Over 1,000 guests and As an extra-special experience"
+        },
+        {
+          "id": "nnexta-ff2024-cavallier-f2",
+          "claim": "Louis Vuitton указывает, что Cavallier Belletrud родом из Граса, сын и внук парфюмеров; его творческое ателье Les Fontaines Parfumées находится в Грасе.",
+          "sourceIds": [
+            "nnexta-jcb-lv"
+          ],
+          "locator": "Jacques Cavallier Belletrud; Les Fontaines Parfumées"
+        },
+        {
+          "id": "nnexta-ff2024-cavallier-f3",
+          "claim": "В прямом интервью BURO он рассказал об изменившемся отношении к пачули и возможности выделять сердце материала, меняя верхние оттенки.",
+          "sourceIds": [
+            "nnexta-jcb-buro"
+          ],
+          "locator": "How do you decide what raw materials to use?, paragraphs 1–2"
+        },
+        {
+          "id": "nnexta-ff2024-cavallier-f4",
+          "claim": "В том же интервью он отдельно описал экстракцию цветочного сырья под давлением без нефтяного растворителя и использование CO2 для сухого сырья, включая ладан и кардамон; первые полученные материалы создавали проблему растворимости в спирте.",
+          "sourceIds": [
+            "nnexta-jcb-buro"
+          ],
+          "locator": "How do you intend to take perfumes into the future?, paragraphs 1–4; distinction between flowers and dry ingredients"
+        },
+        {
+          "id": "nnexta-ff2024-cavallier-f5",
+          "claim": "В интервью Thames & Hudson он сравнивает палитру ингредиентов с красками, описывает свежие, фруктовые, пряные и цветочные грани розы и поясняет, что личная любовь к розе не определяет выбор для каждой композиции.",
+          "sourceIds": [
+            "nnexta-jcb-thames"
+          ],
+          "locator": "questions Do you have one favourite scent? and Is it ever tough to make the distinction?"
+        },
+        {
+          "id": "nnexta-ff2024-cavallier-f6",
+          "claim": "В рассказе о поездках Cavallier-Belletrud связывает Le Jour Se Lève с встречей в китайских жасминовых полях и образом жасмина самбак с мандарином; это его личное воспоминание.",
+          "sourceIds": [
+            "nnexta-jcb-thames"
+          ],
+          "locator": "first question about travelling to source an ingredient, paragraph I also remember being in China"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Награда Jacques Cavallier-Belletrud и выбор характера сырья: Grasse, экстракция, палитра и Rose Fields."
+      ],
+      "excludedClaimsRu": [
+        "Первое в мире применение экстракции; обобщения о вреде растворителей; технические температуры без независимой проверки; сюжет Rihanna/Fenty."
+      ]
+    },
+    {
+      "eventId": "n65b-demachy-lifetime-achievement-2022",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n65b-demachy-lifetime-achievement-2022-f1",
+          "claim": "9 июня 2022 года в David H. Koch Theater Линкольн-центра в Нью-Йорке состоялась церемония TFF; François Demachy получил Lifetime Achievement Perfumer. Это было возвращение очной церемонии после трёх лет.",
+          "sourceIds": [
+            "n65b-demachy-awards"
+          ],
+          "locator": "Heading June9,2022; paragraphs Back in-person and Additionally"
+        },
+        {
+          "id": "n65b-demachy-lifetime-achievement-2022-f2",
+          "claim": "В интервью TFF Демаши назвал главным наследием своё участие в возрождении исключительного сырья, особенно в Грассе.",
+          "sourceIds": [
+            "n65b-demachy-interview"
+          ],
+          "locator": "Question What do you consider to be your greatest legacy?"
+        },
+        {
+          "id": "n65b-demachy-lifetime-achievement-2022-f3",
+          "claim": "Фильм Nose режиссёров Arthur de Kersauson и Clément Beauvais создавался после двух лет наблюдений; дистрибьютор описывает поездки в 14 стран и путь от роз Грасса к бергамоту Калабрии, пачули Индонезии и сандалу Шри-Ланки.",
+          "sourceIds": [
+            "n65b-demachy-film"
+          ],
+          "locator": "Production Statement and Synopsis"
+        },
+        {
+          "id": "n65b-demachy-lifetime-achievement-2022-f4",
+          "claim": "Демаши стал парфюмером-создателем Dior в 2006; профессиональная организация описывает его партнёрства с производителями и начало сотрудничества Carole Biancalana/Domaine de Manon с Dior в 2006, с резервированием урожая розы centifolia, жасмина и туберозы.",
+          "sourceIds": [
+            "n65b-demachy-growers"
+          ],
+          "locator": "François Demachy, parfumeur-créateur Dior; closing paragraph Dès2006"
+        },
+        {
+          "id": "n65b-demachy-lifetime-achievement-2022-f5",
+          "claim": "Демаши в интервью объясняет урок Jean Cavallier через равновесие смеси без выделяющегося компонента, а Henri Robert учил его особенностям материалов и их использованию.",
+          "sourceIds": [
+            "n65b-demachy-interview"
+          ],
+          "locator": "How would you describe your style as a perfumer?"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Связь поля, материала и формулы — редакционное прочтение проверенных партнёрств и профессиональных объяснений."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждается, что Демаши создал исходный Eau Sauvage1966.",
+        "Не заявляется экологический статус каждого производителя или превосходство натурального сырья."
+      ]
+    },
+    {
+      "eventId": "n65b-cresp-lifetime-achievement-2018",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n65b-cresp-lifetime-achievement-2018-f1",
+          "claim": "12 июня 2018 Оливье Кресп получил Lifetime Achievement Perfumer на церемонии TFF в Alice Tully Hall Линкольн-центра; TFF называет его представление финалом вечера.",
+          "sourceIds": [
+            "n65b-cresp-date",
+            "n65b-cresp-awards"
+          ],
+          "locator": "P&F opening paragraphs; TFF heading and For the evening’s grand finale"
+        },
+        {
+          "id": "n65b-cresp-lifetime-achievement-2018-f2",
+          "claim": "Профиль работодателя сообщает, что Кресп вырос в Грассе, пришёл в Firmenich в 1992, стал Master Perfumer в 2006; его семья занималась цветами и сырьём.",
+          "sourceIds": [
+            "n65b-cresp-profile"
+          ],
+          "locator": "About Olivier"
+        },
+        {
+          "id": "n65b-cresp-lifetime-achievement-2018-f3",
+          "claim": "В интервью Twisted Lily Кресп связывает Awake с поездками в Сицилию с отцом и маленькими крепкими порциями кофе с лимонной кожурой.",
+          "sourceIds": [
+            "n65b-cresp-coffee"
+          ],
+          "locator": "AWAKE, question So, what keeps you awake?"
+        },
+        {
+          "id": "n65b-cresp-lifetime-achievement-2018-f4",
+          "claim": "Кресп рассказывает о бразильском образце кофе, лимоне из Калабрии и Сицилии, кардамоне из Гватемалы; каждый связан с воспоминанием; узнаваемый кофейный образ он называет фигуративным подходом.",
+          "sourceIds": [
+            "n65b-cresp-coffee"
+          ],
+          "locator": "AWAKE, What inspired the specific ingredients; following paragraph figurative approach"
+        },
+        {
+          "id": "n65b-cresp-lifetime-achievement-2018-f5",
+          "claim": "В интервью On The Scent Кресп описывает переход от записей от руки с калькулятором к программам; робот составляет около 80% формулы, помощники отвешивают оставшиеся 20%. Он носит блоттеры, чтобы записывать идеи.",
+          "sourceIds": [
+            "n65b-cresp-work"
+          ],
+          "locator": "How do you work?; What kind of other inspirations do you look for?"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Робот и блоттер сопоставлены редакционно на основе описанного автором процесса."
+      ],
+      "excludedClaimsRu": [
+        "Не называется первым в мире гурманским ароматом Angel.",
+        "Не утверждается, что Awake выпущен в день награды, и не раскрывается полная формула."
+      ]
+    },
+    {
+      "eventId": "n65b-aftel-fragrant-riverhead-2014",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n65b-aftel-fragrant-riverhead-2014-f1",
+          "claim": "16 октября 2014 опубликовано электронное издание Fragrant: The Secret Life of Scent Мэнди Афтель, Riverhead, ISBN9781101614686.",
+          "sourceIds": [
+            "n65b-aftel-date"
+          ],
+          "locator": "Publication metadata Published16October2014, ImprintRiverhead, FormatEBook"
+        },
+        {
+          "id": "n65b-aftel-fragrant-riverhead-2014-f2",
+          "claim": "Книга организована вокруг корицы, мяты, ладана, серой амбры и жасмина; издатель связывает их соответственно с экзотическим, знакомым, трансцендентным, любопытством и красотой.",
+          "sourceIds": [
+            "n65b-aftel-date"
+          ],
+          "locator": "Description Cinnamon, queen of the Spice Route..."
+        },
+        {
+          "id": "n65b-aftel-fragrant-riverhead-2014-f3",
+          "claim": "В интервью Forbes рассказано, что первоначально было четыре материала; Daniel Patterson предложил добавить нечто зелёное, и появилась мята. К книге предлагался отдельный набор с корицей, мятой, настойками жасмина/амбры и кусочком ладанной смолы.",
+          "sourceIds": [
+            "n65b-aftel-forbes"
+          ],
+          "locator": "Opening paragraphs and companion kit paragraph"
+        },
+        {
+          "id": "n65b-aftel-fragrant-riverhead-2014-f4",
+          "claim": "Emily Gould в Bookforum описывает книгу через историю каждой эссенции, рецепты и использование абсолютов, экстрактов, эссенций; её рецензионный экземпляр сопровождался набором материалов, и её внимание особенно привлёк ладан.",
+          "sourceIds": [
+            "n65b-aftel-bookforum"
+          ],
+          "locator": "Paragraphs A valuable recent addition; My review copy; But I couldn’t stop sniffing"
+        },
+        {
+          "id": "n65b-aftel-fragrant-riverhead-2014-f5",
+          "claim": "PublishersWeekly отмечает рецепт Deana Sidney с жасмином, серой амброй и шоколадом, чередование исторических/научных сюжетов и рецептов.",
+          "sourceIds": [
+            "n65b-aftel-pw"
+          ],
+          "locator": "Review final paragraph History and science are interspersed..."
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Значение добавления знакомого материала и два темпа чтения — редакционное прочтение структуры и набора."
+      ],
+      "excludedClaimsRu": [
+        "Не даются рецепты для самостоятельного употребления амбры или масел.",
+        "Не повторяются медицинские обещания или универсальное превосходство натуральных духов."
+      ]
+    },
+    {
+      "eventId": "n65b-ellena-diary-us-2013",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n65b-ellena-diary-us-2013-f1",
+          "claim": "22 января 2013 Rizzoli Ex Libris опубликовало The Diary of a Nose: A Year in the Life of a Parfumeur, электронное издание 9780847840434; рецензия Vosnaki уточняет американский выпуск.",
+          "sourceIds": [
+            "n65b-ellena-date",
+            "n65b-ellena-review"
+          ],
+          "locator": "Rizzoli PublishDate/Format/ISBN; Vosnaki paragraph This is the USA edition..."
+        },
+        {
+          "id": "n65b-ellena-diary-us-2013-f2",
+          "claim": "Дневник ранее опубликован как Journal d’un parfumeur в 2011; охватывает год, начинающийся в октябре 2009, мастерскую и путешествия; переводчик английского издания Adriana Hunter.",
+          "sourceIds": [
+            "n65b-ellena-nst",
+            "n65b-ellena-original"
+          ],
+          "locator": "Paragraph Diary of a Nose, first published...; bibliographic lines; Sabine Wespieser Parution Mai2011, author statement Pendant un an"
+        },
+        {
+          "id": "n65b-ellena-diary-us-2013-f3",
+          "claim": "Рецензия NST перечисляет проблемы работы с мятой, поиск имени для ирисового Hermessence, встречу с грушей на фермерском рынке.",
+          "sourceIds": [
+            "n65b-ellena-nst",
+            "n65b-ellena-pw"
+          ],
+          "locator": "Diary of a Nose paragraph; PublishersWeekly paragraph His diary... mint, winter pears"
+        },
+        {
+          "id": "n65b-ellena-diary-us-2013-f4",
+          "claim": "Vosnaki описывает датированные записи с местами, возвращение к незавершённым вариантам и отдельную главу о построении некоторых нот из материалов на блоттерах; это не сборник готовых сокращений пути к химии.",
+          "sourceIds": [
+            "n65b-ellena-review"
+          ],
+          "locator": "Paragraphs Those who will; Indeed the booklet; Instead this diary..."
+        },
+        {
+          "id": "n65b-ellena-diary-us-2013-f5",
+          "claim": "Allure приводит объяснение Эллена: духи других компаний в его холодильнике служат историческими ориентирами качества; он также связывает будущее высокой парфюмерии с новыми формами выражения.",
+          "sourceIds": [
+            "n65b-ellena-allure"
+          ],
+          "locator": "On the future of perfumery; On the competition"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Возвращение времени незавершённости — редакционное прочтение дневниковой структуры."
+      ],
+      "excludedClaimsRu": [
+        "Не повторяется сюжет о саде Нила из существующей истории дня рождения.",
+        "Не раскрываются секретные формулы и не выдаются материалы книги за универсальные рецепты."
+      ]
+    },
+    {
+      "eventId": "n65b-chapman-perfume-australia-2019",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n65b-chapman-perfume-australia-2019-f1",
+          "claim": "1 апреля 2019 опубликовано австралийское издание Perfume: In Search of Your Signature Scent Нила Чапмана, HardieGrantLondon, твёрдый переплёт,288 страниц, ISBN9781784882433.",
+          "sourceIds": [
+            "n65b-chapman-date"
+          ],
+          "locator": "Australian page PublishDateApr1st2019; Details"
+        },
+        {
+          "id": "n65b-chapman-perfume-australia-2019-f2",
+          "claim": "Издатель заявляет более 700 ароматов, от винтажных и классики универмагов до редкостей и нишевых; главы группируют ноты вроде ванили, сандала, жасмина, розы, пачули, шоколада и группы oceanics, greenflorals, anti-perfume.",
+          "sourceIds": [
+            "n65b-chapman-date"
+          ],
+          "locator": "Book description paragraphs2–3"
+        },
+        {
+          "id": "n65b-chapman-perfume-australia-2019-f3",
+          "claim": "Рецензия SerenityNow отмечает первую главу Green, подраздел grasses/leaves/herbs, подробный указатель; автор связывает запахи с личным ношением и воспоминаниями.",
+          "sourceIds": [
+            "n65b-chapman-serenity"
+          ],
+          "locator": "Paragraph Neil’s individual reviews..."
+        },
+        {
+          "id": "n65b-chapman-perfume-australia-2019-f4",
+          "claim": "Рецензент Portia предупреждает, что списки не исчерпывающие, а представляют вкус Чапмана и его выбор любимых ароматов.",
+          "sourceIds": [
+            "n65b-chapman-posse"
+          ],
+          "locator": "Paragraph Neil sets the scene..."
+        },
+        {
+          "id": "n65b-chapman-perfume-australia-2019-f5",
+          "claim": "JohnBiebel описывает в книге небольшие рисунки флаконов, цветовую связь с главами и годы создания перед текстами; автор TheBlackNarcissus живёт в Японии, пишет и о винтаже, и о современных духах.",
+          "sourceIds": [
+            "n65b-chapman-interview"
+          ],
+          "locator": "Introduction paragraphs Chapman is an English person living in Japan; The book is structured..."
+        },
+        {
+          "id": "n65b-chapman-perfume-australia-2019-f6",
+          "claim": "В интервью TheSlowdown Чапман объясняет соединение мемуаров и критики через собственную повседневную жизнь и запахи; его блог совмещает личные истории с анализом и культурными наблюдениями.",
+          "sourceIds": [
+            "n65b-chapman-slowdown"
+          ],
+          "locator": "Introduction and question Your writing style mixes memoir and reportage..."
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Карта, личная библиотека впечатлений и отсутствие обязательного единственного победителя — редакционное прочтение структуры и авторского отбора."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждается единая мировая дата выхода.",
+        "Не представлены ноты как полный состав.",
+        "Не перенесены неподтверждённые легенды о создании ChanelNo19 из интервью."
+      ]
+    },
+    {
+      "eventId": "nnextc-nose-dive-ebook",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "nnextc-nose-dive-ebook-f1",
+          "claim": "Penguin Random House указывает для ebook Nose Dive Гарольда Макги дату публикации 20 октября 2020 года; Макги известен работами о науке еды.",
+          "sourceIds": [
+            "nnextc-mcgee-prh"
+          ],
+          "locator": "Ebook, Published on Oct 20, 2020; Book Description; Author"
+        },
+        {
+          "id": "nnextc-nose-dive-ebook-f2",
+          "claim": "Макги рассказал о первоначальном плане книги о flavour, сильном впечатлении от грауса в английском ресторане и примерно десяти годах исследования запахов.",
+          "sourceIds": [
+            "nnextc-mcgee-spoon"
+          ],
+          "locator": "23 October 2020; paragraphs McGee originally planned; I ordered grouse; Learning all that"
+        },
+        {
+          "id": "nnextc-nose-dive-ebook-f3",
+          "claim": "Издатель описывает маршрут от молекул до человека через воздух, океаны, леса и города к благовониям, духам, вину и еде; примеры включают мостовую, траву, амбру и трюфели.",
+          "sourceIds": [
+            "nnextc-mcgee-prh"
+          ],
+          "locator": "Book Description, paragraphs From Harold McGee; We will sniff; Beginning with the origins"
+        },
+        {
+          "id": "nnextc-nose-dive-ebook-f4",
+          "claim": "В интервью NPR Макги описывает дегустацию сортов в коллекции яблонь USDA и сравнивает сложный запах яблока с аккордом, чьи отдельные ноты можно замечать.",
+          "sourceIds": [
+            "nnextc-mcgee-npr"
+          ],
+          "locator": "25 October 2020 transcript; Garcia-Navarro I also want to talk about apples; McGee Well yeah; So the chance"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "От яблочных сортов к привычке различать оттенки: кухонный исследователь расширяет круг обонятельного внимания."
+      ],
+      "excludedClaimsRu": [
+        "Календарное событие — ebook PRH, а не мировой первый выход книги и не paperback 18 октября 2022 года. Сцена с граусом дана как авторское воспоминание. Издательские превосходные оценки исключены. Три прочитанных содержательных источника; общий RU+EN пересказ каждого менее 200 слов, прямых цитат нет."
+      ]
+    },
+    {
+      "eventId": "nnextc-perfume-lover-publication",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "nnextc-perfume-lover-publication-f1",
+          "claim": "15 марта 2012 года Больё сообщила, что The Perfume Lover уже доступна в книжных магазинах Великобритании; аромат тогда ещё ожидался. Collins metadata фиксирует ebook 15 March 2012, EAN 9780007411832.",
+          "sourceIds": [
+            "nnextc-beaulieu-launch",
+            "nnextc-beaulieu-collins"
+          ],
+          "locator": "Grain de musc: jeudi 15 mars 2012, The Perfumer Lover launches today, first paragraph and fragrance availability; Bookshop: Book Details / Publish Date / Type / EAN"
+        },
+        {
+          "id": "nnextc-perfume-lover-publication-f2",
+          "claim": "The Perfume Lover соединяет личные воспоминания, историю парфюмерии и наблюдение за процессом создания аромата.",
+          "sourceIds": [
+            "nnextc-beaulieu-collins"
+          ],
+          "locator": "Description, paragraphs One day she tells and As Denyse and the perfumer"
+        },
+        {
+          "id": "nnextc-perfume-lover-publication-f3",
+          "claim": "Больё вспоминала, что разговор с Дюшофуром при подготовке курса London College of Fashion перешёл к Севилье: апельсиновому цвету, ладану, восковым свечам, Habanita. Обсуждение с редактором дало книге сюжетную ось, Дюшофур согласился на открытый дневник разработки и вовлёк автора в творческий процесс.",
+          "sourceIds": [
+            "nnextc-beaulieu-parfumista"
+          ],
+          "locator": "17 mai 2015 interview, questions 3 and 4"
+        },
+        {
+          "id": "nnextc-perfume-lover-publication-f4",
+          "claim": "Séville à l’Aube создал Бертран Дюшофур в сотрудничестве с Больё, издателем аромата стал L’Artisan Parfumeur.",
+          "sourceIds": [
+            "nnextc-beaulieu-basenotes",
+            "nnextc-beaulieu-parfumista"
+          ],
+          "locator": "Basenotes opening paragraph; Parfumista question 4, Je considère donc"
+        },
+        {
+          "id": "nnextc-perfume-lover-publication-f5",
+          "claim": "Дюшофур говорил о сложности сочетания апельсинового цвета и ладана в пригодной для ношения композиции; Больё училась видеть потенциал незаконченных проб. В конце потребовалось усилить диффузию перебалансировкой; парфюмер отдельно описал пользу выдержки смеси 15 дней или 3 недели.",
+          "sourceIds": [
+            "nnextc-beaulieu-basenotes"
+          ],
+          "locator": "Questions In what way were you stretched; Denyse What were the challenges; How do you know when to stop; Time also plays an important part"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Публикация книги открывает читателю промежуток между личным воспоминанием и парфюмерной работой Дюшофура."
+      ],
+      "excludedClaimsRu": [
+        "Авторский пост подтверждает состоявшуюся доступность книги 15 марта, а не только предварительный анонс. Месяц/день выхода самого аромата не назначаются: мартовский пост даёт прогноз late July, позднейшая боковая панель September. Больё не приписывается самостоятельное авторство формулы. Память о Севилье представлена как её рассказ. Пересказ Basenotes RU+EN около 190 слов; Parfumista менее 200, остальные значительно меньше. Прямых цитат нет."
+      ]
+    },
+    {
+      "eventId": "n6r-anicka-yi-tate-opening-2021",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n6r-anicka-yi-tate-opening-2021-f1",
+          "claim": "Показ начался 12 октября 2021 года в Tate Modern; состоявшийся период подтверждает библиотечный архив музея.",
+          "sourceIds": [
+            "n6r-tate-library",
+            "n6r-yi-production"
+          ],
+          "locator": "Tate Modern2020– / Anicka Yi, Exhibition held12Oct2021; report Exhibition Dates"
+        },
+        {
+          "id": "n6r-anicka-yi-tate-opening-2021-f2",
+          "claim": "Аэробы соотносятся с морскими организмами и грибами; Турбинный зал прежде вмещал оборудование электростанции.",
+          "sourceIds": [
+            "n6r-yi-studio"
+          ],
+          "locator": "Main description, paragraphs1–2"
+        },
+        {
+          "id": "n6r-anicka-yi-tate-opening-2021-f3",
+          "claim": "Еженедельные scentscapes: докембрийские морские образы, средневековые защитные пряности, уголь и озон20века; художественная среда.",
+          "sourceIds": [
+            "n6r-yi-release"
+          ],
+          "locator": "Main text, Integral to Yi’s commission / scentscapes"
+        },
+        {
+          "id": "n6r-anicka-yi-tate-opening-2021-f4",
+          "claim": "Airstage описывает artificial life simulation, radio spatial mapping и thermal imaging для обнаружения посетителей.",
+          "sourceIds": [
+            "n6r-yi-airstage"
+          ],
+          "locator": "Concept; Technology"
+        },
+        {
+          "id": "n6r-anicka-yi-tate-opening-2021-f5",
+          "claim": "Материалы включают гелий, перезаряжаемые батареи, ароматические масла; scent consultation Pamela Dalton, scents Monell и дополнительные IFF.",
+          "sourceIds": [
+            "n6r-yi-production"
+          ],
+          "locator": "Waste Report / Special waste / Consumable; Production Credits"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Размышления о связи описания и личного восприятия — редакционный анализ; реакции конкретных посетителей не выдумываются."
+      ],
+      "excludedClaimsRu": [
+        "12 октября — публичный показ, не дата интервью 8 октября. Не утверждать точное восстановление древнего воздуха, буквальное обоняние роботов или отсутствие материальных затрат. Основная страница Tate вернула 403; прочитаны Tate Library и совместный производственный отчёт."
+      ]
+    },
+    {
+      "eventId": "n6r-ulm-public-smell-tours-2022",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n6r-ulm-public-smell-tours-2022-f1",
+          "claim": "Публичные туры начались 10 апреля 2022 года; презентация 5 апреля выделена отдельно в ретроспективном отчёте.",
+          "sourceIds": [
+            "n6r-ulm-report",
+            "n6r-ulm-press"
+          ],
+          "locator": "D7.3 PDFp11 Date/ToursStart; museumPDFp2 FromApril10"
+        },
+        {
+          "id": "n6r-ulm-public-smell-tours-2022-f2",
+          "claim": "Музей, Odeuropa и IFF создали тур с садами, парфюмерным шаром, дымом и накрытым столом.",
+          "sourceIds": [
+            "n6r-ulm-press"
+          ],
+          "locator": "PDFp1,new guided tour concept"
+        },
+        {
+          "id": "n6r-ulm-public-smell-tours-2022-f3",
+          "claim": "Портрет Хелены Шермар Андреаса Шуха, около 1628 года: белые кожаные перчатки, красные вышитые краги; рецепт Рушелли, неточные пропорции и решения парфюмеров; второй запах дублёной кожи.",
+          "sourceIds": [
+            "n6r-ulm-seeing-smell"
+          ],
+          "locator": "PDFpp20–22, paragraphs42–44, especially43"
+        },
+        {
+          "id": "n6r-ulm-public-smell-tours-2022-f4",
+          "claim": "Эрих описывает обсуждения коллекции через Zoom, выбор произведений, совместное задание и работу с IFF.",
+          "sourceIds": [
+            "n6r-ulm-ahr"
+          ],
+          "locator": "Transcript SofiaEhrich10:00–12:25"
+        },
+        {
+          "id": "n6r-ulm-public-smell-tours-2022-f5",
+          "claim": "Применяли веера, блоттеры и Point-of-Scent; экскурсоводы выбирали способ подачи под группу.",
+          "sourceIds": [
+            "n6r-ulm-report"
+          ],
+          "locator": "PDFp12,4.1.3OlfactoryTourDesign"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Размышления о связи описания и личного восприятия — редакционный анализ; реакции конкретных посетителей не выдумываются."
+      ],
+      "excludedClaimsRu": [
+        "Выбрано 10 апреля — начало публичных туров; презентация 5 апреля и пресс-встреча 6 апреля являются отдельными событиями. Страницы Odeuropa не открылись; использованы прочитанные PDF и интервью. Датировка портрета около 1628 года приблизительна. Реконструкция не объявляется личной формулой Хелены."
+      ]
+    },
+    {
+      "eventId": "n6r-proust-birth-1871",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n6r-proust-birth-1871-f1",
+          "claim": "Пруст родился 10 июля 1871 года в Париже.",
+          "sourceIds": [
+            "n6r-proust-bnf"
+          ],
+          "locator": "Notice de personne / Naissance1871-07-10,Paris16e"
+        },
+        {
+          "id": "n6r-proust-birth-1871-f2",
+          "claim": "В Комбре описаны комнаты тёти Леонии: сезонные плоды, хлеб, огонь; запахи уподоблены пирогу, шкаф, комод и обои — сухой корочке; покрывало имеет смолисто-фруктовый характер.",
+          "sourceIds": [
+            "n6r-proust-swann"
+          ],
+          "locator": "COMBRAY,paragraphs beginningMy aunt’s life/They were rooms/The air of those rooms; HTMLlines356–358"
+        },
+        {
+          "id": "n6r-proust-birth-1871-f3",
+          "claim": "В цветущем боярышнике рассказчик выделяет горьковато-сладкий миндальный запах.",
+          "sourceIds": [
+            "n6r-proust-swann"
+          ],
+          "locator": "COMBRAY,Month of Mary/church,paragraphWhen,beforeturningtoleavethechurch;HTMLline841"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Размышления о связи описания и личного восприятия — редакционный анализ; реакции конкретных посетителей не выдумываются."
+      ],
+      "excludedClaimsRu": [
+        "Роман рассматривается как художественная работа со словами и ощущениями, а не документ личной жизни или химического состава. Английский перевод 1922 года находится в общественном достоянии; прямых цитат в рассказе нет. Не утверждается научное доказательство эффекта Пруста."
+      ]
     }
   ]
 }

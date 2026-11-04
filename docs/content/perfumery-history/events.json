@@ -3966,6 +3966,915 @@
       "type": "primary",
       "access": "opened",
       "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-tinguely",
+      "publisher": "Museum Tinguely",
+      "type": "museum",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.tinguely.ch/fr/expositions/expositions/2015/belle-haleine.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-pompidou",
+      "publisher": "Centre Pompidou",
+      "type": "museum",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.centrepompidou.fr/en/ressources/oeuvre/cXrkbz",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-tolaas",
+      "publisher": "Kochi-Muziris Biennale / Google Arts & Culture",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://artsandculture.google.com/asset/fear-sissel-tolaas/RAGRQ9pKL6qSLw?hl=en",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-or7d4-paper",
+      "publisher": "Nature",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/nature06162?error=cookies_not_supported",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-or7d4-rockefeller",
+      "publisher": "The Rockefeller University",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.rockefeller.edu/news/2580-gene-determines-whether-male-body-odor-smells-pleasant/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-cultural-paper",
+      "publisher": "Current Biology / PubMed",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35381183/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-cultural-ki",
+      "publisher": "Karolinska Institutet",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://news.ki.se/people-around-the-world-like-the-same-kinds-of-smell",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-dream-paper",
+      "publisher": "Science / author copy at Stanford University",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://cs.stanford.edu/people/marinka/papers/olfaction-science17.pdf",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-dream-release",
+      "publisher": "The Rockefeller University / ScienceDaily",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.sciencedaily.com/releases/2017/02/170221095654.htm",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-rose-paper",
+      "publisher": "Nature Genetics",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/s41588-018-0110-3.pdf",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-rose-inrae",
+      "publisher": "INRAE",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.inrae.fr/en/news/rose-genome",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-enose-date",
+      "publisher": "Nature issue archive",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/nature/volumes/299/issues/5881",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-enose-author",
+      "publisher": "Krishna Persaud / University of Manchester",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pure.manchester.ac.uk/ws/portalfiles/portal/51606009/Sensors_Review_Towards_Bionic_Noses.pdf",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-fingerprint-paper",
+      "publisher": "PNAS / PubMed",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/26100865/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-fingerprint-release",
+      "publisher": "Weizmann Institute / EurekAlert",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.eurekalert.org/news-releases/893597",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-white-release",
+      "publisher": "Weizmann Institute",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://weizmann-usa.org/media/1829/the-smell-of-white.pdf",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-white-critique",
+      "publisher": "Frontiers in Psychology",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2023.1244480/full",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-metamers-paper",
+      "publisher": "Nature",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/s41586-020-2891-7?error=cookies_not_supported",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-metamers-release",
+      "publisher": "Weizmann Institute / Analytik NEWS",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://analytik.news/en/press/2020/230.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-jahai-york",
+      "publisher": "University of York Research Database",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pure.york.ac.uk/portal/en/publications/odors-are-expressible-in-language-as-long-as-you-speak-the-right-/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-jahai-mpi",
+      "publisher": "Max Planck Institute for Psycholinguistics",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.mpi.nl/publications/item1752755/odors-are-expressible-language-long-you-speak-right-language",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-jahai-release",
+      "publisher": "Radboud University / Asian Scientist",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.asianscientist.com/2014/01/in-the-lab/odors-expressible-malay-hunter-gatherer-language-2014/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-temporal-paper",
+      "publisher": "Nature Human Behaviour",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/s41562-024-01984-8?error=cookies_not_supported&code=1",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-temporal-cas",
+      "publisher": "Chinese Academy of Sciences",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://english.cas.cn/newsroom/news--archives/2024/research-news/202409/t20240912_1129979.shtml",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-geosmin-paper",
+      "publisher": "Nature Chemical Biology",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/nchembio.2007.29?error=cookies_not_supported",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-geosmin-brown",
+      "publisher": "Brown University",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://archive2.news.brown.edu/2007-2015/articles/2007/09/origin-soil-scented-geosmin.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-geosmin-bristol",
+      "publisher": "Simon Cotton / University of Bristol Molecule of the Month",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.chm.bris.ac.uk/motm/geosmin/geosminc.htm",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-aerosol-paper",
+      "publisher": "Nature Communications",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/ncomms7083?error=cookies_not_supported&code=1",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-aerosol-mit",
+      "publisher": "Massachusetts Institute of Technology",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://news.mit.edu/2015/rainfall-can-release-aerosols-0114",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-tracking-paper",
+      "publisher": "Nature Neuroscience",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/nn1819?error=cookies_not_supported",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-tracking-berkeley",
+      "publisher": "University of California Berkeley / ScienceDaily",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.sciencedaily.com/releases/2006/12/061219095409.htm",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-tracking-nature",
+      "publisher": "Nature News",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/news/2006/061211/full/news061211-18.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-neurons-paper",
+      "publisher": "Nature",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/s41586-024-08016-5?error=cookies_not_supported&code=2",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-neurons-bonn",
+      "publisher": "University of Bonn",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.uni-bonn.de/en/news/196-2024",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-enose-ieee",
+      "publisher": "IEEE Spectrum",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "url": "https://spectrum.ieee.org/electronic-noses-sniff-success",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-white-paper",
+      "publisher": "PNAS / original paper copy",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.bettercodger.com/images/OlfactoryConvergenceOfMultiComponentMixtures_2012.pdf",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-rose-roadmap",
+      "publisher": "Horticulture Research",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/s41438-019-0156-0.pdf",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-dream-highlight",
+      "publisher": "Nature",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/543009c",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n50c-neurons-highlight",
+      "publisher": "Signal Transduction and Targeted Therapy",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/s41392-024-02073-y.pdf",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-ao-archive",
+      "publisher": "Institute for Art and Olfaction",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://artandolfaction.com/awards/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-calling-angels",
+      "publisher": "April Aromatics",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://aprilaromatics.com/produkt/calling-all-angels-alk-en/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-bochnig-interview",
+      "publisher": "Megan In Sainte Maxime — interview with Tanja Bochnig",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://meganinstmaxime.wordpress.com/2016/08/27/fragrant-femmes-interview-with-tanja-bochnig-from-april-aromatics/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-ao2014-eyewitness",
+      "publisher": "Basenotes — deadidol, eyewitness report",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://basenotes.com/articles/the-first-annual-art-and-olfaction-awards-an-overview.2023/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-famous-finalist",
+      "publisher": "Art and Olfaction Awards — official finalist profile",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://artandolfactionawards.wordpress.com/2015/04/11/finalist-famous-deaths/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-famous-idfa",
+      "publisher": "IDFA — festival archive",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.idfa.nl/en/film/d5dd55bd-b757-463a-a191-0c2254576609/famous-deaths/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-famous-vpro",
+      "publisher": "VPRO Medialab — interview and participant account",
+      "type": "primary",
+      "language": "nl",
+      "access": "opened",
+      "url": "https://www.vpro.nl/vpro-medialab/artikelen/famous-deaths-veldwerk-7",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-sfumato-desertx",
+      "publisher": "Desert X — artist project page",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://desertx.org/dx/dx24-alula/karola-braga",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-sfumato-pipa",
+      "publisher": "PIPA Prize",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.pipaprize.com/2025/08/olfactory-piece-sfumato-by-karola-braga-wins-at-the-art-and-olfaction-awards/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-sfumato-anba",
+      "publisher": "ANBA — direct interview with Karola Braga",
+      "type": "primary",
+      "language": "pt",
+      "access": "opened",
+      "url": "https://anba.com.br/arte-na-arabia-saudita-rende-premio-a-brasileira/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-ff2023-event",
+      "publisher": "The Fragrance Foundation",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://fragrance.org/event/the-2023-fragrance-foundation-awards/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-flipo-ff-interview",
+      "publisher": "The Fragrance Foundation — Anne Flipo interview",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://fragrance.org/honoree_year/2023/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-flipo-iff",
+      "publisher": "IFF",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.iff.com/media/news/iff-master-perfumer-anne-flipo-receives-fragrance-foundation-lifetime-achievement-award/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-flipo-malle",
+      "publisher": "Éditions de Parfums Frédéric Malle",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.fredericmalle.com/perfumer/anne-flipo",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-flipo-conversation",
+      "publisher": "The Perfume Society — direct launch conversation transcript",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://perfumesociety.org/synthetic-jungle-frederic-malle-in-conversation-with-anne-flipo/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-flipo-fff-france",
+      "publisher": "The Fragrance Foundation France — statements by Malle and Flipo",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.fragrancefoundation.fr/2021/09/anne-flipo-signe-son-premier-parfum-pour-frederic-malle/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-ff2024-event",
+      "publisher": "The Fragrance Foundation",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://fragrance.org/event/the-2024-fragrance-foundation-awards/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-jcb-lv",
+      "publisher": "Louis Vuitton",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://uk.louisvuitton.com/eng-gb/stories/world-of-fragrances",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-jcb-buro",
+      "publisher": "BURO — direct interview with Jacques Cavallier Belletrud",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.buro247.my/beauty/buro-loves/louis-vuitton-master-perfumer-jacques-cavallier-be.html",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnexta-jcb-thames",
+      "publisher": "Thames & Hudson — direct interview by Curtis Garner",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.thamesandhudson.com/blogs/all-news-features/inside-the-world-of-jacques-cavallier-belletrud-louis-vuitton-s-master-perfumer",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-demachy-awards",
+      "url": "https://fragrance.org/event/the-2022-fragrance-foundation-awards/",
+      "publisher": "The Fragrance Foundation",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-demachy-interview",
+      "url": "https://fragrance.org/honoree/lifetime-achievement-perfumer-6/",
+      "publisher": "The Fragrance Foundation",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-demachy-growers",
+      "url": "https://www.fragrancefoundation.fr/2021/03/nose-un-documentaire-sur-les-pas-de-francois-demachy-dior/",
+      "publisher": "The Fragrance Foundation France",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-demachy-film",
+      "url": "https://www.umw-originals.com/nose",
+      "publisher": "Under The Milky Way Originals",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-cresp-awards",
+      "url": "https://fragrance.org/event/the-2018-fragrance-foundation-awards/",
+      "publisher": "The Fragrance Foundation",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-cresp-date",
+      "url": "https://www.perfumerflavorist.com/fragrance/fine-fragrance/media-gallery/21865557/slideshow-the-fragrance-foundation-announces-2018-award-winners",
+      "publisher": "Perfumer & Flavorist",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-cresp-profile",
+      "url": "https://www.dsm-firmenich.com/en/businesses/perfumery-beauty/perfumery/fine-fragrance/people/olivier-cresp.html",
+      "publisher": "dsm-firmenich",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-cresp-coffee",
+      "url": "https://twistedlily.com/pages/perfumer-spotlight-olivier-cresp",
+      "publisher": "Twisted Lily — interview with Olivier Cresp",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-cresp-work",
+      "url": "https://www.onthescentmedia.com/news/a-day-in-the-perfumers-life-olivier-cresp",
+      "publisher": "On The Scent — interview with Olivier Cresp",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-aftel-date",
+      "url": "https://www.penguin.com.au/books/fragrant-9781101614686",
+      "publisher": "Penguin Books Australia / Riverhead",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-aftel-forbes",
+      "url": "https://www.forbes.com/sites/sarahwu/2014/11/04/how-to-buy-your-first-natural-perfume/",
+      "publisher": "Forbes — Sarah Y. Wu interview with Mandy Aftel",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-aftel-bookforum",
+      "url": "https://www.bookforum.com/print/2103/a-history-of-perfume-doubles-as-a-how-to-13638",
+      "publisher": "Bookforum — Emily Gould",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-aftel-pw",
+      "url": "https://www.publishersweekly.com/9781594631412",
+      "publisher": "Publishers Weekly",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-ellena-date",
+      "url": "https://www.rizzoliusa.com/book/9780847840434/",
+      "publisher": "Rizzoli New York / Rizzoli Ex Libris",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-ellena-nst",
+      "url": "https://nstperfume.com/2013/06/18/the-diary-of-a-nose-and-perfume-the-alchemy-of-scent-by-jean-claude-ellena-perfume-books-review/",
+      "publisher": "Now Smell This — Aleta",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-ellena-review",
+      "url": "https://beta.fragrantica.com/news/The-Diary-of-a-Nose-A-Year-in-the-life-of-a-Parfumeur-by-Jean-Claude-Ellena-3933.html",
+      "publisher": "Fragrantica — Elena Vosnaki",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-ellena-allure",
+      "url": "https://www.allure.com/story/fragrance-notes-jean-claude-ellena-book",
+      "publisher": "Allure",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-chapman-date",
+      "url": "https://publishing.hardiegrant.com/en-au/books/perfume-by-neil-chapman/9781784882433",
+      "publisher": "Hardie Grant Publishing",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-chapman-serenity",
+      "url": "https://scentsandsensibilities.co/2019/04/05/fragrance-friday-neils-book-perfume/",
+      "publisher": "Serenity Now Scents and Sensibilities",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-chapman-posse",
+      "url": "https://perfumeposse.com/2019/04/04/neil-chapman-perfume-book-review/",
+      "publisher": "Perfume Posse — Portia",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-chapman-interview",
+      "url": "https://www.fragrantica.com/news/Author-Neil-Chapman-and-Perfume-In-Search-of-Your-Signature-Scent-13784.html",
+      "publisher": "Fragrantica — John Biebel interview with Neil Chapman",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-chapman-slowdown",
+      "url": "https://www.slowdown.media/article/black-narcissus",
+      "publisher": "The Slowdown — interview with Neil Chapman",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-ellena-original",
+      "url": "https://www.swediteur.com/titre/journal-dun-parfumeur/",
+      "publisher": "Sabine Wespieser éditeur",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n65b-ellena-pw",
+      "url": "https://www.publishersweekly.com/9780847840427",
+      "publisher": "Publishers Weekly",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnextc-mcgee-prh",
+      "publisher": "Penguin Random House",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.penguinrandomhouse.com/books/302507/nose-dive-by-harold-mcgee/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnextc-mcgee-spoon",
+      "publisher": "The Spoon; Michael Wolf interviews Harold McGee",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://thespoon.tech/talking-with-harold-mcgee-about-smells-culinary-gastronomy-and-the-future-of-food/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnextc-mcgee-npr",
+      "publisher": "NPR / North Country Public Radio; Lulu Garcia-Navarro interviews Harold McGee",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.northcountrypublicradio.org/news/npr/927564392/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnextc-beaulieu-launch",
+      "publisher": "Denyse Beaulieu / Grain de musc",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://graindemusc.blogspot.com/2012/03/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnextc-beaulieu-collins",
+      "publisher": "Collins metadata and description / Bookshop UK",
+      "type": "publisher_metadata",
+      "language": "en",
+      "access": "opened",
+      "url": "https://uk.bookshop.org/p/books/the-perfume-lover-a-personal-story-of-scent-denyse-beaulieu/566a842848dc4369",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnextc-beaulieu-basenotes",
+      "publisher": "Basenotes; Lila Das Gupta interviews Bertrand Duchaufour and Denyse Beaulieu",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://basenotes.com/articles/an-interview-with-bertrand-duchaufour-denyse-beaulieu-on-the-release-of-seville-a-laube.1338/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "nnextc-beaulieu-parfumista",
+      "publisher": "Parfumista; interview with Denyse Beaulieu",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://parfumista.net/2015/05/interview-denyse-beaulieu/",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n6r-tate-library",
+      "publisher": "Tate Library",
+      "url": "https://tate.libguides.com/c.php?g=723193&p=5379105",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n6r-yi-studio",
+      "publisher": "Anicka Yi Studio",
+      "url": "https://www.anickayistudio.biz/exhibitions/in-love-with-the-world",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n6r-yi-release",
+      "publisher": "Tate / WebWire",
+      "url": "https://www.webwire.com/ViewPressRel.asp?aId=280228",
+      "language": "en",
+      "type": "primary_release",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n6r-yi-airstage",
+      "publisher": "Airstage",
+      "url": "https://airstage.de/project/tate-museum-london/",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n6r-yi-production",
+      "publisher": "Anicka Yi Studio / Tate / Artists Commit",
+      "url": "https://www.artistscommit.com/reports/anicka-yi-tate",
+      "language": "en",
+      "type": "participant_report",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n6r-ulm-press",
+      "publisher": "Museum Ulm",
+      "url": "https://museumulm.de/wp-content/uploads/2022/03/PRESS-RELEASE-NEW-GUIDED-TOUR-CONCEPT-FOLLOW-YOUR-NOSE-MUSEUM-ULM-4.pdf",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n6r-ulm-report",
+      "publisher": "Odeuropa / KNAW",
+      "url": "https://odeuropa.eu/wp-content/uploads/2023/08/Draft_D7_3_Impact_Activities_Report_Y2.pdf",
+      "language": "en",
+      "type": "primary_project_report",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n6r-ulm-seeing-smell",
+      "publisher": "Lizzie Marx et al. / Arts et Savoirs / UCL",
+      "url": "https://discovery.ucl.ac.uk/id/eprint/10189090/1/aes-6834.pdf",
+      "language": "en",
+      "type": "scientific_publication",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n6r-ulm-ahr",
+      "publisher": "Sofia Ehrich / American Historical Association",
+      "url": "https://www.historians.org/podcast/follow-your-nose/",
+      "language": "en",
+      "type": "participant_interview",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n6r-proust-bnf",
+      "publisher": "Bibliothèque nationale de France",
+      "url": "https://catalogue.bnf.fr/ark:/12148/cb119207126",
+      "language": "fr",
+      "type": "institutional_reference",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n6r-proust-swann",
+      "publisher": "Marcel Proust / C.K. Scott Moncrieff / Project Gutenberg",
+      "url": "https://www.gutenberg.org/files/7178/7178-h/7178-h.htm",
+      "language": "en",
+      "type": "primary_public_domain",
+      "access": "opened",
+      "checkedOn": "2026-11-04"
     }
   ],
   "events": [
@@ -7151,6 +8060,709 @@
       },
       "storyAngleRu": "Партитура из запахов",
       "researchNotesRu": "15 июля — открытие и премьера,16 июля — начало регулярного режима. Участники дискуссии названы как заявленные в программе. Не заявлять всемирное первенство, универсальную реакцию или точное содержание воспоминаний."
+    },
+    {
+      "id": "n50c-tinguely-2015",
+      "eventDate": "2015-02-11",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Когда в музей входит запах",
+      "status": "verified",
+      "evidenceLevel": "primary_source",
+      "eventGroupId": "n50c-tinguely-2015",
+      "sourceIds": [
+        "n50c-tinguely",
+        "n50c-pompidou",
+        "n50c-tolaas"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50c-tinguely",
+        "locator": "Заголовок и даты; заключительная строка L 213",
+        "summaryRu": "Выставка Belle Haleine проходила 11 февраля —17 мая 2015 в Музее Тэнгли; куратор Annja Müller-Alsbach."
+      },
+      "storyAngleRu": "Когда в музей входит запах",
+      "researchNotesRu": "Название выставки в источнике: Belle Haleine – L’odeur de l’art. Пример Кочи явно отделён от инсталляции в Базеле."
+    },
+    {
+      "id": "n50c-or7d4-2007",
+      "eventDate": "2007-09-16",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "scientific_publication",
+      "titleRu": "Один запах, разные впечатления",
+      "status": "verified",
+      "evidenceLevel": "primary_source",
+      "eventGroupId": "n50c-or7d4-2007",
+      "sourceIds": [
+        "n50c-or7d4-paper",
+        "n50c-or7d4-rockefeller"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50c-or7d4-paper",
+        "locator": "Published и About this article",
+        "summaryRu": "Онлайн-публикация Nature:16 сентября 2007; журнальный выпуск 27 сентября."
+      },
+      "storyAngleRu": "Один запах, разные впечатления",
+      "researchNotesRu": ""
+    },
+    {
+      "id": "n50c-cultural-pleasantness-2022",
+      "eventDate": "2022-04-04",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "scientific_publication",
+      "titleRu": "Ваниль между общим и личным",
+      "status": "verified",
+      "evidenceLevel": "primary_source",
+      "eventGroupId": "n50c-cultural-pleasantness-2022",
+      "sourceIds": [
+        "n50c-cultural-paper",
+        "n50c-cultural-ki"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50c-cultural-paper",
+        "locator": "Epub 2022 Apr 4; Abstract",
+        "summaryRu": "Онлайн-публикация 4 апреля 2022;225 участников из 9 незападных культур."
+      },
+      "storyAngleRu": "Ваниль между общим и личным",
+      "researchNotesRu": "В пресс-релизе KI 235, в аннотации статьи 225: в рассказе явная атрибуция числа научной аннотации. Статья об отдельных молекулах, не готовых духах."
+    },
+    {
+      "id": "n50c-dream-2017",
+      "eventDate": "2017-02-24",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "scientific_publication",
+      "titleRu": "Молекула перед первой пробой",
+      "status": "verified",
+      "evidenceLevel": "primary_source",
+      "eventGroupId": "n50c-dream-2017",
+      "sourceIds": [
+        "n50c-dream-paper",
+        "n50c-dream-highlight",
+        "n50c-dream-release"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50c-dream-paper",
+        "locator": "PDF footer:24 February 2017 наp 1–7; p 7 Published online 20 February 2017",
+        "summaryRu": "Журнальный выпуск Science 24 февраля 2017; онлайн-публикация 20 февраля."
+      },
+      "storyAngleRu": "Молекула перед первой пробой",
+      "researchNotesRu": "В пересказе Rockefeller ошибочная дата 19 February; для даты использована прочитанная строка самого PDF 20 February 2017. Сфера: monomolecules, не автоматическое создание парфюма."
+    },
+    {
+      "id": "n50c-rose-genome-2018",
+      "eventDate": "2018-04-30",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "scientific_publication",
+      "titleRu": "Роза, прочитанная по буквам ДНК",
+      "status": "verified",
+      "evidenceLevel": "primary_source",
+      "eventGroupId": "n50c-rose-genome-2018",
+      "sourceIds": [
+        "n50c-rose-inrae",
+        "n50c-rose-paper",
+        "n50c-rose-roadmap"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50c-rose-inrae",
+        "locator": "Вводный абзац; A high-quality reference genome",
+        "summaryRu": "Исследование Raymond et al опубликовано 30 апреля 2018; объект Rosa chinensis Old Blush."
+      },
+      "storyAngleRu": "Роза, прочитанная по буквам ДНК",
+      "researchNotesRu": "Дата относится к этой статье Raymond et al, не к другой публикации о геноме розы в Nature Plants 11. 06. 2018. Не заявляется универсальная формула розового запаха."
+    },
+    {
+      "id": "n50c-electronic-nose-1982",
+      "eventDate": "1982-09-23",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "scientific_publication",
+      "titleRu": "Три датчика вместо одной отгадки",
+      "status": "verified",
+      "evidenceLevel": "primary_source",
+      "eventGroupId": "n50c-electronic-nose-1982",
+      "sourceIds": [
+        "n50c-enose-date",
+        "n50c-enose-author",
+        "n50c-enose-ieee"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50c-enose-date",
+        "locator": "Letter: Analysis of discrimination mechanisms..., строки 331–336",
+        "summaryRu": "Статья Persaud/Dodd включена в Nature 299 issue 5881 от 23 сентября 1982."
+      },
+      "storyAngleRu": "Три датчика вместо одной отгадки",
+      "researchNotesRu": "Страница оригинальной статьи была недоступна; точная дата прочитана в официальном содержании выпуска Nature. Устройство описано по прочитанному обзору самого Персауда. Всемирное первенство и дата изобретения термина не утверждаются."
+    },
+    {
+      "id": "n50c-fingerprint-2015",
+      "eventDate": "2015-06-22",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "scientific_publication",
+      "titleRu": "Отпечаток из сходств и различий",
+      "status": "verified",
+      "evidenceLevel": "primary_source",
+      "eventGroupId": "n50c-fingerprint-2015",
+      "sourceIds": [
+        "n50c-fingerprint-paper",
+        "n50c-fingerprint-release"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50c-fingerprint-paper",
+        "locator": "Epub 2015 Jun 22, библиографическая строка",
+        "summaryRu": "Epub 22 июня 2015, журнальный выпуск 14 июля."
+      },
+      "storyAngleRu": "Отпечаток из сходств и различий",
+      "researchNotesRu": "Речь о fingerprint восприятия, не химическом запахе тела. Миллиарды идентификаций — расчётная экстраполяция; клиническое использование не объявлено состоявшимся."
+    },
+    {
+      "id": "n50c-white-2012",
+      "eventDate": "2012-11-19",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "scientific_publication",
+      "titleRu": "Белый запах и его границы",
+      "status": "verified",
+      "evidenceLevel": "primary_source",
+      "eventGroupId": "n50c-white-2012",
+      "sourceIds": [
+        "n50c-white-release",
+        "n50c-white-paper",
+        "n50c-white-critique"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50c-white-release",
+        "locator": "PDF p 1: research findings appeared November 19",
+        "summaryRu": "PNAS опубликовал исследование 19 ноября 2012."
+      },
+      "storyAngleRu": "Белый запах и его границы",
+      "researchNotesRu": "Не утверждается, что любые 30 веществ дают одинаковый запах. Сходство отличается от тождества; включён последующий научный критический разбор."
+    },
+    {
+      "id": "n50c-metamers-2020",
+      "eventDate": "2020-11-11",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "scientific_publication",
+      "titleRu": "Разные молекулы, похожий образ",
+      "status": "verified",
+      "evidenceLevel": "primary_source",
+      "eventGroupId": "n50c-metamers-2020",
+      "sourceIds": [
+        "n50c-metamers-paper",
+        "n50c-metamers-release"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50c-metamers-paper",
+        "locator": "Published; Abstract",
+        "summaryRu": "Nature онлайн 11 ноября 2020;199 человек,49,788 парных оценок,242 смеси."
+      },
+      "storyAngleRu": "Разные молекулы, похожий образ",
+      "researchNotesRu": "Дата 11. 11 из Nature, не ошибочное published today в републикации 18. 11. Отдельный от olfactory white сюжет: целенаправленное конструирование близкой пары, а не просто увеличение числа компонентов."
+    },
+    {
+      "id": "n50c-jahai-language-2013",
+      "eventDate": "2013-12-26",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "scientific_publication",
+      "titleRu": "Запах, которому хватает слова",
+      "status": "verified",
+      "evidenceLevel": "primary_source",
+      "eventGroupId": "n50c-jahai-language-2013",
+      "sourceIds": [
+        "n50c-jahai-york",
+        "n50c-jahai-mpi",
+        "n50c-jahai-release"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50c-jahai-york",
+        "locator": "Таблица Early online date; Publication status",
+        "summaryRu": "Early online date 26 December 2013; выпуск Cognition 1 February 2014."
+      },
+      "storyAngleRu": "Запах, которому хватает слова",
+      "researchNotesRu": "Не утверждается общая врождённая или физиологическая превосходность обоняния. Точная дата — ранняя онлайн-публикация, не февральский выпуск 2014."
+    },
+    {
+      "id": "n50c-temporal-sniff-2024",
+      "eventDate": "2024-10-14",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "scientific_publication",
+      "titleRu": "Маленькая последовательность внутри вдоха",
+      "status": "verified",
+      "evidenceLevel": "primary_source",
+      "eventGroupId": "n50c-temporal-sniff-2024",
+      "sourceIds": [
+        "n50c-temporal-paper",
+        "n50c-temporal-cas"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50c-temporal-paper",
+        "locator": "Published; Abstract",
+        "summaryRu": "Публикация 14 октября 2024;229 участников; точность прибора 18 ms; различение порядков при SOA 60 ms."
+      },
+      "storyAngleRu": "Маленькая последовательность внутри вдоха",
+      "researchNotesRu": "60 ms — интервал начала стимулов в заданной задаче, не полное время узнавания молекулы. Не связывать с длительностью раскрытия парфюма."
+    },
+    {
+      "id": "n50c-geosmin-enzyme-2007",
+      "eventDate": "2007-09-16",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "scientific_publication",
+      "titleRu": "Как бактерия делает запах земли",
+      "status": "verified",
+      "evidenceLevel": "primary_source",
+      "eventGroupId": "n50c-geosmin-enzyme-2007",
+      "sourceIds": [
+        "n50c-geosmin-paper",
+        "n50c-geosmin-brown",
+        "n50c-geosmin-bristol"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50c-geosmin-paper",
+        "locator": "Published; Authors; Abstract",
+        "summaryRu": "Nature Chemical Biology опубликована 16 сентября 2007; авторы Jiang,He,Cane; объект Streptomyces coelicolor."
+      },
+      "storyAngleRu": "Как бактерия делает запах земли",
+      "researchNotesRu": "Не датировать этим днём открытие геосмина или полный биосинтез всех микроорганизмов. В шапке Brown 14 Sept, в тексте 16 Sept; точная дата статьи взята из Nature."
+    },
+    {
+      "id": "n50c-rain-aerosol-2015",
+      "eventDate": "2015-01-14",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "scientific_publication",
+      "titleRu": "Капля, которая поднимает землю в воздух",
+      "status": "verified",
+      "evidenceLevel": "primary_source",
+      "eventGroupId": "n50c-rain-aerosol-2015",
+      "sourceIds": [
+        "n50c-aerosol-paper",
+        "n50c-aerosol-mit"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50c-aerosol-paper",
+        "locator": "Published; Authors and affiliations",
+        "summaryRu": "Статья опубликована 14 января 2015; авторы Joung и Buie, MIT."
+      },
+      "storyAngleRu": "Капля, которая поднимает землю в воздух",
+      "researchNotesRu": "Самостоятельный сюжет о физике переноса. Не повторять Bear/Thomas 1964 или приписывать 2015 открытие названия petrichor; перенос конкретного запаха — гипотеза."
+    },
+    {
+      "id": "n50c-scent-tracking-2006",
+      "eventDate": "2006-12-17",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "scientific_publication",
+      "titleRu": "Шоколадная дорожка для человеческого носа",
+      "status": "verified",
+      "evidenceLevel": "primary_source",
+      "eventGroupId": "n50c-scent-tracking-2006",
+      "sourceIds": [
+        "n50c-tracking-paper",
+        "n50c-tracking-berkeley",
+        "n50c-tracking-nature"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50c-tracking-paper",
+        "locator": "Published; библиография NatureNeuroscience 10,27–29(2007)",
+        "summaryRu": "Статья онлайн 17 декабря 2006; выпуск январь 2007."
+      },
+      "storyAngleRu": "Шоколадная дорожка для человеческого носа",
+      "researchNotesRu": "Дата — онлайн-публикация 17. 12. 2006, не пресс-релиз 20. 12 и не выпуск 2007. Никаких самостоятельных рекомендаций закрывать глаза на улице."
+    },
+    {
+      "id": "n50c-single-neurons-2024",
+      "eventDate": "2024-10-09",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "scientific_publication",
+      "titleRu": "Банан как запах, изображение и слово",
+      "status": "verified",
+      "evidenceLevel": "primary_source",
+      "eventGroupId": "n50c-single-neurons-2024",
+      "sourceIds": [
+        "n50c-neurons-paper",
+        "n50c-neurons-highlight",
+        "n50c-neurons-bonn"
+      ],
+      "dateEvidence": {
+        "sourceId": "n50c-neurons-paper",
+        "locator": "Published; About this article",
+        "summaryRu": "Nature опубликована 9 октября 2024."
+      },
+      "storyAngleRu": "Банан как запах, изображение и слово",
+      "researchNotesRu": "Результаты отдельной клинической выборки. Не обещать чтение мыслей, лечение потери обоняния или передачу запаха изображением."
+    },
+    {
+      "id": "nnexta-ao2014-calling-angels",
+      "eventDate": "2014-04-25",
+      "calendar": "gregorian",
+      "category": "fragrance_history",
+      "eventType": "award_ceremony",
+      "titleRu": "Ладан, которому добавили тепла",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "nnexta-ao2014-calling-angels",
+      "sourceIds": [
+        "nnexta-ao-archive",
+        "nnexta-calling-angels",
+        "nnexta-bochnig-interview",
+        "nnexta-ao2014-eyewitness"
+      ],
+      "dateEvidence": {
+        "sourceId": "nnexta-ao-archive",
+        "locator": "The First Art and Olfaction Awards, 2014; date, venue and Artisan winners",
+        "summaryRu": "Первая церемония Art and Olfaction прошла 25 апреля 2014 года в Goethe-Institut в Лос-Анджелесе; Calling All Angels Таньи Бохниг получил награду Artisan."
+      },
+      "storyAngleRu": "Первая премия Art and Olfaction и конкретное ботаническое прочтение ладана Таньей Бохниг.",
+      "researchNotesRu": "Авторское воспоминание датировано интервью 2016 года и не выдано за сцену 2014 года. Исключены брендовые заявления об энергетике и лечебном действии."
+    },
+    {
+      "id": "nnexta-ao2015-famous-deaths",
+      "eventDate": "2015-04-17",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "award_ceremony",
+      "titleRu": "Рассказ, у которого убрали изображение",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "nnexta-ao2015-famous-deaths",
+      "sourceIds": [
+        "nnexta-ao-archive",
+        "nnexta-famous-finalist",
+        "nnexta-famous-idfa",
+        "nnexta-famous-vpro"
+      ],
+      "dateEvidence": {
+        "sourceId": "nnexta-ao-archive",
+        "locator": "The Second Art and Olfaction Awards, 2015; date, venue and Sadakichi winner",
+        "summaryRu": "Вторая церемония Art and Olfaction состоялась 17 апреля 2015 года в Goethe-Institut в Лос-Анджелесе; Famous Deaths получил Sadakichi Award за экспериментальное использование запаха."
+      },
+      "storyAngleRu": "Экспериментальная награда Famous Deaths: запах становится последовательностью сцен, соавторство технологий и ароматов.",
+      "researchNotesRu": "Сюжет не пересекается с центральными работами Duchamp/Tolaas в истории Tinguely. Не воспроизводятся натуралистические детали смертей; реконструкция явно названа интерпретацией."
+    },
+    {
+      "id": "nnexta-ao2025-sfumato",
+      "eventDate": "2025-05-29",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "award_ceremony",
+      "titleRu": "Дым, который рисовал маршрут",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "nnexta-ao2025-sfumato",
+      "sourceIds": [
+        "nnexta-ao-archive",
+        "nnexta-sfumato-desertx",
+        "nnexta-sfumato-pipa",
+        "nnexta-sfumato-anba"
+      ],
+      "dateEvidence": {
+        "sourceId": "nnexta-ao-archive",
+        "locator": "The Eleventh Art and Olfaction Awards, 2025; date, venue and Experimental category",
+        "summaryRu": "29 мая 2025 года на 11-й церемонии Art and Olfaction в Cicada Club в Лос-Анджелесе Sfumato Каролы Браги получил экспериментальную награду; соавтор — изготовитель благовоний Theo Bibancos."
+      },
+      "storyAngleRu": "Sfumato: современное обонятельное прочтение Пути благовоний и физическая видимость запаха в пустыне.",
+      "researchNotesRu": "11 000 — число конусов, не посетителей. 2024 — выставка, 29.05.2025 — церемония награждения. Мирра и ладан подтверждены прямым интервью; дата подтверждена организатором."
+    },
+    {
+      "id": "nnexta-ff2023-flipo",
+      "eventDate": "2023-06-15",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "award_ceremony",
+      "titleRu": "Анн Флипо и искусство разговора",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "nnexta-ff2023-flipo",
+      "sourceIds": [
+        "nnexta-ff2023-event",
+        "nnexta-flipo-ff-interview",
+        "nnexta-flipo-iff",
+        "nnexta-flipo-malle",
+        "nnexta-flipo-conversation",
+        "nnexta-flipo-fff-france"
+      ],
+      "dateEvidence": {
+        "sourceId": "nnexta-ff2023-event",
+        "locator": "June 15, 2023; opening two paragraphs",
+        "summaryRu": "Церемония Fragrance Foundation состоялась 15 июня 2023 года в David H. Koch Theater в Нью-Йорке; Anne Flipo — Lifetime Achievement Perfumer; наградам исполнилось 50 лет."
+      },
+      "storyAngleRu": "Награда Флипо раскрывает профессиональное соавторство через La Vie Est Belle и диалог о Synthetic Jungle.",
+      "researchNotesRu": "Дата пресс-релиза IFF 16 июня не перепутана с церемонией 15 июня. История о диалоге, не ещё одна биография. La Vie Est Belle корректно описан как соавторство."
+    },
+    {
+      "id": "nnexta-ff2024-cavallier",
+      "eventDate": "2024-06-05",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "award_ceremony",
+      "titleRu": "Между цветком и палитрой",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "nnexta-ff2024-cavallier",
+      "sourceIds": [
+        "nnexta-ff2024-event",
+        "nnexta-jcb-lv",
+        "nnexta-jcb-buro",
+        "nnexta-jcb-thames"
+      ],
+      "dateEvidence": {
+        "sourceId": "nnexta-ff2024-event",
+        "locator": "June 5, 2024; paragraphs Over 1,000 guests and As an extra-special experience",
+        "summaryRu": "5 июня 2024 года на церемонии Fragrance Foundation в David H. Koch Theater Jacques Cavallier-Belletrud получил Lifetime Achievement Perfumer; созданный им Rose Fields ароматизировал вход."
+      },
+      "storyAngleRu": "Награда Jacques Cavallier-Belletrud и выбор характера сырья: Grasse, экстракция, палитра и Rose Fields.",
+      "researchNotesRu": "Технические утверждения атрибутированы прямому интервью. Цветочное извлечение не отождествлено с описанным отдельно CO2 для сухих материалов. Исключены заявления о мировом первенстве и недоказанные экологические превосходства; Rihanna/Fenty не упоминаются."
+    },
+    {
+      "id": "n65b-demachy-lifetime-achievement-2022",
+      "eventDate": "2022-06-09",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "award_ceremony",
+      "titleRu": "Франсуа Демаши получил Lifetime Achievement Perfumer",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n65b-demachy-lifetime-achievement-2022",
+      "sourceIds": [
+        "n65b-demachy-awards",
+        "n65b-demachy-interview",
+        "n65b-demachy-film",
+        "n65b-demachy-growers"
+      ],
+      "dateEvidence": {
+        "sourceId": "n65b-demachy-awards",
+        "locator": "Heading June9,2022; paragraphs Back in-person and Additionally",
+        "summaryRu": "9 июня 2022 года в David H. Koch Theater Линкольн-центра в Нью-Йорке состоялась церемония TFF; François Demachy получил Lifetime Achievement Perfumer. Это было возвращение очной церемонии после трёх лет."
+      },
+      "storyAngleRu": "Награда как повод увидеть парфюмерию со стороны производителей сырья.",
+      "researchNotesRu": "Прочитаны ретроспективный отчёт TFF о состоявшейся церемонии, интервью лауреата, профессиональный материал FFF и карточка дистрибьютора фильма. Ошибочное смешение Eau Sauvage и Sauvage в вопросе TFF не перенесено. Суммарный пересказ RU+EN: awards около 85 слов, interview менее 190, growers менее 190, film менее 150; каждый источник имеет web wordlim200."
+    },
+    {
+      "id": "n65b-cresp-lifetime-achievement-2018",
+      "eventDate": "2018-06-12",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "award_ceremony",
+      "titleRu": "Оливье Кресп получил Lifetime Achievement Perfumer",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n65b-cresp-lifetime-achievement-2018",
+      "sourceIds": [
+        "n65b-cresp-date",
+        "n65b-cresp-awards",
+        "n65b-cresp-profile",
+        "n65b-cresp-coffee",
+        "n65b-cresp-work"
+      ],
+      "dateEvidence": {
+        "sourceId": "n65b-cresp-date",
+        "locator": "P&F opening paragraphs; TFF heading and For the evening’s grand finale",
+        "summaryRu": "12 июня 2018 Оливье Кресп получил Lifetime Achievement Perfumer на церемонии TFF в Alice Tully Hall Линкольн-центра; TFF называет его представление финалом вечера."
+      },
+      "storyAngleRu": "Профессиональная награда и конкретный способ превращать воспоминание о кофе в композицию.",
+      "researchNotesRu": "TFF event heading June12,2018 подтверждён независимым отчётом P&F Jun13: heldTuesdayJune12; фраза lastnight в TFF не принята за отдельную дату. Совместный пересказ RU+EN: awards менее 100; profile менее 90; coffee менее 190; work менее 190; каждый wordlim200. Награда 2018 отделена от последующих интервью; дата создания Awake не выводится из даты церемонии."
+    },
+    {
+      "id": "n65b-aftel-fragrant-riverhead-2014",
+      "eventDate": "2014-10-16",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "book_publication",
+      "titleRu": "Вышло издание Fragrant Мэнди Афтель в Riverhead",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n65b-aftel-fragrant-riverhead-2014",
+      "sourceIds": [
+        "n65b-aftel-date",
+        "n65b-aftel-forbes",
+        "n65b-aftel-bookforum",
+        "n65b-aftel-pw"
+      ],
+      "dateEvidence": {
+        "sourceId": "n65b-aftel-date",
+        "locator": "Publication metadata Published16October2014, ImprintRiverhead, FormatEBook",
+        "summaryRu": "16 октября 2014 опубликовано электронное издание Fragrant: The Secret Life of Scent Мэнди Афтель, Riverhead, ISBN9781101614686."
+      },
+      "storyAngleRu": "Пятый ингредиент меняет устройство книги: к далёкому и редкому добавляется знакомая мята.",
+      "researchNotesRu": "Дата узко подтверждена карточкой Riverhead ebook ISBN9781101614686, а не приписана всем мировым изданиям. BAMPFA403 и LA Times25 не использованы. Открыты Penguin, Forbes, Bookforum, PublishersWeekly. Пересказ двух языков: Penguin менее 180 слов, Forbes менее 190, Bookforum менее 170, PW менее 90, wordlim200 каждый. Психологические соответствия обозначены как авторское устройство книги, не научные универсалии."
+    },
+    {
+      "id": "n65b-ellena-diary-us-2013",
+      "eventDate": "2013-01-22",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "book_publication",
+      "titleRu": "Вышло американское издание The Diary of a Nose Жан-Клода Эллена",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n65b-ellena-diary-us-2013",
+      "sourceIds": [
+        "n65b-ellena-date",
+        "n65b-ellena-review",
+        "n65b-ellena-nst",
+        "n65b-ellena-allure",
+        "n65b-ellena-original",
+        "n65b-ellena-pw"
+      ],
+      "dateEvidence": {
+        "sourceId": "n65b-ellena-date",
+        "locator": "Rizzoli PublishDate/Format/ISBN; Vosnaki paragraph This is the USA edition...",
+        "summaryRu": "22 января 2013 Rizzoli Ex Libris опубликовало The Diary of a Nose: A Year in the Life of a Parfumeur, электронное издание 9780847840434; рецензия Vosnaki уточняет американский выпуск."
+      },
+      "storyAngleRu": "Дневник показывает работу через незавершённые поиски, имена и повседневные встречи.",
+      "researchNotesRu": "Дата подтверждена действующей карточкой Rizzoli ebook9780847840434, PublishDateJanuary22,2013; регион США отдельно подтверждён рецензией Vosnaki. Французский издатель реально открыт: Mai2011, авторское описание годового дневника. Большой каталогPDF, PerfumeShrine429 и Basenotes403 не использованы. Дневниковый сюжет отличается от birthday1947/Atlas2020. Совместный пересказ RU+EN распределён: Rizzoli менее 100 слов; NST менее 180 (переводчик/начало года/ирис); SabineWespieser менее 100 (французское издание и дневниковая форма); PublishersWeekly менее 100 (мята/груша); Fragrantica менее 180 (рабочие варианты/глава); Allure менее 100 (холодильник и будущее выражения; сокращено после подсчёта). У Allure wordlim100, у остальных 200. Все прямые цитаты исключены."
+    },
+    {
+      "id": "n65b-chapman-perfume-australia-2019",
+      "eventDate": "2019-04-01",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "book_publication",
+      "titleRu": "В Австралии вышло издание Perfume Нила Чапмана",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n65b-chapman-perfume-australia-2019",
+      "sourceIds": [
+        "n65b-chapman-date",
+        "n65b-chapman-serenity",
+        "n65b-chapman-posse",
+        "n65b-chapman-interview",
+        "n65b-chapman-slowdown"
+      ],
+      "dateEvidence": {
+        "sourceId": "n65b-chapman-date",
+        "locator": "Australian page PublishDateApr1st2019; Details",
+        "summaryRu": "1 апреля 2019 опубликовано австралийское издание Perfume: In Search of Your Signature Scent Нила Чапмана, HardieGrantLondon, твёрдый переплёт,288 страниц, ISBN9781784882433."
+      },
+      "storyAngleRu": "Путеводитель по 700 ароматам устроен как личная библиотека впечатлений, а не рейтинг.",
+      "researchNotesRu": "Дата только австралийской карточки издателя en-au PublishDateApr1st2019, ISBN9781784882433; US2Apr и UKMarch не обобщены до единой мировой даты. Существующий HelenaRubinsteinApril1 оставляет второй слот. Открыты все 5 источников. Совместный пересказ: HardieGrant менее 180; Serenity менее 110; Posse менее 95; Biebel менее 170; Slowdown менее 90 при web wordlim200 каждого. Дождливая сцена из авторского свидетельства не использована, чтобы не драматизировать книгу чужими деталями."
+    },
+    {
+      "id": "nnextc-nose-dive-ebook",
+      "eventDate": "2020-10-20",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "book_publication",
+      "titleRu": "Сколько запахов в одном яблоке",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "nnextc-nose-dive-ebook",
+      "sourceIds": [
+        "nnextc-mcgee-prh",
+        "nnextc-mcgee-spoon",
+        "nnextc-mcgee-npr"
+      ],
+      "dateEvidence": {
+        "sourceId": "nnextc-mcgee-prh",
+        "locator": "Ebook, Published on Oct 20, 2020; Book Description; Author",
+        "summaryRu": "Penguin Random House указывает для ebook Nose Dive Гарольда Макги дату публикации 20 октября 2020 года; Макги известен работами о науке еды."
+      },
+      "storyAngleRu": "От яблочных сортов к привычке различать оттенки: кухонный исследователь расширяет круг обонятельного внимания.",
+      "researchNotesRu": "Календарное событие — ebook PRH, а не мировой первый выход книги и не paperback 18 октября 2022 года. Сцена с граусом дана как авторское воспоминание. Издательские превосходные оценки исключены. Три прочитанных содержательных источника; общий RU+EN пересказ каждого менее 200 слов, прямых цитат нет."
+    },
+    {
+      "id": "nnextc-perfume-lover-publication",
+      "eventDate": "2012-03-15",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "book_publication",
+      "titleRu": "Память, которой понадобился парфюмер",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "nnextc-perfume-lover-publication",
+      "sourceIds": [
+        "nnextc-beaulieu-launch",
+        "nnextc-beaulieu-collins",
+        "nnextc-beaulieu-parfumista",
+        "nnextc-beaulieu-basenotes"
+      ],
+      "dateEvidence": {
+        "sourceId": "nnextc-beaulieu-launch",
+        "locator": "Grain de musc: jeudi 15 mars 2012, The Perfumer Lover launches today, first paragraph and fragrance availability; Bookshop: Book Details / Publish Date / Type / EAN",
+        "summaryRu": "15 марта 2012 года Больё сообщила, что The Perfume Lover уже доступна в книжных магазинах Великобритании; аромат тогда ещё ожидался. Collins metadata фиксирует ebook 15 March 2012, EAN 9780007411832."
+      },
+      "storyAngleRu": "Публикация книги открывает читателю промежуток между личным воспоминанием и парфюмерной работой Дюшофура.",
+      "researchNotesRu": "Авторский пост подтверждает состоявшуюся доступность книги 15 марта, а не только предварительный анонс. Месяц/день выхода самого аромата не назначаются: мартовский пост даёт прогноз late July, позднейшая боковая панель September. Больё не приписывается самостоятельное авторство формулы. Память о Севилье представлена как её рассказ. Пересказ Basenotes RU+EN около 190 слов; Parfumista менее 200, остальные значительно меньше. Прямых цитат нет."
+    },
+    {
+      "id": "n6r-anicka-yi-tate-opening-2021",
+      "eventDate": "2021-10-12",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Воздух, в котором живёт выставка",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n6r-anicka-yi-tate-opening-2021",
+      "sourceIds": [
+        "n6r-tate-library",
+        "n6r-yi-production",
+        "n6r-yi-studio",
+        "n6r-yi-release",
+        "n6r-yi-airstage"
+      ],
+      "dateEvidence": {
+        "sourceId": "n6r-tate-library",
+        "locator": "Tate Modern2020– / Anicka Yi, Exhibition held12Oct2021; report Exhibition Dates",
+        "summaryRu": "Показ начался 12 октября 2021 года в Tate Modern; состоявшийся период подтверждает библиотечный архив музея."
+      },
+      "storyAngleRu": "Воздух, в котором живёт выставка",
+      "researchNotesRu": "12 октября — публичный показ, не дата интервью 8 октября. Не утверждать точное восстановление древнего воздуха, буквальное обоняние роботов или отсутствие материальных затрат. Основная страница Tate вернула 403; прочитаны Tate Library и совместный производственный отчёт."
+    },
+    {
+      "id": "n6r-ulm-public-smell-tours-2022",
+      "eventDate": "2022-04-10",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "public_tour_launch",
+      "titleRu": "Перчатки, которые меняют портрет",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n6r-ulm-public-smell-tours-2022",
+      "sourceIds": [
+        "n6r-ulm-report",
+        "n6r-ulm-press",
+        "n6r-ulm-seeing-smell",
+        "n6r-ulm-ahr"
+      ],
+      "dateEvidence": {
+        "sourceId": "n6r-ulm-report",
+        "locator": "D7.3 PDFp11 Date/ToursStart; museumPDFp2 FromApril10",
+        "summaryRu": "Публичные туры начались 10 апреля 2022 года; презентация 5 апреля выделена отдельно в ретроспективном отчёте."
+      },
+      "storyAngleRu": "Перчатки, которые меняют портрет",
+      "researchNotesRu": "Выбрано 10 апреля — начало публичных туров; презентация 5 апреля и пресс-встреча 6 апреля являются отдельными событиями. Страницы Odeuropa не открылись; использованы прочитанные PDF и интервью. Датировка портрета около 1628 года приблизительна. Реконструкция не объявляется личной формулой Хелены."
+    },
+    {
+      "id": "n6r-proust-birth-1871",
+      "eventDate": "1871-07-10",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "birth",
+      "titleRu": "Комната, рассказанная запахом",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n6r-proust-birth-1871",
+      "sourceIds": [
+        "n6r-proust-bnf",
+        "n6r-proust-swann"
+      ],
+      "dateEvidence": {
+        "sourceId": "n6r-proust-bnf",
+        "locator": "Notice de personne / Naissance1871-07-10,Paris16e",
+        "summaryRu": "Пруст родился 10 июля 1871 года в Париже."
+      },
+      "storyAngleRu": "Комната, рассказанная запахом",
+      "researchNotesRu": "Роман рассматривается как художественная работа со словами и ощущениями, а не документ личной жизни или химического состава. Английский перевод 1922 года находится в общественном достоянии; прямых цитат в рассказе нет. Не утверждается научное доказательство эффекта Пруста."
     }
   ],
   "inclusionRule": "Only events with an exact historical date read and verified in the cited source. No candidates, disputed dates, inferred dates, or merely planned events.",
