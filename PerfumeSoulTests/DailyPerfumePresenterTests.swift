@@ -375,7 +375,7 @@ private enum DailyPerfumeServiceMockError: Error {
 
 private final class DailyPerfumeServiceMock: DailyPerfumeService {
     struct Request: Equatable {
-        let profile: DailyPerfumeProfileRequest
+        let profile: DailyPerfumeProfile
         let excludedPerfumeIDs: [Int]
         let lastShownBrand: String?
         let limit: Int

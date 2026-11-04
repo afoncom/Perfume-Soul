@@ -8,7 +8,7 @@
 
 protocol DailyPerfumeService {
     func requestCandidates(
-        profile: DailyPerfumeProfileRequest,
+        calculation: ProfileCalculation,
         excludedPerfumeIDs: [Int],
         lastShownBrand: String?,
         limit: Int
@@ -25,17 +25,33 @@ final class DailyPerfumeServiceImpl {
 
 extension DailyPerfumeServiceImpl: DailyPerfumeService {
     func requestCandidates(
-        profile: DailyPerfumeProfileRequest,
+        calculation: ProfileCalculation,
         excludedPerfumeIDs: [Int],
         lastShownBrand: String?,
         limit: Int
     ) async throws -> [DailyPerfumeCandidateResponse] {
         try await requestManager.sendRequest(
             request: DailyPerfumeRequest(
-                profile: profile,
+                profile: makeProfileData(for: calculation),
                 excludedPerfumeIDs: excludedPerfumeIDs,
                 lastShownBrand: lastShownBrand,
                 limit: limit
+            )
+        )
+    }
+}
+
+private extension DailyPerfumeServiceImpl {
+    func makeProfileData(for calculation: ProfileCalculation) -> DailyPerfumeProfile {
+        DailyPerfumeProfile(
+            sun: calculation.natalChart.sun.sign.rawValue,
+            moon: calculation.natalChart.moon.sign.rawValue,
+            ascendant: calculation.natalChart.ascendant.sign.rawValue,
+            elementBalance: DailyPerfumeElementBalance(
+                fire: calculation.elementBalance.fire,
+                earth: calculation.elementBalance.earth,
+                air: calculation.elementBalance.air,
+                water: calculation.elementBalance.water
             )
         )
     }
