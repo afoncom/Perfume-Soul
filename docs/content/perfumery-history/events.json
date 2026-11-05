@@ -6099,6 +6099,735 @@
       "type": "supplier_education",
       "access": "opened",
       "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30a-bagh-iao",
+      "publisher": "Institute for Art and Olfaction",
+      "url": "https://artandolfaction.com/exhibitions/bagh-e-hind/",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30a-bagh-retro",
+      "publisher": "Bharti Lalwani and Nicolas Roth — project exhibition history",
+      "url": "https://www.baghehind.com/baghirl",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30a-bagh-interview",
+      "publisher": "Bayt Al Fann — interview with Lalwani and Roth",
+      "url": "https://www.baytalfann.com/post/bagh-e-hind-a-sensory-experience-future-of-co-curation-bharti-lalwani-and-nicolas-roth",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30a-bagh-kewra",
+      "publisher": "Bharti Lalwani and Nicolas Roth — Kewra curatorial correspondence",
+      "url": "https://www.baghehind.com/kewra",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30a-corning-archive",
+      "publisher": "Corning Museum of Glass — exhibition archive",
+      "url": "https://whatson.cmog.org/exhibitions-galleries/sensorium-stories-glass-and-fragrance",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30a-corning-press",
+      "publisher": "Corning Museum of Glass — curatorial press release",
+      "url": "https://press.cmog.org/2024/organizes-special-exhibition-dedicated-scent-glass-innovation",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30a-corning-nouvel",
+      "publisher": "Nouvel — bottle manufacturer",
+      "url": "https://nouvel.glass/pages/luxury-packaging-client/xinu",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30a-corning-bellemare",
+      "publisher": "Corning Museum of Glass — Julie Bellemare, curator",
+      "url": "https://blog.cmog.org/2024/glass-and-scent-contemporary-art-and-design",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30a-cooper-date",
+      "publisher": "Smithsonian Institution — exhibition archive",
+      "url": "https://www.si.edu/exhibitions/senses-design-beyond-vision:event-exhib-6308",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30a-cooper-press",
+      "publisher": "Cooper Hewitt — exhibition press kit",
+      "url": "https://www.cooperhewitt.org/wp-content/uploads/2018/02/PressKit_TheSenses2018.pdf",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30a-cooper-domus",
+      "publisher": "Domus — Adrian Madlener interviews exhibition curators",
+      "url": "https://www.domusweb.it/en/design/2018/05/08/new-yorks-cooper-hewitt-design-museum-engages-all-the-senses.html",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30a-cooper-columbia",
+      "publisher": "Columbia University Teachers College Arts Administration — participant visit account",
+      "url": "https://aradtccolumbia.com/2018/05/02/dr-mangione-explores-the-senses-design-beyond-vision-on-view-at-the-cooper-hewitt/",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30a-mip-report",
+      "publisher": "Communauté d’agglomération du Pays de Grasse — 2024 activities report",
+      "url": "https://www.lacapg.fr/sites/default/files/2025-09/RA%20CAPG%202024%20web.pdf",
+      "language": "fr",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30a-mip-faton",
+      "publisher": "Éditions Faton — exhibition catalogue publisher",
+      "url": "https://www.faton.fr/produit/mondes-sensibles-2/",
+      "language": "fr",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30a-mip-mermin",
+      "publisher": "22,48m² — Sandra Barré interviews Florian Mermin",
+      "url": "https://www.2248m2.com/fm-textes",
+      "language": "fr",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30a-mip-ciha",
+      "publisher": "CIHA2024 — Sandra Barré authored conference abstract",
+      "url": "https://www.cihalyon2024.fr/images/programmeCIHA2024-BAT-digital_V2.pdf",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-burr-nst",
+      "url": "https://nstperfume.com/2008/01/24/the-perfect-scent-by-chandler-burr-perfume-book-review/",
+      "publisher": "Now Smell This — Marcello",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-burr-kirkus",
+      "url": "https://www.kirkusreviews.com/book-reviews/chandler-burr/the-perfect-scent/?page=50",
+      "publisher": "Kirkus Reviews",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-burr-society",
+      "url": "https://perfumesociety.org/fragrant-reading/the-perfect-scent/",
+      "publisher": "The Perfume Society",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-harad-date",
+      "url": "https://www.penguin.com.au/books/coming-to-my-senses-9781101583678",
+      "publisher": "Penguin Books Australia",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-harad-about",
+      "url": "https://alyssaharad.com/about/",
+      "publisher": "Alyssa Harad",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-harad-pw",
+      "url": "https://www.publishersweekly.com/9780670023615",
+      "publisher": "Publishers Weekly",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-harad-interview",
+      "url": "https://www.openlettersmonthlyarchive.com/olm/on-the-scent-an-interview-with-alyssa-harad",
+      "publisher": "Open Letters Monthly — interview with Alyssa Harad",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-bible-date",
+      "url": "https://www.hachette.co.uk/titles/jo-fairley/the-perfume-bible/9780857832344/",
+      "publisher": "Hachette UK / Kyle Books",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-bible-nonblonde",
+      "url": "https://www.thenonblonde.com/2014/10/the-perfume-bible-by-josephine-fairley.html",
+      "publisher": "The Non-Blonde — The Husband",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-bible-persolaise",
+      "url": "https://persolaise.com/2014/11/christmas-2014-perfume-recommendations.html",
+      "publisher": "Persolaise",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-bible-nina",
+      "url": "https://ninarossbeauty.wordpress.com/2016/05/20/the-perfume-bible-by-josephine-fairley-and-lorna-mckay-review/",
+      "publisher": "Nina Ross Beauty",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-pearlstine-date",
+      "url": "https://yalebooks.yale.edu/book/9780300265576/scent/",
+      "publisher": "Yale University Press",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-pearlstine-book",
+      "url": "https://www.elisevernonpearlstine.com/scent-a-natural-history-of-fragrance",
+      "publisher": "Elise Vernon Pearlstine",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-pearlstine-unlv",
+      "url": "https://www.unlv.edu/news/article/ode-de-fragrance-alumnas-new-book-love-letter-scent",
+      "publisher": "University of Nevada, Las Vegas — interview with Elise Pearlstine",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-pearlstine-about",
+      "url": "https://www.elisevernonpearlstine.com/about",
+      "publisher": "Elise Vernon Pearlstine",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-blanc-date",
+      "url": "https://fragrance.org/event/the-2026-fragrance-foundation-awards/",
+      "publisher": "The Fragrance Foundation",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-blanc-interview",
+      "url": "https://fragrance.org/honoree_year/2026/",
+      "publisher": "The Fragrance Foundation — April Long interview with Honorine Blanc",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-blanc-happi",
+      "url": "https://nitesh_happi.rodpub.com/exclusives/dsm-firmenich-master-perfumer-honorine-blanc-wins-lifetime-achievement-award-from-the-fragrance-foundation/",
+      "publisher": "Happi — Lianna Albrizio",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-blanc-dsm",
+      "url": "https://www.dsm-firmenich.com/content/dam/dsm-firmenich/corporate/documents/our-company/news/trade-news/2026/04172026/tff-us-lifetime-achievement-award-2026-honorine-blanc.pdf",
+      "publisher": "dsm-firmenich",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-bat-interview",
+      "url": "https://www.zoologistperfumes.com/blogs/news/81434948-an-interview-with-ellen-covey-the-perfumer-of-zoologists-bat",
+      "publisher": "Zoologist Perfumes — interview with Ellen Covey",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-bat-nst",
+      "url": "https://nstperfume.com/2016/07/20/zoologist-bat-fragrance-review/",
+      "publisher": "Now Smell This — Kevin",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-bat-apj",
+      "url": "https://australianperfumejunkies.com/2016/01/11/bat-zoologist-perfumes-review/",
+      "publisher": "Australian Perfume Junkies — Azar",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-bat-discontinued",
+      "url": "https://www.zoologistperfumes.com/blogs/news/tagged/bat",
+      "publisher": "Zoologist Perfumes",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-dusita-sniff",
+      "url": "https://the-sniff.com/2018/11/08/interview-parfums-dusita/",
+      "publisher": "The Sniff — interview with Pissara Umavijani",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-dusita-elysee",
+      "url": "https://blog.elysee.eu.com/2019/03/08/pissara-umavijani-exclusive-interview/",
+      "publisher": "Elysee — interview with Pissara Umavijani",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-dusita-auparfum",
+      "url": "https://auparfum.bynez.com/melodie-d-amour-parfums-dusita-3708",
+      "publisher": "Auparfum — Jeanne Doré",
+      "type": "specialist",
+      "language": "fr",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-dusita-awards",
+      "url": "https://www.parfumsdusita.com/awards",
+      "publisher": "Parfums Dusita",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-bonsai-brand",
+      "url": "https://www.matriarch.biz/products/bonsai",
+      "publisher": "House of Matriarch",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-meshell-interview",
+      "url": "https://www.fragrantica.com/news/Christi-Meshell-House-of-Matriarch-and-a-Perfume-Giveaway-11831.html",
+      "publisher": "Fragrantica — John Biebel interview with Christi Meshell",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-bonsai-basenotes",
+      "url": "https://basenotes.com/fragrances/bonsai-fragrance-of-zen-by-house-of-matriarch.26160966",
+      "publisher": "Basenotes — CompassRose and Grungevig reviews",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-meshell-consenses",
+      "url": "https://consenses.org/artists/christi-meshell/",
+      "publisher": "Consenses — interview with Christi Meshell",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-voices-date",
+      "url": "https://houseofmammoth.com/pages/press",
+      "publisher": "House of Mammoth",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-voices-product",
+      "url": "https://houseofmammoth.com/products/voices-eau-de-parfum",
+      "publisher": "House of Mammoth",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-voices-podcast",
+      "url": "https://poddtoppen.se/podcast/1491520789/lather-talk-a-wet-shaving-podcast/lather-talk-053-get-ready-for-voices-with-house-of-mammoth",
+      "publisher": "Lather Talk — episode53 official description distributed via Poddtoppen",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-voices-community",
+      "url": "https://www.badgerandblade.com/forum/threads/house-of-mammoth-new-soap-voices.628160/",
+      "publisher": "Badger & Blade — Inverted and community discussion",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-voices-mission",
+      "url": "https://stopaapihate.org/our-mission/",
+      "publisher": "Stop AAPI Hate",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30b-voices-winners",
+      "url": "https://artandolfaction.com/wp-content/uploads/2023/05/2023_Winners_Release_FINAL.pdf",
+      "publisher": "The Institute for Art and Olfaction",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-petunia-transporter-s1",
+      "publisher": "Adebesin et al. / Science",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.sciencemagazinedigital.org/sciencemagazine/30_june_2017?pg=118",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-petunia-transporter-s2",
+      "publisher": "Purdue University",
+      "type": "primary_release",
+      "language": "en",
+      "access": "opened",
+      "url": "https://ag.purdue.edu/news/2017/06/purdue-research-reveals-plant-volatiles-released-more-deliberately-than-once-thought.html",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-petunia-transporter-s3",
+      "publisher": "Purdue University",
+      "type": "primary_release",
+      "language": "en",
+      "access": "opened",
+      "url": "https://purdue.edu/uns/html4ever/031120.Dudareva.scent.html",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-petunia-transporter-s4",
+      "publisher": "Purdue University",
+      "type": "primary_release",
+      "language": "en",
+      "access": "opened",
+      "url": "https://ag.purdue.edu/news/2019/05/purdue-researchers-discover-new-transportation-route-for-plant-volatile-compounds.html",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-rose-nudx1-s1",
+      "publisher": "Magnard et al. / Science / PubMed",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/26138978/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-rose-nudx1-s2",
+      "publisher": "INRAE",
+      "type": "primary_release",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.inrae.fr/actualites/parfum-rose",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-rose-nudx1-s3",
+      "publisher": "Université Jean Monnet",
+      "type": "primary_release",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.univ-st-etienne.fr/_attachment/communiques-de-presse-article-2/2023-05-01_CP-Synth%C3%A8se%20du%20geraniol%20chez%20la%20rose_LBVPam.pdf?download=true",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-rose-nudx1-s4",
+      "publisher": "Shi and Zhang / IJMS",
+      "type": "scientific_review",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9321236/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-perfumer-imagery-s1",
+      "publisher": "Plailly et al. / Human Brain Mapping",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6870234/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-perfumer-imagery-s2",
+      "publisher": "Inserm",
+      "type": "primary_release",
+      "language": "en",
+      "access": "opened",
+      "url": "https://presse.inserm.fr/etre-nez-ce-nest-pas-inne/13694/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-perfumer-imagery-s3",
+      "publisher": "Royet et al. / Frontiers in Psychology",
+      "type": "scientific_review",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2013.00928/full",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-perfumer-imagery-s4",
+      "publisher": "ISIPCA",
+      "type": "primary_education",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.isipca.fr/en/formations/perfume/perfumery-course-online",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-ambrein-engineering-s1",
+      "publisher": "Yamabe et al. / Scientific Reports",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/s41598-020-76624-y.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-ambrein-engineering-s2",
+      "publisher": "Niigata University and National Museum of Nature and Science",
+      "type": "primary_release",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.niigata-u.ac.jp/wp-content/uploads/2020/11/201117rs.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-ambrein-engineering-s3",
+      "publisher": "Natural History Museum",
+      "type": "museum_reference",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nhm.ac.uk/discover/what-is-ambergris.html",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-ambrein-engineering-s4",
+      "publisher": "Givaudan",
+      "type": "primary_product_document",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.givaudan.com/fragrance-beauty/fragrance-ingredients-business/fragrance-molecules/ambrofix",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-santalol-enzymes-s1",
+      "publisher": "Diaz-Chavez et al. / PLOS ONE",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0075053",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-santalol-enzymes-s2",
+      "publisher": "Celedon et al. / The Plant Journal",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/tpj.13162",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-santalol-enzymes-s3",
+      "publisher": "Mahesh et al. / Plant Physiology",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5884603/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-santalol-enzymes-s4",
+      "publisher": "Institute of Wood Science and Technology",
+      "type": "primary_reference",
+      "language": "en",
+      "access": "opened",
+      "url": "https://iwst.icfre.gov.in/database/SIS/properties.html",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-olfactory-mucus-s1",
+      "publisher": "Shirai et al. / Scientific Reports",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9846672/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-olfactory-mucus-s2",
+      "publisher": "Yoshikawa et al. / Scientific Reports / PubMed",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30464187/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-olfactory-mucus-s3",
+      "publisher": "Wolf et al. / Scientific Reports",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/s41598-018-35776-8.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-olfactory-mucus-s4",
+      "publisher": "Kenji Kondo / JIAIO",
+      "type": "scientific_review",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.jstage.jst.go.jp/article/jiaio/5/1/5_21/_article/-char/en",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-osmanthus-genome-s1",
+      "publisher": "Yang et al. / Horticulture Research",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/s41438-018-0108-0?error=cookies_not_supported",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-osmanthus-genome-s2",
+      "publisher": "Chen et al. / Horticulture Research",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/s41438-021-00531-0?error=cookies_not_supported",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-osmanthus-genome-s3",
+      "publisher": "Fu et al. / Molecules",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://mdpi-res.com/d_attachment/molecules/molecules-22-00430/article_deploy/molecules-22-00430-v2.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n30c-osmanthus-genome-s4",
+      "publisher": "Ding et al. / Tree Physiology / PubMed",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31860707/",
+      "checkedOn": "2026-11-05"
     }
   ],
   "events": [
@@ -10787,6 +11516,492 @@
       },
       "storyAngleRu": "Не потерять запах на выходе",
       "researchNotesRu": "Это подача международной заявки, а не её публикация19.10.1989, выдача американского патента17.12.1991 или изобретение всей CO2-экстракции. Современные продукты не объявляются реализацией данного патента. Факты общей патентной семьи суммарно пересказаны менее200словами в обеих локализациях."
+    },
+    {
+      "id": "n30a-bagh-hind-2022",
+      "eventGroupId": "n30a-bagh-hind-2022",
+      "eventDate": "2022-07-15",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Сад выходит из изображения",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "sourceIds": [
+        "n30a-bagh-iao",
+        "n30a-bagh-retro",
+        "n30a-bagh-interview",
+        "n30a-bagh-kewra"
+      ],
+      "dateEvidence": {
+        "sourceId": "n30a-bagh-iao",
+        "locator": "IAO heading and opening description; project Exhibition History",
+        "summaryRu": "Физический показ Bagh-e Hind в IAO проходил 15.07–12.08.2022; кураторы Lalwani/Roth; пять композиций Miss Layla, репродукции в исходном размере, благовония, мыло, растения, поэзия урду."
+      },
+      "storyAngleRu": "Сад выходит из изображения",
+      "researchNotesRu": "Дата подтверждена ретроспективной историей участников, не только анонсом IAO. Онлайн-запуск 10.09.2021 не используется как второй сюжет; рецепт обсуждения не объявляется неизменной формулой выставочных ароматов."
+    },
+    {
+      "id": "n30a-corning-sensorium-2024",
+      "eventGroupId": "n30a-corning-sensorium-2024",
+      "eventDate": "2024-09-07",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Что хранит стекло, кроме духов",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "sourceIds": [
+        "n30a-corning-archive",
+        "n30a-corning-press",
+        "n30a-corning-nouvel",
+        "n30a-corning-bellemare"
+      ],
+      "dateEvidence": {
+        "sourceId": "n30a-corning-archive",
+        "locator": "Exhibition dates and description; press paragraphs Organized; In addition",
+        "summaryRu": "Sensorium открылась 07.09.2024 в Corning Museum of Glass; куратор Julie Bellemare; исторические и современные сосуды рассматриваются через власть, обмен, роскошь."
+      },
+      "storyAngleRu": "Что хранит стекло, кроме духов",
+      "researchNotesRu": "Музейный архив подтверждает состоявшийся показ и начало07Sep; конец позже продлён, в рассказ не внесён. Набор исторических масел не объявляется подлинным сохранившимся содержимым флаконов; арт-реконструкции и объекты различены."
+    },
+    {
+      "id": "n30a-cooper-senses-2018",
+      "eventGroupId": "n30a-cooper-senses-2018",
+      "eventDate": "2018-04-13",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Снег, который можно понюхать в музее",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "sourceIds": [
+        "n30a-cooper-date",
+        "n30a-cooper-press",
+        "n30a-cooper-domus",
+        "n30a-cooper-columbia"
+      ],
+      "dateEvidence": {
+        "sourceId": "n30a-cooper-date",
+        "locator": "Archive dates; press p1 opening and Organized",
+        "summaryRu": "The Senses: Design Beyond Vision открылась13.04.2018в Cooper Hewitt; кураторы Ellen Lupton/Andrea Lipps, мультисенсорный дизайн и доступность."
+      },
+      "storyAngleRu": "Снег, который можно понюхать в музее",
+      "researchNotesRu": "Точная дата из институционального архива; состоявшаяся выставка подтверждена двумя посещениями. Конкретный опыт аносмии приписан автору, не обобщён. Числа дизайнеров не использованы, поскольку предварительный и итоговый списки различаются."
+    },
+    {
+      "id": "n30a-mip-sensitive-2024",
+      "eventGroupId": "n30a-mip-sensitive-2024",
+      "eventDate": "2024-06-14",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Роза, оставшаяся в воздухе",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "sourceIds": [
+        "n30a-mip-report",
+        "n30a-mip-faton",
+        "n30a-mip-mermin",
+        "n30a-mip-ciha"
+      ],
+      "dateEvidence": {
+        "sourceId": "n30a-mip-report",
+        "locator": "PDF p41, printed80, Les expositions2024; lines5628–5632",
+        "summaryRu": "Mondes sensibles началась14.06.2024в MIP, Grasse; Sandra Barré, установки Tiphaine Calmettes, Florian Mermin и Camille Correas."
+      },
+      "storyAngleRu": "Роза, оставшаяся в воздухе",
+      "researchNotesRu": "Точная дата из итогового отчёта2024, а не будущего анонса. Конгрессныйabstract описан как исследовательская программа, не доказательство исполнения каждого опыта. Не переносить ошибочное буквальное описание сюжета стихотворения из вопроса интервью."
+    },
+    {
+      "id": "n30b-perfect-scent-2008",
+      "eventDate": "2008-01-22",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "book_publication",
+      "titleRu": "Между манго и пробой",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n30b-perfect-scent-2008",
+      "sourceIds": [
+        "c-sjp-burr",
+        "n30b-burr-society",
+        "n30b-burr-nst",
+        "n30b-burr-kirkus"
+      ],
+      "dateEvidence": {
+        "sourceId": "c-sjp-burr",
+        "locator": "On Sale01/22/2008; Imprint Publisher; ISBN",
+        "summaryRu": "Henry Holt выпустило американское издание The Perfect Scent22.01.2008; страница данного ebookISBN9781429924658."
+      },
+      "storyAngleRu": "Между манго и пробой",
+      "researchNotesRu": "Фокус: наблюдениеБёрра/HermèsNil, не пересказ birthdaySJP/Lovely. Датаиздания,не запускдухов. Разные оценкиатрибутированы."
+    },
+    {
+      "id": "n30b-coming-senses-ebook-2012",
+      "eventDate": "2012-07-05",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "book_publication",
+      "titleRu": "Разрешить себе аромат",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n30b-coming-senses-ebook-2012",
+      "sourceIds": [
+        "n30b-harad-date",
+        "n30b-harad-about",
+        "n30b-harad-pw",
+        "n30b-harad-interview"
+      ],
+      "dateEvidence": {
+        "sourceId": "n30b-harad-date",
+        "locator": "Published/ISBN/Imprint/Format",
+        "summaryRu": "PenguinAustralia датируетebook9781101583678 05.07.2012, imprintPENUSebookAdult."
+      },
+      "storyAngleRu": "Разрешить себе аромат",
+      "researchNotesRu": "ДатаконкретногоebookвPenguinAustralia; непервыймировойвыход/неpaperback2013. Нетв204историиХарад."
+    },
+    {
+      "id": "n30b-perfume-bible-2014",
+      "eventDate": "2014-09-25",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "book_publication",
+      "titleRu": "Путеводитель, с которым можно спорить",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n30b-perfume-bible-2014",
+      "sourceIds": [
+        "n30b-bible-date",
+        "n35b-ostrom-foundation",
+        "n30b-bible-nonblonde",
+        "n30b-bible-persolaise",
+        "n30b-bible-nina"
+      ],
+      "dateEvidence": {
+        "sourceId": "n30b-bible-date",
+        "locator": "On sale; SelectedHardcover/ISBN; authors",
+        "summaryRu": "Британскийhardcover9780857832344вышел25.09.2014;авторыJoFairleyиLornaMcKay."
+      },
+      "storyAngleRu": "Путеводитель, с которым можно спорить",
+      "researchNotesRu": "Новоеиздание/новыйавторскийдуэт, неLittleBookPerfumes. Мненияотзывовявноатрибутированы."
+    },
+    {
+      "id": "n30b-scent-pearlstine-2022",
+      "eventDate": "2022-05-24",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "book_publication",
+      "titleRu": "До того, как появился парфюмер",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n30b-scent-pearlstine-2022",
+      "sourceIds": [
+        "n30b-pearlstine-date",
+        "n30b-pearlstine-about",
+        "n30b-pearlstine-book",
+        "n30b-pearlstine-unlv"
+      ],
+      "dateEvidence": {
+        "sourceId": "n30b-pearlstine-date",
+        "locator": "Formats PublishedTuesday24May2022; author/illustrator",
+        "summaryRu": "Yaleвыпустилоebook9780300265576иhardcover978030024696424.05.2022,авторEliseVernonPearlstine,иллюстраторLaraCallGastinger."
+      },
+      "storyAngleRu": "До того, как появился парфюмер",
+      "researchNotesRu": "ПерваяисториякнигиScentв204;неAtlasEllena/неNoseDive. Границыбиологическихпримеровсохранены,универсальногообъяснениявсехзапаховнет."
+    },
+    {
+      "id": "n30b-honorine-blanc-award-2026",
+      "eventDate": "2026-06-11",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "award_ceremony",
+      "titleRu": "Кедр и жасмин в общем воздухе",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n30b-honorine-blanc-award-2026",
+      "sourceIds": [
+        "n30b-blanc-date",
+        "n30b-blanc-interview",
+        "n30b-blanc-dsm",
+        "n30b-blanc-happi"
+      ],
+      "dateEvidence": {
+        "sourceId": "n30b-blanc-date",
+        "locator": "June11,2026; retrospective paragraphs29–35",
+        "summaryRu": "БланполучилаLifetimeAchievementPerfumerAward11.06.2026наTFFвDavidH.KochTheaterLincolnCenter."
+      },
+      "storyAngleRu": "Кедр и жасмин в общем воздухе",
+      "researchNotesRu": "ДатафактическойцеремонииподтвержденаTFF+Happi, апрельскийанонсиспользованлишьдлякарьерныхфактов. Новыйперфюмерв204;неприсвоеносольноеавторствовсемработам."
+    },
+    {
+      "id": "n30b-bat-award-2016",
+      "eventDate": "2016-05-07",
+      "calendar": "gregorian",
+      "category": "fragrance_history",
+      "eventType": "award_ceremony",
+      "titleRu": "Пещера, которую можно носить",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n30b-bat-award-2016",
+      "sourceIds": [
+        "nnexta-ao-archive",
+        "n30b-bat-interview",
+        "n30b-bat-nst",
+        "n30b-bat-apj",
+        "n30b-bat-discontinued"
+      ],
+      "dateEvidence": {
+        "sourceId": "nnexta-ao-archive",
+        "locator": "Past editions2016; date and Independentwinners",
+        "summaryRu": "Bat/Zoologist,EllenCoveyдляVictorWongполучилIndependentaward07.05.2016."
+      },
+      "storyAngleRu": "Пещера, которую можно носить",
+      "researchNotesRu": "СамостоятельнаяисторияBatнеWoodcut;награднаядатанеlaunch. ОригиналCoveyотличёнпозднейверсии,вымышленныхисторическихсценнет."
+    },
+    {
+      "id": "n30b-dusita-melodie-award-2017",
+      "eventDate": "2017-05-06",
+      "calendar": "gregorian",
+      "category": "fragrance_history",
+      "eventType": "award_ceremony",
+      "titleRu": "Белые цветы для стихотворения",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n30b-dusita-melodie-award-2017",
+      "sourceIds": [
+        "nnexta-ao-archive",
+        "n30b-dusita-sniff",
+        "n30b-dusita-elysee",
+        "n30b-dusita-auparfum",
+        "n30b-dusita-awards"
+      ],
+      "dateEvidence": {
+        "sourceId": "nnexta-ao-archive",
+        "locator": "Past Editions2017 date and Artisanwinners",
+        "summaryRu": "Mélodie de l’Amour / Dusita / Pissara Umavijani получил Artisan award 06.05.2017."
+      },
+      "storyAngleRu": "Белые цветы для стихотворения",
+      "researchNotesRu": "НоваяисторияDusitaнеOsmodramaтого жевечера;всеэтапыцеремонииоднособытие. Стихине процитированы (поэтическиепроизведения0слов).Нотыявноописания/намерения,несекретнаяформула."
+    },
+    {
+      "id": "n30b-bonsai-award-2020",
+      "eventDate": "2020-09-17",
+      "calendar": "gregorian",
+      "category": "fragrance_history",
+      "eventType": "award_ceremony",
+      "titleRu": "Небольшой сад и разные взгляды",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n30b-bonsai-award-2020",
+      "sourceIds": [
+        "nnexta-ao-archive",
+        "n30b-bonsai-brand",
+        "n30b-meshell-interview",
+        "n30b-meshell-consenses",
+        "n30b-bonsai-basenotes"
+      ],
+      "dateEvidence": {
+        "sourceId": "nnexta-ao-archive",
+        "locator": "Past Editions2020 paragraphs221–228",
+        "summaryRu": "Bonsai / House of Matriarch / Christi Meshell выиграл Artisan award17.09.2020; церемония через Zoom."
+      },
+      "storyAngleRu": "Небольшой сад и разные взгляды",
+      "researchNotesRu": "Новая историяBonsai/ChristiMeshell,незакрытыйранееартпроект;Consensesприведёнкакявноотдельныйпримерметода. Датанаграды,невыход2019. Неттерапевтическихобещаний/недоказаннойполностьюнатуральнойформулы."
+    },
+    {
+      "id": "n30b-voices-award-2023",
+      "eventDate": "2023-05-11",
+      "calendar": "gregorian",
+      "category": "fragrance_history",
+      "eventType": "award_ceremony",
+      "titleRu": "Голоса вокруг манго и риса",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n30b-voices-award-2023",
+      "sourceIds": [
+        "n30b-voices-date",
+        "n30b-voices-product",
+        "n30b-voices-podcast",
+        "n30b-voices-community",
+        "n30b-voices-mission",
+        "n30b-voices-winners"
+      ],
+      "dateEvidence": {
+        "sourceId": "n30b-voices-date",
+        "locator": "Pressrelease datedLosAngelesMay11,2023 paragraphs65–70",
+        "summaryRu": "Voices / House of Mammoth / Benjamin Esposito получилGoldenPear11.05.2023; сElaineLee иLatherTalk."
+      },
+      "storyAngleRu": "Голоса вокруг манго и риса",
+      "researchNotesRu": "СамостоятельнаяноваякомпозицияVoices;неповторобщейисториинаград/другихпобедителей. Датафактическойнаграды,неанонспродажи13.08.2022. Обещаниеблаготворительности,неаудитфактическихперечислений."
+    },
+    {
+      "id": "n30c-petunia-transporter",
+      "eventDate": "2017-06-30",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "scientific_publication",
+      "titleRu": "Как цветок выпускает свой запах",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n30c-petunia-transporter",
+      "sourceIds": [
+        "n30c-petunia-transporter-s1",
+        "n30c-petunia-transporter-s2",
+        "n30c-petunia-transporter-s3",
+        "n30c-petunia-transporter-s4"
+      ],
+      "dateEvidence": {
+        "sourceId": "n30c-petunia-transporter-s1",
+        "locator": "Issue June30 2017; plant science abstract pp1386–1388",
+        "summaryRu": "Печатный номер Science 30.06.2017: PhABCG1 и RNAi показывают активный транспорт через мембрану, снижение эмиссии и токсическое накопление."
+      },
+      "storyAngleRu": "Как цветок выпускает свой запах",
+      "researchNotesRu": "Дата печатного номера. Ранние и поздние исследования — контекст одного сюжета транспорта. Не описывать петунию как сырьё конкретных духов."
+    },
+    {
+      "id": "n30c-rose-nudx1",
+      "eventDate": "2015-07-03",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "scientific_publication",
+      "titleRu": "Другой путь к гераниолу",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n30c-rose-nudx1",
+      "sourceIds": [
+        "n30c-rose-nudx1-s1",
+        "n30c-rose-nudx1-s2",
+        "n30c-rose-nudx1-s3",
+        "n30c-rose-nudx1-s4"
+      ],
+      "dateEvidence": {
+        "sourceId": "n30c-rose-nudx1-s1",
+        "locator": "Citation2015Jul3;Abstract",
+        "summaryRu": "ПечатныйвыпускScience03.07.2015;PapaMeillandmonoterpenes;cytoplasmicRhNUDX1supportsgeraniolbiosynthesis."
+      },
+      "storyAngleRu": "Другой путь к гераниолу",
+      "researchNotesRu": "Датапечатногономера2015;неповторяетrosegenome2018,нетсюжетадекодированиявсегогенома. RhNUDX1необъявленединственнымгеномвсегорозовогозапаха. Работуследующегогодаупомянутькакконтекст,неприсваиватьейдату2015."
+    },
+    {
+      "id": "n30c-perfumer-imagery",
+      "eventDate": "2011-03-09",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "scientific_publication",
+      "titleRu": "Аромат без открытого флакона",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n30c-perfumer-imagery",
+      "sourceIds": [
+        "n30c-perfumer-imagery-s1",
+        "n30c-perfumer-imagery-s2",
+        "n30c-perfumer-imagery-s3",
+        "n30c-perfumer-imagery-s4"
+      ],
+      "dateEvidence": {
+        "sourceId": "n30c-perfumer-imagery-s1",
+        "locator": "Frontmatter2011Mar9;Subjects;ExperimentalDesign;Abstract",
+        "summaryRu": "Онлайнпубликация09.03.2011;14+14набраны,3студентаисключены;восприятие/воображение;piriformactivation."
+      },
+      "storyAngleRu": "Аромат без открытого флакона",
+      "researchNotesRu": "Дата09.03согласносамойстатье;релизInserm08.03упоминает08,неиспользоватьегодлядатыстатьи. Нетдоказательстваврождённости/причинноговыводаповсейпопуляции;низкаяактивациянеравнаплохомуобонянию."
+    },
+    {
+      "id": "n30c-ambrein-engineering",
+      "eventDate": "2020-11-12",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "scientific_publication",
+      "titleRu": "Предшественник морской амбры",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n30c-ambrein-engineering",
+      "sourceIds": [
+        "n30c-ambrein-engineering-s1",
+        "n30c-ambrein-engineering-s2",
+        "n30c-ambrein-engineering-s3",
+        "n30c-ambrein-engineering-s4"
+      ],
+      "dateEvidence": {
+        "sourceId": "n30c-ambrein-engineering-s1",
+        "locator": "PaperAbstract;universityPDFp1/datep3",
+        "summaryRu": "12.11.2020публикацияYamabe;изменениебактериальногофермента/ambreinsynthase;световоепревращениевлетучие."
+      },
+      "storyAngleRu": "Предшественник морской амбры",
+      "researchNotesRu": "Толькоароматическаяхимия;фармакологическиеклеточныенаблюденияполностьюисключены. Ambrofixнеобъявленреализациейстатьи2020;амбреиннесмешанспахучимиокисленнымипродуктами."
+    },
+    {
+      "id": "n30c-santalol-enzymes",
+      "eventDate": "2013-09-18",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "scientific_publication",
+      "titleRu": "Сандал и точность последнего шага",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n30c-santalol-enzymes",
+      "sourceIds": [
+        "n30c-santalol-enzymes-s1",
+        "n30c-santalol-enzymes-s2",
+        "n30c-santalol-enzymes-s3",
+        "n30c-santalol-enzymes-s4"
+      ],
+      "dateEvidence": {
+        "sourceId": "n30c-santalol-enzymes-s1",
+        "locator": "Published;Abstract",
+        "summaryRu": "Статья18.09.2013;CYP76Fклонированы/провереныinvitro/yeast;окислениесанталенов/бергамотена."
+      },
+      "storyAngleRu": "Сандал и точность последнего шага",
+      "researchNotesRu": "НеSandalore/OR2AT4сохранённый18.09;природныесанталолы/стереоселективность. EиZразличены,выходы2013необъявленыполнымэквивалентоммасла. Неутверждатькоммерческийзапуск/сохранениелесовкакдоказанныйрезультат."
+    },
+    {
+      "id": "n30c-olfactory-mucus",
+      "eventDate": "2023-01-18",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "scientific_publication",
+      "titleRu": "Что происходит с запахом перед рецептором",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n30c-olfactory-mucus",
+      "sourceIds": [
+        "n30c-olfactory-mucus-s1",
+        "n30c-olfactory-mucus-s2",
+        "n30c-olfactory-mucus-s3",
+        "n30c-olfactory-mucus-s4"
+      ],
+      "dateEvidence": {
+        "sourceId": "n30c-olfactory-mucus-s1",
+        "locator": "Frontmatter;Odorantconversions;Effectofenzymaticconversiononperception",
+        "summaryRu": "Публикация18.01.2023;pCA->p-cresol;адаптация/receptorsподдерживаютрольmetabolism;kineticswithinonesniffunclear."
+      },
+      "storyAngleRu": "Что происходит с запахом перед рецептором",
+      "researchNotesRu": "Неинструкциялечения/увлажнения/диагностики. Отсутствиеразницвpilotнеотрицаетдругиеметаболическиенаблюдения;неутверждаетсяточныйсоставвдыхаемойсмесивнутриодноговдоха."
+    },
+    {
+      "id": "n30c-osmanthus-genome",
+      "eventDate": "2018-11-20",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "scientific_publication",
+      "titleRu": "Цвет и запах маленького османтуса",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n30c-osmanthus-genome",
+      "sourceIds": [
+        "n30c-osmanthus-genome-s1",
+        "n30c-osmanthus-genome-s2",
+        "n30c-osmanthus-genome-s3",
+        "n30c-osmanthus-genome-s4"
+      ],
+      "dateEvidence": {
+        "sourceId": "n30c-osmanthus-genome-s1",
+        "locator": "Published;Abstract;Materialsandmethods/Genomesequencing",
+        "summaryRu": "20.11.2018genomearticle;Rixiangguiмногократноцветётнежаркимлетом;линалool/TPSflowerstageexpression."
+      },
+      "storyAngleRu": "Цвет и запах маленького османтуса",
+      "researchNotesRu": "Самостоятельныйсюжетосмантуса:сорт/цвет/каротиноидноерасщепление/температура,непересказroseorlavendergenome. Профильживогоцветканеприравненабсолюту;correlationнеобъявленаполныммеханизмом."
     }
   ],
   "inclusionRule": "Only events with an exact historical date read and verified in the cited source. No candidates, disputed dates, inferred dates, or merely planned events.",

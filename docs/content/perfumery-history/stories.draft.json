@@ -15771,6 +15771,1321 @@
           ]
         }
       ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-07-15",
+      "eventId": "n30a-bagh-hind-2022",
+      "eventGroupId": "n30a-bagh-hind-2022",
+      "eventDate": "2022-07-15",
+      "category": "cultural_fact",
+      "localizations": {
+        "ru": {
+          "title": "Сад выходит из изображения",
+          "fullStory": "15 июля 2022 года в лос-анджелесском Институте искусства и обоняния началась физическая выставка Bagh-e Hind. Критик и парфюмер Бхарти Лалвани и историк Николас Рот переводили сады могольской и раджпутской живописи на язык запахов. В галерее появились пять композиций, подготовленных парфюмером Miss Layla по их материалам. Репродукции картин показывали в исходном размере, рядом разместили благовония, мыло, растения и стихи на урду с английскими переводами.\n\nПрежде проект существовал в интернете. Переход в комнату изменил саму кураторскую задачу. В цифровом саду можно было почти без ограничений соединять изображения, музыку и тексты, но запах приходилось описывать. Теперь ароматические и материальные объекты действительно оказывались рядом со зрителем, зато пространство стало конечным. В ретроспективной заметке авторы рассказывают, как обменивались набросками между Пуной и Бостоном, а затем выбирали и сокращали элементы для показа в Лос-Анджелесе.\n\nЗа этим стояла долгая работа со словами. В интервью создатели объясняли, что обсуждали сезон, растения и менее очевидные детали изображённой среды: грязь, пот, сожжённую древесину. Рот хотел различать живые растения по их собственному запаху, а не довольствоваться условной «цветочностью». При обсуждении цитрусовых значение имело даже различие между тёплым образом цитрона с флердоранжем и кислым лимоном. Историческое чтение картины задавало парфюмеру конкретные вопросы, на которые тот отвечал средствами композиции.\n\nОдин из разделов посвящался кевре. В опубликованной переписке о Kamod Ragini Рот обращает внимание на тщательно изображённые душистые растения возле ложа из цветов. Лалвани делает кевру центральным мотивом и обсуждает франжипани, чампаку, туберозу и жасмин. При этом она отдельно отмечает: париджат на картине не изображён, его присутствие можно лишь вообразить. Такая открытость сохраняет границу между прочитанной деталью и творческим выбором. Перед нами современный ароматический перевод живописи, в котором можно увидеть не только результат, но и ход разговора между историком и парфюмером."
+        },
+        "en": {
+          "title": "A garden steps out of the picture",
+          "fullStory": "On 15 July 2022, the Institute for Art and Olfaction in Los Angeles began the physical exhibition Bagh-e Hind. Art critic and perfumer Bharti Lalwani and historian Nicolas Roth were translating the gardens of Mughal and Rajput paintings into smell. Five compositions, prepared by perfumer Miss Layla from their materials, appeared in the gallery. Reproductions showed the paintings at their original size, accompanied by incense, soaps, plants and Urdu poetry with English translations.\n\nPreviously, the project had existed online. Moving into a room changed the curatorial problem. A digital garden could combine pictures, music and writing with few spatial limits, but smell had to be communicated through description. Now fragrant and material objects could actually meet their audience, while the available space became finite. In their retrospective account, the curators describe exchanging sketches between Pune and Boston, then selecting and reducing elements for installation in Los Angeles. Making an exhibition involved deciding what could share that particular room.\n\nBehind it lay an extended conversation about words. In an interview, the makers explained how they discussed seasons, plants and less obvious features of the depicted surroundings: mud, sweat and burned wood. Roth wanted the recognizable smells of living plants rather than a generic suggestion of flowers. Even citrus required distinctions: the warmth of citron and orange blossom was different from acidic lemon. Reading the paintings historically gave the perfumer specific questions to answer with a composition. Botanical details could influence the character of a fragrance instead of merely supplying its name.\n\nOne section concerned kewra. In the published correspondence about Kamod Ragini, Roth notices the carefully depicted fragrant plants around a bed of flowers. Lalwani makes kewra central and discusses frangipani, champaca, tuberose and jasmine. She also explicitly identifies an imaginative addition: parijat is absent from the picture, although its fragrant presence can be imagined. That openness preserves a boundary between a visible detail and a creative decision. This was a contemporary olfactory translation of painting whose working conversation remained available alongside the finished result."
+        }
+      },
+      "sourceIds": [
+        "n30a-bagh-iao",
+        "n30a-bagh-retro",
+        "n30a-bagh-interview",
+        "n30a-bagh-kewra"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Физический показ Bagh-e Hind в IAO проходил 15.07–12.08.2022; кураторы Lalwani/Roth; пять композиций Miss Layla, репродукции в исходном размере, благовония, мыло, растения, поэзия урду.",
+          "factIds": [
+            "n30a-bagh-hind-2022-f1"
+          ],
+          "sourceIds": [
+            "n30a-bagh-iao",
+            "n30a-bagh-retro"
+          ]
+        },
+        {
+          "claim": "Проект перешёл из интернета в физическое пространство; авторы работали между Pune и Boston и отбирали объекты с учётом конечного помещения.",
+          "factIds": [
+            "n30a-bagh-hind-2022-f2"
+          ],
+          "sourceIds": [
+            "n30a-bagh-retro"
+          ]
+        },
+        {
+          "claim": "Авторы обсуждали сезоны, запахи растений, грязь, пот и горелую древесину; Roth различает citron/orange blossom и acidic lemon.",
+          "factIds": [
+            "n30a-bagh-hind-2022-f3"
+          ],
+          "sourceIds": [
+            "n30a-bagh-interview"
+          ]
+        },
+        {
+          "claim": "В переписке Kewra Roth описывает душистые растения Kamod Ragini; Lalwani ставит кевру в центр, перечисляет цветы и прямо называет parijat воображаемым дополнением.",
+          "factIds": [
+            "n30a-bagh-hind-2022-f4"
+          ],
+          "sourceIds": [
+            "n30a-bagh-kewra"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-09-07",
+      "eventId": "n30a-corning-sensorium-2024",
+      "eventGroupId": "n30a-corning-sensorium-2024",
+      "eventDate": "2024-09-07",
+      "category": "cultural_fact",
+      "localizations": {
+        "ru": {
+          "title": "Что хранит стекло, кроме духов",
+          "fullStory": "7 сентября 2024 года в Музее стекла в Корнинге открылась Sensorium: Stories of Glass and Fragrance. Куратор Джули Бельмар предложила рассматривать флаконы как предметы, в которых сохранились истории власти, обмена и представлений о роскоши. Экспозиция соединяла древние и современные сосуды. Близость стекла и парфюмерии объяснялась вполне материально: непроницаемая, химически инертная оболочка помогает удерживать летучее содержимое, а её внешность даёт ему видимый образ.\n\nОдной из отправных точек стал набор четырёх золочёных флаконов с эмалями из Европы и Гуджарата, датированный 1725–1750 годами. Такие сосуды предназначались для пряных масел, которые голландцы дарили дипломатическим партнёрам в регионе Индийского океана. Посетителям предлагали познакомиться с историческими ароматами, связанными с пряностями из Индонезии, Индии и Шри-Ланки. Предмет в витрине получал ароматическое продолжение: запах помогал читать стекло как свидетельство торговли и отношений между людьми.\n\nСовременный ответ представили дизайнеры Эктор Эсраве и Игнасио Кадена, работавшие для мексиканской марки Xinú. Производитель Nouvel описывает их флакон как сочетание выдувного стекла и деревянной крышки ручной работы. Когда духи заканчиваются, предмет можно использовать снова. Вещь сохраняет ценность после исчезновения содержимого; история сосуда не обязана обрываться вместе с последними каплями аромата. Для выставки о хранении запаха это особенно выразительная деталь.\n\nУ художницы Голди Побладор стекло удерживало намеренно неприятный запах. В кураторском рассказе о выставке Бельмар описывает пару Squalor: флаконы ручной работы содержат композиции, полученные из загрязнённых вод манильской реки Пасиг. Работа обращается к ухудшению городской среды. Красивый предмет здесь не обещает привычного удовольствия от духов: его содержимое требует внимания к месту, откуда оно пришло. Рядом с дипломатическим подарком и пригодным для повторного использования флаконом эта пара расширяет сам вопрос о ценности аромата. Стекло способно беречь не только приятные впечатления, но и неудобную память, которой художник придаёт форму."
+        },
+        "en": {
+          "title": "What glass holds besides perfume",
+          "fullStory": "On 7 September 2024, the Corning Museum of Glass opened Sensorium: Stories of Glass and Fragrance. Curator Julie Bellemare invited visitors to read bottles as objects holding histories of power, exchange and luxury. Ancient and contemporary vessels shared the exhibition. The relationship between glass and perfumery had a practical basis: an impermeable, chemically inert container helps retain volatile contents, while its appearance gives those contents a visible identity. The bottle could be considered alongside the fragrance rather than treated as incidental packaging.\n\nOne starting point was a set of four gilded and enameled flasks from Europe and Gujarat, dated 1725–1750. Such vessels held precious spiced oils offered by the Dutch to diplomatic partners around the Indian Ocean. Visitors could encounter historical fragrances associated with spices from Indonesia, India and Sri Lanka. A displayed object thus acquired an olfactory extension. Smell helped make the glass legible as evidence of trade and relationships between people, connecting the preserved container with the kind of substance it once held.\n\nA contemporary response came from Héctor Esrawe and Ignacio Cadena, designers working for Mexican perfume house Xinú. Manufacturer Nouvel describes their bottle as a combination of blown glass and a handcrafted wooden lid. Once the perfume is gone, the object can be used again. Its value survives the disappearance of its contents; the story of a vessel need not finish with the final drops of fragrance. For an exhibition concerned with holding scent, that continuing usefulness was a particularly apt detail.\n\nArtist Goldie Poblador used glass to contain deliberately unpleasant smells. In her account of the exhibition, Bellemare describes Squalor, a pair of handmade bottles containing compositions sourced from the polluted waters of Manila's Pasig River. The work addresses environmental degradation. Here, an appealing object offers something more demanding than conventional fragrant pleasure: its contents direct attention back to a place. Beside diplomatic gifts and a reusable perfume bottle, the pair widened the question of what makes a scent valuable. Glass could preserve an uncomfortable memory as well as a beautiful impression."
+        }
+      },
+      "sourceIds": [
+        "n30a-corning-archive",
+        "n30a-corning-press",
+        "n30a-corning-nouvel",
+        "n30a-corning-bellemare"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Sensorium открылась 07.09.2024 в Corning Museum of Glass; куратор Julie Bellemare; исторические и современные сосуды рассматриваются через власть, обмен, роскошь.",
+          "factIds": [
+            "n30a-corning-sensorium-2024-f1"
+          ],
+          "sourceIds": [
+            "n30a-corning-archive",
+            "n30a-corning-press"
+          ]
+        },
+        {
+          "claim": "Стекло подходит для хранения ароматов благодаря непроницаемости и инертности.",
+          "factIds": [
+            "n30a-corning-sensorium-2024-f2"
+          ],
+          "sourceIds": [
+            "n30a-corning-press"
+          ]
+        },
+        {
+          "claim": "Набор четырёх флаконов Europe and Gujarat 1725–1750 связан с дипломатическими дарами голландцев; в галерее можно было обонять исторические пряные ароматы Индонезии, Индии, Шри-Ланки.",
+          "factIds": [
+            "n30a-corning-sensorium-2024-f3"
+          ],
+          "sourceIds": [
+            "n30a-corning-archive"
+          ]
+        },
+        {
+          "claim": "Флаконы Xinú вошли в выставку; дизайн Esrawe/Cadena, производство Nouvel, выдувное стекло, ручная деревянная крышка, повторное использование.",
+          "factIds": [
+            "n30a-corning-sensorium-2024-f4"
+          ],
+          "sourceIds": [
+            "n30a-corning-archive",
+            "n30a-corning-nouvel"
+          ]
+        },
+        {
+          "claim": "Squalor Побладор — пара флаконов с неприятными запахами из загрязнённых вод Pasig, критика деградации среды Манилы.",
+          "factIds": [
+            "n30a-corning-sensorium-2024-f5"
+          ],
+          "sourceIds": [
+            "n30a-corning-bellemare"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-04-13",
+      "eventId": "n30a-cooper-senses-2018",
+      "eventGroupId": "n30a-cooper-senses-2018",
+      "eventDate": "2018-04-13",
+      "category": "cultural_fact",
+      "localizations": {
+        "ru": {
+          "title": "Снег, который можно понюхать в музее",
+          "fullStory": "13 апреля 2018 года в нью-йоркском Cooper Hewitt открылась выставка The Senses: Design Beyond Vision. Кураторы Эллен Лаптон и Андреа Липпс собрали проекты, предлагающие узнавать дизайн разными чувствами. Среди них были работы с запахом. Аромат рассматривался рядом с фактурой, звуком и движением: как средство сделать предмет или пространство понятнее людям с разными способностями восприятия, а также дать посетителю больше способов вступить с ними в контакт.\n\nДля Snow Storm парфюмер Кристофер Брозиус создал зимний запах. Его носителями стали подвешенные светло-голубые шары из валяной шерсти. Мягкая вещь и аромат складывались в одно произведение, в котором важен сам способ знакомства с материалом. В музейном описании другая работа, Scent Fountain: Fear and Volatile Marilyn Кристофа Лодамьеля и Уго Шаррона, приглашала сопоставлять запах и текстуру. Парфюмерная композиция могла существовать вне привычной задачи выбора духов для кожи и отвечать на совсем другой вопрос: как пахнет ощущение?\n\nЖурнал Domus, беседовавший с кураторами, выделил ещё один путь к обонянию. Архитекторы Рональд Раэль и Вирджиния Сан-Фрателло экспериментировали с трёхмерной печатью сосудов из материалов, включающих кофе, чай, сахар, карри и виноградные остатки. Запах оказывался свойством самого предмета. Его не обязательно было добавлять поверх готовой формы: материал уже содержал чувственную информацию. Рядом с мягкими шерстяными шарами такие объекты показывали разные способы встречи руки, глаза и носа в пространстве одной выставки.\n\nОсобенно внимательный отклик оставила преподавательница Колумбийского университета, не имеющая обоняния. Она описала ароматические круги, скульптуры, связывающие запах с фактурой, и карту запахов Амстердама, соединяющую городскую среду с воспоминаниями. Выставка давала ей поводы думать об ароматах через другие средства восприятия и искать для них слова. Этот личный опыт сохраняет важную особенность The Senses: участие в разговоре о запахе не сводилось к способности понюхать одинаковый образец. Одну тему можно было читать в форме, цвете, прикосновении и чужом описании."
+        },
+        "en": {
+          "title": "Snow to smell inside a museum",
+          "fullStory": "On 13 April 2018, New York's Cooper Hewitt opened The Senses: Design Beyond Vision. Curators Ellen Lupton and Andrea Lipps brought together projects inviting people to encounter design through different senses. Some involved smell. Fragrance appeared alongside texture, sound and movement as a way of making objects and spaces more understandable to people with different sensory abilities, while giving visitors several routes into an experience. Perfumery entered a wider discussion about how a designed encounter could work.\n\nFor Snow Storm, perfumer Christopher Brosius created a winter-inspired scent carried by pale blue balls of felted wool suspended overhead. Soft material and fragrance became parts of one work, in which the manner of meeting the material mattered. Another installation, Christophe Laudamiel and Ugo Charron's Scent Fountain: Fear and Volatile Marilyn, invited comparisons between texture and smell. A composition could serve a purpose beyond selecting a perfume to wear. It could ask how an impression might be translated between the hand and the nose.\n\nDomus, speaking with the curators, highlighted another route to olfaction. Architects Ronald Rael and Virginia San Fratello experimented with printing vessels from materials incorporating coffee, tea, sugar, curry and grape residues. Smell became a property of the object itself. It did not necessarily have to be applied to a completed form: the material already contained sensory information. Alongside the soft woolen spheres, these objects proposed different meetings between hand, eye and nose within a single exhibition. The relationship between form and fragrance could begin during the making of an object.\n\nAn especially attentive response came from a Columbia University teacher without a sense of smell. She described fragrance wheels, sculptures connecting smells with textures, and an Amsterdam smell map linking urban surroundings with memories. The exhibition gave her ways to think about aromas through other kinds of perception and to search for words for them. Her personal account preserves a particular quality of The Senses: joining a conversation about smell involved more than everyone sniffing the same sample. A subject could also be read in shape, color, touch and another person's description."
+        }
+      },
+      "sourceIds": [
+        "n30a-cooper-date",
+        "n30a-cooper-press",
+        "n30a-cooper-domus",
+        "n30a-cooper-columbia"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "The Senses: Design Beyond Vision открылась13.04.2018в Cooper Hewitt; кураторы Ellen Lupton/Andrea Lipps, мультисенсорный дизайн и доступность.",
+          "factIds": [
+            "n30a-cooper-senses-2018-f1"
+          ],
+          "sourceIds": [
+            "n30a-cooper-date",
+            "n30a-cooper-press"
+          ]
+        },
+        {
+          "claim": "Snow Storm Brosius: подвешенные голубые шерстяные шары с зимним запахом; Scent Fountain Fear and Volatile Marilyn Laudamiel/Charron соединяет текстуру и запах.",
+          "factIds": [
+            "n30a-cooper-senses-2018-f2"
+          ],
+          "sourceIds": [
+            "n30a-cooper-press",
+            "n30a-cooper-domus"
+          ]
+        },
+        {
+          "claim": "Rael/San Fratello печатали сосуды из материалов с кофе, чаем, сахаром, карри и виноградными остатками.",
+          "factIds": [
+            "n30a-cooper-senses-2018-f3"
+          ],
+          "sourceIds": [
+            "n30a-cooper-domus"
+          ]
+        },
+        {
+          "claim": "Автор университетского рассказа не имеет обоняния; описала ароматические круги, скульптуры с фактурами, smellmap Amsterdam и связь с воспоминаниями.",
+          "factIds": [
+            "n30a-cooper-senses-2018-f4"
+          ],
+          "sourceIds": [
+            "n30a-cooper-columbia"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-06-14",
+      "eventId": "n30a-mip-sensitive-2024",
+      "eventGroupId": "n30a-mip-sensitive-2024",
+      "eventDate": "2024-06-14",
+      "category": "cultural_fact",
+      "localizations": {
+        "ru": {
+          "title": "Роза, оставшаяся в воздухе",
+          "fullStory": "14 июня 2024 года Международный музей парфюмерии в Грассе открыл Mondes sensibles — выставку о чувственной истории целостного произведения искусства. Куратором стала Сандра Барре. В экспозиции работали три современных художника: Тифен Кальметт, Камий Корреас и Флориан Мермен. Для музея, посвящённого парфюмерии, это был повод поговорить о запахе как об одной из художественных материй, способных соединяться со зрением, слухом и прикосновением.\n\nИсторическая часть возвращалась к произведениям, опыт которых трудно сохранить одной фотографией. Издатель каталога описывает документы, эскизы, свидетельства и записи, через которые обычно передают подобное искусство. Здесь к ним добавлялись ароматические реконструкции и пахучие материалы. Речь шла не просто о сопровождении изображения приятным фоном. Если запах входил в замысел произведения, его исчезновение меняло то, что оставалось следующим поколениям. Обоняние становилось вопросом сохранения, а не только впечатления от посещения.\n\nУ Мермена этот вопрос получил образ розы. В интервью Барре художник рассказывает об инсталляции Le Spectre de la rose. Её отправной точкой стало пурпурное вечернее платье певицы Ани Возняк; к стихотворению Теофиля Готье художник пришёл через музыку. Для выставки он работал над особым ароматом с парфюмером Камий Шемарден и самой певицей. Композиция должна была передать жизнь розы от утренней росы до увядания. Мермен описывал запах как терпкий, связанный с исчезновением и призраком. Цветок получал во времени продолжение, которое не исчерпывалось скульптурой или изображением.\n\nВ программе искусствоведческого конгресса Барре отдельно объяснила исследовательскую сторону работы. Она рассматривала возможность ароматических реконструкций на примере «Метахорий» Валентины де Сен-Пуан, Il Vapore Билла Виолы и Etrog Жан-Пьера Бертрана. Само слово «реконструкция» здесь существенно: современная работа с источниками помогает приблизиться к утраченному чувственному слою. Такой подход не делает прошлый опыт полностью доступным. Он предлагает внимательнее читать следы — и спрашивать, что именно музей сохраняет, когда оставляет от произведения только то, что можно увидеть."
+        },
+        "en": {
+          "title": "A rose remaining in the air",
+          "fullStory": "On 14 June 2024, the International Perfume Museum in Grasse opened Mondes sensibles, an exhibition exploring the sensory history of the total artwork. Sandra Barré curated it, with installations by three contemporary artists: Tiphaine Calmettes, Camille Correas and Florian Mermin. For a museum devoted to perfumery, the exhibition offered a way of considering smell as an artistic material that could work together with sight, sound and touch.\n\nThe historical section returned to works whose experience is difficult to preserve in a photograph alone. The catalogue's publisher describes the documents, sketches, testimonies and recordings through which such art is usually transmitted. Here, olfactory reconstructions and fragrant materials added another dimension. The issue extended beyond supplying a pleasant background to an image. When smell belonged to an artwork's conception, losing it changed what later generations could encounter. Olfaction became a question of preservation as well as an impression made during a museum visit.\n\nMermin gave that question the image of a rose. In an interview with Barré, he discusses his installation Le Spectre de la rose. Its starting point was a purple evening dress belonging to singer Ania Wozniak; he reached Théophile Gautier's poem through music. For the exhibition, he worked with perfumer Camille Chemardin and the singer on a particular fragrance. It was intended to evoke a rose's life from morning dew to decline. Mermin described the smell as acrid, associated with disappearance and a ghost. The flower acquired a presence unfolding over time, extending beyond sculpture or a visible image.\n\nIn an art-history congress program, Barré separately explained the research behind this approach. She considered olfactory reconstruction through Valentine de Saint-Point's Métachorie, Bill Viola's Il Vapore and Jean-Pierre Bertrand's Etrog. The word “reconstruction” matters: a contemporary engagement with sources can approach a lost sensory layer without making the earlier experience wholly accessible. It asks us to read traces more carefully and to consider what a museum actually preserves when it retains only the parts of a work that can be seen."
+        }
+      },
+      "sourceIds": [
+        "n30a-mip-report",
+        "n30a-mip-faton",
+        "n30a-mip-mermin",
+        "n30a-mip-ciha"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Mondes sensibles началась14.06.2024в MIP, Grasse; Sandra Barré, установки Tiphaine Calmettes, Florian Mermin и Camille Correas.",
+          "factIds": [
+            "n30a-mip-sensitive-2024-f1"
+          ],
+          "sourceIds": [
+            "n30a-mip-report"
+          ]
+        },
+        {
+          "claim": "Историческая часть использует документы, свидетельства, эскизы, фото/звук, ароматические реконструкции и пахучие материалы; тема сохранение чувственного слоя total artwork.",
+          "factIds": [
+            "n30a-mip-sensitive-2024-f2"
+          ],
+          "sourceIds": [
+            "n30a-mip-faton"
+          ]
+        },
+        {
+          "claim": "Mermin: Le Spectre de la rose, пурпурное платье певицы Ania Wozniak, Gautier через музыку; аромат с Camille Chemardin и певицей, образ жизни розы от росы до упадка, запах âcre/ghost/disappearance.",
+          "factIds": [
+            "n30a-mip-sensitive-2024-f3"
+          ],
+          "sourceIds": [
+            "n30a-mip-mermin"
+          ]
+        },
+        {
+          "claim": "Barré в авторском abstract рассматривает реконструкцию olfactory archive Métachorie1913, Il Vapore1975, Etrog1999 как основу подхода к выставке.",
+          "factIds": [
+            "n30a-mip-sensitive-2024-f4"
+          ],
+          "sourceIds": [
+            "n30a-mip-ciha"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-01-22",
+      "eventId": "n30b-perfect-scent-2008",
+      "eventGroupId": "n30b-perfect-scent-2008",
+      "eventDate": "2008-01-22",
+      "category": "cultural_fact",
+      "localizations": {
+        "ru": {
+          "title": "Между манго и пробой",
+          "fullStory": "22 января 2008 года издательство Henry Holt выпустило The Perfect Scent Чендлера Бёрра. Парфюмерный критик выбрал необычный способ рассказать о духах: наблюдать за их созданием, пока результат ещё не превратился в красивую историю на упаковке. Две параллельные линии книги разворачивались в Париже и Нью-Йорке. Одной из них стала работа Жан-Клода Эллена над Un Jardin sur le Nil для Hermès.\n\nДля этой линии важен переход от отдельного заказа к постоянной работе внутри дома. Эллена становился заметным автором там, где имя создателя формулы обычно оставалось за именем марки. Бёрр показывал не только готовый аромат, но и напряжение между художественным решением и задачами компании. Зелёный манго на Ниле оказывался отправной точкой сложного процесса уточнения запаха.\n\nСовременник книги, рецензент Now Smell This, описывал восемь месяцев наблюдения за Эллена и командой Hermès. Маршрут проходил через Асуан, парижскую штаб-квартиру и Грасс, где дорабатывались три пробы. Это уже другая география парфюмерии: рядом с местом вдохновения появляются комнаты, в которых впечатление сравнивают, отвергают или меняют. Между деревом и флаконом лежит работа, которую трудно показать одним рекламным изображением.\n\nВторая линия посвящена сотрудничеству Сары Джессики Паркер с Coty над Lovely. Их соседство в книге создаёт полезный масштаб: собственный парфюмер французского дома и крупный американский проект со знаменитостью существуют в одной индустрии, хотя организованы по-разному. Бёрр соединяет творческую работу с устройством бизнеса, позволяя читателю следить за людьми, которые принимают решения.\n\nРеакция на книгу тоже была частью разговора об открытости отрасли. Kirkus ценил сочетание делового взгляда и обонятельной образности; Now Smell This считал доступ к разным участникам неравномерным. Поэтому книга интересна и как репортаж, и как пример границ репортажа. Рядом с пробами Эллена виден сам наблюдатель: насколько близко ему разрешили подойти к работе, которая обычно начинается задолго до появления флакона."
+        },
+        "en": {
+          "title": "Between the Mango and the Trial",
+          "fullStory": "On 22 January 2008, Henry Holt published Chandler Burr's The Perfect Scent. The perfume critic chose an unusual way of writing about fragrance: following its creation while the result had yet to become a polished story on a box. The book's parallel narratives unfolded in Paris and New York. One followed Jean-Claude Ellena's work on Un Jardin sur le Nil for Hermès.\n\nAn important part of that narrative was the move from individual commissions towards a continuing position within a house. Ellena became a visible author in a field where the formula's creator often disappeared behind the brand's name. Burr showed a fragrance being developed alongside the competing demands of a business. The idea of green mangoes on the Nile became the starting point for a complicated process of defining and refining a smell.\n\nA contemporary reviewer at Now Smell This described eight months of observation with Ellena and the Hermès team. The route led through Aswan, the Paris headquarters and Grasse, where three trials were fine-tuned. This was another geography of perfumery: beside the place of inspiration stood rooms in which an impression could be compared, rejected or changed. Between a tree and a finished bottle lay work that a single advertising image could scarcely explain.\n\nThe second narrative concerned Sarah Jessica Parker's collaboration with Coty on Lovely. Placing them together established a useful scale: a French house's own perfumer and a major American celebrity project belonged to the same industry, although their working arrangements differed. Burr connected creative decisions with the organisation of the business, allowing readers to follow the people making those decisions.\n\nThe book's reception also became a conversation about how open the industry really was. Kirkus valued its combination of business reporting and olfactory imagination; Now Smell This considered access to the different participants uneven. That makes the book interesting both as reporting and as an example of reporting's limits. Beside Ellena's trials stands the observer himself: how close was he allowed to get to work that usually begins long before a bottle appears?"
+        }
+      },
+      "sourceIds": [
+        "c-sjp-burr",
+        "n30b-burr-society",
+        "n30b-burr-nst",
+        "n30b-burr-kirkus"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Henry Holt выпустило американское издание The Perfect Scent22.01.2008; страница данного ebookISBN9781429924658.",
+          "factIds": [
+            "n30b-perfect-scent-2008-f1"
+          ],
+          "sourceIds": [
+            "c-sjp-burr"
+          ]
+        },
+        {
+          "claim": "Книга сопоставляет Ellena/HermèsUnJardinSurLeNil и Parker/CotyLovely; парфюмерный репортаж раскрывает творческие и деловые решения.",
+          "factIds": [
+            "n30b-perfect-scent-2008-f2"
+          ],
+          "sourceIds": [
+            "n30b-burr-society"
+          ]
+        },
+        {
+          "claim": "Рецензент описывает восемь месяцев наблюдения, Асуан/Париж/Грасс, трипробы; отмечает неравномерный доступ.",
+          "factIds": [
+            "n30b-perfect-scent-2008-f3"
+          ],
+          "sourceIds": [
+            "n30b-burr-nst"
+          ]
+        },
+        {
+          "claim": "Kirkus описывает становление Эллена штатным авторомHermès, зелёныйманго и смешение делового репортажа с языком запахов.",
+          "factIds": [
+            "n30b-perfect-scent-2008-f4"
+          ],
+          "sourceIds": [
+            "n30b-burr-kirkus"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-07-05",
+      "eventId": "n30b-coming-senses-ebook-2012",
+      "eventGroupId": "n30b-coming-senses-ebook-2012",
+      "eventDate": "2012-07-05",
+      "category": "cultural_fact",
+      "localizations": {
+        "ru": {
+          "title": "Разрешить себе аромат",
+          "fullStory": "В каталоге Penguin Australia 5 июля 2012 года отмечено как день выхода электронной книги Coming to My Senses Алиссы Харад. Её подзаголовок соединял духи, удовольствие и неожиданную невесту. Вместо рассказа о знаменитом носе автор выбрала собственную перемену: серьёзная исследовательница литературы обнаруживает, что занятие, которое она считала чуждым себе, становится источником любопытства и общения.\n\nНачалось всё с парфюмерного блога. Харад было тридцать шесть; после защиты диссертации она хотела писать, но не знала, как выстроить следующую часть жизни. Тексты о запахах увлекли её, хотя интерес к духам плохо сочетался с привычным представлением о себе. Поход за пробами постепенно вывел чтение за пределы экрана. В книге этот переход важнее поиска одного идеального флакона: вместе с запахами меняется круг людей, с которыми можно о них разговаривать.\n\nPublishers Weekly прослеживал конкретные места этой истории: парфюмерный салон в Остине, отделы Bergdorf’s и Barneys в Нью-Йорке, встречу перед свадьбой в родном Бойсе. Там Харад уже делилась историями и рекомендациями. Увлечение, которое сначала хотелось скрывать, становилось общим занятием. Такая последовательность придаёт парфюмерному мемуару движение: меняется не ассортимент на полке, а положение рассказчицы среди других людей.\n\nВ интервью Open Letters Monthly обсуждалось напряжение между интеллектуальной, феминистской идентичностью Харад и представлением о духах как о легкомысленной женской принадлежности. Парфюмерия предлагала повод пересмотреть это готовое деление. О запахе можно писать внимательно, спорить, учиться его различать и при этом получать удовольствие. Личная история делала заметным то, что часто теряется за перечнем нот: кто разрешает себе интересоваться красотой и на каких условиях.\n\nНа своём сайте Харад описывает книгу как результат года неожиданной одержимости ароматами. Её образование было литературным; до книги она работала с текстами, а также с творческими программами. Поэтому Coming to My Senses занимает особое место на парфюмерной полке: это история человека, который через новое чувственное увлечение заново находит собственный голос."
+        },
+        "en": {
+          "title": "Making Room for Perfume",
+          "fullStory": "Penguin Australia's catalogue records 5 July 2012 as the publication date of the ebook Coming to My Senses by Alyssa Harad. Its subtitle brought together perfume, pleasure and an unlikely bride. Rather than telling the story of a celebrated nose, Harad followed her own change: a serious student of literature discovers that something she once considered alien to her identity can become a source of curiosity and company.\n\nIt began with a perfume blog. Harad was thirty-six; after completing her doctorate, she wanted to write but was unsure how to shape the next part of her life. Writing about smells drew her in, although an interest in perfume sat awkwardly beside her established idea of herself. A trip to try samples gradually carried her reading beyond the screen. In the book, that transition matters more than finding a single perfect bottle: discovering smells also changes the circle of people with whom she can discuss them.\n\nPublishers Weekly traced the story through specific places: a perfume salon in Austin, the fragrance departments of Bergdorf's and Barneys in New York, and a bridal gathering back home in Boise. By that point, Harad was sharing stories and recommendations herself. An enthusiasm she initially wanted to conceal had become a shared activity. This sequence gives a perfume memoir its movement: what changes is the narrator's relationship with other people, rather than simply the assortment on her shelf.\n\nAn interview in Open Letters Monthly explored the tension between Harad's intellectual, feminist identity and the idea of perfume as frivolous feminine decoration. Fragrance offered an occasion to reconsider that division. Smells could invite careful writing, disagreement and learning while remaining a pleasure. Her personal account exposed something that can disappear behind a list of notes: who allows themselves an interest in beauty, and on what terms.\n\nOn her own website, Harad describes the book as growing from a year of unexpected obsession with perfume. Her training was literary; her earlier work involved writing and creative programmes. Coming to My Senses consequently occupies a particular place on the fragrance bookshelf: the story of someone finding her own voice through a new sensory enthusiasm."
+        }
+      },
+      "sourceIds": [
+        "n30b-harad-date",
+        "n30b-harad-about",
+        "n30b-harad-pw",
+        "n30b-harad-interview"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "PenguinAustralia датируетebook9781101583678 05.07.2012, imprintPENUSebookAdult.",
+          "factIds": [
+            "n30b-coming-senses-ebook-2012-f1"
+          ],
+          "sourceIds": [
+            "n30b-harad-date"
+          ]
+        },
+        {
+          "claim": "Авторучиласьлитературе,PhDUniversityofTexas; книга вырослаизгодаувлечениядухами; работалас текстамиитворческимипрограммами.",
+          "factIds": [
+            "n30b-coming-senses-ebook-2012-f2"
+          ],
+          "sourceIds": [
+            "n30b-harad-about"
+          ]
+        },
+        {
+          "claim": "В36летблог,неуверенностьпоследиссертации,перемена;Остин/Bergdorf’s/Barneys/предсвадебнаявстречаБойсе.",
+          "factIds": [
+            "n30b-coming-senses-ebook-2012-f3"
+          ],
+          "sourceIds": [
+            "n30b-harad-pw"
+          ]
+        },
+        {
+          "claim": "Интервьюрассматриваетнапряжениемеждуфеминистской/интеллектуальнойидентичностьюиобразомдуховкакженскогоукрашения.",
+          "factIds": [
+            "n30b-coming-senses-ebook-2012-f4"
+          ],
+          "sourceIds": [
+            "n30b-harad-interview"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-09-25",
+      "eventId": "n30b-perfume-bible-2014",
+      "eventGroupId": "n30b-perfume-bible-2014",
+      "eventDate": "2014-09-25",
+      "category": "cultural_fact",
+      "localizations": {
+        "ru": {
+          "title": "Путеводитель, с которым можно спорить",
+          "fullStory": "25 сентября 2014 года вышло британское издание The Perfume Bible Джо Фэйрли и Лорны Маккей. Название обещало почти необъятный предмет, но задача книги была вполне земной: помочь человеку перейти от покупки знакомого флакона к осмысленному знакомству с парфюмерией. Авторы предлагали ориентиры там, где названия семейств, концентраций и материалов легко превращаются в закрытый язык.\n\nУ каждой был свой опыт общения с этой аудиторией. Фэйрли была соавтором Beauty Bible, а Маккей работала закупщиком ароматов в Harrods и Liberty. В книгу вошли советы по выбору духов и уходу за ними, путь ингредиентов от поля до флакона, интервью с парфюмерами и подборка ста ароматов, которые авторы советовали попробовать. Знание магазина соединялось с попыткой объяснить, что находится за прилавком.\n\nОсобенно любопытно, как читатели оценивали этот набор. Рецензент The Non-Blonde увидел удачное введение, а слово «библия» счёл слишком громким. Помимо привычных тем, он выделил выращивание душистых растений, коллекционирование рекламы и флаконов, ссылки на блоги и другие книги. Увлечение можно было продолжить в нескольких направлениях: через сад, изображения, историю вещей или разговор о конкретной композиции.\n\nТа же широта вызывала и вопросы. Рецензент заметил, что охват достигается ценой глубины, а список рекомендаций отражает личные вкусы авторов. Это важная черта любого парфюмерного путеводителя: он знакомит с миром через чей-то выбор. Страница со ста названиями одновременно помогает начать и показывает границы взгляда, с которым читатель имеет дело.\n\nPersolaise назвал книгу дружелюбной и подходящей для первого знакомства, отметив иллюстрации и личные наблюдения. Позже Нина Росс хвалила изображения флаконов и историческую хронологию, но хотела более разнообразного выбора ароматов. Вместе эти отклики сохраняют живую сторону издания: вводная книга не завершает разговор о вкусе. Она даёт названия, вопросы и картинки, с которыми человек затем подходит к реальным пробникам и начинает собственное знакомство с запахами."
+        },
+        "en": {
+          "title": "A Guide You Can Question",
+          "fullStory": "On 25 September 2014, the British edition of The Perfume Bible by Jo Fairley and Lorna McKay appeared. Its title promised an almost boundless subject, but the book's purpose was practical: helping someone move from buying a familiar bottle towards a more informed encounter with perfumery. It offered bearings in a field where the names of families, concentrations and materials can easily become a private language.\n\nEach author brought experience of communicating with that audience. Fairley co-authored the Beauty Bible, while McKay had worked as a fragrance buyer at Harrods and Liberty. Their book included advice on choosing perfume and caring for it, the journey of ingredients from field to bottle, interviews with perfumers, and a selection of one hundred fragrances they recommended trying. Knowledge of the shop floor met an attempt to explain what lay beyond the counter.\n\nThe ways readers assessed this combination are particularly revealing. The Non-Blonde's reviewer found a useful introduction but considered the word “bible” too grand. Alongside familiar subjects, he singled out growing fragrant plants, collecting advertising and bottles, and references to blogs and further books. An interest could continue in several directions: through gardening, images, the history of objects or discussion of a particular composition.\n\nThat breadth also prompted questions. The same reviewer observed that the wide coverage came at the expense of depth and that the recommendations reflected the authors' personal tastes. This is a significant feature of any fragrance guide: it introduces a world through someone's selection. A page of one hundred names can both help a reader begin and reveal the boundaries of the perspective being offered.\n\nPersolaise described the book as friendly and suitable for newcomers, noting its illustrations and personal insights. Later, Nina Ross praised the bottle artwork and historical timeline but wanted a more varied selection of fragrances. Together, these responses preserve the publication's conversational character. An introductory book does not finish the discussion of taste. It supplies names, questions and images that a reader can carry towards real samples, beginning an individual acquaintance with smells."
+        }
+      },
+      "sourceIds": [
+        "n30b-bible-date",
+        "n35b-ostrom-foundation",
+        "n30b-bible-nonblonde",
+        "n30b-bible-persolaise",
+        "n30b-bible-nina"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Британскийhardcover9780857832344вышел25.09.2014;авторыJoFairleyиLornaMcKay.",
+          "factIds": [
+            "n30b-perfume-bible-2014-f1"
+          ],
+          "sourceIds": [
+            "n30b-bible-date"
+          ]
+        },
+        {
+          "claim": "ФэйрлисоавторBeautyBible,МаккейзакупщикHarrods/Liberty;содержание:семейства,aftercare,fieldtoflacon,интервью,100ароматов.",
+          "factIds": [
+            "n30b-perfume-bible-2014-f2"
+          ],
+          "sourceIds": [
+            "n35b-ostrom-foundation"
+          ]
+        },
+        {
+          "claim": "РецензентTheNonBlondeсчитаеткнигувводной,отмечаетрастения/рекламу/флаконы/блоги;широтаценойглубины,личныйхарактер100списка.",
+          "factIds": [
+            "n30b-perfume-bible-2014-f3"
+          ],
+          "sourceIds": [
+            "n30b-bible-nonblonde"
+          ]
+        },
+        {
+          "claim": "Persolaiseсчитаеткнигудружелюбнойвводной,с привлекательнымииллюстрациями и личнымвзглядом.",
+          "factIds": [
+            "n30b-perfume-bible-2014-f4"
+          ],
+          "sourceIds": [
+            "n30b-bible-persolaise"
+          ]
+        },
+        {
+          "claim": "НинаРоссхвалитиллюстрациифлаконов/хронологию,хочетбольшегоразнообразиярекомендаций.",
+          "factIds": [
+            "n30b-perfume-bible-2014-f5"
+          ],
+          "sourceIds": [
+            "n30b-bible-nina"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-05-24",
+      "eventId": "n30b-scent-pearlstine-2022",
+      "eventGroupId": "n30b-scent-pearlstine-2022",
+      "eventDate": "2022-05-24",
+      "category": "cultural_fact",
+      "localizations": {
+        "ru": {
+          "title": "До того, как появился парфюмер",
+          "fullStory": "24 мая 2022 года Yale University Press выпустило Scent: A Natural History of Fragrance Элиз Вернон Перлстин с иллюстрациями Лары Колл Гастингер. Это была книга о знакомых парфюмерных материалах, в которой человек на время уступал центральное место растению. Вопрос звучал иначе: зачем дереву смола, а цветку запах, прежде чем ими заинтересовался парфюмер?\n\nТакой взгляд вырос из двух профессий автора. Перлстин семнадцать лет занималась биологией дикой природы, затем пришла к натуральной парфюмерии и преподаванию. Исследуя ингредиенты для занятий, она всё чаще возвращалась к их биологической истории. На собственном сайте автор рассказывает, что эти направления соединились в книге; договор с Yale она подписала в шестьдесят три года, а печатное издание увидела в шестьдесят шесть.\n\nУстройство Scent позволяет следить за этим переходом. Сначала идут ладан, мирра, копал, уд и сандал, затем пряности, включая кардамон, имбирь и ваниль. Дальше появляются садовые растения, дистилляция и современная парфюмерия. В таком соседстве сырьё перестаёт быть только строкой в перечне нот. У него есть часть растения, собственная функция и путь, по которому оно вошло в человеческую культуру.\n\nВ интервью своему университету Перлстин приводила пример свежескошенной травы. Узнаваемую зелень она объясняла летучими веществами, возникающими в ответ на повреждение листа. Запах, который человек связывает с приятной прогулкой, принадлежит и другой истории — реакции растения на происходящее вокруг. Это не отменяет нашего удовольствия, но добавляет к нему происхождение. Тот же подход направляет внимание к ароматам, через которые растения взаимодействуют с насекомыми и защищаются.\n\nАвтор описывает рассказ от лица цветов, семян, коры, смол и листьев, а также их отношений с опылителями. В парфюмерном чтении это меняет масштаб: за флаконом появляется живой мир, который не создавался для нашего туалетного столика. Роза или жасмин остаются прекрасными запахами, но получают биографию длиннее истории духов. Привычное слово на этикетке становится началом вопроса о растении."
+        },
+        "en": {
+          "title": "Before the Perfumer Arrived",
+          "fullStory": "On 24 May 2022, Yale University Press published Elise Vernon Pearlstine's Scent: A Natural History of Fragrance, illustrated by Lara Call Gastinger. It was a book about familiar perfumery materials in which humans temporarily yielded the central position to plants. The question changed: what use does a tree have for resin, or a flower for fragrance, before a perfumer becomes interested?\n\nThat perspective grew from the author's two careers. Pearlstine spent seventeen years in wildlife biology before turning to natural perfumery and teaching. Researching ingredients for her classes increasingly brought her back to their biological histories. On her own website, she describes those interests coming together in the book; she signed her Yale contract at sixty-three and saw the volume in print at sixty-six.\n\nThe structure of Scent allows readers to follow that transition. Frankincense, myrrh, copal, agarwood and sandalwood come first, followed by spices including cardamom, ginger and vanilla. Garden plants, distillation and modern perfumery appear further along. In this company, a material becomes more than a line in a list of notes. It has a place within a plant, a function of its own and a route into human culture.\n\nIn an interview with her university, Pearlstine used freshly cut grass as an example. She explained its familiar green smell through volatile substances released in response to damage. An aroma that someone associates with a pleasant walk also belongs to another story: a plant responding to what is happening around it. That origin adds something to our pleasure rather than removing it. The same approach draws attention to the smells through which plants interact with insects and defend themselves.\n\nThe author describes telling stories from the perspective of flowers, seeds, bark, resins and leaves, together with their relationships with pollinators. For a perfume reader, this changes the scale: behind the bottle appears a living world that did not develop for our dressing tables. Rose and jasmine remain beautiful smells, but gain biographies longer than the history of perfume. A familiar word on a label becomes the beginning of a question about a plant."
+        }
+      },
+      "sourceIds": [
+        "n30b-pearlstine-date",
+        "n30b-pearlstine-about",
+        "n30b-pearlstine-book",
+        "n30b-pearlstine-unlv"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Yaleвыпустилоebook9780300265576иhardcover978030024696424.05.2022,авторEliseVernonPearlstine,иллюстраторLaraCallGastinger.",
+          "factIds": [
+            "n30b-scent-pearlstine-2022-f1"
+          ],
+          "sourceIds": [
+            "n30b-pearlstine-date"
+          ]
+        },
+        {
+          "claim": "17летбиологдикойприроды,натуральнаяпарфюмерияипреподавание;контракт63года,издание66.",
+          "factIds": [
+            "n30b-scent-pearlstine-2022-f2"
+          ],
+          "sourceIds": [
+            "n30b-pearlstine-about"
+          ]
+        },
+        {
+          "claim": "Структуракниги:смолы/древесина,пряности,садовыерастения,дистилляция,современнаяпарфюмерия;перспективарастений/опылителей.",
+          "factIds": [
+            "n30b-scent-pearlstine-2022-f3"
+          ],
+          "sourceIds": [
+            "n30b-pearlstine-book"
+          ]
+        },
+        {
+          "claim": "ВинтервьюUNLVавторобъясняетзапахсрезаннойтравыgreenleafvolatilesкакответнаповреждение;ароматическиевеществасвязаннысзащитой/насекомыми.",
+          "factIds": [
+            "n30b-scent-pearlstine-2022-f4"
+          ],
+          "sourceIds": [
+            "n30b-pearlstine-unlv"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-06-11",
+      "eventId": "n30b-honorine-blanc-award-2026",
+      "eventGroupId": "n30b-honorine-blanc-award-2026",
+      "eventDate": "2026-06-11",
+      "category": "perfumer",
+      "localizations": {
+        "ru": {
+          "title": "Кедр и жасмин в общем воздухе",
+          "fullStory": "11 июня 2026 года Онорин Блан получила Lifetime Achievement Perfumer Award от американской Fragrance Foundation. Церемония проходила в David H. Koch Theater в Линкольн-центре. Вечер позволил увидеть её работу сразу в двух формах: как признанную карьеру и как запах, который встречал гостей ещё до вручения награды.\n\nДля этого вечера Блан создала Cedar Jasmine 1986. Кедровая нота отсылала к Ливану, где она родилась, а свежий жасмин — к оптимизму Нью-Йорка. Так она сама объясняла композицию в интервью фонда. Название связывало её с личной историей: в 1986 году семья переехала в Париж. Аромат помещения становился своего рода автопортретом, в котором географию можно было передать без изображения. Два выбранных образа говорили о корнях и новом месте жизни.\n\nК американскому признанию вела вполне профессиональная дорога. Блан окончила ISIPCA, построила карьеру в США и в 2013 году получила звание мастера-парфюмера. Среди её работ и совместных композиций компания называет Viva La Juicy, Black Opium, Born in Roma и Mediterranean Honeysuckle. Этот ряд важен своим диапазоном: индивидуальный почерк развивается в проектах разных марок, а авторство может быть совместным.\n\nВ репортаже Happi награждение описано через саму церемонию. Награду вручил Патрик Фирмених; Cedar Jasmine 1986 ароматизировал фойе театра. В своей речи Блан говорила о дисциплине, стойкости и творческой смелости. Работа, которую покупатель обычно встречает уже готовой, на время получила лицо и голос. Рядом с праздничной постановкой появился язык ежедневного ремесла — терпеливого и требующего выбора.\n\nПри этом Блан не рассматривала профессиональное развитие как завершённую историю. Она говорила об интересе к исследованиям и технологиям, о передаче опыта следующим поколениям. В её подходе важны эмоция, текстура и равновесие. Поэтому название награды за вклад в течение жизни здесь соседствует с продолжающейся практикой. В тот вечер её можно было не только перечислить по флаконам разных домов, но и почувствовать в общем воздухе театра."
+        },
+        "en": {
+          "title": "Cedar and Jasmine in Shared Air",
+          "fullStory": "On 11 June 2026, Honorine Blanc received the Lifetime Achievement Perfumer Award from the American Fragrance Foundation. The ceremony took place at the David H. Koch Theater at Lincoln Center. The evening offered two encounters with her work: a recognised career and a smell that welcomed guests before the award itself was presented.\n\nFor the occasion, Blanc created Cedar Jasmine 1986. A cedar note referred to Lebanon, where she was born, while fresh jasmine suggested the optimism of New York. That was how she explained the composition in an interview with the foundation. Its name connected it with her personal history: her family moved to Paris in 1986. An ambient fragrance became a kind of self-portrait in which geography could be conveyed without an image. The two chosen motifs spoke of roots and a new place to live.\n\nA professional path lay behind that American recognition. Blanc graduated from ISIPCA, established her career in the United States and became a master perfumer in 2013. Her company lists Viva La Juicy, Black Opium, Born in Roma and Mediterranean Honeysuckle among her authored or co-authored creations. The range matters: an individual approach develops across projects for different brands, and authorship can be shared.\n\nHappi's report described the recognition through the ceremony itself. Patrick Firmenich presented the award; Cedar Jasmine 1986 scented the theatre's lobby. In her speech, Blanc spoke about discipline, resilience and creative courage. Work that a customer usually encounters as a finished product briefly acquired a face and voice. Alongside the celebratory staging appeared the language of everyday craftsmanship: patient work that requires decisions.\n\nBlanc also discussed professional development as something still unfolding. She expressed an interest in research and technology and in passing experience to the next generation. Emotion, texture and balance are important to her approach. A lifetime achievement award therefore sat beside a continuing practice. That evening, her work could be encountered through more than a list of bottles from different houses: it could also be experienced in the shared air of a theatre."
+        }
+      },
+      "sourceIds": [
+        "n30b-blanc-date",
+        "n30b-blanc-interview",
+        "n30b-blanc-dsm",
+        "n30b-blanc-happi"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "БланполучилаLifetimeAchievementPerfumerAward11.06.2026наTFFвDavidH.KochTheaterLincolnCenter.",
+          "factIds": [
+            "n30b-honorine-blanc-award-2026-f1"
+          ],
+          "sourceIds": [
+            "n30b-blanc-date"
+          ]
+        },
+        {
+          "claim": "CedarJasmine1986связываеткедрсЛиваном,жасминсНью-Йорком;семьяпереехалавПариж1986;интересктехнологиям/передачеопыта.",
+          "factIds": [
+            "n30b-honorine-blanc-award-2026-f2"
+          ],
+          "sourceIds": [
+            "n30b-blanc-interview"
+          ]
+        },
+        {
+          "claim": "ISIPCA,карьеравСША,MasterPerfumer2013;работыилисоавторствоVivaLaJuicy/BlackOpium/BorninRoma/MediterraneanHoneysuckle;эмоция/текстура/равновесие.",
+          "factIds": [
+            "n30b-honorine-blanc-award-2026-f3"
+          ],
+          "sourceIds": [
+            "n30b-blanc-dsm"
+          ]
+        },
+        {
+          "claim": "НаградувручилPatrickFirmenich;CedarJasmineароматизировалфойе;речьодисциплине/стойкости/смелости.",
+          "factIds": [
+            "n30b-honorine-blanc-award-2026-f4"
+          ],
+          "sourceIds": [
+            "n30b-blanc-happi"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-05-07",
+      "eventId": "n30b-bat-award-2016",
+      "eventGroupId": "n30b-bat-award-2016",
+      "eventDate": "2016-05-07",
+      "category": "fragrance_history",
+      "localizations": {
+        "ru": {
+          "title": "Пещера, которую можно носить",
+          "fullStory": "7 мая 2016 года Bat марки Zoologist получил Art and Olfaction Award в категории Independent. За названием «Летучая мышь» стояла работа Эллен Кови для Виктора Вонга. Это был аромат, в котором привычный вопрос о цветах и древесине сменялся другим: можно ли передать среду обитания животного, сохранив возможность носить композицию на коже?\n\nКови знала этот мир как исследовательница. В интервью Zoologist она рассказывала о работах по слуховой системе летучих мышей, вниманию и обучению звукам. Для духов она выбрала иной язык наблюдения: прохладную влажную известняковую пещеру, фрукты, которыми питаются животные, и чистый мускусный оттенок меха. Целью была творческая картина их окружения. Сама Кови описывала соединение воздушности, земли, минералов, фруктов и смол, которое трудно поместить в обычную жанровую ячейку.\n\nЕё путь в парфюмерию проходил также через орхидеи: она выращивала их, изучала запахи цветков и пыталась воссоздавать их в композициях. Такое соседство занятий делает Bat особенно интересным. Профессиональное знание животного не превращается в буквальную копию его запаха. Оно помогает выбрать детали, по которым воображение распознаёт пространство и образ жизни, а затем организовать их в самостоятельную композицию.\n\nСовременные отзывы показывают, как эта идея читалась. Kevin из Now Smell This сначала сомневался, можно ли носить настолько необычную вещь, но на коже изменил мнение. Он описывал возвращение пещерного минерального впечатления среди спелых фруктов и дальнейшее появление мускусов. Azar из Australian Perfume Junkies тоже воспринимала Bat прежде всего как место. Её занимала способность Кови передавать атмосферу ландшафта, а не буквальное соответствие названию.\n\nПозднее Zoologist объявил о прекращении выпуска оригинальной версии и намерении создать новый Bat с другим парфюмером. Поэтому награда 2016 года принадлежит определённой работе, а не любому последующему флакону с тем же именем. В её истории остаётся редкий центральный образ: влажная пещера и фруктовая пища становятся материалом для духов, которые продолжают жить на человеческой коже."
+        },
+        "en": {
+          "title": "A Cave You Can Wear",
+          "fullStory": "On 7 May 2016, Zoologist's Bat received an Art and Olfaction Award in the Independent category. Behind the animal's name stood Ellen Covey's work for Victor Wong. Here, the usual question about flowers and woods gave way to another: could a fragrance convey an animal's habitat while remaining something people could wear on their skin?\n\nCovey knew that world as a researcher. In an interview with Zoologist, she discussed work on bats' auditory systems, attention and vocal learning. For the perfume, she chose another language of observation: a cool, damp limestone cave, the fruit the animals eat and a clean, musky suggestion of fur. Her aim was an imaginative portrait of their surroundings. She described a combination of airiness, earth, minerals, fruit and resins that resisted being placed in a conventional fragrance category.\n\nHer route into perfumery also passed through orchids: she grew them, studied the smells of their flowers and tried recreating those smells in compositions. That meeting of activities makes Bat particularly interesting. Professional knowledge of an animal does not become a literal copy of its smell. It helps select details through which the imagination can recognise a space and a way of life, then organise them into an independent composition.\n\nContemporary reviews show how the idea could be received. Kevin at Now Smell This initially doubted whether something so unusual was wearable, but changed his mind on skin. He described the cave's mineral impression returning among ripe fruits, with musks appearing later. Azar at Australian Perfume Junkies likewise understood Bat primarily as a place. She was interested in Covey's ability to convey the atmosphere of a landscape rather than a literal correspondence with a name.\n\nZoologist later announced the discontinuation of the original version and plans to make a new Bat with another perfumer. The 2016 award therefore belongs to a particular work, rather than any later bottle bearing the same name. Its central image remains unusual: a damp cave and fruit become materials for a perfume that continues its life on human skin."
+        }
+      },
+      "sourceIds": [
+        "nnexta-ao-archive",
+        "n30b-bat-interview",
+        "n30b-bat-nst",
+        "n30b-bat-apj",
+        "n30b-bat-discontinued"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Bat/Zoologist,EllenCoveyдляVictorWongполучилIndependentaward07.05.2016.",
+          "factIds": [
+            "n30b-bat-award-2016-f1"
+          ],
+          "sourceIds": [
+            "nnexta-ao-archive"
+          ]
+        },
+        {
+          "claim": "ИсследованияКовиослухелетучихмышей/внимании/вокальномобучении;цельBatпещера/фрукты/мех,нетбуквальнойкопииживотного;орхидеи/парфюмерноеобучение.",
+          "factIds": [
+            "n30b-bat-award-2016-f2"
+          ],
+          "sourceIds": [
+            "n30b-bat-interview"
+          ]
+        },
+        {
+          "claim": "Kevinсначалаусомнилсявносимости,изменилмнениенакоже;минералы/фрукты/возвращениепещеры/поздниемускусы.",
+          "factIds": [
+            "n30b-bat-award-2016-f3"
+          ],
+          "sourceIds": [
+            "n30b-bat-nst"
+          ]
+        },
+        {
+          "claim": "AzarсчитаетBatароматомместа,отмечаетумениепередаватьландшафт.",
+          "factIds": [
+            "n30b-bat-award-2016-f4"
+          ],
+          "sourceIds": [
+            "n30b-bat-apj"
+          ]
+        },
+        {
+          "claim": "ОригинальныйBatCoveyснятспроизводства;Zoologistсообщилопланеновогосдругимпарфюмером.",
+          "factIds": [
+            "n30b-bat-award-2016-f5"
+          ],
+          "sourceIds": [
+            "n30b-bat-discontinued"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-05-06",
+      "eventId": "n30b-dusita-melodie-award-2017",
+      "eventGroupId": "n30b-dusita-melodie-award-2017",
+      "eventDate": "2017-05-06",
+      "category": "fragrance_history",
+      "localizations": {
+        "ru": {
+          "title": "Белые цветы для стихотворения",
+          "fullStory": "На церемонии Art and Olfaction Awards 6 мая 2017 года Mélodie de l’Amour марки Dusita получил награду в категории Artisan. Автор композиции — Писсара Умавиджани. За французским названием «Мелодия любви» скрывалась очень личная связь между поэзией и белыми цветами: аромат продолжал разговор с её отцом, тайским поэтом Монтри Умавиджани.\n\nВ интервью The Sniff Писсара объясняла, что исходной точкой стали его строки о чувстве, похожем на цветок в пустой комнате. Она прочитала их спустя годы после смерти отца и связала безусловную любовь с белым цветом. Отсюда выбор гардении, туберозы и жасмина; формулу она смягчала сандалом и кедром. Литературный образ не диктовал готовый рецепт, а помогал решить, какое эмоциональное пространство должна создавать композиция.\n\nЭто был осознанный авторский способ работы. В другом интервью, для Elysee, Умавиджани рассказывала о коллекционировании винтажных духов в Бангкоке, изучении их истории, материалов и структуры. Приехав в Париж, она привезла собственные композиции. Совет создать марку возник после знакомства с парфюмерным экспертом. При этом стихи отца она выбирала для передачи настроений, а духи составляла сама. Между двумя видами творчества оставалось различие, делавшее их встречу интереснее.\n\nЖанна Доре в Auparfum услышала в Mélodie de l’Amour пышное раскрытие гардении, жасмина, флердоранжа и туберозы с оттенками мёда, персика и пыльцы. Затем её описание переходило к прохладной золе и потёртому дереву. Это впечатление критика, а не перечень содержимого флакона. Оно показывает, как белый букет способен вместить тепло, телесность и более тёмные грани, сохраняя цветочный центр.\n\nУмавиджани говорила, что формулирование — её любимая часть работы; оно может занимать месяцы и годы. Она также называла сохранение собственной идентичности одной из трудностей независимого дома. В истории награждённого аромата эти признания сходятся: чужое стихотворение становится отправной точкой очень личного труда. Между строкой отца и законченным запахом появляется её собственный выбор цветов, соотношений и мягкости древесного фона."
+        },
+        "en": {
+          "title": "White Flowers for a Poem",
+          "fullStory": "At the Art and Olfaction Awards on 6 May 2017, Dusita's Mélodie de l'Amour received an award in the Artisan category. Its creator was Pissara Umavijani. Behind the French name, “Melody of Love,” lay a personal connection between poetry and white flowers: the fragrance continued a conversation with her father, the Thai poet Montri Umavijani.\n\nIn an interview with The Sniff, Pissara explained that the starting point was his verse comparing a feeling to a flower in an empty room. Reading it years after his death, she associated unconditional love with the colour white. That led her towards gardenia, tuberose and jasmine; she softened the formula with sandalwood and cedar. A literary image did not dictate a ready-made recipe. It helped her decide what emotional space the composition should create.\n\nThis was a deliberate way of working as an author. In another interview, with Elysee, Umavijani recalled collecting vintage perfumes in Bangkok and studying their history, materials and structure. She brought her own compositions when she came to Paris. Encouragement to establish a brand followed a meeting with a perfume expert. She selected her father's poetry to convey moods, while composing the perfumes herself. A distinction remained between the two creative practices, making their encounter more interesting.\n\nWriting in Auparfum, Jeanne Doré perceived an opulent opening of gardenia, jasmine, orange blossom and tuberose, with suggestions of honey, peach and pollen. Her description then moved towards cool ashes and worn wood. This was a critic's impression rather than an inventory of the bottle's contents. It shows how a white bouquet can accommodate warmth, physical presence and darker facets while retaining its floral centre.\n\nUmavijani described formulation as her favourite part of the work, something that can take months or years. She also named preserving a personal identity among an independent house's challenges. Those reflections meet in the history of the award-winning perfume: someone else's poem becomes the beginning of deeply personal work. Between her father's verse and the completed smell stand her own decisions about flowers, proportions and the softness of the woody background."
+        }
+      },
+      "sourceIds": [
+        "nnexta-ao-archive",
+        "n30b-dusita-sniff",
+        "n30b-dusita-elysee",
+        "n30b-dusita-auparfum",
+        "n30b-dusita-awards"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Mélodie de l’Amour / Dusita / Pissara Umavijani получил Artisan award 06.05.2017.",
+          "factIds": [
+            "n30b-dusita-melodie-award-2017-f1"
+          ],
+          "sourceIds": [
+            "nnexta-ao-archive"
+          ]
+        },
+        {
+          "claim": "Исходные строки отца о цветке/пустойкомнате; безусловнаялюбовьсвязана сбелым, выборгардения/тубероза/жасмин, смягчение сандалом/кедром; формулирование месяцы/годы и сохранениеидентичности.",
+          "factIds": [
+            "n30b-dusita-melodie-award-2017-f2"
+          ],
+          "sourceIds": [
+            "n30b-dusita-sniff"
+          ]
+        },
+        {
+          "claim": "КоллекционированиевинтажныхдуховвБангкоке, изучениеистории/сырья/семейств, собственныекомпозициивПариже; экспертподдержалмарку; стихиотцапередаютнастроения.",
+          "factIds": [
+            "n30b-dusita-melodie-award-2017-f3"
+          ],
+          "sourceIds": [
+            "n30b-dusita-elysee"
+          ]
+        },
+        {
+          "claim": "Жанна Доре описывает гардению/жасмин/флердоранж/туберозу, мёд/персик/пыльцу, золу/дерево.",
+          "factIds": [
+            "n30b-dusita-melodie-award-2017-f4"
+          ],
+          "sourceIds": [
+            "n30b-dusita-auparfum"
+          ]
+        },
+        {
+          "claim": "Бренд сохраняет запись награды Mélodie de l’Amour2017.",
+          "factIds": [
+            "n30b-dusita-melodie-award-2017-f5"
+          ],
+          "sourceIds": [
+            "n30b-dusita-awards"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-09-17",
+      "eventId": "n30b-bonsai-award-2020",
+      "eventGroupId": "n30b-bonsai-award-2020",
+      "eventDate": "2020-09-17",
+      "category": "fragrance_history",
+      "localizations": {
+        "ru": {
+          "title": "Небольшой сад и разные взгляды",
+          "fullStory": "Bonsai Кристи Мешелл получил награду Artisan на Art and Olfaction Awards 17 сентября 2020 года. Для House of Matriarch это было признание зелёной композиции, название которой предлагало вообразить небольшой сад. В год, когда церемония проходила через Zoom, такое воображаемое пространство особенно легко отделялось от физического места вручения: сам аромат оставался произведением, доступным через пробу.\n\nДом относит Bonsai к семейству вечнозелёных и предлагает образ сада с можжевельником, чёрным копалом, аглайей и хризантемой. В описании яркое начало встречается с землистым основанием, ладаном, мхами и пряной почвой. Это целая вертикаль впечатлений: от живой зелени к тому, на чём она растёт. Название задаёт масштаб, а описанная палитра позволяет мысленно выйти за его пределы.\n\nМешелл объясняла свой подход к композиции как многослойное повествование. В интервью Джону Бибелю она говорила, что каждая часть должна быть необходимой, а натуральные материалы выбирает там, где считает их подходящими. При этом её практика допускает и синтетические вещества. Такая позиция помогает точнее читать слово «натуральный»: оно не заменяет решений автора о структуре и выразительности и не сообщает нам полного состава конкретного флакона.\n\nЛюбопытный пример её работы с образом сохранил проект Consenses. Отталкиваясь от смешанной художественной техники картины, Мешелл выбрала для отдельной композиции сочетание природных ароматических материалов и синтетических молекул. В центре изображения она увидела напоминание о гардении. Здесь важен способ перевода: цвет, форма и материал превращаются в повод подобрать другое чувственное выражение, а не в буквально воспроизводимый предмет.\n\nВ отзывах о Bonsai этот перевод не давал одинаковых результатов. На Basenotes CompassRose описывала густую зелень влажной тени и тепличное ощущение, но сомневалась в личной привлекательности аромата. Grungevig отмечал зелень, лёгкую дымность и более тихое звучание. Между садом, предложенным домом, и опытом разных носителей остаётся пространство для собственного впечатления. Именно там Bonsai продолжает существовать после объявления победителя."
+        },
+        "en": {
+          "title": "A Small Garden, Differently Seen",
+          "fullStory": "Christi Meshell's Bonsai received an Artisan award at the Art and Olfaction Awards on 17 September 2020. For House of Matriarch, this recognised a green composition whose name invited the imagination into a small garden. In a year when the ceremony took place over Zoom, that imagined space was readily separated from the physical site of an award: the perfume remained a work encountered through a sample.\n\nThe house places Bonsai in its evergreen family and offers a garden with juniper, black copal, aglaia and chrysanthemum. Its description brings a bright opening together with an earthy foundation, incense, mosses and spicy soil. This suggests a vertical arrangement of impressions, from living greenery towards the ground in which it grows. The name establishes a scale, while the described palette allows the imagination to move beyond it.\n\nMeshell has explained her approach to composition as layered storytelling. In an interview with John Biebel, she said that every part should be necessary and that she chooses natural materials where she considers them appropriate. Her practice also allows synthetic substances. That position helps us read the word “natural” more precisely: it does not replace an author's decisions about structure and expression, nor reveal the complete contents of a particular bottle.\n\nThe Consenses project preserves an interesting example of her work with images. Responding to the mixed techniques in a painting, Meshell chose a combination of natural aromatics and synthetic molecules for a separate composition. At the picture's centre she saw a suggestion of gardenia. What matters here is the method of translation: colour, shape and material become occasions to select another sensory expression rather than reproduce an object literally.\n\nResponses to Bonsai show that this translation did not produce an identical experience for everyone. At Basenotes, CompassRose described lush greenery in damp shade and an impression of a greenhouse, while questioning its personal appeal. Grungevig noted greenery, light smokiness and a quieter presence. Between the garden proposed by the house and different wearers' experiences remains space for an individual impression. It is there that Bonsai continues its life after the winner has been announced."
+        }
+      },
+      "sourceIds": [
+        "nnexta-ao-archive",
+        "n30b-bonsai-brand",
+        "n30b-meshell-interview",
+        "n30b-meshell-consenses",
+        "n30b-bonsai-basenotes"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Bonsai / House of Matriarch / Christi Meshell выиграл Artisan award17.09.2020; церемония через Zoom.",
+          "factIds": [
+            "n30b-bonsai-award-2020-f1"
+          ],
+          "sourceIds": [
+            "nnexta-ao-archive"
+          ]
+        },
+        {
+          "claim": "Bonsai Evergreen family; можжевельник,чёрныйкопал,аглайя,хризантема; яркое начало/землистыйниз/ладан/мох/прянаяземля.",
+          "factIds": [
+            "n30b-bonsai-award-2020-f2"
+          ],
+          "sourceIds": [
+            "n30b-bonsai-brand"
+          ]
+        },
+        {
+          "claim": "Мешеллописываеткомпозициюкакlayeredstorytelling,необходимостьчастей,предпочтениенатуральныхматериаловнедогматическое,синтетикадопускается.",
+          "factIds": [
+            "n30b-bonsai-award-2020-f3"
+          ],
+          "sourceIds": [
+            "n30b-meshell-interview"
+          ]
+        },
+        {
+          "claim": "ОтдельнаяработаConsenses: смешаннаятехникаизображенияподсказаласмешаннуюпалитру,центральныйобразгардении.",
+          "factIds": [
+            "n30b-bonsai-award-2020-f4"
+          ],
+          "sourceIds": [
+            "n30b-meshell-consenses"
+          ]
+        },
+        {
+          "claim": "ОтзывыCompassRose(17.03.2022)зелень/влажнаятень/теплица/сомнение;Grungevig(24.05.2020)зелень/дымность/тихоезвучание.",
+          "factIds": [
+            "n30b-bonsai-award-2020-f5"
+          ],
+          "sourceIds": [
+            "n30b-bonsai-basenotes"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-05-11",
+      "eventId": "n30b-voices-award-2023",
+      "eventGroupId": "n30b-voices-award-2023",
+      "eventDate": "2023-05-11",
+      "category": "fragrance_history",
+      "localizations": {
+        "ru": {
+          "title": "Голоса вокруг манго и риса",
+          "fullStory": "11 мая 2023 года Voices от House of Mammoth получил Golden Pear в категории Artisan на Art and Olfaction Awards. В сообщении дома рядом с парфюмером Бенджамином Эспозито названа Элейн Ли, а сама работа описана как сотрудничество с подкастом Lather Talk. Название «Голоса» подходило проекту, в котором аромат возникал из разговора и общего замысла.\n\nЦентральным образом стал манго с клейким рисом. Дом описывает композицию через манго, пандан, рис, кокосовое молоко, ветивер, ирис и древесные оттенки. Это гурманская тема с древесно-молочным основанием: знакомая еда получает форму запаха, который можно носить. Важен сам выбор ассоциации. История блюда предлагает парфюмерии материал, отличный от привычного букета или отвлечённого обещания сладости. Узнавание здесь начинается с конкретного сочетания впечатлений.\n\nLather Talk рассказывал о сотрудничестве ещё в выпуске, посвящённом подготовке Voices. В описании упоминались не только духи, но и мыло для бритья, лосьон и бальзам; к проекту добавлялись кисти с манговой древесиной. Одна идея переходила между несколькими предметами повседневного ухода. Это расширяло круг встречи с ароматом: он мог появиться в ритуале бритья, а затем продолжить жизнь как самостоятельная композиция.\n\nУчастники обсуждения на Badger & Blade показывают эту встречу со стороны пользователей. Inverted сначала сообщил о заказе мыла и лосьона, а позже описал узнаваемый манго с рисом и несладкие, почти ореховые нюансы. Речь шла о его впечатлении от продукта, а не о доказанном содержании формулы. Такой отзыв сохраняет полезную подробность: аромат обсуждали в сообществе ежедневного ухода ещё до профессиональной награды.\n\nПроект имел и общественное продолжение. House of Mammoth обещал направлять десять процентов продажи каждой парфюмерной воды Voices в Stop AAPI Hate. Коалиция занимается противодействием расизму и дискриминации американцев азиатского происхождения и жителей тихоокеанских островов, исследованиями и поддержкой сообществ. В этой истории съедобная ассоциация, совместное авторство и выбранная помощь соединены в одном продукте. После церемонии у названия остаются вполне конкретные участники и адресат."
+        },
+        "en": {
+          "title": "Voices Around Mango Sticky Rice",
+          "fullStory": "On 11 May 2023, House of Mammoth's Voices received a Golden Pear in the Artisan category at the Art and Olfaction Awards. The house's announcement named Elaine Lee alongside perfumer Benjamin Esposito and described the work as a collaboration with the Lather Talk podcast. “Voices” suited a project in which fragrance developed through conversation and a shared idea.\n\nMango sticky rice became its central image. The house describes the composition through mango, pandan, rice, coconut milk, vetiver, orris and woody notes. It is a gourmand theme with a woody, milky foundation: familiar food takes the form of a smell that can be worn. The choice of association matters. A dish offers perfumery material beyond a familiar bouquet or an abstract promise of sweetness. Recognition begins here with a particular combination of impressions.\n\nLather Talk discussed the collaboration in an episode devoted to preparing Voices. Its description mentioned shaving soap, aftershave splash and balm as well as fragrance; brushes featuring mango wood also accompanied the project. One idea moved between several objects of daily grooming. That broadened the possible encounter with the smell: it could enter a shaving routine and then continue its life as a composition in its own right.\n\nParticipants at Badger & Blade show that encounter from the users' side. Inverted first reported ordering soap and splash, then described recognisable mango sticky rice with savoury, almost nutty nuances. This was a personal impression of a product rather than evidence about the formula's contents. Such a response preserves a useful detail: a daily grooming community was discussing the scent before it received a professional award.\n\nThe project also had a public purpose. House of Mammoth pledged ten percent of the sale of each Voices eau de parfum to Stop AAPI Hate. The coalition works against racism and discrimination affecting Asian Americans and Pacific Islanders, conducting research and supporting communities. In this story, a food association, collaborative authorship and a chosen cause meet within one product. After the ceremony, its name retains identifiable participants and a specific recipient of support."
+        }
+      },
+      "sourceIds": [
+        "n30b-voices-date",
+        "n30b-voices-product",
+        "n30b-voices-podcast",
+        "n30b-voices-community",
+        "n30b-voices-mission",
+        "n30b-voices-winners"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Voices / House of Mammoth / Benjamin Esposito получилGoldenPear11.05.2023; сElaineLee иLatherTalk.",
+          "factIds": [
+            "n30b-voices-award-2023-f1"
+          ],
+          "sourceIds": [
+            "n30b-voices-date"
+          ]
+        },
+        {
+          "claim": "Voicesописанчерезманго/пандан/рис/кокосовоемолоко/ветивер/ирис/дерево,woodylactonicbase;10%eachEDPsoldобещаноStopAAPIHate.",
+          "factIds": [
+            "n30b-voices-award-2023-f2"
+          ],
+          "sourceIds": [
+            "n30b-voices-product"
+          ]
+        },
+        {
+          "claim": "LatherTalk53описываетмангорис,мыло/лосьон/бальзам/духи,кистисманговойдревесиной;этоописаниеподготовки,неподтверждениебудущейдатыпродажи.",
+          "factIds": [
+            "n30b-voices-award-2023-f3"
+          ],
+          "sourceIds": [
+            "n30b-voices-podcast"
+          ]
+        },
+        {
+          "claim": "Invertedвобсуждении13.08.2022заказалsoap/splash,позжевэтойжетемеописалмангорис/несладкиеореховыенюансы.",
+          "factIds": [
+            "n30b-voices-award-2023-f4"
+          ],
+          "sourceIds": [
+            "n30b-voices-community"
+          ]
+        },
+        {
+          "claim": "StopAAPIHateборетсясрасизмомидискриминациейAAs/PIs;исследованияиподдержкасообществ.",
+          "factIds": [
+            "n30b-voices-award-2023-f5"
+          ],
+          "sourceIds": [
+            "n30b-voices-mission"
+          ]
+        },
+        {
+          "claim": "ОфициальныйитогIAOподтверждаетVoicesиBenjaminEspositoвArtisanwinners.",
+          "factIds": [
+            "n30b-voices-award-2023-f6"
+          ],
+          "sourceIds": [
+            "n30b-voices-winners"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-06-30",
+      "eventId": "n30c-petunia-transporter",
+      "eventGroupId": "n30c-petunia-transporter",
+      "eventDate": "2017-06-30",
+      "category": "creation_technique",
+      "localizations": {
+        "ru": {
+          "title": "Как цветок выпускает свой запах",
+          "fullStory": "30 июня 2017 года в печатном номере Science вышла работа Фунмилайо Адебесин и коллег о выходе душистых веществ из клеток петунии. Белок PhABCG1 помогал им пересекать клеточную мембрану. Когда исследователи уменьшали его образование, цветы выделяли меньше летучих соединений, а внутри мембран накапливались вещества, способные их повреждать. Между созданием запаха и его появлением в воздухе обнаружился отдельный управляемый этап.\n\nКоманда Университета Пердью подошла к нему через сравнение двух состояний цветка. В бутоне выделение запаха было слабым; на второй день цветения оно достигало максимума. Джошуа Уидхалм искал гены, активность которых менялась вместе с этой разницей. Джон Морган обратил внимание на другую сторону задачи: простое накопление жирорастворимых молекул в мембране должно было бы повредить клетку. Нужен был механизм, который помогал бы освобождать её от избытка. Так исследование запаха соединило наблюдения за цветением с вопросом о сохранности клеточных границ.\n\nЗапах петунии уже был известен как процесс с переключателями. В более ранней работе группа Наталии Дударевой выяснила, что после опыления этилен подавляет активность гена, участвующего в образовании метилбензоата. У львиного зева, который тоже выделяет это вещество, регулирование устроено иначе. Одна знакомая душистая молекула поэтому не означает одинакового поведения разных цветов. Важны и производство, и момент, когда растение перестаёт расходовать на него ресурсы.\n\nПозднее та же исследовательская программа показала ещё один маршрут: до раскрытия бутона терпены перемещаются из трубки цветка к рыльцу через внутреннее воздушное пространство. Это проверяли удалением трубки, мечеными веществами и подавлением соответствующего гена; перенос можно было восстановить соседством с работающей трубкой. Получался маленький обмен между частями одного цветка. Для парфюмерного взгляда такая история добавляет к образу лепестка движение: живой аромат не просто лежит внутри растения готовым запасом. Он производится, выпускается и перемещается по определённым маршрутам, прежде чем его заметит человеческий нос."
+        },
+        "en": {
+          "title": "How a flower releases its scent",
+          "fullStory": "On 30 June 2017, the print issue of Science carried Funmilayo Adebesin and colleagues' investigation of how fragrant substances leave petunia cells. The protein PhABCG1 helped them cross the cell membrane. Reducing its production meant that flowers released fewer volatile compounds, while substances capable of damaging membranes accumulated inside them. Between making a scent and releasing it into the air, the researchers identified a separate, regulated stage.\n\nThe Purdue University team approached that stage by comparing two conditions of a flower. Scent emission was low in a bud and reached its peak on the second day of flowering. Joshua Widhalm looked for genes whose activity changed alongside this difference. John Morgan considered another aspect: simply accumulating fat-soluble molecules in a membrane should damage the cell. Some mechanism would have to help remove the excess. The investigation therefore brought observations of flowering together with the practical problem of keeping cellular boundaries intact.\n\nPetunia scent was already known to have switches. In earlier work, Natalia Dudareva's group found that after pollination, ethylene suppressed activity of a gene involved in making methylbenzoate. Snapdragons, which also release this compound, regulate the process differently. Sharing a familiar fragrant molecule consequently does not mean that different flowers behave alike. Both production and the moment when a plant stops devoting resources to it matter to the scent that eventually reaches the surrounding air.\n\nLater, the same research programme revealed another route: before a bud opens, terpenes move from the flower tube to the stigma through the enclosed air. The researchers tested this by removing the tube, labelling compounds and suppressing the relevant gene; placing a functioning tube nearby could restore the transfer. A small exchange was taking place between parts of one flower. For a fragrance reader, this adds movement to the image of a petal. A living scent does not simply sit inside a plant as a ready-made reserve. It is produced, released and carried along particular routes before a human nose encounters it."
+        }
+      },
+      "sourceIds": [
+        "n30c-petunia-transporter-s1",
+        "n30c-petunia-transporter-s2",
+        "n30c-petunia-transporter-s3",
+        "n30c-petunia-transporter-s4"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Печатный номер Science 30.06.2017: PhABCG1 и RNAi показывают активный транспорт через мембрану, снижение эмиссии и токсическое накопление.",
+          "factIds": [
+            "n30c-petunia-transporter-f1"
+          ],
+          "sourceIds": [
+            "n30c-petunia-transporter-s1"
+          ]
+        },
+        {
+          "claim": "Сопоставлялись бутон и второй день цветения; Widhalm искал изменение экспрессии, Morgan обсуждал повреждение мембраны при накоплении.",
+          "factIds": [
+            "n30c-petunia-transporter-f2"
+          ],
+          "sourceIds": [
+            "n30c-petunia-transporter-s2"
+          ]
+        },
+        {
+          "claim": "Более ранняя работа: этилен подавляет BSMT/метилбензоат после опыления петунии; у snapdragon регулирование иное.",
+          "factIds": [
+            "n30c-petunia-transporter-f3"
+          ],
+          "sourceIds": [
+            "n30c-petunia-transporter-s3"
+          ]
+        },
+        {
+          "claim": "Позднейшая работа: перенос терпенов из трубки в рыльце внутри бутона проверен удалением трубки, меткой, подавлением и восстановлением.",
+          "factIds": [
+            "n30c-petunia-transporter-f4"
+          ],
+          "sourceIds": [
+            "n30c-petunia-transporter-s4"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-07-03",
+      "eventId": "n30c-rose-nudx1",
+      "eventGroupId": "n30c-rose-nudx1",
+      "eventDate": "2015-07-03",
+      "category": "ingredient",
+      "localizations": {
+        "ru": {
+          "title": "Другой путь к гераниолу",
+          "fullStory": "3 июля 2015 года в печатном номере Science появилась работа Жан-Луи Маньяра и коллег о необычном пути образования запаха розы. У некоторых сортов, включая Papa Meilland, монотерпены составляют значительную часть душистых выделений. Учёные показали участие белка RhNUDX1 в образовании гераниола. Он работал в цитоплазме клетки, тогда как привычное объяснение синтеза растительных монотерпенов было связано с другими ферментами и другим клеточным пространством. Знакомый цветочный запах получил неожиданное биохимическое объяснение.\n\nINRAE описывает вопрос через различие между душистыми и почти лишёнными запаха розами. В исследовании путь с участием гидролазы RhNUDX1 отличался от известного пути, использующего терпенсинтазы. У изученных непахнущих роз соответствующий ген не проявлял активности. Это не означало, что один переключатель создаёт весь аромат цветка. Но появлялась конкретная связь между работой определённого гена и частью узнаваемого розового характера. Для селекционера она гораздо полезнее общего пожелания вернуть цветам аромат.\n\nПродолжение, о котором Университет Жана Монне сообщил в 2023 году, поставило следующий вопрос: откуда RhNUDX1 получает исходное вещество? Его субстрат, геранилдифосфат, обычно связывали с пластидами. На розе Old Blush исследователи обнаружили в цитозоле фермент G/FPPS1 с двойной функцией. Он давал не только фарнезилдифосфат, но и нужный для гераниола предшественник. Так путь стал подробнее: важен не только исполнитель одной реакции, но и возможность снабдить его материалом в той же части клетки.\n\nОбзор генетики розового запаха напоминает о широте этой палитры. Помимо терпенов в ней участвуют соединения других классов, включая вещества, связанные с ароматическими аминокислотами и жирными кислотами. Различаются сорта, стадии цветения и условия окружающей среды. Поэтому гераниол остаётся одним участником сложного сочетания. История RhNUDX1 интересна именно точностью масштаба: она позволяет рассмотреть определённую ноту внутри живого производства. За словом «роза» оказывается не единственный рецепт, а несколько химических маршрутов, чья совместная работа создаёт различия между отдельными цветами."
+        },
+        "en": {
+          "title": "Another route to geraniol",
+          "fullStory": "On 3 July 2015, the print issue of Science published Jean-Louis Magnard and colleagues' investigation of an unusual route to rose scent. In some cultivars, including Papa Meilland, monoterpenes form a substantial part of the fragrant emissions. The researchers demonstrated that the protein RhNUDX1 participates in producing geraniol. It acted in the cell's cytoplasm, whereas the familiar explanation of plant monoterpene synthesis involved other enzymes and another cellular compartment. A recognisable floral smell acquired an unexpected biochemical explanation.\n\nINRAE describes the question through the contrast between fragrant roses and those with little scent. In the investigation, the pathway involving the RhNUDX1 hydrolase differed from the known route using terpene synthases. The corresponding gene was not expressed in the scentless roses examined. This did not mean that a single switch produced the flower's complete fragrance. It established a specific connection between the activity of a particular gene and part of a recognisable rosy character. For a breeder, that connection offers more than a general wish to return fragrance to flowers.\n\nA continuation reported by Jean Monnet University in 2023 posed the next question: where does RhNUDX1 obtain its starting material? Its substrate, geranyl diphosphate, had generally been associated with plastids. Studying the rose Old Blush, researchers identified a cytosolic enzyme, G/FPPS1, with a dual function. Besides farnesyl diphosphate, it supplied the precursor needed for geraniol. The route became more detailed: what mattered was both the enzyme performing a reaction and the supply of material in the same part of the cell.\n\nA review of rose-scent genetics recalls the breadth of this palette. Alongside terpenes are other classes of compounds, including substances associated with aromatic amino acids and fatty acids. Cultivars, flowering stages and environmental conditions differ. Geraniol therefore remains one participant in a complex combination. The RhNUDX1 account is compelling precisely because of its scale: it lets us examine a particular note within living production. Behind the word “rose” stand several chemical routes whose combined activity creates differences between individual flowers."
+        }
+      },
+      "sourceIds": [
+        "n30c-rose-nudx1-s1",
+        "n30c-rose-nudx1-s2",
+        "n30c-rose-nudx1-s3",
+        "n30c-rose-nudx1-s4"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "ПечатныйвыпускScience03.07.2015;PapaMeillandmonoterpenes;cytoplasmicRhNUDX1supportsgeraniolbiosynthesis.",
+          "factIds": [
+            "n30c-rose-nudx1-f1"
+          ],
+          "sourceIds": [
+            "n30c-rose-nudx1-s1"
+          ]
+        },
+        {
+          "claim": "ИсследованныйNUDX1путьнеиспользуетterpenesynthases;внепахнущихизученныхрозахгеннеэкспрессировался.",
+          "factIds": [
+            "n30c-rose-nudx1-f2"
+          ],
+          "sourceIds": [
+            "n30c-rose-nudx1-s2"
+          ]
+        },
+        {
+          "claim": "Работа2023OldBlush:cytosolicG/FPPS1producesFPPandGPP,снабжаетNUDX1предшественником.",
+          "factIds": [
+            "n30c-rose-nudx1-f3"
+          ],
+          "sourceIds": [
+            "n30c-rose-nudx1-s3"
+          ]
+        },
+        {
+          "claim": "Классыrosevolatiles:terpenoids,benzenoids/phenylpropanoids,fattyacidderivatives;влияниесорта/стадии/среды.",
+          "factIds": [
+            "n30c-rose-nudx1-f4"
+          ],
+          "sourceIds": [
+            "n30c-rose-nudx1-s4"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-03-09",
+      "eventId": "n30c-perfumer-imagery",
+      "eventGroupId": "n30c-perfumer-imagery",
+      "eventDate": "2011-03-09",
+      "category": "creation_technique",
+      "localizations": {
+        "ru": {
+          "title": "Аромат без открытого флакона",
+          "fullStory": "9 марта 2011 года Human Brain Mapping опубликовал онлайн исследование Джейн Плайи и коллег о мысленном представлении запахов у парфюмеров. В опыте участвовали четырнадцать студентов и четырнадцать профессионалов; данные трёх студентов исключили из-за технических неполадок сканера. Участники нюхали вещества или представляли их по химическому названию. Даже без пахучего стимула воображение активировало первичную обонятельную кору. Сходство касалось работы определённых участков мозга, а не появления настоящих молекул в воздухе.\n\nInserm объяснял задачу через знакомое сравнение: мысленно увидеть комнату или услышать мелодию обычно проще, чем вызвать запах. Парфюмерам показывали названия вроде дигидромирценола, триплаля и альфа-дамаскона. За каждым стоял выученный материал, который можно было попытаться восстановить в памяти. У более опытных участников активность некоторых обонятельных и связанных с памятью областей была ниже. Исследователи связывали это с более эффективной работой освоенного навыка. Меньшая активация здесь не означала, что человек хуже представляет аромат или меньше знает о нём.\n\nВ последующем обзоре авторы рассматривали обонятельную экспертизу шире одного задания. Чувствительность, различение, узнавание и память на запахи — разные способности. Данные о превосходстве экспертов в поведенческих тестах не всегда согласуются между собой. Зато методы визуализации дают возможность исследовать, как опыт связан с организацией обработки информации. Образ парфюмера постепенно освобождается от слишком простой шкалы «сильный или слабый нос»: профессиональное умение включает способы обращения с ощущением, а не только порог его обнаружения.\n\nВ образовательных программах ISIPCA рядом стоят знакомство с натуральными и синтетическими материалами, их классификация и словесное описание. Даже вводный курс соединяет сырьё, способы получения и язык запахов. Это отдельная, практическая сторона той связи между названием и представлением, которую проверяли в сканере. Химическое слово приобретает смысл через повторные встречи с материалом. Затем оно может стать удобным ключом к памяти: чтобы сопоставить будущие сочетания, парфюмер обращается не только к рядам флаконов, но и к уже освоенной внутренней палитре."
+        },
+        "en": {
+          "title": "A scent without an open bottle",
+          "fullStory": "On 9 March 2011, Human Brain Mapping published online Jane Plailly and colleagues' study of mental odour imagery in perfumers. Fourteen students and fourteen professionals participated; data from three students were excluded because of scanner problems. Participants either smelled substances or imagined them from their chemical names. Even without an odorous stimulus, imagery activated the primary olfactory cortex. The similarity concerned activity in particular brain regions, rather than real molecules appearing in the air around the participant.\n\nInserm explained the task through a familiar comparison: mentally seeing a room or hearing a tune is usually easier than calling up a smell. Perfumers saw names such as dihydromyrcenol, triplal and alpha-damascone. Each represented a learned material that could be retrieved from memory. More experienced participants showed lower activity in certain olfactory and memory-related areas. The researchers associated this with more efficient use of an acquired skill. Lower activation here did not mean that someone imagined a fragrance less well or knew less about it.\n\nIn a subsequent review, the authors considered olfactory expertise beyond this single task. Sensitivity, discrimination, identification and odour memory are different abilities. Behavioural evidence that experts outperform other people has not always been consistent. Brain-imaging methods nevertheless allow investigation of how experience relates to the organisation of information processing. The perfumer gradually emerges from an overly simple scale of stronger and weaker noses: professional expertise includes ways of handling a sensation, alongside the threshold at which it can first be detected.\n\nISIPCA's educational programmes place natural and synthetic materials beside classification and verbal description. Even an introductory course connects raw materials, production methods and the language of smell. This provides a separate, practical aspect of the relationship between a name and a mental representation examined in the scanner. A chemical word acquires meaning through repeated encounters with its material. It can then become a useful key to memory: when considering possible combinations, a perfumer can consult both the rows of bottles and an internal palette already learned through experience."
+        }
+      },
+      "sourceIds": [
+        "n30c-perfumer-imagery-s1",
+        "n30c-perfumer-imagery-s2",
+        "n30c-perfumer-imagery-s3",
+        "n30c-perfumer-imagery-s4"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Онлайнпубликация09.03.2011;14+14набраны,3студентаисключены;восприятие/воображение;piriformactivation.",
+          "factIds": [
+            "n30c-perfumer-imagery-f1"
+          ],
+          "sourceIds": [
+            "n30c-perfumer-imagery-s1"
+          ]
+        },
+        {
+          "claim": "Химическиеназваниястимулов;связьбольшегоопытасменьшейактивностьюиинтерпретацияэффективности.",
+          "factIds": [
+            "n30c-perfumer-imagery-f2"
+          ],
+          "sourceIds": [
+            "n30c-perfumer-imagery-s2"
+          ]
+        },
+        {
+          "claim": "Экспертизаобонянияимеетразныекомпоненты;поведенческиеисследованияinconsistent/inconclusive;визуализацияпоказываетизменениясопытом.",
+          "factIds": [
+            "n30c-perfumer-imagery-f3"
+          ],
+          "sourceIds": [
+            "n30c-perfumer-imagery-s3"
+          ]
+        },
+        {
+          "claim": "ISIPCAсодержание:натуральное/синтетическоесырьё,описание,классификация,получение.",
+          "factIds": [
+            "n30c-perfumer-imagery-f4"
+          ],
+          "sourceIds": [
+            "n30c-perfumer-imagery-s4"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-11-12",
+      "eventId": "n30c-ambrein-engineering",
+      "eventGroupId": "n30c-ambrein-engineering",
+      "eventDate": "2020-11-12",
+      "category": "creation_technique",
+      "localizations": {
+        "ru": {
+          "title": "Предшественник морской амбры",
+          "fullStory": "12 ноября 2020 года Scientific Reports опубликовал работу Ёты Ямабэ и коллег об искусственной системе получения амбреина и пахучих компонентов серой амбры. Исследователи изменили бактериальный фермент, создав более эффективную амбреинсинтазу, а затем превращали полученный материал под действием света. Здесь было важно разделить два результата: изготовить крупную молекулу-предшественник и получить из неё летучие вещества, участвующие в запахе. Одно не следовало автоматически из другого.\n\nВ сообщении Университета Ниигаты объяснялось, почему выбран именно такой подход. Естественный путь образования амбреина оставался невыясненным, поэтому просто взять известный фермент его природного производителя было невозможно. Команда строила собственный маршрут на основе другого биологического инструмента. Университет также отмечал, что разные фотосенсибилизаторы меняли соотношения образующихся пахучих веществ. Получение нужного количества и получение нужного характера аромата становились связанными, но отдельными задачами. Меняя условия превращения, исследователь менял не только выход продукта, но и состав будущего запаха.\n\nПриродный материал устроен сложнее одного названия. Музей естественной истории в Лондоне описывает серую амбру как вещество, образующееся в пищеварительной системе кашалота, и напоминает о её изменении при длительном контакте с морем и воздухом. Окисление сопровождается переменой окраски; высохший материал пахнет иначе, чем свежий. Амбреин сам по себе не обладает запахом. Поэтому романтический морской образ в парфюмерии связан и с веществом, и с его последующими превращениями. Это история материала во времени, а не просто извлечения готового аромата из природного источника.\n\nУ промышленности существуют и другие маршруты к амбровому звучанию. Givaudan описывает Ambrofix как стойкий амброво-древесный материал: традиционное растительное сырьё для его получения связано с мускатным шалфеем, а разработанный компанией процесс биоконверсии начинается с сахарного тростника. Это самостоятельная технология, которую не следует смешивать с исследованием амбреина. Вместе примеры показывают несколько разных расстояний между сырьём и впечатлением. Молекулярный предшественник, метод производства и узнаваемая морская нота могут встретиться в одном разговоре о духах, сохраняя каждый собственное значение."
+        },
+        "en": {
+          "title": "A precursor of ambergris",
+          "fullStory": "On 12 November 2020, Scientific Reports published Yota Yamabe and colleagues' artificial system for producing ambrein and fragrant components of ambergris. The researchers modified a bacterial enzyme to create a more effective ambrein synthase, then transformed the resulting material using light. Two achievements had to be distinguished: making a large precursor molecule and obtaining volatile substances involved in the smell. One did not automatically follow from the other.\n\nNiigata University's account explained the reason for this approach. The natural pathway forming ambrein remained unresolved, so the researchers could not simply borrow a known enzyme from its natural producer. They built their own route from a different biological tool. The university also noted that different photosensitisers changed the proportions of fragrant substances produced. Obtaining the required quantity and obtaining the required aromatic character became related but separate tasks. Changing the conditions of conversion affected both the yield and the composition of the future smell.\n\nThe natural material is more complicated than a single name. London's Natural History Museum describes ambergris as forming in a sperm whale's digestive system and recalls its changes during prolonged contact with sea and air. Oxidation accompanies changes in colour; dried material smells different from fresh material. Ambrein itself is odourless. The romantic marine image in perfumery is therefore connected both with a substance and with its subsequent transformations. This is a material's history through time, rather than simply extracting an already complete fragrance from a natural source.\n\nIndustry has other routes towards an ambergris impression. Givaudan describes Ambrofix as a persistent ambery woody material: its traditional plant-based starting material is associated with clary sage, while the company's bioconversion process begins with sugar cane. This is an independent technology, distinct from the ambrein investigation. Together, the examples show several different distances between a raw material and an impression. A molecular precursor, a production method and a recognisable marine note can meet in one conversation about perfume while each retains a meaning of its own."
+        }
+      },
+      "sourceIds": [
+        "n30c-ambrein-engineering-s1",
+        "n30c-ambrein-engineering-s2",
+        "n30c-ambrein-engineering-s3",
+        "n30c-ambrein-engineering-s4"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "12.11.2020публикацияYamabe;изменениебактериальногофермента/ambreinsynthase;световоепревращениевлетучие.",
+          "factIds": [
+            "n30c-ambrein-engineering-f1"
+          ],
+          "sourceIds": [
+            "n30c-ambrein-engineering-s1",
+            "n30c-ambrein-engineering-s2"
+          ]
+        },
+        {
+          "claim": "Природныйферментнеизвестен;искусственныймаршрут;фотосенсибилизаторыменяютпропорциипахучихвеществ.",
+          "factIds": [
+            "n30c-ambrein-engineering-f2"
+          ],
+          "sourceIds": [
+            "n30c-ambrein-engineering-s2"
+          ]
+        },
+        {
+          "claim": "Ambergrisобразуетсявкишечникекашалота;изменяетсяприокисленииморе/воздух;цвет/запах;амбреинбеззапаха.",
+          "factIds": [
+            "n30c-ambrein-engineering-f3"
+          ],
+          "sourceIds": [
+            "n30c-ambrein-engineering-s3"
+          ]
+        },
+        {
+          "claim": "Ambrofixстойкийambery/woody;clarysageисторическийstartingmaterial;sugarcanebioconversionдругоймаршрут.",
+          "factIds": [
+            "n30c-ambrein-engineering-f4"
+          ],
+          "sourceIds": [
+            "n30c-ambrein-engineering-s4"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-09-18",
+      "eventId": "n30c-santalol-enzymes",
+      "eventGroupId": "n30c-santalol-enzymes",
+      "eventDate": "2013-09-18",
+      "category": "ingredient",
+      "localizations": {
+        "ru": {
+          "title": "Сандал и точность последнего шага",
+          "fullStory": "18 сентября 2013 года PLOS ONE опубликовал работу Марии Диас-Чавес и коллег о ферментах, участвующих в образовании сандалового масла. Команда изучала семейство белков CYP76F у Santalum album и проверяла их действие в лабораторных системах и дрожжевых клетках. Эти белки превращали санталены и бергамотен в соответствующие спирты. Исследование показывало возможность перенести часть растительного химического маршрута в другой организм, чтобы получать соединения, связанные с ценным древесным ароматом.\n\nОднако слово «санталол» ещё не исчерпывало задачу. В продолжении 2016 года Хосе Селедон и коллеги подчёркивали: изученные прежде ферменты давали преимущественно формы E, тогда как характерные компоненты настоящего масла имеют конфигурацию Z. Авторы исследовали именно сердцевину древесины и нашли другой фермент, SaCYP736A167, из далёкой ветви того же большого семейства. Он образовывал нужные формы Z. Внешне небольшое уточнение меняло результат: важно не только получить спирт с подходящим названием, но и воспроизвести определённое пространственное устройство его молекулы.\n\nПозднейшая сборка генома сандала соединила данные ДНК, РНК и белков. В исследовании подтвердили тысячи предсказанных генов с помощью обнаруженных пептидов и уточнили участки, которые вычислительные методы пропускали. Такая работа дополняет отдельные опыты с ферментами: она помогает разбираться, какие белки растение действительно производит. Но образец ткани тоже имеет значение. Авторы отдельно отмечали, что их анализ РНК выполнялся на листьях, тогда как найденный ранее SaCYP736A167 связан с сердцевиной дерева. Разные части растения не дают взаимозаменяемых ответов.\n\nИндийский Институт науки и технологии древесины описывает это различие на видимом уровне: светлая заболонь отделяется от желтовато-коричневой пахучей сердцевины. Масло получают перегонкой измельчённой сердцевинной древесины с водяным паром; само дерево ценится также за способность поддаваться тонкой резьбе. За гладкой древесной нотой таким образом сходятся разные виды точности — выбор части дерева, выделение масла, определение фермента и конфигурации продукта. Исследования не заменяют эти ступени одним словом «синтез», а позволяют увидеть, что именно происходит на каждой из них."
+        },
+        "en": {
+          "title": "Sandalwood and the precision of a final step",
+          "fullStory": "On 18 September 2013, PLOS ONE published Maria Diaz-Chavez and colleagues' investigation of enzymes involved in sandalwood oil formation. The team studied the CYP76F protein family in Santalum album and tested its activity in laboratory systems and yeast cells. These proteins converted santalenes and bergamotene into corresponding alcohols. The study demonstrated the possibility of transferring part of a plant's chemical pathway into another organism to obtain compounds associated with a valuable woody fragrance.\n\nThe word “santalol”, however, did not settle the problem. In a 2016 continuation, Jose Celedon and colleagues emphasised that the previously studied enzymes produced mainly E forms, whereas characteristic components of authentic oil have the Z configuration. They examined the heartwood specifically and identified another enzyme, SaCYP736A167, from a distant branch of the same large family. It produced the required Z forms. An apparently small qualification changed the result: obtaining an alcohol with the appropriate name was insufficient without reproducing a particular spatial arrangement of its molecule.\n\nA later sandalwood genome assembly combined DNA, RNA and protein data. Thousands of predicted genes were supported by detected peptides, and regions missed by computational methods were refined. This complements individual enzyme experiments by helping establish which proteins a plant actually makes. The tissue sampled also matters. The authors specifically noted that their RNA analysis used leaves, whereas the previously identified SaCYP736A167 was associated with heartwood. Different parts of the plant do not provide interchangeable answers to the same biochemical question.\n\nIndia's Institute of Wood Science and Technology describes the distinction at a visible level: pale sapwood is separate from the scented yellowish brown heartwood. Oil is obtained by steam-distilling powdered heartwood; the tree is also valued for wood suitable for fine carving. Behind a smooth woody note, several kinds of precision converge: choosing the part of the tree, extracting the oil, identifying an enzyme and establishing the product's configuration. These investigations allow each step to be examined, rather than compressing the entire route into the single word “synthesis”."
+        }
+      },
+      "sourceIds": [
+        "n30c-santalol-enzymes-s1",
+        "n30c-santalol-enzymes-s2",
+        "n30c-santalol-enzymes-s3",
+        "n30c-santalol-enzymes-s4"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Статья18.09.2013;CYP76Fклонированы/провереныinvitro/yeast;окислениесанталенов/бергамотена.",
+          "factIds": [
+            "n30c-santalol-enzymes-f1"
+          ],
+          "sourceIds": [
+            "n30c-santalol-enzymes-s1"
+          ]
+        },
+        {
+          "claim": "Продолжение2016:CYP76FглавнымобразомE;SaCYP736A167вheartwoodсоздаётZформымасла.",
+          "factIds": [
+            "n30c-santalol-enzymes-f2"
+          ],
+          "sourceIds": [
+            "n30c-santalol-enzymes-s2"
+          ]
+        },
+        {
+          "claim": "ПозднийгеномобъединяетDNA/RNA/proteome;peptidesподтверждаютгены;RNAлистевпротивheartwoodspecificenzyme.",
+          "factIds": [
+            "n30c-santalol-enzymes-f3"
+          ],
+          "sourceIds": [
+            "n30c-santalol-enzymes-s3"
+          ]
+        },
+        {
+          "claim": "Светлаязаболонь/желтоватокоричневаяпахучаясердцевина;резьба;steamdistillationpowderedheartwood.",
+          "factIds": [
+            "n30c-santalol-enzymes-f4"
+          ],
+          "sourceIds": [
+            "n30c-santalol-enzymes-s4"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-01-18",
+      "eventId": "n30c-olfactory-mucus",
+      "eventGroupId": "n30c-olfactory-mucus",
+      "eventDate": "2023-01-18",
+      "category": "creation_technique",
+      "localizations": {
+        "ru": {
+          "title": "Что происходит с запахом перед рецептором",
+          "fullStory": "18 января 2023 года Scientific Reports опубликовал исследование Томохиро Сираи и коллег о человеческой обонятельной слизи. В собранных образцах некоторые душистые вещества химически превращались: например, пара-крезилацетат давал пара-крезол. Авторы сопоставили химический анализ с опытом на адаптацию восприятия и тестами рецепторов. Результаты поддерживали участие такого превращения в обонянии. Но скорость реакции внутри одного вдоха оставалась неясной. Между флаконом и рецептором обнаруживалась собственная химическая среда, а не только путь молекулы через воздух.\n\nРанее Кэйити Ёсикава и коллеги составляли каталог белков этой среды. Они брали человеческие образцы из разных областей носа, сравнивали молодую и старшую группы, а затем сопоставляли количества белков с чувствительностью к запахам. Анализ позволил выделить вещества, потенциально связанные с обонянием, и показать различия между местами отбора. Взгляд смещался с одного рецептора на его окружение. То, что молекула может с ним взаимодействовать в лаборатории, ещё не описывает все условия её встречи с живой сенсорной клеткой.\n\nВ другом пилотном исследовании сравнили три небольшие группы: людей с обонятельными нарушениями неясного происхождения, после инфекции и здоровых участников. В каждой было семь человек. Учёные обнаружили множество белков, но значимых различий общего белкового состава между группами не получили. Такой результат сохранял важное различие между богатым каталогом и работающим диагностическим признаком. Он также объясняет, почему изучение среды носа требует разных методов: обнаружить компонент, установить его функцию и связать её с ощущением — самостоятельные задачи, даже если образцы получены одинаковым способом.\n\nОбзор Кэндзи Кондо описывает слизь как покрытие обонятельной области в верхней части носовой полости, выделяемое железами Боумена. Среди обсуждаемых функций — защита ткани и участие в восприятии. От обычной дыхательной слизи она отличается составом; особый интерес вызывает белок липокалин 15, связанный с переносом веществ. Для знакомства с парфюмерией этот малозаметный слой добавляет ещё один масштаб. Запах определяется не только тем, что было помещено во флакон, но и тем, в какой живой среде начинается его распознавание."
+        },
+        "en": {
+          "title": "What happens before an odour reaches a receptor",
+          "fullStory": "On 18 January 2023, Scientific Reports published Tomohiro Shirai and colleagues' investigation of human olfactory mucus. Some fragrant substances underwent chemical conversion in collected samples: p-cresyl acetate, for example, produced p-cresol. The authors combined chemical analysis with a perceptual adaptation experiment and receptor tests. Their results supported a contribution of this conversion to smelling, although the reaction's timing within a single sniff remained unclear. Between bottle and receptor lay a chemical environment of its own, alongside the molecule's journey through the air.\n\nEarlier, Keiichi Yoshikawa and colleagues had assembled a catalogue of proteins in this environment. They collected human samples from different nasal locations, compared younger and older groups, and examined relationships between protein amounts and sensitivity to smells. The analysis identified substances potentially associated with olfaction and differences between collection sites. Attention moved from an isolated receptor to its surroundings. A molecule's ability to interact with that receptor in a laboratory does not yet describe every condition of its encounter with a living sensory cell.\n\nAnother pilot investigation compared three small groups: people with unexplained olfactory disorders, people with disorders after infection, and healthy participants. Each group contained seven people. The researchers detected many proteins but found no significant differences in overall protein composition between the groups. The result preserved an important distinction between an extensive catalogue and a useful diagnostic marker. It also explains why studying the nasal environment requires different methods: detecting a component, establishing its function and connecting that function with a sensation remain separate tasks, even when samples have been collected in the same way.\n\nKenji Kondo's review describes mucus as a covering of the olfactory region at the top of the nasal cavity, secreted by Bowman's glands. Its proposed functions include tissue protection and participation in perception. Its composition differs from ordinary respiratory mucus; lipocalin 15, a protein associated with substance transport, attracts particular interest. For a fragrance reader, this inconspicuous layer adds another scale. A smell depends both on what entered the bottle and on the living environment in which recognition begins."
+        }
+      },
+      "sourceIds": [
+        "n30c-olfactory-mucus-s1",
+        "n30c-olfactory-mucus-s2",
+        "n30c-olfactory-mucus-s3",
+        "n30c-olfactory-mucus-s4"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Публикация18.01.2023;pCA->p-cresol;адаптация/receptorsподдерживаютрольmetabolism;kineticswithinonesniffunclear.",
+          "factIds": [
+            "n30c-olfactory-mucus-f1"
+          ],
+          "sourceIds": [
+            "n30c-olfactory-mucus-s1"
+          ]
+        },
+        {
+          "claim": "Yoshikawa:humanmucusproteomicsразныхнос.областей/возрастов,correlationsproteinandsensitivity.",
+          "factIds": [
+            "n30c-olfactory-mucus-f2"
+          ],
+          "sourceIds": [
+            "n30c-olfactory-mucus-s2"
+          ]
+        },
+        {
+          "claim": "PilotWolf:7idiopathic/7postinfectious/7controls;многобелковбеззначимойразницыкомпозиции.",
+          "factIds": [
+            "n30c-olfactory-mucus-f3"
+          ],
+          "sourceIds": [
+            "n30c-olfactory-mucus-s3"
+          ]
+        },
+        {
+          "claim": "Kondo:uppernasalcavity,Bowmanglands,protection/perception,distinctcomposition,lipocalin15transport.",
+          "factIds": [
+            "n30c-olfactory-mucus-f4"
+          ],
+          "sourceIds": [
+            "n30c-olfactory-mucus-s4"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-11-20",
+      "eventId": "n30c-osmanthus-genome",
+      "eventGroupId": "n30c-osmanthus-genome",
+      "eventDate": "2018-11-20",
+      "category": "ingredient",
+      "localizations": {
+        "ru": {
+          "title": "Цвет и запах маленького османтуса",
+          "fullStory": "20 ноября 2018 года Horticulture Research опубликовал исследование генома душистого османтуса. Сюлянь Ян и коллеги работали с Rixianggui — сортом, который цветёт многократно, исключая жаркие летние месяцы. Они сопоставляли последовательности ДНК с активностью генов и составом выделяемых веществ. В их образцах важное место занимал линалоол; несколько генов терпенсинтаз проявляли активность именно в цветках и на определённых стадиях. За сильным запахом небольших соцветий обнаруживалось расписание работы разных молекулярных участников.\n\nНо османтус интересен и другой связью между видимым и невидимым. В последующей работе о различиях окраски исследователи рассматривали каротиноиды: их накопление участвует в цвете лепестков, а расщепление даёт некоторые пахучие соединения, включая иононы. У оранжево-красных сортов группы Dangui нашли характерное изменение гена CCD4. Такое соседство цвета и запаха не означает, что яркий цветок обязательно пахнет сильнее. Один запас веществ может иметь разные дальнейшие судьбы, и сравнивать приходится конкретные разновидности, а не только впечатление от их внешности.\n\nТемпературные опыты с четырьмя сортами добавили к этому ещё одну переменную. Большинство изученных сортов выделяло наибольшее число обнаруживаемых компонентов при девятнадцати градусах; при повышении или понижении температуры картина менялась. Ответ зависел и от сорта, и от вещества. Среди значимых компонентов были линалоол, альфа- и бета-ионон, гамма-декалактон. Поэтому живой цветок нельзя считать неизменным ароматическим образцом. Разница между двумя наблюдениями может относиться не только к наследственности растения, но и к условиям, в которых оно раскрывает свой букет.\n\nДругой коллектив исследовал у османтуса регуляторы семейства WRKY — белки, связанные с управлением активностью генов. Учёные сопоставляли их работу с выделением монотерпенов и выделили кандидатов для дальнейшего изучения. Корреляция ещё не раскрывала всю цепь управления, но делала вопрос о времени и месте образования запаха конкретнее. Османтус в этих исследованиях предстаёт живой системой взаимосвязей: лепесток хранит цветные предшественники, ферменты превращают вещества, а условия меняют выделение. Именно различия внутри этой небольшой ботанической палитры помогают понять многослойность знакомой парфюмерной ноты."
+        },
+        "en": {
+          "title": "The colour and scent of osmanthus",
+          "fullStory": "On 20 November 2018, Horticulture Research published an investigation of the sweet osmanthus genome. Xiulian Yang and colleagues studied Rixianggui, a cultivar that flowers repeatedly except during hot summer months. They compared DNA sequences with gene activity and emitted compounds. Linalool held an important place in their samples; several terpene-synthase genes were expressed specifically in flowers and at particular stages. Behind the strong scent of small blossoms lay a schedule involving several molecular participants.\n\nOsmanthus also offers another relationship between the visible and invisible. In subsequent work on colour differences, researchers examined carotenoids: their accumulation contributes to petal colour, while their cleavage produces certain fragrant compounds, including ionones. Orange-red cultivars of the Dangui group carried a characteristic alteration in the CCD4 gene. This proximity between colour and scent does not mean that a brighter flower necessarily smells stronger. A shared store of substances can have different subsequent fates, making it necessary to compare particular varieties rather than their outward appearance alone.\n\nTemperature experiments with four cultivars added another variable. Most released the greatest number of detectable components at nineteen degrees Celsius; increasing or decreasing temperature changed the pattern. Responses depended on both cultivar and compound. Important components included linalool, alpha- and beta-ionone, and gamma-decalactone. A living flower therefore cannot be treated as an unchanging aromatic sample. Differences between observations may concern the conditions in which its bouquet is released as well as the plant's inheritance.\n\nAnother team studied regulators of the WRKY family, proteins associated with control of gene activity. The researchers compared their expression with monoterpene emission and identified candidates for further investigation. Correlation did not reveal the complete regulatory chain, but made the questions of when and where scent forms more specific. Across these investigations, osmanthus emerges as a living system of relationships: petals contain coloured precursors, enzymes transform substances and conditions alter emission. Differences within this small botanical palette help explain the many layers associated with a familiar perfumery note."
+        }
+      },
+      "sourceIds": [
+        "n30c-osmanthus-genome-s1",
+        "n30c-osmanthus-genome-s2",
+        "n30c-osmanthus-genome-s3",
+        "n30c-osmanthus-genome-s4"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "20.11.2018genomearticle;Rixiangguiмногократноцветётнежаркимлетом;линалool/TPSflowerstageexpression.",
+          "factIds": [
+            "n30c-osmanthus-genome-f1"
+          ],
+          "sourceIds": [
+            "n30c-osmanthus-genome-s1"
+          ]
+        },
+        {
+          "claim": "Поздняяработа:carotenoidaccumulation/colorcleavage/ionone;DanguiCCD4frameshift.",
+          "factIds": [
+            "n30c-osmanthus-genome-f2"
+          ],
+          "sourceIds": [
+            "n30c-osmanthus-genome-s2"
+          ]
+        },
+        {
+          "claim": "4cultivars/temperature;большинствомаксчислокомпонентов19°C;культивар/вещество;4основныхсоединения.",
+          "factIds": [
+            "n30c-osmanthus-genome-f3"
+          ],
+          "sourceIds": [
+            "n30c-osmanthus-genome-s3"
+          ]
+        },
+        {
+          "claim": "WRKYисследованиеexpression+GCMSmonoterpenes/correlations/candidategenes.",
+          "factIds": [
+            "n30c-osmanthus-genome-f4"
+          ],
+          "sourceIds": [
+            "n30c-osmanthus-genome-s4"
+          ]
+        }
+      ]
     }
   ]
 }

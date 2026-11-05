@@ -11865,6 +11865,948 @@
       "excludedClaimsRu": [
         "Это подача международной заявки, а не её публикация19.10.1989, выдача американского патента17.12.1991 или изобретение всей CO2-экстракции. Современные продукты не объявляются реализацией данного патента. Факты общей патентной семьи суммарно пересказаны менее200словами в обеих локализациях."
       ]
+    },
+    {
+      "eventId": "n30a-bagh-hind-2022",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30a-bagh-hind-2022-f1",
+          "claim": "Физический показ Bagh-e Hind в IAO проходил 15.07–12.08.2022; кураторы Lalwani/Roth; пять композиций Miss Layla, репродукции в исходном размере, благовония, мыло, растения, поэзия урду.",
+          "sourceIds": [
+            "n30a-bagh-iao",
+            "n30a-bagh-retro"
+          ],
+          "locator": "IAO heading and opening description; project Exhibition History"
+        },
+        {
+          "id": "n30a-bagh-hind-2022-f2",
+          "claim": "Проект перешёл из интернета в физическое пространство; авторы работали между Pune и Boston и отбирали объекты с учётом конечного помещения.",
+          "sourceIds": [
+            "n30a-bagh-retro"
+          ],
+          "locator": "Curators' Note paragraphs In a sense; Now; We began"
+        },
+        {
+          "id": "n30a-bagh-hind-2022-f3",
+          "claim": "Авторы обсуждали сезоны, запахи растений, грязь, пот и горелую древесину; Roth различает citron/orange blossom и acidic lemon.",
+          "sourceIds": [
+            "n30a-bagh-interview"
+          ],
+          "locator": "Nicolas answer process of creating exhibition, paragraphs With me; So for me; Eventually"
+        },
+        {
+          "id": "n30a-bagh-hind-2022-f4",
+          "claim": "В переписке Kewra Roth описывает душистые растения Kamod Ragini; Lalwani ставит кевру в центр, перечисляет цветы и прямо называет parijat воображаемым дополнением.",
+          "sourceIds": [
+            "n30a-bagh-kewra"
+          ],
+          "locator": "The Process, Notes between the perfumer and historian, Nicolas and Bharti replies"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сад выходит из изображения"
+      ],
+      "excludedClaimsRu": [
+        "Мировое первенство; неподтверждённые формулы и индивидуальные реакции посетителей."
+      ]
+    },
+    {
+      "eventId": "n30a-corning-sensorium-2024",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30a-corning-sensorium-2024-f1",
+          "claim": "Sensorium открылась 07.09.2024 в Corning Museum of Glass; куратор Julie Bellemare; исторические и современные сосуды рассматриваются через власть, обмен, роскошь.",
+          "sourceIds": [
+            "n30a-corning-archive",
+            "n30a-corning-press"
+          ],
+          "locator": "Exhibition dates and description; press paragraphs Organized; In addition"
+        },
+        {
+          "id": "n30a-corning-sensorium-2024-f2",
+          "claim": "Стекло подходит для хранения ароматов благодаря непроницаемости и инертности.",
+          "sourceIds": [
+            "n30a-corning-press"
+          ],
+          "locator": "paragraph From the very beginnings"
+        },
+        {
+          "id": "n30a-corning-sensorium-2024-f3",
+          "claim": "Набор четырёх флаконов Europe and Gujarat 1725–1750 связан с дипломатическими дарами голландцев; в галерее можно было обонять исторические пряные ароматы Индонезии, Индии, Шри-Ланки.",
+          "sourceIds": [
+            "n30a-corning-archive"
+          ],
+          "locator": "Four Enameled and Gilded Flasks caption; In the gallery space"
+        },
+        {
+          "id": "n30a-corning-sensorium-2024-f4",
+          "claim": "Флаконы Xinú вошли в выставку; дизайн Esrawe/Cadena, производство Nouvel, выдувное стекло, ручная деревянная крышка, повторное использование.",
+          "sourceIds": [
+            "n30a-corning-archive",
+            "n30a-corning-nouvel"
+          ],
+          "locator": "Gallery contemporary works; Nouvel description and credits"
+        },
+        {
+          "id": "n30a-corning-sensorium-2024-f5",
+          "claim": "Squalor Побладор — пара флаконов с неприятными запахами из загрязнённых вод Pasig, критика деградации среды Манилы.",
+          "sourceIds": [
+            "n30a-corning-bellemare"
+          ],
+          "locator": "Squalor caption and paragraph New York-based Filipina artist"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Что хранит стекло, кроме духов"
+      ],
+      "excludedClaimsRu": [
+        "Мировое первенство; неподтверждённые формулы и индивидуальные реакции посетителей."
+      ]
+    },
+    {
+      "eventId": "n30a-cooper-senses-2018",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30a-cooper-senses-2018-f1",
+          "claim": "The Senses: Design Beyond Vision открылась13.04.2018в Cooper Hewitt; кураторы Ellen Lupton/Andrea Lipps, мультисенсорный дизайн и доступность.",
+          "sourceIds": [
+            "n30a-cooper-date",
+            "n30a-cooper-press"
+          ],
+          "locator": "Archive dates; press p1 opening and Organized"
+        },
+        {
+          "id": "n30a-cooper-senses-2018-f2",
+          "claim": "Snow Storm Brosius: подвешенные голубые шерстяные шары с зимним запахом; Scent Fountain Fear and Volatile Marilyn Laudamiel/Charron соединяет текстуру и запах.",
+          "sourceIds": [
+            "n30a-cooper-press",
+            "n30a-cooper-domus"
+          ],
+          "locator": "press pp3,9 Tactile Expression/Sensory Appetites/checklist; Domus curator answer How was exhibition divided"
+        },
+        {
+          "id": "n30a-cooper-senses-2018-f3",
+          "claim": "Rael/San Fratello печатали сосуды из материалов с кофе, чаем, сахаром, карри и виноградными остатками.",
+          "sourceIds": [
+            "n30a-cooper-domus"
+          ],
+          "locator": "closing curatorial interview paragraph Ronald Rael"
+        },
+        {
+          "id": "n30a-cooper-senses-2018-f4",
+          "claim": "Автор университетского рассказа не имеет обоняния; описала ароматические круги, скульптуры с фактурами, smellmap Amsterdam и связь с воспоминаниями.",
+          "sourceIds": [
+            "n30a-cooper-columbia"
+          ],
+          "locator": "paragraphs At the Cooper Hewitt; However wandering around"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Снег, который можно понюхать в музее"
+      ],
+      "excludedClaimsRu": [
+        "Мировое первенство; неподтверждённые формулы и индивидуальные реакции посетителей."
+      ]
+    },
+    {
+      "eventId": "n30a-mip-sensitive-2024",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30a-mip-sensitive-2024-f1",
+          "claim": "Mondes sensibles началась14.06.2024в MIP, Grasse; Sandra Barré, установки Tiphaine Calmettes, Florian Mermin и Camille Correas.",
+          "sourceIds": [
+            "n30a-mip-report"
+          ],
+          "locator": "PDF p41, printed80, Les expositions2024; lines5628–5632"
+        },
+        {
+          "id": "n30a-mip-sensitive-2024-f2",
+          "claim": "Историческая часть использует документы, свидетельства, эскизы, фото/звук, ароматические реконструкции и пахучие материалы; тема сохранение чувственного слоя total artwork.",
+          "sourceIds": [
+            "n30a-mip-faton"
+          ],
+          "locator": "Présentation paragraphs En outre; Ces extraits; Ici l’odeur"
+        },
+        {
+          "id": "n30a-mip-sensitive-2024-f3",
+          "claim": "Mermin: Le Spectre de la rose, пурпурное платье певицы Ania Wozniak, Gautier через музыку; аромат с Camille Chemardin и певицей, образ жизни розы от росы до упадка, запах âcre/ghost/disappearance.",
+          "sourceIds": [
+            "n30a-mip-mermin"
+          ],
+          "locator": "MONDES SENSIBLES Entretien avec Sandra Barré 2024, first answer and En effet"
+        },
+        {
+          "id": "n30a-mip-sensitive-2024-f4",
+          "claim": "Barré в авторском abstract рассматривает реконструкцию olfactory archive Métachorie1913, Il Vapore1975, Etrog1999 как основу подхода к выставке.",
+          "sourceIds": [
+            "n30a-mip-ciha"
+          ],
+          "locator": "PDF p124, Olfactory archive. The scientific necessity of olfactory reconstructions in twentieth-century art"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Роза, оставшаяся в воздухе"
+      ],
+      "excludedClaimsRu": [
+        "Мировое первенство; неподтверждённые формулы и индивидуальные реакции посетителей."
+      ]
+    },
+    {
+      "eventId": "n30b-perfect-scent-2008",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30b-perfect-scent-2008-f1",
+          "claim": "Henry Holt выпустило американское издание The Perfect Scent22.01.2008; страница данного ebookISBN9781429924658.",
+          "sourceIds": [
+            "c-sjp-burr"
+          ],
+          "locator": "On Sale01/22/2008; Imprint Publisher; ISBN"
+        },
+        {
+          "id": "n30b-perfect-scent-2008-f2",
+          "claim": "Книга сопоставляет Ellena/HermèsUnJardinSurLeNil и Parker/CotyLovely; парфюмерный репортаж раскрывает творческие и деловые решения.",
+          "sourceIds": [
+            "n30b-burr-society"
+          ],
+          "locator": "The Perfect Scent, paragraph1"
+        },
+        {
+          "id": "n30b-perfect-scent-2008-f3",
+          "claim": "Рецензент описывает восемь месяцев наблюдения, Асуан/Париж/Грасс, трипробы; отмечает неравномерный доступ.",
+          "sourceIds": [
+            "n30b-burr-nst"
+          ],
+          "locator": "Review paragraphs beginning The first narrative thread; In fact there is little novelty"
+        },
+        {
+          "id": "n30b-perfect-scent-2008-f4",
+          "claim": "Kirkus описывает становление Эллена штатным авторомHermès, зелёныйманго и смешение делового репортажа с языком запахов.",
+          "sourceIds": [
+            "n30b-burr-kirkus"
+          ],
+          "locator": "Review paragraphs155–160"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "Фокус: наблюдениеБёрра/HermèsNil, не пересказ birthdaySJP/Lovely. Датаиздания,не запускдухов. Разные оценкиатрибутированы."
+      ]
+    },
+    {
+      "eventId": "n30b-coming-senses-ebook-2012",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30b-coming-senses-ebook-2012-f1",
+          "claim": "PenguinAustralia датируетebook9781101583678 05.07.2012, imprintPENUSebookAdult.",
+          "sourceIds": [
+            "n30b-harad-date"
+          ],
+          "locator": "Published/ISBN/Imprint/Format"
+        },
+        {
+          "id": "n30b-coming-senses-ebook-2012-f2",
+          "claim": "Авторучиласьлитературе,PhDUniversityofTexas; книга вырослаизгодаувлечениядухами; работалас текстамиитворческимипрограммами.",
+          "sourceIds": [
+            "n30b-harad-about"
+          ],
+          "locator": "About paragraphs1–4"
+        },
+        {
+          "id": "n30b-coming-senses-ebook-2012-f3",
+          "claim": "В36летблог,неуверенностьпоследиссертации,перемена;Остин/Bergdorf’s/Barneys/предсвадебнаявстречаБойсе.",
+          "sourceIds": [
+            "n30b-harad-pw"
+          ],
+          "locator": "Review paragraphs24–27"
+        },
+        {
+          "id": "n30b-coming-senses-ebook-2012-f4",
+          "claim": "Интервьюрассматриваетнапряжениемеждуфеминистской/интеллектуальнойидентичностьюиобразомдуховкакженскогоукрашения.",
+          "sourceIds": [
+            "n30b-harad-interview"
+          ],
+          "locator": "Introduction paragraphs33–37 and interview"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "ДатаконкретногоebookвPenguinAustralia; непервыймировойвыход/неpaperback2013. Нетв204историиХарад."
+      ]
+    },
+    {
+      "eventId": "n30b-perfume-bible-2014",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30b-perfume-bible-2014-f1",
+          "claim": "Британскийhardcover9780857832344вышел25.09.2014;авторыJoFairleyиLornaMcKay.",
+          "sourceIds": [
+            "n30b-bible-date"
+          ],
+          "locator": "On sale; SelectedHardcover/ISBN; authors"
+        },
+        {
+          "id": "n30b-perfume-bible-2014-f2",
+          "claim": "ФэйрлисоавторBeautyBible,МаккейзакупщикHarrods/Liberty;содержание:семейства,aftercare,fieldtoflacon,интервью,100ароматов.",
+          "sourceIds": [
+            "n35b-ostrom-foundation"
+          ],
+          "locator": "The Perfume Bible section"
+        },
+        {
+          "id": "n30b-perfume-bible-2014-f3",
+          "claim": "РецензентTheNonBlondeсчитаеткнигувводной,отмечаетрастения/рекламу/флаконы/блоги;широтаценойглубины,личныйхарактер100списка.",
+          "sourceIds": [
+            "n30b-bible-nonblonde"
+          ],
+          "locator": "Review paragraphs17–27"
+        },
+        {
+          "id": "n30b-perfume-bible-2014-f4",
+          "claim": "Persolaiseсчитаеткнигудружелюбнойвводной,с привлекательнымииллюстрациями и личнымвзглядом.",
+          "sourceIds": [
+            "n30b-bible-persolaise"
+          ],
+          "locator": "For a good read paragraph41"
+        },
+        {
+          "id": "n30b-perfume-bible-2014-f5",
+          "claim": "НинаРоссхвалитиллюстрациифлаконов/хронологию,хочетбольшегоразнообразиярекомендаций.",
+          "sourceIds": [
+            "n30b-bible-nina"
+          ],
+          "locator": "Review contents/illustrations/list paragraphs13–18"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "Новоеиздание/новыйавторскийдуэт, неLittleBookPerfumes. Мненияотзывовявноатрибутированы."
+      ]
+    },
+    {
+      "eventId": "n30b-scent-pearlstine-2022",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30b-scent-pearlstine-2022-f1",
+          "claim": "Yaleвыпустилоebook9780300265576иhardcover978030024696424.05.2022,авторEliseVernonPearlstine,иллюстраторLaraCallGastinger.",
+          "sourceIds": [
+            "n30b-pearlstine-date"
+          ],
+          "locator": "Formats PublishedTuesday24May2022; author/illustrator"
+        },
+        {
+          "id": "n30b-scent-pearlstine-2022-f2",
+          "claim": "17летбиологдикойприроды,натуральнаяпарфюмерияипреподавание;контракт63года,издание66.",
+          "sourceIds": [
+            "n30b-pearlstine-about"
+          ],
+          "locator": "About paragraphs1–3"
+        },
+        {
+          "id": "n30b-scent-pearlstine-2022-f3",
+          "claim": "Структуракниги:смолы/древесина,пряности,садовыерастения,дистилляция,современнаяпарфюмерия;перспективарастений/опылителей.",
+          "sourceIds": [
+            "n30b-pearlstine-book"
+          ],
+          "locator": "A bit about the book; sections1–5; opening paragraph"
+        },
+        {
+          "id": "n30b-scent-pearlstine-2022-f4",
+          "claim": "ВинтервьюUNLVавторобъясняетзапахсрезаннойтравыgreenleafvolatilesкакответнаповреждение;ароматическиевеществасвязаннысзащитой/насекомыми.",
+          "sourceIds": [
+            "n30b-pearlstine-unlv"
+          ],
+          "locator": "Flora she reminds us; quotations The plant can sense; The other story I like"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "ПерваяисториякнигиScentв204;неAtlasEllena/неNoseDive. Границыбиологическихпримеровсохранены,универсальногообъяснениявсехзапаховнет."
+      ]
+    },
+    {
+      "eventId": "n30b-honorine-blanc-award-2026",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30b-honorine-blanc-award-2026-f1",
+          "claim": "БланполучилаLifetimeAchievementPerfumerAward11.06.2026наTFFвDavidH.KochTheaterLincolnCenter.",
+          "sourceIds": [
+            "n30b-blanc-date"
+          ],
+          "locator": "June11,2026; retrospective paragraphs29–35"
+        },
+        {
+          "id": "n30b-honorine-blanc-award-2026-f2",
+          "claim": "CedarJasmine1986связываеткедрсЛиваном,жасминсНью-Йорком;семьяпереехалавПариж1986;интересктехнологиям/передачеопыта.",
+          "sourceIds": [
+            "n30b-blanc-interview"
+          ],
+          "locator": "HonorineBlanc interview paragraphs77–85,95–96"
+        },
+        {
+          "id": "n30b-honorine-blanc-award-2026-f3",
+          "claim": "ISIPCA,карьеравСША,MasterPerfumer2013;работыилисоавторствоVivaLaJuicy/BlackOpium/BorninRoma/MediterraneanHoneysuckle;эмоция/текстура/равновесие.",
+          "sourceIds": [
+            "n30b-blanc-dsm"
+          ],
+          "locator": "Pressrelease page1 paragraphs8–11; page2 paragraph17"
+        },
+        {
+          "id": "n30b-honorine-blanc-award-2026-f4",
+          "claim": "НаградувручилPatrickFirmenich;CedarJasmineароматизировалфойе;речьодисциплине/стойкости/смелости.",
+          "sourceIds": [
+            "n30b-blanc-happi"
+          ],
+          "locator": "Report lines400–412"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "ДатафактическойцеремонииподтвержденаTFF+Happi, апрельскийанонсиспользованлишьдлякарьерныхфактов. Новыйперфюмерв204;неприсвоеносольноеавторствовсемработам."
+      ]
+    },
+    {
+      "eventId": "n30b-bat-award-2016",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30b-bat-award-2016-f1",
+          "claim": "Bat/Zoologist,EllenCoveyдляVictorWongполучилIndependentaward07.05.2016.",
+          "sourceIds": [
+            "nnexta-ao-archive"
+          ],
+          "locator": "Past editions2016; date and Independentwinners"
+        },
+        {
+          "id": "n30b-bat-award-2016-f2",
+          "claim": "ИсследованияКовиослухелетучихмышей/внимании/вокальномобучении;цельBatпещера/фрукты/мех,нетбуквальнойкопииживотного;орхидеи/парфюмерноеобучение.",
+          "sourceIds": [
+            "n30b-bat-interview"
+          ],
+          "locator": "Interview questions startingWhatinspired,Youhavealwaysbeenstudying; answers198,202–208"
+        },
+        {
+          "id": "n30b-bat-award-2016-f3",
+          "claim": "Kevinсначалаусомнилсявносимости,изменилмнениенакоже;минералы/фрукты/возвращениепещеры/поздниемускусы.",
+          "sourceIds": [
+            "n30b-bat-nst"
+          ],
+          "locator": "Review paragraphs21–23"
+        },
+        {
+          "id": "n30b-bat-award-2016-f4",
+          "claim": "AzarсчитаетBatароматомместа,отмечаетумениепередаватьландшафт.",
+          "sourceIds": [
+            "n30b-bat-apj"
+          ],
+          "locator": "Openingparagraphs14–15"
+        },
+        {
+          "id": "n30b-bat-award-2016-f5",
+          "claim": "ОригинальныйBatCoveyснятспроизводства;Zoologistсообщилопланеновогосдругимпарфюмером.",
+          "sourceIds": [
+            "n30b-bat-discontinued"
+          ],
+          "locator": "ZoologistBatDiscontinued paragraphs185–189"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "СамостоятельнаяисторияBatнеWoodcut;награднаядатанеlaunch. ОригиналCoveyотличёнпозднейверсии,вымышленныхисторическихсценнет."
+      ]
+    },
+    {
+      "eventId": "n30b-dusita-melodie-award-2017",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30b-dusita-melodie-award-2017-f1",
+          "claim": "Mélodie de l’Amour / Dusita / Pissara Umavijani получил Artisan award 06.05.2017.",
+          "sourceIds": [
+            "nnexta-ao-archive"
+          ],
+          "locator": "Past Editions2017 date and Artisanwinners"
+        },
+        {
+          "id": "n30b-dusita-melodie-award-2017-f2",
+          "claim": "Исходные строки отца о цветке/пустойкомнате; безусловнаялюбовьсвязана сбелым, выборгардения/тубероза/жасмин, смягчение сандалом/кедром; формулирование месяцы/годы и сохранениеидентичности.",
+          "sourceIds": [
+            "n30b-dusita-sniff"
+          ],
+          "locator": "Interview paragraphs12–14,18–23,32–34"
+        },
+        {
+          "id": "n30b-dusita-melodie-award-2017-f3",
+          "claim": "КоллекционированиевинтажныхдуховвБангкоке, изучениеистории/сырья/семейств, собственныекомпозициивПариже; экспертподдержалмарку; стихиотцапередаютнастроения.",
+          "sourceIds": [
+            "n30b-dusita-elysee"
+          ],
+          "locator": "Interview questions23–28"
+        },
+        {
+          "id": "n30b-dusita-melodie-award-2017-f4",
+          "claim": "Жанна Доре описывает гардению/жасмин/флердоранж/туберозу, мёд/персик/пыльцу, золу/дерево.",
+          "sourceIds": [
+            "n30b-dusita-auparfum"
+          ],
+          "locator": "Symphonie blanche review paragraphs79–81"
+        },
+        {
+          "id": "n30b-dusita-melodie-award-2017-f5",
+          "claim": "Бренд сохраняет запись награды Mélodie de l’Amour2017.",
+          "sourceIds": [
+            "n30b-dusita-awards"
+          ],
+          "locator": "MÉLODIEDEL’AMOURFragranceoftheYear2017"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "НоваяисторияDusitaнеOsmodramaтого жевечера;всеэтапыцеремонииоднособытие. Стихине процитированы (поэтическиепроизведения0слов).Нотыявноописания/намерения,несекретнаяформула."
+      ]
+    },
+    {
+      "eventId": "n30b-bonsai-award-2020",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30b-bonsai-award-2020-f1",
+          "claim": "Bonsai / House of Matriarch / Christi Meshell выиграл Artisan award17.09.2020; церемония через Zoom.",
+          "sourceIds": [
+            "nnexta-ao-archive"
+          ],
+          "locator": "Past Editions2020 paragraphs221–228"
+        },
+        {
+          "id": "n30b-bonsai-award-2020-f2",
+          "claim": "Bonsai Evergreen family; можжевельник,чёрныйкопал,аглайя,хризантема; яркое начало/землистыйниз/ладан/мох/прянаяземля.",
+          "sourceIds": [
+            "n30b-bonsai-brand"
+          ],
+          "locator": "FragranceFamilyEvergreen; productparagraphs740–745"
+        },
+        {
+          "id": "n30b-bonsai-award-2020-f3",
+          "claim": "Мешеллописываеткомпозициюкакlayeredstorytelling,необходимостьчастей,предпочтениенатуральныхматериаловнедогматическое,синтетикадопускается.",
+          "sourceIds": [
+            "n30b-meshell-interview"
+          ],
+          "locator": "Interview layeredstorytelling question and HighPerfumery definition"
+        },
+        {
+          "id": "n30b-bonsai-award-2020-f4",
+          "claim": "ОтдельнаяработаConsenses: смешаннаятехникаизображенияподсказаласмешаннуюпалитру,центральныйобразгардении.",
+          "sourceIds": [
+            "n30b-meshell-consenses"
+          ],
+          "locator": "Interview questions firstreaction; whatpart; creativeprocess"
+        },
+        {
+          "id": "n30b-bonsai-award-2020-f5",
+          "claim": "ОтзывыCompassRose(17.03.2022)зелень/влажнаятень/теплица/сомнение;Grungevig(24.05.2020)зелень/дымность/тихоезвучание.",
+          "sourceIds": [
+            "n30b-bonsai-basenotes"
+          ],
+          "locator": "LatestReviewsCompassRose46–47;Grungevig58–62"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "Новая историяBonsai/ChristiMeshell,незакрытыйранееартпроект;Consensesприведёнкакявноотдельныйпримерметода. Датанаграды,невыход2019. Неттерапевтическихобещаний/недоказаннойполностьюнатуральнойформулы."
+      ]
+    },
+    {
+      "eventId": "n30b-voices-award-2023",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30b-voices-award-2023-f1",
+          "claim": "Voices / House of Mammoth / Benjamin Esposito получилGoldenPear11.05.2023; сElaineLee иLatherTalk.",
+          "sourceIds": [
+            "n30b-voices-date"
+          ],
+          "locator": "Pressrelease datedLosAngelesMay11,2023 paragraphs65–70"
+        },
+        {
+          "id": "n30b-voices-award-2023-f2",
+          "claim": "Voicesописанчерезманго/пандан/рис/кокосовоемолоко/ветивер/ирис/дерево,woodylactonicbase;10%eachEDPsoldобещаноStopAAPIHate.",
+          "sourceIds": [
+            "n30b-voices-product"
+          ],
+          "locator": "Product paragraphs84–89"
+        },
+        {
+          "id": "n30b-voices-award-2023-f3",
+          "claim": "LatherTalk53описываетмангорис,мыло/лосьон/бальзам/духи,кистисманговойдревесиной;этоописаниеподготовки,неподтверждениебудущейдатыпродажи.",
+          "sourceIds": [
+            "n30b-voices-podcast"
+          ],
+          "locator": "Episode description paragraphs41–42"
+        },
+        {
+          "id": "n30b-voices-award-2023-f4",
+          "claim": "Invertedвобсуждении13.08.2022заказалsoap/splash,позжевэтойжетемеописалмангорис/несладкиеореховыенюансы.",
+          "sourceIds": [
+            "n30b-voices-community"
+          ],
+          "locator": "Threadpost1; laterpostwithIMG4166at269"
+        },
+        {
+          "id": "n30b-voices-award-2023-f5",
+          "claim": "StopAAPIHateборетсясрасизмомидискриминациейAAs/PIs;исследованияиподдержкасообществ.",
+          "sourceIds": [
+            "n30b-voices-mission"
+          ],
+          "locator": "OurMission paragraphs30–31"
+        },
+        {
+          "id": "n30b-voices-award-2023-f6",
+          "claim": "ОфициальныйитогIAOподтверждаетVoicesиBenjaminEspositoвArtisanwinners.",
+          "sourceIds": [
+            "n30b-voices-winners"
+          ],
+          "locator": "ArtisanCategoryWinners page2"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "СамостоятельнаяноваякомпозицияVoices;неповторобщейисториинаград/другихпобедителей. Датафактическойнаграды,неанонспродажи13.08.2022. Обещаниеблаготворительности,неаудитфактическихперечислений."
+      ]
+    },
+    {
+      "eventId": "n30c-petunia-transporter",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30c-petunia-transporter-f1",
+          "claim": "Печатный номер Science 30.06.2017: PhABCG1 и RNAi показывают активный транспорт через мембрану, снижение эмиссии и токсическое накопление.",
+          "sourceIds": [
+            "n30c-petunia-transporter-s1"
+          ],
+          "locator": "Issue June30 2017; plant science abstract pp1386–1388"
+        },
+        {
+          "id": "n30c-petunia-transporter-f2",
+          "claim": "Сопоставлялись бутон и второй день цветения; Widhalm искал изменение экспрессии, Morgan обсуждал повреждение мембраны при накоплении.",
+          "sourceIds": [
+            "n30c-petunia-transporter-s2"
+          ],
+          "locator": "paragraphs Morgan said; Widhalm said; Adebesin then"
+        },
+        {
+          "id": "n30c-petunia-transporter-f3",
+          "claim": "Более ранняя работа: этилен подавляет BSMT/метилбензоат после опыления петунии; у snapdragon регулирование иное.",
+          "sourceIds": [
+            "n30c-petunia-transporter-s3"
+          ],
+          "locator": "paragraphs In the current study; Snapdragons"
+        },
+        {
+          "id": "n30c-petunia-transporter-f4",
+          "claim": "Позднейшая работа: перенос терпенов из трубки в рыльце внутри бутона проверен удалением трубки, меткой, подавлением и восстановлением.",
+          "sourceIds": [
+            "n30c-petunia-transporter-s4"
+          ],
+          "locator": "paragraphs Researchers performed three experiments; First; Finally"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление исследования с парфюмерным опытом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Дата печатного номера. Ранние и поздние исследования — контекст одного сюжета транспорта. Не описывать петунию как сырьё конкретных духов."
+      ]
+    },
+    {
+      "eventId": "n30c-rose-nudx1",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30c-rose-nudx1-f1",
+          "claim": "ПечатныйвыпускScience03.07.2015;PapaMeillandmonoterpenes;cytoplasmicRhNUDX1supportsgeraniolbiosynthesis.",
+          "sourceIds": [
+            "n30c-rose-nudx1-s1"
+          ],
+          "locator": "Citation2015Jul3;Abstract"
+        },
+        {
+          "id": "n30c-rose-nudx1-f2",
+          "claim": "ИсследованныйNUDX1путьнеиспользуетterpenesynthases;внепахнущихизученныхрозахгеннеэкспрессировался.",
+          "sourceIds": [
+            "n30c-rose-nudx1-s2"
+          ],
+          "locator": "L’origineinattendueduparfumdelarose"
+        },
+        {
+          "id": "n30c-rose-nudx1-f3",
+          "claim": "Работа2023OldBlush:cytosolicG/FPPS1producesFPPandGPP,снабжаетNUDX1предшественником.",
+          "sourceIds": [
+            "n30c-rose-nudx1-s3"
+          ],
+          "locator": "PDFparagraphsCependant;L’équipe;L’étude"
+        },
+        {
+          "id": "n30c-rose-nudx1-f4",
+          "claim": "Классыrosevolatiles:terpenoids,benzenoids/phenylpropanoids,fattyacidderivatives;влияниесорта/стадии/среды.",
+          "sourceIds": [
+            "n30c-rose-nudx1-s4"
+          ],
+          "locator": "Abstract;Introduction;Biosynthesis;RegulationofRoseScent"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление исследования с парфюмерным опытом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Датапечатногономера2015;неповторяетrosegenome2018,нетсюжетадекодированиявсегогенома. RhNUDX1необъявленединственнымгеномвсегорозовогозапаха. Работуследующегогодаупомянутькакконтекст,неприсваиватьейдату2015."
+      ]
+    },
+    {
+      "eventId": "n30c-perfumer-imagery",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30c-perfumer-imagery-f1",
+          "claim": "Онлайнпубликация09.03.2011;14+14набраны,3студентаисключены;восприятие/воображение;piriformactivation.",
+          "sourceIds": [
+            "n30c-perfumer-imagery-s1"
+          ],
+          "locator": "Frontmatter2011Mar9;Subjects;ExperimentalDesign;Abstract"
+        },
+        {
+          "id": "n30c-perfumer-imagery-f2",
+          "claim": "Химическиеназваниястимулов;связьбольшегоопытасменьшейактивностьюиинтерпретацияэффективности.",
+          "sourceIds": [
+            "n30c-perfumer-imagery-s2"
+          ],
+          "locator": "paragraphsDansunscanner;Autreenseignement;figurecaption"
+        },
+        {
+          "id": "n30c-perfumer-imagery-f3",
+          "claim": "Экспертизаобонянияимеетразныекомпоненты;поведенческиеисследованияinconsistent/inconclusive;визуализацияпоказываетизменениясопытом.",
+          "sourceIds": [
+            "n30c-perfumer-imagery-s3"
+          ],
+          "locator": "Abstract;Introduction;ExpertiseinOdor"
+        },
+        {
+          "id": "n30c-perfumer-imagery-f4",
+          "claim": "ISIPCAсодержание:натуральное/синтетическоесырьё,описание,классификация,получение.",
+          "sourceIds": [
+            "n30c-perfumer-imagery-s4"
+          ],
+          "locator": "Objectives;Programme"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление исследования с парфюмерным опытом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Дата09.03согласносамойстатье;релизInserm08.03упоминает08,неиспользоватьегодлядатыстатьи. Нетдоказательстваврождённости/причинноговыводаповсейпопуляции;низкаяактивациянеравнаплохомуобонянию."
+      ]
+    },
+    {
+      "eventId": "n30c-ambrein-engineering",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30c-ambrein-engineering-f1",
+          "claim": "12.11.2020публикацияYamabe;изменениебактериальногофермента/ambreinsynthase;световоепревращениевлетучие.",
+          "sourceIds": [
+            "n30c-ambrein-engineering-s1",
+            "n30c-ambrein-engineering-s2"
+          ],
+          "locator": "PaperAbstract;universityPDFp1/datep3"
+        },
+        {
+          "id": "n30c-ambrein-engineering-f2",
+          "claim": "Природныйферментнеизвестен;искусственныймаршрут;фотосенсибилизаторыменяютпропорциипахучихвеществ.",
+          "sourceIds": [
+            "n30c-ambrein-engineering-s2"
+          ],
+          "locator": "PDFp1–2研究の概要"
+        },
+        {
+          "id": "n30c-ambrein-engineering-f3",
+          "claim": "Ambergrisобразуетсявкишечникекашалота;изменяетсяприокисленииморе/воздух;цвет/запах;амбреинбеззапаха.",
+          "sourceIds": [
+            "n30c-ambrein-engineering-s3"
+          ],
+          "locator": "paragraphsButinrare;Odour;Ambrein;Ambergrismasses"
+        },
+        {
+          "id": "n30c-ambrein-engineering-f4",
+          "claim": "Ambrofixстойкийambery/woody;clarysageисторическийstartingmaterial;sugarcanebioconversionдругоймаршрут.",
+          "sourceIds": [
+            "n30c-ambrein-engineering-s4"
+          ],
+          "locator": "Productdescriptionlines599–600"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление исследования с парфюмерным опытом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Толькоароматическаяхимия;фармакологическиеклеточныенаблюденияполностьюисключены. Ambrofixнеобъявленреализациейстатьи2020;амбреиннесмешанспахучимиокисленнымипродуктами."
+      ]
+    },
+    {
+      "eventId": "n30c-santalol-enzymes",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30c-santalol-enzymes-f1",
+          "claim": "Статья18.09.2013;CYP76Fклонированы/провереныinvitro/yeast;окислениесанталенов/бергамотена.",
+          "sourceIds": [
+            "n30c-santalol-enzymes-s1"
+          ],
+          "locator": "Published;Abstract"
+        },
+        {
+          "id": "n30c-santalol-enzymes-f2",
+          "claim": "Продолжение2016:CYP76FглавнымобразомE;SaCYP736A167вheartwoodсоздаётZформымасла.",
+          "sourceIds": [
+            "n30c-santalol-enzymes-s2"
+          ],
+          "locator": "Summary;Introduction"
+        },
+        {
+          "id": "n30c-santalol-enzymes-f3",
+          "claim": "ПозднийгеномобъединяетDNA/RNA/proteome;peptidesподтверждаютгены;RNAлистевпротивheartwoodspecificenzyme.",
+          "sourceIds": [
+            "n30c-santalol-enzymes-s3"
+          ],
+          "locator": "Abstract;IdentificationofGenesInvolvedinSantalolBiosynthesis"
+        },
+        {
+          "id": "n30c-santalol-enzymes-f4",
+          "claim": "Светлаязаболонь/желтоватокоричневаяпахучаясердцевина;резьба;steamdistillationpowderedheartwood.",
+          "sourceIds": [
+            "n30c-santalol-enzymes-s4"
+          ],
+          "locator": "PhysicalProperties;MechanicalProperties;ChemicalProperties"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление исследования с парфюмерным опытом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "НеSandalore/OR2AT4сохранённый18.09;природныесанталолы/стереоселективность. EиZразличены,выходы2013необъявленыполнымэквивалентоммасла. Неутверждатькоммерческийзапуск/сохранениелесовкакдоказанныйрезультат."
+      ]
+    },
+    {
+      "eventId": "n30c-olfactory-mucus",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30c-olfactory-mucus-f1",
+          "claim": "Публикация18.01.2023;pCA->p-cresol;адаптация/receptorsподдерживаютрольmetabolism;kineticswithinonesniffunclear.",
+          "sourceIds": [
+            "n30c-olfactory-mucus-s1"
+          ],
+          "locator": "Frontmatter;Odorantconversions;Effectofenzymaticconversiononperception"
+        },
+        {
+          "id": "n30c-olfactory-mucus-f2",
+          "claim": "Yoshikawa:humanmucusproteomicsразныхнос.областей/возрастов,correlationsproteinandsensitivity.",
+          "sourceIds": [
+            "n30c-olfactory-mucus-s2"
+          ],
+          "locator": "Abstract;Fig1–3captions"
+        },
+        {
+          "id": "n30c-olfactory-mucus-f3",
+          "claim": "PilotWolf:7idiopathic/7postinfectious/7controls;многобелковбеззначимойразницыкомпозиции.",
+          "sourceIds": [
+            "n30c-olfactory-mucus-s3"
+          ],
+          "locator": "PDFp1Abstract"
+        },
+        {
+          "id": "n30c-olfactory-mucus-f4",
+          "claim": "Kondo:uppernasalcavity,Bowmanglands,protection/perception,distinctcomposition,lipocalin15transport.",
+          "sourceIds": [
+            "n30c-olfactory-mucus-s4"
+          ],
+          "locator": "Abstract"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление исследования с парфюмерным опытом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Неинструкциялечения/увлажнения/диагностики. Отсутствиеразницвpilotнеотрицаетдругиеметаболическиенаблюдения;неутверждаетсяточныйсоставвдыхаемойсмесивнутриодноговдоха."
+      ]
+    },
+    {
+      "eventId": "n30c-osmanthus-genome",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30c-osmanthus-genome-f1",
+          "claim": "20.11.2018genomearticle;Rixiangguiмногократноцветётнежаркимлетом;линалool/TPSflowerstageexpression.",
+          "sourceIds": [
+            "n30c-osmanthus-genome-s1"
+          ],
+          "locator": "Published;Abstract;Materialsandmethods/Genomesequencing"
+        },
+        {
+          "id": "n30c-osmanthus-genome-f2",
+          "claim": "Поздняяработа:carotenoidaccumulation/colorcleavage/ionone;DanguiCCD4frameshift.",
+          "sourceIds": [
+            "n30c-osmanthus-genome-s2"
+          ],
+          "locator": "Abstract;Introduction"
+        },
+        {
+          "id": "n30c-osmanthus-genome-f3",
+          "claim": "4cultivars/temperature;большинствомаксчислокомпонентов19°C;культивар/вещество;4основныхсоединения.",
+          "sourceIds": [
+            "n30c-osmanthus-genome-s3"
+          ],
+          "locator": "PDFp1Abstract"
+        },
+        {
+          "id": "n30c-osmanthus-genome-f4",
+          "claim": "WRKYисследованиеexpression+GCMSmonoterpenes/correlations/candidategenes.",
+          "sourceIds": [
+            "n30c-osmanthus-genome-s4"
+          ],
+          "locator": "Abstract"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление исследования с парфюмерным опытом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Самостоятельныйсюжетосмантуса:сорт/цвет/каротиноидноерасщепление/температура,непересказroseorlavendergenome. Профильживогоцветканеприравненабсолюту;correlationнеобъявленаполныммеханизмом."
+      ]
     }
   ]
 }
