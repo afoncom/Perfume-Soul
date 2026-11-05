@@ -12807,6 +12807,1307 @@
       "excludedClaimsRu": [
         "Самостоятельныйсюжетосмантуса:сорт/цвет/каротиноидноерасщепление/температура,непересказroseorlavendergenome. Профильживогоцветканеприравненабсолюту;correlationнеобъявленаполныммеханизмом."
       ]
+    },
+    {
+      "eventId": "n30a-green-aria-2009",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30a-green-aria-2009-f1",
+          "claim": "Премьера Green Aria состоялась 31.05.2009 в Guggenheim; автор и режиссёр Stewart Matthew, запахи Christophe Laudamiel, заказ Works & Process.",
+          "sourceIds": [
+            "n30a-green-faber"
+          ],
+          "locator": "First Performance; Commission"
+        },
+        {
+          "id": "n30a-green-aria-2009-f2",
+          "claim": "Музыку написали Nico Muhly и Valgeir Sigurdsson; Matthew написал либретто; композиторы работали с запахами; Muhly описал резкое впечатление от Funky Green Impostor.",
+          "sourceIds": [
+            "n30a-green-abc"
+          ],
+          "locator": "paragraphs To craft the opera; Meanwhile; Recalling their process"
+        },
+        {
+          "id": "n30a-green-aria-2009-f3",
+          "claim": "Fläkt Woods изготовила ароматический орган; трубки вели к креслам, гибкие scent microphones можно было приближать к носу; синхронизация была технической задачей.",
+          "sourceIds": [
+            "n30a-green-abc",
+            "n30a-green-rockwell"
+          ],
+          "locator": "ABC The most difficult part; Instead; Rockwell Smelly Opera paragraphs Together; The odors"
+        },
+        {
+          "id": "n30a-green-aria-2009-f4",
+          "claim": "Rockwell оценил устройство, но счёл аллегорию неясной; Muhly позднее считал музыку и запах естественным сочетанием, а дополнительную технику потенциально запутывающей.",
+          "sourceIds": [
+            "n30a-green-rockwell",
+            "n30a-green-muhly"
+          ],
+          "locator": "Rockwell Smelly Opera; Great Design question Green Aria and answer"
+        },
+        {
+          "id": "n30a-green-aria-2009-f5",
+          "claim": "Каталог Faber Music указывает Duration18 для партитуры.",
+          "sourceIds": [
+            "n30a-green-faber"
+          ],
+          "locator": "Duration18"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Опера, чьи герои приходят с воздухом"
+      ],
+      "excludedClaimsRu": [
+        "Мировое первенство; неподтверждённые формулы и индивидуальные реакции посетителей."
+      ]
+    },
+    {
+      "eventId": "n30a-pong-paradise-2016",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30a-pong-paradise-2016-f1",
+          "claim": "Paradise Paradoxe проходила в Helmhaus11.03–08.05.2016, сочетая видео, скульптуру и аромат; состоявшийся показ описан Frieze05.04.2016.",
+          "sourceIds": [
+            "n30a-pong-press",
+            "n30a-pong-frieze"
+          ],
+          "locator": "Press header; Frieze Elodie Pong section and article date"
+        },
+        {
+          "id": "n30a-pong-paradise-2016-f2",
+          "claim": "White создана с Roman Kaiser; белая комната с неоном, диффузор с солоноватым запахом; перевод идеи белого в аромат.",
+          "sourceIds": [
+            "n30a-pong-rooms"
+          ],
+          "locator": "PDF p2 Gallery3"
+        },
+        {
+          "id": "n30a-pong-paradise-2016-f3",
+          "claim": "Scent Print A tree/B leaf/C pot2016, 3D PLA polylactide; искусственные формы интерпретируются через замену растительного материала синтетическим.",
+          "sourceIds": [
+            "n30a-pong-mainz"
+          ],
+          "locator": "PDF p5 Halle2, works7/8/9 and curatorial paragraphs"
+        },
+        {
+          "id": "n30a-pong-paradise-2016-f4",
+          "claim": "Робот с проектором двигался по верхней галерее, проецируя названия ароматов на поверхности; Frieze связывает работу с языком парфюмерной индустрии.",
+          "sourceIds": [
+            "n30a-pong-frieze"
+          ],
+          "locator": "Elodie Pong section"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Как пахнет белая комната"
+      ],
+      "excludedClaimsRu": [
+        "Мировое первенство; неподтверждённые формулы и индивидуальные реакции посетителей."
+      ]
+    },
+    {
+      "eventId": "n30a-smell-war-2015",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30a-smell-war-2015-f1",
+          "claim": "The Smell of War проходила01.05–30.08.2015в CastleDeLovie,Poperinge, куратор PeterdeCupere; Ursitti участвовала с антимонументальным Monument в памяти WWI.",
+          "sourceIds": [
+            "n30a-war-gsa"
+          ],
+          "locator": "Output Details; Abstract; Event Dates; deposited by Clara Ursitti"
+        },
+        {
+          "id": "n30a-smell-war-2015-f2",
+          "claim": "Monument: каждые полчаса запах decaying human flesh и mist в пустой комнате, сравнение с church bells.",
+          "sourceIds": [
+            "n30a-war-ursitti"
+          ],
+          "locator": "artist description"
+        },
+        {
+          "id": "n30a-smell-war-2015-f3",
+          "claim": "The Juice of War Hiroshima/Nagasaki: личная память детских фото, для запаха использовано мясо из супермаркета; подвешенная чаша/изготовление интерфейса.",
+          "sourceIds": [
+            "n30a-war-ueda"
+          ],
+          "locator": "concept; Production; The interface design"
+        },
+        {
+          "id": "n30a-smell-war-2015-f4",
+          "claim": "Уэда описывает извлечение запахов как переносимые в пространстве/времени; Juice of War пример переноса во времени.",
+          "sourceIds": [
+            "n30a-war-aesthetic"
+          ],
+          "locator": "3-1 Extraction & Representation"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Памятник, который не остаётся на месте"
+      ],
+      "excludedClaimsRu": [
+        "Мировое первенство; неподтверждённые формулы и индивидуальные реакции посетителей."
+      ]
+    },
+    {
+      "eventId": "n30a-new-york-fumes-2021",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30a-new-york-fumes-2021-f1",
+          "claim": "New York/New Fumes открылась16.12.2021в OlfactoryArtKeller, 21автор из парфюмерии, визуального искусства и музыки. Works include Dirkes BRICK and Laudamiel BlackandWhiteMambo.",
+          "sourceIds": [
+            "n30a-fumes-gallery",
+            "n30a-fumes-report"
+          ],
+          "locator": "gallery heading and introduction; report date and The latest exhibit"
+        },
+        {
+          "id": "n30a-new-york-fumes-2021-f2",
+          "claim": "MonteVista1987–2012 Poblador: детство Manila, кокосовое масло для еды/тела, табак как юношеский бунт, флакон как цветок у исчезнувшей вывески; immigrant yearning.",
+          "sourceIds": [
+            "n30a-fumes-gallery"
+          ],
+          "locator": "Monte Vista participant statement"
+        },
+        {
+          "id": "n30a-new-york-fumes-2021-f4",
+          "claim": "Foodgasm14thStreet Adam: булочки кардамон/шафран, масло/сахар/хрусткость; brick oven sourdough accord, captured smoke of fresh bread.",
+          "sourceIds": [
+            "n30a-fumes-iao"
+          ],
+          "locator": "PDF p3 item11"
+        },
+        {
+          "id": "n30a-new-york-fumes-2021-f5",
+          "claim": "AtHomewithFoxandBeaver Songster2021: собаки после fox/beaver encounters, различие человеческого/собачьего опыта; выбран ограниченный поднабор запахов. LauraPeters customclayenclosure; WestchesterCounty dogs rolling animalmarks.",
+          "sourceIds": [
+            "n30a-fumes-songster",
+            "n30a-fumes-report"
+          ],
+          "locator": "Artist At Home with Fox and Beaver, body paragraphs and Scent and clay vessel2021 heading"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Город собирают по запахам"
+      ],
+      "excludedClaimsRu": [
+        "Мировое первенство; неподтверждённые формулы и индивидуальные реакции посетителей."
+      ]
+    },
+    {
+      "eventId": "n30a-portraits-scent-2022",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30a-portraits-scent-2022-f1",
+          "claim": "Portraits in Scent проходила08.09–29.10.2022, reception08Sep, включала известных/вымышленных персонажей, близких и автопортреты.",
+          "sourceIds": [
+            "n30a-portraits-gallery"
+          ],
+          "locator": "heading; OpeningReception; introduction"
+        },
+        {
+          "id": "n30a-portraits-scent-2022-f2",
+          "claim": "Daphne Oram Wendelbo: hair/ink/celluloid/palm trees/electricity, записи и фото архива, шерстяной свитер и студийная электроника.",
+          "sourceIds": [
+            "n30a-portraits-gallery"
+          ],
+          "locator": "work description; previous talk07Oct and paragraphs In1972; In2016"
+        },
+        {
+          "id": "n30a-portraits-scent-2022-f3",
+          "claim": "Scentless Apprentice IrinaAdam2022: WinstonLights, Stargazer lilies, blackcandles,tea,mohair; bottle and dollwig.",
+          "sourceIds": [
+            "n30a-portraits-catalog"
+          ],
+          "locator": "PDF p2"
+        },
+        {
+          "id": "n30a-portraits-scent-2022-f4",
+          "claim": "GreenCicada Lipowitz создана для Portraits2022, автопортрет5лет босиком в австралийскомrainforest; позднее входит в scentlibrary; lemonmyrtle/farnorthQueensland.",
+          "sourceIds": [
+            "n30a-portraits-tan",
+            "n30a-portraits-pda"
+          ],
+          "locator": "TAN paragraph Someitems; PublicDisplay paragraph Woventhroughthecollection"
+        },
+        {
+          "id": "n30a-portraits-scent-2022-f5",
+          "claim": "Later Lipowitz scentlibrary allowed3scents2weeks, handwrittenledger.",
+          "sourceIds": [
+            "n30a-portraits-pda"
+          ],
+          "locator": "PublicDisplayArt14Mar2026 libraryborrowing paragraph"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Портрет без очертаний лица"
+      ],
+      "excludedClaimsRu": [
+        "Мировое первенство; неподтверждённые формулы и индивидуальные реакции посетителей."
+      ]
+    },
+    {
+      "eventId": "n30a-vitone-macht-2021",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30a-vitone-macht-2021-f1",
+          "claim": "Macht opened at Weserburg on8May2021; Imperium accompanied dust watercolors and sound.",
+          "sourceIds": [
+            "n30a-vitone-weser"
+          ],
+          "locator": "dates; Räume; Foresta"
+        },
+        {
+          "id": "n30a-vitone-macht-2021-f2",
+          "claim": "Räume uses dust from Bundesbank, Bundestag, Federal Court and Pergamon Museum, mixed with water on paper.",
+          "sourceIds": [
+            "n30a-vitone-nbk",
+            "n30a-vitone-interview"
+          ],
+          "locator": "n.b.k. exhibition description; interview Le polveri"
+        },
+        {
+          "id": "n30a-vitone-macht-2021-f3",
+          "claim": "Foresta teutonica domestica2015 outside entrance combined synthetic forest with artist's then nine-year-old son's animal imitations.",
+          "sourceIds": [
+            "n30a-vitone-weser"
+          ],
+          "locator": "Foresta teutonica domestica"
+        },
+        {
+          "id": "n30a-vitone-macht-2021-f4",
+          "claim": "Vitone remembers Genoa harbor smell at Piazza Principe and wet asphalt after summer downpour.",
+          "sourceIds": [
+            "n30a-vitone-interview"
+          ],
+          "locator": "Quali sono gli odori..."
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Пыль, голос и запах власти"
+      ],
+      "excludedClaimsRu": [
+        "Мировое первенство; неподтверждённые формулы и индивидуальные реакции посетителей."
+      ]
+    },
+    {
+      "eventId": "n31a-medieval-women-2024",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31a-medieval-women-2024-f1",
+          "claim": "Публичный показ MedievalWomen начался25.10.2024вBritishLibrary; четыре запахаAVM/Marks, точные даты в выполненном проекте.",
+          "sourceIds": [
+            "n31a-medieval-library",
+            "n31a-medieval-avm"
+          ],
+          "locator": "BL openingdate/runs; AVM project dates and Takinginspiration"
+        },
+        {
+          "id": "n31a-medieval-women-2024-f2",
+          "claim": "Deornatumulierum косметические рецепты: breathfreshener/hairperfume, рецепт сушёные розы/гвоздика/мускат/галангал/rosewater, 3Dсосуды рядом с рукописью и гребнем.",
+          "sourceIds": [
+            "n31a-medieval-avm"
+          ],
+          "locator": "Twoofthese; translated hairperfume"
+        },
+        {
+          "id": "n31a-medieval-women-2024-f3",
+          "claim": "Heaven/hell — интерпретации видений Kempe/Julian; AromaPrime разработал дымный/зловонный запах и сообщил о visualsmokeeffect.",
+          "sourceIds": [
+            "n31a-medieval-avm",
+            "n31a-medieval-aroma",
+            "n31a-medieval-library"
+          ],
+          "locator": "AVM Alongside; AromaPrime Inthemeantime and interactive smellstation"
+        },
+        {
+          "id": "n31a-medieval-women-2024-f4",
+          "claim": "Clay created soundscapes with first-person narratives and music, including Christine de Pizan, Kempe and Hildegard; animated vignettes and projected silhouettes inspired by illuminated manuscripts.",
+          "sourceIds": [
+            "n31a-medieval-clay"
+          ],
+          "locator": "Immersive Soundscapes; Animated Vignettes; Multisensory Spiritual Experiences"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Рукопись, к которой приближаются носом"
+      ],
+      "excludedClaimsRu": [
+        "Мировое первенство; неподтверждённые формулы и индивидуальные реакции посетителей."
+      ]
+    },
+    {
+      "eventId": "n31a-barber-pre-raphaelites-2024",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31a-barber-pre-raphaelites-2024-f1",
+          "claim": "Barber show ran11Oct2024–26Jan2025; Bradstreet curated and Sola/Puig/Artphilia created three scents for Millais and Solomon.",
+          "sourceIds": [
+            "n31a-barber-watts",
+            "n31a-barber-curator"
+          ],
+          "locator": "Watts origin and partnership; Barber closing dates and introduction"
+        },
+        {
+          "id": "n31a-barber-pre-raphaelites-2024-f2",
+          "claim": "Meadow grass/apple/rain/autumn accords; cloth cotton/smoky woods/vetiver/patchouli/camphor/lanolin.",
+          "sourceIds": [
+            "n31a-barber-curator"
+          ],
+          "locator": "Scent1; Scent2"
+        },
+        {
+          "id": "n31a-barber-pre-raphaelites-2024-f3",
+          "claim": "D'Alurra visited and interviewed Bradstreet Jan2025; 23years research, rainbow smell and button diffuser.",
+          "sourceIds": [
+            "n31a-barber-visit"
+          ],
+          "locator": "13Jan2025 paragraphs1–4"
+        },
+        {
+          "id": "n31a-barber-pre-raphaelites-2024-f4",
+          "claim": "Januszczak's church-scent reaction and censer/myrtle interpretation.",
+          "sourceIds": [
+            "n31a-barber-critic"
+          ],
+          "locator": "2Dec2024 final review paragraphs"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Радуга, шерсть и ладан в картинной галерее"
+      ],
+      "excludedClaimsRu": [
+        "Мировое первенство; неподтверждённые формулы и индивидуальные реакции посетителей."
+      ]
+    },
+    {
+      "eventId": "n31a-rietberg-ragamala-2024",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31a-rietberg-ragamala-2024-f1",
+          "claim": "Public date range20Sep2024–19Jan2025; vernissage19Sep6pm.50collection paintings17th–19thcenturies; SonikaSoni research;30ragas withTaraKini; Lalwani/RothNEWscents.",
+          "sourceIds": [
+            "n31a-ragamala-museum"
+          ],
+          "locator": "PDFp1dates,p2opening19Sept,p3music/scents,p5vernissage"
+        },
+        {
+          "id": "n31a-rietberg-ragamala-2024-f2",
+          "claim": "Lalwani's Asavari Ragini scent: feathers/animals/hill/snake/lion/clouds/lightningupperleft; funnel wetfur/mud/lightning.",
+          "sourceIds": [
+            "n31a-ragamala-interview"
+          ],
+          "locator": "Tellusaboutyourworkwithmuseums; interview5Jun2026"
+        },
+        {
+          "id": "n31a-rietberg-ragamala-2024-f3",
+          "claim": "MumtazBasanta triptych Ascent/Descent/MeltingMountains spring/joy/longing/flames; SharifMusavvrari film.",
+          "sourceIds": [
+            "n31a-ragamala-review"
+          ],
+          "locator": "reviewparas Murad and film; imagecaption2024"
+        },
+        {
+          "id": "n31a-rietberg-ragamala-2024-f4",
+          "claim": "Sonika Soni recorded30ragas with TaraKini; production documented in museum annualreport2023.",
+          "sourceIds": [
+            "n31a-ragamala-annual"
+          ],
+          "locator": "Jahresbericht2023 pp116–117 GBFCollaborativeResearchProgram; PrabhatStudios"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Как пахнет нарисованная молния"
+      ],
+      "excludedClaimsRu": [
+        "Мировое первенство; неподтверждённые формулы и индивидуальные реакции посетителей."
+      ]
+    },
+    {
+      "eventId": "n31a-villa-rot-air-2015",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31a-villa-rot-air-2015-f1",
+          "claim": "Exhibition22Mar–2Aug2015 atVillaRot; curatedDathe/Verbeek. Historicalsection pump scentedair fromErlenmeyer instead ofsensor system duebudget.",
+          "sourceIds": [
+            "n31a-rot-curator"
+          ],
+          "locator": "PDFp58footnotes122/125; pp58–59 SomethingintheAir and erlenmeyer"
+        },
+        {
+          "id": "n31a-villa-rot-air-2015-f2",
+          "claim": "Exhibition's limitedEauDeToilette2115 composedbyChristineSöffing/KimWeisswange.",
+          "sourceIds": [
+            "n31a-rot-magazine"
+          ],
+          "locator": "PDFp105(print106) VillaRot entry"
+        },
+        {
+          "id": "n31a-villa-rot-air-2015-f3",
+          "claim": "WorldSensorium materials and culturaldata from230countries/territories; blendedpopulationpercentages.",
+          "sourceIds": [
+            "n31a-rot-nalls"
+          ],
+          "locator": "artist statement ethnobotanicalresearch and mathematicalformula"
+        },
+        {
+          "id": "n31a-villa-rot-air-2015-f4",
+          "claim": "WorldSensorium actually displayedVillaRot; Nalls preferredselfapplication withconsciousattentioninstructions.",
+          "sourceIds": [
+            "n31a-rot-interview",
+            "n31a-rot-installation"
+          ],
+          "locator": "Nez Howhas scent beenexhibited; artist photo captions"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Колба с историей и аромат мира"
+      ],
+      "excludedClaimsRu": [
+        "Мировое первенство; неподтверждённые формулы и индивидуальные реакции посетителей."
+      ]
+    },
+    {
+      "eventId": "n30b-grove-award-2024",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30b-grove-award-2024-f1",
+          "claim": "Grove is in the Heart / SAMAR / Na-Moya Lawrence and Debbie Lin получил Artisan award 7 июня 2024 года.",
+          "sourceIds": [
+            "nnexta-ao-archive"
+          ],
+          "locator": "Past Editions / 2024 Lisbon: ceremony 7 June and Artisan winners"
+        },
+        {
+          "id": "n30b-grove-award-2024-f2",
+          "claim": "Дом описывает рощу, мандарин, бергамотовый петигрен, липу и индонезийский сандал; роллер и fractionated coconut oil.",
+          "sourceIds": [
+            "n31b-samar-grove"
+          ],
+          "locator": "Description lines118–132; title Roll-on"
+        },
+        {
+          "id": "n30b-grove-award-2024-f3",
+          "claim": "SAMAR: два самоучки, небольшие партии, гендерно свободные ароматы, чувственное погружение.",
+          "sourceIds": [
+            "n31b-samar-about"
+          ],
+          "locator": "Who We Are paragraphs86–91"
+        },
+        {
+          "id": "n30b-grove-award-2024-f4",
+          "claim": "Авторы: любая нота достойна центра истории, реализм/фантазия, личный ритуал и самовыражение.",
+          "sourceIds": [
+            "n31b-samar-statement"
+          ],
+          "locator": "Statement paragraphs1–3"
+        },
+        {
+          "id": "n30b-grove-award-2024-f5",
+          "claim": "Bekah Waalkes: терпкое маслянистое облако мандариновой кожуры, медовая липа, землистая горечь, изменение ощущения повседневности.",
+          "sourceIds": [
+            "n31b-samar-haloscope"
+          ],
+          "locator": "A Case for Citrus Fragrances paragraphs80–84"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "Новая композиция и церемония2024; не Garden Heaux nomination2023. Образы композиции, не историческая сцена; ноты не объявлены формулой."
+      ]
+    },
+    {
+      "eventId": "n31b-kilian-acquisition-2016",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31b-kilian-acquisition-2016-f1",
+          "claim": "25 февраля 2016 года ELC объявила о приобретении By Kilian; дом основан в 2007 году и продавался более чем в 40 странах.",
+          "sourceIds": [
+            "n31b-kilian-acquisition"
+          ],
+          "locator": "Release dated February 25, 2016; opening and brand-description paragraphs"
+        },
+        {
+          "id": "n31b-kilian-acquisition-2016-f2",
+          "claim": "В интервью FWO основатель связывает многоразовую упаковку и ароматизированные украшения с долговечностью и видимой формой запаха.",
+          "sourceIds": [
+            "n31b-kilian-fwo"
+          ],
+          "locator": "Interview answers concerning refillable bottles, jewellery and movement"
+        },
+        {
+          "id": "n31b-kilian-acquisition-2016-f3",
+          "claim": "Хеннесси объясняет повторное наполнение примером гравированных флаконов своей бабушки.",
+          "sourceIds": [
+            "n31b-kilian-icon"
+          ],
+          "locator": "Interview: grandmother’s engraved bottles and non-disposable luxury"
+        },
+        {
+          "id": "n31b-kilian-acquisition-2016-f4",
+          "claim": "В интервью ParfumPlus описаны личное сопровождение ограниченной дистрибуции и коробка Garden of Good and Evil как клатч.",
+          "sourceIds": [
+            "n31b-kilian-plus"
+          ],
+          "locator": "Answers concerning 200 doors, staff training and reusable clutch box"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "Самостоятельное событие приобретения; не история рождения Хеннесси. Дата сообщения о совершённой покупке; условия не пересказываются."
+      ]
+    },
+    {
+      "eventId": "n31b-rochas-transfer-2015",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31b-rochas-transfer-2015-f1",
+          "claim": "Inter Parfums завершила приобретение активов Rochas 29 мая 2015 года; права охватывали парфюмерию, косметику и моду.",
+          "sourceIds": [
+            "n31b-rochas-sec"
+          ],
+          "locator": "Item 1.01: On May 29, 2015; trademarks in classes 3 and 25"
+        },
+        {
+          "id": "n31b-rochas-transfer-2015-f2",
+          "claim": "После приобретения возвращены первоначальные флаконы Femme, Madame и Tocade; рядом развивались Mademoiselle и L’Homme.",
+          "sourceIds": [
+            "n31b-rochas-rongier"
+          ],
+          "locator": "Interview answers about development since 2015, heritage bottles and newer ranges"
+        },
+        {
+          "id": "n31b-rochas-transfer-2015-f3",
+          "claim": "Серж Мансо создал флакон Tocade с формой амфоры и геометрическим колпачком; описаны роза, ваниль, чай и миндаль.",
+          "sourceIds": [
+            "n31b-rochas-heritage"
+          ],
+          "locator": "Tocade paragraphs: Serge Mansau, three geometric forms, Murano, rose and vanilla"
+        },
+        {
+          "id": "n31b-rochas-transfer-2015-f4",
+          "claim": "Текущая страница Tocade перечисляет розу, магнолию, жасмин, ваниль и амбру и описывает венецианское стекло.",
+          "sourceIds": [
+            "n31b-rochas-tocade"
+          ],
+          "locator": "Fragrance notes and bottle-description sections"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "Дата завершения 29 мая взята из SEC, не дата публикации 1 июня. Не дублирует биографию Марселя Роша; угол — преемственность флаконов."
+      ]
+    },
+    {
+      "eventId": "n31b-creed-agreement-2023",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31b-creed-agreement-2023-f1",
+          "claim": "26 июня 2023 года Kering объявила соглашение о покупке Creed и планы развития Kering Beauté, в том числе географии и категорий.",
+          "sourceIds": [
+            "n31b-creed-agreement"
+          ],
+          "locator": "Dated release, acquisition agreement and strategic-development paragraphs"
+        },
+        {
+          "id": "n31b-creed-agreement-2023-f2",
+          "claim": "Creed стало первым приобретением нового подразделения красоты; Раффаэлла Корнаджа назначена его руководителем в феврале.",
+          "sourceIds": [
+            "n31b-creed-reuters"
+          ],
+          "locator": "Reuters report: new beauty division, first acquisition and February appointment"
+        },
+        {
+          "id": "n31b-creed-agreement-2023-f3",
+          "claim": "Creed датирует Aventus 2010 годом и описывает бергамот, ананасовый аккорд, дымную кожистую берёзу и семейство Aventus.",
+          "sourceIds": [
+            "n31b-creed-aventus"
+          ],
+          "locator": "Product overview, fragrance history and collection links"
+        },
+        {
+          "id": "n31b-creed-agreement-2023-f4",
+          "claim": "17 октября 2023 года Kering сообщила о завершении после антимонопольных разрешений; консолидация с 1 ноября.",
+          "sourceIds": [
+            "n31b-creed-completion"
+          ],
+          "locator": "Press release dated October 17, 2023, opening paragraph"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "26 июня — соглашение, не завершение. Без непроверенных историй 1760 года, королевских заказов и авторства Aventus. Самостоятельная новая история современного дома."
+      ]
+    },
+    {
+      "eventId": "n31b-fresh-rain-book-2017",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31b-fresh-rain-book-2017-f1",
+          "claim": "Твёрдый переплёт The Smell of Fresh Rain опубликован Icon Books 7 сентября 2017 года; автор художник и бывший госслужащий, книга содержит тезаурус 200 запахов.",
+          "sourceIds": [
+            "n31b-rain-icon"
+          ],
+          "locator": "Hardback ISBN 9781785781131; Published 07/09/2017; synopsis and author biography"
+        },
+        {
+          "id": "n31b-fresh-rain-book-2017-f2",
+          "claim": "По Foreword Reviews незрячий от рождения сын спросил автора о запахе трёх часов ночи; маршруты включают кухни, рынки, гаражи, фермы и берег.",
+          "sourceIds": [
+            "n31b-rain-foreword"
+          ],
+          "locator": "Review opening and examples of encountered smells"
+        },
+        {
+          "id": "n31b-fresh-rain-book-2017-f3",
+          "claim": "Perfume Society выделяет главу On the Tip of My Nose и примеры свежей краски и жарящегося бекона.",
+          "sourceIds": [
+            "n31b-rain-society"
+          ],
+          "locator": "Review paragraph on language of smell and everyday examples"
+        },
+        {
+          "id": "n31b-fresh-rain-book-2017-f4",
+          "claim": "Сальваторе Батталья отмечает доступность книги и примеры хлеба, старых книг и любимого дома.",
+          "sourceIds": [
+            "n31b-rain-battaglia"
+          ],
+          "locator": "Book-review discussion of everyday odours and accessible scope"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "Дата именно первого твёрдого переплёта ISBN 9781785781131; не американское издание 2018. Не повторяет петрикор или опыты с дождём; сюжет — словарь повседневного обоняния."
+      ]
+    },
+    {
+      "eventId": "n31b-smellosophy-book-2020",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31b-smellosophy-book-2020-f1",
+          "claim": "Apple Books указывает 14 июля 2020 года для электронной Smellosophy, Harvard University Press; книга использует беседы с исследователями и парфюмерами.",
+          "sourceIds": [
+            "n31b-smellosophy-apple"
+          ],
+          "locator": "Release date, publisher and description; ebook edition"
+        },
+        {
+          "id": "n31b-smellosophy-book-2020-f2",
+          "claim": "Барвих обсуждает в Slowdown изменчивость запаха, примеси и загрязнение как трудности воспроизводимости исследований.",
+          "sourceIds": [
+            "n31b-smellosophy-slowdown"
+          ],
+          "locator": "Interview answers concerning vision, transient smells and controlled stimuli"
+        },
+        {
+          "id": "n31b-smellosophy-book-2020-f3",
+          "claim": "Барвих защитила философскую PhD в Эксетере и работала в лаборатории Файрстайна; её метод включает лабораторные наблюдения и интервью.",
+          "sourceIds": [
+            "n31b-barwich-about"
+          ],
+          "locator": "Author biography and research-method sections"
+        },
+        {
+          "id": "n31b-smellosophy-book-2020-f4",
+          "claim": "Publishers Weekly отмечает критику зрительной модели чувств и сложность специального языка книги.",
+          "sourceIds": [
+            "n31b-smellosophy-pw"
+          ],
+          "locator": "Review of Smellosophy, main paragraph"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "Дата электронной версии в каталоге Apple с издателем Harvard; не заявлена универсальной датой всех форматов. Фокус на историко-философском методе, не пересказ спорных научных гипотез."
+      ]
+    },
+    {
+      "eventId": "n31b-perfume-companion-2021",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31b-perfume-companion-2021-f1",
+          "claim": "Издательский каталог NetGalley указывает Pub Date Nov 09 2021 для The Perfume Companion, ISBN 9780711242180, USD; книга охватывает почти 500 ароматов.",
+          "sourceIds": [
+            "n31b-companion-netgalley"
+          ],
+          "locator": "Publication metadata, US price and publisher description"
+        },
+        {
+          "id": "n31b-perfume-companion-2021-f2",
+          "claim": "Маккартни пригласила Скривен; авторы стремились к доброжелательному тону и не делили книгу на мужские и женские разделы.",
+          "sourceIds": [
+            "n31b-companion-fragroom"
+          ],
+          "locator": "Project background and what makes book different; interview answers"
+        },
+        {
+          "id": "n31b-perfume-companion-2021-f3",
+          "claim": "The Sniff описывает цитрусовые подразделы, имена парфюмеров, краткие характеристики, ценовые ориентиры и иллюстрации.",
+          "sourceIds": [
+            "n31b-companion-sniff"
+          ],
+          "locator": "Review paragraphs on structure and individual entries"
+        },
+        {
+          "id": "n31b-perfume-companion-2021-f4",
+          "claim": "Fragrance Review отмечает пыльно-розовую обложку с чёрными элементами и полезность категорий при растерянности от выбора.",
+          "sourceIds": [
+            "n31b-companion-review"
+          ],
+          "locator": "Section 15, The Perfume Companion"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "Точная дата американской издательской записи NetGalley; не универсальная первая публикация и не запланированное 7 сентября из раннего каталога. Не повторяет Turin/Sanchez: сюжет совместной доброжелательной навигации и авторского кредита."
+      ]
+    },
+    {
+      "eventId": "n31b-scent-empires-2021",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31b-scent-empires-2021-f1",
+          "claim": "Apple Books указывает 27 апреля 2021 года для английской электронной The Scent of Empires, Polity; перевод Джессики Спенглер.",
+          "sourceIds": [
+            "n31b-empires-apple"
+          ],
+          "locator": "Release date, language, publisher and translator credit"
+        },
+        {
+          "id": "n31b-scent-empires-2021-f2",
+          "claim": "Шлёгель объясняет замысел памятью о Красной Москве на советских торжествах и различием обонятельной среды двух частей Берлина.",
+          "sourceIds": [
+            "n31b-empires-fqm"
+          ],
+          "locator": "Interview: What made you decide to write it?"
+        },
+        {
+          "id": "n31b-scent-empires-2021-f3",
+          "claim": "Обзор IPBA обсуждает национализированные Brocard и Rallet, изменения названий, задач, флаконов и этикеток.",
+          "sourceIds": [
+            "n31b-empires-ipba"
+          ],
+          "locator": "Review paragraphs on factories, nationalisation and Soviet packaging"
+        },
+        {
+          "id": "n31b-scent-empires-2021-f4",
+          "claim": "Оглавление содержит главы о scentscapes, историческом письме, новой женщине, New Look и стилягах.",
+          "sourceIds": [
+            "n31b-empires-wiley"
+          ],
+          "locator": "Table of Contents, chapters 3, 5 and 11"
+        },
+        {
+          "id": "n31b-scent-empires-2021-f5",
+          "claim": "Foreword Reviews связывает парфюмерию в книге с войнами, политическими потрясениями и судьбой Полины Жемчужиной.",
+          "sourceIds": [
+            "n31b-empires-foreword"
+          ],
+          "locator": "Review main discussion of perfume, upheaval and Zhemchuzhina"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "Дата английской электронной версии, не дата бумажного издания в мае. Не пересказывает запуск Chanel No5. Исключены спорная общая формула двух духов, точная дата №5 и авторство флакона Малевича."
+      ]
+    },
+    {
+      "eventId": "n31b-aethiopum-award-2026",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31b-aethiopum-award-2026-f1",
+          "claim": "AethiOpum Maya Njie получил награду Artisan на церемонии Art and Olfaction Awards 11 июня 2026 года в Gazarte, Афины.",
+          "sourceIds": [
+            "nnexta-ao-archive",
+            "n31b-aethi-award-news"
+          ],
+          "locator": "Organizer archive, 12th awards 2026; retrospective P&F report June 12, Artisan winners"
+        },
+        {
+          "id": "n31b-aethiopum-award-2026-f2",
+          "claim": "Страница AethiOpum связывает аромат с пальмой Borassus aethiopum, гове и тиурае; перечисляет землю, перец, ветивер, кофе, ирис, ладан и кожу.",
+          "sourceIds": [
+            "n31b-aethi-product"
+          ],
+          "locator": "Scent Profile, notes and inspiration photograph"
+        },
+        {
+          "id": "n31b-aethiopum-award-2026-f3",
+          "claim": "Нджие выросла близ Стокгольма в шведско-гамбийской семье; изучала surface design и вдохновлялась семейным альбомом 1970-х.",
+          "sourceIds": [
+            "n31b-aethi-story"
+          ],
+          "locator": "Interview background, education and family-photo answers"
+        },
+        {
+          "id": "n31b-aethiopum-award-2026-f4",
+          "claim": "Vanilj связан с фотографией свадебного приёма, Tropica с гамбийской растительностью; старые фотографии побуждают представить запах людей и мест.",
+          "sourceIds": [
+            "n31b-aethi-slowdown"
+          ],
+          "locator": "Profile describing the photographic origins of Vanilj and Tropica"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "Организатор и ретроспектива подтверждают состоявшуюся церемонию 2026 года. Категория Artisan; ошибочное Independent на странице продукта исключено. Не вторая история одной ранее использованной церемонии."
+      ]
+    },
+    {
+      "eventId": "n31b-ford-agreement-2022",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31b-ford-agreement-2022-f1",
+          "claim": "15 ноября 2022 года ELC объявила соглашение о покупке Tom Ford; владение должно было заменить лицензию красоты с окончанием в 2030 году.",
+          "sourceIds": [
+            "n31b-ford-agreement"
+          ],
+          "locator": "Release dated November 15, 2022; benefits paragraph, beauty licence expiry in 2030"
+        },
+        {
+          "id": "n31b-ford-agreement-2022-f2",
+          "claim": "Zegna объявила двадцатилетнюю лицензию моды с возможным продлением на десять лет и согласованием творческого направления.",
+          "sourceIds": [
+            "n31b-ford-zegna-license"
+          ],
+          "locator": "Opening paragraphs and Transaction Details"
+        },
+        {
+          "id": "n31b-ford-agreement-2022-f3",
+          "claim": "Marcolin объявила расширение лицензии очков до бессрочной при условии завершения приобретения бренда.",
+          "sourceIds": [
+            "n31b-ford-marcolin-license"
+          ],
+          "locator": "November 15 disclosure, paragraphs 1–2"
+        },
+        {
+          "id": "n31b-ford-agreement-2022-f4",
+          "claim": "Нынешняя страница Oud Wood описывает кардамон, удовые ноты, сандал, ветивер, тонка, амбру и сопутствующие свечу и средства для тела.",
+          "sourceIds": [
+            "n31b-ford-oud"
+          ],
+          "locator": "Product Details; Discover the Collection"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления и объяснения значения произведения являются редакционным анализом подтверждённых фактов."
+      ],
+      "excludedClaimsRu": [
+        "Событие — соглашение, не завершение. Полностью заменён прежний текст: исключены Black Orchid, история рождения Private Blend и число 12, уже центральные в биографической истории Форда. Новый сюжет — распределение лицензий."
+      ]
+    },
+    {
+      "eventId": "n30c-carmona-perfume",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n30c-carmona-perfume-f1",
+          "claim": "Статья опубликована 23 мая 2023 года; сравнение с коммерческими образцами пачули и нарда привело к вероятной идентификации пачули; исследованы доломитовая пробка и битум.",
+          "sourceIds": [
+            "n30c-carmona-perfume-s1"
+          ],
+          "locator": "PDF page 1, publication date and abstract; Conclusions"
+        },
+        {
+          "id": "n30c-carmona-perfume-f2",
+          "claim": "Мавзолей найден в 2019 году; шесть взрослых; в стеклянной урне женщины находился мешочек с тремя янтарными бусинами и кварцевым флаконом. Растительная масляная основа; оливковое масло не подтверждено.",
+          "sourceIds": [
+            "n30c-carmona-perfume-s2"
+          ],
+          "locator": "University account: discovery, urn contents, workmanship and vegetable oil paragraphs"
+        },
+        {
+          "id": "n30c-carmona-perfume-f3",
+          "claim": "ScenTree описывает земляной, мшистый и дымно-древесный характер масла пачули; Pogostemon cablin относится к яснотковым; листья сушат в тени и перегоняют с паром.",
+          "sourceIds": [
+            "n30c-carmona-perfume-s3"
+          ],
+          "locator": "Classification; Tenacity; Botany; Extraction and uses"
+        },
+        {
+          "id": "n30c-carmona-perfume-f4",
+          "claim": "Gas chromatography coupled with mass spectrometry was used for identifying components.",
+          "sourceIds": [
+            "n30c-carmona-perfume-s1"
+          ],
+          "locator": "Methods/GC-MS; Results/Analysis of contents"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление исследования с парфюмерным опытом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Идентификация пачули вероятная; полная формула и запах всей Римской империи не установлены. Оливковое масло не подтверждено. Современное производство не приписывается римлянам."
+      ]
+    },
+    {
+      "eventId": "n31c-patchouli-hybrid",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31c-patchouli-hybrid-f1",
+          "claim": "18.06.2022paper;двесубгенома/гибридизация/chromosomesubstitutiontotalsame;редкиецветение/семена,черенкование.",
+          "sourceIds": [
+            "n31c-patchouli-hybrid-s1"
+          ],
+          "locator": "Published;Abstract;Introduction;Discussion"
+        },
+        {
+          "id": "n31c-patchouli-hybrid-f2",
+          "claim": "Черновик2016:1.15Gb/~73%;sesquiterpenebiosyntheticgenecopies;patchoulolingredient.",
+          "sourceIds": [
+            "n31c-patchouli-hybrid-s2"
+          ],
+          "locator": "PDF page 1, Abstract/Introduction"
+        },
+        {
+          "id": "n31c-patchouli-hybrid-f3",
+          "claim": "Данные2018:1.91Gb,root/stem/leaftranscriptomes;type-aTPSexpansion.",
+          "sourceIds": [
+            "n31c-patchouli-hybrid-s3"
+          ],
+          "locator": "PDF page 1, Abstract/Sample characteristics;Background summary"
+        },
+        {
+          "id": "n31c-patchouli-hybrid-f4",
+          "claim": "Repeatsstudy:4otherLamiales,TEmajority,recentinsertionslargerproportion.",
+          "sourceIds": [
+            "n31c-patchouli-hybrid-s4"
+          ],
+          "locator": "Abstract"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление исследования с парфюмерным опытом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Гибридная модель 2022 года атрибутирована авторам. Не заявлены готовые новые сорта или терапия. Это история происхождения растения, отдельная от археологии масла Carmona. Интерпретация octaploid из работы 2018 года не представлена нынешним консенсусом."
+      ]
+    },
+    {
+      "eventId": "n31c-odor-colour-cultures",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31c-odor-colour-cultures-f1",
+          "claim": "Статья 09.07.2014: 14 запахов, 6 культурных групп, согласованные и несогласованные цвета; различия между группами, US/German наиболее похожи.",
+          "sourceIds": [
+            "n31c-odor-colour-cultures-s1"
+          ],
+          "locator": "Published; Abstract; Methods; Results"
+        },
+        {
+          "id": "n31c-odor-colour-cultures-f2",
+          "claim": "Demattè: strawberry/spearmint, pink/turquoise, implicit association task; более согласованные пары ускоряют и улучшают ответы.",
+          "sourceIds": [
+            "n31c-odor-colour-cultures-s2"
+          ],
+          "locator": "Abstract"
+        },
+        {
+          "id": "n31c-odor-colour-cultures-f3",
+          "claim": "de Valk: Dutch/Thai/Maniq, source-based vs abstract descriptors; правильное называние источника связано с соответствующим цветом; Maniq few consistent associations.",
+          "sourceIds": [
+            "n31c-odor-colour-cultures-s3"
+          ],
+          "locator": "Abstract; Discussion"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление исследования с парфюмерным опытом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Соответствия культуры не названы биологическим законом или одинаковыми для каждого участника. Не утверждать, что цвет меняет молекулы духов; сюжет цветового выбора отличен от сохранённого опыта 2005 о семантических ярлыках."
+      ]
+    },
+    {
+      "eventId": "n31c-trillion-odor-estimate",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31c-trillion-odor-estimate-f1",
+          "claim": "Печатный номер21.03.2014;10/20/30компонентовиз128;различениеобщихкомпонентов,экстраполяциятиллиона.",
+          "sourceIds": [
+            "n31c-trillion-odor-estimate-s1"
+          ],
+          "locator": "PDF pages 1370–1372; Abstract; Methods"
+        },
+        {
+          "id": "n31c-trillion-odor-estimate-f2",
+          "claim": "Meister критикует перенос парных различений на размерodor space, сопоставляет физическое/перцептивное пространство с цветом.",
+          "sourceIds": [
+            "n31c-trillion-odor-estimate-s2"
+          ],
+          "locator": "Abstract; Introduction; Results/How not to estimate"
+        },
+        {
+          "id": "n31c-trillion-odor-estimate-f3",
+          "claim": "Gerkin/Castro:числоиспытуемых/проб/значимостьрезкоменяютоценку;uppernotlowerbound;общеечислонеизвестно.",
+          "sourceIds": [
+            "n31c-trillion-odor-estimate-s3"
+          ],
+          "locator": "Abstract; Introduction; Problems with the estimate"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление исследования с парфюмерным опытом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Триллион явно атрибутирован спорной модели, не установленной способности. Никаких утверждений о превосходстве человеческого носа над всеми видами/чувствами. Сохранённые white/metamers касаются других опытов и не пересказываются."
+      ]
+    },
+    {
+      "eventId": "n31c-vibration-musk",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31c-vibration-musk-f1",
+          "claim": "25.01.2013: водород/дейтерий, отсутствие различения ацетофенона, различение мускусов; вибрационная интерпретация авторов.",
+          "sourceIds": [
+            "n31c-vibration-musk-s1"
+          ],
+          "locator": "Published; Abstract; Discussion"
+        },
+        {
+          "id": "n31c-vibration-musk-f2",
+          "claim": "Обзор: Block OR5AN1 сходные isotope responses; perireceptor events и другие isotope effects как альтернативы.",
+          "sourceIds": [
+            "n31c-vibration-musk-s2"
+          ],
+          "locator": "Experimental Evidence, paragraphs Block et al.; Perireceptor events"
+        },
+        {
+          "id": "n31c-vibration-musk-f3",
+          "claim": "Paoli: 0.0006% ethyl acetate in benzaldehyde-d5 вызвал ответ dOr42b у Drosophila; роль GC purification.",
+          "sourceIds": [
+            "n31c-vibration-musk-s3"
+          ],
+          "locator": "Abstract"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление исследования с парфюмерным опытом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Вибрационный механизм прямо назван спорной интерпретацией. Fly benzaldehyde impurity не объявлена доказанной примесью в человеческих musk образцах. История не медицинская инструкция и не универсальное опровержение всех isotope effects."
+      ]
+    },
+    {
+      "eventId": "n31c-binaral-rivalry",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31c-binaral-rivalry-f1",
+          "claim": "Университет20.08.2009 прямо сообщает paper published online today;12испытуемых/20проб/PEAиn-butanol/чередованиябезпредсказуемойпоследовательности.",
+          "sourceIds": [
+            "n31c-binaral-rivalry-s1"
+          ],
+          "locator": "Dated release; paragraphs This finding; For the study; During 20 rounds"
+        },
+        {
+          "id": "n31c-binaral-rivalry-f2",
+          "claim": "Позднийопыт2012:2odorvsodor/water;picturevsword;картинкисильнеевbinaral,чередованиясохранялись.",
+          "sourceIds": [
+            "n31c-binaral-rivalry-s2"
+          ],
+          "locator": "Abstract; Materials and Methods/Olfactory stimuli and Pictorial and Semantic Cues"
+        },
+        {
+          "id": "n31c-binaral-rivalry-f3",
+          "claim": "Gottfriedсопоставляетбинарноечередованиеобонянияисоперничествозрительныхобразов.",
+          "sourceIds": [
+            "n31c-binaral-rivalry-s3"
+          ],
+          "locator": "Abstract; Comment on citation gives Epub 20 August 2009"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление исследования с парфюмерным опытом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Прочитано сообщение участника от 20 августа 2009 года с прямым подтверждением онлайн-публикации. Печатный выпуск 29 сентября не используется вторым событием. Оригинальный PMC закрыт капчей и не зарегистрирован прочитанным. Прочитанный авторский комментарий PubMed отдельно подтверждает Epub 20 August 2009. Нельзя обобщать на каждую парфюмерную смесь."
+      ]
+    },
+    {
+      "eventId": "n31c-olfactory-lover",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31c-olfactory-lover-f1",
+          "claim": "Обзор опубликован 11 апреля 2014 года; LOVER включает Rare: запахи вызывают меньше воспоминаний и более долгие ответы.",
+          "sourceIds": [
+            "n31c-olfactory-lover-s1"
+          ],
+          "locator": "Publication header; The LOVER acronym; Rare occurrence"
+        },
+        {
+          "id": "n31c-olfactory-lover-f2",
+          "claim": "В исследовании 93 пожилых участников обонятельные воспоминания чаще относились к возрасту до 10 лет; словесные и зрительные — к 11–20 годам.",
+          "sourceIds": [
+            "n31c-olfactory-lover-s2"
+          ],
+          "locator": "Abstract, age distributions and experiential qualities"
+        },
+        {
+          "id": "n31c-olfactory-lover-f3",
+          "claim": "У Херц запахи костра, травы и попкорна усиливали эмоциональность, но не отличались по яркости и конкретности содержания.",
+          "sourceIds": [
+            "n31c-olfactory-lover-s3"
+          ],
+          "locator": "Abstract, comparative sensory cue experiment"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление исследования с парфюмерным опытом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Обзор не является новым экспериментом; субъективная эмоциональность не доказывает точность воспоминания. Последние парфюмерные примеры — редакционная иллюстрация."
+      ]
+    },
+    {
+      "eventId": "n31c-wearable-vr-odor",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31c-wearable-vr-odor-f1",
+          "claim": "Работа опубликована 9 мая 2023 года; описаны беспроводные носимые устройства с двумя или девятью генераторами запаха.",
+          "sourceIds": [
+            "n31c-wearable-vr-odor-s1"
+          ],
+          "locator": "Publication header; Results, designs and operating mechanism"
+        },
+        {
+          "id": "n31c-wearable-vr-odor-f2",
+          "claim": "Шведский отдельный проект использовал контроллер, четыре клапана, вентилятор и игру с угадыванием винных ароматов.",
+          "sourceIds": [
+            "n31c-wearable-vr-odor-s2"
+          ],
+          "locator": "Opening paragraphs; Complex fragrance blends; Code and blueprints openly available"
+        },
+        {
+          "id": "n31c-wearable-vr-odor-f3",
+          "claim": "Обзор перечисляет ватные диски, диффузоры и ольфактометры как разные способы подачи запахов в VR.",
+          "sourceIds": [
+            "n31c-wearable-vr-odor-s3"
+          ],
+          "locator": "Olfactory delivery systems, Table 3 and surrounding discussion"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление исследования с парфюмерным опытом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Не заявляется мгновенное исчезновение запаха, универсальная библиотека ароматов или медицинская эффективность. Три независимые работы; шведское устройство не приписывается авторам Nature."
+      ]
+    },
+    {
+      "eventId": "n31c-learning-roses",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31c-learning-roses-f1",
+          "claim": "Neuron опубликовал работу 21 декабря 2006 года; длительное предъявление улучшало различение связанных запахов и сопровождалось изменением корковых ответов.",
+          "sourceIds": [
+            "n31c-learning-roses-s1"
+          ],
+          "locator": "Citation date; Abstract; figure captions"
+        },
+        {
+          "id": "n31c-learning-roses-f2",
+          "claim": "В отдельном исследовании 2008 года обусловливание улучшало различение энантиомеров и разделяло паттерны грушевидной коры.",
+          "sourceIds": [
+            "n31c-learning-roses-s2"
+          ],
+          "locator": "Abstract; Figures 1 and 2"
+        },
+        {
+          "id": "n31c-learning-roses-f3",
+          "claim": "Обзор различает опыт и формальную тренировку, а также чувствительность, различение, память и идентификацию.",
+          "sourceIds": [
+            "n30c-perfumer-imagery-s3"
+          ],
+          "locator": "Olfactory performance; Odor sensitivity; Odor discrimination; Odor memory; Odor identification"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление исследования с парфюмерным опытом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Не смешивать с историей о мысленном представлении запахов у парфюмеров. Эксперимент 2008 года отделён от датированного события. Нет инструкции по неприятному обусловливанию или медицинских выводов."
+      ]
+    },
+    {
+      "eventId": "n31c-lifespan-crossmodal",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n31c-lifespan-crossmodal-f1",
+          "claim": "Работа впервые опубликована онлайн 6 декабря 2021 года; в возрастном исследовании связей чувств ассоциации обычно становились сильнее и многочисленнее у старших участников.",
+          "sourceIds": [
+            "n31c-lifespan-crossmodal-s1"
+          ],
+          "locator": "First published online header; Abstract; Experiment 3, Method"
+        },
+        {
+          "id": "n31c-lifespan-crossmodal-f2",
+          "claim": "В независимой группе 25 участников лимон и перец связывались с угловатыми, малина и ваниль с округлыми формами.",
+          "sourceIds": [
+            "n31c-lifespan-crossmodal-s2"
+          ],
+          "locator": "Abstract"
+        },
+        {
+          "id": "n31c-lifespan-crossmodal-f3",
+          "claim": "В другом эксперименте шесть запахов на фоне белого шума оценивались как менее приятные и сладкие, чем при музыкальных условиях.",
+          "sourceIds": [
+            "n31c-lifespan-crossmodal-s3"
+          ],
+          "locator": "Abstract; Results and discussion, auditory conditions"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставление исследования с парфюмерным опытом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Онлайн-дата отличается от обозначения номера журнала. Главный сюжет — развитие связей чувств с возрастом, не культурные цветовые соответствия Levitan. Внешние контекстные работы не повторяют источники того сюжета."
+      ]
     }
   ]
 }
