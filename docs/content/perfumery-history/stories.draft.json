@@ -18917,6 +18917,1161 @@
           ]
         }
       ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-06-28",
+      "eventId": "n32a-sillage-los-angeles-2014",
+      "eventGroupId": "n32a-sillage-los-angeles-2014",
+      "eventDate": "2014-06-28",
+      "category": "cultural_fact",
+      "localizations": {
+        "ru": {
+          "title": "Город, который встречается на запястьях",
+          "fullStory": "28 июня 2014 года в Музее искусства Санта-Моники прошла Sillage Брайана Гёльценлойхтера. Вместе с Institute for Art and Olfaction художник предложил посетителям носить географию Лос-Анджелеса на коже. По месту жительства человеку выбирали аромат и наносили его на левое запястье. Внутри выставки Роберта Суэйна The Form of Color возникал ещё один, подвижный слой: запахи пришедших людей постепенно смешивались. Пространство менялось вместе с составом публики.\n\nРабота начиналась с одиннадцати композиций для крупных частей города. Гёльценлойхтер опирался на опрос жителей об ароматических ассоциациях с районами. Для гавани он описывал морской бриз рядом с тяжёлой техникой, для Лос-Фелиса и Силвер-Лейка — сухой воздух с ночным жасмином над бетоном. Сотрудники не выдавали посетителю на пробу все остальные запахи: предлагалось подойти к другому человеку и попросить понюхать его аромат. Карта становилась поводом начать разговор. Различия районов можно было сопоставить через людей, которые оказались рядом.\n\nВ интервью Los Angeles Times художник объяснял, что его интересует настроение места, а не буквальное повторение каждой неприятной приметы. Для центра города он выбрал горячий асфальт и движение транспорта. Берёзовый дёготь и гваяковое дерево помогали получить смолистое впечатление; небольшого количества таких материалов хватало для заметного эффекта. Металлическое тепло и гидравлическая жидкость стали ориентирами для Южного Лос-Анджелеса. Гёльценлойхтер даже носил эту композицию сам, наблюдая её встречу со своей кожей.\n\nПосле события работа продолжилась в другой форме. В собственном эссе художник рассказал, как использовал собранные на месте данные, чтобы составить отдельный парфюм — обонятельный портрет музейной аудитории. Соотношение людей превращалось в соотношение запахов. Получался не аромат всего города, выбранный раз и навсегда, а след конкретной встречи его жителей. Рядом с устойчивыми названиями районов возникало временное сообщество: оно собиралось в зале, общалось, расходилось и оставляло материал для новой композиции. Парфюмерия здесь сохраняла не только воспоминание о месте, но и сведения о том, кто пришёл его представлять."
+        },
+        "en": {
+          "title": "A city meeting on visitors' wrists",
+          "fullStory": "On 28 June 2014, Brian Goeltzenleuchter's Sillage took place at the Santa Monica Museum of Art. Working with the Institute for Art and Olfaction, the artist invited visitors to wear Los Angeles geography on their skin. A fragrance was chosen according to where each person lived and sprayed onto their left wrist. Within Robert Swain's exhibition The Form of Color, another, mobile layer appeared: arriving visitors' smells gradually mingled. The space changed with its audience.\n\nThe project began with eleven compositions representing major regions of the city. Goeltzenleuchter drew on a survey asking residents which smells they associated with neighborhoods. For the harbor he described sea air beside heavy machinery; for Los Feliz and Silver Lake, dry air carrying night-blooming jasmine over concrete. Staff did not offer visitors samples of every other neighborhood. Instead, people were encouraged to approach someone else and ask to smell their fragrance. A map became a reason to begin a conversation, allowing regional differences to be compared through people standing nearby.\n\nIn a Los Angeles Times interview, the artist explained his interest in a place's mood rather than duplicating every unpleasant detail. For downtown he chose hot asphalt and traffic. Birch tar and guaiac wood helped produce a tarry impression, with small amounts making a substantial contribution. Metallic heat and hydraulic fluid provided references for South Los Angeles. Goeltzenleuchter even wore that composition himself, observing its encounter with his skin.\n\nThe work continued in another form after the event. In an authored essay, Goeltzenleuchter described using the data gathered at the museum to formulate a separate perfume: an olfactory portrait of its audience. Proportions of people became proportions of smells. The result represented a particular encounter among residents, rather than one permanently fixed fragrance for the entire city. Alongside established neighborhood names, a temporary community assembled, talked and dispersed, leaving material for another composition. Perfumery preserved both a memory of place and information about who had come to represent it."
+        }
+      },
+      "sourceIds": [
+        "n32a-sillage-iao",
+        "n32a-sillage-artist",
+        "n32a-sillage-times",
+        "n32a-sillage-essay"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Sillage held28June2014 SMMoA withIAO; residence-linked scents onleftwrist insideSwainFormofColor.",
+          "factIds": [
+            "n32a-sillage-los-angeles-2014-f1"
+          ],
+          "sourceIds": [
+            "n32a-sillage-iao"
+          ]
+        },
+        {
+          "claim": "Eleven regionalfragrances; harborseaair/machinery, LosFelizSilverlakejasmine/concrete; staffencouragedsmellingotherpeople notsamples.",
+          "factIds": [
+            "n32a-sillage-los-angeles-2014-f2"
+          ],
+          "sourceIds": [
+            "n32a-sillage-artist"
+          ]
+        },
+        {
+          "claim": "Moodnotliteralreplication; hotasphalt/traffic,birchtar/guaiacwood; SouthLAmetallicheat/hydraulicfluid artistwore.",
+          "factIds": [
+            "n32a-sillage-los-angeles-2014-f3"
+          ],
+          "sourceIds": [
+            "n32a-sillage-times"
+          ]
+        },
+        {
+          "claim": "Afterevent audience data usedtoformulate bespoke demographicperfume.",
+          "factIds": [
+            "n32a-sillage-los-angeles-2014-f4"
+          ],
+          "sourceIds": [
+            "n32a-sillage-essay"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-06-30",
+      "eventId": "n32a-gaia-mother-tree-2018",
+      "eventGroupId": "n32a-gaia-mother-tree-2018",
+      "eventDate": "2018-06-30",
+      "category": "cultural_fact",
+      "localizations": {
+        "ru": {
+          "title": "Пряности, которые держали дерево",
+          "fullStory": "30 июня 2018 года на главном вокзале Цюриха начался публичный показ GaiaMotherTree Эрнесто Нето, организованный Fondation Beyeler. Дерево из связанных вручную хлопковых полос поднималось к двадцатиметровому потолку. В него можно было войти. Под текстильной кроной появлялось место для встречи, отдыха и внимания к собственному присутствию. Ароматические материалы участвовали в устройстве скульптуры столь же буквально, как ткань: свисающие капли служили противовесами.\n\nКуратор Митико Коно описала их содержимое с необычной для художественного дерева точностью. В работе использовали 420 килограммов молотых пряностей: по 140 килограммов куркумы и гвоздики, по 70 — кумина и чёрного перца. Центральный противовес содержал семена. Подвешенные над металлическими балками тяжести позволяли поддерживать конструкцию без новых отверстий и гвоздей в вокзальном здании. Запах был связан с массой вещества и поиском равновесия. То, что можно почувствовать носом, одновременно удерживало форму над головами людей.\n\nРабота продолжала обмен Нето с амазонским сообществом хуни куин, начавшийся в 2013 году. Журнал Domus связывал этот диалог с вниманием к отношениям человека и природы, устойчивости и передаче культурного знания. У основания дерева посетители могли устроиться на сиденьях, расположенных кругом. Вместо одного привилегированного места перед произведением появлялось общее внутреннее пространство. Здесь скульптура задавала не только линию взгляда вверх, но и возможность посмотреть на человека напротив. Прозрачная ткань сохраняла связь с вокзалом вокруг.\n\nСам Нето объяснял выбор места через особое вокзальное состояние: человек обычно думает об отъезде или прибытии, о будущем или прошлом, редко замечая, что находится здесь сейчас. Художник хотел заполнить это промежуточное время. Пряности привлекли его сразу цветом, текстурой и ароматом; обонятельное впечатление углубляло встречу со скульптурой. Предложение снять обувь имело для него и практический, и ритуальный смысл: остановиться перед входом, почувствовать землю под ногами. Несколько знакомых кухонных веществ входили в большой общественный предмет, где вес, запах и забота о совместном пространстве становились неразделимы."
+        },
+        "en": {
+          "title": "Spices holding up a tree",
+          "fullStory": "On 30 June 2018, the public presentation of Ernesto Neto's GaiaMotherTree began at Zurich Main Station, organized by Fondation Beyeler. A tree made from hand-knotted cotton strips reached towards the twenty-meter ceiling. Visitors could enter it. Beneath the textile crown appeared a place for meeting, resting and noticing one's own presence. Aromatic materials participated as literally as fabric in the sculpture's construction: hanging drops served as counterweights.\n\nCurator Michiko Kono described their contents with unusual precision for an artistic tree. The work used 420 kilograms of ground spices: 140 kilograms each of turmeric and cloves, and seventy each of cumin and black pepper. The central counterweight contained seeds. Weights suspended over metal girders supported the structure without new holes or nails in the station building. Smell was connected with the mass of matter and a search for equilibrium. Something encountered through the nose simultaneously held a form above people's heads.\n\nThe project continued Neto's exchange with the Amazonian Huni Kuin community, begun in 2013. Domus connected this dialogue with relationships between humans and nature, sustainability and the transmission of cultural knowledge. Visitors could rest on seats arranged in a circle at the tree's base. Instead of one privileged position before an artwork, there was a shared interior. The sculpture offered both an upward line of sight and an opportunity to look at someone opposite. Transparent fabric maintained a connection with the surrounding station.\n\nNeto himself explained the location through the peculiar condition of railway travel: people usually think about arriving or departing, the future or the past, rarely noticing that they are here now. He wanted to fill that interval. Spices had attracted him through color, texture and fragrance together; olfactory impressions deepened an encounter with sculpture. Removing shoes had both practical and ritual significance: pausing before entering and feeling the ground beneath one's feet. Familiar kitchen substances entered a large public object in which weight, smell and care for a shared space became inseparable."
+        }
+      },
+      "sourceIds": [
+        "n32a-gaia-dossier",
+        "n32a-gaia-kono",
+        "n32a-gaia-domus",
+        "n32a-gaia-neto"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Publicrange30Jun–29Jul2018;29June8pm openingceremony distinguished. Handknottedcotton20m walkinstructure aromaticcounterweights.",
+          "factIds": [
+            "n32a-gaia-mother-tree-2018-f1"
+          ],
+          "sourceIds": [
+            "n32a-gaia-dossier"
+          ]
+        },
+        {
+          "claim": "420kgspices140turmeric140cloves70cumin70pepper, central seeds; countersupportedmetalbeamsnonewholes/nails.",
+          "factIds": [
+            "n32a-gaia-mother-tree-2018-f2"
+          ],
+          "sourceIds": [
+            "n32a-gaia-kono"
+          ]
+        },
+        {
+          "claim": "HuniKuincooperationsince2013, humans/nature/sustainability/knowledge;circleseats/transparentwork.",
+          "factIds": [
+            "n32a-gaia-mother-tree-2018-f3"
+          ],
+          "sourceIds": [
+            "n32a-gaia-domus"
+          ]
+        },
+        {
+          "claim": "Neto'sstationbetweenarrival/departure, spicescolor/texture/scent, remove-shoespause/ground.",
+          "factIds": [
+            "n32a-gaia-mother-tree-2018-f4"
+          ],
+          "sourceIds": [
+            "n32a-gaia-neto"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-10-21",
+      "eventId": "n32a-meduses-raux-2022",
+      "eventGroupId": "n32a-meduses-raux-2022",
+      "eventDate": "2022-10-21",
+      "category": "cultural_fact",
+      "localizations": {
+        "ru": {
+          "title": "Портрет из воды после мытья головы",
+          "fullStory": "21 октября 2022 года в лос-анджелесской галерее Institute for Art and Olfaction началась La Fabrique des Méduses Бориса Ро. Деревянная конструкция становилась местом неожиданной близости: художник выступал одновременно заботливым хозяином и парикмахером. Посетителю мыли голову и делали массаж кожи головы. Использованную воду собирали, чтобы позднее превратить в пахучий гель. Встреча с произведением начиналась с привычного действия ухода, которому давали другое продолжение.\n\nВ авторском описании фабрики три литра воды и десять граммов загустителя превращались в подобие медузы. Скульптура сохраняла аромат лосьона для волос, иногда отдельные выпавшие волосы, и получала имя человека, прошедшего процедуру. Следующий посетитель мог вынуть из формы медузу предшественника, пережившего тот же опыт днём раньше, и поставить её рядом с остальными. Сходство с человеком возникало через вещество, имя и переданное действие. Постепенно вокруг фабрики накапливалась карта отдельных встреч. У каждого объекта была своя недавняя история, а у всей группы — общий процесс появления. Тело оставалось водой, лишь ненадолго удержанной.\n\nЕщё до лос-анджелесского показа Ро объяснял замысел в интервью журналу Академии Версаля. Его интересовала возможность вывести прохожего из повседневного ритма, позаботиться о нём и затем начать разговор. Художник подчёркивал, что не стремится шокировать: он хотел придать значение малому, на первый взгляд несущественному жесту. В той же беседе он рассказывал, как его внимание к запахам выросло из работы с картофельными биоматериалами: часть большого запаса картофеля в студии начинала портиться. От исследования вещества он пришёл к вопросам о том, как люди воспринимают друг друга и делят пространство. Фабрика соединяла эти два интереса: материальное превращение и социальную встречу.\n\nГелевые медузы медленно испарялись, отдавая аромат в зал и теряя собственное тело. После заботливого прикосновения оставался непрочный портрет, которому предстояло исчезнуть. Его ценность зависела от прожитого момента."
+        },
+        "en": {
+          "title": "A portrait made from rinsing water",
+          "fullStory": "On 21 October 2022, Boris Raux's La Fabrique des Méduses opened at the Institute for Art and Olfaction gallery in Los Angeles. A wooden structure became a place of unexpected proximity: the artist acted as both a caring host and a hairdresser. Visitors received a shampoo and scalp massage. The used water was collected to become a fragrant gel later. An encounter with the work began through a familiar act of care given a different continuation.\n\nIn the artist's account of the factory, three liters of water and ten grams of gelling agent became a jellyfish-like form. The sculpture retained the hair lotion's scent, sometimes a few fallen hairs, and the first name of the person receiving the treatment. The next visitor could unmold a predecessor's jellyfish, made from the same experience a day earlier, and place it beside the others. Resemblance emerged through substance, a name and a handed-on action. Individual encounters gradually formed a map around the factory. Each object had its own recent history; the group shared a process of coming into being. Its body remained water, briefly held in place.\n\nBefore the Los Angeles presentation, Raux explained the intention in an interview published by the Versailles education authority. He wanted to interrupt a passerby's everyday rhythm, offer care and then begin a conversation. He emphasized that shocking people was not his aim: he wanted to give significance to an apparently inconsequential gesture. In the same conversation, he recalled his interest in smells developing from work with potato biomaterials, when part of a studio supply began to rot. Investigation of matter led towards questions about how people perceive one another and share space. The factory connected these interests: a transformation of material and a social encounter.\n\nThe gel jellyfish slowly evaporated, releasing fragrance into the gallery as their bodies disappeared. A caring touch left a fragile portrait destined to vanish, its value depending on a lived moment."
+        }
+      },
+      "sourceIds": [
+        "n32a-meduses-iao",
+        "n32a-meduses-portfolio",
+        "n32a-meduses-interview"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Exhibition21–30Oct2022IAO: woodenstructure/scalpmassage/shampoo/rinse watergellified;slowevaporation/vanitas.",
+          "factIds": [
+            "n32a-meduses-raux-2022-f1"
+          ],
+          "sourceIds": [
+            "n32a-meduses-iao"
+          ]
+        },
+        {
+          "claim": "3liters10ggellingagent; lotion/hair/firstname; nextvisitor unmoldspreviousvisitor'sobject; accumulation.",
+          "factIds": [
+            "n32a-meduses-raux-2022-f2"
+          ],
+          "sourceIds": [
+            "n32a-meduses-portfolio"
+          ]
+        },
+        {
+          "claim": "Artist'scare/dialogue/intentionnotshock; potatobiomaterials origin tointerestinsocialolfaction.",
+          "factIds": [
+            "n32a-meduses-raux-2022-f3"
+          ],
+          "sourceIds": [
+            "n32a-meduses-interview"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-01-13",
+      "eventId": "n32a-clearing-au-2023",
+      "eventGroupId": "n32a-clearing-au-2023",
+      "eventDate": "2023-01-13",
+      "category": "cultural_fact",
+      "localizations": {
+        "ru": {
+          "title": "Запах земли за нарисованным пейзажем",
+          "fullStory": "Шёлковый пейзаж, стол для свиданий и два зеркала составляли A Clearing Се Ён Ау. 13 января 2023 года инсталляция открылась в лос-анджелесском Institute for Art and Olfaction. В основе работы были фоны, перед которыми заключённые фотографируются с близкими во время посещений. Природный мотив на шёлке превращался в насыщенное зеленью пространство, а обонятельная часть напоминала влажную землю. Стол сохранял связь с местом встречи двух разделённых миров. Зеркала, обычно связанные с наблюдением, предлагали увидеть возможные версии себя, не ограниченные единственным поступком. Знакомое устройство комнаты становилось материалом для другого отношения к человеку.\n\nВ разговоре с Кеннетом Нг раскрывается личный опыт Ау, стоящий за работой. Брат Ау находился в заключении и писал о том, как ему не хватает запаха свежескошенной травы. Нг, видевший инсталляцию в IAO, связывал этот рассказ с пахучим материалом на кирпиче. В беседе также описаны пейзажные фоны для семейных фотографий: один снимок оставался внутри, другой могли унести родственники. Изображение позволяло ненадолго представить другую среду, но само продолжало принадлежать системе ограничений. В работе Ау к зрительному проходу в природу добавлялось обоняние — способ обратиться к отсутствующему месту без фотографии этого места.\n\nВ собственном описании практики Ау цифровые композиции связаны с переживанием утраты и созданием альтернативных миров. Личный опыт усыновления из Кореи в другую страну позволяет рассматривать перемещение и навязанные формы идентичности через связь биографии с культурной историей. Цвет, звук и запах становятся средствами перехода между этими слоями. Нелинейное изображение допускает сосуществование разных времён и возможностей. В A Clearing такой подход получает материальное выражение: цифровой пейзаж становится шёлком, а представление о внешнем мире — запахом земли. Воздух и ткань не отменяют границу комнаты. Они позволяют заметить, насколько важны для человеческого присутствия вещи, которые легко принять за несущественное окружение."
+        },
+        "en": {
+          "title": "Earth beyond a painted landscape",
+          "fullStory": "A silk landscape, a visiting table and two mirrors formed Se Young Au's A Clearing. On 13 January 2023, the installation opened at Los Angeles's Institute for Art and Olfaction. Au referred to the backdrops against which incarcerated people are photographed with loved ones during visits. A nature motif on silk became a richly green environment, while the olfactory component suggested wet earth. The table retained a connection with a meeting between separated worlds. Mirrors, usually associated with surveillance, offered possible versions of oneself beyond a single act. A familiar room's arrangement became material for another way of considering a person.\n\nIn conversation with Kenneth Ng, Au explained the personal experience behind the work. Their brother had been incarcerated and written about missing the smell of freshly cut grass. Ng, who had visited the installation at IAO, connected that account with scented material on a brick. Au also described landscape backdrops for family photographs: one picture remained inside, while relatives could take another away. An image offered an imagined different environment while still belonging to a system of restrictions. In Au's work, smell joined this visual passage towards nature, addressing an absent place without requiring a photograph of that place.\n\nIn their account of their practice, Au connects digital composites with grief and the creation of alternative worlds. As a Korean transnational adoptee, they consider displacement and imposed identities through personal experience and cultural history. Color, sound and scent become means of passage between these layers. Nonlinear images allow different times and possibilities to coexist. A Clearing gives that approach material expression: a digital landscape becomes silk, and an idea of the outside world becomes the smell of earth. Boundaries remain. They make perceptible the importance of things easily dismissed as incidental surroundings: nature, texture and the possibility of remembering and imagining."
+        }
+      },
+      "sourceIds": [
+        "n32a-clearing-iao",
+        "n32a-clearing-noodle",
+        "n32a-clearing-artist"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "A Clearing Jan13–Mar15,2023 IAO: silk naturemotif fromprisonphotobackdrops,wetearth smell,visitingtable,dual mirrorspossibleversions.",
+          "factIds": [
+            "n32a-clearing-au-2023-f1"
+          ],
+          "sourceIds": [
+            "n32a-clearing-iao"
+          ]
+        },
+        {
+          "claim": "Brother'sfreshgrassletter; Ng sawIAO scentedbrick; familyphotobackdroponeimageinside/oneoutside.",
+          "factIds": [
+            "n32a-clearing-au-2023-f2"
+          ],
+          "sourceIds": [
+            "n32a-clearing-noodle"
+          ]
+        },
+        {
+          "claim": "Au Koreantransnationaladoptee; grief/digitalcomposites/multipletruthsandtimelines/color/sound/scent; 2023IAOconfirmedCV.",
+          "factIds": [
+            "n32a-clearing-au-2023-f3"
+          ],
+          "sourceIds": [
+            "n32a-clearing-artist"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-11-01",
+      "eventId": "n32a-polaroids-ravat-2018",
+      "eventGroupId": "n32a-polaroids-ravat-2018",
+      "eventDate": "2018-11-01",
+      "category": "cultural_fact",
+      "localizations": {
+        "ru": {
+          "title": "Дневник, у которого есть запах",
+          "fullStory": "Снимок и аромат могут удерживать разные следы одной встречи. Клара Рават сделала это соседство основой Polaroids, открывшейся 1 ноября 2018 года в экспериментальном пространстве Institute for Art and Olfaction в Лос-Анджелесе. Она вела дневник фотографий и обонятельных воспоминаний о людях и местах повседневной жизни. Организаторы связывали оба средства с возможностью ненадолго отложить телефон, посмотреть друг другу в глаза и внимательнее побыть вместе. Короткое мгновение фотографии получало продолжение в более медленном знакомстве с запахом.\n\nК такому соединению Рават пришла через разные занятия. В интервью WOW она вспоминала, как оставила медицину и поступила на программу ArtScience в Гааге. Занятие Каро Вербек помогло понять: работать с запахом можно и за пределами профессии парфюмера. Рават делала фильмы, выражающие аромат, инсталляции с запахом и ситуации, в которых люди нюхают друг друга. Её интересовало, как само действие обоняния меняет восприятие и устанавливает связь между участниками. Дневниковая форма давала этому интересу личный масштаб.\n\nВ беседе с CLOT Рават описывала желаемое впечатление как новое и одновременно близкое, словно возвращение домой в незнакомом окружении. Но поддерживать обонятельную работу в музее непросто. Нужно договориться, кто пополняет аромат, когда проветривает помещение и как объяснить смотрителям, что этот запах принадлежит произведению. За эфемерным материалом стоит вполне конкретная забота. Фотографию можно оставить на стене; пахучее присутствие требует внимания к тому, что происходит в воздухе во время показа.\n\nВ другом интервью, посвящённом прогулкам, Рават говорила о возможности сосредоточиться на небольшой части опыта — собственном носе. Ходьба для неё могла быть не только перемещением между двумя точками, но и временем без обязательной цели. Этот подход помогает прочитать Polaroids: дневник сохраняет то, что обычно проходит фоном, пока внимание занято маршрутом или экраном. Знакомство с человеком и местом включает больше, чем их видимый образ. Фотография и запах оставляют разные пути обратно к однажды замеченному."
+        },
+        "en": {
+          "title": "A diary with a smell",
+          "fullStory": "A photograph and a fragrance can hold different traces of one encounter. Klara Ravat made their proximity the basis of Polaroids, which opened on 1 November 2018 at the Institute for Art and Olfaction's experimental space in Los Angeles. She kept a diary of pictures and olfactory memories of people and places encountered in everyday life. Organizers connected both media with putting down a phone, looking into another person's eyes and spending attentive time together. A photograph's brief instant acquired a continuation in a slower encounter with smell.\n\nRavat arrived at this combination through different disciplines. In a WOW interview, she recalled leaving medicine and joining the ArtScience program in The Hague. A class with Caro Verbeek helped her understand that working with smell could extend beyond the profession of perfumer. Ravat made films expressing a scent, installations containing fragrance and situations in which people smelled one another. She wanted to discover how smelling itself changed perception and connected participants. A diary gave that interest a personal scale.\n\nSpeaking with CLOT, Ravat described the impression she sought as something new yet familiar, like returning home while surrounded by strangers. Maintaining an olfactory artwork in a museum nevertheless required practical care. Someone needed to replenish the scent, ventilate the room and explain to attendants that this smell belonged to the work. An ephemeral material entailed concrete responsibilities. A photograph could remain on a wall; a fragrant presence required attention to what happened in the air during its presentation.\n\nIn another interview, about walking, Ravat discussed concentrating on one small part of experience: the nose. Walking could be more than moving between two points, allowing time without an obligatory goal. This approach offers a way to read Polaroids: a diary retains impressions that usually pass unnoticed while attention follows a route or a screen. Encountering a person or place involves more than their visible image. Photography and smell leave different paths back to something once noticed."
+        }
+      },
+      "sourceIds": [
+        "n32a-polaroids-iao",
+        "n32a-polaroids-wow",
+        "n32a-polaroids-clot",
+        "n32a-polaroids-walk",
+        "n32a-polaroids-cv"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Polaroids1–16Nov2018IAO; photo/scentdiary people/places; slowsmartphone/socialfacefacegoal.",
+          "factIds": [
+            "n32a-polaroids-ravat-2018-f1"
+          ],
+          "sourceIds": [
+            "n32a-polaroids-iao",
+            "n32a-polaroids-cv"
+          ]
+        },
+        {
+          "claim": "Medicine→ArtScience; CaroVerbeekclass; films/installations/smellingeachotherpractice.",
+          "factIds": [
+            "n32a-polaroids-ravat-2018-f2"
+          ],
+          "sourceIds": [
+            "n32a-polaroids-wow"
+          ]
+        },
+        {
+          "claim": "Desiredfamiliarnewexperience, museummaintenance refill/ventilate/keepers.",
+          "factIds": [
+            "n32a-polaroids-ravat-2018-f3"
+          ],
+          "sourceIds": [
+            "n32a-polaroids-clot"
+          ]
+        },
+        {
+          "claim": "Walkingmorethantransport, focusnose, aimlesswanderingallowed.",
+          "factIds": [
+            "n32a-polaroids-ravat-2018-f4"
+          ],
+          "sourceIds": [
+            "n32a-polaroids-walk"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-07-11",
+      "eventId": "n32a-secret-histories-brosius-2025",
+      "eventGroupId": "n32a-secret-histories-brosius-2025",
+      "eventDate": "2025-07-11",
+      "category": "cultural_fact",
+      "localizations": {
+        "ru": {
+          "title": "Чья история живёт во флаконе",
+          "fullStory": "У аромата может быть сразу две личные истории: одна принадлежит создателю, другая — тому, кто его нюхает. Этот парадокс Кристофер Брозиус вынес в центр Secret Histories, начавшейся 11 июля 2025 года в лос-анджелесской галерее Institute for Art and Olfaction. В авторском тексте к коллекции он связывал композиции с отдельными яркими моментами собственной жизни. Однако передать их без изменений невозможно: чужой человек встречает запах через свой опыт. Духи могут многое раскрыть об авторе и одновременно оставить его воспоминание недоступным. Ношение становится продолжением истории, которое уже не полностью принадлежит парфюмеру.\n\nМатериальная сторона такого разговора у Брозиуса намеренно сдержанна. Описывая изготовление собственных духов, он рассказывает о ручном составлении, смешивании и разливе в мастерской. Флаконы и коробки опираются на лабораторное оборудование и материалы художественной студии. Их простота должна возвращать внимание к самому запаху. Между внутренним переживанием и чужим носом оказывается вполне определённая цепочка действий: создать смесь, поместить её в сосуд, открыть, почувствовать. Художественный замысел продолжается в форме предмета, которым другой человек сможет пользоваться. Небольшой масштаб производства соответствует заявленной личной встрече, хотя не может заранее определить, что именно вспомнит покупатель.\n\nВ эссе об обонятельном искусстве Брозиус возражает против определения своего подхода как фотореализма. Точность отдельной детали для него важна, но главное — общее впечатление и чувство, возникающее у человека. Он сопоставляет этот принцип с импрессионизмом, а множество ароматических молекул — с точками цвета у Сёра. Важен и контекст: кожа, воздух, открытый флакон, предмет или целая среда дают разные отношения с одной композицией. История спрятана не потому, что её формула непременно секретна. Она остаётся личной, потому что ощущение проходит через жизнь человека. Один и тот же пахучий предмет способен сопровождать разные воспоминания, не сводя их к единственному правильному прочтению."
+        },
+        "en": {
+          "title": "Whose history lives in a bottle",
+          "fullStory": "A fragrance can contain two private histories: one belonging to its maker and another to the person smelling it. Christopher Brosius placed that paradox at the center of Secret Histories, which began on 11 July 2025 at the Institute for Art and Olfaction gallery in Los Angeles. In his collection statement, he connected the compositions with particular luminous moments in his own life. They could not pass unchanged to someone else, however: another person encountered the smell through their own experience. Perfume might reveal much about its maker while leaving the original memory inaccessible. Wearing it continued a story no longer entirely belonging to the perfumer.\n\nThe material side of this exchange is deliberately restrained in Brosius's practice. Describing how he makes his perfumes, he explains that compositions are compounded, blended and bottled by hand in his workshops. Bottles and boxes draw on laboratory equipment and artists' studio materials. Their simplicity is intended to return attention to the smell itself. Between an inward experience and another person's nose lies a definite sequence: making a mixture, containing it, opening it and smelling. An artistic intention continues in an object that someone else can use. Small-scale production corresponds with this proposed personal encounter, although it cannot determine what a customer will remember.\n\nIn a separate essay on olfactory art, Brosius rejects photorealism as a description of his approach. Accurate details matter, but the overall impression and the feeling it produces matter most. He compares that principle with Impressionism, and floating aroma molecules with Seurat's dots of color. Location also matters: skin, air, an opened bottle, an object or an environment establish different relationships with a composition. A history is hidden because an experience passes through a particular person's life, rather than necessarily because a formula is secret. One fragrant object can accompany different memories without reducing them to a single correct reading."
+        }
+      },
+      "sourceIds": [
+        "n32a-secret-iao",
+        "n32a-secret-making",
+        "n32a-secret-art"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "SecretHistoriesJuly11–Sep5,2025IAO; compositionsownlifemoments,butperceiver'sprivateinterpretation.",
+          "factIds": [
+            "n32a-secret-histories-brosius-2025-f1"
+          ],
+          "sourceIds": [
+            "n32a-secret-iao"
+          ]
+        },
+        {
+          "claim": "CBselfdesignhandcompound/blend/bottle; packaginglaboratoryandartiststudio materials.",
+          "factIds": [
+            "n32a-secret-histories-brosius-2025-f2"
+          ],
+          "sourceIds": [
+            "n32a-secret-making"
+          ]
+        },
+        {
+          "claim": "Rejectsphotorealism, Impressionism/Seuratpointillism analogy; olfactoryencounter skin/bottle/air/object/environment.",
+          "factIds": [
+            "n32a-secret-histories-brosius-2025-f3"
+          ],
+          "sourceIds": [
+            "n32a-secret-art"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-08-26",
+      "eventId": "n32a-unsettled-fazzolari-2017",
+      "eventGroupId": "n32a-unsettled-fazzolari-2017",
+      "eventDate": "2017-08-26",
+      "category": "cultural_fact",
+      "localizations": {
+        "ru": {
+          "title": "Сандал внутри ядерного облака",
+          "fullStory": "Флакон Unsettled Бруно Фаццолари имел форму ядерного гриба и был сделан из уранового стекла. Он появился в составе одноимённой выставки Музея искусства Невады, открывшейся в Рино 26 августа 2017 года. Куратор Джоанн Нортрап и её соавтор Эд Руша объединили около двухсот произведений восьмидесяти художников вокруг идеи Большого Запада. Парфюмерная работа вошла в разговор о территориях, ресурсах, контактах и конфликтах. Небольшой сосуд связывал запах с историей огромного региона.\n\nМузейная этикетка объясняла два важных выбора Фаццолари. Сандаловое масло из южной части Тихого океана отсылало к ранней торговле и встречам разных обществ, связанным с этим материалом. Силуэт облака напоминал о наследии ядерных испытаний в Неваде. Эти значения складывались в одном предмете, хотя относились к разным местам и историческим процессам. Флакон не просто украшал духи: он задавал способ читать содержимое. Душистое дерево и тревожная форма заставляли удерживать вместе привлекательность вещества и сложность его культурного окружения.\n\nВ описании произведения, опубликованном для благотворительного аукциона Headlands, появляется ещё один ориентир. Фаццолари обращался к истории торговли сандалом и чаем, а также к ананасовому Colony дома Jean Patou 1938 года. Среди заявленных нот Unsettled перечислены китайский чёрный чай, ананас, новокаледонский сандал, бергамот, мускатный шалфей, лабданум и ваниль. В ансамбль входил и печатный рекламный плакат собственного аромата. Коммерческий язык парфюмерии становился частью произведения, которое можно рассматривать в художественном зале и одновременно узнавать как предмет потребления.\n\nФаццолари соединяет работу художника и парфюмера. В рассказе IAO о проекте отмечено его синестетическое восприятие запаха через цвет: сначала ароматы появлялись рядом с картинами, затем получили самостоятельную жизнь вне галерей. Он вручную составлял и разливал небольшие партии в своей студии. Unsettled включала также буклет, поэтому знакомство не исчерпывалось одной пробой. Запах, стекло, изображение и текст давали разные входы в один замысел. Привычный вопрос о том, нравится ли аромат, получал соседей: что означает его сосуд и какие истории вещество приносит с собой."
+        },
+        "en": {
+          "title": "Sandalwood inside a mushroom cloud",
+          "fullStory": "Bruno Fazzolari's Unsettled bottle took the shape of a mushroom cloud and was made from uranium glass. It appeared in the Nevada Museum of Art's exhibition of the same name, which opened in Reno on 26 August 2017. Curator JoAnne Northrup and collaborating curator Ed Ruscha brought together around two hundred works by eighty artists through the idea of the Greater West. A perfume joined a discussion of territories, resources, encounters and conflicts. A small vessel connected smell with a vast region's history.\n\nThe museum label explained two important choices. Sandalwood oil from the South Pacific referred to early trade and cultural contacts associated with that material. The cloud's silhouette recalled Nevada's legacy of nuclear testing. These meanings occupied one object while relating to different places and historical processes. The bottle supplied more than decoration: it suggested how to read its contents. Fragrant wood and an unsettling shape held together a substance's appeal and the complexity of its cultural surroundings.\n\nAn artwork description published for the Headlands benefit auction added another reference. Fazzolari drew on the history of sandalwood and tea trading, and on Jean Patou's pineapple-themed Colony, launched in 1938. Unsettled's listed notes included China black tea, pineapple, New Caledonian sandalwood, bergamot, clary sage, labdanum and vanilla. The ensemble also incorporated a printed advertisement for the artist's own fragrance. Perfumery's commercial language became part of a work encountered in an art gallery while remaining recognizable as a consumer object.\n\nFazzolari combines the practices of artist and perfumer. IAO's project account describes his synesthetic experience of smelling through color: fragrances first appeared beside paintings, then acquired a life beyond galleries. He compounded and bottled small batches by hand in his studio. Unsettled also included a booklet, so encountering it extended beyond a single sniff. Smell, glass, image and text provided different entrances to one intention. The familiar question of whether a fragrance appeals acquired neighbors: what does its vessel mean, and which histories does its material carry?"
+        }
+      },
+      "sourceIds": [
+        "n32a-unsettled-museum",
+        "n32a-unsettled-label",
+        "n32a-unsettled-artsy",
+        "n32a-unsettled-iao"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "UnsettledAug26,2017–Jan21,2018NevadaMuseum; Northrup/Ruscha,200works80artists, GreaterWest, commissionedFazzolariscent.",
+          "factIds": [
+            "n32a-unsettled-fazzolari-2017-f1"
+          ],
+          "sourceIds": [
+            "n32a-unsettled-museum"
+          ]
+        },
+        {
+          "claim": "Uraniumglassmushroomcloud referencesNevadanucleartesting; SouthPacificsandalwoodtrade.",
+          "factIds": [
+            "n32a-unsettled-fazzolari-2017-f2"
+          ],
+          "sourceIds": [
+            "n32a-unsettled-label"
+          ]
+        },
+        {
+          "claim": "Poster, sandalwood/teatrade, PatouColony1938 and listedfragrancenotes.",
+          "factIds": [
+            "n32a-unsettled-fazzolari-2017-f3"
+          ],
+          "sourceIds": [
+            "n32a-unsettled-artsy"
+          ]
+        },
+        {
+          "claim": "IAO describes perfume/booklet/poster/glassensemble; synesthesia, initialpaintingdisplays, handstudio production.",
+          "factIds": [
+            "n32a-unsettled-fazzolari-2017-f4"
+          ],
+          "sourceIds": [
+            "n32a-unsettled-iao"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-11-04",
+      "eventId": "n32b-cher-couture-launch-2019",
+      "eventGroupId": "n32b-cher-couture-launch-2019",
+      "eventDate": "2019-11-04",
+      "category": "fragrance_history",
+      "localizations": {
+        "ru": {
+          "title": "Шер: четыре года до нужного впечатления",
+          "fullStory": "4 ноября 2019 года Шер выпустила Eau de Couture на ScentBeauty.com. Над ароматом работали четыре года. Певица объясняла, что он предназначен людям, для которых парфюм становится частью собственной личности. Такой замысел интересен своей открытостью: знаменитое имя на флаконе предлагает человеку примерить запах, а затем вписать его в собственную жизнь. У автора и будущего владельца могут оказаться совершенно разные воспоминания.\n\nВ разговоре с Coveteur Шер вспоминала первое знакомство с Opium в парижском магазине Yves Saint Laurent. Сильное впечатление от необычного запаха осталось ориентиром: ей хотелось создать нечто столь же захватывающее. Для дома она выбрала бы благовоние, привезённое из Непала. Эти два примера показывают личный вкус через конкретные встречи. Источником замысла становится уже пережитое ощущение, к которому хочется найти новый путь.\n\nEau de Couture создавался вместе со Scent Beauty и парфюмером Клеманом Гаварри из Firmenich. В материале Evening Standard композиция описана через пряную ваниль, жасмин и нероли. Шер рассказывала о любви к ванили и одновременно к пряностям. Ещё до выхода она носила аромат на Met Gala и в телешоу Джимми Фэллона. Так проект проходил знакомство с жизнью автора, прежде чем стал доступен другим людям.\n\nВ интервью Allure певица уточняла характер поиска: несколько раз ей казалось, что нужный вариант найден, но спустя несколько дней решение менялось. Ей хотелось аромата, который сохраняет присутствие после первого распыления. Здесь четыре года разработки обретают человеческий масштаб: это время повторных встреч с образцом и проверки собственного впечатления.\n\nИстория Eau de Couture позволяет точнее представить участие знаменитости в парфюмерии. Есть профессиональная работа над композицией, а рядом — способность узнавать желаемое ощущение, возвращаться к пробе и менять решение. Имя на флаконе соединяет эти процессы в одном предложении покупателю. С этого момента запах начинает другую историю: его выбирают люди, которым близки пряность, ваниль или сам характер аромата. Их впечатления постепенно добавляются к первоначальному авторскому замыслу."
+        },
+        "en": {
+          "title": "Cher: Four Years to Find an Impression",
+          "fullStory": "On 4 November 2019, Cher released Eau de Couture at ScentBeauty.com. The fragrance had taken four years to develop. She described it as something for people who regard perfume as part of their identity. The idea leaves room for its wearer: a famous name invites somebody to try a scent, then incorporate it into a life of their own. Creator and customer may bring entirely different memories to that encounter.\n\nSpeaking to Coveteur, Cher recalled discovering Opium in a Paris Yves Saint Laurent shop. The powerful impression made by that unusual fragrance remained a reference point: she wanted to create something equally compelling. Asked to choose a single smell for her home, she selected incense brought from Nepal. These examples describe personal taste through specific encounters. A previously experienced sensation becomes a starting point, prompting the search for a new way to reach it.\n\nEau de Couture was developed with Scent Beauty and Firmenich perfumer Clément Gavarry. The Evening Standard described the composition through spicy vanilla, jasmine and neroli. Cher spoke about enjoying vanilla while also wanting spice. Before its release, she had worn the fragrance at the Met Gala and on Jimmy Fallon’s television show. The project was becoming acquainted with its creator’s life before other people could make it their own.\n\nIn her Allure interview, the singer clarified the character of the search. Several times she thought the right version had been found, only to change her mind a few days later. She wanted a fragrance whose presence would continue beyond the first spray. Four years of development acquire a human scale through this account: repeated encounters with samples and repeated tests of her own impressions.\n\nEau de Couture offers a clearer picture of a celebrity’s participation in perfumery. Professional composition works alongside the ability to recognise a desired sensation, revisit a trial and reconsider a decision. The name on the bottle connects those processes in a single proposition. From that moment, the fragrance begins another history, chosen by people drawn to its spice, vanilla or overall character. Their impressions gradually join the creator’s original intention."
+        }
+      },
+      "sourceIds": [
+        "n32b-cher-launch",
+        "n32b-cher-coveteur",
+        "n32b-cher-standard",
+        "n32b-cher-allure"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Eau de Couture запущен 4 ноября 2019 года на ScentBeauty.com после четырёх лет работы; Шер связывает духи с личностью владельца.",
+          "factIds": [
+            "n32b-cher-couture-launch-2019-f1"
+          ],
+          "sourceIds": [
+            "n32b-cher-launch"
+          ]
+        },
+        {
+          "claim": "Шер вспоминает знакомство с Opium в Париже и выбирает непальское благовоние как запах для дома.",
+          "factIds": [
+            "n32b-cher-couture-launch-2019-f2"
+          ],
+          "sourceIds": [
+            "n32b-cher-coveteur"
+          ]
+        },
+        {
+          "claim": "Eau de Couture создан со Scent Beauty и Клеманом Гаварри/Firmenich; пряная ваниль, жасмин и нероли; Шер носила пробу на Met Gala и шоу Фэллона.",
+          "factIds": [
+            "n32b-cher-couture-launch-2019-f3"
+          ],
+          "sourceIds": [
+            "n32b-cher-standard"
+          ]
+        },
+        {
+          "claim": "Шер неоднократно меняла мнение о готовности образца; хотела присутствия аромата после первого распыления.",
+          "factIds": [
+            "n32b-cher-couture-launch-2019-f4"
+          ],
+          "sourceIds": [
+            "n32b-cher-allure"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-07-28",
+      "eventId": "n32b-dolly-scent-launch-2021",
+      "eventGroupId": "n32b-dolly-scent-launch-2021",
+      "eventDate": "2021-07-28",
+      "category": "fragrance_history",
+      "localizations": {
+        "ru": {
+          "title": "Долли Партон: бабочка на новом флаконе",
+          "fullStory": "28 июля 2021 года вышел Dolly — Scent from Above, первый именной аромат Долли Партон, созданный в партнёрстве со Scent Beauty. Его образ строился вокруг бабочек, сердец и надежды. В объявлении певицы перечислены мандарин, пион, жасмин, ваниль, сандал, мускус и пачули. Рядом с конкретными нотами появляется настроение: парфюм предложен как ещё одна возможность войти в яркий, узнаваемый мир Долли и унести небольшую его часть с собой.\n\nНа флаконе этот мир получил розовую хрустальную бабочку. В интервью W Партон рассказывала, что увлекалась бабочками ещё ребёнком в горах Теннесси: могла следовать за ними от куста к кусту. Позднее она сделала их своим символом. Бабочка появилась в логотипе Dollywood и в названии песни Love Is Like a Butterfly. Поэтому колпачок связывает новый предмет с давно знакомым визуальным языком певицы.\n\nВ беседе с Vanity Fair Партон описывала работу над запахом через любимые духи, масла и пудры для ванны. Команда разбиралась, что именно ей нравилось в этих средствах. На поиск окончательного варианта ушло больше двух лет. Личная привычка постепенно становилась общим проектом, которому предстояло найти самостоятельную форму.\n\nВыход сопровождался песней Sent from Above. ABC News описывает её как музыкальное любовное послание с танцевальной электронной основой. У аромата и песни чуть различаются названия: Scent отсылает к запаху, Sent — к тому, что послано свыше. Такой небольшой звуковой поворот соединяет две области работы Партон. Человек может услышать одну версию образа и познакомиться с другой через флакон.\n\nЗдесь особенно интересно, как узнаваемость складывается из нескольких простых элементов. Есть личный символ, есть цвет и форма, есть музыкальное имя, есть выбранные душистые впечатления. Каждый элемент доступен отдельно, но вместе они создают цельное приглашение. Флакон продолжает историю Долли привычным для неё языком яркости и теплоты. А дальше у запаха появляется собственная жизнь: его носят люди, для которых бабочка, песня или ваниль могут означать уже что-то своё."
+        },
+        "en": {
+          "title": "Dolly Parton: A Butterfly on a New Bottle",
+          "fullStory": "On 28 July 2021, Dolly — Scent from Above was released as Dolly Parton’s first signature fragrance, developed in partnership with Scent Beauty. Its imagery gathered butterflies, hearts and hope. The singer’s announcement listed mandarin, peony, jasmine, vanilla, sandalwood, musk and patchouli. Alongside those specific notes came a mood: perfume offered another way to enter Dolly’s bright, recognisable world and carry a small part of it into everyday life.\n\nOn the bottle, that world acquired a pink crystal butterfly. In her W interview, Parton recalled being fascinated by butterflies as a child in the Tennessee mountains, following them from bush to bush. She later adopted them as her symbol. A butterfly appeared in the Dollywood logo and in her song title Love Is Like a Butterfly. The cap therefore connects a new object with an already familiar part of her visual language.\n\nSpeaking to Vanity Fair, Parton described developing the scent from favourite perfumes, bath oils and bath powders. Her team investigated what she liked in these products. Finding the final version took more than two years. A personal habit was gradually becoming a shared project that needed a shape and identity of its own.\n\nThe release was accompanied by a song, Sent from Above. ABC News described it as a musical love letter with an electronic dance foundation. The perfume and song have slightly different names: Scent points towards fragrance, while Sent suggests something dispatched from heaven. That small shift in sound connects two areas of Parton’s work. Somebody can hear one version of the image and encounter another through a bottle.\n\nThe engaging feature of this project is how recognition forms from several simple elements. A personal symbol, colour and shape, a musical name and chosen olfactory impressions can each be encountered separately. Together, they create a coherent invitation. The bottle continues Dolly’s story through a familiar language of brightness and warmth. The fragrance then acquires a life of its own, worn by people for whom a butterfly, a song or vanilla may come to mean something entirely personal."
+        }
+      },
+      "sourceIds": [
+        "n32b-dolly-launch",
+        "n32b-dolly-abc",
+        "n32b-dolly-w",
+        "n32b-dolly-vf"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Первый именной аромат Dolly Scent from Above выпущен 28 июля 2021 года со Scent Beauty; официальный анонс перечисляет ноты и образы.",
+          "factIds": [
+            "n32b-dolly-scent-launch-2021-f1"
+          ],
+          "sourceIds": [
+            "n32b-dolly-launch",
+            "n32b-dolly-abc"
+          ]
+        },
+        {
+          "claim": "Розовая хрустальная бабочка на флаконе связана с личным символом Партон; в W она рассказывает о детстве, логотипе Dollywood и песне Love Is Like a Butterfly.",
+          "factIds": [
+            "n32b-dolly-scent-launch-2021-f2"
+          ],
+          "sourceIds": [
+            "n32b-dolly-w"
+          ]
+        },
+        {
+          "claim": "Партон рассказывает о любимых духах, маслах и пудрах для ванны как основе поиска, занявшего больше двух лет.",
+          "factIds": [
+            "n32b-dolly-scent-launch-2021-f3"
+          ],
+          "sourceIds": [
+            "n32b-dolly-vf"
+          ]
+        },
+        {
+          "claim": "Выход сопровождался песней Sent from Above, музыкальным любовным посланием с электронной танцевальной основой.",
+          "factIds": [
+            "n32b-dolly-scent-launch-2021-f4"
+          ],
+          "sourceIds": [
+            "n32b-dolly-abc"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-08-07",
+      "eventId": "n32b-rare-launch-2025",
+      "eventGroupId": "n32b-rare-launch-2025",
+      "eventDate": "2025-08-07",
+      "category": "fragrance_history",
+      "localizations": {
+        "ru": {
+          "title": "Rare: аромат начинается с движения руки",
+          "fullStory": "7 августа 2025 года в США вышел Rare Eau de Parfum — первая парфюмерная вода Rare Beauty. Марка Селены Гомес предложила тёплую композицию с карамелью, фисташкой, ванилью и пряным имбирём, переходящую к сандалу. Но особенно интересная часть истории находится снаружи. Разработчики уделили внимание тому, как флакон держат, открывают и нажимают: знакомство с ароматом начинается с движения руки, и проект уделил этому движению отдельное внимание.\n\nДиректор по продуктам Джойс Ким рассказывала в издании самой марки, что при обсуждении упаковки Гомес упомянула трудности с использованием духов во время обострений артрита. На образцах кнопка была маленькой и требовала усилия одного пальца. Команда решила создать собственную конструкцию вместе со специалистами по терапии кисти и инженерами упаковки. Так личное наблюдение превратилось в конкретную задачу для разработчиков нового предмета.\n\nFast Company подробно разбирает полученное решение. Вместо съёмного колпачка используется поворотная блокировка с небольшим сопротивлением. Широкая плоская поверхность позволяет нажимать несколькими пальцами или ладонью. Автор материала Маргарет Андерсен, которая обычно выбирала роликовые флаконы из-за ограниченной силы рук, описывает возможность легко распылить духи. Здесь важен именно опыт пользования: красивый предмет становится доступнее благодаря устройству обычного действия.\n\nРядом с парфюмом появились четыре бальзама для сочетания ароматов: Amber Vanilla, Floral Peony Blossom, Fresh Bergamot и Woody Oak. Beauty Scene описывает их как самостоятельные запахи и как дополнения к основному. Ванильное, цветочное, цитрусовое или древесное направление позволяет выбрать иной акцент. Компактный формат предлагает ещё один способ носить композицию, соединяя индивидуальный выбор с простым повседневным жестом.\n\nИстория Rare показывает, сколько решений помещается между идеей запаха и первым распылением. Название и ноты можно прочитать заранее, а удобство открывается только в руке. Это добавляет к разговору о флаконе полезный вопрос: какое движение он предлагает человеку? В таком рассмотрении форма становится частью парфюмерного впечатления. От неё зависит, насколько легко владелец сможет вернуться к выбранному запаху в следующий раз."
+        },
+        "en": {
+          "title": "Rare: Fragrance Begins with a Hand Movement",
+          "fullStory": "On 7 August 2025, Rare Eau de Parfum was released in the United States as Rare Beauty’s first eau de parfum. Selena Gomez’s brand offered a warm composition of caramel, pistachio, vanilla and spicy ginger, moving towards sandalwood. A particularly interesting part of its story sits outside the liquid. The bottle needed to be comfortable to hold, open and press. An encounter with fragrance begins with a hand movement, and this project gave that movement its own attention.\n\nChief product officer Joyce Kim told the brand’s publication that, during packaging discussions, Gomez mentioned difficulty using perfume during arthritis flare-ups. The sample bottles had small actuators that demanded strength from one finger. The team decided to develop a custom construction with hand therapists and packaging engineers. A personal observation had become a specific task for the people developing a new object.\n\nFast Company examined the resulting solution in detail. A low-resistance twist-lock closure replaced a removable cap. The broad, flat surface allowed the user to press with several fingers or a palm. Writer Margaret Andersen, who had generally chosen rollerballs because of reduced hand strength, described being able to spray perfume easily. The experience of using the object matters here: a beautiful possession becomes more accessible through the design of an ordinary action.\n\nFour fragrance layering balms appeared alongside the perfume: Amber Vanilla, Floral Peony Blossom, Fresh Bergamot and Woody Oak. Beauty Scene described them as standalone scents as well as companions to the main fragrance. A vanilla, floral, citrus or woody direction could provide a different emphasis. Their compact format offered another way to wear scent, connecting individual choice with a simple everyday gesture.\n\nRare’s story reveals how many decisions sit between imagining a fragrance and spraying it for the first time. A name and its notes can be read in advance; ease of use becomes apparent in the hand. This adds a useful question to any discussion of bottles: what movement does the object ask of its owner? Seen this way, form becomes part of the perfume experience, helping determine how easily somebody can return to a chosen fragrance next time."
+        }
+      },
+      "sourceIds": [
+        "n32b-rare-launch-email",
+        "n32b-rare-product",
+        "n32b-rare-making",
+        "n32b-rare-fastcompany",
+        "n32b-rare-balms"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Rare Beauty объявила доступность Rare EDP в США 7 августа 2025 года; текущая страница описывает карамель, фисташку, ваниль, имбирь и сандал.",
+          "factIds": [
+            "n32b-rare-launch-2025-f1"
+          ],
+          "sourceIds": [
+            "n32b-rare-launch-email",
+            "n32b-rare-product"
+          ]
+        },
+        {
+          "claim": "Джойс Ким связывает разработку упаковки с трудностями Гомес при артрите и маленькими кнопками; команда работала со специалистами по кисти и инженерами.",
+          "factIds": [
+            "n32b-rare-launch-2025-f2"
+          ],
+          "sourceIds": [
+            "n32b-rare-making"
+          ]
+        },
+        {
+          "claim": "Fast Company описывает поворотную блокировку, широкую поверхность для ладони/пальцев и личный опыт автора с ограниченной силой рук.",
+          "factIds": [
+            "n32b-rare-launch-2025-f3"
+          ],
+          "sourceIds": [
+            "n32b-rare-fastcompany"
+          ]
+        },
+        {
+          "claim": "Четыре исходных бальзама Amber Vanilla, Floral Peony Blossom, Fresh Bergamot, Woody Oak носили отдельно или под EDP.",
+          "factIds": [
+            "n32b-rare-launch-2025-f4"
+          ],
+          "sourceIds": [
+            "n32b-rare-balms"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-09-01",
+      "eventId": "n32b-lv-collection-2016",
+      "eventGroupId": "n32b-lv-collection-2016",
+      "eventDate": "2016-09-01",
+      "category": "fragrance_history",
+      "localizations": {
+        "ru": {
+          "title": "Louis Vuitton: семь запахов, один флакон",
+          "fullStory": "Чёрный колпачок с латунными инициалами LV скрывает распылитель, а имя аромата напечатано над сдержанной гравировкой Louis Vuitton. Марк Ньюсон построил флакон вокруг чистых линий стекла и возможности повторного наполнения. Такой предмет получили семь композиций Les Parfums Louis Vuitton, поступившие в продажу 1 сентября 2016 года. У коллекции была общая внешность, позволяющая заметить различия названий и содержимого, сохраняя узнаваемость целого ряда.\n\nДля дома это было возвращение к собственной парфюмерной истории. В его прошлом остались Heures d’Absence, Réminiscences и Eau de Voyage: имена на старых сосудах, из которых запах давно исчез. Новая коллекция не пыталась заполнить эти флаконы прежним содержимым. Среди её направлений были ваниль Contre Moi, тёмное агаровое дерево Matière Noire и сочетание кожи, малины и османтуса в Mille Feux. Семь новых ответов заняли место рядом с памятью о старых названиях.\n\nСвязь с кожаными изделиями получила буквальное обонятельное продолжение. Посещая мастерские, Жак Кавалье-Бельтрюд заинтересовался тонким запахом натуральной кожи дома и попросил подготовить её экстракт. Материал, который прежде всего держали в руках, стал отправной точкой парфюмерной работы. Так знакомство с маркой могло продолжиться через другую сторону того же предмета. У сумки есть цвет, фактура и запах; композиция позволяет выделить последнюю часть этого впечатления и дать ей самостоятельную жизнь.\n\nВ рекламной кампании коллекцию представляла Леа Сейду. Патрик Демаршелье снимал её в Южной Африке, за стилистику отвечала Мари-Амели Сове. У семи ароматов появилась общая героиня и визуальная среда. Это ещё один способ удержать коллекцию вместе, сохранив различия отдельных композиций.\n\nНьюсон предусмотрел также дорожный распылитель и сменные картриджи с магнитным креплением. Получился небольшой ряд предметов для разных способов пользоваться запахом. Рассматривать запуск 2016 года интересно именно целиком: композиции, единый флакон, дорожная форма и рекламный образ работают рядом. В каждом случае меняется способ встречи, а выбранный аромат остаётся тем, что человек берёт с собой."
+        },
+        "en": {
+          "title": "Louis Vuitton: Seven Scents, One Bottle",
+          "fullStory": "A black cap with brass LV initials conceals an atomiser, while the fragrance name sits above discreet Louis Vuitton engraving. Marc Newson built the bottle around clean glass lines and the possibility of refilling. Seven compositions in Les Parfums Louis Vuitton received this shared form when the collection went on sale on 1 September 2016. Its common appearance made differences of name and contents visible while keeping the entire range recognisable.\n\nFor the house, this was a return to its own perfume history. Heures d’Absence, Réminiscences and Eau de Voyage remained in its past as names on old vessels from which the fragrance had long since evaporated. The new collection developed another chapter. Its directions included the vanilla of Contre Moi, the dark agarwood of Matière Noire and leather combined with raspberry and osmanthus in Mille Feux. Seven new answers took their place beside the memory of older names.\n\nThe connection with leather goods acquired a literal olfactory continuation. Visiting the workshops, Jacques Cavallier-Belletrud became interested in the subtle smell of the house’s natural leather and requested an extract. A material previously encountered primarily through touch became a starting point for perfume work. An acquaintance with the brand could continue through another aspect of the same object. A handbag has colour, texture and smell; composition can isolate that last part of the experience and give it an independent life.\n\nLéa Seydoux represented the collection in its advertising campaign. Patrick Demarchelier photographed her in South Africa, with styling by Marie-Amélie Sauvé. The seven fragrances acquired a shared protagonist and visual setting. This offered another way to hold a collection together while preserving the differences between its individual compositions.\n\nNewson also provided a travel spray and replacement cartridges with magnetic connections. A small family of objects accommodated different ways of using fragrance. The engaging way to consider the 2016 launch is therefore as a whole: compositions, a common bottle, a portable format and an advertising image work alongside one another. Each changes the encounter, while the chosen scent remains something its wearer can take along."
+        }
+      },
+      "sourceIds": [
+        "n32b-lv-report-2016",
+        "n32b-lv-newson",
+        "n32b-lv-leather",
+        "n32b-lv-campaign"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Les Parfums Louis Vuitton из семи композиций доступны с 1 сентября 2016 года; прежние имена Heures d’Absence, Réminiscences, Eau de Voyage; направления Contre Moi/Matière Noire/Mille Feux.",
+          "factIds": [
+            "n32b-lv-collection-2016-f1"
+          ],
+          "sourceIds": [
+            "n32b-lv-report-2016"
+          ]
+        },
+        {
+          "claim": "Марк Ньюсон создал флакон с чёрным колпачком, латунными LV, надписью, гравировкой и повторным наполнением; дорожная версия использует магнитные картриджи.",
+          "factIds": [
+            "n32b-lv-collection-2016-f2"
+          ],
+          "sourceIds": [
+            "n32b-lv-newson"
+          ]
+        },
+        {
+          "claim": "Посещение мастерских и запах натуральной кожи привели Кавалье-Бельтрюда к заказу её экстракта.",
+          "factIds": [
+            "n32b-lv-collection-2016-f3"
+          ],
+          "sourceIds": [
+            "n32b-lv-leather"
+          ]
+        },
+        {
+          "claim": "Кампания с Леа Сейду снята Демаршелье в Южной Африке, стилист Мари-Амели Сове.",
+          "factIds": [
+            "n32b-lv-collection-2016-f4"
+          ],
+          "sourceIds": [
+            "n32b-lv-campaign"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-04-08",
+      "eventId": "n32b-westwood-birth-1941",
+      "eventGroupId": "n32b-westwood-birth-1941",
+      "eventDate": "1941-04-08",
+      "category": "brand",
+      "localizations": {
+        "ru": {
+          "title": "Вивьен Вествуд: своя комната, свой запах",
+          "fullStory": "У названия Boudoir есть пространственный смысл: место, где переодеваются и остаются наедине с собой. Вивьен Вествуд выбрала его для первого аромата своего дома. Дизайнер родилась 8 апреля 1941 года; её парфюмерная история продолжает разговор о личной свободе, знакомый по одежде. Музей Виктории и Альберта описывает её манеру как соединение провокации с уважением к традиции. Исторический силуэт мог получить новую роль, а знакомый предмет — неожиданно близкое отношение к телу.\n\nВ 1998 году появился Boudoir, созданный вместе с парфюмером Мартином Гра. В собственной истории марки Вествуд объясняет будуар как личное женское пространство, где человек замечает свои недостатки и возможности. Для аромата это содержательный выбор имени. Он предлагает представить отношение к себе, а затем искать для него обонятельную форму. Название не перечисляет цветы: оно задаёт обстоятельство, в котором запах мог бы существовать.\n\nИнтересно, как по-разному такую композицию встречают читатели. Автор Australian Perfume Junkies искала запах душистой калины, напоминавший ей университетские годы. В Boudoir она отметила сладость, пудровость, лёгкую пряность и телесный оттенок. При этом прямо оговорила, что аромат не воспроизводит калину буквально. Личное воспоминание помогло ей найти вход в композицию, однако оставило место для того, что было придумано парфюмером. Воображаемая комната получила ещё одну, уже читательскую историю.\n\nДругой принцип сочетания показывает Anglomania. В описании Osmoz авторство принадлежит Доминику Ропьону: роза и зелёный чай встречаются с кардамоном, фиалкой и кожей. Красный флакон со сферическим колпачком напоминает китайский аптекарский сосуд, а упаковка соединяет британский флаг и чёрного дракона. Культурное соседство оказывается сразу и в запахе, и в оформлении.\n\nДва примера позволяют увидеть Вествуд как автора направления, работающего с профессиональными парфюмерами. Один аромат получает имя внутреннего пространства, другой собирает разные культурные отсылки. Как и в одежде, узнаваемые элементы начинают жить в новом сочетании. Человеку остаётся выбрать, какое из этих предложений ближе его собственному способу ощущать себя."
+        },
+        "en": {
+          "title": "Vivienne Westwood: A Room and Scent of One’s Own",
+          "fullStory": "Boudoir names a kind of space: somewhere to change clothes and spend time alone. Vivienne Westwood chose it for her house’s first fragrance. Born on 8 April 1941, the designer extended into perfume a conversation about personal freedom familiar from her clothes. The Victoria and Albert Museum describes her approach as combining provocation with respect for tradition. A historical silhouette could acquire another role, while a familiar object developed an unexpectedly intimate relationship with the body.\n\nBoudoir appeared in 1998, created with perfumer Martin Gras. In her house’s history, Westwood explains the boudoir as a woman’s private space, where she recognises her faults and possibilities. This makes the name a substantial creative choice. It proposes a relationship with oneself, then invites an olfactory form for that relationship. Instead of naming flowers, it establishes a circumstance in which a fragrance might exist.\n\nReaders can enter such a composition in different ways. The Australian Perfume Junkies writer was seeking the smell of fragrant viburnum, associated with her university years. In Boudoir, she found sweetness, powder, gentle spice and a bodily undertone. She explicitly acknowledged that the perfume did not reproduce viburnum literally. Personal memory helped her find a way into the composition, while leaving room for what its perfumer had invented. The imagined room acquired another history, supplied by its reader.\n\nAnglomania demonstrates another principle of combination. Osmoz credits Dominique Ropion with a composition in which rose and green tea encounter cardamom, violet and leather. A red bottle with a spherical cap recalls a Chinese apothecary vessel, while the packaging brings a British flag together with a black dragon. Cultural references sit beside one another in both the fragrance and its presentation.\n\nThese examples reveal Westwood as a director working with professional perfumers. One scent takes its name from an interior space; another assembles contrasting cultural references. As in her clothing, recognisable elements begin a new life through combination. The wearer can decide which proposition feels closer to their own way of experiencing themselves, adding another individual reading to the house’s imagined world."
+        }
+      },
+      "sourceIds": [
+        "n32b-westwood-birth",
+        "n32b-westwood-va",
+        "n32b-westwood-story",
+        "n32b-westwood-boudoir-review",
+        "n32b-westwood-anglomania"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Вивьен Вествуд родилась 8 апреля 1941 года.",
+          "factIds": [
+            "n32b-westwood-birth-1941-f1"
+          ],
+          "sourceIds": [
+            "n32b-westwood-birth"
+          ]
+        },
+        {
+          "claim": "V&A описывает её эстетику как соединение провокации и уважения к традиции.",
+          "factIds": [
+            "n32b-westwood-birth-1941-f2"
+          ],
+          "sourceIds": [
+            "n32b-westwood-va"
+          ]
+        },
+        {
+          "claim": "Boudoir выпущен в1998 с Мартином Гра; Вествуд объясняет имя через личное пространство женщины, её недостатки и возможности.",
+          "factIds": [
+            "n32b-westwood-birth-1941-f3"
+          ],
+          "sourceIds": [
+            "n32b-westwood-story"
+          ]
+        },
+        {
+          "claim": "Автор APJ связывает Boudoir с памятью о душистой калине и описывает сладкий пудрово-пряный телесный характер, не буквальную копию растения.",
+          "factIds": [
+            "n32b-westwood-birth-1941-f4"
+          ],
+          "sourceIds": [
+            "n32b-westwood-boudoir-review"
+          ]
+        },
+        {
+          "claim": "Osmoz приписывает Anglomania Ропьону, описывает розу, чай,кардамон,фиалку,кожу и оформление с красным сосудом,драконом,UnionJack.",
+          "factIds": [
+            "n32b-westwood-birth-1941-f5"
+          ],
+          "sourceIds": [
+            "n32b-westwood-anglomania"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-04-25",
+      "eventId": "n32b-elixir-ebook-2023",
+      "eventGroupId": "n32b-elixir-ebook-2023",
+      "eventDate": "2023-04-25",
+      "category": "cultural_fact",
+      "localizations": {
+        "ru": {
+          "title": "Elixir: вопросы за парфюмерным прилавком",
+          "fullStory": "В парижском парфюмерном доме Laugier Père et Fils два человека пытались понять, чем живое вещество отличается от неживого. Эдуар Ложье и Огюст Лоран становятся героями Elixir Терезы Левитт, американская электронная версия которой вышла 25 апреля 2023 года в Harvard University Press. В центре рассказа — тридцатые годы девятнадцатого века. Дневная работа над душистыми водами соседствует с поиском особой силы жизни. Парфюмерная мастерская оказывается частью истории научного вопроса, масштаб которого намного превосходит отдельный флакон.\n\nРецензент Chapter 16 обращает внимание на оборудование Ложье — дефлегматор, усовершенствованный перегонный аппарат. Поднимающийся дистиллят становился чище, пока менее летучая часть конденсировалась и стекала обратно. Такой предмет помогает представить связь ремесла с исследованием. У парфюмеров были навыки разделения веществ и приборы для работы с ними. Разговор о запахах приводил к вопросу о составе, а работа со знакомым сырьём могла открыть совсем другое направление мысли.\n\nПри этом история не замыкается на одной дружбе. Publishers Weekly отмечает подробные рассказы о соперничестве внутри французской парфюмерии, патентном споре британского химика с французским фармацевтом и попытках продолжить семейное одеколонное дело. Рецензент счёл такие ответвления чрезмерными. Но само их присутствие показывает устройство предмета: знания существовали рядом с коммерческими интересами, правами на изобретения и отношениями между людьми. Для читателя, привыкшего видеть только готовый продукт, это ещё один слой его прошлого.\n\nОбзор Fulbright Chronicles подчёркивает историческую связь душистых эссенций с надеждами на здоровье и сохранение жизни. Это представления героев эпохи, через которые книга объясняет их поиски. В издание включены список действующих лиц, иллюстрации и обширные примечания. Так насыщенный рассказ получает опоры, позволяющие возвращаться к отдельному человеку или эпизоду. Elixir привлекает именно возможностью читать парфюмерию через работу, приборы и ожидания своего времени. Название обещает эликсир, а история показывает настойчивый поиск — с ошибками, соперничеством и вопросами, окончательного ответа на которые герои ещё не знали."
+        },
+        "en": {
+          "title": "Elixir: Questions Behind a Perfume Counter",
+          "fullStory": "At the Paris perfume house Laugier Père et Fils, two men tried to understand what distinguished living matter from nonliving material. Édouard Laugier and Auguste Laurent became the protagonists of Theresa Levitt’s Elixir, whose American ebook edition was released by Harvard University Press on 25 April 2023. The account centres on the eighteen-thirties. Daytime work producing fragrant waters sits beside a search for a special vital force. A perfume workshop becomes part of a scientific question reaching far beyond an individual bottle.\n\nThe Chapter 16 reviewer draws attention to Laugier’s equipment: a dephlegmator, an improved distillation apparatus. The rising distillate became purer as less volatile material condensed and returned downwards. Such an object makes the connection between craft and investigation tangible. Perfumers possessed both skills for separating substances and instruments for working with them. Discussing smells could lead to questions of composition, while handling familiar raw materials might open an entirely different direction of thought.\n\nThe history also extends beyond one friendship. Publishers Weekly notes detailed accounts of rivalry within French perfumery, a patent dispute between a British chemist and a French pharmacist, and attempts to continue a family cologne business. Its reviewer found these diversions excessive. Their presence nevertheless reveals the structure of the subject: knowledge existed alongside commercial interests, rights to inventions and relationships between people. For a reader accustomed to encountering only the finished product, this supplies another layer of its past.\n\nThe Fulbright Chronicles review emphasises the historical connection between fragrant essences and hopes for health and the preservation of life. These were the period’s beliefs, through which the book explains its protagonists’ investigations. A cast of characters, illustrations and extensive notes support the narrative, allowing readers to return to a particular person or episode. Elixir offers the possibility of reading perfumery through the work, equipment and expectations of its own time. Its title promises an elixir; the history reveals a persistent search, involving mistakes, rivalry and questions whose final answers its protagonists did not yet know."
+        }
+      },
+      "sourceIds": [
+        "n32b-elixir-ebook",
+        "n32b-elixir-chapter16",
+        "n32b-elixir-pw",
+        "n32b-elixir-fulbright"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Американская электронная Elixir Theresa Levitt опубликована Harvard25апреля2023; героиЭдуарЛожье/ОгюстЛоран работали вLaugierPereetFils1830-х и искали vitalforce.",
+          "factIds": [
+            "n32b-elixir-ebook-2023-f1"
+          ],
+          "sourceIds": [
+            "n32b-elixir-ebook"
+          ]
+        },
+        {
+          "claim": "Chapter16 описывает дефлегматор Ложье, разделение дистиллята и связь парфюмерных мастерских с химическим исследованием.",
+          "factIds": [
+            "n32b-elixir-ebook-2023-f2"
+          ],
+          "sourceIds": [
+            "n32b-elixir-chapter16"
+          ]
+        },
+        {
+          "claim": "PW отмечает соперничество, патентный спор химика и фармацевта и семейное одеколонное дело; критикует ответвления.",
+          "factIds": [
+            "n32b-elixir-ebook-2023-f3"
+          ],
+          "sourceIds": [
+            "n32b-elixir-pw"
+          ]
+        },
+        {
+          "claim": "FulbrightChronicles описывает исторические надежды на целительные эссенции и аппарат издания:cast,иллюстрации,примечания.",
+          "factIds": [
+            "n32b-elixir-ebook-2023-f4"
+          ],
+          "sourceIds": [
+            "n32b-elixir-fulbright"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-01-25",
+      "eventId": "n32c-habituation-materials",
+      "eventGroupId": "n32c-habituation-materials",
+      "eventDate": "2017-01-25",
+      "category": "creation_technique",
+      "localizations": {
+        "ru": {
+          "title": "Почему аромат становится тише",
+          "fullStory": "25 января 2017 года Scientific Reports опубликовал исследование Шарлотты Синдинг и коллег о привыкании к запахам. Участники в течение двух минут непрерывно оценивали интенсивность тридцати двух душистых веществ. Концентрация каждого предъявляемого вещества оставалась постоянной. Однако впечатления затихали по-разному: для Iso E Super обнаружили профиль сильного привыкания, для манзаната — слабого. Авторы связывали различия с совокупностью сенсорных и физико-химических свойств, включая раздражающее действие на тройничную систему и давление пара. У знакомого парфюмерного вопроса появилась измеримая сторона: ослабевшее ощущение не обязательно означает, что пахучий материал уже исчез из воздуха.\n\nГде именно меняется ответ, исследовала другая команда, записывая электрические сигналы непосредственно у обонятельной слизистой человека. В работе с эвгенолом, манзанатом, Iso E Super и фенилэтиловым спиртом использовали серии из десяти предъявлений. Средняя амплитуда зарегистрированных ответов не показала значимого снижения, хотя оценки интенсивности для части веществ уменьшались. Авторы не сочли это окончательным доказательством отсутствия периферической адаптации: у отдельных людей снижение сигналов наблюдалось, а устойчивые записи удавалось получить не всегда. Такой результат разделяет рассказ человека и один измеряемый этап обработки запаха. Ощущение может меняться, но единственный датчик не обязан повторять его движение.\n\nПрактику «очищать нос» кофейными зёрнами отдельно проверили Алексис Грософски и коллеги. Студенты несколько раз нюхали три парфюмерных образца, затем получали короткую паузу с кофе, ломтиками лимона или обычным воздухом. После этого нужно было найти новый аромат среди четырёх. Кофе не дал преимущества перед двумя другими условиями. Этот небольшой опыт проверял конкретное узнавание, а не все возможные способы восстановления чувствительности. Вместе с исследованием Синдинг он предлагает внимательнее относиться ко времени знакомства с духами. На впечатление влияют не только состав и количество нанесённого: имеет значение история последовательных встреч носа с материалом. Повторная проба поэтому не является точной копией первой, даже когда содержимое флакона осталось тем же."
+        },
+        "en": {
+          "title": "Why a scent grows quieter",
+          "fullStory": "On 25 January 2017, Scientific Reports published Charlotte Sinding and colleagues’ investigation of habituation to smells. Participants continuously rated the intensity of thirty-two odorants over two minutes. The concentration of each presented substance remained constant. Impressions nevertheless faded differently: Iso E Super showed a profile of strong habituation, while manzanate showed relatively little. The authors related these differences to a combination of sensory and physicochemical properties, including trigeminal stimulation and vapor pressure. A familiar perfumery question had acquired a measurable dimension. A quieter impression does not necessarily mean that the fragrant material has already disappeared from the surrounding air.\n\nAnother team investigated where a response changes by recording electrical signals directly at the human olfactory mucosa. Eugenol, manzanate, Iso E Super, and phenyl ethyl alcohol were presented in series of ten stimuli. Average recorded response amplitudes did not decrease significantly, although intensity ratings declined for some substances. The authors did not consider this conclusive evidence against peripheral adaptation: some individuals showed decreasing signals, and reliable recordings were not always obtainable. That result separates a person’s report from one measured stage of odor processing. An impression may change without a single recording method reproducing its trajectory. It also makes the method part of the story, since subjective ratings and electrical measurements answer related but different questions.\n\nAlexis Grosofsky and colleagues separately tested the practice of using coffee beans as a nasal cleanser. Students repeatedly smelled three fragrances, then took a brief pause with coffee, lemon slices, or plain air. They subsequently had to identify a new fragrance among four samples. Coffee provided no advantage over the other conditions. This small experiment tested a particular recognition task, rather than every possible way of recovering sensitivity. Beside Sinding’s investigation, it encourages attention to the time course of encountering perfume. Composition and applied quantity are only part of an impression; the sequence of earlier encounters matters too. A repeated assessment therefore need not be an exact copy of the first, even when the bottle’s contents remain the same."
+        }
+      },
+      "sourceIds": [
+        "n32c-habituation-materials-s1",
+        "n32c-habituation-materials-s2",
+        "n32c-habituation-materials-s3"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Работа опубликована 25 января 2017 года: участники оценивали 32 вещества 120 секунд; профили привыкания различались.",
+          "factIds": [
+            "n32c-habituation-materials-f1"
+          ],
+          "sourceIds": [
+            "n32c-habituation-materials-s1"
+          ]
+        },
+        {
+          "claim": "Электроольфактограмма при десяти предъявлениях четырёх веществ не показала значимого среднего снижения амплитуды, несмотря на изменение некоторых оценок интенсивности.",
+          "factIds": [
+            "n32c-habituation-materials-f2"
+          ],
+          "sourceIds": [
+            "n32c-habituation-materials-s2"
+          ]
+        },
+        {
+          "claim": "В опыте с тремя знакомыми и одним новым ароматом кофе не улучшил узнавание по сравнению с лимоном или воздухом.",
+          "factIds": [
+            "n32c-habituation-materials-f3"
+          ],
+          "sourceIds": [
+            "n32c-habituation-materials-s3"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-01-11",
+      "eventId": "n32c-irone-carotenoid-patent",
+      "eventGroupId": "n32c-irone-carotenoid-patent",
+      "eventDate": "2024-01-11",
+      "category": "ingredient",
+      "localizations": {
+        "ru": {
+          "title": "Ирисовый оттенок из другой цепочки",
+          "fullStory": "11 января 2024 года была опубликована международная патентная заявка WO2024008889A1 Виктора Сайуса и Яньянь Ли. Она описывала получение иронов с помощью изменённых микробных клеток. Эти вещества связаны с характерным запахом ирисового сырья. Авторы предложили путь через метилированные каротиноиды: ферменты замыкали нужные кольца, а затем другие ферменты расщепляли предшественники, высвобождая ироны. В документе приведены схемы опытов с кишечной палочкой и аналитические сигналы продуктов. Это была публикация технического решения, а не объявление о появлении готового промышленного масла. Интерес состоял в самом маршруте: к знакомой душистой структуре подходили со стороны иной биохимической цепочки.\n\nПочему важна точность структуры, помогает понять обзор Элизабетты Бренны, Клаудио Фуганти и Стефано Серры о биокатализе в химии ароматов. Он рассматривал получение всех десяти изомеров ирона из коммерческого альфа-ирона, а также ускоренные способы подготовки природных ирисовых экстрактов. Одно общее название скрывает несколько пространственных вариантов молекулы. Поэтому задача не исчерпывается тем, чтобы обнаружить нужную массу в приборе: исследователей интересует, какой именно вариант получился. На этом фоне патент 2024 года читается как попытка включить клетку в работу по построению определённых химических форм. Сравнение маршрутов показывает и разные роли ферментов: они могут помогать превращать исходный материал или участвовать в сборке новых предшественников.\n\nПарфюмерный дом L’Artisan Parfumeur описывает Iris pallida через оттенки лесного ореха и драгоценной древесины, связывая сырьё с корневищем, а не цветком. Это полезное различие между ботаническим образом и материалом на рабочем столе парфюмера. Название цветка само по себе ещё не говорит, какая часть растения дала сырьё и какой обработке её подвергли. Патент добавляет к этой истории ещё один вопрос: можно ли получать отдельные пахучие составляющие без полного повторения растительного пути? Ироны не равны всему ирисовому маслу, но работа с ними позволяет точнее рассматривать один из его характерных признаков. В истории ингредиента рядом оказываются растение, экстракт и целенаправленно построенная молекула."
+        },
+        "en": {
+          "title": "An iris note from a different pathway",
+          "fullStory": "On 11 January 2024, international patent application WO2024008889A1 by Victor Sayous and Yanyan Li was published. It described producing irones using modified microbial cells. These compounds are associated with the characteristic smell of orris materials. The inventors proposed a route through methylated carotenoids: enzymes formed the required rings, and other enzymes then cleaved the precursors to release irones. The document includes experimental schemes using Escherichia coli and analytical signals for the products. This was the publication of a technical proposal, rather than the announcement of a finished industrial oil. Its interest lay in the route itself, approaching a familiar fragrant structure through a different biochemical pathway.\n\nElisabetta Brenna, Claudio Fuganti, and Stefano Serra’s review of biocatalysis in fragrance chemistry helps explain why structural precision matters. It considered access to all ten irone isomers from commercial alpha-irone, alongside accelerated procedures for preparing natural orris extracts. A shared name conceals several spatial forms of a molecule. Consequently, finding a matching mass in an instrument does not exhaust the question: researchers also need to know which particular form has emerged. Against this background, the 2024 patent can be read as an attempt to involve a cell in building specified chemical structures. Comparing routes also reveals different roles for enzymes. They may help transform an existing material or participate in assembling new precursors leading towards an aromatic constituent.\n\nThe perfume house L’Artisan Parfumeur describes Iris pallida through hazelnut and precious-wood impressions, locating the material in the rhizome rather than the flower. That distinction separates a botanical image from the ingredient on a perfumer’s bench. A flower’s name alone does not establish which plant part supplied a material or how it was processed. The patent adds another question: can individual fragrant constituents be obtained without following the entire plant pathway? Irones are not equivalent to the complete orris oil, but investigating them brings one characteristic feature into sharper focus. The ingredient’s history places a plant, an extract, and a deliberately constructed molecule alongside one another."
+        }
+      },
+      "sourceIds": [
+        "n32c-irone-carotenoid-patent-s1",
+        "n32c-irone-carotenoid-patent-s2",
+        "n32c-irone-carotenoid-patent-s3"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "WO2024008889A1 опубликована 11 января 2024 года; описан путь к иронам через метилированные каротиноиды и рекомбинантные клетки.",
+          "factIds": [
+            "n32c-irone-carotenoid-patent-f1"
+          ],
+          "sourceIds": [
+            "n32c-irone-carotenoid-patent-s1"
+          ]
+        },
+        {
+          "claim": "Обзор биокатализа рассматривает получение десяти изомеров ирона из коммерческого alpha-irone и ускоренную подготовку природных экстрактов.",
+          "factIds": [
+            "n32c-irone-carotenoid-patent-f2"
+          ],
+          "sourceIds": [
+            "n32c-irone-carotenoid-patent-s2"
+          ]
+        },
+        {
+          "claim": "Дом описывает Iris pallida через ореховые и древесные оттенки и указывает на корневище, а не цветок.",
+          "factIds": [
+            "n32c-irone-carotenoid-patent-f3"
+          ],
+          "sourceIds": [
+            "n32c-irone-carotenoid-patent-s3"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-03-28",
+      "eventId": "n32c-body-perfume-blends",
+      "eventGroupId": "n32c-body-perfume-blends",
+      "eventDate": "2012-03-28",
+      "category": "cultural_fact",
+      "localizations": {
+        "ru": {
+          "title": "Аромат встречается с собственным запахом",
+          "fullStory": "28 марта 2012 года PLOS ONE опубликовал исследование Павлины Леноховой и коллег о выборе духов. В двух опытах парфюм улучшал оценки запаха тела, но результат зависел от человека, предоставившего образец. В третьем опыте смесь собственного запаха участника с предпочитаемыми им духами оценивали приятнее, чем смесь с назначенным случайным ароматом. Сами духи при этом не различались по приятности. Авторы предложили рассматривать выбор как поиск подходящего сочетания, а не простое перекрытие одного запаха другим. Для парфюмерии это меняло единицу сравнения: предметом становился не только флакон, но и смесь, возникающая при его использовании конкретным человеком.\n\nЧто происходит с материалами после нанесения, ранее измеряли Клод Вюйемье и коллеги. Они собирали летучие вещества над внутренней стороной предплечья при контролируемом потоке воздуха. Модельная спиртовая композиция содержала одиннадцать душистых веществ; её сравнивали с отдельными компонентами и с нанесением через парфюмированное мыло. После мытья и ополаскивания вещества испарялись с кожи медленнее, чем после спиртового раствора. Это отдельное физико-химическое исследование не объясняет целиком предпочтения участников Леноховой. Оно показывает другую сторону встречи: способ нанесения способен менять выход материалов в воздух. Состав жидкости и состав того, что достигает носа, требуют разных наблюдений и не должны автоматически считаться одним и тем же.\n\nЕсть и поведенческий уровень. В эксперименте Крейга Робертса и коллег мужчины пользовались внешне одинаковыми аэрозолями: один содержал отдушку и антимикробные компоненты, другой их не содержал. Между группами возникали различия в уверенности и самооценке привлекательности. Женщины не давали разных средних оценок фотографиям этих мужчин, но различия появлялись при просмотре видеозаписей. Это не доказательство особой силы одной душистой молекулы: составы отличались несколькими активными компонентами. Однако опыт отделял впечатление от запаха и впечатление от поведения. В таком окружении работа 2012 года остаётся конкретной историей выбора сочетания. Духи встречаются с телом сразу на нескольких уровнях, и приятность самого аромата не исчерпывает результат этой встречи."
+        },
+        "en": {
+          "title": "Perfume meets a person’s own smell",
+          "fullStory": "On 28 March 2012, PLOS ONE published Pavlína Lenochová and colleagues’ investigation of perfume choice. In two experiments, perfume improved evaluations of body odor, but the outcome depended on the person supplying the sample. In a third experiment, a person’s body odor blended with their preferred perfume was judged more pleasant than the same body odor blended with a randomly assigned fragrance. The perfumes themselves did not differ in pleasantness. The authors proposed considering choice as a search for a suitable combination, extending beyond simply covering one smell with another. The unit of comparison was no longer just a bottle, but the blend produced when a particular person used it.\n\nClaude Vuilleumier and colleagues had previously measured what happens to materials after application. They collected volatile substances above the inner forearm under a controlled airflow. A model alcoholic composition containing eleven odorants was compared with individual components and with application through perfumed soap. Following washing and rinsing, components evaporated from skin more slowly than after an alcoholic solution. This separate physicochemical investigation does not fully explain the preferences in Lenochová’s experiments. It reveals another aspect of the encounter: the mode of application can change the release of materials into air. The composition of a liquid and the composition reaching a nose require different observations and should not automatically be treated as identical.\n\nThere is also a behavioral level. In Craig Roberts and colleagues’ experiment, men used visually identical aerosol sprays: one contained fragrance and antimicrobial ingredients, while the other lacked these active components. Differences emerged between groups in confidence and self-perceived attractiveness. Women did not give different average attractiveness ratings to photographs of the men, but differences appeared when they watched video clips. This does not establish a special power of one fragrant molecule, because the formulations differed in several active ingredients. It did separate an impression formed through smell from one formed through behavior. Within this wider picture, the 2012 study remains a specific account of choosing a combination. Perfume meets a body on several levels, and liking the fragrance alone does not exhaust the outcome."
+        }
+      },
+      "sourceIds": [
+        "n32c-body-perfume-blends-s1",
+        "n32c-body-perfume-blends-s2",
+        "n32c-body-perfume-blends-s3"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Статья опубликована 28 марта 2012 года; эффект духов взаимодействовал с запахом донора; предпочитаемая смесь оценивалась приятнее случайно назначенной.",
+          "factIds": [
+            "n32c-body-perfume-blends-f1"
+          ],
+          "sourceIds": [
+            "n32c-body-perfume-blends-s1"
+          ]
+        },
+        {
+          "claim": "Предплечье и динамический headspace использованы для сравнения 11-компонентной спиртовой композиции, отдельных веществ и мыла; после мыла испарение было медленнее.",
+          "factIds": [
+            "n32c-body-perfume-blends-f2"
+          ],
+          "sourceIds": [
+            "n32c-body-perfume-blends-s2"
+          ]
+        },
+        {
+          "claim": "Аэрозоль с отдушкой и антимикробными компонентами менял самооценки; различия зрительских оценок возникали для видео, но не фотографий.",
+          "factIds": [
+            "n32c-body-perfume-blends-f3"
+          ],
+          "sourceIds": [
+            "n32c-body-perfume-blends-s3"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-11-07",
+      "eventId": "n32c-nootkatone-pathway",
+      "eventGroupId": "n32c-nootkatone-pathway",
+      "eventDate": "2023-11-07",
+      "category": "ingredient",
+      "localizations": {
+        "ru": {
+          "title": "Грейпфрутовый характер и работа ферментов",
+          "fullStory": "Знакомый грейпфрутовый оттенок может вести исследователя совсем к другому растению. 7 ноября 2023 года New Phytologist опубликовал работу Сяоминь Дэн и коллег о пути образования нооткатона в Alpinia oxyphylla. Учёные выявили валенценсинтазу, три фермента окисления валенцена и дополнительные белки, необходимые для дальнейших превращений. Затем путь воспроизвели в дрожжах Saccharomyces cerevisiae. Дрожжевая клетка здесь служила одновременно проверкой предполагаемых функций и площадкой для сборки цепочки. Авторы получили основу для биотехнологического производства, а не доказательство того, что растительный экстракт и продукт такой клетки во всех отношениях одинаковы. Запах связывал материалы, но исследование прослеживало конкретные химические переходы.\n\nБолее ранняя работа Катарины Цанкар и коллег показывает, почему одного подходящего названия фермента недостаточно. Исследователи нашли в цикории белок CYP71AV8. При совместной работе с валенценсинтазой в дрожжах он приводил к появлению транс-нооткатола, цис-нооткатола и нооткатона. Тот же белок превращал и другие терпены, причём место окисления зависело от исходного вещества. В биохимической цепочке важна не только возможность провести реакцию, но и её направление. Для душистого материала это означает внимание к соседним продуктам: клетка может выпускать сразу несколько связанных соединений. Поэтому поиск и сочетание ферментов напоминают последовательную настройку производства, где каждый шаг определяет состав того, что доступно следующему.\n\nСам нооткатон тоже требует точного определения. Учебный обзор Рагхавендры Рамачандерана и Бернда Шефера сопоставляет его зеркальные формы. Положительно вращающий вариант описан как сильный грейпфрутовый, отрицательно вращающий — как слабый древесно-ветиверный. Общее устройство молекулы и одинаковая запись состава не делают эти впечатления тождественными. В обзоре также различаются выделение из природного сырья, окисление валенцена и ферментационные процессы. Рядом с вопросом «чем пахнет?» появляется вопрос «как именно это получено?». Работа 2023 года добавила к возможным маршрутам подробно проверенную растительную цепочку. Для парфюмерного ингредиента такой результат ценен своей определённостью: можно обсуждать исходное вещество, последовательность превращений и конкретный конечный продукт, не подменяя их одним общим образом цитруса."
+        },
+        "en": {
+          "title": "A grapefruit character and the work of enzymes",
+          "fullStory": "A familiar grapefruit character can lead a researcher to a very different plant. On 7 November 2023, New Phytologist published Xiaomin Deng and colleagues’ investigation of nootkatone biosynthesis in Alpinia oxyphylla. The scientists identified a valencene synthase, three valencene-oxidizing enzymes, and additional proteins supporting subsequent transformations. They then reconstructed the pathway in Saccharomyces cerevisiae yeast. The yeast cell served both to test proposed functions and to assemble the sequence. The authors established a basis for biotechnological production, rather than demonstrating that a plant extract and a cell-derived product were identical in every respect. Smell connected the materials, while the investigation followed particular chemical transformations.\n\nAn earlier study by Katarina Cankar and colleagues shows why identifying a promising enzyme does not finish the task. They found the protein CYP71AV8 in chicory. Expressing it alongside a valencene synthase in yeast produced trans-nootkatol, cis-nootkatol, and nootkatone. The same protein also transformed other terpenes, with the site of oxidation depending on the starting substance. A biochemical sequence involves the direction of a reaction as well as its possibility. For a fragrance material, that draws attention to neighboring products: a cell may release several related compounds together. Selecting and combining enzymes therefore resembles the progressive adjustment of a production process, with each step determining the material available to the next.\n\nNootkatone itself also needs a precise identity. Raghavendra Ramachanderan and Bernd Schaefer’s teaching review compares its mirror-image forms. The positively rotating version is described as strongly grapefruit-like, while the negatively rotating version has a faint woody, vetiver character. A shared molecular framework and the same chemical formula do not make those impressions equivalent. The review also distinguishes extraction from natural materials, oxidation of valencene, and fermentation processes. Beside “what does it smell like?” stands “how exactly was it obtained?” The 2023 investigation added a closely examined plant pathway to those possible routes. For a perfumery ingredient, the value lies in that specificity: the starting material, sequence of transformations, and particular final product can be discussed without replacing them all with a general image of citrus."
+        }
+      },
+      "sourceIds": [
+        "n32c-nootkatone-pathway-s1",
+        "n32c-nootkatone-pathway-s2",
+        "n32c-nootkatone-pathway-s3"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Работа впервые опубликована 7 ноября 2023 года; путь Alpinia oxyphylla выявлен с использованием функционального дрожжевого скрининга и воспроизведён в Saccharomyces cerevisiae.",
+          "factIds": [
+            "n32c-nootkatone-pathway-f1"
+          ],
+          "sourceIds": [
+            "n32c-nootkatone-pathway-s1"
+          ]
+        },
+        {
+          "claim": "CYP71AV8 цикория в дрожжах давал нооткатолы и нооткатон и по-разному окислял разные исходные терпены.",
+          "factIds": [
+            "n32c-nootkatone-pathway-f2"
+          ],
+          "sourceIds": [
+            "n32c-nootkatone-pathway-s2"
+          ]
+        },
+        {
+          "claim": "Зеркальные формы нооткатона описаны через грейпфрутовый и слабый древесно-ветиверный характер; обзор различает методы получения.",
+          "factIds": [
+            "n32c-nootkatone-pathway-f3"
+          ],
+          "sourceIds": [
+            "n32c-nootkatone-pathway-s3"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-10-17",
+      "eventId": "n32c-spme-patent",
+      "eventGroupId": "n32c-spme-patent",
+      "eventDate": "1991-10-17",
+      "category": "creation_technique",
+      "localizations": {
+        "ru": {
+          "title": "Нить, которая собирает летучие вещества",
+          "fullStory": "Чтобы исследовать аромат, не всегда нужно извлекать большое количество масла. В патентной заявке Януша Павлишина WO1991015745A1, опубликованной 17 октября 1991 года, описано устройство для твердофазной микроэкстракции. Тонкое волокно выдвигается из защитной иглы и собирает вещества из образца; затем его убирают и переносят к аналитическому прибору. Нагрев помогает высвободить собранное для анализа. Такая конструкция объединяла отбор и перенос пробы в маленьком держателе, похожем на шприц. Для истории парфюмерных технологий это другой масштаб работы с сырьём: цель состоит в получении информации о составе, а не в заготовке душистого экстракта для будущей формулы.\n\nВ современном описании ручного отбора производитель MilliporeSigma показывает последовательность действий особенно ясно. Игла проходит через мембрану закрытого флакона; волокно можно выставить в жидкость или в пространство над ней. Время выдержки отсчитывают, затем волокно снова прячут в иглу и переносят в нагретый ввод газового хроматографа. Здесь технически важен каждый переход между средами. Вещество сначала покидает образец, затем удерживается покрытием и наконец освобождается уже внутри прибора. Это не буквальная копия человеческого обоняния: нос не заменяется волокном. Но появляется способ отдельно рассматривать летучую часть сложного материала, не принимая весь состав исходной жидкости за то, что находится над ней в воздухе.\n\nВ исследовании Арым Ко и коллег такой подход использовали для оценки остаточной отдушки после мытья тела. Авторы сравнивали разные волокна и два способа сбора с кожи: клейкую ленту и герметизированную стеклянную воронку. Выбор волокна заметно менял эффективность извлечения; воронка оказалась значительно чувствительнее ленты к галаксолиду. Некоторые базовые материалы обнаруживали даже спустя сутки после мытья. Аналитическое обнаружение, однако, не равно обещанию столь же долгого заметного запаха для любого человека. Этот пример показывает, как конструкция из патента вошла в конкретную исследовательскую задачу. Прежде чем обсуждать стойкость, нужно решить, что именно собирают, каким способом и какой сигнал считают результатом. Работа с ароматом начинается ещё до появления хроматографического графика."
+        },
+        "en": {
+          "title": "A fiber that gathers volatile compounds",
+          "fullStory": "Investigating an aroma does not always require extracting a large quantity of oil. Janusz Pawliszyn’s international patent application WO1991015745A1, published on 17 October 1991, described a device for solid-phase microextraction. A thin fiber extends from a protective needle and collects substances from a sample; it is then withdrawn and transferred to an analytical instrument. Heating helps release the collected material for analysis. The construction brought sampling and transfer together in a small syringe-like holder. Within the history of perfumery technology, this operates at a different scale from producing an ingredient. Its purpose is to obtain information about composition, rather than manufacture an aromatic extract for a future formula.\n\nMilliporeSigma’s modern description of manual sampling makes the sequence particularly clear. The needle passes through the membrane sealing a vial; the fiber can be exposed to the liquid or to the space above it. Exposure is timed, after which the fiber returns inside the needle and travels to the heated inlet of a gas chromatograph. Each transition between environments matters. A substance first leaves the sample, is retained by a coating, and is finally released inside the instrument. This is not a literal duplicate of human smelling: a fiber does not replace a nose. It provides a way to examine the volatile portion of a complex material separately, without treating the entire liquid composition as identical to the air above it.\n\nAreum Goh and colleagues used this approach to assess residual fragrance after body washing. They compared different fibers and two collection methods: adhesive tape and a sealed glass funnel. Fiber selection substantially changed extraction efficiency; the funnel was considerably more sensitive to galaxolide than tape. Some base-note materials remained detectable a day after washing. Analytical detection, however, does not promise an equally persistent noticeable smell for every person. The example shows how the patent’s construction entered a specific research problem. Before discussing lastingness, investigators must decide what they collect, how they collect it, and which signal constitutes a result. Work on a fragrance begins before a chromatographic trace appears."
+        }
+      },
+      "sourceIds": [
+        "n32c-spme-patent-s1",
+        "n32c-spme-patent-s2",
+        "n32c-spme-patent-s3"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "WO1991015745A1 опубликована 17 октября 1991 года; выдвигаемое волокно в игле собирает и переносит аналитическую пробу.",
+          "factIds": [
+            "n32c-spme-patent-f1"
+          ],
+          "sourceIds": [
+            "n32c-spme-patent-s1"
+          ]
+        },
+        {
+          "claim": "Производитель описывает экспозицию волокна в жидкости или headspace, контроль времени и тепловой перенос в GC.",
+          "factIds": [
+            "n32c-spme-patent-f2"
+          ],
+          "sourceIds": [
+            "n32c-spme-patent-s2"
+          ]
+        },
+        {
+          "claim": "В исследовании остаточной отдушки после мытья сравнивались волокна, tape stripping и стеклянные воронки; некоторые базовые материалы обнаруживали до 24 часов.",
+          "factIds": [
+            "n32c-spme-patent-f3"
+          ],
+          "sourceIds": [
+            "n32c-spme-patent-s3"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2027-04-15",
+      "eventId": "n32c-enose-pleasantness",
+      "eventGroupId": "n32c-enose-pleasantness",
+      "eventDate": "2010-04-15",
+      "category": "creation_technique",
+      "localizations": {
+        "ru": {
+          "title": "Прибору предложили оценить приятность",
+          "fullStory": "Шестнадцать датчиков получали настоящую пахучую пробу, а исследователи спрашивали не только, какое вещество перед ними. В работе Рафи Хаддада и коллег, опубликованной 15 апреля 2010 года в PLOS Computational Biology, электронный нос MOSES II обучали оценивать приятность. Сначала прибор измерил семьдесят шесть веществ, а люди дали собственные оценки. Затем проверяли прогнозы для запахов, не включённых в обучение. Так задача узнавания знакомого образца превращалась в задачу предсказания человеческого впечатления. Физический массив датчиков оставался первым звеном: система работала с откликами на реальную пробу, а не только с нарисованной формулой молекулы. Разница существенна для понимания того, что именно измерял этот «нос».\n\nУ исследования была более ранняя предпосылка. В сообщении Беркли о работе Рехана Хана описан поиск связи между характеристиками молекул и оценками запахов. Авторы сопоставляли массив экспертных описаний со множеством химических параметров; приятность стала одним из главных направлений различий. Участники последующей проверки происходили из разных культурных групп. Это не превращало личный вкус в неизменную химическую константу. Но позволяло поставить конкретную задачу: найти часть общего рисунка, которую удастся предсказать. В приборе Хаддада вопрос получил техническое воплощение.\n\nГраницы такого перехода заметны в независимой работе Райана Уорда и коллег с эфирными маслами. Они сопоставили электронные сигналы с выбранными людьми формами, фактурами, высотой звука и цветами. Некоторые соответствия предсказывались лучше других, а приятность в этой выборке надёжно предсказать не получилось. Один прибор, набор материалов или удачная модель не дают универсального языка всех впечатлений. Для парфюмерии история 2010 года интересна как точная смена вопроса к аналитике: мало различить два сигнала, можно попытаться связать их с оценкой человека. При этом остаётся важным, кто оценивал материалы, что именно предъявляли и какие новые образцы проверяли. Электронная система получала измеряемую задачу, а не готовый личный вкус."
+        },
+        "en": {
+          "title": "Asking an instrument to estimate pleasantness",
+          "fullStory": "Sixteen sensors received a real odorous sample, while researchers asked more than which substance was present. In Rafi Haddad and colleagues’ study, published on 15 April 2010 in PLOS Computational Biology, a MOSES II electronic nose was trained to estimate pleasantness. The apparatus first measured seventy-six substances, and people supplied their own ratings. Predictions were then tested on odors excluded from training. Recognizing a familiar sample had become a problem of anticipating a human impression. A physical sensor array remained the first stage: the system used responses to actual material, rather than only a drawn molecular formula. That distinction matters when considering what this particular nose measured.\n\nAn earlier investigation provided a premise for the approach. Berkeley’s account of Rehan Khan’s work describes a search for relationships between molecular characteristics and odor ratings. The researchers compared expert descriptions with a large set of chemical parameters; pleasantness emerged as a major direction of variation. Participants in subsequent validation came from different cultural groups. This did not turn personal taste into an immutable chemical constant. It made a specific question testable: could some shared pattern be predicted? Haddad’s apparatus gave that question a technical form.\n\nThe limits of such mappings appear in Ryan Ward and colleagues’ independent work with essential oils. They compared electronic signals with people’s selections of shapes, textures, pitches, and colors. Some correspondences were predicted better than others, while pleasantness could not be robustly predicted in that dataset. One instrument, collection of materials, or successful model does not establish a universal language for every impression. For perfumery, the 2010 study marks a precise change in the question asked of analysis: beyond distinguishing two signals, researchers can try relating them to human evaluation. Who rated the materials, what was presented, and which new samples were tested still matter. The electronic system acquired a measurable task, rather than a ready-made personal taste."
+        }
+      },
+      "sourceIds": [
+        "n32c-enose-pleasantness-s1",
+        "n32c-enose-pleasantness-s2",
+        "n32c-enose-pleasantness-s3"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Работа опубликована 15 апреля 2010 года; MOSES II использовал 16 датчиков и 76 исходных веществ, прогнозируя оценки для неучаствовавших в обучении запахов.",
+          "factIds": [
+            "n32c-enose-pleasantness-f1"
+          ],
+          "sourceIds": [
+            "n32c-enose-pleasantness-s1"
+          ]
+        },
+        {
+          "claim": "Сообщение университета об исследовании Хана описывает сопоставление экспертных дескрипторов и молекулярных параметров с межгрупповой проверкой.",
+          "factIds": [
+            "n32c-enose-pleasantness-f2"
+          ],
+          "sourceIds": [
+            "n32c-enose-pleasantness-s2"
+          ]
+        },
+        {
+          "claim": "Уорд и коллеги прогнозировали кроссмодальные соответствия эфирных масел; приятность в их выборке надёжно не предсказывалась.",
+          "factIds": [
+            "n32c-enose-pleasantness-f3"
+          ],
+          "sourceIds": [
+            "n32c-enose-pleasantness-s3"
+          ]
+        }
+      ]
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-07-03",
+      "eventId": "n32c-mixture-receptor-antagonism",
+      "eventGroupId": "n32c-mixture-receptor-antagonism",
+      "eventDate": "2020-07-03",
+      "category": "creation_technique",
+      "localizations": {
+        "ru": {
+          "title": "Когда добавление ослабляет ответ",
+          "fullStory": "Больше пахучих компонентов не обязательно означает более сильный ответ обонятельной клетки. Джозеф Зак и коллеги наблюдали это у свободно дышащих мышей; их работа вышла в Nature Communications 3 июля 2020 года. Исследователи регистрировали кальциевые сигналы как в окончаниях обонятельных нейронов, так и в их телах внутри носа. В смесях двух веществ подавляющие взаимодействия встречались широко. В более сложных смесях, содержавших до двенадцати компонентов, они становились сильнее и распространённее. Авторы рассматривали такой механизм как способ ограничивать насыщение ответа. Это наблюдение о кодировании смеси, а не готовое правило, позволяющее вычислить запах любых духов по сумме отдельных нот.\n\nУ другой команды появилась возможность одновременно рассматривать тысячи обонятельных нейронов с помощью объёмной микроскопии SCAPE. В собственном обзорном рассказе об этих опытах авторы отмечают: ответ большинства клеток на доминирующий компонент сохранялся в смеси, но многочисленные исключения показывали подавление или усиление. Дальнейшие проверки зависимости от дозы помогали различать механизмы. Одно вещество могло активировать клетку само по себе и одновременно ослаблять её ответ на другое. В этом состоит важная перемена масштаба: взаимодействие возникает уже на раннем сенсорном уровне. Смесь не обязана сначала получить неизменённые отдельные «ярлыки», которые только затем соединит мозг.\n\nЕсть и физическая сторона подготовки такого опыта. Обзор об обонятельных стимулах подробно различает разведение вещества в жидкости и его концентрацию в воздухе. Связь между ними зависит от материала и условий; равные доли в растворах не гарантируют равного количества молекул у органа обоняния. Это особенно важно при сравнении смеси с её компонентами. Для парфюмерной работы вопрос звучит знакомо: рецепт задаёт количества, но встреча с носом происходит после испарения. Исследование Зака добавляет к этому ещё один уровень — взаимодействие на входе в нервную систему. Физическое распределение веществ и клеточный ответ вместе делают простое сложение недостаточным описанием. Ароматический аккорд приходится рассматривать как сочетание, у которого есть собственное поведение."
+        },
+        "en": {
+          "title": "When adding an odor weakens a response",
+          "fullStory": "More fragrant components do not necessarily produce a stronger response from an olfactory cell. Joseph Zak and colleagues observed this in freely breathing mice; their study appeared in Nature Communications on 3 July 2020. They recorded calcium signals both at olfactory neurons’ terminals and in their cell bodies inside the nose. Suppressive interactions were widespread in two-component mixtures. In more complex mixtures containing up to twelve components, these interactions became stronger and more prevalent. The authors considered this a mechanism for limiting response saturation. It concerns mixture encoding, rather than supplying a rule for calculating every perfume’s smell by adding together its individual notes.\n\nAnother team gained the ability to observe thousands of olfactory neurons simultaneously through SCAPE volumetric microscopy. In their own review of these experiments, the authors report that most cells’ responses to a dominant component were preserved in a mixture, while numerous exceptions showed suppression or enhancement. Further dose-response tests helped distinguish mechanisms. A substance could activate a cell on its own while also weakening its response to another substance. This represents a significant change of scale: interactions occur at an early sensory stage. A mixture need not first acquire unchanged individual labels that the brain subsequently combines. The recorded response can already depend on which molecules arrive together.\n\nThere is also a physical side to preparing such experiments. A review of odor stimuli distinguishes dilution in a liquid from concentration in air. Their relationship depends on the material and conditions; equal proportions in solutions do not guarantee equal numbers of molecules at an olfactory organ. This matters particularly when comparing a mixture with its components. For perfumery, the question is familiar: a recipe specifies quantities, but the nose encounters materials after evaporation. Zak’s investigation adds another level, interactions at the entrance to the nervous system. Physical distribution and cellular responses together make simple addition an incomplete description. An aromatic accord must be considered as a combination with behavior of its own, while the experimental findings remain tied to the animal system and mixtures that were actually tested."
+        }
+      },
+      "sourceIds": [
+        "n32c-mixture-receptor-antagonism-s1",
+        "n32c-mixture-receptor-antagonism-s2",
+        "n32c-mixture-receptor-antagonism-s3"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Работа Зака опубликована 3 июля 2020 года; у свободно дышащих мышей подавление широко наблюдалось в бинарных и до 12-компонентных смесях.",
+          "factIds": [
+            "n32c-mixture-receptor-antagonism-f1"
+          ],
+          "sourceIds": [
+            "n32c-mixture-receptor-antagonism-s1"
+          ]
+        },
+        {
+          "claim": "Авторский обзор описывает SCAPE-регистрацию более 10000 клеток, включая сохранённые, подавленные и усиленные ответы и частичный агонизм.",
+          "factIds": [
+            "n32c-mixture-receptor-antagonism-f2"
+          ],
+          "sourceIds": [
+            "n32c-mixture-receptor-antagonism-s2"
+          ]
+        },
+        {
+          "claim": "Обзор физических стимулов различает концентрацию в воздухе и разведение в жидкости; их отношение не всегда линейно.",
+          "factIds": [
+            "n32c-mixture-receptor-antagonism-f3"
+          ],
+          "sourceIds": [
+            "n32c-mixture-receptor-antagonism-s3"
+          ]
+        }
+      ]
     }
   ]
 }

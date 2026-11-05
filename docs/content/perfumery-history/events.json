@@ -7827,6 +7827,672 @@
       "access": "opened",
       "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2014.01352/full",
       "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-sillage-iao",
+      "publisher": "Institute for Art and Olfaction — project archive",
+      "url": "https://artandolfaction.com/projects/sillage/",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-sillage-artist",
+      "publisher": "Brian Goeltzenleuchter — SillageLosAngeles project and artist statement",
+      "url": "https://www.bgprojects.com/home/2017/9/5/sillage-los-angeles",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-sillage-times",
+      "publisher": "Los Angeles Times — Carolina A.Miranda artist interview, artist-hosted PDF",
+      "url": "https://static1.squarespace.com/static/59ac89042994caa10199036a/t/59e56cd6d7bdce19ad91d14c/1508207831752/What%2Bdoes%2BL.A.%2Bsmell%2Blike-%2BAn%2Bartist%2Bis%2Btrying%2Bto%2Bput%2Bit%2Bin%2Ba%2Bbottle%C2%A0-%C2%A0Los%2BAngeles%2BTimes.pdf",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-sillage-essay",
+      "publisher": "Brian Goeltzenleuchter — Toward aPoetics ofOlfactoryArt inVolatile!2015",
+      "url": "https://static1.squarespace.com/static/5321c7fbe4b037cba1a0100b/t/57b14319579fb320a639e5f7/1471234911524/Volatile.pdf",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-gaia-dossier",
+      "publisher": "Fondation Beyeler — Media Release: Ernesto Neto, GaiaMotherTree",
+      "url": "https://www.fondationbeyeler.ch/fileadmin/user_upload/Presse/Medienmitteilungen_E/en2018/EN_Neto_Press_release_all.pdf",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05",
+      "workTitle": "Media Release: Ernesto Neto, GaiaMotherTree",
+      "author": "Fondation Beyeler",
+      "locator": "PDF pages 1–2; public date range on page 1"
+    },
+    {
+      "id": "n32a-gaia-domus",
+      "publisher": "Domus — installation report3July2018",
+      "url": "https://www.domusweb.it/en/art/2018/07/03/zurigo-sensuality-and-nature-in-ernesto-netos-latest-installation.html",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-meduses-iao",
+      "publisher": "Institute for Art and Olfaction — exhibition archive and installation photographs",
+      "url": "https://artandolfaction.com/exhibitions/la-fabrique-des-meduses/",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-meduses-portfolio",
+      "publisher": "Boris Raux — artist portfolio2025, hostedDocumentsdartistes",
+      "url": "https://dda-auvergnerhonealpes.org/media/pages/artistes/3e57cdca75-1748936654/portfolio-boris-raux-2025.pdf",
+      "language": "fr",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-meduses-interview",
+      "publisher": "Académie de Versailles — BarbaraCarreno interview BorisRaux, DAACtualité38",
+      "url": "https://www.ac-versailles.fr/sites/ac_versailles/files/2021-12/daactualite-juin-27475.pdf",
+      "language": "fr",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-clearing-iao",
+      "publisher": "Institute for Art and Olfaction — A Clearing exhibition archive",
+      "url": "https://artandolfaction.com/exhibitions/aclearing/",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-clearing-noodle",
+      "publisher": "Noodle — Kenneth Ng interviews Se Young Au, with eyewitness installation discussion",
+      "url": "https://www.noodlenewsletter.com/seyoung/",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-clearing-artist",
+      "publisher": "Se Young Au — artist statement and exhibition CV",
+      "url": "https://www.senses-studio.com/about",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-polaroids-iao",
+      "publisher": "Institute for Art and Olfaction — Polaroids exhibition archive",
+      "url": "https://artandolfaction.com/projects/klara-ravat/",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-polaroids-wow",
+      "publisher": "WOWAmsterdam — SuzannaKnight interviews KlaraRavat",
+      "url": "https://www.wow-amsterdam.nl/artists/klara-ravat/",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-polaroids-clot",
+      "publisher": "CLOTMagazine — ŽivaBrglez interviews KlaraRavat2Oct2018",
+      "url": "https://clotmag.com/scout-trends/klara-ravat",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-polaroids-walk",
+      "publisher": "Interartive — ChristianaKazakou interviews KlaraRavat2018",
+      "url": "https://walkingart.interartive.org/2018/12/sensory-walks-BozarLab",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-polaroids-cv",
+      "publisher": "KlaraRavat — artistCV",
+      "url": "https://www.klararavat.com/cv",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-secret-iao",
+      "publisher": "Institute for Art and Olfaction — SecretHistories archive and ChristopherBrosius collectionstatement",
+      "url": "https://artandolfaction.com/exhibitions/secret-histories-by-christopher-brosius/",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-secret-making",
+      "publisher": "ChristopherBrosius — HowCBIHPScentsAreMade authoredstatement",
+      "url": "https://www.cbihateperfume.com/howscentsaremade",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-secret-art",
+      "publisher": "ChristopherBrosius — OlfactoryArt:WhatIsIt? authoredessay",
+      "url": "https://www.cbihateperfume.com/olfactoryart",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-unsettled-museum",
+      "publisher": "Nevada Museum of Art — retrospective exhibition archive",
+      "url": "https://www.nevadaart.org/art/exhibitions/unsettled/",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-unsettled-label",
+      "publisher": "Nevada Museum of Art — exhibition object labels, BrunoFazzolari",
+      "url": "https://www.nevadaart.org/wp-content/uploads/2016/11/FINAL-LABELS_LEGAL.pdf",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-unsettled-artsy",
+      "publisher": "Headlands Center for the Arts — artist auction lot description hostedArtsy",
+      "url": "https://www.artsy.net/artwork/bruno-fazzolari-unsettled",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-unsettled-iao",
+      "publisher": "Institute for Art and Olfaction — participant project presentation",
+      "url": "https://artandolfaction.com/projects/unsettled/",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32a-gaia-kono",
+      "publisher": "Fondation Beyeler — Michiko Kono, Ernesto Neto: GaiaMotherTree",
+      "url": "https://www.fondationbeyeler.ch/fileadmin/user_upload/Presse/Medienmitteilungen_E/en2018/EN_Neto_Press_release_all.pdf",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05",
+      "workTitle": "Ernesto Neto: GaiaMotherTree",
+      "author": "Michiko Kono",
+      "locator": "PDF pages 3–5"
+    },
+    {
+      "id": "n32a-gaia-neto",
+      "publisher": "Fondation Beyeler — Ernesto Neto, Ernesto Neto spricht über GaiaMotherTree",
+      "url": "https://www.fondationbeyeler.ch/fileadmin/user_upload/Presse/Medienmitteilungen_E/en2018/EN_Neto_Press_release_all.pdf",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05",
+      "workTitle": "Ernesto Neto spricht über GaiaMotherTree",
+      "author": "Ernesto Neto",
+      "locator": "PDF pages 9–10"
+    },
+    {
+      "id": "n32b-cher-launch",
+      "url": "https://brookshiregroceryarena.com/wp-content/uploads/2019/11/FINAL-Cher-Bossier-City-Addtl-Dates-Cher-Here-We-Go-Again.pdf",
+      "publisher": "Live Nation / Cher",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-cher-coveteur",
+      "url": "https://coveteur.com/cher-talks-smelling-like-mermaid-her-fire-twitter",
+      "publisher": "Coveteur",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-cher-standard",
+      "url": "https://www.standard.co.uk/lifestyle/beauty/cher-launching-fragrance-eau-de-couture-a4147441.html",
+      "publisher": "Evening Standard",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-cher-allure",
+      "url": "https://www.allure.com/story/cher-eau-de-couture-fragrance-interview-review",
+      "publisher": "Allure",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-dolly-launch",
+      "url": "https://www.dollyparton.com/news/dolly-scent-from-above-available-starting-july-28",
+      "publisher": "Dolly Parton",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-dolly-w",
+      "url": "https://www.wmagazine.com/life/dolly-parton-interview-2021",
+      "publisher": "W Magazine",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-dolly-vf",
+      "url": "https://www.vanityfair.com/style/2021/07/dolly-parton-scent-from-above-fragrance-interview",
+      "publisher": "Vanity Fair",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-dolly-abc",
+      "url": "https://abcnews.com/GMA/Culture/dolly-parton-sparkles-song/story?id=79115650",
+      "publisher": "ABC News",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-rare-launch-email",
+      "url": "https://milled.com/rarebeauty.com/its-here-new-rare-eau-de-parfum-just-landed--DuGtSH84TLMqBDs",
+      "publisher": "Rare Beauty via Milled",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-rare-product",
+      "url": "https://www.rarebeauty.com/products/rare-eau-de-parfum",
+      "publisher": "Rare Beauty",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-rare-making",
+      "url": "https://rarebeauty.substack.com/p/how-the-perfume-is-made",
+      "publisher": "Rare Beauty",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-rare-fastcompany",
+      "url": "https://www.fastcompany.com/91403112/luxury-fragrance-has-a-design-problem-rare-beauty-has-a-fix",
+      "publisher": "Fast Company",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-rare-balms",
+      "url": "https://www.beautyscene.net/celebrity-fragrances/rare-beauty-fragrance/",
+      "publisher": "Beauty Scene",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-lv-report-2016",
+      "url": "https://www.annualreports.co.uk/HostedData/AnnualReportArchive/l/OTC_LVMUY_2016.pdf",
+      "publisher": "LVMH via AnnualReports",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-lv-newson",
+      "url": "https://marc-newson.com/louis-vuitton-fragrance/",
+      "publisher": "Marc Newson Ltd",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-lv-leather",
+      "url": "https://www.prnewswire.com/news-releases/louis-vuitton-perfumes-592980891.html",
+      "publisher": "Louis Vuitton Mexico / PR Newswire",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-lv-campaign",
+      "url": "https://www.beautyscene.net/beauty-campaign/lea-seydoux-les-parfums-louis-vuitton/",
+      "publisher": "Beauty Scene",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-westwood-birth",
+      "url": "https://www.ngv.vic.gov.au/labels/westwood-kawakubo-timeline/",
+      "publisher": "National Gallery of Victoria",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-westwood-va",
+      "url": "https://www.vam.ac.uk/articles/vivienne-westwood-punk-new-romantic-and-beyond",
+      "publisher": "Victoria and Albert Museum",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-westwood-story",
+      "url": "https://www.viviennewestwood.com/westwood-world/the-story-so-far/",
+      "publisher": "Vivienne Westwood",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-westwood-boudoir-review",
+      "url": "https://australianperfumejunkies.com/2013/05/30/boudoir-vivienne-westwood-perfume-review/",
+      "publisher": "Australian Perfume Junkies",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-westwood-anglomania",
+      "url": "https://www.osmoz.com/perfumes/vivienne-westwood/2262/anglomania",
+      "publisher": "Osmoz",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-elixir-ebook",
+      "url": "https://books.apple.com/us/book/elixir/id6445713445",
+      "publisher": "Harvard University Press via Apple Books",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-elixir-chapter16",
+      "url": "https://chapter16.org/the-aroma-of-life/",
+      "publisher": "Humanities Tennessee / Chapter16",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-elixir-pw",
+      "url": "https://www.publishersweekly.com/9780674250895",
+      "publisher": "Publishers Weekly",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32b-elixir-fulbright",
+      "url": "https://fulbright-chronicles.com/wp-content/uploads/2024/08/journal-3-2.pdf",
+      "publisher": "Fulbright Chronicles",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-habituation-materials-s1",
+      "publisher": "Scientific Reports",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/srep41047?error=cookies_not_supported",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-habituation-materials-s2",
+      "publisher": "European Archives of Oto-Rhino-Laryngology",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://link.springer.com/article/10.1007/s00405-021-07170-0",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-habituation-materials-s3",
+      "publisher": "Perceptual and Motor Skills",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://journals.sagepub.com/doi/10.2466/24.PMS.112.2.536-538",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-irone-carotenoid-patent-s1",
+      "publisher": "WIPO patent application via Google Patents",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://patents.google.com/patent/WO2024008889A1/en",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-irone-carotenoid-patent-s2",
+      "publisher": "Brenna, Fuganti and Serra / Chemical Society Reviews",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pubs.rsc.org/en/content/articlehtml/2008/cs/b801557k",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-irone-carotenoid-patent-s3",
+      "publisher": "L’Artisan Parfumeur",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.artisanparfumeur.com/us/en_US/ingredient/iris",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-body-perfume-blends-s1",
+      "publisher": "Lenochová et al. / PLOS ONE",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0033810",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-body-perfume-blends-s2",
+      "publisher": "Vuilleumier et al. / International Journal of Cosmetic Science",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-2494.1995.tb00110.x",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-body-perfume-blends-s3",
+      "publisher": "Roberts et al. / author-hosted journal PDF",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.scraigroberts.com/uploads/1/5/0/4/15042548/2009_ijcs.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-nootkatone-pathway-s1",
+      "publisher": "Deng et al. / New Phytologist",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://nph.onlinelibrary.wiley.com/doi/full/10.1111/nph.19375",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-nootkatone-pathway-s2",
+      "publisher": "Cankar et al. / FEBS Letters author repository",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://dspace.library.uu.nl/bitstream/handle/1874/224889/Bosch.pdf?sequence=1",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-nootkatone-pathway-s3",
+      "publisher": "Ramachanderan and Schaefer / ChemTexts",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://link.springer.com/article/10.1007/s40828-024-00191-2",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-spme-patent-s1",
+      "publisher": "Pawliszyn / WIPO patent application via Google Patents",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://patents.google.com/patent/WO1991015745A1/en",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-spme-patent-s2",
+      "publisher": "MilliporeSigma / manufacturer technical procedure",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/analytical-chemistry/solid-phase-microextraction/manual-spme-sampling",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-spme-patent-s3",
+      "publisher": "Goh et al. / International Journal of Cosmetic Science",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/ics.13001",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-enose-pleasantness-s1",
+      "publisher": "Haddad et al. / PLOS Computational Biology",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000740",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-enose-pleasantness-s2",
+      "publisher": "UC Berkeley / participant research account",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://newsarchive.berkeley.edu/news/media/releases/2007/09/20_pleasantness.shtml",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-enose-pleasantness-s3",
+      "publisher": "Ward et al. / Heliyon author repository PDF",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://researchonline.ljmu.ac.uk/id/eprint/19611/1/Predicting%20the%20crossmodal%20correspondences%20of%20odors%20using%20an%20electronic%20nose.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-mixture-receptor-antagonism-s1",
+      "publisher": "Zak et al. / Nature Communications",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/s41467-020-17124-5?error=cookies_not_supported",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-mixture-receptor-antagonism-s2",
+      "publisher": "Xu and collaborators / Frontiers in Ecology and Evolution",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.frontiersin.org/journals/ecology-and-evolution/articles/10.3389/fevo.2023.1135486/full",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n32c-mixture-receptor-antagonism-s3",
+      "publisher": "Frontiers in Physiology",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2019.01428/full",
+      "checkedOn": "2026-11-05"
     }
   ],
   "events": [
@@ -13715,6 +14381,479 @@
       },
       "storyAngleRu": "Как запах обретает форму и звук",
       "researchNotesRu": "Онлайн-дата отличается от обозначения номера журнала. Главный сюжет — развитие связей чувств с возрастом, не культурные цветовые соответствия Levitan. Внешние контекстные работы не повторяют источники того сюжета."
+    },
+    {
+      "id": "n32a-sillage-los-angeles-2014",
+      "eventGroupId": "n32a-sillage-los-angeles-2014",
+      "eventDate": "2014-06-28",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Город, который встречается на запястьях",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "sourceIds": [
+        "n32a-sillage-iao",
+        "n32a-sillage-artist",
+        "n32a-sillage-times",
+        "n32a-sillage-essay"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32a-sillage-iao",
+        "locator": "headingdate; About paragraphs1–4",
+        "summaryRu": "Sillage held28June2014 SMMoA withIAO; residence-linked scents onleftwrist insideSwainFormofColor."
+      },
+      "storyAngleRu": "Город, который встречается на запястьях",
+      "researchNotesRu": "Entirelynewproject versus baselineNYFumes(privateartistworks) and CooperHewittAmsterdammap. Exactdate IAO plus artistJune28/2014galleryphotographs retrospective. Four independent authoredworks; no sourcequoted verbatim beyondtitles/materialnames."
+    },
+    {
+      "id": "n32a-gaia-mother-tree-2018",
+      "eventGroupId": "n32a-gaia-mother-tree-2018",
+      "eventDate": "2018-06-30",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Пряности, которые держали дерево",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "sourceIds": [
+        "n32a-gaia-dossier",
+        "n32a-gaia-kono",
+        "n32a-gaia-domus",
+        "n32a-gaia-neto"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32a-gaia-dossier",
+        "locator": "MediaReleasePDFp0; PublicProgrammePDFp10 openingceremony",
+        "summaryRu": "Publicrange30Jun–29Jul2018;29June8pm openingceremony distinguished. Handknottedcotton20m walkinstructure aromaticcounterweights."
+      },
+      "storyAngleRu": "Пряности, которые держали дерево",
+      "researchNotesRu": "Publicdate30June primarydossier vs29Juneceremony explicitlyseparate; actualoccurrence3JulyDomus. Notpreviousvenueofusedwork; noNetostorybaseline254. Copyright PERWORK: dossiercontains separately titled authoredKonoessay andartiststatement, explicitlyregistered publisher+factlocators+audit, notarbitrarysections ofsamepressrelease. Paragraph1release,2Kono,3Domus,4Neto."
+    },
+    {
+      "id": "n32a-meduses-raux-2022",
+      "eventGroupId": "n32a-meduses-raux-2022",
+      "eventDate": "2022-10-21",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Портрет из воды после мытья головы",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "sourceIds": [
+        "n32a-meduses-iao",
+        "n32a-meduses-portfolio",
+        "n32a-meduses-interview"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32a-meduses-iao",
+        "locator": "heading; About paragraphs1–3; photographs",
+        "summaryRu": "Exhibition21–30Oct2022IAO: woodenstructure/scalpmassage/shampoo/rinse watergellified;slowevaporation/vanitas."
+      },
+      "storyAngleRu": "Портрет из воды после мытья головы",
+      "researchNotesRu": "NoMeduseswork inbaseline254. PrimaryIAO exactdate and participantportfolioPDFp18 explicitlyIAO2022(actual), avoiding DDAwebpage erroneous2023year. NOTclaimsactualorganisms; no fabricatedparticipantreactions. Paragraphs1+4IAO,2portfolio,3interview; auditcombineRUEN."
+    },
+    {
+      "id": "n32a-clearing-au-2023",
+      "eventGroupId": "n32a-clearing-au-2023",
+      "eventDate": "2023-01-13",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Запах земли за нарисованным пейзажем",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "sourceIds": [
+        "n32a-clearing-iao",
+        "n32a-clearing-noodle",
+        "n32a-clearing-artist"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32a-clearing-iao",
+        "locator": "heading dates; Learn More paragraphs2–5",
+        "summaryRu": "A Clearing Jan13–Mar15,2023 IAO: silk naturemotif fromprisonphotobackdrops,wetearth smell,visitingtable,dual mirrorspossibleversions."
+      },
+      "storyAngleRu": "Запах земли за нарисованным пейзажем",
+      "researchNotesRu": "Дата и устройство инсталляции подтверждены архивом IAO; посещение Кеннетом Нг — его интервью с Ау; биографический контекст — собственное описание практики. В русском тексте не приписывается гендер; английский использует they/them."
+    },
+    {
+      "id": "n32a-polaroids-ravat-2018",
+      "eventGroupId": "n32a-polaroids-ravat-2018",
+      "eventDate": "2018-11-01",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Дневник, у которого есть запах",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "sourceIds": [
+        "n32a-polaroids-iao",
+        "n32a-polaroids-wow",
+        "n32a-polaroids-clot",
+        "n32a-polaroids-walk",
+        "n32a-polaroids-cv"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32a-polaroids-iao",
+        "locator": "IAOheading/About; artistCV2018November",
+        "summaryRu": "Polaroids1–16Nov2018IAO; photo/scentdiary people/places; slowsmartphone/socialfacefacegoal."
+      },
+      "storyAngleRu": "Дневник, у которого есть запах",
+      "researchNotesRu": "PrimaryexactIAOdate corroborated actualartistCVNov2018solo show; notneweditionofusedwork. No unsupported specificphotographs/scents invented. Broaderpractice context only, no claim allotherprojects appearedinPolaroids. Four paragraphstoindependentinterviewworks; CVdate-only."
+    },
+    {
+      "id": "n32a-secret-histories-brosius-2025",
+      "eventGroupId": "n32a-secret-histories-brosius-2025",
+      "eventDate": "2025-07-11",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Чья история живёт во флаконе",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "sourceIds": [
+        "n32a-secret-iao",
+        "n32a-secret-making",
+        "n32a-secret-art"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32a-secret-iao",
+        "locator": "heading dates; collectionstatement paragraphs perfumesincollection",
+        "summaryRu": "SecretHistoriesJuly11–Sep5,2025IAO; compositionsownlifemoments,butperceiver'sprivateinterpretation."
+      },
+      "storyAngleRu": "Чья история живёт во флаконе",
+      "researchNotesRu": "ReadfullbaselineSomerset andCooperSenses; avoidsSnowStorm/snowballs,Dirt andbaselineperfumeexamples. Independentfocusauthor/perceiver doubleautobiography andmaterialencounter. Doesnotinventlistofperfumesphysicallyshown. Exhibitionarchiveupdatedclosingreceptionwithpastdatedrange supportsactualpresentation; nofirst-everclaim."
+    },
+    {
+      "id": "n32a-unsettled-fazzolari-2017",
+      "eventGroupId": "n32a-unsettled-fazzolari-2017",
+      "eventDate": "2017-08-26",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Сандал внутри ядерного облака",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "sourceIds": [
+        "n32a-unsettled-museum",
+        "n32a-unsettled-label",
+        "n32a-unsettled-artsy",
+        "n32a-unsettled-iao"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32a-unsettled-museum",
+        "locator": "archive title/date and openingparagraphs",
+        "summaryRu": "UnsettledAug26,2017–Jan21,2018NevadaMuseum; Northrup/Ruscha,200works80artists, GreaterWest, commissionedFazzolariscent."
+      },
+      "storyAngleRu": "Сандал внутри ядерного облака",
+      "researchNotesRu": "Newworkanddateabsentbaseline254. Museumretrospective exactdate primary, lot2018confirmsinstallationactual. Excludes NST erroneous2018opening andshopuraniumglasssaleclaims. Museumarchive and separately authoredobjectlabel are distinctworks, source records explicitlyseparate. No actualnuclearodorclaimed."
+    },
+    {
+      "id": "n32b-cher-couture-launch-2019",
+      "eventDate": "2019-11-04",
+      "calendar": "gregorian",
+      "category": "fragrance_history",
+      "eventType": "fragrance_launch",
+      "titleRu": "Шер: четыре года до нужного впечатления",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n32b-cher-couture-launch-2019",
+      "sourceIds": [
+        "n32b-cher-launch",
+        "n32b-cher-coveteur",
+        "n32b-cher-standard",
+        "n32b-cher-allure"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32b-cher-launch",
+        "locator": "PDF page1 subheading: Star Launches ... on November 4th; page2 fragrance paragraph",
+        "summaryRu": "Eau de Couture запущен 4 ноября 2019 года на ScentBeauty.com после четырёх лет работы; Шер связывает духи с личностью владельца."
+      },
+      "storyAngleRu": "Шер: четыре года до нужного впечатления",
+      "researchNotesRu": "Совершенно новое имя и композиция относительно254; не повторный рассказ о другой дате одного запуска. PDF прямо датирует запуск в подзаголовке, не вывод из just released."
+    },
+    {
+      "id": "n32b-dolly-scent-launch-2021",
+      "eventDate": "2021-07-28",
+      "calendar": "gregorian",
+      "category": "fragrance_history",
+      "eventType": "fragrance_launch",
+      "titleRu": "Долли Партон: бабочка на новом флаконе",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n32b-dolly-scent-launch-2021",
+      "sourceIds": [
+        "n32b-dolly-launch",
+        "n32b-dolly-abc",
+        "n32b-dolly-w",
+        "n32b-dolly-vf"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32b-dolly-launch",
+        "locator": "Official title Available July28; ABC July28 available now; official notes paragraph",
+        "summaryRu": "Первый именной аромат Dolly Scent from Above выпущен 28 июля 2021 года со Scent Beauty; официальный анонс перечисляет ноты и образы."
+      },
+      "storyAngleRu": "Долли Партон: бабочка на новом флаконе",
+      "researchNotesRu": "Новый автор и аромат; дата июля — полноразмерный выход, не предварительные февральские пробники. Без цитирования текста песни."
+    },
+    {
+      "id": "n32b-rare-launch-2025",
+      "eventDate": "2025-08-07",
+      "calendar": "gregorian",
+      "category": "fragrance_history",
+      "eventType": "fragrance_launch",
+      "titleRu": "Rare: аромат начинается с движения руки",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n32b-rare-launch-2025",
+      "sourceIds": [
+        "n32b-rare-launch-email",
+        "n32b-rare-product",
+        "n32b-rare-making",
+        "n32b-rare-fastcompany",
+        "n32b-rare-balms"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32b-rare-launch-email",
+        "locator": "US brand email dated August7 3:22am EDT, title just landed; product description and notes",
+        "summaryRu": "Rare Beauty объявила доступность Rare EDP в США 7 августа 2025 года; текущая страница описывает карамель, фисташку, ваниль, имбирь и сандал."
+      },
+      "storyAngleRu": "Rare: аромат начинается с движения руки",
+      "researchNotesRu": "Новая марка/композиция, не биографический повтор. Дата США по реальному email запуска; ошибочное 8 августа во Vogue не используется. Не медицинская рекомендация, без обещания доступности всем."
+    },
+    {
+      "id": "n32b-lv-collection-2016",
+      "eventDate": "2016-09-01",
+      "calendar": "gregorian",
+      "category": "fragrance_history",
+      "eventType": "fragrance_collection_launch",
+      "titleRu": "Louis Vuitton: семь запахов, один флакон",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n32b-lv-collection-2016",
+      "sourceIds": [
+        "n32b-lv-report-2016",
+        "n32b-lv-newson",
+        "n32b-lv-leather",
+        "n32b-lv-campaign"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32b-lv-report-2016",
+        "locator": "Annual report printed110–111, PDF112 availability; PDF110 historical names and112 scent descriptions",
+        "summaryRu": "Les Parfums Louis Vuitton из семи композиций доступны с 1 сентября 2016 года; прежние имена Heures d’Absence, Réminiscences, Eau de Voyage; направления Contre Moi/Matière Noire/Mille Feux."
+      },
+      "storyAngleRu": "Louis Vuitton: семь запахов, один флакон",
+      "researchNotesRu": "Прочитана полная похожая история Cavallier2024: RoseFields,пачули,CO2,Grasse,LeJourSeLeve. Здесь самостоятельный запуск2016,флаконNewson,кожа,общая коллекция; без повторения технологий и биографии. Не первые духи дома вообще."
+    },
+    {
+      "id": "n32b-westwood-birth-1941",
+      "eventDate": "1941-04-08",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "birth",
+      "titleRu": "Вивьен Вествуд: своя комната, свой запах",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n32b-westwood-birth-1941",
+      "sourceIds": [
+        "n32b-westwood-birth",
+        "n32b-westwood-va",
+        "n32b-westwood-story",
+        "n32b-westwood-boudoir-review",
+        "n32b-westwood-anglomania"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32b-westwood-birth",
+        "locator": "Timeline Westwood1940s–60s first sentence",
+        "summaryRu": "Вивьен Вествуд родилась 8 апреля 1941 года."
+      },
+      "storyAngleRu": "Вивьен Вествуд: своя комната, свой запах",
+      "researchNotesRu": "Новое имя относительно254; не выставка. Только точная дата рождения; место не указано из-за расхождения Glossop/Hollingworth. Anglomania без спорного года2004/2005."
+    },
+    {
+      "id": "n32b-elixir-ebook-2023",
+      "eventDate": "2023-04-25",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "book_publication",
+      "titleRu": "Elixir: вопросы за парфюмерным прилавком",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n32b-elixir-ebook-2023",
+      "sourceIds": [
+        "n32b-elixir-ebook",
+        "n32b-elixir-chapter16",
+        "n32b-elixir-pw",
+        "n32b-elixir-fulbright"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32b-elixir-ebook",
+        "locator": "Released April25,2023; publisher/seller Harvard; publisher synopsis",
+        "summaryRu": "Американская электронная Elixir Theresa Levitt опубликована Harvard25апреля2023; героиЭдуарЛожье/ОгюстЛоран работали вLaugierPereetFils1830-х и искали vitalforce."
+      },
+      "storyAngleRu": "Elixir: вопросы за парфюмерным прилавком",
+      "researchNotesRu": "Новый самостоятельный труд,не №5илиScentEmpires. ТочнаядатаUSebook25Apr,18Aprизраннегоанонсаисключена.Историческиемедицинскиепредставленияатрибутированы,необъявленысовременнымилечебнымисвойствами.НетошибочныхдеталейFougereRoyale1880/целикомsyntheticизreview."
+    },
+    {
+      "id": "n32c-habituation-materials",
+      "eventDate": "2017-01-25",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "scientific_publication",
+      "titleRu": "Почему аромат становится тише",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n32c-habituation-materials",
+      "sourceIds": [
+        "n32c-habituation-materials-s1",
+        "n32c-habituation-materials-s2",
+        "n32c-habituation-materials-s3"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32c-habituation-materials-s1",
+        "locator": "Publication header (25 January 2017); Results, Differences of habituation between odorants (Man/Hex low habituation; Iso E/Gal/Saf/Sand high habituation); Methods (32 odorants, 120 seconds). Participant count omitted because the paper is internally inconsistent.",
+        "summaryRu": "Работа опубликована 25 января 2017 года: участники оценивали 32 вещества 120 секунд; профили привыкания различались."
+      },
+      "storyAngleRu": "Почему аромат становится тише",
+      "researchNotesRu": "Отличать снижение субъективной интенсивности от испарения и от периферического электрического ответа. Не заявлять полной бесполезности кофе для любых задач. Нет медицинских рекомендаций."
+    },
+    {
+      "id": "n32c-irone-carotenoid-patent",
+      "eventDate": "2024-01-11",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "patent_publication",
+      "titleRu": "Ирисовый оттенок из другой цепочки",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n32c-irone-carotenoid-patent",
+      "sourceIds": [
+        "n32c-irone-carotenoid-patent-s1",
+        "n32c-irone-carotenoid-patent-s2",
+        "n32c-irone-carotenoid-patent-s3"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32c-irone-carotenoid-patent-s1",
+        "locator": "Bibliographic publication date; Definitions; Figures 1–7; description of designed pathway",
+        "summaryRu": "WO2024008889A1 опубликована 11 января 2024 года; описан путь к иронам через метилированные каротиноиды и рекомбинантные клетки."
+      },
+      "storyAngleRu": "Ирисовый оттенок из другой цепочки",
+      "researchNotesRu": "Дата относится к публикации патентной заявки. Не утверждается промышленный запуск, полный аналог масла или доказанное преимущество по экологичности. Обзор прочитан в объёме доступного abstract, не регистрируется как прочитанный полный текст."
+    },
+    {
+      "id": "n32c-body-perfume-blends",
+      "eventDate": "2012-03-28",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "scientific_publication",
+      "titleRu": "Аромат встречается с собственным запахом",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n32c-body-perfume-blends",
+      "sourceIds": [
+        "n32c-body-perfume-blends-s1",
+        "n32c-body-perfume-blends-s2",
+        "n32c-body-perfume-blends-s3"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32c-body-perfume-blends-s1",
+        "locator": "Publication header; Abstract; Study 3 results",
+        "summaryRu": "Статья опубликована 28 марта 2012 года; эффект духов взаимодействовал с запахом донора; предпочитаемая смесь оценивалась приятнее случайно назначенной."
+      },
+      "storyAngleRu": "Аромат встречается с собственным запахом",
+      "researchNotesRu": "Не выводить универсальную совместимость духов и кожи, генетический тест выбора или гарантированную привлекательность. Исследование аэрозоля не изолирует эффект отдушки от антимикробных веществ."
+    },
+    {
+      "id": "n32c-nootkatone-pathway",
+      "eventDate": "2023-11-07",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "scientific_publication",
+      "titleRu": "Грейпфрутовый характер и работа ферментов",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n32c-nootkatone-pathway",
+      "sourceIds": [
+        "n32c-nootkatone-pathway-s1",
+        "n32c-nootkatone-pathway-s2",
+        "n32c-nootkatone-pathway-s3"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32c-nootkatone-pathway-s1",
+        "locator": "First published header; Summary, AoVS, AoCYP6/9/18, AoCPR1 and AoSDR1/2/3",
+        "summaryRu": "Работа впервые опубликована 7 ноября 2023 года; путь Alpinia oxyphylla выявлен с использованием функционального дрожжевого скрининга и воспроизведён в Saccharomyces cerevisiae."
+      },
+      "storyAngleRu": "Грейпфрутовый характер и работа ферментов",
+      "researchNotesRu": "Не приводятся медицинские или инсектицидные эффекты; не заявлены тождество полного экстракта и молекулы, промышленный запуск или абсолютная экологическая оценка."
+    },
+    {
+      "id": "n32c-spme-patent",
+      "eventDate": "1991-10-17",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "patent_publication",
+      "titleRu": "Нить, которая собирает летучие вещества",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n32c-spme-patent",
+      "sourceIds": [
+        "n32c-spme-patent-s1",
+        "n32c-spme-patent-s2",
+        "n32c-spme-patent-s3"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32c-spme-patent-s1",
+        "locator": "Bibliographic publication date; description of fiber, syringe and desorption",
+        "summaryRu": "WO1991015745A1 опубликована 17 октября 1991 года; выдвигаемое волокно в игле собирает и переносит аналитическую пробу."
+      },
+      "storyAngleRu": "Нить, которая собирает летучие вещества",
+      "researchNotesRu": "Патентная дата — публикация, не первая идея и не запуск продаж. Аналитический след не приравнивается к сенсорной стойкости. Отдельно от INRA промышленной CO2-экстракции."
+    },
+    {
+      "id": "n32c-enose-pleasantness",
+      "eventDate": "2010-04-15",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "scientific_publication",
+      "titleRu": "Прибору предложили оценить приятность",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n32c-enose-pleasantness",
+      "sourceIds": [
+        "n32c-enose-pleasantness-s1",
+        "n32c-enose-pleasantness-s2",
+        "n32c-enose-pleasantness-s3"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32c-enose-pleasantness-s1",
+        "locator": "Publication header; Results, eNose training; test-set validation",
+        "summaryRu": "Работа опубликована 15 апреля 2010 года; MOSES II использовал 16 датчиков и 76 исходных веществ, прогнозируя оценки для неучаствовавших в обучении запахов."
+      },
+      "storyAngleRu": "Прибору предложили оценить приятность",
+      "researchNotesRu": "Физический sensor-based прибор отличается от DREAM и principal odor map. Не заявлять универсальной объективности вкуса, идентичности всех культур или способности оценить любые духи."
+    },
+    {
+      "id": "n32c-mixture-receptor-antagonism",
+      "eventDate": "2020-07-03",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "scientific_publication",
+      "titleRu": "Когда добавление ослабляет ответ",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n32c-mixture-receptor-antagonism",
+      "sourceIds": [
+        "n32c-mixture-receptor-antagonism-s1",
+        "n32c-mixture-receptor-antagonism-s2",
+        "n32c-mixture-receptor-antagonism-s3"
+      ],
+      "dateEvidence": {
+        "sourceId": "n32c-mixture-receptor-antagonism-s1",
+        "locator": "Publication header; Abstract; Introduction, recording sites",
+        "summaryRu": "Работа Зака опубликована 3 июля 2020 года; у свободно дышащих мышей подавление широко наблюдалось в бинарных и до 12-компонентных смесях."
+      },
+      "storyAngleRu": "Когда добавление ослабляет ответ",
+      "researchNotesRu": "Не переносить мышиный результат непосредственно в универсальные человеческие сенсорные правила. Рецепторное взаимодействие отличается от историй white, metamers и биноздревого соперничества."
     }
   ],
   "inclusionRule": "Only events with an exact historical date read and verified in the cited source. No candidates, disputed dates, inferred dates, or merely planned events.",
