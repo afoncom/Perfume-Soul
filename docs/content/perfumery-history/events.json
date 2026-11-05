@@ -4875,6 +4875,1230 @@
       "type": "primary_public_domain",
       "access": "opened",
       "checkedOn": "2026-11-04"
+    },
+    {
+      "id": "n35a-kunstpalast-exhibition",
+      "publisher": "Kunstpalast",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.kunstpalast.de/en/event/die-geheime-macht-der-dufte/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-kunstpalast-press",
+      "publisher": "Kunstpalast",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.kunstpalast.de/wp-content/uploads/2024/10/PM_The-Secret-Power-of-Scent_EN.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-kunstpalast-eyewitness",
+      "publisher": "Associated Press — Kirsten Grieshaber, on-site report",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://apnews.com/article/germany-scents-exhibition-kunstpalast-dusseldorf-b5b31e890264cdbca6c2bc3a695afaab",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-kunstpalast-conversation",
+      "publisher": "kultur.west — Vera Lisakowski, on-site report and curator statements",
+      "type": "primary",
+      "language": "de",
+      "access": "opened",
+      "url": "https://www.kulturwest.de/inhalt/der-duft-zur-kunst/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-mfk-palais",
+      "publisher": "Palais de Tokyo",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://palaisdetokyo.com/exposition/parfum-sculpture-de-linvisible/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-mfk-house",
+      "publisher": "Maison Francis Kurkdjian",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.franciskurkdjian.com/us-en/exhibition-perfume-sculpture-of-the-invisible/PDAC27.html",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-mfk-observer",
+      "publisher": "The Observer — Eva Wiseman, direct joint interview with Sophie Calle and Francis Kurkdjian",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://observer.co.uk/culture/art/article/an-hour-with-sophie-calle",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-mfk-eden",
+      "publisher": "Hugo Arcier — artist project record",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://hugoarcier.com/en/eden/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-mfk-money",
+      "publisher": "Maison Francis Kurkdjian",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.franciskurkdjian.com/int-en/the-smell-of-money/PDAC04.html",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-mfk-drops",
+      "publisher": "Maison Francis Kurkdjian — statement by Christelle Boulé",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.franciskurkdjian.com/int-en/expanded-drops/PDAC19.html",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-ether-museum",
+      "publisher": "Craft Contemporary",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.craftcontemporary.org/exhibitions/ether-aromatic-mythologies/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-ether-dossier",
+      "publisher": "Craft Contemporary",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.craftcontemporary.org/wp-content/uploads/2025/05/Ether_PR.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-ether-program",
+      "publisher": "Craft Contemporary",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.craftcontemporary.org/scent-fair-la-2025/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-ether-iao",
+      "publisher": "Institute for Art and Olfaction — exhibition works checklist",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://artandolfaction.com/ether-aromatic-mythologies/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-ether-banks",
+      "publisher": "Alisa Banks — artist portfolio",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.alisabanks.com/books-body/#itemId=64c43d97868a3f158e8000db",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-ether-ueda",
+      "publisher": "Maki Ueda — artist project record",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://ueda.nl/english-uk/space-installations-en/olfactory-labyrinth-ver-8/olfactory-labyrinth-ver-8/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-yi-guggenheim",
+      "publisher": "Solomon R. Guggenheim Museum",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.guggenheim.org/wp-content/uploads/2017/12/guggenheim-press-HBP16AnickaYi_PressRelease_1472-120717.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-yi-columbia",
+      "publisher": "Columbia University Irving Medical Center — interviews with project collaborators",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.cuimc.columbia.edu/news/5-questions-cuimc-students-about-working-artist-anicka-yi",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-yi-interview",
+      "publisher": "Conceptual Fine Arts — Paul Laster, direct interview with Anicka Yi",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.conceptualfinearts.com/cfa/2017/05/09/anicka-yi-and-her-political-statement-to-counter-the-ocular-centric-society-we-live-in-an-interview/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-yi-artsy",
+      "publisher": "Artsy — Scott Indrisek, on-site report and artist statements",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.artsy.net/article/artsy-editorial-anicka-yis-new-guggenheim-art-smells-crawls",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-tolaas-afm",
+      "publisher": "Astrup Fearnley Museet",
+      "type": "primary",
+      "language": "no",
+      "access": "opened",
+      "url": "https://www.afmuseet.no/utstillinger/sissel-tolaas-re________/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-tolaas-witness",
+      "publisher": "Kunstkritikk — Nikhil Vettukattil, exhibition visit",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://kunstkritikk.com/making-new-of-the-senses/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-tolaas-frieze",
+      "publisher": "Frieze — Timotheus Vermeulen, exhibition visit",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.frieze.com/article/sissel-tolaas-re-2021-review",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-tolaas-penn",
+      "publisher": "Penn Today — direct interview with Sissel Tolaas",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://penntoday.upenn.edu/sissel-tolaas-ica-smells-exhibition",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-forest-gallery",
+      "publisher": "Olfactory Art Keller",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.olfactoryartkeller.com/exhibitions/forest-bath",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-forest-artist",
+      "publisher": "M Dougherty",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.m-dougherty.com/forest-bath",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-forest-review",
+      "publisher": "Scent Appreciation — Aubrey Allison, received sample account",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://scentappreciation.com/2021/03/20/olfactory-art-forest-bath/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-forest-curator",
+      "publisher": "Artnet — Janelle Zara, direct interview with Andreas Keller",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://news.artnet.com/market/olafactory-art-keller-2161013",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-forest-report",
+      "publisher": "Aromatica Poetica — Catherine Haley Epstein, contemporary exhibition account",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.aromaticapoetica.com/2021/03/09/olfactory-report-3-the-lure-the-cure-the-smells-of-the-forest-catherine-haley-epstein/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-hammer-archive",
+      "publisher": "Hammer Museum",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://hammer.ucla.edu/artist-residencies/2014/the-institute-for-art-and-olfaction",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-hammer-producer",
+      "publisher": "Institute for Art and Olfaction — retrospective project account",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://artandolfaction.com/projects/a-trip-to-japan-in-sixteen-minutes-revisited/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-hammer-smithsonian",
+      "publisher": "Smithsonian Magazine — Erica R. Hendry, interviews with makers",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.smithsonianmag.com/innovation/traveling-to-japan-through-a-bouquet-of-smells-180949324/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-hammer-w",
+      "publisher": "W Magazine — direct statements by Sherri Sebastian and Saskia Wilson-Brown",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.wmagazine.com/story/saskia-wilson-brown-scent",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-sensoria-date",
+      "publisher": "IHK Niedersachsen — tourism newsletter, retrospective opening report",
+      "type": "primary",
+      "language": "de",
+      "access": "opened",
+      "url": "https://www.ihk-n.de/blueprint/servlet/resource/blob/6334544/7cf955c4990336c1fd355bddfd0252b0/tourismusnachrichten-herbst-2024-data.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-sensoria-press",
+      "publisher": "Sensoria / Stadtmarketing Holzminden",
+      "type": "primary",
+      "language": "de",
+      "access": "opened",
+      "url": "https://sensoria-holzminden.de/wp-content/uploads/Sensoria-Holzminden-I-Presseinformationen_Okt-25.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-sensoria-raw",
+      "publisher": "Sensoria / Weserbergland Tourismus — raw-material gallery report",
+      "type": "primary",
+      "language": "de",
+      "access": "opened",
+      "url": "https://www.mynewsdesk.com/de/weserbergland-tourismus-ev/pressreleases/die-rohstoffe-der-parfuemerie-entdecken-3367986",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-sensoria-media",
+      "publisher": "235 Media — project media production and technology contractor",
+      "type": "primary",
+      "language": "de",
+      "access": "opened",
+      "url": "https://www.235media.com/de/projekte/holzminden-sensoria",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-sensoria-engineer",
+      "publisher": "ifb frohloff staffa kühl ecker — project engineers",
+      "type": "primary",
+      "language": "de",
+      "access": "opened",
+      "url": "https://www.ifb-berlin.de/projekte/alle/sensoria",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-poster-date",
+      "publisher": "Musées de Grasse — retrospective press dossier2025",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.museesdegrasse.com/sites/default/files/2025-01/DOSSIER%20DE%20PRESSE%20MIP%202025%20FR%20WEB_0.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-poster-flyer",
+      "publisher": "Musées de Grasse — official2023programme",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.museesdegrasse.com/sites/default/files/Depliant%20generique%20mip%202023%20FR%20%26%20GB.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-poster-witness",
+      "publisher": "IN Magazine — exhibition report and statements by Monsieur Z and museum director",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.in-magazines.com/magazine/wp-content/uploads/2023/09/IN-33-2023.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-poster-osmotheque",
+      "publisher": "Osmothèque Conservatoire International des Parfums — institutional statement about loans",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://fr.linkedin.com/posts/osmoth%C3%A8que-conservatoire-international-des-parfums-99a5a089_patrimoine-parfum-cultureparfum-activity-7072495476943544320-nOMx",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-marine-report",
+      "publisher": "Musée national de la Marine — annual report2023",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.musee-marine.fr/fileadmin/user_upload/Reseau/a_propos/Rapport_d_activite/RA_2023_MUSEE_DE_LA_MARINE_22x28cm_BD_pages.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-marine-statement",
+      "publisher": "Musée national de la Marine — statement by Nathalie Lorson",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.musee-marine.fr/notre-reseau/a-propos/actualites/une-signature-olfactive-pour-le-futur-musee.html",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-marine-dossier",
+      "publisher": "Musée national de la Marine — Sillage de mer press dossier",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.musee-marine.fr/fileadmin/user_upload/Reseau/professionnel/presse/le_nv_musee_a_paris/MnM_CP_signature_olfactive-V3.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35a-marine-fff",
+      "publisher": "The Fragrance Foundation France — direct creator and museum statements",
+      "type": "primary",
+      "language": "fr",
+      "access": "opened",
+      "url": "https://www.fragrancefoundation.fr/2023/12/comment-est-ne-sillage-de-mer-le-parfum-signature-du-musee-de-la-marine/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-fremont-date",
+      "url": "https://fashionweekdaily.com/karlie-kloss-carolina-herrera-joel-mchale-host-fragrance-foundation-awards/",
+      "publisher": "Daily Front Row",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-fremont-award",
+      "url": "https://www.perfumerflavorist.com/fragrance/fine-fragrance/news/21880641/harry-fremont-receives-2017-lifetime-achievement-award",
+      "publisher": "Perfumer & Flavorist",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-fremont-tff",
+      "url": "https://fragrance.org/honoree/lifetime-achievement-perfumer/",
+      "publisher": "The Fragrance Foundation",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-fremont-interview",
+      "url": "https://everfumed.com/harry-fremont-interview/",
+      "publisher": "Everfumed — Richard Goller interview with Harry Frémont",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-buzantian-date",
+      "url": "https://www.wmagazine.com/story/fragrance-foundation-awards-2",
+      "publisher": "W Magazine — Jane Larkworthy",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-buzantian-award",
+      "url": "https://www.perfumerflavorist.com/home/news/21878282/update-fragrance-foundation-reveals-award-winners-for-2015",
+      "publisher": "Perfumer & Flavorist",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-buzantian-tff",
+      "url": "https://fragrance.org/honoree_year/2015/",
+      "publisher": "The Fragrance Foundation",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-buzantian-interview",
+      "url": "https://blog.elysee.eu.com/2019/04/12/annie-buzantian/",
+      "publisher": "Elysee — interview with Annie Buzantian",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-buzantian-catalog",
+      "url": "https://www.old.puredistance.com/wp-content/uploads/2021/09/02.-Puredistance-MPC-Catalog-2021-22.pdf",
+      "publisher": "Puredistance",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-benaim-magnolia",
+      "url": "https://www.fredericmalle.com/product/19566/50256/parfums/eau-de-magnolia/by-carlos-benaim",
+      "publisher": "Éditions de Parfums Frédéric Malle",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-benaim-interview",
+      "url": "https://perfumesociety.org/carlos-benaim-one-charming-noses-weve-ever-met-talks-scents-2/amp/",
+      "publisher": "The Perfume Society — interview with Carlos Benaïm",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-benaim-review",
+      "url": "https://persolaise.com/2014/07/persolaise-review-eau-de-magnolia-from.html",
+      "publisher": "Persolaise",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-ostrom-date",
+      "url": "https://www.penguin.co.uk/books/420773/perfume-a-century-of-scents-by-lizzie-ostrom/9781473506084",
+      "publisher": "Penguin / Cornerstone Digital",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-ostrom-foundation",
+      "url": "https://www.fragrancefoundation.org.uk/books-articles",
+      "publisher": "The Fragrance Foundation UK",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-ostrom-matthews",
+      "url": "https://www.stephanmatthews.com/2015/10/century-of-scents.html",
+      "publisher": "Stephan Matthews",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-ostrom-persolaise",
+      "url": "https://persolaise.com/2015/12/persolaise-review-perfume-century-of.html",
+      "publisher": "Persolaise",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-herman-date",
+      "url": "https://books.google.com/books?id=ufJABAAAQBAJ",
+      "publisher": "Google Books — publisher-supplied bibliographic record",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-herman-author",
+      "url": "https://barbaraherman.com/book/",
+      "publisher": "Barbara Herman",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-herman-interview",
+      "url": "https://www.fragrantica.com/news/Scent-Subversion-Decoding-a-Century-of-Provocative-Perfume-by-Barbara-Herman-4853.html",
+      "publisher": "Fragrantica — Ida Meister interview with Barbara Herman",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-herman-review",
+      "url": "https://www.thenonblonde.com/2013/11/scent-subversion-by-barbara-herman-book.html?m=0",
+      "publisher": "The Non-Blonde — Gaia Fishler",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-herman-pw",
+      "url": "https://www.publishersweekly.com/9780762784387",
+      "publisher": "Publishers Weekly",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-museum-date",
+      "url": "https://www.accartbooks.com/uk/book/the-museum-of-scent/",
+      "publisher": "ACC Art Books — official distributor",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-museum-interview",
+      "url": "https://www.perfumerflavorist.com/news/fragrance/news/22876873/mandy-aftel-debuts-the-museum-of-scent-book",
+      "publisher": "Perfumer & Flavorist — interview with Mandy Aftel",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-museum-review",
+      "url": "https://www.kirkusreviews.com/book-reviews/mandy-aftel/the-museum-of-scent/",
+      "publisher": "Kirkus Reviews",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-museum-bookmark",
+      "url": "https://www.aromaweb.com/books/museum-of-scent-mandy-aftel.php",
+      "publisher": "AromaWeb — book review",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-flavor-date",
+      "url": "https://www.netgalley.com/catalog/book/118759",
+      "publisher": "Riverhead Books via NetGalley",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-flavor-library",
+      "url": "https://www.overdrive.com/media/3071239/the-art-of-flavor",
+      "publisher": "OverDrive — publisher metadata",
+      "type": "reference",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-flavor-interview",
+      "url": "https://www.publishersweekly.com/pw/by-topic/industry-news/cooking/article/74480-cooking-as-chemistry-a-new-book-for-home-chefs-explains-how-flavor-works.html",
+      "publisher": "Publishers Weekly — interview with Mandy Aftel and Daniel Patterson",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-flavor-review",
+      "url": "https://www.kirkusreviews.com/book-reviews/daniel-patterson/the-art-of-flavor/",
+      "publisher": "Kirkus Reviews",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-flavor-rose",
+      "url": "https://www.realbakingwithrose.com/blog/2017/08/01/the_art_of_flavor-happy_pub_d",
+      "publisher": "Rose Levy Beranbaum — Real Baking with Rose",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-no12-meeting",
+      "url": "https://www.old.puredistance.com/wp-content/uploads/2021/09/00.-The-Story-of-Puredistance-No.12-Press-Text.pdf",
+      "publisher": "Puredistance — Jan Ewoud Vos",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-no12-perfumer",
+      "url": "https://www.puredistance.com/photo-story/nathalie-feisthauer-about-puredistance-no-12/",
+      "publisher": "Puredistance — Nathalie Feisthauer",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-no12-review",
+      "url": "https://theplumgirl.com/puredistance-no12-review-nathalie-feisthauer-2021/",
+      "publisher": "The Plum Girl — Elena Cvjetkovic",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-no12-method",
+      "url": "https://everfumed.com/nathalie-feisthauer-interview/",
+      "publisher": "Everfumed — interview with Nathalie Feisthauer",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-lelabo-agreement",
+      "url": "https://kommunikasjon.ntb.no/pressemelding/5172793/the-estee-lauder-companies-inc-to-acquire-le-labo?publisherId=90063",
+      "publisher": "The Estée Lauder Companies / Business Wire via NTB",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-lelabo-roots",
+      "url": "https://www.lelabofragrances.com/about-us.html",
+      "publisher": "Le Labo",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-lelabo-another",
+      "url": "https://www.lelabofragrances.com/another-13-463.html",
+      "publisher": "Le Labo",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-lelabo-refill",
+      "url": "https://www.lelabofragrances.com/faq/refill-program.html",
+      "publisher": "Le Labo",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-el-annual2015",
+      "url": "https://www.sec.gov/Archives/edgar/data/1001250/000110465915061122/a15-12311_110k.htm",
+      "publisher": "The Estée Lauder Companies — Form10-K, fiscal2015",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-malle-agreement",
+      "url": "https://www.marketscreener.com/quote/stock/ESTEE-LAUDER-12437/news/Estee-Lauder-The-Estee-Lauder-Companies-to-Acquire-Editions-de-Parfums-Frederic-Malle-19355461/",
+      "publisher": "The Estée Lauder Companies / Business Wire via MarketScreener",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-malle-vogue",
+      "url": "https://www.vogue.co.uk/article/estee-lauder-buys-frederic-malle-le-labo-rodin",
+      "publisher": "British Vogue — Lisa Niven",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-malle-publisher",
+      "url": "https://www.vanityfair.com/style/the-beauty-blog/2014/06/the-essence-of-fr-d-ric-malle",
+      "publisher": "Vanity Fair — interview with Frédéric Malle",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35b-malle-space",
+      "url": "https://interiordesign.net/projects/jakob-macfarlane-experiments-with-illusions-and-reflections-in-paris-perfume-boutique/",
+      "publisher": "Interior Design — Ian Phillips",
+      "type": "specialist",
+      "language": "en",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-mcgann",
+      "publisher": "John P. McGann / Science / PMC",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5512720/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-roberts",
+      "publisher": "S. Craig Roberts / University of Stirling",
+      "type": "scientist_commentary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://dspace.stir.ac.uk/bitstream/1893/25479/1/Roberts-Conversation-2017.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-mcgann-lab",
+      "publisher": "Rutgers University",
+      "type": "primary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.evolution.rutgers.edu/people/ches-faculty/ches-faculty-member/74-ches-faculty/311-john-mcgann",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-labels",
+      "publisher": "de Araujo et al. / Neuron / Oxford Centre for Computational Neuroscience",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.oxcns.org/papers/381_DeAraujo%2BRolls%2B%2B%2B05.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-labels-review",
+      "publisher": "Edmund T. Rolls / Frontiers in Systems Neuroscience",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3174394/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-mcgann-rutgers",
+      "publisher": "Rutgers University / Robin Lally",
+      "type": "primary_release",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.rutgers.edu/news/human-sense-smell-its-stronger-we-think",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-herz-labels",
+      "publisher": "Rachel S. Herz and Julia von Clef / Perception / PubMed",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/11374206/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-sleep-date",
+      "publisher": "Arzi et al. / Nature Neuroscience",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/nn.3193",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-sleep-institute",
+      "publisher": "Weizmann Institute / Weizmann Australia",
+      "type": "primary_release",
+      "language": "en",
+      "access": "opened",
+      "url": "https://weizmann.org.au/2012/10/is-sleep-learning-possible/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-sleep-comment",
+      "publisher": "Robert Stickgold / Nature Neuroscience",
+      "type": "scientist_commentary",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.staff.uni-mainz.de/cduch/Softskills_SS2013/3-5_Lernen%20im%20Schlaf/14_Nature%20News%20and%20Views.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-spatial",
+      "publisher": "Dahmani et al. / Nature Communications",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/s41467-018-06569-4.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-spatial-release",
+      "publisher": "McGill University / MedicalXpress",
+      "type": "primary_release",
+      "language": "en",
+      "access": "opened",
+      "url": "https://medicalxpress.com/news/2018-10-good-spatial-memory-youre.html",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-spatial-jacobs",
+      "publisher": "Lucia F. Jacobs / PNAS / UCSD",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://mechanism.ucsd.edu/bill/teaching/f13/cs200/Jacobs%202012%20ChemoCogmap.pdf",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-vanilla",
+      "publisher": "Gallage et al. / Nature Communications / PMC",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4083428/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-vanilla-release",
+      "publisher": "University of Copenhagen",
+      "type": "primary_release",
+      "language": "en",
+      "access": "opened",
+      "url": "https://synbio.ku.dk/news/vanilla_nature/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-vanilla-debate",
+      "publisher": "Diamond, Barnabé and Desgagné-Penix / Plant Biology",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/plb.13465",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-lavender",
+      "publisher": "Li et al. / Horticulture Research",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/s41438-021-00490-6",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-lavender-release",
+      "publisher": "Nanjing Agricultural University / Phys.org",
+      "type": "primary_release",
+      "language": "en",
+      "access": "opened",
+      "url": "https://phys.org/news/2021-05-terpen-tales-mystery-unique-fragrance-lavender.html",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-lavender-auth",
+      "publisher": "Philippe et al. / International Journal of Cosmetic Science",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/ics.12757",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-musk",
+      "publisher": "Li et al. / PLOS Genetics",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1009564",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-musk-release",
+      "publisher": "Public Library of Science / Phys.org",
+      "type": "primary_release",
+      "language": "en",
+      "access": "opened",
+      "url": "https://phys.org/news/2022-02-humans-primates-evolved-sensitive-noses.html",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-musk-iff",
+      "publisher": "IFF",
+      "type": "primary_product_document",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.iff.com/scent/ingredients-compendium/galaxolide-undiluted/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-sandalore",
+      "publisher": "Chéret et al. / Nature Communications",
+      "type": "scientific_publication",
+      "language": "en",
+      "access": "opened",
+      "url": "https://www.nature.com/articles/s41467-018-05973-0",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-sandalore-manchester",
+      "publisher": "University of Manchester Research Explorer / Ralf Paus participant interview",
+      "type": "participant_interview",
+      "language": "en",
+      "access": "opened",
+      "url": "https://research.manchester.ac.uk/en/clippings/various-national-media-hope-for-baldness-cure-as-scientists-trigg/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35c-sandalore-product",
+      "publisher": "Givaudan product description / Perfumer Supply House",
+      "type": "primary_product_document",
+      "language": "en",
+      "access": "opened",
+      "url": "https://perfumersupplyhouse.com/product/sandalore-givaudan/",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-devilbiss-wood",
+      "publisher": "Wood Library-Museum of Anesthesiology",
+      "url": "https://www.woodlibrarymuseum.org/museum/devilbiss-atomizers/",
+      "language": "en",
+      "type": "museum",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-devilbiss-smithsonian",
+      "publisher": "National Museum of American History",
+      "url": "https://americanhistory.si.edu/collections/object/nmah_721925",
+      "language": "en",
+      "type": "museum",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-devilbiss-cmog-blog",
+      "publisher": "Corning Museum of Glass / Rakow Library",
+      "url": "https://blog.cmog.org/2013/recent-acquisition-art-deco-trade-catalog-devilbiss-company",
+      "language": "en",
+      "type": "museum",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-devilbiss-detroit",
+      "publisher": "Detroit Historical Society",
+      "url": "https://www.detroithistorical.org/learn/online-research/collection/object/atomizer-perfume",
+      "language": "en",
+      "type": "museum",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-devilbiss-cmog-object",
+      "publisher": "Corning Museum of Glass",
+      "url": "https://glasscollection.cmog.org/objects/28156/atomizer",
+      "language": "en",
+      "type": "museum",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-iso-patent",
+      "publisher": "US Patent / Hall and Sanders / IFF",
+      "url": "https://patents.google.com/patent/US3929677A/en",
+      "language": "en",
+      "type": "patent",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-iso-iff",
+      "publisher": "IFF",
+      "url": "https://www.iff.com/scent/ingredients-compendium/iso-e-super/",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-iso-pair",
+      "publisher": "Escentric Molecules",
+      "url": "https://escentric.zendesk.com/hc/en-gb/articles/31315909992093-What-is-the-difference-between-Molecule-01-and-Escentric-01",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-iso-schoen",
+      "publisher": "Geza Schoen / Escentric Molecules",
+      "url": "https://www.escentric.com/blogs/news/what-makes-iso-e-super-so-super",
+      "language": "en",
+      "type": "participant_interview",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-iso-product",
+      "publisher": "Escentric Molecules",
+      "url": "https://www.escentric.com/products/molecule-01-200ml",
+      "language": "en",
+      "type": "primary",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-cyclo-patent",
+      "publisher": "US Patent / Procter & Gamble",
+      "url": "https://patents.google.com/patent/US5102564A/en",
+      "language": "en",
+      "type": "patent",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-cyclo-rsc",
+      "publisher": "Royal Society of Chemistry / Judith Gregory interview",
+      "url": "https://www.rsc.org/images/THEMOLE_July%202012_LowRes_tcm18-219390.pdf",
+      "language": "en",
+      "type": "participant_interview",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-cyclo-wuppertal",
+      "publisher": "University of Wuppertal / Chemistry Education",
+      "url": "https://chemiedidaktik.uni-wuppertal.de/fileadmin/Chemie/chemiedidaktik/disido/cyen/info/app01_cy.htm",
+      "language": "en",
+      "type": "institutional_education",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-printing-patent",
+      "publisher": "US Patent / Fuji Photo Film",
+      "url": "https://patents.google.com/patent/US3888689A/en",
+      "language": "en",
+      "type": "patent",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-printing-opm",
+      "publisher": "OPM Group",
+      "url": "https://opmgroup.co.uk/innovations/fragranced-inks/",
+      "language": "en",
+      "type": "manufacturer",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-printing-orlandi",
+      "publisher": "Orlandi",
+      "url": "https://www.orlandi-usa.com/scented-slurry",
+      "language": "en",
+      "type": "manufacturer",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-printing-scentisphere",
+      "publisher": "Scentisphere",
+      "url": "https://www.scentisphere.com/fragrance-and-flavor-sampling/",
+      "language": "en",
+      "type": "manufacturer",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-co2-pct",
+      "publisher": "WIPO patent application / INRA",
+      "url": "https://patents.google.com/patent/WO1989009639A1/en",
+      "language": "en",
+      "type": "patent",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-co2-us",
+      "publisher": "US Patent / INRA",
+      "url": "https://patents.google.com/patent/US5073267A/en",
+      "language": "en",
+      "type": "patent",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-co2-flavex",
+      "publisher": "FLAVEX Naturextrakte",
+      "url": "https://www.flavex.com/en/co2-extraction/",
+      "language": "en",
+      "type": "manufacturer",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-co2-cardamom",
+      "publisher": "FLAVEX Naturextrakte",
+      "url": "https://www.flavex.com/en/produkt/003_002/",
+      "language": "en",
+      "type": "manufacturer",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
+    },
+    {
+      "id": "n35r-co2-eden",
+      "publisher": "Eden Botanicals",
+      "url": "https://www.edenbotanicals.com/extraction-methods",
+      "language": "en",
+      "type": "supplier_education",
+      "access": "opened",
+      "checkedOn": "2026-11-05"
     }
   ],
   "events": [
@@ -8763,6 +9987,806 @@
       },
       "storyAngleRu": "Комната, рассказанная запахом",
       "researchNotesRu": "Роман рассматривается как художественная работа со словами и ощущениями, а не документ личной жизни или химического состава. Английский перевод 1922 года находится в общественном достоянии; прямых цитат в рассказе нет. Не утверждается научное доказательство эффекта Пруста."
+    },
+    {
+      "id": "n35a-kunstpalast-2025",
+      "eventDate": "2025-10-29",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Коллекция получает вторую дорожку",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35a-kunstpalast-2025",
+      "sourceIds": [
+        "n35a-kunstpalast-exhibition",
+        "n35a-kunstpalast-press",
+        "n35a-kunstpalast-eyewitness",
+        "n35a-kunstpalast-conversation"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35a-kunstpalast-exhibition",
+        "locator": "Exhibition date; press p4 paragraph The Secret Power; AP paragraph opens to the public on Wednesday",
+        "summaryRu": "The Secret Power of Scents открылась в Kunstpalast 29 октября 2025 года; выставка встроена в хронологический маршрут постоянной коллекции."
+      },
+      "storyAngleRu": "Аромат меняет способ чтения постоянной коллекции Kunstpalast: запах эпохи, городской памяти и самой институции.",
+      "researchNotesRu": "Публичное начало29Oct подтверждено окончательной страницей музея и фактически прочитанным репортажем с открытия. Пресс-показ28Oct не выдан за публичное открытие. Ранний конец8Mar заменён позже22Mar; конечная дата в текст не включена. Оценочные нейронаучные обещания пресс-релиза исключены."
+    },
+    {
+      "id": "n35a-mfk-palais-2025",
+      "eventDate": "2025-10-29",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Что остаётся от аромата на бумаге",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35a-mfk-palais-2025",
+      "sourceIds": [
+        "n35a-mfk-palais",
+        "n35a-mfk-house",
+        "n35a-mfk-observer",
+        "n35a-mfk-money",
+        "n35a-mfk-drops",
+        "n35a-mfk-eden"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35a-mfk-palais",
+        "locator": "Palais exhibition date29/10/2025; house exhibition curator statement",
+        "summaryRu": "29октября2025в Palais de Tokyo началась выставка Parfum, sculpture de l’invisible, представленная Maison Francis Kurkdjian; куратор Jérôme Neutres."
+      },
+      "storyAngleRu": "Ретроспектива Куркджяна: от запаха банкноты до фотограммы духов и виртуального сада.",
+      "researchNotesRu": "Не повторяются сюжеты Marie-Antoinette и Gaultier/LeMâle.1999 — начало разговора сCalle,2003 — публичное представление. Концертная дата в одном PDF расходится(2Dec/22Dec), она исключена. Никакого вывода состава по фотограмме."
+    },
+    {
+      "id": "n35a-ether-2025",
+      "eventDate": "2025-05-31",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Флакон вместо страницы",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35a-ether-2025",
+      "sourceIds": [
+        "n35a-ether-museum",
+        "n35a-ether-dossier",
+        "n35a-ether-program",
+        "n35a-ether-iao",
+        "n35a-ether-banks",
+        "n35a-ether-ueda"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35a-ether-museum",
+        "locator": "museum Past Exhibitions date; Scent Fair programme Ether Exhibition Preview & Artist Meet and Greet; dossier p1",
+        "summaryRu": "31мая2025Craft Contemporary начал показывать Ether: Aromatic Mythologies; музейная программа отдельно фиксирует preview и встречу с художниками31May18–20; куратор Saskia Wilson-Brown,13художников."
+      },
+      "storyAngleRu": "Ether: ароматические произведения как материальная форма историй; книга Banks, дом Cortes, литературный лабиринтUeda.",
+      "researchNotesRu": "Расхождение дат: IAO headline30May; окончательный архивмузея, музейныйPDF и его программа подтверждают31May. Событие узко привязано к началу музейного показа и preview31May. Для Ueda личная карточка7June, поэтому указано сиюня. Брага/Sfumato не пересказывается."
+    },
+    {
+      "id": "n35a-yi-guggenheim-2017",
+      "eventDate": "2017-04-21",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Аромат на входе в чужую систему",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35a-yi-guggenheim-2017",
+      "sourceIds": [
+        "n35a-yi-guggenheim",
+        "n35a-yi-columbia",
+        "n35a-yi-interview",
+        "n35a-yi-artsy"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35a-yi-guggenheim",
+        "locator": "Exhibition dates April21–July5,2017; opening paragraphs",
+        "summaryRu": "Life Is Cheap Anicka Yi открылась21April2017в Guggenheim; кураторыKatherine Brinson иSusan Thompson."
+      },
+      "storyAngleRu": "Life Is Cheap: Immigrant Caucus и сотрудничество художницы, парфюмеров, биологов; запах как вопрос об обусловленном восприятии.",
+      "researchNotesRu": "Самостоятельное событие и материал по отношению к Tate2021. Аромат не выдан за научную классификацию этничности или тождество видов; фиктивное описание scent as drug не является фармакологическим фактом."
+    },
+    {
+      "id": "n35a-tolaas-re-2021",
+      "eventDate": "2021-10-08",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Море проходит через музей",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35a-tolaas-re-2021",
+      "sourceIds": [
+        "n35a-tolaas-afm",
+        "n35a-tolaas-witness",
+        "n35a-tolaas-frieze",
+        "n35a-tolaas-penn"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35a-tolaas-afm",
+        "locator": "Exhibition heading08.okt.2021–30.des.2021; Utstillingsdesign",
+        "summaryRu": "RE________ Sissel Tolaas открылась8October2021в Astrup Fearnley Museet вОсло; дизайнFormafantasma."
+      },
+      "storyAngleRu": "RE____: здание и норвежский ландшафт становятся частью обонятельного произведения; ветер, берег, отложенное объяснение.",
+      "researchNotesRu": "Не повторяетсяTinguely/Fear21: эта работа исключена, центрально море/архитектура. Penn2022 используется только для прямого воспоминания о подготовкеОсло2020, не для переноса объектовфиладельфийскойверсии. Количество365/360стеклянныхдыханий расходится и исключено."
+    },
+    {
+      "id": "n35a-forest-bath-2021",
+      "eventDate": "2021-02-12",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Лес выходит на тротуар",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35a-forest-bath-2021",
+      "sourceIds": [
+        "n35a-forest-gallery",
+        "n35a-forest-artist",
+        "n35a-forest-review",
+        "n35a-forest-curator",
+        "n35a-forest-report"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35a-forest-gallery",
+        "locator": "gallery dateFebruary12–March13,2021; Artnet paragraph Leasing a small storefront",
+        "summaryRu": "Показ/Forest Bath M Dougherty вOlfactory Art Keller начался12February2021; эта персональная выставка открыла программу галереи вНью-Йорке."
+      },
+      "storyAngleRu": "ForestBath: ароматические скульптуры измицелия, городскойдоступ к произведению черезвитрину и воздух.",
+      "researchNotesRu": "Медицинские обещания forest bathing исключены: речь о художественном переживании. Грибница корректно названа мицелием, а не ботаническим корнем. Авториспользуетthey; RUизбегаетприсвоениягендера. СвидетельствоAllison — полученныйфлакон, не утверждается личное посещение."
+    },
+    {
+      "id": "n35a-hammer-japan-2014",
+      "eventDate": "2014-01-09",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Шестнадцать минут до Токио",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35a-hammer-japan-2014",
+      "sourceIds": [
+        "n35a-hammer-archive",
+        "n35a-hammer-producer",
+        "n35a-hammer-smithsonian",
+        "n35a-hammer-w"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35a-hammer-archive",
+        "locator": "Performance Times and Open House",
+        "summaryRu": "9January2014в Hammer Museum начался основной цикл A Trip to Japan in Sixteen Minutes, Revisited; расписание9Jan1:30/7pm,далее10–12Jan; openhouse7Janотдельно."
+      },
+      "storyAngleRu": "Основной циклсеансов Hammer2014: исторический замысел Hartmann переводят в современное путешествие и решают инженерную смену запахов.",
+      "researchNotesRu": "Датаузкая:9Janначалоосновныхсеансов, неopenhouse7Jan. РетроспективаIAOговоритошестипоказах, расписаниеHammerовосьми:числопоказовисключено. НедоступноеинтервьюLAmagнеиспользовано. Историческаяточнаядатасобытия1902неназначаетсяпо2014поводу."
+    },
+    {
+      "id": "n35a-sensoria-2024",
+      "eventDate": "2024-09-28",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "От сырья к собственному выбору",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35a-sensoria-2024",
+      "sourceIds": [
+        "n35a-sensoria-date",
+        "n35a-sensoria-press",
+        "n35a-sensoria-raw",
+        "n35a-sensoria-media",
+        "n35a-sensoria-engineer"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35a-sensoria-date",
+        "locator": "NEUERÖFFNUNG Sensoria, paragraph Am28September2024ist...eröffnetworden",
+        "summaryRu": "Sensoria – Haus der Düfte und Aromen вHolzminden открылся28September2024."
+      },
+      "storyAngleRu": "Sensoria: материалы и композиция в интерактивном доме запаха; мультимедиа и непрерывныйдоступныймаршрут.",
+      "researchNotesRu": "ТочностьдатыизретроспективногодокументаIHK,недатастатьи/плана. НеобъявляетсяпервымвЕвропе. Press2025описываетпостоянныймаршрут; позднейшиевременныеинсталляции не перенесенына2024. Не повторяетсябиографияHaarmann/синтезванилина."
+    },
+    {
+      "id": "n35a-mip-poster-2023",
+      "eventDate": "2023-06-16",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Как аромат становится изображением",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35a-mip-poster-2023",
+      "sourceIds": [
+        "n35a-poster-date",
+        "n35a-poster-flyer",
+        "n35a-poster-witness",
+        "n35a-poster-osmotheque"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35a-poster-date",
+        "locator": "2025dossierp12ExpositionstemporaryÉté2023; official2023programmeEXPOSITIONS",
+        "summaryRu": "ПубличныйдиапазонLe Parfum s’affiche. Quand les artistes réinventent la publicitéв MIPGrasseначался16June2023; ретроспектива2025подтверждает16June–1Oct."
+      },
+      "storyAngleRu": "LeParfum s’affiche: печатная реклама и сохранённаяформула соединяютвидимыйобраз с исчезнувшимароматом.",
+      "researchNotesRu": "Дата16Juneподтвержденапрочитаннымретроспективнымдосье2025+официальнойпрограммой2023. Недоступныйподробный2023PDFнеиспользован. IN — собственныйрепортажсрепликамиMonsieurZ,непростозеркалорелиза. Не повторяетсяОsmothèque1990openingилиобщаябиографияPoiret."
+    },
+    {
+      "id": "n35a-marine-sillage-2023",
+      "eventDate": "2023-11-17",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "exhibition_opening",
+      "titleRu": "Перейти из города в море",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35a-marine-sillage-2023",
+      "sourceIds": [
+        "n35a-marine-report",
+        "n35a-marine-statement",
+        "n35a-marine-dossier",
+        "n35a-marine-fff"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35a-marine-report",
+        "locator": "annualreportp13weekend17–19November; pp7,14; presidentialinauguration27November",
+        "summaryRu": "ПарижскийMuséenationaldelaMarineвPalaisdeChaillotвозобновилприёмпублики17November2023после6летзакрытия; инаугурацияпрезидентомотдельно27November."
+      },
+      "storyAngleRu": "SillagedeMer: выбородногоизтрёхморскихобразов,авторствоLorson,общественноепространствовместокожи.",
+      "researchNotesRu": "17Nov—публичноевозобновление,27Nov—президентскаяинаугурация. Ранниймартовскийпресс-релизпланировалmi-octobre,этодатойненазначено. Длительностьразработкивисточниках2/3года,исключена. Натуральнаясераяамбраневымышленавформуле:AmbroxSuper—отсылка."
+    },
+    {
+      "id": "n35b-fremont-award-2017",
+      "eventDate": "2017-06-14",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "award_ceremony",
+      "titleRu": "Гарри Фремон получил Lifetime Achievement Perfumer",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n35b-fremont-award-2017",
+      "sourceIds": [
+        "n35b-fremont-date",
+        "n35b-fremont-award",
+        "n35b-fremont-interview",
+        "n35b-fremont-tff"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35b-fremont-date",
+        "locator": "Daily Front Row opening paragraph and Getty captions June14,2017; P&F opening has been awarded",
+        "summaryRu": "14 июня 2017 года на церемонии Fragrance Foundation в Alice Tully Hall Нью-Йорка Гарри Фремон был отмечен Perfumer of the Year Lifetime Achievement Award."
+      },
+      "storyAngleRu": "Сирень из сада стала профессиональным открытием, а сад остался способом думать о композиции.",
+      "researchNotesRu": "Дата церемонии реально прочитана в Getty-подписях Daily Front Row, получение подтверждено ретроспективным P&F. TFF и два фрагмента интервью реально прочитаны. Совместный пересказ RU+EN: Daily <80, P&F <130, TFF <190, Everfumed <195 слов (по200/source). Последовательность сада/сирени/блоттера — редакционное прочтение, без выдуманной сцены."
+    },
+    {
+      "id": "n35b-buzantian-award-2015",
+      "eventDate": "2015-06-17",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "award_ceremony",
+      "titleRu": "Энни Бузантьян получила Lifetime Achievement Perfumer",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n35b-buzantian-award-2015",
+      "sourceIds": [
+        "n35b-buzantian-date",
+        "n35b-buzantian-award",
+        "n35b-buzantian-tff",
+        "n35b-buzantian-interview",
+        "n35b-buzantian-catalog"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35b-buzantian-date",
+        "locator": "W What/When/Where with year heading; P&F Fragrance has a Soul",
+        "summaryRu": "17 июня 2015 года в Alice Tully Hall прошла церемония TFF; Энни Бузантьян получила Perfumer of the Year Lifetime Achievement Award."
+      },
+      "storyAngleRu": "Имя рабочего аромата может встретиться с личной историей заказчика.",
+      "researchNotesRu": "Дата прочитана в ретроспективном W(WhenWednesdayJune17th,year2015); вручение в обновлённом P&F и профиле TFF. Getty/Basenotes недоступны, не используются. В P&F дата страницыApril6 относится к старому объявлению, не церемонии. Совместный пересказ: W<50, P&F<100, TFF<160, Elysee<190, PuredistancePDF<170; wordlim200 каждый. СовпадениеAntonia приписано участнице. Ноты не полный состав."
+    },
+    {
+      "id": "n35b-benaim-award-2014",
+      "eventDate": "2014-06-16",
+      "calendar": "gregorian",
+      "category": "perfumer",
+      "eventType": "award_ceremony",
+      "titleRu": "Карлос Бенаим получил Lifetime Achievement Perfumer",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n35b-benaim-award-2014",
+      "sourceIds": [
+        "c-ralph-iff",
+        "n35b-benaim-magnolia",
+        "n35b-benaim-interview",
+        "n35b-benaim-review"
+      ],
+      "dateEvidence": {
+        "sourceId": "c-ralph-iff",
+        "locator": "Opening paragraphs TheAwards ceremonywasheld...",
+        "summaryRu": "Карлос Бенаим получил Perfumer of the Year Lifetime Achievement Award на церемонии TFF16 июня2014 в Alice Tully Hall; пресс-релиз IFF опубликован20 июня и отдельно называет день церемонии."
+      },
+      "storyAngleRu": "За впечатлением одного цветка стоит соединение наблюдения, анализа и композиции.",
+      "researchNotesRu": "Все4источника открыты и прочитаны. IFF20June отдельно подтверждает16Juneceremony, не дата статьи. Совместный пересказ: IFF<145, Malle<190, PerfumeSociety<130, Persolaise<190 слов, webwordlim200/source. Headspaceневыдаетсязаэкстракциюживогоцветка. Отличается от существующих designerbirthstories самостоятельным сюжетомMagnolia."
+    },
+    {
+      "id": "n35b-ostrom-century-scents-2015",
+      "eventDate": "2015-10-22",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "book_publication",
+      "titleRu": "Вышло электронное издание Perfume: A Century of Scents Лиззи Остром",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n35b-ostrom-century-scents-2015",
+      "sourceIds": [
+        "n35b-ostrom-date",
+        "n35b-ostrom-foundation",
+        "n35b-ostrom-persolaise",
+        "n35b-ostrom-matthews"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35b-ostrom-date",
+        "locator": "Details Published22/10/2015,Imprint,ISBN",
+        "summaryRu": "22 октября2015 вышло электронное издание Perfume: A Century of Scents Лиззи Остром, CornerstoneDigital, ISBN9781473506084."
+      },
+      "storyAngleRu": "Десять ароматов на десятилетие превращают историю духов в историю привычек и публичных образов.",
+      "researchNotesRu": "Издательская карточка открыта и подтверждает фактические22Oct2015/ebook. FFUKсохранил старый анонс hardcover; он используется для структуры, не как единственное доказательство состоявшегося выпуска. Оба обзора прочитаны. У Matthews фраза oneperyear не перенесена: подтверждён только10perdecade. Совместный пересказ Penguin<160, FFUK<160, Persolaise<180, Matthews<180 слов; по200/source."
+    },
+    {
+      "id": "n35b-herman-scent-subversion-2013",
+      "eventDate": "2013-11-05",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "book_publication",
+      "titleRu": "Вышло Scent and Subversion Барбары Херман",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n35b-herman-scent-subversion-2013",
+      "sourceIds": [
+        "n35b-herman-date",
+        "n35b-herman-author",
+        "n35b-herman-review",
+        "n35b-herman-interview",
+        "n35b-herman-pw"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35b-herman-date",
+        "locator": "GoogleBooks heading publicationmetadata; authorBookpage",
+        "summaryRu": "5 ноября2013 опубликовано Scent and Subversion: Decoding a Century of Provocative Perfume; дата открытой библиографической карточки GoogleBooks,ISBN9781493002023; автор подтверждает LyonsPress2013."
+      },
+      "storyAngleRu": "Исторические духи рассматриваются через социальные роли и язык рекламы; за описаниями стоит работа с коллекциями и специалистами.",
+      "researchNotesRu": "Дата реально прочитана в GoogleBooks publisher-suppliedmetadata, не в поисковомфрагменте. Издательская и авторская атрибуцияLyonsPress подтверждена авторскимсайтом иPW. ПервичнаяLinkedInнедоступна и неучитывается. Прочитаны все5. Совместный пересказ Google<50; author<190; Meister<190; NonBlonde<180; PW<130 слов,по200/source. Точные даты старых ароматов в readertext исключены; интерпретации явно атрибутированы."
+    },
+    {
+      "id": "n35b-aftel-museum-scent-uk-2023",
+      "eventDate": "2023-10-10",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "book_publication",
+      "titleRu": "В Великобритании вышло The Museum of Scent Мэнди Афтель",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n35b-aftel-museum-scent-uk-2023",
+      "sourceIds": [
+        "n35b-museum-date",
+        "n35b-museum-review",
+        "n35b-museum-interview",
+        "n35b-museum-bookmark"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35b-museum-date",
+        "locator": "Specifications Published10thOct2023; Territory; Publisher/ISBN",
+        "summaryRu": "10 октября2023 — дата британского выпуска TheMuseumofScent МэндиАфтель у официального дистрибьютораACCArtBooks; AbbevillePress,ISBN9780789214713, территория исключаетСША/Канаду/ПуэртоРико/Австралию."
+      },
+      "storyAngleRu": "Книжный музей соединяет раскрашенную старую ботанику, предметы и запах вложенной закладки.",
+      "researchNotesRu": "ОфициальныйACCреальнооткрыт:10Oct2023 и явная территорияWorldexcludingUSA/Canada/PuertoRico/Australia. Дата31Oct2023Kirkusотноситсякдругому рынку,непротиворечиепервенства;втекстеименноUK. ПрочитаныACC,P&F,Kirkus,AromaWeb. СовместныйпересказACC<190;P&F<190;Kirkus<90;AromaWeb<190слов,200/source. ОтдельноотсуществующейFragrant2014:непятьингредиентов,апечатныйархив/1640woodcuts/bookmark."
+    },
+    {
+      "id": "n35b-art-flavor-publication-2017",
+      "eventDate": "2017-08-01",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "book_publication",
+      "titleRu": "Вышла The Art of Flavor Дэниела Паттерсона и Мэнди Афтель",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n35b-art-flavor-publication-2017",
+      "sourceIds": [
+        "n35b-flavor-date",
+        "n35b-flavor-library",
+        "n35b-flavor-rose",
+        "n35b-flavor-interview",
+        "n35b-flavor-review"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35b-flavor-date",
+        "locator": "NetGalleyPubDateAug012017;OverDriveRelease;RoseheadingHappyPubDateAugust1,2017",
+        "summaryRu": "1 августа2017 опубликована TheArt ofFlavor:PracticesandPrinciplesforCreatingDeliciousFood, DanielPatterson/MandyAftel,Riverhead; датаNetGalleyиздателя совпадает сReleaseOverDrive и поздравлениемRoseBeranbaum."
+      },
+      "storyAngleRu": "Профессиональный язык парфюмера помогает повару думать о сочетаниях, а не только следовать рецепту.",
+      "researchNotesRu": "Реально прочитаны все 5 источников. ДатаNetGalleyпубликуетсяаккаунтомRiverheadиподтвержденабиблиотечнымрелизомOverDrive+свидетельствомсотрудницыRoseвденьвыхода. Неверное/разное количествостраниц/рецептовисключено. СовместныйпересказRiverheaddescription<130(OverDriveнеудваиваетбюджет);Rose<180;PW<190;Kirkus<160,по200/source. Это самостоятельный сюжет совместнойкнигисшефом,неповторFragrant2014илиMuseum2023."
+    },
+    {
+      "id": "n35b-no12-meeting-2018",
+      "eventDate": "2018-07-09",
+      "calendar": "gregorian",
+      "category": "fragrance_history",
+      "eventType": "creative_meeting",
+      "titleRu": "Первая рабочая встреча Puredistance с Натали Фейстхауэр",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n35b-no12-meeting-2018",
+      "sourceIds": [
+        "n35b-no12-meeting",
+        "n35b-no12-perfumer",
+        "n35b-no12-method",
+        "n35b-no12-review"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35b-no12-meeting",
+        "locator": "PDF p1 sequence starting June5,2018, then July9; eleven perfumes and Gold Taffeta",
+        "summaryRu": "9 июля 2018 года Натали Фейстхауэр приехала в Гронинген на первую встречу с Puredistance; она привезла 11 проб, первой была Gold Taffeta."
+      },
+      "storyAngleRu": "Рабочая проба Gold Taffeta стала началом другого аромата: Puredistance No.12.",
+      "researchNotesRu": "Прочитаны PDF основателя, текст парфюмера, обзор и интервью. 9July относится к2018 по непрерывной датированной последовательности PDF, не к публикации2021. Суммарный пересказ RU+EN: PDF<190, Feisthauer2021<170, Everfumed<190, review<155. Развитие аромата в обзоре явно субъективно; дата встречи не выдается за запуск. Подсчёт пересказа касается фактов из источника, а не собственного разбора их значения; вводный и заключительный абзацы также включены в оценку."
+    },
+    {
+      "id": "n35b-lelabo-agreement-2014",
+      "eventDate": "2014-10-15",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "acquisition_agreement_announcement",
+      "titleRu": "Объявлено соглашение о приобретении Le Labo",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n35b-lelabo-agreement-2014",
+      "sourceIds": [
+        "n35b-lelabo-agreement",
+        "n35b-lelabo-roots",
+        "n35b-lelabo-another",
+        "n35b-lelabo-refill",
+        "n35b-el-annual2015"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35b-lelabo-agreement",
+        "locator": "Dateline October15,2014; opening announced today; expected to close in November2014",
+        "summaryRu": "15 октября 2014 года ELC объявила о подписанном соглашении о приобретении Le Labo; завершение ожидалось в ноябре."
+      },
+      "storyAngleRu": "Персональная этикетка и небольшая лаборатория встретились с масштабом международной компании.",
+      "researchNotesRu": "Реально прочитаны первичный релиз ELC/BusinessWire в NTB, три страницы Le Labo и годовойSECотчёт. 15Oct=объявление подписанного соглашения, не закрытие. RU+EN релиз<190, roots<135, Another13<160, refill<170, SEC<90. Нынешняя refill практика явно отделена от2014; два корпоративных события этого пакета имеют разные самостоятельные сюжеты: личная этикетка LeLabo / авторское имя Malle."
+    },
+    {
+      "id": "n35b-malle-agreement-2014",
+      "eventDate": "2014-11-07",
+      "calendar": "gregorian",
+      "category": "brand",
+      "eventType": "acquisition_agreement_announcement",
+      "titleRu": "Объявлено соглашение о приобретении Éditions de Parfums Frédéric Malle",
+      "status": "verified",
+      "evidenceLevel": "primary_and_specialist",
+      "eventGroupId": "n35b-malle-agreement-2014",
+      "sourceIds": [
+        "n35b-malle-agreement",
+        "n35b-malle-vogue",
+        "n35b-malle-publisher",
+        "n35b-malle-space",
+        "n35b-el-annual2015"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35b-malle-agreement",
+        "locator": "Published Nov7,2014 08:01EST; opening announced today; expected January2015",
+        "summaryRu": "7 ноября 2014 года ELC объявила о подписанном соглашении о приобретении Éditions de Parfums Frédéric Malle; завершение ожидалось в январе2015."
+      },
+      "storyAngleRu": "Парфюмерный издатель сделал подпись автора частью знакомства с ароматом.",
+      "researchNotesRu": "Все5источников реально открыты. Дата именно объявленного подписанного соглашения, не завершение; закрытиеJan2015подтверждаетSEC. Суммарный пересказ RU+EN: релиз<180; Vogue<195; VanityFair<95(уэтогоисточникаwordlim100!); InteriorDesign<170; SEC<80вместесLeLabo<170. Литературная аналогия не выдаёт Маля за автора формул. Поздний магазин явно2017, не2014."
+    },
+    {
+      "id": "n35c-mcgann-review",
+      "eventDate": "2017-05-12",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "scientific_publication",
+      "titleRu": "Нос, который недооценили",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35c-mcgann-review",
+      "sourceIds": [
+        "n35c-mcgann",
+        "n35c-roberts",
+        "n35c-mcgann-lab",
+        "n35c-mcgann-rutgers",
+        "n35c-mcgann-rutgers"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35c-mcgann",
+        "locator": "Published in final edited form: Science.2017May12;356(6338):eaam7263",
+        "summaryRu": "Обзор Макганна опубликован в Science,356(6338),12 мая2017; дата печатного выпуска."
+      },
+      "storyAngleRu": "Нос, который недооценили",
+      "researchNotesRu": "Повод — печатный номер12May, не пресс-дата11May. Исключены триллион запахов, абсолютное превосходство человека и пересказ опыта шоколадного следа. Пересказ распределён между обзором, научным комментарием и институциональным профилем; выводы в последних предложениях — собственный анализ."
+    },
+    {
+      "id": "n35c-labels-neuron",
+      "eventDate": "2005-05-19",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "scientific_publication",
+      "titleRu": "Две подписи к одному запаху",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35c-labels-neuron",
+      "sourceIds": [
+        "n35c-labels",
+        "n35c-labels-review",
+        "n35c-herz-labels",
+        "n35c-herz-labels"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35c-labels",
+        "locator": "PDFp1 header/title/authors",
+        "summaryRu": "Статья Cognitive Modulation of Olfactory Processing вышла в Neuron46,671–679,19May2005."
+      },
+      "storyAngleRu": "Две подписи к одному запаху",
+      "researchNotesRu": "Дата из заголовка печатного PDF, не DOIмесяцилиOpenAlex01May. Не утверждаются изменение химии смеси или всевластие названия; механизм обучения в обзоре явно предложен как гипотеза. Совокупный пересказ основных фактов2005≈190слов RU+EN; обзор2011<200; остальное редакционный разбор."
+    },
+    {
+      "id": "n35c-sleep-tones",
+      "eventDate": "2012-08-26",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "scientific_publication",
+      "titleRu": "Вдох в ответ на звук",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35c-sleep-tones",
+      "sourceIds": [
+        "n35c-sleep-date",
+        "n35c-sleep-institute",
+        "n35c-sleep-comment"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35c-sleep-date",
+        "locator": "Published26August2012; Abstract",
+        "summaryRu": "Nature Neuroscience опубликовал исследование Humans can learn new information during sleep26Aug2012."
+      },
+      "storyAngleRu": "Вдох в ответ на звук",
+      "researchNotesRu": "Online26Aug2012, не October print и не5Octinstitution release. Никаких обещаний обучения парфюмерии/языку во сне. Последний абзац — интерпретация наблюдаемого дизайна, а не переживаний добровольцев."
+    },
+    {
+      "id": "n35c-spatial-memory",
+      "eventDate": "2018-10-16",
+      "calendar": "gregorian",
+      "category": "cultural_fact",
+      "eventType": "scientific_publication",
+      "titleRu": "Город и сорок запахов",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35c-spatial-memory",
+      "sourceIds": [
+        "n35c-spatial",
+        "n35c-spatial-release",
+        "n35c-spatial-jacobs"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35c-spatial",
+        "locator": "PDFlastpage Published online16October2018",
+        "summaryRu": "Статья An intrinsic association between olfactory identification and spatial memory in humans опубликована16Oct2018."
+      },
+      "storyAngleRu": "Город и сорок запахов",
+      "researchNotesRu": "16Oct online,19Octpressrelease. Не пахучий виртуальный лабиринт и не повтор шоколадного следа2006. Корреляция не превращена в причинное улучшение памяти парфюмерией; эволюция явно гипотеза."
+    },
+    {
+      "id": "n35c-vanilla-enzyme",
+      "eventDate": "2014-06-19",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "scientific_publication",
+      "titleRu": "Ванилин и незаконченный спор",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35c-vanilla-enzyme",
+      "sourceIds": [
+        "n35c-vanilla",
+        "n35c-vanilla-release",
+        "n35c-vanilla-debate"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35c-vanilla",
+        "locator": "Bibliographicheader2014Jun19; Abstract",
+        "summaryRu": "Gallage et al.article опубликована19June2014; предложена VpVAN,прямо превращающая ferulicacid вvanillin."
+      },
+      "storyAngleRu": "Ванилин и незаконченный спор",
+      "researchNotesRu": "Не выдавать2014решение за окончательное. КритикаYang2017дана через реально прочитанный научныйviewpoint, сам заблокированныйYangURLне зарегистрирован. Более поздние разные результаты представлены сбалансированно, без назначения победителя.20Junepressdateнеповод."
+    },
+    {
+      "id": "n35c-lavender-genome",
+      "eventDate": "2021-03-01",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "scientific_publication",
+      "titleRu": "Лаванда с запасными копиями",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35c-lavender-genome",
+      "sourceIds": [
+        "n35c-lavender",
+        "n35c-lavender-release",
+        "n35c-lavender-auth"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35c-lavender",
+        "locator": "Published01March2021; Abstract",
+        "summaryRu": "Исследование Jingxun2 опубликовано01March2021; сборка894.50Mb/27pseudochromosomes."
+      },
+      "storyAngleRu": "Лаванда с запасными копиями",
+      "researchNotesRu": "Повод01March2021article,не17Mayrelease. Никаких лечебных эффектов лаванды, всемирного первенства сборки, точной формулы масла или утверждения, что новые устойчивые сорта уже выведены. DNAauthentication — самостоятельный последующий контекст, не второе событие этого рассказа."
+    },
+    {
+      "id": "n35c-galaxolide-genetics",
+      "eventDate": "2022-02-03",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "scientific_publication",
+      "titleRu": "Мускус, который слышат не все",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35c-galaxolide-genetics",
+      "sourceIds": [
+        "n35c-musk",
+        "n35c-musk-iff",
+        "n35c-musk-release"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35c-musk",
+        "locator": "PublishedFebruary3,2022; DiscussionOR4D6/Galaxolide",
+        "summaryRu": "Статья From musk to body odor опубликована03Feb2022; Galaxolide intensity связана с OR4D6variants."
+      },
+      "storyAngleRu": "Мускус, который слышат не все",
+      "researchNotesRu": "Не повторять сюжетандростенонаOR7D4. ТолькоGalaxolide,синтетическиймускусиразличиеgeneticassociation/cellassay.364набранныхне357послеQC. Никаких персональныхгенетическихдиагнозовпоодномуфлакону,эволюционнойдеградациивсегообонянияилизаявленийопервенстве."
+    },
+    {
+      "id": "n35c-sandalore-receptor",
+      "eventDate": "2018-09-18",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "scientific_publication",
+      "titleRu": "Сандаловый материал за пределами носа",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35c-sandalore-receptor",
+      "sourceIds": [
+        "n35c-sandalore",
+        "n35c-sandalore-product",
+        "n35c-sandalore-manchester"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35c-sandalore",
+        "locator": "Published18September2018; Abstract",
+        "summaryRu": "Статья Chéret etal опубликована18Sept2018; Sandalore стимулируетOR2AT4hairfolliclesexvivo."
+      },
+      "storyAngleRu": "Сандаловый материал за пределами носа",
+      "researchNotesRu": "Не утверждается,что волосы ощущаютсандал какчеловек,илиготовыедухилечатвыпадениеволос. Exvivoпрямообозначено. Формула,дозировкаиинструкцияпоприменениюнеприводятся. Стойкостьсырья—описаниепоставщика,непрогнозноскиготовойкомпозиции."
+    },
+    {
+      "id": "n35r-devilbiss-patent-1888",
+      "eventDate": "1888-02-21",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "patent_grant",
+      "titleRu": "От врачебного инструмента к туалетному столику",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35r-devilbiss-patent-1888",
+      "sourceIds": [
+        "n35r-devilbiss-wood",
+        "n35r-devilbiss-smithsonian",
+        "n35r-devilbiss-cmog-blog",
+        "n35r-devilbiss-detroit",
+        "n35r-devilbiss-cmog-object"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35r-devilbiss-wood",
+        "locator": "Catalog Record, Note Type Citation / US patent 378,357, February 21,1888",
+        "summaryRu": "Аллену Девилбиссу выдан патент US378357 21 февраля 1888 года."
+      },
+      "storyAngleRu": "От врачебного инструмента к туалетному столику",
+      "researchNotesRu": "Патент не является датой запуска парфюмерного флакона. В музейных карточках расходится год рождения Девилбисса — биографические годы исключены. Приблизительные датировки предметов не используются как календарный повод. Прямой патент Google не открылся; дата подтверждена прочитанной музейной библиографией."
+    },
+    {
+      "id": "n35r-iff-amber-isomer-patent-1975",
+      "eventDate": "1975-12-30",
+      "calendar": "gregorian",
+      "category": "ingredient",
+      "eventType": "patent_grant",
+      "titleRu": "Древесный запах без древесной щепки",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35r-iff-amber-isomer-patent-1975",
+      "sourceIds": [
+        "n35r-iso-patent",
+        "n35r-iso-iff",
+        "n35r-iso-schoen",
+        "n35r-iso-pair",
+        "n35r-iso-product"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35r-iso-patent",
+        "locator": "Front matter [45]/[75]/[73]; The Invention; lines448–454,526–568",
+        "summaryRu": "Патент US3929677 выдан 30.12.1975 Холлу и Сандерсу, IFF; применение амбровых материалов и определённого изомера."
+      },
+      "storyAngleRu": "Древесный запах без древесной щепки",
+      "researchNotesRu": "Не приравнивать день патента к открытию Iso E Super или запуску Molecule01. Не выдавать65%концентрата за долю готового продукта. Маркетинговые феромонные и универсальные эффекты исключены. Пересказ патента ограничен двумя первыми абзацами, остальные сведения распределены между производителем и участником."
+    },
+    {
+      "id": "n35r-cyclodextrin-fabric-filing-1989",
+      "eventDate": "1989-04-12",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "patent_application_filing",
+      "titleRu": "Запах, который ждёт воды",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35r-cyclodextrin-fabric-filing-1989",
+      "sourceIds": [
+        "n35r-cyclo-patent",
+        "n35r-cyclo-rsc",
+        "n35r-cyclo-wuppertal"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35r-cyclo-patent",
+        "locator": "Front matter Filing date1989-04-12; timeline Application filed; US07/337,036",
+        "summaryRu": "12 апреля 1989 года Procter & Gamble подала американскую заявку US07/337,036; патент US5102564 выдан 7 апреля 1992 года."
+      },
+      "storyAngleRu": "Запах, который ждёт воды",
+      "researchNotesRu": "Не приписывать патенту мировое первенство циклодекстринов. Позднейшая аналитическая работа и химическое закрепление на волокне названы отдельно; не утверждать, что это точная реализация данного патента. Пересказ патента около160слов суммарно; RSC около180; университет около130. Календарный повод — подача заявки 12.04.1989; выдача 07.04.1992 относится к тому же изобретению, вторым событием не используется."
+    },
+    {
+      "id": "n35r-perfumed-printing-ink-patent-1975",
+      "eventDate": "1975-06-10",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "patent_grant",
+      "titleRu": "Страница, которая хранит аромат",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35r-perfumed-printing-ink-patent-1975",
+      "sourceIds": [
+        "n35r-printing-patent",
+        "n35r-printing-opm",
+        "n35r-printing-orlandi",
+        "n35r-printing-scentisphere"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35r-printing-patent",
+        "locator": "Front matter; Description/Abstract",
+        "summaryRu": "US3888689 выдан10.06.1975 Fuji Photo Film, водная краска с душистыми микрокапсулами."
+      },
+      "storyAngleRu": "Страница, которая хранит аромат",
+      "researchNotesRu": "Не объявлять патент изобретением всех scratch-and-sniff технологий или датой выхода конкретного пробника. Современные продукты не названы лицензиатами Fuji. Подробности патента пересказаны примерно180словами на оба языка, остальной текст опирается на три прочитанных производителя и редакционный разбор."
+    },
+    {
+      "id": "n35r-inra-co2-pct-filing-1989",
+      "eventDate": "1989-04-06",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "patent_application_filing",
+      "titleRu": "Не потерять запах на выходе",
+      "status": "verified",
+      "evidenceLevel": "primary",
+      "eventGroupId": "n35r-inra-co2-pct-filing-1989",
+      "sourceIds": [
+        "n35r-co2-pct",
+        "n35r-co2-us",
+        "n35r-co2-flavex",
+        "n35r-co2-eden",
+        "n35r-co2-cardamom"
+      ],
+      "dateEvidence": {
+        "sourceId": "n35r-co2-pct",
+        "locator": "Front matter Filing date/Inventor/Application number",
+        "summaryRu": "Международная заявка INRA PCT/FR1989/000158 подана06.04.1989, изобретатели Jacques Adda и Jean-Luc Lorne."
+      },
+      "storyAngleRu": "Не потерять запах на выходе",
+      "researchNotesRu": "Это подача международной заявки, а не её публикация19.10.1989, выдача американского патента17.12.1991 или изобретение всей CO2-экстракции. Современные продукты не объявляются реализацией данного патента. Факты общей патентной семьи суммарно пересказаны менее200словами в обеих локализациях."
     }
   ],
   "inclusionRule": "Only events with an exact historical date read and verified in the cited source. No candidates, disputed dates, inferred dates, or merely planned events.",

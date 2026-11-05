@@ -9897,6 +9897,1974 @@
       "excludedClaimsRu": [
         "Роман рассматривается как художественная работа со словами и ощущениями, а не документ личной жизни или химического состава. Английский перевод 1922 года находится в общественном достоянии; прямых цитат в рассказе нет. Не утверждается научное доказательство эффекта Пруста."
       ]
+    },
+    {
+      "eventId": "n35a-kunstpalast-2025",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35a-kunstpalast-2025-f1",
+          "claim": "The Secret Power of Scents открылась в Kunstpalast 29 октября 2025 года; выставка встроена в хронологический маршрут постоянной коллекции.",
+          "sourceIds": [
+            "n35a-kunstpalast-exhibition",
+            "n35a-kunstpalast-press",
+            "n35a-kunstpalast-eyewitness"
+          ],
+          "locator": "Exhibition date; press p4 paragraph The Secret Power; AP paragraph opens to the public on Wednesday"
+        },
+        {
+          "id": "n35a-kunstpalast-2025-f2",
+          "claim": "Экспозиция занимала около5000м²; музей указывал около30ароматических станций; куратор Robert Müller-Grünow.",
+          "sourceIds": [
+            "n35a-kunstpalast-exhibition"
+          ],
+          "locator": "Exhibition description; Curator"
+        },
+        {
+          "id": "n35a-kunstpalast-2025-f3",
+          "claim": "Репортёр AP описала мирру среди христианской деревянной скульптуры и табак, ваниль и кожу в зале1920-х рядом с картиной Gert Wollheim Farewell from Düsseldorf1924; последний запах отсылал к Tabac Blond.",
+          "sourceIds": [
+            "n35a-kunstpalast-eyewitness"
+          ],
+          "locator": "paragraphs Waves of myrrh; On the other hand, in a gallery dedicated to the Roaring20s"
+        },
+        {
+          "id": "n35a-kunstpalast-2025-f4",
+          "claim": "В пресс-досье перечислены религиозная, придворная, городская, промышленная парфюмерная культура; воспроизведён обычный музейный запах сухого дерева, пыли и старого пространства.",
+          "sourceIds": [
+            "n35a-kunstpalast-press"
+          ],
+          "locator": "pp1,5, sections Olfactory Memory and From Nature to Molecular Art"
+        },
+        {
+          "id": "n35a-kunstpalast-2025-f5",
+          "claim": "В разговоре с kultur.west Müller-Grünow описывает комнату ГДР с воском, кремом Florena, двухтактным двигателем и Westpaket, ассоциируемым с шоколадом, кофе, стиральным средством; Creamcheese сопровождают пиво, ром, табак.",
+          "sourceIds": [
+            "n35a-kunstpalast-conversation"
+          ],
+          "locator": "paragraphs Raum35 and So gibt es nun auch"
+        },
+        {
+          "id": "n35a-kunstpalast-2025-f6",
+          "claim": "Собственный запах Kunstpalast создавался из понятий открытость, творчество, динамика, эксперимент, юмор; размещён в зале, где El Anatsui соседствует с Rubens и Richter.",
+          "sourceIds": [
+            "n35a-kunstpalast-conversation"
+          ],
+          "locator": "paragraph Dazu wurden Attribute gesammelt"
+        },
+        {
+          "id": "n35a-kunstpalast-2025-f7",
+          "claim": "Подписи пресс-досье называют бергамот, кедр, османтус, Hedione и Iso E Super среди материалов музейного аромата.",
+          "sourceIds": [
+            "n35a-kunstpalast-press"
+          ],
+          "locator": "p6 Scent as Identity"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Аромат меняет способ чтения постоянной коллекции Kunstpalast: запах эпохи, городской памяти и самой институции."
+      ],
+      "excludedClaimsRu": [
+        "Первенство масштаба во всём мире; доказанное действие молекул на привлекательность/доверие; спорная гипотеза о бензоине вместо евангельского золота."
+      ]
+    },
+    {
+      "eventId": "n35a-mfk-palais-2025",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35a-mfk-palais-2025-f1",
+          "claim": "29октября2025в Palais de Tokyo началась выставка Parfum, sculpture de l’invisible, представленная Maison Francis Kurkdjian; куратор Jérôme Neutres.",
+          "sourceIds": [
+            "n35a-mfk-palais",
+            "n35a-mfk-house"
+          ],
+          "locator": "Palais exhibition date29/10/2025; house exhibition curator statement"
+        },
+        {
+          "id": "n35a-mfk-palais-2025-f2",
+          "claim": "Запрос Sophie Calle1999привёл к The Smell of Money; произведение представили в2003на Soirées Nomades Fondation Cartier; отправная точка — ношеная долларовая купюра, льняная бумага, чернила, грязь от обращения.",
+          "sourceIds": [
+            "n35a-mfk-money",
+            "n35a-mfk-observer"
+          ],
+          "locator": "The story; Observer interview opening1999"
+        },
+        {
+          "id": "n35a-mfk-palais-2025-f3",
+          "claim": "Выставка включалаThe Smell of Money; в прямом интервью2026Куркджян говорит, что заданиеКалль расширилоегоработу зарамкиприятногозапаха.",
+          "sourceIds": [
+            "n35a-mfk-house",
+            "n35a-mfk-observer"
+          ],
+          "locator": "house exhibition works; Observer paragraph The three of us were talking"
+        },
+        {
+          "id": "n35a-mfk-palais-2025-f4",
+          "claim": "Boulé помещала капли духов на серебряно-желатиновую фотобумагу, получая абстрактные цветные отпечатки; Expanded Drops показан в Palais de Tokyo2025.",
+          "sourceIds": [
+            "n35a-mfk-drops"
+          ],
+          "locator": "artist statement; paragraphs on process and previous presentations"
+        },
+        {
+          "id": "n35a-mfk-palais-2025-f5",
+          "claim": "Eden Hugo Arcier иCyril Teste показан вPalais de Tokyo2025; виртуальныйрастительныймиррождаетсявзглядом,егоразвитиезависитотвниманияучастника; Scents creationFrancisKurkdjian.",
+          "sourceIds": [
+            "n35a-mfk-eden"
+          ],
+          "locator": "Eden description, ExpositionPalais2025 and credits"
+        },
+        {
+          "id": "n35a-mfk-palais-2025-f6",
+          "claim": "Финал The Alchemy of the Senses объединил Baccarat Rouge540 с работой Elias Crespin, Anne-Sophie Pic, David Chalmin, Katia и Marielle Labèque под художественным руководством Cyril Teste.",
+          "sourceIds": [
+            "n35a-mfk-house"
+          ],
+          "locator": "house The exhibition and30October panel"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Ретроспектива Куркджяна: от запаха банкноты до фотограммы духов и виртуального сада."
+      ],
+      "excludedClaimsRu": [
+        "Куркджян как первый в мире художник запаха; фотографии как химический анализ состава; даты концерта из противоречивого пресс-досье."
+      ]
+    },
+    {
+      "eventId": "n35a-ether-2025",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35a-ether-2025-f1",
+          "claim": "31мая2025Craft Contemporary начал показывать Ether: Aromatic Mythologies; музейная программа отдельно фиксирует preview и встречу с художниками31May18–20; куратор Saskia Wilson-Brown,13художников.",
+          "sourceIds": [
+            "n35a-ether-museum",
+            "n35a-ether-program",
+            "n35a-ether-dossier"
+          ],
+          "locator": "museum Past Exhibitions date; Scent Fair programme Ether Exhibition Preview & Artist Meet and Greet; dossier p1"
+        },
+        {
+          "id": "n35a-ether-2025-f2",
+          "claim": "History of a People Alisa Banks — книга с шестью флаконами-главами Roots, Journey, Arrival, Harrow, Protest, Visioning, авторские запахи соответствуют культурным ландшафтам афроамериканской истории; среди материалов дерево, ткань, волосы, стекло.",
+          "sourceIds": [
+            "n35a-ether-banks"
+          ],
+          "locator": "History of a People, open; detail; media and six jars"
+        },
+        {
+          "id": "n35a-ether-2025-f3",
+          "claim": "IAO описывает хлопковую обложку с отсылками к коронам и схемам рабовладельческого судна и волосами, связанными с символомSankofa.",
+          "sourceIds": [
+            "n35a-ether-iao"
+          ],
+          "locator": "Alisa Banks, History of a People, paragraphs37–38"
+        },
+        {
+          "id": "n35a-ether-2025-f4",
+          "claim": "Espiritu y Tierra Andrés Cortes использует материалы семейной мастерской нескольких поколений и предметы из домов вынужденно переезжавших соседей; композиция Burnt wood,2025; внутри можно сидеть.",
+          "sourceIds": [
+            "n35a-ether-iao"
+          ],
+          "locator": "Andrés Cortes, Espiritu y Tierra; Scent and project paragraph"
+        },
+        {
+          "id": "n35a-ether-2025-f5",
+          "claim": "Olfactory Labyrinth ver8 Maki Ueda обращается к главеFireflies Genji; запах из-за бамбуковых штор воспринимается с позицииHotaru; в списке запахов майский дождь, цитрусовое цветение, сезонные благовония, запахи одежд.",
+          "sourceIds": [
+            "n35a-ether-ueda"
+          ],
+          "locator": "Concept; Scents moving inward from the outer edge"
+        },
+        {
+          "id": "n35a-ether-2025-f6",
+          "claim": "Ueda указывает собственный диапазон показа7June–7September2025, поэтому её произведение описано как часть общего проекта, не гарантированная установка31May.",
+          "sourceIds": [
+            "n35a-ether-ueda"
+          ],
+          "locator": "DATE heading"
+        },
+        {
+          "id": "n35a-ether-2025-f7",
+          "claim": "Пресс-досье связываетEther с элементомвоздуха и программой из12приглашённых парфюмеров IAO Olfactory Storylab.",
+          "sourceIds": [
+            "n35a-ether-dossier"
+          ],
+          "locator": "p1 natural elements; p3 IAO Olfactory Storylab"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Ether: ароматические произведения как материальная форма историй; книга Banks, дом Cortes, литературный лабиринтUeda."
+      ],
+      "excludedClaimsRu": [
+        "Начало показаUeda31May; неврологические и феромонные обещания рекламного текста workshops; мистические утверждения о воздействии мифов как научный факт."
+      ]
+    },
+    {
+      "eventId": "n35a-yi-guggenheim-2017",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35a-yi-guggenheim-2017-f1",
+          "claim": "Life Is Cheap Anicka Yi открылась21April2017в Guggenheim; кураторыKatherine Brinson иSusan Thompson.",
+          "sourceIds": [
+            "n35a-yi-guggenheim"
+          ],
+          "locator": "Exhibition dates April21–July5,2017; opening paragraphs"
+        },
+        {
+          "id": "n35a-yi-guggenheim-2017-f2",
+          "claim": "Immigrant Caucus у входа объединял химические соединения, связанные с запахом азиатско-американских женщин и муравьёв-древоточцев; использованы канистры, напоминающие оборудование для инсектицидов.",
+          "sourceIds": [
+            "n35a-yi-guggenheim",
+            "n35a-yi-artsy"
+          ],
+          "locator": "Guggenheim paragraph Visitors first pass; Artsy Visitors to Life is Cheap first encounter"
+        },
+        {
+          "id": "n35a-yi-guggenheim-2017-f3",
+          "claim": "ПарфюмерBarnabé Fillion участвовал в создании аромата; по словамYi, сбор каждого человеческого образца пота занимал около часа.",
+          "sourceIds": [
+            "n35a-yi-artsy"
+          ],
+          "locator": "paragraphs Visitors to Life is Cheap; It took about an hour"
+        },
+        {
+          "id": "n35a-yi-guggenheim-2017-f4",
+          "claim": "Lifestyle Wars объединял живых муравьёв, зеркала, компьютерное оборудование и тоннели; Force Majeure — бактерии на агаровых поверхностях за стеклом, с меняющимися цветными рисунками.",
+          "sourceIds": [
+            "n35a-yi-artsy",
+            "n35a-yi-guggenheim"
+          ],
+          "locator": "Artsy paragraphs That insectile point and The final work; Guggenheim dioramas"
+        },
+        {
+          "id": "n35a-yi-guggenheim-2017-f5",
+          "claim": "Columbia collaboratorsHunter Giese,Frank Cusimano,Ross McBee рассказывали о выборе цветных бактерий, стабильности живого материала, технических механизмах и самостоятельной сборке генератора тумана; идеи художницы переводились в работающие устройства.",
+          "sourceIds": [
+            "n35a-yi-columbia"
+          ],
+          "locator": "Q What was it like working with an artist?, Ross and Frank answers"
+        },
+        {
+          "id": "n35a-yi-guggenheim-2017-f6",
+          "claim": "Yi в прямом интервью подчёркивает первичность повествования, социально обусловленные ассоциации запаха и цель поставить под вопрос предубеждение, а не создать классификацию этнических запахов.",
+          "sourceIds": [
+            "n35a-yi-interview"
+          ],
+          "locator": "questions What inspired you; process; Is there a narrative to the show?"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Life Is Cheap: Immigrant Caucus и сотрудничество художницы, парфюмеров, биологов; запах как вопрос об обусловленном восприятии."
+      ],
+      "excludedClaimsRu": [
+        "Универсальные этнические запахи; физиологическая смена восприятия на муравьиное; запах бактерий изForceMajeure как свободно распространявшийся — витрина была закрыта."
+      ]
+    },
+    {
+      "eventId": "n35a-tolaas-re-2021",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35a-tolaas-re-2021-f1",
+          "claim": "RE________ Sissel Tolaas открылась8October2021в Astrup Fearnley Museet вОсло; дизайнFormafantasma.",
+          "sourceIds": [
+            "n35a-tolaas-afm"
+          ],
+          "locator": "Exhibition heading08.okt.2021–30.des.2021; Utstillingsdesign"
+        },
+        {
+          "id": "n35a-tolaas-re-2021-f2",
+          "claim": "В прямом интервью2022Tolaas вспоминает двухнедельное пребывание в музее вмарте2020и последующее возвращение к архивам вБерлине для разработки выставки.",
+          "sourceIds": [
+            "n35a-tolaas-penn"
+          ],
+          "locator": "opening paragraphs and artist quote After having been at Astrup"
+        },
+        {
+          "id": "n35a-tolaas-re-2021-f3",
+          "claim": "NoREway100.915kmREsponsibility — повторяющиеся алюминиевые трубы с воспроизведёнными запахами Северного моря; один сантиметр соотносился примерно с километром береговой линииНорвегии.",
+          "sourceIds": [
+            "n35a-tolaas-witness"
+          ],
+          "locator": "paragraph Particularly effective is a work comprising woven aluminium piping"
+        },
+        {
+          "id": "n35a-tolaas-re-2021-f4",
+          "claim": "AirREborn BelowAbove объединял данные удалённых ветровых датчиков, компьютеры, вентиляторы, ткань и запах, создавая меняющуюся ветровую хореографию.",
+          "sourceIds": [
+            "n35a-tolaas-witness"
+          ],
+          "locator": "image caption and paragraph AirREborn BelowAbove achieves"
+        },
+        {
+          "id": "n35a-tolaas-re-2021-f5",
+          "claim": "В BeYondUnderNeath отверстия в стенах отсылали к следам износа пола; запахи связывались с деревом, металлом, изоляцией; INsideOutIn переносила наружную деревянную облицовку внутрь.",
+          "sourceIds": [
+            "n35a-tolaas-frieze"
+          ],
+          "locator": "paragraph Downstairs, the museum’s voluminous central space"
+        },
+        {
+          "id": "n35a-tolaas-re-2021-f6",
+          "claim": "Работы обозначались кодами, традиционных развёрнутых этикеток возле них не было; объяснения собраны в последнем зале, посетитель мог начать и снего.",
+          "sourceIds": [
+            "n35a-tolaas-afm"
+          ],
+          "locator": "paragraph Situasjonene i utstillingen formidles ikke"
+        },
+        {
+          "id": "n35a-tolaas-re-2021-f7",
+          "claim": "В7внутренних и наружных пространствах показывали запахи кожи, металла, океана, семян, тающего льда.",
+          "sourceIds": [
+            "n35a-tolaas-frieze"
+          ],
+          "locator": "paragraph Distributed across seven indoor and outdoor spaces"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "RE____: здание и норвежский ландшафт становятся частью обонятельного произведения; ветер, берег, отложенное объяснение."
+      ],
+      "excludedClaimsRu": [
+        "Число стеклянныхдыханий; обещание универсальной памяти запаха; приписывание Осло произведений, добавленных только вPhiladelphia2022; повтор Fear21."
+      ]
+    },
+    {
+      "eventId": "n35a-forest-bath-2021",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35a-forest-bath-2021-f1",
+          "claim": "Показ/Forest Bath M Dougherty вOlfactory Art Keller начался12February2021; эта персональная выставка открыла программу галереи вНью-Йорке.",
+          "sourceIds": [
+            "n35a-forest-gallery",
+            "n35a-forest-curator"
+          ],
+          "locator": "gallery dateFebruary12–March13,2021; Artnet paragraph Leasing a small storefront"
+        },
+        {
+          "id": "n35a-forest-bath-2021-f2",
+          "claim": "Во время пандемии аромат подавали на тротуар; вечером на стекло витрины проецировали лесной пейзаж, позволяя воспринимать произведение снаружи.",
+          "sourceIds": [
+            "n35a-forest-gallery"
+          ],
+          "locator": "paragraphs With COVID and As night falls"
+        },
+        {
+          "id": "n35a-forest-bath-2021-f3",
+          "claim": "Художник использовалGC-MSданные и самостоятельно полученные ароматические материалы; список включает природные и синтетические компоненты.",
+          "sourceIds": [
+            "n35a-forest-artist"
+          ],
+          "locator": "description; Scent Materials; Background Information"
+        },
+        {
+          "id": "n35a-forest-bath-2021-f4",
+          "claim": "Формы выращивали измицелия голубой вешенки вмолдах, нагревали для остановки роста и укрепления, соединяли сароматизированным воском и сохраняли смолой; каждый объект передавал часть лесного запаха.",
+          "sourceIds": [
+            "n35a-forest-artist"
+          ],
+          "locator": "Process"
+        },
+        {
+          "id": "n35a-forest-bath-2021-f5",
+          "claim": "Catherine Haley Epstein описывает ультразвуковой диффузор с таймером, кубы внутри и сочетание аналитических данных с авторским настоем почвы и травы отдома.",
+          "sourceIds": [
+            "n35a-forest-report"
+          ],
+          "locator": "paragraphs This month in NewYork; From a timed ultrasonic; The resulting scent"
+        },
+        {
+          "id": "n35a-forest-bath-2021-f6",
+          "claim": "Aubrey Allison действительно получила флакон композиции и описала землю, пихтовую хвою, свежую древесину и грибную сторону.",
+          "sourceIds": [
+            "n35a-forest-review"
+          ],
+          "locator": "opening paragraph M sent me a vial"
+        },
+        {
+          "id": "n35a-forest-bath-2021-f7",
+          "claim": "В прямом интервью Andreas Keller обсуждает различия междувосприятием посетителей, силу запаха, память; он открыл галерею после академической работы.",
+          "sourceIds": [
+            "n35a-forest-curator"
+          ],
+          "locator": "paragraphs For gallery founder; When visitors debate; The first-time gallerist"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "ForestBath: ароматические скульптуры измицелия, городскойдоступ к произведению черезвитрину и воздух."
+      ],
+      "excludedClaimsRu": [
+        "Лечебное действие композиции; тождество городской инсталляции прогулке влесу; сознание грибницы как научныйфакт."
+      ]
+    },
+    {
+      "eventId": "n35a-hammer-japan-2014",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35a-hammer-japan-2014-f1",
+          "claim": "9January2014в Hammer Museum начался основной цикл A Trip to Japan in Sixteen Minutes, Revisited; расписание9Jan1:30/7pm,далее10–12Jan; openhouse7Janотдельно.",
+          "sourceIds": [
+            "n35a-hammer-archive"
+          ],
+          "locator": "Performance Times and Open House"
+        },
+        {
+          "id": "n35a-hammer-japan-2014-f2",
+          "claim": "ПроектIAOвозвращался к неудачному концертуSadakichi Hartmann1902; команда переносила воображаемуюдорогу изсовременногоЛос-Анджелеса вТокио; парфюмерSherri Sebastian сочинилашестькомпозиций.",
+          "sourceIds": [
+            "n35a-hammer-archive",
+            "n35a-hammer-producer"
+          ],
+          "locator": "openinghistory and2014reinterpretation; TeamSherriSebastian"
+        },
+        {
+          "id": "n35a-hammer-japan-2014-f3",
+          "claim": "Eric Vrymoed иKamil Beski создали механизм подачи запаха; Bennett Barbakow — звуковую композицию; Julia Owen участвовала в живых эффектах; постановкаSaskia Wilson-Brown.",
+          "sourceIds": [
+            "n35a-hammer-producer"
+          ],
+          "locator": "2014projectdescription andTEAM"
+        },
+        {
+          "id": "n35a-hammer-japan-2014-f4",
+          "claim": "Слушателей закрывали повязками; современные композиции включали образы шаттла, самолёта,города,отеля,сна; Wперечисляет пальмы,берёзовыйдёготь,озон,дымныеблаговония.",
+          "sourceIds": [
+            "n35a-hammer-w",
+            "n35a-hammer-archive"
+          ],
+          "locator": "W final3paragraphs; Hammer participantblindfolded"
+        },
+        {
+          "id": "n35a-hammer-japan-2014-f5",
+          "claim": "Smithsonianинтервью сообщает о сложных композициях,до30компонентов; молочность,сладость,зелень шаттла,ревеньприобретаетобразнеоновогоТокио; важно заменитьзапахдляследующегосегмента.",
+          "sourceIds": [
+            "n35a-hammer-smithsonian"
+          ],
+          "locator": "paragraphs Rather than use single scents; Those smells; Adding to the challenge"
+        },
+        {
+          "id": "n35a-hammer-japan-2014-f6",
+          "claim": "Аппарат состоялизтрубок,насосов,стальныхстоек,подачаавтоматическая; звукисоздавали записаннымиэффектами иживымфоли,восемьдинамиков.",
+          "sourceIds": [
+            "n35a-hammer-smithsonian"
+          ],
+          "locator": "paragraphs ForWilsonBrownshow; sounddesign48–52"
+        },
+        {
+          "id": "n35a-hammer-japan-2014-f7",
+          "claim": "Гостям выдавали ограниченныйтиражпрограммыMicah Hahn; историческоеисследованиеDrChristina Bradstreet.",
+          "sourceIds": [
+            "n35a-hammer-producer"
+          ],
+          "locator": "Eachguestleft; TEAMResearch"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Основной циклсеансов Hammer2014: исторический замысел Hartmann переводят в современное путешествие и решают инженерную смену запахов."
+      ],
+      "excludedClaimsRu": [
+        "Точное число состоявшихся показов; мировойпервыйобонятельныйконцерт; реальные запахи всегоТокио; планируемыеэффекты как вымышленные действия конкретныхзрителей."
+      ]
+    },
+    {
+      "eventId": "n35a-sensoria-2024",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35a-sensoria-2024-f1",
+          "claim": "Sensoria – Haus der Düfte und Aromen вHolzminden открылся28September2024.",
+          "sourceIds": [
+            "n35a-sensoria-date"
+          ],
+          "locator": "NEUERÖFFNUNG Sensoria, paragraph Am28September2024ist...eröffnetworden"
+        },
+        {
+          "id": "n35a-sensoria-2024-f2",
+          "claim": "В постояннойэкспозиции около600м² выделеныRaumfürSinne, Zeitreise, Galerie der Düfte; используютсядо60запахов; цифровойпарфюмерныйгенератор позволяетсоставлятьсвойаромат.",
+          "sourceIds": [
+            "n35a-sensoria-press"
+          ],
+          "locator": "pp3,5–7, permanent exhibition sections"
+        },
+        {
+          "id": "n35a-sensoria-2024-f3",
+          "claim": "В RaumfürSinne после нитянойшторы сочетаютсядвижущеесяизображение,звук,аромат;вZeitreise естьпроходимаякарта мира и проекциинаподвешенныхстеклянныхцилиндрах.",
+          "sourceIds": [
+            "n35a-sensoria-press"
+          ],
+          "locator": "p5 RaumfürSinne and Zeitreise"
+        },
+        {
+          "id": "n35a-sensoria-2024-f4",
+          "claim": "Galerie der Düfte представляетсемействазапахов черезотдельныениши,происхождение,историюисмыслсырья; среди примеров мирра и мускус; материалы можно понюхать.",
+          "sourceIds": [
+            "n35a-sensoria-raw"
+          ],
+          "locator": "paragraphsFaszinierend,JedeDuftnische,Dochauch,NebenderTheorie"
+        },
+        {
+          "id": "n35a-sensoria-2024-f5",
+          "claim": "235Media поставляламедиатехнику,системууправления,программированиеифильмпроизводство; концепция/оформлениеnowakteufelknyrimDüsseldorf.",
+          "sourceIds": [
+            "n35a-sensoria-media"
+          ],
+          "locator": "project description paragraph Hierfürliefert; KonzeptundGestaltung"
+        },
+        {
+          "id": "n35a-sensoria-2024-f6",
+          "claim": "Инженерыпроектаописываютнепрерывныйпандус6%междууровнями,общиймаршрутдляпосетителей;зданиеAnderhaltenArchitektenнаходитсямеждуВезеромистарымгородом.",
+          "sourceIds": [
+            "n35a-sensoria-engineer"
+          ],
+          "locator": "projectdescriptionparagraphs1–3 andArchitect"
+        },
+        {
+          "id": "n35a-sensoria-2024-f7",
+          "claim": "Музейныймаршрутсвязанскрышнымсадомивидомнагород; расходятсядеталидоступакрыше,поэтомуненазванпандуснанеё.",
+          "sourceIds": [
+            "n35a-sensoria-engineer",
+            "n35a-sensoria-press"
+          ],
+          "locator": "projectdescription; pressp11EinWegfüralle"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Sensoria: материалы и композиция в интерактивном доме запаха; мультимедиа и непрерывныйдоступныймаршрут."
+      ],
+      "excludedClaimsRu": [
+        "Мировое/европейскоепервенство; лечебныеэффекты;запахЛуныкакдостоверныйсамостоятельныйобразецлунноговоздуха;пандус,якобыведущийсамнакрышу."
+      ]
+    },
+    {
+      "eventId": "n35a-mip-poster-2023",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35a-mip-poster-2023-f1",
+          "claim": "ПубличныйдиапазонLe Parfum s’affiche. Quand les artistes réinventent la publicitéв MIPGrasseначался16June2023; ретроспектива2025подтверждает16June–1Oct.",
+          "sourceIds": [
+            "n35a-poster-date",
+            "n35a-poster-flyer"
+          ],
+          "locator": "2025dossierp12ExpositionstemporaryÉté2023; official2023programmeEXPOSITIONS"
+        },
+        {
+          "id": "n35a-mip-poster-2023-f2",
+          "claim": "ОфициальнаяпрограммаописываетэволюциюрекламноговизуальногоязыкаотJules Chéret,Alphonse Mucha,Leonetto CappielloкHelmut Newton,Jean-Paul Goudeифильму.",
+          "sourceIds": [
+            "n35a-poster-flyer"
+          ],
+          "locator": "EXPOSITIONS2023LeParfum s’affiche"
+        },
+        {
+          "id": "n35a-mip-poster-2023-f3",
+          "claim": "Osmothèqueпоказываетсоставвыставочныхколлекций: плакаты,реклама,флаконы,ароматизированныекарточки,литографскиекамни.",
+          "sourceIds": [
+            "n35a-poster-osmotheque"
+          ],
+          "locator": "institutionalpostparagraphL’expositionestl’occasion"
+        },
+        {
+          "id": "n35a-mip-poster-2023-f4",
+          "claim": "КонсерваторийпредоставилCoupe d’Or — зановоотмеренпооригинальнойформуле Maurice Schaller,описанамбрированно-цитрусовый; LeBalcon HenriAlméras1921цветочныйбукетсмускуснымфоном.",
+          "sourceIds": [
+            "n35a-poster-osmotheque"
+          ],
+          "locator": "postparagraphsPourcetteoccasion andLancé"
+        },
+        {
+          "id": "n35a-mip-poster-2023-f5",
+          "claim": "АфишувыставкисоздалMonsieurZ; вINонобъяснилстремлениекмаксимальномуупрощению,называяплакатупаковкойвыставки.",
+          "sourceIds": [
+            "n35a-poster-witness"
+          ],
+          "locator": "pp74Afficheàl’appui / A poster in support"
+        },
+        {
+          "id": "n35a-mip-poster-2023-f6",
+          "claim": "INпоказываетпереходотиллюстрацийкфотографииикино; средиэкспонатныхпримеровработыJean-Pierre JeunetдляChanelN5,Jean-Jacques AnnaudдляJ’adore,SofiaCoppolaдляMissDior.",
+          "sourceIds": [
+            "n35a-poster-witness"
+          ],
+          "locator": "p75paragraphsL’expositionduMIPlesmetenavant"
+        },
+        {
+          "id": "n35a-mip-poster-2023-f7",
+          "claim": "Недоступный2023DPвпоискеуказываетинаугурацию15June,нонеиспользовандоказательством: публичноеначало16Juneизпрочитанныхофициальныхматериалов.",
+          "sourceIds": [
+            "n35a-poster-date",
+            "n35a-poster-flyer"
+          ],
+          "locator": "dateheadings only; failedsource excluded"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "LeParfum s’affiche: печатная реклама и сохранённаяформула соединяютвидимыйобраз с исчезнувшимароматом."
+      ],
+      "excludedClaimsRu": [
+        "Датапрезидиума15Juneкакпубличноеоткрытие;неточныедатывыпускаизафиши;авторграфикикакпарфюмерформулы."
+      ]
+    },
+    {
+      "eventId": "n35a-marine-sillage-2023",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35a-marine-sillage-2023-f1",
+          "claim": "ПарижскийMuséenationaldelaMarineвPalaisdeChaillotвозобновилприёмпублики17November2023после6летзакрытия; инаугурацияпрезидентомотдельно27November.",
+          "sourceIds": [
+            "n35a-marine-report"
+          ],
+          "locator": "annualreportp13weekend17–19November; pp7,14; presidentialinauguration27November"
+        },
+        {
+          "id": "n35a-marine-sillage-2023-f2",
+          "claim": "SillagedemerсоздалаNathalieLorson,художественноенаправлениеStudioMagique; ароматдляпространствадолженокружатьпосетителя,а неноситьсянакоже.",
+          "sourceIds": [
+            "n35a-marine-statement",
+            "n35a-marine-dossier"
+          ],
+          "locator": "museumarticle quoteLorson; pressp1"
+        },
+        {
+          "id": "n35a-marine-sillage-2023-f3",
+          "claim": "StudioMagiqueсоставилобонятельноеколесотемотйода,бриза,ракушекдодуба,пеньки,пряностей,пороха.",
+          "sourceIds": [
+            "n35a-marine-fff"
+          ],
+          "locator": "Ancreruneidentité"
+        },
+        {
+          "id": "n35a-marine-sillage-2023-f4",
+          "claim": "Lorsonпредложилатринаправления:открытоеморе,берегскамнями/песком/теплом,корабльсдеревом/канатами; выбранопервое,далеедорабатывалосьспубликойнаworkshops.",
+          "sourceIds": [
+            "n35a-marine-fff"
+          ],
+          "locator": "Prendreuncap"
+        },
+        {
+          "id": "n35a-marine-sillage-2023-f5",
+          "claim": "Композициясочетаетфранцузскийабсолютводорослей,Calone,AmbroxSuperкакобонятельнуюотсылкуксеройамбре; описанияотавтора,неполнаяформула.",
+          "sourceIds": [
+            "n35a-marine-dossier"
+          ],
+          "locator": "pressp2Lorsonstatement"
+        },
+        {
+          "id": "n35a-marine-sillage-2023-f6",
+          "claim": "Ароматподавалсявзонахвходаиприветствияшестьюмикрочастичнымидиффузорами; последовательныеволныинебольшоенасыщениеописаныFFF.",
+          "sourceIds": [
+            "n35a-marine-dossier",
+            "n35a-marine-fff"
+          ],
+          "locator": "pressp1sixdiffusers; FFFfinalparagraphmicro-nebulisation"
+        },
+        {
+          "id": "n35a-marine-sillage-2023-f7",
+          "claim": "Отчётмузеязафиксировал12530посетителейзатрибесплатныхдняоткрытия17–19November2023.",
+          "sourceIds": [
+            "n35a-marine-report"
+          ],
+          "locator": "annualreportkeyfiguresp11andp13"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "SillagedeMer: выбородногоизтрёхморскихобразов,авторствоLorson,общественноепространствовместокожи."
+      ],
+      "excludedClaimsRu": [
+        "Срокразработкидваили тригода;всемирноепервенство;экологическиепревосходствабезоценкиполногоцикла;недоказаннаяисторическаяформуламорскоговоздуха."
+      ]
+    },
+    {
+      "eventId": "n35b-fremont-award-2017",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35b-fremont-award-2017-f1",
+          "claim": "14 июня 2017 года на церемонии Fragrance Foundation в Alice Tully Hall Нью-Йорка Гарри Фремон был отмечен Perfumer of the Year Lifetime Achievement Award.",
+          "sourceIds": [
+            "n35b-fremont-date",
+            "n35b-fremont-award"
+          ],
+          "locator": "Daily Front Row opening paragraph and Getty captions June14,2017; P&F opening has been awarded"
+        },
+        {
+          "id": "n35b-fremont-award-2017-f2",
+          "claim": "В интервью Everfumed Фремон вспоминает занятие Monique Schlienger в Isipca: одна из проб сирени совпала с памятью о сирени из его сада и помогла выбрать профессию.",
+          "sourceIds": [
+            "n35b-fremont-interview"
+          ],
+          "locator": "You studied at Isipca; paragraph We had a wonderful lady..."
+        },
+        {
+          "id": "n35b-fremont-award-2017-f3",
+          "claim": "TFF описывает его сад в Калифорнии, запах лавра, посадки бобов, гороха, капусты и подсолнухов; сам Фремон связывает выращиваемые цветы с вдохновением.",
+          "sourceIds": [
+            "n35b-fremont-tff"
+          ],
+          "locator": "Paragraph Today Frémont and his wife Sylvie..."
+        },
+        {
+          "id": "n35b-fremont-award-2017-f4",
+          "claim": "В том же интервью TFF Фремон говорит о мускусе и необходимости пережить его на коже, а не ограничиваться блоттером.",
+          "sourceIds": [
+            "n35b-fremont-tff"
+          ],
+          "locator": "Paragraphs I’m always fascinated by musk; The problem with musk..."
+        },
+        {
+          "id": "n35b-fremont-award-2017-f5",
+          "claim": "P&F называет его первым штатным парфюмером центра Firmenich в Манхэттене; среди работ упоминает Romance, Japanese Cherry Blossom, Modern Muse и Mon Paris.",
+          "sourceIds": [
+            "n35b-fremont-award"
+          ],
+          "locator": "Opening paragraphs"
+        },
+        {
+          "id": "n35b-fremont-award-2017-f6",
+          "claim": "В Everfumed Фремон сравнивает садоводство и создание духов через терпение, видение, сочетание растений и необходимость не дать одному подавить другое; для работы с клиентом важны умение слушать, переводить комментарии в формулу и объяснять решения.",
+          "sourceIds": [
+            "n35b-fremont-interview"
+          ],
+          "locator": "Is gardening similar to perfumery in any ways?"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сирень из сада стала профессиональным открытием, а сад остался способом думать о композиции."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывается Фремону единоличное авторство совместных ароматов.",
+        "Позднейший сад и интервью не датируются днём церемонии."
+      ]
+    },
+    {
+      "eventId": "n35b-buzantian-award-2015",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35b-buzantian-award-2015-f1",
+          "claim": "17 июня 2015 года в Alice Tully Hall прошла церемония TFF; Энни Бузантьян получила Perfumer of the Year Lifetime Achievement Award.",
+          "sourceIds": [
+            "n35b-buzantian-date",
+            "n35b-buzantian-award"
+          ],
+          "locator": "W What/When/Where with year heading; P&F Fragrance has a Soul"
+        },
+        {
+          "id": "n35b-buzantian-award-2015-f2",
+          "claim": "TFF сообщает о звании Firmenich Master Perfumer в1988; Бузантьян пишет формулы от руки, даёт работам имена уже в процессе разработки.",
+          "sourceIds": [
+            "n35b-buzantian-tff"
+          ],
+          "locator": "HonoreeYear2015 paragraphs Annie became; Annie creates"
+        },
+        {
+          "id": "n35b-buzantian-award-2015-f3",
+          "claim": "В интервью Elysee Бузантьян вспоминает начало лабораторной работы в Нью-Йорке и обучение у Elie Roger, поверившего в её способности.",
+          "sourceIds": [
+            "n35b-buzantian-interview"
+          ],
+          "locator": "Opening English interview paragraphs"
+        },
+        {
+          "id": "n35b-buzantian-award-2015-f4",
+          "claim": "По её свидетельству, рабочая зелёная композиция уже называлась Antonia, когда Jan Ewoud Vos сообщил, что задумал аромат для матери Антонии, любившей зелёный; они продолжили работу вместе.",
+          "sourceIds": [
+            "n35b-buzantian-interview"
+          ],
+          "locator": "English paragraph The story of Antonia"
+        },
+        {
+          "id": "n35b-buzantian-award-2015-f5",
+          "claim": "Каталог Puredistance называет Antonia зелёным цветочным ароматом; заявляет жасмин, розу, иланг-иланг, ирис, зелень плюща, гальбанум, ваниль, ветивер; Puredistance I первоначально создан Бузантьян для себя.",
+          "sourceIds": [
+            "n35b-buzantian-catalog"
+          ],
+          "locator": "PDFpp11,15; PuredistanceI andAntonia"
+        },
+        {
+          "id": "n35b-buzantian-award-2015-f6",
+          "claim": "Репортаж P&F фиксирует её объяснение письма от руки желанием создавать без фокуса на цене.",
+          "sourceIds": [
+            "n35b-buzantian-award"
+          ],
+          "locator": "Fragrance has a Soul; Today she still writes..."
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Имя рабочего аромата может встретиться с личной историей заказчика."
+      ],
+      "excludedClaimsRu": [
+        "Не приводится вымышленный прямой диалог.",
+        "Год1988 относится к внутреннему званию,2015кнаградеTFF."
+      ]
+    },
+    {
+      "eventId": "n35b-benaim-award-2014",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35b-benaim-award-2014-f1",
+          "claim": "Карлос Бенаим получил Perfumer of the Year Lifetime Achievement Award на церемонии TFF16 июня2014 в Alice Tully Hall; пресс-релиз IFF опубликован20 июня и отдельно называет день церемонии.",
+          "sourceIds": [
+            "c-ralph-iff"
+          ],
+          "locator": "Opening paragraphs TheAwards ceremonywasheld..."
+        },
+        {
+          "id": "n35b-benaim-award-2014-f2",
+          "claim": "В сообщении IFF Бенаим благодарит за творческую свободу, сочетание искусства и науки и сотрудничество между центрами; источник различает самостоятельные и коллективные работы.",
+          "sourceIds": [
+            "c-ralph-iff"
+          ],
+          "locator": "Carlos quotation and FragranceCreations introduction"
+        },
+        {
+          "id": "n35b-benaim-award-2014-f3",
+          "claim": "Отец Бенаима был аптекарем в Марокко, увлекался извлечением эфирных масел; сам Бенаим учился у Эрнеста Шифтана.",
+          "sourceIds": [
+            "n35b-benaim-magnolia"
+          ],
+          "locator": "ThePerfumer"
+        },
+        {
+          "id": "n35b-benaim-award-2014-f4",
+          "claim": "В интервью Бенаим называет образование скорее ученичеством у BernardChant и ErnestShiftan, чем классической школой; запахи предлагал запоминать через слова и личные ассоциации.",
+          "sourceIds": [
+            "n35b-benaim-interview"
+          ],
+          "locator": "What is yourfirstscentmemory?; besttip"
+        },
+        {
+          "id": "n35b-benaim-award-2014-f5",
+          "claim": "Eau de Magnolia создан Бенаимом; дом описывает лимон, грейпфрут, бергамот и фруктовые оттенки персика/абрикоса в противопоставлении мху и пачули.",
+          "sourceIds": [
+            "n35b-benaim-magnolia"
+          ],
+          "locator": "Description"
+        },
+        {
+          "id": "n35b-benaim-award-2014-f6",
+          "claim": "Обзор Persolaise, опирающийся на фильм Malle, описывает исходную headspace-реконструкцию магнолии BrajaMookherjee и переработку темы ранее созданной Бенаимом свечи JurassicFlower в аромат для кожи.",
+          "sourceIds": [
+            "n35b-benaim-review"
+          ],
+          "locator": "Paragraphs Theconceptinquestion; Usingthisasastartingpoint"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "За впечатлением одного цветка стоит соединение наблюдения, анализа и композиции."
+      ],
+      "excludedClaimsRu": [
+        "Ноты не равны рецепту или доказательству натурального состава.",
+        "Перечень совместных работ не превращён в единоличное авторство."
+      ]
+    },
+    {
+      "eventId": "n35b-ostrom-century-scents-2015",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35b-ostrom-century-scents-2015-f1",
+          "claim": "22 октября2015 вышло электронное издание Perfume: A Century of Scents Лиззи Остром, CornerstoneDigital, ISBN9781473506084.",
+          "sourceIds": [
+            "n35b-ostrom-date"
+          ],
+          "locator": "Details Published22/10/2015,Imprint,ISBN"
+        },
+        {
+          "id": "n35b-ostrom-century-scents-2015-f2",
+          "claim": "В книге100ароматов, по10накаждоедесятилетие XXвека; рассматриваются создатели, рекламные кампании и носившие духи люди.",
+          "sourceIds": [
+            "n35b-ostrom-foundation"
+          ],
+          "locator": "Perfume: A Century of Scents section"
+        },
+        {
+          "id": "n35b-ostrom-century-scents-2015-f3",
+          "claim": "Persolaise отмечает культурный, не рейтинговый принцип отбора; среди неожиданных примеров ImpulseO2,HaiKarate,Mennen’sSkinBracer.",
+          "sourceIds": [
+            "n35b-ostrom-persolaise"
+          ],
+          "locator": "Opening review paragraphs"
+        },
+        {
+          "id": "n35b-ostrom-century-scents-2015-f4",
+          "claim": "StephanMatthews обращает внимание на соседство LynxиAvon сPiverиCaron и иллюстрации CynthiaKittler; исторический контекст сопровождает выбор ароматов.",
+          "sourceIds": [
+            "n35b-ostrom-matthews"
+          ],
+          "locator": "Reviewparagraphs3–6"
+        },
+        {
+          "id": "n35b-ostrom-century-scents-2015-f5",
+          "claim": "Остром, известная какOdetteToilette, с2010организует события, посвящённые запахам; издатель описывает переходы от тем космоса к галереям и прошлому.",
+          "sourceIds": [
+            "n35b-ostrom-date"
+          ],
+          "locator": "AboutLizzieOstrom"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Десять ароматов на десятилетие превращают историю духов в историю привычек и публичных образов."
+      ],
+      "excludedClaimsRu": [
+        "Не пересказываются сомнительные эпизоды об инъекциях духов или неподтверждённых датах старых ароматов.",
+        "Стоароматовнепредставленыкакобъективныйканон."
+      ]
+    },
+    {
+      "eventId": "n35b-herman-scent-subversion-2013",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35b-herman-scent-subversion-2013-f1",
+          "claim": "5 ноября2013 опубликовано Scent and Subversion: Decoding a Century of Provocative Perfume; дата открытой библиографической карточки GoogleBooks,ISBN9781493002023; автор подтверждает LyonsPress2013.",
+          "sourceIds": [
+            "n35b-herman-date",
+            "n35b-herman-author"
+          ],
+          "locator": "GoogleBooks heading publicationmetadata; authorBookpage"
+        },
+        {
+          "id": "n35b-herman-scent-subversion-2013-f2",
+          "claim": "Авторская страница сообщает о более300ароматах отFougèreRoyale1882 доDemeterLaundromat2000, более100старых рекламных изображений, глоссарии и советах коллекционеру.",
+          "sourceIds": [
+            "n35b-herman-author"
+          ],
+          "locator": "Bookdescriptionparagraphs2–3"
+        },
+        {
+          "id": "n35b-herman-scent-subversion-2013-f3",
+          "claim": "TheNonBlonde описывает три части: введение, обзоры по десятилетиям, современное/будущее; среди примеров IrisGris иGiorgioBeverlyHills; рядом заявленные ноты и сведения о реформулировках.",
+          "sourceIds": [
+            "n35b-herman-review"
+          ],
+          "locator": "Three majorparts; followingparagraph"
+        },
+        {
+          "id": "n35b-herman-scent-subversion-2013-f4",
+          "claim": "В интервью IdaMeister Херман рассказывает о блоге Yesterday’sPerfume с2008, решении писать книгу, уходе сработы в конце2009 и работе вНовомОрлеане; за помощью в разборе духов она обращалась к YannVasnier иOctavianCoifan.",
+          "sourceIds": [
+            "n35b-herman-interview"
+          ],
+          "locator": "Paragraphs Yesterday’sPerfume began; Barbara quote; following paragraphs"
+        },
+        {
+          "id": "n35b-herman-scent-subversion-2013-f5",
+          "claim": "PublishersWeekly описывает книгу как чтение политики, общественных норм и меняющихся идентичностей через запахи и рекламу; взгляд принадлежит автору, это не доказательство одинакового значения аромата для всех.",
+          "sourceIds": [
+            "n35b-herman-pw"
+          ],
+          "locator": "Reviewopeningparagraph"
+        },
+        {
+          "id": "n35b-herman-scent-subversion-2013-f6",
+          "claim": "В книге интервью сSisselTolaas,AntoineLie,MartynkaWawrzyniak, тоесть исторический каталог соединён с современными практиками.",
+          "sourceIds": [
+            "n35b-herman-author"
+          ],
+          "locator": "Bookdescriptionparagraph4"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Исторические духи рассматриваются через социальные роли и язык рекламы; за описаниями стоит работа с коллекциями и специалистами."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждаются юридические запреты или вред ингредиентов по старым рецензиям.",
+        "Не присваивается статус первого в мире художественнымпроектам."
+      ]
+    },
+    {
+      "eventId": "n35b-aftel-museum-scent-uk-2023",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35b-aftel-museum-scent-uk-2023-f1",
+          "claim": "10 октября2023 — дата британского выпуска TheMuseumofScent МэндиАфтель у официального дистрибьютораACCArtBooks; AbbevillePress,ISBN9780789214713, территория исключаетСША/Канаду/ПуэртоРико/Австралию.",
+          "sourceIds": [
+            "n35b-museum-date"
+          ],
+          "locator": "Specifications Published10thOct2023; Territory; Publisher/ISBN"
+        },
+        {
+          "id": "n35b-aftel-museum-scent-uk-2023-f2",
+          "claim": "Книга вдохновлена однокомнатным AftelArchiveofCuriousScents вБеркли, открытымв2017; включает ботанические семейства, старые флаконы эфирных масел, рукописные рецепты и другие артефакты.",
+          "sourceIds": [
+            "n35b-museum-date",
+            "n35b-museum-review"
+          ],
+          "locator": "ACCdescription; Kirkusopeningreview"
+        },
+        {
+          "id": "n35b-aftel-museum-scent-uk-2023-f3",
+          "claim": "Афтель вручную раскрасила старые ботанические гравюры; в интервьюP&F она уточняет TheatrumBotanicum1640, оригинальное издание которого хранит архив.",
+          "sourceIds": [
+            "n35b-museum-date",
+            "n35b-museum-interview"
+          ],
+          "locator": "ACCillustratedbullet; P&F Theimageryissobeautiful"
+        },
+        {
+          "id": "n35b-aftel-museum-scent-uk-2023-f4",
+          "claim": "По словамАфтель, книга предназначена тем, кто не может приехать в музей, и тем, кто хочет узнать больше; иллюстрации и предметы позволили расширить рассказ.",
+          "sourceIds": [
+            "n35b-museum-interview"
+          ],
+          "locator": "Whatwerethedriverstocreatethebook?"
+        },
+        {
+          "id": "n35b-aftel-museum-scent-uk-2023-f5",
+          "claim": "В комплекте ароматизированная закладка в запечатанном пакетике; рецензентAromaWeb получил экземпляр с мускатнымшалфеем, не утверждает одинаковую эссенцию во всех тиражах.",
+          "sourceIds": [
+            "n35b-museum-date",
+            "n35b-museum-bookmark"
+          ],
+          "locator": "ACCincludesabookmark; AromaWebreviewparagraphbookmark"
+        },
+        {
+          "id": "n35b-aftel-museum-scent-uk-2023-f6",
+          "claim": "ОглавлениеAromaWeb перечисляет главы PerfumeOrgan,TheFlowerFamily,TheWoodsFamily,TheLeavesandGrassesFamily,TheResinsFamily,TheRimmelCollection.",
+          "sourceIds": [
+            "n35b-museum-bookmark"
+          ],
+          "locator": "TableofContents"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Книжный музей соединяет раскрашенную старую ботанику, предметы и запах вложенной закладки."
+      ],
+      "excludedClaimsRu": [
+        "Не называется первыммузеемароматоввСША.",
+        "Не утверждается,что все закладки пахнут шалфеем или что натуральное сырьё превосходит синтетическое."
+      ]
+    },
+    {
+      "eventId": "n35b-art-flavor-publication-2017",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35b-art-flavor-publication-2017-f1",
+          "claim": "1 августа2017 опубликована TheArt ofFlavor:PracticesandPrinciplesforCreatingDeliciousFood, DanielPatterson/MandyAftel,Riverhead; датаNetGalleyиздателя совпадает сReleaseOverDrive и поздравлениемRoseBeranbaum.",
+          "sourceIds": [
+            "n35b-flavor-date",
+            "n35b-flavor-library",
+            "n35b-flavor-rose"
+          ],
+          "locator": "NetGalleyPubDateAug012017;OverDriveRelease;RoseheadingHappyPubDateAugust1,2017"
+        },
+        {
+          "id": "n35b-art-flavor-publication-2017-f2",
+          "claim": "Книга объединяет профессиональный опыт шефаПаттерсона и парфюмераАфтель; предлагаетFourRules,FlavorCompass,SevenDials,locking/burying.",
+          "sourceIds": [
+            "n35b-flavor-date"
+          ],
+          "locator": "PublisherDescription"
+        },
+        {
+          "id": "n35b-art-flavor-publication-2017-f3",
+          "claim": "RoseBeranbaum приводит4принципа:похожимингредиентамконтраст,контрастнымсвязь,тяжёлымлёгкийакцент,лёгкимопора; в её свидетельстве Паттерсон и Афтель были её друзьями, Афтель создала для неё духи.",
+          "sourceIds": [
+            "n35b-flavor-rose"
+          ],
+          "locator": "FourRuleslist;openingreview"
+        },
+        {
+          "id": "n35b-art-flavor-publication-2017-f4",
+          "claim": "ВPW авторы объясняютburyingкакподавлениесильногоакцента,lockingкаксоединениесновым/большимэффектом; Афтель приводитсочетаниепомидоровскорициивместопривычногобазилика.",
+          "sourceIds": [
+            "n35b-flavor-interview"
+          ],
+          "locator": "ParagraphsThebookalsofeatures;Showingreaders..."
+        },
+        {
+          "id": "n35b-art-flavor-publication-2017-f5",
+          "claim": "Kirkus описываетпримерцветнойкапустысподжареннымкумином;подрумяненноемасло,вотличиеотнеподрумяненного,лучшеотвечаетсильнойпряности.",
+          "sourceIds": [
+            "n35b-flavor-review"
+          ],
+          "locator": "ReviewexampleCookedcauliflower..."
+        },
+        {
+          "id": "n35b-art-flavor-publication-2017-f6",
+          "claim": "ЦельавтороввPW—помочькулинарувидетьсвязи,которыепрофессионалыиспользуютинтуитивно,иполучитьсвободуэксперимента.",
+          "sourceIds": [
+            "n35b-flavor-interview"
+          ],
+          "locator": "ClosingparagraphsPattersonsays...Afteladded..."
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Профессиональный язык парфюмера помогает повару думать о сочетаниях, а не только следовать рецепту."
+      ],
+      "excludedClaimsRu": [
+        "Не приводятсядозировкиили рецепты духов для еды.",
+        "Авторскиеориентирынеобъявляютсяуниверсальныминаучнымизаконами."
+      ]
+    },
+    {
+      "eventId": "n35b-no12-meeting-2018",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35b-no12-meeting-2018-f1",
+          "claim": "9 июля 2018 года Натали Фейстхауэр приехала в Гронинген на первую встречу с Puredistance; она привезла 11 проб, первой была Gold Taffeta.",
+          "sourceIds": [
+            "n35b-no12-meeting"
+          ],
+          "locator": "PDF p1 sequence starting June5,2018, then July9; eleven perfumes and Gold Taffeta"
+        },
+        {
+          "id": "n35b-no12-meeting-2018-f2",
+          "claim": "По рассказу Jan Ewoud Vos, встреча проходила в офисе в старой церкви; в письме 12 августа он предложил работать над No.12 вместо Gold.",
+          "sourceIds": [
+            "n35b-no12-meeting"
+          ],
+          "locator": "PDF pp1–2; August12 letter; No12 last of collection"
+        },
+        {
+          "id": "n35b-no12-meeting-2018-f3",
+          "claim": "Фейстхауэр в собственном тексте описывает работу в Монмартре, интерес команды к Taffeta, несколько лет разработки и ноты нарцисса, жасмина, османтуса, ириса, розы, пачули и шипровые грани.",
+          "sourceIds": [
+            "n35b-no12-perfumer"
+          ],
+          "locator": "Article September19,2021; paragraphs Three years ago; When they visited; In the fragrance"
+        },
+        {
+          "id": "n35b-no12-meeting-2018-f4",
+          "claim": "В интервью Everfumed она описывает чтение задания, образы и текстуры, последовательную доработку проб, неожиданные предложения вне задания; независимость позволяет прямое общение с арт-директорами.",
+          "sourceIds": [
+            "n35b-no12-method"
+          ],
+          "locator": "How do you approach each new perfume project?; When did you decide to go independent?"
+        },
+        {
+          "id": "n35b-no12-meeting-2018-f5",
+          "claim": "Обзор Elena Cvjetkovic вышел 26 октября 2021 года; автор выдержала флакон 30 дней, описывает Ambroxan, древесно-мускусные, солоноватые и пачулиевые впечатления.",
+          "sourceIds": [
+            "n35b-no12-review"
+          ],
+          "locator": "Opening paragraphs after It took me...; drydown paragraphs"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Рабочая проба Gold Taffeta стала началом другого аромата: Puredistance No.12."
+      ],
+      "excludedClaimsRu": [
+        "Не используется первоначально планировавшийся запуск2020 как состоявшийся.",
+        "Ноты не выдаются за полный состав."
+      ]
+    },
+    {
+      "eventId": "n35b-lelabo-agreement-2014",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35b-lelabo-agreement-2014-f1",
+          "claim": "15 октября 2014 года ELC объявила о подписанном соглашении о приобретении Le Labo; завершение ожидалось в ноябре.",
+          "sourceIds": [
+            "n35b-lelabo-agreement"
+          ],
+          "locator": "Dateline October15,2014; opening announced today; expected to close in November2014"
+        },
+        {
+          "id": "n35b-lelabo-agreement-2014-f2",
+          "claim": "Le Labo основали в2006 Fabrice Penot и Eddie Roschi; бренд указывает первую лабораторию по адресу233 Elizabeth Street, Nolita, NewYork.",
+          "sourceIds": [
+            "n35b-lelabo-agreement",
+            "n35b-lelabo-roots"
+          ],
+          "locator": "Release founders paragraph; AboutUs ROOTS"
+        },
+        {
+          "id": "n35b-lelabo-agreement-2014-f3",
+          "claim": "В сообщении2014 персонализация описана как часть клиентского опыта, упомянуты ароматы, уход, свечи и региональные City Exclusives.",
+          "sourceIds": [
+            "n35b-lelabo-agreement"
+          ],
+          "locator": "Release paragraphs Founded in2006; In addition to its core collection"
+        },
+        {
+          "id": "n35b-lelabo-agreement-2014-f4",
+          "claim": "По рассказу Le Labo, Another13 возник в2010 из сотрудничества с AnOther Magazine, Jefferson Hack и Sarah из Colette; марка описывает ambroxyde, жасмин и мох.",
+          "sourceIds": [
+            "n35b-lelabo-another"
+          ],
+          "locator": "Product description2010 commissioned; next paragraph selected ingredients"
+        },
+        {
+          "id": "n35b-lelabo-agreement-2014-f5",
+          "claim": "Нынешняя программа рефилов предусматривает повторное наполнение тем же ароматом и новый персонализированный ярлык с датой; это позднейшая практика, не датированная2014.",
+          "sourceIds": [
+            "n35b-lelabo-refill"
+          ],
+          "locator": "FAQ refill process; new label; same scent and size"
+        },
+        {
+          "id": "n35b-lelabo-agreement-2014-f6",
+          "claim": "Годовой отчёт ELC за2015 фиксирует состоявшееся приобретение Le Labo в ноябре2014.",
+          "sourceIds": [
+            "n35b-el-annual2015"
+          ],
+          "locator": "Business brand profile Le Labo; Note6 Acquisition of Businesses"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Персональная этикетка и небольшая лаборатория встретились с масштабом международной компании."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждается, что рефилы запущены15Oct2014.",
+        "Не выдаётся описание нот за формулу."
+      ]
+    },
+    {
+      "eventId": "n35b-malle-agreement-2014",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35b-malle-agreement-2014-f1",
+          "claim": "7 ноября 2014 года ELC объявила о подписанном соглашении о приобретении Éditions de Parfums Frédéric Malle; завершение ожидалось в январе2015.",
+          "sourceIds": [
+            "n35b-malle-agreement"
+          ],
+          "locator": "Published Nov7,2014 08:01EST; opening announced today; expected January2015"
+        },
+        {
+          "id": "n35b-malle-agreement-2014-f2",
+          "claim": "На момент объявления дом, основанный в2000, представлял21аромат от12парфюмеров и имел5собственных бутиков вПариже иНью-Йорке.",
+          "sourceIds": [
+            "n35b-malle-agreement"
+          ],
+          "locator": "Release Established in2000; Over the last14years"
+        },
+        {
+          "id": "n35b-malle-agreement-2014-f3",
+          "claim": "Vogue7Nov2014 объясняет издательскую модель и имена парфюмеров на флаконах; примерыCarnalFlowerDominiqueRopion иIrisPoudrePierreBourdon.",
+          "sourceIds": [
+            "n35b-malle-vogue"
+          ],
+          "locator": "Opening paragraphs and signatureperfumers paragraph"
+        },
+        {
+          "id": "n35b-malle-agreement-2014-f4",
+          "claim": "В интервью VanityFair2014 Маль сравнивает свою работу с издательством и связывает портреты авторов с посещённой в детстве галереей Gallimard.",
+          "sourceIds": [
+            "n35b-malle-publisher"
+          ],
+          "locator": "Paragraphs Personally I come...; In each one...; small gallery"
+        },
+        {
+          "id": "n35b-malle-agreement-2014-f5",
+          "claim": "В статье InteriorDesign2017 парижский бутик Jakob+MacFarlane имеет отражающие поверхности, фанерные ячейки и портреты парфюмеров; smellingcolumns позволяют воспринимать аромат в отдельном объёме воздуха.",
+          "sourceIds": [
+            "n35b-malle-space"
+          ],
+          "locator": "Article2017; paragraphs Architects DominiqueJakob...; three transparent smelling columns"
+        },
+        {
+          "id": "n35b-malle-agreement-2014-f6",
+          "claim": "Годовой отчёт ELC фиксирует завершённое приобретение FrédéricMalle вянваре2015.",
+          "sourceIds": [
+            "n35b-el-annual2015"
+          ],
+          "locator": "Business brand profile Editions; Note6 AcquisitionofBusinesses"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Парфюмерный издатель сделал подпись автора частью знакомства с ароматом."
+      ],
+      "excludedClaimsRu": [
+        "Маль не называется автором парфюмерных формул.",
+        "Имена парфюмеров не объявлены мировым первенством дома."
+      ]
+    },
+    {
+      "eventId": "n35c-mcgann-review",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35c-mcgann-review-f1",
+          "claim": "Обзор Макганна опубликован в Science,356(6338),12 мая2017; дата печатного выпуска.",
+          "sourceIds": [
+            "n35c-mcgann"
+          ],
+          "locator": "Published in final edited form: Science.2017May12;356(6338):eaam7263"
+        },
+        {
+          "id": "n35c-mcgann-review-f2",
+          "claim": "Макганн прослеживает связь мифа с категоризацией Брока, относительными размерами луковиц, лобными долями и свободой воли.",
+          "sourceIds": [
+            "n35c-mcgann",
+            "n35c-mcgann-rutgers",
+            "n35c-roberts"
+          ],
+          "locator": "Broca, religion, and the myth of microsmatic humans; Rutgers paragraphs In Broco’s1879 writings / long cultural belief; Roberts PDFpp1–2 Broca1879"
+        },
+        {
+          "id": "n35c-mcgann-review-f3",
+          "claim": "Абсолютный размер человеческой луковицы больше мышиной; численность нейронов не даёт ожидаемой простой видовой иерархии.",
+          "sourceIds": [
+            "n35c-mcgann",
+            "n35c-roberts"
+          ],
+          "locator": "Olfactory bulb: One size fits all?; Roberts PDFpp2–3"
+        },
+        {
+          "id": "n35c-mcgann-review-f4",
+          "claim": "Робертс обсуждает участие запахов в памяти, эмоциях и поведении.",
+          "sourceIds": [
+            "n35c-roberts"
+          ],
+          "locator": "PDFp3 When it comes to how odour influences behaviour"
+        },
+        {
+          "id": "n35c-mcgann-review-f5",
+          "claim": "Макганн изучает взаимодействие обучения и сенсорной обработки, пластичность человеческого и мышиного обоняния.",
+          "sourceIds": [
+            "n35c-mcgann-lab"
+          ],
+          "locator": "Research Interests"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Связь опыта исследования с чтением парфюмерии и разбор границ вывода — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Повод — печатный номер12May, не пресс-дата11May. Исключены триллион запахов, абсолютное превосходство человека и пересказ опыта шоколадного следа. Пересказ распределён между обзором, научным комментарием и институциональным профилем; выводы в последних предложениях — собственный анализ."
+      ]
+    },
+    {
+      "eventId": "n35c-labels-neuron",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35c-labels-neuron-f1",
+          "claim": "Статья Cognitive Modulation of Olfactory Processing вышла в Neuron46,671–679,19May2005.",
+          "sourceIds": [
+            "n35c-labels"
+          ],
+          "locator": "PDFp1 header/title/authors"
+        },
+        {
+          "id": "n35c-labels-neuron-f2",
+          "claim": "Один стимул: изовалериановая кислота с cheddar cheese flavor; подписи cheddar cheese/body odor меняли приятность.",
+          "sourceIds": [
+            "n35c-labels"
+          ],
+          "locator": "PDFp1 Summary and Results, Fig1"
+        },
+        {
+          "id": "n35c-labels-neuron-f3",
+          "claim": "В fMRI реакция ACC/medialOFC соотносилась с приятностью; оценки —не полное прочтение субъективного опыта.",
+          "sourceIds": [
+            "n35c-labels",
+            "n35c-labels-review"
+          ],
+          "locator": "PDFp1Summary; review Top-Down Cognitive Modulation"
+        },
+        {
+          "id": "n35c-labels-neuron-f4",
+          "claim": "Роллс обсуждает learned top-down modulation, её гипотетический механизм и усиление эффекта при слабом/неоднозначном входе.",
+          "sourceIds": [
+            "n35c-labels-review"
+          ],
+          "locator": "Top-Down Cognitive Modulation paragraphs beginning I propose; Given that fact"
+        },
+        {
+          "id": "n35c-labels-neuron-f5",
+          "claim": "В2001 Herz/vonClef исследовали пять запахов, включая violet leaf/patchouli, в двух сессиях через неделю с положительными/отрицательными подписями; подписи влияли на оценки.",
+          "sourceIds": [
+            "n35c-herz-labels"
+          ],
+          "locator": "Abstract, five odors; two different sessions separated by one week; Results"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Связь опыта исследования с чтением парфюмерии и разбор границ вывода — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Дата из заголовка печатного PDF, не DOIмесяцилиOpenAlex01May. Не утверждаются изменение химии смеси или всевластие названия; механизм обучения в обзоре явно предложен как гипотеза. Совокупный пересказ основных фактов2005≈190слов RU+EN; обзор2011<200; остальное редакционный разбор."
+      ]
+    },
+    {
+      "eventId": "n35c-sleep-tones",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35c-sleep-tones-f1",
+          "claim": "Nature Neuroscience опубликовал исследование Humans can learn new information during sleep26Aug2012.",
+          "sourceIds": [
+            "n35c-sleep-date"
+          ],
+          "locator": "Published26August2012; Abstract"
+        },
+        {
+          "id": "n35c-sleep-tones-f2",
+          "claim": "Исследование сочетало тоны с приятными/неприятными запахами и проверяло вдохи на отдельные тоны во сне и после пробуждения.",
+          "sourceIds": [
+            "n35c-sleep-date",
+            "n35c-sleep-institute"
+          ],
+          "locator": "Abstract; institute paragraphs In the experiments/The next day"
+        },
+        {
+          "id": "n35c-sleep-tones-f3",
+          "claim": "Сон контролировали; приятные запахи давали более глубокие вдохи, неприятные — более короткие; перенесённая реакция не сопровождалась осознанным воспоминанием обучения.",
+          "sourceIds": [
+            "n35c-sleep-institute"
+          ],
+          "locator": "paragraphs The researchers found/In the experiments/The next day"
+        },
+        {
+          "id": "n35c-sleep-tones-f4",
+          "claim": "Перенос в бодрствование выявлен после обучения в nonREM; различены реагирование во сне и последующий перенос.",
+          "sourceIds": [
+            "n35c-sleep-institute"
+          ],
+          "locator": "The team then asked; Surprisingly they found"
+        },
+        {
+          "id": "n35c-sleep-tones-f5",
+          "claim": "Стикголд отличает ассоциирование простых тонов с запахами от классического изучения фактов и сложного материала во сне.",
+          "sourceIds": [
+            "n35c-sleep-comment"
+          ],
+          "locator": "PDFp1 headline/subheading and paragraphs But in Arzi et al’s study; p2 concluding limitations"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Связь опыта исследования с чтением парфюмерии и разбор границ вывода — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Online26Aug2012, не October print и не5Octinstitution release. Никаких обещаний обучения парфюмерии/языку во сне. Последний абзац — интерпретация наблюдаемого дизайна, а не переживаний добровольцев."
+      ]
+    },
+    {
+      "eventId": "n35c-spatial-memory",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35c-spatial-memory-f1",
+          "claim": "Статья An intrinsic association between olfactory identification and spatial memory in humans опубликована16Oct2018.",
+          "sourceIds": [
+            "n35c-spatial"
+          ],
+          "locator": "PDFlastpage Published online16October2018"
+        },
+        {
+          "id": "n35c-spatial-memory-f2",
+          "claim": "Участники изучали виртуальный город и искали маршруты; тест узнавания включал40запахов, в том числе basil/strawberry/cinnamon; результаты связаны.",
+          "sourceIds": [
+            "n35c-spatial-release"
+          ],
+          "locator": "paragraph To test correlation; Participants were then asked"
+        },
+        {
+          "id": "n35c-spatial-memory-f3",
+          "claim": "В dual-solutionmaze связь с запахами прежде всего у spatiallearners,неresponselearners.",
+          "sourceIds": [
+            "n35c-spatial"
+          ],
+          "locator": "PDFpp2–3 Results and Fig2"
+        },
+        {
+          "id": "n35c-spatial-memory-f4",
+          "claim": "MRI связывает обе способности с right hippocampus/leftmOFC; lesionsmOFC дают трудности обеих задач.",
+          "sourceIds": [
+            "n35c-spatial-release",
+            "n35c-spatial"
+          ],
+          "locator": "release paragraphs The researchers used/Since the mOFC; paper Abstract"
+        },
+        {
+          "id": "n35c-spatial-memory-f5",
+          "claim": "Jacobs предлагает olfactoryspatialhypothesis с навигацией как основнойфункцией; Bohbot отделяет теорию эволюции от того, что непосредственно показала работа.",
+          "sourceIds": [
+            "n35c-spatial-jacobs",
+            "n35c-spatial-release"
+          ],
+          "locator": "Jacobs PDFp1Abstract; release final Bohbotquotation"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Связь опыта исследования с чтением парфюмерии и разбор границ вывода — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "16Oct online,19Octpressrelease. Не пахучий виртуальный лабиринт и не повтор шоколадного следа2006. Корреляция не превращена в причинное улучшение памяти парфюмерией; эволюция явно гипотеза."
+      ]
+    },
+    {
+      "eventId": "n35c-vanilla-enzyme",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35c-vanilla-enzyme-f1",
+          "claim": "Gallage et al.article опубликована19June2014; предложена VpVAN,прямо превращающая ferulicacid вvanillin.",
+          "sourceIds": [
+            "n35c-vanilla"
+          ],
+          "locator": "Bibliographicheader2014Jun19; Abstract"
+        },
+        {
+          "id": "n35c-vanilla-enzyme-f2",
+          "claim": "Статья описывает превращение кислоты/глюкозида вvanillin/glucoside, хранениеvanillinкакglucoside.",
+          "sourceIds": [
+            "n35c-vanilla"
+          ],
+          "locator": "Abstract; introduction In the pod it is produced and stored"
+        },
+        {
+          "id": "n35c-vanilla-enzyme-f3",
+          "claim": "Копенгаген сообщает о сотрудничестве сEvolva и более200соединениях натуральнойванили.",
+          "sourceIds": [
+            "n35c-vanilla-release"
+          ],
+          "locator": "Global race won through collaboration; Background info/Vanillin"
+        },
+        {
+          "id": "n35c-vanilla-enzyme-f4",
+          "claim": "Позднейшийviewpoint обсуждает неудачное воспроизведениеYang2017, ответы Gallage2018 и гипотезу белкового комплекса.",
+          "sourceIds": [
+            "n35c-vanilla-debate"
+          ],
+          "locator": "Vanillin biosynthesis, paragraphs Indeed Yang; The differences; Dixon"
+        },
+        {
+          "id": "n35c-vanilla-enzyme-f5",
+          "claim": "Viewpoint сопоставляет положительные plantcultureработы с отсутствием прямого теста catalyticactivityвних.",
+          "sourceIds": [
+            "n35c-vanilla-debate"
+          ],
+          "locator": "Vanillin biosynthesis, Independent studies; Although neither study"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Связь опыта исследования с чтением парфюмерии и разбор границ вывода — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Не выдавать2014решение за окончательное. КритикаYang2017дана через реально прочитанный научныйviewpoint, сам заблокированныйYangURLне зарегистрирован. Более поздние разные результаты представлены сбалансированно, без назначения победителя.20Junepressdateнеповод."
+      ]
+    },
+    {
+      "eventId": "n35c-lavender-genome",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35c-lavender-genome-f1",
+          "claim": "Исследование Jingxun2 опубликовано01March2021; сборка894.50Mb/27pseudochromosomes.",
+          "sourceIds": [
+            "n35c-lavender"
+          ],
+          "locator": "Published01March2021; Abstract"
+        },
+        {
+          "id": "n35c-lavender-genome-f2",
+          "claim": "Jingxun2 относитсякL.angustifolia; highlinalool/linalylacetate lowcamphor; изучениеgeneterpenoidnetworks.",
+          "sourceIds": [
+            "n35c-lavender"
+          ],
+          "locator": "Introduction paragraphs Lavender grows; gene-terpenoid networks"
+        },
+        {
+          "id": "n35c-lavender-genome-f3",
+          "claim": "Ши объясняет потенциальную диверсификацию копий; дваwholegenomeduplication, расширениеterpenoidgenes, рольпахучихсоединенийвзащитепривлечениинасекомых.",
+          "sourceIds": [
+            "n35c-lavender-release"
+          ],
+          "locator": "paragraphs Their results; Explaining their observations; Upon further analysis"
+        },
+        {
+          "id": "n35c-lavender-genome-f4",
+          "claim": "Улучшенные устойчивые сорта и масла предложены как будущаявозможность.",
+          "sourceIds": [
+            "n35c-lavender-release"
+          ],
+          "locator": "final DrShi paragraphs"
+        },
+        {
+          "id": "n35c-lavender-genome-f5",
+          "claim": "Philippe etal сопоставляютchemicalfingerprints+DNAbarcoding, ограничения близкихвидов и пользу совмещенияметодов.",
+          "sourceIds": [
+            "n35c-lavender-auth"
+          ],
+          "locator": "Discussion/Genetic analysis/Association of chemical analysis and genetic analysis"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Связь опыта исследования с чтением парфюмерии и разбор границ вывода — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Повод01March2021article,не17Mayrelease. Никаких лечебных эффектов лаванды, всемирного первенства сборки, точной формулы масла или утверждения, что новые устойчивые сорта уже выведены. DNAauthentication — самостоятельный последующий контекст, не второе событие этого рассказа."
+      ]
+    },
+    {
+      "eventId": "n35c-galaxolide-genetics",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35c-galaxolide-genetics-f1",
+          "claim": "Статья From musk to body odor опубликована03Feb2022; Galaxolide intensity связана с OR4D6variants.",
+          "sourceIds": [
+            "n35c-musk"
+          ],
+          "locator": "PublishedFebruary3,2022; DiscussionOR4D6/Galaxolide"
+        },
+        {
+          "id": "n35c-galaxolide-genetics-f2",
+          "claim": "IFF описываетGalaxolideкакclean persistentmusk approachingmacrocyclictone; applicationsfinefragrance/detergent/fabricconditioner.",
+          "sourceIds": [
+            "n35c-musk-iff"
+          ],
+          "locator": "Olfactive Description; Product Performance Stabilitytable"
+        },
+        {
+          "id": "n35c-galaxolide-genetics-f3",
+          "claim": "1000HanChinese/10odors, набраны364validation/6odors; результатыгенетики проверялись между группами.",
+          "sourceIds": [
+            "n35c-musk-release"
+          ],
+          "locator": "paragraph Everyone experiences smells"
+        },
+        {
+          "id": "n35c-galaxolide-genetics-f4",
+          "claim": "Galaxolide/OR4D6 не подтверждён cellassay иззаsolubility; это генетическаясвязь, не прямой функциональныйтест.",
+          "sourceIds": [
+            "n35c-musk"
+          ],
+          "locator": "Discussion paragraph Due to solubility issues"
+        },
+        {
+          "id": "n35c-galaxolide-genetics-f5",
+          "claim": "Материалысемействамускусовразноструктурны; specificanosmiaможетбытьне ковсеммускусам.",
+          "sourceIds": [
+            "n35c-musk"
+          ],
+          "locator": "Introduction/Galaxolide: A musk compound"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Связь опыта исследования с чтением парфюмерии и разбор границ вывода — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Не повторять сюжетандростенонаOR7D4. ТолькоGalaxolide,синтетическиймускусиразличиеgeneticassociation/cellassay.364набранныхне357послеQC. Никаких персональныхгенетическихдиагнозовпоодномуфлакону,эволюционнойдеградациивсегообонянияилизаявленийопервенстве."
+      ]
+    },
+    {
+      "eventId": "n35c-sandalore-receptor",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35c-sandalore-receptor-f1",
+          "claim": "Статья Chéret etal опубликована18Sept2018; Sandalore стимулируетOR2AT4hairfolliclesexvivo.",
+          "sourceIds": [
+            "n35c-sandalore"
+          ],
+          "locator": "Published18September2018; Abstract"
+        },
+        {
+          "id": "n35c-sandalore-receptor-f2",
+          "claim": "ОписаниеGivaudanнаsupplierстранице: warmnatural sandalwoodcharacter,diffusive,persistent; материалsynthetic.",
+          "sourceIds": [
+            "n35c-sandalore-product",
+            "n35c-sandalore"
+          ],
+          "locator": "Odor Description CourtesyofGivaudan; articleAbstract synthetic sandalwoododorant"
+        },
+        {
+          "id": "n35c-sandalore-receptor-f3",
+          "claim": "УчастникRalfPaus объясняет замысел через OR2AT4вкоже и сходныемолекулярныеинструментыskinrepair/hairgrowth.",
+          "sourceIds": [
+            "n35c-sandalore-manchester"
+          ],
+          "locator": "Media contributions/NewScientist description paragraphs2–3"
+        },
+        {
+          "id": "n35c-sandalore-receptor-f4",
+          "claim": "Исследование exvivo показываетanagenmaintenance; OR2AT4antagonistPheniratиgenesilencingподдерживаютreceptorspecificeffect.",
+          "sourceIds": [
+            "n35c-sandalore"
+          ],
+          "locator": "Abstract; Introduction; Results/Anagen-prolonging effect is OR2AT4specific"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Связь опыта исследования с чтением парфюмерии и разбор границ вывода — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Не утверждается,что волосы ощущаютсандал какчеловек,илиготовыедухилечатвыпадениеволос. Exvivoпрямообозначено. Формула,дозировкаиинструкцияпоприменениюнеприводятся. Стойкостьсырья—описаниепоставщика,непрогнозноскиготовойкомпозиции."
+      ]
+    },
+    {
+      "eventId": "n35r-devilbiss-patent-1888",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35r-devilbiss-patent-1888-f1",
+          "claim": "Аллену Девилбиссу выдан патент US378357 21 февраля 1888 года.",
+          "sourceIds": [
+            "n35r-devilbiss-wood"
+          ],
+          "locator": "Catalog Record, Note Type Citation / US patent 378,357, February 21,1888"
+        },
+        {
+          "id": "n35r-devilbiss-patent-1888-f2",
+          "claim": "Разработка для врачебной практики, поворотные наконечники и масляные растворы.",
+          "sourceIds": [
+            "n35r-devilbiss-wood"
+          ],
+          "locator": "Opening description; Historical notes, rotating spray nozzle and oil-based solutions"
+        },
+        {
+          "id": "n35r-devilbiss-patent-1888-f3",
+          "claim": "Томас присоединился к компании в 1905 году и расширил ассортимент парфюмерными атомайзерами.",
+          "sourceIds": [
+            "n35r-devilbiss-smithsonian"
+          ],
+          "locator": "Description, Thomas A. DeVilbiss"
+        },
+        {
+          "id": "n35r-devilbiss-patent-1888-f4",
+          "claim": "Парфюмерная линия появилась в 1907 году; каталог и оригинальные издания 1925–1939 демонстрируют ар-деко.",
+          "sourceIds": [
+            "n35r-devilbiss-cmog-blog"
+          ],
+          "locator": "Main text paragraphs1–2"
+        },
+        {
+          "id": "n35r-devilbiss-patent-1888-f5",
+          "claim": "Чёрный флакон около 1920-х: латунные завитки, шёлковая сетка и шнур.",
+          "sourceIds": [
+            "n35r-devilbiss-detroit"
+          ],
+          "locator": "Object1998.004.003, Description and Date"
+        },
+        {
+          "id": "n35r-devilbiss-patent-1888-f6",
+          "claim": "Lady Gray Rose с King Tut, около1927; Victor Durand, Vineland, DeVilbiss.",
+          "sourceIds": [
+            "n35r-devilbiss-cmog-object"
+          ],
+          "locator": "Object2002.4.37, Designer/Factory/Maker/Date"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сравнения и выводы о способе встречи с ароматом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Патент не является датой запуска парфюмерного флакона. В музейных карточках расходится год рождения Девилбисса — биографические годы исключены. Приблизительные датировки предметов не используются как календарный повод. Прямой патент Google не открылся; дата подтверждена прочитанной музейной библиографией."
+      ]
+    },
+    {
+      "eventId": "n35r-iff-amber-isomer-patent-1975",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35r-iff-amber-isomer-patent-1975-f1",
+          "claim": "Патент US3929677 выдан 30.12.1975 Холлу и Сандерсу, IFF; применение амбровых материалов и определённого изомера.",
+          "sourceIds": [
+            "n35r-iso-patent"
+          ],
+          "locator": "Front matter [45]/[75]/[73]; The Invention; lines448–454,526–568"
+        },
+        {
+          "id": "n35r-iff-amber-isomer-patent-1975-f2",
+          "claim": "В патенте названы смеси и отдельный изомер, сочетания с бергамотом, ветивером, пачули и сандалом.",
+          "sourceIds": [
+            "n35r-iso-patent"
+          ],
+          "locator": "The Invention, paragraphs on isomer mixtures and auxiliary perfume adjuvants, lines533–568"
+        },
+        {
+          "id": "n35r-iff-amber-isomer-patent-1975-f3",
+          "claim": "IFF описывает Iso E Super как гладкий древесно-амбровый материал с бархатным ощущением и большей долей гамма-изомера, чем Isocyclemone.",
+          "sourceIds": [
+            "n35r-iso-iff"
+          ],
+          "locator": "Olfactive Description"
+        },
+        {
+          "id": "n35r-iff-amber-isomer-patent-1975-f4",
+          "claim": "Шён обсуждает материал отдельно и в смесях, используя кулинарное сравнение.",
+          "sourceIds": [
+            "n35r-iso-schoen"
+          ],
+          "locator": "Interview bullets In cooking / It doesn’t have to be solo, lines320–321"
+        },
+        {
+          "id": "n35r-iff-amber-isomer-patent-1975-f5",
+          "claim": "Molecule01 и Escentric01 различаются; во втором65% fragrance compound, лайм, гедион, ирис, мускус.",
+          "sourceIds": [
+            "n35r-iso-pair"
+          ],
+          "locator": "Main answer paragraphs1–2"
+        },
+        {
+          "id": "n35r-iff-amber-isomer-patent-1975-f6",
+          "claim": "В ингредиентах Molecule01 указаны Alcohol Denat., Parfum, Aqua.",
+          "sourceIds": [
+            "n35r-iso-product"
+          ],
+          "locator": "Ingredients"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сравнения и выводы о способе встречи с ароматом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Не приравнивать день патента к открытию Iso E Super или запуску Molecule01. Не выдавать65%концентрата за долю готового продукта. Маркетинговые феромонные и универсальные эффекты исключены. Пересказ патента ограничен двумя первыми абзацами, остальные сведения распределены между производителем и участником."
+      ]
+    },
+    {
+      "eventId": "n35r-cyclodextrin-fabric-filing-1989",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35r-cyclodextrin-fabric-filing-1989-f1",
+          "claim": "12 апреля 1989 года Procter & Gamble подала американскую заявку US07/337,036; патент US5102564 выдан 7 апреля 1992 года.",
+          "sourceIds": [
+            "n35r-cyclo-patent"
+          ],
+          "locator": "Front matter Filing date1989-04-12; timeline Application filed; US07/337,036"
+        },
+        {
+          "id": "n35r-cyclodextrin-fabric-filing-1989-f2",
+          "claim": "Предпочтительно нанесение в сушилке на влажную ткань; позднее повторное увлажнение высвобождает аромат; среди примеров полотенца.",
+          "sourceIds": [
+            "n35r-cyclo-patent"
+          ],
+          "locator": "Summary and Description, lines661–670"
+        },
+        {
+          "id": "n35r-cyclodextrin-fabric-filing-1989-f3",
+          "claim": "Джудит Грегори описывает полые молекулы циклодекстрина, высвобождение водой/потом, искусственный пот и GC-MS для исследования поведения аромата.",
+          "sourceIds": [
+            "n35r-cyclo-rsc"
+          ],
+          "locator": "The Mole July2012,p11 / Judith Gregory, paragraphs on analytical techniques and cyclodextrins, lines950–979"
+        },
+        {
+          "id": "n35r-cyclodextrin-fabric-filing-1989-f4",
+          "claim": "Модифицированные производные закрепляют на волокнах; носитель не смывается, принимает гостевые молекулы, высвобождает душистые вещества при увлажнении.",
+          "sourceIds": [
+            "n35r-cyclo-wuppertal"
+          ],
+          "locator": "Cyclodextrins in Textile Finishes, lines12–32 and45–53"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сравнения и выводы о способе встречи с ароматом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Не приписывать патенту мировое первенство циклодекстринов. Позднейшая аналитическая работа и химическое закрепление на волокне названы отдельно; не утверждать, что это точная реализация данного патента. Пересказ патента около160слов суммарно; RSC около180; университет около130. Календарный повод — подача заявки 12.04.1989; выдача 07.04.1992 относится к тому же изобретению, вторым событием не используется."
+      ]
+    },
+    {
+      "eventId": "n35r-perfumed-printing-ink-patent-1975",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35r-perfumed-printing-ink-patent-1975-f1",
+          "claim": "US3888689 выдан10.06.1975 Fuji Photo Film, водная краска с душистыми микрокапсулами.",
+          "sourceIds": [
+            "n35r-printing-patent"
+          ],
+          "locator": "Front matter; Description/Abstract"
+        },
+        {
+          "id": "n35r-perfumed-printing-ink-patent-1975-f2",
+          "claim": "Отдельная капля масла в оболочке, разрыв трением, компромисс сохранности и разрушения, роль связующего; gravure/screen printing.",
+          "sourceIds": [
+            "n35r-printing-patent"
+          ],
+          "locator": "Definitions/Description: capsule cross-section, rubbing surface, binder amount, printing methods, lines165–182"
+        },
+        {
+          "id": "n35r-perfumed-printing-ink-patent-1975-f3",
+          "claim": "OPM предлагает микрокапсулированные покрытия этикеток/упаковки; в перечне яблоко, жасмин, кедр, кофе, new car.",
+          "sourceIds": [
+            "n35r-printing-opm"
+          ],
+          "locator": "Fragranced Inks, opening description and scent table"
+        },
+        {
+          "id": "n35r-perfumed-printing-ink-patent-1975-f4",
+          "claim": "Orlandi предлагает slurry для flexo/silk screen, наклеек, открыток, каталогов и листовок.",
+          "sourceIds": [
+            "n35r-printing-orlandi"
+          ],
+          "locator": "Scented Slurry main paragraph, line75"
+        },
+        {
+          "id": "n35r-perfumed-printing-ink-patent-1975-f5",
+          "claim": "Scentisphere Rub’nSmell наносится как пятый цвет на бумагу, пластик и плёнки; отдельные Scent-A-Coat/Scent-A-Peel работают без трения/поднятием слоя.",
+          "sourceIds": [
+            "n35r-printing-scentisphere"
+          ],
+          "locator": "Rub’nSmell / Scent-A-Coat / Scent-A-Peel, lines54–107"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сравнения и выводы о способе встречи с ароматом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Не объявлять патент изобретением всех scratch-and-sniff технологий или датой выхода конкретного пробника. Современные продукты не названы лицензиатами Fuji. Подробности патента пересказаны примерно180словами на оба языка, остальной текст опирается на три прочитанных производителя и редакционный разбор."
+      ]
+    },
+    {
+      "eventId": "n35r-inra-co2-pct-filing-1989",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n35r-inra-co2-pct-filing-1989-f1",
+          "claim": "Международная заявка INRA PCT/FR1989/000158 подана06.04.1989, изобретатели Jacques Adda и Jean-Luc Lorne.",
+          "sourceIds": [
+            "n35r-co2-pct"
+          ],
+          "locator": "Front matter Filing date/Inventor/Application number"
+        },
+        {
+          "id": "n35r-inra-co2-pct-filing-1989-f2",
+          "claim": "При снижении давления возможны потери; добавлена улавливающая среда в сепаратор, включая глицерин/пищевые масла; плоды/цветы/растения и парфюмерное применение.",
+          "sourceIds": [
+            "n35r-co2-us"
+          ],
+          "locator": "Description, lines252–266; claim on imparting aroma to perfume"
+        },
+        {
+          "id": "n35r-inra-co2-pct-filing-1989-f3",
+          "claim": "FLAVEX регулирует плотность/давление и сорастворитель этанол; гомогенизация/фильтрация/центрифугирование после экстракции.",
+          "sourceIds": [
+            "n35r-co2-flavex"
+          ],
+          "locator": "Selective and Gentle Technology; Extract Conditioning"
+        },
+        {
+          "id": "n35r-inra-co2-pct-filing-1989-f4",
+          "claim": "Select при меньшем давлении более текучи/летучи; total при большем содержат тяжёлые липофильные компоненты и могут быть густыми/воскообразными.",
+          "sourceIds": [
+            "n35r-co2-eden"
+          ],
+          "locator": "CO2 Extracts, paragraphs Select/Total, lines180–181"
+        },
+        {
+          "id": "n35r-inra-co2-pct-filing-1989-f5",
+          "claim": "Кардамон003.002: целые высушенные плоды, оболочка и семена, сладкий смолисто-пряный запах и парфюмерное применение.",
+          "sourceIds": [
+            "n35r-co2-cardamom"
+          ],
+          "locator": "Raw Material/Production/Application, lines229–243"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сравнения и выводы о способе встречи с ароматом — редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Это подача международной заявки, а не её публикация19.10.1989, выдача американского патента17.12.1991 или изобретение всей CO2-экстракции. Современные продукты не объявляются реализацией данного патента. Факты общей патентной семьи суммарно пересказаны менее200словами в обеих локализациях."
+      ]
     }
   ]
 }
