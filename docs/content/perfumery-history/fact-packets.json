@@ -14919,6 +14919,799 @@
       "excludedClaimsRu": [
         "Не переносить мышиный результат непосредственно в универсальные человеческие сенсорные правила. Рецепторное взаимодействие отличается от историй white, metamers и биноздревого соперничества."
       ]
+    },
+    {
+      "eventId": "n33a-scents-sonics-2024",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33a-scents-sonics-2024-f1",
+          "claim": "Открытие и разговор с авторами состоялись 20 января 2024 года; участники — Хан, Леандер, Кубанек; спектроскопические характеристики превращены в звуковые ландшафты.",
+          "sourceIds": [
+            "n33a-sapelo-iao"
+          ],
+          "locator": "Archive heading, opening + artist talk date; project paragraphs 1–2; photographs from opening"
+        },
+        {
+          "id": "n33a-scents-sonics-2024-f2",
+          "claim": "Сапело изменялся людьми тысячелетиями; солёные болота связаны с реками и приливами; запахи и память уязвимы при деградации среды и утрате сообщества.",
+          "sourceIds": [
+            "n33a-sapelo-proposal"
+          ],
+          "locator": "Project account paragraphs 1–3"
+        },
+        {
+          "id": "n33a-scents-sonics-2024-f3",
+          "claim": "Три аккорда MARSH, FOREST, COAST; воображаемые, не буквальные профили; NMR через графическую нотацию и полевые записи; seaweed, sulfur, wet soil.",
+          "sourceIds": [
+            "n33a-sapelo-han"
+          ],
+          "locator": "Yosh Han independently authored abstract, printed pages 42–43 (PDF pages 42–43), Material & Methods and Results"
+        },
+        {
+          "id": "n33a-scents-sonics-2024-f4",
+          "claim": "Альбом выпущен 20 января 2024 года; COAST, FOREST, MARSH по 3:00.",
+          "sourceIds": [
+            "n33a-sapelo-album"
+          ],
+          "locator": "Track listing and credits: released January 20, 2024"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Заключения о значении произведения являются редакционной интерпретацией перечисленных фактов."
+      ],
+      "excludedClaimsRu": [
+        "Неподтверждённые формулы; вымышленные сцены; реакции отдельных посетителей."
+      ]
+    },
+    {
+      "eventId": "n33a-raspet-new-flavors-2014",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33a-raspet-new-flavors-2014-f1",
+          "claim": "New Flavors and Fragrances открылась в New Galerie 19 апреля 2014 года; 90 литров 16 эфиров в пропиленгликоле и 16 настенных ёмкостей; бесцветные жидкости, записи соединений, продажа по объёму и отдельные исключительные права.",
+          "sourceIds": [
+            "n33a-raspet-gallery"
+          ],
+          "locator": "Heading April 19th–May 31th, 2014; work caption lines 57/105; release lines 352–360; installation views"
+        },
+        {
+          "id": "n33a-raspet-new-flavors-2014-f2",
+          "claim": "Распет объясняет переход от стоковых изображений и геля к договорам, текстам и химическим формулам; запах различает визуально сходные вещества; монеты и ключи соединяют символическую и материальную стороны.",
+          "sourceIds": [
+            "n33a-raspet-mousse"
+          ],
+          "locator": "PDF page 2 / printed 147: answers lines 77–102 and 218–252"
+        },
+        {
+          "id": "n33a-raspet-new-flavors-2014-f3",
+          "claim": "Документацию можно читать или сразу нюхать; воспоминания о дедовом камфорном дереве и изопропиловом спирте.",
+          "sourceIds": [
+            "n33a-raspet-tci"
+          ],
+          "locator": "Interview May 18, 2018; childhood answer lines 112–114; audience/documentation answers 119–125"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Заключения о значении произведения являются редакционной интерпретацией перечисленных фактов."
+      ],
+      "excludedClaimsRu": [
+        "Неподтверждённые формулы; вымышленные сцены; реакции отдельных посетителей."
+      ]
+    },
+    {
+      "eventId": "n33a-por-corpo-almada-2017",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33a-por-corpo-almada-2017-f1",
+          "claim": "18 февраля 2017 года — открытие Casa da Cerca; книжный отрывок Сейтил передан парфюмерам, контакт/тело/мышление; цистерна и символический спуск.",
+          "sourceIds": [
+            "n33a-corpo-curator",
+            "n33a-corpo-retrospective"
+          ],
+          "locator": "February curator account lines75–102; November retrospective lines82,89 confirms completed first show and photographs"
+        },
+        {
+          "id": "n33a-por-corpo-almada-2017-f2",
+          "claim": "Первоначальные commissioned works Lebreton, Alessandria, Gracia, Gardoni; revived Nardus; Ondina Pires vocal/percussive work; дополнительные три автора относятся только к LA.",
+          "sourceIds": [
+            "n33a-corpo-retrospective"
+          ],
+          "locator": "November curator article lines82–89"
+        },
+        {
+          "id": "n33a-por-corpo-almada-2017-f3",
+          "claim": "Позднее интервью подтверждает Алмаду 2017; Матуш создаёт прототипы, передаёт формулы в Барселону для воспроизведения и проверки; аромат имеет временные стадии и музыкальное выражение.",
+          "sourceIds": [
+            "n33a-corpo-interview"
+          ],
+          "locator": "Interview lines123–133,144–157"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Заключения о значении произведения являются редакционной интерпретацией перечисленных фактов."
+      ],
+      "excludedClaimsRu": [
+        "Неподтверждённые формулы; вымышленные сцены; реакции отдельных посетителей."
+      ]
+    },
+    {
+      "eventId": "n33a-paterson-earth-sky-2024",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33a-paterson-earth-sky-2024-f1",
+          "claim": "Выставка открылась 26 апреля 2024 года; Chemisphere, Homesickness Kit, стеклянные космические модели, флора и китайский календарь 2024; практики бонсай, настольных ландшафтов, звёзд и благовоний.",
+          "sourceIds": [
+            "n33a-paterson-iao",
+            "n33a-paterson-archive",
+            "n33a-paterson-cv"
+          ],
+          "locator": "IAO heading April26–May26,2024; paragraphs68–72; artist archive installation captions; CV2024 confirms completed solo exhibition"
+        },
+        {
+          "id": "n33a-paterson-earth-sky-2024-f2",
+          "claim": "Homesickness Kit: один парфюм, восемь эссенций в пчелином воске; collaboration Gayil Nalls botanical cultural research; ручные созвездия с земной перспективы и возвращение домой. Разработка набора заняла три года.",
+          "sourceIds": [
+            "n33a-paterson-kit"
+          ],
+          "locator": "Artist's account paragraphs37–41"
+        },
+        {
+          "id": "n33a-paterson-earth-sky-2024-f3",
+          "claim": "Chemisphere заменяет западные созвездия формулами; Vega/Sirius/Andromeda carbon atoms; clouds/nebulae; plants/flowers/tar/body odors; earthly embodiment.",
+          "sourceIds": [
+            "n33a-paterson-chemisphere"
+          ],
+          "locator": "Independent authored abstract The Chemisphere — A Star Map, printed page38, programme lines870–877"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Заключения о значении произведения являются редакционной интерпретацией перечисленных фактов."
+      ],
+      "excludedClaimsRu": [
+        "Неподтверждённые формулы; вымышленные сцены; реакции отдельных посетителей."
+      ]
+    },
+    {
+      "eventId": "n33a-braunstein-scent-2018",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33a-braunstein-scent-2018-f1",
+          "claim": "Scent открылась 24 февраля 2018 года: small collages, sculptural assemblages, found images; visual language of scent; художница собирает печатные материалы, карты, dollhouse furniture, вещи с рынков.",
+          "sourceIds": [
+            "n33a-braunstein-iao",
+            "n33a-braunstein-cv",
+            "n33a-braunstein-artist-date"
+          ],
+          "locator": "IAO date heading and reception; statement lines19–24; artist CV2018 Scent confirms completed solo; event archive Scent Jan27 entry with Feb24 opening"
+        },
+        {
+          "id": "n33a-braunstein-scent-2018-f2",
+          "claim": "Говард Фокс объясняет уже опубликованные составляющие коллажей, необычность монтажа; книги с окнами/отверстиями и меняющимися слоями.",
+          "sourceIds": [
+            "n33a-braunstein-fox"
+          ],
+          "locator": "Signed Howard Fox accounts, Portfolio lines36–41 and Artist Books lines73–77; single combined page budget, not separate budgets for sections"
+        },
+        {
+          "id": "n33a-braunstein-scent-2018-f3",
+          "claim": "Education by Play and Games (2000), one-of-a-kind sculpted book; исходное название и игра внучек вдохновили размышление о жизненных уроках.",
+          "sourceIds": [
+            "n33a-braunstein-au"
+          ],
+          "locator": "Museum artwork caption and artist's account lines76–78; not claiming this older work was physically displayed in Scent"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Заключения о значении произведения являются редакционной интерпретацией перечисленных фактов."
+      ],
+      "excludedClaimsRu": [
+        "Неподтверждённые формулы; вымышленные сцены; реакции отдельных посетителей."
+      ]
+    },
+    {
+      "eventId": "n33a-mehra-death-plastic-2024",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33a-mehra-death-plastic-2024-f1",
+          "claim": "Открытие 1 ноября 2024; аромат имитирует больничный опыт ухаживающего и пациента; смерть матери/друга и собственные госпитализации, темы ритуала/памяти/болезни.",
+          "sourceIds": [
+            "n33a-mehra-iao"
+          ],
+          "locator": "Date heading and reception; paragraphs76–79; Images from Opening actual-event photographs"
+        },
+        {
+          "id": "n33a-mehra-death-plastic-2024-f2",
+          "claim": "Практика связана с личной медицинской историей; анатомические votives/milagros и частное страдание; будущие реликвии, эмодзи и утрата понятности языка.",
+          "sourceIds": [
+            "n33a-mehra-artist"
+          ],
+          "locator": "Artist's own About statement, lines83–87"
+        },
+        {
+          "id": "n33a-mehra-death-plastic-2024-f3",
+          "claim": "Canula2022 resin/metallic paint; Ward2022 resin/clay/Hydrocal; Eupnea: Endotracheal Fossil2022 resin/clay.",
+          "sourceIds": [
+            "n33a-mehra-portfolio"
+          ],
+          "locator": "Portfolio Relicas captions lines97–106 and119–123"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Заключения о значении произведения являются редакционной интерпретацией перечисленных фактов."
+      ],
+      "excludedClaimsRu": [
+        "Неподтверждённые формулы; вымышленные сцены; реакции отдельных посетителей."
+      ]
+    },
+    {
+      "eventId": "n33a-williams-cnc-musk-2022",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33a-williams-cnc-musk-2022-f1",
+          "claim": "CNC Musk Factory открылась 7 июля 2022; Consent is sexy, добровольная scent-pillory performance; восемь ароматизированных fragments Constraint forever; free soaps dedicated Felix Gonzalez-Torres.",
+          "sourceIds": [
+            "n33a-williams-keller"
+          ],
+          "locator": "Gallery date July7–Aug6,2022; opening reception July7; works and performance paragraphs15–21"
+        },
+        {
+          "id": "n33a-williams-cnc-musk-2022-f2",
+          "claim": "Зара присутствовала на открытии: один smell masculine cologne для неё, earthy/herbal для собеседника.",
+          "sourceIds": [
+            "n35a-forest-curator"
+          ],
+          "locator": "Eyewitness opening report lines149–152; actual performance photograph caption175"
+        },
+        {
+          "id": "n33a-williams-cnc-musk-2022-f3",
+          "claim": "Williams описывают IAO classes, journalistic curiosity, independent hand-blending/bottling and scented raves.",
+          "sourceIds": [
+            "n33a-williams-slowghost"
+          ],
+          "locator": "Interview July25,2024, answers lines59–73 and79–83"
+        },
+        {
+          "id": "n33a-williams-cnc-musk-2022-f4",
+          "claim": "Portrait of Ross1991 candies in colored wrappers, varying dimensions/endless supply; candy works give individuals choice to take pieces and replenish.",
+          "sourceIds": [
+            "n33a-williams-felix-work",
+            "n33a-williams-felix-tenets"
+          ],
+          "locator": "Work record lines38–46; Core Tenets PDF pages1–2, paragraphs28–45"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Заключения о значении произведения являются редакционной интерпретацией перечисленных фактов."
+      ],
+      "excludedClaimsRu": [
+        "Неподтверждённые формулы; вымышленные сцены; реакции отдельных посетителей."
+      ]
+    },
+    {
+      "eventId": "n33b-grojsman-calyx-award-2016",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33b-grojsman-calyx-award-2016-f1",
+          "claim": "7 июня2016 FragranceFoundation наградилаГройсман LifetimeAchievement; IFFперечисляет Calyx1986 и передаёт еёмысль о совместном выражении.",
+          "sourceIds": [
+            "a-grojsman-iff",
+            "n33b-grojsman-ceremony-report"
+          ],
+          "locator": "Release June7,2016; paragraphs1,4; fragrance list"
+        },
+        {
+          "id": "n33b-grojsman-calyx-award-2016-f2",
+          "claim": "В интервью Гройсман связывает Calyx с цветкамигрейпфрута вИзраиле, свежесть—с воздухом/зелёнымсадом.",
+          "sourceIds": [
+            "n33b-grojsman-interview"
+          ],
+          "locator": "Perfume Industry Today, paragraphs beginning The mass perfumes and You don’t like citrus"
+        },
+        {
+          "id": "n33b-grojsman-calyx-award-2016-f3",
+          "claim": "Робин описывает Calyx черезгрейпфрут, зелень, мшистуюдревесину, резкоеначало и выразительнуюискусственность.",
+          "sourceIds": [
+            "n33b-calyx-review"
+          ],
+          "locator": "Review paragraphs beginning Calyx is classified and At any rate"
+        },
+        {
+          "id": "n33b-grojsman-calyx-award-2016-f4",
+          "claim": "Calyx названпочашечкебутона; рассказClinique перечисляетзелёныйлист,грейпфрут,манго,маракуйю,нероли,ирис,ветивер.",
+          "sourceIds": [
+            "n33b-calyx-return"
+          ],
+          "locator": "Body paragraphs2–3"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления подтверждённых фактов являются редакционным анализом."
+      ],
+      "excludedClaimsRu": [
+        "Baseline birthday focuses WhiteLinen/Paris/Trésor rose; this independent ceremony and Calyx central. Cabotine excluded: not Grojsman."
+      ]
+    },
+    {
+      "eventId": "n33b-roques-search-2022",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33b-roques-search-2022-f1",
+          "claim": "Электронноеанглоязычное издание9781914495175 вышло вАвстралии13октября2022;17ингредиентов,Андалусия—Сомалиленд,30летработыссообществами.",
+          "sourceIds": [
+            "n33b-roques-hachette"
+          ],
+          "locator": "Formats & Editions e-Book Oct13,2022; description paragraphs2–3"
+        },
+        {
+          "id": "n33b-roques-search-2022-f2",
+          "claim": "PW выделяет Эль-Андевало/лабданум и замену лаванды более производительным и выносливым лавандином.",
+          "sourceIds": [
+            "n33b-roques-pw"
+          ],
+          "locator": "Review paragraphs2–3"
+        },
+        {
+          "id": "n33b-roques-search-2022-f3",
+          "claim": "OneSeed интервью: устойчивость включает воду/пестициды/энергию; личныйнаборроза/ветивер/бензоин/ладан;образыземли/дерева/ванили.",
+          "sourceIds": [
+            "n33b-roques-oneseed"
+          ],
+          "locator": "Questions on sustainability and own natural perfume"
+        },
+        {
+          "id": "n33b-roques-search-2022-f4",
+          "claim": "ElPaís интервью: регулярныеторговыепартнёры,рискнеудачногозапускадляурожая,необходимостьпартнёрства.",
+          "sourceIds": [
+            "n33b-roques-elpais"
+          ],
+          "locator": "Body paragraphs beginning He has traveled and The market is turning"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления подтверждённых фактов являются редакционным анализом."
+      ],
+      "excludedClaimsRu": [
+        "Unique book/author in274; no retelling Empires, FreshRain or extraction-specific Cavallier. Date precise Australian ebook, not global first publication."
+      ]
+    },
+    {
+      "eventId": "n33b-cobb-smell-2020",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33b-cobb-smell-2020-f1",
+          "claim": "Smell:AVeryShortIntroduction опубликованоOUP28мая2020;физиология/история/культура/среда,животные,памятьиусвоенныепривычки.",
+          "sourceIds": [
+            "n33b-cobb-oup"
+          ],
+          "locator": "Publication header May28,2020; Abstract"
+        },
+        {
+          "id": "n33b-cobb-smell-2020-f2",
+          "claim": "Кобб изучал психологию/генетику,химическуюкоммуникациювоФранции,обоняниеуличинокдрозофил/муравьёв,историюнауки.",
+          "sourceIds": [
+            "n33b-cobb-manchester"
+          ],
+          "locator": "Personal profile Biography paragraphs1,4–7"
+        },
+        {
+          "id": "n33b-cobb-smell-2020-f3",
+          "claim": "Кайзер выделяетгенетику/навигацию/экологию,орхидеюиопылителя,PolyesterсOdorama.",
+          "sourceIds": [
+            "n33b-cobb-kiser"
+          ],
+          "locator": "Paragraphs beginning Cobb offers more and There’s also a nifty overview"
+        },
+        {
+          "id": "n33b-cobb-smell-2020-f4",
+          "claim": "Кобб описывает чтениеисточников,планглавы,яркиепримеры,переписывание,исключениелюбимыхфактовнаредактировании.",
+          "sourceIds": [
+            "n33b-cobb-writing"
+          ],
+          "locator": "How did you conduct your research?"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления подтверждённых фактов являются редакционным анализом."
+      ],
+      "excludedClaimsRu": [
+        "New book absent274; focus author’s comparative/historical framing, not baseline receptor papers or Barwich philosophy. Writing-method interview concerns general practice, not a claim that a specific Smell episode followed it."
+      ]
+    },
+    {
+      "eventId": "n33b-ellena-alchemy-2011",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33b-ellena-alchemy-2011-f1",
+          "claim": "Американскаяэлектроннаяверсия9781628721706 опубликована15сентября2011; книгапроводитотзамысла/материаловкупаковке/маркетингу/безопасности.",
+          "sourceIds": [
+            "n33b-ellena-alchemy"
+          ],
+          "locator": "Publication metadata September15,2011; Description paragraphs1–2"
+        },
+        {
+          "id": "n33b-ellena-alchemy-2011-f2",
+          "claim": "Алета выделяет главыобучения/создания и глубинуобзораистории/материалов/классификации/маркетинга;переводJohnCrisp.",
+          "sourceIds": [
+            "n65b-ellena-nst"
+          ],
+          "locator": "Review paragraphs2–4; bibliography"
+        },
+        {
+          "id": "n33b-ellena-alchemy-2011-f3",
+          "claim": "Марчелловыделяет сомненияЭллена вклассификациях,ценностьдаты/имени/марки и положительноеотношениеккритике/молодымавторам.",
+          "sourceIds": [
+            "n33b-ellena-alchemy-marcello"
+          ],
+          "locator": "Review paragraphs beginning There are many other topics, quoted pp77–80; reviewer discussion"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления подтверждённых фактов являются редакционным анализом."
+      ],
+      "excludedClaimsRu": [
+        "Distinct book, not Diary or Atlas; no minimal palette, Aswan travel, pear/mint/iris tasks. Exact US ebook date, not first English/global publication. Basenotes403 not used. No present-day legal advice/formula-protection assertion."
+      ]
+    },
+    {
+      "eventId": "n33b-dries-fragrance-2022",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33b-dries-fragrance-2022-f1",
+          "claim": "2марта2022ВанНотенпредставилколлекцию;производительStoelzleретроспективноназываетдень.10композиций/сад/свободаинтерпретации/контрастыописанысамоймаркой.",
+          "sourceIds": [
+            "n33b-dries-stoelzle",
+            "n33b-dries-introduction"
+          ],
+          "locator": "Stoelzle report March17 opening; brand introduction Eclectic & Unexpected / Impossible Combinations"
+        },
+        {
+          "id": "n33b-dries-fragrance-2022-f2",
+          "claim": "Stoelzle10декоров,8лаковых/2порошковыхRavingRose/SantalGreenery;разныеклеевыесоединенияфарфора/дерева/металла/смолы.",
+          "sourceIds": [
+            "n33b-dries-stoelzle"
+          ],
+          "locator": "Manufacturer first-person report technical bullet points"
+        },
+        {
+          "id": "n33b-dries-fragrance-2022-f3",
+          "claim": "ИнтервьюVogue:NeonGardenмята/ирис,JardinOrangerieапельсиновыйцвет/сандал,каждыйароматрассказываетисторию.",
+          "sourceIds": [
+            "n33b-dries-vogue"
+          ],
+          "locator": "Interview paragraph beginning It had to be something"
+        },
+        {
+          "id": "n33b-dries-fragrance-2022-f4",
+          "claim": "Ceroописывалоаптекарскийсилуэт/цветноестекло/повторноенаполнение/мешочкиизостатковтканейпрошлыхколлекций.",
+          "sourceIds": [
+            "n33b-dries-cero"
+          ],
+          "locator": "Body paragraphs1–2"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления подтверждённых фактов являются редакционным анализом."
+      ],
+      "excludedClaimsRu": [
+        "Unique brand collection absent274. Exact event is actual presentation March2, retrospectively documented by bottle manufacturer; not March1 brand article or assumption of first perfume ever (Malle collaboration predates). Vogue HK/US same work,100 total."
+      ]
+    },
+    {
+      "eventId": "n33b-cosmic-kylie-2024",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33b-cosmic-kylie-2024-f1",
+          "claim": "Cosmic7марта2024доступеннасайтеKylieCosmetics;первыйароматмарки,ноKKWколлаборацияпредшествовала;ноты/эргономичныйфлакон.",
+          "sourceIds": [
+            "n33b-cosmic-release"
+          ],
+          "locator": "Article timestamp March7; body as of today March7 and available now; notes/bottle paragraphs"
+        },
+        {
+          "id": "n33b-cosmic-kylie-2024-f2",
+          "claim": "ПрямоеинтервьюJenner:полнееучаствовалавCosmicпосравнениюсKKW,15раундовароматов.",
+          "sourceIds": [
+            "n33b-cosmic-bazaar"
+          ],
+          "locator": "Interview paragraph beginning I ask Jenner how creating Cosmic differed"
+        },
+        {
+          "id": "n33b-cosmic-kylie-2024-f3",
+          "claim": "ES интервью:первыйподарокКим,цветочныедухиматери,названиепослеподборааромата,скульптурныйфлакон.",
+          "sourceIds": [
+            "n33b-cosmic-standard"
+          ],
+          "locator": "Body paragraphs2–4"
+        },
+        {
+          "id": "n33b-cosmic-kylie-2024-f4",
+          "claim": "Jennerкомментарий:деньрожденияримскимицифраминакартоннойупаковке,разработкасвыше2лет,любимыежасмин/ванильныймускус.",
+          "sourceIds": [
+            "n33b-cosmic-moodie"
+          ],
+          "locator": "Body Jenner quotation last three paragraphs; use carton per her direct quote, not conflicting journalist flacon wording"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления подтверждённых фактов являются редакционным анализом."
+      ],
+      "excludedClaimsRu": [
+        "New fragrance absent274. Actual online availability independently reported March7; not a publication timestamp inference. KKW boundary explicit. Unopened Milled and AOL excluded. Harper’s work100total including mirrors."
+      ]
+    },
+    {
+      "eventId": "n33b-pleasing-trio-2023",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33b-pleasing-trio-2023-f1",
+          "claim": "ТриароматаBrightHot/Closeness/RivuletsсозданысЭпинеттом;продажанасайте16ноября2023;брендначалсяслаков/ухода. INTOтого же дняпрямоgo on sale today.",
+          "sourceIds": [
+            "n33b-pleasing-release",
+            "n33b-pleasing-today"
+          ],
+          "locator": "Entrepreneur November16 body fragrance trio and website beginning November16; INTO November16 body go on sale today"
+        },
+        {
+          "id": "n33b-pleasing-trio-2023-f2",
+          "claim": "GC IразличаетнотыRivulets/Closeness/BrightHot:амбретта/лимон/перец/бельё;кардамон/розовыйперец/ирис/папирус/древесина/мускус;слива/табак/кедр/тонка/ваниль.",
+          "sourceIds": [
+            "n33b-pleasing-materials"
+          ],
+          "locator": "Notes paragraphs following Robertet credit"
+        },
+        {
+          "id": "n33b-pleasing-trio-2023-f3",
+          "claim": "Florence/Spanier/Hawkinsработалисначала,35mmfilm,эпизодыингредиентов/покачиваниефлакона,импровизацияджазовойгруппы.",
+          "sourceIds": [
+            "n33b-pleasing-florence"
+          ],
+          "locator": "Campaign creator submission Description paragraphs1–4"
+        },
+        {
+          "id": "n33b-pleasing-trio-2023-f4",
+          "claim": "TimeOut16ноябрясообщаетоботкрытиимагазинов61CrosbyStreetSoho/LA;триароматавместесодеждой/аксессуарами/косметикой.",
+          "sourceIds": [
+            "n33b-pleasing-stores"
+          ],
+          "locator": "Title opened a retail store today; body today Styles opened; brand launched a store inLA today; home to trio"
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления подтверждённых фактов являются редакционным анализом."
+      ],
+      "excludedClaimsRu": [
+        "Unique trio event absent274; exact date is website/US availability, not first global debut (earlier Selfridges) nor preview party. Two independent actual November16 reports plus creator campaign record; no claim Styles composed formulas."
+      ]
+    },
+    {
+      "eventId": "n33c-aminal-reservoir",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33c-aminal-reservoir-f1",
+          "claim": "Работа Бухс и коллег впервые опубликована 28 декабря 2010 года; обратимое образование аминалей из летучих альдегидов и вторичных диаминов исследовали ЯМР в буферной воде и динамическим анализом воздуха над хлопком; испарение продлевалось.",
+          "sourceIds": [
+            "n33c-aminal-reservoir-s1"
+          ],
+          "locator": "First published (28 December 2010); Abstract and Graphical Abstract: secondary diamines, buffered aqueous media, NMR, kinetic/equilibrium constants, cotton and dynamic headspace. Only publisher abstract and graphical abstract were read."
+        },
+        {
+          "id": "n33c-aminal-reservoir-f2",
+          "claim": "В самостоятельной гидразонной работе понижение pH ускоряло установление равновесия, ПАВ замедляли его; образование и гидролиз приводили к одному равновесию; на сухом хлопке повышалось количество душистых альдегидов/кетонов в воздухе.",
+          "sourceIds": [
+            "n33c-aminal-reservoir-s2"
+          ],
+          "locator": "Abstract: reversible hydrazone formation; pH/surfactant effects; identical equilibrium from formation and hydrolysis; increased headspace over dry cotton."
+        },
+        {
+          "id": "n33c-aminal-reservoir-f3",
+          "claim": "Обзор Херрманна рассматривает освобождение запаха из малолетучих предшественников через гидролиз, нагревание, свет, кислород и ферменты, согласуя высвобождение со стабильностью при хранении.",
+          "sourceIds": [
+            "n33c-aminal-reservoir-s3"
+          ],
+          "locator": "Abstract: nonvolatile precursors, cleavage triggers and storage stability."
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления с парфюмерным опытом и вопросы к материалу представляют редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Аминальное равновесие отличается от включения в циклодекстрин и от фотолиза. Не переносить гидразонные зависимости скорости на аминальную работу. Не заявлять коммерческого внедрения или одинакового поведения всех альдегидов."
+      ]
+    },
+    {
+      "eventId": "n33c-forensic-perfume-collector",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33c-forensic-perfume-collector-f1",
+          "claim": "Статья Одетт, Дюмона и Криспино доступна онлайн 11 августа 2025 года; PowerSorb из PDMS проверяли с тремя парфюмами в четырёх сценариях, включая перекрёстный перенос; сложность повышала неопределённость.",
+          "sourceIds": [
+            "n33c-forensic-perfume-collector-s1"
+          ],
+          "locator": "PDF page 1, Available online 11 August 2025 and Abstract; Methods, PowerSorb PDMS cylinder and thermal desorption; Conclusion on cross-transfer."
+        },
+        {
+          "id": "n33c-forensic-perfume-collector-f2",
+          "claim": "Опыт Гергель с хлопковыми тканями показал больше компонентов при более длительном контакте и меньше после более длительного старения нанесённого парфюма до переноса.",
+          "sourceIds": [
+            "n33c-forensic-perfume-collector-s2"
+          ],
+          "locator": "Abstract; Experimental, perfume ageing and contact-time experiments; Results, effect of contact time and perfume age; methanol extraction and GC-MS."
+        },
+        {
+          "id": "n33c-forensic-perfume-collector-f3",
+          "claim": "Отдельная работа Гергель оптимизировала HS-SPME-GC-MS для хлопка и полиэстера и проверила аналитические характеристики шести летучих веществ.",
+          "sourceIds": [
+            "n33c-forensic-perfume-collector-s3"
+          ],
+          "locator": "Abstract; method optimisation (fiber, incubation/extraction time and temperature); method validation (six VOCs: linearity, LOD/LOQ, trueness, precision)."
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления с парфюмерным опытом и вопросы к материалу представляют редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Не выводить личность, факт преступления или точное время контакта из лабораторного опыта. Сбор сорбентом — самостоятельный сюжет после уже использованного патента SPME, а не второе датирование того же метода."
+      ]
+    },
+    {
+      "eventId": "n33c-light-cotton-release",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33c-light-cotton-release-f1",
+          "claim": "Траксель, Бухс и Херрманн опубликованы онлайн 11 августа 2016 года; светочувствительные ацетали освобождали альдегиды на хлопке при прямом нанесении и через кондиционер; структура сильнее влияла на выход, чем количество; раствор не предсказывал сухую ткань.",
+          "sourceIds": [
+            "n33c-light-cotton-release-s1"
+          ],
+          "locator": "PubMed publication metadata: Epub 2016 Aug 11 (distinct from print Aug 31); Abstract: direct/indirect cotton deposition, precursor structure versus amount, solution versus dry cotton."
+        },
+        {
+          "id": "n33c-light-cotton-release-f2",
+          "claim": "В самостоятельном исследовании Грисбека ароматические альдоли и 1,5-дикетоны служили фотопредшественниками карбонильных душистых веществ; хромофор менял скорость высвобождения дамаскона; промежуточные состояния изучали лазерной спектроскопией.",
+          "sourceIds": [
+            "n33c-light-cotton-release-s2"
+          ],
+          "locator": "Abstract: aromatic aldols and 1,5-diketones; solar irradiation; chromophore tuning of damascone release; Norrish II intermediates and laser transient absorption spectroscopy."
+        },
+        {
+          "id": "n33c-light-cotton-release-f3",
+          "claim": "В патенте Стоуэлла предложен малолетучий носитель со светочувствительным компонентом для тканей и средств ухода, а также конкурирующие за поглощение света добавки для регулирования скорости.",
+          "sourceIds": [
+            "n33c-light-cotton-release-s3"
+          ],
+          "locator": "Abstract; Description, paragraphs on nonvolatile carrier, skin/hair/fabric and personal-care applications, and light-absorbing additives regulating release. Patent proposals, not commercial claims."
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления с парфюмерным опытом и вопросы к материалу представляют редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Дата — Epub 11 августа 2016 года, не дата печати/переноса страницы издателем. Фотолиз на хлопке отличается от обратимого аминального равновесия и от циклодекстринового включения. Не утверждать безопасность УФ-процедур или готовность патентных вариантов к продаже."
+      ]
+    },
+    {
+      "eventId": "n33c-copper-thiol-detection",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33c-copper-thiol-detection-f1",
+          "claim": "Печатный выпуск PNAS датирован 28 февраля 2012 года; Дуань и коллеги показали медь-зависимый ответ мышиного MOR244-3 на MTMT, проверив более 125 соединений, хелатор и электрические ответы нейронов.",
+          "sourceIds": [
+            "n33c-copper-thiol-detection-s1"
+          ],
+          "locator": "PubMed bibliographic header: 2012 Feb 28;109(9):3492–3497; Epub 2012 Feb 10 explicitly distinguished. Abstract paragraphs 1–5, copper enhancement, TEPA and olfactory-neuron recordings."
+        },
+        {
+          "id": "n33c-copper-thiol-detection-f2",
+          "claim": "В самостоятельной человеческой работе OR2T11 требовал ионную медь для сильного ответа на короткие тиолы; серебро воспроизводило эффект; спирты не отвечали. Методы включали моделирование, мутагенез, STD NMR и измерения активности.",
+          "sourceIds": [
+            "n33c-copper-thiol-detection-s2"
+          ],
+          "locator": "Abstract, methods and receptor response profile: t-BuSH/EtSH, copper/silver, alcohol nonresponse."
+        },
+        {
+          "id": "n33c-copper-thiol-detection-f3",
+          "claim": "Обзор Блока описывает изменение характера грейпфрутового меркаптана с концентрацией, тиолы кофе и чёрной смородины и рекомендует хелатор для выявления роли следовых металлов в среде.",
+          "sourceIds": [
+            "n33c-copper-thiol-detection-s3"
+          ],
+          "locator": "Section 2, paragraph on grapefruit mercaptan, furfuryl mercaptan and blackcurrant/hops thiol (lines 157–158); Section 10 Conclusion, trace metals and chelator control (lines 619–620)."
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления с парфюмерным опытом и вопросы к материалу представляют редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Выбран печатный выпуск 28 февраля, а не Epub 10 февраля. MOR244-3 — мышиный рецептор; человеческий OR2T11 относится к другому исследованию. Не распространять эффект на все тиолы и не давать рецептуры или медицинские советы."
+      ]
+    },
+    {
+      "eventId": "n33c-ambrox-industrial-cyclase",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33c-ambrox-industrial-cyclase-f1",
+          "claim": "Айххорн и коллеги впервые опубликованы 17 апреля 2018 года; три улучшенных варианта SHC, восемь замен суммарно с одной в активном центре; выбранный вариант в E. coli превращал 125 г/л гомофарнезола за ≤72 ч.",
+          "sourceIds": [
+            "n33c-ambrox-industrial-cyclase-s1"
+          ],
+          "locator": "Publisher header, First published 17 April 2018; Abstract paragraphs 1–3. Read publisher abstract, not paywalled full paper."
+        },
+        {
+          "id": "n33c-ambrox-industrial-cyclase-f2",
+          "claim": "Самостоятельная работа Шнайдера исследовала совместную настройку активного центра и входного туннеля SHC, выявила инактивацию терпенами и применила подачу субстрата для увеличения общего числа оборотов.",
+          "sourceIds": [
+            "n33c-ambrox-industrial-cyclase-s2"
+          ],
+          "locator": "Abstract and Graphical Abstract: synergistic active-site/entrance-tunnel mutations; computational substrate acquisition/flow/chaperoning; terpene-induced inactivation and feeding strategy."
+        },
+        {
+          "id": "n33c-ambrox-industrial-cyclase-f3",
+          "claim": "Обзор Givaudan описывает природную реакцию сквален→гопен для мембраны и промышленное замыкание гомофарнезола, полученного C1-удлинением фарнезена, в сравнении с маршрутом из склареола мускатного шалфея. Обзор описывает амброкс как амброво-древесный с оттенками табака и мускатного шалфея.",
+          "sourceIds": [
+            "n33c-ambrox-industrial-cyclase-s3"
+          ],
+          "locator": "PDF page 2 (printed 385), Section 2 Squalene-Hopene Cyclases; homofarnesol/farnesene and sclareol comparison; Scheme 1 on following page."
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления с парфюмерным опытом и вопросы к материалу представляют редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Новый сюжет — производственный процесс амброкса из гомофарнезола, не повтор амбреина 2020 года. Не переносить числа улучшения разных работ между собой. Не объявлять любой биокатализ автоматически экологичным. Указаны условия публикации, не обещания для всех процессов."
+      ]
+    },
+    {
+      "eventId": "n33c-odor-face-judgments",
+      "status": "verified_fact_packet",
+      "facts": [
+        {
+          "id": "n33c-odor-face-judgments-f1",
+          "claim": "Дематте, Эстербауэр и Спенс опубликованы онлайн 16 мая 2007 года; 16 женщин оценивали мужские лица, предъявленные с геранью/мужской композицией, резиной/запахом тела или воздухом; неприятные запахи снижали оценки, приятные не отличались от воздуха, телесная релевантность не меняла результата.",
+          "sourceIds": [
+            "n33c-odor-face-judgments-s1"
+          ],
+          "locator": "PubMed metadata Epub 2007 May 16 (print July); Abstract, full design and results. Primary author abstract read; publisher PDF blocked and not used as separate source."
+        },
+        {
+          "id": "n33c-odor-face-judgments-f2",
+          "claim": "Самостоятельный опыт Зойберт использовал рыбно-розовый ряд, изменения морщин/пятен и оценки по памяти; приятность линейно меняла привлекательность, но не возраст.",
+          "sourceIds": [
+            "n33c-odor-face-judgments-s2"
+          ],
+          "locator": "Methods: Odor Stimuli and Delivery, Visual Stimuli and Delivery, Procedures; Results: Facial Attractiveness Ratings and Facial Age Ratings; Discussion, memory-based task qualification."
+        },
+        {
+          "id": "n33c-odor-face-judgments-f3",
+          "claim": "В опыте Кук лица следовали за трёхсекундным жасмином, метилмеркаптаном или воздухом; приятность лиц и поздние электрические ответы зависели от запаха даже при временном промежутке.",
+          "sourceIds": [
+            "n33c-odor-face-judgments-s3"
+          ],
+          "locator": "Abstract; Methods, odor-priming paradigm; Results and Discussion: neutral faces, 3 s odor, late/ultra-late ERPs and temporal lag."
+        }
+      ],
+      "editorialInterpretationsRu": [
+        "Сопоставления с парфюмерным опытом и вопросы к материалу представляют редакционный анализ."
+      ],
+      "excludedClaimsRu": [
+        "Выбран отдельный эксперимент 2007 года (Epub 16 мая), не повтор Roberts2009 из истории выбора духов 2012 года. Не обещать универсальную привлекательность, омоложение или изменение самих черт лица. Опыт Зойберт 2014 используется только как независимый контекст, его дата 29 мая, не 28."
+      ]
     }
   ]
 }
