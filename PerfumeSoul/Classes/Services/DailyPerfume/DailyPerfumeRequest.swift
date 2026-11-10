@@ -38,6 +38,22 @@ struct DailyPerfumeProfile: Encodable, Equatable {
     let elementBalance: DailyPerfumeElementBalance
 }
 
+extension DailyPerfumeProfile {
+    init(calculation: ProfileCalculation) {
+        self.init(
+            sun: calculation.natalChart.sun.sign.rawValue,
+            moon: calculation.natalChart.moon.sign.rawValue,
+            ascendant: calculation.natalChart.ascendant.sign.rawValue,
+            elementBalance: DailyPerfumeElementBalance(
+                fire: calculation.elementBalance.fire,
+                earth: calculation.elementBalance.earth,
+                air: calculation.elementBalance.air,
+                water: calculation.elementBalance.water
+            )
+        )
+    }
+}
+
 struct DailyPerfumeElementBalance: Encodable, Equatable {
     let fire: Int
     let earth: Int

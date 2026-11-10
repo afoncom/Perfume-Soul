@@ -31,25 +31,9 @@ extension RecommendedPerfumeServiceImpl: RecommendedPerfumeService {
     ) async throws -> [DailyPerfumeCandidateResponse] {
         try await requestManager.sendRequest(
             request: RecommendedPerfumeRequest(
-                profile: makeProfileData(for: calculation),
+                profile: DailyPerfumeProfile(calculation: calculation),
                 excludedPerfumeIDs: excludedPerfumeIDs,
                 limit: limit
-            )
-        )
-    }
-}
-
-private extension RecommendedPerfumeServiceImpl {
-    func makeProfileData(for calculation: ProfileCalculation) -> DailyPerfumeProfile {
-        DailyPerfumeProfile(
-            sun: calculation.natalChart.sun.sign.rawValue,
-            moon: calculation.natalChart.moon.sign.rawValue,
-            ascendant: calculation.natalChart.ascendant.sign.rawValue,
-            elementBalance: DailyPerfumeElementBalance(
-                fire: calculation.elementBalance.fire,
-                earth: calculation.elementBalance.earth,
-                air: calculation.elementBalance.air,
-                water: calculation.elementBalance.water
             )
         )
     }
