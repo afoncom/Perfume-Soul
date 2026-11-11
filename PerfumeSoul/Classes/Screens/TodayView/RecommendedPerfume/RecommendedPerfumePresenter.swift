@@ -110,7 +110,7 @@ extension RecommendedPerfumePresenterImpl: RecommendedPerfumePresenter {
 
         do {
             let responses = try await service.requestCandidates(
-                profile: makeProfileRequest(calculation),
+                calculation: calculation,
                 excludedPerfumeIDs: excludedPerfumeIDs,
                 limit: Self.candidateLimit
             )
@@ -202,20 +202,6 @@ extension RecommendedPerfumePresenterImpl: RecommendedPerfumePresenter {
 }
 
 extension RecommendedPerfumePresenterImpl {
-    private func makeProfileRequest(_ calculation: ProfileCalculation) -> DailyPerfumeProfileRequest {
-        DailyPerfumeProfileRequest(
-            sun: calculation.natalChart.sun.sign.rawValue,
-            moon: calculation.natalChart.moon.sign.rawValue,
-            ascendant: calculation.natalChart.ascendant.sign.rawValue,
-            elementBalance: DailyPerfumeElementBalanceRequest(
-                fire: calculation.elementBalance.fire,
-                earth: calculation.elementBalance.earth,
-                air: calculation.elementBalance.air,
-                water: calculation.elementBalance.water
-            )
-        )
-    }
-
     private func show(_ perfumes: [DailyPerfumeSummary]) async {
         await setState(perfumes.isEmpty ? .empty : .content(perfumes))
     }

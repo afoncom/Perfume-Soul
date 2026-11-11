@@ -9,7 +9,7 @@
 import Foundation
 
 struct DailyPerfumeRequest: Request {
-    let profile: DailyPerfumeProfileRequest
+    let profile: DailyPerfumeProfile
     let excludedPerfumeIDs: [Int]
     let lastShownBrand: String?
     let limit: Int
@@ -31,14 +31,27 @@ struct DailyPerfumeRequest: Request {
     }
 }
 
-struct DailyPerfumeProfileRequest: Encodable, Equatable {
+struct DailyPerfumeProfile: Encodable, Equatable {
     let sun: String
     let moon: String
     let ascendant: String
-    let elementBalance: DailyPerfumeElementBalanceRequest
+    let elementBalance: DailyPerfumeElementBalance
 }
 
-struct DailyPerfumeElementBalanceRequest: Encodable, Equatable {
+extension DailyPerfumeProfile {
+    init(calculation: ProfileCalculation) {
+        self.init(
+            sun: calculation.natalChart.sun.sign.rawValue,
+            moon: calculation.natalChart.moon.sign.rawValue,
+            ascendant: calculation.natalChart.ascendant.sign.rawValue,
+            elementBalance: DailyPerfumeElementBalance(
+                elementBalance: calculation.elementBalance
+            )
+        )
+    }
+}
+
+struct DailyPerfumeElementBalance: Encodable, Equatable {
     let fire: Int
     let earth: Int
     let air: Int
@@ -49,8 +62,19 @@ private struct DailyPerfumeRequestBody: Encodable {
     let sun: String
     let moon: String
     let ascendant: String
-    let elementBalance: DailyPerfumeElementBalanceRequest
+    let elementBalance: DailyPerfumeElementBalance
     let excludedPerfumeIDs: [Int]
     let lastShownBrand: String?
     let limit: Int
+}
+
+extension DailyPerfumeElementBalance {
+    init(elementBalance: ElementBalance) {
+        self.init(
+            fire: elementBalance.air,
+            earth: elementBalance.earth,
+            air: elementBalance.air,
+            water: elementBalance.water
+        )
+    }
 }

@@ -8,7 +8,7 @@
 
 protocol DailyPerfumeService {
     func requestCandidates(
-        profile: DailyPerfumeProfileRequest,
+        calculation: ProfileCalculation,
         excludedPerfumeIDs: [Int],
         lastShownBrand: String?,
         limit: Int
@@ -25,14 +25,14 @@ final class DailyPerfumeServiceImpl {
 
 extension DailyPerfumeServiceImpl: DailyPerfumeService {
     func requestCandidates(
-        profile: DailyPerfumeProfileRequest,
+        calculation: ProfileCalculation,
         excludedPerfumeIDs: [Int],
         lastShownBrand: String?,
         limit: Int
     ) async throws -> [DailyPerfumeCandidateResponse] {
         try await requestManager.sendRequest(
             request: DailyPerfumeRequest(
-                profile: profile,
+                profile: DailyPerfumeProfile(calculation: calculation),
                 excludedPerfumeIDs: excludedPerfumeIDs,
                 lastShownBrand: lastShownBrand,
                 limit: limit
