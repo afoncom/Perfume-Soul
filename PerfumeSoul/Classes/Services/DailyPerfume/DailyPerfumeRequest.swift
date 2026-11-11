@@ -45,10 +45,7 @@ extension DailyPerfumeProfile {
             moon: calculation.natalChart.moon.sign.rawValue,
             ascendant: calculation.natalChart.ascendant.sign.rawValue,
             elementBalance: DailyPerfumeElementBalance(
-                fire: calculation.elementBalance.fire,
-                earth: calculation.elementBalance.earth,
-                air: calculation.elementBalance.air,
-                water: calculation.elementBalance.water
+                elementBalance: calculation.elementBalance
             )
         )
     }
@@ -69,4 +66,15 @@ private struct DailyPerfumeRequestBody: Encodable {
     let excludedPerfumeIDs: [Int]
     let lastShownBrand: String?
     let limit: Int
+}
+
+extension DailyPerfumeElementBalance {
+    init(elementBalance: ElementBalance) {
+        self.init(
+            fire: elementBalance.air,
+            earth: elementBalance.earth,
+            air: elementBalance.air,
+            water: elementBalance.water
+        )
+    }
 }
