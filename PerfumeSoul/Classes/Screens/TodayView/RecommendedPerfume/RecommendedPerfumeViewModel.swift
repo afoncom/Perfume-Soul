@@ -5,7 +5,7 @@
 //  Created by afon.com on 07.09.2026.
 //
 
-
+import Foundation
 import Observation
 
 enum RecommendedPerfumeViewState: Equatable {
@@ -20,4 +20,8 @@ enum RecommendedPerfumeViewState: Equatable {
     var state: RecommendedPerfumeViewState = .loading
     var isResolving = false
     var shouldRefreshAfterResolving = false
+    
+    var todayDate: Date {
+        Date()
+    }
 }

@@ -54,7 +54,7 @@ extension RecommendedPerfumePresenterImpl: RecommendedPerfumePresenter {
         let collection = collectionService.loadState()
         let exclusions = Set(topIDs + collection.savedPerfumes.map(\.id) + collection.dislikedPerfumeIDs)
         let excludedPerfumeIDs = exclusions.sorted()
-        let weekKey = Self.currentWeekKey()
+        let weekKey = Self.currentWeekKey(todayDate: viewModel.todayDate)
 
         let storedState = stateStorage.loadState()
         var fallbackPerfumes: [DailyPerfumeSummary] = []
@@ -269,9 +269,9 @@ extension RecommendedPerfumePresenterImpl {
         viewModel.shouldRefreshAfterResolving = true
     }
 
-    private static func currentWeekKey() -> String {
+    private static func currentWeekKey(todayDate: Date) -> String {
         let calendar = Calendar(identifier: .iso8601)
-        let parts = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date())
+        let parts = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: todayDate)
         return "\(parts.yearForWeekOfYear ?? 0)-\(parts.weekOfYear ?? 0)"
     }
 }
