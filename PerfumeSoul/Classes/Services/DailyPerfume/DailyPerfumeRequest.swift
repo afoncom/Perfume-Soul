@@ -71,7 +71,7 @@ private struct DailyPerfumeRequestBody: Encodable {
 extension DailyPerfumeElementBalance {
     init(elementBalance: ElementBalance) {
         self.init(
-            fire: elementBalance.air,
+            fire: elementBalance.fire,
             earth: elementBalance.earth,
             air: elementBalance.air,
             water: elementBalance.water
