@@ -1,35 +1,30 @@
 import Fluent
 
 struct PerfumeryHistoryItem: Codable, Equatable {
-    let year: Int
-    let perfumeName: String
-    let shortStory: String
+    let publicationDate: String
+    let eventYear: Int
+    let title: String
     let fullStory: String
-    let imageUrl: String
 }
 
 enum PerfumeryHistoryLoader {
     static func load(
         dateKey: String,
+        language: String?,
         on database: any Database
     ) async throws -> PerfumeryHistoryItem? {
-        guard let item = try await PerfumeryHistoryModel.query(on: database)
+        let query = PerfumeryHistoryModel.query(on: database)
             .filter(\.$dateKey == dateKey)
-            .first()
-        else {
+        guard let model = try await query.first() else {
             return nil
         }
 
-        return PerfumeryHistoryItem(model: item)
-    }
-}
-
-private extension PerfumeryHistoryItem {
-    init(model: PerfumeryHistoryModel) {
-        self.year = model.year
-        self.perfumeName = model.perfumeName
-        self.shortStory = model.shortStory
-        self.fullStory = model.fullStory
-        self.imageUrl = model.imageUrl
+        let isRussian = language?.lowercased().hasPrefix("ru") == true
+        return PerfumeryHistoryItem(
+            publicationDate: model.dateKey,
+            eventYear: model.eventYear,
+            title: isRussian ? model.titleRu : model.titleEn,
+            fullStory: isRussian ? model.fullStoryRu : model.fullStoryEn
+        )
     }
 }

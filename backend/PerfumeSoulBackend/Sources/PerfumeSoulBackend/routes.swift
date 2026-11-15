@@ -1,10 +1,12 @@
 import Fluent
 import FluentSQL
+import Foundation
 import Vapor
 
 func routes(
     _ app: Application,
     imageCache: CatalogImageCache = CatalogImageCache(),
+    historyClock: PerfumeryHistoryClock = PerfumeryHistoryClock(),
     imageProvider: @escaping PerfumeImageProvider = { _, _, _ in nil }
 ) throws {
     try app.register(collection: CatalogRoutes(imageCache: imageCache, imageProvider: imageProvider))
@@ -61,14 +63,21 @@ func routes(
     }
 
     app.get("perfumery-history") { req async throws -> Response in
+        let query = try req.query.decode(PerfumeryHistoryQuery.self)
+        guard let timeZone = TimeZone(identifier: query.timeZone ?? "UTC") else {
+            throw Abort(.badRequest, reason: "Invalid timeZone")
+        }
         guard let item = try await PerfumeryHistoryLoader.load(
-            dateKey: "2026-04-18",
+            dateKey: PerfumeryHistoryCalendar.dateKey(now: historyClock.now(), timeZone: timeZone),
+            language: req.headers.first(name: "Accept-Language"),
             on: req.db
         ) else {
             throw Abort(.notFound)
         }
 
-        return try jsonResponse(item)
+        let response = try jsonResponse(item, varyByLanguage: true)
+        response.headers.replaceOrAdd(name: "Cache-Control", value: "no-store")
+        return response
     }
 
     app.get("horoscope", "daily") { req async throws -> Response in
