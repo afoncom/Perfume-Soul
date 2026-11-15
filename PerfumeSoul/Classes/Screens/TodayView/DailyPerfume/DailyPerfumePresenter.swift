@@ -210,26 +210,12 @@ extension DailyPerfumePresenterImpl {
         return storedState
     }
 
-    private func makeProfileRequest(profileCalculation: ProfileCalculation) -> DailyPerfumeProfileRequest {
-        DailyPerfumeProfileRequest(
-            sun: profileCalculation.natalChart.sun.sign.rawValue,
-            moon: profileCalculation.natalChart.moon.sign.rawValue,
-            ascendant: profileCalculation.natalChart.ascendant.sign.rawValue,
-            elementBalance: DailyPerfumeElementBalanceRequest(
-                fire: profileCalculation.elementBalance.fire,
-                earth: profileCalculation.elementBalance.earth,
-                air: profileCalculation.elementBalance.air,
-                water: profileCalculation.elementBalance.water
-            )
-        )
-    }
-
     private func requestCandidates(
         profileCalculation: ProfileCalculation,
         state: DailyPerfumeState
     ) async throws -> [DailyPerfumeCandidateResponse] {
         try await service.requestCandidates(
-            profile: makeProfileRequest(profileCalculation: profileCalculation),
+            calculation: profileCalculation,
             excludedPerfumeIDs: excludedPerfumeIDs(from: state),
             lastShownBrand: state.lastShownBrand,
             limit: Self.candidateLimit

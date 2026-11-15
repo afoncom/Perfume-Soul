@@ -106,7 +106,7 @@ extension FindPerfumesPresenterImpl: FindPerfumesPresenter {
             return
         }
 
-        guard hasValidOptionalSelections else {
+        guard viewModel.hasValidOptionalSelections else {
             showValidationMessage(L10n.Discover.FindSimilar.selectionValidationMessage)
             return
         }
@@ -122,17 +122,6 @@ extension FindPerfumesPresenterImpl: FindPerfumesPresenter {
 }
 
 extension FindPerfumesPresenterImpl {
-    @MainActor private var hasValidOptionalSelections: Bool {
-        isFieldValid(
-            searchText: viewModel.secondSearchText,
-            selectedPerfume: viewModel.secondSelectedPerfume
-        )
-        && isFieldValid(
-            searchText: viewModel.thirdSearchText,
-            selectedPerfume: viewModel.thirdSelectedPerfume
-        )
-    }
-
     @MainActor private func loadSearchResults(searchText: String) async {
         let trimmedSearchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         let requestID = UUID()
@@ -179,14 +168,6 @@ extension FindPerfumesPresenterImpl {
             viewModel.isSearching = false
             viewModel.searchErrorMessage = L10n.Common.Error.message
         }
-    }
-
-    @MainActor private func isFieldValid(
-        searchText: String,
-        selectedPerfume: SearchPerfumeItem?
-    ) -> Bool {
-        let trimmedSearchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmedSearchText.isEmpty || selectedPerfume != nil
     }
 
     @MainActor private func showValidationMessage(_ message: String) {

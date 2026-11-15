@@ -9,7 +9,7 @@ import Foundation
 
 protocol RecommendedPerfumeService {
     func requestCandidates(
-        profile: DailyPerfumeProfileRequest,
+        calculation: ProfileCalculation,
         excludedPerfumeIDs: [Int],
         limit: Int
     ) async throws -> [DailyPerfumeCandidateResponse]
@@ -25,13 +25,13 @@ final class RecommendedPerfumeServiceImpl {
 
 extension RecommendedPerfumeServiceImpl: RecommendedPerfumeService {
     func requestCandidates(
-        profile: DailyPerfumeProfileRequest,
+        calculation: ProfileCalculation,
         excludedPerfumeIDs: [Int],
         limit: Int
     ) async throws -> [DailyPerfumeCandidateResponse] {
         try await requestManager.sendRequest(
             request: RecommendedPerfumeRequest(
-                profile: profile,
+                profile: DailyPerfumeProfile(calculation: calculation),
                 excludedPerfumeIDs: excludedPerfumeIDs,
                 limit: limit
             )
@@ -40,7 +40,7 @@ extension RecommendedPerfumeServiceImpl: RecommendedPerfumeService {
 }
 
 private struct RecommendedPerfumeRequest: Request {
-    let profile: DailyPerfumeProfileRequest
+    let profile: DailyPerfumeProfile
     let excludedPerfumeIDs: [Int]
     let limit: Int
     let path = "/recommended-perfumes/candidates"
@@ -64,7 +64,7 @@ private struct RecommendedPerfumeRequest: Request {
         let sun: String
         let moon: String
         let ascendant: String
-        let elementBalance: DailyPerfumeElementBalanceRequest
+        let elementBalance: DailyPerfumeElementBalance
         let excludedPerfumeIDs: [Int]
         let lastShownBrand: String?
         let limit: Int
