@@ -39,7 +39,26 @@ enum FindPerfumeField: Hashable, Identifiable {
         ]
         .compactMap { $0 }
     }
-
+    
+    @MainActor var hasValidOptionalSelections: Bool {
+        isFieldValid(
+            searchText: secondSearchText,
+            selectedPerfume: secondSelectedPerfume
+        )
+        && isFieldValid(
+            searchText: thirdSearchText,
+            selectedPerfume: thirdSelectedPerfume
+        )
+    }
+    
+    @MainActor private func isFieldValid(
+        searchText: String,
+        selectedPerfume: SearchPerfumeItem?
+    ) -> Bool {
+        let trimmedSearchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmedSearchText.isEmpty || selectedPerfume != nil
+    }
+    
     func title(for field: FindPerfumeField) -> String {
         field == .first ? L10n.Discover.FindSimilar.firstPerfumeTitle : L10n.Discover.FindSimilar.additionalPerfumeTitle
     }
