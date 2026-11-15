@@ -12,6 +12,7 @@ struct TodayScreen: View {
     private let dailyPerfumeScreen: DailyPerfumeScreen
     private let recommendedPerfumeScreen: RecommendedPerfumeScreen
     private let presenter: TodayPresenter
+    @Environment(\.scenePhase) private var scenePhase
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @ScaledMetric(relativeTo: .largeTitle) private var headingSize = 38
     @ScaledMetric(relativeTo: .largeTitle) private var historyDateSize = 44
@@ -56,6 +57,16 @@ struct TodayScreen: View {
         .navigationBarTitleDisplayMode(.inline)
         .task {
             await presenter.onAppear()
+        }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active {
+                Task { await presenter.onAppear() }
+            }
+        }
+        .task {
+            for await _ in NotificationCenter.default.notifications(named: .NSCalendarDayChanged) {
+                await presenter.onAppear()
+            }
         }
     }
 }
@@ -102,7 +113,7 @@ extension TodayScreen {
                         .tint(Color(.textPrimary))
                         .frame(maxWidth: .infinity, minHeight: 160)
                 } else {
-                    Text(L10n.Today.Energy.missingProfile)
+                    Text(viewModel.horoscopePlaceholder)
                         .font(.body)
                         .lineSpacing(5)
                         .fixedSize(horizontal: false, vertical: true)

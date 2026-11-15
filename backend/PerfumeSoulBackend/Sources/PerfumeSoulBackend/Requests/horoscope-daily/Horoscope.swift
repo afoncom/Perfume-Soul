@@ -6,20 +6,38 @@ struct DailyHoroscope: Codable, Equatable {
     let energyOfDay: String
 }
 
+struct DailyHoroscopeQuery: Content {
+    let timeZone: String?
+}
+
 enum DailyHoroscopeLoader {
-    static func load(on database: any Database) async throws -> [DailyHoroscope] {
-        let horoscopes = try await DailyHoroscopeModel.query(on: database)
+    static func load(
+        dateKey: String,
+        language: String?,
+        on database: any Database
+    ) async throws -> [DailyHoroscope]? {
+        let horoscopes = try await DailyHoroscopeEntryModel.query(on: database)
+            .filter(\.$dateKey == dateKey)
             .sort(\.$sortOrder)
             .all()
 
+        guard !horoscopes.isEmpty else {
+            return nil
+        }
         try validate(horoscopes)
 
-        return horoscopes.map(DailyHoroscope.init(model:))
+        let isRussian = language?.lowercased().hasPrefix("ru") == true
+        return horoscopes.map { model in
+            DailyHoroscope(
+                sign: model.sign,
+                energyOfDay: isRussian ? model.energyOfDayRu : model.energyOfDayEn
+            )
+        }
     }
 }
 
-private extension DailyHoroscopeLoader {
-    static let expectedSigns: Set<String> = [
+extension DailyHoroscopeLoader {
+    private static let expectedSigns: Set<String> = [
         "aries",
         "taurus",
         "gemini",
@@ -34,11 +52,11 @@ private extension DailyHoroscopeLoader {
         "pisces"
     ]
 
-    static func validate(_ horoscopes: [DailyHoroscopeModel]) throws {
+    private static func validate(_ horoscopes: [DailyHoroscopeEntryModel]) throws {
         guard horoscopes.count == expectedSigns.count else {
             throw Abort(
                 .internalServerError,
-                reason: "daily_horoscopes must contain exactly 12 signs"
+                reason: "daily_horoscope_entries must contain exactly 12 signs for the date"
             )
         }
 
@@ -46,15 +64,8 @@ private extension DailyHoroscopeLoader {
         guard loadedSigns == expectedSigns else {
             throw Abort(
                 .internalServerError,
-                reason: "daily_horoscopes contains an invalid or incomplete sign set"
+                reason: "daily_horoscope_entries contains an invalid or incomplete sign set"
             )
         }
-    }
-}
-
-private extension DailyHoroscope {
-    init(model: DailyHoroscopeModel) {
-        self.sign = model.sign
-        self.energyOfDay = model.energyOfDay
     }
 }

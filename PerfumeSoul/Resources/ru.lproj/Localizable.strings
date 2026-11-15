@@ -248,6 +248,7 @@
 "today.energy.moonTitle" = "Луна в Скорпионе";
 "today.energy.personalTitle" = "Для вас";
 "today.energy.missingProfile" = "Заполните профиль, чтобы увидеть свой гороскоп на день.";
+"today.energy.unavailable" = "Гороскоп на сегодня пока недоступен.";
 "today.energy.title" = "Гороскоп дня";
 "today.overview.caption" = "Ваш выбор на сегодня";
 "today.overview.title" = "Аромат вашего дня.";

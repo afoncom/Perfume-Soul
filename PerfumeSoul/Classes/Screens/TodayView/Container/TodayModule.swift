@@ -16,9 +16,13 @@ final class TodayModule {
     ) -> NavigationControllerContainer {
         let viewModel = TodayViewModel()
         let navigationController = UINavigationController()
-        let router = TodayRouterImpl(navigationController: navigationController, imageLoader: imageLoader)
         let perfumeHistoryService = PerfumeHistoryServiceImpl(requestManager: requestManager)
         let dailyHoroscopeService = DailyHoroscopeServiceImpl(requestManager: requestManager)
+        let router = TodayRouterImpl(
+            navigationController: navigationController,
+            imageLoader: imageLoader,
+            dailyHoroscopeService: dailyHoroscopeService
+        )
         let profileService = ProfileServiceImpl(container: container)
         let collectionService = PerfumeCollectionServiceImpl(
             storage: PerfumeCollectionStorageImpl(

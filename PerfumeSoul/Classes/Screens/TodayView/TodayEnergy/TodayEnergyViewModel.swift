@@ -7,12 +7,12 @@
 //
 
 import Foundation
-import Combine
 import Observation
 
 @Observable final class TodayEnergyViewModel {
-    let personalDailyHoroscope: DailyHoroscope
-    let dailyHoroscopes: [DailyHoroscope]
+    var personalDailyHoroscope: DailyHoroscope
+    var dailyHoroscopes: [DailyHoroscope]
+    var isUnavailable = false
 
     init(
         personalDailyHoroscope: DailyHoroscope,

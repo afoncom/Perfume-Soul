@@ -5,6 +5,7 @@ import Vapor
 func routes(
     _ app: Application,
     imageCache: CatalogImageCache = CatalogImageCache(),
+    horoscopeClock: DailyHoroscopeClock = DailyHoroscopeClock(),
     imageProvider: @escaping PerfumeImageProvider = { _, _, _ in nil }
 ) throws {
     try app.register(collection: CatalogRoutes(imageCache: imageCache, imageProvider: imageProvider))
@@ -72,8 +73,21 @@ func routes(
     }
 
     app.get("horoscope", "daily") { req async throws -> Response in
-        let horoscopes = try await DailyHoroscopeLoader.load(on: req.db)
-        return try jsonResponse(horoscopes)
+        let query = try req.query.decode(DailyHoroscopeQuery.self)
+        guard let timeZone = TimeZone(identifier: query.timeZone ?? "UTC") else {
+            throw Abort(.badRequest, reason: "Invalid timeZone")
+        }
+        guard let horoscopes = try await DailyHoroscopeLoader.load(
+            dateKey: DailyHoroscopeCalendar.dateKey(now: horoscopeClock.now(), timeZone: timeZone),
+            language: req.headers.first(name: "Accept-Language"),
+            on: req.db
+        ) else {
+            throw Abort(.notFound)
+        }
+        let response = try jsonResponse(horoscopes)
+        response.headers.replaceOrAdd(name: "Vary", value: "Accept-Language")
+        response.headers.replaceOrAdd(name: "Cache-Control", value: "no-store")
+        return response
     }
 
     app.get("quiz-of-the-day") { _ async throws -> Response in
