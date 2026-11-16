@@ -14,6 +14,7 @@ final class TodayEnergyPresenterImpl {
     private let viewModel: TodayEnergyViewModel
     private let router: TodayEnergyRouter
     private let dailyHoroscopeService: DailyHoroscopeService
+    @MainActor private var latestLoadID = 0
     
     init(
         viewModel: TodayEnergyViewModel,
@@ -29,8 +30,13 @@ final class TodayEnergyPresenterImpl {
 extension TodayEnergyPresenterImpl: TodayEnergyPresenter {
     @MainActor
     func refresh() async {
+        latestLoadID += 1
+        let loadID = latestLoadID
         do {
             let horoscopes = try await dailyHoroscopeService.requestDailyHoroscope()
+            guard loadID == latestLoadID else {
+                return
+            }
             guard let personal = horoscopes.first(where: { $0.sign == viewModel.personalDailyHoroscope.sign }) else {
                 viewModel.isUnavailable = true
                 return
@@ -39,7 +45,9 @@ extension TodayEnergyPresenterImpl: TodayEnergyPresenter {
             viewModel.personalDailyHoroscope = personal
             viewModel.isUnavailable = false
         } catch {
-            viewModel.isUnavailable = true
+            if loadID == latestLoadID {
+                viewModel.isUnavailable = true
+            }
         }
     }
 }
