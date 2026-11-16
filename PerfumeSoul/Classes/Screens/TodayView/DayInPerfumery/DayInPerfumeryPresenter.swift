@@ -14,6 +14,7 @@ final class DayInPerfumeryPresenterImpl {
     private let viewModel: DayInPerfumeryViewModel
     private let router: DayInPerfumeryRouter
     private let perfumeHistoryService: PerfumeHistoryService
+    @MainActor private var latestLoadID = 0
     
     init(
         viewModel: DayInPerfumeryViewModel,
@@ -29,11 +30,19 @@ final class DayInPerfumeryPresenterImpl {
 extension DayInPerfumeryPresenterImpl: DayInPerfumeryPresenter {
     @MainActor
     func refresh() async {
+        latestLoadID += 1
+        let loadID = latestLoadID
         do {
-            viewModel.historyFact = try await perfumeHistoryService.requestPerfumeHistory()
+            let historyFact = try await perfumeHistoryService.requestPerfumeHistory()
+            guard loadID == latestLoadID else {
+                return
+            }
+            viewModel.historyFact = historyFact
             viewModel.isUnavailable = false
         } catch {
-            viewModel.isUnavailable = true
+            if loadID == latestLoadID {
+                viewModel.isUnavailable = true
+            }
         }
     }
 }

@@ -19,6 +19,7 @@ final class TodayPresenterImpl {
     private let perfumeHistoryService: PerfumeHistoryService
     private let dailyHoroscopeService: DailyHoroscopeService
     private let profileService: ProfileService
+    @MainActor private var latestLoadID = 0
     
     init(
         viewModel: TodayViewModel,
@@ -38,6 +39,8 @@ final class TodayPresenterImpl {
 extension TodayPresenterImpl: TodayPresenter {
     @MainActor
     func onAppear() async {
+        latestLoadID += 1
+        let loadID = latestLoadID
         viewModel.viewState = .loading
         async let historyFactTask = perfumeHistoryService.requestPerfumeHistory()
         async let dailyHoroscopesTask = dailyHoroscopeService.requestDailyHoroscope()
@@ -45,6 +48,9 @@ extension TodayPresenterImpl: TodayPresenter {
 
         let profile = await profileTask
         let dailyHoroscopes = (try? await dailyHoroscopesTask) ?? []
+        guard loadID == latestLoadID else {
+            return
+        }
         let userSign = profile?.preferredZodiacSign
         viewModel.dailyHoroscopes = dailyHoroscopes
         viewModel.personalHoroscope = dailyHoroscopes.first { horoscope in
@@ -53,9 +59,15 @@ extension TodayPresenterImpl: TodayPresenter {
 
         do {
             let historyFact = try await historyFactTask
+            guard loadID == latestLoadID else {
+                return
+            }
             viewModel.historyFact = historyFact
             viewModel.viewState = .loaded(historyFact: historyFact)
         } catch {
+            guard loadID == latestLoadID else {
+                return
+            }
             viewModel.historyFact = nil
             viewModel.viewState = .unavailable
         }
