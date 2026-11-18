@@ -536,7 +536,7 @@ Backend recommendation logic has focused tests for:
 - `GET /perfumes/recommendations` also reads from PostgreSQL and depends on populated `perfumes`, `brands`, `notes`, `perfume_notes`, `accords`, and `perfume_accords`.
 - `POST /personal-perfumes` depends on populated `market_segment`, profile metadata, notes, and accords.
 - `GET /horoscope/daily` now reads from PostgreSQL, so `daily_horoscopes` must be seeded before local run.
-- quiz data still uses packaged backend resources under `Sources/PerfumeSoulBackend/Requests/quiz-of-the-day/Resources`.
+- `GET /quiz-of-the-day` reads the 5,475-question RU/EN bank from PostgreSQL. The bank is imported from `Sources/PerfumeSoulBackend/Requests/quiz-of-the-day/Resources/quiz-bank.json` during migration. Until daily selection is implemented, the endpoint returns the first 15 questions by ID; `Accept-Language: en` selects English, and Russian is the default.
 - If the server is running, stop it with `Control + C`.
 
 ### Catalog product images

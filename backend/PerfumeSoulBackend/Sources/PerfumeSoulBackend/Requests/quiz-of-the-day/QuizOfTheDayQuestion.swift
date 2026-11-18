@@ -1,4 +1,5 @@
 import Foundation
+import Fluent
 
 struct QuizOfTheDayQuestion: Codable, Equatable {
     let id: Int
@@ -14,17 +15,11 @@ struct QuizOfTheDayQuestion: Codable, Equatable {
 }
 
 enum QuizOfTheDayQuestionLoader {
-    static func load() throws -> [QuizOfTheDayQuestion] {
-        let url = try resourceURL()
-        let data = try Data(contentsOf: url)
-        return try JSONDecoder().decode([QuizOfTheDayQuestion].self, from: data)
-    }
-
-    private static func resourceURL() throws -> URL {
-        if let url = Bundle.module.url(forResource: "quiz-of-the-day", withExtension: "json") {
-            return url
-        }
-
-        throw CocoaError(.fileNoSuchFile)
+    static func load(on database: any Database, language: String?) async throws -> [QuizOfTheDayQuestion] {
+        let questions = try await QuizBankQuestionModel.query(on: database)
+            .sort(\.$id)
+            .limit(15)
+            .all()
+        return questions.map { $0.payload.response(language: language) }
     }
 }
