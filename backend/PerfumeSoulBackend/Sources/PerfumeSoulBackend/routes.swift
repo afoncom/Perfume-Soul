@@ -63,6 +63,13 @@ func routes(
     }
 
     app.get("perfumery-history") { req async throws -> Response in
+        guard let item = try await PerfumeryHistoryLoader.loadLegacy(dateKey: "2026-04-18", on: req.db) else {
+            throw Abort(.notFound)
+        }
+        return try jsonResponse(item)
+    }
+
+    app.get("v2", "perfumery-history") { req async throws -> Response in
         let query = try req.query.decode(PerfumeryHistoryQuery.self)
         guard let timeZone = TimeZone(identifier: query.timeZone ?? "UTC") else {
             throw Abort(.badRequest, reason: "Invalid timeZone")

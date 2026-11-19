@@ -10,7 +10,7 @@ import Foundation
 
 struct PerfumeHistoryRequest: Request {
     let timeZoneIdentifier: String
-    let path: String = "/perfumery-history"
+    let path: String = "/v2/perfumery-history"
     let httpMethod: HTTPMethod = .get
 
     var queryItems: [URLQueryItem] {

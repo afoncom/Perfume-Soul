@@ -1,5 +1,6 @@
 import Foundation
 import Fluent
+import FluentPostgresDriver
 import Testing
 import Vapor
 import VaporTesting
@@ -7,6 +8,63 @@ import XCTFluent
 @testable import PerfumeSoulBackend
 
 struct PerfumeryHistoryTests {
+    @Test("Unversioned requests preserve the main client's response before and after December 1", arguments: [
+        "2026-11-19T12:00:00Z", "2026-12-01T12:00:00Z"
+    ])
+    func legacyClientCompatibility(timestamp: String) async throws {
+        let database = CallbackTestDatabase { query in
+            guard query.schema == "perfumery_history" else { return [] }
+            #expect(query.filters.contains { $0.description.contains("2026-04-18") })
+            return [TestOutput([
+                "id": 1, "date_key": "2026-04-18", "year": 1947,
+                "perfume_name": "Legacy perfume", "short_story": "Legacy summary",
+                "full_story": "Legacy full story", "image_url": "https://example.com/legacy.jpg"
+            ])]
+        }
+        let instant = try #require(ISO8601DateFormatter().date(from: timestamp))
+        try await withApp { app in
+            app.databases.use(database.configuration, as: .psql)
+            try routes(app, historyClock: PerfumeryHistoryClock { instant })
+            try await app.testing().test(.GET, "/perfumery-history") { response in
+                #expect(response.status == .ok)
+                let oldClient = try JSONDecoder().decode(
+                    MainClientHistoryResponse.self, from: Data(response.body.string.utf8)
+                )
+                #expect(oldClient.year == 1947)
+                #expect(oldClient.perfumeName == "Legacy perfume")
+                #expect(oldClient.shortStory == "Legacy summary")
+                #expect(oldClient.fullStory == "Legacy full story")
+                #expect(oldClient.imageUrl == "https://example.com/legacy.jpg")
+            }
+        }
+    }
+
+    @Test("The history migration can be prepared twice after a committed seed", .enabled(
+        if: Environment.get("PERFUME_SOUL_TEST_DATABASE_URL") != nil
+    ))
+    func migrationCanBeReplayed() async throws {
+        let databaseURL = try #require(Environment.get("PERFUME_SOUL_TEST_DATABASE_URL"))
+        let entries = try PerfumeryHistorySeed.entries()
+        let first = try #require(entries.first)
+        try await withApp { app in
+            app.databases.use(try .postgres(url: databaseURL), as: .psql)
+            let migration = CreatePerfumeryHistoryEntriesMigration()
+            try await migration.prepare(on: app.db)
+            let model = try #require(try await PerfumeryHistoryModel.query(on: app.db)
+                .filter(\.$dateKey == first.dateKey).first())
+            model.titleRu = "Outdated seed"
+            try await model.save(on: app.db)
+
+            // Simulate prepare committed successfully, but Fluent's migration log was not written.
+            try await migration.prepare(on: app.db)
+
+            #expect(try await PerfumeryHistoryModel.query(on: app.db).count() == entries.count)
+            let restored = try #require(try await PerfumeryHistoryModel.query(on: app.db)
+                .filter(\.$dateKey == first.dateKey).first())
+            #expect(restored.titleRu == first.titleRu)
+        }
+    }
+
     @Test("The published catalog covers every date with distinct December stories")
     func catalogCoverage() throws {
         let entries = try PerfumeryHistorySeed.entries()
@@ -137,7 +195,7 @@ struct PerfumeryHistoryTests {
             try await withApp { app in
                 app.databases.use(database.configuration, as: .psql)
                 try routes(app, historyClock: PerfumeryHistoryClock { instant })
-                try await app.testing().test(.GET, "/perfumery-history?timeZone=UTC") { response in
+                try await app.testing().test(.GET, "/v2/perfumery-history?timeZone=UTC") { response in
                     #expect(response.status == .ok)
                     let item = try JSONDecoder().decode(
                         PerfumeryHistoryItem.self,
@@ -158,7 +216,7 @@ struct PerfumeryHistoryTests {
         try await withApp { app in
             app.databases.use(database.configuration, as: .psql)
             try routes(app)
-            try await app.testing().test(.GET, "/perfumery-history?timeZone=UTC") { response in
+            try await app.testing().test(.GET, "/v2/perfumery-history?timeZone=UTC") { response in
                 #expect(response.status == .notFound)
             }
         }
@@ -168,9 +226,18 @@ struct PerfumeryHistoryTests {
     func invalidTimeZone() async throws {
         try await withApp { app in
             try routes(app)
-            try await app.testing().test(.GET, "/perfumery-history?timeZone=Invalid") { response in
+            try await app.testing().test(.GET, "/v2/perfumery-history?timeZone=Invalid") { response in
                 #expect(response.status == .badRequest)
             }
         }
     }
+}
+
+// This mirrors the released iOS DTO, independently of the backend's versioned response.
+private struct MainClientHistoryResponse: Decodable {
+    let year: Int
+    let perfumeName: String
+    let shortStory: String
+    let fullStory: String
+    let imageUrl: String
 }

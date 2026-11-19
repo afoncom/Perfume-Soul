@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[3]
 SOURCE = ROOT / 'docs/content/perfumery-history/stories.draft.json'
 DESTINATION = (
     Path(__file__).resolve().parents[1]
-    / 'Sources/PerfumeSoulBackend/Requests/perfumery-history/Resources/perfumery-history.json'
+    / 'Sources/PerfumeSoulBackend/Resources/perfumery-history.json'
 )
 
 

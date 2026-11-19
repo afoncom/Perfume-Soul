@@ -20,6 +20,7 @@ final class PerfumeHistoryServiceTests: XCTestCase {
     func testRequestIncludesLocalTimeZone() {
         let request = PerfumeHistoryRequest(timeZoneIdentifier: "Europe/Madrid")
 
+        XCTAssertEqual(request.path, "/v2/perfumery-history")
         XCTAssertEqual(request.queryItems, [URLQueryItem(name: "timeZone", value: "Europe/Madrid")])
     }
 }

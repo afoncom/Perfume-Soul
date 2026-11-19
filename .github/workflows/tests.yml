@@ -157,8 +157,8 @@ jobs:
           psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_daily_horoscopes.sql
         curl -f http://127.0.0.1:8080/horoscope/daily
         history_code="$(curl -sS -o /dev/null -w '%{http_code}' \
-          'http://127.0.0.1:8080/perfumery-history?timeZone=UTC')"
-        echo "/perfumery-history -> $history_code"
+          'http://127.0.0.1:8080/v2/perfumery-history?timeZone=UTC')"
+        echo "/v2/perfumery-history -> $history_code"
         [[ "$history_code" == "200" || "$history_code" == "404" ]]
     - name: Dump Compose logs
       if: failure()

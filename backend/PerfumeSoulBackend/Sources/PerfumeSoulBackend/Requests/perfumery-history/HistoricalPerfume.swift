@@ -7,7 +7,29 @@ struct PerfumeryHistoryItem: Codable, Equatable {
     let fullStory: String
 }
 
+struct LegacyPerfumeryHistoryItem: Codable, Equatable {
+    let year: Int
+    let perfumeName: String
+    let shortStory: String
+    let fullStory: String
+    let imageUrl: String
+}
+
 enum PerfumeryHistoryLoader {
+    static func loadLegacy(dateKey: String, on database: any Database) async throws -> LegacyPerfumeryHistoryItem? {
+        guard let model = try await LegacyPerfumeryHistoryModel.query(on: database)
+            .filter(\.$dateKey == dateKey).first() else {
+            return nil
+        }
+        return LegacyPerfumeryHistoryItem(
+            year: model.year,
+            perfumeName: model.perfumeName,
+            shortStory: model.shortStory,
+            fullStory: model.fullStory,
+            imageUrl: model.imageUrl
+        )
+    }
+
     static func load(
         dateKey: String,
         language: String?,
