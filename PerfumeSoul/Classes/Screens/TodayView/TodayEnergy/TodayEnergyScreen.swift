@@ -11,6 +11,7 @@ import SwiftUI
 struct TodayEnergyScreen: View {
     @Bindable private var viewModel: TodayEnergyViewModel
     private let presenter: TodayEnergyPresenter
+    @Environment(\.scenePhase) private var scenePhase
     @ScaledMetric(relativeTo: .largeTitle) private var headingSize = 38
 
     init(
@@ -24,8 +25,13 @@ struct TodayEnergyScreen: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 36) {
-                makePersonalSection()
-                makeHoroscopeSection()
+                if viewModel.isUnavailable {
+                    Text(String(localized: "today.energy.unavailable"))
+                        .font(.body)
+                } else {
+                    makePersonalSection()
+                    makeHoroscopeSection()
+                }
             }
             .padding(.horizontal, 24)
             .padding(.top, 20)
@@ -36,6 +42,16 @@ struct TodayEnergyScreen: View {
         .preferredColorScheme(.light)
         .navigationTitle(L10n.Screen.todayEnergy)
         .navigationBarTitleDisplayMode(.inline)
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active {
+                Task { await presenter.refresh() }
+            }
+        }
+        .task {
+            for await _ in NotificationCenter.default.notifications(named: .NSCalendarDayChanged) {
+                await presenter.refresh()
+            }
+        }
     }
 }
 

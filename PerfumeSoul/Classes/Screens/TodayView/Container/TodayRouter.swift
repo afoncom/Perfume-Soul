@@ -17,11 +17,17 @@ protocol TodayRouter {
 
 final class TodayRouterImpl {
     private let imageLoader: PerfumeImageLoader
+    private let dailyHoroscopeService: DailyHoroscopeService
     private weak var navigationController: UINavigationController?
     
-    init(navigationController: UINavigationController?, imageLoader: PerfumeImageLoader) {
+    init(
+        navigationController: UINavigationController?,
+        imageLoader: PerfumeImageLoader,
+        dailyHoroscopeService: DailyHoroscopeService
+    ) {
         self.navigationController = navigationController
         self.imageLoader = imageLoader
+        self.dailyHoroscopeService = dailyHoroscopeService
     }
 }
 
@@ -34,7 +40,8 @@ extension TodayRouterImpl: TodayRouter {
             TodayEnergyModule.build(
                 navigationController: navigationController,
                 personalDailyHoroscope: personalDailyHoroscope,
-                dailyHoroscopes: dailyHoroscopes
+                dailyHoroscopes: dailyHoroscopes,
+                dailyHoroscopeService: dailyHoroscopeService
             ),
             animated: true
         )

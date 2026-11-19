@@ -248,6 +248,7 @@
 "today.energy.moonTitle" = "Moon in Scorpio";
 "today.energy.personalTitle" = "For You";
 "today.energy.missingProfile" = "Complete your profile to see your daily horoscope.";
+"today.energy.unavailable" = "Today's horoscope is not available yet.";
 "today.energy.title" = "Today's Horoscope";
 "today.overview.caption" = "Your daily edit";
 "today.overview.title" = "A scent for today.";

@@ -45,11 +45,7 @@ Seed perfumery history into PostgreSQL:
 psql "$DATABASE_URL" -f scripts/seed_perfumery_history.sql
 ```
 
-Seed daily horoscopes into PostgreSQL:
-
-```bash
-psql "$DATABASE_URL" -f scripts/seed_daily_horoscopes.sql
-```
+The 731 days of RU/EN daily horoscopes are loaded into PostgreSQL automatically by a Fluent migration.
 
 Backfill perfume profile metadata:
 
@@ -164,9 +160,6 @@ docker compose exec -T postgres \
   psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_perfumery_history.sql
 
 docker compose exec -T postgres \
-  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_daily_horoscopes.sql
-
-docker compose exec -T postgres \
   psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 < scripts/fill_perfume_profile_metadata.sql
 
 docker compose exec -T postgres \
@@ -260,18 +253,20 @@ Smoke check the first deploy after importing a dump:
 curl -f http://127.0.0.1:8080/health
 curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
-curl -f http://127.0.0.1:8080/horoscope/daily
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -At -c 'SELECT COUNT(*) FROM daily_horoscope_entries'
 curl -fs "http://127.0.0.1:8080/perfumes?searchText=&offset=0&limit=1" | grep -q '"id"'
 ```
 
-A brand-new Docker PostgreSQL volume starts with schema only. The seed/backfill scripts above create `perfumery_history` and `daily_horoscopes`, but do not insert `brands`, `perfumes`, `notes`, or `perfume_notes` rows. If no dump is imported, start the stack, run the Docker seed/backfill section above, then smoke check the seed-only path:
+A brand-new Docker PostgreSQL volume receives `daily_horoscope_entries` through migration. The history seed script above creates `perfumery_history`, but neither it nor the horoscope migration inserts `brands`, `perfumes`, `notes`, or `perfume_notes` rows. If no dump is imported, start the stack, run the Docker seed/backfill section above, then smoke check the seed-only path:
 
 ```bash
 docker compose up -d --wait --wait-timeout 120
 curl -f http://127.0.0.1:8080/health
 curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
-curl -f http://127.0.0.1:8080/horoscope/daily
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -At -c 'SELECT COUNT(*) FROM daily_horoscope_entries'
 ```
 
 Update an existing deployment:
@@ -381,17 +376,17 @@ Expected response on `/perfumery-history`:
 }
 ```
 
-Expected response on `/horoscope/daily`:
+Expected response on `/horoscope/daily?timeZone=UTC` on 1 December 2026 with `Accept-Language: en` (two of twelve signs shown):
 
 ```json
 [
   {
     "sign": "aries",
-    "energyOfDay": "Сегодня хороший день для инициативы и быстрых решений."
+    "energyOfDay": "Start with one important task today and save your energy for what matters."
   },
   {
     "sign": "taurus",
-    "energyOfDay": "День подойдет для спокойной концентрации, практичных покупок и наведения порядка в делах."
+    "energyOfDay": "A steady pace will help you notice details and finish something you have postponed."
   }
 ]
 ```
@@ -535,7 +530,7 @@ Backend recommendation logic has focused tests for:
 - `GET /perfumes` now reads from PostgreSQL, so the local database must be running and contain `brands` and `perfumes`.
 - `GET /perfumes/recommendations` also reads from PostgreSQL and depends on populated `perfumes`, `brands`, `notes`, `perfume_notes`, `accords`, and `perfume_accords`.
 - `POST /personal-perfumes` depends on populated `market_segment`, profile metadata, notes, and accords.
-- `GET /horoscope/daily` now reads from PostgreSQL, so `daily_horoscopes` must be seeded before local run.
+- `GET /horoscope/daily` reads the current date from `daily_horoscope_entries` in the requested `timeZone` (UTC by default). The migration loads 12 RU/EN entries for every date from 2026-12-01 through 2028-11-30. Outside that range it returns 404; `Accept-Language: ru` selects Russian, otherwise English.
 - quiz data still uses packaged backend resources under `Sources/PerfumeSoulBackend/Requests/quiz-of-the-day/Resources`.
 - If the server is running, stop it with `Control + C`.
 
