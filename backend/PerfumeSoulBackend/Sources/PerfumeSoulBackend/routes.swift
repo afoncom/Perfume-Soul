@@ -74,7 +74,10 @@ func routes(
 
     app.get("horoscope", "daily") { req async throws -> Response in
         let query = try req.query.decode(DailyHoroscopeQuery.self)
-        guard let timeZone = TimeZone(identifier: query.timeZone ?? "UTC") else {
+        guard let timeZoneIdentifier = query.timeZone else {
+            return try jsonResponse(try await DailyHoroscopeLoader.load(on: req.db))
+        }
+        guard let timeZone = TimeZone(identifier: timeZoneIdentifier) else {
             throw Abort(.badRequest, reason: "Invalid timeZone")
         }
         guard let horoscopes = try await DailyHoroscopeLoader.load(

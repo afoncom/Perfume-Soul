@@ -3,6 +3,28 @@ import XCTest
 
 final class DailyHoroscopeRefreshOrderTests: XCTestCase {
     @MainActor
+    func testTodayFinishesLoadingWhenHistoryAndHoroscopeBothFail() async {
+        let viewModel = TodayViewModel()
+        let presenter = TodayPresenterImpl(
+            viewModel: viewModel,
+            router: TodayRouterStub(),
+            perfumeHistoryService: FailingHistoryServiceStub(),
+            dailyHoroscopeService: FailingHoroscopeServiceStub(),
+            profileService: ProfileServiceStub()
+        )
+
+        await presenter.onAppear()
+
+        XCTAssertFalse(viewModel.isLoadingHoroscope)
+        XCTAssertNil(viewModel.personalHoroscope)
+        XCTAssertTrue(viewModel.hasPreferredZodiacSign)
+        XCTAssertEqual(viewModel.horoscopePlaceholder, String(localized: "today.energy.unavailable"))
+        guard case .failed = viewModel.viewState else {
+            return XCTFail("History must finish loading after a failure")
+        }
+    }
+
+    @MainActor
     func testTodayKeepsLatestHoroscopeWhenEarlierRequestFinishesLast() async {
         let service = PendingHoroscopeService()
         let viewModel = TodayViewModel()
@@ -71,6 +93,18 @@ final class DailyHoroscopeRefreshOrderTests: XCTestCase {
 
         XCTAssertEqual(viewModel.personalDailyHoroscope.energyOfDay, "December 2")
         XCTAssertEqual(viewModel.dailyHoroscopes.first?.energyOfDay, "December 2")
+    }
+}
+
+private final class FailingHistoryServiceStub: PerfumeHistoryService {
+    func requestPerfumeHistory() async throws -> PerfumeHistory {
+        throw URLError(.notConnectedToInternet)
+    }
+}
+
+private final class FailingHoroscopeServiceStub: DailyHoroscopeService {
+    func requestDailyHoroscope() async throws -> [DailyHoroscope] {
+        throw URLError(.notConnectedToInternet)
     }
 }
 

@@ -13,6 +13,7 @@ import Observation
     var dailyHoroscopes: [DailyHoroscope] = []
     var personalHoroscope: DailyHoroscope?
     var hasPreferredZodiacSign = false
+    var isLoadingHoroscope = true
     var viewState: TodayScreen.ViewState = .loading
 
     var dateText: String {

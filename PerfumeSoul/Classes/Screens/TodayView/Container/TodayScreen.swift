@@ -108,7 +108,7 @@ extension TodayScreen {
                             .fill(Color(.textPrimary).opacity(0.16))
                             .frame(height: 1)
                     }
-                } else if case .loading = viewModel.viewState {
+                } else if viewModel.isLoadingHoroscope {
                     ProgressView()
                         .tint(Color(.textPrimary))
                         .frame(maxWidth: .infinity, minHeight: 160)
@@ -159,6 +159,11 @@ extension TodayScreen {
                     .background(Color(.textPrimary).opacity(0.035))
             case let .loaded(historyFact):
                 makeHistoryCard(historyFact: historyFact)
+            case .failed:
+                Text(L10n.Common.Error.message)
+                    .font(.body)
+                    .frame(maxWidth: .infinity, minHeight: 260)
+                    .background(Color(.textPrimary).opacity(0.035))
             }
         }
         .foregroundStyle(Color(.textPrimary))
@@ -266,5 +271,6 @@ extension TodayScreen {
     enum ViewState {
         case loading
         case loaded(historyFact: PerfumeHistory)
+        case failed
     }
 }

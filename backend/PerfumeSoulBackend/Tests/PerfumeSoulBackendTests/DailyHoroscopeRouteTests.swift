@@ -7,6 +7,41 @@ import XCTFluent
 @testable import PerfumeSoulBackend
 
 struct DailyHoroscopeRouteTests {
+    @Test("Requests without timeZone preserve the legacy response", arguments: [
+        "2026-11-30T12:00:00Z", "2026-12-01T12:00:00Z"
+    ])
+    func legacyDailyHoroscopes(timestamp: String) async throws {
+        let database = CallbackTestDatabase { query in
+            #expect(query.schema == "daily_horoscopes")
+            guard query.schema == "daily_horoscopes" else {
+                return []
+            }
+            return DailyHoroscopeSeed.signs.sorted().enumerated().map { index, sign in
+                TestOutput([
+                    "id": index + 1,
+                    "sign": sign,
+                    "energy_of_day": "Legacy \(sign)",
+                    "sort_order": index + 1
+                ])
+            }
+        }
+        let instant = try #require(ISO8601DateFormatter().date(from: timestamp))
+
+        try await withApp { app in
+            app.databases.use(database.configuration, as: .psql)
+            try routes(app, horoscopeClock: DailyHoroscopeClock { instant })
+            try await app.testing().test(.GET, "/horoscope/daily") { response in
+                #expect(response.status == .ok)
+                let horoscopes = try JSONDecoder().decode(
+                    [LegacyDailyHoroscope].self,
+                    from: Data(response.body.string.utf8)
+                )
+                #expect(horoscopes.count == 12)
+                #expect(horoscopes.first { $0.sign == "aries" }?.energyOfDay == "Legacy aries")
+            }
+        }
+    }
+
     @Test("The endpoint returns the requested day in Russian or English")
     func localizedDailyHoroscopes() async throws {
         let days = try DailyHoroscopeSeed.days()
@@ -71,4 +106,9 @@ struct DailyHoroscopeRouteTests {
             }
         }
     }
+}
+
+private struct LegacyDailyHoroscope: Decodable {
+    let sign: String
+    let energyOfDay: String
 }

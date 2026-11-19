@@ -11,6 +11,14 @@ struct DailyHoroscopeQuery: Content {
 }
 
 enum DailyHoroscopeLoader {
+    static func load(on database: any Database) async throws -> [DailyHoroscope] {
+        let horoscopes = try await DailyHoroscopeModel.query(on: database)
+            .sort(\.$sortOrder)
+            .all()
+        try validate(horoscopes.map(\.sign), schema: DailyHoroscopeModel.schema)
+        return horoscopes.map { DailyHoroscope(sign: $0.sign, energyOfDay: $0.energyOfDay) }
+    }
+
     static func load(
         dateKey: String,
         language: String?,
@@ -24,7 +32,7 @@ enum DailyHoroscopeLoader {
         guard !horoscopes.isEmpty else {
             return nil
         }
-        try validate(horoscopes)
+        try validate(horoscopes.map(\.sign), schema: DailyHoroscopeEntryModel.schema)
 
         let isRussian = language?.lowercased().hasPrefix("ru") == true
         return horoscopes.map { model in
@@ -52,19 +60,19 @@ extension DailyHoroscopeLoader {
         "pisces"
     ]
 
-    private static func validate(_ horoscopes: [DailyHoroscopeEntryModel]) throws {
-        guard horoscopes.count == expectedSigns.count else {
+    private static func validate(_ signs: [String], schema: String) throws {
+        guard signs.count == expectedSigns.count else {
             throw Abort(
                 .internalServerError,
-                reason: "daily_horoscope_entries must contain exactly 12 signs for the date"
+                reason: "\(schema) must contain exactly 12 signs"
             )
         }
 
-        let loadedSigns = Set(horoscopes.map(\.sign))
+        let loadedSigns = Set(signs)
         guard loadedSigns == expectedSigns else {
             throw Abort(
                 .internalServerError,
-                reason: "daily_horoscope_entries contains an invalid or incomplete sign set"
+                reason: "\(schema) contains an invalid or incomplete sign set"
             )
         }
     }
