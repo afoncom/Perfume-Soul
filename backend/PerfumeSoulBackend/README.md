@@ -536,7 +536,8 @@ Backend recommendation logic has focused tests for:
 - `GET /perfumes/recommendations` also reads from PostgreSQL and depends on populated `perfumes`, `brands`, `notes`, `perfume_notes`, `accords`, and `perfume_accords`.
 - `POST /personal-perfumes` depends on populated `market_segment`, profile metadata, notes, and accords.
 - `GET /horoscope/daily` now reads from PostgreSQL, so `daily_horoscopes` must be seeded before local run.
-- `GET /quiz-of-the-day` reads the 5,475-question RU/EN bank from PostgreSQL. The bank is imported from `Sources/PerfumeSoulBackend/Requests/quiz-of-the-day/Resources/quiz-bank.json` during migration. Until daily selection is implemented, the endpoint returns the first 15 questions by ID; `Accept-Language: en` selects English, and Russian is the default.
+- `GET /quiz-of-the-day` preserves the original 15 questions (IDs 1–15) for existing clients and same-day sessions.
+- `GET /v2/quiz-of-the-day` reads the 5,475-question RU/EN bank from PostgreSQL. The bank is imported from `Sources/PerfumeSoulBackend/Resources/quiz-bank.json` during migration. Until daily selection is implemented, the endpoint returns the first 15 questions by ID; `Accept-Language: en` selects English, and Russian is the default. Updated iOS clients keep a legacy session, including its completion state, until the next local day; new sessions use the versioned endpoint and persist the question set version.
 - If the server is running, stop it with `Control + C`.
 
 ### Catalog product images

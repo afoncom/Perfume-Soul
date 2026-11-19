@@ -6,6 +6,16 @@
 //
 
 struct QuizOfTheDayRequest: Request {
-    let path: String = "/quiz-of-the-day"
+    let version: QuizOfTheDayQuestion.SetVersion
+
+    var path: String {
+        switch version {
+        case .legacy:
+            return "/quiz-of-the-day"
+        case .bank:
+            return "/v2/quiz-of-the-day"
+        }
+    }
+
     let httpMethod: HTTPMethod = .get
 }

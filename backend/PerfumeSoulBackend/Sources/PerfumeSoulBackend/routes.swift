@@ -76,7 +76,11 @@ func routes(
         return try jsonResponse(horoscopes)
     }
 
-    app.get("quiz-of-the-day") { req async throws -> Response in
+    app.get("quiz-of-the-day") { _ async throws -> Response in
+        try jsonResponse(QuizOfTheDayQuestionLoader.load())
+    }
+
+    app.get("v2", "quiz-of-the-day") { req async throws -> Response in
         let questions = try await QuizOfTheDayQuestionLoader.load(
             on: req.db,
             language: req.headers.first(name: "Accept-Language")

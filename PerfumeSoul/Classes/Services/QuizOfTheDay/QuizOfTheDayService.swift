@@ -6,7 +6,7 @@
 //
 
 protocol QuizOfTheDayService {
-    func requestQuizOfTheDayQuestions() async throws -> [QuizOfTheDayQuestion]
+    func requestQuizOfTheDayQuestions(version: QuizOfTheDayQuestion.SetVersion) async throws -> [QuizOfTheDayQuestion]
 }
 
 final class QuizOfTheDayServiceImpl {
@@ -18,8 +18,10 @@ final class QuizOfTheDayServiceImpl {
 }
 
 extension QuizOfTheDayServiceImpl: QuizOfTheDayService {
-    func requestQuizOfTheDayQuestions() async throws -> [QuizOfTheDayQuestion] {
-        let questions: [QuizOfTheDayResponse] = try await requestManager.sendRequest(request: QuizOfTheDayRequest())
+    func requestQuizOfTheDayQuestions(version: QuizOfTheDayQuestion.SetVersion) async throws -> [QuizOfTheDayQuestion] {
+        let questions: [QuizOfTheDayResponse] = try await requestManager.sendRequest(
+            request: QuizOfTheDayRequest(version: version)
+        )
         return questions.map { QuizOfTheDayQuestion(response: $0) }
     }
 }
