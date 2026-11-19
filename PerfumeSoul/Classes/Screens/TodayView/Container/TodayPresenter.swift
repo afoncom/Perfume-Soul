@@ -19,6 +19,7 @@ final class TodayPresenterImpl {
     private let perfumeHistoryService: PerfumeHistoryService
     private let dailyHoroscopeService: DailyHoroscopeService
     private let profileService: ProfileService
+    @MainActor private var latestLoadID = 0
     
     init(
         viewModel: TodayViewModel,
@@ -38,29 +39,37 @@ final class TodayPresenterImpl {
 extension TodayPresenterImpl: TodayPresenter {
     @MainActor
     func onAppear() async {
+        latestLoadID += 1
+        let loadID = latestLoadID
         viewModel.viewState = .loading
+        async let historyFactTask = perfumeHistoryService.requestPerfumeHistory()
+        async let dailyHoroscopesTask = dailyHoroscopeService.requestDailyHoroscope()
+        async let profileTask = profileService.fetchProfile()
+
+        let profile = await profileTask
+        let dailyHoroscopes = (try? await dailyHoroscopesTask) ?? []
+        guard loadID == latestLoadID else {
+            return
+        }
+        let userSign = profile?.preferredZodiacSign
+        viewModel.dailyHoroscopes = dailyHoroscopes
+        viewModel.personalHoroscope = dailyHoroscopes.first { horoscope in
+            horoscope.sign == userSign
+        }
+
         do {
-            async let historyFactTask = perfumeHistoryService.requestPerfumeHistory()
-            async let dailyHoroscopesTask = dailyHoroscopeService.requestDailyHoroscope()
-            async let profileTask = profileService.fetchProfile()
-            
-            let profile = await profileTask
-
             let historyFact = try await historyFactTask
-            let dailyHoroscopes = try await dailyHoroscopesTask
-            let userSign = profile?.preferredZodiacSign
-            
-            viewModel.historyFact = historyFact
-            viewModel.dailyHoroscopes = dailyHoroscopes
-            viewModel.personalHoroscope = dailyHoroscopes.first { horoscope in
-                horoscope.sign == userSign
+            guard loadID == latestLoadID else {
+                return
             }
-            
+            viewModel.historyFact = historyFact
             viewModel.viewState = .loaded(historyFact: historyFact)
-            print(historyFact)
-
-        } catch let error {
-            print(error)
+        } catch {
+            guard loadID == latestLoadID else {
+                return
+            }
+            viewModel.historyFact = nil
+            viewModel.viewState = .unavailable
         }
     }
 

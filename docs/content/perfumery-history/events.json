@@ -16791,6 +16791,16 @@
       "url": "https://patents.justia.com/patent/7638477",
       "receivedOn": "2026-11-15",
       "provenance": "perfume_soul_new_coverage_draft.json"
+    },
+    {
+      "id": "iff-living-tree-patent-1993-source",
+      "publisher": "Google Patents",
+      "type": "user_provided_reference",
+      "language": "en",
+      "access": "not_independently_opened",
+      "url": "https://patents.google.com/patent/US5263359A/en",
+      "receivedOn": "2026-11-15",
+      "provenance": "perfume_soul_2028-11-23.json"
     }
   ],
   "events": [
@@ -36244,8 +36254,37 @@
         "inputProvenance": "independent_research_new_coverage_2026_11",
         "inputCategory": "creation_technique"
       }
+    },
+    {
+      "id": "iff-living-tree-patent-1993",
+      "eventDate": "1993-11-23",
+      "calendar": "gregorian",
+      "category": "creation_technique",
+      "eventType": "выдача патента на анализ запаха живого дерева",
+      "titleRu": "Как услышать запах живого дерева",
+      "status": "user_provided",
+      "evidenceLevel": "user_provided_not_independently_verified",
+      "eventGroupId": "iff-living-tree-patent-1993",
+      "sourceIds": [
+        "iff-living-tree-patent-1993-source"
+      ],
+      "dateEvidence": {
+        "sourceId": "iff-living-tree-patent-1993-source",
+        "locator": "perfume_soul_2028-11-23.json — stories[0] — factsUsed[0] — US5263359A — Info; Application granted 1993-11-23",
+        "summaryRu": "Патент US5263359A выдан IFF 23 ноября 1993 года.",
+        "verificationStatus": "user_provided_not_independently_verified"
+      },
+      "storyAngleRu": "Как услышать запах живого дерева",
+      "researchNotesRu": "Для календарного слота 23.11.2028. Историческая дата — выдача патента, не дата изобретения или запуска парфюма. publicationDate не назначена.",
+      "provenance": {
+        "file": "perfume_soul_2028-11-23.json",
+        "inputIndex": 0,
+        "inboxReference": "Дополнение календаря: 23 ноября 2028 — IFF, исследование запаха живого дерева",
+        "inputProvenance": "independent_research",
+        "verificationStatus": "user_provided_not_independently_verified"
+      }
     }
   ],
-  "inclusionRule": "Only events with an exact historical date read and verified in the cited source. No candidates, disputed dates, inferred dates, or merely planned events. Exception authorized by the user on 2026-11-13: compact001 imports may use user-provided dates and references without independent source verification; their status is user_provided, never verified. Cumulative import of 2026-11-13: user-provided dates and references were accepted without independent source verification as instructed; these events use status user_provided, not verified. New coverage import on 2026-11-15: 248 stories were accepted from a supplied draft JSON without independent source verification; their events use status user_provided, not verified. A duplicate exhibition closing was excluded.",
-  "verificationScope": "Exact date and the narrowly stated event are verified. Story angles are editorial proposals and require sourced fact packets before writing. The compact001 batch is user-provided and has not been independently verified; source links in this batch are references supplied by the user. The cumulative197 batch is user-provided and was not independently source-checked during import. The new coverage batch was structurally integrated without independent source review."
+  "inclusionRule": "Only events with an exact historical date read and verified in the cited source. No candidates, disputed dates, inferred dates, or merely planned events. Exception authorized by the user on 2026-11-13: compact001 imports may use user-provided dates and references without independent source verification; their status is user_provided, never verified. Cumulative import of 2026-11-13: user-provided dates and references were accepted without independent source verification as instructed; these events use status user_provided, not verified. New coverage import on 2026-11-15: 248 stories were accepted from a supplied draft JSON without independent source verification; their events use status user_provided, not verified. A duplicate exhibition closing was excluded. The 2028-11-23 IFF patent story was imported from a user-supplied draft without independent source review and is marked user_provided.",
+  "verificationScope": "Exact date and the narrowly stated event are verified. Story angles are editorial proposals and require sourced fact packets before writing. The compact001 batch is user-provided and has not been independently verified; source links in this batch are references supplied by the user. The cumulative197 batch is user-provided and was not independently source-checked during import. The new coverage batch was structurally integrated without independent source review. The 2028-11-23 IFF patent story is user-provided and has not been independently source-checked."
 }

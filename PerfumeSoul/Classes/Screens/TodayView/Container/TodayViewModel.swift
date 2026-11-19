@@ -18,7 +18,4 @@ import Observation
         Date().formatted(.dateTime.weekday(.wide).day().month(.wide))
     }
 
-    func historyDateText(year: Int) -> String {
-        "\(Date().formatted(.dateTime.day().month(.wide))) \(year)"
-    }
 }

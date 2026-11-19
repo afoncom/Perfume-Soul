@@ -34,7 +34,8 @@ let package = Package(
             ],
             resources: [
                 .process("Catalog/Resources"),
-                .process("Requests/quiz-of-the-day/Resources")
+                .process("Requests/quiz-of-the-day/Resources"),
+                .process("Resources")
             ],
             swiftSettings: swiftSettings
         ),

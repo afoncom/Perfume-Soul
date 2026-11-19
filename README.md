@@ -51,12 +51,11 @@ Main tabs:
 
 Backend-backed data already used here:
 
-- `GET /perfumery-history` returns a single history item with:
-  - `year`
-  - `perfumeName`
-  - `shortStory`
-  - `fullStory`
-  - `imageUrl`
+- `GET /perfumery-history?timeZone=Europe%2FMadrid` returns the current day's history with:
+  - `publicationDate`
+  - `eventYear`
+  - localized `title`
+  - localized `fullStory`
 - `GET /perfumes/recommendations?perfumeIDs=1,2,3` returns up to 5 similar perfumes with:
   - `id`
   - `perfumeName`

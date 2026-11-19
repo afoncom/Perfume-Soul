@@ -150,12 +150,16 @@ jobs:
         code="$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/perfumes/1/notes)"
         echo "/perfumes/1/notes -> $code"
         [[ "$code" == "404" || "$code" == "200" ]]
-        docker compose exec -T postgres \
-          psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_perfumery_history.sql
+        history_count="$(docker compose exec -T postgres \
+          psql -U perfumesoul -d perfumesoul -At -c 'SELECT COUNT(*) FROM perfumery_history_entries')"
+        [[ "$history_count" == "731" ]]
         docker compose exec -T postgres \
           psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_daily_horoscopes.sql
         curl -f http://127.0.0.1:8080/horoscope/daily
-        curl -f http://127.0.0.1:8080/perfumery-history
+        history_code="$(curl -sS -o /dev/null -w '%{http_code}' \
+          'http://127.0.0.1:8080/v2/perfumery-history?timeZone=UTC')"
+        echo "/v2/perfumery-history -> $history_code"
+        [[ "$history_code" == "200" || "$history_code" == "404" ]]
     - name: Dump Compose logs
       if: failure()
       working-directory: backend/PerfumeSoulBackend

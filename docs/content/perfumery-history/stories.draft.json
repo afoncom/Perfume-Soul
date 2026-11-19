@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "partial_draft_catalog",
+  "status": "complete_draft_catalog",
   "publicationWindow": {
     "startDate": "2026-12-01",
     "endDate": "2028-11-30",
@@ -46367,6 +46367,65 @@
         "verificationStatus": "user_provided_not_independently_verified"
       },
       "editorialNotes": "Патентное описание, не свидетельство выпуска продукта или гарантированной длительности.",
+      "lengthPolicy": "user_supplied_compact"
+    },
+    {
+      "status": "draft",
+      "publicationDate": "2028-11-23",
+      "eventId": "iff-living-tree-patent-1993",
+      "eventGroupId": "iff-living-tree-patent-1993",
+      "eventDate": "1993-11-23",
+      "category": "creation_technique",
+      "localizations": {
+        "ru": {
+          "title": "Как услышать запах живого дерева",
+          "fullStory": "23 ноября 1993 года компания International Flavors & Fragrances получила американский патент на метод исследования запаха живого дерева. Вместо того чтобы изучать только заготовленную древесину, разработчики предложили сравнивать летучие вещества внутри ствола и у поверхности коры.\n\nДля этого в небольшое отверстие в древесине помещали трубку с улавливающим материалом. Вторую трубку соединяли с камерой, прилегающей к коре. Два насоса одновременно пропускали воздух через ловушки, после чего собранные вещества исследовали методом газовой хроматографии и масс-спектрометрии.\n\nВ описанном опыте с дугласией сбор проб продолжался семь часов. Среди обнаруженных соединений были лимонен, мирцен и пинены. При этом соотношение веществ внутри ствола и снаружи различалось. Например, в наружной пробе доля лонгифолена оказалась выше.\n\nДля парфюмерии такой подход интересен возможностью изучать древесный запах в его естественном окружении. Аналитические данные дают ориентиры для будущих композиций, хотя сами по себе ещё не становятся готовой формулой. За знакомым образом хвойного леса скрывается целое сочетание летучих веществ."
+        },
+        "en": {
+          "title": "Capturing the Scent of a Living Tree",
+          "fullStory": "On November 23, 1993, International Flavors & Fragrances received a US patent for studying the scent of a living tree. Rather than examining harvested wood alone, the researchers proposed comparing volatile compounds inside the trunk with those released at the surface of the bark.\n\nA small opening in the wood held a tube containing a substance that captured airborne compounds. A second tube connected to a chamber sealed against the bark. Two pumps drew air through the traps simultaneously, and the collected compounds were subsequently examined using gas chromatography and mass spectrometry.\n\nIn an experiment involving a Douglas fir, sampling continued for seven hours. The researchers identified limonene, myrcene and pinenes among other compounds. Their relative proportions differed inside and outside the trunk. Longifolene, for instance, accounted for a larger share of the exterior sample.\n\nFor perfumery, this approach offers a way to explore woody scents in their natural setting. Analytical findings can inform future compositions without becoming finished formulas themselves."
+        }
+      },
+      "sourceIds": [
+        "iff-living-tree-patent-1993-source"
+      ],
+      "claimEvidence": [
+        {
+          "claim": "Патент US5263359A выдан IFF 23 ноября 1993 года.",
+          "factIds": [
+            "iff-living-tree-patent-1993-f1"
+          ],
+          "sourceIds": [
+            "iff-living-tree-patent-1993-source"
+          ]
+        },
+        {
+          "claim": "Раздельный одновременный сбор летучих веществ изнутри ствола и у коры.",
+          "factIds": [
+            "iff-living-tree-patent-1993-f2"
+          ],
+          "sourceIds": [
+            "iff-living-tree-patent-1993-source"
+          ]
+        },
+        {
+          "claim": "Опыт с дугласией длился 7 часов; анализ GC-MS, лимонен, мирцен, пинены и различия долей лонгифолена.",
+          "factIds": [
+            "iff-living-tree-patent-1993-f3"
+          ],
+          "sourceIds": [
+            "iff-living-tree-patent-1993-source"
+          ]
+        }
+      ],
+      "provenance": {
+        "file": "perfume_soul_2028-11-23.json",
+        "inputIndex": 0,
+        "inboxReference": "Дополнение календаря: 23 ноября 2028 — IFF, исследование запаха живого дерева",
+        "inputProvenance": "independent_research",
+        "verificationStatus": "user_provided_not_independently_verified"
+      },
+      "editorialNotes": "Для календарного слота 23.11.2028. Историческая дата — выдача патента, не дата изобретения или запуска парфюма. publicationDate не назначена.",
       "lengthPolicy": "user_supplied_compact"
     }
   ]

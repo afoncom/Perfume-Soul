@@ -10,20 +10,18 @@ import SwiftUI
 
 struct DayInPerfumeryScreen: View {
     @Bindable private var viewModel: DayInPerfumeryViewModel
-    private let imageLoader: PerfumeImageLoader
     private let presenter: DayInPerfumeryPresenter
+    @Environment(\.scenePhase) private var scenePhase
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @ScaledMetric(relativeTo: .largeTitle) private var headingSize = 32
     @ScaledMetric(relativeTo: .largeTitle) private var dateSize = 48
 
     init(
         viewModel: DayInPerfumeryViewModel,
-        presenter: DayInPerfumeryPresenter,
-        imageLoader: PerfumeImageLoader
+        presenter: DayInPerfumeryPresenter
     ) {
         self.viewModel = viewModel
         self.presenter = presenter
-        self.imageLoader = imageLoader
     }
 
     var body: some View {
@@ -31,9 +29,13 @@ struct DayInPerfumeryScreen: View {
             VStack(alignment: .leading, spacing: 32) {
                 PerfumeFlowHeader(section: L10n.Today.History.title, step: nil)
 
-                makeHeader()
-                makeImagePlaceholder()
-                makeStory()
+                if viewModel.isUnavailable {
+                    Text(String(localized: "today.history.unavailable"))
+                        .font(.body)
+                } else {
+                    makeHeader()
+                    makeStory()
+                }
             }
             .padding(.horizontal, 24)
             .padding(.top, 20)
@@ -43,6 +45,16 @@ struct DayInPerfumeryScreen: View {
         .foregroundStyle(Color(.textPrimary))
         .preferredColorScheme(.light)
         .navigationBarTitleDisplayMode(.inline)
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active {
+                Task { await presenter.refresh() }
+            }
+        }
+        .task {
+            for await _ in NotificationCenter.default.notifications(named: .NSCalendarDayChanged) {
+                await presenter.refresh()
+            }
+        }
     }
 }
 
@@ -65,32 +77,14 @@ extension DayInPerfumeryScreen {
                 .frame(height: 1)
                 .accessibilityHidden(true)
 
-            Text(viewModel.historyFact.perfumeName)
+            Text(viewModel.historyFact.title)
                 .font(.system(size: headingSize, weight: .semibold))
                 .tracking(-0.8)
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityAddTraits(.isHeader)
-
-            Text(viewModel.historyFact.shortStory)
-                .font(.title3)
-                .foregroundStyle(Color(.descriptionText))
-                .lineSpacing(5)
                 .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-    }
-
-    private func makeImagePlaceholder() -> some View {
-        Rectangle()
-            .fill(Color(.textPrimary).opacity(0.035))
-            .aspectRatio(4.0 / 3.0, contentMode: .fit)
-            .overlay {
-                PerfumeProductImage(imageURL: URL(string: viewModel.historyFact.imageUrl), loader: imageLoader)
-            }
-            .overlay {
-                Rectangle().strokeBorder(Color(.inputBorder), lineWidth: 1)
-            }
-            .accessibilityHidden(true)
     }
 
     private func makeStory() -> some View {
