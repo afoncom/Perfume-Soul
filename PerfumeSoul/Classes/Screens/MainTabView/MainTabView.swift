@@ -22,6 +22,7 @@ struct MainTabView: View {
     let profileScreen: NavigationControllerContainer
     let settingsScreen: NavigationControllerContainer
     let searchPerfumeScreen: NavigationControllerContainer
+    var historyNotificationID: UUID?
     
     @State private var selectedTab: MainTab = .today
     
@@ -35,8 +36,15 @@ struct MainTabView: View {
     }
 }
 
-private extension MainTabView {
-    func makeTabView() -> some View {
+extension MainTabView {
+    private func handleHistoryNotification() {
+        selectedTab = .today
+        todayScreen.navigationController.popToRootViewController(animated: false)
+    }
+}
+
+extension MainTabView {
+    private func makeTabView() -> some View {
         TabView(selection: $selectedTab) {
             Tab(L10n.Screen.today, systemImage: "house.fill", value: .today) {
                 todayScreen
@@ -57,6 +65,9 @@ private extension MainTabView {
             Tab(value: .search, role: .search) {
                 searchPerfumeScreen
             }
+        }
+        .onChange(of: historyNotificationID) { _, _ in
+            handleHistoryNotification()
         }
     }
 }

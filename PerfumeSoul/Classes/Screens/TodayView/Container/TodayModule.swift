@@ -12,9 +12,9 @@ final class TodayModule {
     static func build(
         container: NSPersistentContainer,
         requestManager: RequestManager,
-        imageLoader: PerfumeImageLoader
+        imageLoader: PerfumeImageLoader,
+        viewModel: TodayViewModel = TodayViewModel()
     ) -> NavigationControllerContainer {
-        let viewModel = TodayViewModel()
         let navigationController = UINavigationController()
         let router = TodayRouterImpl(navigationController: navigationController, imageLoader: imageLoader)
         let perfumeHistoryService = PerfumeHistoryServiceImpl(requestManager: requestManager)

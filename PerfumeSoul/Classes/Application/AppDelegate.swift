@@ -6,13 +6,26 @@
 //
 
 import UIKit
+import UserNotifications
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
+    private var hasPendingHistoryNotification = false
+    private var lastHistoryNotificationDate: Date?
+
+    var onHistoryNotification: (() -> Void)? {
+        didSet {
+            guard hasPendingHistoryNotification, let onHistoryNotification else {
+                return
+            }
+            hasPendingHistoryNotification = false
+            onHistoryNotification()
+        }
+    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        true
+        UNUserNotificationCenter.current().delegate = self
+        return true
     }
     
     // MARK: UISceneSession Lifecycle
@@ -27,5 +40,29 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    nonisolated func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse
+    ) async {
+        await handleNotificationResponse(response)
+    }
+
+    func handleNotificationResponse(_ response: UNNotificationResponse) {
+        let notification = response.notification
+        guard response.actionIdentifier == UNNotificationDefaultActionIdentifier,
+            notification.request.identifier == DailyNotificationKind.history.identifier,
+            lastHistoryNotificationDate != notification.date else {
+            return
+        }
+        lastHistoryNotificationDate = notification.date
+        if let onHistoryNotification {
+            onHistoryNotification()
+        } else {
+            hasPendingHistoryNotification = true
+        }
     }
 }

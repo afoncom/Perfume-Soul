@@ -48,6 +48,9 @@ extension TodayPresenterImpl: TodayPresenter {
 
             let historyFact = try await historyFactTask
             let dailyHoroscopes = try await dailyHoroscopesTask
+            guard !Task.isCancelled else {
+                return
+            }
             let userSign = profile?.preferredZodiacSign
             
             viewModel.historyFact = historyFact

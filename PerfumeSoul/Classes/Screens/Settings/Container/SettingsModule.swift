@@ -14,7 +14,7 @@ final class SettingsModule {
         container: NSPersistentContainer
     ) -> NavigationControllerContainer {
         let profileService = ProfileServiceImpl(container: container)
-        let dailyHoroscopeNotificationService = DailyHoroscopeNotificationServiceImpl(
+        let notificationService = DailyNotificationServiceImpl(
             profileService: profileService
         )
         let viewModel = SettingsViewModel()
@@ -24,7 +24,7 @@ final class SettingsModule {
         let presenter = SettingsPresenterImpl(
             viewModel: viewModel,
             router: router,
-            dailyHoroscopeNotificationService: dailyHoroscopeNotificationService
+            notificationService: notificationService
         )
         
         let view = SettingsScreen(viewModel: viewModel, presenter: presenter)

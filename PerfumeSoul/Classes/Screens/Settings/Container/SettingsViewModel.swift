@@ -11,6 +11,7 @@ import Observation
 @Observable final class SettingsViewModel {
     var appVersion = "—"
     var isDailyHoroscopeNotificationEnabled = false
+    var isDailyHistoryNotificationEnabled = false
     var notificationAlertTitle: String?
     var notificationAlertMessage: String?
     var isShowingNotificationAlert = false

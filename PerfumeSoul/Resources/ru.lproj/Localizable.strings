@@ -209,8 +209,11 @@
 "settings.notification.profileRequiredTitle" = "Нужны данные профиля";
 "settings.notification.unavailableMessage" = "Сейчас не удалось получить гороскоп дня. Попробуйте позже.";
 "settings.notification.unavailableTitle" = "Гороскоп недоступен";
-"settings.notification.dayInPerfumerySubtitle" = "Исторические события и факты";
-"settings.notification.dayInPerfumeryTitle" = "Этот день в парфюмерии";
+"settings.notification.dayInPerfumerySubtitle" = "Напоминание об истории парфюмерии каждый день в 19:00.";
+"settings.notification.dayInPerfumeryTitle" = "История дня";
+"settings.notification.historyReminderBody" = "Сделайте паузу и загляните в историю парфюмерии.";
+"settings.notification.historyPermissionDeniedMessage" = "Чтобы получать напоминание об истории дня в 19:00, разрешите уведомления для приложения в системных настройках.";
+"settings.notification.historyUnavailableTitle" = "Уведомления недоступны";
 "sendFeedback.button" = "Написать разработчику";
 "sendFeedback.emailTitle" = "Почта разработчика";
 "sendFeedback.mailUnavailable" = "Apple Mail не настроен на этом устройстве. Используйте адрес выше для ручной отправки письма.";

@@ -28,10 +28,20 @@ struct SettingsScreen: View {
                     Label(L10n.Settings.Notification.dailyHoroscopeTitle, systemImage: "bell")
                 }
                 .listRowBackground(Color(.backgroundPrimary))
+                Toggle(isOn: Binding(
+                    get: { viewModel.isDailyHistoryNotificationEnabled },
+                    set: { presenter.dailyHistoryNotificationToggled(isEnabled: $0) }
+                )) {
+                    Label(L10n.Settings.Notification.dayInPerfumeryTitle, systemImage: "book")
+                }
+                .listRowBackground(Color(.backgroundPrimary))
             } header: {
                 Text(L10n.Settings.notificationsTitle)
             } footer: {
-                Text(L10n.Settings.Notification.dailyHoroscopeSubtitle)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(L10n.Settings.Notification.dailyHoroscopeSubtitle)
+                    Text(L10n.Settings.Notification.dayInPerfumerySubtitle)
+                }
             }
 
             Section(L10n.Settings.supportTitle) {
