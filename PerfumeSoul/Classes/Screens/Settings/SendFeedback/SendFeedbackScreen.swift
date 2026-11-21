@@ -69,7 +69,6 @@ struct SendFeedbackScreen: View {
         .background(Color(.backgroundPrimary))
         .foregroundStyle(Color(.textPrimary))
         .tint(Color(.textPrimary))
-        .preferredColorScheme(.light)
         .navigationBarTitleDisplayMode(.inline)
         .task { presenter.onAppear() }
     }

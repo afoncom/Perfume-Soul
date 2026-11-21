@@ -63,7 +63,6 @@ struct ProfileDescriptionScreen: View {
             .padding(.bottom, 32)
         }
         .background(Color(.backgroundPrimary))
-        .preferredColorScheme(.light)
         .safeAreaInset(edge: .bottom, spacing: 0) {
             if presenter.shouldShowContinueButton {
                 PerfumePrimaryButton(title: L10n.PerfumeFlow.findPerfumes) {
