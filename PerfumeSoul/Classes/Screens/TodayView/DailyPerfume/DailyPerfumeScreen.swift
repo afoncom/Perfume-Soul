@@ -39,6 +39,9 @@ struct DailyPerfumeScreen: View {
         .task {
             await presenter.resolve()
         }
+        .onChange(of: viewModel.refreshID) { _, _ in
+            Task { await presenter.resolve() }
+        }
     }
 }
 

@@ -11,6 +11,7 @@ protocol SettingsPresenter {
     func onAppear() async
     func dailyHoroscopeNotificationToggled(isEnabled: Bool)
     func dailyHistoryNotificationToggled(isEnabled: Bool)
+    func dailyPerfumeNotificationToggled(isEnabled: Bool)
     func feedbackButtonTapped()
     func openSystemSettingsTapped()
     func notificationAlertDismissed()
@@ -52,6 +53,10 @@ extension SettingsPresenterImpl: SettingsPresenter {
         toggleNotification(.history, isEnabled: isEnabled)
     }
 
+    func dailyPerfumeNotificationToggled(isEnabled: Bool) {
+        toggleNotification(.dailyPerfume, isEnabled: isEnabled)
+    }
+
     func feedbackButtonTapped() {
         router.showSendFeedback()
     }
@@ -76,6 +81,8 @@ extension SettingsPresenterImpl {
             viewModel.isDailyHoroscopeNotificationEnabled = isEnabled
         case .history:
             viewModel.isDailyHistoryNotificationEnabled = isEnabled
+        case .dailyPerfume:
+            viewModel.isDailyPerfumeNotificationEnabled = isEnabled
         }
     }
 
@@ -132,13 +139,20 @@ extension SettingsPresenterImpl {
         switch error {
         case .permissionDenied:
             viewModel.notificationAlertTitle = L10n.Settings.Notification.permissionDeniedTitle
-            viewModel.notificationAlertMessage = kind == .history
-                ? String(localized: "settings.notification.historyPermissionDeniedMessage")
-                : L10n.Settings.Notification.permissionDeniedMessage
+            switch kind {
+            case .horoscope:
+                viewModel.notificationAlertMessage = L10n.Settings.Notification.permissionDeniedMessage
+            case .history:
+                viewModel.notificationAlertMessage = String(localized: "settings.notification.historyPermissionDeniedMessage")
+            case .dailyPerfume:
+                viewModel.notificationAlertMessage = String(localized: "settings.notification.dailyPerfumePermissionDeniedMessage")
+            }
             viewModel.showsNotificationSettingsAction = true
         case .profileUnavailable:
             viewModel.notificationAlertTitle = L10n.Settings.Notification.profileRequiredTitle
-            viewModel.notificationAlertMessage = L10n.Settings.Notification.profileRequiredMessage
+            viewModel.notificationAlertMessage = kind == .dailyPerfume
+                ? String(localized: "settings.notification.dailyPerfumeProfileRequiredMessage")
+                : L10n.Settings.Notification.profileRequiredMessage
             viewModel.showsNotificationSettingsAction = false
         }
 
@@ -147,9 +161,9 @@ extension SettingsPresenterImpl {
 
     @MainActor
     private func presentUnknownNotificationError(for kind: DailyNotificationKind) {
-        viewModel.notificationAlertTitle = kind == .history
-            ? String(localized: "settings.notification.historyUnavailableTitle")
-            : L10n.Settings.Notification.unavailableTitle
+        viewModel.notificationAlertTitle = kind == .horoscope
+            ? L10n.Settings.Notification.unavailableTitle
+            : String(localized: "settings.notification.historyUnavailableTitle")
         viewModel.notificationAlertMessage = L10n.Common.Error.message
         viewModel.showsNotificationSettingsAction = false
         viewModel.isShowingNotificationAlert = true

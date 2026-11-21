@@ -13,8 +13,10 @@ final class TodayModule {
         container: NSPersistentContainer,
         requestManager: RequestManager,
         imageLoader: PerfumeImageLoader,
-        viewModel: TodayViewModel = TodayViewModel()
+        onPresenterReady: ((TodayPresenter) -> Void)? = nil,
+        onDailyPerfumePresenterReady: ((DailyPerfumePresenter) -> Void)? = nil
     ) -> NavigationControllerContainer {
+        let viewModel = TodayViewModel()
         let navigationController = UINavigationController()
         let router = TodayRouterImpl(navigationController: navigationController, imageLoader: imageLoader)
         let perfumeHistoryService = PerfumeHistoryServiceImpl(requestManager: requestManager)
@@ -30,7 +32,8 @@ final class TodayModule {
             requestManager: requestManager,
             imageLoader: imageLoader,
             profileService: profileService,
-            collectionService: collectionService
+            collectionService: collectionService,
+            onPresenterReady: onDailyPerfumePresenterReady
         )
 
         let recommendedPerfumeModule = RecommendedPerfumeModule.build(
@@ -61,6 +64,7 @@ final class TodayModule {
 
         navigationController.viewControllers = [hostingController]
         navigationController.navigationBar.prefersLargeTitles = false
+        onPresenterReady?(presenter)
         
         return NavigationControllerContainer(navigationController: navigationController)
     }

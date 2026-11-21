@@ -12,6 +12,7 @@ import Observation
     var appVersion = "—"
     var isDailyHoroscopeNotificationEnabled = false
     var isDailyHistoryNotificationEnabled = false
+    var isDailyPerfumeNotificationEnabled = false
     var notificationAlertTitle: String?
     var notificationAlertMessage: String?
     var isShowingNotificationAlert = false

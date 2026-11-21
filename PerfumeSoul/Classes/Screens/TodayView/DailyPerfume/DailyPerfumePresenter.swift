@@ -11,6 +11,8 @@ import Foundation
 protocol DailyPerfumePresenter {
     func resolve() async
     @MainActor
+    func notificationOpened()
+    @MainActor
     func saveCurrentPerfume()
     @MainActor
     func dismissCurrentPerfume()
@@ -53,6 +55,11 @@ final class DailyPerfumePresenterImpl {
 }
 
 extension DailyPerfumePresenterImpl: DailyPerfumePresenter {
+    @MainActor
+    func notificationOpened() {
+        viewModel.refreshID += 1
+    }
+
     func resolve() async {
         let shouldResolve = await MainActor.run {
             guard !viewModel.isResolving else {

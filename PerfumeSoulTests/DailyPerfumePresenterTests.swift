@@ -3,6 +3,31 @@ import XCTest
 
 final class DailyPerfumePresenterTests: XCTestCase {
     @MainActor
+    func testReminderResolvePreservesEveryCurrentDayReactionWithoutRequest() async {
+        for reaction in [DailyPerfumeReaction.pending, .saved, .dismissed] {
+            var state = makeState()
+            state.currentReaction = reaction
+            let storage = makeStorage(state: state)
+            let service = DailyPerfumeServiceMock(candidates: [])
+            let viewModel = DailyPerfumeViewModel()
+            let presenter = makePresenter(
+                viewModel: viewModel,
+                service: service,
+                storage: storage,
+                collectionService: DailyPerfumeCollectionServiceMock(stateStorage: storage)
+            )
+
+            await presenter.resolve()
+
+            XCTAssertTrue(service.requests.isEmpty)
+            XCTAssertEqual(viewModel.state, .content(makeSummary(id: 42), reaction))
+            XCTAssertEqual(storage.loadState()?.currentPerfume, state.currentPerfume)
+            XCTAssertEqual(storage.loadState()?.currentReaction, reaction)
+            XCTAssertEqual(storage.loadState()?.shownPerfumeIDs, state.shownPerfumeIDs)
+        }
+    }
+
+    @MainActor
     func testResolveRestoresCurrentDayPerfumeWithoutRequest() async {
         let storage = makeStorage(state: makeState())
         let service = DailyPerfumeServiceMock(candidates: [])

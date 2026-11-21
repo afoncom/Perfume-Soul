@@ -29,27 +29,41 @@ struct TodayScreen: View {
     }
 
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            LazyVStack(alignment: .leading, spacing: 40) {
-                PerfumeFlowHeader(section: viewModel.dateText, step: nil, title: L10n.Screen.today)
-                    .padding(.horizontal, 24)
+        ScrollViewReader { proxy in
+            ScrollView(.vertical, showsIndicators: false) {
+                LazyVStack(alignment: .leading, spacing: 40) {
+                    PerfumeFlowHeader(section: viewModel.dateText, step: nil, title: L10n.Screen.today)
+                        .padding(.horizontal, 24)
 
-                TodayOverviewBanner()
-                    .padding(.horizontal, 24)
+                    TodayOverviewBanner()
+                        .padding(.horizontal, 24)
 
-                makeTodayEnergyCard()
-                    .padding(.horizontal, 24)
+                    makeTodayEnergyCard()
+                        .padding(.horizontal, 24)
 
-                dailyPerfumeScreen
-                    .padding(.horizontal, 24)
+                    dailyPerfumeScreen
+                        .id(DailyNotificationKind.dailyPerfume)
+                        .padding(.horizontal, 24)
 
-                recommendedPerfumeScreen
+                    recommendedPerfumeScreen
 
-                makeHistorySection()
-                    .padding(.horizontal, 24)
+                    makeHistorySection()
+                        .padding(.horizontal, 24)
+                }
+                .padding(.top, 20)
+                .padding(.bottom, 40)
             }
-            .padding(.top, 20)
-            .padding(.bottom, 40)
+            .task(id: viewModel.refreshID) {
+                guard viewModel.notificationTarget == .dailyPerfume else {
+                    return
+                }
+                await Task.yield()
+                guard !Task.isCancelled else {
+                    return
+                }
+                proxy.scrollTo(DailyNotificationKind.dailyPerfume, anchor: .top)
+                viewModel.notificationTarget = nil
+            }
         }
         .background(Color(.backgroundPrimary))
         .preferredColorScheme(.light)

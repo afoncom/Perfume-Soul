@@ -3,6 +3,76 @@ import XCTest
 @testable import PerfumeSoul
 
 final class DailyNotificationServiceTests: XCTestCase {
+    func testDailyPerfumeSchedulesAtEightAndDisablesOnlyItself() async throws {
+        let suite = "tests.notifications.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        defaults.set(true, forKey: "settings.notifications.dailyHistory")
+        let scheduler = NotificationSchedulerStub()
+        let profile = Profile(
+            name: "Alex",
+            birthDate: "01.01.1990",
+            birthTime: "12:00",
+            birthPlace: "Madrid",
+            birthLatitude: 40.4168,
+            birthLongitude: -3.7038,
+            birthTimeZoneIdentifier: "Europe/Madrid"
+        ).withProfileCalculation(
+            ProfileCalculation(
+                natalChart: NatalChart(
+                    sun: ZodiacPlacement(sign: .aquarius, longitude: 0),
+                    moon: ZodiacPlacement(sign: .aquarius, longitude: 0),
+                    ascendant: ZodiacPlacement(sign: .aquarius, longitude: 0)
+                ),
+                elementBalance: ElementBalance(fire: 0, earth: 0, air: 100, water: 0)
+            )
+        )
+        let service = DailyNotificationServiceImpl(
+            userNotificationCenter: scheduler,
+            profileService: NotificationProfileStub(profile: profile),
+            userDefaults: defaults
+        )
+        let initiallyEnabled = await service.isNotificationEnabled(for: .dailyPerfume)
+        XCTAssertFalse(initiallyEnabled)
+
+        try await service.enableNotification(for: .dailyPerfume)
+
+        let request = try XCTUnwrap(scheduler.requests.first)
+        let trigger = try XCTUnwrap(request.trigger as? UNCalendarNotificationTrigger)
+        XCTAssertEqual(request.identifier, "daily_perfume_notification")
+        XCTAssertEqual(trigger.dateComponents.hour, 8)
+        XCTAssertEqual(trigger.dateComponents.minute, 0)
+        XCTAssertTrue(trigger.repeats)
+        XCTAssertFalse(request.content.body.isEmpty)
+        XCTAssertTrue(defaults.bool(forKey: "settings.notifications.dailyPerfume"))
+
+        await service.disableNotification(for: .dailyPerfume)
+
+        XCTAssertEqual(scheduler.removedIdentifiers, ["daily_perfume_notification"])
+        XCTAssertFalse(defaults.bool(forKey: "settings.notifications.dailyPerfume"))
+        XCTAssertTrue(defaults.bool(forKey: "settings.notifications.dailyHistory"))
+    }
+
+    func testDailyPerfumeRequiresACalculatedProfile() async throws {
+        let suite = "tests.notifications.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let scheduler = NotificationSchedulerStub()
+        let service = DailyNotificationServiceImpl(
+            userNotificationCenter: scheduler,
+            profileService: NotificationProfileStub(),
+            userDefaults: defaults
+        )
+
+        do {
+            try await service.enableNotification(for: .dailyPerfume)
+            XCTFail("The daily perfume reminder needs a calculated profile")
+        } catch DailyNotificationServiceError.profileUnavailable {
+            XCTAssertTrue(scheduler.requests.isEmpty)
+            XCTAssertFalse(defaults.bool(forKey: "settings.notifications.dailyPerfume"))
+        }
+    }
+
     func testDisablingHoroscopeDoesNotCancelAHistoryReminderBeingScheduled() async throws {
         let suite = "tests.notifications.\(UUID().uuidString)"
         let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
@@ -134,8 +204,14 @@ private final class NotificationSchedulerStub: UserNotificationScheduling {
 }
 
 private final class NotificationProfileStub: ProfileService {
+    private let profile: Profile?
+
+    init(profile: Profile? = nil) {
+        self.profile = profile
+    }
+
     func saveProfile(_ profile: Profile) { }
     func replaceProfile(_ profile: Profile) async { }
-    func fetchProfile() async -> Profile? { nil }
+    func fetchProfile() async -> Profile? { profile }
     func deleteProfile(_ profile: Profile) async { }
 }

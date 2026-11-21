@@ -196,7 +196,10 @@
 "settings.about.feedbackSubtitle" = "Отзывы, пожелания и идеи по улучшению";
 "settings.about.feedbackTitle" = "Обратная связь";
 "settings.aboutTitle" = "О приложении";
-"settings.notification.aromaOfTheDaySubtitle" = "Уведомлять о новом аромате дня";
+"settings.notification.aromaOfTheDaySubtitle" = "Напоминание о персональной подборке каждый день в 08:00.";
+"settings.notification.dailyPerfumeReminderBody" = "Какой аромат подойдёт вашему дню? Загляните в персональную подборку.";
+"settings.notification.dailyPerfumePermissionDeniedMessage" = "Чтобы получать напоминание об аромате дня в 08:00, разрешите уведомления для приложения в системных настройках.";
+"settings.notification.dailyPerfumeProfileRequiredMessage" = "Заполните профиль и выполните расчёт, чтобы получать персональную подборку ароматов и включить это напоминание.";
 "settings.notification.aromaOfTheDayTitle" = "Аромат дня";
 "settings.notification.dailyHoroscopeSubtitle" = "Получайте прогноз каждый день";
 "settings.notification.dailyHoroscopeTitle" = "Ежедневный гороскоп";

@@ -22,7 +22,7 @@ struct MainTabView: View {
     let profileScreen: NavigationControllerContainer
     let settingsScreen: NavigationControllerContainer
     let searchPerfumeScreen: NavigationControllerContainer
-    var historyNotificationID: UUID?
+    var dailyNotificationID: UUID?
     
     @State private var selectedTab: MainTab = .today
     
@@ -37,7 +37,7 @@ struct MainTabView: View {
 }
 
 extension MainTabView {
-    private func handleHistoryNotification() {
+    private func handleDailyNotification() {
         selectedTab = .today
         todayScreen.navigationController.popToRootViewController(animated: false)
     }
@@ -66,8 +66,8 @@ extension MainTabView {
                 searchPerfumeScreen
             }
         }
-        .onChange(of: historyNotificationID) { _, _ in
-            handleHistoryNotification()
+        .onChange(of: dailyNotificationID) { _, _ in
+            handleDailyNotification()
         }
     }
 }

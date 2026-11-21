@@ -29,6 +29,13 @@ struct SettingsScreen: View {
                 }
                 .listRowBackground(Color(.backgroundPrimary))
                 Toggle(isOn: Binding(
+                    get: { viewModel.isDailyPerfumeNotificationEnabled },
+                    set: { presenter.dailyPerfumeNotificationToggled(isEnabled: $0) }
+                )) {
+                    Label(L10n.Settings.Notification.aromaOfTheDayTitle, systemImage: "sparkles")
+                }
+                .listRowBackground(Color(.backgroundPrimary))
+                Toggle(isOn: Binding(
                     get: { viewModel.isDailyHistoryNotificationEnabled },
                     set: { presenter.dailyHistoryNotificationToggled(isEnabled: $0) }
                 )) {
@@ -40,6 +47,7 @@ struct SettingsScreen: View {
             } footer: {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(L10n.Settings.Notification.dailyHoroscopeSubtitle)
+                    Text(L10n.Settings.Notification.aromaOfTheDaySubtitle)
                     Text(L10n.Settings.Notification.dayInPerfumerySubtitle)
                 }
             }

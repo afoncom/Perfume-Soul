@@ -14,8 +14,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     let coreDataManager: CoreDataManager = CoreDataManagerImpl()
     private var mainTabController: UIHostingController<MainTabView>?
-    private var todayViewModel: TodayViewModel?
-    private var hasPendingHistoryNotification = false
+    private var todayPresenter: TodayPresenter?
+    private var dailyPerfumePresenter: DailyPerfumePresenter?
+    private var pendingDailyNotification: DailyNotificationKind?
 
     static func backendBaseURL(environment: [String: String]) -> String {
         let defaultURL = "http://82.97.248.219"
@@ -55,8 +56,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
 
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        appDelegate?.onHistoryNotification = { [weak self] in
-            self?.openHistoryNotification()
+        appDelegate?.onDailyNotification = { [weak self] kind in
+            self?.openDailyNotification(kind)
         }
         if let response = connectionOptions.notificationResponse {
             appDelegate?.handleNotificationResponse(response)
@@ -83,13 +84,16 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func showMainScreen(container: NSPersistentContainer) {
-        let todayViewModel = TodayViewModel()
-        self.todayViewModel = todayViewModel
         let todayScreen = TodayModule.build(
             container: container,
             requestManager: requestManager,
             imageLoader: imageLoader,
-            viewModel: todayViewModel
+            onPresenterReady: { [weak self] presenter in
+                self?.todayPresenter = presenter
+            },
+            onDailyPerfumePresenterReady: { [weak self] presenter in
+                self?.dailyPerfumePresenter = presenter
+            }
         )
         let settingsScreen = SettingsModule.build(
             container: container
@@ -118,8 +122,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let viewController = UIHostingController(rootView: mainTabView)
         mainTabController = viewController
         setRootViewController(viewController)
-        if hasPendingHistoryNotification {
-            openHistoryNotification()
+        if let kind = pendingDailyNotification {
+            openDailyNotification(kind)
         }
     }
 
@@ -128,7 +132,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         initialProfile: Profile? = nil
     ) {
         mainTabController = nil
-        todayViewModel = nil
+        todayPresenter = nil
+        dailyPerfumePresenter = nil
         let calculationScreen = CalculationModule.build(
             container: container,
             requestManager: requestManager,
@@ -144,15 +149,18 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         showMainScreen(container: coreDataManager.container)
     }
 
-    private func openHistoryNotification() {
-        hasPendingHistoryNotification = true
-        guard let mainTabController, let todayViewModel else {
+    private func openDailyNotification(_ kind: DailyNotificationKind) {
+        pendingDailyNotification = kind
+        guard let mainTabController, let todayPresenter else {
             return
         }
-        hasPendingHistoryNotification = false
+        pendingDailyNotification = nil
         mainTabController.dismiss(animated: false)
-        mainTabController.rootView.historyNotificationID = UUID()
-        todayViewModel.refreshID += 1
+        mainTabController.rootView.dailyNotificationID = UUID()
+        todayPresenter.notificationOpened(kind)
+        if kind == .dailyPerfume {
+            dailyPerfumePresenter?.notificationOpened()
+        }
     }
 
     private func setRootViewController(_ viewController: UIViewController) {
