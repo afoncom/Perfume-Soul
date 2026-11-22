@@ -64,10 +64,9 @@ struct SettingsScreen: View {
             }
         }
         .scrollContentBackground(.hidden)
-        .background(Color(.placeholderSoft).ignoresSafeArea())
+        .background(Color(.backgroundGrouped).ignoresSafeArea())
         .foregroundStyle(Color(.textPrimary))
         .tint(Color(.textPrimary))
-        .preferredColorScheme(.light)
         .task { await presenter.onAppear() }
         .onChange(of: scenePhase) { _, phase in
             if phase == .active {

@@ -33,7 +33,6 @@ struct TodayEnergyScreen: View {
         }
         .background(Color(.backgroundPrimary))
         .foregroundStyle(Color(.textPrimary))
-        .preferredColorScheme(.light)
         .navigationTitle(L10n.Screen.todayEnergy)
         .navigationBarTitleDisplayMode(.inline)
     }

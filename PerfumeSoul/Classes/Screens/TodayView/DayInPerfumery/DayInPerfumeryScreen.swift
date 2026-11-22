@@ -43,7 +43,6 @@ struct DayInPerfumeryScreen: View {
         }
         .background(Color(.backgroundPrimary))
         .foregroundStyle(Color(.textPrimary))
-        .preferredColorScheme(.light)
         .navigationBarTitleDisplayMode(.inline)
         .onChange(of: scenePhase) { _, phase in
             if phase == .active {

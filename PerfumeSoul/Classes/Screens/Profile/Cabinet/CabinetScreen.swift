@@ -58,7 +58,6 @@ struct CabinetScreen: View {
         .background(Color(.backgroundPrimary))
         .foregroundStyle(Color(.textPrimary))
         .tint(Color(.textPrimary))
-        .preferredColorScheme(.light)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear { presenter.onAppear() }
     }

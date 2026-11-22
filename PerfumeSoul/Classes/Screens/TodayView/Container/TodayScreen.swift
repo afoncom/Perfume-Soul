@@ -53,7 +53,6 @@ struct TodayScreen: View {
             .padding(.bottom, 40)
         }
         .background(Color(.backgroundPrimary))
-        .preferredColorScheme(.light)
         .navigationBarTitleDisplayMode(.inline)
         .task {
             await presenter.onAppear()
@@ -233,6 +232,7 @@ private struct TodayOverviewBanner: View {
                         .scaledToFill()
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         .clipped()
+                        .overlay(Color(.surfaceOverlay))
                         .accessibilityHidden(true)
                         .overlay(alignment: .leading) {
                             bannerText

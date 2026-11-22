@@ -53,7 +53,6 @@ struct CalculationScreen: View {
             .padding(.bottom, 28)
         }
         .background(Color(.backgroundPrimary))
-        .preferredColorScheme(.light)
         .safeAreaInset(edge: .bottom, spacing: 0) {
             PerfumePrimaryButton(title: L10n.PerfumeFlow.createProfile) {
                 focusedField = nil

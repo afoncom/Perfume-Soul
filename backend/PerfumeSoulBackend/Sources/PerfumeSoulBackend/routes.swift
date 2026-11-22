@@ -93,13 +93,15 @@ func routes(
     }
 
     app.get("quiz-of-the-day") { _ async throws -> Response in
-        do {
-            return try jsonResponse(QuizOfTheDayQuestionLoader.load())
-        } catch let error as CocoaError where error.code == .fileNoSuchFile {
-            throw Abort(.notFound)
-        } catch {
-            throw error
-        }
+        try jsonResponse(QuizOfTheDayQuestionLoader.load())
+    }
+
+    app.get("v2", "quiz-of-the-day") { req async throws -> Response in
+        let questions = try await QuizOfTheDayQuestionLoader.load(
+            on: req.db,
+            language: req.headers.first(name: "Accept-Language")
+        )
+        return try jsonResponse(questions, varyByLanguage: true)
     }
     
     app.get("perfumes", "recommendations") { req async throws -> Response in
