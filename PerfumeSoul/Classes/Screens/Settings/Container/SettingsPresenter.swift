@@ -22,6 +22,7 @@ final class SettingsPresenterImpl {
     private let router: SettingsRouter
     private let notificationService: DailyNotificationService
     private var notificationToggleTasks: [DailyNotificationKind: Task<Void, Never>] = [:]
+    private var notificationToggleRevisions: [DailyNotificationKind: Int] = [:]
     
     init(
         viewModel: SettingsViewModel,
@@ -38,8 +39,10 @@ extension SettingsPresenterImpl: SettingsPresenter {
     @MainActor
     func onAppear() async {
         for kind in DailyNotificationKind.allCases {
+            let revision = notificationToggleRevisions[kind, default: 0]
             let isEnabled = await notificationService.isNotificationEnabled(for: kind)
-            if notificationToggleTasks[kind] == nil {
+            if notificationToggleRevisions[kind, default: 0] == revision,
+                notificationToggleTasks[kind] == nil {
                 setNotificationEnabled(isEnabled, for: kind)
             }
         }
@@ -88,6 +91,7 @@ extension SettingsPresenterImpl {
 
     @MainActor
     private func toggleNotification(_ kind: DailyNotificationKind, isEnabled: Bool) {
+        notificationToggleRevisions[kind, default: 0] += 1
         setNotificationEnabled(isEnabled, for: kind)
         notificationToggleTasks[kind]?.cancel()
         notificationToggleTasks[kind] = Task { @MainActor [weak self] in
