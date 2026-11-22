@@ -114,6 +114,21 @@ jobs:
         docker compose up -d --wait --wait-timeout 180
         curl -f http://127.0.0.1:8080/health
         curl -f http://127.0.0.1:8080/ready
+        legacy_horoscope_code="$(curl -fsS -o legacy-horoscopes.json -w '%{http_code}' \
+          http://127.0.0.1:8080/horoscope/daily)"
+        [[ "$legacy_horoscope_code" == "200" ]]
+        jq -e '
+          type == "array" and length == 12
+          and ([.[].sign] | sort) == [
+            "aquarius", "aries", "cancer", "capricorn", "gemini", "leo",
+            "libra", "pisces", "sagittarius", "scorpio", "taurus", "virgo"
+          ]
+          and all(.[];
+            (.sign | type) == "string"
+            and (.energyOfDay | type) == "string"
+            and (.energyOfDay | length) > 0
+          )
+        ' legacy-horoscopes.json
         curl -f http://127.0.0.1:8080/quiz-of-the-day
         docker compose exec -T postgres \
           psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_similar_finder_smoke.sql
