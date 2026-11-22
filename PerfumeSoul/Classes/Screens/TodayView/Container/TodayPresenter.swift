@@ -42,6 +42,7 @@ extension TodayPresenterImpl: TodayPresenter {
         latestLoadID += 1
         let loadID = latestLoadID
         viewModel.viewState = .loading
+        viewModel.isLoadingHoroscope = true
         async let historyFactTask = perfumeHistoryService.requestPerfumeHistory()
         async let dailyHoroscopesTask = dailyHoroscopeService.requestDailyHoroscope()
         async let profileTask = profileService.fetchProfile()
@@ -53,9 +54,11 @@ extension TodayPresenterImpl: TodayPresenter {
         }
         let userSign = profile?.preferredZodiacSign
         viewModel.dailyHoroscopes = dailyHoroscopes
+        viewModel.hasPreferredZodiacSign = userSign != nil
         viewModel.personalHoroscope = dailyHoroscopes.first { horoscope in
             horoscope.sign == userSign
         }
+        viewModel.isLoadingHoroscope = false
 
         do {
             let historyFact = try await historyFactTask

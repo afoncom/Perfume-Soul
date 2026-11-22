@@ -218,7 +218,7 @@ Follow-up for a larger catalogue: cache or precompute `PerfumeProfile` scoring m
 
 - Separate screen exists
 - Backend service for daily horoscopes exists
-- `GET /horoscope/daily` returns an array of horoscope items from PostgreSQL
+- `GET /horoscope/daily?timeZone=Europe/Madrid` returns twelve localized horoscope items for the current local date from PostgreSQL (2026-12-01 through 2028-11-30)
 - The screen receives backend-driven data through the `Today` module and displays the personal horoscope plus the general list
 
 ## Architecture

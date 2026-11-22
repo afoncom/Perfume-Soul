@@ -107,12 +107,12 @@ extension TodayScreen {
                             .fill(Color(.textPrimary).opacity(0.16))
                             .frame(height: 1)
                     }
-                } else if case .loading = viewModel.viewState {
+                } else if viewModel.isLoadingHoroscope {
                     ProgressView()
                         .tint(Color(.textPrimary))
                         .frame(maxWidth: .infinity, minHeight: 160)
                 } else {
-                    Text(L10n.Today.Energy.missingProfile)
+                    Text(viewModel.horoscopePlaceholder)
                         .font(.body)
                         .lineSpacing(5)
                         .fixedSize(horizontal: false, vertical: true)

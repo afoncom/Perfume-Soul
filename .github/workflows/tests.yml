@@ -114,6 +114,21 @@ jobs:
         docker compose up -d --wait --wait-timeout 180
         curl -f http://127.0.0.1:8080/health
         curl -f http://127.0.0.1:8080/ready
+        legacy_horoscope_code="$(curl -fsS -o legacy-horoscopes.json -w '%{http_code}' \
+          http://127.0.0.1:8080/horoscope/daily)"
+        [[ "$legacy_horoscope_code" == "200" ]]
+        jq -e '
+          type == "array" and length == 12
+          and ([.[].sign] | sort) == [
+            "aquarius", "aries", "cancer", "capricorn", "gemini", "leo",
+            "libra", "pisces", "sagittarius", "scorpio", "taurus", "virgo"
+          ]
+          and all(.[];
+            (.sign | type) == "string"
+            and (.energyOfDay | type) == "string"
+            and (.energyOfDay | length) > 0
+          )
+        ' legacy-horoscopes.json
         legacy_history_code="$(curl -fsS -o legacy-perfumery-history.json -w '%{http_code}' \
           http://127.0.0.1:8080/perfumery-history)"
         [[ "$legacy_history_code" == "200" ]]
@@ -163,15 +178,19 @@ jobs:
         code="$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/perfumes/1/notes)"
         echo "/perfumes/1/notes -> $code"
         [[ "$code" == "404" || "$code" == "200" ]]
+        horoscope_count="$(docker compose exec -T postgres \
+          psql -U perfumesoul -d perfumesoul -At -c 'SELECT COUNT(*) FROM daily_horoscope_entries')"
+        [[ "$horoscope_count" == "8772" ]]
+        horoscope_code="$(curl -sS -o /dev/null -w '%{http_code}' \
+          'http://127.0.0.1:8080/horoscope/daily?timeZone=UTC')"
+        echo "/horoscope/daily → $horoscope_code"
+        [[ "$horoscope_code" == "200" || "$horoscope_code" == "404" ]]
         history_count="$(docker compose exec -T postgres \
           psql -U perfumesoul -d perfumesoul -At -c 'SELECT COUNT(*) FROM perfumery_history_entries')"
         [[ "$history_count" == "731" ]]
-        docker compose exec -T postgres \
-          psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_daily_horoscopes.sql
-        curl -f http://127.0.0.1:8080/horoscope/daily
         history_code="$(curl -sS -o /dev/null -w '%{http_code}' \
           'http://127.0.0.1:8080/v2/perfumery-history?timeZone=UTC')"
-        echo "/v2/perfumery-history -> $history_code"
+        echo "/v2/perfumery-history → $history_code"
         [[ "$history_code" == "200" || "$history_code" == "404" ]]
     - name: Dump Compose logs
       if: failure()

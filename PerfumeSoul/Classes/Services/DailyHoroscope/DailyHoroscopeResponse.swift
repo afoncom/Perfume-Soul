@@ -10,5 +10,3 @@ struct DailyHoroscopeResponse: Decodable {
     let sign: String
     let energyOfDay: String
 }
-
-

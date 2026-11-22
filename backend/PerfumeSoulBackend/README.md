@@ -43,13 +43,10 @@ Other seed/backfill steps remain separate and should be run manually. The 731 da
 python3 scripts/generate_perfumery_history_resource.py
 ```
 
-`GET /perfumery-history?timeZone=Europe%2FMadrid` selects the current local publication date. The app sends its time zone and `Accept-Language: ru` or `en`; the response contains `publicationDate`, `eventYear`, `title`, and `fullStory`. Dates without a story return 404. The publication window is 2026-12-01 through 2028-11-30.
 
-Seed daily horoscopes into PostgreSQL:
+The 731 days of RU/EN daily horoscopes are loaded into PostgreSQL automatically by a Fluent migration.
 
-```bash
-psql "$DATABASE_URL" -f scripts/seed_daily_horoscopes.sql
-```
+`GET /v2/perfumery-history?timeZone=Europe%2FMadrid` selects the current local publication date. The app sends its time zone and `Accept-Language: ru` or `en`; the response contains `publicationDate`, `eventYear`, `title`, and `fullStory`. Dates without a story return 404. The publication window is 2026-12-01 through 2028-11-30.
 
 Backfill perfume profile metadata:
 
@@ -161,9 +158,6 @@ The PostgreSQL container mounts `scripts/` and the note translation TSV read-onl
 
 ```bash
 docker compose exec -T postgres \
-  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_daily_horoscopes.sql
-
-docker compose exec -T postgres \
   psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 < scripts/fill_perfume_profile_metadata.sql
 
 docker compose exec -T postgres \
@@ -257,18 +251,20 @@ Smoke check the first deploy after importing a dump:
 curl -f http://127.0.0.1:8080/health
 curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
-curl -f http://127.0.0.1:8080/horoscope/daily
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -At -c 'SELECT COUNT(*) FROM daily_horoscope_entries'
 curl -fs "http://127.0.0.1:8080/perfumes?searchText=&offset=0&limit=1" | grep -q '"id"'
 ```
 
-A brand-new Docker PostgreSQL volume starts with schema only. The seed/backfill scripts above create `perfumery_history` and `daily_horoscopes`, but do not insert `brands`, `perfumes`, `notes`, or `perfume_notes` rows. If no dump is imported, start the stack, run the Docker seed/backfill section above, then smoke check the seed-only path:
+A brand-new Docker PostgreSQL volume receives `daily_horoscope_entries` through migration. The history seed script above creates `perfumery_history`, but neither it nor the horoscope migration inserts `brands`, `perfumes`, `notes`, or `perfume_notes` rows. If no dump is imported, start the stack, run the Docker seed/backfill section above, then smoke check the seed-only path:
 
 ```bash
 docker compose up -d --wait --wait-timeout 120
 curl -f http://127.0.0.1:8080/health
 curl -f http://127.0.0.1:8080/ready
 curl -f http://127.0.0.1:8080/quiz-of-the-day
-curl -f http://127.0.0.1:8080/horoscope/daily
+docker compose exec -T postgres \
+  psql -U perfumesoul -d perfumesoul -At -c 'SELECT COUNT(*) FROM daily_horoscope_entries'
 ```
 
 Update an existing deployment:
@@ -377,17 +373,17 @@ Response shape on `/perfumery-history` (story text shortened here):
 }
 ```
 
-Expected response on `/horoscope/daily`:
+Expected response on `/horoscope/daily?timeZone=UTC` on 1 December 2026 with `Accept-Language: en` (two of twelve signs shown):
 
 ```json
 [
   {
     "sign": "aries",
-    "energyOfDay": "Сегодня хороший день для инициативы и быстрых решений."
+    "energyOfDay": "Start with one important task today and save your energy for what matters."
   },
   {
     "sign": "taurus",
-    "energyOfDay": "День подойдет для спокойной концентрации, практичных покупок и наведения порядка в делах."
+    "energyOfDay": "A steady pace will help you notice details and finish something you have postponed."
   }
 ]
 ```
@@ -531,6 +527,8 @@ Backend recommendation logic has focused tests for:
 - `GET /perfumes` now reads from PostgreSQL, so the local database must be running and contain `brands` and `perfumes`.
 - `GET /perfumes/recommendations` also reads from PostgreSQL and depends on populated `perfumes`, `brands`, `notes`, `perfume_notes`, `accords`, and `perfume_accords`.
 - `POST /personal-perfumes` depends on populated `market_segment`, profile metadata, notes, and accords.
+- `GET /horoscope/daily` reads the current date from `daily_horoscope_entries` in the requested `timeZone` (UTC by default). The migration loads 12 RU/EN entries for every date from 2026-12-01 through 2028-11-30. Outside that range it returns 404; `Accept-Language: ru` selects Russian, otherwise English.
+- quiz data still uses packaged backend resources under `Sources/PerfumeSoulBackend/Requests/quiz-of-the-day/Resources`.
 - `GET /horoscope/daily` now reads from PostgreSQL, so `daily_horoscopes` must be seeded before local run.
 - `GET /quiz-of-the-day` preserves the original 15 questions (IDs 1–15) for existing clients and same-day sessions.
 - `GET /v2/quiz-of-the-day` reads the 5,475-question RU/EN bank from PostgreSQL. The bank is imported from `Sources/PerfumeSoulBackend/Resources/quiz-bank.json` during migration. Until daily selection is implemented, the endpoint returns the first 15 questions by ID; `Accept-Language: en` selects English, and Russian is the default. Updated iOS clients keep a legacy session, including its completion state, until the next local day; new sessions use the versioned endpoint and persist the question set version.
