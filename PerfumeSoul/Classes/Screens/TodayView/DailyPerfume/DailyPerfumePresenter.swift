@@ -23,6 +23,7 @@ protocol DailyPerfumePresenter {
 
 final class DailyPerfumePresenterImpl {
     private static let candidateLimit = 20
+    @MainActor private var hasPendingResolve = false
 
     private let viewModel: DailyPerfumeViewModel
     private let router: DailyPerfumeRouter
@@ -60,84 +61,19 @@ extension DailyPerfumePresenterImpl: DailyPerfumePresenter {
         viewModel.refreshID += 1
     }
 
+    @MainActor
     func resolve() async {
-        let shouldResolve = await MainActor.run {
-            guard !viewModel.isResolving else {
-                return false
-            }
-
-            viewModel.isResolving = true
-            return true
-        }
-        guard shouldResolve else {
+        guard !viewModel.isResolving else {
+            hasPendingResolve = true
             return
         }
-        defer {
-            Task { @MainActor in
-                viewModel.isResolving = false
-            }
-        }
+        viewModel.isResolving = true
+        defer { viewModel.isResolving = false }
 
-        await setState(.loading)
-
-        let profile = await profileService.fetchProfile()
-
-        guard
-            let profile,
-            let profileCalculation = profile.cachedProfileCalculation
-        else {
-            await setState(.missingProfile)
-            return
-        }
-
-        let dayKey = dayKeyProvider.todayKey()
-        var state = preparedState(
-            storedState: stateStorage.loadState(),
-            profileCalculationCacheKey: profile.profileCalculationCacheKey,
-            dayKey: dayKey
-        )
-
-        if let currentPerfume = state.currentPerfume,
-            let reaction = state.currentReaction {
-            await setState(.content(currentPerfume, reaction))
-            return
-        }
-
-        do {
-            var candidates = try await requestCandidates(
-                profileCalculation: profileCalculation,
-                state: state
-            )
-
-            if candidates.isEmpty, !state.shownPerfumeIDs.isEmpty {
-                state.shownPerfumeIDs = []
-                candidates = try await requestCandidates(
-                    profileCalculation: profileCalculation,
-                    state: state
-                )
-            }
-
-            guard let candidate = selectionService.selectCandidate(from: candidates) else {
-                stateStorage.saveState(state)
-                await setState(.exhausted)
-                return
-            }
-
-            let perfume = DailyPerfumeSummary(
-                id: candidate.id,
-                perfumeName: candidate.perfumeName,
-                brandName: candidate.brandName
-            )
-            state.currentPerfume = perfume
-            state.currentReaction = .pending
-            appendUnique(perfume.id, to: &state.shownPerfumeIDs)
-            state.lastShownBrand = perfume.brandName
-            stateStorage.saveState(state)
-
-            await setState(.content(perfume, .pending))
-        } catch {
-            await setState(.failed)
-        }
+        repeat {
+            hasPendingResolve = false
+            await resolveCurrentDay()
+        } while hasPendingResolve
     }
 
     @MainActor
@@ -180,6 +116,88 @@ extension DailyPerfumePresenterImpl: DailyPerfumePresenter {
 }
 
 extension DailyPerfumePresenterImpl {
+    @MainActor
+    private func resolveCurrentDay() async {
+        setState(.loading)
+
+        let profile = await profileService.fetchProfile()
+
+        guard
+            let profile,
+            let profileCalculation = profile.cachedProfileCalculation
+        else {
+            setState(.missingProfile)
+            return
+        }
+
+        let dayKey = dayKeyProvider.todayKey()
+        var state = preparedState(
+            storedState: stateStorage.loadState(),
+            profileCalculationCacheKey: profile.profileCalculationCacheKey,
+            dayKey: dayKey
+        )
+
+        if let currentPerfume = state.currentPerfume,
+            let reaction = state.currentReaction {
+            setState(.content(currentPerfume, reaction))
+            return
+        }
+
+        do {
+            var candidates = try await requestCandidates(
+                profileCalculation: profileCalculation,
+                state: state
+            )
+            guard shouldApplyResult(for: dayKey) else {
+                return
+            }
+
+            if candidates.isEmpty, !state.shownPerfumeIDs.isEmpty {
+                state.shownPerfumeIDs = []
+                candidates = try await requestCandidates(
+                    profileCalculation: profileCalculation,
+                    state: state
+                )
+                guard shouldApplyResult(for: dayKey) else {
+                    return
+                }
+            }
+
+            guard let candidate = selectionService.selectCandidate(from: candidates) else {
+                stateStorage.saveState(state)
+                setState(.exhausted)
+                return
+            }
+
+            let perfume = DailyPerfumeSummary(
+                id: candidate.id,
+                perfumeName: candidate.perfumeName,
+                brandName: candidate.brandName
+            )
+            state.currentPerfume = perfume
+            state.currentReaction = .pending
+            appendUnique(perfume.id, to: &state.shownPerfumeIDs)
+            state.lastShownBrand = perfume.brandName
+            stateStorage.saveState(state)
+
+            setState(.content(perfume, .pending))
+        } catch {
+            guard shouldApplyResult(for: dayKey) else {
+                return
+            }
+            setState(.failed)
+        }
+    }
+
+    @MainActor
+    private func shouldApplyResult(for dayKey: String) -> Bool {
+        guard dayKey == dayKeyProvider.todayKey() else {
+            hasPendingResolve = true
+            return false
+        }
+        return true
+    }
+
     private func preparedState(
         storedState: DailyPerfumeState?,
         profileCalculationCacheKey: String?,
