@@ -8,9 +8,11 @@ struct CreateQuizCalendarDaysMigration: AsyncMigration {
         try await database.transaction { database in
             try await database.schema(QuizCalendarDayModel.schema)
                 .field("day_key", .string, .identifier(auto: false))
-                .field("question_ids", .json, .required)
+                .field("question_ids", .array(of: .int), .required)
                 .ignoreExisting()
                 .create()
+            // Also recover a prepare that created the old JSON column before it was logged.
+            try await UseNativeQuizQuestionIDsMigration().prepare(on: database)
             guard let sqlDatabase = database as? any SQLDatabase else {
                 throw DatabaseMigrationError.sqlDatabaseIsRequired
             }
@@ -20,7 +22,12 @@ struct CreateQuizCalendarDaysMigration: AsyncMigration {
                 // Keep published dates unchanged, including after a replay of prepare.
                 try await sqlDatabase.raw("""
                     INSERT INTO quiz_calendar_days (day_key, question_ids)
-                    SELECT value ->> 'dayKey', value -> 'questionIDs'
+                    SELECT value ->> 'dayKey', ARRAY(
+                        SELECT question_id::bigint
+                        FROM jsonb_array_elements_text(value -> 'questionIDs') WITH ORDINALITY
+                            AS question(question_id, position)
+                        ORDER BY position
+                    )
                     FROM jsonb_array_elements(\(bind: json)::jsonb) AS item(value)
                     WHERE true
                     ON CONFLICT (day_key) DO NOTHING

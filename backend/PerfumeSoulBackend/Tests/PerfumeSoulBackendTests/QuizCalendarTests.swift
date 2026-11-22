@@ -1,6 +1,7 @@
 import Foundation
 import Fluent
 import FluentPostgresDriver
+import FluentSQL
 import Testing
 import Vapor
 import VaporTesting
@@ -19,10 +20,26 @@ struct QuizCalendarTests {
             app.databases.use(try .postgres(url: databaseURL), as: .psql)
             let migration = CreateQuizCalendarDaysMigration()
             try await migration.prepare(on: app.db)
+            let storedDays = try await QuizCalendarDayModel.query(on: app.db).all()
+            let expected = Dictionary(uniqueKeysWithValues: days.map { ($0.dayKey, $0.questionIDs) })
+            #expect(storedDays.count == days.count)
+            for storedDay in storedDays {
+                let dayKey = try #require(storedDay.id)
+                #expect(storedDay.questionIDs == expected[dayKey])
+            }
             let published = try #require(try await QuizCalendarDayModel.find(first.dayKey, on: app.db))
             let existingOrder = Array(first.questionIDs.reversed())
             published.questionIDs = existingOrder
             try await published.save(on: app.db)
+
+            // Reproduce a database where the earlier JSON migration was already logged.
+            let sqlDatabase = try #require(app.db as? any SQLDatabase)
+            try await sqlDatabase.raw("""
+                ALTER TABLE quiz_calendar_days
+                ALTER COLUMN question_ids TYPE jsonb USING to_jsonb(question_ids)
+                """)
+                .run()
+            try await UseNativeQuizQuestionIDsMigration().prepare(on: app.db)
             try await migration.prepare(on: app.db)
             let restored = try #require(try await QuizCalendarDayModel.find(first.dayKey, on: app.db))
             #expect(restored.questionIDs == existingOrder)
