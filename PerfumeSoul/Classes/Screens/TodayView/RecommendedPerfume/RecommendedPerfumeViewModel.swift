@@ -16,6 +16,7 @@ enum RecommendedPerfumeViewState: Equatable {
     case failed
 }
 
+
 @Observable final class RecommendedPerfumeViewModel {
     var state: RecommendedPerfumeViewState = .loading
     var isResolving = false
