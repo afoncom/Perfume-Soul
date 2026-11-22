@@ -8,6 +8,11 @@
 import Foundation
 
 struct QuizOfTheDayQuestion {
+    enum SetVersion: Int, Codable {
+        case legacy = 1
+        case bank = 2
+    }
+
     let id: Int
     let question: String
     let answers: [QuizOfTheDayAnswer]
