@@ -12,6 +12,7 @@ struct TodayScreen: View {
     private let dailyPerfumeScreen: DailyPerfumeScreen
     private let recommendedPerfumeScreen: RecommendedPerfumeScreen
     private let presenter: TodayPresenter
+    @Environment(\.scenePhase) private var scenePhase
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @ScaledMetric(relativeTo: .largeTitle) private var headingSize = 38
     @ScaledMetric(relativeTo: .largeTitle) private var historyDateSize = 44
@@ -52,10 +53,19 @@ struct TodayScreen: View {
             .padding(.bottom, 40)
         }
         .background(Color(.backgroundPrimary))
-        .preferredColorScheme(.light)
         .navigationBarTitleDisplayMode(.inline)
         .task(id: viewModel.refreshID) {
             await presenter.onAppear()
+        }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active {
+                Task { await presenter.onAppear() }
+            }
+        }
+        .task {
+            for await _ in NotificationCenter.default.notifications(named: .NSCalendarDayChanged) {
+                await presenter.onAppear()
+            }
         }
     }
 }
@@ -97,12 +107,12 @@ extension TodayScreen {
                             .fill(Color(.textPrimary).opacity(0.16))
                             .frame(height: 1)
                     }
-                } else if case .loading = viewModel.viewState {
+                } else if viewModel.isLoadingHoroscope {
                     ProgressView()
                         .tint(Color(.textPrimary))
                         .frame(maxWidth: .infinity, minHeight: 160)
                 } else {
-                    Text(L10n.Today.Energy.missingProfile)
+                    Text(viewModel.horoscopePlaceholder)
                         .font(.body)
                         .lineSpacing(5)
                         .fixedSize(horizontal: false, vertical: true)
@@ -148,6 +158,10 @@ extension TodayScreen {
                     .background(Color(.textPrimary).opacity(0.035))
             case let .loaded(historyFact):
                 makeHistoryCard(historyFact: historyFact)
+            case .unavailable:
+                Text(String(localized: "today.history.unavailable"))
+                    .font(.body)
+                    .foregroundStyle(Color(.descriptionText))
             }
         }
         .foregroundStyle(Color(.textPrimary))
@@ -158,7 +172,7 @@ extension TodayScreen {
             presenter.dayInPerfumeryButtonTab()
         } label: {
             VStack(alignment: .leading, spacing: 24) {
-                Text(viewModel.historyDateText(year: historyFact.year))
+                Text(historyFact.eventDateText)
                     .font(
                         dynamicTypeSize.isAccessibilitySize
                             ? .title.weight(.light)
@@ -175,14 +189,9 @@ extension TodayScreen {
                     .accessibilityHidden(true)
 
                 VStack(alignment: .leading, spacing: 14) {
-                    Text(historyFact.perfumeName)
+                    Text(historyFact.title)
                         .font(.title2.weight(.medium))
                         .tracking(-0.4)
-
-                    Text(historyFact.shortStory)
-                        .font(.body)
-                        .foregroundStyle(Color(.descriptionText))
-                        .lineSpacing(4)
                 }
                 .fixedSize(horizontal: false, vertical: true)
 
@@ -223,6 +232,7 @@ private struct TodayOverviewBanner: View {
                         .scaledToFill()
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         .clipped()
+                        .overlay(Color(.surfaceOverlay))
                         .accessibilityHidden(true)
                         .overlay(alignment: .leading) {
                             bannerText
@@ -255,5 +265,6 @@ extension TodayScreen {
     enum ViewState {
         case loading
         case loaded(historyFact: PerfumeHistory)
+        case unavailable
     }
 }

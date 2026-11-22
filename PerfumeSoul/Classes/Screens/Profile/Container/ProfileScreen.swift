@@ -46,7 +46,6 @@ struct ProfileScreen: View {
         .background(Color(.backgroundPrimary))
         .foregroundStyle(Color(.textPrimary))
         .tint(Color(.textPrimary))
-        .preferredColorScheme(.light)
         .navigationBarTitleDisplayMode(.inline)
         .alert(L10n.Profile.Actions.deleteAlertTitle, isPresented: $viewModel.isShowingDeleteProfileAlert) {
             Button(L10n.Profile.Actions.cancelButton, role: .cancel) { }

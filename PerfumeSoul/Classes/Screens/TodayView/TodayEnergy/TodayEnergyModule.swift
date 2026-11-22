@@ -12,14 +12,19 @@ final class TodayEnergyModule {
     static func build(
         navigationController: UINavigationController?,
         personalDailyHoroscope: DailyHoroscope,
-        dailyHoroscopes: [DailyHoroscope]
+        dailyHoroscopes: [DailyHoroscope],
+        dailyHoroscopeService: DailyHoroscopeService
     ) -> UIViewController {
         let viewModel = TodayEnergyViewModel(
             personalDailyHoroscope: personalDailyHoroscope,
             dailyHoroscopes: dailyHoroscopes
         )
         let router = TodayEnergyRouterImpl(navigationController: navigationController)
-        let presenter = TodayEnergyPresenterImpl(viewModel: viewModel, router: router)
+        let presenter = TodayEnergyPresenterImpl(
+            viewModel: viewModel,
+            router: router,
+            dailyHoroscopeService: dailyHoroscopeService
+        )
         
         let view = TodayEnergyScreen(viewModel: viewModel, presenter: presenter)
         

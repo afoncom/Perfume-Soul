@@ -1,10 +1,13 @@
 import Fluent
 import FluentSQL
+import Foundation
 import Vapor
 
 func routes(
     _ app: Application,
     imageCache: CatalogImageCache = CatalogImageCache(),
+    horoscopeClock: DailyHoroscopeClock = DailyHoroscopeClock(),
+    historyClock: PerfumeryHistoryClock = PerfumeryHistoryClock(),
     imageProvider: @escaping PerfumeImageProvider = { _, _, _ in nil }
 ) throws {
     try app.register(collection: CatalogRoutes(imageCache: imageCache, imageProvider: imageProvider))
@@ -61,29 +64,61 @@ func routes(
     }
 
     app.get("perfumery-history") { req async throws -> Response in
+        guard let item = try await PerfumeryHistoryLoader.loadLegacy(dateKey: "2026-04-18", on: req.db) else {
+            throw Abort(.notFound)
+        }
+        return try jsonResponse(item)
+    }
+
+    app.get("v2", "perfumery-history") { req async throws -> Response in
+        let query = try req.query.decode(PerfumeryHistoryQuery.self)
+        guard let timeZone = TimeZone(identifier: query.timeZone ?? "UTC") else {
+            throw Abort(.badRequest, reason: "Invalid timeZone")
+        }
         guard let item = try await PerfumeryHistoryLoader.load(
-            dateKey: "2026-04-18",
+            dateKey: PerfumeryHistoryCalendar.dateKey(now: historyClock.now(), timeZone: timeZone),
+            language: req.headers.first(name: "Accept-Language"),
             on: req.db
         ) else {
             throw Abort(.notFound)
         }
 
-        return try jsonResponse(item)
+        let response = try jsonResponse(item, varyByLanguage: true)
+        response.headers.replaceOrAdd(name: "Cache-Control", value: "no-store")
+        return response
     }
 
     app.get("horoscope", "daily") { req async throws -> Response in
-        let horoscopes = try await DailyHoroscopeLoader.load(on: req.db)
-        return try jsonResponse(horoscopes)
+        let query = try req.query.decode(DailyHoroscopeQuery.self)
+        guard let timeZoneIdentifier = query.timeZone else {
+            return try jsonResponse(try await DailyHoroscopeLoader.load(on: req.db))
+        }
+        guard let timeZone = TimeZone(identifier: timeZoneIdentifier) else {
+            throw Abort(.badRequest, reason: "Invalid timeZone")
+        }
+        guard let horoscopes = try await DailyHoroscopeLoader.load(
+            dateKey: DailyHoroscopeCalendar.dateKey(now: horoscopeClock.now(), timeZone: timeZone),
+            language: req.headers.first(name: "Accept-Language"),
+            on: req.db
+        ) else {
+            throw Abort(.notFound)
+        }
+        let response = try jsonResponse(horoscopes)
+        response.headers.replaceOrAdd(name: "Vary", value: "Accept-Language")
+        response.headers.replaceOrAdd(name: "Cache-Control", value: "no-store")
+        return response
     }
 
     app.get("quiz-of-the-day") { _ async throws -> Response in
-        do {
-            return try jsonResponse(QuizOfTheDayQuestionLoader.load())
-        } catch let error as CocoaError where error.code == .fileNoSuchFile {
-            throw Abort(.notFound)
-        } catch {
-            throw error
-        }
+        try jsonResponse(QuizOfTheDayQuestionLoader.load())
+    }
+
+    app.get("v2", "quiz-of-the-day") { req async throws -> Response in
+        let questions = try await QuizOfTheDayQuestionLoader.load(
+            on: req.db,
+            language: req.headers.first(name: "Accept-Language")
+        )
+        return try jsonResponse(questions, varyByLanguage: true)
     }
     
     app.get("perfumes", "recommendations") { req async throws -> Response in

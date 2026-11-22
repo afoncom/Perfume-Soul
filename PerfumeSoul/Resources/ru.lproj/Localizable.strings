@@ -251,12 +251,12 @@
 "today.energy.moonTitle" = "Луна в Скорпионе";
 "today.energy.personalTitle" = "Для вас";
 "today.energy.missingProfile" = "Заполните профиль, чтобы увидеть свой гороскоп на день.";
+"today.energy.unavailable" = "Гороскоп на сегодня пока недоступен.";
 "today.energy.title" = "Гороскоп дня";
 "today.overview.caption" = "Ваш выбор на сегодня";
 "today.overview.title" = "Аромат вашего дня.";
-"today.history.description" = "Один из самых культовых ароматов Dior с нотой ландыша.";
-"today.history.eventTitle" = "Dior выпустил Diorissimo";
 "today.history.title" = "В этот день в парфюмерии";
+"today.history.unavailable" = "На сегодня нет истории парфюмерии.";
 "today.recommended.title" = "Рекомендовано для тебя";
 "today.recommended.subtitle" = "Подобрано по вашему натальному профилю";
 "today.recommended.failed" = "Не удалось загрузить рекомендации. Попробуйте ещё раз.";
