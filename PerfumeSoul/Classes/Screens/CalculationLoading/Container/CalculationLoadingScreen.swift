@@ -33,7 +33,6 @@ struct CalculationLoadingScreen: View {
             .padding(.bottom, 36)
         }
         .background(Color(.backgroundPrimary))
-        .preferredColorScheme(.light)
         .task(id: viewModel.retryAttempt) {
             await presenter.onAppear()
         }

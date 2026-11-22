@@ -11,6 +11,81 @@ import XCTest
 
 final class QuizOfTheDayPresenterTests: XCTestCase {
     @MainActor
+    func testLegacySessionsKeepAnswersAndCompletionUntilTheNextDay() async throws {
+        for completed in [false, true] {
+            let suiteName = "tests.quizTransition.\(UUID().uuidString)"
+            let defaults = try XCTUnwrap(UserDefaults(suiteName: suiteName))
+            defer { defaults.removePersistentDomain(forName: suiteName) }
+            let storage = ViewStateStorage<DailyQuizState>(userDefaults: defaults, storableKey: "quiz")
+            let legacyJSON = """
+                {"quizDayKey":"2026-08-18","questionIDs":[1,2],"currentQuestionIndex":1,
+                "questionStates":[
+                    {"questionID":1,"selectedAnswerID":"A","isSubmitted":true,"wasCorrect":true},
+                    {"questionID":2,"selectedAnswerID":"B","isSubmitted":true,"wasCorrect":false}
+                ],"isCompleted":\(completed)}
+                """
+            defaults.set(Data(legacyJSON.utf8), forKey: "quiz")
+            var expected = try XCTUnwrap(storage.loadState())
+            let viewModel = QuizOfTheDayViewModel()
+            let dayProvider = QuizDayKeyProviderMock()
+            let presenter = makePresenter(
+                router: QuizOfTheDayRouterMock(),
+                viewModel: viewModel,
+                service: VersionedQuizServiceMock(),
+                storage: storage,
+                dayKeyProvider: dayProvider
+            )
+
+            await presenter.onAppear()
+
+            expected.questionSetVersion = .legacy
+            XCTAssertEqual(viewModel.currentDailyQuizState, expected)
+            XCTAssertEqual(storage.loadState(), expected)
+            XCTAssertEqual(viewModel.questions.map(\.id), [1, 2])
+
+            dayProvider.dayKey = "2026-08-19"
+            await presenter.onAppear()
+
+            XCTAssertEqual(viewModel.questions.map(\.id), [10_001, 10_002])
+            XCTAssertEqual(storage.loadState()?.questionSetVersion, .bank)
+            XCTAssertFalse(viewModel.isQuizCompleted)
+            XCTAssertEqual(viewModel.currentQuestionIndex, 0)
+        }
+    }
+
+    @MainActor
+    func testNewBankSessionRestoresTheSameSetAndAnswers() async throws {
+        let suiteName = "tests.quizBank.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suiteName))
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+        let storage = ViewStateStorage<DailyQuizState>(userDefaults: defaults, storableKey: "quiz")
+        let viewModel = QuizOfTheDayViewModel()
+        let presenter = makePresenter(
+            router: QuizOfTheDayRouterMock(),
+            viewModel: viewModel,
+            service: VersionedQuizServiceMock(),
+            storage: storage
+        )
+
+        await presenter.onAppear()
+        presenter.selectAnswer(id: "A")
+        await presenter.submitAnswer()
+        let savedState = try XCTUnwrap(storage.loadState())
+        await presenter.onAppear()
+
+        XCTAssertEqual(viewModel.questions.map(\.id), [10_001, 10_002])
+        XCTAssertEqual(savedState.questionSetVersion, .bank)
+        XCTAssertEqual(viewModel.currentDailyQuizState, savedState)
+        XCTAssertEqual(viewModel.selectedAnswerId, "A")
+        XCTAssertTrue(viewModel.isAnswerSubmitted)
+    }
+
+    func testQuizRequestsUseSeparateEndpointsForEachSet() {
+        XCTAssertEqual(QuizOfTheDayRequest(version: .legacy).path, "/quiz-of-the-day")
+        XCTAssertEqual(QuizOfTheDayRequest(version: .bank).path, "/v2/quiz-of-the-day")
+    }
+
+    @MainActor
     func testCompletedCardAppearanceWithoutQuizCompletionDoesNotRequestReview() {
         let router = QuizOfTheDayRouterMock()
         let presenter = makePresenter(router: router)
@@ -91,18 +166,21 @@ final class QuizOfTheDayPresenterTests: XCTestCase {
     private func makePresenter(
         router: QuizOfTheDayRouterMock,
         viewModel: QuizOfTheDayViewModel = QuizOfTheDayViewModel(),
-        quizProgressService: QuizProgressService = QuizProgressServiceMock()
+        quizProgressService: QuizProgressService = QuizProgressServiceMock(),
+        service: QuizOfTheDayService = QuizOfTheDayServiceMock(),
+        storage: ViewStateStorage<DailyQuizState>? = nil,
+        dayKeyProvider: QuizDayKeyProvider = QuizDayKeyProviderMock()
     ) -> QuizOfTheDayPresenterImpl {
         QuizOfTheDayPresenterImpl(
             viewModel: viewModel,
             router: router,
-            service: QuizOfTheDayServiceMock(),
-            dailyQuizStateStorage: ViewStateStorage<DailyQuizState>(
+            service: service,
+            dailyQuizStateStorage: storage ?? ViewStateStorage<DailyQuizState>(
                 userDefaults: .standard,
                 storableKey: "tests.dailyQuiz.\(UUID().uuidString)"
             ),
             quizProgressService: quizProgressService,
-            dayKeyProvider: QuizDayKeyProviderMock()
+            dayKeyProvider: dayKeyProvider
         )
     }
 }
@@ -166,8 +244,25 @@ private final class QuizOfTheDayRouterMock: QuizOfTheDayRouter {
     }
 }
 
+private final class VersionedQuizServiceMock: QuizOfTheDayService {
+    func requestQuizOfTheDayQuestions(version: QuizOfTheDayQuestion.SetVersion) async throws -> [QuizOfTheDayQuestion] {
+        let ids = version == .legacy ? [1, 2] : [10_001, 10_002]
+        return ids.map { id in
+            QuizOfTheDayQuestion(
+                id: id,
+                question: "Question \(id)",
+                answers: [
+                    QuizOfTheDayAnswer(id: "A", text: "Correct", isCorrect: true),
+                    QuizOfTheDayAnswer(id: "B", text: "Incorrect", isCorrect: false)
+                ],
+                explanation: "Explanation"
+            )
+        }
+    }
+}
+
 private final class QuizOfTheDayServiceMock: QuizOfTheDayService {
-    func requestQuizOfTheDayQuestions() async throws -> [QuizOfTheDayQuestion] {
+    func requestQuizOfTheDayQuestions(version: QuizOfTheDayQuestion.SetVersion) async throws -> [QuizOfTheDayQuestion] {
         [
             QuizOfTheDayQuestion(
                 id: 1,
@@ -206,8 +301,10 @@ private final class QuizProgressServiceMock: QuizProgressService {
 }
 
 private final class QuizDayKeyProviderMock: QuizDayKeyProvider {
+    var dayKey = "2026-08-18"
+
     func todayKey() -> String {
-        "2026-08-18"
+        dayKey
     }
 
     func isCurrentOrPreviousDay(_ dayKey: String) -> Bool {

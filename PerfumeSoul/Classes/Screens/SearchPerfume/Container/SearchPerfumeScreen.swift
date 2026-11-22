@@ -65,7 +65,6 @@ struct SearchPerfumeScreen: View {
         .background(Color(.backgroundPrimary))
         .foregroundStyle(Color(.textPrimary))
         .tint(Color(.textPrimary))
-        .preferredColorScheme(.light)
         .navigationBarTitleDisplayMode(.inline)
         .onChange(of: viewModel.searchText) { _, text in
             presenter.searchTextChanged(text)

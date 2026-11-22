@@ -54,7 +54,6 @@ struct PerfumeDetailsScreen: View {
         .background(Color(.backgroundPrimary))
         .foregroundStyle(Color(.textPrimary))
         .tint(Color(.textPrimary))
-        .preferredColorScheme(.light)
         .navigationBarTitleDisplayMode(.inline)
         .task { await presenter.onAppear() }
     }

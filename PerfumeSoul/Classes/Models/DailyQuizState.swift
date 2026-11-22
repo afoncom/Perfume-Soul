@@ -29,17 +29,20 @@ struct DailyQuizState: StorableViewState, Equatable {
     var currentQuestionIndex: Int
     var questionStates: [DailyQuizQuestionState]
     var isCompleted: Bool
+    var questionSetVersion: QuizOfTheDayQuestion.SetVersion?
 
     static func initial(
         quizDayKey: String,
-        questionIDs: [Int]
+        questionIDs: [Int],
+        questionSetVersion: QuizOfTheDayQuestion.SetVersion = .bank
     ) -> DailyQuizState {
         DailyQuizState(
             quizDayKey: quizDayKey,
             questionIDs: questionIDs,
             currentQuestionIndex: 0,
             questionStates: questionIDs.map { DailyQuizQuestionState.initial(questionID: $0) },
-            isCompleted: false
+            isCompleted: false,
+            questionSetVersion: questionSetVersion
         )
     }
 

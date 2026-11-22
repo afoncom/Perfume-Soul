@@ -41,7 +41,6 @@ struct DayInPerfumeryScreen: View {
         }
         .background(Color(.backgroundPrimary))
         .foregroundStyle(Color(.textPrimary))
-        .preferredColorScheme(.light)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

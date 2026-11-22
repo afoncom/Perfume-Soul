@@ -52,8 +52,18 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
         let quizProgress = await quizProgressService.loadProgress()
 
         do {
-            let questions = try await service.requestQuizOfTheDayQuestions()
-            let resolvedSession = resolveSession(from: questions)
+            let todayKey = dayKeyProvider.todayKey()
+            let storedState = dailyQuizStateStorage.loadState()
+            let version: QuizOfTheDayQuestion.SetVersion = storedState?.quizDayKey == todayKey
+                ? storedState?.questionSetVersion ?? .legacy
+                : .bank
+            let questions = try await service.requestQuizOfTheDayQuestions(version: version)
+            let resolvedSession = resolveSession(
+                from: questions,
+                storedState: storedState,
+                todayKey: todayKey,
+                version: version
+            )
             await MainActor.run {
                 viewModel.errorMessage = nil
                 viewModel.applySession(
@@ -130,11 +140,15 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
         router.requestAppReviewIfEligible()
     }
 
-    private func resolveSession(from questions: [QuizOfTheDayQuestion]) -> (questions: [QuizOfTheDayQuestion], state: DailyQuizState) {
-        let todayKey = dayKeyProvider.todayKey()
-
-        if let storedState = dailyQuizStateStorage.loadState() {
+    private func resolveSession(
+        from questions: [QuizOfTheDayQuestion],
+        storedState: DailyQuizState?,
+        todayKey: String,
+        version: QuizOfTheDayQuestion.SetVersion
+    ) -> (questions: [QuizOfTheDayQuestion], state: DailyQuizState) {
+        if let storedState {
             if let restoredSession = restoreSession(from: storedState, questions: questions, todayKey: todayKey) {
+                dailyQuizStateStorage.saveState(restoredSession.state)
                 return restoredSession
             }
 
@@ -143,7 +157,8 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
 
         let newState = DailyQuizState.initial(
             quizDayKey: todayKey,
-            questionIDs: questions.map(\.id)
+            questionIDs: questions.map(\.id),
+            questionSetVersion: version
         )
         dailyQuizStateStorage.saveState(newState)
 
@@ -171,6 +186,7 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
         }
 
         var resolvedState = state
+        resolvedState.questionSetVersion = state.questionSetVersion ?? .legacy
         resolvedState.currentQuestionIndex = min(
             state.currentQuestionIndex,
             max(orderedQuestions.count - 1, 0)

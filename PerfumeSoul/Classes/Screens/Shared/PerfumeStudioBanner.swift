@@ -28,6 +28,7 @@ struct PerfumeStudioBanner: View {
                         .scaledToFill()
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         .clipped()
+                        .overlay(Color(.surfaceOverlay))
                         .accessibilityHidden(true)
                         .overlay(alignment: .leading) {
                             bannerText
