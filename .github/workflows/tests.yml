@@ -114,6 +114,19 @@ jobs:
         docker compose up -d --wait --wait-timeout 180
         curl -f http://127.0.0.1:8080/health
         curl -f http://127.0.0.1:8080/ready
+        legacy_history_code="$(curl -fsS -o legacy-perfumery-history.json -w '%{http_code}' \
+          http://127.0.0.1:8080/perfumery-history)"
+        [[ "$legacy_history_code" == "200" ]]
+        jq -e '
+          (.year | type) == "number"
+          and (.perfumeName | type) == "string"
+          and (.perfumeName | length) > 0
+          and (.shortStory | type) == "string"
+          and (.shortStory | length) > 0
+          and (.fullStory | type) == "string"
+          and (.fullStory | length) > 0
+          and (.imageUrl | type) == "string"
+        ' legacy-perfumery-history.json
         curl -f http://127.0.0.1:8080/quiz-of-the-day
         docker compose exec -T postgres \
           psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_similar_finder_smoke.sql
