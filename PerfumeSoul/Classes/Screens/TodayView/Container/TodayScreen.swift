@@ -158,11 +158,10 @@ extension TodayScreen {
                     .background(Color(.textPrimary).opacity(0.035))
             case let .loaded(historyFact):
                 makeHistoryCard(historyFact: historyFact)
-            case .failed:
-                Text(L10n.Common.Error.message)
+            case .unavailable:
+                Text(String(localized: "today.history.unavailable"))
                     .font(.body)
-                    .frame(maxWidth: .infinity, minHeight: 260)
-                    .background(Color(.textPrimary).opacity(0.035))
+                    .foregroundStyle(Color(.descriptionText))
             }
         }
         .foregroundStyle(Color(.textPrimary))
@@ -173,7 +172,7 @@ extension TodayScreen {
             presenter.dayInPerfumeryButtonTab()
         } label: {
             VStack(alignment: .leading, spacing: 24) {
-                Text(viewModel.historyDateText(year: historyFact.year))
+                Text(historyFact.eventDateText)
                     .font(
                         dynamicTypeSize.isAccessibilitySize
                             ? .title.weight(.light)
@@ -190,14 +189,9 @@ extension TodayScreen {
                     .accessibilityHidden(true)
 
                 VStack(alignment: .leading, spacing: 14) {
-                    Text(historyFact.perfumeName)
+                    Text(historyFact.title)
                         .font(.title2.weight(.medium))
                         .tracking(-0.4)
-
-                    Text(historyFact.shortStory)
-                        .font(.body)
-                        .foregroundStyle(Color(.descriptionText))
-                        .lineSpacing(4)
                 }
                 .fixedSize(horizontal: false, vertical: true)
 
@@ -271,6 +265,6 @@ extension TodayScreen {
     enum ViewState {
         case loading
         case loaded(historyFact: PerfumeHistory)
-        case failed
+        case unavailable
     }
 }

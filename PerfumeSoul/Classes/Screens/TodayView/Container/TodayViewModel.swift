@@ -26,8 +26,4 @@ import Observation
         }
         return L10n.Today.Energy.missingProfile
     }
-
-    func historyDateText(year: Int) -> String {
-        "\(Date().formatted(.dateTime.day().month(.wide))) \(year)"
-    }
 }

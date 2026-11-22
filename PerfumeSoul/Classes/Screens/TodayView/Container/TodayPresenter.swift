@@ -67,14 +67,12 @@ extension TodayPresenterImpl: TodayPresenter {
             }
             viewModel.historyFact = historyFact
             viewModel.viewState = .loaded(historyFact: historyFact)
-            print(historyFact)
-        } catch let error {
+        } catch {
             guard loadID == latestLoadID else {
                 return
             }
             viewModel.historyFact = nil
-            viewModel.viewState = .failed
-            print(error)
+            viewModel.viewState = .unavailable
         }
     }
 

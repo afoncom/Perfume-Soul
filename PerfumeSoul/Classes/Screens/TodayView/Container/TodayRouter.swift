@@ -52,7 +52,7 @@ extension TodayRouterImpl: TodayRouter {
             DayInPerfumeryModule.build(
                 navigationController: navigationController,
                 historyFact: historyFact,
-                imageLoader: imageLoader
+                requestManager: requestManager
             ),
             animated: true
         )

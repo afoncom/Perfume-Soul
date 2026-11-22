@@ -129,6 +129,19 @@ jobs:
             and (.energyOfDay | length) > 0
           )
         ' legacy-horoscopes.json
+        legacy_history_code="$(curl -fsS -o legacy-perfumery-history.json -w '%{http_code}' \
+          http://127.0.0.1:8080/perfumery-history)"
+        [[ "$legacy_history_code" == "200" ]]
+        jq -e '
+          (.year | type) == "number"
+          and (.perfumeName | type) == "string"
+          and (.perfumeName | length) > 0
+          and (.shortStory | type) == "string"
+          and (.shortStory | length) > 0
+          and (.fullStory | type) == "string"
+          and (.fullStory | length) > 0
+          and (.imageUrl | type) == "string"
+        ' legacy-perfumery-history.json
         curl -f http://127.0.0.1:8080/quiz-of-the-day
         docker compose exec -T postgres \
           psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_similar_finder_smoke.sql
@@ -165,16 +178,20 @@ jobs:
         code="$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/perfumes/1/notes)"
         echo "/perfumes/1/notes -> $code"
         [[ "$code" == "404" || "$code" == "200" ]]
-        docker compose exec -T postgres \
-          psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_perfumery_history.sql
         horoscope_count="$(docker compose exec -T postgres \
           psql -U perfumesoul -d perfumesoul -At -c 'SELECT COUNT(*) FROM daily_horoscope_entries')"
         [[ "$horoscope_count" == "8772" ]]
         horoscope_code="$(curl -sS -o /dev/null -w '%{http_code}' \
           'http://127.0.0.1:8080/horoscope/daily?timeZone=UTC')"
-        echo "/horoscope/daily -> $horoscope_code"
+        echo "/horoscope/daily → $horoscope_code"
         [[ "$horoscope_code" == "200" || "$horoscope_code" == "404" ]]
-        curl -f http://127.0.0.1:8080/perfumery-history
+        history_count="$(docker compose exec -T postgres \
+          psql -U perfumesoul -d perfumesoul -At -c 'SELECT COUNT(*) FROM perfumery_history_entries')"
+        [[ "$history_count" == "731" ]]
+        history_code="$(curl -sS -o /dev/null -w '%{http_code}' \
+          'http://127.0.0.1:8080/v2/perfumery-history?timeZone=UTC')"
+        echo "/v2/perfumery-history → $history_code"
+        [[ "$history_code" == "200" || "$history_code" == "404" ]]
     - name: Dump Compose logs
       if: failure()
       working-directory: backend/PerfumeSoulBackend
@@ -200,6 +217,18 @@ jobs:
     if: needs.changes.outputs.backend == 'true'
     runs-on: ubuntu-latest
     container: swift:6.2-jammy
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_DB: perfumesoul_test
+          POSTGRES_USER: perfumesoul_test
+          POSTGRES_PASSWORD: perfumesoul_test
+        options: >-
+          --health-cmd "pg_isready -U perfumesoul_test -d perfumesoul_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     steps:
     - uses: actions/checkout@v5
     - name: Capture Swift toolchain version
@@ -213,6 +242,8 @@ jobs:
           linux-backend-spm-${{ hashFiles('backend-swift-version.txt') }}-
     - name: Run backend tests
       working-directory: backend/PerfumeSoulBackend
+      env:
+        PERFUME_SOUL_TEST_DATABASE_URL: postgresql://perfumesoul_test:perfumesoul_test@postgres:5432/perfumesoul_test
       run: swift test
 
   test:
