@@ -1,0 +1,1647 @@
+{
+  "days": [
+    {
+      "date": "2028-07-01",
+      "signs": {
+        "aries": {
+          "ru": "Когда захочется сменить привычный ход дня, обратите внимание на детали знакомого маршрута.",
+          "en": "When you feel like changing the pace today, look for new details along a familiar route."
+        },
+        "taurus": {
+          "ru": "Если собеседник похвалит ваш подход к делу, не торопитесь переводить разговор на собственные недостатки.",
+          "en": "If someone praises your approach to a task, do not rush to turn the conversation toward your shortcomings."
+        },
+        "gemini": {
+          "ru": "Если появится возможность немного отклониться от маршрута, поищите красивый вид в самом обычном месте.",
+          "en": "If you get a chance to leave your usual route, look for a beautiful view in an ordinary place."
+        },
+        "cancer": {
+          "ru": "Чтобы внимательнее отнестись к долгосрочным желаниям, вспомните маленькую мечту, которую пока не осуществили.",
+          "en": "To pay closer attention to your long term wishes, recall a small dream you have not fulfilled yet."
+        },
+        "leo": {
+          "ru": "Чтобы добавить в разговор немного искренности, вспомните о событии, которое когда-то вас рассмешило.",
+          "en": "To bring a little sincerity into a conversation, recall an occasion that once made you laugh."
+        },
+        "virgo": {
+          "ru": "Если хочется вдохновения за пределами экрана, заметьте, как свет меняет цвета разных поверхностей.",
+          "en": "If you want a little inspiration beyond your screen, notice how light changes the colors of different surfaces."
+        },
+        "libra": {
+          "ru": "Во время пересмотра своего недельного плана найдите место для дела, которое приносит вам радость.",
+          "en": "As you review your plan for the week make room for an activity that brings you joy."
+        },
+        "scorpio": {
+          "ru": "Когда вы замечаете хорошую мелочь среди забот, подумайте, как сделать такое удовольствие более привычным.",
+          "en": "When you notice a good little thing among your concerns, consider how to make such a pleasure more familiar."
+        },
+        "sagittarius": {
+          "ru": "На прогулке, даже совсем короткой и обычной, заметьте интересное изменение в знакомом пейзаже.",
+          "en": "On a walk, even a short and ordinary one, notice an interesting change in the familiar scenery."
+        },
+        "capricorn": {
+          "ru": "Если получится провести вечер в приятной обстановке, позвольте себе завершить день без новых обязательств.",
+          "en": "If you can spend the evening in pleasant surroundings, let yourself end the day without taking on new obligations."
+        },
+        "aquarius": {
+          "ru": "В процессе очередной знакомой задачи, выделите один момент, который можно сделать немного приятнее.",
+          "en": "While working through another familiar task, identify one moment you could make a little more pleasant."
+        },
+        "pisces": {
+          "ru": "Когда отправитесь по дороге к очередному делу, попробуйте заметить что-нибудь красивое в повседневном пейзаже.",
+          "en": "When you head out on your way to another task, try to spot something beautiful in the everyday scenery."
+        }
+      }
+    },
+    {
+      "date": "2028-07-02",
+      "signs": {
+        "aries": {
+          "ru": "Когда близкий захочет немного облегчить ваш день, ответьте спокойно, сохраняя благодарность за саму готовность помочь.",
+          "en": "When someone close wants to lighten your day, respond calmly while appreciating the willingness to help."
+        },
+        "taurus": {
+          "ru": "Если хочется немного порадовать слух сегодня, попробуйте послушать мелодию, не отвлекаясь на другие дела.",
+          "en": "If you want something pleasant for your ears today, try listening to a melody without distractions from other tasks."
+        },
+        "gemini": {
+          "ru": "Если привычный план сегодня немного изменится, не пытайтесь вернуть каждый пункт первоначального плана.",
+          "en": "If your usual plan changes a little today, avoid trying to restore every item of your original plan."
+        },
+        "cancer": {
+          "ru": "Если планы требуют сразу нескольких усилий, отметьте, что из намеченного уже удалось выполнить сегодня.",
+          "en": "If your plans require several efforts at once, notice which parts of your plan you have already finished today."
+        },
+        "leo": {
+          "ru": "Чтобы принимать более осознанные решения о мелочах, попробуйте заметить, какая деталь особенно вам нравится.",
+          "en": "To make more mindful decisions about little things, try to notice which particular detail you especially like."
+        },
+        "virgo": {
+          "ru": "Если на вечер нет каких-либо особых планов, отложите на время привычное стремление быть продуктивнее.",
+          "en": "If you do not have any special evening plans, set aside your usual wish to be more productive."
+        },
+        "libra": {
+          "ru": "Прежде чем сравнивать нынешний день с прошлым, заметьте хоть один маленький повод гордиться собой.",
+          "en": "Before comparing how today went with another day, notice at least one small reason to be proud of yourself."
+        },
+        "scorpio": {
+          "ru": "Если есть желание помочь коллегам сегодня, оставьте достаточно пространства для чужих идей и предложений.",
+          "en": "If you feel like helping your colleagues today, leave enough room for other people's ideas and suggestions."
+        },
+        "sagittarius": {
+          "ru": "Если знакомый аромат напомнит о чём-нибудь хорошем, отнеситесь к приятному впечатлению с простым любопытством.",
+          "en": "If a familiar scent reminds you of something nice, welcome the pleasant impression with a little simple curiosity."
+        },
+        "capricorn": {
+          "ru": "Если вас позовут на небольшую встречу, не забывайте оставить немного пространства для спонтанных решений.",
+          "en": "If you are invited to a small get-together, remember to leave a little room for spontaneous decisions."
+        },
+        "aquarius": {
+          "ru": "Если хочется ненадолго погрузиться в собственные мысли, вспомните любимое детское увлечение и попробуйте его снова.",
+          "en": "If you want to spend a little time with your thoughts, remember a childhood hobby and give it another try."
+        },
+        "pisces": {
+          "ru": "Если сегодня хочется почувствовать собственное развитие, разберите один пример в удобном для себя темпе.",
+          "en": "If you want to feel yourself learning today, work through one example at a pace that suits you."
+        }
+      }
+    },
+    {
+      "date": "2028-07-03",
+      "signs": {
+        "aries": {
+          "ru": "Выбирая направление для сегодняшнего дня, составьте план с комфортным для себя темпом.",
+          "en": "As you choose a direction for today, make a plan that feels comfortable at your own pace."
+        },
+        "taurus": {
+          "ru": "Если найдёте приятный способ выразить себя сегодня, следуйте интересу, а не заранее придуманным требованиям.",
+          "en": "If you find a pleasant way to express yourself today, follow your interest rather than a set of predetermined expectations."
+        },
+        "gemini": {
+          "ru": "Если день подарит немного времени для общения, не стремитесь заполнить каждую паузу словами и разговорами.",
+          "en": "If the day leaves some time for connection, do not feel the need to fill every pause with conversation."
+        },
+        "cancer": {
+          "ru": "Когда появится время для открытия чего-то небольшого, найдите историю о происхождении одного любимого вами цвета.",
+          "en": "When you find time for a little discovery, find the story behind one of your favorite colors."
+        },
+        "leo": {
+          "ru": "Если сегодня появится место для небольшого увлечения, отложите сравнения и сосредоточьтесь на удовольствии от процесса.",
+          "en": "If there is room for a little hobby today, set comparisons aside and focus on enjoying the process."
+        },
+        "virgo": {
+          "ru": "Если сегодня вы ищете небольшое удовольствие для себя, обратите внимание на простоту и удобство ваших решений.",
+          "en": "If you are looking for a small treat for yourself today, pay attention to simplicity and convenience in your choices."
+        },
+        "libra": {
+          "ru": "Если вечером хочется отложить необязательный разговор, найдите спокойный момент, не посвящённый ожиданиям других людей.",
+          "en": "If you would rather postpone an optional conversation this evening, find a peaceful moment free of other people's expectations."
+        },
+        "scorpio": {
+          "ru": "Чтобы не потерять интерес к новому начинанию, выберите самую доступную и простую версию привычки.",
+          "en": "To avoid losing interest in a new undertaking, choose the most accessible and simple version of the habit."
+        },
+        "sagittarius": {
+          "ru": "Если сегодня вы готовы попробовать новый подход, не забывайте оставлять место для обычных удовольствий.",
+          "en": "If you are ready to try a new approach today, remember to leave room for life's ordinary pleasures."
+        },
+        "capricorn": {
+          "ru": "Если захочется попробовать какой-нибудь новый аромат, насладитесь этим маленьким чувственным ритуалом без спешки.",
+          "en": "If you feel like trying a new fragrance, enjoy this small sensory ritual without rushing."
+        },
+        "aquarius": {
+          "ru": "Когда сегодняшние планы постепенно подойдут к концу, вспомните одну полезную мысль, пришедшую вам в голову.",
+          "en": "When today's plans are gradually winding down, recall one helpful thought that came to your mind."
+        },
+        "pisces": {
+          "ru": "В процессе обычной для вас работы заметьте удовольствие, которое приносит простота привычного действия.",
+          "en": "In the course of your usual work notice the enjoyment that comes from the simplicity of a familiar task."
+        }
+      }
+    },
+    {
+      "date": "2028-07-04",
+      "signs": {
+        "aries": {
+          "ru": "Если давно не было простого дружеского разговора, расскажите о чём-то приятном, что недавно привлекло ваше внимание.",
+          "en": "If it has been a while since you had a friendly chat, mention something pleasant that recently caught your attention."
+        },
+        "taurus": {
+          "ru": "Если сегодня какой-нибудь вопрос увлечёт ваше внимание, запишите несколько слов, описывающих суть вашего интереса.",
+          "en": "If a question happens to capture your attention today, write a few words describing what interests you most."
+        },
+        "gemini": {
+          "ru": "В процессе очередной знакомой задачи, подарите себе возможность взглянуть на обычные детали иначе.",
+          "en": "While working through another familiar task, give yourself a chance to see everyday details differently."
+        },
+        "cancer": {
+          "ru": "Если обстоятельства потребуют скорректировать сегодняшние намерения, позвольте себе пересмотреть намеченное без лишней спешки.",
+          "en": "If circumstances call for adjusting your intentions today, allow yourself to revise your plans without unnecessary haste."
+        },
+        "leo": {
+          "ru": "Когда планы столкнутся с небольшим препятствием, попробуйте спокойно рассмотреть ещё пару доступных вариантов.",
+          "en": "When your plans encounter a minor obstacle, try calmly considering a couple more available options."
+        },
+        "virgo": {
+          "ru": "Если захочется порадовать кого-нибудь по-своему, напишите пару слов, которые напоминают о тёплом моменте.",
+          "en": "If you want to make someone happy in your own way, write a few words about a warm shared moment."
+        },
+        "libra": {
+          "ru": "Когда захочется отвлечься с помощью красивых слов, найдите удовольствие в возможности ненадолго сменить точку зрения.",
+          "en": "When you feel like escaping for a moment through beautiful words, enjoy the chance to change your perspective briefly."
+        },
+        "scorpio": {
+          "ru": "Когда вам предложат дружеское участие в деле, оставьте место для благодарности и честного разговора о потребностях.",
+          "en": "When someone offers their friendly help with a task, make room for gratitude and an honest conversation about your needs."
+        },
+        "sagittarius": {
+          "ru": "Знакомясь с чем-то действительно увлекательным для себя, вспомните похожие вещи, которые когда-то тоже вызывали любопытство.",
+          "en": "As you explore something you genuinely find fascinating, recall similar things that once sparked your curiosity as well."
+        },
+        "capricorn": {
+          "ru": "Когда приходится немного менять привычные планы, позвольте себе спокойно продолжить без лишних упрёков.",
+          "en": "When you need to adjust your usual plans a little, let yourself continue calmly without unnecessary self criticism."
+        },
+        "aquarius": {
+          "ru": "Когда привычный образ начинает казаться немного скучным, вспомните, какая вещь помогает вам чувствовать себя уютно.",
+          "en": "When your usual look starts feeling a little dull, remember which item helps you feel at ease."
+        },
+        "pisces": {
+          "ru": "В первые спокойные минуты нового дня обратите внимание на мягкие звуки этого утра.",
+          "en": "In the first quiet moments of a new day, pay attention to the gentle sounds of the morning."
+        }
+      }
+    },
+    {
+      "date": "2028-07-05",
+      "signs": {
+        "aries": {
+          "ru": "Во время пересмотра своего недельного плана попробуйте объединить небольшие задачи с похожим характером.",
+          "en": "As you review your plan for the week try grouping a few small tasks with something in common."
+        },
+        "taurus": {
+          "ru": "Обычную дружескую беседу можно сделать чуточку теплее, если вспомнить недавний случай, которым хочется поделиться.",
+          "en": "An ordinary friendly chat can feel warmer when you recall a recent experience you would enjoy sharing."
+        },
+        "gemini": {
+          "ru": "Если утро началось с неожиданной суеты, сделайте небольшую паузу перед следующим шагом.",
+          "en": "If your morning has begun in an unexpected rush, take a short pause before making your next move."
+        },
+        "cancer": {
+          "ru": "Когда обычные слова кажутся слишком привычными, назовите сегодняшний день так, словно это название фильма.",
+          "en": "When ordinary words feel a little too familiar, name your day as if it were a film title."
+        },
+        "leo": {
+          "ru": "Когда появится время для знакомства со своей коллекцией, не спешите с выбором и позвольте себе спокойно оценить впечатления.",
+          "en": "When you have time to explore your own collection, take your time choosing and let yourself consider your impressions calmly."
+        },
+        "virgo": {
+          "ru": "Если сегодня приходится принимать непростое решение, возьмите небольшую паузу для спокойного размышления.",
+          "en": "If you face a difficult decision today, take a short pause for quiet reflection."
+        },
+        "libra": {
+          "ru": "Если впереди задача с незнакомыми деталями, выберите действие, которое соответствует нынешним возможностям.",
+          "en": "If there is a task with unfamiliar details ahead, choose an action that matches your current abilities."
+        },
+        "scorpio": {
+          "ru": "Когда привычный предмет вдруг предстанет в новом свете, позвольте одному наблюдению стать приятным открытием дня.",
+          "en": "When a familiar object appears in a new light, let one observation become a pleasant discovery today."
+        },
+        "sagittarius": {
+          "ru": "Если у приятеля возникнет вопрос к вам, сохраняйте уважение к обстоятельствам и возможностям другого человека.",
+          "en": "If a friend has a question for you, remain respectful of the other person's circumstances and options."
+        },
+        "capricorn": {
+          "ru": "Если вокруг появилось несколько лишних предметов, найдите небольшую деталь, добавляющую окружающему месту уюта.",
+          "en": "If a few unnecessary things have gathered around you, find a small detail that makes your surroundings feel cozy."
+        },
+        "aquarius": {
+          "ru": "Если новый привычный ритуал пока ещё не сложился, выберите удобный ориентир вместо строгого расписания.",
+          "en": "If your new daily ritual hasn't quite settled in, choose a convenient cue rather than a strict schedule."
+        },
+        "pisces": {
+          "ru": "В непринуждённой беседе с близким человеком легко вспомнить вслух о маленьком приятном событии из прошлого.",
+          "en": "In a relaxed conversation with someone close, it is easy to recall a small pleasant moment from the past aloud."
+        }
+      }
+    },
+    {
+      "date": "2028-07-06",
+      "signs": {
+        "aries": {
+          "ru": "Если хочется ненадолго погрузиться в собственные мысли, отложите сравнения и сосредоточьтесь на удовольствии от процесса.",
+          "en": "If you want to spend a little time with your thoughts, set comparisons aside and focus on enjoying the process."
+        },
+        "taurus": {
+          "ru": "Когда день заполнен привычными бытовыми заботами, подготовьте заранее что-нибудь полезное для завтрашнего утра.",
+          "en": "When your day is full of familiar household tasks, prepare something useful for tomorrow morning in advance."
+        },
+        "gemini": {
+          "ru": "Для поддержания лёгкого и доброжелательного общения найдите добрые слова, которые приятно произнести самим.",
+          "en": "To keep your conversations light and friendly, find kind words that feel pleasant to say."
+        },
+        "cancer": {
+          "ru": "Если сегодня хочется почувствовать собственное развитие, кратко запишите то, что оказалось особенно интересным.",
+          "en": "If you want to feel yourself learning today, briefly note what you found especially interesting."
+        },
+        "leo": {
+          "ru": "Когда кто-то предложит вам неожиданную совместную встречу, оставьте возможность спокойно обсудить удобный для вас вариант.",
+          "en": "When someone suggests an unexpected get-together with you, leave room for a calm discussion of an option that suits you."
+        },
+        "virgo": {
+          "ru": "Когда появится желание познакомиться с новым литературным миром, подарите себе немного времени для тихого наслаждения словами.",
+          "en": "When you feel like discovering a new literary world, give yourself a little time to quietly enjoy the words."
+        },
+        "libra": {
+          "ru": "Когда трудно понять, за что взяться, разделите работу на несколько частей с небольшими паузами.",
+          "en": "When you cannot quite decide where to start, divide the work into a few parts with short breaks."
+        },
+        "scorpio": {
+          "ru": "Когда закончится основная часть сегодняшних важных дел, вспомните хотя бы одну приятную деталь прошедших часов.",
+          "en": "When the main part of today's important tasks is over, recall at least one pleasant detail from the earlier hours."
+        },
+        "sagittarius": {
+          "ru": "Когда возникнет идея для одного небольшого начинания, сделайте короткую заметку, чтобы вернуться к ней позже.",
+          "en": "When an idea for a small undertaking comes to mind, make a brief note to return to later."
+        },
+        "capricorn": {
+          "ru": "Когда новый распорядок ещё не стал привычным, сделайте ставку на простые и понятные действия.",
+          "en": "When a new routine has not yet become familiar, favor simple actions that feel clear to you."
+        },
+        "aquarius": {
+          "ru": "Перед тем как дать окончательный ответ, сначала уточните одну деталь, которую вы пока не знаете.",
+          "en": "Before you give your final answer, first clarify one detail you do not yet know."
+        },
+        "pisces": {
+          "ru": "Когда появится время для открытия чего-то небольшого, откройте небольшую подборку старых фотографий интересного места.",
+          "en": "When you find time for a little discovery, explore a small collection of old photographs of an interesting place."
+        }
+      }
+    },
+    {
+      "date": "2028-07-07",
+      "signs": {
+        "aries": {
+          "ru": "Когда захочется глубже разобраться в знакомом занятии, позвольте себе начать с самых простых действий.",
+          "en": "When you want to understand a familiar activity better, allow yourself to begin with the simplest steps."
+        },
+        "taurus": {
+          "ru": "Размышляя о своих дальнейших личных целях, наметьте один шаг, который можно выполнить без дополнительного давления.",
+          "en": "As you reflect on your personal goals ahead, outline one step you can take without putting more pressure on yourself."
+        },
+        "gemini": {
+          "ru": "Если день оставляет немного времени на мастерство, попробуйте дать новое применение небольшому старому предмету.",
+          "en": "If the day leaves some time to practice a craft, try giving a small old object a new use."
+        },
+        "cancer": {
+          "ru": "Если сегодня вы почувствуете поддержку со стороны, позвольте себе просто порадоваться такой маленькой доброте.",
+          "en": "If you feel someone offering you support today, allow yourself simply to enjoy this little kindness."
+        },
+        "leo": {
+          "ru": "Когда новый шаг требует немного смелости, оставьте возможность спокойно учиться по ходу дела.",
+          "en": "When a new step calls for a little courage, give yourself room to learn calmly as you go."
+        },
+        "virgo": {
+          "ru": "Если планы требуют сразу нескольких усилий, расставьте дела по важности, не забывая о своём самочувствии.",
+          "en": "If your plans require several efforts at once, order your tasks by importance while keeping your well-being in mind."
+        },
+        "libra": {
+          "ru": "Когда близкий поинтересуется вашим самочувствием, оставьте себе право не объяснять каждую подробность.",
+          "en": "When someone close asks how you are feeling, reserve the right not to explain every little detail."
+        },
+        "scorpio": {
+          "ru": "Если привычный путь сегодня позволит остановиться, найдите в окружающей обстановке один любопытный контраст.",
+          "en": "If your familiar route lets you pause briefly today, look for one intriguing contrast in the surrounding scene."
+        },
+        "sagittarius": {
+          "ru": "Если захочется провести немного времени с любимым автором, позвольте себе читать медленно и получать удовольствие от деталей.",
+          "en": "If you feel like spending some time with a favorite author, let yourself read slowly and enjoy the details."
+        },
+        "capricorn": {
+          "ru": "При желании взглянуть на всё чуть иначе попробуйте мысленно соединить идеи из разных областей.",
+          "en": "To see things a little differently, try mentally connecting ideas from different fields."
+        },
+        "aquarius": {
+          "ru": "Когда захочется перерыва от постоянного обмена сообщениями, найдите время для любимого занятия вне цифрового пространства.",
+          "en": "When you feel like a break from constant messaging, make time for a favorite activity away from the digital world."
+        },
+        "pisces": {
+          "ru": "Небольшой шаг к пониманию своих нынешних интересов — заметить, какие занятия сразу вызывают интерес.",
+          "en": "A small step toward understanding your current interests is to notice which activities immediately spark your interest."
+        }
+      }
+    },
+    {
+      "date": "2028-07-08",
+      "signs": {
+        "aries": {
+          "ru": "Когда захочется ненадолго окунуться в приятную ностальгию, найдите минуту, чтобы спокойно вспомнить свои тогдашние чувства.",
+          "en": "When you feel like indulging in some pleasant nostalgia, take a minute to calmly recall how you felt then."
+        },
+        "taurus": {
+          "ru": "Если хочется ненадолго дать волю воображению, подумайте, какая текстура напоминает вам о покое.",
+          "en": "If you want to let your imagination roam briefly, consider which texture reminds you of calm."
+        },
+        "gemini": {
+          "ru": "Когда вдохновение предлагает новое направление, обратите внимание на ту часть замысла, которая радует сильнее всего.",
+          "en": "When inspiration suggests a new direction, notice the part of the idea that brings you the most joy."
+        },
+        "cancer": {
+          "ru": "Когда внимание естественно привлекают оттенки вокруг, выберите один оттенок и замечайте его разные варианты.",
+          "en": "When the shades around you naturally catch your attention, choose a shade and notice its different variations."
+        },
+        "leo": {
+          "ru": "Когда найдёте комфорт в предсказуемости повседневных мелочей, обратите внимание на маленькие достоинства знакомого уклада жизни.",
+          "en": "When you find comfort in predictable little everyday things, notice the small merits of your familiar way of life."
+        },
+        "virgo": {
+          "ru": "Если сегодня трудно найти свободную минуту, оставьте немного времени на простое созерцание.",
+          "en": "If finding a free moment seems difficult today, leave a little time to quietly take things in."
+        },
+        "libra": {
+          "ru": "Когда новая идея касается повседневных занятий, начните с действия, которое хочется повторить завтра.",
+          "en": "When a new idea concerns your everyday activities, start with an action you would enjoy repeating tomorrow."
+        },
+        "scorpio": {
+          "ru": "В спокойную паузу среди повседневного распорядка найдите небольшую деталь, добавляющую окружающему месту уюта.",
+          "en": "During a peaceful pause in the everyday routine find a small detail that makes your surroundings feel cozy."
+        },
+        "sagittarius": {
+          "ru": "Если выбор пока остаётся не совсем очевидным, сравните не только пользу, но и затраты времени.",
+          "en": "If your choice still seems far from obvious, consider the time involved as well as the benefits."
+        },
+        "capricorn": {
+          "ru": "Если новый привычный ритуал пока ещё не сложился, сосредоточьтесь на одной небольшой и выполнимой детали.",
+          "en": "If your new daily ritual hasn't quite settled in, focus on one small detail that is easy to manage."
+        },
+        "aquarius": {
+          "ru": "Когда что-нибудь неожиданно привлечёт ваше внимание, спросите себя, что именно вызывает приятное чувство.",
+          "en": "When something unexpectedly catches your attention, ask yourself what exactly creates that pleasant feeling."
+        },
+        "pisces": {
+          "ru": "Для приятного начала дружеской беседы расскажите о какой-нибудь простой и приятной мелочи.",
+          "en": "For a friendly start to a conversation, mention something simple and pleasant from your day."
+        }
+      }
+    },
+    {
+      "date": "2028-07-09",
+      "signs": {
+        "aries": {
+          "ru": "Если приходится выбирать между помощью и отдыхом, вспомните о собственных планах на сегодняшний день.",
+          "en": "If you have to choose between helping and resting, remember the plans you made for yourself today."
+        },
+        "taurus": {
+          "ru": "Если захочется подарить себе радость без покупок, полюбуйтесь какой-нибудь красивой деталью в вашем окружении.",
+          "en": "If you want to treat yourself without buying anything, admire a small beautiful detail in your surroundings."
+        },
+        "gemini": {
+          "ru": "Если хочется оставить себе небольшой полезный подарок, приведите в порядок то, что понадобится в ближайшее время.",
+          "en": "If you want to leave yourself a small helpful gift, tidy up something you will need in the near future."
+        },
+        "cancer": {
+          "ru": "Когда ваш путь пролегает по знакомой улице, воспринимайте окружающее без необходимости сразу оценивать происходящее.",
+          "en": "When your journey takes you along a familiar street, take in your surroundings without immediately forming a judgment."
+        },
+        "leo": {
+          "ru": "Один из способов заметить собственные приоритеты сегодня — вспомнить занятие, которое недавно вас порадовало.",
+          "en": "One way to notice your own priorities today is to remember an activity you enjoyed recently."
+        },
+        "virgo": {
+          "ru": "Чтобы сделать обычное утро чуть организованнее, сгруппируйте два похожих дела в один подход.",
+          "en": "To make an ordinary morning a little more organized, group two similar tasks into a single session."
+        },
+        "libra": {
+          "ru": "Когда захочется спокойно провести несколько минут, попробуйте послушать мелодию, не отвлекаясь на другие дела.",
+          "en": "When you feel like spending a few quiet minutes, try listening to a melody without distractions from other tasks."
+        },
+        "scorpio": {
+          "ru": "Пока окружающий мир только набирает скорость, уделите несколько минут исключительно своему внутреннему комфорту.",
+          "en": "While the world around you is just gathering speed, spend a few minutes focusing solely on your personal comfort."
+        },
+        "sagittarius": {
+          "ru": "Если кто-то с теплотой вспомнит о вас, позвольте себе искренне порадоваться такому маленькому моменту.",
+          "en": "If someone remembers you with warmth today, allow yourself to genuinely enjoy this little moment."
+        },
+        "capricorn": {
+          "ru": "Когда кто-то поделится личным поводом для радости, разрешите себе получить удовольствие от хороших чувств другого человека.",
+          "en": "When someone shares a personal reason for feeling happy, allow yourself to enjoy sharing another person's positive feelings."
+        },
+        "aquarius": {
+          "ru": "Когда интересно понаблюдать за собственными ассоциациями, заметьте, какие слова помогают точнее выразить ваши чувства.",
+          "en": "When you feel curious about your own associations, notice which words help express your feelings more accurately."
+        },
+        "pisces": {
+          "ru": "В ходе привычной совместной повседневной работы предложите свой взгляд без необходимости убедить остальных в нём.",
+          "en": "In the course of your usual collaborative work offer your perspective without needing to convince everyone else."
+        }
+      }
+    },
+    {
+      "date": "2028-07-10",
+      "signs": {
+        "aries": {
+          "ru": "Когда работа идёт в привычном ритме, обратите внимание на ту часть процесса, которая вам нравится.",
+          "en": "When your work moves along at its usual rhythm, pay attention to the part of the process you enjoy."
+        },
+        "taurus": {
+          "ru": "Когда появится настроение поблагодарить себя за что-нибудь, уделите этому приятному намерению несколько минут.",
+          "en": "When you feel like thanking yourself for something, give that pleasant intention a few moments."
+        },
+        "gemini": {
+          "ru": "Если близкому понадобится взгляд со стороны, говорите спокойно, избегая категоричных суждений и лишних оценок.",
+          "en": "If someone close needs an outside perspective, speak calmly without categorical statements or unnecessary judgments."
+        },
+        "cancer": {
+          "ru": "Небольшой шаг к пониманию своих нынешних интересов — подумать о том, что делает вас спокойнее.",
+          "en": "A small step toward understanding your current interests is to think about what makes you feel calmer."
+        },
+        "leo": {
+          "ru": "Если захочется немного развить полезный навык, позвольте себе начать с самых простых действий.",
+          "en": "If you want to build on a useful skill, allow yourself to begin with the simplest steps."
+        },
+        "virgo": {
+          "ru": "Когда появится время обустроить пространство вокруг себя, подарите любимым вещам немного внимания и заботы.",
+          "en": "When you have time to arrange the space around you, give your favorite belongings a little attention and care."
+        },
+        "libra": {
+          "ru": "Если кто-то проявит к вам искреннее внимание, не торопитесь отмахиваться от такого проявления заботы.",
+          "en": "If someone shows you some genuine care today, resist the urge to brush off this expression of care."
+        },
+        "scorpio": {
+          "ru": "Если день позволяет уделить внимание окружающей природе, понаблюдайте за движением облаков, не торопя этот момент.",
+          "en": "If your day allows you to pay attention to nature, watch the clouds move without rushing the moment."
+        },
+        "sagittarius": {
+          "ru": "Когда хочется обновить окружающую рабочую обстановку, поставьте рядом что-нибудь, на что вам приятно смотреть.",
+          "en": "When you feel like refreshing the space around your work, place something nearby that you find pleasant to look at."
+        },
+        "capricorn": {
+          "ru": "В поисках небольшой порции литературного вдохновения выберите несколько красивых строк для своего настроения.",
+          "en": "For a little literary inspiration, choose a few beautiful lines to suit your mood."
+        },
+        "aquarius": {
+          "ru": "Если сегодня какой-нибудь вопрос увлечёт ваше внимание, сохраните самое интересное без обязательства продолжать прямо сейчас.",
+          "en": "If a question happens to capture your attention today, save the most interesting part without committing to continue immediately."
+        },
+        "pisces": {
+          "ru": "Если кто-то предлагает изменить ваши планы, проверьте, комфортны ли вам предложенные условия.",
+          "en": "If someone suggests changing the plans you have made, check whether you feel comfortable with the proposed terms."
+        }
+      }
+    },
+    {
+      "date": "2028-07-11",
+      "signs": {
+        "aries": {
+          "ru": "Если удастся выйти на свежий воздух, насладитесь ощущением свободы хотя бы на несколько минут.",
+          "en": "If you manage to get out into the fresh air, enjoy a feeling of freedom for a few minutes."
+        },
+        "taurus": {
+          "ru": "Когда хочется порадовать взгляд чем-то выразительным, позвольте себе любоваться искусством без попыток его объяснить.",
+          "en": "When you want something expressive to delight your eyes, let yourself admire art without trying to explain it."
+        },
+        "gemini": {
+          "ru": "Когда задач кажется слишком много, отложите хотя бы один пункт, который не требует спешки.",
+          "en": "When the number of tasks feels overwhelming, postpone at least one thing that does not need rushing."
+        },
+        "cancer": {
+          "ru": "Если поступит предложение присоединиться к общему занятию, различайте собственное желание и привычку всегда быть доступным.",
+          "en": "If you receive an invitation to join an activity, distinguish your own desire from the habit of always being available."
+        },
+        "leo": {
+          "ru": "Чтобы понять, чему стоит уделять больше времени, подумайте о занятии, которым хочется заниматься без спешки.",
+          "en": "To understand what deserves more of your time, think of an activity you would enjoy without rushing."
+        },
+        "virgo": {
+          "ru": "Если сегодня найдётся место для эксперимента, исследуйте что-нибудь просто ради удовольствия от открытия.",
+          "en": "If today offers a little room for experimentation, explore something purely for the pleasure of discovery."
+        },
+        "libra": {
+          "ru": "Перед началом небольшого личного проекта, сохраните идею там, где сможете легко найти её позже.",
+          "en": "Before starting a small personal project, keep the idea somewhere you can easily find it later."
+        },
+        "scorpio": {
+          "ru": "Когда любимый предмет напомнит вам о прошлом, не спешите отмахиваться от этой маленькой радости.",
+          "en": "When a favorite item reminds you of the past, do not rush to brush that little joy aside."
+        },
+        "sagittarius": {
+          "ru": "Если под рукой не окажется нужной вещи, представьте, как подошли бы к этому впервые.",
+          "en": "If you don't have the right item on hand, imagine how you would approach this for the first time."
+        },
+        "capricorn": {
+          "ru": "Если привычные договорённости требуют небольшого пересмотра, найдите вариант, который оставляет достаточно места для отдыха.",
+          "en": "If your usual arrangements need a little reconsideration, find an option that leaves enough room for rest."
+        },
+        "aquarius": {
+          "ru": "Если сегодня вспомнится кто-то из давних друзей, поделитесь воспоминанием, которое вызывает у вас улыбку.",
+          "en": "If an old friend comes to mind today, share a memory that still brings a smile to your face."
+        },
+        "pisces": {
+          "ru": "Для спокойного упражнения в игре с образами представьте, каким предметом могло бы стать воспоминание.",
+          "en": "For a quiet exercise in playing with imagery, imagine what object a memory might become."
+        }
+      }
+    },
+    {
+      "date": "2028-07-12",
+      "signs": {
+        "aries": {
+          "ru": "Когда появится свободная минута для себя, выберите простую вещь, способную настроить на хороший день.",
+          "en": "When you find a free moment for yourself, choose something simple that puts you in a good mood."
+        },
+        "taurus": {
+          "ru": "Когда друг поделится с вами своими сомнениями, сохраняйте уважение к обстоятельствам и возможностям другого человека.",
+          "en": "When a friend shares their uncertainty with you, remain respectful of the other person's circumstances and options."
+        },
+        "gemini": {
+          "ru": "Когда привычный опыт кажется недостаточно убедительным, обратите внимание на уже приобретённые навыки.",
+          "en": "When your usual experience does not feel convincing enough, pay attention to the skills you have already gained."
+        },
+        "cancer": {
+          "ru": "Если давно не занимались тем, что нравится, выберите несколько минут без каких-либо требований к результату.",
+          "en": "If you haven't done something you enjoy for a while, set aside a few minutes without demanding particular results."
+        },
+        "leo": {
+          "ru": "Если получится провести вечер в приятной обстановке, отложите на время привычное стремление быть продуктивнее.",
+          "en": "If you can spend the evening in pleasant surroundings, set aside your usual wish to be more productive."
+        },
+        "virgo": {
+          "ru": "Если хочется провести время интереснее обычного, отложите сравнения и сосредоточьтесь на удовольствии от процесса.",
+          "en": "If you want to spend your time differently than usual, set comparisons aside and focus on enjoying the process."
+        },
+        "libra": {
+          "ru": "Когда устанете следить за обновлениями и новостями, подыщите приятный способ провести эти минуты без спешки.",
+          "en": "When you tire of keeping up with updates and news, find a pleasant way to spend those minutes without rushing."
+        },
+        "scorpio": {
+          "ru": "Если вам нужна небольшая передышка от общения, разрешите себе немного замедлиться в ответах и разговорах.",
+          "en": "If you need a small break from social interaction, allow yourself to slow down a little in replies and conversations."
+        },
+        "sagittarius": {
+          "ru": "Прежде чем открывать рабочий список, заметьте, какие дела уже не требуют вашего внимания.",
+          "en": "Before you open your task list, notice which tasks no longer need any of your attention."
+        },
+        "capricorn": {
+          "ru": "Когда день подарит несколько свободных минут, запишите один вопрос, оставшийся без ответа.",
+          "en": "When the day offers a few spare minutes, write down one unanswered question worth exploring."
+        },
+        "aquarius": {
+          "ru": "В спокойном темпе обычного рабочего процесса заметьте, в какой момент процесс становится особенно приятным.",
+          "en": "In the quiet rhythm of your usual work notice which moment makes the process feel particularly pleasant."
+        },
+        "pisces": {
+          "ru": "Если новое предложение вызывает смешанные чувства, спросите себя, что для вас сейчас важнее всего.",
+          "en": "If a new proposal brings up mixed feelings, ask yourself what matters most to you right now."
+        }
+      }
+    },
+    {
+      "date": "2028-07-13",
+      "signs": {
+        "aries": {
+          "ru": "Когда полезная привычка кажется слишком громоздкой, привяжите новое действие к уже знакомому занятию.",
+          "en": "When a helpful habit feels too complicated to maintain, link the new action to something you already do."
+        },
+        "taurus": {
+          "ru": "Когда возникает возможность поучиться у другого, уточните одну деталь, к которой возникло искреннее любопытство.",
+          "en": "When there is an opportunity to learn from another person, ask about one detail that has sparked your genuine curiosity."
+        },
+        "gemini": {
+          "ru": "Если любимая вещь неожиданно поднимет вам настроение, просто порадуйтесь тому, что удалось это заметить.",
+          "en": "If a favorite belonging unexpectedly lifts your mood, simply enjoy the fact that you noticed it."
+        },
+        "cancer": {
+          "ru": "Когда вам удаётся порадоваться обычному моменту, заметьте, как много значат иногда простые вещи.",
+          "en": "When you manage to enjoy an ordinary moment, notice how much simple things can sometimes mean."
+        },
+        "leo": {
+          "ru": "Если появится желание немного поиграть с материалами, сделайте небольшую вещь из того, что уже под рукой.",
+          "en": "If you feel like playing around with materials, make something small from things you already have at hand."
+        },
+        "virgo": {
+          "ru": "Когда знакомый попросит поделиться вашим опытом, сначала уточните, о чём человеку хотелось бы поговорить.",
+          "en": "When someone asks you to share your experience, first clarify what the person would like to talk about."
+        },
+        "libra": {
+          "ru": "Если вы давно собирались обратиться к близкому человеку, сформулируйте просьбу конкретно, без лишних оправданий и извинений.",
+          "en": "If you have been meaning to reach out to someone close, make your request specific, without unnecessary explanations or apologies."
+        },
+        "scorpio": {
+          "ru": "Если новое занятие кажется непривычным, попробуйте связать услышанное с уже знакомым вам понятием.",
+          "en": "If a new activity feels unfamiliar, try connecting what you hear with a concept you already know."
+        },
+        "sagittarius": {
+          "ru": "Чтобы немного замедлить поток собственных мыслей, проведите минуту за чашкой любимого напитка.",
+          "en": "To slow the flow of your thoughts a little, spend a minute with a cup of your favorite drink."
+        },
+        "capricorn": {
+          "ru": "Если сегодня появится место для небольшого увлечения, создайте что-нибудь небольшое, не оценивая каждый отдельный шаг.",
+          "en": "If there is room for a little hobby today, create something small without judging every single step."
+        },
+        "aquarius": {
+          "ru": "Когда настроение расположит к простым удовольствиям, включите музыку, связанную с тёплыми воспоминаниями.",
+          "en": "When your mood invites some simple pleasures, play music that brings back warm memories."
+        },
+        "pisces": {
+          "ru": "Когда любимый аромат окажется под рукой, понаблюдайте, какие ассоциации появятся у вас.",
+          "en": "When your favorite fragrance is close at hand, see what associations come to your mind."
+        }
+      }
+    },
+    {
+      "date": "2028-07-14",
+      "signs": {
+        "aries": {
+          "ru": "Когда хочется внимательнее замечать детали своего настроения, назовите сегодняшний день так, словно это название фильма.",
+          "en": "When you want to notice your mood more closely, name your day as if it were a film title."
+        },
+        "taurus": {
+          "ru": "Если выбор наряда займёт немного больше времени, найдите баланс между любопытством и привычным ощущением уюта.",
+          "en": "If choosing your outfit takes a little longer today, find a balance between curiosity and your familiar sense of comfort."
+        },
+        "gemini": {
+          "ru": "Если в привычной системе хранения стало неудобно, оставьте под рукой только необходимое для ближайших задач.",
+          "en": "If your usual storage system has become inconvenient, keep only what you need for upcoming tasks within easy reach."
+        },
+        "cancer": {
+          "ru": "Когда работа идёт в привычном ритме, попробуйте сделать знакомое действие в более удобном порядке.",
+          "en": "When your work moves along at its usual rhythm, try doing familiar things in a more comfortable order."
+        },
+        "leo": {
+          "ru": "Когда кто-то захочет узнать ваше мнение, оставьте время собеседнику самостоятельно обдумать ваши слова.",
+          "en": "When someone wants to know your opinion, give the person time to reflect on your words independently."
+        },
+        "virgo": {
+          "ru": "Когда в течение дня захочется чего-нибудь красивого, отдайте предпочтение тому, от чего становится теплее на душе.",
+          "en": "When you feel like enjoying something beautiful during the day, favor whatever brings a little warmth to your heart."
+        },
+        "libra": {
+          "ru": "Когда основная часть дня уже окажется позади, отметьте одну вещь, которой сегодня уделили внимание.",
+          "en": "When the main part of the day is behind you, acknowledge one thing you gave your attention to today."
+        },
+        "scorpio": {
+          "ru": "Когда найдётся минута для небольших перемен дома, добавьте одну небольшую деталь с личным значением.",
+          "en": "When you have a moment for small changes at home, add one little detail that has personal meaning."
+        },
+        "sagittarius": {
+          "ru": "Если сегодня найдётся возможность посмотреть на небо, заметьте, как свет меняет цвета разных поверхностей.",
+          "en": "If today offers a chance to look up at the sky, notice how light changes the colors of different surfaces."
+        },
+        "capricorn": {
+          "ru": "Чтобы лучше узнать свои нынешние желания, подумайте о занятии, которым хочется заниматься без спешки.",
+          "en": "To understand your current wishes a little better, think of an activity you would enjoy without rushing."
+        },
+        "aquarius": {
+          "ru": "Если появится приглашение, которое нужно немного обдумать, помните, что доброжелательный отказ тоже может быть уместен.",
+          "en": "If you receive an invitation that needs a little thought, remember that a friendly refusal can also be appropriate."
+        },
+        "pisces": {
+          "ru": "Начните свободную часть дня без спешки и найдите минуту для приятного простого дела.",
+          "en": "Begin your free time today without rushing and find a minute for something simple and enjoyable."
+        }
+      }
+    },
+    {
+      "date": "2028-07-15",
+      "signs": {
+        "aries": {
+          "ru": "Посреди особенно насыщенного делами дня, запишите оставшиеся заботы, чтобы освободить немного места в мыслях.",
+          "en": "In the middle of an especially busy day, write down your remaining concerns to clear some mental space."
+        },
+        "taurus": {
+          "ru": "В процессе обычной для вас работы заметьте, в какой момент процесс становится особенно приятным.",
+          "en": "In the course of your usual work notice which moment makes the process feel particularly pleasant."
+        },
+        "gemini": {
+          "ru": "Когда появляется желание побольше узнать о другом времени, вспомните, какой исторический период особенно привлекает ваше внимание.",
+          "en": "When you want to learn about another era, remember which period in history especially interests you."
+        },
+        "cancer": {
+          "ru": "Сегодня, когда появится небольшой перерыв, назовите про себя одну вещь, которую цените.",
+          "en": "Today, when a little break comes your way, silently name one thing that you genuinely value."
+        },
+        "leo": {
+          "ru": "Когда хочется немного разнообразить впечатления от еды, откройте рецепт, который давно лежит без внимания.",
+          "en": "When you want a little variety in your experience of food, open a recipe you have long kept without trying."
+        },
+        "virgo": {
+          "ru": "Если захочется немного пройтись пешком, попробуйте рассмотреть какую-нибудь давно знакомую деталь заново.",
+          "en": "If you feel like going for a short walk, try seeing a long-familiar detail with fresh eyes."
+        },
+        "libra": {
+          "ru": "Если времени на всё явно не хватает, оставьте себе несколько свободных минут между делами.",
+          "en": "If there clearly isn't time for everything today, leave yourself a few spare minutes between tasks."
+        },
+        "scorpio": {
+          "ru": "Если хочется получить ответ без промедления, оцените, насколько этот шаг подходит вашему ритму жизни.",
+          "en": "If you feel like finding an answer straightaway, consider how well this step fits your pace of life."
+        },
+        "sagittarius": {
+          "ru": "Если встретите сегодня близкого вам друга, вспомните одну вещь, которую особенно цените в этом общении.",
+          "en": "If you see a close friend today, recall one thing you especially cherish about this connection."
+        },
+        "capricorn": {
+          "ru": "Для приятного начала дружеской беседы найдите добрые слова, которые приятно произнести самим.",
+          "en": "For a friendly start to a conversation, find kind words that feel pleasant to say."
+        },
+        "aquarius": {
+          "ru": "Когда привычный график неожиданно меняет темп, подарите себе несколько спокойных минут для отдыха.",
+          "en": "When your usual schedule unexpectedly changes its pace, give yourself a few peaceful minutes to rest."
+        },
+        "pisces": {
+          "ru": "Когда вспомнится что-нибудь хорошее из прошедших дней, не спешите отмахиваться от этой маленькой радости.",
+          "en": "When something nice from recent days comes back to you, do not rush to brush that little joy aside."
+        }
+      }
+    },
+    {
+      "date": "2028-07-16",
+      "signs": {
+        "aries": {
+          "ru": "Если сегодня удобно что-нибудь сделать немного заранее, сохраните полезную идею там, где легко её найти.",
+          "en": "If it's convenient to do something slightly ahead today, save a useful idea somewhere it is easy to find."
+        },
+        "taurus": {
+          "ru": "Если хочется провести время интереснее обычного, попробуйте набросать на бумаге то, что приходит в голову.",
+          "en": "If you want to spend your time differently than usual, try sketching whatever comes to mind on paper."
+        },
+        "gemini": {
+          "ru": "Чтобы внимательнее отнестись к долгосрочным желаниям, подумайте о месте, которое давно хотелось посетить.",
+          "en": "To pay closer attention to your long term wishes, think about a place you have long wanted to visit."
+        },
+        "cancer": {
+          "ru": "Когда вас попросят оценить интересную идею, предложите один вариант, сохраняя за человеком право выбора.",
+          "en": "When someone asks for your thoughts on an idea, offer one possibility while respecting their freedom to choose."
+        },
+        "leo": {
+          "ru": "Когда найдёте время ненадолго выйти из дома, попробуйте рассматривать знакомые места с новым интересом.",
+          "en": "When you find time to step outside your home, try looking at familiar places with renewed interest."
+        },
+        "virgo": {
+          "ru": "Отправляясь сегодня на встречу со знакомым, настройтесь на то, чтобы слушать с интересом и вниманием.",
+          "en": "As you head out to meet someone today, prepare to listen with interest and attention."
+        },
+        "libra": {
+          "ru": "Прежде чем ускоряться в ответ на обстоятельства, оцените, достаточно ли времени вы себе оставляете.",
+          "en": "Before speeding up in response to changing circumstances, consider whether you're leaving yourself enough time for things."
+        },
+        "scorpio": {
+          "ru": "По завершении дела, требовавшего вашего внимания, сделайте мысленную паузу, прежде чем снова вернуться к планам.",
+          "en": "After finishing something that required your attention, take a mental pause before returning to your plans again."
+        },
+        "sagittarius": {
+          "ru": "Размышляя о своей роли в совместном деле, предложите свой взгляд без необходимости убедить остальных в нём.",
+          "en": "As you consider your role in a shared task, offer your perspective without needing to convince everyone else."
+        },
+        "capricorn": {
+          "ru": "Прежде чем судить о себе слишком строго, вспомните конкретный случай, когда проявили терпение.",
+          "en": "Before judging yourself far too harshly, recall a specific moment when you showed patience."
+        },
+        "aquarius": {
+          "ru": "Для небольшого вдохновения посреди привычных забот позвольте себе любоваться искусством без попыток его объяснить.",
+          "en": "For a little inspiration amid familiar concerns, let yourself admire art without trying to explain it."
+        },
+        "pisces": {
+          "ru": "Когда появится возможность устроить дружескую встречу, не забывайте оставить немного пространства для спонтанных решений.",
+          "en": "When a chance to arrange a friendly get-together arises, remember to leave a little room for spontaneous decisions."
+        }
+      }
+    },
+    {
+      "date": "2028-07-17",
+      "signs": {
+        "aries": {
+          "ru": "Вместо привычного и быстрого просмотра ленты попробуйте заметить, какие слова создают особую атмосферу.",
+          "en": "Instead of quickly scrolling through your usual feed, try noticing which words create a particular atmosphere."
+        },
+        "taurus": {
+          "ru": "Когда выпадет возможность остаться наедине со своими мыслями, прислушайтесь к тому, что действительно занимает ваши мысли.",
+          "en": "When you get a chance to be alone with your thoughts, listen to what is genuinely on your mind."
+        },
+        "gemini": {
+          "ru": "Если хочется выбрать один небольшой полезный ориентир, добавьте к привычке какой-нибудь приятный мелкий элемент.",
+          "en": "If you want to choose one small helpful direction, include a little pleasant detail in the habit."
+        },
+        "cancer": {
+          "ru": "Планируя новый творческий эксперимент для себя, запишите несколько мыслей без требования сразу получить идеальный результат.",
+          "en": "As you plan a new creative experiment for yourself, write down a few thoughts without demanding a perfect result immediately."
+        },
+        "leo": {
+          "ru": "Когда возвращаетесь к регулярным личным занятиям, поищите удобный подход, который хотелось бы использовать и завтра.",
+          "en": "When you return to your regular personal practice, look for a comfortable approach you would enjoy using again tomorrow."
+        },
+        "virgo": {
+          "ru": "Если привычные договорённости требуют небольшого пересмотра, оцените сначала, сколько сил готовы уделить этому.",
+          "en": "If your usual arrangements need a little reconsideration, first consider how much energy you are ready to give."
+        },
+        "libra": {
+          "ru": "Когда кто-то захочет согласовать с вами общие планы, помните, что доброжелательный отказ тоже может быть уместен.",
+          "en": "When someone wants to make shared plans with you, remember that a friendly refusal can also be appropriate."
+        },
+        "scorpio": {
+          "ru": "Когда предстоит выбрать между несколькими приятными вариантами, позвольте своему вкусу немного меняться со временем.",
+          "en": "When you're choosing between a few pleasant options, let your personal taste evolve a little over time."
+        },
+        "sagittarius": {
+          "ru": "Если сегодняшний день подарит минуту для чашки чая, попробуйте уловить детали, которые обычно остаются без внимания.",
+          "en": "If today gives you a moment for a cup of tea, try to catch details that usually escape your attention."
+        },
+        "capricorn": {
+          "ru": "Если хочется освежить привычный уголок без больших перемен, освободите место для одного предмета, который приятно видеть.",
+          "en": "If you want to refresh a familiar corner without big changes, make room for one object you enjoy seeing."
+        },
+        "aquarius": {
+          "ru": "Если в обычной беседе назреет небольшое недопонимание, попробуйте своими словами пересказать то, что вы поняли.",
+          "en": "If a small misunderstanding emerges in an ordinary conversation, try restating what you understood in your own words."
+        },
+        "pisces": {
+          "ru": "Если хочется получить одобрение перед первым шагом, позвольте любопытству занять место излишних переживаний.",
+          "en": "If you want approval before taking the first step, let curiosity take the place of unnecessary worries."
+        }
+      }
+    },
+    {
+      "date": "2028-07-18",
+      "signs": {
+        "aries": {
+          "ru": "Если мысли часто возвращаются к будущему, выберите направление, в котором хочется расти без лишней спешки.",
+          "en": "If your thoughts keep returning to the future, choose a direction in which you want to grow without unnecessary hurry."
+        },
+        "taurus": {
+          "ru": "Когда любопытство зовёт к новым впечатлениям, подберите мелодию, которая созвучна вашим сегодняшним ощущениям.",
+          "en": "When curiosity draws you toward new experiences, find a melody that matches how you feel today."
+        },
+        "gemini": {
+          "ru": "В тот момент, когда сегодняшняя суета уляжется, поблагодарите себя за то, что успели сегодня.",
+          "en": "When the bustle of the day has finally settled, thank yourself for what you managed to do today."
+        },
+        "cancer": {
+          "ru": "Время для себя так же важно, как ежедневные обязанности, поэтому вспомните одно занятие, которое искренне любите.",
+          "en": "Time for yourself matters as much as daily duties, so remember one activity you genuinely love."
+        },
+        "leo": {
+          "ru": "По пути к одному из привычных мест найдите в окружающей обстановке один любопытный контраст.",
+          "en": "On your way to one of your usual places, look for one intriguing contrast in the surrounding scene."
+        },
+        "virgo": {
+          "ru": "Когда смысл чужих слов окажется не совсем ясным, оставьте место для пояснений, не усложняя сам разговор.",
+          "en": "When the meaning of someone's words is not quite clear, leave room for clarification without making the conversation complicated."
+        },
+        "libra": {
+          "ru": "Если хочется занять ум приятными образами, отметьте особенно удачное описание места или природы.",
+          "en": "If you want to fill your mind with pleasant images, take note of an especially evocative description of a place."
+        },
+        "scorpio": {
+          "ru": "Когда поймёте, что просмотрели уже немало уведомлений, попробуйте просто посвятить несколько минут тихому созерцанию.",
+          "en": "When you realize you have already checked plenty of notifications, try simply spending a few minutes quietly taking things in."
+        },
+        "sagittarius": {
+          "ru": "Сегодня, не дожидаясь какого-либо особого повода, подумайте о вещи, которая делает быт удобнее.",
+          "en": "Today, without waiting for any special occasion, think of something that makes everyday life more comfortable."
+        },
+        "capricorn": {
+          "ru": "Если привычный план сегодня немного изменится, воспользуйтесь паузой, чтобы прислушаться к собственным желаниям.",
+          "en": "If your usual plan changes a little today, use the pause to listen to your own wishes."
+        },
+        "aquarius": {
+          "ru": "Чтобы сегодняшние мелкие начинания оставались посильными, привяжите новое действие к уже знакомому занятию.",
+          "en": "To keep today's small beginnings easy to manage, link the new action to something you already do."
+        },
+        "pisces": {
+          "ru": "Если кто-то ненадолго облегчит ваши повседневные заботы, дайте человеку понять, что вы оценили его участие.",
+          "en": "If someone makes your everyday responsibilities a little easier, let them know you appreciate their involvement."
+        }
+      }
+    },
+    {
+      "date": "2028-07-19",
+      "signs": {
+        "aries": {
+          "ru": "Если разговор коснётся непривычной для вас темы, оставьте немного пространства для новой точки зрения.",
+          "en": "If the conversation turns to a subject that feels unfamiliar, leave a little room for a different point of view."
+        },
+        "taurus": {
+          "ru": "Когда день складывается иначе, чем вы предполагали, найдите занятие, которое впишется в новый ритм.",
+          "en": "When the day unfolds differently from what you expected, find an activity that suits the new rhythm."
+        },
+        "gemini": {
+          "ru": "В спокойном темпе обычного рабочего процесса сохраните приятное ощущение от спокойствия, с которым справляетесь сегодня.",
+          "en": "In the quiet rhythm of your usual work savor the good feeling of how calmly you manage things today."
+        },
+        "cancer": {
+          "ru": "Когда запланированные дела позволят заняться приятными мелочами, выберите для небольшой поверхности только необходимые вещи.",
+          "en": "When your plans leave time for pleasant little things, keep only the essentials on one small surface."
+        },
+        "leo": {
+          "ru": "Если нужно пересмотреть свой первоначальный выбор, выделите время, чтобы прислушаться к собственным ощущениям.",
+          "en": "If you need to rethink your original choice, set aside some time to listen to your own feelings."
+        },
+        "virgo": {
+          "ru": "Если сегодня особенно хочется чего-то красивого, сохраните в памяти один красивый отблеск или силуэт.",
+          "en": "If you feel a particular need for beauty today, keep one beautiful reflection or silhouette in your memory."
+        },
+        "libra": {
+          "ru": "Если вечер обещает быть немного свободнее обычного, уделите несколько минут приятным мыслям о себе.",
+          "en": "If your evening looks a little freer than usual, spend a few minutes thinking kindly about yourself."
+        },
+        "scorpio": {
+          "ru": "Чтобы немного приблизиться к тому, что важно лично вам, отметьте приятное дело, не связанное с обязанностями.",
+          "en": "To move a little closer to what personally matters to you, note an enjoyable activity unrelated to your obligations."
+        },
+        "sagittarius": {
+          "ru": "Когда ненадолго окажетесь вне привычного пространства, послушайте естественные звуки вокруг, не отвлекаясь на уведомления.",
+          "en": "When you briefly find yourself outside your usual surroundings, listen to the sounds around you without checking notifications."
+        },
+        "capricorn": {
+          "ru": "Когда захотите пригласить друзей в гости, не перегружайте встречу множеством заранее намеченных дел.",
+          "en": "When you feel like inviting some friends over, avoid filling the get-together with too many planned activities."
+        },
+        "aquarius": {
+          "ru": "Для небольшого перерыва от привычных занятий сохраните смешную или неожиданную идею на будущее.",
+          "en": "For a little break from your usual activities, save a funny or unexpected idea for later."
+        },
+        "pisces": {
+          "ru": "Если найдётся время для коротких личных заметок, вспомните что-нибудь интересное, узнанное за эти часы.",
+          "en": "If you find time for a few personal notes, recall something interesting you learned over these hours."
+        }
+      }
+    },
+    {
+      "date": "2028-07-20",
+      "signs": {
+        "aries": {
+          "ru": "Если сегодня захочется немного изменить окружающее пространство, вспомните, какой оттенок или фактура вам особенно нравится.",
+          "en": "If you want to change your surroundings a little today, recall which shade or texture you particularly enjoy."
+        },
+        "taurus": {
+          "ru": "После завершения небольшой сегодняшней задачи представьте, что можно в следующий раз сделать немного проще.",
+          "en": "After finishing a small task from today's list imagine what you could make a little simpler next time."
+        },
+        "gemini": {
+          "ru": "Если вечером хочется отложить необязательный разговор, спокойно выделите немного времени только для собственных потребностей.",
+          "en": "If you would rather postpone an optional conversation this evening, calmly set aside a little time for your own needs."
+        },
+        "cancer": {
+          "ru": "Когда привычный опыт кажется недостаточно убедительным, позвольте любопытству занять место излишних переживаний.",
+          "en": "When your usual experience does not feel convincing enough, let curiosity take the place of unnecessary worries."
+        },
+        "leo": {
+          "ru": "Перед началом общения сегодня найдите время и оставьте немного внутреннего пространства для приятных неожиданностей.",
+          "en": "Before your next conversation today, take a moment and leave some room in your mind for pleasant surprises."
+        },
+        "virgo": {
+          "ru": "Когда захочется отвлечься от всех внешних голосов, позвольте мыслям течь свободно, ничего не исправляя.",
+          "en": "When you want to tune out all the voices around you, let your thoughts flow freely without fixing anything."
+        },
+        "libra": {
+          "ru": "Если вы сегодня выделите время на размышления, добавьте одну необычную ассоциацию, даже если она кажется случайной.",
+          "en": "If you set aside time for reflection today, add one unusual association even if it seems quite random."
+        },
+        "scorpio": {
+          "ru": "Когда друг попросит о новой небольшой услуге, проверьте, сколько свободного времени у вас на самом деле.",
+          "en": "When a friend asks for a small new favor, check how much spare time you actually have."
+        },
+        "sagittarius": {
+          "ru": "Если хочется провести время интереснее обычного, разрешите себе сделать работу намеренно немного несовершенной.",
+          "en": "If you want to spend your time differently than usual, allow yourself to deliberately leave your work a little imperfect."
+        },
+        "capricorn": {
+          "ru": "Для небольшого знака внимания без повода подумайте о цвете, который нравится дорогому вам человеку.",
+          "en": "For a small gesture of thoughtfulness without an occasion, think of a color someone dear to you enjoys."
+        },
+        "aquarius": {
+          "ru": "Прежде чем переключиться на следующее занятие, определите, на что действительно хочется потратить внимание.",
+          "en": "Before switching to the next activity on your list, identify what truly deserves your attention right now."
+        },
+        "pisces": {
+          "ru": "Когда захочется наконец завершить сегодняшний рабочий день, оставьте время на занятие, которое помогает вам расслабиться.",
+          "en": "When you feel ready to end your working day, make time for an activity that helps you unwind."
+        }
+      }
+    },
+    {
+      "date": "2028-07-21",
+      "signs": {
+        "aries": {
+          "ru": "Если хочется проявить больше свободы в творчестве, измените одну деталь и посмотрите на результат.",
+          "en": "If you want more freedom in your creativity, change one detail and observe the result."
+        },
+        "taurus": {
+          "ru": "Для маленького обновления без лишних затрат разместите любимый предмет там, где чаще бываете.",
+          "en": "For a small refresh without any unnecessary expense, place a favorite item where you spend more time."
+        },
+        "gemini": {
+          "ru": "Когда приходится начинать знакомую задачу заново, вспомните о том, что уже удалось сделать.",
+          "en": "When you need to start a familiar task over, remember what you have already managed to do."
+        },
+        "cancer": {
+          "ru": "Когда неожиданно вспомните какую-нибудь хорошую историю, попробуйте ещё раз почувствовать тепло того самого момента.",
+          "en": "When you unexpectedly remember a lovely little story, try to feel the warmth of that particular moment again."
+        },
+        "leo": {
+          "ru": "Прежде чем снова заняться запланированными делами, спросите себя, насколько комфортен ваш нынешний темп.",
+          "en": "Before returning to your planned tasks today, ask yourself how comfortable your present pace feels."
+        },
+        "virgo": {
+          "ru": "Отрабатывая сегодня привычный для себя навык, сохраните внимание к процессу, даже если результат пока скромный.",
+          "en": "As you practice a familiar skill today, stay attentive to the process even if the outcome is modest."
+        },
+        "libra": {
+          "ru": "Если день позволяет заняться чем-то непривычным, познакомьтесь с интересным ремеслом, о котором мало знаете.",
+          "en": "If your day allows you to explore something unfamiliar, discover an interesting craft you know little about."
+        },
+        "scorpio": {
+          "ru": "При выборе чего-либо для собственного удовольствия доверьтесь тому, что кажется вам особенно близким сегодня.",
+          "en": "When choosing something purely for your own enjoyment, trust whatever feels especially close to your heart today."
+        },
+        "sagittarius": {
+          "ru": "Чтобы поделиться с окружающими хорошим настроением, найдите добрые слова, которые приятно произнести самим.",
+          "en": "To share some good cheer with others, find kind words that feel pleasant to say."
+        },
+        "capricorn": {
+          "ru": "Если близкие захотят разделить с вами обязанности, постарайтесь понять, было бы вам приятно принять предложение.",
+          "en": "If loved ones want to share your responsibilities, consider whether accepting the offer would feel pleasant."
+        },
+        "aquarius": {
+          "ru": "Если привычные договорённости требуют небольшого пересмотра, оставьте себе достаточно времени на восстановление сил.",
+          "en": "If your usual arrangements need a little reconsideration, leave yourself enough time to regain your energy."
+        },
+        "pisces": {
+          "ru": "В спокойный момент после напряжённой работы позвольте себе оценить сделанное без сравнения с чужими результатами.",
+          "en": "In a quiet moment after some demanding work let yourself appreciate your progress without comparison to anyone else's results."
+        }
+      }
+    },
+    {
+      "date": "2028-07-22",
+      "signs": {
+        "aries": {
+          "ru": "Чтобы принимать более осознанные решения о мелочах, спросите себя, что именно вызывает приятное чувство.",
+          "en": "To make more mindful decisions about little things, ask yourself what exactly creates that pleasant feeling."
+        },
+        "taurus": {
+          "ru": "Когда особенно интересно вспомнить любимые запахи, обратите внимание на то, как меняются ваши ощущения.",
+          "en": "When it feels especially interesting to recall favorite scents, pay attention to how your impressions change."
+        },
+        "gemini": {
+          "ru": "Когда собственных сил немного не хватает для дела, попробуйте начать с небольшой, понятной и выполнимой просьбы.",
+          "en": "When your own energy feels insufficient for a task, try starting with a small, clear and manageable request."
+        },
+        "cancer": {
+          "ru": "Если обычное расписание кажется перегруженным деталями, подумайте, какое действие можно сделать удобнее.",
+          "en": "If your usual schedule feels overloaded with details, consider which action you could make more convenient."
+        },
+        "leo": {
+          "ru": "Если вам приятно замечать необычные визуальные сочетания, попробуйте увидеть красоту в сочетании света и пространства.",
+          "en": "If you enjoy noticing unusual visual combinations, try to see beauty in the interplay of light and space."
+        },
+        "virgo": {
+          "ru": "Если сегодня настроение навеет какое-то доброе воспоминание, не спешите отвлекаться от этого маленького приятного момента.",
+          "en": "If today's mood brings a lovely memory to mind, do not rush away from this little moment of pleasure."
+        },
+        "libra": {
+          "ru": "Выбирая сегодня парфюм без особого повода, подарите своим чувствам немного свободного внимания.",
+          "en": "When choosing a perfume without any special occasion today, give your senses a little undivided attention."
+        },
+        "scorpio": {
+          "ru": "Когда возникает желание немного изменить личный распорядок, выберите новое время для какого-нибудь любимого занятия.",
+          "en": "When you feel like changing up your personal routine a little, choose a new time for an activity you love."
+        },
+        "sagittarius": {
+          "ru": "Когда запланированные дела позволят заняться приятными мелочами, найдите для любимого предмета более заметное место.",
+          "en": "When your plans leave time for pleasant little things, find a more prominent place for a favorite item."
+        },
+        "capricorn": {
+          "ru": "Когда возвращаетесь к регулярным личным занятиям, постарайтесь заметить маленькое изменение к лучшему в процессе.",
+          "en": "When you return to your regular personal practice, try to notice one small improvement in the process."
+        },
+        "aquarius": {
+          "ru": "Когда будете любоваться каким-нибудь красивым деревом или цветком, попробуйте заметить необычные детали привычных природных форм.",
+          "en": "When you are admiring a beautiful tree or flower, try noticing unusual details in familiar natural shapes."
+        },
+        "pisces": {
+          "ru": "Если захочется сделать что-то немного иначе, попробуйте спокойно рассмотреть ещё пару доступных вариантов.",
+          "en": "If you want to do something a little differently, try calmly considering a couple more available options."
+        }
+      }
+    },
+    {
+      "date": "2028-07-23",
+      "signs": {
+        "aries": {
+          "ru": "Когда какая-то мелодия напомнит о приятной встрече, вспомните, какой была атмосфера, сопровождавшая это событие.",
+          "en": "When a melody reminds you of a pleasant meeting, remember what the atmosphere around that experience felt like."
+        },
+        "taurus": {
+          "ru": "Если сегодня захочется сменить привычную обстановку, позвольте себе отвлечься от привычных списков задач.",
+          "en": "If you feel like changing your familiar surroundings today, let yourself forget your usual lists of tasks briefly."
+        },
+        "gemini": {
+          "ru": "Сегодня, выбирая аромат по своему настроению, насладитесь этим маленьким чувственным ритуалом без спешки.",
+          "en": "Today, when choosing a fragrance for your mood, enjoy this small sensory ritual without rushing."
+        },
+        "cancer": {
+          "ru": "В ожидании встречи с близким человеком отметьте про себя одну вещь, которой хочется поделиться.",
+          "en": "While waiting to meet someone close, think of one thing you would like to share."
+        },
+        "leo": {
+          "ru": "В любой спокойный момент сегодняшнего дня выберите любимую чашку для своего обычного напитка.",
+          "en": "At any quiet moment in today's schedule, choose your favorite cup for your usual drink."
+        },
+        "virgo": {
+          "ru": "Если рабочее пространство стало слишком насыщенным, уберите один предмет, который давно мешает вашему удобству.",
+          "en": "If your workspace has become a little crowded, put away one object that has been getting in your way."
+        },
+        "libra": {
+          "ru": "Когда найдётся время на небольшое самостоятельное занятие, позвольте себе начать с самых простых действий.",
+          "en": "When you find time for a little independent practice, allow yourself to begin with the simplest steps."
+        },
+        "scorpio": {
+          "ru": "Если сегодня особенно привлекают истории и образы, откройте книгу, которую давно откладываете на потом.",
+          "en": "If stories and imagery particularly appeal to you today, open a book you have been saving for later."
+        },
+        "sagittarius": {
+          "ru": "Если хочется чем-то дополнить свои планы, подумайте, какое новое занятие впишется в ваш привычный ритм.",
+          "en": "If you feel like adding something to your plans, consider what new activity might fit into your familiar rhythm."
+        },
+        "capricorn": {
+          "ru": "Когда окружающим требуется много вашего внимания, найдите вариант, который оставляет достаточно места для отдыха.",
+          "en": "When people around you need a lot of your attention, find an option that leaves enough room for rest."
+        },
+        "aquarius": {
+          "ru": "Один из способов заметить собственные приоритеты сегодня — найти время на короткую неспешную прогулку.",
+          "en": "One way to notice your own priorities today is to find time for a short leisurely walk."
+        },
+        "pisces": {
+          "ru": "Когда простые материалы подсказывают интересные идеи, оставьте место для случайности и не планируйте каждую деталь.",
+          "en": "When simple materials suggest interesting ideas, leave room for chance without planning every detail."
+        }
+      }
+    },
+    {
+      "date": "2028-07-24",
+      "signs": {
+        "aries": {
+          "ru": "Размышляя о своей роли в совместном деле, обсудите один простой способ сделать процесс удобнее для всех.",
+          "en": "As you consider your role in a shared task, discuss one simple way to make the process easier for everyone."
+        },
+        "taurus": {
+          "ru": "Если друг заговорит о любимой книге, попробуйте понять, чем именно это так привлекает человека.",
+          "en": "If a friend mentions a book they love, try to understand what draws that person to it."
+        },
+        "gemini": {
+          "ru": "В ходе совместного поиска подходящего решения постарайтесь выразить свою мысль простыми и понятными словами.",
+          "en": "While looking together for a suitable solution try expressing your thoughts in words that are simple and clear."
+        },
+        "cancer": {
+          "ru": "Когда аромат становится приятной частью вашего дня, выделите одну ноту, которая особенно нравится вашему обонянию.",
+          "en": "When fragrance becomes an enjoyable part of your day, single out one note that particularly appeals to your senses."
+        },
+        "leo": {
+          "ru": "Когда результат начинает казаться важнее самого процесса, не исправляйте сразу небольшие случайности в своей работе.",
+          "en": "When the result starts seeming more important than the process, do not immediately correct small accidents in your work."
+        },
+        "virgo": {
+          "ru": "Если сегодня хочется попробовать новый личный ритуал, решите, когда для этого обычно бывает свободная минута.",
+          "en": "If you'd like to try a new personal ritual today, decide when you usually have a spare moment for it."
+        },
+        "libra": {
+          "ru": "В обычном разговоре с человеком, которому доверяете, попробуйте вспомнить вслух о маленьком приятном событии из прошлого.",
+          "en": "In an ordinary conversation with someone you trust, try to recall a small pleasant moment from the past aloud."
+        },
+        "scorpio": {
+          "ru": "Посмотрите на собственные ожидания чуть мягче и отметьте несколько вещей, за которые благодарны себе.",
+          "en": "Look a little more gently at your own expectations and notice a few things you appreciate about yourself."
+        },
+        "sagittarius": {
+          "ru": "Если вы заметили возможность внести небольшое изменение, оставьте место для импровизации без лишних ожиданий.",
+          "en": "If you notice an opportunity to make a small change, leave room for improvisation without unnecessary expectations."
+        },
+        "capricorn": {
+          "ru": "Если утро началось с неожиданной суеты, попробуйте ненадолго отложить всё, что может подождать.",
+          "en": "If your morning has begun in an unexpected rush, try briefly setting aside anything that can wait."
+        },
+        "aquarius": {
+          "ru": "Когда появится возможность заняться чем-нибудь ради удовольствия, наслаждайтесь процессом без стремления добиться идеального результата.",
+          "en": "When you get a chance to do something purely for enjoyment, enjoy the process without aiming for a perfect result."
+        },
+        "pisces": {
+          "ru": "Прежде чем добавить ещё одно дело в список, оцените, достаточно ли времени вы себе оставляете.",
+          "en": "Before adding another item to your list, consider whether you're leaving yourself enough time for things."
+        }
+      }
+    },
+    {
+      "date": "2028-07-25",
+      "signs": {
+        "aries": {
+          "ru": "Когда в расписании почти не осталось свободного времени, учтите не только чужие, но и свои потребности.",
+          "en": "When your schedule has barely any free space left, consider your own needs as well as those of others."
+        },
+        "taurus": {
+          "ru": "Когда неожиданно освобождается немного времени, посмотрите на одну из давно отложенных интересных идей.",
+          "en": "When you unexpectedly find a little free time, revisit one interesting idea you have put aside for a long time."
+        },
+        "gemini": {
+          "ru": "Если какая-нибудь песня снова привлечёт ваше внимание, освободите немного времени от мыслей о других занятиях.",
+          "en": "If a particular song catches your attention again, give yourself some time free of thoughts about other activities."
+        },
+        "cancer": {
+          "ru": "Когда захочется заранее устроить всё немного удобнее, оставьте на виду предмет, который пригодится завтра.",
+          "en": "When you feel like making things easier in advance, keep an item you'll need tomorrow in plain sight."
+        },
+        "leo": {
+          "ru": "Возобновляя дело после некоторого времени отдыха, позвольте себе немного изменить первоначальный план с учётом сегодняшних интересов.",
+          "en": "As you resume a task after some time away, allow yourself to adjust your original plan to suit today's interests."
+        },
+        "virgo": {
+          "ru": "Когда привычные вещи вдруг хочется переосмыслить, выберите то, что будет уместно и через неделю.",
+          "en": "When you suddenly feel like reconsidering the things you own, choose something that will still feel right next week."
+        },
+        "libra": {
+          "ru": "По пути к одному из привычных мест позвольте себе на минуту просто наблюдать за окружением.",
+          "en": "On your way to one of your usual places, let yourself spend a minute simply observing your surroundings."
+        },
+        "scorpio": {
+          "ru": "Когда заинтересует какое-нибудь новое звучание аромата, ориентируйтесь прежде всего на свои ощущения.",
+          "en": "When an unusual fragrance catches your curiosity, follow your own impressions first and foremost."
+        },
+        "sagittarius": {
+          "ru": "Если день оставляет немного времени на мастерство, придумайте необычную форму для простого маленького предмета.",
+          "en": "If the day leaves some time to practice a craft, think of an unusual shape for a simple little object."
+        },
+        "capricorn": {
+          "ru": "Если близкий человек расскажет о своём приятном открытии, оставьте место для искреннего интереса и доброго любопытства.",
+          "en": "If someone close tells you about a pleasant discovery they made, make room for genuine interest and kind curiosity."
+        },
+        "aquarius": {
+          "ru": "Когда получите положительный отзыв о себе, постарайтесь услышать благодарность, а не искать в словах оговорки.",
+          "en": "When you receive some positive feedback about yourself, try to hear the appreciation rather than look for qualifications."
+        },
+        "pisces": {
+          "ru": "Когда захочется ненадолго отвлечься от дел, вспомните пейзаж, который вам всегда приятно представлять.",
+          "en": "When you feel like briefly stepping away from your tasks, remember a landscape you have always enjoyed imagining."
+        }
+      }
+    },
+    {
+      "date": "2028-07-26",
+      "signs": {
+        "aries": {
+          "ru": "Когда вокруг происходит слишком много всего, оставьте немного времени на простое созерцание.",
+          "en": "When there seems to be too much happening around you, leave a little time to quietly take things in."
+        },
+        "taurus": {
+          "ru": "Порой за привычным стремлением сделать больше скрывается простая потребность, поэтому побудьте немного наедине с собственными желаниями.",
+          "en": "Sometimes behind the urge to do more lies a simple need, so spend some time alone with your own wishes."
+        },
+        "gemini": {
+          "ru": "Если вы задумались о небольшом личном изменении, не забывайте оставлять место для обычных удовольствий.",
+          "en": "If you are considering a small personal change, remember to leave room for life's ordinary pleasures."
+        },
+        "cancer": {
+          "ru": "В поиске подходящего способа организовать работу найдите место для дела, которое приносит вам радость.",
+          "en": "When looking for a way to organize your work make room for an activity that brings you joy."
+        },
+        "leo": {
+          "ru": "Когда какая-то мелодия напомнит о приятной встрече, разрешите себе улыбнуться этому небольшому отголоску прошлого.",
+          "en": "When a melody reminds you of a pleasant meeting, allow yourself to smile at this little echo of the past."
+        },
+        "virgo": {
+          "ru": "Когда близкий захочет немного облегчить ваш день, не отказывайтесь автоматически, если участие вам действительно пригодится.",
+          "en": "When someone close wants to lighten your day, avoid automatically declining if the help would be useful."
+        },
+        "libra": {
+          "ru": "Если хочется добавить в день чуть больше цвета, найдите сочетание двух оттенков, которое вызывает приятные чувства.",
+          "en": "If you want more color in your day, find two shades that make you feel good together."
+        },
+        "scorpio": {
+          "ru": "Если захочется немного развить полезный навык, выберите одну маленькую тему для внимательного изучения.",
+          "en": "If you want to build on a useful skill, choose one small subject to explore with attention."
+        },
+        "sagittarius": {
+          "ru": "Пока день идёт своим привычным чередом, выберите любимую чашку для своего обычного напитка.",
+          "en": "While the day follows its familiar course, choose your favorite cup for your usual drink."
+        },
+        "capricorn": {
+          "ru": "Если вам случайно встретится что-нибудь вдохновляющее сегодня, подарите этому впечатлению чуть больше своего времени.",
+          "en": "If you happen upon something inspiring today, give that impression a little more of your time."
+        },
+        "aquarius": {
+          "ru": "Когда хочется отвлечься от привычных задач, попробуйте набросать на бумаге то, что приходит в голову.",
+          "en": "When you want to step away from familiar tasks, try sketching whatever comes to mind on paper."
+        },
+        "pisces": {
+          "ru": "Если задача пока не получается, не торопитесь оценивать весь свой труд по одному моменту.",
+          "en": "If a task is not quite working out yet, avoid judging all your work on the basis of one moment."
+        }
+      }
+    },
+    {
+      "date": "2028-07-27",
+      "signs": {
+        "aries": {
+          "ru": "Чтобы постепенно приблизиться к своей учебной цели, позвольте себе начать с самых простых действий.",
+          "en": "To move gradually toward your learning goal, allow yourself to begin with the simplest steps."
+        },
+        "taurus": {
+          "ru": "Когда хочется добавить красоты в привычную обстановку, найдите место для маленькой композиции из знакомых вещей.",
+          "en": "When you want to bring beauty into your usual surroundings, find a spot for a little arrangement of familiar objects."
+        },
+        "gemini": {
+          "ru": "Пока в мыслях ещё нет спешки, уберите из виду всё, что отвлекает от главного.",
+          "en": "While your thoughts are still unhurried, put away anything that distracts you from what matters."
+        },
+        "cancer": {
+          "ru": "Когда новая идея касается повседневных занятий, проверьте, насколько выбранная идея подходит вашему распорядку.",
+          "en": "When a new idea concerns your everyday activities, check how well the idea fits into your routine."
+        },
+        "leo": {
+          "ru": "В самом начале сегодняшнего неспешного утра попробуйте немного побыть наедине с простыми мыслями.",
+          "en": "At the very start of this unhurried morning, try spending a little time with uncomplicated thoughts."
+        },
+        "virgo": {
+          "ru": "Когда выполняете одну из повседневных обязанностей, сосредоточьтесь на качестве одного небольшого элемента своей работы.",
+          "en": "When you are taking care of an everyday responsibility, focus on the quality of one small element of your work."
+        },
+        "libra": {
+          "ru": "Если выдастся спокойная минута между делами, посвятите несколько минут теме, которая вас удивляет.",
+          "en": "If you find a quiet moment between tasks, spend a few minutes on something that surprises you."
+        },
+        "scorpio": {
+          "ru": "Если хочется сделать личное пространство уютнее, вспомните, какими вещами уже пользуетесь с удовольствием.",
+          "en": "If you want to make your personal space cozier, remember which things you already use with pleasure."
+        },
+        "sagittarius": {
+          "ru": "Если вам сегодня придётся попросить кого-то о помощи, попробуйте начать с небольшой, понятной и выполнимой просьбы.",
+          "en": "If you need to ask someone for help today, try starting with a small, clear and manageable request."
+        },
+        "capricorn": {
+          "ru": "Если привычное меню сегодня вызывает меньше интереса, прислушайтесь к тому, какого сочетания вкусов вам хочется.",
+          "en": "If your usual menu seems less interesting today, listen to what combination of flavors you are craving."
+        },
+        "aquarius": {
+          "ru": "Если вам нужна небольшая передышка от общения, помните, что личное пространство не отменяет близости.",
+          "en": "If you need a small break from social interaction, remember that personal space does not diminish closeness."
+        },
+        "pisces": {
+          "ru": "Когда захочется поддержать себя доброй мыслью, сохраните это желание как напоминание о заботе.",
+          "en": "When you want to encourage yourself with a kind thought, keep that wish as a reminder of care."
+        }
+      }
+    },
+    {
+      "date": "2028-07-28",
+      "signs": {
+        "aries": {
+          "ru": "Если захочется поиграть с атмосферой знакомого пространства, попробуйте сочетать несколько предметов с похожими оттенками.",
+          "en": "If you feel like playing with the atmosphere of a familiar space, try grouping a few things in similar colors."
+        },
+        "taurus": {
+          "ru": "Когда решите немного разнообразить привычное общение, предложите знакомое место с приятной для вас атмосферой.",
+          "en": "When you decide to vary your usual social routine, suggest a familiar place with an atmosphere you enjoy."
+        },
+        "gemini": {
+          "ru": "Если появится желание освежить свои знания, попробуйте упражнение, которое удобно повторить завтра.",
+          "en": "If you feel like refreshing what you know, try an exercise that is easy to repeat tomorrow."
+        },
+        "cancer": {
+          "ru": "Если сегодня хочется попробовать новый личный ритуал, сделайте первый шаг как можно более естественным.",
+          "en": "If you'd like to try a new personal ritual today, make the first step feel as natural as possible."
+        },
+        "leo": {
+          "ru": "В конце очередного рабочего этапа заметьте, что теперь стало хотя бы немного понятнее.",
+          "en": "At the end of another stage of work notice what has become even a little clearer to you now."
+        },
+        "virgo": {
+          "ru": "Если впереди задача с незнакомыми деталями, подумайте, какой первый шаг будет вам по силам.",
+          "en": "If there is a task with unfamiliar details ahead, consider which initial step feels manageable to you."
+        },
+        "libra": {
+          "ru": "Когда предстоит сделать что-то очень знакомое, напомните себе, что простые результаты тоже имеют ценность.",
+          "en": "When you are about to do something very familiar, remind yourself that straightforward results are valuable too."
+        },
+        "scorpio": {
+          "ru": "Перед завершением этого насыщенного впечатлениями дня выберите спокойное занятие, которое не требует спешки.",
+          "en": "As this day full of impressions draws to a close, choose a peaceful activity that does not require haste."
+        },
+        "sagittarius": {
+          "ru": "Если появится желание поиграть с личным стилем, доверьтесь своему вкусу в выборе маленьких украшений.",
+          "en": "If you feel like playing with your personal style, trust your taste when choosing your small accessories."
+        },
+        "capricorn": {
+          "ru": "По дороге на встречу с другом выберите для общения спокойный и естественный темп.",
+          "en": "On your way to see a friend, choose a relaxed and natural pace for your conversation."
+        },
+        "aquarius": {
+          "ru": "Если захочется внести разнообразие в привычный ритуал, прислушайтесь к своему вкусу, даже если он изменился.",
+          "en": "If you feel like varying one of your familiar rituals, listen to your own taste, even if it has changed."
+        },
+        "pisces": {
+          "ru": "Когда в расписании почти не осталось свободного времени, найдите вариант, который оставляет достаточно места для отдыха.",
+          "en": "When your schedule has barely any free space left, find an option that leaves enough room for rest."
+        }
+      }
+    },
+    {
+      "date": "2028-07-29",
+      "signs": {
+        "aries": {
+          "ru": "В поиске небольших изменений в обстановке обратите внимание на освещение и выберите наиболее комфортное для себя.",
+          "en": "When looking for small changes to your surroundings consider the lighting and choose what feels more comfortable to you."
+        },
+        "taurus": {
+          "ru": "Когда появляется интерес к чужому воображению, представьте сцену из книги в непривычных цветах.",
+          "en": "When someone else's imagination sparks your curiosity, imagine a scene from a book in unexpected colors."
+        },
+        "gemini": {
+          "ru": "Перед тем как дать окончательный ответ, подумайте о комфорте не только сегодняшнего, но и завтрашнего дня.",
+          "en": "Before you give your final answer, consider your comfort tomorrow as well as your comfort today."
+        },
+        "cancer": {
+          "ru": "Когда знакомый скажет о вас приятные слова, позвольте доброму замечанию ненадолго поднять ваше настроение.",
+          "en": "When someone you know says something nice about you, let the kind remark lift your mood for a while."
+        },
+        "leo": {
+          "ru": "Иногда простой выбор помогает лучше понять свои потребности, поэтому побудьте немного наедине с собственными желаниями.",
+          "en": "Sometimes a simple choice reveals what you need, so spend some time alone with your own wishes."
+        },
+        "virgo": {
+          "ru": "Когда хочется немного разнообразить впечатления от еды, выберите что-нибудь простое и уделите внимание процессу приготовления.",
+          "en": "When you want a little variety in your experience of food, choose something simple and give the preparation your attention."
+        },
+        "libra": {
+          "ru": "Если хочется освободить чуть больше пространства для себя, ненадолго переключитесь на что-нибудь доступное вашим чувствам.",
+          "en": "If you want to make a little more space for yourself, briefly turn to something that engages your senses."
+        },
+        "scorpio": {
+          "ru": "Когда друг расскажет о месте своего отдыха, оставьте место для неожиданного поворота в вашем разговоре.",
+          "en": "When a friend talks about a place they visited, leave room for an unexpected turn in your conversation."
+        },
+        "sagittarius": {
+          "ru": "Чтобы не потерять ощущение собственного ритма, назовите про себя чувство, которое сейчас испытываете.",
+          "en": "To stay aware of your own pace today, quietly name the feeling you are experiencing right now."
+        },
+        "capricorn": {
+          "ru": "Если найдётся время для коротких личных заметок, вспомните одну полезную мысль, пришедшую вам в голову.",
+          "en": "If you find time for a few personal notes, recall one helpful thought that came to your mind."
+        },
+        "aquarius": {
+          "ru": "Во время важного для вас двоих разговора проявите любопытство, не торопясь предлагать готовый ответ.",
+          "en": "During a conversation that matters to both of you, show some curiosity without rushing to offer a ready answer."
+        },
+        "pisces": {
+          "ru": "Во время одной из сегодняшних пеших прогулок найдите в окружающей обстановке один любопытный контраст.",
+          "en": "During one of your walks on foot today, look for one intriguing contrast in the surrounding scene."
+        }
+      }
+    },
+    {
+      "date": "2028-07-30",
+      "signs": {
+        "aries": {
+          "ru": "Если сегодня хочется вдохновения из необычного источника, посмотрите несколько работ незнакомого вам художника.",
+          "en": "If you want inspiration from an unusual source today, look at a few works by an artist new to you."
+        },
+        "taurus": {
+          "ru": "В моменты выбора между знакомым и новым, заметьте, какие причины кажутся важными даже без внешнего давления.",
+          "en": "When choosing between the familiar and the new, notice which reasons feel important even without any outside pressure."
+        },
+        "gemini": {
+          "ru": "На прогулке, даже совсем короткой и обычной, поищите глазами одну красивую архитектурную деталь.",
+          "en": "On a walk, even a short and ordinary one, look for one beautiful little architectural detail."
+        },
+        "cancer": {
+          "ru": "Когда поймёте, что просмотрели уже немало уведомлений, прислушайтесь к тому, чем действительно хочется сейчас заняться.",
+          "en": "When you realize you have already checked plenty of notifications, listen to what you genuinely feel like doing right now."
+        },
+        "leo": {
+          "ru": "Когда начнёте выбирать что-нибудь приятное для себя, выберите то, что хочется сохранить в сегодняшних воспоминаниях.",
+          "en": "When you start choosing something nice for yourself, choose what you would like to remember about today."
+        },
+        "virgo": {
+          "ru": "Если найдётся несколько минут на чтение, выберите то, что будит воображение, а не только внимание.",
+          "en": "If you find a few minutes to spend reading, choose what awakens your imagination rather than simply catching your attention."
+        },
+        "libra": {
+          "ru": "Вместо долгих поисков идеального творческого решения посмотрите на знакомую вещь с неожиданной стороны.",
+          "en": "Instead of searching for the perfect creative solution, look at a familiar thing from an unexpected angle."
+        },
+        "scorpio": {
+          "ru": "Когда хочется изменить привычный темп занятий, воспользуйтесь паузой, чтобы прислушаться к собственным желаниям.",
+          "en": "When you want to change your usual pace of activity, use the pause to listen to your own wishes."
+        },
+        "sagittarius": {
+          "ru": "Если сегодня особенно хочется новых впечатлений, посвятите несколько минут теме, которая вас удивляет.",
+          "en": "If you especially crave new experiences today, spend a few minutes on something that surprises you."
+        },
+        "capricorn": {
+          "ru": "Если вам нужна небольшая передышка от общения, уважайте своё желание провести часть дня в тишине.",
+          "en": "If you need a small break from social interaction, respect your wish to spend part of the day in quiet."
+        },
+        "aquarius": {
+          "ru": "Когда хочется сравнить свои успехи с чужими, напомните себе, что одному дню не обязательно быть идеальным.",
+          "en": "When you feel like comparing your progress with others, remind yourself that a single day need not be perfect."
+        },
+        "pisces": {
+          "ru": "Общаясь сегодня с теми, кто вам дорог, попробуйте вспомнить, что вы особенно цените в вашем общении.",
+          "en": "While talking with people dear to you today, try to recall what you especially appreciate about your connection."
+        }
+      }
+    },
+    {
+      "date": "2028-07-31",
+      "signs": {
+        "aries": {
+          "ru": "Если привычная домашняя обстановка немного наскучила, окружите себя цветами, которые действуют на вас успокаивающе.",
+          "en": "If your familiar home surroundings feel a little dull, surround yourself with colors you find soothing."
+        },
+        "taurus": {
+          "ru": "Если хочется вдохновения за пределами экрана, обратите внимание на ритм повторяющихся линий или форм.",
+          "en": "If you want a little inspiration beyond your screen, pay attention to the rhythm of repeating lines or shapes."
+        },
+        "gemini": {
+          "ru": "Постарайтесь оценить свои возможности без сравнения и подумайте, чего вам сейчас действительно не хватает.",
+          "en": "Try assessing your abilities without making comparisons and consider what you are genuinely missing right now."
+        },
+        "cancer": {
+          "ru": "Если приходится изменить первоначальный рабочий подход, заметьте, чему полезному можно научиться из этого опыта.",
+          "en": "If you have to change your original working approach, notice what useful lesson you could take from this experience."
+        },
+        "leo": {
+          "ru": "Если собеседник поинтересуется вашими впечатлениями, оставьте себе право не объяснять каждую подробность.",
+          "en": "If someone asks about your impressions, reserve the right not to explain every little detail."
+        },
+        "virgo": {
+          "ru": "Когда вспомнится что-нибудь хорошее из прошедших дней, найдите немного времени, чтобы просто порадоваться этому.",
+          "en": "When something nice from recent days comes back to you, give yourself a little time simply to enjoy it."
+        },
+        "libra": {
+          "ru": "Если сегодня вы почувствуете поддержку со стороны, ответьте такой же теплотой, если того захочется.",
+          "en": "If you feel someone offering you support today, respond with the same warmth if you feel like it."
+        },
+        "scorpio": {
+          "ru": "Прежде чем наполнить свободную минуту новой задачей, оцените, достаточно ли времени вы себе оставляете.",
+          "en": "Before filling a spare minute with another task, consider whether you're leaving yourself enough time for things."
+        },
+        "sagittarius": {
+          "ru": "Обращаясь за дополнительным взглядом со стороны, выделите время, чтобы внимательно выслушать собеседника до конца.",
+          "en": "When asking someone for a fresh perspective, take the time to listen to the other person all the way through."
+        },
+        "capricorn": {
+          "ru": "Прежде чем забывать о собственных маленьких достижениях, отметьте, чему успели научиться за последнее время.",
+          "en": "Before overlooking your own small accomplishments, notice what you have learned recently."
+        },
+        "aquarius": {
+          "ru": "Когда появляется желание побольше узнать о другом времени, откройте старые фотографии и присмотритесь к одежде людей.",
+          "en": "When you want to learn about another era, explore old photographs and notice the clothing people wore."
+        },
+        "pisces": {
+          "ru": "Сегодня, независимо от объёма запланированных занятий, назовите про себя одну вещь, которую цените.",
+          "en": "Today, regardless of how much you have planned, silently name one thing that you genuinely value."
+        }
+      }
+    }
+  ]
+}

@@ -14,13 +14,18 @@ import Observation
     var historyFact: PerfumeHistory?
     var dailyHoroscopes: [DailyHoroscope] = []
     var personalHoroscope: DailyHoroscope?
+    var hasPreferredZodiacSign = false
+    var isLoadingHoroscope = true
     var viewState: TodayScreen.ViewState = .loading
 
     var dateText: String {
         Date().formatted(.dateTime.weekday(.wide).day().month(.wide))
     }
 
-    func historyDateText(year: Int) -> String {
-        "\(Date().formatted(.dateTime.day().month(.wide))) \(year)"
+    var horoscopePlaceholder: String {
+        if hasPreferredZodiacSign {
+            return String(localized: "today.energy.unavailable")
+        }
+        return L10n.Today.Energy.missingProfile
     }
 }

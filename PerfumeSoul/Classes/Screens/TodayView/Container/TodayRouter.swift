@@ -16,12 +16,21 @@ protocol TodayRouter {
 }
 
 final class TodayRouterImpl {
+    private let requestManager: RequestManager
     private let imageLoader: PerfumeImageLoader
+    private let dailyHoroscopeService: DailyHoroscopeService
     private weak var navigationController: UINavigationController?
     
-    init(navigationController: UINavigationController?, imageLoader: PerfumeImageLoader) {
+    init(
+        navigationController: UINavigationController?,
+        requestManager: RequestManager,
+        imageLoader: PerfumeImageLoader,
+        dailyHoroscopeService: DailyHoroscopeService
+    ) {
         self.navigationController = navigationController
+        self.requestManager = requestManager
         self.imageLoader = imageLoader
+        self.dailyHoroscopeService = dailyHoroscopeService
     }
 }
 
@@ -34,7 +43,8 @@ extension TodayRouterImpl: TodayRouter {
             TodayEnergyModule.build(
                 navigationController: navigationController,
                 personalDailyHoroscope: personalDailyHoroscope,
-                dailyHoroscopes: dailyHoroscopes
+                dailyHoroscopes: dailyHoroscopes,
+                dailyHoroscopeService: dailyHoroscopeService
             ),
             animated: true
         )
@@ -45,7 +55,7 @@ extension TodayRouterImpl: TodayRouter {
             DayInPerfumeryModule.build(
                 navigationController: navigationController,
                 historyFact: historyFact,
-                imageLoader: imageLoader
+                requestManager: requestManager
             ),
             animated: true
         )

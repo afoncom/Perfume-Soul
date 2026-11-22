@@ -7,9 +7,8 @@
 //
 
 struct PerfumeHistoryResponse: Decodable {
-    let year: Int
-    let perfumeName: String
-    let shortStory: String
+    let publicationDate: String
+    let eventYear: Int
+    let title: String
     let fullStory: String
-    let imageUrl: String
 }
