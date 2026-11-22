@@ -54,7 +54,7 @@ struct TodayScreen: View {
         }
         .background(Color(.backgroundPrimary))
         .navigationBarTitleDisplayMode(.inline)
-        .task {
+        .task(id: viewModel.refreshID) {
             await presenter.onAppear()
         }
         .onChange(of: scenePhase) { _, phase in

@@ -208,8 +208,11 @@
 "settings.notification.profileRequiredTitle" = "Profile Data Required";
 "settings.notification.unavailableMessage" = "The daily horoscope is currently unavailable. Please try again later.";
 "settings.notification.unavailableTitle" = "Horoscope Unavailable";
-"settings.notification.dayInPerfumerySubtitle" = "Historical events and facts";
+"settings.notification.dayInPerfumerySubtitle" = "A daily reminder to explore perfume history at 7:00 PM.";
 "settings.notification.dayInPerfumeryTitle" = "This Day in Perfumery";
+"settings.notification.historyReminderBody" = "Take a moment to explore perfume history.";
+"settings.notification.historyPermissionDeniedMessage" = "To receive your daily perfume history reminder at 7:00 PM, allow notifications for the app in system settings.";
+"settings.notification.historyUnavailableTitle" = "Notifications Unavailable";
 "settings.notificationsTitle" = "Notifications";
 "sendFeedback.button" = "Write to the Developer";
 "sendFeedback.emailTitle" = "Developer email";

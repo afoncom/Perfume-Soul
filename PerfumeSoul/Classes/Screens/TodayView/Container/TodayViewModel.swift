@@ -9,6 +9,7 @@ import Foundation
 import Observation
 
 @Observable final class TodayViewModel {
+    var refreshID = 0
     var historyFact: PerfumeHistory?
     var dailyHoroscopes: [DailyHoroscope] = []
     var personalHoroscope: DailyHoroscope?

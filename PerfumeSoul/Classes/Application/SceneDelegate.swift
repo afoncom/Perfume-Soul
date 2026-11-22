@@ -8,10 +8,14 @@
 import UIKit
 import SwiftUI
 import CoreData
+import UserNotifications
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     let coreDataManager: CoreDataManager = CoreDataManagerImpl()
+    private var mainTabController: UIHostingController<MainTabView>?
+    private var todayViewModel: TodayViewModel?
+    private var hasPendingHistoryNotification = false
 
     static func backendBaseURL(environment: [String: String]) -> String {
         let defaultURL = "http://82.97.248.219"
@@ -50,6 +54,14 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.backgroundColor = UIColor(resource: .backgroundPrimary)
         self.window = window
 
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        appDelegate?.onHistoryNotification = { [weak self] in
+            self?.openHistoryNotification()
+        }
+        if let response = connectionOptions.notificationResponse {
+            appDelegate?.handleNotificationResponse(response)
+        }
+
         showWelcomeLoadingScreen(container: coreDataManager.container)
     }
     
@@ -71,10 +83,13 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func showMainScreen(container: NSPersistentContainer) {
+        let todayViewModel = TodayViewModel()
+        self.todayViewModel = todayViewModel
         let todayScreen = TodayModule.build(
             container: container,
             requestManager: requestManager,
-            imageLoader: imageLoader
+            imageLoader: imageLoader,
+            viewModel: todayViewModel
         )
         let settingsScreen = SettingsModule.build(
             container: container
@@ -101,13 +116,19 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             searchPerfumeScreen: searchPerfumeScreen
         )
         let viewController = UIHostingController(rootView: mainTabView)
+        mainTabController = viewController
         setRootViewController(viewController)
+        if hasPendingHistoryNotification {
+            openHistoryNotification()
+        }
     }
 
     private func showCalculationScreen(
         container: NSPersistentContainer,
         initialProfile: Profile? = nil
     ) {
+        mainTabController = nil
+        todayViewModel = nil
         let calculationScreen = CalculationModule.build(
             container: container,
             requestManager: requestManager,
@@ -121,6 +142,17 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private func finishCalculationFlow() {
         showMainScreen(container: coreDataManager.container)
+    }
+
+    private func openHistoryNotification() {
+        hasPendingHistoryNotification = true
+        guard let mainTabController, let todayViewModel else {
+            return
+        }
+        hasPendingHistoryNotification = false
+        mainTabController.dismiss(animated: false)
+        mainTabController.rootView.historyNotificationID = UUID()
+        todayViewModel.refreshID += 1
     }
 
     private func setRootViewController(_ viewController: UIViewController) {
