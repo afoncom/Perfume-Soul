@@ -30,7 +30,9 @@ public func configure(_ app: Application, needsDatabase: Bool = true) throws {
     app.migrations.add(AllowDuplicateLocalizedNoteNamesMigration())
     app.migrations.add(AddCatalogImportSupportMigration())
     app.migrations.add(CreateUnfoundSearchQueriesMigration())
+    app.migrations.add(CreatePerfumeryHistoryEntriesMigration())
     app.migrations.add(CreateQuizBankQuestionsMigration())
+    app.migrations.add(CreateLegacyPerfumeryHistoryMigration())
 
     try app.autoMigrate().wait()
 

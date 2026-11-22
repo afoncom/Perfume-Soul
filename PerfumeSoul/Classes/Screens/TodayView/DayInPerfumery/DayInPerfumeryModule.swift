@@ -12,13 +12,17 @@ final class DayInPerfumeryModule {
     static func build(
         navigationController: UINavigationController?,
         historyFact: PerfumeHistory,
-        imageLoader: PerfumeImageLoader
+        requestManager: RequestManager
     ) -> UIViewController {
         let viewModel = DayInPerfumeryViewModel(historyFact: historyFact)
         let router = DayInPerfumeryRouterImpl(navigationController: navigationController)
-        let presenter = DayInPerfumeryPresenterImpl(viewModel: viewModel, router: router)
+        let presenter = DayInPerfumeryPresenterImpl(
+            viewModel: viewModel,
+            router: router,
+            perfumeHistoryService: PerfumeHistoryServiceImpl(requestManager: requestManager)
+        )
         
-        let view = DayInPerfumeryScreen(viewModel: viewModel, presenter: presenter, imageLoader: imageLoader)
+        let view = DayInPerfumeryScreen(viewModel: viewModel, presenter: presenter)
         
         let hostingController = UIHostingController(rootView: view)
         hostingController.title = nil

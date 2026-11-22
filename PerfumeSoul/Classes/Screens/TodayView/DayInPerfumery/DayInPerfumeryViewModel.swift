@@ -11,13 +11,14 @@ import Combine
 import Observation
 
 @Observable final class DayInPerfumeryViewModel {
-    let historyFact: PerfumeHistory
+    var historyFact: PerfumeHistory
+    var isUnavailable = false
     
     init(historyFact: PerfumeHistory) {
         self.historyFact = historyFact
     }
 
     var dateText: String {
-        "\(Date().formatted(.dateTime.day().month(.wide))) \(historyFact.year)"
+        historyFact.eventDateText
     }
 }

@@ -37,13 +37,13 @@ The iOS app keeps its remote backend by default, including Debug launches in the
 Schema changes for perfume profile metadata and accords are now applied by Fluent migrations during app startup.
 The same migration also adds `market_segment` to `perfumes` and backfills it with `luxury`, `daily`, or `niche`.
 
-Seed/backfill steps remain separate and should be run manually for local data population.
-
-Seed perfumery history into PostgreSQL:
+Other seed/backfill steps remain separate and should be run manually. The 731 daily perfumery histories are bundled with the backend and inserted into `perfumery_history_entries` by a Fluent migration on its first startup. Regenerate the bundled resource after editing the editorial catalog; databases where the migration has already run need a new data migration for later content revisions:
 
 ```bash
-psql "$DATABASE_URL" -f scripts/seed_perfumery_history.sql
+python3 scripts/generate_perfumery_history_resource.py
 ```
+
+`GET /perfumery-history?timeZone=Europe%2FMadrid` selects the current local publication date. The app sends its time zone and `Accept-Language: ru` or `en`; the response contains `publicationDate`, `eventYear`, `title`, and `fullStory`. Dates without a story return 404. The publication window is 2026-12-01 through 2028-11-30.
 
 Seed daily horoscopes into PostgreSQL:
 
@@ -156,13 +156,10 @@ BACKEND_IMAGE_TAG=abc1234
 
 ### Docker seed/backfill
 
-Fluent migrations run automatically when the backend starts. Data seed and backfill scripts still need to be run manually.
+Fluent migrations run automatically when the backend starts, including the 731 perfumery histories. Other data seed and backfill scripts still need to be run manually.
 The PostgreSQL container mounts `scripts/` and the note translation TSV read-only under `/catalog` for the localized-note backfill.
 
 ```bash
-docker compose exec -T postgres \
-  psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_perfumery_history.sql
-
 docker compose exec -T postgres \
   psql -U perfumesoul -d perfumesoul -v ON_ERROR_STOP=1 --single-transaction < scripts/seed_daily_horoscopes.sql
 
@@ -362,22 +359,21 @@ certbot --nginx -d api.your-domain.com
 
 After `swift run`, open:
 
-- http://127.0.0.1:8080/perfumery-history
+- http://127.0.0.1:8080/perfumery-history?timeZone=Europe%2FMadrid
 - http://127.0.0.1:8080/horoscope/daily
 - http://127.0.0.1:8080/perfumes?searchText=dior&offset=0&limit=10
 - http://127.0.0.1:8080/perfumes/1/notes
 - http://127.0.0.1:8080/perfumes/recommendations?perfumeIDs=1,2,3
 - `POST` http://127.0.0.1:8080/personal-perfumes
 
-Expected response on `/perfumery-history`:
+Response shape on `/perfumery-history` (story text shortened here):
 
 ```json
 {
-  "year": 1957,
-  "perfumeName": "Dior Diorissimo",
-  "shortStory": "Один из самых культовых ароматов Dior с нотой ландыша.",
-  "fullStory": "12 мая 1957 года Дом Dior представил миру аромат Diorissimo — утончённый цветочный букет, вдохновлённый ландышем, любимым цветком Кристиана Диора.",
-  "imageUrl": ""
+  "publicationDate": "2026-12-01",
+  "eventYear": 2020,
+  "title": "Кимоно, переведённое в аромат",
+  "fullStory": "1 декабря 2020 года в Японии вышла коллекция DECORTÉ Kimono. …"
 }
 ```
 
@@ -531,7 +527,7 @@ Backend recommendation logic has focused tests for:
 
 - Backend is separate from the iOS app and lives in `backend/PerfumeSoulBackend`.
 - First build can take a long time because Swift Package Manager downloads and compiles dependencies.
-- `GET /perfumery-history` now reads from PostgreSQL, so `perfumery_history` must be seeded before local run.
+- `GET /perfumery-history` reads from PostgreSQL. The `perfumery_history_entries` table is populated automatically by its Fluent migration.
 - `GET /perfumes` now reads from PostgreSQL, so the local database must be running and contain `brands` and `perfumes`.
 - `GET /perfumes/recommendations` also reads from PostgreSQL and depends on populated `perfumes`, `brands`, `notes`, `perfume_notes`, `accords`, and `perfume_accords`.
 - `POST /personal-perfumes` depends on populated `market_segment`, profile metadata, notes, and accords.

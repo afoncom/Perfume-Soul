@@ -31973,6 +31973,46 @@
       "excludedClaimsRu": [],
       "editorialNotes": "Патентное описание, не свидетельство выпуска продукта или гарантированной длительности.",
       "verificationStatus": "not_independently_verified"
+    },
+    {
+      "eventId": "iff-living-tree-patent-1993",
+      "status": "user_provided_fact_packet",
+      "facts": [
+        {
+          "id": "iff-living-tree-patent-1993-f1",
+          "claim": "Патент US5263359A выдан IFF 23 ноября 1993 года.",
+          "sourceIds": [
+            "iff-living-tree-patent-1993-source"
+          ],
+          "locator": "perfume_soul_2028-11-23.json — stories[0] — factsUsed[0] — US5263359A — Info; Application granted 1993-11-23",
+          "provenance": "user_provided_draft_json",
+          "verificationStatus": "not_independently_verified"
+        },
+        {
+          "id": "iff-living-tree-patent-1993-f2",
+          "claim": "Раздельный одновременный сбор летучих веществ изнутри ствола и у коры.",
+          "sourceIds": [
+            "iff-living-tree-patent-1993-source"
+          ],
+          "locator": "perfume_soul_2028-11-23.json — stories[0] — factsUsed[1] — US5263359A — описание FIG. 1–2 и Claims 1–2",
+          "provenance": "user_provided_draft_json",
+          "verificationStatus": "not_independently_verified"
+        },
+        {
+          "id": "iff-living-tree-patent-1993-f3",
+          "claim": "Опыт с дугласией длился 7 часов; анализ GC-MS, лимонен, мирцен, пинены и различия долей лонгифолена.",
+          "sourceIds": [
+            "iff-living-tree-patent-1993-source"
+          ],
+          "locator": "perfume_soul_2028-11-23.json — stories[0] — factsUsed[2] — US5263359A — Example I, Procedure и таблица Interior/Exterior",
+          "provenance": "user_provided_draft_json",
+          "verificationStatus": "not_independently_verified"
+        }
+      ],
+      "editorialInterpretationsRu": [],
+      "excludedClaimsRu": [],
+      "editorialNotes": "Для календарного слота 23.11.2028. Историческая дата — выдача патента, не дата изобретения или запуска парфюма. publicationDate не назначена.",
+      "verificationStatus": "not_independently_verified"
     }
   ]
 }
