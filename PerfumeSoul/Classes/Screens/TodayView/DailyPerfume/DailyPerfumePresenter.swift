@@ -24,6 +24,7 @@ protocol DailyPerfumePresenter {
 final class DailyPerfumePresenterImpl {
     private static let candidateLimit = 20
     @MainActor private var hasPendingResolve = false
+    @MainActor private var resolveTask: Task<Void, Never>?
 
     private let viewModel: DailyPerfumeViewModel
     private let router: DailyPerfumeRouter
@@ -63,17 +64,23 @@ extension DailyPerfumePresenterImpl: DailyPerfumePresenter {
 
     @MainActor
     func resolve() async {
-        guard !viewModel.isResolving else {
+        guard resolveTask == nil else {
             hasPendingResolve = true
             return
         }
         viewModel.isResolving = true
-        defer { viewModel.isResolving = false }
-
-        repeat {
-            hasPendingResolve = false
-            await resolveCurrentDay()
-        } while hasPendingResolve
+        let task = Task { @MainActor in
+            defer {
+                viewModel.isResolving = false
+                resolveTask = nil
+            }
+            repeat {
+                hasPendingResolve = false
+                await resolveCurrentDay()
+            } while hasPendingResolve
+        }
+        resolveTask = task
+        await task.value
     }
 
     @MainActor
@@ -183,6 +190,9 @@ extension DailyPerfumePresenterImpl {
             setState(.content(perfume, .pending))
         } catch {
             guard shouldApplyResult(for: dayKey) else {
+                return
+            }
+            guard !(error is CancellationError), (error as? URLError)?.code != .cancelled else {
                 return
             }
             setState(.failed)

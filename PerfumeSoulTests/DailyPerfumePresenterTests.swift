@@ -4,6 +4,39 @@ import XCTest
 final class DailyPerfumePresenterTests: XCTestCase {
     @MainActor
     func testReminderQueuesNewDayAndDoesNotPersistTheDelayedPreviousDayResult() async {
+        await checkQueuedReminder(cancelsFirstLoad: false)
+    }
+
+    @MainActor
+    func testQueuedReminderLoadsNewDayAfterFirstCallerIsCancelled() async {
+        await checkQueuedReminder(cancelsFirstLoad: true)
+    }
+
+    @MainActor
+    func testRequestCancellationDoesNotShowFailureAndAllowsRetry() async {
+        for error in [CancellationError(), URLError(.cancelled)] as [Error] {
+            let storage = makeStorage()
+            let service = DailyPerfumeServiceMock(responses: [
+                .failure(error), .success([makeCandidate(id: 9, score: 0.8)])
+            ])
+            let viewModel = DailyPerfumeViewModel()
+            let presenter = makePresenter(viewModel: viewModel, service: service, storage: storage)
+
+            await presenter.resolve()
+
+            XCTAssertNotEqual(viewModel.state, .failed)
+            XCTAssertFalse(viewModel.isResolving)
+            XCTAssertNil(storage.loadState()?.currentPerfume)
+
+            await presenter.retry()
+
+            XCTAssertEqual(viewModel.state, .content(makeSummary(id: 9), .pending))
+            XCTAssertEqual(storage.loadState()?.currentPerfume?.id, 9)
+        }
+    }
+
+    @MainActor
+    private func checkQueuedReminder(cancelsFirstLoad: Bool) async {
         var state = makeState()
         state.dayKey = "2026-11-20"
         state.currentPerfume = nil
@@ -29,6 +62,9 @@ final class DailyPerfumePresenterTests: XCTestCase {
         presenter.notificationOpened()
         await presenter.resolve()
         await presenter.resolve()
+        if cancelsFirstLoad {
+            firstLoad.cancel()
+        }
         service.resumeRequests(with: [makeCandidate(id: 7, score: 0.8)])
         await fulfillment(of: [secondStarted], timeout: 2)
 
@@ -486,10 +522,12 @@ private final class DailyPerfumeServiceMock: DailyPerfumeService {
             )
         )
         if suspendsRequests {
-            return await withCheckedContinuation { continuation in
+            let result = await withCheckedContinuation { continuation in
                 continuations.append(continuation)
                 onRequest?(requests.count)
             }
+            try Task.checkCancellation()
+            return result
         }
 
         onRequest?(requests.count)
