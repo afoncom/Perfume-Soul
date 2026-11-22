@@ -16,16 +16,19 @@ protocol TodayRouter {
 }
 
 final class TodayRouterImpl {
+    private let requestManager: RequestManager
     private let imageLoader: PerfumeImageLoader
     private let dailyHoroscopeService: DailyHoroscopeService
     private weak var navigationController: UINavigationController?
     
     init(
         navigationController: UINavigationController?,
+        requestManager: RequestManager,
         imageLoader: PerfumeImageLoader,
         dailyHoroscopeService: DailyHoroscopeService
     ) {
         self.navigationController = navigationController
+        self.requestManager = requestManager
         self.imageLoader = imageLoader
         self.dailyHoroscopeService = dailyHoroscopeService
     }

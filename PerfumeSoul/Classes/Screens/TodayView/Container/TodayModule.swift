@@ -20,6 +20,7 @@ final class TodayModule {
         let dailyHoroscopeService = DailyHoroscopeServiceImpl(requestManager: requestManager)
         let router = TodayRouterImpl(
             navigationController: navigationController,
+            requestManager: requestManager,
             imageLoader: imageLoader,
             dailyHoroscopeService: dailyHoroscopeService
         )
