@@ -19,7 +19,7 @@ final class DailyHoroscopeRefreshOrderTests: XCTestCase {
         XCTAssertNil(viewModel.personalHoroscope)
         XCTAssertTrue(viewModel.hasPreferredZodiacSign)
         XCTAssertEqual(viewModel.horoscopePlaceholder, String(localized: "today.energy.unavailable"))
-        guard case .failed = viewModel.viewState else {
+        guard case .unavailable = viewModel.viewState else {
             return XCTFail("History must finish loading after a failure")
         }
     }
@@ -128,11 +128,10 @@ private final class PendingHoroscopeService: DailyHoroscopeService {
 private final class HistoryServiceStub: PerfumeHistoryService {
     func requestPerfumeHistory() async throws -> PerfumeHistory {
         PerfumeHistory(
+            publicationDate: "2026-12-01",
             year: 2026,
-            perfumeName: "History",
-            shortStory: "Short",
-            fullStory: "Full",
-            imageUrl: ""
+            title: "History",
+            fullStory: "Full"
         )
     }
 }
