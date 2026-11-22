@@ -56,8 +56,11 @@ extension QuizOfTheDayPresenterImpl: QuizOfTheDayPresenter {
             let storedState = dailyQuizStateStorage.loadState()
             let version: QuizOfTheDayQuestion.SetVersion = storedState?.quizDayKey == todayKey
                 ? storedState?.questionSetVersion ?? .legacy
-                : .bank
-            let questions = try await service.requestQuizOfTheDayQuestions(version: version)
+                : (todayKey >= "2026-12-01" ? .calendar : .bank)
+            let questions = try await service.requestQuizOfTheDayQuestions(
+                version: version,
+                dayKey: version == .calendar ? todayKey : nil
+            )
             let resolvedSession = resolveSession(
                 from: questions,
                 storedState: storedState,

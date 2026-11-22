@@ -116,7 +116,8 @@ func routes(
     app.get("v2", "quiz-of-the-day") { req async throws -> Response in
         let questions = try await QuizOfTheDayQuestionLoader.load(
             on: req.db,
-            language: req.headers.first(name: "Accept-Language")
+            language: req.headers.first(name: "Accept-Language"),
+            dayKey: req.query[String.self, at: "dayKey"]
         )
         return try jsonResponse(questions, varyByLanguage: true)
     }

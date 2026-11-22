@@ -11,6 +11,7 @@ struct QuizOfTheDayQuestion {
     enum SetVersion: Int, Codable {
         case legacy = 1
         case bank = 2
+        case calendar = 3
     }
 
     let id: Int
