@@ -13,7 +13,7 @@ final class DailyPerfumePresenterTests: XCTestCase {
     }
 
     @MainActor
-    func testRequestCancellationDoesNotShowFailureAndAllowsRetry() async {
+    func testCurrentRequestCancellationShowsRetryBeforeAnotherResolve() async {
         for error in [CancellationError(), URLError(.cancelled)] as [Error] {
             let storage = makeStorage()
             let service = DailyPerfumeServiceMock(responses: [
@@ -24,7 +24,7 @@ final class DailyPerfumePresenterTests: XCTestCase {
 
             await presenter.resolve()
 
-            XCTAssertNotEqual(viewModel.state, .failed)
+            XCTAssertEqual(viewModel.state, .failed)
             XCTAssertFalse(viewModel.isResolving)
             XCTAssertNil(storage.loadState()?.currentPerfume)
 
@@ -33,6 +33,34 @@ final class DailyPerfumePresenterTests: XCTestCase {
             XCTAssertEqual(viewModel.state, .content(makeSummary(id: 9), .pending))
             XCTAssertEqual(storage.loadState()?.currentPerfume?.id, 9)
         }
+    }
+
+    @MainActor
+    func testCancelledRequestWithQueuedReplacementKeepsLoadingUntilReplacementFinishes() async {
+        let storage = makeStorage()
+        let service = DailyPerfumeServiceMock(candidates: [], suspendsRequests: true)
+        let firstStarted = expectation(description: "First request started")
+        let replacementStarted = expectation(description: "Queued replacement started")
+        service.onRequest = { count in
+            if count == 1 { firstStarted.fulfill() }
+            if count == 2 { replacementStarted.fulfill() }
+        }
+        let viewModel = DailyPerfumeViewModel()
+        let presenter = makePresenter(viewModel: viewModel, service: service, storage: storage)
+        let load = Task { await presenter.resolve() }
+        await fulfillment(of: [firstStarted], timeout: 2)
+        await presenter.resolve()
+
+        service.failRequests(with: URLError(.cancelled))
+        await fulfillment(of: [replacementStarted], timeout: 2)
+
+        XCTAssertEqual(viewModel.state, .loading)
+        XCTAssertTrue(viewModel.isResolving)
+        service.resumeRequests(with: [makeCandidate(id: 9, score: 0.8)])
+        await load.value
+
+        XCTAssertEqual(viewModel.state, .content(makeSummary(id: 9), .pending))
+        XCTAssertEqual(storage.loadState()?.currentPerfume?.id, 9)
     }
 
     @MainActor
@@ -490,7 +518,7 @@ private final class DailyPerfumeServiceMock: DailyPerfumeService {
     let candidates: [DailyPerfumeCandidateResponse]
     private var responses: [Result<[DailyPerfumeCandidateResponse], Error>]
     private let suspendsRequests: Bool
-    private var continuations: [CheckedContinuation<[DailyPerfumeCandidateResponse], Never>] = []
+    private var continuations: [CheckedContinuation<[DailyPerfumeCandidateResponse], Error>] = []
 
     init(
         candidates: [DailyPerfumeCandidateResponse],
@@ -522,7 +550,7 @@ private final class DailyPerfumeServiceMock: DailyPerfumeService {
             )
         )
         if suspendsRequests {
-            let result = await withCheckedContinuation { continuation in
+            let result = try await withCheckedThrowingContinuation { continuation in
                 continuations.append(continuation)
                 onRequest?(requests.count)
             }
@@ -546,6 +574,12 @@ private final class DailyPerfumeServiceMock: DailyPerfumeService {
         pending.forEach { continuation in
             continuation.resume(returning: result ?? candidates)
         }
+    }
+
+    func failRequests(with error: Error) {
+        let pending = continuations
+        continuations = []
+        pending.forEach { $0.resume(throwing: error) }
     }
 }
 

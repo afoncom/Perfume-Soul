@@ -192,7 +192,8 @@ extension DailyPerfumePresenterImpl {
             guard shouldApplyResult(for: dayKey) else {
                 return
             }
-            guard !(error is CancellationError), (error as? URLError)?.code != .cancelled else {
+            let isCancellation = error is CancellationError || (error as? URLError)?.code == .cancelled
+            if isCancellation, hasPendingResolve {
                 return
             }
             setState(.failed)
