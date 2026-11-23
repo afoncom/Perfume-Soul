@@ -9,6 +9,30 @@ import XCTFluent
 @testable import PerfumeSoulBackend
 
 struct QuizCalendarTests {
+    @Test("Second-cycle slots always use the oldest eligible question of the same topic and difficulty")
+    func oldestEligibleQuestionsAreRepeatedFirst() throws {
+        let days = try QuizCalendar.load()
+        let bank = try QuizBankSeed.load()
+        let byID = Dictionary(uniqueKeysWithValues: bank.map { ($0.id, $0) })
+        let previousDays = Dictionary(uniqueKeysWithValues: days.prefix(365).enumerated().flatMap { day, entry in
+            entry.questionIDs.map { ($0, day) }
+        })
+        let banned = Set(days[335..<365].flatMap(\.questionIDs))
+        var remaining = Dictionary(grouping: bank) { "\($0.topic)/\($0.difficulty)" }
+            .mapValues { Set($0.map(\.id)) }
+
+        for (day, entry) in days.dropFirst(365).enumerated() {
+            for id in entry.questionIDs {
+                let question = try #require(byID[id])
+                let key = "\(question.topic)/\(question.difficulty)"
+                let eligible = remaining[key, default: []].filter { day >= 30 || !banned.contains($0) }
+                let oldestDay = try #require(eligible.compactMap { previousDays[$0] }.min())
+                #expect(previousDays[id] == oldestDay, "\(entry.dayKey), ID \(id): an older eligible question exists")
+                remaining[key]?.remove(id)
+            }
+        }
+    }
+
     @Test("Replaying calendar migration preserves already published assignments", .enabled(
         if: Environment.get("PERFUME_SOUL_TEST_DATABASE_URL") != nil
     ))
@@ -44,6 +68,23 @@ struct QuizCalendarTests {
             let restored = try #require(try await QuizCalendarDayModel.find(first.dayKey, on: app.db))
             #expect(restored.questionIDs == existingOrder)
             #expect(try await QuizCalendarDayModel.query(on: app.db).count() == days.count)
+
+            let secondCycleDay = days[365]
+            let futureDay = try #require(try await QuizCalendarDayModel.find(secondCycleDay.dayKey, on: app.db))
+            futureDay.questionIDs = Array(secondCycleDay.questionIDs.reversed())
+            try await futureDay.save(on: app.db)
+            try await RefreshSecondQuizCycleMigration(todayKey: "2026-11-23").prepare(on: app.db)
+            let refreshed = try #require(try await QuizCalendarDayModel.find(secondCycleDay.dayKey, on: app.db))
+            let unchanged = try #require(try await QuizCalendarDayModel.find(first.dayKey, on: app.db))
+            #expect(refreshed.questionIDs == secondCycleDay.questionIDs)
+            #expect(unchanged.questionIDs == existingOrder)
+            futureDay.questionIDs = Array(secondCycleDay.questionIDs.reversed())
+            try await futureDay.save(on: app.db)
+            try await RefreshSecondQuizCycleMigration(todayKey: "2027-12-01").prepare(on: app.db)
+            let protected = try #require(try await QuizCalendarDayModel.find(secondCycleDay.dayKey, on: app.db))
+            #expect(protected.questionIDs == futureDay.questionIDs)
+            futureDay.questionIDs = secondCycleDay.questionIDs
+            try await futureDay.save(on: app.db)
             published.questionIDs = first.questionIDs
             try await published.save(on: app.db)
         }

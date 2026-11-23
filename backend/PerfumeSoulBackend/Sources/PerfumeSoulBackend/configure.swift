@@ -35,6 +35,7 @@ public func configure(_ app: Application, needsDatabase: Bool = true) throws {
     app.migrations.add(CreateQuizBankQuestionsMigration())
     app.migrations.add(CreateQuizCalendarDaysMigration())
     app.migrations.add(UseNativeQuizQuestionIDsMigration())
+    app.migrations.add(RefreshSecondQuizCycleMigration())
     app.migrations.add(CreateLegacyDailyHoroscopesMigration())
     app.migrations.add(CreateLegacyPerfumeryHistoryMigration())
 

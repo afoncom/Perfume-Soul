@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build two immutable 365-day quiz cycles using only the Python standard library."""
 
+import argparse
 import collections
 import datetime as dt
 import json
@@ -99,7 +100,7 @@ def generate_cycle(questions, previous, seed):
                 break
             for group in groups.values():
                 rng.shuffle(group)
-                # On later cycles prefer questions (and thus their topics) shown longest ago.
+                # Provisional IDs define slots only; the final pass assigns across both boundary groups.
                 group.sort(key=lambda question: previous_days.get(question["id"], 0))
                 group.reverse()
             for key, day, edge in sorted(allocations, key=lambda item: item[1]):
@@ -127,8 +128,33 @@ def generate_cycle(questions, previous, seed):
                     ordered.append(question)
                     remaining.remove(question)
                 result.append([question["id"] for question in ordered + hard])
-            return result
+            return assign_oldest_eligible(questions, previous, result) if previous else result
     raise ValueError("Cannot satisfy the calendar constraints for this bank")
+
+
+def assign_oldest_eligible(questions, previous, slots):
+    """Keep each slot's topic/difficulty, then assign IDs across both flow groups."""
+    by_id = {question["id"]: question for question in questions}
+    previous_days = {qid: day for day, ids in enumerate(previous) for qid in ids}
+    last_month = {qid for ids in previous[-30:] for qid in ids}
+    pools = collections.defaultdict(list)
+    for question in questions:
+        pools[(question["topic"], question["difficulty"])].append(question["id"])
+    for pool in pools.values():
+        pool.sort(key=lambda qid: (previous_days[qid], qid))
+    result = []
+    for day, ids in enumerate(slots):
+        assigned = []
+        for qid in ids:
+            entry = by_id[qid]
+            pool = pools[(entry["topic"], entry["difficulty"])]
+            eligible = next((index for index, candidate in enumerate(pool)
+                             if day >= 30 or candidate not in last_month), None)
+            if eligible is None:
+                raise ValueError(f"No eligible question for day {day + 1}, {entry['topic']}/{entry['difficulty']}")
+            assigned.append(pool.pop(eligible))
+        result.append(assigned)
+    return result
 
 
 def validate(questions, cycles):
@@ -150,9 +176,26 @@ def validate(questions, cycles):
         if cycle_index:
             last_month = {qid for day in cycles[cycle_index - 1][-30:] for qid in day}
             assert not last_month.intersection(qid for day in days[:30] for qid in day)
+            previous_days = {qid: day for day, ids in enumerate(cycles[cycle_index - 1]) for qid in ids}
+            unused = set(by_id)
+            for day, ids in enumerate(days):
+                for qid in ids:
+                    entry = by_id[qid]
+                    eligible = [candidate for candidate in unused
+                                if by_id[candidate]["topic"] == entry["topic"]
+                                and by_id[candidate]["difficulty"] == entry["difficulty"]
+                                and (day >= 30 or candidate not in last_month)]
+                    assert previous_days[qid] == min(previous_days[candidate] for candidate in eligible), (
+                        f"Cycle {cycle_index + 1}, day {day + 1}, ID {qid}: older eligible question exists"
+                    )
+                    unused.remove(qid)
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--regenerate-second-cycle", action="store_true",
+                        help="Replace only the still-unpublished second cycle; preserve the first cycle")
+    args = parser.parse_args()
     questions = json.loads((RESOURCES / "quiz-bank.json").read_text())["questions"]
     cycles = []
     for index in range(2):
@@ -165,9 +208,13 @@ def main():
     # Published dates must never be silently reassigned when extending the resource.
     if output.exists():
         old_days = json.loads(output.read_text())["days"]
-        assert sets[:len(old_days)] == old_days, "Refusing to change published quiz dates"
+        if args.regenerate_second_cycle:
+            assert dt.date.today() < START + dt.timedelta(days=365), "Second cycle has already started"
+            assert sets[:365] == old_days[:365], "Refusing to change the first cycle"
+        else:
+            assert sets[:len(old_days)] == old_days, "Refusing to change published quiz dates"
     output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
-    print(f"Validated {len(sets)} dates, two complete cycles and the 30-day boundary exclusion")
+    print(f"Validated {len(sets)} dates, two complete cycles, the 30-day boundary and oldest-eligible-first order")
 
 
 if __name__ == "__main__":
