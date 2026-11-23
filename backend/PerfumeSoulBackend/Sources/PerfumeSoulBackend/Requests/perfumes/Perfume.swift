@@ -37,6 +37,9 @@ struct PerfumeNotesResponse: Codable, Equatable {
     let baseNotes: [String]
     let imageURL: String?
     let imageSource: String?
+    var topNoteKeys: [String] = []
+    var middleNoteKeys: [String] = []
+    var baseNoteKeys: [String] = []
 }
 
 struct PerfumeAccordResponse: Codable, Equatable {
@@ -113,12 +116,7 @@ enum PerfumeNotesLoader {
         var middleNotes: [String] = []
         var baseNotes: [String] = []
         let isEnglish = Self.prefersEnglish(acceptLanguage: language)
-        let useEnglishNotes = isEnglish && !perfumeNotes.isEmpty && perfumeNotes.allSatisfy {
-            $0.note.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
-        }
-        if isEnglish, !useEnglishNotes, !perfumeNotes.isEmpty {
-            database.logger.debug("[perfumes] serving Russian notes for English request perfumeID=\(perfumeID)")
-        }
+        let useEnglishNotes = isEnglish
         let accords = perfumeAccords
             .sorted { lhs, rhs in
                 if lhs.weight == rhs.weight {
@@ -137,7 +135,8 @@ enum PerfumeNotesLoader {
         for perfumeNote in perfumeNotes {
             let noteName: String
             if useEnglishNotes,
-                let englishName = perfumeNote.note.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines) {
+                let englishName = perfumeNote.note.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines),
+                !englishName.isEmpty {
                 noteName = englishName
             } else {
                 noteName = perfumeNote.note.name
@@ -187,7 +186,10 @@ enum PerfumeNotesLoader {
             middleNotes: middleNotes,
             baseNotes: baseNotes,
             imageURL: nil,
-            imageSource: nil
+            imageSource: nil,
+            topNoteKeys: perfumeNotes.filter { $0.noteType == .top }.map { PerfumeNoteKey.key(for: $0.note.name, id: $0.note.id) },
+            middleNoteKeys: perfumeNotes.filter { $0.noteType == .middle }.map { PerfumeNoteKey.key(for: $0.note.name, id: $0.note.id) },
+            baseNoteKeys: perfumeNotes.filter { $0.noteType == .base }.map { PerfumeNoteKey.key(for: $0.note.name, id: $0.note.id) }
         )
     }
 

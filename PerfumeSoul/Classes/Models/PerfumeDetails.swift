@@ -39,7 +39,11 @@ struct PerfumeDetails {
 }
 
 extension PerfumeDetails {
-    init(response: PerfumeDetailsResponse) {
+    init(
+        response: PerfumeDetailsResponse,
+        languageCode: String = SupportedAppLanguage.currentCode,
+        bundle: Bundle = .main
+    ) {
         self.id = response.id
         self.brand = response.brand
         self.name = response.perfumeName
@@ -64,9 +68,9 @@ extension PerfumeDetails {
             )
         }
         self.notesLanguage = response.notesLanguage
-        self.topNotes = response.topNotes
-        self.middleNotes = response.middleNotes
-        self.baseNotes = response.baseNotes
+        self.topNotes = PerfumeNoteFormatter.names(keys: response.topNoteKeys, fallbackNames: response.topNotes, languageCode: languageCode, bundle: bundle)
+        self.middleNotes = PerfumeNoteFormatter.names(keys: response.middleNoteKeys, fallbackNames: response.middleNotes, languageCode: languageCode, bundle: bundle)
+        self.baseNotes = PerfumeNoteFormatter.names(keys: response.baseNoteKeys, fallbackNames: response.baseNotes, languageCode: languageCode, bundle: bundle)
         self.imageURL = response.imageURL.flatMap(URL.init(string:))
     }
 }
