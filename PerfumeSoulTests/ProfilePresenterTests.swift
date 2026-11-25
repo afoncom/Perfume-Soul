@@ -7,9 +7,42 @@
 
 import XCTest
 import UIKit
+import UserNotifications
 @testable import PerfumeSoul
 
 final class ProfilePresenterTests: XCTestCase {
+    @MainActor
+    func testDeleteProfileRemovesDailyPerfumeReminderAndResetsItsPreference() async throws {
+        let suite = "tests.profileNotification.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        defaults.set(true, forKey: DailyNotificationKind.dailyPerfume.preferenceKey)
+        defaults.set(true, forKey: DailyNotificationKind.history.preferenceKey)
+        let scheduler = ProfileNotificationScheduler()
+        let notifications = DailyNotificationServiceImpl(
+            userNotificationCenter: scheduler,
+            profileService: ProfileServiceMock(),
+            userDefaults: defaults
+        )
+        let viewModel = ProfileViewModel()
+        viewModel.profile = makeProfile()
+        let presenter = makePresenter(
+            viewModel: viewModel,
+            appReviewRequester: AppReviewRequesterMock(),
+            notificationService: notifications
+        )
+        let enabled = await notifications.isNotificationEnabled(for: .dailyPerfume)
+        XCTAssertTrue(enabled)
+
+        await presenter.deleteProfile()
+
+        XCTAssertFalse(defaults.bool(forKey: DailyNotificationKind.dailyPerfume.preferenceKey))
+        XCTAssertEqual(scheduler.pendingIdentifiers, [DailyNotificationKind.history.identifier])
+        let stillEnabled = await notifications.isNotificationEnabled(for: .dailyPerfume)
+        XCTAssertFalse(stillEnabled)
+        XCTAssertTrue(defaults.bool(forKey: DailyNotificationKind.history.preferenceKey))
+    }
+
     @MainActor
     func testDeleteProfileResetsCompletedQuizCount() async {
         let viewModel = ProfileViewModel()
@@ -45,7 +78,8 @@ final class ProfilePresenterTests: XCTestCase {
     private func makePresenter(
         viewModel: ProfileViewModel,
         appReviewRequester: AppReviewRequesterMock,
-        dailyPerfumeStateStorage: ViewStateStorage<DailyPerfumeState>? = nil
+        dailyPerfumeStateStorage: ViewStateStorage<DailyPerfumeState>? = nil,
+        notificationService: DailyNotificationService = ProfileNotificationServiceMock()
     ) -> ProfilePresenterImpl {
         ProfilePresenterImpl(
             viewModel: viewModel,
@@ -59,7 +93,8 @@ final class ProfilePresenterTests: XCTestCase {
             personalPerfumeTopStorage: PersonalPerfumeTopStorageMock(),
             recommendedPerfumeStateStorage: makeStorage(),
             appReviewRequester: appReviewRequester,
-            profileAvatarBuilder: ProfileAvatarBuilderMock()
+            profileAvatarBuilder: ProfileAvatarBuilderMock(),
+            notificationService: notificationService
         )
     }
 
@@ -93,6 +128,22 @@ final class ProfilePresenterTests: XCTestCase {
             dislikedPerfumeIDs: [],
             lastShownBrand: nil
         )
+    }
+}
+
+private final class ProfileNotificationServiceMock: DailyNotificationService {
+    func isNotificationEnabled(for kind: DailyNotificationKind) async -> Bool { false }
+    func enableNotification(for kind: DailyNotificationKind) async throws { }
+    func disableNotification(for kind: DailyNotificationKind) async { }
+}
+
+private final class ProfileNotificationScheduler: UserNotificationScheduling {
+    var pendingIdentifiers: Set<String> = [DailyNotificationKind.dailyPerfume.identifier, DailyNotificationKind.history.identifier]
+    func authorizationStatus() async -> UNAuthorizationStatus { .authorized }
+    func requestAuthorization(options: UNAuthorizationOptions) async throws -> Bool { true }
+    func add(_ request: UNNotificationRequest) async throws { pendingIdentifiers.insert(request.identifier) }
+    func removePendingNotificationRequests(withIdentifiers identifiers: [String]) {
+        pendingIdentifiers.subtract(identifiers)
     }
 }
 

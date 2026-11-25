@@ -155,7 +155,7 @@ extension DailyPerfumePresenterImpl {
                 profileCalculation: profileCalculation,
                 state: state
             )
-            guard shouldApplyResult(for: dayKey) else {
+            guard await shouldApplyResult(for: dayKey, profile: profile) else {
                 return
             }
 
@@ -165,7 +165,7 @@ extension DailyPerfumePresenterImpl {
                     profileCalculation: profileCalculation,
                     state: state
                 )
-                guard shouldApplyResult(for: dayKey) else {
+                guard await shouldApplyResult(for: dayKey, profile: profile) else {
                     return
                 }
             }
@@ -189,7 +189,7 @@ extension DailyPerfumePresenterImpl {
 
             setState(.content(perfume, .pending))
         } catch {
-            guard shouldApplyResult(for: dayKey) else {
+            guard await shouldApplyResult(for: dayKey, profile: profile) else {
                 return
             }
             let isCancellation = error is CancellationError || (error as? URLError)?.code == .cancelled
@@ -201,7 +201,15 @@ extension DailyPerfumePresenterImpl {
     }
 
     @MainActor
-    private func shouldApplyResult(for dayKey: String) -> Bool {
+    private func shouldApplyResult(for dayKey: String, profile: Profile) async -> Bool {
+        guard let currentProfile = await profileService.fetchProfile() else {
+            setState(.missingProfile)
+            return false
+        }
+        guard currentProfile == profile else {
+            hasPendingResolve = true
+            return false
+        }
         guard dayKey == dayKeyProvider.todayKey() else {
             hasPendingResolve = true
             return false

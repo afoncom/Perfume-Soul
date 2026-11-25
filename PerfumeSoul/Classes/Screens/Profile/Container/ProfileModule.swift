@@ -19,6 +19,7 @@ final class ProfileModule {
         let viewModel = ProfileViewModel()
         let navigationController = UINavigationController()
         let profileService = ProfileServiceImpl(container: container)
+        let notificationService = DailyNotificationServiceImpl(profileService: profileService)
         let profileCalculationService = ProfileCalculationServiceImpl(requestManager: requestManager)
         let dayKeyProvider = QuizDayKeyProviderImpl()
         let quizProgressService = QuizProgressServiceImpl(
@@ -69,6 +70,7 @@ final class ProfileModule {
             recommendedPerfumeStateStorage: recommendedPerfumeStateStorage,
             appReviewRequester: appReviewRequester,
             profileAvatarBuilder: profileAvatarBuilder,
+            notificationService: notificationService,
             catalogFavoritesStorage: CatalogFavoritesStorage(userDefaults: .standard)
         )
         

@@ -3,6 +3,37 @@ import XCTest
 
 final class DailyPerfumePresenterTests: XCTestCase {
     @MainActor
+    func testDeletedProfileIsNotRestoredByDelayedSuccessOrFailureAfterScreenCancellation() async {
+        for fails in [false, true] {
+            let profileService = DailyPerfumeProfileServiceMock(profile: makeProfile())
+            let storage = makeStorage()
+            let service = DailyPerfumeServiceMock(candidates: [], suspendsRequests: true)
+            let started = expectation(description: "Request started")
+            service.onRequest = { _ in started.fulfill() }
+            let viewModel = DailyPerfumeViewModel()
+            let presenter = makePresenter(
+                viewModel: viewModel, service: service, storage: storage, profileService: profileService
+            )
+            let load = Task { await presenter.resolve() }
+            await fulfillment(of: [started], timeout: 2)
+
+            profileService.profile = nil
+            storage.clearState()
+            load.cancel()
+            if fails {
+                service.failRequests(with: URLError(.notConnectedToInternet))
+            } else {
+                service.resumeRequests(with: [makeCandidate(id: 7, score: 0.8)])
+            }
+            await load.value
+
+            XCTAssertNil(storage.loadState())
+            XCTAssertEqual(viewModel.state, .missingProfile)
+            XCTAssertFalse(viewModel.isResolving)
+        }
+    }
+
+    @MainActor
     func testReminderQueuesNewDayAndDoesNotPersistTheDelayedPreviousDayResult() async {
         await checkQueuedReminder(cancelsFirstLoad: false)
     }
@@ -396,13 +427,14 @@ extension DailyPerfumePresenterTests {
         storage: ViewStateStorage<DailyPerfumeState>,
         collectionService: DailyPerfumeCollectionServiceMock? = nil,
         randomValue: Double = 0.5,
-        dayKeyProvider: DailyPerfumeDayKeyProvider = DailyPerfumeDayKeyProviderMock()
+        dayKeyProvider: DailyPerfumeDayKeyProvider = DailyPerfumeDayKeyProviderMock(),
+        profileService: ProfileService? = nil
     ) -> DailyPerfumePresenterImpl {
         DailyPerfumePresenterImpl(
             viewModel: viewModel,
             router: DailyPerfumeRouterMock(),
             service: service,
-            profileService: DailyPerfumeProfileServiceMock(profile: makeProfile()),
+            profileService: profileService ?? DailyPerfumeProfileServiceMock(profile: makeProfile()),
             stateStorage: storage,
             collectionService: collectionService ?? DailyPerfumeCollectionServiceMock(stateStorage: storage),
             dayKeyProvider: dayKeyProvider,
@@ -484,7 +516,7 @@ private final class DailyPerfumeRouterMock: DailyPerfumeRouter {
 }
 
 private final class DailyPerfumeProfileServiceMock: ProfileService {
-    private let profile: Profile?
+    var profile: Profile?
 
     init(profile: Profile?) {
         self.profile = profile
