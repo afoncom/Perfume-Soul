@@ -375,38 +375,10 @@ extension PerfumeRecommendationLoader {
     static func noteWeights(for perfumeProfile: PerfumeProfile) -> [String: Int] {
         var noteWeights: [String: Int] = [:]
 
-        addNotes(
-            perfumeProfile.topNotes,
-            weight: 3,
-            keys: perfumeProfile.noteKeys,
-            to: &noteWeights
-        )
-        addNotes(
-            perfumeProfile.middleNotes,
-            weight: 2,
-            keys: perfumeProfile.noteKeys,
-            to: &noteWeights
-        )
-        addNotes(
-            perfumeProfile.baseNotes,
-            weight: 1,
-            keys: perfumeProfile.noteKeys,
-            to: &noteWeights
-        )
-
-        return noteWeights
-    }
-
-    static func addNotes(
-        _ notes: [String],
-        weight: Int,
-        keys: [String: String] = [:],
-        to noteWeights: inout [String: Int]
-    ) {
-        for note in notes {
-            let normalizedNote = keys[normalize(note)] ?? PerfumeNoteKey.key(for: note)
-            noteWeights[normalizedNote, default: 0] += weight
+        for note in perfumeProfile.notes {
+            noteWeights[note.key, default: 0] += note.weight
         }
+        return noteWeights
     }
 
     fileprivate static func matchingNotesAndKeys(
@@ -640,30 +612,10 @@ private struct RecommendationTargetProfile {
         var accordWeights: [String: Double] = [:]
 
         for perfumeProfile in perfumeProfiles {
-            Self.addNotes(
-                perfumeProfile.topNotes,
-                weight: 3,
-                displayNames: perfumeProfile.noteDisplayNames,
-                keys: perfumeProfile.noteKeys,
-                noteWeights: &noteWeights,
-                noteDisplayNames: &noteDisplayNames
-            )
-            Self.addNotes(
-                perfumeProfile.middleNotes,
-                weight: 2,
-                displayNames: perfumeProfile.noteDisplayNames,
-                keys: perfumeProfile.noteKeys,
-                noteWeights: &noteWeights,
-                noteDisplayNames: &noteDisplayNames
-            )
-            Self.addNotes(
-                perfumeProfile.baseNotes,
-                weight: 1,
-                displayNames: perfumeProfile.noteDisplayNames,
-                keys: perfumeProfile.noteKeys,
-                noteWeights: &noteWeights,
-                noteDisplayNames: &noteDisplayNames
-            )
+            for note in perfumeProfile.notes {
+                noteWeights[note.key, default: 0] += note.weight
+                noteDisplayNames[note.key] = note.displayName
+            }
             Self.addAccords(
                 perfumeProfile.accordWeights,
                 accordWeights: &accordWeights
@@ -704,22 +656,6 @@ private struct RecommendationTargetProfile {
         self.averageSillageScore = Self.average(
             values: perfumeProfiles.compactMap(\.sillageScore)
         )
-    }
-
-    private static func addNotes(
-        _ notes: [String],
-        weight: Int,
-        displayNames: [String: String],
-        keys: [String: String],
-        noteWeights: inout [String: Int],
-        noteDisplayNames: inout [String: String]
-    ) {
-        for note in notes {
-            let canonicalName = PerfumeRecommendationLoader.normalize(note)
-            let normalizedNote = keys[canonicalName] ?? PerfumeNoteKey.key(for: note)
-            noteWeights[normalizedNote, default: 0] += weight
-            noteDisplayNames[normalizedNote] = displayNames[canonicalName] ?? note
-        }
     }
 
     private static func addAccords(
@@ -903,16 +839,32 @@ struct PerfumeProfileAccord: Sendable {
     let weight: Double
 }
 
+/// A pyramid entry keeps identity independent of translated or duplicate names.
+struct PerfumeProfileNoteEntry: Sendable {
+    let key: String
+    let name: String
+    let displayName: String
+    let noteType: PerfumeNoteType
+
+    var weight: Int {
+        switch noteType {
+        case .top: 3
+        case .middle: 2
+        case .base: 1
+        }
+    }
+}
+
 struct PerfumeProfile: Sendable {
     let id: Int
     let perfumeName: String
     let brandName: String
     let longevityScore: Int?
     let sillageScore: Int?
-    let topNotes: [String]
-    let middleNotes: [String]
-    let baseNotes: [String]
-    let noteDisplayNames: [String: String]
+    private(set) var notes: [PerfumeProfileNoteEntry]
+    var topNotes: [String] { notes.filter { $0.noteType == .top }.map(\.name) }
+    var middleNotes: [String] { notes.filter { $0.noteType == .middle }.map(\.name) }
+    var baseNotes: [String] { notes.filter { $0.noteType == .base }.map(\.name) }
     let accordWeights: [String: Double]
     let concentration: String?
     let fragranceFamily: String?
@@ -922,11 +874,22 @@ struct PerfumeProfile: Sendable {
     let genderProfile: String?
     let moodProfile: String?
     let marketSegment: String?
-    let signature: String
-    var noteKeys: [String: String] = [:]
-
-    func noteKey(for name: String) -> String {
-        noteKeys[PerfumeRecommendationLoader.normalize(name)] ?? PerfumeNoteKey.key(for: name)
+    var signature: String {
+        Self.makeSignature(
+            topNotes: notes.filter { $0.noteType == .top }.map(\.key),
+            middleNotes: notes.filter { $0.noteType == .middle }.map(\.key),
+            baseNotes: notes.filter { $0.noteType == .base }.map(\.key),
+            accordWeights: accordWeights,
+            concentration: concentration,
+            fragranceFamily: fragranceFamily,
+            seasonProfile: seasonProfile,
+            occasionProfile: occasionProfile,
+            styleProfile: styleProfile,
+            genderProfile: genderProfile,
+            moodProfile: moodProfile,
+            longevityScore: longevityScore,
+            sillageScore: sillageScore
+        )
     }
 
     init(
@@ -954,10 +917,16 @@ struct PerfumeProfile: Sendable {
         self.brandName = brandName
         self.longevityScore = longevityScore
         self.sillageScore = sillageScore
-        self.topNotes = topNotes
-        self.middleNotes = middleNotes
-        self.baseNotes = baseNotes
-        self.noteDisplayNames = noteDisplayNames
+        self.notes = [(PerfumeNoteType.top, topNotes), (.middle, middleNotes), (.base, baseNotes)].flatMap { type, names in
+            names.map { name in
+                PerfumeProfileNoteEntry(
+                    key: PerfumeNoteKey.key(for: name),
+                    name: name,
+                    displayName: noteDisplayNames[PerfumeRecommendationLoader.normalize(name)] ?? name,
+                    noteType: type
+                )
+            }
+        }
         self.accordWeights = accordWeights
         self.concentration = concentration
         self.fragranceFamily = fragranceFamily
@@ -967,21 +936,6 @@ struct PerfumeProfile: Sendable {
         self.genderProfile = genderProfile
         self.moodProfile = moodProfile
         self.marketSegment = marketSegment
-        self.signature = Self.makeSignature(
-            topNotes: topNotes,
-            middleNotes: middleNotes,
-            baseNotes: baseNotes,
-            accordWeights: accordWeights,
-            concentration: concentration,
-            fragranceFamily: fragranceFamily,
-            seasonProfile: seasonProfile,
-            occasionProfile: occasionProfile,
-            styleProfile: styleProfile,
-            genderProfile: genderProfile,
-            moodProfile: moodProfile,
-            longevityScore: longevityScore,
-            sillageScore: sillageScore
-        )
     }
 
     init(
@@ -1006,13 +960,6 @@ struct PerfumeProfile: Sendable {
             lhs.sortOrder < rhs.sortOrder
         }
         let isEnglish = PerfumeNotesLoader.prefersEnglish(acceptLanguage: language)
-        let useEnglishNotes = isEnglish
-        var noteDisplayNames: [String: String] = [:]
-        for note in sortedNotes {
-            let englishName = note.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines)
-            let displayName = useEnglishNotes && englishName?.isEmpty == false ? englishName! : note.name
-            noteDisplayNames[PerfumeRecommendationLoader.normalize(note.name)] = displayName
-        }
 
         self.init(
             id: id,
@@ -1023,7 +970,6 @@ struct PerfumeProfile: Sendable {
             topNotes: sortedNotes.filter { $0.noteType == .top }.map(\.name),
             middleNotes: sortedNotes.filter { $0.noteType == .middle }.map(\.name),
             baseNotes: sortedNotes.filter { $0.noteType == .base }.map(\.name),
-            noteDisplayNames: noteDisplayNames,
             accordWeights: Dictionary(
                 uniqueKeysWithValues: profileAccords.map {
                     (PerfumeRecommendationLoader.normalize($0.name), $0.weight)
@@ -1038,8 +984,14 @@ struct PerfumeProfile: Sendable {
             moodProfile: moodProfile,
             marketSegment: marketSegment
         )
-        for note in sortedNotes {
-            noteKeys[PerfumeRecommendationLoader.normalize(note.name)] = PerfumeNoteKey.key(for: note.name, id: note.id)
+        self.notes = sortedNotes.map { note in
+            let englishName = note.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines)
+            return PerfumeProfileNoteEntry(
+                key: PerfumeNoteKey.key(for: note.name, id: note.id),
+                name: note.name,
+                displayName: isEnglish ? englishName.flatMap { $0.isEmpty ? nil : $0 } ?? note.name : note.name,
+                noteType: note.noteType
+            )
         }
     }
 
@@ -1094,9 +1046,9 @@ struct PerfumeProfile: Sendable {
         sillageScore: Int?
     ) -> String {
         let noteParts = [
-            "top:" + topNotes.map { PerfumeNoteKey.key(for: $0) }.sorted().joined(separator: ","),
-            "middle:" + middleNotes.map { PerfumeNoteKey.key(for: $0) }.sorted().joined(separator: ","),
-            "base:" + baseNotes.map { PerfumeNoteKey.key(for: $0) }.sorted().joined(separator: ",")
+            "top:" + topNotes.sorted().joined(separator: ","),
+            "middle:" + middleNotes.sorted().joined(separator: ","),
+            "base:" + baseNotes.sorted().joined(separator: ",")
         ]
         let accordParts = accordWeights
             .map { key, value in

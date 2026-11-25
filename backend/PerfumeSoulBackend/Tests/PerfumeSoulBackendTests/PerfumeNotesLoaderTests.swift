@@ -5,8 +5,8 @@ import XCTFluent
 @testable import PerfumeSoulBackend
 
 struct PerfumeNotesLoaderTests {
-    @Test("Details preserve English for a translated note when a neighboring note has no translation")
-    func detailsUseKeysAndPerNoteFallback() async throws {
+    @Test("Legacy details report the actual list language", arguments: [false, true])
+    func detailsUseKeysAndPerNoteFallback(hasEnglishTranslation: Bool) async throws {
         let database = ArrayTestDatabase()
         database.append([PerfumeModel(id: 1, perfumeName: "Perfume", brandID: 1)])
         database.append([BrandModel(id: 1, name: "Brand")])
@@ -16,7 +16,7 @@ struct PerfumeNotesLoaderTests {
         ])
         database.append([
             NoteModel(id: 10, name: "Бергамот", nameEnglish: "Bergamot"),
-            NoteModel(id: 99, name: "Редкая нота")
+            NoteModel(id: 99, name: "Редкая нота", nameEnglish: hasEnglishTranslation ? "Rare note" : nil)
         ])
         database.append([])
         try await withApp { app in
@@ -25,7 +25,8 @@ struct PerfumeNotesLoaderTests {
             try await app.testing().test(.GET, "/perfumes/1/notes", headers: ["Accept-Language": "en"]) { response in
                 #expect(response.status == .ok)
                 let notes = try JSONDecoder().decode(PerfumeNotesResponse.self, from: Data(response.body.string.utf8))
-                #expect(notes.topNotes == ["Bergamot", "Редкая нота"])
+                #expect(notes.topNotes == (hasEnglishTranslation ? ["Bergamot", "Rare note"] : ["Бергамот", "Редкая нота"]))
+                #expect(notes.notesLanguage == (hasEnglishTranslation ? "en" : "ru"))
                 #expect(notes.topNoteKeys == ["bergamot", "note:99"])
             }
         }

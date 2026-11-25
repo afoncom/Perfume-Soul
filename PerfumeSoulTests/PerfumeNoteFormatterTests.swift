@@ -13,7 +13,7 @@ final class PerfumeNoteFormatterTests: XCTestCase {
     func testSameNoteKeyHasSameNameAcrossAllThreeResponsesWithPerNoteFallback() throws {
         let detailsJSON = """
         {"id":1,"brand":"Brand","perfumeName":"Perfume", "topNoteKeys":["bergamot","note:99"],
-        "topNotes":["Старое имя","Редкая нота"],"middleNotes":[],"baseNotes":[]}
+        "notesLanguage":"ru","topNotes":["Бергамот","Редкая нота"],"middleNotes":[],"baseNotes":[]}
         """
         let recommendationsJSON = """
         {"id":1,"brandName":"Brand","perfumeName":"Perfume","matchingNoteKeys":["bergamot","note:99"],

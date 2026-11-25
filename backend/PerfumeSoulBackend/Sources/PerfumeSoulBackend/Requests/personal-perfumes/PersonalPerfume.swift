@@ -681,10 +681,8 @@ enum PersonalPerfumeScorer {
 
     fileprivate static func noteWeights(for perfumeProfile: PerfumeProfile) -> [String: Double] {
         var noteWeights: [String: Double] = [:]
-        for (notes, weight) in [(perfumeProfile.topNotes, 3.0), (perfumeProfile.middleNotes, 2.0), (perfumeProfile.baseNotes, 1.0)] {
-            for note in notes {
-                noteWeights[perfumeProfile.noteKey(for: note), default: 0] += weight
-            }
+        for note in perfumeProfile.notes {
+            noteWeights[note.key, default: 0] += Double(note.weight)
         }
         return noteWeights
     }

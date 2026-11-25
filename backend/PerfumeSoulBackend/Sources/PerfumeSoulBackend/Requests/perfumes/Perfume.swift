@@ -116,7 +116,10 @@ enum PerfumeNotesLoader {
         var middleNotes: [String] = []
         var baseNotes: [String] = []
         let isEnglish = Self.prefersEnglish(acceptLanguage: language)
-        let useEnglishNotes = isEnglish
+        // Legacy clients treat notesLanguage as the language of the entire pyramid.
+        let useEnglishNotes = isEnglish && perfumeNotes.allSatisfy {
+            !($0.note.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)
+        }
         let accords = perfumeAccords
             .sorted { lhs, rhs in
                 if lhs.weight == rhs.weight {

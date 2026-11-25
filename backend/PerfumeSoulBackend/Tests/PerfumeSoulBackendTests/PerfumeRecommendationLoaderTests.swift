@@ -20,6 +20,49 @@ struct PerfumeRecommendationLoaderTests {
         #expect(PerfumeNoteKey.key(for: "Апельсиновый цвет") == "orange_blossom")
     }
 
+    @Test("Equal Russian names retain distinct IDs, localized names and matches")
+    func equalNamesRetainIdentity() async throws {
+        func profile(id: Int, notes: [PerfumeProfileNote], language: String) -> PerfumeProfile {
+            PerfumeProfile(
+                id: id,
+                perfumeName: "Perfume \(id)",
+                brandName: "Brand",
+                longevityScore: nil,
+                sillageScore: nil,
+                concentration: nil,
+                fragranceFamily: nil,
+                seasonProfile: nil,
+                occasionProfile: nil,
+                styleProfile: nil,
+                genderProfile: nil,
+                moodProfile: nil,
+                marketSegment: nil,
+                profileNotes: notes,
+                profileAccords: [],
+                language: language
+            )
+        }
+        let blonde = PerfumeProfileNote(
+            name: "Светлая древесина", nameEnglish: "Blonde Woods", noteType: .top, sortOrder: 0, id: 501
+        )
+        let white = PerfumeProfileNote(
+            name: "Светлая древесина", nameEnglish: "White Woods", noteType: .top, sortOrder: 1, id: 502
+        )
+        for language in ["ru", "en"] {
+            let source = profile(id: 1, notes: [blonde, white], language: language)
+            let candidate = profile(id: 2, notes: [blonde], language: language)
+            let other = profile(id: 3, notes: [white], language: language)
+            #expect(PerfumeRecommendationLoader.noteWeights(for: source) == ["note:501": 3, "note:502": 3])
+            #expect(candidate.signature != other.signature)
+            let result = try await loadRecommendations(perfumeProfiles: [source, candidate, other], selectedPerfumeIDs: [1])
+            #expect(result.count == 2)
+            #expect(result.first { $0.id == 2 }?.matchingNoteKeys == ["note:501"])
+            #expect(result.first { $0.id == 3 }?.matchingNoteKeys == ["note:502"])
+            #expect(result.first { $0.id == 2 }?.matchingNotes == [language == "en" ? "Blonde Woods" : "Светлая древесина"])
+            #expect(result.first { $0.id == 3 }?.matchingNotes == [language == "en" ? "White Woods" : "Светлая древесина"])
+        }
+    }
+
     @Test("SQL profile mapping preserves notes, accords and localized names")
     func sqlProfileMappingPreservesNotesAccordsAndLocalizedNames() throws {
         let row = SimilarPerfumeProfileRow(
@@ -44,7 +87,7 @@ struct PerfumeRecommendationLoaderTests {
 
         #expect(profile.topNotes == ["Бергамот"])
         #expect(profile.baseNotes == ["Мускус"])
-        #expect(profile.noteDisplayNames["бергамот"] == "Bergamot")
+        #expect(profile.notes.first { $0.key == "bergamot" }?.displayName == "Bergamot")
         #expect(profile.accordWeights == ["citrus": 0.8])
     }
 
