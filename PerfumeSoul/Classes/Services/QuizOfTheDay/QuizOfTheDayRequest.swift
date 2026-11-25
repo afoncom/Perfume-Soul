@@ -15,8 +15,10 @@ struct QuizOfTheDayRequest: Request {
         switch version {
         case .legacy:
             return "/quiz-of-the-day"
-        case .bank, .calendar:
+        case .bank:
             return "/v2/quiz-of-the-day"
+        case .calendar:
+            return "/v3/quiz-of-the-day"
         }
     }
 

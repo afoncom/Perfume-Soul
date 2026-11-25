@@ -9,6 +9,16 @@ import XCTFluent
 @testable import PerfumeSoulBackend
 
 struct QuizCalendarTests {
+    @Test("V3 requires a dayKey and cannot silently return bank questions")
+    func calendarRequiresDayKey() async throws {
+        try await withApp { app in
+            try routes(app)
+            try await app.testing().test(.GET, "/v3/quiz-of-the-day") { response in
+                #expect(response.status == .badRequest)
+            }
+        }
+    }
+
     @Test("Second-cycle slots always use the oldest eligible question of the same topic and difficulty")
     func oldestEligibleQuestionsAreRepeatedFirst() throws {
         let days = try QuizCalendar.load()
@@ -145,7 +155,7 @@ struct QuizCalendarTests {
             app.databases.use(database.configuration, as: .psql)
             try routes(app)
             try await app.testing().test(
-                .GET, "/v2/quiz-of-the-day?dayKey=\(day.dayKey)", headers: ["Accept-Language": language]
+                .GET, "/v3/quiz-of-the-day?dayKey=\(day.dayKey)", headers: ["Accept-Language": language]
             ) { response in
                 #expect(response.status == .ok)
                 let returned = try JSONDecoder().decode(
@@ -166,7 +176,7 @@ struct QuizCalendarTests {
         try await withApp { app in
             app.databases.use(database.configuration, as: .psql)
             try routes(app)
-            try await app.testing().test(.GET, "/v2/quiz-of-the-day?dayKey=\(value)") { response in
+            try await app.testing().test(.GET, "/v3/quiz-of-the-day?dayKey=\(value)") { response in
                 #expect(response.status == .badRequest)
             }
         }
@@ -178,7 +188,7 @@ struct QuizCalendarTests {
         try await withApp { app in
             app.databases.use(database.configuration, as: .psql)
             try routes(app)
-            try await app.testing().test(.GET, "/v2/quiz-of-the-day?dayKey=2026-11-30") { response in
+            try await app.testing().test(.GET, "/v3/quiz-of-the-day?dayKey=2026-11-30") { response in
                 #expect(response.status == .notFound)
             }
         }

@@ -27,8 +27,8 @@ struct QuizBankTests {
         }
     }
 
-    @Test("The versioned endpoint returns the new bank in the requested language", arguments: ["ru", "en"])
-    func versionedEndpointUsesBank(language: String) async throws {
+    @Test("V2 preserves bank IDs even if dayKey is supplied", arguments: ["ru", "en"], ["", "?dayKey=2026-12-01"])
+    func versionedEndpointUsesBank(language: String, query: String) async throws {
         let database = ArrayTestDatabase()
         let models = try QuizBankSeed.load().prefix(15).map { entry in
             let model = QuizBankQuestionModel()
@@ -41,7 +41,7 @@ struct QuizBankTests {
             app.databases.use(database.configuration, as: .psql)
             try routes(app)
             try await app.testing().test(
-                .GET, "/v2/quiz-of-the-day", headers: ["Accept-Language": language]
+                .GET, "/v2/quiz-of-the-day\(query)", headers: ["Accept-Language": language]
             ) { response in
                 #expect(response.status == .ok)
                 let questions = try JSONDecoder().decode(

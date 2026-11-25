@@ -11,6 +11,83 @@ import XCTest
 
 final class QuizOfTheDayPresenterTests: XCTestCase {
     @MainActor
+    func testBankAnswersAndCompletionSurviveBackendUpgradeOnSameDay() async {
+        let storage = ViewStateStorage<DailyQuizState>(
+            userDefaults: .standard, storableKey: "tests.bankBackendUpgrade.\(UUID().uuidString)"
+        )
+        defer { storage.clearState() }
+        var saved = DailyQuizState.initial(
+            quizDayKey: "2026-12-01", questionIDs: [10_001, 10_002], questionSetVersion: .bank
+        )
+        saved.isCompleted = true
+        saved.questionStates[0].selectedAnswerID = "A"
+        saved.questionStates[0].isSubmitted = true
+        storage.saveState(saved)
+        let manager = UpgradingQuizRequestManager()
+        let dayProvider = QuizDayKeyProviderMock()
+        dayProvider.dayKey = "2026-12-01"
+        let viewModel = QuizOfTheDayViewModel()
+        let presenter = makePresenter(
+            router: QuizOfTheDayRouterMock(),
+            viewModel: viewModel,
+            service: QuizOfTheDayServiceImpl(requestManager: manager),
+            storage: storage,
+            dayKeyProvider: dayProvider
+        )
+
+        await presenter.onAppear()
+        XCTAssertEqual(storage.loadState(), saved)
+        manager.supportsCalendar = true
+        await presenter.onAppear()
+
+        XCTAssertEqual(storage.loadState(), saved)
+        XCTAssertTrue(viewModel.isQuizCompleted)
+        XCTAssertEqual(manager.paths, ["/v2/quiz-of-the-day", "/v2/quiz-of-the-day"])
+    }
+
+    @MainActor
+    func testOldBackendCannotCreateOrOverwriteCalendarSessionBeforeSameDayUpgrade() async throws {
+        for hasSavedSession in [false, true] {
+            let storage = ViewStateStorage<DailyQuizState>(
+                userDefaults: .standard, storableKey: "tests.quizBackendUpgrade.\(UUID().uuidString)"
+            )
+            defer { storage.clearState() }
+            var saved = DailyQuizState.initial(
+                quizDayKey: "2026-12-01", questionIDs: [12_001, 12_002], questionSetVersion: .calendar
+            )
+            saved.isCompleted = true
+            saved.questionStates[0].selectedAnswerID = "A"
+            saved.questionStates[0].isSubmitted = true
+            if hasSavedSession { storage.saveState(saved) }
+            let manager = UpgradingQuizRequestManager()
+            let dayProvider = QuizDayKeyProviderMock()
+            dayProvider.dayKey = "2026-12-01"
+            let viewModel = QuizOfTheDayViewModel()
+            let presenter = makePresenter(
+                router: QuizOfTheDayRouterMock(),
+                viewModel: viewModel,
+                service: QuizOfTheDayServiceImpl(requestManager: manager),
+                storage: storage,
+                dayKeyProvider: dayProvider
+            )
+
+            await presenter.onAppear()
+
+            XCTAssertEqual(storage.loadState(), hasSavedSession ? saved : nil)
+            XCTAssertNotNil(viewModel.errorMessage)
+            XCTAssertEqual(manager.paths, ["/v3/quiz-of-the-day"])
+
+            manager.supportsCalendar = true
+            await presenter.onAppear()
+
+            XCTAssertNil(viewModel.errorMessage)
+            XCTAssertEqual(viewModel.questions.map(\.id), [12_001, 12_002])
+            XCTAssertEqual(storage.loadState()?.questionSetVersion, .calendar)
+            if hasSavedSession { XCTAssertEqual(storage.loadState(), saved) }
+        }
+    }
+
+    @MainActor
     func testCalendarStartsOnDecemberFirstAndPreservesExistingBankSessionUntilNextDay() async throws {
         let defaults = try XCTUnwrap(UserDefaults(suiteName: "tests.quizCalendar.\(UUID().uuidString)"))
         let storage = ViewStateStorage<DailyQuizState>(userDefaults: defaults, storableKey: "quiz")
@@ -131,7 +208,7 @@ final class QuizOfTheDayPresenterTests: XCTestCase {
         XCTAssertEqual(QuizOfTheDayRequest(version: .legacy).path, "/quiz-of-the-day")
         XCTAssertEqual(QuizOfTheDayRequest(version: .bank).path, "/v2/quiz-of-the-day")
         let request = QuizOfTheDayRequest(version: .calendar, dayKey: "2026-12-01")
-        XCTAssertEqual(request.path, "/v2/quiz-of-the-day")
+        XCTAssertEqual(request.path, "/v3/quiz-of-the-day")
         XCTAssertEqual(request.queryItems, [URLQueryItem(name: "dayKey", value: "2026-12-01")])
         XCTAssertTrue(QuizOfTheDayRequest(version: .bank, dayKey: "2026-12-01").queryItems.isEmpty)
         XCTAssertTrue(QuizOfTheDayRequest(version: .legacy).queryItems.isEmpty)
@@ -234,6 +311,30 @@ final class QuizOfTheDayPresenterTests: XCTestCase {
             quizProgressService: quizProgressService,
             dayKeyProvider: dayKeyProvider
         )
+    }
+}
+
+private final class UpgradingQuizRequestManager: RequestManager {
+    var supportsCalendar = false
+    var paths: [String] = []
+
+    func sendRequest<Response: Decodable>(request: Request) async throws -> Response {
+        paths.append(request.path)
+        let isCalendar = request.path == "/v3/quiz-of-the-day"
+        if isCalendar, !supportsCalendar {
+            throw RequestManagerError.clientError(statusCode: 404, reason: "Not Found")
+        }
+        // The old backend ignores dayKey on v2 and still returns HTTP 200 with bank IDs.
+        let ids = isCalendar ? [12_001, 12_002] : [10_001, 10_002]
+        let questions: [[String: Any]] = ids.map { id in
+            [
+                "id": id,
+                "question": "Question",
+                "explanation": "Explanation",
+                "answers": [["id": "A", "text": "Answer", "isCorrect": true]]
+            ]
+        }
+        return try JSONDecoder().decode(Response.self, from: JSONSerialization.data(withJSONObject: questions))
     }
 }
 

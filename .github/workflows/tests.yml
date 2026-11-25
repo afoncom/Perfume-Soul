@@ -144,9 +144,9 @@ jobs:
         ' legacy-perfumery-history.json
         curl -f http://127.0.0.1:8080/quiz-of-the-day
         curl -fsS -H 'Accept-Language: ru' \
-          'http://127.0.0.1:8080/v2/quiz-of-the-day?dayKey=2026-12-01' > quiz-ru.json
+          'http://127.0.0.1:8080/v3/quiz-of-the-day?dayKey=2026-12-01' > quiz-ru.json
         curl -fsS -H 'Accept-Language: en' \
-          'http://127.0.0.1:8080/v2/quiz-of-the-day?dayKey=2026-12-01' > quiz-en.json
+          'http://127.0.0.1:8080/v3/quiz-of-the-day?dayKey=2026-12-01' > quiz-en.json
         jq -e 'type == "array" and length == 15' quiz-ru.json
         diff <(jq '[.[].id]' quiz-ru.json) <(jq '[.[].id]' quiz-en.json)
         docker compose exec -T postgres \
