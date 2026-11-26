@@ -681,20 +681,10 @@ enum PersonalPerfumeScorer {
 
     fileprivate static func noteWeights(for perfumeProfile: PerfumeProfile) -> [String: Double] {
         var noteWeights: [String: Double] = [:]
-        addNotes(perfumeProfile.topNotes, weight: 3, to: &noteWeights)
-        addNotes(perfumeProfile.middleNotes, weight: 2, to: &noteWeights)
-        addNotes(perfumeProfile.baseNotes, weight: 1, to: &noteWeights)
-        return noteWeights
-    }
-
-    fileprivate static func addNotes(
-        _ notes: [String],
-        weight: Double,
-        to noteWeights: inout [String: Double]
-    ) {
-        for note in notes {
-            noteWeights[normalize(note), default: 0] += weight
+        for note in perfumeProfile.notes {
+            noteWeights[note.key, default: 0] += Double(note.weight)
         }
+        return noteWeights
     }
 
     fileprivate static func weightedSimilarity(
@@ -743,9 +733,9 @@ extension PersonalPerfumePreference {
         }
 
         for note in signPreference.notes {
-            let normalizedNote = PersonalPerfumeScorer.normalize(note)
+            let normalizedNote = PerfumeNoteKey.key(for: note)
             noteWeights[normalizedNote, default: 0] += noteWeight
-            noteKeys[normalizedNote] = PersonalPerfumeNoteKey.key(for: note)
+            noteKeys[normalizedNote] = PerfumeNoteKey.key(for: note)
         }
     }
 
@@ -782,9 +772,9 @@ extension PersonalPerfumePreference {
 
         let noteWeight = multiplier * 3
         for note in elementPreference.notes {
-            let normalizedNote = PersonalPerfumeScorer.normalize(note)
+            let normalizedNote = PerfumeNoteKey.key(for: note)
             noteWeights[normalizedNote, default: 0] += noteWeight
-            noteKeys[normalizedNote] = PersonalPerfumeNoteKey.key(for: note)
+            noteKeys[normalizedNote] = PerfumeNoteKey.key(for: note)
         }
 
         addTokens(elementPreference.fragranceTokens, weight: multiplier, to: &fragranceTokenWeights)
@@ -808,40 +798,6 @@ extension Array where Element == ScoredPersonalPerfume {
     }
 }
 
-private enum PersonalPerfumeNoteKey {
-    private static let keysByNormalizedNote: [String: String] = [
-        "апельсиновый цвет": "orange_blossom",
-        "амбра": "amber",
-        "бергамот": "bergamot",
-        "ваниль": "vanilla",
-        "ветивер": "vetiver",
-        "грейпфрут": "grapefruit",
-        "жасмин": "jasmine",
-        "имбирь": "ginger",
-        "ирис": "iris",
-        "кардамон": "cardamom",
-        "кедр": "cedar",
-        "кожа": "leather",
-        "лаванда": "lavender",
-        "ладан": "incense",
-        "лимон": "lemon",
-        "можжевельник": "juniper",
-        "морские ноты": "marine_notes",
-        "мускус": "musk",
-        "мята": "mint",
-        "пачули": "patchouli",
-        "перец": "pepper",
-        "роза": "rose",
-        "сандал": "sandalwood",
-        "чай": "tea",
-        "уд": "oud",
-        "шафран": "saffron"
-    ]
-
-    static func key(for note: String) -> String? {
-        keysByNormalizedNote[PersonalPerfumeScorer.normalize(note)]
-    }
-}
 
 private struct SignPerfumePreference {
     let accords: [String]

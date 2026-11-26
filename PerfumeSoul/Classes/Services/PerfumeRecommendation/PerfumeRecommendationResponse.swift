@@ -16,4 +16,5 @@ struct PerfumeRecommendationResponse: Decodable {
     let matchPercentage: Int
     let longevityScore: Int?
     let sillageScore: Int?
+    var matchingNoteKeys: [String]?
 }

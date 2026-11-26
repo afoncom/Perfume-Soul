@@ -19,11 +19,15 @@ struct PerfumeRecommendation {
 }
 
 extension PerfumeRecommendation {
-    init(response: PerfumeRecommendationResponse) {
+    init(
+        response: PerfumeRecommendationResponse,
+        languageCode: String = SupportedAppLanguage.currentCode,
+        bundle: Bundle = .main
+    ) {
         self.id = response.id
         self.perfumeName = response.perfumeName
         self.brandName = response.brandName
-        self.matchingNotes = response.matchingNotes
+        self.matchingNotes = PerfumeNoteFormatter.names(keys: response.matchingNoteKeys, fallbackNames: response.matchingNotes, languageCode: languageCode, bundle: bundle)
         self.matchPercentage = response.matchPercentage
         self.longevityScore = response.longevityScore
         self.sillageScore = response.sillageScore

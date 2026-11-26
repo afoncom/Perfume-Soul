@@ -31,6 +31,19 @@ struct PerfumeDetailsResponse: Decodable {
     let middleNotes: [String]
     let baseNotes: [String]
     let imageURL: String?
+    let topNoteKeys: [String]?
+    let middleNoteKeys: [String]?
+    let baseNoteKeys: [String]?
+
+    struct Note: Decodable {
+        let key: String
+        let name: String
+        let language: String
+    }
+
+    let topNoteItems: [Note]?
+    let middleNoteItems: [Note]?
+    let baseNoteItems: [Note]?
 
     private enum CodingKeys: String, CodingKey {
         case id
@@ -56,6 +69,12 @@ struct PerfumeDetailsResponse: Decodable {
         case middleNotes
         case baseNotes
         case imageURL
+        case topNoteKeys
+        case middleNoteKeys
+        case baseNoteKeys
+        case topNoteItems
+        case middleNoteItems
+        case baseNoteItems
     }
 
     init(from decoder: any Decoder) throws {
@@ -84,6 +103,12 @@ struct PerfumeDetailsResponse: Decodable {
         self.middleNotes = try container.decode([String].self, forKey: .middleNotes)
         self.baseNotes = try container.decode([String].self, forKey: .baseNotes)
         self.imageURL = try container.decodeIfPresent(String.self, forKey: .imageURL)
+        self.topNoteKeys = try container.decodeIfPresent([String].self, forKey: .topNoteKeys)
+        self.middleNoteKeys = try container.decodeIfPresent([String].self, forKey: .middleNoteKeys)
+        self.baseNoteKeys = try container.decodeIfPresent([String].self, forKey: .baseNoteKeys)
+        self.topNoteItems = try container.decodeIfPresent([Note].self, forKey: .topNoteItems)
+        self.middleNoteItems = try container.decodeIfPresent([Note].self, forKey: .middleNoteItems)
+        self.baseNoteItems = try container.decodeIfPresent([Note].self, forKey: .baseNoteItems)
     }
 }
 

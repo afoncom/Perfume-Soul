@@ -3,6 +3,66 @@ import Vapor
 @testable import PerfumeSoulBackend
 
 struct PerfumeRecommendationLoaderTests {
+    @Test("Scoring and API note keys are independent of display language")
+    func scoringUsesStableNoteKeys() async throws {
+        let candidate = PerfumeProfile(id: 2, perfumeName: "Candidate", brandName: "Brand", topNotes: ["Бергамот"])
+        let russian = PerfumeProfile(id: 1, perfumeName: "Source", brandName: "Brand", topNotes: ["Бергамот"])
+        let english = PerfumeProfile(id: 1, perfumeName: "Source", brandName: "Brand", topNotes: ["Bergamot"])
+        let ruResult = try await loadRecommendations(perfumeProfiles: [russian, candidate], selectedPerfumeIDs: [1])
+        let enResult = try await loadRecommendations(perfumeProfiles: [english, candidate], selectedPerfumeIDs: [1])
+        #expect(PerfumeRecommendationLoader.noteWeights(for: russian) == ["bergamot": 3])
+        #expect(PerfumeRecommendationLoader.noteWeights(for: english) == ["bergamot": 3])
+        #expect(ruResult.map(\.matchingNoteKeys) == [["bergamot"]])
+        #expect(enResult.map(\.matchingNoteKeys) == ruResult.map(\.matchingNoteKeys))
+        #expect(enResult.map(\.matchPercentage) == ruResult.map(\.matchPercentage))
+        #expect(PerfumeNoteKey.key(for: "Редкая нота", id: 99) == "note:99")
+        #expect(PerfumeNoteKey.key(for: "Морские ноты") == "marine_notes")
+        #expect(PerfumeNoteKey.key(for: "Апельсиновый цвет") == "orange_blossom")
+    }
+
+    @Test("Equal Russian names retain distinct IDs, localized names and matches")
+    func equalNamesRetainIdentity() async throws {
+        func profile(id: Int, notes: [PerfumeProfileNote], language: String) -> PerfumeProfile {
+            PerfumeProfile(
+                id: id,
+                perfumeName: "Perfume \(id)",
+                brandName: "Brand",
+                longevityScore: nil,
+                sillageScore: nil,
+                concentration: nil,
+                fragranceFamily: nil,
+                seasonProfile: nil,
+                occasionProfile: nil,
+                styleProfile: nil,
+                genderProfile: nil,
+                moodProfile: nil,
+                marketSegment: nil,
+                profileNotes: notes,
+                profileAccords: [],
+                language: language
+            )
+        }
+        let blonde = PerfumeProfileNote(
+            name: "Светлая древесина", nameEnglish: "Blonde Woods", noteType: .top, sortOrder: 0, id: 501
+        )
+        let white = PerfumeProfileNote(
+            name: "Светлая древесина", nameEnglish: "White Woods", noteType: .top, sortOrder: 1, id: 502
+        )
+        for language in ["ru", "en"] {
+            let source = profile(id: 1, notes: [blonde, white], language: language)
+            let candidate = profile(id: 2, notes: [blonde], language: language)
+            let other = profile(id: 3, notes: [white], language: language)
+            #expect(PerfumeRecommendationLoader.noteWeights(for: source) == ["note:501": 3, "note:502": 3])
+            #expect(candidate.signature != other.signature)
+            let result = try await loadRecommendations(perfumeProfiles: [source, candidate, other], selectedPerfumeIDs: [1])
+            #expect(result.count == 2)
+            #expect(result.first { $0.id == 2 }?.matchingNoteKeys == ["note:501"])
+            #expect(result.first { $0.id == 3 }?.matchingNoteKeys == ["note:502"])
+            #expect(result.first { $0.id == 2 }?.matchingNotes == [language == "en" ? "Blonde Woods" : "Светлая древесина"])
+            #expect(result.first { $0.id == 3 }?.matchingNotes == [language == "en" ? "White Woods" : "Светлая древесина"])
+        }
+    }
+
     @Test("SQL profile mapping preserves notes, accords and localized names")
     func sqlProfileMappingPreservesNotesAccordsAndLocalizedNames() throws {
         let row = SimilarPerfumeProfileRow(
@@ -27,7 +87,7 @@ struct PerfumeRecommendationLoaderTests {
 
         #expect(profile.topNotes == ["Бергамот"])
         #expect(profile.baseNotes == ["Мускус"])
-        #expect(profile.noteDisplayNames["бергамот"] == "Bergamot")
+        #expect(profile.notes.first { $0.key == "bergamot" }?.displayName == "Bergamot")
         #expect(profile.accordWeights == ["citrus": 0.8])
     }
 
@@ -114,8 +174,7 @@ struct PerfumeRecommendationLoaderTests {
             topNotes: ["Бергамот"],
             noteDisplayNames: [
                 PerfumeRecommendationLoader.normalize("Бергамот"): "Bergamot"
-            ],
-            usesLocalizedNoteDisplayNames: true
+            ]
         )
         let candidate = PerfumeProfile(
             id: 2,
@@ -141,8 +200,7 @@ struct PerfumeRecommendationLoaderTests {
             topNotes: ["Бергамот"],
             noteDisplayNames: [
                 PerfumeRecommendationLoader.normalize("Бергамот"): "Bergamot First"
-            ],
-            usesLocalizedNoteDisplayNames: true
+            ]
         )
         let secondRequested = PerfumeProfile(
             id: 2,
@@ -151,8 +209,7 @@ struct PerfumeRecommendationLoaderTests {
             topNotes: ["Бергамот"],
             noteDisplayNames: [
                 PerfumeRecommendationLoader.normalize("Бергамот"): "Bergamot Second"
-            ],
-            usesLocalizedNoteDisplayNames: true
+            ]
         )
         let candidate = PerfumeProfile(
             id: 3,
@@ -177,8 +234,8 @@ struct PerfumeRecommendationLoaderTests {
         #expect(recommendations.map(\.matchingNotes) == [["Bergamot Second"]])
     }
 
-    @Test("Selected perfumes fall back to base note names when any selected display map is incomplete")
-    func selectedPerfumesFallBackToBaseNoteNamesWhenAnyDisplayMapIsIncomplete() async throws {
+    @Test("A missing display name falls back per note without changing other selected notes")
+    func selectedPerfumesFallBackPerNote() async throws {
         let englishSelectedPerfume = PerfumeProfile(
             id: 1,
             perfumeName: "English Selected",
@@ -186,8 +243,7 @@ struct PerfumeRecommendationLoaderTests {
             topNotes: ["Бергамот"],
             noteDisplayNames: [
                 PerfumeRecommendationLoader.normalize("Бергамот"): "Bergamot"
-            ],
-            usesLocalizedNoteDisplayNames: true
+            ]
         )
         let fallbackSelectedPerfume = PerfumeProfile(
             id: 2,
@@ -207,7 +263,7 @@ struct PerfumeRecommendationLoaderTests {
             selectedPerfumeIDs: [englishSelectedPerfume.id, fallbackSelectedPerfume.id]
         )
 
-        #expect(recommendations.map(\.matchingNotes) == [["Бергамот", "Жасмин"]])
+        #expect(recommendations.map(\.matchingNotes) == [["Bergamot", "Жасмин"]])
     }
 
     @Test("Matching notes keep the same cutoff before applying display names")
@@ -224,8 +280,7 @@ struct PerfumeRecommendationLoaderTests {
                 PerfumeRecommendationLoader.normalize("Кедр"): "Cedar",
                 PerfumeRecommendationLoader.normalize("Мускус"): "Musk",
                 PerfumeRecommendationLoader.normalize("Роза"): "Rose"
-            ],
-            usesLocalizedNoteDisplayNames: true
+            ]
         )
         let candidate = PerfumeProfile(
             id: 2,
@@ -239,7 +294,8 @@ struct PerfumeRecommendationLoaderTests {
             selectedPerfumeIDs: [selectedPerfume.id]
         )
 
-        #expect(recommendations.map(\.matchingNotes) == [["Bergamot", "Vanilla", "Jasmine", "Cedar", "Musk"]])
+        #expect(recommendations.map(\.matchingNotes) == [["Bergamot", "Cedar", "Jasmine", "Musk", "Rose"]])
+        #expect(recommendations.map(\.matchingNoteKeys) == [["bergamot", "cedar", "jasmine", "musk", "rose"]])
     }
 
     @Test("Equal scores use deterministic brand, perfume, and id tie-breakers")

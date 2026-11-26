@@ -16,6 +16,17 @@ struct PersonalPerfumeResponse: Decodable {
     let matchPercentage: Int
     let longevityScore: Int?
     let sillageScore: Int?
+    var matchingNoteKeys: [String]?
+
+    var matchingNotes: [String] {
+        localizedMatchingNotes()
+    }
+    func localizedMatchingNotes(
+        languageCode: String = SupportedAppLanguage.currentCode,
+        bundle: Bundle = .main
+    ) -> [String] {
+        PerfumeNoteFormatter.names(keys: matchingNoteKeys, fallbackNames: [], languageCode: languageCode, bundle: bundle)
+    }
 }
 
 enum PersonalPerfumeMarketSegment: String, Decodable, CaseIterable {
