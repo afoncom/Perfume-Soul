@@ -40,6 +40,16 @@ struct PerfumeNotesResponse: Codable, Equatable {
     var topNoteKeys: [String] = []
     var middleNoteKeys: [String] = []
     var baseNoteKeys: [String] = []
+    var topNoteItems: [PerfumeNoteResponse] = []
+    var middleNoteItems: [PerfumeNoteResponse] = []
+    var baseNoteItems: [PerfumeNoteResponse] = []
+}
+
+/// Per-note fallback for key-aware clients; legacy arrays keep their single-language contract.
+struct PerfumeNoteResponse: Codable, Equatable {
+    let key: String
+    let name: String
+    let language: String
 }
 
 struct PerfumeAccordResponse: Codable, Equatable {
@@ -159,6 +169,19 @@ enum PerfumeNotesLoader {
             return nil
         }
 
+        func noteItems(_ type: PerfumeNoteType) -> [PerfumeNoteResponse] {
+            perfumeNotes.filter { $0.noteType == type }.map { perfumeNote in
+                let note = perfumeNote.note
+                let englishName = note.nameEnglish?.trimmingCharacters(in: .whitespacesAndNewlines)
+                let useEnglishName = isEnglish && englishName?.isEmpty == false
+                return PerfumeNoteResponse(
+                    key: PerfumeNoteKey.key(for: note.name, id: note.id),
+                    name: useEnglishName ? englishName! : note.name,
+                    language: useEnglishName ? "en" : "ru"
+                )
+            }
+        }
+
         return PerfumeNotesResponse(
             id: id,
             brand: perfume.brand.name,
@@ -192,7 +215,10 @@ enum PerfumeNotesLoader {
             imageSource: nil,
             topNoteKeys: perfumeNotes.filter { $0.noteType == .top }.map { PerfumeNoteKey.key(for: $0.note.name, id: $0.note.id) },
             middleNoteKeys: perfumeNotes.filter { $0.noteType == .middle }.map { PerfumeNoteKey.key(for: $0.note.name, id: $0.note.id) },
-            baseNoteKeys: perfumeNotes.filter { $0.noteType == .base }.map { PerfumeNoteKey.key(for: $0.note.name, id: $0.note.id) }
+            baseNoteKeys: perfumeNotes.filter { $0.noteType == .base }.map { PerfumeNoteKey.key(for: $0.note.name, id: $0.note.id) },
+            topNoteItems: noteItems(.top),
+            middleNoteItems: noteItems(.middle),
+            baseNoteItems: noteItems(.base)
         )
     }
 

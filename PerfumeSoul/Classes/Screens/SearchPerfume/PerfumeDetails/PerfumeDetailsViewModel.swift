@@ -70,7 +70,10 @@ enum PerfumeDetailsSection: CaseIterable {
     }
 
     var hasLocalizedNotes: Bool {
-        perfumeDetails?.notesLanguage?.lowercased() == SupportedAppLanguage.currentCode
+        if let languages = perfumeDetails?.resolvedNoteLanguages {
+            return !languages.isEmpty
+        }
+        return perfumeDetails?.notesLanguage?.lowercased() == SupportedAppLanguage.currentCode
     }
 
     var noteRows: [(title: String, notes: String)] {

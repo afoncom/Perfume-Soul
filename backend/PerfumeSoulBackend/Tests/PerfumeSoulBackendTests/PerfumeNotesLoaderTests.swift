@@ -12,11 +12,13 @@ struct PerfumeNotesLoaderTests {
         database.append([BrandModel(id: 1, name: "Brand")])
         database.append([
             PerfumeNoteModel(id: 1, perfumeID: 1, noteID: 10, noteType: .top, sortOrder: 0),
-            PerfumeNoteModel(id: 2, perfumeID: 1, noteID: 99, noteType: .top, sortOrder: 1)
+            PerfumeNoteModel(id: 2, perfumeID: 1, noteID: 99, noteType: .top, sortOrder: 1),
+            PerfumeNoteModel(id: 3, perfumeID: 1, noteID: 501, noteType: .base, sortOrder: 2)
         ])
         database.append([
             NoteModel(id: 10, name: "Бергамот", nameEnglish: "Bergamot"),
-            NoteModel(id: 99, name: "Редкая нота", nameEnglish: hasEnglishTranslation ? "Rare note" : nil)
+            NoteModel(id: 99, name: "Редкая нота", nameEnglish: hasEnglishTranslation ? "Rare note" : nil),
+            NoteModel(id: 501, name: "Светлая древесина", nameEnglish: "Blonde Woods")
         ])
         database.append([])
         try await withApp { app in
@@ -28,6 +30,20 @@ struct PerfumeNotesLoaderTests {
                 #expect(notes.topNotes == (hasEnglishTranslation ? ["Bergamot", "Rare note"] : ["Бергамот", "Редкая нота"]))
                 #expect(notes.notesLanguage == (hasEnglishTranslation ? "en" : "ru"))
                 #expect(notes.topNoteKeys == ["bergamot", "note:99"])
+                let body = try #require(JSONSerialization.jsonObject(with: Data(response.body.string.utf8)) as? [String: Any])
+                let topItems = try #require(body["topNoteItems"] as? [[String: String]])
+                #expect(topItems == [
+                    ["key": "bergamot", "name": "Bergamot", "language": "en"],
+                    [
+                        "key": "note:99",
+                        "name": hasEnglishTranslation ? "Rare note" : "Редкая нота",
+                        "language": hasEnglishTranslation ? "en" : "ru"
+                    ]
+                ])
+                let baseItems = try #require(body["baseNoteItems"] as? [[String: String]])
+                #expect(baseItems == [["key": "note:501", "name": "Blonde Woods", "language": "en"]])
+                #expect(notes.baseNotes == [hasEnglishTranslation ? "Blonde Woods" : "Светлая древесина"])
+
             }
         }
     }
