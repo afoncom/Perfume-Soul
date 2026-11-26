@@ -40,6 +40,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     )
     
     private lazy var imageLoader = PerfumeImageLoader(requestManager: requestManager)
+    private lazy var notificationService: DailyNotificationService = DailyNotificationServiceImpl(
+        profileService: ProfileServiceImpl(container: coreDataManager.container)
+    )
 
     func scene(
         _ scene: UIScene,
@@ -96,7 +99,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         )
         let settingsScreen = SettingsModule.build(
-            container: container
+            notificationService: notificationService
         )
         let discoverScreen = DiscoverModule.build(
             container: container,
@@ -106,7 +109,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let profileScreen = ProfileModule.build(
             container: container,
             requestManager: requestManager,
-            imageLoader: imageLoader
+            imageLoader: imageLoader,
+            notificationService: notificationService
         ) { [weak self] initialProfile in
             self?.showCalculationScreen(container: container, initialProfile: initialProfile)
         }

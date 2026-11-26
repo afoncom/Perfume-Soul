@@ -12,6 +12,58 @@ import UserNotifications
 
 final class ProfilePresenterTests: XCTestCase {
     @MainActor
+    func testDeletingProfileDuringReminderAddLeavesReminderDisabled() async throws {
+        let suite = "tests.profileNotification.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(ProfileNotificationDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        defaults.set(true, forKey: DailyNotificationKind.dailyPerfume.preferenceKey)
+        defaults.set(true, forKey: DailyNotificationKind.history.preferenceKey)
+        let profile = makeProfile().withProfileCalculation(ProfileCalculation(
+            natalChart: NatalChart(
+                sun: ZodiacPlacement(sign: .aquarius, longitude: 0),
+                moon: ZodiacPlacement(sign: .aquarius, longitude: 0),
+                ascendant: ZodiacPlacement(sign: .aquarius, longitude: 0)
+            ),
+            elementBalance: ElementBalance(fire: 0, earth: 0, air: 100, water: 0)
+        ))
+        let profileService = ProfileServiceMock(profile: profile)
+        let scheduler = ProfileNotificationScheduler()
+        scheduler.pendingIdentifiers = [DailyNotificationKind.history.identifier]
+        let addStarted = expectation(description: "Settings reminder add suspended")
+        let disableStarted = expectation(description: "Profile deletion disabled reminder")
+        scheduler.onAddStarted = { addStarted.fulfill() }
+        defaults.onDailyPerfumeDisabled = { disableStarted.fulfill() }
+        let notifications = DailyNotificationServiceImpl(
+            userNotificationCenter: scheduler,
+            profileService: profileService,
+            userDefaults: defaults
+        )
+        let viewModel = ProfileViewModel()
+        viewModel.profile = profile
+        let presenter = makePresenter(
+            viewModel: viewModel,
+            appReviewRequester: AppReviewRequesterMock(),
+            notificationService: notifications,
+            profileService: profileService
+        )
+        let enabling = Task { try await notifications.enableNotification(for: .dailyPerfume) }
+        await fulfillment(of: [addStarted], timeout: 2)
+        let deleting = Task { await presenter.deleteProfile() }
+        await fulfillment(of: [disableStarted], timeout: 2)
+        scheduler.resumeAdd()
+        try await enabling.value
+        await deleting.value
+
+        let remainingProfile = await profileService.fetchProfile()
+        XCTAssertNil(remainingProfile)
+        XCTAssertFalse(defaults.bool(forKey: DailyNotificationKind.dailyPerfume.preferenceKey))
+        XCTAssertEqual(scheduler.pendingIdentifiers, [DailyNotificationKind.history.identifier])
+        let enabled = await notifications.isNotificationEnabled(for: .dailyPerfume)
+        XCTAssertFalse(enabled)
+        XCTAssertTrue(defaults.bool(forKey: DailyNotificationKind.history.preferenceKey))
+    }
+
+    @MainActor
     func testDeleteProfileRemovesDailyPerfumeReminderAndResetsItsPreference() async throws {
         let suite = "tests.profileNotification.\(UUID().uuidString)"
         let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
@@ -79,12 +131,13 @@ final class ProfilePresenterTests: XCTestCase {
         viewModel: ProfileViewModel,
         appReviewRequester: AppReviewRequesterMock,
         dailyPerfumeStateStorage: ViewStateStorage<DailyPerfumeState>? = nil,
-        notificationService: DailyNotificationService = ProfileNotificationServiceMock()
+        notificationService: DailyNotificationService = ProfileNotificationServiceMock(),
+        profileService: ProfileService = ProfileServiceMock()
     ) -> ProfilePresenterImpl {
         ProfilePresenterImpl(
             viewModel: viewModel,
             router: ProfileRouterMock(),
-            profileService: ProfileServiceMock(),
+            profileService: profileService,
             profileCalculationService: ProfileCalculationServiceMock(),
             quizProgressService: QuizProgressServiceMock(),
             dailyQuizStateStorage: makeStorage(),
@@ -141,7 +194,21 @@ private final class ProfileNotificationScheduler: UserNotificationScheduling {
     var pendingIdentifiers: Set<String> = [DailyNotificationKind.dailyPerfume.identifier, DailyNotificationKind.history.identifier]
     func authorizationStatus() async -> UNAuthorizationStatus { .authorized }
     func requestAuthorization(options: UNAuthorizationOptions) async throws -> Bool { true }
-    func add(_ request: UNNotificationRequest) async throws { pendingIdentifiers.insert(request.identifier) }
+    var onAddStarted: (() -> Void)?
+    private var addContinuation: CheckedContinuation<Void, Never>?
+    func add(_ request: UNNotificationRequest) async throws {
+        if let onAddStarted {
+            await withCheckedContinuation { continuation in
+                addContinuation = continuation
+                onAddStarted()
+            }
+        }
+        pendingIdentifiers.insert(request.identifier)
+    }
+    func resumeAdd() {
+        addContinuation?.resume()
+        addContinuation = nil
+    }
     func removePendingNotificationRequests(withIdentifiers identifiers: [String]) {
         pendingIdentifiers.subtract(identifiers)
     }
@@ -155,11 +222,23 @@ private final class ProfileRouterMock: ProfileRouter {
     func showCalculationScreen() { }
 }
 
+private final class ProfileNotificationDefaults: UserDefaults {
+    var onDailyPerfumeDisabled: (() -> Void)?
+    override func set(_ value: Bool, forKey defaultName: String) {
+        super.set(value, forKey: defaultName)
+        if defaultName == DailyNotificationKind.dailyPerfume.preferenceKey, !value {
+            onDailyPerfumeDisabled?()
+        }
+    }
+}
+
 private final class ProfileServiceMock: ProfileService {
+    private var profile: Profile?
+    init(profile: Profile? = nil) { self.profile = profile }
     func saveProfile(_ profile: Profile) { }
     func replaceProfile(_ profile: Profile) async { }
-    func fetchProfile() async -> Profile? { nil }
-    func deleteProfile(_ profile: Profile) async { }
+    func fetchProfile() async -> Profile? { profile }
+    func deleteProfile(_ profile: Profile) async { self.profile = nil }
 }
 
 private final class ProfileCalculationServiceMock: ProfileCalculationService {

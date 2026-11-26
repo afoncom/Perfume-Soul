@@ -14,12 +14,12 @@ final class ProfileModule {
         container: NSPersistentContainer,
         requestManager: RequestManager,
         imageLoader: PerfumeImageLoader,
+        notificationService: DailyNotificationService,
         onProfileSetupRequested: @escaping (Profile?) -> Void
     ) -> NavigationControllerContainer {
         let viewModel = ProfileViewModel()
         let navigationController = UINavigationController()
         let profileService = ProfileServiceImpl(container: container)
-        let notificationService = DailyNotificationServiceImpl(profileService: profileService)
         let profileCalculationService = ProfileCalculationServiceImpl(requestManager: requestManager)
         let dayKeyProvider = QuizDayKeyProviderImpl()
         let quizProgressService = QuizProgressServiceImpl(
