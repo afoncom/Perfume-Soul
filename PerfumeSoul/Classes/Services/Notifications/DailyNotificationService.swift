@@ -70,6 +70,24 @@ final class DailyNotificationServiceImpl {
             latestOperationIDs[kind] == operationID
         }
 
+        func performDisable(
+            for kind: DailyNotificationKind,
+            onBegin: () -> Void,
+            action: @escaping () -> Void
+        ) async {
+            _ = beginOperation(for: kind)
+            onBegin()
+            let previous = pendingOperations[kind]
+            // Removal remains mandatory even if a newer enable fails validation.
+            // Enqueue before yielding so any valid new add runs after this removal.
+            let task = Task<Void, Error> {
+                _ = try? await previous?.value
+                action()
+            }
+            pendingOperations[kind] = task
+            _ = try? await task.value
+        }
+
         // Serialize system writes per reminder so a late add cannot undo a newer disable.
         func perform(
             _ operationID: Int,
@@ -140,11 +158,13 @@ extension DailyNotificationServiceImpl: DailyNotificationService {
     }
 
     func disableNotification(for kind: DailyNotificationKind) async {
-        let operationID = await operationCoordinator.beginOperation(for: kind)
-        userDefaults.set(false, forKey: kind.preferenceKey)
-        try? await operationCoordinator.perform(operationID, for: kind) { [self] in
-            userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [kind.identifier])
-        }
+        await operationCoordinator.performDisable(
+            for: kind,
+            onBegin: { [self] in userDefaults.set(false, forKey: kind.preferenceKey) },
+            action: { [self] in
+                userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [kind.identifier])
+            }
+        )
     }
 }
 

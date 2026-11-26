@@ -13,6 +13,16 @@ import UserNotifications
 final class ProfilePresenterTests: XCTestCase {
     @MainActor
     func testDeletingProfileDuringReminderAddLeavesReminderDisabled() async throws {
+        try await checkDeletingProfileDuringReminderAdd(failedRetry: false)
+    }
+
+    @MainActor
+    func testFailedEnableCannotInvalidatePendingProfileDeletionDisable() async throws {
+        try await checkDeletingProfileDuringReminderAdd(failedRetry: true)
+    }
+
+    @MainActor
+    private func checkDeletingProfileDuringReminderAdd(failedRetry: Bool) async throws {
         let suite = "tests.profileNotification.\(UUID().uuidString)"
         let defaults = try XCTUnwrap(ProfileNotificationDefaults(suiteName: suite))
         defer { defaults.removePersistentDomain(forName: suite) }
@@ -50,6 +60,14 @@ final class ProfilePresenterTests: XCTestCase {
         await fulfillment(of: [addStarted], timeout: 2)
         let deleting = Task { await presenter.deleteProfile() }
         await fulfillment(of: [disableStarted], timeout: 2)
+        if failedRetry {
+            do {
+                try await notifications.enableNotification(for: .dailyPerfume)
+                XCTFail("Enabling without a profile must fail")
+            } catch DailyNotificationServiceError.profileUnavailable {
+                // A failed enable must preserve the removal queued by profile deletion.
+            }
+        }
         scheduler.resumeAdd()
         try await enabling.value
         await deleting.value
