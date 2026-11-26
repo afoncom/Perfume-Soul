@@ -6,7 +6,10 @@
 //
 
 protocol QuizOfTheDayService {
-    func requestQuizOfTheDayQuestions(version: QuizOfTheDayQuestion.SetVersion) async throws -> [QuizOfTheDayQuestion]
+    func requestQuizOfTheDayQuestions(
+        version: QuizOfTheDayQuestion.SetVersion,
+        dayKey: String?
+    ) async throws -> [QuizOfTheDayQuestion]
 }
 
 final class QuizOfTheDayServiceImpl {
@@ -18,9 +21,12 @@ final class QuizOfTheDayServiceImpl {
 }
 
 extension QuizOfTheDayServiceImpl: QuizOfTheDayService {
-    func requestQuizOfTheDayQuestions(version: QuizOfTheDayQuestion.SetVersion) async throws -> [QuizOfTheDayQuestion] {
+    func requestQuizOfTheDayQuestions(
+        version: QuizOfTheDayQuestion.SetVersion,
+        dayKey: String?
+    ) async throws -> [QuizOfTheDayQuestion] {
         let questions: [QuizOfTheDayResponse] = try await requestManager.sendRequest(
-            request: QuizOfTheDayRequest(version: version)
+            request: QuizOfTheDayRequest(version: version, dayKey: dayKey)
         )
         return questions.map { QuizOfTheDayQuestion(response: $0) }
     }

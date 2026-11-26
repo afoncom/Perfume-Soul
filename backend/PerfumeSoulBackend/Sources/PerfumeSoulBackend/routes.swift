@@ -120,6 +120,18 @@ func routes(
         )
         return try jsonResponse(questions, varyByLanguage: true)
     }
+
+    app.get("v3", "quiz-of-the-day") { req async throws -> Response in
+        guard let dayKey = req.query[String.self, at: "dayKey"] else {
+            throw Abort(.badRequest, reason: "A calendar dayKey is required")
+        }
+        let questions = try await QuizOfTheDayQuestionLoader.load(
+            on: req.db,
+            language: req.headers.first(name: "Accept-Language"),
+            dayKey: dayKey
+        )
+        return try jsonResponse(questions, varyByLanguage: true)
+    }
     
     app.get("perfumes", "recommendations") { req async throws -> Response in
         let query = try req.query.decode(PerfumeRecommendationsQuery.self)
