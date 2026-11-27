@@ -22,20 +22,70 @@ final class ProfilePresenterTests: XCTestCase {
     }
 
     @MainActor
+    func testDeletingProfileCannotBeOverwrittenByAnEnableFlagCommit() async throws {
+        let suite = "tests.profileNotification.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(ProfileNotificationDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let scheduler = ProfileNotificationScheduler()
+        let profile = makeCalculatedProfile()
+        let profileService = ProfileServiceMock(profile: profile)
+        let notifications = DailyNotificationServiceImpl(
+            userNotificationCenter: scheduler,
+            profileService: profileService,
+            userDefaults: defaults
+        )
+        let viewModel = ProfileViewModel()
+        viewModel.profile = profile
+        let presenter = makePresenter(
+            viewModel: viewModel,
+            appReviewRequester: AppReviewRequesterMock(),
+            notificationService: notifications,
+            profileService: profileService
+        )
+        let writeStarted = expectation(description: "Enable reached its true flag write")
+        let disableInterleaved = expectation(description: "Disable must not interrupt the flag commit")
+        disableInterleaved.isInverted = true
+        let resumeWrite = DispatchSemaphore(value: 0)
+        let writeReleased = DispatchSemaphore(value: 0)
+        defer { resumeWrite.signal() }
+        defaults.onWillEnableDailyPerfume = {
+            writeStarted.fulfill()
+            if resumeWrite.wait(timeout: .now() + 5) == .timedOut {
+                XCTFail("The paused flag write was not released")
+            }
+        }
+        defaults.onDailyPerfumeDisabled = {
+            if writeReleased.wait(timeout: .now()) == .timedOut {
+                disableInterleaved.fulfill()
+            } else {
+                writeReleased.signal()
+            }
+        }
+        let enabling = Task { try await notifications.enableNotification(for: .dailyPerfume) }
+        await fulfillment(of: [writeStarted], timeout: 2)
+        let deleting = Task { await presenter.deleteProfile() }
+        // Pause after version validation, before UserDefaults stores true.
+        // The coordinator must keep disable's false write outside that commit.
+        await fulfillment(of: [disableInterleaved], timeout: 1)
+        writeReleased.signal()
+        resumeWrite.signal()
+        try await enabling.value
+        await deleting.value
+
+        XCTAssertFalse(defaults.bool(forKey: DailyNotificationKind.dailyPerfume.preferenceKey))
+        XCTAssertFalse(scheduler.pendingIdentifiers.contains(DailyNotificationKind.dailyPerfume.identifier))
+        let enabled = await notifications.isNotificationEnabled(for: .dailyPerfume)
+        XCTAssertFalse(enabled)
+    }
+
+    @MainActor
     private func checkDeletingProfileDuringReminderAdd(failedRetry: Bool) async throws {
         let suite = "tests.profileNotification.\(UUID().uuidString)"
         let defaults = try XCTUnwrap(ProfileNotificationDefaults(suiteName: suite))
         defer { defaults.removePersistentDomain(forName: suite) }
         defaults.set(true, forKey: DailyNotificationKind.dailyPerfume.preferenceKey)
         defaults.set(true, forKey: DailyNotificationKind.history.preferenceKey)
-        let profile = makeProfile().withProfileCalculation(ProfileCalculation(
-            natalChart: NatalChart(
-                sun: ZodiacPlacement(sign: .aquarius, longitude: 0),
-                moon: ZodiacPlacement(sign: .aquarius, longitude: 0),
-                ascendant: ZodiacPlacement(sign: .aquarius, longitude: 0)
-            ),
-            elementBalance: ElementBalance(fire: 0, earth: 0, air: 100, water: 0)
-        ))
+        let profile = makeCalculatedProfile()
         let profileService = ProfileServiceMock(profile: profile)
         let scheduler = ProfileNotificationScheduler()
         scheduler.pendingIdentifiers = [DailyNotificationKind.history.identifier]
@@ -169,6 +219,17 @@ final class ProfilePresenterTests: XCTestCase {
         )
     }
 
+    private func makeCalculatedProfile() -> Profile {
+        makeProfile().withProfileCalculation(ProfileCalculation(
+            natalChart: NatalChart(
+                sun: ZodiacPlacement(sign: .aquarius, longitude: 0),
+                moon: ZodiacPlacement(sign: .aquarius, longitude: 0),
+                ascendant: ZodiacPlacement(sign: .aquarius, longitude: 0)
+            ),
+            elementBalance: ElementBalance(fire: 0, earth: 0, air: 100, water: 0)
+        ))
+    }
+
     private func makeProfile() -> Profile {
         Profile(
             name: "Alex",
@@ -242,7 +303,11 @@ private final class ProfileRouterMock: ProfileRouter {
 
 private final class ProfileNotificationDefaults: UserDefaults {
     var onDailyPerfumeDisabled: (() -> Void)?
+    var onWillEnableDailyPerfume: (() -> Void)?
     override func set(_ value: Bool, forKey defaultName: String) {
+        if defaultName == DailyNotificationKind.dailyPerfume.preferenceKey, value {
+            onWillEnableDailyPerfume?()
+        }
         super.set(value, forKey: defaultName)
         if defaultName == DailyNotificationKind.dailyPerfume.preferenceKey, !value {
             onDailyPerfumeDisabled?()

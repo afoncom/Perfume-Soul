@@ -70,6 +70,18 @@ final class DailyNotificationServiceImpl {
             latestOperationIDs[kind] == operationID
         }
 
+        // Validate and commit synchronously so disable cannot interleave its false write.
+        func commitIfCurrent(
+            _ operationID: Int,
+            for kind: DailyNotificationKind,
+            action: () -> Void
+        ) {
+            guard isCurrent(operationID, for: kind) else {
+                return
+            }
+            action()
+        }
+
         func performDisable(
             for kind: DailyNotificationKind,
             onBegin: () -> Void,
@@ -150,10 +162,9 @@ extension DailyNotificationServiceImpl: DailyNotificationService {
         let request = UNNotificationRequest(identifier: kind.identifier, content: content, trigger: trigger)
         try await operationCoordinator.perform(operationID, for: kind) { [self] in
             try await userNotificationCenter.add(request)
-            guard await operationCoordinator.isCurrent(operationID, for: kind) else {
-                return
+            await operationCoordinator.commitIfCurrent(operationID, for: kind) {
+                self.userDefaults.set(true, forKey: kind.preferenceKey)
             }
-            userDefaults.set(true, forKey: kind.preferenceKey)
         }
     }
 
