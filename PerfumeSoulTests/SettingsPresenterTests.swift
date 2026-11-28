@@ -8,6 +8,7 @@ final class SettingsPresenterTests: XCTestCase {
             let viewModel = SettingsViewModel()
             viewModel.isDailyHistoryNotificationEnabled = true
             viewModel.isDailyHoroscopeNotificationEnabled = true
+            viewModel.isDailyPerfumeNotificationEnabled = true
             let service = DelayedSettingsNotificationService(kind: kind)
             let presenter = SettingsPresenterImpl(
                 viewModel: viewModel,
@@ -26,6 +27,8 @@ final class SettingsPresenterTests: XCTestCase {
                 presenter.dailyHoroscopeNotificationToggled(isEnabled: false)
             case .history:
                 presenter.dailyHistoryNotificationToggled(isEnabled: false)
+            case .dailyPerfume:
+                presenter.dailyPerfumeNotificationToggled(isEnabled: false)
             }
             await fulfillment(of: [disableCompleted], timeout: 2)
             service.resumeRead(with: true)
@@ -37,6 +40,8 @@ final class SettingsPresenterTests: XCTestCase {
                 XCTAssertFalse(viewModel.isDailyHoroscopeNotificationEnabled)
             case .history:
                 XCTAssertFalse(viewModel.isDailyHistoryNotificationEnabled)
+            case .dailyPerfume:
+                XCTAssertFalse(viewModel.isDailyPerfumeNotificationEnabled)
             }
         }
     }

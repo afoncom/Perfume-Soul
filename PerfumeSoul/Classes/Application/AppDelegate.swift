@@ -10,16 +10,16 @@ import UserNotifications
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
-    private var hasPendingHistoryNotification = false
-    private var lastHistoryNotificationDate: Date?
+    private var pendingDailyNotification: DailyNotificationKind?
+    private var lastNotificationDates: [DailyNotificationKind: Date] = [:]
 
-    var onHistoryNotification: (() -> Void)? {
+    var onDailyNotification: ((DailyNotificationKind) -> Void)? {
         didSet {
-            guard hasPendingHistoryNotification, let onHistoryNotification else {
+            guard let kind = pendingDailyNotification, let onDailyNotification else {
                 return
             }
-            hasPendingHistoryNotification = false
-            onHistoryNotification()
+            pendingDailyNotification = nil
+            onDailyNotification(kind)
         }
     }
     
@@ -54,15 +54,16 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func handleNotificationResponse(_ response: UNNotificationResponse) {
         let notification = response.notification
         guard response.actionIdentifier == UNNotificationDefaultActionIdentifier,
-            notification.request.identifier == DailyNotificationKind.history.identifier,
-            lastHistoryNotificationDate != notification.date else {
+            let kind = DailyNotificationKind.allCases.first(where: { $0.identifier == notification.request.identifier }),
+            kind != .horoscope,
+            lastNotificationDates[kind] != notification.date else {
             return
         }
-        lastHistoryNotificationDate = notification.date
-        if let onHistoryNotification {
-            onHistoryNotification()
+        lastNotificationDates[kind] = notification.date
+        if let onDailyNotification {
+            onDailyNotification(kind)
         } else {
-            hasPendingHistoryNotification = true
+            pendingDailyNotification = kind
         }
     }
 }

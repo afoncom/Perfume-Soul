@@ -14,7 +14,8 @@ final class DailyPerfumeModule {
         requestManager: RequestManager,
         imageLoader: PerfumeImageLoader,
         profileService: ProfileService,
-        collectionService: PerfumeCollectionService
+        collectionService: PerfumeCollectionService,
+        onPresenterReady: ((DailyPerfumePresenter) -> Void)? = nil
     ) -> DailyPerfumeScreen {
         let viewModel = DailyPerfumeViewModel()
         let presenter = DailyPerfumePresenterImpl(
@@ -37,6 +38,7 @@ final class DailyPerfumeModule {
             )
         )
 
+        onPresenterReady?(presenter)
         return DailyPerfumeScreen(viewModel: viewModel, presenter: presenter, imageLoader: imageLoader)
     }
 }

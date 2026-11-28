@@ -9,6 +9,8 @@ import Foundation
 
 protocol TodayPresenter {
     func onAppear() async
+    @MainActor
+    func notificationOpened(_ kind: DailyNotificationKind)
     func todayEnergyButtonTab()
     func dayInPerfumeryButtonTab()
 }
@@ -37,6 +39,12 @@ final class TodayPresenterImpl {
 }
 
 extension TodayPresenterImpl: TodayPresenter {
+    @MainActor
+    func notificationOpened(_ kind: DailyNotificationKind) {
+        viewModel.notificationTarget = kind
+        viewModel.refreshID += 1
+    }
+
     @MainActor
     func onAppear() async {
         latestLoadID += 1

@@ -7,16 +7,11 @@
 //
 
 import SwiftUI
-import CoreData
 
 final class SettingsModule {
     static func build(
-        container: NSPersistentContainer
+        notificationService: DailyNotificationService
     ) -> NavigationControllerContainer {
-        let profileService = ProfileServiceImpl(container: container)
-        let notificationService = DailyNotificationServiceImpl(
-            profileService: profileService
-        )
         let viewModel = SettingsViewModel()
         viewModel.appVersion = AppVersionProviderImpl().currentAppVersion() ?? "—"
         let navigationController = UINavigationController()

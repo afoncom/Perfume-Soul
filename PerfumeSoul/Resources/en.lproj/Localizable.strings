@@ -195,8 +195,11 @@
 "settings.about.feedbackSubtitle" = "Reviews, wishes, and ideas for improvement";
 "settings.about.feedbackTitle" = "Feedback";
 "settings.aboutTitle" = "About";
-"settings.notification.aromaOfTheDaySubtitle" = "Notify about the new aroma of the day";
-"settings.notification.aromaOfTheDayTitle" = "Aroma of the Day";
+"settings.notification.aromaOfTheDaySubtitle" = "A daily reminder to explore your personal selection at 8:00 AM.";
+"settings.notification.aromaOfTheDayTitle" = "Fragrance of the Day";
+"settings.notification.dailyPerfumeReminderBody" = "Which fragrance suits your day? Explore your personal selection.";
+"settings.notification.dailyPerfumePermissionDeniedMessage" = "To receive your fragrance reminder at 8:00 AM, allow notifications for the app in system settings.";
+"settings.notification.dailyPerfumeProfileRequiredMessage" = "Complete your profile calculation to receive personal fragrance recommendations and enable this reminder.";
 "settings.notification.dailyHoroscopeSubtitle" = "Receive a forecast every day";
 "settings.notification.dailyHoroscopeTitle" = "Daily Horoscope";
 "settings.notification.dailyHoroscopeReminderBody" = "Open PerfumeSoul to read today's horoscope.";

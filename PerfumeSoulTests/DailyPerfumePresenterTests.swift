@@ -3,6 +3,168 @@ import XCTest
 
 final class DailyPerfumePresenterTests: XCTestCase {
     @MainActor
+    func testDeletedProfileIsNotRestoredByDelayedSuccessOrFailureAfterScreenCancellation() async {
+        for fails in [false, true] {
+            let profileService = DailyPerfumeProfileServiceMock(profile: makeProfile())
+            let storage = makeStorage()
+            let service = DailyPerfumeServiceMock(candidates: [], suspendsRequests: true)
+            let started = expectation(description: "Request started")
+            service.onRequest = { _ in started.fulfill() }
+            let viewModel = DailyPerfumeViewModel()
+            let presenter = makePresenter(
+                viewModel: viewModel, service: service, storage: storage, profileService: profileService
+            )
+            let load = Task { await presenter.resolve() }
+            await fulfillment(of: [started], timeout: 2)
+
+            profileService.profile = nil
+            storage.clearState()
+            load.cancel()
+            if fails {
+                service.failRequests(with: URLError(.notConnectedToInternet))
+            } else {
+                service.resumeRequests(with: [makeCandidate(id: 7, score: 0.8)])
+            }
+            await load.value
+
+            XCTAssertNil(storage.loadState())
+            XCTAssertEqual(viewModel.state, .missingProfile)
+            XCTAssertFalse(viewModel.isResolving)
+        }
+    }
+
+    @MainActor
+    func testReminderQueuesNewDayAndDoesNotPersistTheDelayedPreviousDayResult() async {
+        await checkQueuedReminder(cancelsFirstLoad: false)
+    }
+
+    @MainActor
+    func testQueuedReminderLoadsNewDayAfterFirstCallerIsCancelled() async {
+        await checkQueuedReminder(cancelsFirstLoad: true)
+    }
+
+    @MainActor
+    func testCurrentRequestCancellationShowsRetryBeforeAnotherResolve() async {
+        for error in [CancellationError(), URLError(.cancelled)] as [Error] {
+            let storage = makeStorage()
+            let service = DailyPerfumeServiceMock(responses: [
+                .failure(error), .success([makeCandidate(id: 9, score: 0.8)])
+            ])
+            let viewModel = DailyPerfumeViewModel()
+            let presenter = makePresenter(viewModel: viewModel, service: service, storage: storage)
+
+            await presenter.resolve()
+
+            XCTAssertEqual(viewModel.state, .failed)
+            XCTAssertFalse(viewModel.isResolving)
+            XCTAssertNil(storage.loadState()?.currentPerfume)
+
+            await presenter.retry()
+
+            XCTAssertEqual(viewModel.state, .content(makeSummary(id: 9), .pending))
+            XCTAssertEqual(storage.loadState()?.currentPerfume?.id, 9)
+        }
+    }
+
+    @MainActor
+    func testCancelledRequestWithQueuedReplacementKeepsLoadingUntilReplacementFinishes() async {
+        let storage = makeStorage()
+        let service = DailyPerfumeServiceMock(candidates: [], suspendsRequests: true)
+        let firstStarted = expectation(description: "First request started")
+        let replacementStarted = expectation(description: "Queued replacement started")
+        service.onRequest = { count in
+            if count == 1 { firstStarted.fulfill() }
+            if count == 2 { replacementStarted.fulfill() }
+        }
+        let viewModel = DailyPerfumeViewModel()
+        let presenter = makePresenter(viewModel: viewModel, service: service, storage: storage)
+        let load = Task { await presenter.resolve() }
+        await fulfillment(of: [firstStarted], timeout: 2)
+        await presenter.resolve()
+
+        service.failRequests(with: URLError(.cancelled))
+        await fulfillment(of: [replacementStarted], timeout: 2)
+
+        XCTAssertEqual(viewModel.state, .loading)
+        XCTAssertTrue(viewModel.isResolving)
+        service.resumeRequests(with: [makeCandidate(id: 9, score: 0.8)])
+        await load.value
+
+        XCTAssertEqual(viewModel.state, .content(makeSummary(id: 9), .pending))
+        XCTAssertEqual(storage.loadState()?.currentPerfume?.id, 9)
+    }
+
+    @MainActor
+    private func checkQueuedReminder(cancelsFirstLoad: Bool) async {
+        var state = makeState()
+        state.dayKey = "2026-11-20"
+        state.currentPerfume = nil
+        state.currentReaction = nil
+        state.shownPerfumeIDs = []
+        let storage = makeStorage(state: state)
+        let service = DailyPerfumeServiceMock(candidates: [], suspendsRequests: true)
+        let clock = DailyPerfumeDayKeyProviderMock(dayKey: "2026-11-21")
+        let firstStarted = expectation(description: "Previous day request started")
+        let secondStarted = expectation(description: "New day request started")
+        service.onRequest = { count in
+            if count == 1 { firstStarted.fulfill() }
+            if count == 2 { secondStarted.fulfill() }
+        }
+        let viewModel = DailyPerfumeViewModel()
+        let presenter = makePresenter(
+            viewModel: viewModel, service: service, storage: storage, dayKeyProvider: clock
+        )
+        let firstLoad = Task { await presenter.resolve() }
+        await fulfillment(of: [firstStarted], timeout: 2)
+
+        clock.dayKey = "2026-11-22"
+        presenter.notificationOpened()
+        await presenter.resolve()
+        await presenter.resolve()
+        if cancelsFirstLoad {
+            firstLoad.cancel()
+        }
+        service.resumeRequests(with: [makeCandidate(id: 7, score: 0.8)])
+        await fulfillment(of: [secondStarted], timeout: 2)
+
+        XCTAssertEqual(service.requests.count, 2)
+        XCTAssertNil(storage.loadState()?.currentPerfume)
+        XCTAssertFalse(storage.loadState()?.shownPerfumeIDs.contains(7) ?? false)
+        service.resumeRequests(with: [makeCandidate(id: 9, score: 0.8)])
+        await firstLoad.value
+
+        XCTAssertEqual(storage.loadState()?.dayKey, "2026-11-22")
+        XCTAssertEqual(storage.loadState()?.currentPerfume?.id, 9)
+        XCTAssertEqual(viewModel.state, .content(makeSummary(id: 9), .pending))
+        XCTAssertEqual(service.requests.count, 2)
+    }
+
+    @MainActor
+    func testReminderResolvePreservesEveryCurrentDayReactionWithoutRequest() async {
+        for reaction in [DailyPerfumeReaction.pending, .saved, .dismissed] {
+            var state = makeState()
+            state.currentReaction = reaction
+            let storage = makeStorage(state: state)
+            let service = DailyPerfumeServiceMock(candidates: [])
+            let viewModel = DailyPerfumeViewModel()
+            let presenter = makePresenter(
+                viewModel: viewModel,
+                service: service,
+                storage: storage,
+                collectionService: DailyPerfumeCollectionServiceMock(stateStorage: storage)
+            )
+
+            await presenter.resolve()
+
+            XCTAssertTrue(service.requests.isEmpty)
+            XCTAssertEqual(viewModel.state, .content(makeSummary(id: 42), reaction))
+            XCTAssertEqual(storage.loadState()?.currentPerfume, state.currentPerfume)
+            XCTAssertEqual(storage.loadState()?.currentReaction, reaction)
+            XCTAssertEqual(storage.loadState()?.shownPerfumeIDs, state.shownPerfumeIDs)
+        }
+    }
+
+    @MainActor
     func testResolveRestoresCurrentDayPerfumeWithoutRequest() async {
         let storage = makeStorage(state: makeState())
         let service = DailyPerfumeServiceMock(candidates: [])
@@ -264,16 +426,18 @@ extension DailyPerfumePresenterTests {
         service: DailyPerfumeServiceMock,
         storage: ViewStateStorage<DailyPerfumeState>,
         collectionService: DailyPerfumeCollectionServiceMock? = nil,
-        randomValue: Double = 0.5
+        randomValue: Double = 0.5,
+        dayKeyProvider: DailyPerfumeDayKeyProvider = DailyPerfumeDayKeyProviderMock(),
+        profileService: ProfileService? = nil
     ) -> DailyPerfumePresenterImpl {
         DailyPerfumePresenterImpl(
             viewModel: viewModel,
             router: DailyPerfumeRouterMock(),
             service: service,
-            profileService: DailyPerfumeProfileServiceMock(profile: makeProfile()),
+            profileService: profileService ?? DailyPerfumeProfileServiceMock(profile: makeProfile()),
             stateStorage: storage,
             collectionService: collectionService ?? DailyPerfumeCollectionServiceMock(stateStorage: storage),
-            dayKeyProvider: DailyPerfumeDayKeyProviderMock(),
+            dayKeyProvider: dayKeyProvider,
             selectionService: DailyPerfumeSelectionServiceImpl(
                 randomSource: DailyPerfumeRandomSourceMock(value: randomValue)
             )
@@ -352,7 +516,7 @@ private final class DailyPerfumeRouterMock: DailyPerfumeRouter {
 }
 
 private final class DailyPerfumeProfileServiceMock: ProfileService {
-    private let profile: Profile?
+    var profile: Profile?
 
     init(profile: Profile?) {
         self.profile = profile
@@ -386,7 +550,7 @@ private final class DailyPerfumeServiceMock: DailyPerfumeService {
     let candidates: [DailyPerfumeCandidateResponse]
     private var responses: [Result<[DailyPerfumeCandidateResponse], Error>]
     private let suspendsRequests: Bool
-    private var continuations: [CheckedContinuation<[DailyPerfumeCandidateResponse], Never>] = []
+    private var continuations: [CheckedContinuation<[DailyPerfumeCandidateResponse], Error>] = []
 
     init(
         candidates: [DailyPerfumeCandidateResponse],
@@ -417,14 +581,16 @@ private final class DailyPerfumeServiceMock: DailyPerfumeService {
                 limit: limit
             )
         )
-        onRequest?(requests.count)
-
         if suspendsRequests {
-            return await withCheckedContinuation { continuation in
+            let result = try await withCheckedThrowingContinuation { continuation in
                 continuations.append(continuation)
+                onRequest?(requests.count)
             }
+            try Task.checkCancellation()
+            return result
         }
 
+        onRequest?(requests.count)
         let response = responses.isEmpty ? .success(candidates) : responses.removeFirst()
         switch response {
         case let .success(candidates):
@@ -434,11 +600,18 @@ private final class DailyPerfumeServiceMock: DailyPerfumeService {
         }
     }
 
-    func resumeRequests() {
-        continuations.forEach { continuation in
-            continuation.resume(returning: candidates)
-        }
+    func resumeRequests(with result: [DailyPerfumeCandidateResponse]? = nil) {
+        let pending = continuations
         continuations = []
+        pending.forEach { continuation in
+            continuation.resume(returning: result ?? candidates)
+        }
+    }
+
+    func failRequests(with error: Error) {
+        let pending = continuations
+        continuations = []
+        pending.forEach { $0.resume(throwing: error) }
     }
 }
 
@@ -481,7 +654,13 @@ private final class DailyPerfumeCollectionServiceMock: PerfumeCollectionService 
 }
 
 private final class DailyPerfumeDayKeyProviderMock: DailyPerfumeDayKeyProvider {
-    func todayKey() -> String { "2026-09-05" }
+    var dayKey: String
+
+    init(dayKey: String = "2026-09-05") {
+        self.dayKey = dayKey
+    }
+
+    func todayKey() -> String { dayKey }
 }
 
 private final class DailyPerfumeRandomSourceMock: DailyPerfumeRandomSource {

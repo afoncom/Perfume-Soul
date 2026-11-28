@@ -14,6 +14,7 @@ final class ProfileModule {
         container: NSPersistentContainer,
         requestManager: RequestManager,
         imageLoader: PerfumeImageLoader,
+        notificationService: DailyNotificationService,
         onProfileSetupRequested: @escaping (Profile?) -> Void
     ) -> NavigationControllerContainer {
         let viewModel = ProfileViewModel()
@@ -69,6 +70,7 @@ final class ProfileModule {
             recommendedPerfumeStateStorage: recommendedPerfumeStateStorage,
             appReviewRequester: appReviewRequester,
             profileAvatarBuilder: profileAvatarBuilder,
+            notificationService: notificationService,
             catalogFavoritesStorage: CatalogFavoritesStorage(userDefaults: .standard)
         )
         
